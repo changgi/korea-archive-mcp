@@ -13,5 +13,6 @@ No local Python needed by users — they just add a connector URL.
 ## Users connect with one URL
 - Claude (web/desktop): Settings → Connectors → Add custom connector → `https://<deployment>.vercel.app/api/mcp`
 - Claude Code: `claude mcp add --transport http korea-archive https://<deployment>.vercel.app/api/mcp`
+- <deployment> is `korea-archive-mcp` so  → `https://korea-archive-mcp.vercel.app/api/mcp`
 
 MIT · Methodology: Song, Chang-Gi (2026), National Archives of Korea
