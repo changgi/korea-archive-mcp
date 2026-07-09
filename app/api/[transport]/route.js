@@ -117,18 +117,18 @@ const handler = createMcpHandler((server) => {
     });
 
   server.tool('europeana_search',
-    'Search Europeana — 4,000+ institutions in 58 countries. Requires EUROPEANA_API_KEY env (free at apis.europeana.eu). media_type: VIDEO|IMAGE|TEXT|SOUND. 유럽 통합 검색.',
+    'Search Europeana — 4,000+ institutions in 58 countries. Works out of the box (shared demo key); set EUROPEANA_API_KEY for heavy use. media_type: VIDEO|IMAGE|TEXT|SOUND. 유럽 통합 검색.',
     { query: z.string(), max_results: z.number().int().min(1).max(50).default(15), media_type: z.enum(['VIDEO', 'IMAGE', 'TEXT', 'SOUND']).optional() },
     async ({ query, max_results, media_type }) => {
-      const key = process.env.EUROPEANA_API_KEY;
-      if (!key) return text('EUROPEANA_API_KEY not configured. Free key at https://apis.europeana.eu/ . Meanwhile search europeana.eu directly (query: Korea OR Corée OR Korea-Krieg).');
+      const key = process.env.EUROPEANA_API_KEY || 'api2demo';
+      const demo = !process.env.EUROPEANA_API_KEY;
       const u = new URL('https://api.europeana.eu/record/v2/search.json');
       u.searchParams.set('wskey', key); u.searchParams.set('query', query);
       u.searchParams.set('rows', String(max_results)); u.searchParams.set('profile', 'standard');
       if (media_type) u.searchParams.set('qf', `TYPE:${media_type}`);
       const d = await jget(u.toString());
       const items = d.items || [];
-      return text(`Europeana '${query}'${media_type ? ` [${media_type}]` : ''} — total ${d.totalResults}:\n` + (items.map((it) => `- ${String((it.title || ['?'])[0]).slice(0, 90)} (${(it.year || [''])[0]}) — ${String((it.dataProvider || [''])[0]).slice(0, 40)} | ${it.guid || ''}`).join('\n') || '(0)') + '\nTip: multilingual — Corée(fr)·Korea-Krieg(de)·Corea(it/es)');
+      return text(`Europeana '${query}'${media_type ? ` [${media_type}]` : ''} — total ${d.totalResults}:\n` + (items.map((it) => `- ${String((it.title || ['?'])[0]).slice(0, 90)} (${(it.year || [''])[0]}) — ${String((it.dataProvider || [''])[0]).slice(0, 40)} | ${it.guid || ''}`).join('\n') || '(0)') + '\nTip: multilingual — Corée(fr)·Korea-Krieg(de)·Corea(it/es)' + (demo ? '\n(shared demo key in use — for heavy use, set a free EUROPEANA_API_KEY from apis.europeana.eu)' : ''));
     });
 
   server.tool('query_bank',
