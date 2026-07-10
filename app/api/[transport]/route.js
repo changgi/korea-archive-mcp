@@ -176,13 +176,6 @@ const handler = createMcpHandler((server) => {
     .replace(/&gt;/g, '>').replace(/&lt;/g, '<').replace(/&amp;/g, '&')
     .replace(/&#39;/g, "'").replace(/&quot;/g, '"').replace(/&nbsp;/g, ' ').trim();
   const dbrowse = (u) => `\n열어보기: ${u}`;
-  const agentBrowse = (name, q, u) => `${name} '${q}'\n이 사이트는 서버 검색 응답이 제한적이라 자동 페치가 어렵습니다. 브라우저 도구(웹 열람)로 아래 주소를 열어 결과 목록을 읽어오세요:\n${u}`;
-
-  // ===== 국내 아카이브 — 자동 브라우징(서버 사이드 fetch·파싱) v1.9.0 =====
-  const dclean = (s) => s.replace(/<[^>]+>/g, '').replace(/\s+/g, ' ')
-    .replace(/&gt;/g, '>').replace(/&lt;/g, '<').replace(/&amp;/g, '&')
-    .replace(/&#39;/g, "'").replace(/&quot;/g, '"').replace(/&nbsp;/g, ' ').trim();
-  const dbrowse = (u) => `\n열어보기: ${u}`;
   const agentBrowse = (name, q, u, why = '이 기관은 자동 페치가 제한적입니다') => `${name} '${q}' — ${why}.\n➤ 에이전트 지시: 이 메시지를 그대로 사용자에게 전달하지 마세요. 대신 당신의 웹 검색(WebSearch)으로 '${q}'를 이 기관에서 찾거나 아래 공식 검색 URL을 열람해 상위 결과(제목·연대·링크)를 표로 정리해 사용자에게 제시하세요. 결과가 있으면 report_template으로 HTML 보고서화도 가능합니다.\n공식 검색: ${u}`;
 
   server.tool('nedb_search',
