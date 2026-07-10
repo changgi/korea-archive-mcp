@@ -201,15 +201,16 @@ const handler = createMcpHandler((server) => {
       const key = process.env.ARCHIVES_API_KEY;
       const portal = 'https://www.archives.go.kr/next/newsearch/listSubjectDescription.do?query=' + encodeURIComponent(query);
       if (!key) return text(agentBrowse('국가기록원', query, portal, "OpenAPI 키(ARCHIVES_API_KEY, data.go.kr 15000153) 미설정"));
-      const api = `https://search.archives.go.kr/openapi/search.arc?serviceKey=${encodeURIComponent(key)}&query=${encodeURIComponent(query)}&start=1&limit=${Math.min(max_results, 50)}`;
+      const sk = /%[0-9A-Fa-f]{2}/.test(key) ? key : encodeURIComponent(key);
+      const api = `https://apis.data.go.kr/1741050/openapi/searcharc?serviceKey=${sk}&query=${encodeURIComponent(query)}&start=1&limit=${Math.min(max_results, 50)}`;
       try {
         const xml = await gtext(api);
-        if (xml.includes('searchError')) return text(`국가기록원 API 오류: ${xtag(xml, 'message') || '?'} — 키·쿼터 확인.` + dbrowse(portal));
-        const tot = xtag(xml, 'totalCount') || xtag(xml, 'totalResults') || '?';
+        if (xml.includes('searchError') || !xml.includes('<item>')) return text(agentBrowse('국가기록원', query, portal, `API 오류: ${xtag(xml, 'message') || '결과 없음'}`));
+        const tot = xtag(xml, 'total') || '?';
         const items = xml.match(/<item>[\s\S]*?<\/item>/g) || [];
-        const lines = items.slice(0, max_results).map((i) => `- ${xtag(i, 'title').slice(0, 90)} (${xtag(i, 'produceYear') || xtag(i, 'pubDate').slice(0, 16)}) ${xtag(i, 'link')}`);
-        return text(`국가기록원 '${query}' — 총 ${tot}건:\n` + (lines.join('\n') || '(0건)') + '\n공공누리 유형 확인 후 이용.');
-      } catch (e) { return text(`국가기록원 API 오류(${e.message}).` + dbrowse(portal)); }
+        const lines = items.slice(0, max_results).map((i) => `- ${xtag(i, 'title').slice(0, 90)} (${xtag(i, 'prod_year')}) · ${xtag(i, 'prod_name').slice(0, 20)} [${xtag(i, 'is_open') === '1' ? '공개' : '비공개'}] ${xtag(i, 'link')}`);
+        return text(`국가기록원 '${query}' — 총 ${tot}건:\n` + (lines.join('\n') || '(0건)') + '\n공공누리(KOGL) 유형 확인 후 이용. 비공개 항목은 정보공개청구 대상.');
+      } catch (e) { return text(agentBrowse('국가기록원', query, portal, `API 오류(${e.message})`)); }
     });
 
   server.tool('nlk_search',
@@ -237,7 +238,15 @@ const handler = createMcpHandler((server) => {
           if (!xml.includes('<error>')) {
             const tot = xtag(xml, 'total') || '?';
             const items = xml.match(/<item>[\s\S]*?<\/item>/g) || [];
-            const lines = items.slice(0, max_results).map((i) => `- ${xtag(i, 'titleInfo').slice(0, 90)} / ${xtag(i, 'authorInfo').slice(0, 24)} (${xtag(i, 'pubYearInfo')}) ${xtag(i, 'detailLink')}`);
+            const pick = (b, tags) => { for (const t of tags) { const v = xtag(b, t); if (v) return v; } return ''; };
+            const lines = items.slice(0, max_results).map((it) => {
+              let title = pick(it, ['titleInfo', 'title', 'TITLE', 'title_info']);
+              if (!title) title = it.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
+              const author = pick(it, ['authorInfo', 'author', 'AUTHOR']);
+              const year = pick(it, ['pubYearInfo', 'pubYear', 'pub_year']);
+              const link = pick(it, ['detailLink', 'DETAIL_LINK', 'link']);
+              return '- ' + title.slice(0, 90) + (author ? ' / ' + author.slice(0, 24) : '') + (year ? ' (' + year + ')' : '') + (link ? ' ' + link : '');
+            });
             return text(`국립중앙도서관 · ${name} '${query}' — 총 ${tot}건:\n` + (lines.join('\n') || '(0건)') + `\n※ ${note}`);
           }
           return text(`NLK OpenAPI 오류: ${xtag(xml, 'msg') || '?'} — NLK_API_KEY 확인.` + dbrowse(openUrl));
