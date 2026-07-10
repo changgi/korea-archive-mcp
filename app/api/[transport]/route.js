@@ -240,12 +240,14 @@ const handler = createMcpHandler((server) => {
             const items = xml.match(/<item>[\s\S]*?<\/item>/g) || [];
             const pick = (b, tags) => { for (const t of tags) { const v = xtag(b, t); if (v) return v; } return ''; };
             const lines = items.slice(0, max_results).map((it) => {
-              let title = pick(it, ['titleInfo', 'title', 'TITLE', 'title_info']);
+              let title = pick(it, ['title_info', 'titleInfo', 'title']);
               if (!title) title = it.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
-              const author = pick(it, ['authorInfo', 'author', 'AUTHOR']);
-              const year = pick(it, ['pubYearInfo', 'pubYear', 'pub_year']);
-              const link = pick(it, ['detailLink', 'DETAIL_LINK', 'link']);
-              return '- ' + title.slice(0, 90) + (author ? ' / ' + author.slice(0, 24) : '') + (year ? ' (' + year + ')' : '') + (link ? ' ' + link : '');
+              const typ = pick(it, ['type_name', 'typeName']);
+              const pub = pick(it, ['pub_info', 'author_info', 'authorInfo']);
+              const year = pick(it, ['pub_year_info', 'pubYearInfo']);
+              let lk = pick(it, ['org_link', 'detail_link', 'detailLink']);
+              if (lk.startsWith('/')) lk = 'https://www.nl.go.kr' + lk;
+              return '- ' + title.slice(0, 80) + (typ ? ' [' + typ + ']' : '') + (pub ? ' · ' + pub.slice(0, 20) : '') + (year ? ' (' + year + ')' : '') + (lk ? ' ' + lk : '');
             });
             return text(`국립중앙도서관 · ${name} '${query}' — 총 ${tot}건:\n` + (lines.join('\n') || '(0건)') + `\n※ ${note}`);
           }
