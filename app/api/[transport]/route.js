@@ -178,6 +178,13 @@ const handler = createMcpHandler((server) => {
   const dbrowse = (u) => `\n열어보기: ${u}`;
   const agentBrowse = (name, q, u) => `${name} '${q}'\n이 사이트는 서버 검색 응답이 제한적이라 자동 페치가 어렵습니다. 브라우저 도구(웹 열람)로 아래 주소를 열어 결과 목록을 읽어오세요:\n${u}`;
 
+  // ===== 국내 아카이브 — 자동 브라우징(서버 사이드 fetch·파싱) v1.9.0 =====
+  const dclean = (s) => s.replace(/<[^>]+>/g, '').replace(/\s+/g, ' ')
+    .replace(/&gt;/g, '>').replace(/&lt;/g, '<').replace(/&amp;/g, '&')
+    .replace(/&#39;/g, "'").replace(/&quot;/g, '"').replace(/&nbsp;/g, ' ').trim();
+  const dbrowse = (u) => `\n열어보기: ${u}`;
+  const agentBrowse = (name, q, u, why = '이 기관은 자동 페치가 제한적입니다') => `${name} '${q}' — ${why}.\n➤ 에이전트 지시: 이 메시지를 그대로 사용자에게 전달하지 마세요. 대신 당신의 웹 검색(WebSearch)으로 '${q}'를 이 기관에서 찾거나 아래 공식 검색 URL을 열람해 상위 결과(제목·연대·링크)를 표로 정리해 사용자에게 제시하세요. 결과가 있으면 report_template으로 HTML 보고서화도 가능합니다.\n공식 검색: ${u}`;
+
   server.tool('nedb_search',
     "Search 국사편찬위 한국사데이터베이스 (db.history.go.kr) — server fetches the integrated search and returns which DBs (조선왕조실록·승정원일기·포로신문보고서·독립운동사 등) contain the term, plus the browse URL. 11M+ Korean primary sources. 한자·한글 병행 표기 권장.",
     { query: z.string(), db: z.string().default(''), max_results: z.number().int().min(1).max(50).default(15) },
@@ -190,8 +197,8 @@ const handler = createMcpHandler((server) => {
         const re = /href="\/item\/\w+\/main\.do"[^>]*>([\s\S]*?)<\/a>/g; let m;
         while ((m = re.exec(b))) { const nm = dclean(m[1]); if (nm && !seen.has(nm)) { seen.add(nm); dbs.push(nm); } }
         if (dbs.length) return text(`한국사DB '${query}' — 검색어가 등장하는 DB ${dbs.length}종:\n` + dbs.slice(0, max_results).map((d) => '- ' + d).join('\n') + dbrowse(browse) + '\n각 DB에서 문서 단위로 열람. 한자 원표기 병행 검색 권장.');
-        return text(`한국사DB '${query}' — 매칭 DB 미검출(한자/이표기 시도 권장).` + dbrowse(browse));
-      } catch (e) { return text(`한국사DB '${query}' — 자동조회 실패(${e.message}).` + dbrowse(browse)); }
+        return text(agentBrowse('한국사DB', query, browse, '통합검색에서 매칭 DB 미검출'));
+      } catch (e) { return text(agentBrowse('한국사DB', query, browse, `자동조회 실패(${e.message})`)); }
     });
 
   server.tool('archives_search',
@@ -200,7 +207,7 @@ const handler = createMcpHandler((server) => {
     async ({ query, max_results }) => {
       const key = process.env.ARCHIVES_API_KEY;
       const portal = 'https://www.archives.go.kr/next/newsearch/listSubjectDescription.do?query=' + encodeURIComponent(query);
-      if (!key) return text(`국가기록원 '${query}' — ARCHIVES_API_KEY 미설정. data.go.kr '나라기록물정보 서비스'(15000153) 무료 키 설정 시 자동 검색.` + dbrowse(portal));
+      if (!key) return text(agentBrowse('국가기록원', query, portal, "OpenAPI 키(ARCHIVES_API_KEY, data.go.kr 15000153) 미설정"));
       const api = `https://search.archives.go.kr/openapi/search.arc?serviceKey=${encodeURIComponent(key)}&query=${encodeURIComponent(query)}&start=1&limit=${Math.min(max_results, 50)}`;
       try {
         const xml = await gtext(api);
@@ -243,8 +250,8 @@ const handler = createMcpHandler((server) => {
           return text(`NLK OpenAPI 오류: ${xtag(xml, 'msg') || '?'} — NLK_API_KEY 확인.` + dbrowse(openUrl));
         } catch (e) { return text(`NLK API 오류(${e.message}).` + dbrowse(openUrl)); }
       }
-      const keyed = (apiOk && !key) ? 'NLK_API_KEY 미설정(www.nl.go.kr Open API 신청 시 자동 검색). ' : '';
-      return text(`국립중앙도서관 · ${name} '${query}'\n${keyed}※ ${note}` + dbrowse(openUrl));
+      const why = (apiOk && !key) ? 'OpenAPI 키(NLK_API_KEY, www.nl.go.kr Open API) 미설정' : `큐레이션/전용 컬렉션 — ${note}`;
+      return text(agentBrowse(`국립중앙도서관 · ${name}`, query, openUrl, why));
     });
 
   server.tool('seoul_archives_search',
@@ -258,8 +265,8 @@ const handler = createMcpHandler((server) => {
         const cols = []; const re = /href="(\/catalog\/result\?[^"]*collects=[^"]*)"[^>]*>([\s\S]*?)<\/a>/g; let m;
         while ((m = re.exec(b))) { const nm = dclean(m[2]); if (nm && nm.includes('컬렉션')) cols.push([nm, 'https://archives.seoul.go.kr' + m[1]]); }
         if (cols.length) return text(`서울기록원 '${query}' — 매칭 컬렉션 ${cols.length}개:\n` + cols.slice(0, max_results).map(([n, u]) => `- ${n}\n  ${u}`).join('\n') + `\n전체 항목: ${deep}`);
-        return text(`서울기록원 '${query}' — 매칭 컬렉션 미검출.` + dbrowse(deep));
-      } catch (e) { return text(`서울기록원 '${query}' — 자동조회 실패(${e.message}).` + dbrowse(deep)); }
+        return text(agentBrowse('서울기록원', query, deep, '매칭 컬렉션 미검출'));
+      } catch (e) { return text(agentBrowse('서울기록원', query, deep, `자동조회 실패(${e.message})`)); }
     });
 
   server.tool('warmemo_search',
@@ -272,8 +279,8 @@ const handler = createMcpHandler((server) => {
         const cats = []; const re = /class="total-breadcrumb">([\s\S]*?)<\/span>\s*<span>\s*총\s*([\d,]+)/g; let m;
         while ((m = re.exec(b))) cats.push([dclean(m[1]), m[2]]);
         if (cats.length) return text(`전쟁기념관 '${query}' — 카테고리별 검색 건수:\n` + cats.slice(0, 20).map(([c, n]) => `- ${c} : ${n}건`).join('\n') + dbrowse(url) + '\n한국전쟁·군사사 사료 — 해외(NARA·TNA)와 교차검증.');
-        return text(`전쟁기념관 '${query}' — 검색 결과 미검출.` + dbrowse(url));
-      } catch (e) { return text(`전쟁기념관 '${query}' — 자동조회 실패(${e.message}).` + dbrowse(url)); }
+        return text(agentBrowse('전쟁기념관', query, url, '통합검색 결과 미검출'));
+      } catch (e) { return text(agentBrowse('전쟁기념관', query, url, `자동조회 실패(${e.message})`)); }
     });
 
   server.tool('foia_search',
@@ -296,8 +303,8 @@ const handler = createMcpHandler((server) => {
           const re = /<a[^>]+href="(\/sanction\/\d+)"[^>]*>([\s\S]*?)<\/a>/g; let m;
           while ((m = re.exec(b))) { const t = dclean(m[2]).replace(/^제목\s*:\s*/, ''); if (t && !seen.has(m[1])) { seen.add(m[1]); uniq.push([m[1], t]); } }
           if (uniq.length) return text(`서울정보소통광장 '${query}' — 결재문서 ${uniq.length}건:\n` + uniq.slice(0, 15).map(([h, t]) => `- ${t}\n  https://opengov.seoul.go.kr${h}`).join('\n'));
-          return text(`서울정보소통광장 '${query}' — 결과 미검출.` + dbrowse(url));
-        } catch (e) { return text(`서울정보소통광장 '${query}' — 자동조회 실패(${e.message}).` + dbrowse(url)); }
+          return text(agentBrowse('서울정보소통광장', query, url, '결재문서 미검출'));
+        } catch (e) { return text(agentBrowse('서울정보소통광장', query, url, `자동조회 실패(${e.message})`)); }
       }
       if (source === 'sen') return text(agentBrowse('서울시교육청 정보공개(열린 서울교육)', query, 'https://open.sen.go.kr/'));
       if (source === 'gyeongnam') return text(agentBrowse('경상남도기록원', query, 'https://archives.gyeongnam.go.kr/main.web'));
