@@ -295,6 +295,14 @@ const handler = createMcpHandler((server) => {
       else { url = base; cmd = chelipedSearch(url, query); }
       return text(`${name} '${query}'\n브라우저 열기: ${url}\n※ ${note}\n${cmd}`);
     });
+
+  server.tool('warmemo_search',
+    "Search 전쟁기념관 아카이브 (archives.warmemo.or.kr) — War Memorial of Korea: Korean War and modern military-history records, photos, artifacts, oral histories, documents. Domestic primary source for 6·25 War units/battles/veterans, great for cross-checking overseas holdings (NARA RG 111/342, TNA WO). JS portal with no keyless API — returns browser-open URL + 2-step cheliped scrape command. 전쟁기념관 아카이브 검색.",
+    { query: z.string() },
+    async ({ query }) => {
+      const url = 'http://archives.warmemo.or.kr/index.do';
+      return text(`전쟁기념관 아카이브 '${query}'\n브라우저 열기: ${url}\n※ 한국전쟁·군사사 기록·사진·유물·구술. 6·25 참전·전투·부대 사료 — 해외(NARA·TNA)와 교차검증.\n${chelipedSearch(url, query)}`);
+    });
 }, {}, { basePath: '/api' });
 
 const REPORT_RULES = `HTML 발굴 보고서 작성 규칙 (11) / Report writing rules:
