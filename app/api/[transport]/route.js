@@ -171,56 +171,49 @@ const handler = createMcpHandler((server) => {
     {},
     async () => text(REPORT_RULES + '\n\n===== HTML TEMPLATE (fill the {{placeholders}}) =====\n' + REPORT_TEMPLATE));
 
+  // ===== 국내 아카이브 — 자동 브라우징(서버 사이드 fetch·파싱) v1.9.0 =====
+  const dclean = (s) => s.replace(/<[^>]+>/g, '').replace(/\s+/g, ' ')
+    .replace(/&gt;/g, '>').replace(/&lt;/g, '<').replace(/&amp;/g, '&')
+    .replace(/&#39;/g, "'").replace(/&quot;/g, '"').replace(/&nbsp;/g, ' ').trim();
+  const dbrowse = (u) => `\n열어보기: ${u}`;
+  const agentBrowse = (name, q, u) => `${name} '${q}'\n이 사이트는 서버 검색 응답이 제한적이라 자동 페치가 어렵습니다. 브라우저 도구(웹 열람)로 아래 주소를 열어 결과 목록을 읽어오세요:\n${u}`;
+
   server.tool('nedb_search',
-    "Search 국사편찬위 한국사데이터베이스 (db.history.go.kr) — 11M+ Korean primary sources (Joseon sillok, colonial-era, independence movement, modern newspapers). The site renders results with JavaScript, so plain HTTP returns an empty list — robots allows it, so scrape with cheliped-skills. db: limit to a specific DB id (e.g. 'sillok','jsseung'). 한자·한글 병행 표기 권장.",
+    "Search 국사편찬위 한국사데이터베이스 (db.history.go.kr) — server fetches the integrated search and returns which DBs (조선왕조실록·승정원일기·포로신문보고서·독립운동사 등) contain the term, plus the browse URL. 11M+ Korean primary sources. 한자·한글 병행 표기 권장.",
     { query: z.string(), db: z.string().default(''), max_results: z.number().int().min(1).max(50).default(15) },
-    async ({ query, db, max_results }) => {
-      const p = new URLSearchParams({ searchKeyword: query, searchKeywordType: 'BI', pageSize: String(Math.min(max_results, 50)) });
-      if (db) p.set('itemId', db);
-      const url = 'https://db.history.go.kr/search/searchResultList.do?' + p.toString();
-      let hint = '';
-      try { const html = await gtext(url); const m = html.match(/([\d,]{1,12})\s*건/); hint = m ? `직접 조회 약 ${m[1]}건 감지. ` : '직접 조회는 빈 목록(JS 렌더 확인). '; }
-      catch (e) { hint = `(직접 조회 실패: ${e.message}) `; }
-      return text(`한국사DB '${query}'${db ? ' · DB=' + db : ''}\n브라우저 열기: ${url}\n${hint}JS 렌더 사이트이므로 목록·본문은 브라우저 스크래핑으로 추출:\n${CHELIPED_INSTALL}\n실행: ${chelipedCmd(url)}\n팁: observe가 부여한 번호 id로 상세(level.do) 진입·다음페이지 클릭. 인명·기관명은 한자 원표기가 색인 정확도 높음.`);
+    async ({ query, max_results }) => {
+      const browse = 'https://db.history.go.kr/search/searchResultList.do?searchKeywordType=BI&searchKeyword=' + encodeURIComponent(query);
+      const api = 'https://db.history.go.kr/search/searchTotalResult.do?searchKeyword=' + encodeURIComponent(query);
+      try {
+        const b = await gtext(api);
+        const seen = new Set(); const dbs = [];
+        const re = /href="\/item\/\w+\/main\.do"[^>]*>([\s\S]*?)<\/a>/g; let m;
+        while ((m = re.exec(b))) { const nm = dclean(m[1]); if (nm && !seen.has(nm)) { seen.add(nm); dbs.push(nm); } }
+        if (dbs.length) return text(`한국사DB '${query}' — 검색어가 등장하는 DB ${dbs.length}종:\n` + dbs.slice(0, max_results).map((d) => '- ' + d).join('\n') + dbrowse(browse) + '\n각 DB에서 문서 단위로 열람. 한자 원표기 병행 검색 권장.');
+        return text(`한국사DB '${query}' — 매칭 DB 미검출(한자/이표기 시도 권장).` + dbrowse(browse));
+      } catch (e) { return text(`한국사DB '${query}' — 자동조회 실패(${e.message}).` + dbrowse(browse)); }
     });
 
   server.tool('archives_search',
-    "Search 국가기록원 국가기록포털 (archives.go.kr) via its official OpenAPI (search.archives.go.kr/openapi/search.arc, RSS). Needs a free key from data.go.kr '나라기록물정보 서비스' (15000153) set as ARCHIVES_API_KEY; without it, returns browser-open URL + cheliped scrape command. 일 1,000건 제한.",
+    "Search 국가기록원 국가기록포털 (archives.go.kr) via official OpenAPI (RSS). Set a free data.go.kr key '나라기록물정보 서비스'(15000153) as ARCHIVES_API_KEY and the server auto-searches; otherwise returns the portal URL. 공공누리 확인 후 이용.",
     { query: z.string(), max_results: z.number().int().min(1).max(50).default(10) },
     async ({ query, max_results }) => {
       const key = process.env.ARCHIVES_API_KEY;
       const portal = 'https://www.archives.go.kr/next/newsearch/listSubjectDescription.do?query=' + encodeURIComponent(query);
-      if (!key) return text(`국가기록원 '${query}'\n인증키 미설정 — data.go.kr '나라기록물정보 서비스'(15000153) 무료 신청 후 ARCHIVES_API_KEY로 설정하면 OpenAPI 자동 검색.\n브라우저 열기: ${portal}\n${CHELIPED_INSTALL}\n실행: ${chelipedCmd(portal)}`);
+      if (!key) return text(`국가기록원 '${query}' — ARCHIVES_API_KEY 미설정. data.go.kr '나라기록물정보 서비스'(15000153) 무료 키 설정 시 자동 검색.` + dbrowse(portal));
       const api = `https://search.archives.go.kr/openapi/search.arc?serviceKey=${encodeURIComponent(key)}&query=${encodeURIComponent(query)}&start=1&limit=${Math.min(max_results, 50)}`;
-      let xml;
-      try { xml = await gtext(api); } catch (e) { return text(`국가기록원 API 오류: ${e.message}\n브라우저 열기: ${portal}`); }
-      if (xml.includes('searchError')) return text(`국가기록원 API 오류: ${xtag(xml, 'message') || '알 수 없음'}\n인증키·일일 쿼터(1,000건) 확인.`);
-      const tot = xtag(xml, 'totalCount') || xtag(xml, 'totalResults') || '?';
-      const items = xml.match(/<item>[\s\S]*?<\/item>/g) || [];
-      const lines = items.slice(0, max_results).map((b) => `- ${xtag(b, 'title').slice(0, 90)} (${xtag(b, 'produceYear') || xtag(b, 'pubDate').slice(0, 16)}) ${xtag(b, 'link')}`);
-      return text(`국가기록원 '${query}' — 총 ${tot}건:\n` + (lines.join('\n') || '(0건)') + '\n※ 노획문서·생산기관 코드는 상세 확인. 저작권은 공공누리(KOGL) 유형 확인 후 이용.');
-    });
-
-  server.tool('scrape_plan',
-    'Check a URL\'s robots.txt and return whether direct scraping is allowed; for robots-blocked or JS-rendered sites, return a ready-to-run cheliped-skills (CDP browser) command. Fallback path for archives with no API. robots 차단·JS 렌더 사이트의 cheliped 스크래핑 폴백.',
-    { url: z.string() },
-    async ({ url }) => {
-      const u = new URL(url); const root = `${u.protocol}//${u.host}`; const path = u.pathname || '/';
-      let verdict = 'robots 미확인';
       try {
-        const rb = await gtext(root + '/robots.txt'); let blocked = false, agentAll = false;
-        for (const line of rb.split('\n')) {
-          const s = line.trim().toLowerCase();
-          if (s.startsWith('user-agent:')) agentAll = s.includes('*');
-          else if (agentAll && s.startsWith('disallow:')) { const d = s.split(':')[1].trim(); if (d && path.startsWith(d)) blocked = true; }
-        }
-        verdict = blocked ? 'robots 차단됨 → 브라우저 스크래핑 사용' : 'robots 허용(단 JS 렌더면 브라우저 필요)';
-      } catch (e) { verdict = `robots 미확인(${e.message}) → 브라우저 스크래핑 안전`; }
-      return text(`${url}\n판정: ${verdict}\n${CHELIPED_INSTALL}\n실행: ${chelipedCmd(url)}\n다단계: goto→observe로 요소 번호 확인 후 click/fill/scrape로 목록·상세·페이지네이션 처리.`);
+        const xml = await gtext(api);
+        if (xml.includes('searchError')) return text(`국가기록원 API 오류: ${xtag(xml, 'message') || '?'} — 키·쿼터 확인.` + dbrowse(portal));
+        const tot = xtag(xml, 'totalCount') || xtag(xml, 'totalResults') || '?';
+        const items = xml.match(/<item>[\s\S]*?<\/item>/g) || [];
+        const lines = items.slice(0, max_results).map((i) => `- ${xtag(i, 'title').slice(0, 90)} (${xtag(i, 'produceYear') || xtag(i, 'pubDate').slice(0, 16)}) ${xtag(i, 'link')}`);
+        return text(`국가기록원 '${query}' — 총 ${tot}건:\n` + (lines.join('\n') || '(0건)') + '\n공공누리 유형 확인 후 이용.');
+      } catch (e) { return text(`국가기록원 API 오류(${e.message}).` + dbrowse(portal)); }
     });
 
   server.tool('nlk_search',
-    "Search 국립중앙도서관 (nl.go.kr) digital collections. collection: 'total'(전체 소장자료) · 'subject'(주제별컬렉션) · 'newspaper'(대한민국신문아카이브 1883-1960 old newspapers, copyright-expired free use) · 'gwanbo'(관보) · 'exhibit'(전시컬렉션) · 'koreanmemory'(코리안메모리) · 'overseas'(해외 한국관련자료). Unified OpenAPI (search.do) is used for total/subject/gwanbo/overseas when NLK_API_KEY is set (apply at www.nl.go.kr); otherwise returns browser-open URL + cheliped scrape command. 국립중앙도서관 6개 컬렉션.",
+    "Search 국립중앙도서관 (nl.go.kr) collections. collection: total·subject·newspaper(1883-1960 old newspapers, free use)·gwanbo·exhibit·koreanmemory·overseas. With NLK_API_KEY (www.nl.go.kr Open API) the server auto-searches total/subject/gwanbo/overseas; otherwise returns the collection URL.",
     { query: z.string(), collection: z.enum(['total', 'subject', 'newspaper', 'gwanbo', 'exhibit', 'koreanmemory', 'overseas']).default('total'), max_results: z.number().int().min(1).max(50).default(15) },
     async ({ query, collection, max_results }) => {
       const COLL = {
@@ -232,76 +225,97 @@ const handler = createMcpHandler((server) => {
         koreanmemory: ['코리안메모리', 'https://nl.go.kr/koreanmemory/', false],
         overseas: ['해외 한국관련자료', 'https://www.nl.go.kr/NL/contents/N20401010000.do', true],
       };
-      const NOTE = {
-        newspaper: '1883–1960 고신문 108종(기사 868만). 저작권 만료 — 출처(국립중앙도서관) 표기 시 자유이용.',
-        koreanmemory: '구술·사진 큐레이션 아카이브 — 주제 브라우징에 적합.',
-        exhibit: '온라인 전시(서사형) — 전시 목록 브라우징 권장.',
-        overseas: '해외 소재 한국 관련 자료 — 소장기관·마이크로필름 정보 확인.',
-        gwanbo: '대한제국·조선총독부·대한민국 관보 원문 — 법령·서임·고시 1차 사료.',
-        subject: '국립중앙도서관 주제별 선별 디지털 컬렉션.',
-        total: '전체 소장자료(단행본·고서·학위논문·디지털화 자료 등).',
-      };
+      const NOTE = { newspaper: '1883–1960 고신문 108종. 저작권 만료 — 출처표기 시 자유이용.', koreanmemory: '구술·사진 큐레이션.', exhibit: '온라인 전시.', overseas: '해외 소재 한국 관련 자료.', gwanbo: '대한제국·총독부·대한민국 관보 원문.', subject: '주제별 선별 컬렉션.', total: '전체 소장자료.' };
       const [name, base, apiOk] = COLL[collection];
       const openUrl = (base.endsWith('kwd=') || base.endsWith('keyword=')) ? base + encodeURIComponent(query) : base;
       const note = NOTE[collection] || '';
       const key = process.env.NLK_API_KEY;
       if (apiOk && key) {
         const api = `https://www.nl.go.kr/NL/search/openApi/search.do?key=${encodeURIComponent(key)}&apiType=xml&srchTarget=total&kwd=${encodeURIComponent(query)}&pageSize=${Math.min(max_results, 50)}&pageNum=1`;
-        let xml = '';
-        try { xml = await gtext(api); } catch (e) { xml = ''; }
-        if (xml && !xml.includes('<error>')) {
-          const tot = xtag(xml, 'total') || '?';
-          const items = xml.match(/<item>[\s\S]*?<\/item>/g) || [];
-          const lines = items.slice(0, max_results).map((b) => `- ${xtag(b, 'titleInfo').slice(0, 90)} / ${xtag(b, 'authorInfo').slice(0, 24)} (${xtag(b, 'pubYearInfo')}) [${xtag(b, 'typeName').slice(0, 14)}] ${xtag(b, 'detailLink')}`);
-          return text(`국립중앙도서관 · ${name} '${query}' — 총 ${tot}건:\n` + (lines.join('\n') || '(0건)') + `\n※ ${note}`);
-        }
-        if (xml.includes('<error>')) return text(`NLK OpenAPI 오류: ${xtag(xml, 'msg') || '알 수 없음'} — NLK_API_KEY 확인.\n브라우저 열기: ${openUrl}`);
+        try {
+          const xml = await gtext(api);
+          if (!xml.includes('<error>')) {
+            const tot = xtag(xml, 'total') || '?';
+            const items = xml.match(/<item>[\s\S]*?<\/item>/g) || [];
+            const lines = items.slice(0, max_results).map((i) => `- ${xtag(i, 'titleInfo').slice(0, 90)} / ${xtag(i, 'authorInfo').slice(0, 24)} (${xtag(i, 'pubYearInfo')}) ${xtag(i, 'detailLink')}`);
+            return text(`국립중앙도서관 · ${name} '${query}' — 총 ${tot}건:\n` + (lines.join('\n') || '(0건)') + `\n※ ${note}`);
+          }
+          return text(`NLK OpenAPI 오류: ${xtag(xml, 'msg') || '?'} — NLK_API_KEY 확인.` + dbrowse(openUrl));
+        } catch (e) { return text(`NLK API 오류(${e.message}).` + dbrowse(openUrl)); }
       }
-      const keyed = (apiOk && !key) ? '인증키 미설정 — www.nl.go.kr Open API 신청 후 NLK_API_KEY 설정 시 자동 검색. ' : '';
-      return text(`국립중앙도서관 · ${name} '${query}'\n${keyed}브라우저 열기: ${openUrl}\n※ ${note}\n${CHELIPED_INSTALL}\n실행: ${chelipedCmd(openUrl)}`);
-    });
-
-  server.tool('foia_search',
-    "Search 대한민국 정보공개포털 (open.go.kr) — 원문정보공개 (full-text of released government decision documents), 사전정보공표, and FOIA request cases. Login/JS portal with no keyless API, so returns the browser-open URL + a 2-step cheliped scrape command (fill search box → scrape list). Unreleased documents can be requested via 정보공개청구. 정보공개포털 검색.",
-    { query: z.string() },
-    async ({ query }) => {
-      const url = 'https://www.open.go.kr/com/main/mainView.do';
-      return text(`정보공개포털 '${query}'\n브라우저 열기: ${url}\n※ 원문정보공개=정부 결재문서 원문 전문검색 · 사전정보공표 · 정보공개청구 사례. 미공개 문서는 포털에서 정보공개청구로 요청 가능.\n${chelipedSearch(url, query)}`);
+      const keyed = (apiOk && !key) ? 'NLK_API_KEY 미설정(www.nl.go.kr Open API 신청 시 자동 검색). ' : '';
+      return text(`국립중앙도서관 · ${name} '${query}'\n${keyed}※ ${note}` + dbrowse(openUrl));
     });
 
   server.tool('seoul_archives_search',
-    "Search 서울기록원 (archives.seoul.go.kr) — Seoul Metropolitan Archives: municipal administrative records, city photos, oral histories, mayoral documents. The catalog is JS-rendered, so returns the full-text search URL (search_api_fulltext) + a cheliped scrape command. Essential local-archives cross-source for regional history. 서울기록원 카탈로그 검색.",
+    "Search 서울기록원 (archives.seoul.go.kr) — server fetches the catalog and returns collections matching the term plus the full-result URL. Seoul municipal records/photos/oral histories.",
     { query: z.string(), max_results: z.number().int().min(1).max(50).default(15) },
     async ({ query, max_results }) => {
-      const url = 'https://archives.seoul.go.kr/catalog?search_api_fulltext=' + encodeURIComponent(query);
-      let hint = '';
-      try { const html = await gtext(url); const m = html.match(/([\d,]{1,9})\s*건/); hint = m ? `약 ${m[1]}건 감지. ` : '직접 조회는 빈 목록(JS 렌더 확인). '; }
-      catch (e) { hint = `(직접 조회 실패: ${e.message}) `; }
-      return text(`서울기록원 '${query}'\n브라우저 열기: ${url}\n${hint}JS 렌더 카탈로그이므로 목록·상세는 브라우저 스크래핑으로 추출:\n${CHELIPED_INSTALL}\n실행: ${chelipedCmd(url)}\n※ 지방기록물 저작권은 공공누리(KOGL) 유형 확인 후 이용.`);
-    });
-
-  server.tool('local_gov_search',
-    "Search Korean local-government FOIA / archives. source: 'seoul_opengov' (서울정보소통광장 — Seoul city decision documents full-text, 2014+), 'sen' (서울시교육청 정보공개 '열린 서울교육' — Seoul education office released documents), 'gyeongnam' (경상남도기록원 — first provincial archive, local records/oral history). All are JS portals with no keyless API, so returns browser-open URL + cheliped scrape command. Decision-document originals are primary sources for local/incident history. 지방 정보공개·기록원 라우팅.",
-    { query: z.string(), source: z.enum(['seoul_opengov', 'sen', 'gyeongnam']) },
-    async ({ query, source }) => {
-      const SRC = {
-        seoul_opengov: ['서울정보소통광장(결재문서 원문공개)', 'https://opengov.seoul.go.kr/sanction/list?srch_all=', '서울시 결재문서 원문 전문공개(2014~). 부서·기간 필터 가능. 저작권 공공누리 확인.'],
-        sen: ['서울시교육청 정보공개(열린 서울교육)', 'https://open.sen.go.kr/', '서울교육청 원문정보공개 결재문서(2014~)·사전정보공표. 미공개분은 정보공개청구.'],
-        gyeongnam: ['경상남도기록원', 'https://archives.gyeongnam.go.kr/main.web', '국내 최초 광역 지방기록원 — 경남도정 기록·구술·행정박물. 지역사 발굴 핵심.'],
-      };
-      const [name, base, note] = SRC[source];
-      let url, cmd;
-      if (base.endsWith('=')) { url = base + encodeURIComponent(query); cmd = `실행: ${chelipedCmd(url)}`; }
-      else { url = base; cmd = chelipedSearch(url, query); }
-      return text(`${name} '${query}'\n브라우저 열기: ${url}\n※ ${note}\n${cmd}`);
+      const land = 'https://archives.seoul.go.kr/catalog?search_api_fulltext=' + encodeURIComponent(query);
+      const deep = 'https://archives.seoul.go.kr/catalog/result?regclass=RC_ITEM&search_api_fulltext=' + encodeURIComponent(query);
+      try {
+        const b = await gtext(land);
+        const cols = []; const re = /href="(\/catalog\/result\?[^"]*collects=[^"]*)"[^>]*>([\s\S]*?)<\/a>/g; let m;
+        while ((m = re.exec(b))) { const nm = dclean(m[2]); if (nm && nm.includes('컬렉션')) cols.push([nm, 'https://archives.seoul.go.kr' + m[1]]); }
+        if (cols.length) return text(`서울기록원 '${query}' — 매칭 컬렉션 ${cols.length}개:\n` + cols.slice(0, max_results).map(([n, u]) => `- ${n}\n  ${u}`).join('\n') + `\n전체 항목: ${deep}`);
+        return text(`서울기록원 '${query}' — 매칭 컬렉션 미검출.` + dbrowse(deep));
+      } catch (e) { return text(`서울기록원 '${query}' — 자동조회 실패(${e.message}).` + dbrowse(deep)); }
     });
 
   server.tool('warmemo_search',
-    "Search 전쟁기념관 아카이브 (archives.warmemo.or.kr) — War Memorial of Korea: Korean War and modern military-history records, photos, artifacts, oral histories, documents. Domestic primary source for 6·25 War units/battles/veterans, great for cross-checking overseas holdings (NARA RG 111/342, TNA WO). JS portal with no keyless API — returns browser-open URL + 2-step cheliped scrape command. 전쟁기념관 아카이브 검색.",
+    "Search 전쟁기념관 아카이브 (archives.warmemo.or.kr) — server fetches the integrated search and returns per-category hit counts (유물·사진/필름·구술·전시 등). Korean War / military-history primary source; cross-check with NARA·TNA.",
     { query: z.string() },
     async ({ query }) => {
-      const url = 'http://archives.warmemo.or.kr/index.do';
-      return text(`전쟁기념관 아카이브 '${query}'\n브라우저 열기: ${url}\n※ 한국전쟁·군사사 기록·사진·유물·구술. 6·25 참전·전투·부대 사료 — 해외(NARA·TNA)와 교차검증.\n${chelipedSearch(url, query)}`);
+      const url = 'http://archives.warmemo.or.kr/intgsrch/intgsrchArchv.do?MID=UM00045&keyword=' + encodeURIComponent(query);
+      try {
+        const b = await gtext(url);
+        const cats = []; const re = /class="total-breadcrumb">([\s\S]*?)<\/span>\s*<span>\s*총\s*([\d,]+)/g; let m;
+        while ((m = re.exec(b))) cats.push([dclean(m[1]), m[2]]);
+        if (cats.length) return text(`전쟁기념관 '${query}' — 카테고리별 검색 건수:\n` + cats.slice(0, 20).map(([c, n]) => `- ${c} : ${n}건`).join('\n') + dbrowse(url) + '\n한국전쟁·군사사 사료 — 해외(NARA·TNA)와 교차검증.');
+        return text(`전쟁기념관 '${query}' — 검색 결과 미검출.` + dbrowse(url));
+      } catch (e) { return text(`전쟁기념관 '${query}' — 자동조회 실패(${e.message}).` + dbrowse(url)); }
+    });
+
+  server.tool('foia_search',
+    "대한민국 정보공개포털 (open.go.kr) — 원문정보공개·정보공개청구. Login-based portal, so returns the search URL for the agent to open with its browser tool. Unreleased documents can be requested via 정보공개청구.",
+    { query: z.string() },
+    async ({ query }) => {
+      const url = 'https://www.open.go.kr/othicInfo/infoList/orginlInfoList.do?searchKeyword=' + encodeURIComponent(query);
+      return text(agentBrowse('정보공개포털(원문정보공개)', query, url) + '\n※ 미공개 문서는 포털에서 정보공개청구로 요청.');
+    });
+
+  server.tool('local_gov_search',
+    "Korean local-government FOIA/archives. source: 'seoul_opengov' (서울정보소통광장 — Seoul city decision documents, server auto-fetches the list), 'sen' (서울시교육청 정보공개), 'gyeongnam' (경상남도기록원). Decision-document originals are primary sources for local/incident history.",
+    { query: z.string(), source: z.enum(['seoul_opengov', 'sen', 'gyeongnam']) },
+    async ({ query, source }) => {
+      if (source === 'seoul_opengov') {
+        const url = 'https://opengov.seoul.go.kr/sanction/list?searchKeyword=' + encodeURIComponent(query);
+        try {
+          const b = await gtext(url);
+          const seen = new Set(); const uniq = [];
+          const re = /<a[^>]+href="(\/sanction\/\d+)"[^>]*>([\s\S]*?)<\/a>/g; let m;
+          while ((m = re.exec(b))) { const t = dclean(m[2]).replace(/^제목\s*:\s*/, ''); if (t && !seen.has(m[1])) { seen.add(m[1]); uniq.push([m[1], t]); } }
+          if (uniq.length) return text(`서울정보소통광장 '${query}' — 결재문서 ${uniq.length}건:\n` + uniq.slice(0, 15).map(([h, t]) => `- ${t}\n  https://opengov.seoul.go.kr${h}`).join('\n'));
+          return text(`서울정보소통광장 '${query}' — 결과 미검출.` + dbrowse(url));
+        } catch (e) { return text(`서울정보소통광장 '${query}' — 자동조회 실패(${e.message}).` + dbrowse(url)); }
+      }
+      if (source === 'sen') return text(agentBrowse('서울시교육청 정보공개(열린 서울교육)', query, 'https://open.sen.go.kr/'));
+      if (source === 'gyeongnam') return text(agentBrowse('경상남도기록원', query, 'https://archives.gyeongnam.go.kr/main.web'));
+      return text('source 값: seoul_opengov, sen, gyeongnam');
+    });
+
+  server.tool('scrape_plan',
+    "Check a URL's robots.txt; for robots-blocked or JS-rendered sites with no server response, advise opening the URL with the agent's own browser tool and tabulating results, then report_template. robots 판정 + 브라우저 도구 안내.",
+    { url: z.string() },
+    async ({ url }) => {
+      const u = new URL(url); const root = `${u.protocol}//${u.host}`; const path = u.pathname || '/';
+      let verdict = 'robots 미확인';
+      try {
+        const rb = await gtext(root + '/robots.txt'); let blocked = false, agentAll = false;
+        for (const line of rb.split('\n')) { const s = line.trim().toLowerCase(); if (s.startsWith('user-agent:')) agentAll = s.includes('*'); else if (agentAll && s.startsWith('disallow:')) { const d = s.split(':')[1].trim(); if (d && path.startsWith(d)) blocked = true; } }
+        verdict = blocked ? 'robots 차단 → 브라우저 도구로 열람' : 'robots 허용(단 JS 렌더면 브라우저 필요)';
+      } catch (e) { verdict = `robots 미확인(${e.message})`; }
+      return text(`${url}\n판정: ${verdict}\n권장: 에이전트 브라우저 도구로 이 URL을 열고 결과의 제목·링크·연대를 표로 정리한 뒤 report_template으로 HTML 보고서화. 과도한 요청은 피할 것.`);
     });
 }, {}, { basePath: '/api' });
 
