@@ -523,7 +523,7 @@ const handler = createMcpHandler((server) => {
     });
 }, {}, { basePath: '/api' });
 
-const REPORT_RULES = `HTML 발굴 보고서 작성 규칙 (11) / Report writing rules:
+const REPORT_RULES = `HTML 발굴 보고서 작성 규칙 (12) / Report writing rules:
 1. Filename: [topic]_records_[years].html — default deliverable when an investigation finishes
 2. header: "[주제] — 자료 발굴 보고" + meta(작성일 · 대상 시기 · 대상 아카이브)
 3. highlight box: the single most important find (identifier · provenance · structure · significance)
@@ -534,7 +534,8 @@ const REPORT_RULES = `HTML 발굴 보고서 작성 규칙 (11) / Report writing 
 8. Rights section: legal basis (17 U.S.C. §105 · 36 CFR 1254.62 · Crown/OGL · domaine public) + "human final confirmation required before publishing" + Class D must not be published
 9. footer: methodology line + "all links verified as of [date]"
 10. Only URLs actually verified via tool calls — never guess URLs
-11. Sensitive topics (comfort women, POWs, massacres): include victim-dignity / ethical-use language in the rights section`;
+11. Sensitive topics (comfort women, POWs, massacres): include victim-dignity / ethical-use language in the rights section
+12. Figures (optional; omit if none): illustrate with <figure> — 대표 이미지·지도·연표·다이어그램. 자료 사진은 <img src="data:image/jpeg;base64,…"> 로 base64 임베드(외부 이미지 링크 금지 — 단일 HTML 파일 자기완결), 연표·관계도 등 도해는 인라인 <svg> 로 직접 작성 가능. 각 그림에 <figcaption>그림 N. 설명</figcaption>. Figures may be placed between any sections.`;
 
 const REPORT_TEMPLATE = `<!DOCTYPE html>
 <html lang="ko">
@@ -573,6 +574,10 @@ const REPORT_TEMPLATE = `<!DOCTYPE html>
   ul.src{columns:1; padding-left:20px; font-size:14px;}
   ul.src li{margin:6px 0;}
   .small{font-size:13px; color:var(--sub);}
+  figure{margin:22px 0;}
+  figure img{width:100%; display:block; border:1px solid var(--line);}
+  figure svg{width:100%; height:auto; display:block; border:1px solid var(--line); background:var(--card);}
+  figcaption{font-size:13px; color:var(--sub); margin-top:6px;}
   footer{margin-top:48px; padding-top:16px; border-top:1px solid var(--line); font-size:12px; color:var(--sub);}
 </style>
 </head>
@@ -582,6 +587,11 @@ const REPORT_TEMPLATE = `<!DOCTYPE html>
   <h1>{{제목}} — 자료 발굴 보고</h1>
   <div class="meta">작성일: {{작성일}} · 대상 시기: {{대상시기}} · 대상 아카이브: {{아카이브 목록}}</div>
 </header>
+<!-- 그림(선택) — 대표 이미지·지도·연표·다이어그램. 없으면 이 <figure> 블록 삭제. figure는 어느 절 사이에나 넣을 수 있음. -->
+<figure>
+  <img src="data:image/jpeg;base64,{{BASE64 이미지 데이터 — 외부 링크 금지, 자기완결}}" alt="{{대체 텍스트}}">
+  <figcaption>그림 1. {{그림 설명}}</figcaption>
+</figure>
 <div class="highlight">
   <p><strong>핵심 발굴</strong> — {{가장 중요한 발굴 1건: 식별자·원제·경위·구성·연구사적 의의 요약}}</p>
 </div>
