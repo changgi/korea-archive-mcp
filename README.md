@@ -1,6 +1,6 @@
 # Korea Archive MCP — Remote server (Vercel)
 
-Remote MCP server exposing **24** Korea-records discovery tools (해외 7 + 국내 12 + 유틸 5) over Streamable HTTP.
+Remote MCP server exposing **20** Korea-records discovery tools (해외 6 + 국내 9 + 유틸 5) over Streamable HTTP — PlayMCP 개발가이드 준수(≤20 tools, annotations, Streamable HTTP, stateless).
 No local Python needed by users — they just add a connector URL.
 
 ## Deploy (once)
@@ -37,17 +37,24 @@ No local Python needed by users — they just add a connector URL.
 - Claude Code: `claude mcp add --transport http korea-archive https://<deployment>.vercel.app/api/mcp`
 - <deployment> is `korea-archive-mcp` so  → `https://korea-archive-mcp.vercel.app/api/mcp`
 
-## Tools (24)
-- **Overseas (7):** tna_search · tna_adjacent_mine · nara_search · ia_search · ia_metadata · gallica_search · europeana_search
-- **Domestic (12):** nedb_search(한국사DB) · archives_search(국가기록원) · nlk_search(국립중앙도서관·category 이중채널) · seoul_archives_search(서울기록원) · foia_search(정보공개포털) · local_gov_search(서울정보소통광장·서울시교육청·경남기록원) · warmemo_search(전쟁기념관) · **koreanwar_search**(6·25전쟁 아카이브센터 통합검색+OpenAPI 이중채널) · **koreanwar_detail**(건별 메타·권리) · **koreanwar_adjacent_mine**(참조코드 인접 채굴) · **koreanwar_battle**(전투정보 DB) · scrape_plan
+## Tools (20 — PlayMCP 개발가이드 준수: 서버당 20개 이하)
+- **Overseas (6):** tna_search · tna_adjacent_mine · nara_search · ia_search(검색+identifier 메타 조회 통합) · gallica_search · europeana_search
+- **Domestic (9):** nedb_search(한국사DB) · archives_search(국가기록원) · nlk_search(국립중앙도서관·category 이중채널) · seoul_archives_search(서울기록원) · foia_search(정보공개포털+서울정보소통광장·서울시교육청·경남기록원 — source 파라미터) · warmemo_search(전쟁기념관) · **koreanwar_search**(6·25전쟁 아카이브센터 통합검색+전투정보 scope+OpenAPI 이중채널) · **koreanwar_item**(건별 메타·권리 + radius 인접 채굴) · scrape_plan
 - **Utility (5):** query_bank(+국내 키워드셋) · judge_rights · report_template · **cross_search**(여러 아카이브 동시 교차수집·병합) · **source_profile**(기관 자료·이용·활용구조)
 
 ### 6·25전쟁 아카이브센터 (koreanwar.or.kr — MOU 협약기관)
 TNA-style structured toolset for the Korean War Archive Center (전쟁기념관재단, 55,000+ items):
-`koreanwar_search`(통합검색 — 상위계층 breadcrumb에서 NARA Record Group을 추출해 원본 역추적 링크 제공, 생산연도·참조코드 상세필터) →
-`koreanwar_detail`(생산처·생산시기·입수처·저작권/이용조건) → `koreanwar_adjacent_mine`(archRfcd 일련번호 ±N 동일 시리즈 채굴) →
-`koreanwar_battle`(전투명·부대명 전투정보 DB). All requests carry a partner-identifying User-Agent and polite pacing.
+`koreanwar_search`(통합검색 — 상위계층 breadcrumb에서 NARA Record Group을 추출해 원본 역추적 링크 제공; 생산연도·수집구분 서버측 필터, pageSize 10/20/50; `scope=battle`이면 전투정보 DB) →
+`koreanwar_item`(생산처·생산시기·입수처[NARA NAID 직결]·열람 및 이용조건; `radius=1~8`이면 archRfcd 일련번호 ±N 동일 시리즈 인접 채굴 — 정중한 3건 배치 병렬).
+All requests carry a partner-identifying User-Agent and polite pacing.
 `KOREANWAR_API_TOKEN` 승인 즉시 공식 OpenAPI 메타 채널(pbrcList.do — KOGL·이용조건·저작권 필드)이 자동 병행된다.
+
+### PlayMCP 개발가이드 준수 (2026.06.12판)
+- Streamable HTTP · Remote(public URL) · stateless — mcp-handler 기반 충족
+- 도구 20개 이하(24→20 통합) · 도구명 영문/숫자/underscore · "kakao" 문자열 미사용
+- 전 도구 annotations(title·readOnlyHint·destructiveHint·openWorldHint·idempotentHint) 지정 — 전부 read-only·비파괴
+- description: 서비스명 "Korea Archive(코리아 아카이브)" 병기 + 1024자 이내 자동 보장
+- 응답은 정제 텍스트(마크다운형) — API 원본 미투과 · 인접 채굴은 배치 병렬로 p99 3s 내 응답
 
 ### cross_search — 상호보완 동시수집
 `cross_search(query, sources="all")` runs one query across TNA·IA·Gallica·Europeana (keyless) + NARA·archives·nlk (if key) + nedb (if `NEDB_INDEX_URL`) **concurrently**, then merges & dedups, tagging each record by which source(s) found it (multi-source = cross-corroborated). robots-forbidden sites (opengov·서울기록원) are excluded by design.

@@ -207,6 +207,32 @@ async function kwApiScan(q, maxPages) {
 }
 
 const handler = createMcpHandler((server) => {
+  // ── PlayMCP 개발가이드 준수(2026.06.12) ──
+  // · description: 서비스명(Korea Archive 코리아 아카이브) 병기 + 1024자 이내 보장
+  // · annotations: title·readOnlyHint·destructiveHint·openWorldHint·idempotentHint 전 도구 필수
+  //   (모든 도구는 외부 아카이브 read-only 조회 — 파괴적 동작 없음, 결과는 원격 상태에 따라 변동 가능한 open-world)
+  // · 도구 수 20개 이하(ia_metadata→ia_search, local_gov→foia, koreanwar 4→2 통합으로 24→20)
+  const SVC = ' — Korea Archive(코리아 아카이브)';
+  const TITLES = {
+    tna_search: 'TNA 영국 국립기록관 검색', tna_adjacent_mine: 'TNA 인접 참조코드 채굴',
+    nara_search: 'NARA 미국 국립문서기록관리청 검색', ia_search: 'archive.org 검색·메타데이터',
+    gallica_search: 'Gallica 프랑스 국립도서관 검색', europeana_search: 'Europeana 유럽 통합 검색',
+    query_bank: '검증 키워드 뱅크', judge_rights: '권리 등급 초판 판정', report_template: 'HTML 발굴 보고서 템플릿',
+    nedb_search: '국사편찬위 한국사DB 검색', archives_search: '국가기록원 검색', nlk_search: '국립중앙도서관 검색',
+    seoul_archives_search: '서울기록원 검색', warmemo_search: '전쟁기념관 아카이브 검색',
+    koreanwar_search: '6·25전쟁 아카이브센터 검색', koreanwar_item: '6·25전쟁 아카이브센터 상세·인접 채굴',
+    foia_search: '정보공개포털·지방 정보공개 검색', scrape_plan: 'robots 판정·수집 계획',
+    cross_search: '다중 아카이브 동시 교차수집', source_profile: '기관 구조 프로파일',
+  };
+  const _tool = server.tool.bind(server);
+  server.tool = (name, desc, schema, cb) => {
+    const max = 1024 - SVC.length;
+    const d = (desc.length > max ? desc.slice(0, max - 1) + '…' : desc) + SVC;
+    return _tool(name, d, schema,
+      { title: TITLES[name] || name, readOnlyHint: true, destructiveHint: false, idempotentHint: true, openWorldHint: true },
+      cb);
+  };
+
   server.tool('tna_search',
     'Search the UK National Archives (TNA) Discovery catalog for Korea-related records. Reference codes like "FO 371/84053" are auto-quoted. 영국 국립기록관 검색.',
     { query: z.string().describe('e.g. "Korea armistice", "FO 371 FK1015", "WO 281 Glosters"'), max_results: z.number().int().min(1).max(50).default(15) },
@@ -261,23 +287,20 @@ const handler = createMcpHandler((server) => {
     });
 
   server.tool('ia_search',
-    'Search archive.org (advanced search syntax). e.g. "identifier:111-adc*", "collection:universal_newsreels AND korea", "mediatype:movies AND (keijo OR chosen)".',
-    { query: z.string(), max_results: z.number().int().min(1).max(50).default(15) },
-    async ({ query, max_results }) => {
+    'Search archive.org (advanced search syntax) — e.g. "identifier:111-adc*", "collection:universal_newsreels AND korea", "mediatype:movies AND (keijo OR chosen)". Pass identifier instead to inspect one item: metadata, license, original files with sizes (check before downloading).',
+    { query: z.string().default('').describe('search query (ignored when identifier is set)'), identifier: z.string().optional().describe('item identifier for metadata inspection'), max_results: z.number().int().min(1).max(50).default(15) },
+    async ({ query, identifier, max_results }) => {
+      if (identifier) {
+        const d = await jget(`https://archive.org/metadata/${encodeURIComponent(identifier)}`);
+        const md = d.metadata || {};
+        const files = (d.files || []).filter((f) => f.source === 'original').slice(0, 10);
+        return text(`Title: ${md.title}\nDate: ${md.date} | License: ${md.licenseurl || md.rights || 'not stated'}\nDescription: ${String(md.description || '').slice(0, 300)}\nOriginal files:\n` + files.map((f) => `- ${f.name} (${(Number(f.size || 0) / 1e6).toFixed(1)}MB)`).join('\n'));
+      }
+      if (!query) return text('query 또는 identifier 중 하나는 필수.');
       const u = `https://archive.org/advancedsearch.php?q=${encodeURIComponent(query)}&fl[]=identifier&fl[]=title&fl[]=date&rows=${max_results}&output=json`;
       const d = await jget(u);
       const docs = ((d.response || {}).docs) || [];
       return text(`archive.org '${query}' — total ${(d.response || {}).numFound}:\n` + (docs.map((x) => `- ${x.identifier} | ${String(x.title).slice(0, 90)} | https://archive.org/details/${x.identifier}`).join('\n') || '(0)'));
-    });
-
-  server.tool('ia_metadata',
-    'Inspect an archive.org item: metadata, license, original files with sizes (check before downloading).',
-    { identifier: z.string() },
-    async ({ identifier }) => {
-      const d = await jget(`https://archive.org/metadata/${encodeURIComponent(identifier)}`);
-      const md = d.metadata || {};
-      const files = (d.files || []).filter((f) => f.source === 'original').slice(0, 10);
-      return text(`Title: ${md.title}\nDate: ${md.date} | License: ${md.licenseurl || md.rights || 'not stated'}\nDescription: ${String(md.description || '').slice(0, 300)}\nOriginal files:\n` + files.map((f) => `- ${f.name} (${(Number(f.size || 0) / 1e6).toFixed(1)}MB)`).join('\n'));
     });
 
   server.tool('gallica_search',
@@ -494,11 +517,29 @@ const handler = createMcpHandler((server) => {
       } catch (e) { return text(agentBrowse('전쟁기념관', query, url, `자동조회 실패(${e.message})`)); }
     });
 
-  // ── 6·25전쟁 아카이브센터 (협약기관 — MOU) : TNA-style structured toolset ──
+  // ── 6·25전쟁 아카이브센터 (협약기관 — MOU) : TNA-style structured toolset (PlayMCP 준수: 2 tools) ──
   server.tool('koreanwar_search',
-    "Search 6·25전쟁 아카이브센터 (koreanwar.or.kr, 전쟁기념관재단 — 협약기관). Server fetches /search.do (viewType=archive: 10건/페이지 완전 목록·페이징) and parses result cards: title·archRfcd(영속 참조코드)·producer·provenance hierarchy (NARA Record Group 노출 → nara_search 역추적). 55,000여 건: 문서·지도·사진·필름·음원·구술. 상세검색 서버측 필터(실측 검증): year_from/year_to = 생산연도 범위, acquisition = 수집구분(수집·기증·구입·기탁·제작·이관·차입·기타). 자료유형·자료연대·열람/이용조건 필터는 GET 미반영(브라우저 상세검색 폼 전용 — 코드표는 source_profile koreanwar 참조); 참조코드 탐색은 koreanwar_adjacent_mine. With KOREANWAR_API_TOKEN a 2nd OpenAPI channel joins (공식 메타데이터·KOGL 권리정보). 한글 질의 권장(미군 원본도 한글 재기술 제목으로 히트).",
-    { query: z.string().describe('한글 권장 — e.g. "장진호", "흥남철수", "인천상륙"'), page: z.number().int().min(1).default(1), max_results: z.number().int().min(1).max(50).default(10).describe('페이지당 결과 수(=pageSize 10/20/50 자동 매핑)'), year_from: z.number().int().optional().describe('생산연도 시작 e.g. 1950'), year_to: z.number().int().optional().describe('생산연도 끝 e.g. 1951'), acquisition: z.enum(['수집', '기증', '기타', '구입', '기탁', '제작', '이관', '차입']).optional().describe('수집구분(depth1) 필터') },
-    async ({ query, page, max_results, year_from, year_to, acquisition }) => {
+    "Search the Korean War Archive Center 6·25전쟁 아카이브센터 (koreanwar.or.kr, War Memorial of Korea Foundation — MOU partner): 55,000+ items (documents·maps·photos·films·audio·oral histories). Parses result cards (title, archRfcd persistent ref code, producer, provenance hierarchy) and extracts NARA Record Group for origin tracing via nara_search. Verified server-side filters: year_from/year_to (production year), acquisition (수집구분: 수집·기증·구입·기탁·제작·이관·차입·기타). scope='battle' searches the battle-info DB instead (69 early-war battles — anchor for TNA WO 281 / NARA RG 407 cross-verification). Korean queries recommended (US-origin footage is re-described in Korean). With KOREANWAR_API_TOKEN, an official OpenAPI metadata channel (KOGL rights fields) joins automatically. Full filter code tables: source_profile('koreanwar').",
+    { query: z.string().describe('한글 권장 — e.g. "장진호", "흥남철수", "인천상륙"'), scope: z.enum(['archive', 'battle']).default('archive').describe('archive=소장자료 통합검색, battle=전투정보 DB'), page: z.number().int().min(1).default(1), max_results: z.number().int().min(1).max(50).default(10).describe('페이지당 결과 수(=pageSize 10/20/50 자동 매핑)'), year_from: z.number().int().optional().describe('생산연도 시작 e.g. 1950'), year_to: z.number().int().optional().describe('생산연도 끝 e.g. 1951'), acquisition: z.enum(['수집', '기증', '기타', '구입', '기탁', '제작', '이관', '차입']).optional().describe('수집구분(depth1) 필터') },
+    async ({ query, scope, page, max_results, year_from, year_to, acquisition }) => {
+      if (scope === 'battle') {
+        const listUrl = KW_BASE + '/warList.do';
+        try {
+          const b = await gtext(listUrl, KW_UA);
+          const cards = [];
+          for (const blk of b.split('/warDetail.do?warIdx=').slice(1)) {
+            const idx = (blk.match(/^(\d+)/) || [])[1]; if (!idx) continue;
+            const name = kwClean((blk.match(/<span class="text">([\s\S]*?)<\/span>/) || [, ''])[1]);
+            const meta = [...blk.slice(0, 2500).matchAll(/<dt>([\s\S]{1,30}?)<\/dt>\s*<dd>([\s\S]{0,120}?)<\/dd>/g)].map((x) => `${kwClean(x[1])}:${kwClean(x[2])}`);
+            cards.push({ idx, name, metaText: meta.join(' · ') });
+          }
+          const t = query.trim();
+          const matched = t ? cards.filter((c) => (c.name + ' ' + c.metaText).includes(t)) : cards;
+          const lines = matched.slice(0, 25).map((c) => `- [warIdx ${c.idx}] ${c.name || '?'}${c.metaText ? ' | ' + c.metaText : ''}\n  ${KW_BASE}/warDetail.do?warIdx=${c.idx}`);
+          if (lines.length) return text(`6·25 전투정보 '${t || '(전체)'}' — ${matched.length}/${cards.length}건:\n` + lines.join('\n') + '\n※ 전투명·시기·장소를 앵커로 TNA WO 281·NARA RG 407·koreanwar_search(scope=archive)와 교차. DB는 개전 초기(1950.6.25~9.14) 단계 수록(확장 중).');
+          return text(`6·25 전투정보 '${t}' — 0건 (전체 ${cards.length}건 중). 현재 DB는 개전 초기(1950.6.25~9.14) 전투만 수록 — 이후 시기(백마고지 1952 등)는 미수록. scope=archive로 자료 검색은 가능.` + dbrowse(listUrl));
+        } catch (e) { return text(agentBrowse('6·25 전투정보', query, listUrl, `자동조회 실패(${e.message})`)); }
+      }
       const pageSize = max_results > 20 ? 50 : (max_results > 10 ? 20 : 10);
       const params = { keyword: query, viewType: 'archive', page, pageSize };
       if (year_from || year_to || acquisition) {
@@ -524,86 +565,58 @@ const handler = createMcpHandler((server) => {
         } else {
           out += '\n※ OpenAPI(공식 메타·KOGL 권리정보 채널)는 토큰 승인 후 KOREANWAR_API_TOKEN 설정 시 자동 병행 활성 (현재 신청·승인 대기 상태여도 이 검색은 정상 동작).';
         }
-        return text(out + `\n협약기관 — 출처 표기 필수: 6·25전쟁 아카이브센터(전쟁기념관재단). 상세 메타·권리: koreanwar_detail, 인접 채굴: koreanwar_adjacent_mine.`
+        return text(out + `\n협약기관 — 출처 표기 필수: 6·25전쟁 아카이브센터(전쟁기념관재단). 건별 메타·인접 채굴: koreanwar_item.`
           + `\n도서자료 포함 전체·상세검색폼(계층 depth·자료유형·입수처 등 추가 필터는 브라우저에서): ${KW_BASE}/search.do?detailYn=Y&keyword=${encodeURIComponent(query)}`);
       } catch (e) { return text(agentBrowse('6·25전쟁 아카이브센터', query, `${KW_BASE}/search.do?keyword=${encodeURIComponent(query)}`, `자동조회 실패(${e.message})`)); }
     });
 
-  server.tool('koreanwar_detail',
-    "Fetch full metadata for one 6·25전쟁 아카이브센터 item by archRfcd — title, 생산처/생산자, 생산시기, 입수처(+입수처 링크: NARA 재수집본이면 catalog.archives.gov NAID 원본 직결), 열람 및 이용조건 (권리 판정 근거). Use after koreanwar_search; feed the 이용조건 line to judge_rights.",
-    { ref_code: z.string().describe('e.g. "2022-US-02-AV-D-00207"') },
-    async ({ ref_code }) => {
-      const url = `${KW_BASE}/searchDetail.do?archRfcd=${encodeURIComponent(ref_code.trim())}`;
+  const kwItemTitle = (b) => [...b.matchAll(/<h2[^>]*>([\s\S]{1,300}?)<\/h2>/g)].map((x) => kwClean(x[1])).filter((x) => x && !/KOREAN WAR ARCHIVE/i.test(x))[0];
+  server.tool('koreanwar_item',
+    "Inspect one Korean War Archive Center 6·25전쟁 아카이브센터 item by archRfcd: full metadata — title, producer, production dates, acquisition source (direct NARA catalog NAID link for US re-collections), 열람 및 이용조건 (feed to judge_rights). Set radius 1-8 for Adaptive Mining: iterates the serial tail ±radius to surface same-series adjacent items (TNA-style), fetched in polite parallel batches. MOU partner — cite the source when publishing.",
+    { ref_code: z.string().describe('e.g. "2022-US-02-AV-D-00207"'), radius: z.number().int().min(0).max(8).default(0).describe('0=단건 상세, 1~8=일련번호 ±N 인접 채굴') },
+    async ({ ref_code, radius }) => {
+      const ref0 = ref_code.trim();
+      const url = `${KW_BASE}/searchDetail.do?archRfcd=${encodeURIComponent(ref0)}`;
+      if (radius > 0) {
+        const m = ref0.match(/^(.+-)(\d+)$/);
+        if (!m) return text('참조코드 형식 오류 — 예: 2022-US-02-AV-D-00207 (말미가 일련번호)');
+        const prefix = m[1]; const serial = parseInt(m[2], 10); const width = m[2].length;
+        const refs = [];
+        for (let s = Math.max(0, serial - radius); s <= serial + radius; s++) refs.push(prefix + String(s).padStart(width, '0'));
+        // 정중한 병렬: 3건 배치 동시 조회 + 배치 간 200ms — p99 3s 내 응답 유지
+        const lines = [];
+        for (let i = 0; i < refs.length; i += 3) {
+          const batch = refs.slice(i, i + 3);
+          const rs = await Promise.all(batch.map(async (ref) => {
+            try {
+              const t = kwItemTitle(await gtext(`${KW_BASE}/searchDetail.do?archRfcd=${encodeURIComponent(ref)}`, KW_UA));
+              return t ? `${ref === ref0 ? '●' : '○'} ${ref} | ${t.slice(0, 90)}` : `  ${ref} | (없음)`;
+            } catch (e) { return `  ${ref} | ERROR ${e.message}`; }
+          }));
+          lines.push(...rs);
+          if (i + 3 < refs.length) await sleep(200);
+        }
+        return text(`인접 채굴 ${ref0} ±${radius} (● 기준 · ○ 인접 발굴):\n` + lines.join('\n') + '\n※ 발굴 건은 koreanwar_item(radius=0)으로 메타 확인.');
+      }
       try {
         const b = await gtext(url, KW_UA);
-        const h2s = [...b.matchAll(/<h2[^>]*>([\s\S]{1,300}?)<\/h2>/g)].map((m) => kwClean(m[1])).filter((t) => t && !/KOREAN WAR ARCHIVE/i.test(t));
+        const title = kwItemTitle(b);
         const rows = [...b.matchAll(/<dt[^>]*>\s*([\s\S]{1,60}?)\s*<\/dt>\s*<dd[^>]*>([\s\S]{0,400}?)<\/dd>/g)]
           .map((m) => [kwClean(m[1]), kwClean(m[2])]).filter(([k, v]) => k && v && v !== '~');
-        if (!h2s.length && !rows.length) return text(agentBrowse('6·25전쟁 아카이브센터', ref_code, url, '상세 메타 미검출 — 참조코드 확인'));
+        if (!title && !rows.length) return text(agentBrowse('6·25전쟁 아카이브센터', ref0, url, '상세 메타 미검출 — 참조코드 확인'));
         const all = rows.map(([, v]) => v).join(' ');
         const naid = (all.match(/catalog\.archives\.gov\/id\/(\d+)/) || [])[1];
         const rg = (all.match(/Record Group (\d+)/) || [])[1];
-        return text(`6·25전쟁 아카이브센터 [${ref_code}]\n제목: ${h2s[0] || '?'}\n` + rows.map(([k, v]) => `· ${k}: ${v.slice(0, 200)}`).join('\n')
+        return text(`6·25전쟁 아카이브센터 [${ref0}]\n제목: ${title || '?'}\n` + rows.map(([k, v]) => `· ${k}: ${v.slice(0, 200)}`).join('\n')
           + (naid ? `\n↔ NARA 원본 NAID ${naid} (입수처 링크 직결) — https://catalog.archives.gov/id/${naid} 에서 고해상 원본·상세 기술 확인` : '')
           + (rg ? `\n↔ NARA RG ${rg} — nara_search(record_group=${rg})로 시리즈 확장 검색` : '')
           + `\n${url}\n※ '열람 및 이용조건' 행을 judge_rights에 투입해 권리 초판 판정. 협약기관 — 출처 표기 필수.`);
-      } catch (e) { return text(agentBrowse('6·25전쟁 아카이브센터', ref_code, url, `자동조회 실패(${e.message})`)); }
-    });
-
-  server.tool('koreanwar_adjacent_mine',
-    'Adaptive Mining on 6·25전쟁 아카이브센터: iterate the serial tail of a verified archRfcd (e.g. 2022-US-02-AV-D-00207 → ±radius) to surface same-series adjacent items — 검증된 참조코드 주변 일련번호 순회로 동일 시리즈 미발굴 건 채굴 (TNA tna_adjacent_mine 방식).',
-    { reference: z.string().describe('e.g. "2022-US-02-AV-D-00207"'), radius: z.number().int().min(1).max(8).default(3) },
-    async ({ reference, radius }) => {
-      const m = reference.trim().match(/^(.+-)(\d+)$/);
-      if (!m) return text('참조코드 형식 오류 — 예: 2022-US-02-AV-D-00207 (말미가 일련번호)');
-      const prefix = m[1]; const serial = parseInt(m[2], 10); const width = m[2].length;
-      const lines = [];
-      for (let s = Math.max(0, serial - radius); s <= serial + radius; s++) {
-        const ref = prefix + String(s).padStart(width, '0');
-        try {
-          const b = await gtext(`${KW_BASE}/searchDetail.do?archRfcd=${encodeURIComponent(ref)}`, KW_UA);
-          const t = [...b.matchAll(/<h2[^>]*>([\s\S]{1,300}?)<\/h2>/g)].map((x) => kwClean(x[1])).filter((x) => x && !/KOREAN WAR ARCHIVE/i.test(x))[0];
-          lines.push(t ? `${s === serial ? '●' : '○'} ${ref} | ${t.slice(0, 90)}` : `  ${ref} | (없음)`);
-        } catch (e) { lines.push(`  ${ref} | ERROR ${e.message}`); }
-        await sleep(300);
-      }
-      return text(`인접 채굴 ${prefix}${String(serial).padStart(width, '0')} ±${radius} (● 기준 · ○ 인접 발굴):\n` + lines.join('\n') + '\n※ 협약기관 정중 호출(건당 지연 적용). 발굴 건은 koreanwar_detail로 메타 확인.');
-    });
-
-  server.tool('koreanwar_battle',
-    "Search 6·25전쟁 전투정보 DB (/warList.do) — battle-level finding aid. The site's own warNm filter is JS-side, so the server fetches the FULL battle list (~69 cards) and filters locally by 전투명(battle)·부대/키워드(unit) substring. 현재 DB는 개전 초기 '북한군의 남침과 방어작전(1950.6.25~9.14)' 단계 수록 — 이후 시기 전투 0건은 미수록일 수 있음(0건 ≠ 부재). Battle context anchor for cross-archive verification (TNA WO 281 전투일지 · NARA RG 407 부대기록과 교차).",
-    { battle: z.string().default('').describe('전투명 부분일치 e.g. "대전", "옹진반도", "미아리"'), unit: z.string().default('').describe('추가 키워드 부분일치(AND) — 시기 등 e.g. "1950-06"') },
-    async ({ battle, unit }) => {
-      const listUrl = KW_BASE + '/warList.do';
-      try {
-        const b = await gtext(listUrl, KW_UA);
-        const cards = [];
-        for (const blk of b.split('/warDetail.do?warIdx=').slice(1)) {
-          const idx = (blk.match(/^(\d+)/) || [])[1]; if (!idx) continue;
-          const name = kwClean((blk.match(/<span class="text">([\s\S]*?)<\/span>/) || [, ''])[1]);
-          const meta = [...blk.slice(0, 2500).matchAll(/<dt>([\s\S]{1,30}?)<\/dt>\s*<dd>([\s\S]{0,120}?)<\/dd>/g)].map((x) => `${kwClean(x[1])}:${kwClean(x[2])}`);
-          cards.push({ idx, name, metaText: meta.join(' · ') });
-        }
-        const terms = [battle, unit].map((t) => t.trim()).filter(Boolean);
-        const matched = terms.length ? cards.filter((c) => terms.every((t) => (c.name + ' ' + c.metaText).includes(t))) : cards;
-        const q = terms.join(' + ') || '(전체)';
-        const lines = matched.slice(0, 25).map((c) => `- [warIdx ${c.idx}] ${c.name || '?'}${c.metaText ? ' | ' + c.metaText : ''}\n  ${KW_BASE}/warDetail.do?warIdx=${c.idx}`);
-        if (lines.length) return text(`6·25 전투정보 '${q}' — ${matched.length}/${cards.length}건:\n` + lines.join('\n') + '\n※ 전투명·시기·장소를 앵커로 TNA WO 281(영연방 전투일지)·NARA RG 407(부대기록)·koreanwar_search와 교차. DB는 개전 초기 단계 수록(확장 중).');
-        return text(`6·25 전투정보 '${q}' — 0건 (전체 ${cards.length}건 중). 현재 DB는 개전 초기(1950.6.25~9.14) 전투만 수록 — 이후 시기(백마고지 1952 등)는 미수록. koreanwar_search('${q}')로 자료 검색은 가능.` + dbrowse(listUrl));
-      } catch (e) { return text(agentBrowse('6·25 전투정보', [battle, unit].filter(Boolean).join(' '), listUrl, `자동조회 실패(${e.message})`)); }
+      } catch (e) { return text(agentBrowse('6·25전쟁 아카이브센터', ref0, url, `자동조회 실패(${e.message})`)); }
     });
 
   server.tool('foia_search',
-    "대한민국 정보공개포털 (open.go.kr) — 원문정보공개·정보공개청구. Login-based portal, so returns the search URL for the agent to open with its browser tool. Unreleased documents can be requested via 정보공개청구.",
-    { query: z.string() },
-    async ({ query }) => {
-      const url = 'https://www.open.go.kr/othicInfo/infoList/orginlInfoList.do?searchKeyword=' + encodeURIComponent(query);
-      return text(agentBrowse('정보공개포털(원문정보공개)', query, url) + '\n※ 미공개 문서는 포털에서 정보공개청구로 요청.');
-    });
-
-  server.tool('local_gov_search',
-    "Korean local-government FOIA/archives. source: 'seoul_opengov' (서울정보소통광장 — Seoul city decision documents, server auto-fetches the list), 'sen' (서울시교육청 정보공개), 'gyeongnam' (경상남도기록원). Decision-document originals are primary sources for local/incident history.",
-    { query: z.string(), source: z.enum(['seoul_opengov', 'sen', 'gyeongnam']) },
+    "Korean FOIA / freedom-of-information search. source: 'open_go' (대한민국 정보공개포털 open.go.kr — 원문정보공개·정보공개청구; login-based, returns the URL for the agent's browser), 'seoul_opengov' (서울정보소통광장 — Seoul decision documents, server auto-fetches the list), 'sen' (서울시교육청 정보공개), 'gyeongnam' (경상남도기록원). Decision-document originals are primary sources for local/incident history.",
+    { query: z.string(), source: z.enum(['open_go', 'seoul_opengov', 'sen', 'gyeongnam']).default('open_go') },
     async ({ query, source }) => {
       if (source === 'seoul_opengov') {
         const url = 'https://opengov.seoul.go.kr/sanction/list?searchKeyword=' + encodeURIComponent(query);
@@ -618,7 +631,8 @@ const handler = createMcpHandler((server) => {
       }
       if (source === 'sen') return text(agentBrowse('서울시교육청 정보공개(열린 서울교육)', query, 'https://open.sen.go.kr/'));
       if (source === 'gyeongnam') return text(agentBrowse('경상남도기록원', query, 'https://archives.gyeongnam.go.kr/main.web'));
-      return text('source 값: seoul_opengov, sen, gyeongnam');
+      const url = 'https://www.open.go.kr/othicInfo/infoList/orginlInfoList.do?searchKeyword=' + encodeURIComponent(query);
+      return text(agentBrowse('정보공개포털(원문정보공개)', query, url) + '\n※ 미공개 문서는 포털에서 정보공개청구로 요청.');
     });
 
   server.tool('scrape_plan',
