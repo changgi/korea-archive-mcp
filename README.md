@@ -16,7 +16,7 @@ No local Python needed by users — they just add a connector URL.
    - `EUROPEANA_API_KEY` — heavier europeana_search use (free: apis.europeana.eu; a shared demo key works without it)
    - `ARCHIVES_API_KEY` — enables archives_search / 국가기록원 (free: data.go.kr 15000153)
    - `NLK_API_KEY` — enables nlk_search / 국립중앙도서관 (free: www.nl.go.kr Open API)
-   - `KOREANWAR_API_TOKEN` — enables the OpenAPI channel of koreanwar_search / 6·25전쟁 아카이브센터 (협약기관).
+   - `KOREANWAR_API_TOKEN` — enables the OpenAPI channel of koreanwar_search / KOREAN WAR ARCHIVES 6·25전쟁 아카이브센터 (협약기관).
      Apply via the site's Q&A board ("API 문의"); after approval the admin registers your token **and allowed IP**
      (register the deployment's egress IP — Seoul region). Scraped search works keyless meanwhile; the token adds
      the official-metadata channel (공공누리 KOGL·이용조건·저작권 필드). `KOREANWAR_API_PAGES` (default 3) caps the
@@ -39,11 +39,11 @@ No local Python needed by users — they just add a connector URL.
 
 ## Tools (20 — PlayMCP 개발가이드 준수: 서버당 20개 이하)
 - **Overseas (6):** tna_search · tna_adjacent_mine · nara_search · ia_search(검색+identifier 메타 조회 통합) · gallica_search · europeana_search
-- **Domestic (9):** nedb_search(한국사DB) · archives_search(국가기록원) · nlk_search(국립중앙도서관·category 이중채널) · seoul_archives_search(서울기록원) · foia_search(정보공개포털+서울정보소통광장·서울시교육청·경남기록원 — source 파라미터) · warmemo_search(전쟁기념관) · **koreanwar_search**(6·25전쟁 아카이브센터 통합검색+전투정보 scope+OpenAPI 이중채널) · **koreanwar_item**(건별 메타·권리 + radius 인접 채굴) · scrape_plan
+- **Domestic (9):** nedb_search(한국사DB) · archives_search(국가기록원) · nlk_search(국립중앙도서관·category 이중채널) · seoul_archives_search(서울기록원) · foia_search(정보공개포털+서울정보소통광장·서울시교육청·경남기록원 — source 파라미터) · warmemo_search(전쟁기념관) · **koreanwar_search**(KOREAN WAR ARCHIVES·6·25전쟁 아카이브센터 통합검색+전투정보 scope+OpenAPI 이중채널) · **koreanwar_item**(건별 메타·권리 + radius 인접 채굴) · scrape_plan
 - **Utility (5):** query_bank(+국내 키워드셋) · judge_rights · report_template · **cross_search**(여러 아카이브 동시 교차수집·병합) · **source_profile**(기관 자료·이용·활용구조)
 
-### 6·25전쟁 아카이브센터 (koreanwar.or.kr — MOU 협약기관)
-TNA-style structured toolset for the Korean War Archive Center (전쟁기념관재단, 55,000+ items):
+### KOREAN WAR ARCHIVES 6·25전쟁 아카이브센터 (koreanwar.or.kr — MOU 협약기관)
+TNA-style structured toolset for KOREAN WAR ARCHIVES (정식 명칭; 전쟁기념관재단, 55,000+ items):
 `koreanwar_search`(통합검색 — 상위계층 breadcrumb에서 NARA Record Group을 추출해 원본 역추적 링크 제공; 생산연도·수집구분 서버측 필터, pageSize 10/20/50; `scope=battle`이면 전투정보 DB) →
 `koreanwar_item`(생산처·생산시기·입수처[NARA NAID 직결]·열람 및 이용조건; `radius=1~8`이면 archRfcd 일련번호 ±N 동일 시리즈 인접 채굴 — 정중한 3건 배치 병렬).
 All requests carry a partner-identifying User-Agent and polite pacing.

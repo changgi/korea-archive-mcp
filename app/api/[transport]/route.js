@@ -155,7 +155,7 @@ const COLLECT = {
   koreanwar: async (q, n) => (await kwSearch({ keyword: q, viewType: 'archive' })).cards.slice(0, n).map((c) => ({ title: c.title, date: '', id: c.id, url: c.url })),
 };
 
-// ══════════ 6·25전쟁 아카이브센터 (koreanwar.or.kr:8443 — 전쟁기념관재단, 협약기관) ══════════
+// ══════════ KOREAN WAR ARCHIVES 6·25전쟁 아카이브센터 (koreanwar.or.kr:8443 — 전쟁기념관재단, 협약기관) ══════════
 // MOU partner: identify this program in every request (courtesy UA) and keep call volume polite
 // (robots.txt 404 = no directive; OpenAPI terms forbid bulk crawling — we page-scan modestly).
 const KW_BASE = 'https://www.koreanwar.or.kr:8443';
@@ -208,11 +208,12 @@ async function kwApiScan(q, maxPages) {
 
 const handler = createMcpHandler((server) => {
   // ── PlayMCP 개발가이드 준수(2026.06.12) ──
-  // · description: 서비스명(Korea Archive 코리아 아카이브) 병기 + 1024자 이내 보장
+  // · description: PlayMCP 등록 서비스명(KOREA ARCHIVE 통합검색) 병기 + 1024자 이내 보장
+  //   ※ 심사 기준: 등록된 서비스명 문자열이 각 도구 description에 그대로 포함되어야 함 (2026-08 반려 사유)
   // · annotations: title·readOnlyHint·destructiveHint·openWorldHint·idempotentHint 전 도구 필수
   //   (모든 도구는 외부 아카이브 read-only 조회 — 파괴적 동작 없음, 결과는 원격 상태에 따라 변동 가능한 open-world)
   // · 도구 수 20개 이하(ia_metadata→ia_search, local_gov→foia, koreanwar 4→2 통합으로 24→20)
-  const SVC = ' — Korea Archive(코리아 아카이브)';
+  const SVC = ' — KOREA ARCHIVE 통합검색';
   const TITLES = {
     tna_search: 'TNA 영국 국립기록관 검색', tna_adjacent_mine: 'TNA 인접 참조코드 채굴',
     nara_search: 'NARA 미국 국립문서기록관리청 검색', ia_search: 'archive.org 검색·메타데이터',
@@ -220,7 +221,7 @@ const handler = createMcpHandler((server) => {
     query_bank: '검증 키워드 뱅크', judge_rights: '권리 등급 초판 판정', report_template: 'HTML 발굴 보고서 템플릿',
     nedb_search: '국사편찬위 한국사DB 검색', archives_search: '국가기록원 검색', nlk_search: '국립중앙도서관 검색',
     seoul_archives_search: '서울기록원 검색', warmemo_search: '전쟁기념관 아카이브 검색',
-    koreanwar_search: '6·25전쟁 아카이브센터 검색', koreanwar_item: '6·25전쟁 아카이브센터 상세·인접 채굴',
+    koreanwar_search: 'KOREAN WAR ARCHIVES(6·25전쟁 아카이브센터) 검색', koreanwar_item: 'KOREAN WAR ARCHIVES(6·25전쟁 아카이브센터) 상세·인접 채굴',
     foia_search: '정보공개포털·지방 정보공개 검색', scrape_plan: 'robots 판정·수집 계획',
     cross_search: '다중 아카이브 동시 교차수집', source_profile: '기관 구조 프로파일',
   };
@@ -517,9 +518,9 @@ const handler = createMcpHandler((server) => {
       } catch (e) { return text(agentBrowse('전쟁기념관', query, url, `자동조회 실패(${e.message})`)); }
     });
 
-  // ── 6·25전쟁 아카이브센터 (협약기관 — MOU) : TNA-style structured toolset (PlayMCP 준수: 2 tools) ──
+  // ── KOREAN WAR ARCHIVES 6·25전쟁 아카이브센터 (협약기관 — MOU) : TNA-style structured toolset (PlayMCP 준수: 2 tools) ──
   server.tool('koreanwar_search',
-    "Search the Korean War Archive Center 6·25전쟁 아카이브센터 (koreanwar.or.kr, War Memorial of Korea Foundation — MOU partner): 55,000+ items (documents·maps·photos·films·audio·oral histories). Parses result cards (title, archRfcd persistent ref code, producer, provenance hierarchy) and extracts NARA Record Group for origin tracing via nara_search. Verified server-side filters: year_from/year_to (production year), acquisition (수집구분: 수집·기증·구입·기탁·제작·이관·차입·기타). scope='battle' searches the battle-info DB instead (69 early-war battles — anchor for TNA WO 281 / NARA RG 407 cross-verification). Korean queries recommended (US-origin footage is re-described in Korean). With KOREANWAR_API_TOKEN, an official OpenAPI metadata channel (KOGL rights fields) joins automatically. Full filter code tables: source_profile('koreanwar').",
+    "Search KOREAN WAR ARCHIVES 6·25전쟁 아카이브센터 (koreanwar.or.kr, War Memorial of Korea Foundation — MOU partner): 55,000+ items (documents·maps·photos·films·audio·oral histories). Parses result cards (title, archRfcd persistent ref code, producer, provenance hierarchy) and extracts NARA Record Group for origin tracing via nara_search. Verified server-side filters: year_from/year_to (production year), acquisition (수집구분: 수집·기증·구입·기탁·제작·이관·차입·기타). scope='battle' searches the battle-info DB instead (69 early-war battles — anchor for TNA WO 281 / NARA RG 407 cross-verification). Korean queries recommended (US-origin footage is re-described in Korean). With KOREANWAR_API_TOKEN, an official OpenAPI metadata channel (KOGL rights fields) joins automatically. Full filter code tables: source_profile('koreanwar').",
     { query: z.string().describe('한글 권장 — e.g. "장진호", "흥남철수", "인천상륙"'), scope: z.enum(['archive', 'battle']).default('archive').describe('archive=소장자료 통합검색, battle=전투정보 DB'), page: z.number().int().min(1).default(1), max_results: z.number().int().min(1).max(50).default(10).describe('페이지당 결과 수(=pageSize 10/20/50 자동 매핑)'), year_from: z.number().int().optional().describe('생산연도 시작 e.g. 1950'), year_to: z.number().int().optional().describe('생산연도 끝 e.g. 1951'), acquisition: z.enum(['수집', '기증', '기타', '구입', '기탁', '제작', '이관', '차입']).optional().describe('수집구분(depth1) 필터') },
     async ({ query, scope, page, max_results, year_from, year_to, acquisition }) => {
       if (scope === 'battle') {
@@ -565,14 +566,14 @@ const handler = createMcpHandler((server) => {
         } else {
           out += '\n※ OpenAPI(공식 메타·KOGL 권리정보 채널)는 토큰 승인 후 KOREANWAR_API_TOKEN 설정 시 자동 병행 활성 (현재 신청·승인 대기 상태여도 이 검색은 정상 동작).';
         }
-        return text(out + `\n협약기관 — 출처 표기 필수: 6·25전쟁 아카이브센터(전쟁기념관재단). 건별 메타·인접 채굴: koreanwar_item.`
+        return text(out + `\n협약기관 — 출처 표기 필수: KOREAN WAR ARCHIVES 6·25전쟁 아카이브센터(전쟁기념관재단). 건별 메타·인접 채굴: koreanwar_item.`
           + `\n도서자료 포함 전체·상세검색폼(계층 depth·자료유형·입수처 등 추가 필터는 브라우저에서): ${KW_BASE}/search.do?detailYn=Y&keyword=${encodeURIComponent(query)}`);
       } catch (e) { return text(agentBrowse('6·25전쟁 아카이브센터', query, `${KW_BASE}/search.do?keyword=${encodeURIComponent(query)}`, `자동조회 실패(${e.message})`)); }
     });
 
   const kwItemTitle = (b) => [...b.matchAll(/<h2[^>]*>([\s\S]{1,300}?)<\/h2>/g)].map((x) => kwClean(x[1])).filter((x) => x && !/KOREAN WAR ARCHIVE/i.test(x))[0];
   server.tool('koreanwar_item',
-    "Inspect one Korean War Archive Center 6·25전쟁 아카이브센터 item by archRfcd: full metadata — title, producer, production dates, acquisition source (direct NARA catalog NAID link for US re-collections), 열람 및 이용조건 (feed to judge_rights). Set radius 1-8 for Adaptive Mining: iterates the serial tail ±radius to surface same-series adjacent items (TNA-style), fetched in polite parallel batches. MOU partner — cite the source when publishing.",
+    "Inspect one KOREAN WAR ARCHIVES 6·25전쟁 아카이브센터 item by archRfcd: full metadata — title, producer, production dates, acquisition source (direct NARA catalog NAID link for US re-collections), 열람 및 이용조건 (feed to judge_rights). Set radius 1-8 for Adaptive Mining: iterates the serial tail ±radius to surface same-series adjacent items (TNA-style), fetched in polite parallel batches. MOU partner — cite the source when publishing.",
     { ref_code: z.string().describe('e.g. "2022-US-02-AV-D-00207"'), radius: z.number().int().min(0).max(8).default(0).describe('0=단건 상세, 1~8=일련번호 ±N 인접 채굴') },
     async ({ ref_code, radius }) => {
       const ref0 = ref_code.trim();
@@ -650,7 +651,7 @@ const handler = createMcpHandler((server) => {
     });
 
   server.tool('cross_search',
-    'Federated discovery — run ONE query across multiple archives concurrently and merge+dedup the results (상호보완 동시수집: API 채널을 동시에 돌려 상호보완). sources: "all" or a comma list of tna,ia,gallica,europeana,nara,archives,nlk,nedb,koreanwar. Overseas (tna/ia/gallica/europeana) are keyless; koreanwar(6·25전쟁 아카이브센터, 협약기관) is keyless; nara/archives/nlk join if their server key is set; nedb joins if NEDB_INDEX_URL (official open-data files) is set. Each result is tagged by which source(s) found it — multi-source tags = cross-corroborated. 여러 아카이브를 한 쿼리로 동시 교차수집·병합.',
+    'Federated discovery — run ONE query across multiple archives concurrently and merge+dedup the results (상호보완 동시수집: API 채널을 동시에 돌려 상호보완). sources: "all" or a comma list of tna,ia,gallica,europeana,nara,archives,nlk,nedb,koreanwar. Overseas (tna/ia/gallica/europeana) are keyless; koreanwar(KOREAN WAR ARCHIVES 6·25전쟁 아카이브센터, 협약기관) is keyless; nara/archives/nlk join if their server key is set; nedb joins if NEDB_INDEX_URL (official open-data files) is set. Each result is tagged by which source(s) found it — multi-source tags = cross-corroborated. 여러 아카이브를 한 쿼리로 동시 교차수집·병합.',
     { query: z.string(), sources: z.string().default('all'), max_per_source: z.number().int().min(1).max(30).default(8) },
     async ({ query, sources, max_per_source }) => {
       const want = sources.trim().toLowerCase() === 'all'
