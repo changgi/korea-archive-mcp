@@ -62,6 +62,57 @@ function koreaScore(t) {
   return ['korea','korean','corea','corean','chosen','seoul','pusan','panmunjom','inchon','pyongyang','armistice'].filter(w => s.includes(w)).length;
 }
 
+// ── 영어권 아카이브(TNA·NARA·archive.org·Europeana) 한국어→영어 자동 변환 ──
+// 한국어 질의는 영어 색인에서 0건이거나 대폭 축소된다(실측: IA 장진호 1건 vs
+// "Chosin Reservoir" 139건, 흥남철수 0 vs 26, 인천상륙작전 4 vs 151). 한글 감지 시
+// 주제어를 영어 등가어(당대 표기 포함)로 사상하고 미사상 한국어는 제거 후 Korea 보정.
+const KO_EN = [
+  [/장진호/g, 'Chosin Reservoir'],
+  [/흥남\s?철수|흥남/g, 'Hungnam evacuation'],
+  [/인천\s?상륙\s?작전|인천\s?상륙/g, 'Inchon landing'],
+  [/백마고지/g, 'White Horse Hill Korea'],
+  [/단장의\s?능선/g, 'Heartbreak Ridge'],
+  [/펀치볼/g, 'Punchbowl Korea'],
+  [/임진강/g, 'Imjin River'],
+  [/그로스터|글로스터/g, 'Gloucestershire Regiment Korea'],
+  [/거제도/g, 'Koje Island'],
+  [/판문점/g, 'Panmunjom'],
+  [/휴전\s?협정|정전\s?협정|휴전|정전/g, 'Korea armistice'],
+  [/포로/g, 'prisoners of war Korea'],
+  [/노획/g, 'captured Korea'],
+  [/병인양요|병인박해/g, 'French expedition Korea 1866'],
+  [/신미양요/g, 'United States expedition Korea 1871'],
+  [/강화도|강화/g, 'Kanghwa'],
+  [/선교사/g, 'missionaries Korea'],
+  [/맥아더/g, 'MacArthur'],
+  [/이승만/g, 'Syngman Rhee'],
+  [/김일성/g, 'Kim Il Sung'],
+  [/한국전쟁|6[·.]25/g, 'Korean War'],
+  [/일제\s?강점기|조선총독부/g, 'Chosen Japan colonial'],
+  [/대한제국/g, 'Korean Empire Corea'],
+  [/압록강/g, 'Yalu'],
+  [/낙동강/g, 'Naktong'],
+  [/서울|한양/g, 'Seoul'],
+  [/부산/g, 'Pusan'],
+  [/평양/g, 'Pyongyang'],
+  [/제주/g, 'Cheju Quelpart'],
+  [/해방/g, 'Korea liberation 1945'],
+  [/영상|필름/g, 'film'],
+  [/사진/g, 'photograph'],
+  [/지도/g, 'map'],
+  [/전투/g, 'battle'],
+  [/조선|한국/g, 'Korea'],
+  [/기록|자료|문서|관련/g, ' '],
+];
+function koToEn(q) {
+  if (!/[가-힣]/.test(q)) return null;
+  let e = q;
+  for (const [re, en] of KO_EN) e = e.replace(re, en);
+  e = e.replace(/[가-힣]+/g, ' ').replace(/\s+/g, ' ').trim();
+  if (!/korea|corea|chosen|chosin|seoul|pusan|inchon|hungnam|panmunjom|imjin|koje|yalu|naktong|kanghwa|pyongyang|macarthur|rhee|kim il/i.test(e)) e = ('Korea ' + e).trim();
+  return e || 'Korea';
+}
+
 // ── Gallica 한국어→프랑스어 자동 변환 ──
 // Gallica는 프랑스어 색인이라 한국어 질의는 0건이 된다("병인양요 선교사" → 0 vs
 // "expédition de Corée 1866 missionnaires" → 5,853, 실측). 한글이 감지되면 주제어를
@@ -145,11 +196,13 @@ function nedbFileSearch(recs, q, n) {
 // normalized per-source collectors → [{title,date,id,url}]; compliant channels only (robots-OK APIs / officially-published files)
 const COLLECT = {
   tna: async (q, n) => {
+    q = koToEn(q) || q;
     const query = /^[A-Z]+ \d+\/\d+$/.test(q.trim()) ? `"${q.trim()}"` : q;
     const d = await tnaFetch(query, n);
     return (d.records || []).map((r) => ({ title: r.title || r.description, date: r.coveringDates || '', id: r.reference || '', url: `https://discovery.nationalarchives.gov.uk/details/r/${r.id}` }));
   },
   ia: async (q, n) => {
+    q = koToEn(q) || q;
     const d = await jget(`https://archive.org/advancedsearch.php?q=${encodeURIComponent(q)}&fl[]=identifier&fl[]=title&fl[]=date&rows=${n}&output=json`);
     return ((d.response || {}).docs || []).map((x) => ({ title: String(x.title || ''), date: x.date || '', id: x.identifier, url: `https://archive.org/details/${x.identifier}` }));
   },
@@ -164,11 +217,13 @@ const COLLECT = {
     });
   },
   europeana: async (q, n) => {
+    q = koToEn(q) || q;
     const key = process.env.EUROPEANA_API_KEY || 'api2demo';
     const d = await jget(`https://api.europeana.eu/record/v2/search.json?wskey=${key}&query=${encodeURIComponent(q)}&rows=${n}&profile=standard`);
     return (d.items || []).map((it) => ({ title: (it.title || ['?'])[0], date: (it.year || [''])[0], id: it.id || '', url: it.guid || '' }));
   },
   nara: async (q, n) => {
+    q = koToEn(q) || q;
     const key = process.env.NARA_API_KEY; if (!key) return [];
     const d = await jget(`https://catalog.archives.gov/api/v2/records/search?q=${encodeURIComponent(q)}&limit=${n}&page=1`, { 'x-api-key': key });
     return ((((d.body || {}).hits || {}).hits) || []).map((h) => { const rec = (h._source || {}).record || {}; return { title: rec.title || '', date: '', id: rec.naId ? `NAID ${rec.naId}` : '', url: `https://catalog.archives.gov/id/${rec.naId}` }; });
@@ -268,13 +323,15 @@ const handler = createMcpHandler((server) => {
   };
 
   server.tool('tna_search',
-    'Search the UK National Archives (TNA) Discovery catalog for Korea-related records. Reference codes like "FO 371/84053" are auto-quoted. 영국 국립기록관 검색.',
-    { query: z.string().describe('e.g. "Korea armistice", "FO 371 FK1015", "WO 281 Glosters"'), max_results: z.number().int().min(1).max(50).default(15) },
+    'Search the UK National Archives (TNA) Discovery catalog for Korea-related records. Korean queries are auto-translated to English terms (임진강→Imjin River, 그로스터→Gloucestershire Regiment …). Reference codes like "FO 371/84053" are auto-quoted. 영국 국립기록관 검색 — 한국어 질의 자동 영문 변환.',
+    { query: z.string().describe('한국어 또는 영어 — e.g. "임진강 전투", "Korea armistice", "FO 371 FK1015"'), max_results: z.number().int().min(1).max(50).default(15) },
     async ({ query, max_results }) => {
-      const q = /^[A-Z]+ \d+\/\d+$/.test(query.trim()) ? `"${query.trim()}"` : query;
+      const en = koToEn(query);
+      const eff = en || query;
+      const q = /^[A-Z]+ \d+\/\d+$/.test(eff.trim()) ? `"${eff.trim()}"` : eff;
       const d = await tnaFetch(q, max_results);
       const recs = d.records || [];
-      return text(`TNA '${query}' — total ${d.count ?? '?'}:\n` + (recs.map(tnaLine).join('\n') || '(0 results)'));
+      return text(`TNA '${query}'${en ? ` → 영문 자동 변환 '${eff}'` : ''} — total ${d.count ?? '?'}:\n` + (recs.map(tnaLine).join('\n') || '(0 results)'));
     });
 
   server.tool('tna_adjacent_mine',
@@ -301,13 +358,15 @@ const handler = createMcpHandler((server) => {
     });
 
   server.tool('nara_search',
-    'Search the US NARA catalog (API v2). Requires NARA_API_KEY env on the server; record_group enables precision cross-search (e.g. 242). 미국 NARA 검색.',
-    { query: z.string(), record_group: z.number().int().optional(), moving_images_only: z.boolean().default(false), max_results: z.number().int().min(1).max(50).default(15) },
+    'Search the US NARA catalog (API v2). Korean queries are auto-translated to English terms (장진호→Chosin Reservoir, 흥남철수→Hungnam evacuation …). Requires NARA_API_KEY env on the server; record_group enables precision cross-search (e.g. 242). 미국 NARA 검색 — 한국어 질의 자동 영문 변환.',
+    { query: z.string().describe('한국어 또는 영어'), record_group: z.number().int().optional(), moving_images_only: z.boolean().default(false), max_results: z.number().int().min(1).max(50).default(15) },
     async ({ query, record_group, moving_images_only, max_results }) => {
       const key = process.env.NARA_API_KEY;
       if (!key) return text('NARA_API_KEY not configured on this server. Free key: email Catalog_API@nara.gov (name + email). Meanwhile use catalog.archives.gov directly.');
+      const en = koToEn(query);
+      const eff = en || query;
       const u = new URL('https://catalog.archives.gov/api/v2/records/search');
-      u.searchParams.set('q', query); u.searchParams.set('limit', String(max_results)); u.searchParams.set('page', '1');
+      u.searchParams.set('q', eff); u.searchParams.set('limit', String(max_results)); u.searchParams.set('page', '1');
       if (record_group) u.searchParams.set('recordGroupNumber', String(record_group));
       if (moving_images_only) u.searchParams.set('typeOfMaterials', 'Moving Images');
       const d = await jget(u.toString(), { 'x-api-key': key });
@@ -317,11 +376,11 @@ const handler = createMcpHandler((server) => {
         return `- [NAID ${rec.naId}] ${(rec.title || '').slice(0, 100)} | ${rec.localIdentifier || ''} | https://catalog.archives.gov/id/${rec.naId}`;
       });
       const total = typeof hits.total === 'object' ? hits.total.value : hits.total;
-      return text(`NARA '${query}'${record_group ? ` (RG ${record_group})` : ''} — total ${total}:\n` + (rows.join('\n') || '(0 results)'));
+      return text(`NARA '${query}'${en ? ` → 영문 자동 변환 '${eff}'` : ''}${record_group ? ` (RG ${record_group})` : ''} — total ${total}:\n` + (rows.join('\n') || '(0 results)'));
     });
 
   server.tool('ia_search',
-    'Search archive.org (advanced search syntax) — e.g. "identifier:111-adc*", "collection:universal_newsreels AND korea", "mediatype:movies AND (keijo OR chosen)". Pass identifier instead to inspect one item: metadata, license, original files with sizes (check before downloading).',
+    'Search archive.org (advanced search syntax) — e.g. "identifier:111-adc*", "collection:universal_newsreels AND korea". Korean queries auto-translate to English terms (장진호→Chosin Reservoir …). Pass identifier instead to inspect one item: metadata, license, original files with sizes (check before downloading). 한국어 질의 자동 영문 변환.',
     { query: z.string().default('').describe('search query (ignored when identifier is set)'), identifier: z.string().optional().describe('item identifier for metadata inspection'), max_results: z.number().int().min(1).max(50).default(15) },
     async ({ query, identifier, max_results }) => {
       if (identifier) {
@@ -331,10 +390,12 @@ const handler = createMcpHandler((server) => {
         return text(`Title: ${md.title}\nDate: ${md.date} | License: ${md.licenseurl || md.rights || 'not stated'}\nDescription: ${String(md.description || '').slice(0, 300)}\nOriginal files:\n` + files.map((f) => `- ${f.name} (${(Number(f.size || 0) / 1e6).toFixed(1)}MB)`).join('\n'));
       }
       if (!query) return text('query 또는 identifier 중 하나는 필수.');
-      const u = `https://archive.org/advancedsearch.php?q=${encodeURIComponent(query)}&fl[]=identifier&fl[]=title&fl[]=date&rows=${max_results}&output=json`;
+      const en = koToEn(query);
+      const eff = en || query;
+      const u = `https://archive.org/advancedsearch.php?q=${encodeURIComponent(eff)}&fl[]=identifier&fl[]=title&fl[]=date&rows=${max_results}&output=json`;
       const d = await jget(u);
       const docs = ((d.response || {}).docs) || [];
-      return text(`archive.org '${query}' — total ${(d.response || {}).numFound}:\n` + (docs.map((x) => `- ${x.identifier} | ${String(x.title).slice(0, 90)} | https://archive.org/details/${x.identifier}`).join('\n') || '(0)'));
+      return text(`archive.org '${query}'${en ? ` → 영문 자동 변환 '${eff}'` : ''} — total ${(d.response || {}).numFound}:\n` + (docs.map((x) => `- ${x.identifier} | ${String(x.title).slice(0, 90)} | https://archive.org/details/${x.identifier}`).join('\n') || '(0)'));
     });
 
   server.tool('gallica_search',
@@ -354,18 +415,20 @@ const handler = createMcpHandler((server) => {
     });
 
   server.tool('europeana_search',
-    'Search Europeana — 4,000+ institutions in 58 countries. Works out of the box (shared demo key); set EUROPEANA_API_KEY for heavy use. media_type: VIDEO|IMAGE|TEXT|SOUND. 유럽 통합 검색.',
+    'Search Europeana — 4,000+ institutions in 58 countries. Korean queries auto-translate to English terms. Works out of the box (shared demo key); set EUROPEANA_API_KEY for heavy use. media_type: VIDEO|IMAGE|TEXT|SOUND. 유럽 통합 검색 — 한국어 질의 자동 영문 변환.',
     { query: z.string(), max_results: z.number().int().min(1).max(50).default(15), media_type: z.enum(['VIDEO', 'IMAGE', 'TEXT', 'SOUND']).optional() },
     async ({ query, max_results, media_type }) => {
       const key = process.env.EUROPEANA_API_KEY || 'api2demo';
       const demo = !process.env.EUROPEANA_API_KEY;
+      const en = koToEn(query);
+      const eff = en || query;
       const u = new URL('https://api.europeana.eu/record/v2/search.json');
-      u.searchParams.set('wskey', key); u.searchParams.set('query', query);
+      u.searchParams.set('wskey', key); u.searchParams.set('query', eff);
       u.searchParams.set('rows', String(max_results)); u.searchParams.set('profile', 'standard');
       if (media_type) u.searchParams.set('qf', `TYPE:${media_type}`);
       const d = await jget(u.toString());
       const items = d.items || [];
-      return text(`Europeana '${query}'${media_type ? ` [${media_type}]` : ''} — total ${d.totalResults}:\n` + (items.map((it) => `- ${String((it.title || ['?'])[0]).slice(0, 90)} (${(it.year || [''])[0]}) — ${String((it.dataProvider || [''])[0]).slice(0, 40)} | ${it.guid || ''}`).join('\n') || '(0)') + '\nTip: multilingual — Corée(fr)·Korea-Krieg(de)·Corea(it/es)' + (demo ? '\n(shared demo key in use — for heavy use, set a free EUROPEANA_API_KEY from apis.europeana.eu)' : ''));
+      return text(`Europeana '${query}'${en ? ` → 영문 자동 변환 '${eff}'` : ''}${media_type ? ` [${media_type}]` : ''} — total ${d.totalResults}:\n` + (items.map((it) => `- ${String((it.title || ['?'])[0]).slice(0, 90)} (${(it.year || [''])[0]}) — ${String((it.dataProvider || [''])[0]).slice(0, 40)} | ${it.guid || ''}`).join('\n') || '(0)') + '\nTip: multilingual — Corée(fr)·Korea-Krieg(de)·Corea(it/es)' + (demo ? '\n(shared demo key in use — for heavy use, set a free EUROPEANA_API_KEY from apis.europeana.eu)' : ''));
     });
 
   server.tool('query_bank',
