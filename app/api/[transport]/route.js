@@ -62,6 +62,38 @@ function koreaScore(t) {
   return ['korea','korean','corea','corean','chosen','seoul','pusan','panmunjom','inchon','pyongyang','armistice'].filter(w => s.includes(w)).length;
 }
 
+// ── Gallica 한국어→프랑스어 자동 변환 ──
+// Gallica는 프랑스어 색인이라 한국어 질의는 0건이 된다("병인양요 선교사" → 0 vs
+// "expédition de Corée 1866 missionnaires" → 5,853, 실측). 한글이 감지되면 주제어를
+// 프랑스어 등가어로 사상하고, 미사상 한국어는 제거한 뒤 Corée를 보정한다.
+const KO_FR = [
+  [/병인양요|병인박해/g, 'expédition de Corée 1866'],
+  [/신미양요/g, 'Corée expédition américaine 1871'],
+  [/강화도|강화/g, "île Kanghoa"],
+  [/파리\s?외방전교회/g, 'Missions étrangères de Paris'],
+  [/선교사/g, 'missionnaires'],
+  [/천주교|가톨릭|순교/g, 'catholique Corée'],
+  [/한국전쟁|6[·.]25/g, 'guerre de Corée'],
+  [/러일전쟁/g, 'guerre russo-japonaise'],
+  [/서울|한양/g, 'Séoul'],
+  [/부산/g, 'Fusan'],
+  [/인천|제물포/g, 'Chemulpo'],
+  [/제주/g, 'Quelpaert'],
+  [/지도/g, 'carte'],
+  [/사진/g, 'photographie'],
+  [/신문/g, 'journal'],
+  [/조선|한국|대한제국|고려/g, 'Corée'],
+  [/기록|자료|문서|영상|관련/g, ' '],
+];
+function gallicaKoToFr(q) {
+  if (!/[가-힣]/.test(q)) return null;
+  let f = q;
+  for (const [re, fr] of KO_FR) f = f.replace(re, fr);
+  f = f.replace(/[가-힣]+/g, ' ').replace(/\s+/g, ' ').trim();
+  if (!/cor[ée]e|séoul|fusan|chemulpo|quelpaert|missionnaires|tchosen/i.test(f)) f = ('Corée ' + f).trim();
+  return f || 'Corée';
+}
+
 async function tnaFetch(query, rows = 20, page = 1) {
   const u = new URL('https://discovery.nationalarchives.gov.uk/API/search/records');
   u.searchParams.set('sps.searchQuery', query);
@@ -122,6 +154,7 @@ const COLLECT = {
     return ((d.response || {}).docs || []).map((x) => ({ title: String(x.title || ''), date: x.date || '', id: x.identifier, url: `https://archive.org/details/${x.identifier}` }));
   },
   gallica: async (q, n) => {
+    q = gallicaKoToFr(q) || q;
     const query = encodeURIComponent(`gallica all "${q.replace(/"/g, '')}"`);
     const r = await robustFetch(`https://gallica.bnf.fr/SRU?operation=searchRetrieve&version=1.2&query=${query}&maximumRecords=${n}`);
     const xml = await r.text();
@@ -305,17 +338,19 @@ const handler = createMcpHandler((server) => {
     });
 
   server.tool('gallica_search',
-    'Search Gallica (Bibliothèque nationale de France, no key needed). Use French terms: Corée, guerre de Corée, missionnaires Corée, Tchosen. 프랑스 국립도서관 검색.',
-    { query: z.string().describe('French terms work best, e.g. "Corée missionnaires"'), max_results: z.number().int().min(1).max(30).default(10) },
+    'Search Gallica (Bibliothèque nationale de France, no key needed). Korean queries are auto-translated to French search terms (병인양요→expédition de Corée 1866, 선교사→missionnaires, 조선→Corée …), so 한국어로 질문해도 됩니다. French terms also work: Corée, guerre de Corée, missionnaires, Tchosen. 프랑스 국립도서관 검색 — 한국어 질의 자동 프랑스어 변환.',
+    { query: z.string().describe('한국어 또는 프랑스어 — e.g. "병인양요 선교사", "Corée missionnaires"'), max_results: z.number().int().min(1).max(30).default(10) },
     async ({ query, max_results }) => {
-      const q = encodeURIComponent(`gallica all "${query.replace(/"/g, '')}"`);
+      const fr = gallicaKoToFr(query);
+      const eff = fr || query;
+      const q = encodeURIComponent(`gallica all "${eff.replace(/"/g, '')}"`);
       const r = await fetch(`https://gallica.bnf.fr/SRU?operation=searchRetrieve&version=1.2&query=${q}&maximumRecords=${max_results}`, { headers: { 'User-Agent': UA } });
       const xml = await r.text();
       const total = (xml.match(/<srw:numberOfRecords>(\d+)</) || [])[1] || '?';
       const recs = xml.split('<srw:record>').slice(1);
       const g = (block, tag) => { const m = block.match(new RegExp(`<dc:${tag}[^>]*>([^<]*)<`)); return m ? m[1].trim() : ''; };
       const lines = recs.slice(0, max_results).map((b) => `- ${g(b, 'title').slice(0, 100)} (${g(b, 'date')}) [${g(b, 'type')}] ${g(b, 'identifier')}`);
-      return text(`Gallica '${query}' — total ${total}:\n` + (lines.join('\n') || '(0)') + '\nTip: French variants — Corée·Coréens·Séoul·Fusan·guerre de Corée·Tchosen');
+      return text(`Gallica '${query}'${fr ? ` → 프랑스어 자동 변환 '${eff}'` : ''} — total ${total}:\n` + (lines.join('\n') || '(0)') + '\nTip: French variants — Corée·Coréens·Séoul·Fusan·guerre de Corée·Tchosen');
     });
 
   server.tool('europeana_search',
