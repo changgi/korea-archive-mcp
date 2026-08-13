@@ -62,88 +62,78 @@ function koreaScore(t) {
   return ['korea','korean','corea','corean','chosen','seoul','pusan','panmunjom','inchon','pyongyang','armistice'].filter(w => s.includes(w)).length;
 }
 
-// ── 영어권 아카이브(TNA·NARA·archive.org·Europeana) 한국어→영어 자동 변환 ──
-// 한국어 질의는 영어 색인에서 0건이거나 대폭 축소된다(실측: IA 장진호 1건 vs
-// "Chosin Reservoir" 139건, 흥남철수 0 vs 26, 인천상륙작전 4 vs 151). 한글 감지 시
-// 주제어를 영어 등가어(당대 표기 포함)로 사상하고 미사상 한국어는 제거 후 Korea 보정.
-const KO_EN = [
-  [/장진호/g, 'Chosin Reservoir'],
-  [/흥남\s?철수|흥남/g, 'Hungnam evacuation'],
-  [/인천\s?상륙\s?작전|인천\s?상륙/g, 'Inchon landing'],
-  [/백마고지/g, 'White Horse Hill Korea'],
-  [/단장의\s?능선/g, 'Heartbreak Ridge'],
-  [/펀치볼/g, 'Punchbowl Korea'],
-  [/임진강/g, 'Imjin River'],
-  [/그로스터|글로스터/g, 'Gloucestershire Regiment Korea'],
-  [/거제도/g, 'Koje Island'],
-  [/판문점/g, 'Panmunjom'],
-  [/휴전\s?협정|정전\s?협정|휴전|정전/g, 'Korea armistice'],
-  [/포로/g, 'prisoners of war Korea'],
-  [/노획/g, 'captured Korea'],
-  [/병인양요|병인박해/g, 'French expedition Korea 1866'],
-  [/신미양요/g, 'United States expedition Korea 1871'],
-  [/강화도|강화/g, 'Kanghwa'],
-  [/선교사/g, 'missionaries Korea'],
-  [/맥아더/g, 'MacArthur'],
-  [/이승만/g, 'Syngman Rhee'],
-  [/김일성/g, 'Kim Il Sung'],
-  [/한국전쟁|6[·.]25/g, 'Korean War'],
-  [/일제\s?강점기|조선총독부/g, 'Chosen Japan colonial'],
-  [/대한제국/g, 'Korean Empire Corea'],
-  [/압록강/g, 'Yalu'],
-  [/낙동강/g, 'Naktong'],
-  [/서울|한양/g, 'Seoul'],
-  [/부산/g, 'Pusan'],
-  [/평양/g, 'Pyongyang'],
-  [/제주/g, 'Cheju Quelpart'],
-  [/해방/g, 'Korea liberation 1945'],
-  [/영상|필름/g, 'film'],
-  [/사진/g, 'photograph'],
-  [/지도/g, 'map'],
-  [/전투/g, 'battle'],
-  [/조선|한국/g, 'Korea'],
-  [/기록|자료|문서|관련/g, ' '],
+// ── 다국어 주제 사전 → 색인 언어 자동 변환 ──
+// 각 아카이브는 자기 색인 언어로만 검색된다(TNA·NARA·IA·Europeana=영어, Gallica=프랑스어).
+// 한국어·일본어·중국어·러시아어·스페인어·독일어·베트남어·힌디어·히브리어·아랍어·카자흐어·
+// 몽골어 등 어떤 언어로 질의해도, 주제 사전이 해당 주제를 인식해 대상 색인 언어로 변환한다.
+// 출력에는 당대 표기(Corea·Chosen·Quelpart·Fusan 등 historical spellings)를 병용한다.
+// 실측 근거: IA 장진호 1건 vs "Chosin Reservoir" 139건, Gallica 병인양요 0 vs 5,853건.
+// 각 항목: p=매칭 패턴(전 언어 병렬), en=영어 출력, fr=프랑스어 출력(없으면 en 사용).
+const TOPICS = [
+  { p: '인천\\s?상륙\\s?작전|인천\\s?상륙|仁川上陸|仁川登陆|Инчхонская десантная', en: 'Inchon landing' },
+  { p: '장진호|長津湖|长津湖', en: 'Chosin Reservoir' },
+  { p: '흥남\\s?철수|흥남|興南', en: 'Hungnam evacuation' },
+  { p: '백마고지|白馬高地|白马高地', en: 'White Horse Hill Korea' },
+  { p: '단장의\\s?능선', en: 'Heartbreak Ridge' },
+  { p: '펀치볼', en: 'Punchbowl Korea' },
+  { p: '임진강|臨津江|临津江', en: 'Imjin River' },
+  { p: '그로스터|글로스터', en: 'Gloucestershire Regiment Korea' },
+  { p: '거제도|巨濟島|巨济岛', en: 'Koje Island' },
+  { p: '판문점|板門店|板门店|Пханмунджом', en: 'Panmunjom' },
+  { p: '38\\s?선|삼팔선|三八線|三八线', en: '38th parallel Korea' },
+  { p: '휴전\\s?협정|정전\\s?협정|휴전|정전|停戦|停战|休戰|перемирие|armisticio|Waffenstillstand', en: 'Korea armistice' },
+  { p: '포로|捕虜|战俘|военнопленн\\w*', en: 'prisoners of war Korea' },
+  { p: '노획', en: 'captured Korea' },
+  { p: '병인양요|丙寅洋擾|병인박해', en: 'French expedition Korea 1866', fr: 'expédition de Corée 1866' },
+  { p: '신미양요|辛未洋擾', en: 'United States expedition Korea 1871', fr: 'Corée expédition américaine 1871' },
+  { p: '강화도|江華島|江华岛|강화', en: 'Kanghwa', fr: 'île Kanghoa' },
+  { p: '파리\\s?외방전교회', en: 'Paris Foreign Missions Korea', fr: 'Missions étrangères de Paris' },
+  { p: '선교사|宣教師|宣教师|传教士|missionnaires?|misioneros|Missionare|миссионер\\w*', en: 'missionaries Korea', fr: 'missionnaires' },
+  { p: '천주교|가톨릭|카톨릭|순교', en: 'Catholic Korea martyrs', fr: 'catholique Corée' },
+  { p: '한국전쟁|6[·.]25|조선전쟁|朝鮮戦争|朝鲜战争|朝鮮戰爭|抗美援朝|Корейская война|Корей соғысы|Солонгосын дайн|Chiến tranh Triều Tiên|कोरियाई युद्ध|מלחמת קוריאה|الحرب الكورية|Koreakrieg|Guerra de Corea|Guerra da Coreia|Guerre de Corée', en: 'Korean War', fr: 'guerre de Corée' },
+  { p: '러일전쟁|日露戦争|日俄战争', en: 'Russo-Japanese War Korea', fr: 'guerre russo-japonaise' },
+  { p: '청일전쟁|日清戦争|甲午战争', en: 'Sino-Japanese War Korea 1894' },
+  { p: '일제\\s?강점기|조선총독부|朝鮮總督府|朝鮮総督府|植民地朝鮮', en: 'Chosen Japan colonial' },
+  { p: '대한제국|大韓帝國|大韓帝国', en: 'Korean Empire Corea', fr: 'Empire de Corée' },
+  { p: '맥아더|マッカーサー|麦克阿瑟|Макартур', en: 'MacArthur' },
+  { p: '이승만|李承晩|李承晚', en: 'Syngman Rhee' },
+  { p: '김일성|金日成', en: 'Kim Il Sung' },
+  { p: '압록강|鴨綠江|鸭绿江', en: 'Yalu' },
+  { p: '낙동강|洛東江|洛东江', en: 'Naktong' },
+  { p: '서울|한양|ソウル|首爾|首尔|漢城|汉城|Сеул|Seúl', en: 'Seoul', fr: 'Séoul' },
+  { p: '부산|釜山|Пусан', en: 'Pusan', fr: 'Fusan' },
+  { p: '평양|平壌|平壤|Пхеньян', en: 'Pyongyang' },
+  { p: '인천|제물포|仁川', en: 'Inchon', fr: 'Chemulpo' },
+  { p: '제주|濟州|济州|Чеджу', en: 'Cheju Quelpart', fr: 'Quelpaert' },
+  { p: '해방|解放', en: 'Korea liberation 1945', fr: 'Corée libération 1945' },
+  { p: '영상|필름|映像|フィルム|视频|кинохроника', en: 'film' },
+  { p: '사진|寫真|写真|照片|фотографи\\w*', en: 'photograph', fr: 'photographie' },
+  { p: '지도|地圖|地图|карт[аы]\\w*', en: 'map', fr: 'carte' },
+  { p: '신문|新聞|新闻|газет\\w*', en: 'newspaper', fr: 'journal' },
+  { p: '전투|戦闘|战斗|битва|сражение', en: 'battle', fr: 'bataille' },
+  // 총칭(각 언어의 '한국/조선') — 구체 주제를 먼저 치환한 뒤 남은 표기를 마지막에 처리.
+  // Corea·Coreia 등 라틴 표기는 넣지 않는다: 당대 표기 변형 검색(tna_search "Corea" 등)이 Korea로 강제 치환되면 방법론이 무력화됨. 악상 있는 Corée만 프랑스어 확정으로 사상.
+  { p: '조선|한국|고려|朝鮮|韓國|韩国|朝鲜|Корея|Коре[еию]|Corée|كوريا|קוריאה|कोरिया|Hàn Quốc|Triều Tiên|Солонгос|Корей', en: 'Korea', fr: 'Corée' },
+  { p: '기록|자료|문서|관련|찾아줘|記録|資料|文書|档案|документ\\w*|материал\\w*', en: ' ', fr: ' ' },
 ];
-function koToEn(q) {
-  if (!/[가-힣]/.test(q)) return null;
-  let e = q;
-  for (const [re, en] of KO_EN) e = e.replace(re, en);
-  e = e.replace(/[가-힣]+/g, ' ').replace(/\s+/g, ' ').trim();
-  if (!/korea|corea|chosen|chosin|seoul|pusan|inchon|hungnam|panmunjom|imjin|koje|yalu|naktong|kanghwa|pyongyang|macarthur|rhee|kim il/i.test(e)) e = ('Korea ' + e).trim();
-  return e || 'Korea';
-}
-
-// ── Gallica 한국어→프랑스어 자동 변환 ──
-// Gallica는 프랑스어 색인이라 한국어 질의는 0건이 된다("병인양요 선교사" → 0 vs
-// "expédition de Corée 1866 missionnaires" → 5,853, 실측). 한글이 감지되면 주제어를
-// 프랑스어 등가어로 사상하고, 미사상 한국어는 제거한 뒤 Corée를 보정한다.
-const KO_FR = [
-  [/병인양요|병인박해/g, 'expédition de Corée 1866'],
-  [/신미양요/g, 'Corée expédition américaine 1871'],
-  [/강화도|강화/g, "île Kanghoa"],
-  [/파리\s?외방전교회/g, 'Missions étrangères de Paris'],
-  [/선교사/g, 'missionnaires'],
-  [/천주교|가톨릭|순교/g, 'catholique Corée'],
-  [/한국전쟁|6[·.]25/g, 'guerre de Corée'],
-  [/러일전쟁/g, 'guerre russo-japonaise'],
-  [/서울|한양/g, 'Séoul'],
-  [/부산/g, 'Fusan'],
-  [/인천|제물포/g, 'Chemulpo'],
-  [/제주/g, 'Quelpaert'],
-  [/지도/g, 'carte'],
-  [/사진/g, 'photographie'],
-  [/신문/g, 'journal'],
-  [/조선|한국|대한제국|고려/g, 'Corée'],
-  [/기록|자료|문서|영상|관련/g, ' '],
-];
-function gallicaKoToFr(q) {
-  if (!/[가-힣]/.test(q)) return null;
+const TOPIC_RE = TOPICS.map((t) => ({ ...t, re: new RegExp(t.p, 'giu') }));
+// 라틴 확장(악상 포함) 밖의 문자 = 대상 색인이 못 읽는 스크립트(한글·CJK·가나·키릴·아랍·히브리·데바나가리…)
+const NON_LATIN = /[^\u0000-ɏ]+/gu;
+const EN_ANCHOR = /korea|corea|chosen|chosin|seoul|pusan|inchon|hungnam|panmunjom|imjin|koje|yalu|naktong|kanghwa|pyongyang|macarthur|rhee|kim il/i;
+const FR_ANCHOR = /cor[ée]e|séoul|fusan|chemulpo|quelpaert|kanghoa|missionnaires|tchosen/i;
+function toIndexLang(q, lang) {
   let f = q;
-  for (const [re, fr] of KO_FR) f = f.replace(re, fr);
-  f = f.replace(/[가-힣]+/g, ' ').replace(/\s+/g, ' ').trim();
-  if (!/cor[ée]e|séoul|fusan|chemulpo|quelpaert|missionnaires|tchosen/i.test(f)) f = ('Corée ' + f).trim();
-  return f || 'Corée';
+  for (const t of TOPIC_RE) f = f.replace(t.re, ' ' + (lang === 'fr' ? (t.fr || t.en) : t.en) + ' ');
+  const changed = f !== q;
+  const foreign = NON_LATIN.test(f); NON_LATIN.lastIndex = 0;
+  if (!changed && !foreign) return null;   // 이미 대상 언어(라틴) 질의 — 손대지 않음
+  f = f.replace(NON_LATIN, ' ').replace(/\(\s*\)|\[\s*\]|"\s*"/g, ' ').replace(/\s+/g, ' ').trim();
+  const anchor = lang === 'fr' ? FR_ANCHOR : EN_ANCHOR;
+  if (!anchor.test(f)) f = ((lang === 'fr' ? 'Corée ' : 'Korea ') + f).trim();
+  return f || (lang === 'fr' ? 'Corée' : 'Korea');
 }
+const koToEn = (q) => toIndexLang(q, 'en');
+const gallicaKoToFr = (q) => toIndexLang(q, 'fr');
 
 async function tnaFetch(query, rows = 20, page = 1) {
   const u = new URL('https://discovery.nationalarchives.gov.uk/API/search/records');
@@ -323,7 +313,7 @@ const handler = createMcpHandler((server) => {
   };
 
   server.tool('tna_search',
-    'Search the UK National Archives (TNA) Discovery catalog for Korea-related records. Korean queries are auto-translated to English terms (임진강→Imjin River, 그로스터→Gloucestershire Regiment …). Reference codes like "FO 371/84053" are auto-quoted. 영국 국립기록관 검색 — 한국어 질의 자동 영문 변환.',
+    'Search the UK National Archives (TNA) Discovery catalog for Korea-related records. Queries in Korean·Japanese·Chinese·Russian·Spanish·German·Vietnamese·Hindi·Hebrew·Arabic etc. are auto-translated to English index terms (임진강→Imjin River, 長津湖→Chosin Reservoir, Корейская война→Korean War …). Reference codes like "FO 371/84053" are auto-quoted. 영국 국립기록관 검색 — 다국어 질의 자동 영문 변환.',
     { query: z.string().describe('한국어 또는 영어 — e.g. "임진강 전투", "Korea armistice", "FO 371 FK1015"'), max_results: z.number().int().min(1).max(50).default(15) },
     async ({ query, max_results }) => {
       const en = koToEn(query);
@@ -358,7 +348,7 @@ const handler = createMcpHandler((server) => {
     });
 
   server.tool('nara_search',
-    'Search the US NARA catalog (API v2). Korean queries are auto-translated to English terms (장진호→Chosin Reservoir, 흥남철수→Hungnam evacuation …). Requires NARA_API_KEY env on the server; record_group enables precision cross-search (e.g. 242). 미국 NARA 검색 — 한국어 질의 자동 영문 변환.',
+    'Search the US NARA catalog (API v2). Multilingual queries (한국어·日本語·中文·Русский 등) auto-translate to English index terms (장진호/長津湖→Chosin Reservoir …). Requires NARA_API_KEY env on the server; record_group enables precision cross-search (e.g. 242). 미국 NARA 검색 — 다국어 질의 자동 영문 변환.',
     { query: z.string().describe('한국어 또는 영어'), record_group: z.number().int().optional(), moving_images_only: z.boolean().default(false), max_results: z.number().int().min(1).max(50).default(15) },
     async ({ query, record_group, moving_images_only, max_results }) => {
       const key = process.env.NARA_API_KEY;
@@ -380,7 +370,7 @@ const handler = createMcpHandler((server) => {
     });
 
   server.tool('ia_search',
-    'Search archive.org (advanced search syntax) — e.g. "identifier:111-adc*", "collection:universal_newsreels AND korea". Korean queries auto-translate to English terms (장진호→Chosin Reservoir …). Pass identifier instead to inspect one item: metadata, license, original files with sizes (check before downloading). 한국어 질의 자동 영문 변환.',
+    'Search archive.org (advanced search syntax) — e.g. "identifier:111-adc*", "collection:universal_newsreels AND korea". Multilingual queries (한국어·日本語·中文·Русский 등) auto-translate to English terms. Pass identifier instead to inspect one item: metadata, license, original files with sizes (check before downloading). 다국어 질의 자동 영문 변환.',
     { query: z.string().default('').describe('search query (ignored when identifier is set)'), identifier: z.string().optional().describe('item identifier for metadata inspection'), max_results: z.number().int().min(1).max(50).default(15) },
     async ({ query, identifier, max_results }) => {
       if (identifier) {
@@ -399,7 +389,7 @@ const handler = createMcpHandler((server) => {
     });
 
   server.tool('gallica_search',
-    'Search Gallica (Bibliothèque nationale de France, no key needed). Korean queries are auto-translated to French search terms (병인양요→expédition de Corée 1866, 선교사→missionnaires, 조선→Corée …), so 한국어로 질문해도 됩니다. French terms also work: Corée, guerre de Corée, missionnaires, Tchosen. 프랑스 국립도서관 검색 — 한국어 질의 자동 프랑스어 변환.',
+    'Search Gallica (Bibliothèque nationale de France, no key needed). Multilingual queries (한국어·日本語·中文 등) auto-translate to French index terms (병인양요→expédition de Corée 1866, 長津湖→Chosin …). French terms also work: Corée, guerre de Corée, missionnaires, Tchosen. 프랑스 국립도서관 검색 — 다국어 질의 자동 프랑스어 변환.',
     { query: z.string().describe('한국어 또는 프랑스어 — e.g. "병인양요 선교사", "Corée missionnaires"'), max_results: z.number().int().min(1).max(30).default(10) },
     async ({ query, max_results }) => {
       const fr = gallicaKoToFr(query);
@@ -415,7 +405,7 @@ const handler = createMcpHandler((server) => {
     });
 
   server.tool('europeana_search',
-    'Search Europeana — 4,000+ institutions in 58 countries. Korean queries auto-translate to English terms. Works out of the box (shared demo key); set EUROPEANA_API_KEY for heavy use. media_type: VIDEO|IMAGE|TEXT|SOUND. 유럽 통합 검색 — 한국어 질의 자동 영문 변환.',
+    'Search Europeana — 4,000+ institutions in 58 countries. Multilingual queries (한국어·日本語·中文 등) auto-translate to English terms. Works out of the box (shared demo key); set EUROPEANA_API_KEY for heavy use. media_type: VIDEO|IMAGE|TEXT|SOUND. 유럽 통합 검색 — 다국어 질의 자동 영문 변환.',
     { query: z.string(), max_results: z.number().int().min(1).max(50).default(15), media_type: z.enum(['VIDEO', 'IMAGE', 'TEXT', 'SOUND']).optional() },
     async ({ query, max_results, media_type }) => {
       const key = process.env.EUROPEANA_API_KEY || 'api2demo';
