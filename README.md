@@ -53,10 +53,14 @@ All requests carry a partner-identifying User-Agent and polite pacing.
 - Streamable HTTP · Remote(public URL) · stateless — mcp-handler 기반 충족
 - 도구 20개 이하(24→20 통합) · 도구명 영문/숫자/underscore · "kakao" 문자열 미사용
 - 전 도구 annotations(title·readOnlyHint·destructiveHint·openWorldHint·idempotentHint) 지정 — 전부 read-only·비파괴
-- description: 서비스명 "Korea Archive(코리아 아카이브)" 병기 + 1024자 이내 자동 보장
+- description: PlayMCP 등록 서비스명 "KOREA ARCHIVE 통합검색" 병기 + 1024자 이내 자동 보장
 - 응답은 정제 텍스트(마크다운형) — API 원본 미투과 · 인접 채굴은 배치 병렬로 p99 3s 내 응답
 
 ### cross_search — 상호보완 동시수집
 `cross_search(query, sources="all")` runs one query across TNA·IA·Gallica·Europeana (keyless) + NARA·archives·nlk (if key) + nedb (if `NEDB_INDEX_URL`) **concurrently**, then merges & dedups, tagging each record by which source(s) found it (multi-source = cross-corroborated). robots-forbidden sites (opengov·서울기록원) are excluded by design.
+
+## Skills (`.claude/skills/`)
+- **insta-carousel** — 발굴조사 결과를 인스타그램 캐러셀 카드뉴스(1080×1080 PNG)로 제작: 실물 이미지 소싱·라이선스 판정·레이아웃·헤드리스 크롬 렌더링·캡션.
+- **archival-discovery-pipeline** — 발굴이 식별자·URL을 확보하면 **실물을 여는** 후속 파이프라인: 프레임 단위 영상·이미지 분석, 문자 영역 탐지·OCR·VLM 교차검증 판독(슬레이트·표지판·현수막), 당대 지명·부대 식별, 재기술, 게재 윤리 4단계 판정, RiC-O/CIDOC-CRM 온톨로지·KARDA 노드엣지 변환, 논문 도판·정합 검사. MCP 도구(`nara_search`·`tna_adjacent_mine`·`koreanwar_search`·`judge_rights` 등)와 왕복 구조로 연동 — 판독에서 나온 단서(ROLL·과제번호·촬영자·부대)로 다시 발굴 도구를 호출해 자매편을 찾는다. 의존: `pip install pillow numpy opencv-python matplotlib` + ffmpeg (OCR 보조: tesseract).
 
 MIT · Methodology: Song, Chang-Gi (2026), National Archives of Korea
