@@ -744,7 +744,7 @@ const handler = createMcpHandler((server) => {
     });
 
   server.tool('cross_search',
-    'Federated discovery — run ONE query across multiple archives concurrently and merge+dedup the results (상호보완 동시수집: API 채널을 동시에 돌려 상호보완). sources: "all" or a comma list of tna,ia,gallica,europeana,nara,archives,nlk,nedb,koreanwar. Overseas (tna/ia/gallica/europeana) are keyless; koreanwar(KOREAN WAR ARCHIVES 6·25전쟁 아카이브센터, 협약기관) is keyless; nara/archives/nlk join if their server key is set; nedb joins if NEDB_INDEX_URL (official open-data files) is set. Each result is tagged by which source(s) found it — multi-source tags = cross-corroborated. 여러 아카이브를 한 쿼리로 동시 교차수집·병합.',
+    'Federated discovery — run ONE query across multiple archives concurrently and merge+dedup the results (상호보완 동시수집: API 채널을 동시에 돌려 상호보완). sources: "all" or a comma list of tna,ia,gallica,europeana,nara,archives,nlk,nedb,koreanwar. Overseas (tna/ia/gallica/europeana) are keyless; koreanwar(KOREAN WAR ARCHIVES 6·25전쟁 아카이브센터, 협약기관) is keyless; nara/archives/nlk join if their server key is set; nedb joins if NEDB_INDEX_URL (official open-data files) is set. Each result is tagged by which source(s) found it — multi-source tags = cross-corroborated. 여러 아카이브를 한 쿼리로 동시 교차수집·병합. 사용자가 "풀패키지"(보고서·카드뉴스·포스터 전부)를 원하면 report_template(kind=full_package)를 먼저 호출해 제작 순서를 따르라.',
     { query: z.string(), sources: z.string().default('all'), max_per_source: z.number().int().min(1).max(30).default(8) },
     async ({ query, sources, max_per_source }) => {
       const want = sources.trim().toLowerCase() === 'all'
