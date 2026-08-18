@@ -550,8 +550,28 @@ const handler = createMcpHandler((server) => {
       return text(`Europeana '${query}'${en ? ` → 영문 자동 변환 '${eff}'` : ''}${media_type ? ` [${media_type}]` : ''} — total ${d.totalResults}:\n` + (items.map((it) => `- ${String((it.title || ['?'])[0]).slice(0, 90)} (${(it.year || [''])[0]}) — ${String((it.dataProvider || [''])[0]).slice(0, 40)} | ${it.guid || ''}`).join('\n') || '(0)') + '\nTip: multilingual — Corée(fr)·Korea-Krieg(de)·Corea(it/es)' + (demo ? '\n(shared demo key in use — for heavy use, set a free EUROPEANA_API_KEY from apis.europeana.eu)' : ''));
     });
 
+const JB_WALLS = `열한 겹의 벽 — 한국 기록이 안 찾아지는 11가지 이유와 대응 (실증 기반)
+1 일본식 독음: 금강산→Soto Kongo — 일제기 자료는 일본식 지명 병렬 / 2 로마자 철자: Corea·Korea 둘 다 / 3 기계번역 함정: 번역이 아니라 대조표(사람이 만들고 조합은 AI) / 4 외래 명명: 원산=Port Lazareff·제주=Quelpaert·거문도=Port Hamilton / 5 인명 표기: topic=persons 참조 / 6 언어 8+개국어 / 7 출처주의 분류: 찍은 사람이 서랍을 정한다(이승만 사진이 해병대 127-R-1438에) / 8 식별자: topic=identifiers / 9 기술심도: 제목만 있고 내용 없음 — 안을 열어야 함 / 10 결락: ①물리 소실(되찾을 수 없음)·②목록에 없는 것(목록에 올리면 되찾음 — 궁내청 의궤 77종 2011 환수 실증) / 11 음력/양력: 조선 기록=음력·서양=양력(대한제국 양력 채택 1896.1.1) — 두 자료를 겹칠 때 사건 순서가 뒤집힐 수 있다.
+부록 — 한자 전사 오류 복원: 연호·간지·서명 3중 교차로 원 한자 확정(예: '한풍원년 신예'→咸豊元年 辛亥, 1851).`;
+const JB_IDENT = `식별자 해독 — 번호가 곧 정보다 (첫 건은 검색어로, 나머지 수십 건은 번호 규칙으로)
+· NARA 참조코드 127-GR-223-A164360 = 기록군-시리즈-주제묶음-낱건. 주제 묶음이 차면 다음 번호(223→226 실증). NAID 간격은 계열마다 다름(사진 3·색인 1) — 하나 찾으면 ±1·±3 다 넣기.
+· 컬렉션 번호대: 같은 컬렉션인데 절반은 Chosen, 절반은 Seoul로 기술 — 검색어로는 절반만 걸린다 → NAID 앞뒤 훑기.
+· 같은 기관 안에서도 표기가 갈린다: 'Log of U.S.S.' vs 'Smooth Log of the USS' → 수식어 빼고 고유명만.
+· TNA 옆 훑기: 계열번호만 넣기(OCB 1→부산항 해도 82건·140년). 금지: 계열번호+주제어 조합(0건). 결락은 X 접미어(FO 881/9951X 병합 선언 등) — 남은 짝으로 우회. 지도는 MPKK·MFQ 등으로 추출 이관 — 원 문서철 번호로 역검색.
+· Gallica ark: btv1b=도판·필사 / bpt6k=인쇄본 — 같은 책이 형태별로 갈린다. · 6·25아카이브: 수집연도-국가-매체-일련(인접 채굴 가능).`;
+const JB_PERSONS = `인명 열쇠 — 지명은 나라마다 갈리지만 사람 이름은 하나다
+절차: 자료 하나를 찾으면 찍은·쓴·모은·채집한 사람 이름으로 재검색 — 한 건이 컬렉션으로 열린다(Vráz→대한제국 사진 66건: 기관이 지명을 현대 표기 Inchon으로 정비해 Chemulpo 검색은 2건뿐이었다).
+표기 변형 생성: 이=Lee·Yi·Rhee·Ri / 김=Kim·Gim / 박=Park·Pak·Bak + 성명 도치(장면=Myun Chang, Dr. John)·현지 발음(서영해=Seu Ring-Hai).
+색인 함정: NARA Personalities 색인은 알파벳만이 기준 — 편철 제목에 Korea가 없어 '한국 자료'로는 안 걸린다. 구간 경계 이름(Kim·Park)은 두 칸 다 열기. 시기 구간 1940-54/1955-81 별도.
+독립운동가는 독립기념관 인명사전(search.i815.or.kr)이 이명·가명·호를 대신 생성. 채집자명은 체류국 비중 확인 — coreana와 교집합 검색으로 판정.`;
+const JB_CROSS = `국내외 대조 절차 — 순서를 틀리면 헛수고한다
+① 국내 연구사부터(사학사적 검토·수집정책 보고서 — 발굴의 첫 단계는 검색창이 아니라 보고서다) ② 번역본 존재 확인(원본 뒤지기 전에 우리말 번역으로 대목을 짚는다) ③ 해외 원본(번역에 없는 부분·사진·도판) ④ 국내 원사료와 같은 날짜 겹치기(승정원일기·실록 — 음/양력 주의).
+같은 전투가 한쪽엔 '부상 30여 명', 다른 쪽엔 '승리'로 적힌다 — 둘 다 봐야 그날이 보인다.
+국내 DB 요령: 검색어는 짧게(1단어), 인명은 하나씩. 국내 소장 해외자료 먼저(국편 NARA 문서·통일원 노획문서·국회도서관 국무부 문서·6·25아카이브 55,206건).
+미기술 자료를 만나면: 기증이 어려우면 사본수집(공공기록물법 46조 — 국가기록원)·국립중앙도서관 책다모아(02-590-0700). 판단은 기관이 한다, 소장자는 연락만 하면 된다.`;
+
   server.tool('query_bank',
-    'Browse validated discovery keywords (Song 2026). topic: "list" for groups, a group id (G-01..G-22, N-01..N-07), "RG" for NARA Record Group cross-map, "TNA" for the 14 strategy layers, "domestic" for the 5 domestic archives, or a domestic key (nedb/archives/nlk/warmemo/seoul) / domestic group id (e.g. NAK-L1). 검증 쿼리 뱅크(국내 아카이브 포함).',
+    'Browse validated discovery keywords (Song 2026). topic: "list" for groups, a group id (G-01..G-22, N-01..N-07), "RG" for NARA Record Group cross-map, "TNA" for the 14 strategy layers, "domestic" for the 5 domestic archives, or a domestic key (nedb/archives/nlk/warmemo/seoul) / domestic group id (e.g. NAK-L1). 전략 지식: "walls"=열한 겹의 벽(실패 원인 11층+대응), "identifiers"=식별자 해독(번호 규칙·옆 훑기), "persons"=인명 열쇠(표기 변형·색인 함정), "crosscheck"=국내외 대조 절차(순서·사본수집). 검증 쿼리 뱅크+조사 전략.',
     { topic: z.string().default('list') },
     async ({ topic }) => {
       const t = topic.trim();
@@ -580,7 +600,9 @@ const handler = createMcpHandler((server) => {
         const g = v.groups.find((g) => g.id.toUpperCase() === t.toUpperCase());
         if (g) return text(`${g.id} ${g.ko} (${v.name}) [${g.dim}]:\n` + g.kws.map((k) => `- ${k}`).join('\n'));
       }
-      return text('Group not found — use topic="list" (해외 G/N/RG/TNA) 또는 "domestic"');
+      const STRAT = { walls: JB_WALLS, identifiers: JB_IDENT, persons: JB_PERSONS, crosscheck: JB_CROSS };
+      if (STRAT[t.toLowerCase()]) return text(STRAT[t.toLowerCase()]);
+      return text('Group not found — topic="list"(해외 G/N/RG/TNA)·"domestic"·전략(walls/identifiers/persons/crosscheck)');
     });
 
   server.tool('judge_rights',
@@ -1692,12 +1714,13 @@ const ANNOTATION_GUIDE = `기록 해설형 어노테이션 규칙 — 상세판 
 5. ★추정 금지: 화면·원문에서 직접 읽히는 것만 적는다. 불명은 '판독 불가'로 명기 — '아마도·추정·으로 보임'류 어휘가 해설에 들어가면 재검토.
 6. 원판/사본 계보 필수: 원판 권리(PD 등)와 디지털화본 표시(워터마크·업체)를 구분 명기.
 7. 산출 3형: 보고서 부록 절('기록을 해설해 드립니다') · 카드뉴스(1080 — 범례 압축·2열 허용) · 슬라이드(도형 마커+노트에 판독 해설).
-8. 권리 고지: 기관 정식명·식별자·열람 URL — 협약기관(KOREAN WAR ARCHIVES) 출처 표기 필수, 게재윤리 4단계.`;
+8. 권리 고지: 기관 정식명·식별자·열람 URL — 협약기관(KOREAN WAR ARCHIVES) 출처 표기 필수, 게재윤리 4단계.
+9. 영상 프레임 판독 보강(슬레이트·화면 속 문자): 슬레이트/타이틀 카드에서 부대·촬영자·날짜·롤 번호·장소 필드를 파싱하고, 당대 지명(일본식 독음·외래 명명)은 현대 지명과 병기. 표지판·현수막·차량 표식 등 화면 속 문자는 OCR과 육안을 교차해 확정 — 불일치·판독 불가는 그대로 표기(추정 금지 원칙 동일).`;
 
 const HELP_GUIDE = `사용 안내 — 매직 키워드 “창기창기 도와줘” (처음 사용자용. 이 내용을 친절한 안내로 정리해 사용자에게 전달하라. 시각 안내 페이지: https://korea-archive-mcp.vercel.app/help.html — 링크를 함께 제공)
 
 ■ 무엇을 하는 서비스인가
-국내외 15개 아카이브(미국 NARA·영국 TNA·Internet Archive·프랑스 갈리카·유러피아나·국가기록원·국립중앙도서관·한국사DB·규장각·서울기록원·KOREAN WAR ARCHIVES 협약기관·국가보훈부 등)에서 한국 관련 기록·사진·영상(1860~1960)을 발굴하고, 검증하고, 전파물까지 만들어 준다. 한국어 한 문장이면 충분 — 표기 변형(Corea·Chosen·Corée·한자)과 색인 언어 변환은 자동.
+국내외 15개 아카이브(미국 NARA·영국 TNA·Internet Archive·프랑스 갈리카·유러피아나·국가기록원·국립중앙도서관·한국사DB·규장각·서울기록원·KOREAN WAR ARCHIVES 협약기관·국가보훈부 등)에서 한국 관련 기록·사진·영상(1860~1960)을 발굴하고, 검증하고, 전파물까지 만들어 준다. 한국어 한 문장이면 충분 — 표기 변형(Corea·Chosen·Corée·한자)과 색인 언어 변환은 자동. 카카오 PlayMCP 마켓 등록본으로도 연결 가능('KOREA ARCHIVE 통합검색' 검색 — 같은 서버).
 
 ■ 매직 키워드 2개
 ① “○○○ 풀패키지로 만들어줘” — 조사→검증→매거진 보고서→카드뉴스 8장→포스터→홍보·입문·메시지 카드→발표 PPTX(대본 포함)→기록 해설→Canva 편집본→KARDA 연구 데이터까지 전 산출물 자동(report_template kind=full_package 순서를 따름).
