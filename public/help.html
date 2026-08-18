@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>창기창기 도와줘 — KOREA ARCHIVE 통합검색 사용 안내</title>
+<style>
+  :root{--paper:#f5f1e8;--card:#fffdf7;--ink:#211d18;--sub:#6b6257;--line:#dcd4c5;
+    --accent:#8a3033;--deep:#5f1f22;--gold:#a8853c;--dark:#171412;--cream:#e9e2d6}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--paper);color:var(--ink);font-size:16.5px;line-height:1.75;
+    font-family:'Noto Serif KR','Nanum Myeongjo',Batang,Georgia,serif}
+  .sans{font-family:'Apple SD Gothic Neo','Malgun Gothic','Noto Sans KR',sans-serif}
+  .wrap{max-width:860px;margin:0 auto;padding:0 24px 80px}
+  ::selection{background:var(--accent);color:#fff}
+  .hero{background:var(--dark);color:var(--cream);padding:54px 0 46px}
+  .hero .in{max-width:860px;margin:0 auto;padding:0 24px}
+  .hero .mast{font-size:11.5px;letter-spacing:.24em;color:#9d9384;text-transform:uppercase}
+  .hero .mast b{color:#e8b45a}
+  .hero h1{margin:16px 0 10px;font-size:clamp(30px,5.5vw,44px);line-height:1.2;font-weight:800}
+  .hero h1 .g{color:#e8b45a}
+  .hero p{color:#cfc5b4;max-width:640px}
+  .magic{display:inline-block;margin-top:16px;background:#241d15;border:1px solid #4a4238;border-radius:8px;
+    padding:12px 20px;font-size:19px;color:#e8c15c;font-weight:700}
+  h2{margin:56px 0 14px;font-size:22px;font-weight:800;letter-spacing:-.01em}
+  h2::after{content:"";display:block;width:52px;height:3px;background:var(--accent);margin-top:9px}
+  .step{display:flex;gap:14px;margin:14px 0;background:var(--card);border:1px solid var(--line);
+    border-radius:8px;padding:16px 18px;box-shadow:0 8px 20px rgba(33,29,24,.06)}
+  .step .n{flex:0 0 34px;height:34px;border-radius:50%;background:var(--accent);color:#fff;
+    font:800 17px/34px sans-serif;text-align:center}
+  .step b{color:var(--accent)}
+  code,.mono{font-family:Consolas,Menlo,monospace;font-size:.92em;background:#efe8d8;
+    padding:1px 7px;border-radius:4px;word-break:break-all}
+  .ask{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--gold);
+    border-radius:0 8px 8px 0;padding:12px 16px;margin:10px 0;font-size:15.5px}
+  .ask small{display:block;color:var(--sub);font-size:12.5px;margin-top:3px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;margin:16px 0}
+  .cell{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:14px 16px;
+    box-shadow:0 8px 20px rgba(33,29,24,.06)}
+  .cell b{display:block;color:var(--accent);margin-bottom:4px}
+  .cell{font-size:14px;line-height:1.6}
+  .four{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;margin:14px 0}
+  .four div{background:var(--dark);color:var(--cream);border-radius:8px;padding:14px 16px;font-size:14px}
+  .four b{color:#e8c15c;display:block;margin-bottom:3px}
+  details{background:var(--card);border:1px solid var(--line);border-radius:8px;margin:10px 0;padding:0 18px}
+  summary{cursor:pointer;padding:13px 0;font-weight:700;list-style:none}
+  summary::before{content:"Q. ";color:var(--accent)}
+  details p{margin:0 0 14px;color:#3d372f;font-size:15px}
+  a{color:var(--accent)}
+  .foot{margin-top:64px;padding-top:20px;border-top:3px double var(--ink);font-size:13px;color:var(--sub)}
+  .seal{display:inline-block;background:var(--accent);color:#fff;font:800 12px/1 sans-serif;
+    padding:6px 10px;border-radius:4px;letter-spacing:.08em}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="in">
+    <div class="mast sans"><b>KOREA ARCHIVE</b> 통합검색 — 사용 안내</div>
+    <h1>창기창기 <span class="g">도와줘</span></h1>
+    <p>국내외 15개 아카이브에서 한국 관련 기록(1860~1960)을 찾고, 검증하고,
+    매거진 보고서부터 카드뉴스·발표자료까지 한 번에 만들어 드립니다.
+    한국어 한 문장이면 충분합니다.</p>
+    <div class="magic sans">이 안내가 필요하면 언제든 — "창기창기 도와줘"</div>
+  </div>
+</div>
+
+<div class="wrap">
+
+<h2>1. 시작하기 — 커넥터 연결 (1분)</h2>
+<div class="step sans"><div class="n">1</div><div>Claude 앱(웹·모바일) → <b>설정 → 커넥터 → 커스텀 커넥터 추가</b></div></div>
+<div class="step sans"><div class="n">2</div><div>주소 입력: <code>https://korea-archive-mcp.vercel.app/api/mcp</code></div></div>
+<div class="step sans"><div class="n">3</div><div>끝. 대화창에서 바로 물어보세요. <b>로그인·키 불필요</b>(해외 아카이브는 전부 무키).</div></div>
+
+<h2>2. 매직 키워드 두 개만 기억하세요</h2>
+<div class="ask"><b>"○○○ 풀패키지로 만들어줘"</b>
+  <small>조사→검증→매거진 보고서→카드뉴스→포스터→홍보·입문·메시지 카드→발표 PPTX→기록 해설→Canva 편집본→연구 데이터(KARDA)까지 전 산출물 자동. 예: "장진호 풀패키지로 만들어줘"</small></div>
+<div class="ask"><b>"창기창기 도와줘"</b>
+  <small>이 사용 안내를 다시 불러옵니다.</small></div>
+
+<h2>3. 이렇게 물어보세요 — 예시 문장</h2>
+<div class="ask">"할아버지가 참전한 글로스터 연대 기록 찾아줘" <small>영국 TNA 훈장 추천서 원문까지 — 실전 1호가 이렇게 나왔습니다</small></div>
+<div class="ask">"장진호 전투 영상 기록 찾아줘" <small>미국 NARA·archive.org·한국 전쟁기념관 3중 교차 — 실전 2호</small></div>
+<div class="ask">"조선시대 한강 나루의 행정을 정리해줘" <small>법전 조문 판독→형제 조 전수→승정원일기 연대 검증까지 제도사 재구성</small></div>
+<div class="ask">"병인양요 프랑스 기록 찾아줘" <small>갈리카(BnF)를 프랑스어 표기 Corée로 자동 검색</small></div>
+<div class="ask">"이 참조코드 주변에 뭐가 더 있는지 캐줘" <small>TNA·전쟁기념관 인접 채굴(±N) — 같은 시리즈 미발굴 기록 발견</small></div>
+<div class="ask">"이 기록 게재해도 되는지 판정해줘" <small>권리 판정 + 게재윤리 4단계 심사</small></div>
+
+<h2>4. 무엇이 나오나 — 산출물 9종</h2>
+<div class="grid sans">
+  <div class="cell"><b>매거진 보고서</b>표지·목차·실물 도판·필름스트립·검증 낙관 — 잡지급 HTML</div>
+  <div class="cell"><b>카드뉴스 8장</b>인스타 1080×1080, 실물 이미지·출처 캡션</div>
+  <div class="cell"><b>포스터 시리즈</b>1080×1350 연작 4~6장</div>
+  <div class="cell"><b>홍보 카드</b>실제 지면 캡쳐 쇼케이스 — "당신도 만들 수 있습니다"</div>
+  <div class="cell"><b>발표 PPTX</b>16:9 강의 슬라이드 + 발표 대본, Canva 편집 가능</div>
+  <div class="cell"><b>입문 카드</b>"○○은 처음이지?" 키워드 정복형 — 시민 눈높이</div>
+  <div class="cell"><b>메시지 카드·슬라이드</b>1장 1메시지 미장센 — 강연 오프닝용</div>
+  <div class="cell"><b>기록 해설</b>점선 영역 판독 + 메타데이터 표 — "기록을 해설해 드립니다"</div>
+  <div class="cell"><b>연구 데이터</b>KARDA 온톨로지 CSV + 작업 로그 + ZIP 패키지</div>
+</div>
+
+<h2>5. 다른 점 하나 — 검증 <span class="seal sans">檢證 落款</span></h2>
+<div class="four sans">
+  <div><b>실물 기록만</b>AI 생성 인물·역사 장면을 쓰지 않습니다</div>
+  <div><b>원문 대조</b>훈격·날짜·건수는 카탈로그 API로 확인</div>
+  <div><b>출처 명시</b>모든 도판에 기관·식별자·링크</div>
+  <div><b>정정 공개</b>틀리면 고치고, 고친 기록을 남깁니다</div>
+</div>
+<p>네 가지를 통과한 산출물에만 검증 낙관이 찍힙니다.</p>
+
+<h2>6. 자주 묻는 질문</h2>
+<details><summary>0건이 나왔어요.</summary><p>0건은 부재가 아닙니다. 표기 변형(Corea·Chosen·한자 원표기), 인접 채굴,
+"대상을 관리한 행정"으로 검색어 전환을 요청해 보세요 — 도구가 자동으로 제안하기도 합니다.</p></details>
+<details><summary>조선시대 주제도 되나요?</summary><p>됩니다. 법전 조문 검색·형제 조 전수 스캔·좌목 필터·승정원일기
+연대 검증까지 심층 판독 모드가 있습니다. "조선의 ○○ 제도 풀패키지로"라고 해 보세요.</p></details>
+<details><summary>ZIP 패키지도 받을 수 있나요?</summary><p>ZIP 일괄 납품은 로컬(Claude Code) 환경에서 가능합니다.
+웹·모바일에서는 산출물이 개별 아티팩트로 제공되고 manifest 목록이 함께 나옵니다.</p></details>
+<details><summary>기록 이미지가 안 보여요.</summary><p>웹 환경에서는 기관 공개 이미지 URL을 참조로 제공합니다.
+원본은 항상 기관 카탈로그 링크에서 열람하세요 — 링크는 전부 실확인된 것만 싣습니다.</p></details>
+<details><summary>어떤 아카이브를 검색하나요?</summary><p>미국 NARA, 영국 TNA, Internet Archive, 프랑스 갈리카(BnF),
+유러피아나, 한국 국가기록원·국립중앙도서관·한국사DB·규장각·서울기록원·전쟁기념관
+KOREAN WAR ARCHIVES(협약기관)·국가보훈부 등 15개.</p></details>
+
+<div class="foot sans">
+  KOREA ARCHIVE 통합검색 · 실물 기록만, 검증된 것만 · 실전 산출물: 글로스터 연대(제1호) · 장진호(제2호)<br>
+  커넥터: korea-archive-mcp.vercel.app/api/mcp · 이 페이지: korea-archive-mcp.vercel.app/help.html
+</div>
+
+</div>
+</body>
+</html>
