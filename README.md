@@ -17,10 +17,10 @@ No local Python needed by users — they just add a connector URL.
    - `ARCHIVES_API_KEY` — enables archives_search / 국가기록원 (free: data.go.kr 15000153)
    - `NLK_API_KEY` — enables nlk_search / 국립중앙도서관 (free: www.nl.go.kr Open API)
    - `KOREANWAR_API_TOKEN` — enables the OpenAPI channel of koreanwar_search / KOREAN WAR ARCHIVES 6·25전쟁 아카이브센터 (협약기관).
-     Apply via the site's Q&A board ("API 문의"); after approval the admin registers your token **and allowed IP**
-     (register the deployment's egress IP — Seoul region). Scraped search works keyless meanwhile; the token adds
-     the official-metadata channel (공공누리 KOGL·이용조건·저작권 필드). `KOREANWAR_API_PAGES` (default 3) caps the
-     pages scanned per query (pageSize 100) to respect the API's no-bulk-crawling terms.
+     Apply via the site's Q&A board ("API 문의"). **실측(2026-08-19): 발급 토큰은 Referer 바인딩**
+     (`https://korea-archive-mcp.vercel.app/`) — 서버가 해당 Referer 헤더를 자동 첨부하므로 환경변수만 넣으면 동작.
+     Scraped search works keyless meanwhile; the token adds the official-metadata channel (KOGL·이용조건·저작권 필드,
+     pbrcList.do — keyword param 없음·pageSize 상한 100 실측). `KOREANWAR_API_PAGES` (default 3) caps pages/query.
    - `FETCH_PROXY_PREFIX` — *last-resort bypass* if a site still blocks even the Seoul region (some Korean gov
      sites block all cloud/datacenter ASNs). Point it at a read-through proxy that returns **raw** content, e.g.
      `https://api.allorigins.win/raw?url=` (append target) or `https://r.jina.ai/` (uses the sent `X-Return-Format: html`).
@@ -39,15 +39,21 @@ No local Python needed by users — they just add a connector URL.
 
 ## Tools (20 — PlayMCP 개발가이드 준수: 서버당 20개 이하)
 - **Overseas (6):** tna_search · tna_adjacent_mine · nara_search · ia_search(검색+identifier 메타 조회 통합) · gallica_search · europeana_search
-- **Domestic (9):** nedb_search(한국사DB) · archives_search(국가기록원) · nlk_search(국립중앙도서관·category 이중채널) · seoul_archives_search(서울기록원) · foia_search(정보공개포털+서울정보소통광장·서울시교육청·경남기록원 — source 파라미터) · warmemo_search(전쟁기념관) · **koreanwar_search**(KOREAN WAR ARCHIVES·6·25전쟁 아카이브센터 통합검색+전투정보 scope+OpenAPI 이중채널) · **koreanwar_item**(건별 메타·권리 + radius 인접 채굴) · scrape_plan
-- **Utility (5):** query_bank(+국내 키워드셋) · judge_rights · report_template · **cross_search**(여러 아카이브 동시 교차수집·병합) · **source_profile**(기관 자료·이용·활용구조)
+- **Domestic (9):** **nedb_search**(한국사DB + **조선 사료 심층 판독 9모드** — law·record(座目 필터)·item·★sibling(형제 조 전수)·matrix(부재 발견)·origin·sjw(왕대 분포)·kyujanggak(목록+해제·이미지 패턴 지식)) · archives_search(국가기록원) · nlk_search(국립중앙도서관·category 이중채널) · seoul_archives_search(서울기록원) · foia_search(정보공개포털 외 — source 파라미터) · warmemo_search(전쟁기념관) · **koreanwar_search**(KOREAN WAR ARCHIVES 통합검색+전투정보 scope+OpenAPI 공식 메타 채널) · **koreanwar_item**(건별 메타·권리 + radius 인접 채굴) · scrape_plan
+- **Utility (5):** **query_bank**(검증 키워드셋 + **조사 전략 6토픽** — walls·identifiers·persons·crosscheck·world(6개국 서고 지도)·cities(도시명 계보)) · judge_rights · **report_template**(**kind 8종** — report·carousel·canva_prompts·**full_package**(매직 키워드 '풀패키지' — 산출물 12종 오케스트레이션)·magazine·**help**(매직 키워드 '창기창기 도와줘')·citation(한국사DB·국회도서관 인용 형식)·annotation(기록 해설 규칙)) · **cross_search**(동시 교차수집·병합) · **source_profile**(기관 3층 프로파일)
+
+### 매직 키워드 · MCP 프롬프트 · 사용 안내
+- **MCP prompts 2종**(웹·모바일 + 메뉴 노출): `full-package`(topic 인자) · `changgi-help` — server `instructions`에도 트리거 규칙 명시
+- 매직 키워드: **"○○○ 풀패키지로 만들어줘"** → 조사→검증→매거진 보고서→카드뉴스→포스터→홍보·입문·메시지 카드→발표 PPTX→기록 해설→Canva 편집본→KARDA·시연 영상까지 산출물 12종 / **"창기창기 도와줘"** → 처음 사용자 안내
+- 사용 안내 페이지(정적 서빙): **`/help.html`** — 커버리지·조사 방법론·산출물 12종·실전 미리보기 갤러리 14섹션(글로스터 1호·장진호 2호·한강·강연 세트·기록잇다)
+- 로컬 스킬(`.claude/skills/` — 서버와 패리티): korea-full-package·changgi-help·insta-carousel·archival-discovery-pipeline·joseon-source-mining(+excavation)·khdb/nanet-citation·kyujanggak-images·record-annotation
 
 ### KOREAN WAR ARCHIVES 6·25전쟁 아카이브센터 (koreanwar.or.kr — MOU 협약기관)
 TNA-style structured toolset for KOREAN WAR ARCHIVES (정식 명칭; 전쟁기념관재단, 55,000+ items):
 `koreanwar_search`(통합검색 — 상위계층 breadcrumb에서 NARA Record Group을 추출해 원본 역추적 링크 제공; 생산연도·수집구분 서버측 필터, pageSize 10/20/50; `scope=battle`이면 전투정보 DB) →
 `koreanwar_item`(생산처·생산시기·입수처[NARA NAID 직결]·열람 및 이용조건; `radius=1~8`이면 archRfcd 일련번호 ±N 동일 시리즈 인접 채굴 — 정중한 3건 배치 병렬).
 All requests carry a partner-identifying User-Agent and polite pacing.
-`KOREANWAR_API_TOKEN` 승인 즉시 공식 OpenAPI 메타 채널(pbrcList.do — KOGL·이용조건·저작권 필드)이 자동 병행된다.
+`KOREANWAR_API_TOKEN` 설정 즉시 공식 OpenAPI 메타 채널(pbrcList.do — KOGL·이용조건·저작권 필드)이 자동 병행된다(토큰은 Referer 바인딩 발급 — 서버가 자동 처리).
 
 ### PlayMCP 개발가이드 준수 (2026.06.12판)
 - Streamable HTTP · Remote(public URL) · stateless — mcp-handler 기반 충족
