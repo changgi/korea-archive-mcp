@@ -261,16 +261,18 @@ async function kwSearch(params) {
 }
 // 수집구분(depth1) 코드 — 상세검색 폼 실측; 서버측 GET 필터로 동작 검증됨(철수 778 → 수집 633 · 기증 104).
 const KW_DEPTH1 = { '수집': '00001041', '기증': '00001042', '기타': '00001047', '구입': '00001054', '기탁': '00001073', '제작': '00001125', '이관': '00001179', '차입': '00001410' };
-// OpenAPI pbrcList.do — token+IP auth, JSON list (no keyword param) → scan pages, filter client-side.
-// Activates the moment KOREANWAR_API_TOKEN is set (application currently pending approval).
+// OpenAPI pbrcList.do — token은 Referer(https://korea-archive-mcp.vercel.app/) 바인딩 발급(2026-08-19 실측).
+// JSON list (keyword param 없음, pageSize 상한 100) → scan pages, filter client-side.
+// 토큰은 Vercel 환경변수 KOREANWAR_API_TOKEN로 주입(공개 저장소 노출 금지 — 커밋 금지).
+const KW_API_HDR = { ...KW_UA, Referer: 'https://korea-archive-mcp.vercel.app/' };
 async function kwApiScan(q, maxPages) {
   const token = process.env.KOREANWAR_API_TOKEN;
   if (!token) return null;
   const pages = Math.min(maxPages || Number(process.env.KOREANWAR_API_PAGES || 3), 10);
   const ql = q.toLowerCase(); const hits = []; let total = 0, checked = 0;
   for (let p = 1; p <= pages; p++) {
-    const d = await jget(`${KW_BASE}/openapi/pbrcList.do?token=${encodeURIComponent(token)}&page=${p}&pageSize=100`, KW_UA);
-    if (d.resultCode !== 'OK') throw new Error(`OpenAPI ${d.resultCode}: ${d.resultMsg || ''} — 토큰 미승인이거나 서버 egress IP가 미등록(승인 후 IP 등록 필요)`);
+    const d = await jget(`${KW_BASE}/openapi/pbrcList.do?token=${encodeURIComponent(token)}&page=${p}&pageSize=100`, KW_API_HDR);
+    if (d.resultCode !== 'OK') throw new Error(`OpenAPI ${d.resultCode}: ${d.resultMsg || ''} — 토큰이 Referer(korea-archive-mcp.vercel.app) 바인딩인지 확인`);
     total = d.totalCount || total;
     const list = d.list || [];
     checked += list.length;
