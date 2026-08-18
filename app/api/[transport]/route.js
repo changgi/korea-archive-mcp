@@ -564,6 +564,18 @@ const JB_PERSONS = `인명 열쇠 — 지명은 나라마다 갈리지만 사람
 표기 변형 생성: 이=Lee·Yi·Rhee·Ri / 김=Kim·Gim / 박=Park·Pak·Bak + 성명 도치(장면=Myun Chang, Dr. John)·현지 발음(서영해=Seu Ring-Hai).
 색인 함정: NARA Personalities 색인은 알파벳만이 기준 — 편철 제목에 Korea가 없어 '한국 자료'로는 안 걸린다. 구간 경계 이름(Kim·Park)은 두 칸 다 열기. 시기 구간 1940-54/1955-81 별도.
 독립운동가는 독립기념관 인명사전(search.i815.or.kr)이 이명·가명·호를 대신 생성. 채집자명은 체류국 비중 확인 — coreana와 교집합 검색으로 판정.`;
+const JB_WORLD = `세계 서고 지도 — 6개국+ 기관·분류체계 (조선 덱 2026-08-18 실측·조사분)
+🇯🇵 일본 JACAR(jacar.go.jp): 3기관 한 창구 — A=국립공문서관·B=외무성 외교사료관(재외 한인 감시·독립운동)·C=방위연구소(군). 레퍼런스코드=영문1+숫자11(예 B04014056900) — 첫 글자가 기관, 코드 그대로 문서 직행(상세검색 All→Reference Code). 외무성 기록은 門-類-項-目 4단(한자 부수 분류 전통).
+🇨🇳 중국: 제1역사당안관(베이징·명청 1,000만건·만주문 20%) / 제2역사당안관(난징·1912-49) — ★임시정부는 제2당안관(남경 임정 100여 권·괴뢰정권 91전종 10만권 — 재만 조선인 가능성). 체계: 全宗-类-案卷-文件(우리 철·건과 같은 자리). 당안관 4,234개 — 지방 당안관에 재만 기록 가능.
+🇷🇺 러시아: ГАРФ(중앙 — '무엇을 하라' 결정) vs ГАХК 하바롭스크(지방 — '어떻게 했다' 집행). 1937 강제이주는 두 곳을 겹쳐야 실제가 나온다. 체계 ф(폰드)-оп(목록)-д(건).
+🇲🇳 몽골 NCAM: 1674년~·126만 항목·6개 언어. 외국인은 다단계 허가 — '가서 보라' 할 수 없는 기관임을 명시.
+🇰🇿 카자흐: 고려인 10만 도착지 — 중앙국립문서보관소 계열.
+★비교표: 미 RG-Series-FileUnit-Item / 영 Dept-Series-Piece-Item / 일 소장관-資料群·門類項目-簿冊-件名 / 중 全宗-类-案卷-文件 / 러 ф-оп-д / 한 기록물군-계열-철-건 — 전부 ISAD(G) fonds·series·file·item 한 뼈대(출처주의). 하나를 익히면 여섯이 읽힌다.`;
+const JB_CITIES = `도시명 계보 대조 — 표기 변형 실전표 (해외 카탈로그는 당대 표기로 적혀 있다)
+서울: 한성·漢城 → 경성·京城·Keijo(일본 독음)·Kyongsong → Seoul (서울의 이름 13종 실측). 부산: Fusan(독음)·초량 Tsau-liang-hai(중국식) → Pusan → Busan. 평양: Heijo. 인천: Jinsen(독음)·Chemulpo(개항장) → Inchon. 원산: Gensan·Port Lazareff. 거문도: Port Hamilton. 제주: Quelpaert. 성진: Songchin → 김책(도시명 자체 소멸 — 이중 상실). 조선 국호 철자 7종: Corea·Korea·Chosen·Chosŏn·Joseon·Corée·朝鮮.
+★규칙 1 — 1914 경계: 부군면 통폐합(1914)을 경계로 검색 어휘가 갈린다. 연도만 알면 어느 어휘를 쓸지 정해진다(4층 외래 명명은 논리가 없어 외워야 하지만 3층 개명은 규칙이 있다).
+★규칙 2 — 로마자 표기법 연대: 1959 문교부식 → 1984 MR(매큔-라이샤워, 올림픽 계기) → 2000 국어의 로마자(인터넷 계기). 기록 생산·정리 시기를 알면 카탈로그 표기를 추정할 수 있다.
+★규칙 3 — 국내 목록에 옛 표기 병기: 국내 기관이 Joseon으로만 기술할수록 Chosen으로 채워진 해외 목록과 영영 만나지 못한다 — Goguryeo(Koguryo) 방식 병기.`;
 const JB_CROSS = `국내외 대조 절차 — 순서를 틀리면 헛수고한다
 ① 국내 연구사부터(사학사적 검토·수집정책 보고서 — 발굴의 첫 단계는 검색창이 아니라 보고서다) ② 번역본 존재 확인(원본 뒤지기 전에 우리말 번역으로 대목을 짚는다) ③ 해외 원본(번역에 없는 부분·사진·도판) ④ 국내 원사료와 같은 날짜 겹치기(승정원일기·실록 — 음/양력 주의).
 같은 전투가 한쪽엔 '부상 30여 명', 다른 쪽엔 '승리'로 적힌다 — 둘 다 봐야 그날이 보인다.
@@ -571,7 +583,7 @@ const JB_CROSS = `국내외 대조 절차 — 순서를 틀리면 헛수고한�
 미기술 자료를 만나면: 기증이 어려우면 사본수집(공공기록물법 46조 — 국가기록원)·국립중앙도서관 책다모아(02-590-0700). 판단은 기관이 한다, 소장자는 연락만 하면 된다.`;
 
   server.tool('query_bank',
-    'Browse validated discovery keywords (Song 2026). topic: "list" for groups, a group id (G-01..G-22, N-01..N-07), "RG" for NARA Record Group cross-map, "TNA" for the 14 strategy layers, "domestic" for the 5 domestic archives, or a domestic key (nedb/archives/nlk/warmemo/seoul) / domestic group id (e.g. NAK-L1). 전략 지식: "walls"=열한 겹의 벽(실패 원인 11층+대응), "identifiers"=식별자 해독(번호 규칙·옆 훑기), "persons"=인명 열쇠(표기 변형·색인 함정), "crosscheck"=국내외 대조 절차(순서·사본수집). 검증 쿼리 뱅크+조사 전략.',
+    'Browse validated discovery keywords (Song 2026). topic: "list" for groups, a group id (G-01..G-22, N-01..N-07), "RG" for NARA Record Group cross-map, "TNA" for the 14 strategy layers, "domestic" for the 5 domestic archives, or a domestic key (nedb/archives/nlk/warmemo/seoul) / domestic group id (e.g. NAK-L1). 전략 지식: "walls"=열한 겹의 벽(실패 원인 11층+대응), "identifiers"=식별자 해독(번호 규칙·옆 훑기), "persons"=인명 열쇠(표기 변형·색인 함정), "crosscheck"=국내외 대조 절차, "world"=6개국+ 서고 지도(JACAR·당안관·ГАРФ 분류체계 비교), "cities"=도시명 계보 대조(Keijo·Fusan·1914 경계·로마자 표기법 연대). 검증 쿼리 뱅크+조사 전략.',
     { topic: z.string().default('list') },
     async ({ topic }) => {
       const t = topic.trim();
@@ -600,7 +612,7 @@ const JB_CROSS = `국내외 대조 절차 — 순서를 틀리면 헛수고한�
         const g = v.groups.find((g) => g.id.toUpperCase() === t.toUpperCase());
         if (g) return text(`${g.id} ${g.ko} (${v.name}) [${g.dim}]:\n` + g.kws.map((k) => `- ${k}`).join('\n'));
       }
-      const STRAT = { walls: JB_WALLS, identifiers: JB_IDENT, persons: JB_PERSONS, crosscheck: JB_CROSS };
+      const STRAT = { walls: JB_WALLS, identifiers: JB_IDENT, persons: JB_PERSONS, crosscheck: JB_CROSS, world: JB_WORLD, cities: JB_CITIES };
       if (STRAT[t.toLowerCase()]) return text(STRAT[t.toLowerCase()]);
       return text('Group not found — topic="list"(해외 G/N/RG/TNA)·"domestic"·전략(walls/identifiers/persons/crosscheck)');
     });
