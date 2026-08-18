@@ -66,6 +66,73 @@ const ARCHIVES = {
       return { count, records };
     },
   },
+  europeana: {
+    name: '유러피아나(유럽 4천 기관)',
+    verified: ['Corea', 'Corée', 'Korea'],
+    noisy: { Chosen: '유럽 색인 희소', Coree: '악상 없는 표기 — Corée 사용' },
+    note: 'Corea는 재즈 피아니스트·의학용어와 동음 — 결과 확인 필요',
+    async search(term, rows = 6) {
+      const url = `https://api.europeana.eu/record/v2/search.json?wskey=api2demo&query=${encodeURIComponent('"' + term + '"')}&rows=${rows}`;
+      const res = await fetch(url, { headers: { Accept: 'application/json', ...UA }, signal: AbortSignal.timeout(12000) });
+      if (!res.ok) throw new Error(`Europeana ${res.status}`);
+      const d = await res.json();
+      if (!d.success) throw new Error('Europeana key');
+      return {
+        count: d.totalResults ?? null,
+        records: (d.items || []).map((r) => ({
+          title: clean(Array.isArray(r.title) ? r.title[0] : r.title),
+          ref: (r.id || '').replace(/^\//, ''),
+          held: (r.dataProvider && r.dataProvider[0]) || 'Europeana', dates: (r.year && r.year[0]) || '', id: r.guid || '',
+        })),
+      };
+    },
+  },
+  kwa: {
+    name: '6·25전쟁 아카이브(KWA)',
+    useRawQuery: true,
+    verified: [], noisy: {},
+    async search(term, rows = 8) {
+      const url = `https://www.koreanwar.or.kr:8443/search.do?keyword=${encodeURIComponent(term)}&viewType=archive&pageSize=10`;
+      const res = await fetch(url, { headers: { ...UA, Accept: 'text/html' }, signal: AbortSignal.timeout(12000) });
+      if (!res.ok) throw new Error(`KWA ${res.status}`);
+      const b = await res.text();
+      const count = parseInt(((b.match(/totalCount">\s*([\d,]+)/) || [, '0'])[1]).replace(/,/g, ''), 10);
+      const records = [];
+      const re = /searchDetail\.do\?archRfcd=([\w-]+)[^>]*>([\s\S]{1,300}?)<\/a>/g;
+      let m; const seen = new Set();
+      while ((m = re.exec(b)) && records.length < rows) {
+        const t = clean(m[2]);
+        if (!t || seen.has(m[1])) continue;
+        seen.add(m[1]);
+        records.push({ title: t, ref: m[1], held: 'KOREAN WAR ARCHIVES(협약기관)', dates: '', id: m[1] });
+      }
+      return { count, records };
+    },
+  },
+  nara: {
+    name: '미국 NARA',
+    verified: ['Korea', 'Chosen'],
+    noisy: { Corea: '미국 색인은 Korea·Chosen 위주' },
+    needsKey: true,
+    async search(term, rows = 6) {
+      const key = process.env.NARA_API_KEY;
+      if (!key) throw new Error('서버 키 필요(NARA_API_KEY)');
+      const url = `https://catalog.archives.gov/api/v2/records/search?q=${encodeURIComponent(term)}&limit=${rows}`;
+      const res = await fetch(url, { headers: { Accept: 'application/json', 'x-api-key': key, ...UA }, signal: AbortSignal.timeout(12000) });
+      if (!res.ok) throw new Error(`NARA ${res.status}`);
+      const d = await res.json();
+      const body = d.body || d;
+      const hits = (body.hits && body.hits.hits) || [];
+      const total = (body.hits && body.hits.total && (body.hits.total.value ?? body.hits.total)) || null;
+      return {
+        count: typeof total === 'number' ? total : null,
+        records: hits.map((h) => {
+          const r = (h._source && h._source.record) || {};
+          return { title: clean(r.title), ref: String(r.naId || ''), held: 'NARA', dates: '', id: String(r.naId || '') };
+        }),
+      };
+    },
+  },
 };
 
 const clean = (s) => String(s || '').replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim();
@@ -83,6 +150,7 @@ export async function GET(request) {
   const jobs = [];
   for (const a of use) {
     const A = ARCHIVES[a];
+    if (A.useRawQuery) { jobs.push({ archive: a, term: q, noisy: null }); continue; }
     const terms = userTerms.length ? userTerms : [...A.verified, ...Object.keys(A.noisy)];
     for (const t of terms) jobs.push({ archive: a, term: t, noisy: A.noisy[t] || null });
   }
