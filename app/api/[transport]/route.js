@@ -233,6 +233,132 @@ const COLLECT = {
   koreanwar: async (q, n) => (await kwSearch({ keyword: q, viewType: 'archive' })).cards.slice(0, n).map((c) => ({ title: c.title, date: '', id: c.id, url: c.url })),
 };
 
+// ══════════ 조선 사료 심층 판독 (db.history.go.kr · sjw · kyudb — joseon-source-mining 이식) ══════════
+const JDB = 'https://db.history.go.kr';
+const JSJW = 'https://sjw.history.go.kr';
+const JKYU = 'https://kyudb.snu.ac.kr';
+const JDB_HDR = { Referer: JDB + '/' };
+async function jdbPost(url, params, headers = {}) {
+  const body = new URLSearchParams(params).toString();
+  let lastErr;
+  for (let a = 0; a < 2; a++) {
+    try {
+      const r = await fetch(url, { method: 'POST', body,
+        headers: { 'User-Agent': UA, 'Content-Type': 'application/x-www-form-urlencoded', ...JDB_HDR, ...headers },
+        signal: AbortSignal.timeout(FETCH_TIMEOUT) });
+      if (!r.ok) throw new Error(`HTTP ${r.status}`);
+      return await r.text();
+    } catch (e) { lastErr = e; if (a === 0) await sleep(300); }
+  }
+  throw new Error(errInfo(lastErr));
+}
+const jNoScript = (s) => String(s || '').replace(/<script[\s\S]*?<\/script>/g, ' ').replace(/<style[\s\S]*?<\/style>/g, ' ');
+const jStrip = (s) => dclean(jNoScript(s));
+const jLines = (s) => jNoScript(s).replace(/<[^>]+>/g, '\n').split('\n').map((l) => dclean(l)).filter(Boolean);
+const jCite = (lid) => `${JDB}/id/${lid}`;
+const jItemUrl = (lid) => JDB + (lid.startsWith('jlaw') ? '/joseon/item/level.do?levelId=' : '/joseon/level.do?levelId=') + lid;
+const J_SEARCH_BASE = { pageIndex: '1', pageSize: '1', orderColumn: 'levelId', orderDir: 'ASC',
+  synonym: 'off', chinessChar: 'on', titleWord: '', titleConjunction: 'AND',
+  contentsWord: '', contentsConjunction: 'AND', creatorWord: '', creatorConjunction: 'AND',
+  startDate: '', endDate: '' };
+
+async function jLawSearch(query, n) {
+  const b = await jdbPost(JDB + '/search/law/searchResultList.do',
+    { ...J_SEARCH_BASE, searchItemId: 'jlaw', searchTarget: 'jlaw', pageUnit: String(Math.min(n, 200)), totalWord: query });
+  const total = parseInt(((jStrip(b).match(/총\s*([\d,]+)건/) || [])[1] || '0').replace(/,/g, ''), 10);
+  const results = [];
+  const re = /fnGoItemView\('([^']+)',\s*'\d+'\)[\s\S]*?<ul class="tit">([\s\S]*?)<\/ul>\s*<p class="tx">([\s\S]*?)<\/p>/g;
+  let m;
+  while ((m = re.exec(b))) {
+    const parts = [...m[2].matchAll(/<li>([\s\S]*?)<\/li>/g)].map((x) => jStrip(x[1]).replace(/\s+/g, ''));
+    results.push({ id: m[1], source: parts[0] || '', section: parts.slice(1).join('·'), excerpt: jStrip(m[3]).slice(0, 240) });
+  }
+  return { total, results };
+}
+
+async function jItemRead(lid, maxChars) {
+  let b;
+  try { b = await gtext(jItemUrl(lid), JDB_HDR); } catch (e) { return { lid, status: 'not_found', note: e.message }; }
+  const lines = jLines(b);
+  const title = lines.find((l) => /啓$|傳敎$|事目|節目|條例|大典|要覽|謄錄/.test(l) && l.length > 8 && l.length < 140) || '';
+  let k = null;
+  if (lid.startsWith('jlaw')) { const i = lines.indexOf('다음글'); k = i >= 0 ? i + 1 : null; }
+  else { const i = lines.findIndex((l) => l.startsWith('◯') || l.startsWith('○')); k = i >= 0 ? i : null; }
+  if (k === null) return { lid, title, status: title ? 'not_published' : 'parse_failed' };
+  let end = lines.slice(k).findIndex((l) => l.includes('경기도 과천시') || l.includes('개인정보'));
+  end = end >= 0 ? k + end : Math.min(lines.length, k + 250);
+  const body = lines.slice(k, end).join(' ').slice(0, maxChars || 1200);
+  return { lid, title, body, chars: body.length, status: 'ok', isLaw: lid.startsWith('jlaw') };
+}
+
+async function jSibling(lid, span) {
+  const m = lid.match(/^(.+_)(\d{4})$/);
+  if (!m) return { error: '형제 조 스캔은 4자리 일련번호로 끝나는 levelId에만 적용됩니다.' };
+  const stem = m[1]; const asked = parseInt(m[2], 10);
+  const sibs = [];
+  const nums = []; for (let n = 1; n <= span; n++) nums.push(n * 10);
+  for (let i = 0; i < nums.length; i += 3) {
+    const batch = nums.slice(i, i + 3);
+    const rs = await Promise.all(batch.map(async (num) => {
+      const id = stem + String(num).padStart(4, '0');
+      const r = await jItemRead(id, 400).catch(() => null);
+      if (!r || r.status !== 'ok' || (r.body || '').includes('조선시대법령자료 메뉴')) return null;
+      const hm = (r.body || '').match(/^\s*([\u4e00-\u9fff]{2,6})/);
+      return { id, head: hm ? hm[1] : (r.body || '').slice(0, 12), chars: r.chars, requested: num === asked };
+    }));
+    sibs.push(...rs.filter(Boolean));
+    if (i + 3 < nums.length) await sleep(150);
+  }
+  return { stem: stem.replace(/_$/, ''), sibs, others: sibs.filter((s) => !s.requested) };
+}
+
+async function jRecordSearch(query, n) {
+  const b = await jdbPost(JDB + '/joseon/search/searchResultList.do',
+    { ...J_SEARCH_BASE, searchItemId: 'bb', searchTarget: 'bb', pageUnit: String(Math.min(n, 200)), totalWord: query });
+  const total = parseInt(((jStrip(b).match(/총\s*([\d,]+)건/) || [])[1] || '0').replace(/,/g, ''), 10);
+  const seen = new Set(); const rows = [];
+  const re = /fnGoItemLevel\('[^']*',\s*'(\w+)'[^)]*\);[^>]*>([\s\S]*?)<\/a>/g;
+  let m;
+  while ((m = re.exec(b))) {
+    const t = jStrip(m[2]);
+    if (!t || seen.has(m[1])) continue;
+    seen.add(m[1]);
+    rows.push({ id: m[1], title: t, jwamok: /좌목\s*$/.test(t) });
+  }
+  return { total, rows, jwamok: rows.filter((r) => r.jwamok), real: rows.filter((r) => !r.jwamok) };
+}
+
+async function jSjw(query) {
+  const b = await jdbPost(JSJW + '/search/searchResultList.do',
+    { searchTerm: query, searchTermImages: '', topSearchWord: query, topSearchWord_ime: query,
+      pageUnit: '50', pageIndex: '1', searchType: 'a' });
+  const t = jStrip(b);
+  const total = parseInt((((t.match(/검색결과\s*([\d,]+)\s*건/) || t.match(/총\s*([\d,]+)\s*건/)) || [])[1] || '0').replace(/,/g, ''), 10);
+  const REIGNS = ['태조', '정종', '태종', '세종', '문종', '단종', '세조', '예종', '성종', '연산군', '중종', '인종', '명종', '선조', '광해군', '인조', '효종', '현종', '숙종', '경종', '영조', '정조', '순조', '헌종', '철종', '고종', '순종'];
+  const dist = {};
+  for (const r of REIGNS) { const mm = t.match(new RegExp(r + '\\s*\\((\\d+)\\)')); if (mm) dist[r] = parseInt(mm[1], 10); }
+  const me = t.match(new RegExp('(' + REIGNS.join('|') + ')\\s*(\\d+)년[^\\d]{0,12}(\\d{4})년'));
+  const earliest = me ? { reign: `${me[1]} ${me[2]}년`, year: parseInt(me[3], 10) } : null;
+  return { total, dist, earliest };
+}
+
+async function jKyu(query) {
+  const out = {};
+  for (const [code, label] of [['10', '목록'], ['20', '해제']]) {
+    try {
+      const b = await jdbPost(JKYU + '/search/search.do', { totalSearchString: query, searchArea: code }, { Referer: JKYU + '/' });
+      const codes = [...new Set([...b.matchAll(/(奎[\d軸]+)/g)].map((x) => x[1]))];
+      out[label] = codes.slice(0, 30);
+    } catch (e) { out[label] = { error: e.message }; }
+    await sleep(200);
+  }
+  return out;
+}
+
+const J_DOMAINS = { '노비·신분': ['奴婢', '婢', '良賤', '從良'], '재산·상속': ['分衿', '衿', '遺書', '文記', '和會'],
+  '시험·교육': ['講', '生員', '成均館', '考講', '製述'], '형벌·소송': ['刑', '決訟', '杖', '徒', '流'],
+  '군사': ['軍', '兵', '鎭', '營', '戰船'], '조운·선박': ['船', '漕', '津', '渡', '水站'], '재정·세': ['稅', '貢', '米', '錢', '貿'] };
+
 // ══════════ KOREAN WAR ARCHIVES 6·25전쟁 아카이브센터 (koreanwar.or.kr:8443 — 전쟁기념관재단, 협약기관) ══════════
 // MOU partner: identify this program in every request (courtesy UA) and keep call volume polite
 // (robots.txt 404 = no directive; OpenAPI terms forbid bulk crawling — we page-scan modestly).
@@ -482,9 +608,94 @@ const handler = createMcpHandler((server) => {
   const agentBrowse = (name, q, u, why = '이 기관은 자동 페치가 제한적입니다') => `${name} '${q}' — ${why}.\n➤ 에이전트 지시: 이 메시지를 그대로 사용자에게 전달하지 마세요. 대신 당신의 웹 검색(WebSearch)으로 '${q}'를 이 기관에서 찾거나 아래 공식 검색 URL을 열람해 상위 결과(제목·연대·링크)를 표로 정리해 사용자에게 제시하세요. 결과가 있으면 report_template으로 HTML 보고서화도 가능합니다.\n공식 검색: ${u}`;
 
   server.tool('nedb_search',
-    "Search 국사편찬위 한국사데이터베이스 (db.history.go.kr). PREFERRED: set NEDB_INDEX_URL to a pre-built index of the OFFICIAL data.go.kr open-data files (KOGL) — searches those files (robots-compliant, no live scraping). Otherwise falls back to the integrated-search page (note: db.history.go.kr/robots.txt disallows generic crawlers — prefer the file index or a browser tool). 한자·한글 병행 표기 권장.",
-    { query: z.string(), db: z.string().default(''), max_results: z.number().int().min(1).max(50).default(15) },
-    async ({ query, max_results }) => {
+    "Search 국사편찬위 한국사데이터베이스 (db.history.go.kr) + 조선 사료 심층 판독 (verified POST routes from the Han-river vessel study). mode: total=통합검색(기본) · law=법전·편람 조문 검색(한문 원문 제공 여부 판정) · record=등록류 검색(座目 회의명단 자동 필터 — 검색 건수를 지표로 쓰기 전 필수) · item=levelId 본문 판독(미공개/파싱실패 구분 — query에 levelId) · sibling=★형제 조 전수 스캔(query에 levelId — 조문을 하나라도 열었으면 반드시 이어 호출, 총론만 읽으면 핵심을 놓친다) · matrix=법전 수록 대조표(query에 쉼표구분 어휘 ≤8 — 부재의 발견) · origin=어휘 연원 추적(query='용어' 또는 '용어,영역') · sjw=승정원일기(왕대 분포·최초 용례 — 연대가 뒤집힐 수 있다) · kyujanggak=규장각 목록+해제 동시(절목·사목류는 해제에서 발견). 판정 우선: '601건'이 아니라 '492건이 座目입니다'를 반환한다. 한자 원표기 병행 권장.",
+    { query: z.string().describe("검색어 · levelId(item/sibling) · 쉼표구분 어휘(matrix) · '용어,영역'(origin)"), db: z.string().default(''), max_results: z.number().int().min(1).max(50).default(15), mode: z.enum(['total', 'law', 'record', 'item', 'sibling', 'matrix', 'origin', 'sjw', 'kyujanggak']).default('total'), span: z.number().int().min(2).max(12).default(8).describe('sibling 모드 스캔 폭') },
+    async ({ query, max_results, mode, span }) => {
+      const q = query.trim();
+      try {
+        if (mode === 'law') {
+          const r = await jLawSearch(q, max_results);
+          const lines = r.results.slice(0, max_results).map((x) => `- [${x.id}] ${x.source}${x.section ? ' ' + x.section : ''}\n  ${x.excerpt.slice(0, 150)}\n  ${jCite(x.id)}`);
+          let out = `법전·편람 '${q}' — 총 ${r.total}건:\n` + (lines.join('\n') || '(0건)');
+          if (r.total === 0) out += `\n★ '${q}'는 법전에 수록되어 있지 않습니다. 법전 밖 관행일 가능성 — mode=record·sjw로 등록류·일기를 조회하십시오.`;
+          else out += '\n※ 법전·편람은 한문 원문 제공 — 인용 가능(표점은 DB 형태·교감본 미대조). 조문을 열었으면 mode=sibling으로 형제 조를 반드시 확인.';
+          return text(out);
+        }
+        if (mode === 'record') {
+          const r = await jRecordSearch(q, Math.max(max_results, 50));
+          const lines = r.real.slice(0, max_results).map((x) => `- [${x.id}] ${x.title.slice(0, 90)}\n  ${jCite(x.id)}`);
+          let out = `등록류(비변사등록) '${q}' — 보고 총계 ${r.total}건 · 페이지 내 ${r.rows.length}건 중 座目 ${r.jwamok.length}건 제외 → 실질 ${r.real.length}건:\n` + (lines.join('\n') || '(실질 기사 0건)');
+          if (r.jwamok.length) out += `\n★ ${Math.round(r.jwamok.length / Math.max(r.rows.length, 1) * 100)}%가 座目(회의 참석 명단)입니다. 검색 건수를 주제 중요도 지표로 쓰지 마십시오.`;
+          out += '\n※ 등록류는 국역만 노출 — 한문 역구성은 학술 인용 불가.';
+          return text(out);
+        }
+        if (mode === 'item') {
+          const r = await jItemRead(q, 3000);
+          if (r.status === 'ok') return text(`[${q}] ${r.title || ''}\n${r.body}\n(${r.chars}자) ${jCite(q)}\n※ ${r.isLaw ? '한문 원문 제공 — 인용 가능(표점 DB 형태)' : '국역만 제공 — 역구성 한문은 학술 인용 불가'}. 조문이면 mode=sibling으로 형제 조 확인.`);
+          if (r.status === 'not_published') return text(`[${q}] ${r.title}\n본문이 공개되지 않았습니다 — 항목은 존재하고 URL도 유효하나 공개 범위 문제입니다. 재시도로 해결되지 않으며 국사편찬위원회 문의 대상. ${jCite(q)}`);
+          return text(`[${q}] 조회 실패(${r.status}${r.note ? ': ' + r.note : ''}) — levelId와 경로(jlaw*=item/level.do)를 확인하십시오.`);
+        }
+        if (mode === 'sibling') {
+          const r = await jSibling(q, span);
+          if (r.error) return text(r.error);
+          const lines = r.sibs.map((s) => `${s.requested ? '●' : '○'} ${s.id} [${s.head}] ${s.chars}자 ${jCite(s.id)}`);
+          let out = `형제 조 전수 스캔 ${q} (편: ${r.stem}):\n` + (lines.join('\n') || '(형제 조 미검출 — span 확대 재시도 가능)');
+          if (r.others.length) out += `\n★ 요청한 조 외에 ${r.others.length}개가 더 있습니다: ${[...new Set(r.others.map((s) => '[' + s.head + ']'))].join(' ')} — 전부 확인하십시오. 총론만 읽고 끝내면 핵심을 놓칩니다.`;
+          return text(out);
+        }
+        if (mode === 'matrix') {
+          const terms = q.split(',').map((t) => t.trim()).filter(Boolean).slice(0, 8);
+          const rows = [];
+          for (let i = 0; i < terms.length; i += 3) {
+            const rs = await Promise.all(terms.slice(i, i + 3).map(async (t) => {
+              const r = await jLawSearch(t, 10).catch(() => ({ total: -1, results: [] }));
+              const srcs = r.results.map((x) => x.source);
+              const code = ['經國大典', '續大典', '大典通編', '大典會通', '受敎輯錄', '六典條例'].find((c) => srcs.some((s) => s.includes(c)));
+              return { t, total: r.total, earliest: code || srcs[0] || '', inCode: !!code };
+            }));
+            rows.push(...rs);
+            if (i + 3 < terms.length) await sleep(150);
+          }
+          rows.sort((a, b) => b.total - a.total);
+          const absent = rows.filter((r) => r.total === 0 || !r.inCode);
+          let out = '법전 수록 대조표:\n' + rows.map((r) => `- ${r.t}: ${r.total}건${r.earliest ? ' (' + r.earliest + (r.inCode ? '' : ' — 법전 아님') + ')' : ''}${r.total === 0 ? ' — 법전 미수록' : ''}`).join('\n');
+          if (absent.length) out += `\n★ ${absent.map((r) => r.t).join('·')}는 법전에 오르지 못했습니다. 제도사를 법전으로만 재구성하면 이 요소는 존재하지 않습니다 — 등록류·일기류를 함께 읽으십시오.`;
+          return text(out);
+        }
+        if (mode === 'origin') {
+          const [term, domain] = q.split(',').map((t) => t.trim());
+          const r = await jLawSearch(term, 100);
+          if (r.total === 0) return text(`'${term}'은 법전에 나타나지 않습니다 — 법전 밖 관행 용어일 수 있습니다. mode=record·sjw로 조회하십시오.`);
+          const domains = {};
+          for (const item of r.results) {
+            const blob = item.section + ' ' + item.excerpt;
+            for (const [dom, hints] of Object.entries(J_DOMAINS)) if (hints.some((h) => blob.includes(h))) domains[dom] = (domains[dom] || 0) + 1;
+          }
+          const sorted = Object.entries(domains).sort((a, b) => b[1] - a[1]);
+          let out = `어휘 연원 '${term}' — 법전 ${r.total}건 · 영역 분포: ` + (sorted.map(([d, c]) => `${d} ${c}`).join(' · ') || '(판별 불가)');
+          out += '\n대표 용례:\n' + r.results.slice(0, 4).map((x) => `- ${x.source} ${x.section} | ${x.excerpt.slice(0, 110)}`).join('\n');
+          if (domain && !domains[domain]) out += `\n★ '${domain}' 영역 용례가 0건 — 이 용어는 주로 '${(sorted[0] || ['?'])[0]}' 영역에서 쓰였고 '${domain}'으로 전용된 것으로 보입니다. 전용 시점을 등록류·일기에서 확인하십시오.`;
+          return text(out);
+        }
+        if (mode === 'sjw') {
+          const r = await jSjw(q);
+          let out = `승정원일기 '${q}' — 총 ${r.total}건`;
+          const dist = Object.entries(r.dist);
+          if (dist.length) out += '\n왕대 분포: ' + dist.map(([k, v]) => `${k} ${v}`).join(' · ');
+          if (r.earliest) out += `\n★ 최초 용례 ${r.earliest.year}년(${r.earliest.reign}) — 관련 기구·제도의 성립 연대와 대조하십시오. 용어가 기구보다 앞서면 그 기구는 제도를 만든 것이 아니라 인수한 것입니다.`;
+          return text(out + `\n검색: ${JSJW}/search/searchResultList.do (POST)`);
+        }
+        if (mode === 'kyujanggak') {
+          const r = await jKyu(q);
+          const fmt = (v) => Array.isArray(v) ? `${v.length}건 — ${v.slice(0, 12).join(' ')}` : `오류(${v.error})`;
+          let out = `규장각 '${q}'\n목록: ${fmt(r['목록'])}\n해제: ${fmt(r['해제'])}`;
+          const lc = Array.isArray(r['목록']) ? r['목록'].length : 0; const ac = Array.isArray(r['해제']) ? r['해제'].length : 0;
+          if (ac > lc) out += '\n★ 해제 검색이 목록보다 많습니다 — 절목·사목류가 상위 서명 아래 편차(編次)로 들어가 있을 수 있습니다.';
+          out += '\n※ 원문 이미지 수집·게재는 로컬 kyujanggak-images 스킬 경로(파일명 패턴 실측 필수) · 게재는 소장기관 허가 확인(02-880-5316).';
+          return text(out);
+        }
+      } catch (e) { return text(`조선 심층 판독(${mode}) 실패: ${e.message} — 한국사DB 계열은 전부 POST이며 GET 재현이 불가합니다. 잠시 후 재시도.`); }
+      // mode=total — 기존 통합검색
       const browse = 'https://db.history.go.kr/search/searchResultList.do?searchKeywordType=BI&searchKeyword=' + encodeURIComponent(query);
       const idx = await loadNedbIndex();
       if (idx) {
@@ -498,9 +709,8 @@ const handler = createMcpHandler((server) => {
         const b = await gtext(api);
         const seen = new Set(); const dbs = [];
         const re = /href="\/item\/\w+\/main\.do"[^>]*>([\s\S]*?)<\/a>/g; let m;
-        // strip the "n(ew)" badge (<span class="btn-new">n</span>) so DB names aren't suffixed with " n"
         while ((m = re.exec(b))) { const nm = dclean(m[1].replace(/<span[^>]*class="btn-new"[^>]*>[\s\S]*?<\/span>/g, '')); if (nm && !seen.has(nm)) { seen.add(nm); dbs.push(nm); } }
-        if (dbs.length) return text(`한국사DB '${query}' — 검색어가 등장하는 DB ${dbs.length}종:\n` + dbs.slice(0, max_results).map((d) => '- ' + d).join('\n') + dbrowse(browse) + '\n각 DB에서 문서 단위로 열람. 한자 원표기 병행 검색 권장.');
+        if (dbs.length) return text(`한국사DB '${query}' — 검색어가 등장하는 DB ${dbs.length}종:\n` + dbs.slice(0, max_results).map((d) => '- ' + d).join('\n') + dbrowse(browse) + '\n각 DB에서 문서 단위로 열람. 한자 원표기 병행 검색 권장. 조선 제도사 심층 판독은 mode=law·record·sibling·matrix·origin·sjw·kyujanggak.');
         return text(agentBrowse('한국사DB', query, browse, '통합검색에서 매칭 DB 미검출'));
       } catch (e) { return text(agentBrowse('한국사DB', query, browse, `자동조회 실패(${e.message})`)); }
     });
