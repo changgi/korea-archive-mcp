@@ -253,8 +253,9 @@ async function jdbPost(url, params, headers = {}) {
   throw new Error(errInfo(lastErr));
 }
 const jNoScript = (s) => String(s || '').replace(/<script[\s\S]*?<\/script>/g, ' ').replace(/<style[\s\S]*?<\/style>/g, ' ');
-const jStrip = (s) => dclean(jNoScript(s));
-const jLines = (s) => jNoScript(s).replace(/<[^>]+>/g, '\n').split('\n').map((l) => dclean(l)).filter(Boolean);
+const jClean = (s) => String(s || '').replace(/<[^>]+>/g, '').replace(/&gt;/g, '>').replace(/&lt;/g, '<').replace(/&amp;/g, '&').replace(/&#39;/g, "'").replace(/&quot;/g, '"').replace(/&nbsp;/g, ' ').replace(/\s+/g, ' ').trim();
+const jStrip = (s) => jClean(jNoScript(s));
+const jLines = (s) => jNoScript(s).replace(/<[^>]+>/g, '\n').split('\n').map((l) => jClean(l)).filter(Boolean);
 const jCite = (lid) => `${JDB}/id/${lid}`;
 const jItemUrl = (lid) => JDB + (lid.startsWith('jlaw') ? '/joseon/item/level.do?levelId=' : '/joseon/level.do?levelId=') + lid;
 const J_SEARCH_BASE = { pageIndex: '1', pageSize: '1', orderColumn: 'levelId', orderDir: 'ASC',
