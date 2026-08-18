@@ -403,7 +403,8 @@ footer b{color:var(--ink-soft);font-weight:500}
           </button>
           <button class="go" id="go" type="submit">찾아보기</button>
         </div>
-        <div class="examples">
+        <div id="archRow" style="display:flex;gap:12px;flex-wrap:wrap;margin:9px 2px 3px;font-size:13px;align-items:center;opacity:.92"><span style="opacity:.65">문서고 선택</span><label style="cursor:pointer"><input type="checkbox" class="archCk" value="tna" checked> 영국 TNA</label><label style="cursor:pointer"><input type="checkbox" class="archCk" value="ia" checked> Internet Archive</label><label style="cursor:pointer"><input type="checkbox" class="archCk" value="gallica"> 갈리카(BnF) — Corée</label></div>
+<div class="examples">
           <span>눌러서 예시 보기</span>
           <button class="chip" type="button" data-k="okinawa">오키나와에 끌려간 할아버지</button>
           <button class="chip" type="button" data-k="land">돌아가신 아버지 명의 땅</button>
@@ -518,7 +519,8 @@ const hasProxy = location.protocol === 'http:' || location.protocol === 'https:'
 
 async function overseasSearch(text){
   const kw=toKeyword(text);
-  const res=await fetch(PROXY+'?q='+encodeURIComponent(kw),{signal:AbortSignal.timeout(20000)});
+  const archives=[...document.querySelectorAll('.archCk:checked')].map(c=>c.value).join(',')||'tna';
+  const res=await fetch(PROXY+'?q='+encodeURIComponent(kw)+'&archives='+archives,{signal:AbortSignal.timeout(35000)});
   if(!res.ok) throw new Error('프록시 '+res.status);
   const d=await res.json();
   if(!d.ok) throw new Error(d.error||'조회 실패');
@@ -539,7 +541,7 @@ function renderOverseas(d,text){
   d.kept.forEach(k=>{
     const el=document.createElement('div'); el.className='vari-r ok';
     el.innerHTML='<i class="v"></i><i class="n"></i><i class="m"></i><i class="j"></i>';
-    el.querySelector('.v').textContent=k.term;
+    el.querySelector('.v').textContent=k.term+(k.archive?' · '+k.archive:'');
     el.querySelector('.n').textContent=(k.count!=null?k.count.toLocaleString():'?')+'건';
     el.querySelector('.m').textContent='결과에 포함';
     el.querySelector('.j').textContent='유효';
@@ -548,7 +550,7 @@ function renderOverseas(d,text){
   d.dropped.forEach(k=>{
     const el=document.createElement('div'); el.className='vari-r no';
     el.innerHTML='<i class="v"></i><i class="n"></i><i class="m"></i><i class="j"></i>';
-    el.querySelector('.v').textContent=k.term;
+    el.querySelector('.v').textContent=k.term+(k.archive?' · '+k.archive:'');
     el.querySelector('.n').textContent=(k.count!=null?k.count.toLocaleString():'—')+'건';
     el.querySelector('.m').textContent=k.reason;
     el.querySelector('.j').textContent='제외';
@@ -568,7 +570,7 @@ function renderOverseas(d,text){
       const e=document.createElement('div'); e.className='live-row';
       e.innerHTML='<h4></h4><div class="meta"></div>';
       e.querySelector('h4').textContent=r.title;
-      e.querySelector('.meta').textContent=[r.ref,r.dates,r.held,'표기: '+r.matchedBy].filter(Boolean).join('  ·  ');
+      e.querySelector('.meta').textContent=[r.archive||'',r.ref,r.dates,r.held,'표기: '+r.matchedBy].filter(Boolean).join('  ·  ');
       list.appendChild(e);
     });
   }
