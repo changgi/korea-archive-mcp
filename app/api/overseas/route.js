@@ -97,14 +97,15 @@ const ARCHIVES = {
       if (!res.ok) throw new Error(`KWA ${res.status}`);
       const b = await res.text();
       const count = parseInt(((b.match(/totalCount">\s*([\d,]+)/) || [, '0'])[1]).replace(/,/g, ''), 10);
+      // MCP kwParseCards 이식 — archive(archRfcd)·도서(bookId) 카드 모두
       const records = [];
-      const re = /searchDetail\.do\?archRfcd=([\w-]+)[^>]*>([\s\S]{1,300}?)<\/a>/g;
-      let m; const seen = new Set();
-      while ((m = re.exec(b)) && records.length < rows) {
-        const t = clean(m[2]);
-        if (!t || seen.has(m[1])) continue;
-        seen.add(m[1]);
-        records.push({ title: t, ref: m[1], held: 'KOREAN WAR ARCHIVES(협약기관)', dates: '', id: m[1] });
+      for (const seg of b.split('result-card__body').slice(1)) {
+        if (records.length >= rows) break;
+        const m = seg.match(/href="\/(searchDetail(?:-book)?\.do)\?(archRfcd|bookId)=([^"]+)"[^>]*>([\s\S]*?)<\/a>/);
+        if (!m) continue;
+        records.push({ title: clean(m[4]), ref: m[2] === 'archRfcd' ? m[3] : `book:${m[3]}`,
+          held: 'KOREAN WAR ARCHIVES(협약기관)', dates: '',
+          id: `https://www.koreanwar.or.kr:8443/${m[1]}?${m[2]}=${encodeURIComponent(m[3])}` });
       }
       return { count, records };
     },
