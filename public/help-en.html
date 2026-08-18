@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Changgi-Changgi, Help Me — KOREA ARCHIVE Integrated Search Guide</title>
+<style>
+  :root{--paper:#f5f1e8;--card:#fffdf7;--ink:#211d18;--sub:#6b6257;--line:#dcd4c5;
+    --accent:#8a3033;--deep:#5f1f22;--gold:#a8853c;--dark:#171412;--cream:#e9e2d6}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--paper);color:var(--ink);font-size:16.5px;line-height:1.75;
+    font-family:'Noto Serif KR','Nanum Myeongjo',Batang,Georgia,serif}
+  .sans{font-family:'Apple SD Gothic Neo','Malgun Gothic','Noto Sans KR',sans-serif}
+  .wrap{max-width:860px;margin:0 auto;padding:0 24px 80px}
+  ::selection{background:var(--accent);color:#fff}
+  .hero{background:var(--dark);color:var(--cream);padding:54px 0 46px}
+  .hero .in{max-width:860px;margin:0 auto;padding:0 24px}
+  .hero .mast{font-size:11.5px;letter-spacing:.24em;color:#9d9384;text-transform:uppercase}
+  .hero .mast b{color:#e8b45a}
+  .hero h1{margin:16px 0 10px;font-size:clamp(30px,5.5vw,44px);line-height:1.2;font-weight:800}
+  .hero h1 .g{color:#e8b45a}
+  .hero p{color:#cfc5b4;max-width:640px}
+  .magic{display:inline-block;margin-top:16px;background:#241d15;border:1px solid #4a4238;border-radius:8px;
+    padding:12px 20px;font-size:19px;color:#e8c15c;font-weight:700}
+  h2{margin:56px 0 14px;font-size:22px;font-weight:800;letter-spacing:-.01em}
+  h2::after{content:"";display:block;width:52px;height:3px;background:var(--accent);margin-top:9px}
+  .step{display:flex;gap:14px;margin:14px 0;background:var(--card);border:1px solid var(--line);
+    border-radius:8px;padding:16px 18px;box-shadow:0 8px 20px rgba(33,29,24,.06)}
+  .step .n{flex:0 0 34px;height:34px;border-radius:50%;background:var(--accent);color:#fff;
+    font:800 17px/34px sans-serif;text-align:center}
+  .step b{color:var(--accent)}
+  code,.mono{font-family:Consolas,Menlo,monospace;font-size:.92em;background:#efe8d8;
+    padding:1px 7px;border-radius:4px;word-break:break-all}
+  .ask{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--gold);
+    border-radius:0 8px 8px 0;padding:12px 16px;margin:10px 0;font-size:15.5px}
+  .ask small{display:block;color:var(--sub);font-size:12.5px;margin-top:3px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;margin:16px 0}
+  .cell{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:14px 16px;
+    box-shadow:0 8px 20px rgba(33,29,24,.06)}
+  .cell b{display:block;color:var(--accent);margin-bottom:4px}
+  .cell{font-size:14px;line-height:1.6}
+  .gal-h{margin:30px 0 4px;font-size:15.5px;font-weight:800;color:var(--accent)}
+  .gal-h span{font-weight:400;font-size:12.5px;color:var(--sub);margin-left:8px}
+  .gal{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px;margin:18px 0}
+  .gal figure{margin:0;background:var(--card);border:1px solid var(--line);border-radius:8px;
+    padding:8px;box-shadow:0 10px 24px rgba(33,29,24,.08)}
+  .gal img{width:100%;display:block;border-radius:4px}
+  .gal figcaption{font-size:12px;color:var(--sub);margin-top:7px;line-height:1.45}
+  .four{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;margin:14px 0}
+  .four div{background:var(--dark);color:var(--cream);border-radius:8px;padding:14px 16px;font-size:14px}
+  .four b{color:#e8c15c;display:block;margin-bottom:3px}
+  details{background:var(--card);border:1px solid var(--line);border-radius:8px;margin:10px 0;padding:0 18px}
+  summary{cursor:pointer;padding:13px 0;font-weight:700;list-style:none}
+  summary::before{content:"Q. ";color:var(--accent)}
+  details p{margin:0 0 14px;color:#3d372f;font-size:15px}
+  a{color:var(--accent)}
+  .foot{margin-top:64px;padding-top:20px;border-top:3px double var(--ink);font-size:13px;color:var(--sub)}
+  .seal{display:inline-block;background:var(--accent);color:#fff;font:800 12px/1 sans-serif;
+    padding:6px 10px;border-radius:4px;letter-spacing:.08em}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="in">
+    <div class="mast sans"><b>KOREA ARCHIVE</b> Integrated Search — User Guide · <a href="/help.html" style="color:#e8b45a">한국어 →</a></div>
+    <h1>Changgi-Changgi, <span class="g">Help Me</span></h1>
+    <p>We discover, verify, and publish Korea-related records (1860–1960) across 15 archives at home and abroad —
+    from magazine-grade reports to card news and lecture decks. One sentence in Korean or English is enough.</p>
+    <div class="magic sans">Whenever you need this guide — say “창기창기 도와줘 (Changgi-changgi, help me)”</div>
+  </div>
+</div>
+
+<div class="wrap">
+
+<h2>1. Getting started — connect in one minute</h2>
+<div class="step sans"><div class="n">1</div><div>Claude app (web·mobile) → <b>Settings → Connectors → Add custom connector</b></div></div>
+<div class="step sans"><div class="n">2</div><div>Enter: <code>https://korea-archive-mcp.vercel.app/api/mcp</code></div></div>
+<div class="step sans"><div class="n">3</div><div>Done. Ask in plain language. <b>No login, no key</b> (all overseas archives are keyless).</div></div>
+<div class="step sans"><div class="n">★</div><div><b>Kakao PlayMCP works too</b> — search <b>“KOREA ARCHIVE 통합검색”</b> in the PlayMCP market (same server).</div></div>
+
+<h2>2. Two magic keywords to remember</h2>
+<div class="ask"><b>“○○○ 풀패키지로 만들어줘” (Full package, please)</b>
+  <small>Investigation → verification → magazine report → card news → posters → promo/beginner/message cards → lecture PPTX → record annotation → Canva editions → KARDA research data → demo video. Twelve deliverables, automatically. e.g. “장진호 풀패키지로 만들어줘”.</small></div>
+<div class="ask"><b>“창기창기 도와줘” (Changgi-changgi, help me)</b>
+  <small>Brings this guide back. Tip: on claude.ai, the reliable path is the <b>+ menu → connector prompts</b> (full-package · changgi-help).</small></div>
+
+<h2>3. Try asking like this</h2>
+<div class="ask">"Find the records of the Gloucestershire Regiment my grandfather served in" <small>down to the original V.C. recommendation at TNA — that became Vol.1</small></div>
+<div class="ask">"Find film records of the Chosin Reservoir campaign" <small>NARA·archive.org·Korean War Archives triple-custody proof — Vol.2</small></div>
+<div class="ask">"Reconstruct the ferry administration of the Joseon-era Han River" <small>statute reading → sibling-clause sweep → date verification</small></div>
+<div class="ask">"Find French records of the 1866 campaign (Byeong-in yang-yo)" <small>Gallica searched with the period spelling Corée, automatically</small></div>
+<div class="ask">"Mine the shelf around this reference code" <small>adjacent-number mining ±N surfaces unlisted series-mates</small></div>
+
+<h2>4. How far, and how — coverage & methodology</h2>
+<div class="grid sans">
+  <div class="cell"><b>🌍 15 archives</b>🇺🇸 NARA · 🇬🇧 TNA · 🌐 Internet Archive · 🇫🇷 Gallica(BnF) · 🇪🇺 Europeana ·
+  🇰🇷 National Archives of Korea, National Library, Korean History DB, Kyujanggak, Seoul Archives, FOIA portal, KOREAN WAR ARCHIVES (MOU partner), MPVA</div>
+  <div class="cell"><b>🗣 Multilingual queries</b>Ask in Korean or English — queries auto-convert to each index language (Corée for Gallica), and period spellings (Corea·Chosen·長津湖) are preserved, not "corrected".</div>
+</div>
+<div class="grid sans">
+  <div class="cell"><b>Spelling variants in parallel</b>Korea·Corea·Corée·朝鮮 — period spelling changes the result set</div>
+  <div class="cell"><b>Adjacent mining ±N</b>walk the reference numbers around one hit — Vol.1 found five unlisted war diaries this way</div>
+  <div class="cell"><b>Cross-verification</b>the same film matched across three national archives (Vol.2)</div>
+  <div class="cell"><b>Sibling-clause sweep (Joseon)</b>open one statute clause, always sweep its siblings</div>
+  <div class="cell"><b>Verdict-first server</b>not “601 hits” but “492 of them are attendance rosters”</div>
+  <div class="cell"><b>Zero-hit recovery</b>if the object isn't indexed, search the administration that governed it</div>
+</div>
+
+<h2>5. What you get — 12 deliverable types</h2>
+<div class="grid sans">
+  <div class="cell"><b>Magazine report</b>cover·TOC·real images·filmstrips·verification seal — journal-grade HTML</div>
+  <div class="cell"><b>Card news ×8</b>Instagram 1080×1080, credits on every image</div>
+  <div class="cell"><b>Poster series</b>1080×1350, 4–6 piece narrative</div>
+  <div class="cell"><b>Promo cards</b>built from actual page captures</div>
+  <div class="cell"><b>Lecture PPTX</b>16:9 + full speaker script, Canva-editable</div>
+  <div class="cell"><b>Beginner cards</b>“New to ○○?” — one keyword per card</div>
+  <div class="cell"><b>Message cards·slides</b>one image, one sentence — mise-en-scène grammar</div>
+  <div class="cell"><b>Record annotation</b>dashed-zone reading + metadata table</div>
+  <div class="cell"><b>Research data</b>KARDA ontology CSV + activity log + ZIP</div>
+  <div class="cell"><b>Institutional-history report</b>Joseon statutes·registers·Kyujanggak, cross-read</div>
+  <div class="cell"><b>Demo video</b>GIF·MP4 for talks, SNS, juries</div>
+  <div class="cell"><b>Canva editions</b>edit everything on the web</div>
+</div>
+
+<h2>6. Real outputs — every one of these came from a single sentence</h2>
+<p class="sans" style="font-size:14.5px;color:var(--sub)">Vol.1 “Find my grandfather's Gloucestershire Regiment records” · Vol.2 “장진호 풀패키지로 만들어줘” — grouped by deliverable type.</p>
+
+<div class="gal-h sans">① Magazine report <span>Journal-grade HTML — cover, filmstrip, verification seal, galleries, annotation appendix</span></div>
+<div class="gal sans">
+  <figure><img src="/gallery/g01.jpg" alt="Vol.1 magazine cover — Names Left on the Imjin (Gloucestershire Regiment)" loading="lazy"><figcaption>Vol.1 magazine cover — Names Left on the Imjin (Gloucestershire Regiment)</figcaption></figure>
+  <figure><img src="/gallery/g04.jpg" alt="Vol.2 cover — Minus 30°C, the Film Survived in Three Nations (Chosin)" loading="lazy"><figcaption>Vol.2 cover — Minus 30°C, the Film Survived in Three Nations (Chosin)</figcaption></figure>
+  <figure><img src="/gallery/g05.jpg" alt="Vol.2 spread — video filmstrip section" loading="lazy"><figcaption>Vol.2 spread — video filmstrip section</figcaption></figure>
+  <figure><img src="/gallery/g06.jpg" alt="Vol.2 spread — rights & verification seal" loading="lazy"><figcaption>Vol.2 spread — rights & verification seal</figcaption></figure>
+  <figure><img src="/gallery/g15.jpg" alt="Vol.2 spread — card-news gallery in print" loading="lazy"><figcaption>Vol.2 spread — card-news gallery in print</figcaption></figure>
+  <figure><img src="/gallery/g16.jpg" alt="Vol.2 spread — 'Reading the Records' appendix" loading="lazy"><figcaption>Vol.2 spread — 'Reading the Records' appendix</figcaption></figure>
+  <figure><img src="/gallery/g27.jpg" alt="Vol.1 spread — V.C. recommendation原文 preview (TNA)" loading="lazy"><figcaption>Vol.1 spread — V.C. recommendation原文 preview (TNA)</figcaption></figure>
+  <figure><img src="/gallery/g28.jpg" alt="Vol.1 spread — domestic cross-verification (regimental badge carving)" loading="lazy"><figcaption>Vol.1 spread — domestic cross-verification (regimental badge carving)</figcaption></figure>
+  <figure><img src="/gallery/g29.jpg" alt="Vol.1 spread — poster series gallery" loading="lazy"><figcaption>Vol.1 spread — poster series gallery</figcaption></figure>
+</div>
+
+<div class="gal-h sans">② Card news (Instagram 1080×1080) <span>8-card narrative arc — real archival images with credits</span></div>
+<div class="gal sans">
+  <figure><img src="/gallery/g02.jpg" alt="Vol.1 card cover — 'Find my grandfather's regiment'" loading="lazy"><figcaption>Vol.1 card cover — 'Find my grandfather's regiment'</figcaption></figure>
+  <figure><img src="/gallery/g17.jpg" alt="Vol.1 — James P. Carne & the carved badge (real artifact)" loading="lazy"><figcaption>Vol.1 — James P. Carne & the carved badge (real artifact)</figcaption></figure>
+  <figure><img src="/gallery/g07.jpg" alt="Vol.2 card cover — Minus 30°C" loading="lazy"><figcaption>Vol.2 card cover — Minus 30°C</figcaption></figure>
+  <figure><img src="/gallery/g19.jpg" alt="Vol.2 — one film in three archives" loading="lazy"><figcaption>Vol.2 — one film in three archives</figcaption></figure>
+  <figure><img src="/gallery/g30.jpg" alt="Vol.1 — zero hits: the diary without 'Korea'" loading="lazy"><figcaption>Vol.1 — zero hits: the diary without 'Korea'</figcaption></figure>
+  <figure><img src="/gallery/g31.jpg" alt="Vol.2 — anyone can reproduce this" loading="lazy"><figcaption>Vol.2 — anyone can reproduce this</figcaption></figure>
+</div>
+
+<div class="gal-h sans">③ Poster series (1080×1350) <span>Title · people · verification as a set</span></div>
+<div class="gal sans">
+  <figure><img src="/gallery/g03.jpg" alt="Vol.1 poster — Names Left on the Imjin" loading="lazy"><figcaption>Vol.1 poster — Names Left on the Imjin</figcaption></figure>
+  <figure><img src="/gallery/g18.jpg" alt="Vol.1 poster — 'V.C.' in two handwritten letters" loading="lazy"><figcaption>Vol.1 poster — 'V.C.' in two handwritten letters</figcaption></figure>
+  <figure><img src="/gallery/g08.jpg" alt="Vol.2 poster — Minus 30°C" loading="lazy"><figcaption>Vol.2 poster — Minus 30°C</figcaption></figure>
+  <figure><img src="/gallery/g20.jpg" alt="Vol.2 poster — ×3, one film, three archives" loading="lazy"><figcaption>Vol.2 poster — ×3, one film, three archives</figcaption></figure>
+  <figure><img src="/gallery/g32.jpg" alt="Vol.1 poster — your family is in the records too" loading="lazy"><figcaption>Vol.1 poster — your family is in the records too</figcaption></figure>
+  <figure><img src="/gallery/g33.jpg" alt="Vol.2 poster — that winter's records await you" loading="lazy"><figcaption>Vol.2 poster — that winter's records await you</figcaption></figure>
+</div>
+
+<div class="gal-h sans">④ Promo cards <span>Showcase built from actual page captures</span></div>
+<div class="gal sans">
+  <figure><img src="/gallery/g09.jpg" alt="Promo cover — this magazine came from one sentence" loading="lazy"><figcaption>Promo cover — this magazine came from one sentence</figcaption></figure>
+  <figure><img src="/gallery/g21.jpg" alt="Promo — it's not just a report" loading="lazy"><figcaption>Promo — it's not just a report</figcaption></figure>
+  <figure><img src="/gallery/g34.jpg" alt="Promo close — what's your topic?" loading="lazy"><figcaption>Promo close — what's your topic?</figcaption></figure>
+</div>
+
+<div class="gal-h sans">⑤ Lecture PPTX (16:9) <span>Slides + full speaker script · Canva-editable</span></div>
+<div class="gal sans">
+  <figure><img src="/gallery/g13.jpg" alt="Lecture PPTX cover (14 slides with speaker notes)" loading="lazy"><figcaption>Lecture PPTX cover (14 slides with speaker notes)</figcaption></figure>
+  <figure><img src="/gallery/g22.jpg" alt="PPTX — embarkation filmstrip slide" loading="lazy"><figcaption>PPTX — embarkation filmstrip slide</figcaption></figure>
+  <figure><img src="/gallery/g23.jpg" alt="PPTX — KARDA research data slide" loading="lazy"><figcaption>PPTX — KARDA research data slide</figcaption></figure>
+</div>
+
+<div class="gal-h sans">⑥ Beginner cards <span>'New to ○○?' — one keyword per card, plain language</span></div>
+<div class="gal sans">
+  <figure><img src="/gallery/g10.jpg" alt="Beginner card — 'New to Chosin?'" loading="lazy"><figcaption>Beginner card — 'New to Chosin?'</figcaption></figure>
+  <figure><img src="/gallery/g24.jpg" alt="Beginner card — triple custody in 3 frames" loading="lazy"><figcaption>Beginner card — triple custody in 3 frames</figcaption></figure>
+  <figure><img src="/gallery/g35.jpg" alt="Beginner card — the verification seal, explained" loading="lazy"><figcaption>Beginner card — the verification seal, explained</figcaption></figure>
+</div>
+
+<div class="gal-h sans">⑦ Message type (mise-en-scène) <span>One image, one sentence — blackout thesis arc</span></div>
+<div class="gal sans">
+  <figure><img src="/gallery/g11.jpg" alt="Message card — blackout thesis: records don't vanish" loading="lazy"><figcaption>Message card — blackout thesis: records don't vanish</figcaption></figure>
+  <figure><img src="/gallery/g25.jpg" alt="Message card — today's discovery guards tomorrow's history" loading="lazy"><figcaption>Message card — today's discovery guards tomorrow's history</figcaption></figure>
+  <figure><img src="/gallery/g36.jpg" alt="Message slide — cinematic opener" loading="lazy"><figcaption>Message slide — cinematic opener</figcaption></figure>
+</div>
+
+<div class="gal-h sans">⑧ Record annotation <span>Dashed-zone reading + metadata table + original/copy lineage</span></div>
+<div class="gal sans">
+  <figure><img src="/gallery/g12.jpg" alt="Record annotation — one frame, four clues" loading="lazy"><figcaption>Record annotation — one frame, four clues</figcaption></figure>
+  <figure><img src="/gallery/g14.jpg" alt="Annotation slide — dashed zones + legend" loading="lazy"><figcaption>Annotation slide — dashed zones + legend</figcaption></figure>
+  <figure><img src="/gallery/g46.jpg" alt="Yu Gwan-sun prisoner-card annotation" loading="lazy"><figcaption>Yu Gwan-sun prisoner-card annotation</figcaption></figure>
+  <figure><img src="/gallery/g37.jpg" alt="Annotation — metadata table: identity of a film" loading="lazy"><figcaption>Annotation — metadata table: identity of a film</figcaption></figure>
+</div>
+
+<div class="gal-h sans">⑨ Research data (KARDA) <span>Ontology CSV · activity log · ZIP package</span></div>
+<div class="gal sans">
+  <figure><img src="/gallery/g26.jpg" alt="KARDA relation graph — 17 nodes · 14 edges" loading="lazy"><figcaption>KARDA relation graph — 17 nodes · 14 edges</figcaption></figure>
+  <figure><img src="/gallery/g40.jpg" alt="Activity log + ZIP package — audit trail" loading="lazy"><figcaption>Activity log + ZIP package — audit trail</figcaption></figure>
+</div>
+
+<div class="gal-h sans">⑩ Canva editions <span>Second-pass editing on the web</span></div>
+<div class="gal sans">
+  <figure><img src="/gallery/g38.jpg" alt="Canva journal poster (editable)" loading="lazy"><figcaption>Canva journal poster (editable)</figcaption></figure>
+  <figure><img src="/gallery/g39.jpg" alt="Canva commercial poster (editable)" loading="lazy"><figcaption>Canva commercial poster (editable)</figcaption></figure>
+</div>
+
+<div class="gal-h sans">⑪ Institutional-history report (Joseon sources) <span>Statute reading → sibling-clause sweep → date verification — <a href="/examples/hanriver.html">open the real report →</a></span></div>
+<div class="gal sans">
+  <figure><img src="/gallery/g43.jpg" alt="Han River survey report cover (1485–1986)" loading="lazy"><figcaption>Han River survey report cover (1485–1986)</figcaption></figure>
+  <figure><img src="/gallery/g44.jpg" alt="Han River report — full findings list" loading="lazy"><figcaption>Han River report — full findings list</figcaption></figure>
+  <figure><img src="/gallery/g45.jpg" alt="Han River report — deep-reading section" loading="lazy"><figcaption>Han River report — deep-reading section</figcaption></figure>
+  <figure><img src="/gallery/g42.jpg" alt="Kyujanggak image pipeline (procedure only — rights pending)" loading="lazy"><figcaption>Kyujanggak image pipeline (procedure only — rights pending)</figcaption></figure>
+</div>
+
+<div class="gal-h sans">⑫ Demo videos (GIF·MP4) <span>Your outputs, in motion</span></div>
+<div class="gal sans">
+  <figure><img src="/gallery/demo_scroll.gif" alt="scroll demo" loading="lazy"><figcaption>Scroll demo GIF of this page</figcaption></figure>
+  <figure><video src="/gallery/ingitda_demo.mp4" muted loop autoplay playsinline style="width:100%;display:block;border-radius:4px"></video><figcaption>30-second Girokitda service demo (actual contest entry)</figcaption></figure>
+</div>
+
+<div class="gal-h sans">⑬ Lecture operations set <span>Full deck · dossier · run-of-show · handout — <a href="/examples/joseon-deck.html">open all 403 slides →</a></span></div>
+<div class="gal sans">
+  <figure><img src="/gallery/g47.jpg" alt="Lecture full deck cover — 'Between Chosen and Joseon' (10-layer curriculum)" loading="lazy"><figcaption>Lecture full deck cover — 'Between Chosen and Joseon' (10-layer curriculum)</figcaption></figure>
+  <figure><img src="/gallery/g48.jpg" alt="Full deck — search-barrier layer slide" loading="lazy"><figcaption>Full deck — search-barrier layer slide</figcaption></figure>
+  <figure><img src="/gallery/g49.jpg" alt="Lecture dossier — one-page summary" loading="lazy"><figcaption>Lecture dossier — one-page summary</figcaption></figure>
+  <figure><img src="/gallery/g50.jpg" alt="Run of show — 'Driving 403 slides'" loading="lazy"><figcaption>Run of show — 'Driving 403 slides'</figcaption></figure>
+  <figure><img src="/gallery/g51.jpg" alt="Audience handout — finding Korean records abroad" loading="lazy"><figcaption>Audience handout — finding Korean records abroad</figcaption></figure>
+</div>
+
+<div class="gal-h sans">⑭ Service prototype <span><a href="/ingitda.html">try Girokitda live →</a></span></div>
+<div class="gal sans">
+  <figure><img src="/gallery/g52.jpg" alt="Girokitda web app — 'One name is enough to find a record'" loading="lazy"><figcaption>Girokitda web app — 'One name is enough to find a record'</figcaption></figure>
+  <figure><img src="/gallery/g53.jpg" alt="Girokitda contest deck cover" loading="lazy"><figcaption>Girokitda contest deck cover</figcaption></figure>
+</div>
+
+<h2>7. What makes it different — verification <span class="seal sans">檢證 落款</span></h2>
+<div class="four sans">
+  <div><b>Real records only</b>no AI-generated people or historical scenes, ever</div>
+  <div><b>Source-checked</b>decorations, dates, counts verified against catalog APIs</div>
+  <div><b>Credited</b>institution·identifier·link on every image</div>
+  <div><b>Corrections published</b>when we're wrong, the fix is on the page</div>
+</div>
+<p>Only outputs that pass all four receive the verification seal.</p>
+
+<h2>8. FAQ</h2>
+<details><summary>I got zero hits.</summary><p>Zero is not absence. Try period spellings (Corea·Chosen), adjacent mining,
+or switch to “the administration that governed the object” — the server suggests these automatically.</p></details>
+<details><summary>Does it cover the Joseon dynasty?</summary><p>Yes — statute search, sibling-clause sweeps, roster filtering,
+and Seungjeongwon Ilgi date verification are built in. Try “조선의 ○○ 제도 풀패키지로”.</p></details>
+<details><summary>Can I get the ZIP package?</summary><p>ZIP delivery is local (Claude Code). On web/mobile, deliverables
+arrive as individual artifacts with a manifest.</p></details>
+<details><summary>Which archives are searched?</summary><p>US NARA, UK TNA, Internet Archive, Gallica (BnF), Europeana,
+and nine Korean institutions including the Korean History DB, Kyujanggak, and KOREAN WAR ARCHIVES (MOU partner).</p></details>
+
+<div class="foot sans">
+  KOREA ARCHIVE Integrated Search · real records only, verified only · live outputs: Gloucestershire (Vol.1) · Chosin (Vol.2) · Han River<br>
+  Connector: korea-archive-mcp.vercel.app/api/mcp · 한국어판: <a href="/help.html">/help.html</a> · Girokitda: <a href="/ingitda.html">/ingitda.html</a>
+</div>
+
+</div>
+</body>
+</html>
