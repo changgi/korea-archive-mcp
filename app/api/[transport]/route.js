@@ -626,7 +626,7 @@ const JB_CROSS = `국내외 대조 절차 — 순서를 틀리면 헛수고한�
     });
 
   server.tool('report_template',
-    'Get the magazine-grade HTML report skeleton + 17 writing rules — editorial journal layout (masthead·standfirst·drop cap·pull quote·record cards), embedded record images with mandatory per-image credits, film-strip frame galleries with timecodes + watch-the-original CTA for video records, per-institution source chips (country flag + official name) and an archives-cited roster. Call as the FINAL step of an investigation, fill {{placeholders}} with verified findings only, save as [topic]_records_[years].html. 발굴 마무리 단계 호출 — 잡지·저널급 HTML 보고서 골격+작성 규칙 반환(실물 이미지·영상 필름스트립·기관별 출처 명시). Pass kind=carousel for the Instagram card-news design system: 검증된 1080×1080 카드 CSS 컴포넌트+제작 12규칙(서사 아크·실물 이미지·출처 캡션·겹침 방지·육안 검수) — 어디서든 같은 품질의 카드뉴스 제작 가능. 사용자가 "풀패키지"라고 말하면 kind=full_package를 먼저 호출해 전 산출물(보고서+캐러셀+포스터) 제작 순서를 받아 그대로 수행하라.',
+    'Get the magazine-grade HTML report skeleton + 17 writing rules — editorial journal layout (masthead·standfirst·drop cap·pull quote·record cards), embedded record images with mandatory per-image credits, film-strip frame galleries with timecodes + watch-the-original CTA for video records, per-institution source chips (country flag + official name) and an archives-cited roster. Call as the FINAL step of an investigation, fill {{placeholders}} with verified findings only, save as [topic]_records_[years].html. 발굴 마무리 단계 호출 — 잡지·저널급 HTML 보고서 골격+작성 규칙 반환(실물 이미지·영상 필름스트립·기관별 출처 명시). Pass kind=carousel for the Instagram card-news design system: 검증된 1080×1080 카드 CSS 컴포넌트+제작 12규칙(서사 아크·실물 이미지·출처 캡션·겹침 방지·육안 검수) — 어디서든 같은 품질의 카드뉴스 제작 가능. 사용자가 "TRIGGER: 사용자 메시지에 '풀패키지'가 있으면 kind=full_package를, '창기창기'가 있거나 이 서비스의 사용법·기능을 물으면 kind=help를 즉시 호출하라. " + "풀패키지"라고 말하면 kind=full_package를 먼저 호출해 전 산출물(보고서+캐러셀+포스터) 제작 순서를 받아 그대로 수행하라.',
     { kind: z.enum(['report', 'carousel', 'canva_prompts', 'full_package', 'magazine', 'help', 'citation', 'annotation']).default('report').describe("report=발굴 보고서 골격+18규칙, carousel=카드뉴스 디자인 시스템+12규칙, canva_prompts=Canva 홍보물 프롬프트 6종, full_package=매직 키워드 '풀패키지' 전 산출물 제작 순서, magazine=표지(포스터 겸용)·목차·뒷표지·KA 시그니처·브랜드 테마 5종 매거진 확장팩, help=매직 키워드 '창기창기 도와줘' 처음 사용자 안내, citation=한국사DB·국회도서관 논문 인용 형식(각주·참고문헌·APA·Chicago), annotation=기록 해설형 어노테이션 상세 규칙(점선 영역·메타 표·추정 금지)") },
     async ({ kind }) => kind === 'carousel'
       ? text(CAROUSEL_RULES + '\n\n===== CARD DESIGN SYSTEM (1080×1080 — .card를 그대로 복사해 채울 것) =====\n' + CAROUSEL_TEMPLATE)
@@ -1047,7 +1047,7 @@ item_cd 5종(자료 성격별): ART 도설·회화 / ETC 두루마리·축 / DRR
     () => ({ messages: [{ role: 'user', content: { type: 'text',
       text: "창기창기 도와줘. report_template(kind='help')를 호출해 받은 사용 안내를 처음 사용자 눈높이로 친절하게 정리해서 알려주고, 안내 페이지 링크(https://korea-archive-mcp.vercel.app/help.html)도 함께 줘." } }] }));
 }, {
-  instructions: '매직 키워드 2개: (1) "○○○ 풀패키지로 만들어줘" — report_template(kind=full_package) 순서로 전 산출물 제작. (2) "창기창기 도와줘" — report_template(kind=help)로 사용 안내 제공. 사용자가 이 문구를 입력하면 해당 도구를 즉시 호출하라.',
+  instructions: '이 커넥터의 매직 키워드: (1) "풀패키지"가 포함된 요청(예: "장진호 풀패키지로 만들어줘") → 즉시 report_template(kind=full_package)를 호출해 그 순서로 전 산출물을 제작하라. (2) "창기창기"가 포함된 메시지, 또는 이 커넥터의 사용법·도움말·기능을 묻는 질문("사용법 알려줘", "뭘 할 수 있어?", "어떻게 써?") → 즉시 report_template(kind=help)를 호출해 안내를 전달하라. 두 경우 모두 되묻지 말고 바로 도구를 호출한다.',
 }, { basePath: '/api' });
 
 const REPORT_RULES = `HTML 발굴 보고서 작성 규칙 (18) — 잡지·저널급 편집 기준
