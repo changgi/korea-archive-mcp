@@ -994,7 +994,20 @@ const handler = createMcpHandler((server) => {
         `· 3대 부정합: ${U.mismatch_summary}\n· 키워드셋: ${U.keyword_ref}\n· 분류 교차맵: ${U.crossmap_ref}\n· 인접확장: ${U.adjacent_mining}\n· 교차검증 조합:\n${combos}\n· 권리판정: ${U.rights_rule}` +
         vn);
     });
-}, {}, { basePath: '/api' });
+
+  // ── MCP 프롬프트: 매직 키워드를 웹·모바일 클라이언트 UI(+메뉴)에 네이티브 노출 ──
+  server.prompt('full-package',
+    "매직 키워드 '풀패키지' — 주제 하나로 발굴 조사부터 매거진 보고서·카드뉴스·포스터·홍보·입문·메시지 카드·발표 PPTX·기록 해설·Canva 편집본·KARDA 연구 데이터까지 전 산출물 자동 제작" + SVC,
+    { topic: z.string().describe('조사 주제 — 예: 장진호, 흥남철수, 조선의 조운 제도') },
+    ({ topic }) => ({ messages: [{ role: 'user', content: { type: 'text',
+      text: `${topic} 풀패키지로 만들어줘. 먼저 report_template(kind='full_package')를 호출해 제작 순서와 품질 게이트를 받고, 그 순서를 그대로 따라 전 산출물을 제작해줘.` } }] }));
+  server.prompt('changgi-help',
+    "매직 키워드 '창기창기 도와줘' — KOREA ARCHIVE 통합검색 처음 사용자 안내(연결법·매직 키워드·예시 문장·산출물 9종·검증 원칙·FAQ)" + SVC,
+    () => ({ messages: [{ role: 'user', content: { type: 'text',
+      text: "창기창기 도와줘. report_template(kind='help')를 호출해 받은 사용 안내를 처음 사용자 눈높이로 친절하게 정리해서 알려주고, 안내 페이지 링크(https://korea-archive-mcp.vercel.app/help.html)도 함께 줘." } }] }));
+}, {
+  instructions: '매직 키워드 2개: (1) "○○○ 풀패키지로 만들어줘" — report_template(kind=full_package) 순서로 전 산출물 제작. (2) "창기창기 도와줘" — report_template(kind=help)로 사용 안내 제공. 사용자가 이 문구를 입력하면 해당 도구를 즉시 호출하라.',
+}, { basePath: '/api' });
 
 const REPORT_RULES = `HTML 발굴 보고서 작성 규칙 (18) — 잡지·저널급 편집 기준
 1. 파일명: [주제영문]_records_[연도범위].html — 조사 완료 시 기본 산출물
