@@ -32,6 +32,11 @@ No local Python needed by users — they just add a connector URL.
      `nedb_search` and `cross_search` serve results from the official files — no live scraping. (Tailor the field
      map in `scripts/ingest-opendata.mjs` to each dataset's actual XML/CSV structure.)
 
+## Web layer (same deployment)
+- **Landing** `/` — 브랜드 랜딩(연결법·도구 지도·실물 링크) · **사용 안내** `/help.html` · **English** `/help-en.html`
+- **기록잇다** `/ingitda.html` + `/api/overseas` — 6문서고 연합 즉석 검색(TNA·IA·Gallica·Europeana·KWA[한국어 실검색]·NARA[키 감지]), 문서고별 검증/노이즈 표기 판별
+- **실물 예제** `/examples/hanriver.html`(한강 강배 보고서 원본) · `/examples/joseon-deck.html`(강연 풀덱 403장)
+
 ## Users connect with one URL
 - Claude (web/desktop): Settings → Connectors → Add custom connector → `https://<deployment>.vercel.app/api/mcp`
 - Claude Code: `claude mcp add --transport http korea-archive https://<deployment>.vercel.app/api/mcp`
