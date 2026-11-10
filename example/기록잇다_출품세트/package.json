@@ -1,0 +1,17 @@
+{
+  "name": "girokitda",
+  "version": "1.0.0",
+  "description": "기록잇다 — 국내외에 흩어진 우리 기록을 국민이 직접 찾는 플랫폼",
+  "private": true,
+  "scripts": {
+    "test": "node test.js",
+    "coverage": "node coverage.js",
+    "consistency": "node consistency.js",
+    "test:net": "node test.js --net",
+    "start": "python3 -m http.server 8080"
+  },
+  "devDependencies": {
+    "puppeteer": "^24.0.0"
+  },
+  "license": "MIT"
+}

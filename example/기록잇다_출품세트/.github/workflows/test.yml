@@ -1,0 +1,43 @@
+name: 검사
+
+# 코드가 바뀔 때마다 검사를 돌립니다.
+# 특히 "근거가 없으면 답하지 않는다"와 "개인 신상은 저장하지 않는다"는
+# 이 프로젝트의 약속이므로, 코드에서 사라지면 즉시 실패해야 합니다.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: 의존성 설치
+        run: npm install puppeteer
+
+      - name: 검사 실행 (네트워크 불필요)
+        run: node test.js
+
+      - name: 판단 범위 측정
+        # 정당한 질문까지 보류하면 도구가 쓸모없어집니다.
+        # 잘못 고르는 것이 하나라도 있거나 적중률이 75% 아래면 실패합니다.
+        run: node coverage.js
+
+      - name: 산출물 정합 점검
+        # 문서에 흩어진 수치가 서로 어긋나지 않는지 대조합니다.
+        # 산출물 파일이 저장소에 없으면 건너뜁니다.
+        continue-on-error: true
+        run: node consistency.js
+
+      - name: 해외 문서고 실제 조회 포함
+        # 외부 기관 서버 상태에 좌우되므로 실패해도 전체를 막지 않습니다.
+        continue-on-error: true
+        run: node test.js --net

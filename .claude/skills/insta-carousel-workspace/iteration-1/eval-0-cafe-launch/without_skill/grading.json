@@ -1,0 +1,29 @@
+{
+  "expectations": [
+    {
+      "text": "PNG 파일이 6~10장 생성되었다",
+      "passed": true,
+      "evidence": "PNG 8장"
+    },
+    {
+      "text": "모든 PNG가 정확히 1080x1080 픽셀이다",
+      "passed": false,
+      "evidence": "크기: 1080x1350, 1080x1350, 1080x1350, 1080x1350, 1080x1350, 1080x1350, 1080x1350, 1080x1350"
+    },
+    {
+      "text": "캡션 텍스트 파일이 존재하고 해시태그(#)가 10개 이상 포함되어 있다",
+      "passed": true,
+      "evidence": "텍스트파일 True, 해시태그 22개"
+    },
+    {
+      "text": "HTML 소스에 페이지 번호(n / N 형식) 마크업이 있다",
+      "passed": true,
+      "evidence": "정규식 '\\d+ / \\d+' 매칭"
+    },
+    {
+      "text": "핵심 정보('볕뜰로스터스', '24시간')가 카드 HTML에 반영되어 있다",
+      "passed": true,
+      "evidence": "볕뜰:True, 24시간:True"
+    }
+  ]
+}

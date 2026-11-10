@@ -1,0 +1,29 @@
+{
+  "expectations": [
+    {
+      "text": "PNG 파일이 6~10장 생성되었다",
+      "passed": false,
+      "evidence": "PNG 18장"
+    },
+    {
+      "text": "모든 PNG가 정확히 1080x1080 픽셀이다",
+      "passed": true,
+      "evidence": "크기: 1080x1080, 1080x1080, 1080x1080, 1080x1080, 1080x1080, 1080x1080, 1080x1080, 1080x1080, 1080x1080, 1080x1080, 1080x1080, 1080x1080"
+    },
+    {
+      "text": "제공된 실제 사진이 임베드되었다 (HTML에 data:image base64 URI 3개 이상)",
+      "passed": true,
+      "evidence": "data:image 24개"
+    },
+    {
+      "text": "핵심 수치('40분', '30%')가 카드 HTML 또는 캡션에 반영되어 있다",
+      "passed": true,
+      "evidence": "40분:True, 30%:True"
+    },
+    {
+      "text": "캡션 파일이 존재하고 팔로우 유도(CTA) 문구가 카드 또는 캡션에 있다",
+      "passed": true,
+      "evidence": "텍스트파일 True, '팔로우' 포함 True"
+    }
+  ]
+}

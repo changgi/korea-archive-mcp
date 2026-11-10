@@ -2,3 +2,6 @@ node_modules/
 .next/
 .vercel/
 __pycache__/
+
+# GitHub 100MB 한도 초과 — 압축 해제본이 example/에 커밋되어 있음
+example/hanriver_boats_fullpackage_20260818.zip

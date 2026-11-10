@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>볕뜰로스터스 — 원두 구독 카드뉴스</title>
+<style>
+  :root{
+    --bg:#f7efe0;        /* 따뜻한 크림 배경 */
+    --ink:#2b1a0f;       /* 에스프레소 잉크 */
+    --roast:#b4502a;     /* 포인트1 — 테라코타(로스팅) */
+    --gold:#dd9a34;      /* 포인트2 — 볕(햇살) 골드 */
+    --brown:#6b4226;     /* 진갈색 프레임 */
+    --sub:#8a7663;       /* 보조 텍스트 */
+    --paper:#fffdf6;     /* 종이 카드 */
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{background:#e9dfcc; font-family:'Malgun Gothic','Noto Sans KR','Apple SD Gothic Neo',sans-serif; padding:40px; color:var(--ink);}
+
+  .card{width:1080px; height:1080px; margin:0 auto 56px; position:relative; overflow:hidden;
+        background:var(--bg); box-shadow:0 10px 60px rgba(43,26,15,.25);}
+
+  /* 장식 */
+  .grain{position:absolute; inset:0; pointer-events:none; opacity:.45; mix-blend-mode:multiply;
+    background-image:repeating-linear-gradient(0deg, rgba(107,66,38,.03) 0 1px, transparent 1px 3px),
+                     repeating-linear-gradient(90deg, rgba(107,66,38,.04) 0 1px, transparent 1px 4px);}
+  .frame{position:absolute; inset:26px; border:2px solid rgba(107,66,38,.4); pointer-events:none;}
+  .frame:after{content:''; position:absolute; inset:8px; border:1px solid rgba(107,66,38,.18);}
+  .corner{position:absolute; width:34px; height:34px; border:4px solid var(--gold); z-index:3;}
+  .c-tl{top:16px; left:16px; border-right:none; border-bottom:none;}
+  .c-tr{top:16px; right:16px; border-left:none; border-bottom:none;}
+  .c-bl{bottom:16px; left:16px; border-right:none; border-top:none;}
+  .c-br{bottom:16px; right:16px; border-left:none; border-top:none;}
+
+  /* 해 모티프 — '볕' */
+  .sun{position:absolute; border-radius:50%;
+       background:radial-gradient(circle, rgba(221,154,52,.85) 0 38%, rgba(221,154,52,.25) 60%, transparent 72%);}
+  .rays{position:absolute; border-radius:50%; opacity:.5;
+        background:repeating-conic-gradient(rgba(221,154,52,.55) 0 3deg, transparent 3deg 14deg);
+        -webkit-mask:radial-gradient(circle, transparent 0 46%, #000 47% 68%, transparent 69%);
+        mask:radial-gradient(circle, transparent 0 46%, #000 47% 68%, transparent 69%);}
+
+  /* 타이포 */
+  .kicker{display:inline-block; background:var(--roast); color:#fff8ee; font-weight:900;
+          letter-spacing:.28em; font-size:24px; padding:12px 26px 12px 34px;}
+  h1{font-size:84px; line-height:1.24; font-weight:900; word-break:keep-all; color:var(--ink);}
+  h2{font-size:58px; line-height:1.3; font-weight:900; word-break:keep-all; color:var(--ink);}
+  .gold{color:var(--gold);} .roastc{color:var(--roast);}
+  .lead{font-size:33px; line-height:1.6; word-break:keep-all; color:#4c3826;}
+  .lead b{color:var(--roast); font-weight:900;}
+  .divider{height:5px; width:130px; background:linear-gradient(90deg,var(--gold),var(--roast)); margin:28px 0;}
+
+  .pageno{position:absolute; bottom:50px; right:76px; font-size:23px; color:var(--sub); letter-spacing:.12em; z-index:5;}
+  .brand{position:absolute; bottom:50px; left:76px; font-size:23px; color:var(--sub); font-weight:700; z-index:5;}
+
+  /* 컴포넌트 */
+  .stamp{position:absolute; border:5px solid var(--roast); color:var(--roast); border-radius:10px;
+         padding:10px 22px; font-weight:900; font-size:32px; letter-spacing:.15em;
+         transform:rotate(-9deg); background:rgba(255,253,246,.7); z-index:6;}
+  .li{display:flex; gap:24px; align-items:flex-start; margin:30px 0; font-size:32px; line-height:1.5; word-break:keep-all;}
+  .li .n{flex:0 0 56px; height:56px; border-radius:50%; background:var(--roast); color:#fff8ee;
+         font-weight:900; font-size:28px; display:flex; align-items:center; justify-content:center;}
+  .li b{color:var(--roast);}
+  .li .t{padding-top:6px;}
+  .paper{background:var(--paper); border:1px solid #e3d5bc; box-shadow:0 10px 26px rgba(43,26,15,.14);}
+  .qa{background:var(--paper); border:1px solid #e3d5bc; border-left:8px solid var(--gold);
+      padding:26px 34px; margin:20px 0; box-shadow:0 8px 20px rgba(43,26,15,.10);}
+  .qa .q{font-size:31px; font-weight:900; color:var(--ink); margin-bottom:8px;}
+  .qa .q span{color:var(--roast);}
+  .qa .a{font-size:27px; line-height:1.5; color:#4c3826; word-break:keep-all;}
+  .qa .a b{color:var(--roast);}
+  .bean{position:absolute; z-index:2; opacity:.9;}
+</style>
+</head>
+<body>
+
+<!-- ───────── 1 · 커버 훅 ───────── -->
+<div class="card">
+  <div class="sun" style="width:760px; height:760px; top:-300px; right:-220px;"></div>
+  <div class="rays" style="width:900px; height:900px; top:-370px; right:-290px;"></div>
+  <!-- 커피콩 장식 -->
+  <svg class="bean" style="top:430px; right:150px; transform:rotate(-24deg);" width="76" height="110" viewBox="0 0 40 60"><ellipse cx="20" cy="30" rx="17" ry="27" fill="#6b4226"/><path d="M20 5 C 11 20, 29 40, 20 55" stroke="#f7efe0" stroke-width="4" fill="none"/></svg>
+  <svg class="bean" style="top:520px; right:290px; transform:rotate(31deg);" width="58" height="84" viewBox="0 0 40 60"><ellipse cx="20" cy="30" rx="17" ry="27" fill="#8a5a33"/><path d="M20 5 C 11 20, 29 40, 20 55" stroke="#f7efe0" stroke-width="4" fill="none"/></svg>
+  <svg class="bean" style="top:380px; right:330px; transform:rotate(80deg);" width="46" height="66" viewBox="0 0 40 60"><ellipse cx="20" cy="30" rx="17" ry="27" fill="#b4502a"/><path d="M20 5 C 11 20, 29 40, 20 55" stroke="#f7efe0" stroke-width="4" fill="none"/></svg>
+  <div class="grain"></div><div class="frame"></div>
+  <div class="corner c-tl"></div><div class="corner c-tr"></div><div class="corner c-bl"></div><div class="corner c-br"></div>
+  <div style="position:relative; z-index:4; height:100%; display:flex; flex-direction:column; padding:84px 90px;">
+    <div><span class="kicker">볕뜰로스터스 · 9월 시작</span></div>
+    <div style="margin-top:auto; padding-bottom:78px;">
+      <h1>어제 볶은 원두가,</h1>
+      <h1><span class="roastc">오늘 아침</span> 문 앞에<br>도착한다면?</h1>
+      <div class="divider"></div>
+      <p class="lead">주 1회 <b>갓볶은 원두 구독</b> — 로스팅 후 <b>24시간 안에</b> 배송합니다</p>
+    </div>
+  </div>
+  <div class="brand">볕뜰로스터스</div><div class="pageno">1 / 8</div>
+</div>
+
+<!-- ───────── 2 · 통념 뒤집기 ───────── -->
+<div class="card">
+  <div class="grain"></div><div class="frame"></div>
+  <div style="position:relative; z-index:4; height:100%; display:flex; flex-direction:column; padding:80px 88px;">
+    <div><span class="kicker">생각해 본 적 있나요</span></div>
+    <h2 style="margin:30px 0 0;">마트 원두 봉투에서<br><span class="roastc">'볶은 날짜'</span>를 본 적 있나요?</h2>
+    <!-- 원두 봉투 그래픽 -->
+    <div style="display:flex; justify-content:center; margin:38px 0 0;">
+      <div class="paper" style="width:560px; padding:34px 40px; border-radius:6px; position:relative;">
+        <div style="height:14px; background:#e3d5bc; border-radius:7px; margin:-8px auto 26px; width:220px;"></div>
+        <p style="font-size:27px; font-weight:900; letter-spacing:.2em; color:#8a7663; text-align:center;">COFFEE BEANS</p>
+        <div style="height:1px; background:#e3d5bc; margin:20px 0;"></div>
+        <p style="font-size:29px; margin:12px 0; color:#4c3826;">유통기한&nbsp; <b style="color:#3f7d4e;">2027.08 ✓</b></p>
+        <p style="font-size:29px; margin:12px 0; color:#4c3826;">볶은 날짜&nbsp; <b style="color:var(--roast);">— ? ? ? —</b></p>
+        <div class="stamp" style="top:18px; right:-30px; font-size:26px; transform:rotate(8deg);">미표기</div>
+      </div>
+    </div>
+    <p class="lead" style="margin-top:40px;">유통기한은 있어도 <b>로스팅 날짜</b>는 없는 봉투가 많습니다.<br>커피는 볶은 그 순간부터 향이 날아가기 시작하는데도요.</p>
+  </div>
+  <div class="brand">볕뜰로스터스</div><div class="pageno">2 / 8</div>
+</div>
+
+<!-- ───────── 3 · 왜 신선도인가 ───────── -->
+<div class="card">
+  <div class="grain"></div><div class="frame"></div>
+  <div style="position:relative; z-index:4; height:100%; display:flex; flex-direction:column; padding:80px 88px;">
+    <div><span class="kicker">신선도의 과학</span></div>
+    <h2 style="margin:30px 0 10px;">갓 볶은 커피가<br><span class="gold">다른 이유 3가지</span></h2>
+    <div class="li"><div class="n">1</div><div class="t"><b>향</b> — 로스팅 직후가 향이 가장 풍부한 순간.<br>시간이 지날수록 향 성분은 조금씩 날아갑니다.</div></div>
+    <div class="li"><div class="n">2</div><div class="t"><b>블루밍</b> — 신선한 원두는 뜸 들일 때<br>빵 반죽처럼 봉긋하게 부풀어 오릅니다.</div></div>
+    <div class="li"><div class="n">3</div><div class="t"><b>산패</b> — 오래된 원두는 기름이 산화되어<br>텁텁하고 묵은 맛이 나기 쉽습니다.</div></div>
+    <div class="divider"></div>
+    <p class="lead">그래서 <b>'언제 볶았는가'</b>가 원두 선택의 첫 번째 기준입니다.</p>
+  </div>
+  <div class="brand">볕뜰로스터스</div><div class="pageno">3 / 8</div>
+</div>
+
+<!-- ───────── 4 · 서비스 발표 ───────── -->
+<div class="card">
+  <div class="sun" style="width:640px; height:640px; top:-260px; left:50%; transform:translateX(-50%);"></div>
+  <div class="rays" style="width:780px; height:780px; top:-330px; left:50%; transform:translateX(-50%);"></div>
+  <div class="grain"></div><div class="frame"></div>
+  <div class="corner c-tl"></div><div class="corner c-tr"></div><div class="corner c-bl"></div><div class="corner c-br"></div>
+  <div class="stamp" style="top:96px; right:96px;">NEW</div>
+  <div style="position:relative; z-index:4; height:100%; display:flex; flex-direction:column; align-items:center; text-align:center; padding:120px 90px 80px;">
+    <div><span class="kicker">그래서 시작합니다</span></div>
+    <div style="margin-top:auto; margin-bottom:auto;">
+      <h1 style="font-size:92px;">주 1회,<br><span class="roastc">갓볶은 원두 구독</span></h1>
+      <div class="divider" style="margin:34px auto;"></div>
+      <p class="lead" style="font-size:36px;">매주 로스팅하는 날, <b>당신 몫까지 함께 볶습니다.</b><br>볕뜰로스터스가 <b>다음 달(9월)</b> 첫 배송을 시작해요.</p>
+    </div>
+  </div>
+  <div class="brand">볕뜰로스터스</div><div class="pageno">4 / 8</div>
+</div>
+
+<!-- ───────── 5 · 24시간 타임라인 ───────── -->
+<div class="card">
+  <div class="grain"></div><div class="frame"></div>
+  <div style="position:relative; z-index:4; height:100%; display:flex; flex-direction:column; padding:80px 88px;">
+    <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+      <div>
+        <span class="kicker">이렇게 진행돼요</span>
+        <h2 style="margin:28px 0 0;">로스팅에서 문 앞까지,<br><span class="roastc">딱 24시간</span></h2>
+      </div>
+      <div style="flex:0 0 190px; height:190px; border-radius:50%; background:var(--roast); color:#fff8ee;
+                  display:flex; flex-direction:column; align-items:center; justify-content:center; box-shadow:0 10px 26px rgba(180,80,42,.35);">
+        <span style="font-size:64px; font-weight:900; line-height:1;">24H</span>
+        <span style="font-size:22px; letter-spacing:.2em; margin-top:6px;">이내 배송</span>
+      </div>
+    </div>
+    <div style="margin-top:44px; border-left:6px solid var(--gold); padding-left:44px;">
+      <div style="margin-bottom:36px;">
+        <p style="font-size:24px; font-weight:900; color:var(--gold); letter-spacing:.15em;">STEP 1 · 로스팅</p>
+        <p style="font-size:31px; line-height:1.5; word-break:keep-all; margin-top:6px;">매주 로스팅 데이, <b style="color:var(--roast);">소량씩 갓 볶습니다.</b></p>
+      </div>
+      <div style="margin-bottom:36px;">
+        <p style="font-size:24px; font-weight:900; color:var(--gold); letter-spacing:.15em;">STEP 2 · 당일 포장</p>
+        <p style="font-size:31px; line-height:1.5; word-break:keep-all; margin-top:6px;">원두가 식자마자 <b style="color:var(--roast);">로스팅 날짜를 찍어</b> 포장합니다.</p>
+      </div>
+      <div>
+        <p style="font-size:24px; font-weight:900; color:var(--gold); letter-spacing:.15em;">STEP 3 · 24시간 내 배송</p>
+        <p style="font-size:31px; line-height:1.5; word-break:keep-all; margin-top:6px;">볶은 지 <b style="color:var(--roast);">하루가 지나기 전에</b> 문 앞에 도착합니다.</p>
+      </div>
+    </div>
+    <div style="margin-top:auto; margin-bottom:90px;">
+      <div class="divider"></div>
+      <p class="lead">창고에서 몇 주 묵는 시간이 없습니다.<br><b>동네 로스터리라서 가능한 속도</b>예요.</p>
+    </div>
+  </div>
+  <div class="brand">볕뜰로스터스</div><div class="pageno">5 / 8</div>
+</div>
+
+<!-- ───────── 6 · 매주 받는 구성 ───────── -->
+<div class="card">
+  <div class="grain"></div><div class="frame"></div>
+  <div style="position:relative; z-index:4; height:100%; display:flex; flex-direction:column; padding:80px 88px;">
+    <div><span class="kicker">구독 구성</span></div>
+    <h2 style="margin:28px 0 0;">매주, 이런 꾸러미가<br><span class="gold">도착합니다</span></h2>
+    <div style="display:flex; gap:44px; margin-top:auto; margin-bottom:auto; align-items:center; padding-bottom:30px;">
+      <!-- 원두 봉투 그래픽 -->
+      <div style="flex:0 0 300px; position:relative;">
+        <div class="paper" style="width:300px; height:400px; border-radius:8px; padding:30px 24px; text-align:center; background:#6b4226; border:none;">
+          <div style="height:16px; background:#54331d; border-radius:8px; width:180px; margin:0 auto 30px;"></div>
+          <div style="width:150px; height:150px; border-radius:50%; margin:0 auto;
+                      background:radial-gradient(circle, #dd9a34 0 55%, rgba(221,154,52,.25) 72%, transparent 78%);"></div>
+          <p style="color:#f7efe0; font-weight:900; font-size:30px; margin-top:24px; letter-spacing:.08em;">볕뜰로스터스</p>
+          <p style="color:#dd9a34; font-weight:900; font-size:21px; margin-top:12px; letter-spacing:.06em;">ROASTED : 이번 주</p>
+        </div>
+      </div>
+      <div style="flex:1;">
+        <div class="li" style="margin:20px 0;"><div class="n" style="background:var(--gold);">✓</div><div class="t"><b>그 주에 볶은 원두</b><br><span style="font-size:26px; color:#6d5b48;">주마다 로스터가 고른 싱글오리진·블렌드</span></div></div>
+        <div class="li" style="margin:20px 0;"><div class="n" style="background:var(--gold);">✓</div><div class="t"><b>로스팅 날짜 스탬프</b><br><span style="font-size:26px; color:#6d5b48;">언제 볶았는지 봉투에 그대로</span></div></div>
+        <div class="li" style="margin:20px 0;"><div class="n" style="background:var(--gold);">✓</div><div class="t"><b>테이스팅 노트 카드</b><br><span style="font-size:26px; color:#6d5b48;">이번 주 원두의 향미와 추출 팁</span></div></div>
+      </div>
+    </div>
+  </div>
+  <div class="brand">볕뜰로스터스</div><div class="pageno">6 / 8</div>
+</div>
+
+<!-- ───────── 7 · FAQ ───────── -->
+<div class="card">
+  <div class="grain"></div><div class="frame"></div>
+  <div style="position:relative; z-index:4; height:100%; display:flex; flex-direction:column; padding:80px 88px;">
+    <div><span class="kicker">자주 묻는 질문</span></div>
+    <h2 style="margin:28px 0 14px;">궁금한 것들,<br><span class="gold">미리 답해 드려요</span></h2>
+    <div class="qa">
+      <p class="q"><span>Q.</span> 원두는 제가 고르나요?</p>
+      <p class="a">매주 로스터 추천 원두가 기본이에요. <b>고소파·산미파</b> 취향을 알려주시면 반영해 드립니다.</p>
+    </div>
+    <div class="qa">
+      <p class="q"><span>Q.</span> 분쇄해서 받을 수 있나요?</p>
+      <p class="a">네. <b>홀빈 / 핸드드립용 / 모카포트용</b> 등 추출 도구에 맞춰 갈아 드려요.</p>
+    </div>
+    <div class="qa">
+      <p class="q"><span>Q.</span> 한 주 쉬어갈 수 있나요?</p>
+      <p class="a">물론이죠. 미리 말씀해 주시면 <b>그 주는 건너뛰고</b> 다음 주에 다시 보내 드립니다.</p>
+    </div>
+  </div>
+  <div class="brand">볕뜰로스터스</div><div class="pageno">7 / 8</div>
+</div>
+
+<!-- ───────── 8 · CTA ───────── -->
+<div class="card">
+  <div class="sun" style="width:700px; height:700px; bottom:-330px; left:50%; transform:translateX(-50%);"></div>
+  <div class="rays" style="width:860px; height:860px; bottom:-410px; left:50%; transform:translateX(-50%);"></div>
+  <div class="grain"></div><div class="frame"></div>
+  <div class="corner c-tl"></div><div class="corner c-tr"></div><div class="corner c-bl"></div><div class="corner c-br"></div>
+  <div style="position:relative; z-index:4; height:100%; display:flex; flex-direction:column; padding:84px 90px;">
+    <div><span class="kicker">9월, 첫 로스팅</span></div>
+    <h1 style="margin:36px 0 0; font-size:78px;">다음 달,<br><span class="roastc">첫 원두</span>를 볶습니다</h1>
+    <div class="divider"></div>
+    <div class="li"><div class="n">1</div><div class="t"><b>프로필 링크 또는 DM</b>으로 사전 신청을 받아요.</div></div>
+    <div class="li"><div class="n">2</div><div class="t">댓글로 <b>고소파 vs 산미파</b>, 당신의 취향을 알려주세요.</div></div>
+    <div class="li"><div class="n">3</div><div class="t">이 게시물을 <b>저장</b>해 두면 오픈 소식을 놓치지 않아요.</div></div>
+    <p class="lead" style="margin-top:26px;">동네에서 볶아, 하루 안에 당신의 잔까지. ☕</p>
+  </div>
+  <div class="brand">볕뜰로스터스</div><div class="pageno">8 / 8</div>
+</div>
+
+</body>
+</html>

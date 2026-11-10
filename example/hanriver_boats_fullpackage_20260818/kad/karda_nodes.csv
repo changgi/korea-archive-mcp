@@ -1,0 +1,132 @@
+﻿id,type,label,label_en,period,attributes
+A001,agent,경강상인,Gyeonggang merchants,조선후기,유형=상인집단;근거=고려대 아세아문제연구소1971
+A002,agent,떼꾼,Raft men,근대,유형=생업집단;수계=북한강·남한강
+A003,agent,손낙기,Son Nak-gi,현대,유형=전승자;분야=한강 황포돛배 조선
+A004,agent,鄭民始,Jeong Min-si,18세기,직임=舟橋堂上·全羅監司·前提調·行戶曹判書;역할=재원·집행·보상제혁파·건설실무 4국면
+A005,agent,李文源,Yi Mun-won,18세기,직임=舟橋司堂上;근거=備邊司謄錄 정조13년 12월
+A006,agent,金鍾秀,Kim Jong-su,18세기,직임=右議政;역할=舟橋司를 濬川司에 合付하는 문제 논의
+A007,agent,舟橋船人,Jugyo boatmen,18-19세기,유형=경강 선인 집단;지위=배다리 징발 대상이자 세곡 운송권 수령자
+A008,agent,沈頤之,Sim Iji,정조대,직=舟橋堂上;행위=船格徵索을 구조적 갈등으로 진단(1796)
+A009,agent,魚允中,Eo Yunjung,고종대,직=全羅右道 暗行御史;행위=漕船 개조·상업 겸용·군선 통합 제안(1878)
+A010,agent,金炳學,Kim Byeonghak,고종대,직=左議政;행위=戰漕船 通用 定式化·訓局船 혁파 청(1866)
+E001,event,도선 규율 법제화,Legal codification of ferry regulation,1909,성격=제도
+E002,event,도선 규율의 경찰사무 편입,Transfer of ferry regulation to police,1912,성격=제도
+E003,event,漢江渡船顚覆 양평 세월리 5명 익사,Ferry capsizing Yangpyeong,1934-08-29,성격=재난
+E004,event,北漢江 渡船顚覆 11명 중 7명 사상,Bukhan River ferry capsizing,1937-03-28,성격=재난
+E005,event,上漢江 나룻배 침몰 4명 익사 배급미 유실,Upper Han River ferry sinking,1948-08-14,성격=재난
+E006,event,한강 도하작전,Han River crossing operation,1950-09-20,성격=군사
+E007,event,도선장 신분증 통제 재개,Ferry landings reopened under ID control,1952-12,성격=통제
+E008,event,漢江 중류 도선 전복 8명 익사,Mid Han River ferry capsizing,1956-08-06,성격=재난
+E009,event,한강 나룻배 전복 24명 사상 및 기소,1962 ferry disaster and indictment,1962,성격=재난·사법
+E010,event,한강종합개발 준공,Han River Comprehensive Development completed,1986,성격=개발
+E011,event,경강 사선 등록제 시행,Registration of Gyeonggang private ships,1492,성격=제도;근거=大典續錄
+E012,event,均役法 시행 — 선박 수세 균역청 이관,Gyunyeok Act - ship tax transferred,1750,성격=제도;효과=호조 烙印點船·관찰사 歲抄啓聞 폐지
+E013,event,舟橋司 창설,Establishment of Jugyosa,1789-1790,성격=제도;근거=備邊司謄錄 1789.12 논의 / 萬機要覽 正宗庚戌 창설
+E014,event,漕船 적재 한도 상향 800→1000석,Grain ship load limit raised,1790,"성격=재정;주체=舟橋堂上 鄭民始;효과=漕船 10척 감축, 주교사 재원"
+E015,event,舟橋司 물력 장용영 이속,Jugyosa funds transferred to Jangyongyeong,1801,성격=재정;후속=장용영 혁파 후 均役廳
+E016,event,배다리 銅雀津 이설,Pontoon bridge relocated to Dongjak,1857,성격=제도;근거=備邊司謄錄;비고=舟橋指南 形便조 '노량진 최적지'의 변경
+K001,record,各船圖本,Gakseondobon - ship drawings,조선후기,소장=규장각;청구기호=奎15752;형태=1冊6張 彩色圖 35.4×26.4cm;도판=戰船·漕船·兵船·北漕船·戰船·戰船;권리=C
+K002,record,[戰兵]各船圖本,Variant scroll edition,조선후기,소장=규장각;청구기호=奎軸12163;형태=1軸 234×155cm 도엽155.5×143.9cm;장서인=朝鮮總督府圖書之印·京城帝國大學圖書章;권리=C
+K003,record,舟橋指南,Jugyo Jinam - pontoon bridge manual,1790/1793,소장=규장각;청구기호=奎7315·奎5485·奎3172;편차=舟橋指南(節目)·廟堂撰進舟橋節目論辨·舟橋司改定節目·全羅監司鄭民始狀啓;세목14=形便水廣擇船船數船高縱梁橫板鋪莎欄干下碇藏板結隊賞罰期會檜橋;권리=C
+K004,record,船案,Seonan - national ship register,19세기초,소장=규장각;청구기호=奎17036;형태=1冊25張 32.4×21.4cm 卷首嶺南;내용=純祖年間 전국 船舶 보유 현황;원문이미지=미제공;권리=C
+K005,record,禁營津船謄錄,Geumyeong Jinseon Deungnok,1751-1885,소장=규장각;청구기호=奎19356;편저=禁衛營;형태=1冊74張 35.7×22cm;내용=鷺梁·銅雀 兩津 四軍門 船隻 新造改槊 134년 기록;원문이미지=제공(item_cd=DRR);특이=광범위한 墨抹;권리=C
+L001,record,經國大典 工典 舟車 [水運諸渡船],Gyeongguk Daejeon - ship specs,1485,"소장=국사편찬위 한국사DB;ID=jlawa_106_0060_0010;내용=江船 大50척×10척3촌/中46×9/小41×8, 竝用營造尺, 五年修理十年改造;권리=KOGL"
+L002,record,經國大典 戶典 漕轉 [諸道漕稅倉],Grain-transport depots and ship quotas,1485,소장=한국사DB;내용=京畿左道 51척·右道 20척 등 조창별 漕船 척수;권리=KOGL
+L003,record,大典後續錄 刑典 雜令 [各津渡過涉船…],Penalty for failure to rescue,1543,"소장=한국사DB;내용=重載 파선 시 구조 불이행하면 沙工·船主·津夫 杖一百, 渡丞 重論;권리=KOGL"
+L004,record,大典後續錄 戶典 雜令 [水商行狀計程],Navigation permit system,1543,소장=한국사DB;ID=jlawb_020_0020_0030_0060;내용=行狀 발급·計程定限·船主容貌年歲人數 기재·三江 不時擲奸·管領切隣 연대책임;권리=KOGL
+L005,record,大典續錄 工典 舟車 [京江居人舡隻…],Gyeonggang private ship registry (origin),1492,"소장=한국사DB;ID=jlawb_010_0060_0020_0010;내용=每年推刷·大中小尺量·刻字號烙印·舡主名字成案·一年一度收稅, 세수는 軍資;권리=KOGL"
+L006,record,續大典 工典 舟車 [京江私船每年推刷],Gyeonggang private ship registry,1746,"소장=한국사DB;ID=jlawa_206_0040_0040;내용=동 조문, 稅錢三兩·無烙印路引 倍徵, 세수 용도가 津船改造로 전환;권리=KOGL"
+L007,record,續大典 工典 舟車 [各津官船錄案定額],Ferry official-ship quotas by garrison,1746,"소장=한국사DB;내용=한강15·노량15·송파9·양화도9·공암5·광진4·삼전도3·신천2·철곶1, 5군영 분속, 賃私船使用;권리=KOGL"
+L008,record,續大典 兵典 外官職 [津渡],Ferry official posts,1746,소장=한국사DB;내용=三田渡·楊花渡·露梁渡·漢江渡 權管五員 增置;권리=KOGL
+L009,record,大典通編 戶典 魚鹽 [錄案收稅宮房折受竝革罷],Abolition of Hojo ship registry taxation,1785,"소장=한국사DB;ID=jlawa_302_0170_0120;내용=魚鹽船稅 本曹錄案收稅之規 革罷 移屬均役廳, 用均役事目, 英宗庚午(1750);권리=KOGL"
+L010,record,大典通編 工典 舟車 [諸宮家各衙門船隻],Ferry ships under Gyunyeokcheong,1785,"소장=한국사DB;ID=jlawa_306_0060_0100;내용=三津別將 亦屬均役廳, 每年給漕船退材 以補津船改造;권리=KOGL"
+L011,record,大典會通 兵典 京官職 濬川司 [舟橋司],Jugyosa established under Juncheonsa,1865,"소장=한국사DB;ID=jlawa_404_0020_0180_0030_0020;내용=正宗朝庚戌創, 付本司 掌舟橋及兩湖漕運等事;권리=KOGL"
+L012,record,典律通補 工典 舟車 [各津官船],Post-Gyunyeok ship administration,조선후기,소장=한국사DB;ID=jlawb_100_0060_0050_0010;내용=自均廳收稅之後 本曹烙印點船之規·觀察使歲抄啓聞之法 竝廢;권리=KOGL
+L013,record,六典條例 卷10 工典 舟橋司 [總論],Jugyosa organization,1866,"소장=한국사DB;ID=jlawb_110_0100_0040_0010;내용=有司堂上1·舟師大將1·領將13인, 행차 시 가동되는 동원 체계;권리=KOGL"
+L014,record,六典條例 卷3 戶典 版籍司 雜稅,Ttukseom timber-raft tax office,1866,"소장=한국사DB;내용=收稅所 設置纛島, 解氷後合氷前 計士入直, 流下木物 什一收稅, 潛越者 屬公;권리=KOGL"
+L015,record,萬機要覽 財用編5 舟橋 [總例],Pontoon bridge general rules,1808,"소장=한국사DB;ID=jlawb_400_0050_0090_0010;내용=取訓局船及京江私船之體大者 聯綜成橋, 재원=영남 별회곡 모조+호남 3조창 漕船 10척 減額, 1801 장용영 이속;권리=KOGL"
+L016,record,萬機要覽 財用編2 漕轉 [漕倉],Grain depots and load limit raise,1808,"소장=한국사DB;ID=jlawb_400_0020_0060_0020;내용=舟橋堂上 鄭民始 筵稟으로 三倉 漕船 적재 800석→1000석, 漕船 10척 감축;권리=KOGL"
+L017,record,經國大典 禮典 奬勸 [抽籤考講],"Gyeongguk daejeon, Rites, Encouragement",1485,내용=성균관 매일 抽籤 講書·京外官吏 매년말 抽籤 考講;함의=抽籤이 원래 시험 용어;권리=PD
+L018,record,受敎輯錄 刑典 文記 [和會執籌分衿],"Sugyo jimnok, Punishments, Documents",1543,내용=부모 미분 노비를 자녀가 和會執籌 分衿;함의=執籌가 원래 상속 분할 용어;권리=PD
+L019,record,萬機要覽 財用編5 舟橋 [舟橋船],"Mangi yoram, Boat Bridge, Bridge Ships",1808,내용=橋排船38척·衛護船12척·縱樑175주·鋪板1039립·牽馬鐵5804개·欄干240척;撤橋時 藏置本司庫;권리=PD
+L020,record,萬機要覽 財用編5 舟橋 [津路],"Mangi yoram, Boat Bridge, Crossing Routes",1808,내용=宣陵靖陵章陵健陵顯隆園=鷺梁 / 獻陵英陵寧陵=廣津;함의=배다리는 능행 전반의 도강 수단;권리=PD
+L021,record,萬機要覽 財用編5 舟橋 [員額],"Mangi yoram, Boat Bridge, Personnel",1808,내용=都監官1·副監官1·領將10인·旗軍456명(每船 格軍12명);검증=456÷12=38척;권리=PD
+L022,record,六典條例 工典 舟橋司 [卷首] 舟橋,"Yukjeon jorye, Boat Bridge Office, Construction",1866,내용=시공 시방 전문(排聯·編結·鐵索釘結·縱樑橫板欄干·潮進船高 대응);권리=PD
+L023,record,六典條例 工典 舟橋司 [卷首] 漕運,"Yukjeon jorye, Boat Bridge Office, Tax Transport",1866,내용=分等抽籤 산식(배 3등: 訓局船1·舟橋所入2·挾船3 / 읍 3등: 船價 厚薄);호남25읍·호서31읍 명기;권리=PD
+L024,record,六典條例 工典 舟橋司 [卷首] 總例,"Yukjeon jorye, Boat Bridge Office, General Rules",1866,내용=八江 管領 각1명 差出·매년 合氷前 노량 尺量·기한위반시 抽籤 拔去·庫舍 藏置·영장은 선주 圈點;권리=PD
+L025,record,萬機要覽 財用編2 漕轉 [賞罰],"Mangi yoram, Tax Transport, Reward and Punishment",1808,내용=英宗丁亥(1767) 十石添載 禁錮3년·百石 禁錮5년·私物添載 守令差使員 禁錮10년;添載最是行船之大忌 臭載之患多由於此;권리=PD
+L026,record,續大典 工典 舟車 [各津過涉及往來船],"Sok daejeon, Ferry Rescue Duty",1746,"내용=각 나루 배 致敗 시 구조 불이행하면 船主·津夫 杖一百, 別將 從重決棍;권리=PD"
+L027,record,續大典 工典 舟車 [仍騎津船橫涉],"Sok daejeon, Unauthorized Ferry Diversion",1746,"내용=나룻배로 他所 橫涉 시 대부·사·서인 막론 定配律, 선주 미신고 시 동죄;권리=PD"
+L028,record,度支志 外篇 版籍司 漕轉部 [事實],"Takjiji, Tax Transport Section, Cases",18C말,내용=執籌船의 유일한 법령DB 수록처;성격=법조문이 아닌 사례·경위 편목;권리=PD
+P001,place,경강(광나루~양화진),Gyeonggang reach of Han River,,유형=수계구간
+P002,place,양평군 세월리,Seworil Yangpyeong,,유형=사고지점
+P003,place,북한강,Bukhan River,,유형=수계;연관=뗏목·도선전복
+P004,place,남한강,Namhan River,,유형=수계;연관=뗏목
+P005,place,마포,Mapo,,유형=포구
+P006,place,露梁津,Noryang Ferry,,유형=나루;관선=15척(후 10척);관할=禁衛營;배다리 원 가설지
+P007,place,銅雀津,Dongjak Ferry,,유형=나루;관선=5척(1785 증치);관할=禁衛營;1857 배다리 이설지
+P008,place,楊花渡,Yanghwa Ferry,,유형=나루;관선=9척;관할=御營廳
+P009,place,纛島,Ttukseom,,유형=포구;기능=목물 수세소 소재지;경강 상류 기준점(국편 정의)
+P010,place,三江,Samgang,,유형=수계구간;정의=한강·용산강·서강;기능=行狀 不時擲奸 대상
+P011,place,八江,Palgang (Eight River Districts),조선후기,구성=纛島·西氷庫·新村里·龍山·麻浦·土亭·西江·望遠亭;성격=주교사 관할 구역;출전=六典條例 舟橋司 總例
+P012,place,廣津,Gwangjin,조선후기,용도=獻陵·英陵·寧陵 행차 시 도강 지점;관선 4척;주교 제2지점
+R001,record,渡船營業取締規則(대한제국 관보),Ferry Business Control Regulation,1909,소장=국립중앙도서관;식별자=CNTS-00048086812;권리=A
+R002,record,渡船營業取締規則 충청북도 경무부령 제3호,Same regulation as N.Chungcheong Police Order No.3,1912-07-30,소장=국립중앙도서관;식별자=CNTS-00083079757;권리=A
+R003,record,渡船營業取締規則 강원도 경무부령 제7호,Same as Gangwon Police Order No.7,1912-11-13,소장=국립중앙도서관;식별자=CNTS-00083081371;권리=A
+R004,record,渡船營業取締規則 경상북도 경무부령 제5호,Same as N.Gyeongsang Police Order No.5,1912-12-04,소장=국립중앙도서관;식별자=CNTS-00083081711;권리=A
+R005,record,유선 및 도선사업법 시행규칙(내무부령 제604호),Enforcement Rule of Excursion and Ferry Business Act,1993,소장=국가기록원;식별자=200301063321;권리=A
+R006,record,한강수운기획과 (드렛지) 기술원 양성에 관한 건,Han River Waterway Plan and Dredge Technician Training,1953,소장=국가기록원;생산=국무총리비서실;권리=A
+R007,record,한강수운기획에 관한 건,Han River Waterway Plan,1954,소장=국가기록원;생산=국무총리비서실;권리=A
+R008,record,한강도선장 및 수로 준설 재검토,Review of Han River Ferry Landings and Channel Dredging,1981,소장=국가기록원;생산=건설교통부 하천계획과;권리=A
+R009,record,漢江渡船場復活 이곳만 市民證으로 自由往來,Han River Ferry Landings Revived - Citizen ID Required,1952-12-15,소장=국립중앙도서관;매체=서울신문;식별자=CNTS-00133990243;권리=A
+R010,record,漢江渡船場五個所 農民에겐 道民證만으로 通用,Five Ferry Landings - Provincial ID for Farmers,1952-12-21,소장=국립중앙도서관;식별자=CNTS-00133990621;권리=A
+R011,record,HAN RIVER CROSSING US 1ST MARINE DIVISION KOREA,Han River Crossing film,1950-09-20,소장=NARA;RG=111;식별자=111-ADC-8331/NAID 22096;길이=591.15s;권리=B
+R012,record,미 제1해병사단 한강도하 기록영상 1,Re-collected copy of R011,1950-09-20,소장=6·25전쟁아카이브센터;식별자=2022-US-02-AV-D-00195;권리=B
+R013,record,나룻배를 타고 강을 건너는 한국인 난민들,Korean refugees crossing river by ferry boat,1951,소장=6·25전쟁아카이브센터;생산=ICRC;식별자=2024-KR-02-PF-D-01938;권리=C
+R014,record,한강 도하 지점 부교 건설 미 제10군단 제9공병대대,Pontoon bridge construction at Han River,1951,소장=6·25전쟁아카이브센터;식별자=2024-US-02-PF-D-00216;RG=111;권리=B
+R015,record,한강 나룻배 모습,Han River ferry boat,1947,소장=국가기록원;식별자=202511960879;권리=A
+R016,record,한강나룻배,Han River ferry boat,1975,소장=국가기록원;식별자=200200065274;권리=A
+R017,record,사진 한강의 뗏목장수,Photo - Han River timber raft trader,1914-08-07,소장=국립중앙도서관;매체=每日申報;식별자=CNTS-00093975711;권리=A
+R018,record,漢江 나룻배 顚覆事件 사망 등 24名,Han River Ferry Capsizing - 24 casualties,1962-09-08,소장=국립중앙도서관;식별자=CNTS-00115008419;권리=A
+R019,record,漢江 나룻배 事件 責任者들 起訴,Ferry Incident - Responsible Parties Indicted,1962-10-03,소장=국립중앙도서관;식별자=CNTS-00113086323;권리=A
+R020,record,한강종합개발 준공식 유람선 전경,Han River Comprehensive Development Completion - Excursion Boat,1986,소장=국가기록원;생산=공보처 홍보국;식별자=200200011978;권리=A
+R021,record,各船圖本,Gakseondobon - ship drawings,조선후기,소장=국립중앙도서관(영인);권리=C;비고=규장각 원본 미확인
+R022,record,舟橋司節目,Jugyosa Jeolmok - Pontoon Bridge Office regulations,조선말,권리=C;비고=규장각 원본 미확인;연구경유=대한토목학회1992
+R023,record,Trade Conditions in China and Japan and Corea,FO 368/63/84,1906-06-25,소장=TNA;권리=B
+S001,record,承政院日記 정조16년 11월 20일 舟橋船人 分等抽籤,Compensation by grain-transport rights,1792-11-20,"소장=한국사DB;내용=舟橋船人 稅穀載運時 分等抽籤 亶出於慰悅江民之意, 前提調 鄭民始 혁파;권리=KOGL"
+S002,record,承政院日記 정조23년 5월 7일 舟橋船人 作弊,Jugyo boatmen abuse of privilege,1799-05-07,"소장=한국사DB;내용=各邑守令等 畏於舟橋司三字 不卽自斷徵治, 정조 船人痛繩 하교;권리=KOGL"
+S003,record,備邊司謄錄 정조14년 2월 17일 監色沙格成冊,Roster and reward for pontoon-bridge labor,1790-02-17,소장=한국사DB;ID=bb_176r_001_02_0590;내용=日數 기준 成冊·守直立番 구별 施賞·귀환 시 식량·京江 백성 선척 什物 손실 보전;권리=KOGL
+S004,record,備邊司謄錄 헌종9년 2월 5일 幸行後 卽發送,Post-procession ship redeployment as routine,1843-02-05,소장=한국사DB;ID=bb_230r_001_02_0080;내용=舟橋司 船隻 으레(例) 해빙 시 兩湖 관문 보내 稅穀 운송;권리=KOGL
+S005,record,備邊司謄錄 철종8년 1월 11일 銅雀津 移設,Pontoon bridge relocation to Dongjak,1857-01-11,"소장=한국사DB;ID=bb_244r_001_01_0180;내용=舟橋를 銅雀津으로 移設, 처음 있는 일, 宣惠廳 別置錢 4천냥 劃給;권리=KOGL"
+S006,record,備邊司謄錄 정조13년 12월 舟橋司 재원 區劃,Jugyosa funding decision,1789-12,소장=한국사DB;내용=嶺南 別會穀 大米 2천석 耗條를 해마다 舟橋司에 區劃;권리=KOGL
+S007,record,承政院日記 執籌船 최초 사례,"Seungjeongwon ilgi, Earliest Jipju Ship Case",1731-06-20,"내용=京江船人이 영남 선호·호남호서 회피, 고을이 지나가는 경강선을 執捉;함의=주교사보다 58년 앞섬;권리=PD"
+S008,record,承政院日記 記注 누락 지적,"Seungjeongwon ilgi, Record Omission Noted",1731-07-05,"내용=여러 차례 진달했으나 擧條에 미기록, 記注가 상세하지 못한 탓;함의=사관 기록 누락이 문제로 제기;권리=PD"
+S009,record,承政院日記 船格徵索 폐단,"Seungjeongwon ilgi, Boatmen Overcharging",1795-12-22,"내용=執籌船이 나온 뒤로 船格 徵索이 갑절, 民結 전가, 監色이 逋欠 지고 流離;권리=PD"
+S010,record,承政院日記 沈頤之의 구조적 진단,"Seungjeongwon ilgi, Sim Ijis Structural Diagnosis",1796-01-15,내용=船格도 邑吏도 각각 이익을 취하려 다투어 漕轉에 해를 끼침;함의=일방 악행이 아닌 구조적 갈등 인식;권리=PD
+S011,record,備邊司謄錄 水站船을 舟橋司에 이속,"Bibyeonsa deungnok, Transfer of Station Ships",1792-06-20,"내용=水站 선척을 모두 주교사에 소속, 얕은 여울에 浮橋 대비, 기한전 파손시 주인 담당;권리=PD"
+S012,record,備邊司謄錄 추첨 불복 고을 처벌,"Bibyeonsa deungnok, Counties Defying Lot Assignment",1793-03-01,"내용=보령·청양이 帖文 무시하고 타선 적재, 충청감사 李亨元 파직;권리=PD"
+S013,record,備邊司謄錄 과적 관례 묵인,"Bibyeonsa deungnok, Overloading Custom Condoned",1798-01-26,"내용=1천석 외 30~40석 추가 적재를 비록 잘못된 관례이지만 예전처럼 거행 청, 윤허;권리=PD"
+S014,record,備邊司謄錄 都廳 朴基豐 사건,"Bibyeonsa deungnok, Bak Gipung Case",1791-11-25,내용=鐵索 창출 배정 죄상;정조가 보고 시점·제출 시각·친족 혐의로 신뢰성 판정;당상 金文淳 삭직;권리=PD
+S015,record,備邊司謄錄 세곡선 고의 침몰 정황,"Bibyeonsa deungnok, Suspected Deliberate Sinking",1816-11-09,내용=5읍 세곡 1429석 침몰;항로이탈·조기이선·사망0·표류거리·진술모순 5정황;근년 취재 없는 해가 없음;권리=PD
+S016,record,備邊司謄錄 배다리 石橋化,"Bibyeonsa deungnok, Boat Bridge to Stone Pier",1859-09-25,내용=매번 다리 놓는 역이 어려우니 주교사와 금위·어영 兩營이 돌축대를 쌓게;권리=PD
+S017,record,備邊司謄錄 배 반환 압력의 재정난,"Bibyeonsa deungnok, Fiscal Pressure to Release Ships",1860-03-05,내용=京司 창고가 텅 비어 頒祿·放料에 넉넉지 못하니 풀어 보낸 즉시 출발시키라;권리=PD
+S018,record,備邊司謄錄 戰漕船 通用 定式,"Bibyeonsa deungnok, War-Tax Ship Interchange",1866-08-05,"내용=櫓없고 上裝있으면 戰船, 櫓있고 上裝없으면 漕船;고종 定式 명;訓局船 10척 영구 혁파;권리=PD"
+S019,record,備邊司謄錄 魚允中 별단 조운 조목,"Bibyeonsa deungnok, Eo Yunjung Memorial",1878-07-19,내용=漕船을 중국배처럼 개조·운반뒤 상업 허용·兵船을 漕船에 소속;도는 반대했으나 시험 시행;권리=PD
+S020,record,備邊司謄錄 漕運 폐단 釐正 事目,"Bibyeonsa deungnok, Tax Transport Reform Regulations",1880-12-15,내용=제1조 주교사당상이 조운 총괄;執籌 직임 영구혁파·船主 추첨;1천석 한정 해제 5~6백석 두척;籌船 30여척(정원60);권리=PD
+S021,record,備邊司謄錄 執籌船 영구 혁파,"Bibyeonsa deungnok, Abolition of Jipju Ships",1882-11-30,내용=근원을 따지면 京江 執籌船이 빌미;執籌船 永罷 賃船 전환·戰船 통용;권리=PD
+S022,record,備邊司謄錄 임선 산수 불일치,"Bibyeonsa deungnok, Hired Ship Arithmetic Failure",1883-09-23,"내용=집주선 1천석 vs 임선 2~300석 → 8~9백척 필요, 수대로 임대할 길 없음;사공격군감색 모두 초보자;권리=PD"
+S023,record,備邊司謄錄 주교사 재설치 불가 판단,"Bibyeonsa deungnok, Restoration Deemed Impossible",1887-01-28,내용=암행어사가 집주선 복구 건의;의정부 이미 혁파한 것을 곧바로 다시 설치할 수 없다;권리=PD
+U001,unit,舟橋司,Pontoon Bridge Office,1789~,유형=조선 관청;기능=배다리 가설·선박 징발
+U002,unit,조선총독부 도 경무부,Provincial Police Department Government-General,1910-1945,유형=식민지 경찰기구
+U003,unit,국무총리비서실,Office of the Prime Minister Secretariat,1953-1954,유형=행정기구
+U004,unit,미 제1해병사단,US 1st Marine Division,1950,유형=군부대
+U005,unit,미 제10군단 제9공병대대,9th Engineer Bn US X Corps,1951,유형=군부대
+U006,unit,濬川司,Juncheonsa,조선후기,유형=정1품아문;관계=舟橋司를 합부
+U007,unit,均役廳,Gyunyeokcheong,1750~,"유형=재정기구;기능=선박 수세 이관 수령, 漕船退材 지급"
+U008,unit,訓鍊都監,Hullyeon Dogam,조선후기,유형=군영;관할=漢江津·西氷庫·楊根 龍津
+U009,unit,禁衛營,Geumwiyeong,조선후기,유형=군영;관할=露梁津·銅雀津;산출=禁營津船謄錄
+U010,unit,御營廳,Eoyeongcheong,조선후기,유형=군영;관할=楊花渡·孔巖·鐵串
+U011,unit,守禦廳,Sueocheong,조선후기,유형=군영;관할=松坡·廣津·三田渡·新川
+U012,unit,戶曹 版籍司 收稅所,Hojo tax office at Ttukseom,조선후기,유형=세관;소재=纛島;기능=流下木物 什一收稅
+U013,unit,量船尺,Yangseoncheok (Ship Measuring Rule),1750~,단위=把;1把≒영조척 5척(150~155cm);19C엔 均尺;용도=船稅 징수용 量船
+U014,unit,執籌 배정 체계,Jipju Lot Assignment System,1731~1880,성격=법전 미수록 관행;배3등(訓局船·舟橋所入·挾船)×읍3등(船價 厚薄);독점권;혁파=1880 직임·1882 선박

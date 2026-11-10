@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>진행 대본 — Chosen과 Joseon 사이</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Song+Myung&family=IBM+Plex+Sans+KR:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ground:#E4E4DE; --ground-2:#DBDBD3; --card:#F1F1EC;
+  --ink:#16191C; --ink-60:#5A6068; --ink-35:#8E949B;
+  --rule:#C4C5BC; --vault:#1F262D; --vault-2:#161C22;
+  --mineral:#2E6A63; --mineral-lt:#4C8F86; --oxide:#7A2B20;
+  --maxw:1080px;
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{margin:0;background:var(--ground);color:var(--ink);
+  font-family:'IBM Plex Sans KR',system-ui,sans-serif;font-size:16px;line-height:1.7;
+  -webkit-font-smoothing:antialiased;}
+h1,h2,h3,h4{font-family:'Song Myung',serif;font-weight:400;margin:0;letter-spacing:-.01em;}
+.mono,code{font-family:'IBM Plex Mono',monospace;}
+
+.mast{background:var(--vault);color:var(--ground);padding:66px 28px 54px;border-bottom:6px solid var(--mineral);}
+.mast-in{max-width:var(--maxw);margin:0 auto;}
+.eyebrow{font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.22em;
+  text-transform:uppercase;color:var(--mineral-lt);margin-bottom:22px;}
+.mast h1{font-size:clamp(28px,4.6vw,48px);line-height:1.26;color:#F3F3EE;margin-bottom:14px;}
+.mast .sub{font-size:17px;color:#B9BEC2;max-width:62ch;font-weight:300;}
+.mast-meta{margin-top:32px;padding-top:20px;border-top:1px solid #384049;display:flex;
+  flex-wrap:wrap;gap:26px 48px;font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:#8B9299;}
+.mast-meta b{display:block;color:#E4E4DE;font-weight:500;margin-top:5px;}
+
+nav.top{position:sticky;top:0;z-index:50;background:rgba(228,228,222,.95);
+  backdrop-filter:blur(8px);border-bottom:1px solid var(--rule);padding:0 28px;}
+nav.top .in{max-width:var(--maxw);margin:0 auto;display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;}
+nav.top .in::-webkit-scrollbar{display:none;}
+nav.top a{flex:0 0 auto;padding:13px 13px 11px;font-family:'IBM Plex Mono',monospace;font-size:11.5px;
+  color:var(--ink-60);text-decoration:none;border-bottom:2px solid transparent;white-space:nowrap;}
+nav.top a:hover,nav.top a:focus-visible{color:var(--mineral);border-bottom-color:var(--mineral);}
+
+main{max-width:var(--maxw);margin:0 auto;padding:0 28px 110px;}
+section{padding-top:66px;}
+.sec-head{border-top:2px solid var(--ink);padding-top:15px;margin-bottom:26px;}
+.sec-num{font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.2em;
+  color:var(--mineral);text-transform:uppercase;}
+.sec-head h2{font-size:clamp(22px,3vw,31px);margin-top:8px;line-height:1.34;}
+.sec-head .lede{margin-top:12px;color:var(--ink-60);max-width:70ch;font-size:15px;}
+
+table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14.5px;}
+caption{text-align:left;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--ink-35);padding-bottom:9px;}
+th{text-align:left;font-weight:500;font-size:11.5px;letter-spacing:.09em;text-transform:uppercase;
+  color:var(--ink-35);border-bottom:1px solid var(--ink);padding:0 10px 7px 0;}
+td{padding:9px 10px 9px 0;border-bottom:1px solid var(--rule);vertical-align:top;line-height:1.55;}
+tr:last-child td{border-bottom:none;}
+td.c{white-space:nowrap;}
+td.t{font-family:'IBM Plex Mono',monospace;color:var(--mineral);font-weight:500;white-space:nowrap;}
+.scroll{overflow-x:auto;}
+
+.note{border-left:3px solid var(--mineral);background:rgba(46,106,99,.06);
+  padding:15px 20px;margin:18px 0;font-size:14.5px;line-height:1.68;}
+.note b{color:var(--mineral);}
+.warn{border-left-color:var(--oxide);background:rgba(122,43,32,.06);}
+.warn b{color:var(--oxide);}
+.say{font-family:'Song Myung',serif;font-size:17px;line-height:1.78;padding:19px 23px;
+  background:var(--vault);color:#E7E7E1;margin:20px 0;}
+.say span{color:var(--mineral-lt);}
+.say .tag{display:block;font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.18em;
+  color:#767D84;margin-bottom:10px;text-transform:uppercase;}
+
+.cards{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));margin:16px 0;}
+.card{background:var(--card);border:1px solid var(--rule);padding:18px 20px;}
+.card h4{font-size:17px;margin-bottom:8px;}
+.card ul{margin:0;padding-left:18px;font-size:14.5px;line-height:1.65;color:var(--ink-60);}
+.card li b{color:var(--ink);}
+h4{font-size:17px;margin:26px 0 4px;}
+p{margin:10px 0;}
+ul{margin:10px 0;padding-left:20px;}li{margin:5px 0;}
+
+.chk{list-style:none;padding:0;}
+.chk li{position:relative;padding:8px 0 8px 30px;border-bottom:1px solid var(--rule);margin:0;font-size:15px;}
+.chk li:last-child{border-bottom:none;}
+.chk li::before{content:'';position:absolute;left:0;top:13px;width:14px;height:14px;
+  border:1.5px solid var(--ink-35);}
+.chk li.key::before{border-color:var(--oxide);background:rgba(122,43,32,.12);}
+
+.bar{display:flex;height:26px;margin:6px 0 18px;border:1px solid var(--rule);}
+.bar div{display:flex;align-items:center;justify-content:center;
+  font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:#fff;overflow:hidden;}
+.b1{background:#3E6B63;} .b2{background:#2E6A63;} .b3{background:#4C8F86;}
+.b4{background:#9A8455;} .b5{background:#7A2B20;} .b6{background:#1F262D;}
+
+footer{background:var(--vault);color:#8B9299;padding:40px 28px;border-top:6px solid var(--mineral);}
+footer .in{max-width:var(--maxw);margin:0 auto;font-family:'IBM Plex Mono',monospace;font-size:12px;line-height:1.9;}
+
+@media print{nav.top{display:none;}body{background:#fff;}.card,.say,table{break-inside:avoid;}}
+@media(max-width:640px){main{padding:0 20px 70px;}.mast{padding:48px 20px 40px;}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto;}}
+</style>
+</head>
+<body>
+
+<header class="mast">
+  <div class="mast-in">
+    <div class="eyebrow">진행 대본 · Run of Show</div>
+    <h1>403장을 굴리는 법</h1>
+    <p class="sub">타이밍 · 정적 지점 · 압축 순서 · 시연 대본 · 사고 대응. 강연 당일 손에 들고 계실 문서입니다.</p>
+    <div class="mast-meta">
+      <div>덱<b>403장 · 27개 구간</b></div>
+      <div>기준 소요<b>약 285분</b></div>
+      <div>장소<b>서울기록원</b></div>
+      <div>시연<b>실시간 3회 + 객석 1회</b></div>
+    </div>
+  </div>
+</header>
+
+<nav class="top" aria-label="구간 이동">
+  <div class="in">
+    <a href="#timeline">전체 타임라인</a>
+    <a href="#pace">구간별 속도</a>
+    <a href="#silence">정적 지점</a>
+    <a href="#compress">압축 순서</a>
+    <a href="#demo">시연 대본</a>
+    <a href="#prep">사전 준비</a>
+    <a href="#trouble">사고 대응</a>
+    <a href="#memorize">외울 문장</a>
+  </div>
+</nav>
+
+<main>
+
+<section id="timeline">
+  <div class="sec-head">
+    <div class="sec-num">01 — 전체 타임라인</div>
+    <h2>어디서 몇 분을 쓸 것인가</h2>
+    <p class="lede">말이 빠르신 편이라 장당 <b>75초</b>를 기준으로 잡았습니다. 느리게 가면 240분, 빠르게 가면 190분입니다.</p>
+  </div>
+
+  <div class="bar">
+    <div class="b1" style="flex:13">여는 13</div>
+    <div class="b2" style="flex:13">1부 13</div>
+    <div class="b3" style="flex:66">2부 전반 66</div>
+    <div class="b4" style="flex:52">2부 후반 52</div>
+    <div class="b1" style="flex:20">3부 20</div>
+    <div class="b2" style="flex:22">4부 22</div>
+    <div class="b3" style="flex:14">5부 14</div>
+    <div class="b5" style="flex:11">맺음 11</div>
+    <div class="b6" style="flex:8">부록 8</div>
+  </div>
+
+  <div class="scroll">
+  <table>
+    <caption>부별 목표 시간 · 누적 — 장당 75초 기준</caption>
+    <thead><tr><th>구간</th><th>장수</th><th>목표</th><th>누적</th><th>비고</th></tr></thead>
+    <tbody>
+      <tr><td><b>여는 장면</b></td><td class="c">10</td><td class="t">13분</td><td class="t">0:13</td><td>가장 늘어지기 쉬운 구간. <b>15분 넘으면 즉시 1부로</b></td></tr>
+      <tr><td><b>1부 흩어진 이름들</b></td><td class="c">10</td><td class="t">13분</td><td class="t">0:26</td><td>사례 네 개는 각 60초씩만</td></tr>
+      <tr><td>2부 도입 + 1층</td><td class="c">11</td><td class="t">13분</td><td class="t">0:39</td><td>조사 방법 슬라이드는 30초</td></tr>
+      <tr><td>2부 · 2층</td><td class="c">10</td><td class="t">14분</td><td class="t">0:53</td><td>국가기록원 3건에서 <b>소속 밝히기</b></td></tr>
+      <tr><td>2부 · 3층</td><td class="c">9</td><td class="t">13분</td><td class="t">1:06</td><td>죽첨정→충정로에서 정적</td></tr>
+      <tr><td>2부 · 4층</td><td class="c">7</td><td class="t">9분</td><td class="t">1:15</td><td>거문도 · 제물포</td></tr>
+      <tr><td>2부 · 5층</td><td class="c">17</td><td class="t">21분</td><td class="t">1:24</td><td>장면 · 서재필 · 창씨개명</td></tr>
+      <tr><td>2부 · 6층</td><td class="c">8</td><td class="t">10분</td><td class="t">1:34</td><td>쿠랑 · 달레 · <b>스웨덴 사진 13점</b></td></tr>
+      <tr><td><b>2부 · 6-A 유라시아</b></td><td class="c">20</td><td class="t">25분</td><td class="t">1:47</td><td><b>신설.</b> 일본 · 중국 · 러시아 · 몽골 · 중앙아시아</td></tr>
+      <tr><td><b>2부 · 6-B 기관과 분류</b></td><td class="c">23</td><td class="t">29분</td><td class="t">2:00</td><td><b>신설.</b> JACAR 12자리 · 中 全宗 · 露 фонд · 6국 비교</td></tr>
+      <tr><td><b>2부 · 6-C 기록 해부</b></td><td class="c">6</td><td class="t">8분</td><td class="t">2:08</td><td><b>신설.</b> JANIS 75 · 불령단관계잡건 · 1937 결정문 · Atlas coréen</td></tr>
+      <tr><td><b>2부 · 6-D 이웃의 기록</b></td><td class="c">10</td><td class="t">13분</td><td class="t">2:21</td><td><b>신설.</b> 레닌기치 68년 · 고려극장 · ‘고려인’이라는 말</td></tr>
+      <tr><td><b>2부 · 6-E 반출과 환수</b></td><td class="c">6</td><td class="t">8분</td><td class="t">2:29</td><td><b>신설.</b> 1922 의궤 반출 · 이토 대출본 · 2011 환수 — <b>10층 예고</b></td></tr>
+      <tr><td><b>2부 · 6-F 해외사료총서</b></td><td class="c">7</td><td class="t">9분</td><td class="t">2:38</td><td><b>신설.</b> 국편 25년 조사 · 발굴 <b>0단계</b>의 근거</td></tr>
+      <tr><td><b>2부 · 6-G 우리가 만든 해답</b></td><td class="c">6</td><td class="t">8분</td><td class="t">2:46</td><td><b>신설.</b> 6·25아카이브센터 — <b>2부 전체의 착지점</b></td></tr>
+      <tr><td>2부 · 7층</td><td class="c">16</td><td class="t">20분</td><td class="t">2:48</td><td><b>지적 정점.</b> 서두르지 말 것</td></tr>
+      <tr><td>2부 · 8층 + 8-A</td><td class="c">29</td><td class="t">33분</td><td class="t"><b>3:10</b></td><td>식별자 해부. <b>압축 1순위 · 휴식 지점</b></td></tr>
+      <tr><td>2부 · 9~10층 + 전환</td><td class="c">26</td><td class="t">33분</td><td class="t">3:27</td><td>10층에서 톤을 낮춤</td></tr>
+      <tr><td><b>3부 AI가 놓는 다리</b></td><td class="c">20</td><td class="t">25분</td><td class="t">3:47</td><td>도구 소개 포함</td></tr>
+      <tr><td><b>4부 함께 발굴</b></td><td class="c">12</td><td class="t">22분</td><td class="t">4:09</td><td><b>실시간 검색 — 가장 많이 밀리는 곳</b></td></tr>
+      <tr><td><b>5부 누구나 발굴자</b></td><td class="c">11</td><td class="t">14분</td><td class="t">4:14</td><td>아홉 나라의 문 · 배포자료 안내</td></tr>
+      <tr><td><b>맺음</b></td><td class="c">9</td><td class="t">12분</td><td class="t">4:36</td><td>마지막 두 장은 화면 안 보고</td></tr>
+      <tr><td>부록 · 질의응답</td><td class="c">10</td><td class="t">11분+</td><td class="t">4:45</td><td>출처 일람은 넘기며 훑기만</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="note warn">
+    <b>중간 휴식을 넣으신다면 3:10 지점(8-A 끝)입니다.</b> 2부가 끝나기 전이지만, 식별자 해부가 가장 밀도 높은 구간이라 여기서 한 번 끊어주는 게 청중에게 낫습니다. 10분 휴식이면 총 <b>4:55</b>. 반일 워크숍이거나, 6-A 유라시아를 경계로 2회차로 나누셔도 됩니다.
+  </div>
+</section>
+
+<section id="pace">
+  <div class="sec-head">
+    <div class="sec-num">02 — 구간별 속도</div>
+    <h2>같은 속도로 가면 안 됩니다</h2>
+    <p class="lede">표가 많은 장은 짧게, 문장 한 줄짜리 장은 길게. 반대로 하면 청중이 지칩니다.</p>
+  </div>
+
+  <div class="scroll">
+  <table>
+    <thead><tr><th>슬라이드 유형</th><th>목표</th><th>어떻게</th></tr></thead>
+    <tbody>
+      <tr><td><b>큰 문장 한 줄</b> (어두운 배경)</td><td class="t">40~60초</td><td>읽고, <b>쉬고</b>, 한 문장 덧붙이기. 서두르면 효과가 죽습니다</td></tr>
+      <tr><td><b>표가 있는 장</b></td><td class="t">50~70초</td><td>전부 읽지 말 것. <b>두세 행만 짚고</b> “나머지는 배포자료에 있습니다”</td></tr>
+      <tr><td><b>식별자 해부</b> (색으로 나눈 번호)</td><td class="t">45~60초</td><td>색깔 순서대로 <b>손가락으로 짚으며</b>. 설명보다 지시가 빠릅니다</td></tr>
+      <tr><td><b>검색 화면</b> (screen 블록)</td><td class="t">30~45초</td><td>화면을 읽어주지 말고 <b>결론만</b>. “0건입니다”</td></tr>
+      <tr><td><b>구간 표지</b> (숫자만 큰 장)</td><td class="t">10~15초</td><td>넘어가는 신호일 뿐. <b>호흡 정리용</b></td></tr>
+      <tr><td><b>실시간 시연</b></td><td class="t">2~5분</td><td>타이핑하며 말하지 말 것. <b>치고 → 멈추고 → 결과를 함께 보기</b></td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="note">
+    <b>말이 빠르신 게 이 덱에서는 장점입니다.</b> 다만 <b>어두운 배경의 큰 문장 슬라이드에서만</b>은 의식적으로 늦추십시오. 그 장들이 강연의 마디이고, 청중이 숨 쉬는 자리입니다.
+  </div>
+</section>
+
+<section id="silence">
+  <div class="sec-head">
+    <div class="sec-num">03 — 정적 지점</div>
+    <h2>말을 멈춰야 하는 여섯 곳</h2>
+    <p class="lede">여기서 쉬지 않으면 이 강연의 가장 좋은 대목들이 그냥 지나갑니다.</p>
+  </div>
+
+  <div class="scroll">
+  <table>
+    <thead><tr><th>위치</th><th>내용</th><th>정적</th></tr></thead>
+    <tbody>
+      <tr><td><b>여는 장면</b></td><td>“아무도 모릅니다. 기록이 없어서입니다.”</td><td class="t">3초</td></tr>
+      <tr><td><b>2부 · 3층</b></td><td>죽첨정(다케조에) → 충정로(민영환)</td><td class="t">3초</td></tr>
+      <tr><td><b>2부 · 7층</b></td><td>“목록은 중립적이지 않습니다”</td><td class="t">2초</td></tr>
+      <tr><td><b>2부 · 10층</b></td><td>먹칠 슬라이드 — FO 881/9951X</td><td class="t"><b>4초</b></td></tr>
+      <tr><td><b>2부 → 3부</b></td><td>“KEIJO POST OFFICE 간판은 1947년 1월까지”</td><td class="t">3초</td></tr>
+      <tr><td><b>맺음 마지막</b></td><td>“그 한 줄을 찾아서 적어두는 사람이…”</td><td class="t"><b>4초</b></td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="note warn">
+    <b>10층 먹칠 슬라이드에서는 조명을 낮추실 수 있으면 낮추십시오.</b> 검은 화면에 붉은 막대 하나만 남습니다. 이 강연에서 시각적으로 가장 강한 한 장입니다.
+  </div>
+</section>
+
+<section id="compress">
+  <div class="sec-head">
+    <div class="sec-num">04 — 압축 순서</div>
+    <h2>시간이 밀리면 이 순서로 빠르게</h2>
+    <p class="lede">빼지 마시고 <b>빠르게 지나가십시오.</b> 슬라이드를 건너뛰면 앞에서 한 예고가 회수되지 않습니다.</p>
+  </div>
+
+  <div class="scroll">
+  <table>
+    <thead><tr><th>순위</th><th>구간</th><th>절약</th><th>어떻게</th></tr></thead>
+    <tbody>
+      <tr><td class="c"><b>1</b></td><td>8-A 식별자 해부 15장</td><td class="t">~8분</td><td>미국·영국·한국 <b>세 개만</b> 짚고 나머지는 넘기며 “배포자료에 있습니다”</td></tr>
+      <tr><td class="c"><b>2</b></td><td>6-A 유라시아 10장</td><td class="t">~6분</td><td><b>일본·러시아만</b> 보여주고 중국·몽골·중앙아시아는 마지막 종합표 한 장으로 대체</td></tr>
+      <tr><td class="c"><b>3</b></td><td>6-B 기관과 분류 10장</td><td class="t">~6분</td><td><b>마지막 6국 비교표 한 장만</b> 보여주고 나머지는 넘기기</td></tr>
+      <tr><td class="c"><b>4</b></td><td>6층 언어 8장</td><td class="t">~4분</td><td>Gallica 목록 장은 <b>제목만</b> 읽고 넘기기</td></tr>
+      <tr><td class="c"><b>5</b></td><td>2층 로마자 10장</td><td class="t">~4분</td><td>서양 표기 계보(Caule~Korea) 장을 빠르게</td></tr>
+      <tr><td class="c"><b>6</b></td><td>1부 사례 4장</td><td class="t">~3분</td><td>미국·프랑스만 보여주고 영국·archive.org는 넘기기</td></tr>
+      <tr><td class="c"><b>7</b></td><td>부록 출처 일람 3장</td><td class="t">~3분</td><td>넘기며 “배포자료와 온라인 대장에 있습니다”</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="note warn">
+    <b>절대 압축하지 말 것 — 스물일곱 장</b><br>
+    ① 국가기록원 3건(소속 밝히는 자리) &nbsp;② 죽첨정→충정로 &nbsp;③ “목록은 중립적이지 않습니다” &nbsp;④ 녹번 0건 &nbsp;⑤ FO 881/9951X 먹칠<br>⑥ 6-A 「알파벳이 세 가지입니다」 &nbsp;⑦ 6-D 「무대가 없었습니다」(고려극장) &nbsp;⑧ 6-E 「89년 뒤에 돌려받을 수 있었습니다」<br>⑨ <b>7층 「폭격기가 날아갈 수 있는 거리」</b> &nbsp;⑩ <b>6-G 「열 겹을 이렇게 뚫었습니다」</b> &nbsp;⑪ <b>4-A 「and reaction of people of Korea」</b> — 3초 정적 &nbsp;⑫ <b>4-B 「같은 항구, 시대마다 다른 이름」</b> &nbsp;⑬ <b>3-A 「번역이 아니라 대조가 필요합니다」</b> &nbsp;⑭ <b>8층 「894.00/107 – 895.927/2」</b> &nbsp;⑮ <b>6-B 「2001년 목록이 없었다면…」</b> &nbsp;⑯ <b>7-A 「Bound: Corea vs China」</b> &nbsp;⑰ <b>9층 「A–M이 있으면 N–Z도 있다」</b> &nbsp;⑱ <b>8-A 「74248126」</b> — 예측→적중 10초 &nbsp;⑲ <b>5층 「우리가 그 철자를 몰랐을 뿐입니다」</b> &nbsp;⑳ <b>6-I 「Chemulpo…아홉 나라」</b> &nbsp;㉑ <b>6-L 「하나를 열면 다음이 보이는 것」</b> &nbsp;㉒ <b>6-M 「지명보다 사람 이름」</b> &nbsp;㉓ <b>6-Q 「짧게·하나씩·여러 번」</b> &nbsp;㉔ <b>6-R 「헌 달력 뒷면에 43일」</b> &nbsp;㉕ <b>10층 「기증되지 않으면 ①이 됩니다」</b> &nbsp;㉖ <b>5-D 「사본수집」 + 02-590-0700</b> &nbsp;㉗ <b>5-E 「제가 찾은 것보다 찾는 방법이 더 오래 남습니다」</b> — <b>강연 전체의 착지</b><br>
+    이 스물일곱이 이 강연의 뼈대입니다. <b>나머지를 다 빠르게 가더라도 여기서는 멈추십시오.</b>
+  </div>
+</section>
+
+<section id="demo">
+  <div class="sec-head">
+    <div class="sec-num">05 — 4부 시연 대본</div>
+    <h2>실시간 검색, 열 단계</h2>
+    <p class="lede">가장 강력하면서 가장 위험한 구간입니다. 순서를 정해두고, 실패를 미리 설계해두면 안전합니다.</p>
+  </div>
+
+  <div class="scroll">
+  <table>
+    <thead><tr><th>단계</th><th>무엇을</th><th>시간</th><th>실패해도 되나</th></tr></thead>
+    <tbody>
+      <tr><td class="c">⓪</td><td><b>『해외사료총서』 먼저 열기</b> — db.history.go.kr → 자료일람 <b>국가별</b></td><td class="t">2분</td><td>“맨땅에서 시작하지 않는다”를 눈으로 보여주는 자리</td></tr>
+      <tr><td class="c">①</td><td><b>녹번 · Muak · Hongje · Kupabal</b> → 0건</td><td class="t">2분</td><td><b>실패가 곧 논지</b></td></tr>
+      <tr><td class="c">②</td><td>Seoul / Keijo / Kyongsong 건수 대비</td><td class="t">2분</td><td>백업 스크린샷으로 대체 가능</td></tr>
+      <tr><td class="c">③</td><td><b>JANIS 75 PDF를 열어 안에서 지명 찾기</b></td><td class="t">5분</td><td><b>PDF 미리 받아두면 무조건 진행</b></td></tr>
+      <tr><td class="c">④</td><td>객석 요청 1건</td><td class="t">5분</td><td>“이게 발굴의 실제”로 회수</td></tr>
+      <tr><td class="c">⑤</td><td>권리 판정 — 2017년 비밀해제 문서</td><td class="t">2분</td><td>화면 없이 말로도 가능</td></tr>
+      <tr><td class="c">⑥</td><td>1936년 대경성정도 ↔ Keijo, Japan</td><td class="t">2분</td><td>이미지 두 장이면 됨</td></tr>
+      <tr><td class="c">⑦</td><td><b>옆을 훑기 — OCB 1/1280/A1 → A10</b></td><td class="t">3분</td><td>주소창 마지막 글자만 바꾸기</td></tr>
+      <tr><td class="c">⑧</td><td>미확인 검색어 확인 — Taikyu · Koshu · Port Lazareff</td><td class="t">3분</td><td><b>안 나오는 게 정상</b></td></tr>
+      <tr><td class="c">⑨</td><td><b>이웃 나라로 넘어가기</b> — 일본 <span class="mono">朝鮮</span> · 러시아 <span class="mono">Корё сарам</span></td><td class="t">3분</td><td>한국어 화면이라 실패 위험 낮음</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h4>3중 백업</h4>
+  <div class="cards">
+    <div class="card"><h4>1차 · 실시간</h4><ul>
+      <li>현장 네트워크로 직접 검색</li>
+      <li><b>가장 좋지만 가장 불안정</b></li>
+    </ul></div>
+    <div class="card"><h4>2차 · 녹화 영상</h4><ul>
+      <li>①②⑦을 미리 화면 녹화</li>
+      <li>각 30~60초</li>
+      <li><b>“어제 해본 화면입니다”</b>로 자연스럽게</li>
+    </ul></div>
+    <div class="card"><h4>3차 · 스크린샷</h4><ul>
+      <li>모든 단계의 결과 화면 캡처</li>
+      <li><b>PPT 안에 미리 삽입</b></li>
+      <li>네트워크가 완전히 끊겨도 진행</li>
+    </ul></div>
+  </div>
+
+  <div class="note">
+    <b>④ 객석 요청은 미리 대비할 수 있습니다.</b> 나올 법한 요청 세 가지 — “우리 동네 1950년대 사진”, “하와이 간 할아버지 명부”, “내가 다닌 학교” — 를 <b>전날 미리 검색해두시고</b>, 실제 요청이 그중 하나에 가까우면 그걸로 진행하십시오.
+  </div>
+
+  <div class="say">
+    <span class="tag">시연 실패 시 회수 문장</span>
+    안 나오네요. <span>그런데 이게 오늘 제가 말씀드린 열 겹의 벽입니다.</span> 0건이 나왔을 때 무엇을 의심해야 하는지 — 그게 오늘의 수확입니다.
+  </div>
+</section>
+
+<section id="prep">
+  <div class="sec-head">
+    <div class="sec-num">06 — 사전 준비</div>
+    <h2>체크리스트</h2>
+    <p class="lede">붉은 표시는 <b>빠지면 강연이 무너지는 항목</b>입니다.</p>
+  </div>
+
+  <h4>전날까지</h4>
+  <ul class="chk">
+    <li class="key"><b>JANIS 75 PDF 다운로드</b> — archive.org, 1.3MB. 네트워크가 끊겨도 ③이 진행됩니다</li>
+    <li class="key"><b>시연 10단계 전부 미리 실행</b>하고 결과 스크린샷 저장</li>
+    <li class="key"><b>국가기록원 BA0085029 원문 화면 확보</b> — 기관 내부 조회. 소속을 밝히는 그 슬라이드의 실물입니다</li>
+    <li>객석 요청 대비 3건 미리 검색</li>
+    <li>⚠ <b>6·25전쟁 아카이브 — 강연 전 반드시 재확인.</b> <b>2026.5.15</b> 새 플랫폼(6·25전쟁 아카이브 서비스 플랫폼) 오픈, <b>2026.8.14</b> 기존 오픈아카이브 <b>종료 안내</b>. <b>주소·건수·검색 동작이 모두 바뀌었을 수 있음</b> — 「장진호 86건」 시연 전 <b>실제 건수를 다시 세어볼 것</b>. 구 주소 <span class="mono">koreanwar.or.kr:8443</span>은 <b>서버가 닫은 포트</b>로 확정(:443은 정상) — 표준 주소를 쓸 것</li>
+    <li><b>FO 93/26</b>(조선 조약 전용 서랍) 열어둘 것 — 7-A 시연용</li>
+    <li><b>FO 17/1560</b> 준비 — 9층 「문서와 지도가 헤어졌다」 시연용(보고서와 MPKK 1/52 지도를 나란히)</li>
+    <li><b>895 주제 코드 표</b> 손에 들고 있을 것 — 객석 질문 대응용(3·1운동 895.00 · 치안 895.10 · 교육 895.40 · 이민 895.50 · 산업 895.60)</li>
+    <li><b>355190</b>(로마 1905 서울 사진 미확인분) — 4부 예비 카드, 시간 남으면 현장에서 넣어볼 것</li>
+    <li><b>NAID 74248123 · 74248126</b> — 8-A 「예측→적중」 시연용. <b>미리 열지 말고 현장에서 처음 넣을 것</b>(그래야 극적)</li>
+    <li><b>NAID 348549552 전후</b>(서울 거리 사진 2009-349~352) 열어둘 것 — 4-B 번호순 채굴 시연용, <b>가장 눈에 잘 보이는 장면</b></li>
+    <li><b>OCB 1/1259</b>(부산항 해도 82건) 미리 열어둘 것 — 4-B 「옆을 훑기」 실시간 시연용</li>
+    <li><b>CN 1/14/12~18</b>(금강산 Soto Kongo 사진 7점) 미리 열어둘 것 — 1층 신규 발굴 시연용</li>
+    <li><b>MFQ 1/1100/3-4</b>(원산 Port Lazareff 도면) 미리 열어둘 것 — 부록 6 검증 결과 시연용</li>
+    <li><b>일본 아시아역사자료센터 한국어 화면</b> 접속 확인 — 시연 ⑨용 (jacar.go.jp/korean)</li>
+    <li><b>『해외사료총서』 자료일람 탭</b> 미리 열어둘 것 — 시연 ⓪용 (db.history.go.kr)</li>
+    <li><b>총독부 기록물분류 검색</b> 열어둘 것 — 6-D 「일본이 아니라 한국에」 실물 확인용 (theme.archives.go.kr)</li>
+    <li>키릴 입력 준비 — <span class="mono">Корё сарам</span> 복사해둘 것 (현장에서 타이핑 불가)</li>
+    <li>1936 대경성정도 이미지 확보 (서울역사박물관)</li>
+    <li>배포자료 인쇄 — 82장, 예상 인원 + 20%</li>
+    <li>덱을 <b>노트북에 로컬 파일로</b> 저장 (인터넷 없이 열리는지 확인)</li>
+  </ul>
+
+  <h4>당일 · 시작 30분 전</h4>
+  <ul class="chk">
+    <li class="key"><b>프로젝터에서 어두운 슬라이드가 제대로 보이는지</b> 확인 — 먹칠 슬라이드가 핵심입니다</li>
+    <li class="key">현장 네트워크로 <b>NARA·TNA 접속 테스트</b></li>
+    <li>화면 비율 16:9 확인</li>
+    <li>발표 노트 <span class="mono">N</span> 키 작동 확인 (덱 하단 버튼)</li>
+    <li>조명 조절 가능 여부 확인 — 10층에서 낮출 수 있으면 좋습니다</li>
+    <li>물 · 시계 (스마트폰 말고 <b>보이는 시계</b>)</li>
+  </ul>
+
+  <h4>시작 직전</h4>
+  <ul class="chk">
+    <li class="key"><b>화면을 켜지 말 것</b> — 첫 1분은 말만 합니다</li>
+    <li>맺음 마지막 두 문장을 한 번 되뇌기</li>
+  </ul>
+</section>
+
+<section id="trouble">
+  <div class="sec-head">
+    <div class="sec-num">07 — 사고 대응</div>
+    <h2>이런 일이 생기면</h2>
+  </div>
+
+  <div class="scroll">
+  <table>
+    <thead><tr><th>상황</th><th>대응</th></tr></thead>
+    <tbody>
+      <tr><td><b>네트워크가 끊겼다</b></td><td>3차 백업(스크린샷)으로 전환. <b>“오늘은 미리 받아둔 화면으로 보겠습니다”</b> 한마디면 충분합니다. 사과하지 마십시오</td></tr>
+      <tr><td><b>시연이 0건으로 끝났다</b></td><td>회수 문장을 쓰십시오. <b>4부 「0건도 결과입니다」 슬라이드로 바로 넘어가면</b> 오히려 설계된 것처럼 보입니다</td></tr>
+      <tr><td><b>시간이 30분 밀렸다</b></td><td>압축 순서 1~3번을 적용. <b>맺음 8장은 절대 줄이지 마십시오</b> — 여기가 줄면 강연이 끝나지 않은 느낌으로 남습니다</td></tr>
+      <tr><td><b>질문이 중간에 계속 나온다</b></td><td>“그 이야기가 곧 나옵니다”로 미루되, <b>두 번 이상 미루지 마십시오.</b> 세 번째는 그냥 답하는 게 낫습니다</td></tr>
+      <tr><td><b>독도 · 영유권 논쟁으로 흐른다</b></td><td>“<b>카탈로그 용어가 그렇다는 건 사실이고, 영유권 문제는 제 강연 범위를 넘습니다</b>”에서 멈추십시오. 부연하지 마십시오</td></tr>
+      <tr><td><b>모르는 질문을 받았다</b></td><td><b>“모릅니다. 확인해서 알려드리겠습니다.”</b> 오늘 「확인하지 못한 것들」 슬라이드를 만든 것과 같은 태도입니다 — 이 강연에서는 이게 오히려 신뢰를 올립니다</td></tr>
+      <tr><td><b>청중이 지쳐 보인다</b></td><td>가장 가까운 <b>구간 표지 슬라이드</b>까지 빠르게 간 뒤, 거기서 한 박자 쉬고 톤을 바꾸십시오</td></tr>
+    </tbody>
+  </table>
+  </div>
+</section>
+
+<section id="memorize">
+  <div class="sec-head">
+    <div class="sec-num">08 — 외울 문장</div>
+    <h2>화면 안 보고 말할 일곱 문장</h2>
+    <p class="lede">이 일곱만 외우시면 나머지는 슬라이드가 받쳐줍니다.</p>
+  </div>
+
+  <div class="say">
+    <span class="tag">여는 장면</span>
+    둘 중에 뭐가 맞을까요? <span>아무도 모릅니다. 기록이 없어서입니다.</span>
+  </div>
+
+  <div class="say">
+    <span class="tag">2층 · 국가기록원 3건</span>
+    지금 우리가 쓰는 Joseon은 진리가 아니라, <span>합의에 실패한 끝에 내려진 행정 결정</span>입니다.
+  </div>
+
+  <div class="say">
+    <span class="tag">7층 · 지적 정점</span>
+    목록은 중립적이지 않습니다. 1885년에 거문도를 ‘중국’ 서랍에 넣은 것도, 1930년대에 서울을 ‘일본’ 서랍에 넣은 것도 <span>당시의 힘의 배치를 그대로 옮겨 적은 것</span>입니다.
+  </div>
+
+  <div class="say">
+    <span class="tag">9층 · 5부의 근거</span>
+    검색은 <span>기술된 것</span>만 찾습니다. 기술되지 않은 기록은, 존재하지만 존재하지 않습니다.
+  </div>
+
+  <div class="say">
+    <span class="tag">10층 · 먹칠 슬라이드</span>
+    앞의 아홉 층은 예제를 스무 개씩 모을 수 있었습니다. 열 번째 층만 여섯 개에서 멈췄습니다. <span>더 없어서가 아닙니다. 셀 수가 없어서입니다.</span>
+  </div>
+
+  <div class="say">
+    <span class="tag">맺음 · 마지막</span>
+    어쩌면 워싱턴이나 런던의 어느 상자 안에, 1945년에 이 고개를 지나간 누군가가 남긴 한 줄이 아직 목록에 오르지 못한 채 들어 있을지도 모릅니다.<br><br>
+    <span>그 한 줄을 찾아서 적어두는 사람이, 오늘 이후로 여러분입니다.</span>
+  </div>
+
+  <div class="say">
+    <span class="tag">6-A · 유라시아</span>
+    알파벳이 세 가지입니다 — 로마자 · 한자 · 키릴. <span>그리고 어느 것도 한글이 아닙니다.</span>
+  </div>
+
+  <div class="note warn">
+    <b>마지막 문장만은 반드시 청중의 눈을 보며 하십시오.</b> 화면을 보면 효과가 절반으로 떨어집니다.
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="in">
+    진행 대본 · 2026 서울기록페어 「Chosen과 Joseon 사이 누구나 발굴자가 된다」<br>
+    함께 쓰는 문서 — <b style="color:#E4E4DE">완전판 덱</b>(403장) · <b style="color:#E4E4DE">조사 대장</b>(11개 장) · <b style="color:#E4E4DE">배포자료</b>(82장)
+  </div>
+</footer>
+
+</body>
+</html>

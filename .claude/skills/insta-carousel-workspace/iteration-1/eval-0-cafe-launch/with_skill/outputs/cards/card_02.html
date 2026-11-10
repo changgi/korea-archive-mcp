@@ -1,0 +1,86 @@
+<!DOCTYPE html><html><head><meta charset="UTF-8"><style>
+  :root{
+    --bg:#f7efe0;        /* 따뜻한 크림 배경 */
+    --ink:#2b1a0f;       /* 에스프레소 잉크 */
+    --roast:#b4502a;     /* 포인트1 — 테라코타(로스팅) */
+    --gold:#dd9a34;      /* 포인트2 — 볕(햇살) 골드 */
+    --brown:#6b4226;     /* 진갈색 프레임 */
+    --sub:#8a7663;       /* 보조 텍스트 */
+    --paper:#fffdf6;     /* 종이 카드 */
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{background:#e9dfcc; font-family:'Malgun Gothic','Noto Sans KR','Apple SD Gothic Neo',sans-serif; padding:40px; color:var(--ink);}
+
+  .card{width:1080px; height:1080px; margin:0 auto 56px; position:relative; overflow:hidden;
+        background:var(--bg); box-shadow:0 10px 60px rgba(43,26,15,.25);}
+
+  /* 장식 */
+  .grain{position:absolute; inset:0; pointer-events:none; opacity:.45; mix-blend-mode:multiply;
+    background-image:repeating-linear-gradient(0deg, rgba(107,66,38,.03) 0 1px, transparent 1px 3px),
+                     repeating-linear-gradient(90deg, rgba(107,66,38,.04) 0 1px, transparent 1px 4px);}
+  .frame{position:absolute; inset:26px; border:2px solid rgba(107,66,38,.4); pointer-events:none;}
+  .frame:after{content:''; position:absolute; inset:8px; border:1px solid rgba(107,66,38,.18);}
+  .corner{position:absolute; width:34px; height:34px; border:4px solid var(--gold); z-index:3;}
+  .c-tl{top:16px; left:16px; border-right:none; border-bottom:none;}
+  .c-tr{top:16px; right:16px; border-left:none; border-bottom:none;}
+  .c-bl{bottom:16px; left:16px; border-right:none; border-top:none;}
+  .c-br{bottom:16px; right:16px; border-left:none; border-top:none;}
+
+  /* 해 모티프 — '볕' */
+  .sun{position:absolute; border-radius:50%;
+       background:radial-gradient(circle, rgba(221,154,52,.85) 0 38%, rgba(221,154,52,.25) 60%, transparent 72%);}
+  .rays{position:absolute; border-radius:50%; opacity:.5;
+        background:repeating-conic-gradient(rgba(221,154,52,.55) 0 3deg, transparent 3deg 14deg);
+        -webkit-mask:radial-gradient(circle, transparent 0 46%, #000 47% 68%, transparent 69%);
+        mask:radial-gradient(circle, transparent 0 46%, #000 47% 68%, transparent 69%);}
+
+  /* 타이포 */
+  .kicker{display:inline-block; background:var(--roast); color:#fff8ee; font-weight:900;
+          letter-spacing:.28em; font-size:24px; padding:12px 26px 12px 34px;}
+  h1{font-size:84px; line-height:1.24; font-weight:900; word-break:keep-all; color:var(--ink);}
+  h2{font-size:58px; line-height:1.3; font-weight:900; word-break:keep-all; color:var(--ink);}
+  .gold{color:var(--gold);} .roastc{color:var(--roast);}
+  .lead{font-size:33px; line-height:1.6; word-break:keep-all; color:#4c3826;}
+  .lead b{color:var(--roast); font-weight:900;}
+  .divider{height:5px; width:130px; background:linear-gradient(90deg,var(--gold),var(--roast)); margin:28px 0;}
+
+  .pageno{position:absolute; bottom:50px; right:76px; font-size:23px; color:var(--sub); letter-spacing:.12em; z-index:5;}
+  .brand{position:absolute; bottom:50px; left:76px; font-size:23px; color:var(--sub); font-weight:700; z-index:5;}
+
+  /* 컴포넌트 */
+  .stamp{position:absolute; border:5px solid var(--roast); color:var(--roast); border-radius:10px;
+         padding:10px 22px; font-weight:900; font-size:32px; letter-spacing:.15em;
+         transform:rotate(-9deg); background:rgba(255,253,246,.7); z-index:6;}
+  .li{display:flex; gap:24px; align-items:flex-start; margin:30px 0; font-size:32px; line-height:1.5; word-break:keep-all;}
+  .li .n{flex:0 0 56px; height:56px; border-radius:50%; background:var(--roast); color:#fff8ee;
+         font-weight:900; font-size:28px; display:flex; align-items:center; justify-content:center;}
+  .li b{color:var(--roast);}
+  .li .t{padding-top:6px;}
+  .paper{background:var(--paper); border:1px solid #e3d5bc; box-shadow:0 10px 26px rgba(43,26,15,.14);}
+  .qa{background:var(--paper); border:1px solid #e3d5bc; border-left:8px solid var(--gold);
+      padding:26px 34px; margin:20px 0; box-shadow:0 8px 20px rgba(43,26,15,.10);}
+  .qa .q{font-size:31px; font-weight:900; color:var(--ink); margin-bottom:8px;}
+  .qa .q span{color:var(--roast);}
+  .qa .a{font-size:27px; line-height:1.5; color:#4c3826; word-break:keep-all;}
+  .qa .a b{color:var(--roast);}
+  .bean{position:absolute; z-index:2; opacity:.9;}
+</style><style>body{margin:0!important;padding:0!important;}.card{margin:0!important;box-shadow:none!important;}</style></head><body><div class="card">
+  <div class="grain"></div><div class="frame"></div>
+  <div style="position:relative; z-index:4; height:100%; display:flex; flex-direction:column; padding:80px 88px;">
+    <div><span class="kicker">생각해 본 적 있나요</span></div>
+    <h2 style="margin:30px 0 0;">마트 원두 봉투에서<br><span class="roastc">'볶은 날짜'</span>를 본 적 있나요?</h2>
+    <!-- 원두 봉투 그래픽 -->
+    <div style="display:flex; justify-content:center; margin:38px 0 0;">
+      <div class="paper" style="width:560px; padding:34px 40px; border-radius:6px; position:relative;">
+        <div style="height:14px; background:#e3d5bc; border-radius:7px; margin:-8px auto 26px; width:220px;"></div>
+        <p style="font-size:27px; font-weight:900; letter-spacing:.2em; color:#8a7663; text-align:center;">COFFEE BEANS</p>
+        <div style="height:1px; background:#e3d5bc; margin:20px 0;"></div>
+        <p style="font-size:29px; margin:12px 0; color:#4c3826;">유통기한&nbsp; <b style="color:#3f7d4e;">2027.08 ✓</b></p>
+        <p style="font-size:29px; margin:12px 0; color:#4c3826;">볶은 날짜&nbsp; <b style="color:var(--roast);">— ? ? ? —</b></p>
+        <div class="stamp" style="top:18px; right:-30px; font-size:26px; transform:rotate(8deg);">미표기</div>
+      </div>
+    </div>
+    <p class="lead" style="margin-top:40px;">유통기한은 있어도 <b>로스팅 날짜</b>는 없는 봉투가 많습니다.<br>커피는 볶은 그 순간부터 향이 날아가기 시작하는데도요.</p>
+  </div>
+  <div class="brand">볕뜰로스터스</div><div class="pageno">2 / 8</div>
+</div></body></html>

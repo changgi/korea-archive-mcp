@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>기록잇다 — 부록 · 검증 자료</title>
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700;800&family=IBM+Plex+Sans+KR:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#12232B;--ink2:#2C4550;--paper:#F2F3F0;--paper2:#E7E9E4;
+  --seal:#A8372A;--silver:#8C9AA0;--muted:#5E6C73;--silver2:#B6C0C4;--light:#D9A441;--line:#C3CAC7;
+  --disp:'Nanum Myeongjo',serif;--body:'IBM Plex Sans KR',system-ui,sans-serif;--mono:'IBM Plex Mono',monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.7}
+.wrap{max-width:960px;margin:0 auto;padding:0 clamp(1rem,4vw,2rem)}
+:focus-visible{outline:3px solid var(--seal);outline-offset:3px}
+
+header{background:var(--ink);color:#fff;padding:clamp(2.5rem,6vw,4rem) 0 clamp(2rem,5vw,3rem)}
+.eyebrow{font-family:var(--mono);font-size:.72rem;letter-spacing:.22em;color:var(--light);margin-bottom:1rem}
+header h1{font-family:var(--disp);font-size:clamp(2rem,5vw,3rem);font-weight:800;line-height:1.2;margin-bottom:.7rem}
+header p{color:var(--silver2);max-width:52ch;font-weight:300}
+
+h2{font-family:var(--disp);font-size:clamp(1.4rem,3vw,1.9rem);font-weight:800;
+   margin:clamp(2.5rem,6vw,3.5rem) 0 .4rem;letter-spacing:-.01em}
+h2 .n{font-family:var(--mono);font-size:.72rem;color:var(--seal);letter-spacing:.18em;display:block;margin-bottom:.5rem;font-weight:400}
+.sub{color:var(--ink2);margin-bottom:1.2rem;max-width:62ch}
+
+table{width:100%;border-collapse:collapse;background:#fff;margin-top:.6rem;font-size:.92rem}
+th{background:var(--ink);color:#fff;font-weight:500;text-align:left;padding:.65rem .8rem;font-size:.85rem}
+td{padding:.68rem .8rem;border-bottom:1px solid var(--paper2);vertical-align:top}
+tr:last-child td{border-bottom:none}
+td.k{font-weight:600;white-space:nowrap}
+td .mono{font-family:var(--mono);font-size:.8rem;color:var(--muted);display:block;margin-top:.2rem}
+
+.grid{display:grid;gap:.8rem;margin-top:.8rem}
+@media(min-width:700px){.grid.c3{grid-template-columns:repeat(3,1fr)}}
+.pack{background:#fff;border:1px solid var(--line);padding:1rem}
+.pack h3{font-family:var(--disp);font-size:1.15rem;font-weight:700;margin-bottom:.15rem}
+.pack .when{font-family:var(--mono);font-size:.7rem;color:var(--muted);margin-bottom:.6rem}
+.pack ul{list-style:none;font-size:.87rem;color:var(--ink2)}
+.pack li{padding:.22rem 0 .22rem .9rem;position:relative}
+.pack li::before{content:'';position:absolute;left:0;top:.72rem;width:4px;height:4px;background:var(--seal)}
+
+.link{background:#fff;border:1px solid var(--line);border-left:3px solid var(--seal);padding:.75rem .9rem;margin-top:.55rem}
+.link b{display:block;font-size:.95rem;margin-bottom:.15rem}
+.link code{font-family:var(--mono);font-size:.8rem;color:var(--ink2);word-break:break-all}
+.link .memo{font-size:.82rem;color:var(--muted);margin-top:.25rem}
+
+.note{background:var(--ink);color:var(--silver2);padding:1.1rem;margin-top:1rem;font-size:.9rem}
+.note b{color:var(--light);display:block;margin-bottom:.35rem;font-weight:500}
+
+footer{margin-top:4rem;border-top:1px solid var(--line);padding:1.5rem 0 3rem;font-size:.82rem;color:var(--muted)}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="eyebrow">부록 · 검증 자료</div>
+    <h1>기록잇다</h1>
+    <p>본 부록은 계획서에 기술한 내용을 심사위원이 직접 확인할 수 있도록, 실물 산출물과 검증 경로를 정리한 것입니다.</p>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <h2><span class="n">부록 1</span>제출물 구성</h2>
+  <p class="sub">이번 출품에 포함된 산출물입니다.</p>
+  <table>
+    <tr><th style="width:30%">산출물</th><th style="width:22%">형식</th><th>내용</th></tr>
+    <tr><td class="k">한 장 요약</td><td>문서 1쪽</td><td>심사위원용 요약 — 문제·해법·증명·확인방법을 한 장에</td></tr>
+    <tr><td class="k">프로젝트 계획서</td><td>문서 18쪽</td><td>과제 전체 기획 — 5축 구조, 7단계 파이프라인, 12개 서비스</td></tr>
+    <tr><td class="k">발표자료</td><td>슬라이드 12장</td><td>발표용 요약본 (발표자 노트 포함)</td></tr>
+    <tr><td class="k">시연본</td><td>웹 · 단일 파일</td><td>실제 작동하는 서비스. 시연 모드와 실연동 모드 전환 가능</td></tr>
+    <tr><td class="k">시연 영상 (전체)</td><td>영상 43초</td><td>무편집 화면 녹화 — 표기 변형 판별 · 해외 문서고 실시간 조회 · 공동 발굴 대장 · 입양 갈래 · 답하지 않는 동작</td></tr>
+    <tr><td class="k">시연 영상 (발표용)</td><td>영상 29초</td><td>같은 녹화를 발표 분량으로 압축</td></tr>
+    <tr><td class="k">해외 검색 프록시</td><td>서버리스 함수</td><td>영국 국립기록보관소를 서버에서 대신 조회. 표기 변형 판별·중복 제거 포함 (api/overseas.js)</td></tr>
+    <tr><td class="k">판단 범위 측정</td><td>스크립트</td><td>국민이 쓸 법한 표현 41개로 적중률과 헛보류를 측정 (coverage.js)</td></tr>
+    <tr><td class="k">자동 실행 설정</td><td>GitHub Actions</td><td>코드가 바뀔 때마다 검사·측정·정합 점검을 자동 실행</td></tr>
+    <tr><td class="k">정합 점검</td><td>스크립트</td><td>문서끼리 수치가 어긋나지 않는지, 영상·슬라이드가 실물과 맞는지 기계 대조</td></tr>
+    <tr><td class="k">인용 근거 정리</td><td>부록 6</td><td>계획서 수치의 출처·기준 시점 — 실측·계산·인용 구분 표기</td></tr>
+    <tr><td class="k">검사 파일</td><td>스크립트</td><td>90개 항목 자동 검사 + 판단 범위 측정 — 판단 규칙·파싱·표기 판별·개인정보 보호·접근성</td></tr>
+    <tr><td class="k">발표 준비 자료</td><td>문서 6쪽</td><td>7분 발표 대본 · 60초 시연 순서 · 예상 질문 12개</td></tr>
+    <tr><td class="k">부록</td><td>본 문서</td><td>검증 경로와 실물 산출물 목록</td></tr>
+  </table>
+
+  <h2><span class="n">부록 2</span>직접 확인하는 방법</h2>
+  <p class="sub">시연본은 설치 없이 파일을 열기만 하면 동작합니다. 인터넷 연결 없이도 시연 모드가 작동합니다.</p>
+
+  <div class="link">
+    <b>1. 시연 모드 — 즉시 확인</b>
+    <code>girokitda/index.html 을 브라우저로 열기</code>
+    <div class="memo">화면의 예시 버튼을 누르면 각각 다른 이용자의 경로가 재생됩니다. 해외 소장·재산·신분·입양·지역 다섯 갈래를 다룹니다. 각 결과에는 그 내용이 실제 조사를 재현한 것인지 절차를 구성한 것인지 표시됩니다.</div>
+  </div>
+
+  <div class="link">
+    <b>2. 실연동 모드 — 실제 오픈API 호출</b>
+    <code>[실연동] → [국내] 선택 → 요청주소와 인증키 입력</code>
+    <div class="memo">기관 오픈API는 요청주소와 파라미터가 기관마다 다르고 개편되기도 합니다. 그래서 주소를 코드에 고정하지 않고 이용자가 직접 넣도록 했습니다. 공공데이터포털에서 「나라기록물정보 서비스」 개발계정을 신청하면 상세화면에 요청주소와 예시가 표시됩니다. 응답 XML은 흔한 필드명을 폭넓게 훑어 제목·기관·번호를 추출하므로 기관이 달라도 동작합니다. 주소와 키는 브라우저에만 저장됩니다.</div>
+  </div>
+
+  <div class="link">
+    <b>3. 배포하여 확인</b>
+    <code>정적 호스팅에 폴더째 올리면 공개 주소가 생성됩니다 (vercel.json 포함)</code>
+    <div class="memo">빌드 과정이 없습니다. 어떤 기록관이든 파일 하나만 받아 자기 데이터로 고쳐 쓸 수 있도록 단일 파일로 만들었습니다.</div>
+  </div>
+
+  <div class="link">
+    <b>4. 해외 문서고 실연동 — 인증키 불필요</b>
+    <code>배포 후 [실연동] → [해외 · 영국 문서고] 선택</code>
+    <div class="memo">서버 프록시(<code>api/overseas.js</code>)가 영국 국립기록보관소를 대신 조회합니다. 표기 변형을 동시에 던진 뒤 유효한 것만 남기고 노이즈를 걸러내는 과정이 화면에 그대로 표시됩니다. 해당 기관 서버가 브라우저 직접 호출을 허용하지 않아 프록시를 두었으며, 코드가 제출물에 포함되어 있습니다.</div>
+  </div>
+
+  <div class="link">
+    <b>5. 검사 파일 실행 — 41개 항목</b>
+    <code>npm install puppeteer  →  node test.js  ·  node coverage.js</code>
+    <div class="memo">판단 규칙·응답 파싱·표기 판별·공동 발굴 대장·접근성·해외 검색 프록시를 자동 검사합니다. 계획서가 내건 네 약속을 기계적으로 검증합니다 — 근거가 없으면 답하지 않는다(여섯 가지 입력), 개인 신상은 저장하지 않는다(대장 저장 내용을 값으로 확인), 접근성은 기본값이다(글자·행간·키보드·초점·동작 최소화), 무엇이 실제이고 무엇이 구성인지 밝힌다(시나리오별 출처 표시). 규칙을 일부러 제거하거나 개인정보 항목을 추가하고 돌리면 해당 항목이 즉시 실패합니다. 또 산출물 정합 점검(consistency.js)으로 문서끼리 수치가 어긋나지 않는지 대조합니다. 실제로 처음 돌렸을 때 계획서에만 접근성 약속이 빠져 있는 것을 잡아냈습니다. 판단 범위 측정(coverage.js)으로는 반대 방향도 봅니다 — 국민이 쓸 법한 표현 35개에서 적중 100%, 헛보류 0건이고, 다루지 않는 영역 6개는 모두 올바로 보류합니다. 답하지 않는 안전장치와 제대로 답하는 범위를 함께 유지하기 위한 것입니다. GitHub Actions 설정이 포함되어 있어 코드가 바뀔 때마다 자동 실행됩니다.</div>
+  </div>
+
+  <div class="link">
+    <b>6. 오답 방지 동작 — 직접 시험해 보세요</b>
+    <code>[막연하게 물어보기] 버튼 또는 "안녕하세요" 같은 모호한 질문 입력</code>
+    <div class="memo">근거가 부족하면 도장이 <b>확인필요</b>로 바뀌고, 답을 만들지 않습니다. 대신 가까운 갈래를 되묻고 담당기관을 안내합니다. 계획서에 적은 원칙이 화면에서 실제로 작동하는지 확인할 수 있는 항목입니다.</div>
+  </div>
+
+  <h2><span class="n">부록 3</span>완주한 콘텐츠 패키지</h2>
+  <p class="sub">발굴에서 향유까지의 파이프라인이 실제로 완주된 세 사례입니다. 각 패키지는 발굴 보고, 전시기획, 카드뉴스, 캡션, 전거대장으로 구성됩니다.</p>
+
+  <div class="grid c3">
+    <div class="pack">
+      <h3>광복절</h3>
+      <div class="when">서울기록원 활용</div>
+      <ul>
+        <li>발굴 보고서</li>
+        <li>전시 구성안</li>
+        <li>카드뉴스 8장</li>
+        <li>SNS 캡션 4종</li>
+        <li>전거대장</li>
+      </ul>
+    </div>
+    <div class="pack">
+      <h3>장진호</h3>
+      <div class="when">국내외 교차 검증</div>
+      <ul>
+        <li>발굴 보고 13절</li>
+        <li>전시 4존 + 도슨트 3구간</li>
+        <li>카드뉴스 8장</li>
+        <li>권리판정 · 체크리스트</li>
+        <li>전거대장 + 실행 로그</li>
+      </ul>
+    </div>
+    <div class="pack">
+      <h3>둔촌주공</h3>
+      <div class="when">서울기록원 컬렉션</div>
+      <ul>
+        <li>발굴 보고 10절</li>
+        <li>전시 4존 + 도슨트 3구간</li>
+        <li>카드뉴스 8장</li>
+        <li>접근성 실측 자료</li>
+        <li>전거대장</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="note">
+    <b>왜 이 세 건이 중요한가</b>
+    기록을 찾는 것만으로는 국민에게 닿지 않습니다. 찾아도 읽을 수 없고, 읽어도 맥락을 모르며, 맥락을 알아도 나눌 형식이 없으면 그대로 묻힙니다. 이 세 건은 발굴이 시민이 볼 수 있는 형태까지 도달한 완주 기록입니다.
+  </div>
+
+  <h2><span class="n">부록 4</span>보유 기술 자산</h2>
+  <p class="sub">본 과제는 무(無)에서 시작하지 않습니다. 아래는 개발·검증을 마친 구성요소이며, 검증 지표는 실측값입니다.</p>
+  <table>
+    <tr><th style="width:32%">자산</th><th style="width:34%">검증 지표</th><th>적용 단계</th></tr>
+    <tr><td class="k">다국 아카이브 통합검색 엔진</td><td>공개 배포·운영 중<span class="mono">검색 정확도 F1 0.931</span></td><td>① 발굴</td></tr>
+    <tr><td class="k">미국 문서고 탐색 도구군</td><td>8개 서버 · 115개 도구<span class="mono">검증 키워드 557종</span></td><td>① 발굴</td></tr>
+    <tr><td class="k">영국 문서고 탐색 도구</td><td>184,917건 색인<span class="mono">7,544개 시리즈</span></td><td>① 발굴</td></tr>
+    <tr><td class="k">필름·릴 원격 판독기</td><td>스트리밍 판독<span class="mono">다운로드 없이 대량 탐색</span></td><td>② 판독</td></tr>
+    <tr><td class="k">음성 자막화 도구</td><td>한국어 음성인식<span class="mono">공개 패키지</span></td><td>② 판독</td></tr>
+    <tr><td class="k">기록물 무결성 검사기</td><td>테스트 74건 통과<span class="mono">컨테이너·자동배포 구성</span></td><td>③ 검증</td></tr>
+    <tr><td class="k">관계망 발굴 에이전트</td><td>관계 그래프·시각화 산출<span class="mono">실제 조사 적용</span></td><td>④ 연결</td></tr>
+    <tr><td class="k">기록관리 개발 키트</td><td>90,000줄 이상<span class="mono">테스트 2,325건 · 외부 의존성 없음</span></td><td>기관 축</td></tr>
+    <tr><td class="k">문서지능 플랫폼</td><td>전 구간 E2E 작동<span class="mono">테스트 20/20 · 개인정보 통제 내장</span></td><td>② 판독 · ⑤ 보고</td></tr>
+    <tr><td class="k">교육과정</td><td>12차시 · 4개 트랙<span class="mono">만족도 85.9점</span></td><td>⑦ 확산</td></tr>
+    <tr><td class="k">국제 협력 산출물</td><td>3개국어 백서 78쪽<span class="mono">해외 기록관 연수 운영</span></td><td>⑦ 확산</td></tr>
+  </table>
+
+  <h2><span class="n">부록 5</span>활용 데이터 목록</h2>
+  <p class="sub">국내 공공데이터를 중심축으로 하고, 해외 공개 아카이브를 연계합니다.</p>
+  <table>
+    <tr><th style="width:38%">데이터</th><th style="width:30%">제공기관</th><th>활용</th></tr>
+    <tr><td class="k">나라기록물정보 서비스 오픈API</td><td>국가기록원</td><td>핵심 데이터원 · 실연동 완료</td></tr>
+    <tr><td class="k">나라기록 검색 웹서비스</td><td>국가기록원</td><td>분류체계 탐색</td></tr>
+    <tr><td class="k">국가기록물 초거대 AI 말뭉치</td><td>AI-Hub</td><td>용어사전 · 판독 학습</td></tr>
+    <tr><td class="k">한국사데이터베이스</td><td>국사편찬위원회</td><td>사건·인물 맥락</td></tr>
+    <tr><td class="k">전자사료관 구술자료</td><td>국사편찬위원회</td><td>구술 자막화</td></tr>
+    <tr><td class="k">지역 기록 컬렉션</td><td>지방기록물관리기관</td><td>지역 전시</td></tr>
+    <tr><td class="k">민원 서비스 안내 데이터</td><td>행정안전부 · 정부24</td><td>절차 · 구비서류</td></tr>
+    <tr><td class="k">정보공개포털 데이터</td><td>행정안전부</td><td>비공개 기록 청구 경로</td></tr>
+    <tr><td class="k">행정표준코드</td><td>행정안전부</td><td>기관 · 지역 판별</td></tr>
+    <tr><td class="k">국가유산 정보</td><td>국가유산청</td><td>장소 · 유산 연계</td></tr>
+    <tr><td class="k">해외 국립기록보관소 · 도서관</td><td>미국 · 영국 · 프랑스 · 유럽</td><td>국경 축 · 연동 완료</td></tr>
+  </table>
+
+  <h2><span class="n">부록 6</span>인용한 외부 근거</h2>
+  <p class="sub">계획서에 쓴 수치의 출처입니다. 직접 확인하실 수 있도록 어디서 나온 값인지와 기준 시점을 함께 적었습니다.</p>
+  <table>
+    <tr><th style="width:26%">수치</th><th style="width:32%">출처</th><th>기준과 유의점</th></tr>
+    <tr>
+      <td class="k">조상땅 찾기<br>연 45만 건</td>
+      <td>국토교통부 「온라인 조상땅 찾기 서비스」 시행 보도자료<span class="mono">KDI 경제정보센터 정책자료 수록</span></td>
+      <td>발표 시점 기준 <b>최근 5년간 연평균</b> 신청 건수이며, 같은 기간 73만 필지를 찾았습니다. 특정 연도 값이 아니라 5년 평균이라는 점에 유의해 인용했습니다.</td>
+    </tr>
+    <tr>
+      <td class="k">재산관계 기록물<br>열람 최다</td>
+      <td>국가기록원 열람 통계<span class="mono">「국가기록원의 기록제공서비스에 관한 탐색적 연구」 분석</span></td>
+      <td>일반 개인 청구 기준입니다. 행형·재산·신분 관계 열람 비중은 2007년 83.3%에서 2019년 61.8%로 낮아졌고, 그 안에서 재산관계가 가장 많습니다.</td>
+    </tr>
+    <tr>
+      <td class="k">행형기록<br>유공자 등록 목적</td>
+      <td>같은 연구</td>
+      <td>조부의 독립운동·참전 사실을 입증하려 일제강점기 재판·수감 기록을 청구하는 사례가 다수라는 서술에 근거했습니다.</td>
+    </tr>
+    <tr>
+      <td class="k">표기별 검색 결과<br>Korea 13,518 / Corea 756</td>
+      <td>영국 국립기록보관소 Discovery 검색 API</td>
+      <td>본 과제가 직접 조회한 <b>실측값</b>입니다. 시연본의 실연동 모드에서 같은 조회를 재현할 수 있으며, 결과 수는 소장기관의 목록 갱신에 따라 달라질 수 있습니다.</td>
+    </tr>
+    <tr>
+      <td class="k">무료 등급<br>월 4만 5천 회</td>
+      <td>배포 플랫폼 공개 요금·한도 문서</td>
+      <td>함수 실행 한도를 해외 검색 1회당 소요 시간으로 나눈 <b>계산값</b>입니다. 플랫폼 정책 변경 시 달라집니다. 무료 등급은 약관상 개인·비영리 용도 전제라는 점도 함께 밝혔습니다.</td>
+    </tr>
+  </table>
+
+  <div class="note">
+    <b>인용 원칙</b>
+    실측값과 계산값과 인용값을 구분해 적었습니다. 직접 조회한 것은 실측, 한도를 나눠 얻은 것은 계산, 기관 발표를 가져온 것은 인용입니다. 기준 시점이 있는 수치는 그 시점을 함께 밝혔습니다.
+  </div>
+
+  <h2><span class="n">부록 7</span>접근성 · 개인정보 · 연구 윤리</h2>
+  <p class="sub">발굴 결과에는 개인의 신원이 포함될 수 있습니다. 본 과제는 다음 원칙을 따릅니다.</p>
+  <table>
+    <tr><th style="width:26%">원칙</th><th>내용</th></tr>
+    <tr><td class="k">단정하지 않음</td><td>동명이인 가능성이 있는 한 신원을 확정하지 않고, 대조가 필요한 항목을 함께 안내합니다.</td></tr>
+    <tr><td class="k">시연 익명화</td><td>공개 시연과 발표에는 익명 처리본을 사용합니다.</td></tr>
+    <tr><td class="k">유족 확인</td><td>개인 신원이 포함된 기록은 별도 검토 절차를 거쳐 제공합니다.</td></tr>
+    <tr><td class="k">색 대비</td><td>본문·보조 문구 11개 항목의 명암비를 실측해 WCAG AA(4.5:1, 큰 글씨 3:1)를 전부 충족하도록 조정했습니다. 밝은 배경용 보조색을 따로 두어 4.87:1 이상을 확보했습니다.</td></tr>
+    <tr><td class="k">음성 입력</td><td>재산·신분 기록 이용자는 상당수가 고령층입니다. 긴 문장 입력이 장벽이 되므로 말로도 받으며, 지원하지 않는 기기에서는 버튼이 나타나지 않습니다.</td></tr>
+    <tr><td class="k">각색 금지</td><td>서술은 기록 원문에서만 가져오고, 기록의 공백은 공백이라고 표시합니다.</td></tr>
+    <tr><td class="k">권리 확인</td><td>전시·배포 전 기록마다 소장기관의 이용 조건과 권리 등급을 확인합니다.</td></tr>
+  </table>
+
+  <div class="note">
+    <b>오답을 만들지 않는 설계</b>
+    행정 안내에서 틀린 정보는 국민에게 실제 손해를 줍니다. 절차 안내는 사전 검증된 템플릿에서만 조립하고, 검색 결과는 실제 응답만 표시하며, 근거가 없으면 답을 만들지 않고 담당기관 연락처를 안내합니다.
+  </div>
+
+</main>
+
+<footer class="wrap">
+  <p>기록잇다 · 공공데이터·AI 활용 창업경진대회 아이디어 기획 부문 — 부록</p>
+  <p>본 부록의 검증 지표는 실측값이며, 공개 저장소 및 배포 주소로 실물 확인이 가능합니다.</p>
+</footer>
+
+</body>
+</html>
