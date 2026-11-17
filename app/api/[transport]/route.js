@@ -111,6 +111,51 @@ const TOPICS = [
   { p: '지도|地圖|地图|карт[аы]\\w*', en: 'map', fr: 'carte' },
   { p: '신문|新聞|新闻|газет\\w*', en: 'newspaper', fr: 'journal' },
   { p: '전투|戦闘|战斗|битва|сражение', en: 'battle', fr: 'bataille' },
+  // ── v1.17 증보: 6·25 후기 단계 전투 ──
+  { p: '지평리|砥平里', en: 'Chipyong-ni', fr: 'bataillon français Corée Chipyong-ni' },
+  { p: '가평\\s?전투|加平', en: 'Kapyong' },
+  { p: '노근리|老斤里', en: 'No Gun Ri' },
+  { p: '철의\\s?삼각지?대?', en: 'Iron Triangle Korea' },
+  { p: '폭찹\\s?힐|폭찹\\s?고지', en: 'Pork Chop Hill' },
+  { p: '피의\\s?능선', en: 'Bloody Ridge Korea' },
+  { p: '저격\\s?능선|狙擊稜線|狙击岭', en: 'Sniper Ridge Korea' },
+  { p: '삼각\\s?고지|상감령|上甘嶺|上甘岭', en: 'Triangle Hill Korea' },
+  { p: '금성\\s?전투|金城\\s?戰鬪|金城战役', en: 'Kumsong offensive 1953' },
+  { p: '청천강|淸川江|清川江', en: 'Chongchon River' },
+  { p: '부산\\s?교두보|워커\\s?라인', en: 'Pusan Perimeter' },
+  { p: '유엔군|국제연합군|국련군|联合国军', en: 'United Nations forces Korea', fr: 'forces ONU Corée' },
+  { p: '중공군|인민지원군|志願軍|志愿军', en: 'Chinese forces Korea' },
+  { p: '리지웨이|リッジウェイ|李奇微', en: 'Ridgway' },
+  { p: '밴\\s?플리트|밴플리트', en: 'Van Fleet' },
+  // ── v1.17 증보: 지명 ──
+  { p: '원산|元山|Вонсан', en: 'Wonsan' },
+  { p: '대구|大邱|Тэгу', en: 'Taegu' },
+  { p: '대전\\s?전투|大田', en: 'Taejon' },
+  { p: '개성|開城|开城|Кэсон', en: 'Kaesong' },
+  { p: '철원|鐵原|铁原', en: 'Chorwon' },
+  { p: '금강산|金剛山|金刚山', en: 'Kumgang Diamond Mountains', fr: 'monts Kumgang' },
+  { p: '독도|獨島|独岛|다케시마|竹島', en: 'Dokdo Takeshima Liancourt Rocks' },
+  // ── v1.17 증보: 개항기~일제강점기~해방 공간 인물·사건 ──
+  { p: '명성황후|명성왕후|민비|閔妃', en: 'Queen Min Korea', fr: 'reine Min Corée' },
+  { p: '고종\\s?황제|고종|高宗', en: 'Kojong' },
+  { p: '안중근|安重根', en: 'An Jung-geun Ito Hirobumi' },
+  { p: '이토\\s?히로부미|伊藤博文', en: 'Ito Hirobumi Korea' },
+  { p: '김구|金九', en: 'Kim Koo' },
+  { p: '안창호|安昌浩', en: 'Ahn Chang-ho' },
+  { p: '3[·.]1\\s?운동|삼일\\s?운동|三一運動|만세\\s?운동', en: 'March First Movement Korea 1919', fr: 'mouvement du 1er mars Corée' },
+  { p: '위안부|慰安婦|慰安妇', en: 'comfort women', fr: 'femmes de réconfort' },
+  { p: '강제\\s?동원|강제\\s?징용|징용|徵用|征用', en: 'Korean forced labor conscription' },
+  { p: '광복군|光復軍|光复军', en: 'Korean Liberation Army' },
+  { p: '임시\\s?정부|臨時政府|临时政府', en: 'Korean Provisional Government' },
+  { p: '동학|東學|东学|갑오\\s?농민', en: 'Tonghak rebellion', fr: 'Tonghak' },
+  { p: '의병|義兵|义兵', en: 'Righteous Army Korea insurgents', fr: 'insurgés Corée' },
+  { p: '을사\\s?조약|을사\\s?늑약|乙巳條約', en: 'Japan Korea protectorate treaty 1905' },
+  { p: '아관\\s?파천|俄館播遷', en: 'Kojong Russian legation 1896' },
+  { p: '헤이그\\s?특사|해아\\s?밀사', en: 'Hague secret emissaries Korea 1907', fr: 'La Haye Corée 1907' },
+  { p: '제주\\s?4[·.]3|4[·.]3\\s?사건', en: 'Cheju uprising 1948' },
+  { p: '여순\\s?사건|여수.순천\\s?사건', en: 'Yosu rebellion 1948' },
+  { p: '신탁\\s?통치', en: 'Korea trusteeship', fr: 'tutelle Corée' },
+  { p: '미군정|미\\s?군정', en: 'USAMGIK military government Korea' },
   // 총칭(각 언어의 '한국/조선') — 구체 주제를 먼저 치환한 뒤 남은 표기를 마지막에 처리.
   // Corea·Coreia 등 라틴 표기는 넣지 않는다: 당대 표기 변형 검색(tna_search "Corea" 등)이 Korea로 강제 치환되면 방법론이 무력화됨. 악상 있는 Corée만 프랑스어 확정으로 사상.
   { p: '조선|한국|고려|朝鮮|韓國|韩国|朝鲜|Корея|Коре[еию]|Corée|كوريا|קוריאה|कोरिया|Hàn Quốc|Triều Tiên|Солонгос|Корей', en: 'Korea', fr: 'Corée' },
@@ -388,6 +433,31 @@ async function kwSearch(params) {
 }
 // 수집구분(depth1) 코드 — 상세검색 폼 실측; 서버측 GET 필터로 동작 검증됨(철수 778 → 수집 633 · 기증 104).
 const KW_DEPTH1 = { '수집': '00001041', '기증': '00001042', '기타': '00001047', '구입': '00001054', '기탁': '00001073', '제작': '00001125', '이관': '00001179', '차입': '00001410' };
+// 후기 단계 전투 검색 앵커 — 서버 큐레이션(기관 전투 DB 아님). 사이트 DB(개전 초기 69건) 미수록
+// 시기를 보완한다. t=통설 전사 시기, x=교차검색 앵커(쿼리·기록군 제안 — 수치·전과 주장 없음).
+const KW_ANCHORS = [
+  { p: /인천\s?상륙|仁川上陸|Inchon/i, n: '인천상륙작전', t: '1950-09-15 ~ 09-19', x: "en 'Inchon landing' · NARA RG 127(해병)·RG 80 · TNA ADM 116" },
+  { p: /서울\s?수복/, n: '서울 수복', t: '1950-09-22 ~ 09-28', x: "en 'Seoul recapture 1950' · koreanwar_search(scope=archive '서울 수복')" },
+  { p: /장진호|長津湖|长津湖|Chosin/i, n: '장진호 전투', t: '1950-11-27 ~ 12-11', x: "en 'Chosin Reservoir' · NARA RG 127 · ia_search 'Chosin'" },
+  { p: /청천강|淸川江|清川江/, n: '청천강 전투', t: '1950-11-25 ~ 12-02', x: "en 'Chongchon River' · NARA RG 407" },
+  { p: /흥남|興南|Hungnam/i, n: '흥남 철수', t: '1950-12 중순 ~ 12-24', x: "en 'Hungnam evacuation' · NARA RG 80·RG 127" },
+  { p: /1[·.]4\s?후퇴/, n: '1·4 후퇴(서울 재실함)', t: '1951-01-04', x: "en 'fall of Seoul 1951'" },
+  { p: /지평리|砥平里|Chipyong/i, n: '지평리 전투', t: '1951-02-13 ~ 02-15', x: "en 'Chipyong-ni' · 프랑스대대 — gallica_search 병행" },
+  { p: /임진강\s?전투|글로스터|그로스터|Imjin/i, n: '임진강 전투(글로스터)', t: '1951-04-22 ~ 04-25', x: "en 'Imjin River' · TNA WO 281(부대 전쟁일지) — tna_search" },
+  { p: /가평|加平|Kapyong/i, n: '가평 전투', t: '1951-04-23 ~ 04-25', x: "en 'Kapyong' · 영연방(호주·캐나다) — tna_search·archives 교차" },
+  { p: /피의\s?능선/, n: '피의 능선 전투', t: '1951-08-18 ~ 09-05', x: "en 'Bloody Ridge'" },
+  { p: /단장의\s?능선|Heartbreak/i, n: '단장의 능선 전투', t: '1951-09-13 ~ 10-15', x: "en 'Heartbreak Ridge' · 프랑스대대 — gallica_search 병행" },
+  { p: /백마고지|白馬高地|白马高地/, n: '백마고지 전투', t: '1952-10-06 ~ 10-15', x: "en 'White Horse Hill' · NARA RG 407" },
+  { p: /저격\s?능선|삼각\s?고지|상감령|上甘[嶺岭]/, n: '저격능선·삼각고지 전투', t: '1952-10-14 ~ 11월', x: "en 'Sniper Ridge'·'Triangle Hill'" },
+  { p: /폭찹/, n: '폭찹힐 전투', t: '1953-04 · 1953-07', x: "en 'Pork Chop Hill'" },
+  { p: /금성\s?전투|金城/, n: '금성 전투', t: '1953-07-13 ~ 07-19', x: "en 'Kumsong offensive'" },
+  { p: /휴전|정전|판문점|Panmunjom/i, n: '정전협정 조인(판문점)', t: '1953-07-27', x: "en 'Korea armistice' · koreanwar_search(scope=archive '정전')" },
+];
+const kwAnchorLines = (q) => {
+  if (!q) return [];
+  return KW_ANCHORS.filter((a) => a.p.test(q)).slice(0, 5)
+    .map((a) => `- [앵커] ${a.n} (${a.t}) → ${a.x}`);
+};
 // OpenAPI pbrcList.do — token은 Referer(https://korea-archive-mcp.vercel.app/) 바인딩 발급(2026-08-19 실측).
 // JSON list (keyword param 없음, pageSize 상한 100) → scan pages, filter client-side.
 // 토큰은 Vercel 환경변수 KOREANWAR_API_TOKEN로 주입(공개 저장소 노출 금지 — 커밋 금지).
@@ -645,11 +715,230 @@ const JB_CROSS = `국내외 대조 절차 — 순서를 틀리면 헛수고한�
   const dbrowse = (u) => `\n열어보기: ${u}`;
   const agentBrowse = (name, q, u, why = '이 기관은 자동 페치가 제한적입니다') => `${name} '${q}' — ${why}.\n➤ 에이전트 지시: 이 메시지를 그대로 사용자에게 전달하지 마세요. 대신 당신의 웹 검색(WebSearch)으로 '${q}'를 이 기관에서 찾거나 아래 공식 검색 URL을 열람해 상위 결과(제목·연대·링크)를 표로 정리해 사용자에게 제시하세요. 결과가 있으면 report_template으로 HTML 보고서화도 가능합니다.\n공식 검색: ${u}`;
 
+// ── 한국고문서자료관(한국학중앙연구원, archive.aks.ac.kr) — 소장처 172곳 (2026-11-17 treeAjax 전수 실측) ──
+// 형식: id|상위경로(upPath)|분류|소장처명. 트리·문서목록은 라이브 조회, 이미지 일괄 수집은 로컬 전용.
+const AKS_BASE = 'https://archive.aks.ac.kr';
+const AKS_UA = { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)', 'Referer': AKS_BASE + '/viewer/viewer.do' };
+const AKS_CAT = `L011146|01^0111|문중>서울특별시|서울 마포 반남박씨 대종중
+L011143|01^0111|문중>서울특별시|서울 마포 성주이씨 대종회
+L011144|01^0111|문중>서울특별시|서울 원주김씨 두암 김응남 종가
+L011148|01^0111|문중>서울특별시|서울 전주이씨 경녕군 후손가
+L011145|01^0111|문중>서울특별시|서울 전주이씨 장천군 이보생 후손가
+L011117|01^0111|문중>서울특별시|서울 진주류씨 우강 유태영 후손가
+L016909|01^0169|문중>대구광역시|대구 영천이씨 세효당 후손가
+L013003|01^0130|문중>대전광역시|대전 무수동 안동권씨 유회당 권이진 종가
+L013001|01^0130|문중>대전광역시|대전 회덕 은진송씨 동춘당 송준길 후손가
+L014151|01^0141|문중>경기도|광주 기곡 광주안씨 순암 안정복 종가
+L014160|01^0141|문중>경기도|광주 연안이씨 매간 이익상 종가
+L014158|01^0141|문중>경기도|광주 평산신씨 신대우
+L014153|01^0141|문중>경기도|군포 속달 동래정씨 동래부원군 정난종 종가
+L014140|01^0141|문중>경기도|김포 의령남씨 서윤공 남두장 후손가
+L014156|01^0141|문중>경기도|김포 전주이씨 효헌 이인철 후손가
+L014139|01^0141|문중>경기도|성남 해주오씨 월곡공파 오윤함
+L014163|01^0141|문중>경기도|시흥 반남박씨 금계군 박동량 종가
+L014132|01^0141|문중>경기도|안산 부곡 진주류씨 경성당
+L014115|01^0141|문중>경기도|안성 보체 동래정씨 정홍순 종가
+L014131|01^0141|문중>경기도|안성 해주오씨 오치풍 후손가
+L014154|01^0141|문중>경기도|양근 안동김씨 노가재 김창업 후손가
+L014161|01^0141|문중>경기도|양주 광주정씨
+L014168|01^0141|문중>경기도|양주 사릉 해주정씨 종가
+L014164|01^0141|문중>경기도|여주 산북 전주이씨 완양부원군 이충원 종가
+L014148|01^0141|문중>경기도|여흥민씨 민영환 후손가
+L014152|01^0141|문중>경기도|용인 해주오씨 추탄 오윤겸 종가
+L014167|01^0141|문중>경기도|의정부 장암 반남박씨 서계 박세당 종가
+L014166|01^0141|문중>경기도|의정부 장암 반남박씨 서계 박세당 후손가
+L014165|01^0141|문중>경기도|이천 풍천임씨
+L014303|01^0143|문중>충청북도|제천 한수 연안이씨
+L014423|01^0144|문중>충청남도|공주 안동김씨 청음 김상헌 후손가
+L014421|01^0144|문중>충청남도|공주 전주이씨 숭선군파 종가
+L014422|01^0144|문중>충청남도|공주 진주류씨 금사 유충걸 후손가
+L014418|01^0144|문중>충청남도|논산 노성 파평윤씨 명재 윤증 종가
+L014426|01^0144|문중>충청남도|보령 천궁 경주김씨 직각 김면주 종가
+L014425|01^0144|문중>충청남도|부여 은산 함양박씨 구당 박세영 종가
+L014429|01^0144|문중>충청남도|서산 대교 경주김씨 충민공 김홍익 후손가
+L014432|01^0144|문중>충청남도|서산 대교 경주김씨 학주 김홍욱 종가
+L014433|01^0144|문중>충청남도|서산 대교 경주김씨 학주 김홍욱 후손가
+L014430|01^0144|문중>충청남도|아산 선교 장흥임씨 종가
+L014427|01^0144|문중>충청남도|예산 한곡 한산이씨 수당 고택
+L014431|01^0144|문중>충청남도|예산 한양조씨
+L014428|01^0144|문중>충청남도|청양 안동김씨 삼당 김영 후손가
+L014738|01^0147|문중>전북특별자치도|고창 광산김씨 노산사
+L014734|01^0147|문중>전북특별자치도|고창 신천강씨
+L014724|01^0147|문중>전북특별자치도|고창 흥덕 평해황씨 이재 황윤석 종가
+L014731|01^0147|문중>전북특별자치도|남원 안터 순흥안씨 사제당 안처순 후손가
+L014722|01^0147|문중>전북특별자치도|남원·구례 삭녕최씨
+L014720|01^0147|문중>전북특별자치도|부안 우반 부안김씨
+L014735|01^0147|문중>전북특별자치도|익산 함열 임천조씨
+L014736|01^0147|문중>전북특별자치도|정읍 광산김씨 김흥암 후손가
+L014737|01^0147|문중>전북특별자치도|정읍 광산김씨 옥산서원
+L014719|01^0147|문중>전북특별자치도|진안 정천 전주이씨 서곡 이정영 후손가
+L014804|01^0148|문중>전라남도|구례 오미 문화류씨 운조루
+L014803|01^0148|문중>전라남도|나주 회진 나주임씨 창계 임영 후손가
+L014810|01^0148|문중>전라남도|영광 연안김씨 종가
+L014802|01^0148|문중>전라남도|영광 영월신씨
+L014812|01^0148|문중>전라남도|영암 남평문씨
+L014813|01^0148|문중>전라남도|해남 김해김씨
+L014811|01^0148|문중>전라남도|해남 연동 해남윤씨 녹우당
+L016792|01^0167|문중>경상북도|경주 구정 경주이씨
+L016722|01^0167|문중>경상북도|경주 소정 경주이씨
+L016762|01^0167|문중>경상북도|경주 양동 경주손씨 종가 송첨
+L016712|01^0167|문중>경상북도|경주 옥산 여주이씨 독락당
+L016794|01^0167|문중>경상북도|경주 옥산 여주이씨 치암 이순 종가
+L016798|01^0167|문중>경상북도|경주 용산서원
+L016706|01^0167|문중>경상북도|경주 이조 경주최씨
+L016727|01^0167|문중>경상북도|고령 도진 고령박씨 소윤공 문연재
+L016763|01^0167|문중>경상북도|고령 선산김씨 점필재 김종직 종가
+L016768|01^0167|문중>경상북도|구미 옥산 인동장씨 여헌 장현광 종가
+L016746|01^0167|문중>경상북도|김천 성산이씨 양계 이하 종가
+L016724|01^0167|문중>경상북도|김천 진주강씨 학암 강석귀 종가
+L016744|01^0167|문중>경상북도|봉화 꽃내 무안박씨 회이당 박한 종가
+L016725|01^0167|문중>경상북도|봉화 법전 진주강씨 고암 강임 후손가
+L016775|01^0167|문중>경상북도|봉화 유곡 안동권씨 충재 권벌 종가
+L016776|01^0167|문중>경상북도|봉화 유곡 안동권씨 충재 권벌 후손가
+L016785|01^0167|문중>경상북도|상주 낙동 풍양조씨 양진당 조정
+L016793|01^0167|문중>경상북도|상주 성주이씨 묵재 종가
+L016767|01^0167|문중>경상북도|상주 연안이씨 식산 이만부 종가
+L016766|01^0167|문중>경상북도|상주 우산 진주정씨 우복 정경세 종가
+L016761|01^0167|문중>경상북도|상주 충주박씨 충원군 박동형 종가
+L016769|01^0167|문중>경상북도|성주 명곡 벽진이씨 완석정 이언영 종가
+L016764|01^0167|문중>경상북도|안동 갈전 순흥안씨 종가
+L016713|01^0167|문중>경상북도|안동 금계 의성김씨 학봉 김성일 종가
+L016758|01^0167|문중>경상북도|안동 법흥 고성이씨 종가 임청각
+L016709|01^0167|문중>경상북도|안동 송파 진주하씨 하위지 후손가
+L016701|01^0167|문중>경상북도|안동 수곡 전주류씨 무실 종가
+L016715|01^0167|문중>경상북도|안동 오천 광산김씨 후조당 김부필
+L016717|01^0167|문중>경상북도|안동 주촌 진성이씨 경류정
+L016707|01^0167|문중>경상북도|안동 천전 의성김씨 천상각파
+L016708|01^0167|문중>경상북도|안동 하회 풍산류씨
+L016728|01^0167|문중>경상북도|안동 하회 풍산류씨 북촌댁 화경당
+L016759|01^0167|문중>경상북도|영덕 도곡 무안박씨 무의공 박의장 종가
+L016765|01^0167|문중>경상북도|영덕 도곡 무안박씨 충효당 박선 종가
+L016760|01^0167|문중>경상북도|영덕 재령이씨 충효당 이함 종가
+L016791|01^0167|문중>경상북도|영주 화계 인동장씨 연복군 종가
+L016795|01^0167|문중>경상북도|예천 맛질 함양박씨 미산 박득녕 종가
+L016796|01^0167|문중>경상북도|예천 맛질 함양박씨 박현녕 후손가
+L016780|01^0167|문중>경상북도|예천 진주류씨 서파 유희 가문
+L016741|01^0167|문중>경상북도|의성 아주신씨 오봉 신지제 가문
+L016742|01^0167|문중>경상북도|의성 아주신씨 호계 신적도 가문
+L016774|01^0167|문중>경상북도|청도 함박김씨
+L016721|01^0167|문중>경상북도|칠곡 석전 광주이씨
+L015019|01^0150|문중>경상남도|거창 강동 초계정씨 동계 정온 종가
+L015025|01^0150|문중>경상남도|거창 거창신씨
+L015024|01^0150|문중>경상남도|거창 은진임씨
+L015022|01^0150|문중>경상남도|밀양 밀성박씨 종가 모선정
+L015020|01^0150|문중>경상남도|밀양 사촌 의령남씨 종가 침류정
+L015026|01^0150|문중>경상남도|밀양 창녕조씨 오봉서원
+L015007|01^0150|문중>경상남도|진주 단목 진양하씨 단지 하협 종가
+L015004|01^0150|문중>경상남도|진주 단목 진양하씨 창주 하증 후손가
+L015023|01^0150|문중>경상남도|진주 마진 재령이씨 이재관 후손가
+L015018|01^0150|문중>경상남도|진주 마진 재령이씨 종가
+L015011|01^0150|문중>경상남도|진주 안계 진양하씨 담헌 하우선 종가
+L015005|01^0150|문중>경상남도|진주 운문 진양하씨
+L015002|01^0150|문중>경상남도|함안 두릉 순흥안씨
+L015021|01^0150|문중>경상남도|함양 안의 밀양박씨 지족당 박명부 종가
+L017101|01^0171|문중>강원특별자치도|강릉 전주이씨 선교장 효령대군 후손가
+L016821|01^0168|문중>제주특별자치도|서귀포 사계 진주강씨
+L016814|01^0168|문중>제주특별자치도|제주 경주김씨 문중회
+L016807|01^0168|문중>제주특별자치도|제주 구좌 동래정씨 정석록 후손가
+L016816|01^0168|문중>제주특별자치도|제주 동래정씨 정희현 후손가
+L016819|01^0168|문중>제주특별자치도|제주 애월 김해김씨 김용징 후손가
+L016820|01^0168|문중>제주특별자치도|제주 애월 김해김씨 김희주 후손가
+L016822|01^0168|문중>제주특별자치도|제주 어도 진주강씨 강봉지 후손가
+L016817|01^0168|문중>제주특별자치도|제주 어도 진주강씨 강수황 후손가
+L016818|01^0168|문중>제주특별자치도|제주 어도 진주강씨 강익진 후손가
+L016815|01^0168|문중>제주특별자치도|제주 제주고씨 종친회
+L016810|01^0168|문중>제주특별자치도|제주 조천 곡산강씨 강만식 후손가
+L016811|01^0168|문중>제주특별자치도|제주 조천 곡산강씨 강이진 후손가
+L016806|01^0168|문중>제주특별자치도|제주 조천 김해김씨 김희정 후손가
+L017201|01^0172|문중>인천광역시|강화·부여 창원황씨
+L024712|02^0247|서원향교>경상북도|경주 용산서원
+L024711|02^0247|서원향교>경상북도|경주 장산서원
+L024710|02^0247|서원향교>경상북도|안동 병산서원
+L024807|02^0248|서원향교>경상남도|거창 거창향교
+L024804|02^0248|서원향교>경상남도|김해 김해향교
+L024808|02^0248|서원향교>경상남도|밀양 덕남서원
+L024806|02^0248|서원향교>경상남도|산청 단성향교
+L024802|02^0248|서원향교>경상남도|산청 덕천서원
+L024803|02^0248|서원향교>경상남도|함양 남계서원
+L024801|02^0248|서원향교>경상남도|합천 용연서원
+L024805|02^0248|서원향교>경상남도|합천 합천향교
+L031119|03^0311|박물관도서관>서울특별시|국립고궁박물관
+L031121|03^0311|박물관도서관>서울특별시|한국연구원
+L037702|03^0377|박물관도서관>경기도|경기도박물관
+L037705|03^0377|박물관도서관>경기도|명성황후기념관
+L037701|03^0377|박물관도서관>경기도|여주박물관
+L037801|03^0378|박물관도서관>강원특별자치도|오죽헌·시립박물관
+L037502|03^0375|박물관도서관>충청북도|국립청주박물관
+L039202|03^0392|박물관도서관>세종특별자치시|미래엔 교과서박물관
+L040102|04^0401|공공기관>경기도|국사편찬위원회
+L040101|04^0401|공공기관>경기도|한국학중앙연구원 장서각
+L040301|04^0403|공공기관>서울특별시|규장각한국학연구원
+L054904|05^0549|사찰>경상북도|김천 직지사
+L054901|05^0549|사찰>경상북도|예천 용문사
+L054701|05^0547|사찰>경상남도|고성 옥천사 보장각
+L054702|05^0547|사찰>경상남도|고성 옥천사 청련암
+L061502|06^0615|개인>경기도|신상후 선생님 제공 자료
+L061503|06^0615|개인>경기도|헤이리예술마을뮤지엄카페 타임캡슐
+L061201|06^0612|개인>경상북도|경주 경주이씨 이찬우
+L0619  F02|06^L0619|개인>개인|고문서
+L062001|06^0620|개인>미상|개인
+L074902|07^0749|촌락>경상북도|경주 외동 방어리
+L074901|07^0749|촌락>경상북도|경주 지북동(황성동)
+L074801|07^0748|촌락>경상남도|거제 일운 구조라리
+L074702|07^0747|촌락>제주특별자치도|제주 애월 수산리
+L074703|07^0747|촌락>제주특별자치도|제주 애월 중엄리
+L074701|07^0747|촌락>제주특별자치도|제주 애월 하가리
+L0807  F02|08^L0807|기타>기타|고문서
+L0809  F02|08^L0809|기타>명성황후 편지글(이기대, 다운샘, 2007)|고문서
+L0811  F02|08^L0811|기타>한글서예변천전 도록|고문서`.trim().split('\n').map((l) => { const [id, up, grp, name] = l.split('|'); return { id, up, grp, name }; });
+const aksChain = (base, suf) => { const c = []; if (suf) { c.push(base + suf.slice(0, 3)); if (suf.length > 3) c.push(base + suf); } return c; };
+
   server.tool('nedb_search',
-    "Search 국사편찬위 한국사데이터베이스 (db.history.go.kr) + 조선 사료 심층 판독 (verified POST routes from the Han-river vessel study). mode: total=통합검색(기본) · law=법전·편람 조문 검색(한문 원문 제공 여부 판정) · record=등록류 검색(座目 회의명단 자동 필터 — 검색 건수를 지표로 쓰기 전 필수) · item=levelId 본문 판독(미공개/파싱실패 구분 — query에 levelId) · sibling=★형제 조 전수 스캔(query에 levelId — 조문을 하나라도 열었으면 반드시 이어 호출, 총론만 읽으면 핵심을 놓친다) · matrix=법전 수록 대조표(query에 쉼표구분 어휘 ≤8 — 부재의 발견) · origin=어휘 연원 추적(query='용어' 또는 '용어,영역') · sjw=승정원일기(왕대 분포·최초 용례 — 연대가 뒤집힐 수 있다) · kyujanggak=규장각 목록+해제 동시(절목·사목류는 해제에서 발견). 판정 우선: '601건'이 아니라 '492건이 座目입니다'를 반환한다. 한자 원표기 병행 권장.",
-    { query: z.string().describe("검색어 · levelId(item/sibling) · 쉼표구분 어휘(matrix) · '용어,영역'(origin)"), db: z.string().default(''), max_results: z.number().int().min(1).max(50).default(15), mode: z.enum(['total', 'law', 'record', 'item', 'sibling', 'matrix', 'origin', 'sjw', 'kyujanggak']).default('total'), span: z.number().int().min(2).max(12).default(8).describe('sibling 모드 스캔 폭') },
+    "Search 국사편찬위 한국사데이터베이스 (db.history.go.kr) + 조선 사료 심층 판독 (verified POST routes from the Han-river vessel study). mode: total=통합검색(기본) · law=법전·편람 조문 검색(한문 원문 제공 여부 판정) · record=등록류 검색(座目 회의명단 자동 필터 — 검색 건수를 지표로 쓰기 전 필수) · item=levelId 본문 판독(미공개/파싱실패 구분 — query에 levelId) · sibling=★형제 조 전수 스캔(query에 levelId — 조문을 하나라도 열었으면 반드시 이어 호출, 총론만 읽으면 핵심을 놓친다) · matrix=법전 수록 대조표(query에 쉼표구분 어휘 ≤8 — 부재의 발견) · origin=어휘 연원 추적(query='용어' 또는 '용어,영역') · sjw=승정원일기(왕대 분포·최초 용례 — 연대가 뒤집힐 수 있다) · kyujanggak=규장각 목록+해제 동시(절목·사목류는 해제에서 발견) · aks=한국고문서자료관(archive.aks.ac.kr) 문중·서원 고문서 — 소장처 172곳 검색→분류→문서 면·썸네일(query=소장처명 또는 L-ID·분류ID·'분류ID/문서ID'). 판정 우선: '601건'이 아니라 '492건이 座目입니다'를 반환한다. 한자 원표기 병행 권장.",
+    { query: z.string().describe("검색어 · levelId(item/sibling) · 쉼표구분 어휘(matrix) · '용어,영역'(origin) · 소장처명/L-ID(aks)"), db: z.string().default(''), max_results: z.number().int().min(1).max(50).default(15), mode: z.enum(['total', 'law', 'record', 'item', 'sibling', 'matrix', 'origin', 'sjw', 'kyujanggak', 'aks']).default('total'), span: z.number().int().min(2).max(12).default(8).describe('sibling 모드 스캔 폭') },
     async ({ query, max_results, mode, span }) => {
       const q = query.trim();
+      if (mode === 'aks') {
+        try {
+          if (q.includes('/')) { // 'L013001F0201/G002+AKS+...' — 문서 노드 페이지 목록(imgnode)
+            const [fid, did] = q.split('/', 2);
+            const fm = fid.match(/^(L\d{6})(F\d{2,4})?$/);
+            const col = fm && AKS_CAT.find((c) => c.id === fm[1]);
+            if (!col) return text(`'${fid}' — 소장처 ID 불인식. mode=aks에 소장처명으로 먼저 검색하십시오.`);
+            const chain = [fm[1], ...aksChain(fm[1], fm[2] || '')];
+            const up = [col.up, ...chain].join('^');
+            const j = JSON.parse(await gtext(`${AKS_BASE}/viewer/imgnode.do?itemId=book&gubun=booktree&depth=${2 + chain.length + 1}&upPath=${encodeURIComponent(up)}&dataId=${encodeURIComponent(did)}&itemType=`, AKS_UA));
+            const items = j.imgItems || [];
+            return text(`한국고문서자료관 문서 '${j.infoTitle || did}' — ${items.length}면${j.dataUCI ? ` · UCI ${j.dataUCI}` : ''}\n`
+              + items.slice(0, 8).map((it, i) => `- ${i + 1}면: ${it.filename || ''}${it.thumb ? `\n  썸네일 ${AKS_BASE}${it.thumb}` : ''}`).join('\n')
+              + (items.length > 8 ? `\n… 외 ${items.length - 8}면` : '')
+              + `\n※ 원본 고해상 이미지 일괄 수집은 로컬 전용(aks-archive-harvester 스킬 — DZI 타일 복원). 웹에서는 뷰어 열람: ${AKS_BASE}/viewer/viewer.do`
+              + `\n출처 표기: 한국학중앙연구원 한국고문서자료관. 이미지 재이용은 기관 이용조건 준수.`);
+          }
+          const idm = q.match(/^(L\d{6})(F\d{2,4})?$/);
+          if (idm) { // 소장처/분류 노드 → 하위 트리 라이브 조회
+            const col = AKS_CAT.find((c) => c.id === idm[1]);
+            if (!col) return text(`'${q}' — 소장처 목록(172곳)에 없는 ID. mode=aks에 소장처명을 넣어 먼저 검색하십시오.`);
+            const chain = aksChain(idm[1], idm[2] || '');
+            const up = [col.up, ...(idm[2] ? [idm[1], ...chain.slice(0, -1)] : [])].join('^');
+            const b = await gtext(`${AKS_BASE}/viewer/treeAjax.do?itemId=book&gubun=booktree&depth=${3 + (idm[2] ? chain.length : 0)}&upPath=${encodeURIComponent(up)}&dataId=${q}&itemType=`, AKS_UA);
+            const kids = [...b.matchAll(/data-dataId='([^']+)'[\s\S]{0,300}?<span(?:\s+class='([^']*)')?\s+title='([^']*)'/g)]
+              .map((m) => ({ id: m[1], leaf: /nochild/.test(m[2] || ''), name: m[3] }));
+            const lines = kids.slice(0, 25).map((k) => k.leaf
+              ? `- [문서] ${k.name}\n  상세: mode=aks query='${q}/${k.id}'`
+              : `- [분류 ${k.id}] ${k.name} → mode=aks query='${k.id}'`);
+            return text(`한국고문서자료관 ${col.name} [${q}] 하위 ${kids.length}건:\n` + (lines.join('\n') || '(0건)')
+              + (kids.length > 25 ? `\n… 외 ${kids.length - 25}건` : '')
+              + `\n※ 이미지 일괄 수집=로컬 스킬(aks-archive-harvester), 웹 열람=뷰어 ${AKS_BASE}. 출처 표기: 한국학중앙연구원 한국고문서자료관.`);
+          }
+          const toks = q.split(/\s+/).filter(Boolean);
+          const hits = toks.length ? AKS_CAT.filter((c) => toks.every((t) => (c.name + ' ' + c.grp).includes(t))) : [];
+          return text(`한국고문서자료관 소장처 '${q}' — ${hits.length}/172곳:\n`
+            + (hits.slice(0, 20).map((c) => `- [${c.id}] ${c.name} (${c.grp})`).join('\n') || '(0곳 — 지역명·성씨·호 등으로 재시도. 예: "송준길", "문중 충청")')
+            + `\n※ 다음 단계: mode=aks query='L013001'(분류 목록) → query='L013001F02'(문서 목록) → query='분류ID/문서ID'(면·썸네일).`
+            + `\n172곳 전수는 2026-11 실측 스냅숏 — 신규 소장처는 ${AKS_BASE}에서 확인.`);
+        } catch (e) { return text(`한국고문서자료관 자동조회 실패(${e.message}) — 뷰어 직접 열람: ${AKS_BASE}/viewer/viewer.do (분류 트리에서 소장처 탐색)`); }
+      }
       try {
         if (mode === 'law') {
           const r = await jLawSearch(q, max_results);
@@ -868,7 +1157,7 @@ item_cd 5종(자료 성격별): ART 도설·회화 / ETC 두루마리·축 / DRR
 
   // ── KOREAN WAR ARCHIVES 6·25전쟁 아카이브센터 (협약기관 — MOU) : TNA-style structured toolset (PlayMCP 준수: 2 tools) ──
   server.tool('koreanwar_search',
-    "Search KOREAN WAR ARCHIVES 6·25전쟁 아카이브센터 (koreanwar.or.kr, War Memorial of Korea Foundation — MOU partner): 55,000+ items (documents·maps·photos·films·audio·oral histories). Parses result cards (title, archRfcd persistent ref code, producer, provenance hierarchy) and extracts NARA Record Group for origin tracing via nara_search. Verified server-side filters: year_from/year_to (production year), acquisition (수집구분: 수집·기증·구입·기탁·제작·이관·차입·기타). scope='battle' searches the battle-info DB instead (69 early-war battles — anchor for TNA WO 281 / NARA RG 407 cross-verification). Korean queries recommended (US-origin footage is re-described in Korean). With KOREANWAR_API_TOKEN, an official OpenAPI metadata channel (KOGL rights fields) joins automatically. Full filter code tables: source_profile('koreanwar').",
+    "Search KOREAN WAR ARCHIVES 6·25전쟁 아카이브센터 (koreanwar.or.kr, War Memorial of Korea Foundation — MOU partner): 55,000+ items (documents·maps·photos·films·audio·oral histories). Parses result cards (title, archRfcd persistent ref code, producer, provenance hierarchy) and extracts NARA Record Group for origin tracing via nara_search. Verified server-side filters: year_from/year_to (production year), acquisition (수집구분: 수집·기증·구입·기탁·제작·이관·차입·기타). scope='battle' searches the battle-info DB instead (69 early-war battles + 16 server-curated later-phase anchors 인천상륙~금성 — for TNA WO 281 / NARA RG 407 cross-verification). Korean queries recommended (US-origin footage is re-described in Korean). With KOREANWAR_API_TOKEN, an official OpenAPI metadata channel (KOGL rights fields) joins automatically. Full filter code tables: source_profile('koreanwar').",
     { query: z.string().describe('한글 권장 — e.g. "장진호", "흥남철수", "인천상륙"'), scope: z.enum(['archive', 'battle']).default('archive').describe('archive=소장자료 통합검색, battle=전투정보 DB'), page: z.number().int().min(1).default(1), max_results: z.number().int().min(1).max(50).default(10).describe('페이지당 결과 수(=pageSize 10/20/50 자동 매핑)'), year_from: z.number().int().optional().describe('생산연도 시작 e.g. 1950'), year_to: z.number().int().optional().describe('생산연도 끝 e.g. 1951'), acquisition: z.enum(['수집', '기증', '기타', '구입', '기탁', '제작', '이관', '차입']).optional().describe('수집구분(depth1) 필터') },
     async ({ query, scope, page, max_results, year_from, year_to, acquisition }) => {
       if (scope === 'battle') {
@@ -885,8 +1174,11 @@ item_cd 5종(자료 성격별): ART 도설·회화 / ETC 두루마리·축 / DRR
           const t = query.trim();
           const matched = t ? cards.filter((c) => (c.name + ' ' + c.metaText).includes(t)) : cards;
           const lines = matched.slice(0, 25).map((c) => `- [warIdx ${c.idx}] ${c.name || '?'}${c.metaText ? ' | ' + c.metaText : ''}\n  ${KW_BASE}/warDetail.do?warIdx=${c.idx}`);
-          if (lines.length) return text(`6·25 전투정보 '${t || '(전체)'}' — ${matched.length}/${cards.length}건:\n` + lines.join('\n') + '\n※ 전투명·시기·장소를 앵커로 TNA WO 281·NARA RG 407·koreanwar_search(scope=archive)와 교차. DB는 개전 초기(1950.6.25~9.14) 단계 수록(확장 중).');
-          return text(`6·25 전투정보 '${t}' — 0건 (전체 ${cards.length}건 중). 현재 DB는 개전 초기(1950.6.25~9.14) 전투만 수록 — 이후 시기(백마고지 1952 등)는 미수록. scope=archive로 자료 검색은 가능.` + dbrowse(listUrl));
+          const anchors = kwAnchorLines(t);
+          const anchorBlock = anchors.length ? `\n\n[후기 단계 검색 앵커 — 서버 큐레이션(기관 전투 DB 아님), 시기는 통설 전사 기준]\n` + anchors.join('\n') : '';
+          if (lines.length) return text(`6·25 전투정보 '${t || '(전체)'}' — ${matched.length}/${cards.length}건:\n` + lines.join('\n') + anchorBlock + '\n※ 전투명·시기·장소를 앵커로 TNA WO 281·NARA RG 407·koreanwar_search(scope=archive)와 교차. 기관 DB는 개전 초기(1950.6.25~9.14) 단계 수록(확장 중) — 이후 시기는 위 앵커로 보완.');
+          if (anchors.length) return text(`6·25 전투정보 '${t}' — 기관 DB 0건 (개전 초기 ${cards.length}건만 수록).` + anchorBlock + `\n※ 앵커의 전투명·시기로 scope=archive·nara_search·tna_search를 교차 검색하십시오.`);
+          return text(`6·25 전투정보 '${t}' — 0건 (전체 ${cards.length}건 중). 현재 기관 DB는 개전 초기(1950.6.25~9.14) 전투만 수록 — 이후 시기(백마고지 1952 등)는 서버 앵커(인천상륙·장진호·지평리·백마고지·금성 등 16건)로 보완되니 해당 전투명으로 재질의. scope=archive로 자료 검색은 가능.` + dbrowse(listUrl));
         } catch (e) { return text(agentBrowse('6·25 전투정보', query, listUrl, `자동조회 실패(${e.message})`)); }
       }
       const pageSize = max_results > 20 ? 50 : (max_results > 10 ? 20 : 10);
