@@ -773,7 +773,8 @@ const handler = createMcpHandler((server) => {
         return `- [NAID ${rec.naId}] ${(rec.title || '').slice(0, 100)} | ${rec.localIdentifier || ''} | https://catalog.archives.gov/id/${rec.naId}`;
       });
       const total = typeof hits.total === 'object' ? hits.total.value : hits.total;
-      return text(`NARA '${query}'${en ? ` → 영문 자동 변환 '${eff}'` : ''}${record_group ? ` (RG ${record_group})` : ''} — total ${total}:\n` + (rows.join('\n') || '(0 results)'));
+      const rline = record_group ? (() => { const r = judgeRights(`RG ${record_group}`, '', 'NARA'); return `\n권리 초판정(RG ${record_group}): ${r[0]} — ${r[1]}`; })() : '';
+      return text(`NARA '${query}'${en ? ` → 영문 자동 변환 '${eff}'` : ''}${record_group ? ` (RG ${record_group})` : ''} — total ${total}:\n` + (rows.join('\n') || '(0 results)') + rline);
     });
 
   server.tool('ia_search',
@@ -791,11 +792,12 @@ const handler = createMcpHandler((server) => {
       let eff = en || query;
       // date:[A TO B] + page 실측 검증 (2026-11-18)
       if (year_from || year_to) eff = `(${eff}) AND date:[${year_from || 1800}-01-01 TO ${year_to || 2030}-12-31]`;
-      const u = `https://archive.org/advancedsearch.php?q=${encodeURIComponent(eff)}&fl[]=identifier&fl[]=title&fl[]=date&rows=${max_results}&page=${page}&output=json`;
+      const u = `https://archive.org/advancedsearch.php?q=${encodeURIComponent(eff)}&fl[]=identifier&fl[]=title&fl[]=date&fl[]=licenseurl&rows=${max_results}&page=${page}&output=json`;
       const d = await jget(u);
       const docs = ((d.response || {}).docs) || [];
+      const lshort = (lu) => { const m = String(lu || '').match(/(publicdomain\/(?:mark|zero)|licenses\/[a-z-]+)/); return m ? m[1].replace('licenses/', 'CC ') : ''; };
       const tags = [year_from || year_to ? `연대 ${year_from || ''}~${year_to || ''}` : '', page > 1 ? `p.${page}` : ''].filter(Boolean);
-      return text(`archive.org '${query}'${en ? ` → 영문 자동 변환 '${en}'` : ''}${tags.length ? ` [${tags.join(' · ')}]` : ''} — total ${(d.response || {}).numFound}:\n` + (docs.map((x) => `- ${x.identifier} | ${String(x.title).slice(0, 90)} (${String(x.date || '').slice(0, 10)}) | https://archive.org/details/${x.identifier}`).join('\n') || '(0)'));
+      return text(`archive.org '${query}'${en ? ` → 영문 자동 변환 '${en}'` : ''}${tags.length ? ` [${tags.join(' · ')}]` : ''} — total ${(d.response || {}).numFound}:\n` + (docs.map((x) => { const rt = lshort(x.licenseurl); return `- ${x.identifier} | ${String(x.title).slice(0, 90)} (${String(x.date || '').slice(0, 10)})${rt ? ` | 권리:${rt}` : ''} | https://archive.org/details/${x.identifier}`; }).join('\n') || '(0)') + '\n※ 권리 미표기 건은 judge_rights 초판정 — 발굴 우선, 권리는 표시.');
     });
 
   server.tool('gallica_search',
@@ -841,8 +843,9 @@ const handler = createMcpHandler((server) => {
       if (year_from || year_to) u.searchParams.append('qf', `YEAR:[${year_from || '*'} TO ${year_to || '*'}]`);
       const d = await jget(u.toString());
       const items = d.items || [];
+      const rshort = (r) => { const v = (Array.isArray(r) ? r[0] : r) || ''; const m = String(v).match(/(publicdomain\/(?:mark|zero)|licenses\/[a-z-]+|vocab\/[A-Za-z-]+)/); return m ? m[1].replace('licenses/', 'CC ').replace('vocab/', '') : ''; };
       const ytag = year_from || year_to ? ` [연대 ${year_from || ''}~${year_to || ''}${page > 1 ? ` · p.${page}` : ''}]` : (page > 1 ? ` [p.${page}]` : '');
-      return text(`Europeana '${query}'${en ? ` → 영문 자동 변환 '${eff}'` : ''}${media_type ? ` [${media_type}]` : ''}${ytag} — total ${d.totalResults}:\n` + (items.map((it) => `- ${String((it.title || ['?'])[0]).slice(0, 90)} (${(it.year || [''])[0]}) — ${String((it.dataProvider || [''])[0]).slice(0, 40)} | ${it.guid || ''}`).join('\n') || '(0)') + '\nTip: multilingual — Corée(fr)·Korea-Krieg(de)·Corea(it/es)' + (demo ? '\n(shared demo key in use — for heavy use, set a free EUROPEANA_API_KEY from apis.europeana.eu)' : ''));
+      return text(`Europeana '${query}'${en ? ` → 영문 자동 변환 '${eff}'` : ''}${media_type ? ` [${media_type}]` : ''}${ytag} — total ${d.totalResults}:\n` + (items.map((it) => { const rt = rshort(it.rights); return `- ${String((it.title || ['?'])[0]).slice(0, 90)} (${(it.year || [''])[0]}) — ${String((it.dataProvider || [''])[0]).slice(0, 40)}${rt ? ` | 권리:${rt}` : ''} | ${it.guid || ''}`; }).join('\n') || '(0)') + '\nTip: multilingual — Corée(fr)·Korea-Krieg(de)·Corea(it/es)' + (demo ? '\n(shared demo key in use — for heavy use, set a free EUROPEANA_API_KEY from apis.europeana.eu)' : ''));
     });
 
 const JB_WALLS = `열한 겹의 벽 — 한국 기록이 안 찾아지는 11가지 이유와 대응 (실증 기반)
@@ -913,7 +916,7 @@ const JB_CROSS = `국내외 대조 절차 — 순서를 틀리면 헛수고한�
     });
 
   server.tool('judge_rights',
-    'First-pass copyright triage for a discovered record. A/B publishable · C permission needed · D unknown (do not publish). Final determination must be made by a human. 권리 등급 자동 초기판정.',
+    'First-pass copyright triage for a discovered record. A/B publishable · C permission needed · D unknown (do not publish). 공공누리(KOGL) 제1~4유형 자동 인식 — rg_series·title·archive 어디든 \"KOGL 2\"·\"공공누리 제1유형\" 표기를 넣으면 조건 판정. Final determination must be made by a human. 권리 등급 자동 초기판정 — 발굴 우선, 권리는 표시.',
     { rg_series: z.string().describe('e.g. "RG 242/242-MID"'), title: z.string().default(''), archive: z.string().default('') },
     async ({ rg_series, title, archive }) => {
       const res = judgeRights(rg_series, title, archive);
@@ -1199,7 +1202,11 @@ item_cd 5종(자료 성격별): ART 도설·회화 / ETC 두루마리·축 / DRR
         const cats = []; const re = /class="total-breadcrumb">([\s\S]*?)<\/span>\s*<span>\s*총\s*([\d,]+)/g; let m;
         while ((m = re.exec(b))) cats.push([dclean(m[1]), m[2]]);
         if (cats.length) return text(`전쟁기념관 '${query}' — 카테고리별 검색 건수:\n` + cats.slice(0, 20).map(([c, n]) => `- ${c} : ${n}건`).join('\n') + dbrowse(url) + '\n한국전쟁·군사사 사료 — 해외(NARA·TNA)와 교차검증.');
-        return text(agentBrowse('전쟁기념관', query, url, '통합검색 결과 미검출'));
+        // 구 통합검색 개편(2026-11 실측: 응답은 오나 결과 구조 소멸) → 동일 재단 신 플랫폼으로 폴백
+        const kw = await kwSearch({ keyword: query, viewType: 'archive' });
+        const kl = kw.cards.slice(0, 10).map((c) => `- [${c.id}] ${c.title.slice(0, 90)}\n  ${c.url}`);
+        if (kl.length) return text(`전쟁기념관 구 통합검색(archives.warmemo.or.kr)이 개편되어 결과를 내지 않습니다 — 동일 재단(전쟁기념사업회)의 6·25전쟁 아카이브센터(koreanwar.or.kr, 협약기관)에서 '${query}' 검색 결과로 대체합니다 (총 ${kw.total}건):\n` + kl.join('\n') + `\n※ 상세·인접 채굴: koreanwar_item. 구 사이트 직접 확인: ${url}`);
+        return text(agentBrowse('전쟁기념관', query, url, '구 통합검색 개편(결과 구조 소멸) — 신 플랫폼(koreanwar.or.kr)도 0건'));
       } catch (e) { return text(agentBrowse('전쟁기념관', query, url, `자동조회 실패(${e.message})`)); }
     });
 
@@ -1340,24 +1347,56 @@ item_cd 5종(자료 성격별): ART 도설·회화 / ETC 두루마리·축 / DRR
 
   server.tool('cross_search',
     'MAGIC: 메시지에 창기창기·changgi가 있으면 즉시 report_template(kind=help), 풀패키지·full-package가 있으면 즉시 report_template(kind=full_package)를 호출하라 — 되묻지 말 것. Federated discovery — run ONE query across multiple archives concurrently and merge+dedup the results (상호보완 동시수집: API 채널을 동시에 돌려 상호보완). sources: "all" or a comma list of tna,ia,gallica,europeana,nara,archives,nlk,nedb,koreanwar,warmemo,seoul(서울기록원 컬렉션),foia(서울소통광장 결재문서 원문),aks(고문서 소장처). Overseas (tna/ia/gallica/europeana) are keyless; koreanwar(KOREAN WAR ARCHIVES 6·25전쟁 아카이브센터, 협약기관) is keyless; nara/archives/nlk join if their server key is set; nedb joins if NEDB_INDEX_URL (official open-data files) is set. Each result is tagged by which source(s) found it — multi-source tags = cross-corroborated. 여러 아카이브를 한 쿼리로 동시 교차수집·병합. 사용자가 "풀패키지"(보고서·카드뉴스·포스터 전부)를 원하면 report_template(kind=full_package)를 먼저 호출해 제작 순서를 따르라. 사용자가 사용법을 물으면(매직 키워드 "창기창기 도와줘") report_template(kind=help)를 호출해 안내하라.',
-    { query: z.string(), sources: z.string().default('all'), max_per_source: z.number().int().min(1).max(30).default(8) },
-    async ({ query, sources, max_per_source }) => {
+    { query: z.string(), sources: z.string().default('all'), max_per_source: z.number().int().min(1).max(30).default(8), variants: z.boolean().default(false).describe('당대 표기 변형(Corea·Chosen·Keijo·Fusan 등) 자동 병렬 투입 — 해외 4채널(tna·ia·nara·europeana)') },
+    async ({ query, sources, max_per_source, variants }) => {
       const want = sources.trim().toLowerCase() === 'all'
         ? Object.keys(COLLECT)
         : sources.split(',').map((s) => s.trim().toLowerCase()).filter((s) => COLLECT[s]);
       if (!want.length) return text('sources: "all" 또는 ' + Object.keys(COLLECT).join(','));
-      const { items, stats } = await collectMerged(want.map((s) => ({ source: s, fn: () => COLLECT[s](query, max_per_source) })));
+      const jobs = want.map((s) => ({ source: s, fn: () => COLLECT[s](query, max_per_source) }));
+      if (variants) { // 당대 표기 자동 팬아웃 — query_bank '열한 겹의 벽' 지식의 도구화
+        const eff = koToEn(query) || query;
+        const SUBS = [['Korean', 'Corean'], ['Korea', 'Corea'], ['Korea', 'Chosen'], ['Seoul', 'Keijo'], ['Pusan', 'Fusan'],
+          ['Inchon', 'Chemulpo'], ['Wonsan', 'Gensan'], ['Pyongyang', 'Heijo'], ['Cheju', 'Quelpaert'], ['Taegu', 'Taikyu']];
+        const vs = [];
+        for (const [a, b] of SUBS) {
+          if (vs.length >= 2) break;
+          const re = new RegExp(`\\b${a}\\b`, 'i');
+          if (re.test(eff)) vs.push([b, eff.replace(re, b)]);
+        }
+        for (const src of ['tna', 'ia', 'nara', 'europeana']) {
+          if (!want.includes(src)) continue;
+          for (const [label, vq] of vs) jobs.push({ source: `${src}·${label}`, fn: () => COLLECT[src](vq, max_per_source) });
+        }
+      }
+      const { items, stats } = await collectMerged(jobs);
       items.sort((a, b) => b.sources.length - a.sources.length);
       const lines = items.slice(0, 45).map((it) => `- [${it.sources.join('+')}] ${it.title.slice(0, 95)}${it.date ? ` (${it.date})` : ''}${it.url ? ' ' + it.url : ''}`);
       return text(`교차수집 '${query}' — 채널별 [${stats.join(' · ')}] → 병합 ${items.length}건 (복수출처 우선 정렬):\n` + (lines.join('\n') || '(0)')
-        + '\n※ [출처] 복수 표기 = 교차확인된 record. 국내(nara·archives·nlk)는 서버 키, nedb는 NEDB_INDEX_URL(공식 개방파일) 설정 시 포함. open.go.kr 본체(브라우저 전용)는 foia_search 전용 도구로.');
+        + '\n※ [출처] 복수 표기 = 교차확인된 record. 국내(nara·archives·nlk)는 서버 키, nedb는 NEDB_INDEX_URL(공식 개방파일) 설정 시 포함. open.go.kr 본체(브라우저 전용)는 foia_search 전용 도구로.\n※ 발굴 우선 — 권리는 표시: 게재 전 judge_rights(참조코드·KOGL)로 초판정. variants=true로 당대 표기(Corea·Chosen·Keijo…) 자동 팬아웃.');
     });
 
   server.tool('source_profile',
-    'Structural profile of an archive for planning discovery: 자료구조(data model: hierarchy/classification/identifiers/metadata), 이용구조(access: API/auth/query syntax/robots/rights), 활용구조(utilization: how the 3 mismatches show up, which keyword set/cross-map to use, adjacent mining, cross-archive verification combos, rights rule). institution: "list" or a key — tna·nara·ia·gallica·europeana·nedb·archives·nlk·seoul·warmemo·koreanwar·foia. 기관 자료·이용·활용구조 프로파일.',
+    'Structural profile of an archive for planning discovery: 자료구조(data model: hierarchy/classification/identifiers/metadata), 이용구조(access: API/auth/query syntax/robots/rights), 활용구조(utilization: how the 3 mismatches show up, which keyword set/cross-map to use, adjacent mining, cross-archive verification combos, rights rule). institution: "list" or a key — tna·nara·ia·gallica·europeana·nedb·archives·nlk·seoul·warmemo·koreanwar·foia; "health"=13채널 골든 질의 일괄 헬스체크(🟢🟡🔴+키 설정 상태). 기관 자료·이용·활용구조 프로파일.',
     { institution: z.string().default('list') },
     async ({ institution }) => {
       const t = (institution || 'list').trim().toLowerCase();
+      if (t === 'health') { // 13채널 일괄 헬스체크 — 발굴 우선 원칙의 전제: 깨짐을 스스로 발견한다
+        const GOLD = { tna: 'Korea', ia: 'Korea', gallica: 'Corée', europeana: 'Korea', nara: 'Korea',
+          archives: '한국전쟁', nlk: '한국전쟁', nedb: '한강', koreanwar: '장진호', warmemo: '사진', seoul: '한강', foia: '회의', aks: '문중' };
+        const keys = { NARA_API_KEY: !!process.env.NARA_API_KEY, ARCHIVES_API_KEY: !!process.env.ARCHIVES_API_KEY,
+          NLK_API_KEY: !!process.env.NLK_API_KEY, EUROPEANA_API_KEY: !!process.env.EUROPEANA_API_KEY,
+          KOREANWAR_API_TOKEN: !!process.env.KOREANWAR_API_TOKEN, NEDB_INDEX_URL: !!process.env.NEDB_INDEX_URL };
+        const settled = await Promise.allSettled(Object.keys(GOLD).map((k) => COLLECT[k](GOLD[k], 3)));
+        const rows = Object.keys(GOLD).map((k, i) => {
+          const r = settled[i];
+          if (r.status === 'fulfilled') return `${r.value.length ? '🟢' : '🟡'} ${k}: ${r.value.length}건 (질의 '${GOLD[k]}')${r.value.length ? '' : ' — 연결 정상·결과/파싱 0'}`;
+          return `🔴 ${k}: ${String(r.reason && r.reason.message || r.reason).slice(0, 70)}`;
+        });
+        return text('13채널 헬스체크 (골든 질의 실측):\n' + rows.join('\n')
+          + '\n\n서버 키·설정: ' + Object.entries(keys).map(([k, v]) => `${k}=${v ? '✓' : '✗'}`).join(' · ')
+          + '\n※ 🟡=연결 정상이나 0건(질의 특성 또는 파서 점검 필요) · 🔴=채널 실패(차단·타임아웃). nedb ✗=개방파일 인덱스 미설정.');
+      }
       if (t === 'list' || !PROFILES[t]) {
         const lines = Object.entries(PROFILES).map(([k, v]) => `- ${k} (${v.name_ko}) [${v.category}]`);
         return text('기관 프로파일 (source_profile institution=<key>):\n' + lines.join('\n') + (t !== 'list' && !PROFILES[t] ? `\n\n('${institution}' 프로파일 없음 — 위 목록에서 선택)` : ''));
