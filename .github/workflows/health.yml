@@ -30,7 +30,7 @@ jobs:
           print(text)
           with open(os.environ['GITHUB_STEP_SUMMARY'], 'a') as f:
               f.write('## 주간 소스 헬스체크\n```\n' + text + '\n```\n')
-          red = text.count('🔴')
+          red = sum(1 for ln in text.splitlines() if ln.startswith('🔴'))  # 범례의 🔴 제외
           if red >= 3:
               print(f'::error::🔴 {red}채널 — 기지 2채널(gallica·foia) 초과. 신규 장애 점검 필요.')
               sys.exit(1)
