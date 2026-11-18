@@ -1,0 +1,27 @@
+name: verify
+on:
+  push:
+    branches: [main, main-ua9jn9]
+  pull_request:
+    branches: [main]
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: 구문 검사 (route.js · lib)
+        run: |
+          cp "app/api/[transport]/route.js" /tmp/route_check.mjs
+          node --check /tmp/route_check.mjs
+          node --check lib/rights.js
+      - name: 정적 검증 (도구 20종 · 설명 1024자 · TOPICS 컴파일 · 24KB 가드)
+        run: node scripts/ci-verify.mjs
+      - name: marketplace 패리티 (3사본 도구명 diff + py_compile)
+        run: |
+          git clone --depth 1 https://github.com/changgi/korea-archive-marketplace /tmp/mkt
+          node scripts/ci-parity.mjs /tmp/mkt
+          python3 -m py_compile /tmp/mkt/plugins/korea-archive/servers/server.py /tmp/mkt/mcp/server.py \
+            /tmp/mkt/plugins/korea-archive/servers/kla/ledger.py /tmp/mkt/collector/kla/ledger.py
