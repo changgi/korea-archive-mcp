@@ -709,12 +709,28 @@ const handler = createMcpHandler((server) => {
     cross_search: '다중 아카이브 동시 교차수집', source_profile: '기관 구조 프로파일',
   };
   const _tool = server.tool.bind(server);
+  // PlayMCP 응답 24KB 한도 — UTF-8 바이트 실측 공통 가드(여유 23,800B). 모든 도구에 일괄 적용.
+  const LIMIT_B = 23800;
+  const _enc = new TextEncoder(); const _dec = new TextDecoder('utf-8', { fatal: false });
+  const guard24k = (cb) => async (...args) => {
+    const res = await cb(...args);
+    try {
+      for (const c of (res && res.content) || []) {
+        if (c.type === 'text' && typeof c.text === 'string') {
+          const b = _enc.encode(c.text);
+          if (b.length > LIMIT_B) c.text = _dec.decode(b.slice(0, LIMIT_B)).replace(/\uFFFD+$/, '')
+            + `\n…[응답 24KB 한도 — ${b.length}B 중 절단. page·max_results로 분할 조회]`;
+        }
+      }
+    } catch { /* 가드 실패 시 원응답 유지 */ }
+    return res;
+  };
   server.tool = (name, desc, schema, cb) => {
     const max = 1024 - SVC.length;
     const d = (desc.length > max ? desc.slice(0, max - 1) + '…' : desc) + SVC;
     return _tool(name, d, schema,
       { title: TITLES[name] || name, readOnlyHint: true, destructiveHint: false, idempotentHint: true, openWorldHint: true },
-      cb);
+      guard24k(cb));
   };
 
   server.tool('tna_search',
