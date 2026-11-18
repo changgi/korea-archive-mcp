@@ -714,7 +714,8 @@ const handler = createMcpHandler((server) => {
       const d = await tnaFetch(q, max_results, page, year_from, year_to);
       const recs = d.records || [];
       const tags = [year_from || year_to ? `연대 ${year_from || ''}~${year_to || ''}` : '', page > 1 ? `p.${page}` : ''].filter(Boolean);
-      return text(`TNA '${query}'${en ? ` → 영문 자동 변환 '${eff}'` : ''}${tags.length ? ` [${tags.join(' · ')}]` : ''} — total ${d.count ?? '?'}:\n` + (recs.map(tnaLine).join('\n') || '(0 results)'));
+      const hint = (year_from || year_to) && !recs.length ? '\n※ 연대 필터는 연대 미상(Date unknown) 기록을 제외합니다 — 무필터로 재시도해 비교하십시오.' : '';
+      return text(`TNA '${query}'${en ? ` → 영문 자동 변환 '${eff}'` : ''}${tags.length ? ` [${tags.join(' · ')}]` : ''} — total ${d.count ?? '?'}:\n` + (recs.map(tnaLine).join('\n') || '(0 results)') + hint);
     });
 
   server.tool('tna_adjacent_mine',
@@ -790,18 +791,20 @@ const handler = createMcpHandler((server) => {
     async ({ query, max_results, year_from, year_to, page }) => {
       const fr = gallicaKoToFr(query);
       const eff = fr || query;
-      let cql = `gallica all "${eff.replace(/"/g, '')}"`;
-      if (year_from) cql += ` and gallicapublication_date>="${year_from}"`;
-      if (year_to) cql += ` and gallicapublication_date<="${year_to}"`;
-      const q = encodeURIComponent(cql);
-      const r = await fetch(`https://gallica.bnf.fr/SRU?operation=searchRetrieve&version=1.2&query=${q}&maximumRecords=${max_results}&startRecord=${(page - 1) * max_results + 1}`, { headers: { 'User-Agent': UA } });
-      const xml = await r.text();
-      const total = (xml.match(/<srw:numberOfRecords>(\d+)</) || [])[1] || '?';
-      const recs = xml.split('<srw:record>').slice(1);
       const g = (block, tag) => { const m = block.match(new RegExp(`<dc:${tag}[^>]*>([^<]*)<`)); return m ? m[1].trim() : ''; };
+      const base = `gallica all "${eff.replace(/"/g, '')}"`;
+      // 연대 필터: BnF 공식 색인 dc.date(>=·<= 지원, api.bnf.fr) — 진단 응답이면 후처리 폴백
+      const dateClause = (year_from ? ` and dc.date >= "${year_from}"` : '') + (year_to ? ` and dc.date <= "${year_to}"` : '');
+      const sru = async (cql) => (await fetch(`https://gallica.bnf.fr/SRU?operation=searchRetrieve&version=1.2&query=${encodeURIComponent(cql)}&maximumRecords=${max_results}&startRecord=${(page - 1) * max_results + 1}`, { headers: { 'User-Agent': UA } })).text();
+      let xml = await sru(base + dateClause);
+      let total = (xml.match(/<srw:numberOfRecords>(\d+)</) || [])[1];
+      let post = false;
+      if (dateClause && total === undefined) { xml = await sru(base); total = (xml.match(/<srw:numberOfRecords>(\d+)</) || [])[1]; post = true; }
+      let recs = xml.split('<srw:record>').slice(1);
+      if (post) recs = recs.filter((b) => { const y = parseInt((g(b, 'date').match(/\d{4}/) || [])[0], 10); return y && (!year_from || y >= year_from) && (!year_to || y <= year_to); });
       const lines = recs.slice(0, max_results).map((b) => `- ${g(b, 'title').slice(0, 100)} (${g(b, 'date')}) [${g(b, 'type')}] ${g(b, 'identifier')}`);
-      const tags = [year_from || year_to ? `간행 ${year_from || ''}~${year_to || ''}` : '', page > 1 ? `p.${page}` : ''].filter(Boolean);
-      return text(`Gallica '${query}'${fr ? ` → 프랑스어 자동 변환 '${eff}'` : ''}${tags.length ? ` [${tags.join(' · ')}]` : ''} — total ${total}:\n` + (lines.join('\n') || '(0)') + '\nTip: French variants — Corée·Coréens·Séoul·Fusan·guerre de Corée·Tchosen');
+      const tags = [year_from || year_to ? `간행 ${year_from || ''}~${year_to || ''}${post ? '·후처리' : ''}` : '', page > 1 ? `p.${page}` : ''].filter(Boolean);
+      return text(`Gallica '${query}'${fr ? ` → 프랑스어 자동 변환 '${eff}'` : ''}${tags.length ? ` [${tags.join(' · ')}]` : ''} — total ${total || '?'}${post ? `건 중 이 페이지 연대 일치 ${lines.length}건` : ''}:\n` + (lines.join('\n') || '(0)') + '\nTip: French variants — Corée·Coréens·Séoul·Fusan·guerre de Corée·Tchosen');
     });
 
   server.tool('europeana_search',
