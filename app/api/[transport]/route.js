@@ -180,11 +180,14 @@ function toIndexLang(q, lang) {
 const koToEn = (q) => toIndexLang(q, 'en');
 const gallicaKoToFr = (q) => toIndexLang(q, 'fr');
 
-async function tnaFetch(query, rows = 20, page = 1) {
+async function tnaFetch(query, rows = 20, page = 1, yearFrom, yearTo) {
   const u = new URL('https://discovery.nationalarchives.gov.uk/API/search/records');
   u.searchParams.set('sps.searchQuery', query);
   u.searchParams.set('sps.resultsPageSize', String(rows));
   u.searchParams.set('sps.page', String(page));
+  // sps.dateFrom/To 실측 검증: Korea 13,533건 → 1950~51 한정 2,553건 (2026-11-18)
+  if (yearFrom) u.searchParams.set('sps.dateFrom', `${yearFrom}-01-01`);
+  if (yearTo) u.searchParams.set('sps.dateTo', `${yearTo}-12-31`);
   return jget(u.toString());
 }
 const tnaLine = (r) => `- [${r.reference || '?'}] ${(r.title || r.description || '').replace(/<[^>]+>/g, '').slice(0, 110)} (${r.coveringDates || ''}) https://discovery.nationalarchives.gov.uk/details/r/${r.id}`;
@@ -227,6 +230,184 @@ function nedbFileSearch(recs, q, n) {
   return recs.filter((r) => (r.title || '').toLowerCase().includes(ql) || (r.text || '').toLowerCase().includes(ql))
     .slice(0, n).map((r) => ({ title: r.title || '', date: r.date || '', id: r.db || '', url: r.url || '' }));
 }
+
+// ── 한국고문서자료관(한국학중앙연구원, archive.aks.ac.kr) — 소장처 172곳 (2026-11-17 treeAjax 전수 실측) ──
+// 형식: id|상위경로(upPath)|분류|소장처명. 트리·문서목록은 라이브 조회, 이미지 일괄 수집은 로컬 전용.
+const AKS_BASE = 'https://archive.aks.ac.kr';
+const AKS_UA = { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)', 'Referer': AKS_BASE + '/viewer/viewer.do' };
+const AKS_CAT = `L011146|01^0111|문중>서울특별시|서울 마포 반남박씨 대종중
+L011143|01^0111|문중>서울특별시|서울 마포 성주이씨 대종회
+L011144|01^0111|문중>서울특별시|서울 원주김씨 두암 김응남 종가
+L011148|01^0111|문중>서울특별시|서울 전주이씨 경녕군 후손가
+L011145|01^0111|문중>서울특별시|서울 전주이씨 장천군 이보생 후손가
+L011117|01^0111|문중>서울특별시|서울 진주류씨 우강 유태영 후손가
+L016909|01^0169|문중>대구광역시|대구 영천이씨 세효당 후손가
+L013003|01^0130|문중>대전광역시|대전 무수동 안동권씨 유회당 권이진 종가
+L013001|01^0130|문중>대전광역시|대전 회덕 은진송씨 동춘당 송준길 후손가
+L014151|01^0141|문중>경기도|광주 기곡 광주안씨 순암 안정복 종가
+L014160|01^0141|문중>경기도|광주 연안이씨 매간 이익상 종가
+L014158|01^0141|문중>경기도|광주 평산신씨 신대우
+L014153|01^0141|문중>경기도|군포 속달 동래정씨 동래부원군 정난종 종가
+L014140|01^0141|문중>경기도|김포 의령남씨 서윤공 남두장 후손가
+L014156|01^0141|문중>경기도|김포 전주이씨 효헌 이인철 후손가
+L014139|01^0141|문중>경기도|성남 해주오씨 월곡공파 오윤함
+L014163|01^0141|문중>경기도|시흥 반남박씨 금계군 박동량 종가
+L014132|01^0141|문중>경기도|안산 부곡 진주류씨 경성당
+L014115|01^0141|문중>경기도|안성 보체 동래정씨 정홍순 종가
+L014131|01^0141|문중>경기도|안성 해주오씨 오치풍 후손가
+L014154|01^0141|문중>경기도|양근 안동김씨 노가재 김창업 후손가
+L014161|01^0141|문중>경기도|양주 광주정씨
+L014168|01^0141|문중>경기도|양주 사릉 해주정씨 종가
+L014164|01^0141|문중>경기도|여주 산북 전주이씨 완양부원군 이충원 종가
+L014148|01^0141|문중>경기도|여흥민씨 민영환 후손가
+L014152|01^0141|문중>경기도|용인 해주오씨 추탄 오윤겸 종가
+L014167|01^0141|문중>경기도|의정부 장암 반남박씨 서계 박세당 종가
+L014166|01^0141|문중>경기도|의정부 장암 반남박씨 서계 박세당 후손가
+L014165|01^0141|문중>경기도|이천 풍천임씨
+L014303|01^0143|문중>충청북도|제천 한수 연안이씨
+L014423|01^0144|문중>충청남도|공주 안동김씨 청음 김상헌 후손가
+L014421|01^0144|문중>충청남도|공주 전주이씨 숭선군파 종가
+L014422|01^0144|문중>충청남도|공주 진주류씨 금사 유충걸 후손가
+L014418|01^0144|문중>충청남도|논산 노성 파평윤씨 명재 윤증 종가
+L014426|01^0144|문중>충청남도|보령 천궁 경주김씨 직각 김면주 종가
+L014425|01^0144|문중>충청남도|부여 은산 함양박씨 구당 박세영 종가
+L014429|01^0144|문중>충청남도|서산 대교 경주김씨 충민공 김홍익 후손가
+L014432|01^0144|문중>충청남도|서산 대교 경주김씨 학주 김홍욱 종가
+L014433|01^0144|문중>충청남도|서산 대교 경주김씨 학주 김홍욱 후손가
+L014430|01^0144|문중>충청남도|아산 선교 장흥임씨 종가
+L014427|01^0144|문중>충청남도|예산 한곡 한산이씨 수당 고택
+L014431|01^0144|문중>충청남도|예산 한양조씨
+L014428|01^0144|문중>충청남도|청양 안동김씨 삼당 김영 후손가
+L014738|01^0147|문중>전북특별자치도|고창 광산김씨 노산사
+L014734|01^0147|문중>전북특별자치도|고창 신천강씨
+L014724|01^0147|문중>전북특별자치도|고창 흥덕 평해황씨 이재 황윤석 종가
+L014731|01^0147|문중>전북특별자치도|남원 안터 순흥안씨 사제당 안처순 후손가
+L014722|01^0147|문중>전북특별자치도|남원·구례 삭녕최씨
+L014720|01^0147|문중>전북특별자치도|부안 우반 부안김씨
+L014735|01^0147|문중>전북특별자치도|익산 함열 임천조씨
+L014736|01^0147|문중>전북특별자치도|정읍 광산김씨 김흥암 후손가
+L014737|01^0147|문중>전북특별자치도|정읍 광산김씨 옥산서원
+L014719|01^0147|문중>전북특별자치도|진안 정천 전주이씨 서곡 이정영 후손가
+L014804|01^0148|문중>전라남도|구례 오미 문화류씨 운조루
+L014803|01^0148|문중>전라남도|나주 회진 나주임씨 창계 임영 후손가
+L014810|01^0148|문중>전라남도|영광 연안김씨 종가
+L014802|01^0148|문중>전라남도|영광 영월신씨
+L014812|01^0148|문중>전라남도|영암 남평문씨
+L014813|01^0148|문중>전라남도|해남 김해김씨
+L014811|01^0148|문중>전라남도|해남 연동 해남윤씨 녹우당
+L016792|01^0167|문중>경상북도|경주 구정 경주이씨
+L016722|01^0167|문중>경상북도|경주 소정 경주이씨
+L016762|01^0167|문중>경상북도|경주 양동 경주손씨 종가 송첨
+L016712|01^0167|문중>경상북도|경주 옥산 여주이씨 독락당
+L016794|01^0167|문중>경상북도|경주 옥산 여주이씨 치암 이순 종가
+L016798|01^0167|문중>경상북도|경주 용산서원
+L016706|01^0167|문중>경상북도|경주 이조 경주최씨
+L016727|01^0167|문중>경상북도|고령 도진 고령박씨 소윤공 문연재
+L016763|01^0167|문중>경상북도|고령 선산김씨 점필재 김종직 종가
+L016768|01^0167|문중>경상북도|구미 옥산 인동장씨 여헌 장현광 종가
+L016746|01^0167|문중>경상북도|김천 성산이씨 양계 이하 종가
+L016724|01^0167|문중>경상북도|김천 진주강씨 학암 강석귀 종가
+L016744|01^0167|문중>경상북도|봉화 꽃내 무안박씨 회이당 박한 종가
+L016725|01^0167|문중>경상북도|봉화 법전 진주강씨 고암 강임 후손가
+L016775|01^0167|문중>경상북도|봉화 유곡 안동권씨 충재 권벌 종가
+L016776|01^0167|문중>경상북도|봉화 유곡 안동권씨 충재 권벌 후손가
+L016785|01^0167|문중>경상북도|상주 낙동 풍양조씨 양진당 조정
+L016793|01^0167|문중>경상북도|상주 성주이씨 묵재 종가
+L016767|01^0167|문중>경상북도|상주 연안이씨 식산 이만부 종가
+L016766|01^0167|문중>경상북도|상주 우산 진주정씨 우복 정경세 종가
+L016761|01^0167|문중>경상북도|상주 충주박씨 충원군 박동형 종가
+L016769|01^0167|문중>경상북도|성주 명곡 벽진이씨 완석정 이언영 종가
+L016764|01^0167|문중>경상북도|안동 갈전 순흥안씨 종가
+L016713|01^0167|문중>경상북도|안동 금계 의성김씨 학봉 김성일 종가
+L016758|01^0167|문중>경상북도|안동 법흥 고성이씨 종가 임청각
+L016709|01^0167|문중>경상북도|안동 송파 진주하씨 하위지 후손가
+L016701|01^0167|문중>경상북도|안동 수곡 전주류씨 무실 종가
+L016715|01^0167|문중>경상북도|안동 오천 광산김씨 후조당 김부필
+L016717|01^0167|문중>경상북도|안동 주촌 진성이씨 경류정
+L016707|01^0167|문중>경상북도|안동 천전 의성김씨 천상각파
+L016708|01^0167|문중>경상북도|안동 하회 풍산류씨
+L016728|01^0167|문중>경상북도|안동 하회 풍산류씨 북촌댁 화경당
+L016759|01^0167|문중>경상북도|영덕 도곡 무안박씨 무의공 박의장 종가
+L016765|01^0167|문중>경상북도|영덕 도곡 무안박씨 충효당 박선 종가
+L016760|01^0167|문중>경상북도|영덕 재령이씨 충효당 이함 종가
+L016791|01^0167|문중>경상북도|영주 화계 인동장씨 연복군 종가
+L016795|01^0167|문중>경상북도|예천 맛질 함양박씨 미산 박득녕 종가
+L016796|01^0167|문중>경상북도|예천 맛질 함양박씨 박현녕 후손가
+L016780|01^0167|문중>경상북도|예천 진주류씨 서파 유희 가문
+L016741|01^0167|문중>경상북도|의성 아주신씨 오봉 신지제 가문
+L016742|01^0167|문중>경상북도|의성 아주신씨 호계 신적도 가문
+L016774|01^0167|문중>경상북도|청도 함박김씨
+L016721|01^0167|문중>경상북도|칠곡 석전 광주이씨
+L015019|01^0150|문중>경상남도|거창 강동 초계정씨 동계 정온 종가
+L015025|01^0150|문중>경상남도|거창 거창신씨
+L015024|01^0150|문중>경상남도|거창 은진임씨
+L015022|01^0150|문중>경상남도|밀양 밀성박씨 종가 모선정
+L015020|01^0150|문중>경상남도|밀양 사촌 의령남씨 종가 침류정
+L015026|01^0150|문중>경상남도|밀양 창녕조씨 오봉서원
+L015007|01^0150|문중>경상남도|진주 단목 진양하씨 단지 하협 종가
+L015004|01^0150|문중>경상남도|진주 단목 진양하씨 창주 하증 후손가
+L015023|01^0150|문중>경상남도|진주 마진 재령이씨 이재관 후손가
+L015018|01^0150|문중>경상남도|진주 마진 재령이씨 종가
+L015011|01^0150|문중>경상남도|진주 안계 진양하씨 담헌 하우선 종가
+L015005|01^0150|문중>경상남도|진주 운문 진양하씨
+L015002|01^0150|문중>경상남도|함안 두릉 순흥안씨
+L015021|01^0150|문중>경상남도|함양 안의 밀양박씨 지족당 박명부 종가
+L017101|01^0171|문중>강원특별자치도|강릉 전주이씨 선교장 효령대군 후손가
+L016821|01^0168|문중>제주특별자치도|서귀포 사계 진주강씨
+L016814|01^0168|문중>제주특별자치도|제주 경주김씨 문중회
+L016807|01^0168|문중>제주특별자치도|제주 구좌 동래정씨 정석록 후손가
+L016816|01^0168|문중>제주특별자치도|제주 동래정씨 정희현 후손가
+L016819|01^0168|문중>제주특별자치도|제주 애월 김해김씨 김용징 후손가
+L016820|01^0168|문중>제주특별자치도|제주 애월 김해김씨 김희주 후손가
+L016822|01^0168|문중>제주특별자치도|제주 어도 진주강씨 강봉지 후손가
+L016817|01^0168|문중>제주특별자치도|제주 어도 진주강씨 강수황 후손가
+L016818|01^0168|문중>제주특별자치도|제주 어도 진주강씨 강익진 후손가
+L016815|01^0168|문중>제주특별자치도|제주 제주고씨 종친회
+L016810|01^0168|문중>제주특별자치도|제주 조천 곡산강씨 강만식 후손가
+L016811|01^0168|문중>제주특별자치도|제주 조천 곡산강씨 강이진 후손가
+L016806|01^0168|문중>제주특별자치도|제주 조천 김해김씨 김희정 후손가
+L017201|01^0172|문중>인천광역시|강화·부여 창원황씨
+L024712|02^0247|서원향교>경상북도|경주 용산서원
+L024711|02^0247|서원향교>경상북도|경주 장산서원
+L024710|02^0247|서원향교>경상북도|안동 병산서원
+L024807|02^0248|서원향교>경상남도|거창 거창향교
+L024804|02^0248|서원향교>경상남도|김해 김해향교
+L024808|02^0248|서원향교>경상남도|밀양 덕남서원
+L024806|02^0248|서원향교>경상남도|산청 단성향교
+L024802|02^0248|서원향교>경상남도|산청 덕천서원
+L024803|02^0248|서원향교>경상남도|함양 남계서원
+L024801|02^0248|서원향교>경상남도|합천 용연서원
+L024805|02^0248|서원향교>경상남도|합천 합천향교
+L031119|03^0311|박물관도서관>서울특별시|국립고궁박물관
+L031121|03^0311|박물관도서관>서울특별시|한국연구원
+L037702|03^0377|박물관도서관>경기도|경기도박물관
+L037705|03^0377|박물관도서관>경기도|명성황후기념관
+L037701|03^0377|박물관도서관>경기도|여주박물관
+L037801|03^0378|박물관도서관>강원특별자치도|오죽헌·시립박물관
+L037502|03^0375|박물관도서관>충청북도|국립청주박물관
+L039202|03^0392|박물관도서관>세종특별자치시|미래엔 교과서박물관
+L040102|04^0401|공공기관>경기도|국사편찬위원회
+L040101|04^0401|공공기관>경기도|한국학중앙연구원 장서각
+L040301|04^0403|공공기관>서울특별시|규장각한국학연구원
+L054904|05^0549|사찰>경상북도|김천 직지사
+L054901|05^0549|사찰>경상북도|예천 용문사
+L054701|05^0547|사찰>경상남도|고성 옥천사 보장각
+L054702|05^0547|사찰>경상남도|고성 옥천사 청련암
+L061502|06^0615|개인>경기도|신상후 선생님 제공 자료
+L061503|06^0615|개인>경기도|헤이리예술마을뮤지엄카페 타임캡슐
+L061201|06^0612|개인>경상북도|경주 경주이씨 이찬우
+L0619  F02|06^L0619|개인>개인|고문서
+L062001|06^0620|개인>미상|개인
+L074902|07^0749|촌락>경상북도|경주 외동 방어리
+L074901|07^0749|촌락>경상북도|경주 지북동(황성동)
+L074801|07^0748|촌락>경상남도|거제 일운 구조라리
+L074702|07^0747|촌락>제주특별자치도|제주 애월 수산리
+L074703|07^0747|촌락>제주특별자치도|제주 애월 중엄리
+L074701|07^0747|촌락>제주특별자치도|제주 애월 하가리
+L0807  F02|08^L0807|기타>기타|고문서
+L0809  F02|08^L0809|기타>명성황후 편지글(이기대, 다운샘, 2007)|고문서
+L0811  F02|08^L0811|기타>한글서예변천전 도록|고문서`.trim().split('\n').map((l) => { const [id, up, grp, name] = l.split('|'); return { id, up, grp, name }; });
+const aksChain = (base, suf) => { const c = []; if (suf) { c.push(base + suf.slice(0, 3)); if (suf.length > 3) c.push(base + suf); } return c; };
 
 // normalized per-source collectors → [{title,date,id,url}]; compliant channels only (robots-OK APIs / officially-published files)
 const COLLECT = {
@@ -276,6 +457,18 @@ const COLLECT = {
   },
   nedb: async (q, n) => { const recs = await loadNedbIndex(); return recs ? nedbFileSearch(recs, q, n) : []; },
   koreanwar: async (q, n) => (await kwSearch({ keyword: q, viewType: 'archive' })).cards.slice(0, n).map((c) => ({ title: c.title, date: '', id: c.id, url: c.url })),
+  warmemo: async (q, n) => { // 카테고리별 건수 채널 — 소장 신호 제공(개별 레코드 아님)
+    const url = 'http://archives.warmemo.or.kr/intgsrch/intgsrchArchv.do?MID=UM00045&keyword=' + encodeURIComponent(q);
+    const b = await gtext(url);
+    const out = []; const re = /class="total-breadcrumb">([\s\S]*?)<\/span>\s*<span>\s*총\s*([\d,]+)/g; let m;
+    while ((m = re.exec(b)) && out.length < Math.min(n, 5)) { if (m[2] !== '0') out.push({ title: `전쟁기념관 ${norm(m[1])} ${m[2]}건`, date: '', id: '', url }); }
+    return out;
+  },
+  aks: async (q, n) => { // 한국고문서자료관 소장처 매칭(내장 카탈로그 — 네트워크 0)
+    const toks = q.split(/\s+/).filter(Boolean);
+    return AKS_CAT.filter((c) => toks.length && toks.every((t) => (c.name + ' ' + c.grp).includes(t))).slice(0, n)
+      .map((c) => ({ title: `[고문서 소장처] ${c.name} (${c.grp})`, date: '', id: c.id, url: AKS_BASE + '/viewer/viewer.do' }));
+  },
 };
 
 // ══════════ 조선 사료 심층 판독 (db.history.go.kr · sjw · kyudb — joseon-source-mining 이식) ══════════
@@ -513,14 +706,15 @@ const handler = createMcpHandler((server) => {
 
   server.tool('tna_search',
     'Search the UK National Archives (TNA) Discovery catalog for Korea-related records. Queries in Korean·Japanese·Chinese·Russian·Spanish·German·Vietnamese·Hindi·Hebrew·Arabic etc. are auto-translated to English index terms (임진강→Imjin River, 長津湖→Chosin Reservoir, Корейская война→Korean War …). Reference codes like "FO 371/84053" are auto-quoted. 영국 국립기록관 검색 — 다국어 질의 자동 영문 변환.',
-    { query: z.string().describe('한국어 또는 영어 — e.g. "임진강 전투", "Korea armistice", "FO 371 FK1015"'), max_results: z.number().int().min(1).max(50).default(15) },
-    async ({ query, max_results }) => {
+    { query: z.string().describe('한국어 또는 영어 — e.g. "임진강 전투", "Korea armistice", "FO 371 FK1015"'), max_results: z.number().int().min(1).max(50).default(15), year_from: z.number().int().optional().describe('연대 시작 e.g. 1950'), year_to: z.number().int().optional().describe('연대 끝 e.g. 1953'), page: z.number().int().min(1).default(1) },
+    async ({ query, max_results, year_from, year_to, page }) => {
       const en = koToEn(query);
       const eff = en || query;
       const q = /^[A-Z]+ \d+\/\d+$/.test(eff.trim()) ? `"${eff.trim()}"` : eff;
-      const d = await tnaFetch(q, max_results);
+      const d = await tnaFetch(q, max_results, page, year_from, year_to);
       const recs = d.records || [];
-      return text(`TNA '${query}'${en ? ` → 영문 자동 변환 '${eff}'` : ''} — total ${d.count ?? '?'}:\n` + (recs.map(tnaLine).join('\n') || '(0 results)'));
+      const tags = [year_from || year_to ? `연대 ${year_from || ''}~${year_to || ''}` : '', page > 1 ? `p.${page}` : ''].filter(Boolean);
+      return text(`TNA '${query}'${en ? ` → 영문 자동 변환 '${eff}'` : ''}${tags.length ? ` [${tags.join(' · ')}]` : ''} — total ${d.count ?? '?'}:\n` + (recs.map(tnaLine).join('\n') || '(0 results)'));
     });
 
   server.tool('tna_adjacent_mine',
@@ -548,14 +742,14 @@ const handler = createMcpHandler((server) => {
 
   server.tool('nara_search',
     'Search the US NARA catalog (API v2). Multilingual queries (한국어·日本語·中文·Русский 등) auto-translate to English index terms (장진호/長津湖→Chosin Reservoir …). Requires NARA_API_KEY env on the server; record_group enables precision cross-search (e.g. 242). 미국 NARA 검색 — 다국어 질의 자동 영문 변환.',
-    { query: z.string().describe('한국어 또는 영어'), record_group: z.number().int().optional(), moving_images_only: z.boolean().default(false), max_results: z.number().int().min(1).max(50).default(15) },
-    async ({ query, record_group, moving_images_only, max_results }) => {
+    { query: z.string().describe('한국어 또는 영어'), record_group: z.number().int().optional(), moving_images_only: z.boolean().default(false), max_results: z.number().int().min(1).max(50).default(15), page: z.number().int().min(1).default(1) },
+    async ({ query, record_group, moving_images_only, max_results, page }) => {
       const key = process.env.NARA_API_KEY;
       if (!key) return text('NARA_API_KEY not configured on this server. Free key: email Catalog_API@nara.gov (name + email). Meanwhile use catalog.archives.gov directly.');
       const en = koToEn(query);
       const eff = en || query;
       const u = new URL('https://catalog.archives.gov/api/v2/records/search');
-      u.searchParams.set('q', eff); u.searchParams.set('limit', String(max_results)); u.searchParams.set('page', '1');
+      u.searchParams.set('q', eff); u.searchParams.set('limit', String(max_results)); u.searchParams.set('page', String(page));
       if (record_group) u.searchParams.set('recordGroupNumber', String(record_group));
       if (moving_images_only) u.searchParams.set('typeOfMaterials', 'Moving Images');
       const d = await jget(u.toString(), { 'x-api-key': key });
@@ -570,8 +764,8 @@ const handler = createMcpHandler((server) => {
 
   server.tool('ia_search',
     'Search archive.org (advanced search syntax) — e.g. "identifier:111-adc*", "collection:universal_newsreels AND korea". Multilingual queries (한국어·日本語·中文·Русский 등) auto-translate to English terms. Pass identifier instead to inspect one item: metadata, license, original files with sizes (check before downloading). 다국어 질의 자동 영문 변환.',
-    { query: z.string().default('').describe('search query (ignored when identifier is set)'), identifier: z.string().optional().describe('item identifier for metadata inspection'), max_results: z.number().int().min(1).max(50).default(15) },
-    async ({ query, identifier, max_results }) => {
+    { query: z.string().default('').describe('search query (ignored when identifier is set)'), identifier: z.string().optional().describe('item identifier for metadata inspection'), max_results: z.number().int().min(1).max(50).default(15), year_from: z.number().int().optional().describe('연대 시작 e.g. 1950'), year_to: z.number().int().optional().describe('연대 끝 e.g. 1953'), page: z.number().int().min(1).default(1) },
+    async ({ query, identifier, max_results, year_from, year_to, page }) => {
       if (identifier) {
         const d = await jget(`https://archive.org/metadata/${encodeURIComponent(identifier)}`);
         const md = d.metadata || {};
@@ -580,33 +774,40 @@ const handler = createMcpHandler((server) => {
       }
       if (!query) return text('query 또는 identifier 중 하나는 필수.');
       const en = koToEn(query);
-      const eff = en || query;
-      const u = `https://archive.org/advancedsearch.php?q=${encodeURIComponent(eff)}&fl[]=identifier&fl[]=title&fl[]=date&rows=${max_results}&output=json`;
+      let eff = en || query;
+      // date:[A TO B] + page 실측 검증 (2026-11-18)
+      if (year_from || year_to) eff = `(${eff}) AND date:[${year_from || 1800}-01-01 TO ${year_to || 2030}-12-31]`;
+      const u = `https://archive.org/advancedsearch.php?q=${encodeURIComponent(eff)}&fl[]=identifier&fl[]=title&fl[]=date&rows=${max_results}&page=${page}&output=json`;
       const d = await jget(u);
       const docs = ((d.response || {}).docs) || [];
-      return text(`archive.org '${query}'${en ? ` → 영문 자동 변환 '${eff}'` : ''} — total ${(d.response || {}).numFound}:\n` + (docs.map((x) => `- ${x.identifier} | ${String(x.title).slice(0, 90)} | https://archive.org/details/${x.identifier}`).join('\n') || '(0)'));
+      const tags = [year_from || year_to ? `연대 ${year_from || ''}~${year_to || ''}` : '', page > 1 ? `p.${page}` : ''].filter(Boolean);
+      return text(`archive.org '${query}'${en ? ` → 영문 자동 변환 '${en}'` : ''}${tags.length ? ` [${tags.join(' · ')}]` : ''} — total ${(d.response || {}).numFound}:\n` + (docs.map((x) => `- ${x.identifier} | ${String(x.title).slice(0, 90)} (${String(x.date || '').slice(0, 10)}) | https://archive.org/details/${x.identifier}`).join('\n') || '(0)'));
     });
 
   server.tool('gallica_search',
     'Search Gallica (Bibliothèque nationale de France, no key needed). Multilingual queries (한국어·日本語·中文 등) auto-translate to French index terms (병인양요→expédition de Corée 1866, 長津湖→Chosin …). French terms also work: Corée, guerre de Corée, missionnaires, Tchosen. 프랑스 국립도서관 검색 — 다국어 질의 자동 프랑스어 변환.',
-    { query: z.string().describe('한국어 또는 프랑스어 — e.g. "병인양요 선교사", "Corée missionnaires"'), max_results: z.number().int().min(1).max(30).default(10) },
-    async ({ query, max_results }) => {
+    { query: z.string().describe('한국어 또는 프랑스어 — e.g. "병인양요 선교사", "Corée missionnaires"'), max_results: z.number().int().min(1).max(30).default(10), year_from: z.number().int().optional().describe('간행 연대 시작 e.g. 1866'), year_to: z.number().int().optional().describe('간행 연대 끝 e.g. 1871'), page: z.number().int().min(1).default(1) },
+    async ({ query, max_results, year_from, year_to, page }) => {
       const fr = gallicaKoToFr(query);
       const eff = fr || query;
-      const q = encodeURIComponent(`gallica all "${eff.replace(/"/g, '')}"`);
-      const r = await fetch(`https://gallica.bnf.fr/SRU?operation=searchRetrieve&version=1.2&query=${q}&maximumRecords=${max_results}`, { headers: { 'User-Agent': UA } });
+      let cql = `gallica all "${eff.replace(/"/g, '')}"`;
+      if (year_from) cql += ` and gallicapublication_date>="${year_from}"`;
+      if (year_to) cql += ` and gallicapublication_date<="${year_to}"`;
+      const q = encodeURIComponent(cql);
+      const r = await fetch(`https://gallica.bnf.fr/SRU?operation=searchRetrieve&version=1.2&query=${q}&maximumRecords=${max_results}&startRecord=${(page - 1) * max_results + 1}`, { headers: { 'User-Agent': UA } });
       const xml = await r.text();
       const total = (xml.match(/<srw:numberOfRecords>(\d+)</) || [])[1] || '?';
       const recs = xml.split('<srw:record>').slice(1);
       const g = (block, tag) => { const m = block.match(new RegExp(`<dc:${tag}[^>]*>([^<]*)<`)); return m ? m[1].trim() : ''; };
       const lines = recs.slice(0, max_results).map((b) => `- ${g(b, 'title').slice(0, 100)} (${g(b, 'date')}) [${g(b, 'type')}] ${g(b, 'identifier')}`);
-      return text(`Gallica '${query}'${fr ? ` → 프랑스어 자동 변환 '${eff}'` : ''} — total ${total}:\n` + (lines.join('\n') || '(0)') + '\nTip: French variants — Corée·Coréens·Séoul·Fusan·guerre de Corée·Tchosen');
+      const tags = [year_from || year_to ? `간행 ${year_from || ''}~${year_to || ''}` : '', page > 1 ? `p.${page}` : ''].filter(Boolean);
+      return text(`Gallica '${query}'${fr ? ` → 프랑스어 자동 변환 '${eff}'` : ''}${tags.length ? ` [${tags.join(' · ')}]` : ''} — total ${total}:\n` + (lines.join('\n') || '(0)') + '\nTip: French variants — Corée·Coréens·Séoul·Fusan·guerre de Corée·Tchosen');
     });
 
   server.tool('europeana_search',
     'Search Europeana — 4,000+ institutions in 58 countries. Multilingual queries (한국어·日本語·中文 등) auto-translate to English terms. Works out of the box (shared demo key); set EUROPEANA_API_KEY for heavy use. media_type: VIDEO|IMAGE|TEXT|SOUND. 유럽 통합 검색 — 다국어 질의 자동 영문 변환.',
-    { query: z.string(), max_results: z.number().int().min(1).max(50).default(15), media_type: z.enum(['VIDEO', 'IMAGE', 'TEXT', 'SOUND']).optional() },
-    async ({ query, max_results, media_type }) => {
+    { query: z.string(), max_results: z.number().int().min(1).max(50).default(15), media_type: z.enum(['VIDEO', 'IMAGE', 'TEXT', 'SOUND']).optional(), year_from: z.number().int().optional().describe('연대 시작 e.g. 1950'), year_to: z.number().int().optional().describe('연대 끝 e.g. 1953'), page: z.number().int().min(1).default(1) },
+    async ({ query, max_results, media_type, year_from, year_to, page }) => {
       const key = process.env.EUROPEANA_API_KEY || 'api2demo';
       const demo = !process.env.EUROPEANA_API_KEY;
       const en = koToEn(query);
@@ -614,10 +815,14 @@ const handler = createMcpHandler((server) => {
       const u = new URL('https://api.europeana.eu/record/v2/search.json');
       u.searchParams.set('wskey', key); u.searchParams.set('query', eff);
       u.searchParams.set('rows', String(max_results)); u.searchParams.set('profile', 'standard');
-      if (media_type) u.searchParams.set('qf', `TYPE:${media_type}`);
+      u.searchParams.set('start', String((page - 1) * max_results + 1));
+      if (media_type) u.searchParams.append('qf', `TYPE:${media_type}`);
+      // YEAR:[A TO B] 열린 범위(*)·다중 qf 실측 검증 (2026-11-18)
+      if (year_from || year_to) u.searchParams.append('qf', `YEAR:[${year_from || '*'} TO ${year_to || '*'}]`);
       const d = await jget(u.toString());
       const items = d.items || [];
-      return text(`Europeana '${query}'${en ? ` → 영문 자동 변환 '${eff}'` : ''}${media_type ? ` [${media_type}]` : ''} — total ${d.totalResults}:\n` + (items.map((it) => `- ${String((it.title || ['?'])[0]).slice(0, 90)} (${(it.year || [''])[0]}) — ${String((it.dataProvider || [''])[0]).slice(0, 40)} | ${it.guid || ''}`).join('\n') || '(0)') + '\nTip: multilingual — Corée(fr)·Korea-Krieg(de)·Corea(it/es)' + (demo ? '\n(shared demo key in use — for heavy use, set a free EUROPEANA_API_KEY from apis.europeana.eu)' : ''));
+      const ytag = year_from || year_to ? ` [연대 ${year_from || ''}~${year_to || ''}${page > 1 ? ` · p.${page}` : ''}]` : (page > 1 ? ` [p.${page}]` : '');
+      return text(`Europeana '${query}'${en ? ` → 영문 자동 변환 '${eff}'` : ''}${media_type ? ` [${media_type}]` : ''}${ytag} — total ${d.totalResults}:\n` + (items.map((it) => `- ${String((it.title || ['?'])[0]).slice(0, 90)} (${(it.year || [''])[0]}) — ${String((it.dataProvider || [''])[0]).slice(0, 40)} | ${it.guid || ''}`).join('\n') || '(0)') + '\nTip: multilingual — Corée(fr)·Korea-Krieg(de)·Corea(it/es)' + (demo ? '\n(shared demo key in use — for heavy use, set a free EUROPEANA_API_KEY from apis.europeana.eu)' : ''));
     });
 
 const JB_WALLS = `열한 겹의 벽 — 한국 기록이 안 찾아지는 11가지 이유와 대응 (실증 기반)
@@ -715,183 +920,6 @@ const JB_CROSS = `국내외 대조 절차 — 순서를 틀리면 헛수고한�
   const dbrowse = (u) => `\n열어보기: ${u}`;
   const agentBrowse = (name, q, u, why = '이 기관은 자동 페치가 제한적입니다') => `${name} '${q}' — ${why}.\n➤ 에이전트 지시: 이 메시지를 그대로 사용자에게 전달하지 마세요. 대신 당신의 웹 검색(WebSearch)으로 '${q}'를 이 기관에서 찾거나 아래 공식 검색 URL을 열람해 상위 결과(제목·연대·링크)를 표로 정리해 사용자에게 제시하세요. 결과가 있으면 report_template으로 HTML 보고서화도 가능합니다.\n공식 검색: ${u}`;
 
-// ── 한국고문서자료관(한국학중앙연구원, archive.aks.ac.kr) — 소장처 172곳 (2026-11-17 treeAjax 전수 실측) ──
-// 형식: id|상위경로(upPath)|분류|소장처명. 트리·문서목록은 라이브 조회, 이미지 일괄 수집은 로컬 전용.
-const AKS_BASE = 'https://archive.aks.ac.kr';
-const AKS_UA = { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)', 'Referer': AKS_BASE + '/viewer/viewer.do' };
-const AKS_CAT = `L011146|01^0111|문중>서울특별시|서울 마포 반남박씨 대종중
-L011143|01^0111|문중>서울특별시|서울 마포 성주이씨 대종회
-L011144|01^0111|문중>서울특별시|서울 원주김씨 두암 김응남 종가
-L011148|01^0111|문중>서울특별시|서울 전주이씨 경녕군 후손가
-L011145|01^0111|문중>서울특별시|서울 전주이씨 장천군 이보생 후손가
-L011117|01^0111|문중>서울특별시|서울 진주류씨 우강 유태영 후손가
-L016909|01^0169|문중>대구광역시|대구 영천이씨 세효당 후손가
-L013003|01^0130|문중>대전광역시|대전 무수동 안동권씨 유회당 권이진 종가
-L013001|01^0130|문중>대전광역시|대전 회덕 은진송씨 동춘당 송준길 후손가
-L014151|01^0141|문중>경기도|광주 기곡 광주안씨 순암 안정복 종가
-L014160|01^0141|문중>경기도|광주 연안이씨 매간 이익상 종가
-L014158|01^0141|문중>경기도|광주 평산신씨 신대우
-L014153|01^0141|문중>경기도|군포 속달 동래정씨 동래부원군 정난종 종가
-L014140|01^0141|문중>경기도|김포 의령남씨 서윤공 남두장 후손가
-L014156|01^0141|문중>경기도|김포 전주이씨 효헌 이인철 후손가
-L014139|01^0141|문중>경기도|성남 해주오씨 월곡공파 오윤함
-L014163|01^0141|문중>경기도|시흥 반남박씨 금계군 박동량 종가
-L014132|01^0141|문중>경기도|안산 부곡 진주류씨 경성당
-L014115|01^0141|문중>경기도|안성 보체 동래정씨 정홍순 종가
-L014131|01^0141|문중>경기도|안성 해주오씨 오치풍 후손가
-L014154|01^0141|문중>경기도|양근 안동김씨 노가재 김창업 후손가
-L014161|01^0141|문중>경기도|양주 광주정씨
-L014168|01^0141|문중>경기도|양주 사릉 해주정씨 종가
-L014164|01^0141|문중>경기도|여주 산북 전주이씨 완양부원군 이충원 종가
-L014148|01^0141|문중>경기도|여흥민씨 민영환 후손가
-L014152|01^0141|문중>경기도|용인 해주오씨 추탄 오윤겸 종가
-L014167|01^0141|문중>경기도|의정부 장암 반남박씨 서계 박세당 종가
-L014166|01^0141|문중>경기도|의정부 장암 반남박씨 서계 박세당 후손가
-L014165|01^0141|문중>경기도|이천 풍천임씨
-L014303|01^0143|문중>충청북도|제천 한수 연안이씨
-L014423|01^0144|문중>충청남도|공주 안동김씨 청음 김상헌 후손가
-L014421|01^0144|문중>충청남도|공주 전주이씨 숭선군파 종가
-L014422|01^0144|문중>충청남도|공주 진주류씨 금사 유충걸 후손가
-L014418|01^0144|문중>충청남도|논산 노성 파평윤씨 명재 윤증 종가
-L014426|01^0144|문중>충청남도|보령 천궁 경주김씨 직각 김면주 종가
-L014425|01^0144|문중>충청남도|부여 은산 함양박씨 구당 박세영 종가
-L014429|01^0144|문중>충청남도|서산 대교 경주김씨 충민공 김홍익 후손가
-L014432|01^0144|문중>충청남도|서산 대교 경주김씨 학주 김홍욱 종가
-L014433|01^0144|문중>충청남도|서산 대교 경주김씨 학주 김홍욱 후손가
-L014430|01^0144|문중>충청남도|아산 선교 장흥임씨 종가
-L014427|01^0144|문중>충청남도|예산 한곡 한산이씨 수당 고택
-L014431|01^0144|문중>충청남도|예산 한양조씨
-L014428|01^0144|문중>충청남도|청양 안동김씨 삼당 김영 후손가
-L014738|01^0147|문중>전북특별자치도|고창 광산김씨 노산사
-L014734|01^0147|문중>전북특별자치도|고창 신천강씨
-L014724|01^0147|문중>전북특별자치도|고창 흥덕 평해황씨 이재 황윤석 종가
-L014731|01^0147|문중>전북특별자치도|남원 안터 순흥안씨 사제당 안처순 후손가
-L014722|01^0147|문중>전북특별자치도|남원·구례 삭녕최씨
-L014720|01^0147|문중>전북특별자치도|부안 우반 부안김씨
-L014735|01^0147|문중>전북특별자치도|익산 함열 임천조씨
-L014736|01^0147|문중>전북특별자치도|정읍 광산김씨 김흥암 후손가
-L014737|01^0147|문중>전북특별자치도|정읍 광산김씨 옥산서원
-L014719|01^0147|문중>전북특별자치도|진안 정천 전주이씨 서곡 이정영 후손가
-L014804|01^0148|문중>전라남도|구례 오미 문화류씨 운조루
-L014803|01^0148|문중>전라남도|나주 회진 나주임씨 창계 임영 후손가
-L014810|01^0148|문중>전라남도|영광 연안김씨 종가
-L014802|01^0148|문중>전라남도|영광 영월신씨
-L014812|01^0148|문중>전라남도|영암 남평문씨
-L014813|01^0148|문중>전라남도|해남 김해김씨
-L014811|01^0148|문중>전라남도|해남 연동 해남윤씨 녹우당
-L016792|01^0167|문중>경상북도|경주 구정 경주이씨
-L016722|01^0167|문중>경상북도|경주 소정 경주이씨
-L016762|01^0167|문중>경상북도|경주 양동 경주손씨 종가 송첨
-L016712|01^0167|문중>경상북도|경주 옥산 여주이씨 독락당
-L016794|01^0167|문중>경상북도|경주 옥산 여주이씨 치암 이순 종가
-L016798|01^0167|문중>경상북도|경주 용산서원
-L016706|01^0167|문중>경상북도|경주 이조 경주최씨
-L016727|01^0167|문중>경상북도|고령 도진 고령박씨 소윤공 문연재
-L016763|01^0167|문중>경상북도|고령 선산김씨 점필재 김종직 종가
-L016768|01^0167|문중>경상북도|구미 옥산 인동장씨 여헌 장현광 종가
-L016746|01^0167|문중>경상북도|김천 성산이씨 양계 이하 종가
-L016724|01^0167|문중>경상북도|김천 진주강씨 학암 강석귀 종가
-L016744|01^0167|문중>경상북도|봉화 꽃내 무안박씨 회이당 박한 종가
-L016725|01^0167|문중>경상북도|봉화 법전 진주강씨 고암 강임 후손가
-L016775|01^0167|문중>경상북도|봉화 유곡 안동권씨 충재 권벌 종가
-L016776|01^0167|문중>경상북도|봉화 유곡 안동권씨 충재 권벌 후손가
-L016785|01^0167|문중>경상북도|상주 낙동 풍양조씨 양진당 조정
-L016793|01^0167|문중>경상북도|상주 성주이씨 묵재 종가
-L016767|01^0167|문중>경상북도|상주 연안이씨 식산 이만부 종가
-L016766|01^0167|문중>경상북도|상주 우산 진주정씨 우복 정경세 종가
-L016761|01^0167|문중>경상북도|상주 충주박씨 충원군 박동형 종가
-L016769|01^0167|문중>경상북도|성주 명곡 벽진이씨 완석정 이언영 종가
-L016764|01^0167|문중>경상북도|안동 갈전 순흥안씨 종가
-L016713|01^0167|문중>경상북도|안동 금계 의성김씨 학봉 김성일 종가
-L016758|01^0167|문중>경상북도|안동 법흥 고성이씨 종가 임청각
-L016709|01^0167|문중>경상북도|안동 송파 진주하씨 하위지 후손가
-L016701|01^0167|문중>경상북도|안동 수곡 전주류씨 무실 종가
-L016715|01^0167|문중>경상북도|안동 오천 광산김씨 후조당 김부필
-L016717|01^0167|문중>경상북도|안동 주촌 진성이씨 경류정
-L016707|01^0167|문중>경상북도|안동 천전 의성김씨 천상각파
-L016708|01^0167|문중>경상북도|안동 하회 풍산류씨
-L016728|01^0167|문중>경상북도|안동 하회 풍산류씨 북촌댁 화경당
-L016759|01^0167|문중>경상북도|영덕 도곡 무안박씨 무의공 박의장 종가
-L016765|01^0167|문중>경상북도|영덕 도곡 무안박씨 충효당 박선 종가
-L016760|01^0167|문중>경상북도|영덕 재령이씨 충효당 이함 종가
-L016791|01^0167|문중>경상북도|영주 화계 인동장씨 연복군 종가
-L016795|01^0167|문중>경상북도|예천 맛질 함양박씨 미산 박득녕 종가
-L016796|01^0167|문중>경상북도|예천 맛질 함양박씨 박현녕 후손가
-L016780|01^0167|문중>경상북도|예천 진주류씨 서파 유희 가문
-L016741|01^0167|문중>경상북도|의성 아주신씨 오봉 신지제 가문
-L016742|01^0167|문중>경상북도|의성 아주신씨 호계 신적도 가문
-L016774|01^0167|문중>경상북도|청도 함박김씨
-L016721|01^0167|문중>경상북도|칠곡 석전 광주이씨
-L015019|01^0150|문중>경상남도|거창 강동 초계정씨 동계 정온 종가
-L015025|01^0150|문중>경상남도|거창 거창신씨
-L015024|01^0150|문중>경상남도|거창 은진임씨
-L015022|01^0150|문중>경상남도|밀양 밀성박씨 종가 모선정
-L015020|01^0150|문중>경상남도|밀양 사촌 의령남씨 종가 침류정
-L015026|01^0150|문중>경상남도|밀양 창녕조씨 오봉서원
-L015007|01^0150|문중>경상남도|진주 단목 진양하씨 단지 하협 종가
-L015004|01^0150|문중>경상남도|진주 단목 진양하씨 창주 하증 후손가
-L015023|01^0150|문중>경상남도|진주 마진 재령이씨 이재관 후손가
-L015018|01^0150|문중>경상남도|진주 마진 재령이씨 종가
-L015011|01^0150|문중>경상남도|진주 안계 진양하씨 담헌 하우선 종가
-L015005|01^0150|문중>경상남도|진주 운문 진양하씨
-L015002|01^0150|문중>경상남도|함안 두릉 순흥안씨
-L015021|01^0150|문중>경상남도|함양 안의 밀양박씨 지족당 박명부 종가
-L017101|01^0171|문중>강원특별자치도|강릉 전주이씨 선교장 효령대군 후손가
-L016821|01^0168|문중>제주특별자치도|서귀포 사계 진주강씨
-L016814|01^0168|문중>제주특별자치도|제주 경주김씨 문중회
-L016807|01^0168|문중>제주특별자치도|제주 구좌 동래정씨 정석록 후손가
-L016816|01^0168|문중>제주특별자치도|제주 동래정씨 정희현 후손가
-L016819|01^0168|문중>제주특별자치도|제주 애월 김해김씨 김용징 후손가
-L016820|01^0168|문중>제주특별자치도|제주 애월 김해김씨 김희주 후손가
-L016822|01^0168|문중>제주특별자치도|제주 어도 진주강씨 강봉지 후손가
-L016817|01^0168|문중>제주특별자치도|제주 어도 진주강씨 강수황 후손가
-L016818|01^0168|문중>제주특별자치도|제주 어도 진주강씨 강익진 후손가
-L016815|01^0168|문중>제주특별자치도|제주 제주고씨 종친회
-L016810|01^0168|문중>제주특별자치도|제주 조천 곡산강씨 강만식 후손가
-L016811|01^0168|문중>제주특별자치도|제주 조천 곡산강씨 강이진 후손가
-L016806|01^0168|문중>제주특별자치도|제주 조천 김해김씨 김희정 후손가
-L017201|01^0172|문중>인천광역시|강화·부여 창원황씨
-L024712|02^0247|서원향교>경상북도|경주 용산서원
-L024711|02^0247|서원향교>경상북도|경주 장산서원
-L024710|02^0247|서원향교>경상북도|안동 병산서원
-L024807|02^0248|서원향교>경상남도|거창 거창향교
-L024804|02^0248|서원향교>경상남도|김해 김해향교
-L024808|02^0248|서원향교>경상남도|밀양 덕남서원
-L024806|02^0248|서원향교>경상남도|산청 단성향교
-L024802|02^0248|서원향교>경상남도|산청 덕천서원
-L024803|02^0248|서원향교>경상남도|함양 남계서원
-L024801|02^0248|서원향교>경상남도|합천 용연서원
-L024805|02^0248|서원향교>경상남도|합천 합천향교
-L031119|03^0311|박물관도서관>서울특별시|국립고궁박물관
-L031121|03^0311|박물관도서관>서울특별시|한국연구원
-L037702|03^0377|박물관도서관>경기도|경기도박물관
-L037705|03^0377|박물관도서관>경기도|명성황후기념관
-L037701|03^0377|박물관도서관>경기도|여주박물관
-L037801|03^0378|박물관도서관>강원특별자치도|오죽헌·시립박물관
-L037502|03^0375|박물관도서관>충청북도|국립청주박물관
-L039202|03^0392|박물관도서관>세종특별자치시|미래엔 교과서박물관
-L040102|04^0401|공공기관>경기도|국사편찬위원회
-L040101|04^0401|공공기관>경기도|한국학중앙연구원 장서각
-L040301|04^0403|공공기관>서울특별시|규장각한국학연구원
-L054904|05^0549|사찰>경상북도|김천 직지사
-L054901|05^0549|사찰>경상북도|예천 용문사
-L054701|05^0547|사찰>경상남도|고성 옥천사 보장각
-L054702|05^0547|사찰>경상남도|고성 옥천사 청련암
-L061502|06^0615|개인>경기도|신상후 선생님 제공 자료
-L061503|06^0615|개인>경기도|헤이리예술마을뮤지엄카페 타임캡슐
-L061201|06^0612|개인>경상북도|경주 경주이씨 이찬우
-L0619  F02|06^L0619|개인>개인|고문서
-L062001|06^0620|개인>미상|개인
-L074902|07^0749|촌락>경상북도|경주 외동 방어리
-L074901|07^0749|촌락>경상북도|경주 지북동(황성동)
-L074801|07^0748|촌락>경상남도|거제 일운 구조라리
-L074702|07^0747|촌락>제주특별자치도|제주 애월 수산리
-L074703|07^0747|촌락>제주특별자치도|제주 애월 중엄리
-L074701|07^0747|촌락>제주특별자치도|제주 애월 하가리
-L0807  F02|08^L0807|기타>기타|고문서
-L0809  F02|08^L0809|기타>명성황후 편지글(이기대, 다운샘, 2007)|고문서
-L0811  F02|08^L0811|기타>한글서예변천전 도록|고문서`.trim().split('\n').map((l) => { const [id, up, grp, name] = l.split('|'); return { id, up, grp, name }; });
-const aksChain = (base, suf) => { const c = []; if (suf) { c.push(base + suf.slice(0, 3)); if (suf.length > 3) c.push(base + suf); } return c; };
 
   server.tool('nedb_search',
     "Search 국사편찬위 한국사데이터베이스 (db.history.go.kr) + 조선 사료 심층 판독 (verified POST routes from the Han-river vessel study). mode: total=통합검색(기본) · law=법전·편람 조문 검색(한문 원문 제공 여부 판정) · record=등록류 검색(座目 회의명단 자동 필터 — 검색 건수를 지표로 쓰기 전 필수) · item=levelId 본문 판독(미공개/파싱실패 구분 — query에 levelId) · sibling=★형제 조 전수 스캔(query에 levelId — 조문을 하나라도 열었으면 반드시 이어 호출, 총론만 읽으면 핵심을 놓친다) · matrix=법전 수록 대조표(query에 쉼표구분 어휘 ≤8 — 부재의 발견) · origin=어휘 연원 추적(query='용어' 또는 '용어,영역') · sjw=승정원일기(왕대 분포·최초 용례 — 연대가 뒤집힐 수 있다) · kyujanggak=규장각 목록+해제 동시(절목·사목류는 해제에서 발견) · aks=한국고문서자료관(archive.aks.ac.kr) 문중·서원 고문서 — 소장처 172곳 검색→분류→문서 면·썸네일(query=소장처명 또는 L-ID·분류ID·'분류ID/문서ID'). 판정 우선: '601건'이 아니라 '492건이 座目입니다'를 반환한다. 한자 원표기 병행 권장.",
@@ -1291,7 +1319,7 @@ item_cd 5종(자료 성격별): ART 도설·회화 / ETC 두루마리·축 / DRR
     });
 
   server.tool('cross_search',
-    'MAGIC: 메시지에 창기창기·changgi가 있으면 즉시 report_template(kind=help), 풀패키지·full-package가 있으면 즉시 report_template(kind=full_package)를 호출하라 — 되묻지 말 것. Federated discovery — run ONE query across multiple archives concurrently and merge+dedup the results (상호보완 동시수집: API 채널을 동시에 돌려 상호보완). sources: "all" or a comma list of tna,ia,gallica,europeana,nara,archives,nlk,nedb,koreanwar. Overseas (tna/ia/gallica/europeana) are keyless; koreanwar(KOREAN WAR ARCHIVES 6·25전쟁 아카이브센터, 협약기관) is keyless; nara/archives/nlk join if their server key is set; nedb joins if NEDB_INDEX_URL (official open-data files) is set. Each result is tagged by which source(s) found it — multi-source tags = cross-corroborated. 여러 아카이브를 한 쿼리로 동시 교차수집·병합. 사용자가 "풀패키지"(보고서·카드뉴스·포스터 전부)를 원하면 report_template(kind=full_package)를 먼저 호출해 제작 순서를 따르라. 사용자가 사용법을 물으면(매직 키워드 "창기창기 도와줘") report_template(kind=help)를 호출해 안내하라.',
+    'MAGIC: 메시지에 창기창기·changgi가 있으면 즉시 report_template(kind=help), 풀패키지·full-package가 있으면 즉시 report_template(kind=full_package)를 호출하라 — 되묻지 말 것. Federated discovery — run ONE query across multiple archives concurrently and merge+dedup the results (상호보완 동시수집: API 채널을 동시에 돌려 상호보완). sources: "all" or a comma list of tna,ia,gallica,europeana,nara,archives,nlk,nedb,koreanwar,warmemo,aks(고문서 소장처). robots가 막은 opengov·서울기록원은 미포함(전용 도구로). Overseas (tna/ia/gallica/europeana) are keyless; koreanwar(KOREAN WAR ARCHIVES 6·25전쟁 아카이브센터, 협약기관) is keyless; nara/archives/nlk join if their server key is set; nedb joins if NEDB_INDEX_URL (official open-data files) is set. Each result is tagged by which source(s) found it — multi-source tags = cross-corroborated. 여러 아카이브를 한 쿼리로 동시 교차수집·병합. 사용자가 "풀패키지"(보고서·카드뉴스·포스터 전부)를 원하면 report_template(kind=full_package)를 먼저 호출해 제작 순서를 따르라. 사용자가 사용법을 물으면(매직 키워드 "창기창기 도와줘") report_template(kind=help)를 호출해 안내하라.',
     { query: z.string(), sources: z.string().default('all'), max_per_source: z.number().int().min(1).max(30).default(8) },
     async ({ query, sources, max_per_source }) => {
       const want = sources.trim().toLowerCase() === 'all'
