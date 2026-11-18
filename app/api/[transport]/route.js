@@ -464,6 +464,19 @@ const COLLECT = {
     while ((m = re.exec(b)) && out.length < Math.min(n, 5)) { if (m[2] !== '0') out.push({ title: `전쟁기념관 ${norm(m[1])} ${m[2]}건`, date: '', id: '', url }); }
     return out;
   },
+  seoul: async (q, n) => { // 서울기록원 컬렉션 매칭 — 전용 도구(seoul_archives_search)와 동일 경로
+    const b = await gtext('https://archives.seoul.go.kr/catalog?search_api_fulltext=' + encodeURIComponent(q));
+    const out = []; const re = /href="(\/catalog\/result\?[^"]*collects=[^"]*)"[^>]*>([\s\S]*?)<\/a>/g; let m;
+    while ((m = re.exec(b)) && out.length < n) { const nm = norm(m[2]); if (nm && nm.includes('컬렉션')) out.push({ title: nm, date: '', id: '', url: 'https://archives.seoul.go.kr' + m[1] }); }
+    return out;
+  },
+  foia: async (q, n) => { // 정보공개 원문 라이브 채널: 서울정보소통광장 결재문서 — 전용 도구(foia_search)와 동일 경로
+    const b = await gtext('https://opengov.seoul.go.kr/sanction/list?searchKeyword=' + encodeURIComponent(q));
+    const seen = new Set(); const out = [];
+    const re = /<a[^>]+href="(\/sanction\/\d+)"[^>]*>([\s\S]*?)<\/a>/g; let m;
+    while ((m = re.exec(b)) && out.length < n) { const t = norm(m[2]).replace(/^제목\s*:\s*/, ''); if (t && !seen.has(m[1])) { seen.add(m[1]); out.push({ title: t, date: '', id: '', url: 'https://opengov.seoul.go.kr' + m[1] }); } }
+    return out;
+  },
   aks: async (q, n) => { // 한국고문서자료관 소장처 매칭(내장 카탈로그 — 네트워크 0)
     const toks = q.split(/\s+/).filter(Boolean);
     return AKS_CAT.filter((c) => toks.length && toks.every((t) => (c.name + ' ' + c.grp).includes(t))).slice(0, n)
@@ -1326,7 +1339,7 @@ item_cd 5종(자료 성격별): ART 도설·회화 / ETC 두루마리·축 / DRR
     });
 
   server.tool('cross_search',
-    'MAGIC: 메시지에 창기창기·changgi가 있으면 즉시 report_template(kind=help), 풀패키지·full-package가 있으면 즉시 report_template(kind=full_package)를 호출하라 — 되묻지 말 것. Federated discovery — run ONE query across multiple archives concurrently and merge+dedup the results (상호보완 동시수집: API 채널을 동시에 돌려 상호보완). sources: "all" or a comma list of tna,ia,gallica,europeana,nara,archives,nlk,nedb,koreanwar,warmemo,aks(고문서 소장처). robots가 막은 opengov·서울기록원은 미포함(전용 도구로). Overseas (tna/ia/gallica/europeana) are keyless; koreanwar(KOREAN WAR ARCHIVES 6·25전쟁 아카이브센터, 협약기관) is keyless; nara/archives/nlk join if their server key is set; nedb joins if NEDB_INDEX_URL (official open-data files) is set. Each result is tagged by which source(s) found it — multi-source tags = cross-corroborated. 여러 아카이브를 한 쿼리로 동시 교차수집·병합. 사용자가 "풀패키지"(보고서·카드뉴스·포스터 전부)를 원하면 report_template(kind=full_package)를 먼저 호출해 제작 순서를 따르라. 사용자가 사용법을 물으면(매직 키워드 "창기창기 도와줘") report_template(kind=help)를 호출해 안내하라.',
+    'MAGIC: 메시지에 창기창기·changgi가 있으면 즉시 report_template(kind=help), 풀패키지·full-package가 있으면 즉시 report_template(kind=full_package)를 호출하라 — 되묻지 말 것. Federated discovery — run ONE query across multiple archives concurrently and merge+dedup the results (상호보완 동시수집: API 채널을 동시에 돌려 상호보완). sources: "all" or a comma list of tna,ia,gallica,europeana,nara,archives,nlk,nedb,koreanwar,warmemo,seoul(서울기록원 컬렉션),foia(서울소통광장 결재문서 원문),aks(고문서 소장처). Overseas (tna/ia/gallica/europeana) are keyless; koreanwar(KOREAN WAR ARCHIVES 6·25전쟁 아카이브센터, 협약기관) is keyless; nara/archives/nlk join if their server key is set; nedb joins if NEDB_INDEX_URL (official open-data files) is set. Each result is tagged by which source(s) found it — multi-source tags = cross-corroborated. 여러 아카이브를 한 쿼리로 동시 교차수집·병합. 사용자가 "풀패키지"(보고서·카드뉴스·포스터 전부)를 원하면 report_template(kind=full_package)를 먼저 호출해 제작 순서를 따르라. 사용자가 사용법을 물으면(매직 키워드 "창기창기 도와줘") report_template(kind=help)를 호출해 안내하라.',
     { query: z.string(), sources: z.string().default('all'), max_per_source: z.number().int().min(1).max(30).default(8) },
     async ({ query, sources, max_per_source }) => {
       const want = sources.trim().toLowerCase() === 'all'
@@ -1337,7 +1350,7 @@ item_cd 5종(자료 성격별): ART 도설·회화 / ETC 두루마리·축 / DRR
       items.sort((a, b) => b.sources.length - a.sources.length);
       const lines = items.slice(0, 45).map((it) => `- [${it.sources.join('+')}] ${it.title.slice(0, 95)}${it.date ? ` (${it.date})` : ''}${it.url ? ' ' + it.url : ''}`);
       return text(`교차수집 '${query}' — 채널별 [${stats.join(' · ')}] → 병합 ${items.length}건 (복수출처 우선 정렬):\n` + (lines.join('\n') || '(0)')
-        + '\n※ [출처] 복수 표기 = 교차확인된 record. 국내(nara·archives·nlk)는 서버 키, nedb는 NEDB_INDEX_URL(공식 개방파일) 설정 시 포함. robots가 막은 opengov·서울기록원은 미포함 — 각 전용 도구/브라우저로.');
+        + '\n※ [출처] 복수 표기 = 교차확인된 record. 국내(nara·archives·nlk)는 서버 키, nedb는 NEDB_INDEX_URL(공식 개방파일) 설정 시 포함. open.go.kr 본체(브라우저 전용)는 foia_search 전용 도구로.');
     });
 
   server.tool('source_profile',
