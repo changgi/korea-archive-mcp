@@ -410,9 +410,15 @@ L0811  F02|08^L0811|기타>한글서예변천전 도록|고문서`.trim().split(
 const aksChain = (base, suf) => { const c = []; if (suf) { c.push(base + suf.slice(0, 3)); if (suf.length > 3) c.push(base + suf); } return c; };
 
 // 한→일 출력 사전(JACAR 전용) — 일본어 질의가 영어와 다른 결과축을 연다(총독부 행정 법령류 실측)
-const JA_MAP = [['조선총독부', '朝鮮総督府'], ['총독부', '総督府'], ['조선', '朝鮮'], ['경성', '京城'], ['한국', '朝鮮'],
-  ['독립운동', '独立運動'], ['의병', '義兵'], ['위안부', '慰安婦'], ['징용', '徴用'], ['강제동원', '強制動員'],
-  ['관동군', '関東軍'], ['만주', '満州'], ['간도', '間島'], ['임시정부', '臨時政府'], ['안중근', '安重根'], ['이토 히로부미', '伊藤博文']];
+const JA_MAP = [['조선총독부', '朝鮮総督府'], ['이토 히로부미', '伊藤博文'], ['강제동원', '強制動員'], ['인천상륙', '仁川上陸'],
+  ['한국전쟁', '朝鮮戦争'], ['창씨개명', '創氏改名'], ['동양척식', '東洋拓殖'], ['조선은행', '朝鮮銀行'], ['재일조선인', '在日朝鮮人'],
+  ['독립운동', '独立運動'], ['임시정부', '臨時政府'], ['3·1운동', '三・一運動'], ['삼일운동', '三・一運動'], ['만주국', '満州国'],
+  ['관동군', '関東軍'], ['황민화', '皇民化'], ['학도병', '学徒兵'], ['위안소', '慰安所'], ['위안부', '慰安婦'], ['독립군', '独立軍'],
+  ['의열단', '義烈団'], ['광복군', '光復軍'], ['연해주', '沿海州'], ['사할린', '樺太'], ['신의주', '新義州'], ['총독부', '総督府'],
+  ['장진호', '長津湖'], ['안중근', '安重根'], ['윤봉길', '尹奉吉'], ['이봉창', '李奉昌'], ['여운형', '呂運亨'], ['김구', '金九'],
+  ['헌병', '憲兵'], ['특고', '特高'], ['징용', '徴用'], ['의병', '義兵'], ['간도', '間島'], ['만주', '満州'], ['경성', '京城'],
+  ['평양', '平壌'], ['부산', '釜山'], ['인천', '仁川'], ['원산', '元山'], ['청진', '清津'], ['상해', '上海'], ['중경', '重慶'],
+  ['조선', '朝鮮'], ['한국', '朝鮮']];
 const koToJa = (q) => { let out = q, hit = false; for (const [k, j] of JA_MAP) { if (out.includes(k)) { out = out.split(k).join(j); hit = true; } } return hit ? out : null; };
 
 // normalized per-source collectors → [{title,date,id,url}]; compliant channels only (robots-OK APIs / officially-published files)
@@ -463,6 +469,11 @@ const COLLECT = {
   },
   nedb: async (q, n) => { const recs = await loadNedbIndex(); return recs ? nedbFileSearch(recs, q, n) : []; },
   koreanwar: async (q, n) => (await kwSearch({ keyword: q, viewType: 'archive' })).cards.slice(0, n).map((c) => ({ title: c.title, date: '', id: c.id, url: c.url })),
+  kyudb: async (q, n) => { // 서울대 규장각 — 기존 jKyu(목록+해제 POST) 코어 재사용
+    const r = await jKyu(q);
+    const list = Array.isArray(r['목록']) ? r['목록'] : [];
+    return list.slice(0, n).map((t) => ({ title: String(t), date: '', id: '', url: 'https://kyudb.snu.ac.kr' }));
+  },
   i815: async (q, n) => { // 독립기념관 한국독립운동정보시스템 — GET 실측(2026-11-19). 카테고리 집계+직행 링크(신호 채널)
     const b = await gtext('https://search.i815.or.kr/main/totalSearch.do?searchWord=' + encodeURIComponent(q) + '&searchMenu=all');
     const out = [];
@@ -1049,8 +1060,8 @@ const JB_CROSS = `국내외 대조 절차 — 순서를 틀리면 헛수고한�
 
 
   server.tool('nedb_search',
-    "Search 국사편찬위 한국사데이터베이스 (db.history.go.kr) + 조선 사료 심층 판독 (verified POST routes from the Han-river vessel study). mode: total=통합검색(기본) · law=법전·편람 조문 검색(한문 원문 제공 여부 판정) · record=등록류 검색(座目 회의명단 자동 필터 — 검색 건수를 지표로 쓰기 전 필수) · item=levelId 본문 판독(미공개/파싱실패 구분 — query에 levelId) · sibling=★형제 조 전수 스캔(query에 levelId — 조문을 하나라도 열었으면 반드시 이어 호출, 총론만 읽으면 핵심을 놓친다) · matrix=법전 수록 대조표(query에 쉼표구분 어휘 ≤8 — 부재의 발견) · origin=어휘 연원 추적(query='용어' 또는 '용어,영역') · sjw=승정원일기(왕대 분포·최초 용례 — 연대가 뒤집힐 수 있다) · kyujanggak=규장각 목록+해제 동시(절목·사목류는 해제에서 발견) · aks=한국고문서자료관(archive.aks.ac.kr) 문중·서원 고문서 — 소장처 172곳 검색→분류→문서 면·썸네일(query=소장처명 또는 L-ID·분류ID·'분류ID/문서ID'). 판정 우선: '601건'이 아니라 '492건이 座目입니다'를 반환한다. 한자 원표기 병행 권장.",
-    { query: z.string().describe("검색어 · levelId(item/sibling) · 쉼표구분 어휘(matrix) · '용어,영역'(origin) · 소장처명/L-ID(aks)"), db: z.string().default(''), max_results: z.number().int().min(1).max(50).default(15), mode: z.enum(['total', 'law', 'record', 'item', 'sibling', 'matrix', 'origin', 'sjw', 'kyujanggak', 'aks']).default('total'), span: z.number().int().min(2).max(12).default(8).describe('sibling 모드 스캔 폭') },
+    "Search 국사편찬위 한국사데이터베이스 (db.history.go.kr) + 조선 사료 심층 판독 (verified POST routes from the Han-river vessel study). mode: total=통합검색(기본) · law=법전·편람 조문 검색(한문 원문 제공 여부 판정) · record=등록류 검색(座目 회의명단 자동 필터 — 검색 건수를 지표로 쓰기 전 필수) · item=levelId 본문 판독(미공개/파싱실패 구분 — query에 levelId) · sibling=★형제 조 전수 스캔(query에 levelId — 조문을 하나라도 열었으면 반드시 이어 호출, 총론만 읽으면 핵심을 놓친다) · matrix=법전 수록 대조표(query에 쉼표구분 어휘 ≤8 — 부재의 발견) · origin=어휘 연원 추적(query='용어' 또는 '용어,영역') · sjw=승정원일기(왕대 분포·최초 용례 — 연대가 뒤집힐 수 있다) · kyujanggak=규장각 목록+해제 동시(절목·사목류는 해제에서 발견) · aks=한국고문서자료관(archive.aks.ac.kr) 문중·서원 고문서 — 소장처 172곳 검색→분류→문서 면·썸네일(query=소장처명 또는 L-ID·분류ID·'분류ID/문서ID'). · jacar=일본 아시아역사자료센터(한→일 자동 변환 검색·레퍼런스코드 메타 직행·±span×100 인접 채굴). 판정 우선: '601건'이 아니라 '492건이 座目입니다'를 반환한다.",
+    { query: z.string().describe("검색어 · levelId(item/sibling) · 쉼표구분 어휘(matrix) · '용어,영역'(origin) · 소장처명/L-ID(aks)"), db: z.string().default(''), max_results: z.number().int().min(1).max(50).default(15), mode: z.enum(['total', 'law', 'record', 'item', 'sibling', 'matrix', 'origin', 'sjw', 'kyujanggak', 'aks', 'jacar']).default('total'), span: z.number().int().min(2).max(12).default(8).describe('sibling 모드 스캔 폭') },
     async ({ query, max_results, mode, span }) => {
       const q = query.trim();
       if (mode === 'aks') {
@@ -1098,6 +1109,44 @@ const JB_CROSS = `국내외 대조 절차 — 순서를 틀리면 헛수고한�
             + `\n※ 다음 단계: mode=aks query='L013001'(분류 목록) → query='L013001F02'(문서 목록) → query='분류ID/문서ID'(면·썸네일).`
             + `\n172곳 전수는 2026-11 실측 스냅숏 — 신규 소장처는 ${AKS_BASE}에서 확인.`);
         } catch (e) { return text(`한국고문서자료관 자동조회 실패(${e.message}) — 뷰어 직접 열람: ${AKS_BASE}/viewer/viewer.do (분류 트리에서 소장처 탐색)`); }
+      }
+      if (mode === 'jacar') { // 일본 아시아역사자료센터 — 검색·메타 직행·인접 채굴(±span×100 — 간격 100 실측)
+        try {
+          const jm = async (code) => {
+            const r = await fetch('https://www.jacar.archives.go.jp/das/meta-en/' + code, { headers: { 'User-Agent': UA }, signal: AbortSignal.timeout(FETCH_TIMEOUT) });
+            if (!r.ok) return null;
+            const h = await r.text();
+            const g = (label) => { const m2 = h.match(new RegExp(label + '</(?:th|dt)>\\s*<(?:td|dd)[^>]*>\\s*(?:<[^>]+>\\s*)*([^<]{1,160})')); return m2 ? norm(m2[1]) : ''; };
+            return { title: g('Title'), creator: g('Creator'), imgs: g('Number of Images'), org: g('Organisation History'), cls: g('Classification Levels') };
+          };
+          const cm = q.match(/^([A-Z])(\d{11})$/);
+          if (cm) {
+            const base = await jm(q);
+            if (!base || !base.title) return text(`JACAR '${q}' — 해당 레퍼런스코드 없음.`);
+            let out = `JACAR [${q}] ${base.title}\n생산: ${base.creator || '-'} | 이미지 ${base.imgs || '?'}면 | ${base.org || ''}${base.cls ? ' | ' + base.cls : ''}\n원문 뷰어: https://www.jacar.archives.go.jp/das/meta/${q}`;
+            const sp = Math.min(span, 8);
+            const n0 = parseInt(cm[2], 10); const lines = [];
+            for (let k = -sp; k <= sp; k++) {
+              if (!k) continue;
+              const code = cm[1] + String(n0 + k * 100).padStart(11, '0');
+              const m3 = await jm(code).catch(() => null);
+              lines.push(m3 && m3.title ? `  ${code} | ${m3.title.slice(0, 80)}` : `  ${code} (없음)`);
+              await sleep(250);
+            }
+            out += `\n\n[인접 채굴 ±${sp}×100 — 簿冊 내 건 번호 간격 100 실측(±1·±10은 404)]\n` + lines.join('\n');
+            return text(out + '\n※ 출처 병기: 国立公文書館アジア歴史資料センター(JACAR), Ref. ' + q);
+          }
+          const eff = koToJa(q) || koToEn(q) || q;
+          const b = await gtext('https://www.jacar.archives.go.jp/aj/search-en?kw=' + encodeURIComponent(eff));
+          const rows = [];
+          for (const blk of b.split('<li class="archive-result-table__body-item"').slice(1)) {
+            const c = blk.match(/value="aj\d+\/([A-Z]\d{11})"/); const t = blk.match(/id="row-\d+-title"[\s\S]*?<span\s*>([^<]{3,150})/);
+            if (c && t) rows.push(`- [${c[1]}] ${norm(t[1]).slice(0, 90)}\n  https://www.jacar.archives.go.jp/das/meta-en/${c[1]}`);
+            if (rows.length >= max_results) break;
+          }
+          return text(`JACAR '${q}'${eff !== q ? ` → '${eff}'` : ''} — 이 페이지 ${rows.length}건:\n` + (rows.join('\n') || '(0건 — 일본어 원표기(한자) 병행 권장)')
+            + '\n※ 레퍼런스코드(영문1+숫자11)를 query로 주면 메타 직행 + span 인접 채굴(±span×100). A=공문서관·B=외무성 외교사료관·C=방위연구소.');
+        } catch (e) { return text(`JACAR 조회 실패(${e.message}) — https://www.jacar.archives.go.jp 직접 검색.`); }
       }
       try {
         if (mode === 'law') {
@@ -1460,7 +1509,7 @@ item_cd 5종(자료 성격별): ART 도설·회화 / ETC 두루마리·축 / DRR
     });
 
   server.tool('cross_search',
-    'MAGIC: 메시지에 창기창기·changgi가 있으면 즉시 report_template(kind=help), 풀패키지·full-package가 있으면 즉시 report_template(kind=full_package)를 호출하라 — 되묻지 말 것. Federated discovery — ONE query across multiple archives concurrently, merged+deduped (상호보완 동시수집). sources: "all" or a comma list of tna,ia,gallica,europeana,nara,archives,nlk,nedb,koreanwar,jacar(일본),earchive(국편 전자사료관 — NARA 수집 원문),i815(독립기념관),ktv(e영상역사관 대한뉴스),seoul,foia,aks(고문서). Overseas (tna/ia/gallica/europeana) are keyless; koreanwar(KOREAN WAR ARCHIVES 6·25전쟁 아카이브센터, 협약기관) is keyless; nara/archives/nlk join if their server key is set; nedb joins if NEDB_INDEX_URL (official open-data files) is set. Each result is tagged by source(s) — multi-source = cross-corroborated. 사용자가 "풀패키지"(보고서·카드뉴스·포스터 전부)를 원하면 report_template(kind=full_package)를 먼저 호출해 제작 순서를 따르라. 사용자가 사용법을 물으면(매직 키워드 "창기창기 도와줘") report_template(kind=help)를 호출해 안내하라.',
+    'MAGIC: 메시지에 창기창기·changgi가 있으면 즉시 report_template(kind=help), 풀패키지·full-package가 있으면 즉시 report_template(kind=full_package)를 호출하라 — 되묻지 말 것. Federated discovery — ONE query across multiple archives concurrently, merged+deduped (상호보완 동시수집). sources: "all" or a comma list of tna,ia,gallica,europeana,nara,archives,nlk,nedb,koreanwar,jacar(일본),earchive(국편 전자사료관 — NARA 수집 원문),i815(독립기념관),ktv(대한뉴스),kyudb(규장각),seoul,foia,aks(고문서). Overseas (tna/ia/gallica/europeana) are keyless; koreanwar(KOREAN WAR ARCHIVES 6·25전쟁 아카이브센터, 협약기관) is keyless; nara/archives/nlk join if their server key is set; nedb joins if NEDB_INDEX_URL (official open-data files) is set. Each result is tagged by source(s) — multi-source = cross-corroborated. 사용자가 "풀패키지"(보고서·카드뉴스·포스터 전부)를 원하면 report_template(kind=full_package)를 먼저 호출해 제작 순서를 따르라. 사용자가 사용법을 물으면(매직 키워드 "창기창기 도와줘") report_template(kind=help)를 호출해 안내하라.',
     { query: z.string(), sources: z.string().default('all'), max_per_source: z.number().int().min(1).max(30).default(8), variants: z.boolean().default(false).describe('당대 표기 변형(Corea·Chosen·Keijo·Fusan 등) 자동 병렬 투입 — 해외 4채널(tna·ia·nara·europeana)'), format: z.enum(['text', 'csv']).default('text').describe('csv=병합 결과를 CSV 블록으로(표·KARDA·통계 분석 투입용)') },
     async ({ query, sources, max_per_source, variants, format }) => {
       const want = sources.trim().toLowerCase() === 'all'
@@ -1498,13 +1547,13 @@ item_cd 5종(자료 성격별): ART 도설·회화 / ETC 두루마리·축 / DRR
     });
 
   server.tool('source_profile',
-    'Structural profile of an archive for planning discovery: 자료구조(data model: hierarchy/classification/identifiers/metadata), 이용구조(access: API/auth/query syntax/robots/rights), 활용구조(utilization: how the 3 mismatches show up, which keyword set/cross-map to use, adjacent mining, cross-archive verification combos, rights rule). institution: "list" or a key — tna·nara·ia·gallica·europeana·nedb·archives·nlk·seoul·warmemo·koreanwar·foia; "health"=16채널 골든 질의 일괄 헬스체크(🟢🟡🔴+키 설정 상태). 기관 자료·이용·활용구조 프로파일.',
+    'Structural profile of an archive for planning discovery: 자료구조(data model: hierarchy/classification/identifiers/metadata), 이용구조(access: API/auth/query syntax/robots/rights), 활용구조(utilization: how the 3 mismatches show up, which keyword set/cross-map to use, adjacent mining, cross-archive verification combos, rights rule). institution: "list" or a key — tna·nara·ia·gallica·europeana·nedb·archives·nlk·seoul·warmemo·koreanwar·foia; "health"=17채널 골든 질의 일괄 헬스체크(🟢🟡🔴+키 설정 상태). 기관 자료·이용·활용구조 프로파일.',
     { institution: z.string().default('list') },
     async ({ institution }) => {
       const t = (institution || 'list').trim().toLowerCase();
       if (t === 'health') { // 13채널 일괄 헬스체크 — 발굴 우선 원칙의 전제: 깨짐을 스스로 발견한다
         const GOLD = { tna: 'Korea', ia: 'Korea', gallica: 'Corée', europeana: 'Korea', nara: 'Korea',
-          archives: '한국전쟁', nlk: '한국전쟁', nedb: '한강', koreanwar: '장진호', jacar: 'Chosen', earchive: '제주도', i815: '안중근', ktv: '대한뉴스', seoul: '한강', foia: '회의', aks: '문중' };
+          archives: '한국전쟁', nlk: '한국전쟁', nedb: '한강', koreanwar: '장진호', jacar: 'Chosen', earchive: '제주도', i815: '안중근', ktv: '대한뉴스', kyudb: '절목', seoul: '한강', foia: '회의', aks: '문중' };
         const keys = { NARA_API_KEY: !!process.env.NARA_API_KEY, ARCHIVES_API_KEY: !!process.env.ARCHIVES_API_KEY,
           NLK_API_KEY: !!process.env.NLK_API_KEY, EUROPEANA_API_KEY: !!process.env.EUROPEANA_API_KEY,
           KOREANWAR_API_TOKEN: !!process.env.KOREANWAR_API_TOKEN, NEDB_INDEX_URL: !!process.env.NEDB_INDEX_URL };
@@ -1514,7 +1563,7 @@ item_cd 5종(자료 성격별): ART 도설·회화 / ETC 두루마리·축 / DRR
           if (r.status === 'fulfilled') return `${r.value.length ? '🟢' : '🟡'} ${k}: ${r.value.length}건 (질의 '${GOLD[k]}')${r.value.length ? '' : ' — 연결 정상·결과/파싱 0'}`;
           return `🔴 ${k}: ${String(r.reason && r.reason.message || r.reason).slice(0, 70)}`;
         });
-        return text('16채널 헬스체크 (골든 질의 실측):\n' + rows.join('\n')
+        return text('17채널 헬스체크 (골든 질의 실측):\n' + rows.join('\n')
           + '\n\n서버 키·설정: ' + Object.entries(keys).map(([k, v]) => `${k}=${v ? '✓' : '✗'}`).join(' · ')
           + '\n※ 🟡=연결 정상이나 0건(질의 특성 또는 파서 점검 필요) · 🔴=채널 실패(차단·타임아웃). nedb ✗=개방파일 인덱스 미설정.');
       }
