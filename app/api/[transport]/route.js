@@ -772,10 +772,20 @@ const handler = createMcpHandler((server) => {
 
   server.tool('nara_search',
     'Search the US NARA catalog (API v2). Multilingual queries (한국어·日本語·中文·Русский 등) auto-translate to English index terms (장진호/長津湖→Chosin Reservoir …). Requires NARA_API_KEY env on the server; record_group enables precision cross-search (e.g. 242). 미국 NARA 검색 — 다국어 질의 자동 영문 변환.',
-    { query: z.string().describe('한국어 또는 영어'), record_group: z.number().int().optional(), moving_images_only: z.boolean().default(false), max_results: z.number().int().min(1).max(50).default(15), page: z.number().int().min(1).default(1) },
-    async ({ query, record_group, moving_images_only, max_results, page }) => {
+    { query: z.string().describe('한국어 또는 영어 (naid 지정 시 무시 가능 — 빈 문자열 허용)'), record_group: z.number().int().optional(), moving_images_only: z.boolean().default(false), max_results: z.number().int().min(1).max(50).default(15), page: z.number().int().min(1).default(1), naid: z.number().int().optional().describe('NAID 인접 채굴 중심값 e.g. 22015'), radius: z.number().int().min(0).max(8).default(3).describe('naid ±N 인접 범위') },
+    async ({ query, record_group, moving_images_only, max_results, page, naid, radius }) => {
       const key = process.env.NARA_API_KEY;
       if (!key) return text('NARA_API_KEY not configured on this server. Free key: email Catalog_API@nara.gov (name + email). Meanwhile use catalog.archives.gov directly.');
+      if (naid) { // NAID ± 인접 채굴 — 사진 ±3·색인 ±1 간격 실무 지식(query_bank identifiers). 한 호출로 일괄 조회(naIds 콤마 목록)
+        const ids = []; for (let i = naid - radius; i <= naid + radius; i++) if (i > 0) ids.push(i);
+        const u2 = new URL('https://catalog.archives.gov/api/v2/records/search');
+        u2.searchParams.set('naIds', ids.join(',')); u2.searchParams.set('limit', String(ids.length));
+        const d2 = await jget(u2.toString(), { 'x-api-key': key });
+        const got = new Map();
+        for (const h of (((d2.body || {}).hits || {}).hits) || []) { const rec = (h._source || {}).record || {}; if (rec.naId) got.set(Number(rec.naId), rec); }
+        const lines = ids.map((i) => { const r = got.get(i); return r ? `${i === naid ? '★' : ' '} [NAID ${i}] ${(r.title || '').slice(0, 95)} | ${r.localIdentifier || ''} | https://catalog.archives.gov/id/${i}` : `  [NAID ${i}] (없음)`; });
+        return text(`NARA NAID 인접 채굴 ${naid}±${radius} (★=중심, 한국 관련 여부는 제목으로 판별):\n` + lines.join('\n') + '\n※ 간격 지식: 사진 계열 ±3·색인 ±1 — 하나 찾으면 양옆을 훑는다(query_bank identifiers).');
+      }
       const en = koToEn(query);
       const eff = en || query;
       const u = new URL('https://catalog.archives.gov/api/v2/records/search');
@@ -795,8 +805,25 @@ const handler = createMcpHandler((server) => {
 
   server.tool('ia_search',
     'Search archive.org (advanced search syntax) — e.g. "identifier:111-adc*", "collection:universal_newsreels AND korea". Multilingual queries (한국어·日本語·中文·Русский 등) auto-translate to English terms. Pass identifier instead to inspect one item: metadata, license, original files with sizes (check before downloading). 다국어 질의 자동 영문 변환.',
-    { query: z.string().default('').describe('search query (ignored when identifier is set)'), identifier: z.string().optional().describe('item identifier for metadata inspection'), max_results: z.number().int().min(1).max(50).default(15), year_from: z.number().int().optional().describe('연대 시작 e.g. 1950'), year_to: z.number().int().optional().describe('연대 끝 e.g. 1953'), page: z.number().int().min(1).default(1) },
-    async ({ query, identifier, max_results, year_from, year_to, page }) => {
+    { query: z.string().default('').describe('search query (ignored when identifier is set)'), identifier: z.string().optional().describe('item identifier for metadata inspection'), max_results: z.number().int().min(1).max(50).default(15), year_from: z.number().int().optional().describe('연대 시작 e.g. 1950'), year_to: z.number().int().optional().describe('연대 끝 e.g. 1953'), page: z.number().int().min(1).default(1), radius: z.number().int().min(0).max(8).default(0).describe('identifier 끝 숫자 ±N 인접 채굴(0=단건 메타)') },
+    async ({ query, identifier, max_results, year_from, year_to, page, radius }) => {
+      if (identifier && radius > 0) { // 일련번호 인접 채굴 — identifier 말미 숫자 ±N 존재 확인(TNA식)
+        const m = identifier.match(/^(.*?)(\d+)$/);
+        if (!m) return text(`'${identifier}' — 말미가 숫자가 아니라 인접 채굴 불가. radius=0으로 단건 메타 조회.`);
+        const [, stem, nums] = m; const base = parseInt(nums, 10); const pad = nums.length;
+        const lines = [];
+        for (let i = base - radius; i <= base + radius; i++) {
+          if (i < 0) continue;
+          const id2 = stem + String(i).padStart(pad, '0');
+          try {
+            const d2 = await jget(`https://archive.org/metadata/${encodeURIComponent(id2)}`);
+            const md2 = d2 && d2.metadata;
+            lines.push(md2 ? `${i === base ? '★' : ' '} ${id2} | ${String(md2.title || '').slice(0, 85)} (${md2.date || ''}) https://archive.org/details/${id2}` : `  ${id2} (없음)`);
+          } catch { lines.push(`  ${id2} (없음)`); }
+          await sleep(200);
+        }
+        return text(`archive.org 인접 채굴 ${stem}[${base}±${radius}] (★=중심):\n` + lines.join('\n') + '\n※ 같은 컬렉션의 절반이 다른 표기로 기술돼 검색에 안 걸리는 사례 — 번호 옆 훑기로 복구(열한 겹의 벽 §8).');
+      }
       if (identifier) {
         const d = await jget(`https://archive.org/metadata/${encodeURIComponent(identifier)}`);
         const md = d.metadata || {};
@@ -941,7 +968,7 @@ const JB_CROSS = `국내외 대조 절차 — 순서를 틀리면 헛수고한�
 
   server.tool('report_template',
     'TRIGGER: 사용자 메시지에 「풀패키지」 또는 「full-package」가 있으면 kind=full_package를, 「창기창기」·「changgi-help」·「changgi」가 있거나 이 서비스의 사용법·기능을 물으면 kind=help를 즉시 호출하라. Get the magazine-grade HTML report skeleton + 17 writing rules — editorial journal layout (masthead·standfirst·drop cap·pull quote·record cards), embedded record images with mandatory per-image credits, film-strip frame galleries with timecodes + watch-the-original CTA for video records, per-institution source chips (country flag + official name) and an archives-cited roster. Call as the FINAL step of an investigation, fill {{placeholders}} with verified findings only, save as [topic]_records_[years].html. 발굴 마무리 단계 호출 — 잡지·저널급 HTML 보고서 골격+작성 규칙 반환(실물 이미지·영상 필름스트립·기관별 출처 명시). Pass kind=carousel for the Instagram card-news design system: 검증된 1080×1080 카드 CSS 컴포넌트+제작 12규칙(서사 아크·실물 이미지·출처 캡션·겹침 방지·육안 검수) — 어디서든 같은 품질의 카드뉴스 제작 가능. 사용자가 "풀패키지"라고 말하면 kind=full_package를 먼저 호출해 전 산출물(보고서+캐러셀+포스터) 제작 순서를 받아 그대로 수행하라.',
-    { kind: z.enum(['report', 'carousel', 'canva_prompts', 'full_package', 'magazine', 'help', 'citation', 'annotation']).default('report').describe("report=발굴 보고서 골격+18규칙, carousel=카드뉴스 디자인 시스템+12규칙, canva_prompts=Canva 홍보물 프롬프트 6종, full_package=매직 키워드 '풀패키지' 전 산출물 제작 순서, magazine=표지(포스터 겸용)·목차·뒷표지·KA 시그니처·브랜드 테마 5종 매거진 확장팩, help=매직 키워드 '창기창기 도와줘' 처음 사용자 안내, citation=한국사DB·국회도서관 논문 인용 형식(각주·참고문헌·APA·Chicago), annotation=기록 해설형 어노테이션 상세 규칙(점선 영역·메타 표·추정 금지)") },
+    { kind: z.enum(['report', 'carousel', 'canva_prompts', 'full_package', 'magazine', 'help', 'citation', 'annotation', 'exhibit']).default('report').describe("report=발굴 보고서 골격+18규칙, carousel=카드뉴스 디자인 시스템+12규칙, canva_prompts=Canva 홍보물 프롬프트 6종, full_package=매직 키워드 '풀패키지' 전 산출물 제작 순서, magazine=표지(포스터 겸용)·목차·뒷표지·KA 시그니처·브랜드 테마 5종 매거진 확장팩, help=매직 키워드 '창기창기 도와줘' 처음 사용자 안내, citation=한국사DB·국회도서관 논문 인용 형식(각주·참고문헌·APA·Chicago), annotation=기록 해설형 어노테이션 상세 규칙(점선 영역·메타 표·추정 금지), exhibit=고문서 전시형(AKS 문중·서원 고문서 — 전시 페이지·카드·학습지 규칙+HTML 골격)") },
     async ({ kind }) => kind === 'carousel'
       ? text(CAROUSEL_RULES + '\n\n===== CARD DESIGN SYSTEM (1080×1080 — .card를 그대로 복사해 채울 것) =====\n' + CAROUSEL_TEMPLATE)
       : kind === 'canva_prompts' ? text(CANVA_PROMPTS)
@@ -950,6 +977,7 @@ const JB_CROSS = `국내외 대조 절차 — 순서를 틀리면 헛수고한�
       : kind === 'help' ? text(HELP_GUIDE)
       : kind === 'citation' ? text(CITATION_GUIDE)
       : kind === 'annotation' ? text(ANNOTATION_GUIDE)
+      : kind === 'exhibit' ? text(EXHIBIT_GUIDE)
       : text(REPORT_RULES + '\n\n===== HTML TEMPLATE (fill the {{placeholders}}) =====\n' + REPORT_TEMPLATE));
 
   // ===== 국내 아카이브 — 자동 브라우징(서버 사이드 fetch·파싱) v1.9.0 =====
@@ -1116,27 +1144,29 @@ item_cd 5종(자료 성격별): ART 도설·회화 / ETC 두루마리·축 / DRR
 
   server.tool('archives_search',
     "Search 국가기록원 국가기록포털 (archives.go.kr) via official OpenAPI (RSS). Set a free data.go.kr key '나라기록물정보 서비스'(15000153) as ARCHIVES_API_KEY and the server auto-searches; otherwise returns the portal URL. 공공누리 확인 후 이용.",
-    { query: z.string(), max_results: z.number().int().min(1).max(50).default(10) },
-    async ({ query, max_results }) => {
+    { query: z.string(), max_results: z.number().int().min(1).max(50).default(10), year_from: z.number().int().optional().describe('생산연도 시작(후처리 필터) e.g. 1950'), year_to: z.number().int().optional().describe('생산연도 끝 e.g. 1960') },
+    async ({ query, max_results, year_from, year_to }) => {
       const key = process.env.ARCHIVES_API_KEY;
       const portal = 'https://www.archives.go.kr/next/newsearch/listSubjectDescription.do?query=' + encodeURIComponent(query);
       if (!key) return text(agentBrowse('국가기록원', query, portal, "OpenAPI 키(ARCHIVES_API_KEY, data.go.kr 15000153) 미설정"));
       const sk = /%[0-9A-Fa-f]{2}/.test(key) ? key : encodeURIComponent(key);
-      const api = `https://apis.data.go.kr/1741050/openapi/searcharc?serviceKey=${sk}&query=${encodeURIComponent(query)}&start=1&limit=${Math.min(max_results, 50)}`;
+      const yf = year_from || 0, yt = year_to || 9999, filt = !!(year_from || year_to);
+      const api = `https://apis.data.go.kr/1741050/openapi/searcharc?serviceKey=${sk}&query=${encodeURIComponent(query)}&start=1&limit=${filt ? 50 : Math.min(max_results, 50)}`;
       try {
         const xml = await gtext(api);
         if (xml.includes('searchError') || !xml.includes('<item>')) return text(agentBrowse('국가기록원', query, portal, `API 오류: ${xtag(xml, 'message') || '결과 없음'}`));
         const tot = xtag(xml, 'total') || '?';
-        const items = xml.match(/<item>[\s\S]*?<\/item>/g) || [];
+        let items = xml.match(/<item>[\s\S]*?<\/item>/g) || [];
+        if (filt) items = items.filter((i) => { const y = parseInt((xtag(i, 'prod_year').match(/\d{4}/) || [])[0], 10); return y && y >= yf && y <= yt; });
         const lines = items.slice(0, max_results).map((i) => `- ${xtag(i, 'title').slice(0, 90)} (${xtag(i, 'prod_year')}) · ${xtag(i, 'prod_name').slice(0, 20)} [${xtag(i, 'is_open') === '1' ? '공개' : '비공개'}] ${xtag(i, 'link')}`);
-        return text(`국가기록원 '${query}' — 총 ${tot}건:\n` + (lines.join('\n') || '(0건)') + '\n공공누리(KOGL) 유형 확인 후 이용. 비공개 항목은 정보공개청구 대상.');
+        return text(`국가기록원 '${query}'${filt ? ` [생산 ${year_from || ''}~${year_to || ''} · 상위 50건 내 후처리]` : ''} — 총 ${tot}건${filt ? ` 중 연대 일치 ${items.length}건` : ''}:\n` + (lines.join('\n') || '(0건)') + '\n공공누리(KOGL) 유형 확인 후 이용. 비공개 항목은 정보공개청구 대상.');
       } catch (e) { return text(agentBrowse('국가기록원', query, portal, `API 오류(${e.message})`)); }
     });
 
   server.tool('nlk_search',
     "Search 국립중앙도서관 (nl.go.kr) collections. collection: total·subject·newspaper(1883-1960 old newspapers, free use)·gwanbo·exhibit·koreanmemory·overseas. With NLK_API_KEY the server auto-searches. category (자료유형: 도서·고문헌·학위논문·잡지/학술지·신문·기사·멀티미디어) runs a 2nd concurrent type-scoped channel merged with the full-catalog channel (상호보완 이중수집).",
-    { query: z.string(), collection: z.enum(['total', 'subject', 'newspaper', 'gwanbo', 'exhibit', 'koreanmemory', 'overseas']).default('total'), category: z.enum(['도서', '고문헌', '학위논문', '잡지/학술지', '신문', '기사', '멀티미디어']).optional(), max_results: z.number().int().min(1).max(50).default(15) },
-    async ({ query, collection, category, max_results }) => {
+    { query: z.string(), collection: z.enum(['total', 'subject', 'newspaper', 'gwanbo', 'exhibit', 'koreanmemory', 'overseas']).default('total'), category: z.enum(['도서', '고문헌', '학위논문', '잡지/학술지', '신문', '기사', '멀티미디어']).optional(), max_results: z.number().int().min(1).max(50).default(15), year_from: z.number().int().optional().describe('발행연도 시작(후처리) e.g. 1900'), year_to: z.number().int().optional().describe('발행연도 끝 e.g. 1945') },
+    async ({ query, collection, category, max_results, year_from, year_to }) => {
       const COLL = {
         total: ['전체 소장자료', 'https://www.nl.go.kr/NL/contents/search.do?srchTarget=total&kwd=', true],
         subject: ['주제별컬렉션', 'https://www.nl.go.kr/NL/contents/N20103000000.do', true],
@@ -1152,11 +1182,13 @@ item_cd 5종(자료 성격별): ART 도설·회화 / ETC 두루마리·축 / DRR
       const note = NOTE[collection] || '';
       const key = process.env.NLK_API_KEY;
       if (apiOk && key) {
-        const base = `https://www.nl.go.kr/NL/search/openApi/search.do?key=${encodeURIComponent(key)}&apiType=xml&srchTarget=total&kwd=${encodeURIComponent(query)}&pageSize=${Math.min(max_results, 50)}&pageNum=1`;
+        const yfilt = !!(year_from || year_to); const yf = year_from || 0, yt2 = year_to || 9999;
+        const base = `https://www.nl.go.kr/NL/search/openApi/search.do?key=${encodeURIComponent(key)}&apiType=xml&srchTarget=total&kwd=${encodeURIComponent(query)}&pageSize=${yfilt ? 50 : Math.min(max_results, 50)}&pageNum=1`;
         const parse = (xml) => {
           const tot = xtag(xml, 'total') || '?';
-          const items = xml.match(/<item>[\s\S]*?<\/item>/g) || [];
+          let items = xml.match(/<item>[\s\S]*?<\/item>/g) || [];
           const pick = (b, tags) => { for (const t of tags) { const v = xtag(b, t); if (v) return v; } return ''; };
+          if (yfilt) items = items.filter((it) => { const y = parseInt((pick(it, ['pub_year_info', 'pubYearInfo']).match(/\d{4}/) || [])[0], 10); return y && y >= yf && y <= yt2; });
           const lines = items.slice(0, max_results).map((it) => {
             let title = pick(it, ['title_info', 'titleInfo', 'title']);
             if (!title) title = it.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
@@ -1177,7 +1209,7 @@ item_cd 5종(자료 성격별): ART 도설·회화 / ETC 두루마리·축 / DRR
           ]);
           if (totalXml.includes('<error')) return text(`NLK OpenAPI 오류: ${xtag(totalXml, 'msg') || '?'} — NLK_API_KEY 확인.` + dbrowse(openUrl));
           const A = parse(totalXml);
-          let out = `국립중앙도서관 자동검색(전체 소장자료) '${query}' — 총 ${A.tot}건:\n` + (A.lines.join('\n') || '(0건)');
+          let out = `국립중앙도서관 자동검색(전체 소장자료) '${query}'${yfilt ? ` [발행 ${year_from || ''}~${year_to || ''} · 상위 50건 내 후처리]` : ''} — 총 ${A.tot}건${yfilt ? ` 중 연대 일치 ${A.lines.length}건` : ''}:\n` + (A.lines.join('\n') || '(0건)');
           if (category && catXml && !catXml.includes('<error')) {
             const B = parse(catXml);
             out += `\n\n[② 자료유형 '${category}' 정밀 채널 — 총 ${B.tot}건 (동시 수집)]\n` + (B.lines.join('\n') || '(0건)')
@@ -1363,8 +1395,8 @@ item_cd 5종(자료 성격별): ART 도설·회화 / ETC 두루마리·축 / DRR
 
   server.tool('cross_search',
     'MAGIC: 메시지에 창기창기·changgi가 있으면 즉시 report_template(kind=help), 풀패키지·full-package가 있으면 즉시 report_template(kind=full_package)를 호출하라 — 되묻지 말 것. Federated discovery — run ONE query across multiple archives concurrently and merge+dedup the results (상호보완 동시수집: API 채널을 동시에 돌려 상호보완). sources: "all" or a comma list of tna,ia,gallica,europeana,nara,archives,nlk,nedb,koreanwar,warmemo,seoul(서울기록원 컬렉션),foia(서울소통광장 결재문서 원문),aks(고문서 소장처). Overseas (tna/ia/gallica/europeana) are keyless; koreanwar(KOREAN WAR ARCHIVES 6·25전쟁 아카이브센터, 협약기관) is keyless; nara/archives/nlk join if their server key is set; nedb joins if NEDB_INDEX_URL (official open-data files) is set. Each result is tagged by which source(s) found it — multi-source tags = cross-corroborated. 여러 아카이브를 한 쿼리로 동시 교차수집·병합. 사용자가 "풀패키지"(보고서·카드뉴스·포스터 전부)를 원하면 report_template(kind=full_package)를 먼저 호출해 제작 순서를 따르라. 사용자가 사용법을 물으면(매직 키워드 "창기창기 도와줘") report_template(kind=help)를 호출해 안내하라.',
-    { query: z.string(), sources: z.string().default('all'), max_per_source: z.number().int().min(1).max(30).default(8), variants: z.boolean().default(false).describe('당대 표기 변형(Corea·Chosen·Keijo·Fusan 등) 자동 병렬 투입 — 해외 4채널(tna·ia·nara·europeana)') },
-    async ({ query, sources, max_per_source, variants }) => {
+    { query: z.string(), sources: z.string().default('all'), max_per_source: z.number().int().min(1).max(30).default(8), variants: z.boolean().default(false).describe('당대 표기 변형(Corea·Chosen·Keijo·Fusan 등) 자동 병렬 투입 — 해외 4채널(tna·ia·nara·europeana)'), format: z.enum(['text', 'csv']).default('text').describe('csv=병합 결과를 CSV 블록으로(표·KARDA·통계 분석 투입용)') },
+    async ({ query, sources, max_per_source, variants, format }) => {
       const want = sources.trim().toLowerCase() === 'all'
         ? Object.keys(COLLECT)
         : sources.split(',').map((s) => s.trim().toLowerCase()).filter((s) => COLLECT[s]);
@@ -1387,6 +1419,13 @@ item_cd 5종(자료 성격별): ART 도설·회화 / ETC 두루마리·축 / DRR
       }
       const { items, stats } = await collectMerged(jobs);
       items.sort((a, b) => b.sources.length - a.sources.length);
+      if (format === 'csv') { // 분석 투입용 구조화 출력 — "자료로써 분석할 수 있게"
+        const esc = (v) => `"${String(v == null ? '' : v).replace(/"/g, '""')}"`;
+        const rows = items.slice(0, 45).map((it) => [it.sources.join('+'), it.title, it.date, it.id, it.url].map(esc).join(','));
+        return text(`교차수집 '${query}' CSV — 채널별 [${stats.join(' · ')}] → 병합 ${items.length}건 (45건 상한):\n`
+          + 'sources,title,date,id,url\n' + rows.join('\n')
+          + '\n※ 그대로 스프레드시트·KARDA 온톨로지(nodes/edges)·통계 분석에 투입 가능. 권리 초판정: judge_rights.');
+      }
       const lines = items.slice(0, 45).map((it) => `- [${it.sources.join('+')}] ${it.title.slice(0, 95)}${it.date ? ` (${it.date})` : ''}${it.url ? ' ' + it.url : ''}`);
       return text(`교차수집 '${query}' — 채널별 [${stats.join(' · ')}] → 병합 ${items.length}건 (복수출처 우선 정렬):\n` + (lines.join('\n') || '(0)')
         + '\n※ [출처] 복수 표기 = 교차확인된 record. 국내(nara·archives·nlk)는 서버 키, nedb는 NEDB_INDEX_URL(공식 개방파일) 설정 시 포함. open.go.kr 본체(브라우저 전용)는 foia_search 전용 도구로.\n※ 발굴 우선 — 권리는 표시: 게재 전 judge_rights(참조코드·KOGL)로 초판정. variants=true로 당대 표기(Corea·Chosen·Keijo…) 자동 팬아웃.');
@@ -2123,6 +2162,38 @@ const ANNOTATION_GUIDE = `기록 해설형 어노테이션 규칙 — 상세판 
 7. 산출 3형: 보고서 부록 절('기록을 해설해 드립니다') · 카드뉴스(1080 — 범례 압축·2열 허용) · 슬라이드(도형 마커+노트에 판독 해설).
 8. 권리 고지: 기관 정식명·식별자·열람 URL — 협약기관(KOREAN WAR ARCHIVES) 출처 표기 필수, 게재윤리 4단계.
 9. 영상 프레임 판독 보강(슬레이트·화면 속 문자): 슬레이트/타이틀 카드에서 부대·촬영자·날짜·롤 번호·장소 필드를 파싱하고, 당대 지명(일본식 독음·외래 명명)은 현대 지명과 병기. 표지판·현수막·차량 표식 등 화면 속 문자는 OCR과 육안을 교차해 확정 — 불일치·판독 불가는 그대로 표기(추정 금지 원칙 동일).`;
+
+const EXHIBIT_GUIDE = `고문서 전시형 산출물 규칙 — aks-archive-harvester 스킬 ④매개(Mediate) 단계의 서버판 (웹·모바일 동등성).
+nedb_search(mode=aks)로 발굴한 문중·서원 고문서를 전시 페이지·카드뉴스·학습지로 만드는 규칙.
+
+■ 산출물 4종
+① 전시 페이지(단일 HTML): 표제·도입문(lead) → 시대 타임라인 → 문서별 패널(도판+캡션+이야기) → 출처 고지. 인쇄 시 패널 단위로 나뉘는 구성. 웹=아티팩트 미리보기, 로컬=파일 저장.
+② 카드뉴스(1080×1350): 표지 1장 + 문서별 1장 + 클로징 1장. 문서 카드 = 도판(상단 70%)+캡션 띠(하단). 로컬=헤드리스 크롬 렌더, 웹=아티팩트/Canva 커넥터.
+③ 학습지(A4 1장): "이 문서는 무엇인가"(유형·연대·발급자) · "찾아보기"(도판에서 날짜·수취인 찾기) · "생각해보기"(열린 질문 1개) · 요약 박스.
+④ 게시 문구: 2~3문장 + 해시태그 — 기관명·소장처명 반드시 포함.
+
+■ 캡션·서술 규칙 (추정 금지)
+- 제목·문서유형·육안으로 보이는 것만 서술. 탈초(판독문)·번역·인물 생애는 사용자가 제공·확인한 것만 사실로 기술.
+- 캡션 형식: [연대] [발급자→수취인] [문서유형] — 한 줄. 이야기(2문장 이내)는 주제와의 연결만.
+- 검토 미완(사용자 확인 없는 항목)은 "초안" 표기를 지우지 않는다.
+
+■ 권리·출처 (산출물 전체 공통)
+- 전 산출물에 "자료: 한국학중앙연구원 한국고문서자료관 (archive.aks.ac.kr)" 고지 필수.
+- 이미지 재이용은 기관 이용조건을 따름 — 게재 전 judge_rights로 초판정.
+
+■ 전시 페이지 골격 (채워 쓸 것)
+<!doctype html><html lang=ko><head><meta charset=utf-8><title>{{전시제목}}</title><style>
+body{font-family:'Noto Serif KR',serif;max-width:860px;margin:0 auto;padding:2rem;color:#222}
+.lead{font-size:1.15rem;border-left:4px solid #8a6d3b;padding-left:1rem;margin:1.5rem 0}
+.tl{display:flex;gap:.6rem;flex-wrap:wrap;margin:1rem 0}.tl span{background:#f3ede2;padding:.2rem .7rem;border-radius:1rem;font-size:.85rem}
+.panel{page-break-inside:avoid;margin:2.2rem 0;border-top:1px solid #ddd;padding-top:1.4rem}
+.panel img{width:100%;border:1px solid #ccc}.cap{font-size:.92rem;color:#555;margin:.4rem 0}
+.story{margin:.6rem 0}.draft{color:#b33;font-size:.8rem}
+.src{margin-top:3rem;font-size:.85rem;color:#777;border-top:2px solid #8a6d3b;padding-top:.8rem}
+</style></head><body><h1>{{전시제목}}</h1><p class=lead>{{도입문}}</p>
+<div class=tl>{{<span>연대</span>…}}</div>
+<div class=panel><img src="{{도판URL}}"><p class=cap>{{[연대] [발급자→수취인] [문서유형]}}</p><p class=story>{{이야기}}</p><span class=draft>{{검토 미완 시: 초안}}</span></div>
+<p class=src>자료: 한국학중앙연구원 한국고문서자료관 (archive.aks.ac.kr) · 이미지 재이용은 기관 이용조건 준수</p></body></html>`;
 
 const HELP_GUIDE = `사용 안내 — 매직 키워드 “창기창기 도와줘” (처음 사용자용. 이 내용을 친절한 안내로 정리해 사용자에게 전달하라. 시각 안내 페이지: https://korea-archive-mcp.vercel.app/help.html — 링크를 함께 제공)
 
