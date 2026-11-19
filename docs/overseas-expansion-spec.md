@@ -20,5 +20,13 @@
 - **DDB(deutsche-digitale-bibliothek.de)**: 웹 403이나 **공식 API(무료 키)** 제공 — `DDB_API_KEY` 확보 시 `ddb` 소스 합류 가능.
 - 현행 대안: **Europeana가 독일(DDB 포함) 기관을 이미 집계** — `europeana_search`가 독일권 실질 커버(필요 시 쿼리에 Koreakrieg 병용, TOPICS가 독일어 입력 인식).
 
-## 📝 뉴질랜드·기타 후보(미탐침)
-- Papers Past(NZ 신문)·Archives NZ·네덜란드 Nationaal Archief — 다음 확장 라운드 대상.
+## ✅ 네덜란드 국립문서보관소 (nationaalarchief.nl) — cross_search `nlna` 합류 (v1.26)
+- 웹 검색은 SPA 셸이나 **공개 JSON API**를 Playwright 역추적으로 확보: `GET zvt.nationaalarchief.nl/api/search/eads?q=&rows=&page=&sortBy=_score` — 키 불요.
+- 응답: total_hits + results[{type, id(문서군 코드), title, period}]. 실측 'Korea' 243건 — **주한 네덜란드 대사관(2.05.202, 1955-74)·한국전 파견부대(2.13.56, 1950-79)** 문서군 직행.
+- 딥링크: `nationaalarchief.nl/onderzoeken/archief/<id>`.
+
+## ⛔ 뉴질랜드 Papers Past — 보류 (v1.26 실측)
+- Incapsula(Imperva) 봇 게이트 — 서버사이드 불가. Archives NZ는 미탐침(다음 라운드).
+
+## (v1.26) AWM 심화
+- 상세 파싱 확장: **권리 자동 태그**(Item copyright 'Copyright expired - public domain' → `· 권리:PD(저작권 만료)`) + Conflict 기간을 date 필드로 — 발굴 우선·권리 표시 원칙의 해외 적용 1호.
