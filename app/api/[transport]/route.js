@@ -1178,7 +1178,9 @@ const JB_CROSS = `국내외 대조 절차 — 순서를 틀리면 헛수고한�
             if (i2 >= 0) {
               const seg = strip(b.slice(b.indexOf('>', i2) + 1, i2 + 30000));
               rokInfo = (seg.match(/수록정보[:\s]*([^)]{3,40}\))/) || [])[1] || '';
-              const body = seg.replace(/^[\s\S]{0,80}?수록정보[:\s]*[^)]{3,40}\)\s*/, '').trim();
+              let body = seg.replace(/^[\s\S]{0,80}?수록정보[:\s]*[^)]{3,40}\)\s*/, '').trim();
+              // 본문 경계: 게시판(감사의 글)·JS 찌꺼기 절단. 수형기록·묘소·현충시설 표는 분석 가치가 있어 유지
+              body = body.split('감사의 글')[0].replace(/function\s+fn[\s\S]*$/, '').replace(/\$\{\w+\}/g, '').trim();
               rok = body.length > 4000 ? body.slice(0, 4000) + ` …(총 ${body.length}자 — 전문은 원문 링크)` : body;
             }
             if (!name && !summary) return text(`[mngNo ${q}] 공훈전자사료관 상세 파싱 실패 — 관리번호를 확인하거나 mode=gonghun에 이름으로 검색하십시오.`);
