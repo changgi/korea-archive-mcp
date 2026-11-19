@@ -16,7 +16,8 @@ jobs:
         run: |
           cp "app/api/[transport]/route.js" /tmp/route_check.mjs
           node --check /tmp/route_check.mjs
-          node --check lib/rights.js
+          cp lib/rights.js /tmp/rights_check.mjs
+          node --check /tmp/rights_check.mjs
       - name: 정적 검증 (도구 20종 · 설명 1024자 · TOPICS 컴파일 · 24KB 가드)
         run: node scripts/ci-verify.mjs
       - name: marketplace 패리티 (3사본 도구명 diff + py_compile)
