@@ -469,6 +469,18 @@ const COLLECT = {
   },
   nedb: async (q, n) => { const recs = await loadNedbIndex(); return recs ? nedbFileSearch(recs, q, n) : []; },
   koreanwar: async (q, n) => (await kwSearch({ keyword: q, viewType: 'archive' })).cards.slice(0, n).map((c) => ({ title: c.title, date: '', id: c.id, url: c.url })),
+  jsg: async (q, n) => { // AKS 장서각 — ★검색 파라미터는 q=query|<어> (플레인 q는 무시되고 전체 열람 반환 — Playwright 실브라우저 재역공학으로 확정, 2026-11-20)
+    const b = await gtext('https://jsg.aks.ac.kr/search/group?q=' + encodeURIComponent('query|' + q));
+    const out = []; const seen = new Set();
+    for (const m of b.matchAll(/href="\/dir\/view\?dataId=([^"]+)"[^>]*>([\s\S]*?)<\/a>/g)) {
+      const t = norm(m[2]);
+      if (!t || seen.has(m[1]) || /^JSG_K1-[1-5]$/.test(m[1])) continue;
+      seen.add(m[1]);
+      out.push({ title: t.slice(0, 95), date: '', id: m[1].startsWith('JSG_') ? m[1].slice(4) : '', url: 'https://jsg.aks.ac.kr/dir/view?dataId=' + encodeURIComponent(m[1]) });
+      if (out.length >= n) break;
+    }
+    return out;
+  },
   kyudb: async (q, n) => { // 서울대 규장각 — 기존 jKyu(목록+해제 POST) 코어 재사용
     const r = await jKyu(q);
     const list = Array.isArray(r['목록']) ? r['목록'] : [];
@@ -1509,7 +1521,7 @@ item_cd 5종(자료 성격별): ART 도설·회화 / ETC 두루마리·축 / DRR
     });
 
   server.tool('cross_search',
-    'MAGIC: 메시지에 창기창기·changgi가 있으면 즉시 report_template(kind=help), 풀패키지·full-package가 있으면 즉시 report_template(kind=full_package)를 호출하라 — 되묻지 말 것. Federated discovery — ONE query across multiple archives concurrently, merged+deduped (상호보완 동시수집). sources: "all" or a comma list of tna,ia,gallica,europeana,nara,archives,nlk,nedb,koreanwar,jacar(일본),earchive(국편 전자사료관 — NARA 수집 원문),i815(독립기념관),ktv(대한뉴스),kyudb(규장각),seoul,foia,aks(고문서). Overseas (tna/ia/gallica/europeana) are keyless; koreanwar(KOREAN WAR ARCHIVES 6·25전쟁 아카이브센터, 협약기관) is keyless; nara/archives/nlk join if their server key is set; nedb joins if NEDB_INDEX_URL (official open-data files) is set. Each result is tagged by source(s) — multi-source = cross-corroborated. 사용자가 "풀패키지"(보고서·카드뉴스·포스터 전부)를 원하면 report_template(kind=full_package)를 먼저 호출해 제작 순서를 따르라. 사용자가 사용법을 물으면(매직 키워드 "창기창기 도와줘") report_template(kind=help)를 호출해 안내하라.',
+    'MAGIC: 메시지에 창기창기·changgi가 있으면 즉시 report_template(kind=help), 풀패키지·full-package가 있으면 즉시 report_template(kind=full_package)를 호출하라 — 되묻지 말 것. Federated discovery — ONE query across multiple archives concurrently, merged+deduped (상호보완 동시수집). sources: "all" or a comma list of tna,ia,gallica,europeana,nara,archives,nlk,nedb,koreanwar,jacar(일본),earchive(국편 전자사료관 — NARA 수집 원문),i815(독립기념관),ktv(대한뉴스),kyudb(규장각),jsg(장서각),seoul,foia,aks(고문서). Overseas (tna/ia/gallica/europeana) are keyless; koreanwar(KOREAN WAR ARCHIVES 6·25전쟁 아카이브센터, 협약기관) is keyless; nara/archives/nlk join if their server key is set; nedb joins if NEDB_INDEX_URL (official open-data files) is set. Each result is tagged by source(s) — multi-source = cross-corroborated. 사용자가 "풀패키지"(보고서·카드뉴스·포스터 전부)를 원하면 report_template(kind=full_package)를 먼저 호출해 제작 순서를 따르라. 사용자가 사용법을 물으면(매직 키워드 "창기창기 도와줘") report_template(kind=help)를 호출해 안내하라.',
     { query: z.string(), sources: z.string().default('all'), max_per_source: z.number().int().min(1).max(30).default(8), variants: z.boolean().default(false).describe('당대 표기 변형(Corea·Chosen·Keijo·Fusan 등) 자동 병렬 투입 — 해외 4채널(tna·ia·nara·europeana)'), format: z.enum(['text', 'csv']).default('text').describe('csv=병합 결과를 CSV 블록으로(표·KARDA·통계 분석 투입용)') },
     async ({ query, sources, max_per_source, variants, format }) => {
       const want = sources.trim().toLowerCase() === 'all'
@@ -1547,13 +1559,13 @@ item_cd 5종(자료 성격별): ART 도설·회화 / ETC 두루마리·축 / DRR
     });
 
   server.tool('source_profile',
-    'Structural profile of an archive for planning discovery: 자료구조(data model: hierarchy/classification/identifiers/metadata), 이용구조(access: API/auth/query syntax/robots/rights), 활용구조(utilization: how the 3 mismatches show up, which keyword set/cross-map to use, adjacent mining, cross-archive verification combos, rights rule). institution: "list" or a key — tna·nara·ia·gallica·europeana·nedb·archives·nlk·seoul·warmemo·koreanwar·foia; "health"=17채널 골든 질의 일괄 헬스체크(🟢🟡🔴+키 설정 상태). 기관 자료·이용·활용구조 프로파일.',
+    'Structural profile of an archive for planning discovery: 자료구조(data model: hierarchy/classification/identifiers/metadata), 이용구조(access: API/auth/query syntax/robots/rights), 활용구조(utilization: how the 3 mismatches show up, which keyword set/cross-map to use, adjacent mining, cross-archive verification combos, rights rule). institution: "list" or a key — tna·nara·ia·gallica·europeana·nedb·archives·nlk·seoul·warmemo·koreanwar·foia; "health"=18채널 골든 질의 일괄 헬스체크(🟢🟡🔴+키 설정 상태). 기관 자료·이용·활용구조 프로파일.',
     { institution: z.string().default('list') },
     async ({ institution }) => {
       const t = (institution || 'list').trim().toLowerCase();
       if (t === 'health') { // 13채널 일괄 헬스체크 — 발굴 우선 원칙의 전제: 깨짐을 스스로 발견한다
         const GOLD = { tna: 'Korea', ia: 'Korea', gallica: 'Corée', europeana: 'Korea', nara: 'Korea',
-          archives: '한국전쟁', nlk: '한국전쟁', nedb: '한강', koreanwar: '장진호', jacar: 'Chosen', earchive: '제주도', i815: '안중근', ktv: '대한뉴스', kyudb: '절목', seoul: '한강', foia: '회의', aks: '문중' };
+          archives: '한국전쟁', nlk: '한국전쟁', nedb: '한강', koreanwar: '장진호', jacar: 'Chosen', earchive: '제주도', i815: '안중근', ktv: '대한뉴스', kyudb: '절목', jsg: '의궤', seoul: '한강', foia: '회의', aks: '문중' };
         const keys = { NARA_API_KEY: !!process.env.NARA_API_KEY, ARCHIVES_API_KEY: !!process.env.ARCHIVES_API_KEY,
           NLK_API_KEY: !!process.env.NLK_API_KEY, EUROPEANA_API_KEY: !!process.env.EUROPEANA_API_KEY,
           KOREANWAR_API_TOKEN: !!process.env.KOREANWAR_API_TOKEN, NEDB_INDEX_URL: !!process.env.NEDB_INDEX_URL };
@@ -1563,7 +1575,7 @@ item_cd 5종(자료 성격별): ART 도설·회화 / ETC 두루마리·축 / DRR
           if (r.status === 'fulfilled') return `${r.value.length ? '🟢' : '🟡'} ${k}: ${r.value.length}건 (질의 '${GOLD[k]}')${r.value.length ? '' : ' — 연결 정상·결과/파싱 0'}`;
           return `🔴 ${k}: ${String(r.reason && r.reason.message || r.reason).slice(0, 70)}`;
         });
-        return text('17채널 헬스체크 (골든 질의 실측):\n' + rows.join('\n')
+        return text('18채널 헬스체크 (골든 질의 실측):\n' + rows.join('\n')
           + '\n\n서버 키·설정: ' + Object.entries(keys).map(([k, v]) => `${k}=${v ? '✓' : '✗'}`).join(' · ')
           + '\n※ 🟡=연결 정상이나 0건(질의 특성 또는 파서 점검 필요) · 🔴=채널 실패(차단·타임아웃). nedb ✗=개방파일 인덱스 미설정.');
       }
