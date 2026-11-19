@@ -692,15 +692,20 @@ async function jSjw(query) {
 }
 
 async function jKyu(query) {
+  // 실측 10.2s(12s 타임박스 근접 — cross_search 간헐 탈락 위험) → 목록·해제 2건 병렬 + 6h TTL 캐시
+  const ck = 'kyudb:' + query;
+  const hit = _ttlCache.get(ck);
+  if (hit && Date.now() - hit.t < 6 * 3600e3) return JSON.parse(hit.v);
   const out = {};
-  for (const [code, label] of [['10', '목록'], ['20', '해제']]) {
+  await Promise.all([['10', '목록'], ['20', '해제']].map(async ([code, label]) => {
     try {
       const b = await jdbPost(JKYU + '/search/search.do', { totalSearchString: query, searchArea: code }, { Referer: JKYU + '/' });
-      const codes = [...new Set([...b.matchAll(/(奎[\d軸]+)/g)].map((x) => x[1]))];
-      out[label] = codes.slice(0, 30);
+      out[label] = [...new Set([...b.matchAll(/(奎[\d軸]+)/g)].map((x) => x[1]))].slice(0, 30);
     } catch (e) { out[label] = { error: e.message }; }
-    await sleep(200);
-  }
+  }));
+  // 정상 형태(양쪽 배열)이고 결과가 있을 때만 캐시 — 차단·오류 응답 오염 방지
+  if (Array.isArray(out['목록']) && Array.isArray(out['해제']) && (out['목록'].length + out['해제'].length))
+    _ttlCache.set(ck, { t: Date.now(), v: JSON.stringify(out) });
   return out;
 }
 
@@ -909,7 +914,7 @@ const handler = createMcpHandler((server) => {
         return `- [NAID ${rec.naId}] ${(rec.title || '').slice(0, 100)} | ${rec.localIdentifier || ''} | https://catalog.archives.gov/id/${rec.naId}`;
       });
       const total = typeof hits.total === 'object' ? hits.total.value : hits.total;
-      const rline = record_group ? (() => { const r = judgeRights(`RG ${record_group}`, '', 'NARA'); return `\n권리 초판정(RG ${record_group}): ${r[0]} — ${r[1]}`; })() : '';
+      const rline = record_group ? (() => { const r = judgeRights(`RG ${record_group}`, '', 'NARA'); return `\n권리 초판정(RG ${record_group}): ${r[0]} — ${r[1]}\n※ 건별 실확인: judge_rights(naid=<NAID>) — 카탈로그 Use Restriction 실조회로 A/C 확정`; })() : '';
       return text(`NARA '${query}'${en ? ` → 영문 자동 변환 '${eff}'` : ''}${record_group ? ` (RG ${record_group})` : ''} — total ${total}:\n` + (rows.join('\n') || '(0 results)') + rline);
     });
 
