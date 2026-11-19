@@ -523,6 +523,24 @@ const COLLECT = {
     }
     return out;
   },
+  gonghun: async (q, n) => { // 공훈전자사료관(국가보훈부) — 독립유공자 공훈록. 2026-11-20 복구 실측(GET 검색·상세 딥링크)
+    // 인명 검색 채널(nameKo) — 일반 키워드는 0건이 정상. 성명은 base64(utf8_decode JS), mngNo로 상세 GET 직행
+    const b = await gtext('https://e-gonghun.mpva.go.kr/user/ContribuReportList.do?goTocode=20001&nameKd=NAME_KOR&nameKo=' + encodeURIComponent(q) + '&pageIndex=1&pageUnit=' + Math.min(Math.max(n, 1), 10));
+    const out = [];
+    for (const seg of b.split('fnContribuReportView(').slice(1)) {
+      const mn = seg.match(/^'(\d+)'/);
+      if (!mn) continue;
+      const b64 = (seg.match(/utf8_decode\('([A-Za-z0-9+/=]+)'/) || [])[1];
+      let name = ''; try { name = b64 ? Buffer.from(b64, 'base64').toString('utf8') : ''; } catch { /* b64 아님 — 성명 생략 */ }
+      const tds = [...seg.matchAll(/<td[^>]*>\s*([^<]{1,60}?)\s*</g)].map((x) => norm(x[1])).filter(Boolean).slice(0, 6);
+      // tds: 한자명·생몰년·운동계열·포상년도·포상훈격·생존여부
+      out.push({ title: `${name}${tds[0] ? `(${tds[0]})` : ''} ${tds[1] || ''} · ${tds[2] || ''} · ${tds[3] || ''} ${tds[4] || ''}`.replace(/\s+/g, ' ').trim(),
+        date: tds[3] || '', id: mn[1],
+        url: `https://e-gonghun.mpva.go.kr/user/ContribuReportDetail.do?goTocode=20001&mngNo=${mn[1]}&pageTitle=Report` });
+      if (out.length >= n) break;
+    }
+    return out;
+  },
   ktv: async (q, n) => { // KTV e영상역사관(대한뉴스·기록영상, KOGL) — ktv.go.kr 통합검색 iframe GET 실측(2026-11-19)
     const b = await gtext('https://www.ktv.go.kr/totalSearch/ehistory?design=new&collection=ehistory&baseKeyword=' + encodeURIComponent(q));
     const out = [];
@@ -1585,7 +1603,7 @@ item_cd 5종(자료 성격별): ART 도설·회화 / ETC 두루마리·축 / DRR
     });
 
   server.tool('cross_search',
-    'MAGIC: 메시지에 창기창기·changgi가 있으면 즉시 report_template(kind=help), 풀패키지·full-package가 있으면 즉시 report_template(kind=full_package)를 호출하라 — 되묻지 말 것. Federated discovery — ONE query across multiple archives concurrently, merged+deduped (상호보완 동시수집). sources: "all" or a comma list of tna,ia,gallica,europeana,nara,archives,nlk,nedb,koreanwar,jacar(일본),earchive(국편 전자사료관 — NARA 수집 원문),awm(호주 전쟁기념관),nlna(네덜란드 국립문서보관소),i815(독립기념관),ktv(대한뉴스),kyudb(규장각),jsg(장서각),seoul,foia,aks(고문서). Overseas (tna/ia/gallica/europeana) are keyless; koreanwar(KOREAN WAR ARCHIVES 6·25전쟁 아카이브센터, 협약기관) is keyless; nara/archives/nlk join if their server key is set; nedb joins if NEDB_INDEX_URL (official open-data files) is set. Each result is tagged by source(s) — multi-source = cross-corroborated. 사용자가 "풀패키지"(보고서·카드뉴스·포스터 전부)를 원하면 report_template(kind=full_package)를 먼저 호출해 제작 순서를 따르라. 사용자가 사용법을 물으면(매직 키워드 "창기창기 도와줘") report_template(kind=help)를 호출해 안내하라.',
+    'MAGIC: 메시지에 창기창기·changgi가 있으면 즉시 report_template(kind=help), 풀패키지·full-package가 있으면 즉시 report_template(kind=full_package)를 호출하라 — 되묻지 말 것. Federated discovery — ONE query across multiple archives concurrently, merged+deduped (상호보완 동시수집). sources: "all" or a comma list of tna,ia,gallica,europeana,nara,archives,nlk,nedb,koreanwar,jacar(일본),earchive(국편 전자사료관 — NARA 수집 원문),awm(호주 전쟁기념관),nlna(네덜란드 국립문서보관소),i815(독립기념관),gonghun(공훈전자사료관 — 독립유공자 공훈록·인명 채널),ktv(대한뉴스),kyudb(규장각),jsg(장서각),seoul,foia,aks(고문서). Overseas (tna/ia/gallica/europeana) are keyless; koreanwar(KOREAN WAR ARCHIVES 6·25전쟁 아카이브센터, 협약기관) is keyless; nara/archives/nlk join if their server key is set; nedb joins if NEDB_INDEX_URL (official open-data files) is set. Each result is tagged by source(s) — multi-source = cross-corroborated. 사용자가 "풀패키지"(보고서·카드뉴스·포스터 전부)를 원하면 report_template(kind=full_package)를 먼저 호출해 제작 순서를 따르라. 사용자가 사용법을 물으면(매직 키워드 "창기창기 도와줘") report_template(kind=help)를 호출해 안내하라.',
     { query: z.string(), sources: z.string().default('all'), max_per_source: z.number().int().min(1).max(30).default(8), variants: z.boolean().default(false).describe('당대 표기 변형(Corea·Chosen·Keijo·Fusan 등) 자동 병렬 투입 — 해외 4채널(tna·ia·nara·europeana)'), format: z.enum(['text', 'csv']).default('text').describe('csv=병합 결과를 CSV 블록으로(표·KARDA·통계 분석 투입용)') },
     async ({ query, sources, max_per_source, variants, format }) => {
       const want = sources.trim().toLowerCase() === 'all'
@@ -1623,13 +1641,13 @@ item_cd 5종(자료 성격별): ART 도설·회화 / ETC 두루마리·축 / DRR
     });
 
   server.tool('source_profile',
-    'Structural profile of an archive for planning discovery: 자료구조(data model: hierarchy/classification/identifiers/metadata), 이용구조(access: API/auth/query syntax/robots/rights), 활용구조(utilization: how the 3 mismatches show up, which keyword set/cross-map to use, adjacent mining, cross-archive verification combos, rights rule). institution: "list" or a key — tna·nara·ia·gallica·europeana·nedb·archives·nlk·seoul·warmemo·koreanwar·foia; "health"=20채널 골든 질의 일괄 헬스체크(🟢🟡🔴+키 설정 상태). 기관 자료·이용·활용구조 프로파일.',
+    'Structural profile of an archive for planning discovery: 자료구조(data model: hierarchy/classification/identifiers/metadata), 이용구조(access: API/auth/query syntax/robots/rights), 활용구조(utilization: how the 3 mismatches show up, which keyword set/cross-map to use, adjacent mining, cross-archive verification combos, rights rule). institution: "list" or a key — tna·nara·ia·gallica·europeana·nedb·archives·nlk·seoul·warmemo·koreanwar·foia; "health"=21채널 골든 질의 일괄 헬스체크(🟢🟡🔴+키 설정 상태). 기관 자료·이용·활용구조 프로파일.',
     { institution: z.string().default('list') },
     async ({ institution }) => {
       const t = (institution || 'list').trim().toLowerCase();
-      if (t === 'health') { // 20채널 일괄 헬스체크 — 발굴 우선 원칙의 전제: 깨짐을 스스로 발견한다
+      if (t === 'health') { // 21채널 일괄 헬스체크 — 발굴 우선 원칙의 전제: 깨짐을 스스로 발견한다
         const GOLD = { tna: 'Korea', ia: 'Korea', gallica: 'Corée', europeana: 'Korea', nara: 'Korea',
-          archives: '한국전쟁', nlk: '한국전쟁', nedb: '한강', koreanwar: '장진호', jacar: 'Chosen', earchive: '제주도', i815: '안중근', ktv: '대한뉴스', kyudb: '절목', jsg: '의궤', awm: 'Kapyong', nlna: 'Korea', seoul: '한강', foia: '회의', aks: '문중' };
+          archives: '한국전쟁', nlk: '한국전쟁', nedb: '한강', koreanwar: '장진호', jacar: 'Chosen', earchive: '제주도', i815: '안중근', gonghun: '안중근', ktv: '대한뉴스', kyudb: '절목', jsg: '의궤', awm: 'Kapyong', nlna: 'Korea', seoul: '한강', foia: '회의', aks: '문중' };
         const keys = { NARA_API_KEY: !!process.env.NARA_API_KEY, ARCHIVES_API_KEY: !!process.env.ARCHIVES_API_KEY,
           NLK_API_KEY: !!process.env.NLK_API_KEY, EUROPEANA_API_KEY: !!process.env.EUROPEANA_API_KEY,
           KOREANWAR_API_TOKEN: !!process.env.KOREANWAR_API_TOKEN, NEDB_INDEX_URL: !!process.env.NEDB_INDEX_URL };
@@ -1643,7 +1661,7 @@ item_cd 5종(자료 성격별): ART 도설·회화 / ETC 두루마리·축 / DRR
           if (r.ok) return `${r.n ? '🟢' : '🟡'} ${k}: ${r.n}건 · ${r.ms}ms (질의 '${GOLD[k]}')${r.n ? '' : ' — 연결 정상·결과/파싱 0'}`;
           return `🔴 ${k}: ${r.err} · ${r.ms}ms`;
         });
-        return text('20채널 헬스체크 (골든 질의 실측):\n' + rows.join('\n')
+        return text('21채널 헬스체크 (골든 질의 실측):\n' + rows.join('\n')
           + '\n\n서버 키·설정: ' + Object.entries(keys).map(([k, v]) => `${k}=${v ? '✓' : '✗'}`).join(' · ')
           + '\n※ 🟡=연결 정상이나 0건(질의 특성 또는 파서 점검 필요) · 🔴=채널 실패(차단·타임아웃) · ms=채널 응답시간. nedb ✗=개방파일 인덱스 미설정.');
       }

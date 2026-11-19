@@ -16,3 +16,18 @@ NARA 등 해외 수집 사료의 **국내 원문 창구**(사료ID AUS…=미국
 - 대안 경로: 공공데이터포털 **15157239**(국가보훈부 독립유공자 공적 정보 — data.go.kr API). 이 작업 환경에서
   data.go.kr이 차단되어 메타 확인 불가 — 포털에서 신청·키 발급 후 `MPVA_API_KEY`류로 서버 합류 가능.
 - 재점검 시점: 사이트 복구 또는 API 키 확보 시. '훈격 실확인' 1차 소스로 우선순위 유지.
+
+## 공훈전자사료관 복구 확정 — cross_search `gonghun` 합류 (2026-11-20 실측)
+
+과거 '사이트 오류'로 보류했던 e-gonghun.mpva.go.kr 가 복구됐다(재점검 주기의 성과). **전 경로 키 없는 GET.**
+
+- 검색: `GET /user/ContribuReportList.do?goTocode=20001&nameKd=NAME_KOR&nameKo=<이름>&pageIndex=1&pageUnit=10`
+  — **인명 검색 채널**(독립유공자 공훈록). 일반 키워드는 0건이 정상. ※ indexMain.do는 404 — 목록 경로로 직행할 것.
+- 성명은 `utf8_decode('<base64>')` JS로 렌더 — base64 디코드 필요. 한자명은 `<td class="chinese">`.
+  행 구성: 성명·한자명·생몰년·운동계열·포상년도·포상훈격·생존여부·본적(base64 2분절).
+- 상세 딥링크: `GET /user/ContribuReportDetail.do?goTocode=20001&mngNo=<관리번호>&pageTitle=Report`
+  — 공적개요(공적조서)·공훈록·독립운동 인명사전 연계·묘소정보·관련 현충시설까지 한 페이지(실측 ~100KB).
+- 실측: 안중근 mngNo=3150(1962 대한민국장) · 유관순 mngNo=3536(2019/1962 대한민국장/독립장) · 윤봉길(1962 대한민국장).
+- OpenAPI 안내 페이지 4종 존재(RewardOpenAPI·IndepCrusaderOpenAPI·ContribuMeritOpenAPI·OverseaIndepHistDataOpenAPI)
+  — 공공데이터 키 확보 시 구조화 JSON 경로로 승격 가능.
+- 같은 날 재점검: kdemo(검색 경로 여전히 오류)·UN Archives(JS 챌린지 유지)는 보류 지속.
