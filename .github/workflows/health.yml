@@ -22,7 +22,8 @@ jobs:
             -d '{"jsonrpc":"2.0","method":"notifications/initialized"}' -o /dev/null
           curl -sS -m 150 -H "$H1" -H "$H2" -H "Mcp-Session-Id: $SID" -X POST "$PV" \
             -d '{"jsonrpc":"2.0","id":2,"method":"tools/call","params":{"name":"source_profile","arguments":{"institution":"health"}}}' \
-            | sed 's/^data: //' | grep -m1 '^{' > /tmp/health.json
+            -o /tmp/health.raw
+          sed 's/^data: //' /tmp/health.raw | grep -m1 '^{' > /tmp/health.json
           python3 - <<'EOF'
           import json, os, sys
           d = json.load(open('/tmp/health.json'))

@@ -457,13 +457,6 @@ const COLLECT = {
   },
   nedb: async (q, n) => { const recs = await loadNedbIndex(); return recs ? nedbFileSearch(recs, q, n) : []; },
   koreanwar: async (q, n) => (await kwSearch({ keyword: q, viewType: 'archive' })).cards.slice(0, n).map((c) => ({ title: c.title, date: '', id: c.id, url: c.url })),
-  warmemo: async (q, n) => { // 카테고리별 건수 채널 — 소장 신호 제공(개별 레코드 아님)
-    const url = 'http://archives.warmemo.or.kr/intgsrch/intgsrchArchv.do?MID=UM00045&keyword=' + encodeURIComponent(q);
-    const b = await gtext(url);
-    const out = []; const re = /class="total-breadcrumb">([\s\S]*?)<\/span>\s*<span>\s*총\s*([\d,]+)/g; let m;
-    while ((m = re.exec(b)) && out.length < Math.min(n, 5)) { if (m[2] !== '0') out.push({ title: `전쟁기념관 ${norm(m[1])} ${m[2]}건`, date: '', id: '', url }); }
-    return out;
-  },
   seoul: async (q, n) => { // 서울기록원 컬렉션 매칭 — 전용 도구(seoul_archives_search)와 동일 경로
     const b = await gtext('https://archives.seoul.go.kr/catalog?search_api_fulltext=' + encodeURIComponent(q));
     const out = []; const re = /href="(\/catalog\/result\?[^"]*collects=[^"]*)"[^>]*>([\s\S]*?)<\/a>/g; let m;
@@ -661,11 +654,12 @@ const KW_ANCHORS = [
 ];
 // 느리게 변하는 조회의 인메모리 TTL 캐시(웜 인스턴스 혜택 — 콜드스타트 시 자연 소멸)
 const _ttlCache = new Map();
-async function cachedText(key, ttlMs, fn) {
+async function cachedText(key, ttlMs, fn, marker) {
   const hit = _ttlCache.get(key);
   if (hit && Date.now() - hit.t < ttlMs) return hit.v;
   const v = await fn();
-  if (v && v.length > 100) _ttlCache.set(key, { t: Date.now(), v });
+  // 마커(기대 구조)가 있는 정상 응답만 캐시 — 차단·점검 페이지의 6시간 오염 방지
+  if (v && v.length > 100 && (!marker || v.includes(marker))) _ttlCache.set(key, { t: Date.now(), v });
   return v;
 }
 const kwAnchorLines = (q) => {
@@ -877,7 +871,7 @@ const handler = createMcpHandler((server) => {
       let recs = xml.split('<srw:record>').slice(1);
       if (post) recs = recs.filter((b) => { const y = parseInt((g(b, 'date').match(/\d{4}/) || [])[0], 10); return y && (!year_from || y >= year_from) && (!year_to || y <= year_to); });
       const lines = recs.slice(0, max_results).map((b) => `- ${g(b, 'title').slice(0, 100)} (${g(b, 'date')}) [${g(b, 'type')}] ${g(b, 'identifier')}`);
-      const tags = [year_from || year_to ? `간행 ${year_from || ''}~${year_to || ''}${post ? '·후처리' : ''}` : '', page > 1 ? `p.${page}` : ''].filter(Boolean);
+      const tags = [year_from || year_to ? `간행 ${year_from || ''}~${year_to || ''}${post ? '·후처리·연대 미상 제외' : ''}` : '', page > 1 ? `p.${page}` : ''].filter(Boolean);
       return text(`Gallica '${query}'${fr ? ` → 프랑스어 자동 변환 '${eff}'` : ''}${tags.length ? ` [${tags.join(' · ')}]` : ''} — total ${total || '?'}${post ? `건 중 이 페이지 연대 일치 ${lines.length}건` : ''}:\n` + (lines.join('\n') || '(0)') + '\nTip: French variants — Corée·Coréens·Séoul·Fusan·guerre de Corée·Tchosen');
     });
 
@@ -1007,14 +1001,14 @@ const JB_CROSS = `국내외 대조 절차 — 순서를 틀리면 헛수고한�
       const q = query.trim();
       if (mode === 'aks') {
         try {
-          if (q.includes('/')) { // 'L013001F0201/G002+AKS+...' — 문서 노드 페이지 목록(imgnode)
+          if (q.includes('/')) { // '분류ID/G002+AKS+...' — 문서 노드 페이지 목록(imgnode)
             const [fid, did] = q.split('/', 2);
+            const exact = AKS_CAT.find((c) => c.id === fid); // 비표준 ID(공백 포함 4건) 포함 정확일치 우선
             const fm = fid.match(/^(L\d{6})(F\d{2,4})?$/);
-            const col = fm && AKS_CAT.find((c) => c.id === fm[1]);
-            if (!col) return text(`'${fid}' — 소장처 ID 불인식. mode=aks에 소장처명으로 먼저 검색하십시오.`);
-            const chain = [fm[1], ...aksChain(fm[1], fm[2] || '')];
-            const up = [col.up, ...chain].join('^');
-            const j = JSON.parse(await gtext(`${AKS_BASE}/viewer/imgnode.do?itemId=book&gubun=booktree&depth=${2 + chain.length + 1}&upPath=${encodeURIComponent(up)}&dataId=${encodeURIComponent(did)}&itemType=`, AKS_UA));
+            const col = exact || (fm && AKS_CAT.find((c) => c.id === fm[1]));
+            if (!col) return text(`'${fid}' — 소장처 ID 불인식. mode=aks에 소장처명을 넣어 먼저 검색하십시오.`);
+            const up = exact ? `${col.up}^${fid}` : [col.up, fm[1], ...aksChain(fm[1], fm[2] || '')].join('^');
+            const j = JSON.parse(await gtext(`${AKS_BASE}/viewer/imgnode.do?itemId=book&gubun=booktree&depth=${up.split('^').length + 1}&upPath=${encodeURIComponent(up)}&dataId=${encodeURIComponent(did)}&itemType=`, AKS_UA));
             const items = j.imgItems || [];
             return text(`한국고문서자료관 문서 '${j.infoTitle || did}' — ${items.length}면${j.dataUCI ? ` · UCI ${j.dataUCI}` : ''}\n`
               + items.slice(0, 8).map((it, i) => `- ${i + 1}면: ${it.filename || ''}${it.thumb ? `\n  썸네일 ${AKS_BASE}${it.thumb}` : ''}`).join('\n')
@@ -1022,14 +1016,15 @@ const JB_CROSS = `국내외 대조 절차 — 순서를 틀리면 헛수고한�
               + `\n※ 원본 고해상 이미지 일괄 수집은 로컬 전용(aks-archive-harvester 스킬 — DZI 타일 복원). 웹에서는 뷰어 열람: ${AKS_BASE}/viewer/viewer.do`
               + `\n출처 표기: 한국학중앙연구원 한국고문서자료관. 이미지 재이용은 기관 이용조건 준수.`);
           }
-          const idm = q.match(/^(L\d{6})(F\d{2,4})?$/);
-          if (idm) { // 소장처/분류 노드 → 하위 트리 라이브 조회
-            const col = AKS_CAT.find((c) => c.id === idm[1]);
+          const exactCol = AKS_CAT.find((c) => c.id === q); // 비표준 ID 포함 정확일치 우선
+          const idm = exactCol ? null : q.match(/^(L\d{6})(F\d{2,4})?$/);
+          if (exactCol || idm) { // 소장처/분류 노드 → 하위 트리 라이브 조회
+            const col = exactCol || AKS_CAT.find((c) => c.id === idm[1]);
             if (!col) return text(`'${q}' — 소장처 목록(172곳)에 없는 ID. mode=aks에 소장처명을 넣어 먼저 검색하십시오.`);
-            const chain = aksChain(idm[1], idm[2] || '');
-            const up = [col.up, ...(idm[2] ? [idm[1], ...chain.slice(0, -1)] : [])].join('^');
-            const aksUrl = `${AKS_BASE}/viewer/treeAjax.do?itemId=book&gubun=booktree&depth=${3 + (idm[2] ? chain.length : 0)}&upPath=${encodeURIComponent(up)}&dataId=${q}&itemType=`;
-            const b = await cachedText('aks:' + q, 6 * 3600e3, () => gtext(aksUrl, AKS_UA));
+            const chain = exactCol ? [] : aksChain(idm[1], idm[2] || '');
+            const up = exactCol ? col.up : [col.up, ...(idm[2] ? [idm[1], ...chain.slice(0, -1)] : [])].join('^');
+            const aksUrl = `${AKS_BASE}/viewer/treeAjax.do?itemId=book&gubun=booktree&depth=${up.split('^').length + 1}&upPath=${encodeURIComponent(up)}&dataId=${encodeURIComponent(q)}&itemType=`;
+            const b = await cachedText('aks:' + q, 6 * 3600e3, () => gtext(aksUrl, AKS_UA), 'data-dataId');
             const kids = [...b.matchAll(/data-dataId='([^']+)'[\s\S]{0,300}?<span(?:\s+class='([^']*)')?\s+title='([^']*)'/g)]
               .map((m) => ({ id: m[1], leaf: /nochild/.test(m[2] || ''), name: m[3] }));
             const lines = kids.slice(0, 25).map((k) => k.leaf
@@ -1172,7 +1167,7 @@ item_cd 5종(자료 성격별): ART 도설·회화 / ETC 두루마리·축 / DRR
         let items = xml.match(/<item>[\s\S]*?<\/item>/g) || [];
         if (filt) items = items.filter((i) => { const y = parseInt((xtag(i, 'prod_year').match(/\d{4}/) || [])[0], 10); return y && y >= yf && y <= yt; });
         const lines = items.slice(0, max_results).map((i) => `- ${xtag(i, 'title').slice(0, 90)} (${xtag(i, 'prod_year')}) · ${xtag(i, 'prod_name').slice(0, 20)} [${xtag(i, 'is_open') === '1' ? '공개' : '비공개'}] ${xtag(i, 'link')}`);
-        return text(`국가기록원 '${query}'${filt ? ` [생산 ${year_from || ''}~${year_to || ''} · 상위 50건 내 후처리]` : ''} — 총 ${tot}건${filt ? ` 중 연대 일치 ${items.length}건` : ''}:\n` + (lines.join('\n') || '(0건)') + '\n공공누리(KOGL) 유형 확인 후 이용. 비공개 항목은 정보공개청구 대상.');
+        return text(`국가기록원 '${query}'${filt ? ` [생산 ${year_from || ''}~${year_to || ''} · 상위 50건 내 후처리·연대 미상 제외]` : ''} — 총 ${tot}건${filt ? ` 중 연대 일치 ${items.length}건` : ''}:\n` + (lines.join('\n') || '(0건)') + '\n공공누리(KOGL) 유형 확인 후 이용. 비공개 항목은 정보공개청구 대상.');
       } catch (e) { return text(agentBrowse('국가기록원', query, portal, `API 오류(${e.message})`)); }
     });
 
@@ -1202,6 +1197,7 @@ item_cd 5종(자료 성격별): ART 도설·회화 / ETC 두루마리·축 / DRR
           let items = xml.match(/<item>[\s\S]*?<\/item>/g) || [];
           const pick = (b, tags) => { for (const t of tags) { const v = xtag(b, t); if (v) return v; } return ''; };
           if (yfilt) items = items.filter((it) => { const y = parseInt((pick(it, ['pub_year_info', 'pubYearInfo']).match(/\d{4}/) || [])[0], 10); return y && y >= yf && y <= yt2; });
+          const matched = items.length;
           const lines = items.slice(0, max_results).map((it) => {
             let title = pick(it, ['title_info', 'titleInfo', 'title']);
             if (!title) title = it.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
@@ -1212,7 +1208,7 @@ item_cd 5종(자료 성격별): ART 도설·회화 / ETC 두루마리·축 / DRR
             if (lk.startsWith('/')) lk = 'https://www.nl.go.kr' + lk;
             return '- ' + title.slice(0, 80) + (typ ? ' [' + typ + ']' : '') + (pub ? ' · ' + pub.slice(0, 20) : '') + (year ? ' (' + year + ')' : '') + (lk ? ' ' + lk : '');
           });
-          return { tot, lines };
+          return { tot, lines, matched };
         };
         try {
           // 이중채널 동시 수집: (A) 전체 소장자료 + (B) 자료유형(category) 정밀 — 상호보완
@@ -1222,7 +1218,7 @@ item_cd 5종(자료 성격별): ART 도설·회화 / ETC 두루마리·축 / DRR
           ]);
           if (totalXml.includes('<error')) return text(`NLK OpenAPI 오류: ${xtag(totalXml, 'msg') || '?'} — NLK_API_KEY 확인.` + dbrowse(openUrl));
           const A = parse(totalXml);
-          let out = `국립중앙도서관 자동검색(전체 소장자료) '${query}'${yfilt ? ` [발행 ${year_from || ''}~${year_to || ''} · 상위 50건 내 후처리]` : ''} — 총 ${A.tot}건${yfilt ? ` 중 연대 일치 ${A.lines.length}건` : ''}:\n` + (A.lines.join('\n') || '(0건)');
+          let out = `국립중앙도서관 자동검색(전체 소장자료) '${query}'${yfilt ? ` [발행 ${year_from || ''}~${year_to || ''} · 상위 50건 내 후처리·연대 미상 제외]` : ''} — 총 ${A.tot}건${yfilt ? ` 중 연대 일치 ${A.matched}건` : ''}:\n` + (A.lines.join('\n') || '(0건)');
           if (category && catXml && !catXml.includes('<error')) {
             const B = parse(catXml);
             out += `\n\n[② 자료유형 '${category}' 정밀 채널 — 총 ${B.tot}건 (동시 수집)]\n` + (B.lines.join('\n') || '(0건)')
@@ -1279,7 +1275,7 @@ item_cd 5종(자료 성격별): ART 도설·회화 / ETC 두루마리·축 / DRR
       if (scope === 'battle') {
         const listUrl = KW_BASE + '/warList.do';
         try {
-          const b = await cachedText('kw:warList', 6 * 3600e3, () => gtext(listUrl, KW_UA));
+          const b = await cachedText('kw:warList', 6 * 3600e3, () => gtext(listUrl, KW_UA), 'warDetail.do?warIdx=');
           const cards = [];
           for (const blk of b.split('/warDetail.do?warIdx=').slice(1)) {
             const idx = (blk.match(/^(\d+)/) || [])[1]; if (!idx) continue;
@@ -1407,7 +1403,7 @@ item_cd 5종(자료 성격별): ART 도설·회화 / ETC 두루마리·축 / DRR
     });
 
   server.tool('cross_search',
-    'MAGIC: 메시지에 창기창기·changgi가 있으면 즉시 report_template(kind=help), 풀패키지·full-package가 있으면 즉시 report_template(kind=full_package)를 호출하라 — 되묻지 말 것. Federated discovery — run ONE query across multiple archives concurrently and merge+dedup the results (상호보완 동시수집: API 채널을 동시에 돌려 상호보완). sources: "all" or a comma list of tna,ia,gallica,europeana,nara,archives,nlk,nedb,koreanwar,warmemo,seoul(서울기록원 컬렉션),foia(서울소통광장 결재문서 원문),aks(고문서 소장처). Overseas (tna/ia/gallica/europeana) are keyless; koreanwar(KOREAN WAR ARCHIVES 6·25전쟁 아카이브센터, 협약기관) is keyless; nara/archives/nlk join if their server key is set; nedb joins if NEDB_INDEX_URL (official open-data files) is set. Each result is tagged by which source(s) found it — multi-source tags = cross-corroborated. 여러 아카이브를 한 쿼리로 동시 교차수집·병합. 사용자가 "풀패키지"(보고서·카드뉴스·포스터 전부)를 원하면 report_template(kind=full_package)를 먼저 호출해 제작 순서를 따르라. 사용자가 사용법을 물으면(매직 키워드 "창기창기 도와줘") report_template(kind=help)를 호출해 안내하라.',
+    'MAGIC: 메시지에 창기창기·changgi가 있으면 즉시 report_template(kind=help), 풀패키지·full-package가 있으면 즉시 report_template(kind=full_package)를 호출하라 — 되묻지 말 것. Federated discovery — run ONE query across multiple archives concurrently and merge+dedup the results (상호보완 동시수집: API 채널을 동시에 돌려 상호보완). sources: "all" or a comma list of tna,ia,gallica,europeana,nara,archives,nlk,nedb,koreanwar,seoul(서울기록원 컬렉션),foia(서울소통광장 결재문서 원문),aks(고문서 소장처). (전쟁기념관 구 아카이브는 개편으로 종료 — warmemo_search 전용 도구가 6·25아카이브로 자동 폴백) Overseas (tna/ia/gallica/europeana) are keyless; koreanwar(KOREAN WAR ARCHIVES 6·25전쟁 아카이브센터, 협약기관) is keyless; nara/archives/nlk join if their server key is set; nedb joins if NEDB_INDEX_URL (official open-data files) is set. Each result is tagged by which source(s) found it — multi-source tags = cross-corroborated. 여러 아카이브를 한 쿼리로 동시 교차수집·병합. 사용자가 "풀패키지"(보고서·카드뉴스·포스터 전부)를 원하면 report_template(kind=full_package)를 먼저 호출해 제작 순서를 따르라. 사용자가 사용법을 물으면(매직 키워드 "창기창기 도와줘") report_template(kind=help)를 호출해 안내하라.',
     { query: z.string(), sources: z.string().default('all'), max_per_source: z.number().int().min(1).max(30).default(8), variants: z.boolean().default(false).describe('당대 표기 변형(Corea·Chosen·Keijo·Fusan 등) 자동 병렬 투입 — 해외 4채널(tna·ia·nara·europeana)'), format: z.enum(['text', 'csv']).default('text').describe('csv=병합 결과를 CSV 블록으로(표·KARDA·통계 분석 투입용)') },
     async ({ query, sources, max_per_source, variants, format }) => {
       const want = sources.trim().toLowerCase() === 'all'
@@ -1445,13 +1441,13 @@ item_cd 5종(자료 성격별): ART 도설·회화 / ETC 두루마리·축 / DRR
     });
 
   server.tool('source_profile',
-    'Structural profile of an archive for planning discovery: 자료구조(data model: hierarchy/classification/identifiers/metadata), 이용구조(access: API/auth/query syntax/robots/rights), 활용구조(utilization: how the 3 mismatches show up, which keyword set/cross-map to use, adjacent mining, cross-archive verification combos, rights rule). institution: "list" or a key — tna·nara·ia·gallica·europeana·nedb·archives·nlk·seoul·warmemo·koreanwar·foia; "health"=13채널 골든 질의 일괄 헬스체크(🟢🟡🔴+키 설정 상태). 기관 자료·이용·활용구조 프로파일.',
+    'Structural profile of an archive for planning discovery: 자료구조(data model: hierarchy/classification/identifiers/metadata), 이용구조(access: API/auth/query syntax/robots/rights), 활용구조(utilization: how the 3 mismatches show up, which keyword set/cross-map to use, adjacent mining, cross-archive verification combos, rights rule). institution: "list" or a key — tna·nara·ia·gallica·europeana·nedb·archives·nlk·seoul·warmemo·koreanwar·foia; "health"=12채널 골든 질의 일괄 헬스체크(🟢🟡🔴+키 설정 상태). 기관 자료·이용·활용구조 프로파일.',
     { institution: z.string().default('list') },
     async ({ institution }) => {
       const t = (institution || 'list').trim().toLowerCase();
       if (t === 'health') { // 13채널 일괄 헬스체크 — 발굴 우선 원칙의 전제: 깨짐을 스스로 발견한다
         const GOLD = { tna: 'Korea', ia: 'Korea', gallica: 'Corée', europeana: 'Korea', nara: 'Korea',
-          archives: '한국전쟁', nlk: '한국전쟁', nedb: '한강', koreanwar: '장진호', warmemo: '사진', seoul: '한강', foia: '회의', aks: '문중' };
+          archives: '한국전쟁', nlk: '한국전쟁', nedb: '한강', koreanwar: '장진호', seoul: '한강', foia: '회의', aks: '문중' };
         const keys = { NARA_API_KEY: !!process.env.NARA_API_KEY, ARCHIVES_API_KEY: !!process.env.ARCHIVES_API_KEY,
           NLK_API_KEY: !!process.env.NLK_API_KEY, EUROPEANA_API_KEY: !!process.env.EUROPEANA_API_KEY,
           KOREANWAR_API_TOKEN: !!process.env.KOREANWAR_API_TOKEN, NEDB_INDEX_URL: !!process.env.NEDB_INDEX_URL };
@@ -1461,7 +1457,7 @@ item_cd 5종(자료 성격별): ART 도설·회화 / ETC 두루마리·축 / DRR
           if (r.status === 'fulfilled') return `${r.value.length ? '🟢' : '🟡'} ${k}: ${r.value.length}건 (질의 '${GOLD[k]}')${r.value.length ? '' : ' — 연결 정상·결과/파싱 0'}`;
           return `🔴 ${k}: ${String(r.reason && r.reason.message || r.reason).slice(0, 70)}`;
         });
-        return text('13채널 헬스체크 (골든 질의 실측):\n' + rows.join('\n')
+        return text('12채널 헬스체크 (골든 질의 실측):\n' + rows.join('\n')
           + '\n\n서버 키·설정: ' + Object.entries(keys).map(([k, v]) => `${k}=${v ? '✓' : '✗'}`).join(' · ')
           + '\n※ 🟡=연결 정상이나 0건(질의 특성 또는 파서 점검 필요) · 🔴=채널 실패(차단·타임아웃). nedb ✗=개방파일 인덱스 미설정.');
       }
