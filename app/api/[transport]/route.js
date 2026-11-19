@@ -659,6 +659,15 @@ const KW_ANCHORS = [
   { p: /금성\s?전투|金城/, n: '금성 전투', t: '1953-07-13 ~ 07-19', x: "en 'Kumsong offensive'" },
   { p: /휴전|정전|판문점|Panmunjom/i, n: '정전협정 조인(판문점)', t: '1953-07-27', x: "en 'Korea armistice' · koreanwar_search(scope=archive '정전')" },
 ];
+// 느리게 변하는 조회의 인메모리 TTL 캐시(웜 인스턴스 혜택 — 콜드스타트 시 자연 소멸)
+const _ttlCache = new Map();
+async function cachedText(key, ttlMs, fn) {
+  const hit = _ttlCache.get(key);
+  if (hit && Date.now() - hit.t < ttlMs) return hit.v;
+  const v = await fn();
+  if (v && v.length > 100) _ttlCache.set(key, { t: Date.now(), v });
+  return v;
+}
 const kwAnchorLines = (q) => {
   if (!q) return [];
   return KW_ANCHORS.filter((a) => a.p.test(q)).slice(0, 5)
@@ -1019,7 +1028,8 @@ const JB_CROSS = `국내외 대조 절차 — 순서를 틀리면 헛수고한�
             if (!col) return text(`'${q}' — 소장처 목록(172곳)에 없는 ID. mode=aks에 소장처명을 넣어 먼저 검색하십시오.`);
             const chain = aksChain(idm[1], idm[2] || '');
             const up = [col.up, ...(idm[2] ? [idm[1], ...chain.slice(0, -1)] : [])].join('^');
-            const b = await gtext(`${AKS_BASE}/viewer/treeAjax.do?itemId=book&gubun=booktree&depth=${3 + (idm[2] ? chain.length : 0)}&upPath=${encodeURIComponent(up)}&dataId=${q}&itemType=`, AKS_UA);
+            const aksUrl = `${AKS_BASE}/viewer/treeAjax.do?itemId=book&gubun=booktree&depth=${3 + (idm[2] ? chain.length : 0)}&upPath=${encodeURIComponent(up)}&dataId=${q}&itemType=`;
+            const b = await cachedText('aks:' + q, 6 * 3600e3, () => gtext(aksUrl, AKS_UA));
             const kids = [...b.matchAll(/data-dataId='([^']+)'[\s\S]{0,300}?<span(?:\s+class='([^']*)')?\s+title='([^']*)'/g)]
               .map((m) => ({ id: m[1], leaf: /nochild/.test(m[2] || ''), name: m[3] }));
             const lines = kids.slice(0, 25).map((k) => k.leaf
@@ -1269,7 +1279,7 @@ item_cd 5종(자료 성격별): ART 도설·회화 / ETC 두루마리·축 / DRR
       if (scope === 'battle') {
         const listUrl = KW_BASE + '/warList.do';
         try {
-          const b = await gtext(listUrl, KW_UA);
+          const b = await cachedText('kw:warList', 6 * 3600e3, () => gtext(listUrl, KW_UA));
           const cards = [];
           for (const blk of b.split('/warDetail.do?warIdx=').slice(1)) {
             const idx = (blk.match(/^(\d+)/) || [])[1]; if (!idx) continue;
@@ -2219,7 +2229,7 @@ const HELP_GUIDE = `사용 안내 — 매직 키워드 “창기창기 도와줘
 · 0건 → 부재가 아니다. 표기 변형·인접 채굴·“대상을 관리한 행정”으로 전환.
 · ZIP 일괄 납품은 로컬 환경 전용 — 웹·모바일은 개별 아티팩트+manifest.
 · 이미지: 웹은 기관 공개 URL 참조 — 원본은 항상 기관 링크에서 열람.
-· 조선 주제 → nedb_search 심층 판독 모드(law·sibling·matrix·origin·record·sjw·kyujanggak).
+· 조선 주제 → nedb_search 심층 판독 모드(law·sibling·matrix·origin·record·sjw·kyujanggak·aks[한국고문서자료관 — 문중·서원 고문서 172곳]).\n· 연대로 좁히기 → 주요 검색 도구의 year_from/year_to. 번호 옆 훑기(인접 채굴) → TNA·NARA(naid)·archive.org(radius)·6·25아카이브. 당대 표기 자동 팬아웃 → cross_search(variants). 채널 상태 → source_profile('health').
 
 커넥터: korea-archive-mcp.vercel.app/api/mcp · 안내 페이지: korea-archive-mcp.vercel.app/help.html`;
 
