@@ -1080,9 +1080,28 @@ const JB_CROSS = `국내외 대조 절차 — 순서를 틀리면 헛수고한�
     });
 
   server.tool('judge_rights',
-    'First-pass copyright triage for a discovered record. A/B publishable · C permission needed · D unknown (do not publish). 공공누리(KOGL) 제1~4유형 자동 인식 — rg_series·title·archive 어디든 \"KOGL 2\"·\"공공누리 제1유형\" 표기를 넣으면 조건 판정. Final determination must be made by a human. 권리 등급 자동 초기판정 — 발굴 우선, 권리는 표시.',
-    { rg_series: z.string().describe('e.g. "RG 242/242-MID"'), title: z.string().default(''), archive: z.string().default('') },
-    async ({ rg_series, title, archive }) => {
+    'First-pass copyright triage for a discovered record. A/B publishable · C permission needed · D unknown (do not publish). 공공누리(KOGL) 제1~4유형 자동 인식 — rg_series·title·archive 어디든 \"KOGL 2\"·\"공공누리 제1유형\" 표기를 넣으면 조건 판정. naid 지정 시 NARA 카탈로그의 Use Restriction 필드를 실제 조회해 자동판정(Unrestricted 실확인 → A 확정, Restricted → C). Final determination must be made by a human. 권리 등급 자동 초기판정 — 발굴 우선, 권리는 표시.',
+    { rg_series: z.string().default('').describe('e.g. "RG 242/242-MID" (naid 지정 시 생략 가능)'), title: z.string().default(''), archive: z.string().default(''), naid: z.number().int().optional().describe('NARA NAID — 카탈로그 Use Restriction 실확인 e.g. 22015') },
+    async ({ rg_series, title, archive, naid }) => {
+      if (naid) { // NAID 실확인 자동판정 — "Unrestricted 확인 시 A 상향" 규칙의 자동화
+        const key = process.env.NARA_API_KEY;
+        if (!key) return text('NAID 실확인은 서버 NARA_API_KEY 필요 — rg_series 초판정을 사용하거나 catalog.archives.gov/id/' + naid + ' 의 Use Restriction을 직접 확인하십시오.');
+        try {
+          const d = await jget(`https://catalog.archives.gov/api/v2/records/search?naId=${naid}&limit=1`, { 'x-api-key': key });
+          const rec = (((((d.body || {}).hits || {}).hits) || [])[0] || { _source: {} })._source.record || null;
+          if (!rec || Number(rec.naId) !== naid) return text(`[NAID ${naid}] 카탈로그에 없음 — NAID를 확인하거나 rg_series 초판정을 사용하십시오.`);
+          const ur = rec.useRestriction || {};
+          const urs = typeof ur === 'string' ? ur : [ur.status, ur.note, (ur.specificUseRestrictions || []).join('/')].filter(Boolean).join(' · ');
+          const rgnum = rec.recordGroupNumber || ((rec.ancestors || []).map((a) => a.recordGroupNumber).find(Boolean)) || '';
+          const base = judgeRights(rgnum ? `RG ${rgnum}` : rg_series, rec.title || title, 'NARA');
+          let cls = base[0], basis = base[1];
+          if (/unrestricted/i.test(urs) && !/restricted\s*[-–]|possibly|fully restricted/i.test(urs)) { cls = 'A'; basis = `NARA 카탈로그 Use Restriction '${urs}' 실확인 — 제한 없음 확정 (출처 표기 권장)`; }
+          else if (/restricted/i.test(urs)) { cls = 'C'; basis = `NARA 카탈로그 Use Restriction '${urs}' 실확인 — 제한 표기, 기관 확인 필요`; }
+          else if (urs) basis += ` · Use Restriction '${urs.slice(0, 80)}' (판정 불변 — 문구 확인 필요)`;
+          else basis += ' · 카탈로그에 Use Restriction 미기재 — RG 초판정 유지';
+          return text(`[NAID ${naid}] ${(rec.title || '').slice(0, 95)}\n${rgnum ? `RG ${rgnum} · ` : ''}https://catalog.archives.gov/id/${naid}\nClass: ${cls}\nBasis: ${basis}\n※ 카탈로그 실확인 기반 자동판정 — 게재 전 최종 확인은 사람이. Class D must not be published.`);
+        } catch (e) { return text(`[NAID ${naid}] 카탈로그 조회 실패(${String(e && e.message || e).slice(0, 60)}) — rg_series 초판정으로 폴백하십시오.`); }
+      }
       const res = judgeRights(rg_series, title, archive);
       return text(`Class: ${res[0]}\nBasis: ${res[1]}\n※ Automated first-pass — confirm manually before publishing. Class D must not be published.`);
     });
@@ -1603,21 +1622,25 @@ item_cd 5종(자료 성격별): ART 도설·회화 / ETC 두루마리·축 / DRR
     { institution: z.string().default('list') },
     async ({ institution }) => {
       const t = (institution || 'list').trim().toLowerCase();
-      if (t === 'health') { // 13채널 일괄 헬스체크 — 발굴 우선 원칙의 전제: 깨짐을 스스로 발견한다
+      if (t === 'health') { // 20채널 일괄 헬스체크 — 발굴 우선 원칙의 전제: 깨짐을 스스로 발견한다
         const GOLD = { tna: 'Korea', ia: 'Korea', gallica: 'Corée', europeana: 'Korea', nara: 'Korea',
           archives: '한국전쟁', nlk: '한국전쟁', nedb: '한강', koreanwar: '장진호', jacar: 'Chosen', earchive: '제주도', i815: '안중근', ktv: '대한뉴스', kyudb: '절목', jsg: '의궤', awm: 'Kapyong', nlna: 'Korea', seoul: '한강', foia: '회의', aks: '문중' };
         const keys = { NARA_API_KEY: !!process.env.NARA_API_KEY, ARCHIVES_API_KEY: !!process.env.ARCHIVES_API_KEY,
           NLK_API_KEY: !!process.env.NLK_API_KEY, EUROPEANA_API_KEY: !!process.env.EUROPEANA_API_KEY,
           KOREANWAR_API_TOKEN: !!process.env.KOREANWAR_API_TOKEN, NEDB_INDEX_URL: !!process.env.NEDB_INDEX_URL };
-        const settled = await Promise.allSettled(Object.keys(GOLD).map((k) => COLLECT[k](GOLD[k], 3)));
+        const timed = await Promise.all(Object.keys(GOLD).map(async (k) => {
+          const s = Date.now();
+          try { const v = await COLLECT[k](GOLD[k], 3); return { ok: true, n: v.length, ms: Date.now() - s }; }
+          catch (e) { return { ok: false, err: String(e && e.message || e).slice(0, 60), ms: Date.now() - s }; }
+        }));
         const rows = Object.keys(GOLD).map((k, i) => {
-          const r = settled[i];
-          if (r.status === 'fulfilled') return `${r.value.length ? '🟢' : '🟡'} ${k}: ${r.value.length}건 (질의 '${GOLD[k]}')${r.value.length ? '' : ' — 연결 정상·결과/파싱 0'}`;
-          return `🔴 ${k}: ${String(r.reason && r.reason.message || r.reason).slice(0, 70)}`;
+          const r = timed[i];
+          if (r.ok) return `${r.n ? '🟢' : '🟡'} ${k}: ${r.n}건 · ${r.ms}ms (질의 '${GOLD[k]}')${r.n ? '' : ' — 연결 정상·결과/파싱 0'}`;
+          return `🔴 ${k}: ${r.err} · ${r.ms}ms`;
         });
         return text('20채널 헬스체크 (골든 질의 실측):\n' + rows.join('\n')
           + '\n\n서버 키·설정: ' + Object.entries(keys).map(([k, v]) => `${k}=${v ? '✓' : '✗'}`).join(' · ')
-          + '\n※ 🟡=연결 정상이나 0건(질의 특성 또는 파서 점검 필요) · 🔴=채널 실패(차단·타임아웃). nedb ✗=개방파일 인덱스 미설정.');
+          + '\n※ 🟡=연결 정상이나 0건(질의 특성 또는 파서 점검 필요) · 🔴=채널 실패(차단·타임아웃) · ms=채널 응답시간. nedb ✗=개방파일 인덱스 미설정.');
       }
       if (t === 'list' || !PROFILES[t]) {
         const lines = Object.entries(PROFILES).map(([k, v]) => `- ${k} (${v.name_ko}) [${v.category}]`);
