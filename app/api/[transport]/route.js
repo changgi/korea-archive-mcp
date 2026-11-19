@@ -1152,10 +1152,50 @@ const JB_CROSS = `국내외 대조 절차 — 순서를 틀리면 헛수고한�
 
 
   server.tool('nedb_search',
-    "Search 국사편찬위 한국사데이터베이스 (db.history.go.kr) + 조선 사료 심층 판독 (verified POST routes from the Han-river vessel study). mode: total=통합검색(기본) · law=법전·편람 조문 검색(한문 원문 제공 여부 판정) · record=등록류 검색(座目 회의명단 자동 필터 — 검색 건수를 지표로 쓰기 전 필수) · item=levelId 본문 판독(미공개/파싱실패 구분 — query에 levelId) · sibling=★형제 조 전수 스캔(query에 levelId — 조문을 하나라도 열었으면 반드시 이어 호출, 총론만 읽으면 핵심을 놓친다) · matrix=법전 수록 대조표(query에 쉼표구분 어휘 ≤8 — 부재의 발견) · origin=어휘 연원 추적(query='용어' 또는 '용어,영역') · sjw=승정원일기(왕대 분포·최초 용례 — 연대가 뒤집힐 수 있다) · kyujanggak=규장각 목록+해제 동시(절목·사목류는 해제에서 발견) · aks=한국고문서자료관(archive.aks.ac.kr) 문중·서원 고문서 — 소장처 172곳 검색→분류→문서 면·썸네일(query=소장처명 또는 L-ID·분류ID·'분류ID/문서ID'). · jacar=일본 아시아역사자료센터(한→일 자동 변환 검색·레퍼런스코드 메타 직행·±span×100 인접 채굴). 판정 우선: '601건'이 아니라 '492건이 座目입니다'를 반환한다.",
-    { query: z.string().describe("검색어 · levelId(item/sibling) · 쉼표구분 어휘(matrix) · '용어,영역'(origin) · 소장처명/L-ID(aks)"), db: z.string().default(''), max_results: z.number().int().min(1).max(50).default(15), mode: z.enum(['total', 'law', 'record', 'item', 'sibling', 'matrix', 'origin', 'sjw', 'kyujanggak', 'aks', 'jacar']).default('total'), span: z.number().int().min(2).max(12).default(8).describe('sibling 모드 스캔 폭') },
+    "Search 국사편찬위 한국사데이터베이스 (db.history.go.kr) + 조선 사료 심층 판독 (verified POST routes from the Han-river vessel study). mode: total=통합검색(기본) · law=법전·편람 조문 검색(한문 원문 제공 여부 판정) · record=등록류 검색(座目 회의명단 자동 필터 — 검색 건수를 지표로 쓰기 전 필수) · item=levelId 본문 판독(미공개/파싱실패 구분 — query에 levelId) · sibling=★형제 조 전수 스캔(query에 levelId — 조문을 하나라도 열었으면 반드시 이어 호출, 총론만 읽으면 핵심을 놓친다) · matrix=법전 수록 대조표(query에 쉼표구분 어휘 ≤8 — 부재의 발견) · origin=어휘 연원 추적(query='용어' 또는 '용어,영역') · sjw=승정원일기(왕대 분포·최초 용례 — 연대가 뒤집힐 수 있다) · kyujanggak=규장각 목록+해제 동시(절목·사목류는 해제에서 발견) · aks=한국고문서자료관(archive.aks.ac.kr) 문중·서원 고문서 — 소장처 172곳 검색→분류→문서 면·썸네일(query=소장처명 또는 L-ID·분류ID·'분류ID/문서ID'). · jacar=일본 아시아역사자료센터(한→일 자동 변환 검색·레퍼런스코드 메타 직행·±span×100 인접 채굴) · gonghun=공훈전자사료관 독립유공자(query=이름 검색→mngNo 숫자 투입 시 공적조서·공훈록 본문 판독). 판정 우선: '601건'이 아니라 '492건이 座目입니다'를 반환한다.",
+    { query: z.string().describe("검색어 · levelId(item/sibling) · 쉼표구분 어휘(matrix) · '용어,영역'(origin) · 소장처명/L-ID(aks) · 이름/mngNo(gonghun)"), db: z.string().default(''), max_results: z.number().int().min(1).max(50).default(15), mode: z.enum(['total', 'law', 'record', 'item', 'sibling', 'matrix', 'origin', 'sjw', 'kyujanggak', 'aks', 'jacar', 'gonghun']).default('total'), span: z.number().int().min(2).max(12).default(8).describe('sibling 모드 스캔 폭') },
     async ({ query, max_results, mode, span }) => {
       const q = query.trim();
+      if (mode === 'gonghun') { // 공훈전자사료관 — 이름 목록 / mngNo 심층 판독(공적조서·공훈록 본문)
+        try {
+          const b64d = (s) => { try { return Buffer.from(s, 'base64').toString('utf8'); } catch { return ''; } };
+          const strip = (s) => dclean(String(s || ''));
+          if (/^\d+$/.test(q)) { // mngNo 상세
+            const b = await cachedText('gonghunD:' + q, 24 * 3600e3,
+              () => gtext(`https://e-gonghun.mpva.go.kr/user/ContribuReportDetail.do?goTocode=20001&mngNo=${q}&pageTitle=Report`), 'achivement_1');
+            const pick = (re2) => (b.match(re2) || [])[1] || '';
+            const name = b64d(pick(/utf8_decode\('([A-Za-z0-9+/=]+)',\s*'#namekoDiv'/));
+            const hanja = strip(pick(/<th>한자<\/th>\s*<td>([\s\S]*?)<\/td>/));
+            const alias = strip(pick(/<th>이명<\/th>\s*<td>([\s\S]*?)<\/td>/));
+            const birth = b64d(pick(/utf8_decode\('([A-Za-z0-9+/=]*)',\s*'#birthdayenm'/));
+            const death = b64d(pick(/utf8_decode\('([A-Za-z0-9+/=]*)',\s*'#deathdatenm'/));
+            const bon = [...b.matchAll(/utf8_decode\('([A-Za-z0-9+/=]+)',\s*'#famp\d'/g)].map((m) => b64d(m[1])).filter(Boolean).join(' ');
+            const flat = strip(b);
+            const aw = flat.match(/포상년도\s*([\d/]+)\s*훈격\s*(\S{1,30})/);
+            const summary = strip(pick(/id="achivement_1"[^>]*>([\s\S]*?)<\/div>/));
+            const i2 = b.indexOf('id="tab2"');
+            let rok = '', rokInfo = '';
+            if (i2 >= 0) {
+              const seg = strip(b.slice(b.indexOf('>', i2) + 1, i2 + 30000));
+              rokInfo = (seg.match(/수록정보[:\s]*([^)]{3,40}\))/) || [])[1] || '';
+              const body = seg.replace(/^[\s\S]{0,80}?수록정보[:\s]*[^)]{3,40}\)\s*/, '').trim();
+              rok = body.length > 4000 ? body.slice(0, 4000) + ` …(총 ${body.length}자 — 전문은 원문 링크)` : body;
+            }
+            if (!name && !summary) return text(`[mngNo ${q}] 공훈전자사료관 상세 파싱 실패 — 관리번호를 확인하거나 mode=gonghun에 이름으로 검색하십시오.`);
+            return text(`공훈전자사료관 독립유공자 [관리번호 ${q}] ${name}${hanja ? `(${hanja})` : ''}${alias ? ` — 이명: ${alias}` : ''}\n`
+              + `생몰: ${birth || '?'} ~ ${death || '?'}${bon ? ` · 본적: ${bon}` : ''}${aw ? `\n포상: ${aw[1]} ${aw[2]}` : ''}\n`
+              + `【공적개요(공적조서)】\n${summary || '(없음)'}\n`
+              + (rok ? `【공훈록${rokInfo ? ` — ${rokInfo}` : ''}】\n${rok}\n` : '')
+              + `원문: https://e-gonghun.mpva.go.kr/user/ContribuReportDetail.do?goTocode=20001&mngNo=${q}&pageTitle=Report\n`
+              + `※ 출처: 국가보훈부 공훈전자사료관 — 게재 시 출처 표기. 공적조서·공훈록은 원칙적 수정불가 원문(정부포상 결정·전문가 집필). 권리 초판정: judge_rights.`);
+          }
+          const items = await COLLECT.gonghun(q, Math.min(max_results, 10));
+          if (!items.length) return text(`공훈전자사료관 '${q}' — 0건. 인명 검색 채널(독립유공자 공훈록)이므로 이름으로 검색하십시오. 이명·한자명도 시도 가치(예: 안응칠→안중근).`);
+          return text(`공훈전자사료관 독립유공자 '${q}' — ${items.length}건:\n`
+            + items.map((it) => `- [mngNo ${it.id}] ${it.title}\n  ${it.url}`).join('\n')
+            + `\n※ mngNo 숫자를 mode=gonghun query로 재투입 → 공적조서·공훈록 본문 판독.`);
+        } catch (e) { return text(`공훈전자사료관 오류(${String(e && e.message || e).slice(0, 60)}) — 잠시 후 재시도 또는 브라우저: https://e-gonghun.mpva.go.kr/user/ContribuReportList.do?goTocode=20001`); }
+      }
       if (mode === 'aks') {
         try {
           if (q.includes('/')) { // '분류ID/G002+AKS+...' — 문서 노드 페이지 목록(imgnode)
