@@ -776,14 +776,17 @@ const handler = createMcpHandler((server) => {
     async ({ query, record_group, moving_images_only, max_results, page, naid, radius }) => {
       const key = process.env.NARA_API_KEY;
       if (!key) return text('NARA_API_KEY not configured on this server. Free key: email Catalog_API@nara.gov (name + email). Meanwhile use catalog.archives.gov directly.');
-      if (naid) { // NAID ± 인접 채굴 — 사진 ±3·색인 ±1 간격 실무 지식(query_bank identifiers). 한 호출로 일괄 조회(naIds 콤마 목록)
+      if (naid) { // NAID ± 인접 채굴 — 사진 ±3·색인 ±1 간격 실무 지식. v2는 단수 naId만 수용(naIds=400 실측) → 순차 조회
         const ids = []; for (let i = naid - radius; i <= naid + radius; i++) if (i > 0) ids.push(i);
-        const u2 = new URL('https://catalog.archives.gov/api/v2/records/search');
-        u2.searchParams.set('naIds', ids.join(',')); u2.searchParams.set('limit', String(ids.length));
-        const d2 = await jget(u2.toString(), { 'x-api-key': key });
-        const got = new Map();
-        for (const h of (((d2.body || {}).hits || {}).hits) || []) { const rec = (h._source || {}).record || {}; if (rec.naId) got.set(Number(rec.naId), rec); }
-        const lines = ids.map((i) => { const r = got.get(i); return r ? `${i === naid ? '★' : ' '} [NAID ${i}] ${(r.title || '').slice(0, 95)} | ${r.localIdentifier || ''} | https://catalog.archives.gov/id/${i}` : `  [NAID ${i}] (없음)`; });
+        const lines = [];
+        for (const i of ids) {
+          try {
+            const d2 = await jget(`https://catalog.archives.gov/api/v2/records/search?naId=${i}&limit=1`, { 'x-api-key': key });
+            const rec = (((((d2.body || {}).hits || {}).hits) || [])[0] || { _source: {} })._source.record || null;
+            lines.push(rec && Number(rec.naId) === i ? `${i === naid ? '★' : ' '} [NAID ${i}] ${(rec.title || '').slice(0, 95)} | ${rec.localIdentifier || ''} | https://catalog.archives.gov/id/${i}` : `  [NAID ${i}] (없음)`);
+          } catch (e) { lines.push(`  [NAID ${i}] 오류(${e.message})`); }
+          await sleep(150);
+        }
         return text(`NARA NAID 인접 채굴 ${naid}±${radius} (★=중심, 한국 관련 여부는 제목으로 판별):\n` + lines.join('\n') + '\n※ 간격 지식: 사진 계열 ±3·색인 ±1 — 하나 찾으면 양옆을 훑는다(query_bank identifiers).');
       }
       const en = koToEn(query);
