@@ -196,8 +196,10 @@ const tnaLine = (r) => `- [${r.reference || '?'}] ${(r.title || r.description ||
 const norm = (s) => (s == null ? '' : String(s)).replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim();
 const dedupKey = (it) => norm(it.title).toLowerCase().replace(/[^a-z0-9가-힣一-鿿]/g, '').slice(0, 50) + '|' + (it.id || '');
 // run collectors concurrently; merge, dedup by title|id, union the source tags (상호보완: 한 record를 여러 채널이 확인)
+const SOURCE_TIMEBOX_MS = 12000; // 소스별 타임박스 — 최저속(차단 대기) 소스가 전체 지연을 지배하지 않게 (실측 21.7s → ~12s)
 async function collectMerged(collectors) {
-  const settled = await Promise.allSettled(collectors.map((c) => c.fn()));
+  const boxed = (fn) => Promise.race([fn(), new Promise((_, rej) => setTimeout(() => rej(new Error('timebox 12s')), SOURCE_TIMEBOX_MS))]);
+  const settled = await Promise.allSettled(collectors.map((c) => boxed(c.fn)));
   const map = new Map(); const stats = [];
   settled.forEach((r, i) => {
     const name = collectors[i].source;
@@ -484,7 +486,7 @@ const COLLECT = {
     const ids = [...new Set([...b.matchAll(/href="\/collection\/(C\d+)"/g)].map((m) => m[1]))].slice(0, Math.min(n, 5));
     const out = await Promise.all(ids.map(async (cid) => {
       try {
-        const d = await gtext('https://www.awm.gov.au/collection/' + cid);
+        const d = await cachedText('awm:' + cid, 24 * 3600e3, () => gtext('https://www.awm.gov.au/collection/' + cid), '<h1');
         const h1 = d.match(/<h1[^>]*>\s*(?:<[^>]+>\s*)*([^<]{3,120})/);
         const acc = d.match(/(?:Accession Number|ID number)[^A-Z0-9]{0,40}([A-Z0-9/.\-]{3,20})/);
         const pd = /Copyright expired - public domain|publicdomain\/mark/.test(d);
@@ -999,6 +1001,17 @@ const handler = createMcpHandler((server) => {
       return text(`Europeana '${query}'${en ? ` → 영문 자동 변환 '${eff}'` : ''}${media_type ? ` [${media_type}]` : ''}${ytag} — total ${d.totalResults}:\n` + (items.map((it) => { const rt = rshort(it.rights); return `- ${String((it.title || ['?'])[0]).slice(0, 90)} (${(it.year || [''])[0]}) — ${String((it.dataProvider || [''])[0]).slice(0, 40)}${rt ? ` | 권리:${rt}` : ''} | ${it.guid || ''}`; }).join('\n') || '(0)') + '\nTip: multilingual — Corée(fr)·Korea-Krieg(de)·Corea(it/es)' + (demo ? '\n(shared demo key in use — for heavy use, set a free EUROPEANA_API_KEY from apis.europeana.eu)' : ''));
     });
 
+const JB_ALLIES = `한국전 참전·지원국 발굴 지도 — 22개국 소스 매핑 (◉=보유 소스 직행 / ○=대체 경로)
+◉ 미국: nara(RG 111·127·242·342·428)·ia·earchive(국내 수집 원문) ◉ 영국: tna(WO 281 부대 전쟁일지·ADM·AIR)
+◉ 호주: awm(사진·유물 — PD 다수, 가평) ◉ 네덜란드: nlna(주한대사관 2.05.202·UN파견대 2.13.56·적십자 2.19.309)
+◉ 프랑스: gallica(차단 시 브라우저) + 지평리·단장의 능선 프랑스대대는 TOPICS 프랑스어 사상 자동
+○ 캐나다: LAC는 Turnstile 차단 — PPCLI(가평)는 awm·tna 영연방 교차로 ○ 터키: nara RG 407 + ia "Turkish Brigade Kunu-ri"
+○ 전투 참전(태국·필리핀·콜롬비아·에티오피아·그리스·벨기에·룩셈부르크·뉴질랜드·남아공): nara(유엔군 RG)·ia에서
+  부대 고유명 영문 병기 — Kagnew Battalion(에티오피아)·PEFTOK/10th BCT(필리핀)·Gloster(영)·Van Heutsz(네)
+○ 의료지원(스웨덴·덴마크·노르웨이·이탈리아·인도·서독): ia·europeana — 병원선 Jutlandia(덴)·NORMASH(노)·
+  60th Parachute Field Ambulance(인도) 등 고유명 검색
+※ 공통 열쇠: 부대 고유명(영문)+Korea 병기 · 유엔군 총괄은 nara RG 333(극동사령부) · UN 아카이브는 챌린지 보류(명세 참조).`;
+
 const JB_WALLS = `열한 겹의 벽 — 한국 기록이 안 찾아지는 11가지 이유와 대응 (실증 기반)
 1 일본식 독음: 금강산→Soto Kongo — 일제기 자료는 일본식 지명 병렬 / 2 로마자 철자: Corea·Korea 둘 다 / 3 기계번역 함정: 번역이 아니라 대조표(사람이 만들고 조합은 AI) / 4 외래 명명: 원산=Port Lazareff·제주=Quelpaert·거문도=Port Hamilton / 5 인명 표기: topic=persons 참조 / 6 언어 8+개국어 / 7 출처주의 분류: 찍은 사람이 서랍을 정한다(이승만 사진이 해병대 127-R-1438에) / 8 식별자: topic=identifiers / 9 기술심도: 제목만 있고 내용 없음 — 안을 열어야 함 / 10 결락: ①물리 소실(되찾을 수 없음)·②목록에 없는 것(목록에 올리면 되찾음 — 궁내청 의궤 77종 2011 환수 실증) / 11 음력/양력: 조선 기록=음력·서양=양력(대한제국 양력 채택 1896.1.1) — 두 자료를 겹칠 때 사건 순서가 뒤집힐 수 있다.
 부록 — 한자 전사 오류 복원: 연호·간지·서명 3중 교차로 원 한자 확정(예: '한풍원년 신예'→咸豊元年 辛亥, 1851).`;
@@ -1032,7 +1045,7 @@ const JB_CROSS = `국내외 대조 절차 — 순서를 틀리면 헛수고한�
 미기술 자료를 만나면: 기증이 어려우면 사본수집(공공기록물법 46조 — 국가기록원)·국립중앙도서관 책다모아(02-590-0700). 판단은 기관이 한다, 소장자는 연락만 하면 된다.`;
 
   server.tool('query_bank',
-    'Browse validated discovery keywords (Song 2026). topic: "list" for groups, a group id (G-01..G-22, N-01..N-07), "RG" for NARA Record Group cross-map, "TNA" for the 14 strategy layers, "domestic" for the 5 domestic archives, or a domestic key (nedb/archives/nlk/warmemo/seoul) / domestic group id (e.g. NAK-L1). 전략 지식: "walls"=열한 겹의 벽(실패 원인 11층+대응), "identifiers"=식별자 해독(번호 규칙·옆 훑기), "persons"=인명 열쇠(표기 변형·색인 함정), "crosscheck"=국내외 대조 절차, "world"=6개국+ 서고 지도(JACAR·당안관·ГАРФ 분류체계 비교), "cities"=도시명 계보 대조(Keijo·Fusan·1914 경계·로마자 표기법 연대). 검증 쿼리 뱅크+조사 전략.',
+    'Browse validated discovery keywords (Song 2026). topic: "list" for groups, a group id (G-01..G-22, N-01..N-07), "RG" for NARA Record Group cross-map, "TNA" for the 14 strategy layers, "domestic" for the 5 domestic archives, or a domestic key (nedb/archives/nlk/warmemo/seoul) / domestic group id (e.g. NAK-L1). 전략 지식: "walls"=열한 겹의 벽(실패 원인 11층+대응), "identifiers"=식별자 해독(번호 규칙·옆 훑기), "persons"=인명 열쇠(표기 변형·색인 함정), "crosscheck"=국내외 대조 절차, "world"=6개국+ 서고 지도, "cities"=도시명 계보 대조(Keijo·Fusan·1914 경계), "allies"=한국전 참전·지원 22개국 발굴 지도(보유 소스 매핑·부대 고유명 열쇠). 검증 쿼리 뱅크+조사 전략.',
     { topic: z.string().default('list') },
     async ({ topic }) => {
       const t = topic.trim();
@@ -1061,7 +1074,7 @@ const JB_CROSS = `국내외 대조 절차 — 순서를 틀리면 헛수고한�
         const g = v.groups.find((g) => g.id.toUpperCase() === t.toUpperCase());
         if (g) return text(`${g.id} ${g.ko} (${v.name}) [${g.dim}]:\n` + g.kws.map((k) => `- ${k}`).join('\n'));
       }
-      const STRAT = { walls: JB_WALLS, identifiers: JB_IDENT, persons: JB_PERSONS, crosscheck: JB_CROSS, world: JB_WORLD, cities: JB_CITIES };
+      const STRAT = { walls: JB_WALLS, identifiers: JB_IDENT, persons: JB_PERSONS, crosscheck: JB_CROSS, world: JB_WORLD, cities: JB_CITIES, allies: JB_ALLIES };
       if (STRAT[t.toLowerCase()]) return text(STRAT[t.toLowerCase()]);
       return text('Group not found — topic="list"(해외 G/N/RG/TNA)·"domestic"·전략(walls/identifiers/persons/crosscheck)');
     });
@@ -1150,9 +1163,11 @@ const JB_CROSS = `국내외 대조 절차 — 순서를 틀리면 헛수고한�
       if (mode === 'jacar') { // 일본 아시아역사자료센터 — 검색·메타 직행·인접 채굴(±span×100 — 간격 100 실측)
         try {
           const jm = async (code) => {
-            const r = await fetch('https://www.jacar.archives.go.jp/das/meta-en/' + code, { headers: { 'User-Agent': UA }, signal: AbortSignal.timeout(FETCH_TIMEOUT) });
-            if (!r.ok) return null;
-            const h = await r.text();
+            const h = await cachedText('jacarM:' + code, 24 * 3600e3, async () => {
+              const r = await fetch('https://www.jacar.archives.go.jp/das/meta-en/' + code, { headers: { 'User-Agent': UA }, signal: AbortSignal.timeout(FETCH_TIMEOUT) });
+              return r.ok ? r.text() : '';
+            }, 'Reference Code');
+            if (!h) return null;
             const g = (label) => { const m2 = h.match(new RegExp(label + '</(?:th|dt)>\\s*<(?:td|dd)[^>]*>\\s*(?:<[^>]+>\\s*)*([^<]{1,160})')); return m2 ? norm(m2[1]) : ''; };
             return { title: g('Title'), creator: g('Creator'), imgs: g('Number of Images'), org: g('Organisation History'), cls: g('Classification Levels') };
           };
