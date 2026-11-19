@@ -1,6 +1,8 @@
 # Korea Archive MCP — Remote server (Vercel)
 
-Remote MCP server exposing **20** Korea-records discovery tools (해외 6 + 국내 9 + 유틸 5) over Streamable HTTP — PlayMCP 개발가이드 준수(≤20 tools, annotations, Streamable HTTP, stateless).
+Remote MCP server exposing **20** Korea-records discovery tools (해외 6 + 국내 9 + 유틸 5) over Streamable HTTP — PlayMCP 개발가이드 준수(≤20 tools, annotations, Streamable HTTP, stateless, **응답 24KB 공통 가드**).
+
+> **발굴 우선 원칙** — 자료를 전부 찾아 분석 가능하게 하고, 권리관계는 표시(judge_rights·KOGL·건별 권리 태그)로 제공한다. 연대 필터(`year_from`/`year_to`)·페이지는 TNA·IA·Gallica·Europeana·NARA·국가기록원·NLK·6·25아카이브에, 인접 채굴(±N 옆 훑기)은 TNA·NARA(NAID)·IA(일련번호)·6·25아카이브 4기관에 선다.
 No local Python needed by users — they just add a connector URL.
 
 ## Deploy (once)
@@ -44,8 +46,8 @@ No local Python needed by users — they just add a connector URL.
 
 ## Tools (20 — PlayMCP 개발가이드 준수: 서버당 20개 이하)
 - **Overseas (6):** tna_search · tna_adjacent_mine · nara_search · ia_search(검색+identifier 메타 조회 통합) · gallica_search · europeana_search
-- **Domestic (9):** **nedb_search**(한국사DB + **조선 사료 심층 판독 9모드** — law·record(座目 필터)·item·★sibling(형제 조 전수)·matrix(부재 발견)·origin·sjw(왕대 분포)·kyujanggak(목록+해제·이미지 패턴 지식)) · archives_search(국가기록원) · nlk_search(국립중앙도서관·category 이중채널) · seoul_archives_search(서울기록원) · foia_search(정보공개포털 외 — source 파라미터) · warmemo_search(전쟁기념관) · **koreanwar_search**(KOREAN WAR ARCHIVES 통합검색+전투정보 scope+OpenAPI 공식 메타 채널) · **koreanwar_item**(건별 메타·권리 + radius 인접 채굴) · scrape_plan
-- **Utility (5):** **query_bank**(검증 키워드셋 + **조사 전략 6토픽** — walls·identifiers·persons·crosscheck·world(6개국 서고 지도)·cities(도시명 계보)) · judge_rights · **report_template**(**kind 8종** — report·carousel·canva_prompts·**full_package**(매직 키워드 '풀패키지' — 산출물 12종 오케스트레이션)·magazine·**help**(매직 키워드 '창기창기 도와줘')·citation(한국사DB·국회도서관 인용 형식)·annotation(기록 해설 규칙)) · **cross_search**(동시 교차수집·병합) · **source_profile**(기관 3층 프로파일)
+- **Domestic (9):** **nedb_search**(한국사DB + **조선 사료 심층 판독 10모드** — law·record(座目 필터)·item·★sibling(형제 조 전수)·matrix(부재 발견)·origin·sjw(왕대 분포)·kyujanggak(목록+해제·이미지 패턴 지식)·**aks**(한국고문서자료관 — 소장처 172곳 내장 카탈로그→분류→문서 면·썸네일)) · archives_search(국가기록원·**연대 후처리 필터**) · nlk_search(국립중앙도서관·category 이중채널·**연대 후처리 필터**) · seoul_archives_search(서울기록원) · foia_search(정보공개포털 외 — source 파라미터) · warmemo_search(전쟁기념관 — 구 사이트 개편 시 **6·25아카이브 자동 폴백**) · **koreanwar_search**(KOREAN WAR ARCHIVES 통합검색+전투정보 scope(기관 69건+**후기 단계 서버 앵커 16건**)+OpenAPI 공식 메타 채널) · **koreanwar_item**(건별 메타·권리 + radius 인접 채굴) · scrape_plan
+- **Utility (5):** **query_bank**(검증 키워드셋 + **조사 전략 6토픽** — walls·identifiers·persons·crosscheck·world(6개국 서고 지도)·cities(도시명 계보)) · judge_rights(**공공누리 KOGL 1~4유형 자동 판정** 포함) · **report_template**(**kind 9종** — report·carousel·canva_prompts·**full_package**(매직 키워드 '풀패키지' — 산출물 12종 오케스트레이션)·magazine·**help**(매직 키워드 '창기창기 도와줘')·citation(한국사DB·국회도서관 인용 형식)·annotation(기록 해설 규칙)·**exhibit**(AKS 고문서 전시형)) · **cross_search**(**13소스** 동시 교차수집·병합 + **variants 당대 표기 팬아웃** + **format=csv**) · **source_profile**(기관 3층 프로파일 + **health 13채널 헬스체크**)
 
 ### 매직 키워드 · MCP 프롬프트 · 사용 안내
 - **MCP prompts 2종**(웹·모바일 + 메뉴 노출): `full-package`(topic 인자) · `changgi-help` — server `instructions`에도 트리거 규칙 명시
@@ -67,8 +69,11 @@ All requests carry a partner-identifying User-Agent and polite pacing.
 - description: PlayMCP 등록 서비스명 "KOREA ARCHIVE 통합검색" 병기 + 1024자 이내 자동 보장
 - 응답은 정제 텍스트(마크다운형) — API 원본 미투과 · 인접 채굴은 배치 병렬로 p99 3s 내 응답
 
-### cross_search — 상호보완 동시수집
-`cross_search(query, sources="all")` runs one query across TNA·IA·Gallica·Europeana (keyless) + NARA·archives·nlk (if key) + nedb (if `NEDB_INDEX_URL`) **concurrently**, then merges & dedups, tagging each record by which source(s) found it (multi-source = cross-corroborated). robots-forbidden sites (opengov·서울기록원) are excluded by design.
+### cross_search — 상호보완 동시수집 (13소스)
+`cross_search(query, sources="all")` runs one query across **13 sources** — TNA·IA·Gallica·Europeana (keyless) + NARA·archives·nlk (if key) + nedb (if `NEDB_INDEX_URL`) + koreanwar·warmemo·seoul·foia(서울소통광장 원문)·aks(고문서 소장처 내장 카탈로그) — **concurrently**, then merges & dedups, tagging each record by which source(s) found it (multi-source = cross-corroborated).
+- `variants=true`: 당대 표기(Corean·Corea·Chosen·Keijo·Fusan·Chemulpo·Gensan·Heijo·Quelpaert·Taikyu) 최대 2종을 해외 4채널에 자동 병렬 투입 — 채널 태그에 변형 표시(예 `ia·Corean`).
+- `format="csv"`: 병합 결과를 `sources,title,date,id,url` CSV 블록으로 — 스프레드시트·KARDA 온톨로지·통계 분석 직투입.
+- 채널 상태 점검: `source_profile(institution="health")` — 13채널 골든 질의 일괄 실측(🟢🟡🔴) + 서버 키 설정 상태. GitHub Actions `health` 워크플로가 주간 자동 실행.
 
 ## Skills (`.claude/skills/`)
 - **insta-carousel** — 발굴조사 결과를 인스타그램 캐러셀 카드뉴스(1080×1080 PNG)로 제작: 실물 이미지 소싱·라이선스 판정·레이아웃·헤드리스 크롬 렌더링·캡션.
