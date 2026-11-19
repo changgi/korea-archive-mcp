@@ -473,7 +473,7 @@ const COLLECT = {
     const en = koToEn(q) || q;
     const d = await jget(`https://zvt.nationaalarchief.nl/api/search/eads?page=1&rows=${Math.min(n, 10)}&q=${encodeURIComponent(en)}&sortBy=_score`);
     return ((d && d.results) || []).slice(0, n).map((r) => ({
-      title: String(r.title || '').slice(0, 95) + (r.type === 'ARCHIVE' ? ' [문서군]' : ''),
+      title: norm(String(r.title || '')).slice(0, 95) + (r.type === 'ARCHIVE' ? ' [문서군]' : ''),
       date: String(r.period || ''), id: String(r.id || ''),
       url: 'https://www.nationaalarchief.nl/onderzoeken/archief/' + encodeURIComponent(String(r.id || '')),
     }));
