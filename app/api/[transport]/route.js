@@ -1017,12 +1017,15 @@ const JB_CROSS = `국내외 대조 절차 — 순서를 틀리면 헛수고한�
               + `\n출처 표기: 한국학중앙연구원 한국고문서자료관. 이미지 재이용은 기관 이용조건 준수.`);
           }
           const exactCol = AKS_CAT.find((c) => c.id === q); // 비표준 ID 포함 정확일치 우선
-          const idm = exactCol ? null : q.match(/^(L\d{6})(F\d{2,4})?$/);
-          if (exactCol || idm) { // 소장처/분류 노드 → 하위 트리 라이브 조회
-            const col = exactCol || AKS_CAT.find((c) => c.id === idm[1]);
+          // 비표준 하위 분류('L0809  F0206' — 공백 포함, 카탈로그 밖): 부모 분류(F02)를 카탈로그에서 유도
+          const nm = !exactCol && q.match(/^(L\d{4,6})(\s+)(F\d{4})$/);
+          const nmParent = nm && AKS_CAT.find((c) => c.id === nm[1] + nm[2] + nm[3].slice(0, 3));
+          const idm = exactCol || nmParent ? null : q.match(/^(L\d{6})(F\d{2,4})?$/);
+          if (exactCol || nmParent || idm) { // 소장처/분류 노드 → 하위 트리 라이브 조회
+            const col = exactCol || nmParent || AKS_CAT.find((c) => c.id === idm[1]);
             if (!col) return text(`'${q}' — 소장처 목록(172곳)에 없는 ID. mode=aks에 소장처명을 넣어 먼저 검색하십시오.`);
-            const chain = exactCol ? [] : aksChain(idm[1], idm[2] || '');
-            const up = exactCol ? col.up : [col.up, ...(idm[2] ? [idm[1], ...chain.slice(0, -1)] : [])].join('^');
+            const chain = (exactCol || nmParent) ? [] : aksChain(idm[1], idm[2] || '');
+            const up = exactCol ? col.up : nmParent ? `${col.up}^${col.id}` : [col.up, ...(idm[2] ? [idm[1], ...chain.slice(0, -1)] : [])].join('^');
             const aksUrl = `${AKS_BASE}/viewer/treeAjax.do?itemId=book&gubun=booktree&depth=${up.split('^').length + 1}&upPath=${encodeURIComponent(up)}&dataId=${encodeURIComponent(q)}&itemType=`;
             const b = await cachedText('aks:' + q, 6 * 3600e3, () => gtext(aksUrl, AKS_UA), 'data-dataId');
             const kids = [...b.matchAll(/data-dataId='([^']+)'[\s\S]{0,300}?<span(?:\s+class='([^']*)')?\s+title='([^']*)'/g)]
