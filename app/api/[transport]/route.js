@@ -1173,10 +1173,33 @@ const JB_CROSS = `국내외 대조 절차 — 순서를 틀리면 헛수고한�
 
 
   server.tool('nedb_search',
-    "Search 국사편찬위 한국사데이터베이스 (db.history.go.kr) + 조선 사료 심층 판독 (verified POST routes from the Han-river vessel study). mode: total=통합검색(기본) · law=법전·편람 조문 검색(한문 원문 제공 여부 판정) · record=등록류 검색(座目 회의명단 자동 필터 — 검색 건수를 지표로 쓰기 전 필수) · item=levelId 본문 판독(미공개/파싱실패 구분 — query에 levelId) · sibling=★형제 조 전수 스캔(query에 levelId — 조문을 하나라도 열었으면 반드시 이어 호출, 총론만 읽으면 핵심을 놓친다) · matrix=법전 수록 대조표(query에 쉼표구분 어휘 ≤8 — 부재의 발견) · origin=어휘 연원 추적(query='용어' 또는 '용어,영역') · sjw=승정원일기(왕대 분포·최초 용례 — 연대가 뒤집힐 수 있다) · kyujanggak=규장각 목록+해제 동시(절목·사목류는 해제에서 발견) · aks=한국고문서자료관(archive.aks.ac.kr) 문중·서원 고문서 — 소장처 172곳 검색→분류→문서 면·썸네일(query=소장처명 또는 L-ID·분류ID·'분류ID/문서ID'). · jacar=일본 아시아역사자료센터(한→일 자동 변환 검색·레퍼런스코드 메타 직행·±span×100 인접 채굴) · gonghun=공훈전자사료관 독립유공자(query=이름 검색→mngNo 숫자 투입 시 공적조서·공훈록 본문 판독). 판정 우선: '601건'이 아니라 '492건이 座目입니다'를 반환한다.",
-    { query: z.string().describe("검색어 · levelId(item/sibling) · 쉼표구분 어휘(matrix) · '용어,영역'(origin) · 소장처명/L-ID(aks) · 이름/mngNo(gonghun)"), db: z.string().default(''), max_results: z.number().int().min(1).max(50).default(15), mode: z.enum(['total', 'law', 'record', 'item', 'sibling', 'matrix', 'origin', 'sjw', 'kyujanggak', 'aks', 'jacar', 'gonghun']).default('total'), span: z.number().int().min(2).max(12).default(8).describe('sibling 모드 스캔 폭') },
+    "Search 국사편찬위 한국사데이터베이스 (db.history.go.kr) + 조선 사료 심층 판독 (verified POST routes from the Han-river vessel study). mode: total=통합검색(기본) · law=법전·편람 조문 검색(한문 원문 제공 여부 판정) · record=등록류 검색(座目 회의명단 자동 필터 — 검색 건수를 지표로 쓰기 전 필수) · item=levelId 본문 판독(미공개/파싱실패 구분 — query에 levelId) · sibling=★형제 조 전수 스캔(query에 levelId — 조문을 하나라도 열었으면 반드시 이어 호출, 총론만 읽으면 핵심을 놓친다) · matrix=법전 수록 대조표(query에 쉼표구분 어휘 ≤8 — 부재의 발견) · origin=어휘 연원 추적(query='용어' 또는 '용어,영역') · sjw=승정원일기(왕대 분포·최초 용례 — 연대가 뒤집힐 수 있다) · kyujanggak=규장각 목록+해제 동시(절목·사목류는 해제에서 발견) · aks=한국고문서자료관(archive.aks.ac.kr) 문중·서원 고문서 — 소장처 172곳 검색→분류→문서 면·썸네일(query=소장처명 또는 L-ID·분류ID·'분류ID/문서ID'). · jacar=일본 아시아역사자료센터(한→일 자동 변환 검색·레퍼런스코드 메타 직행·±span×100 인접 채굴) · gonghun=공훈전자사료관 독립유공자(query=이름 검색→mngNo 숫자 투입 시 공적조서·공훈록 본문 판독) · i815=독립기념관(query=키워드 목록→detail.do URL 투입 시 당대 신문기사·독립운동가 자료 본문 판독). 판정 우선: '601건'이 아니라 '492건이 座目입니다'를 반환한다.",
+    { query: z.string().describe("검색어 · levelId(item/sibling) · 쉼표구분 어휘(matrix) · '용어,영역'(origin) · 소장처명/L-ID(aks) · 이름/mngNo(gonghun)"), db: z.string().default(''), max_results: z.number().int().min(1).max(50).default(15), mode: z.enum(['total', 'law', 'record', 'item', 'sibling', 'matrix', 'origin', 'sjw', 'kyujanggak', 'aks', 'jacar', 'gonghun', 'i815']).default('total'), span: z.number().int().min(2).max(12).default(8).describe('sibling 모드 스캔 폭') },
     async ({ query, max_results, mode, span }) => {
       const q = query.trim();
+      if (mode === 'i815') { // 독립기념관 — 키워드 목록 / detail.do URL 본문 판독(당대 신문기사·독립운동가 자료)
+        try {
+          if (/^https?:\/\/search\.i815\.or\.kr\//.test(q)) { // 상세 판독 — i815 도메인 한정(임의 URL 페치 방지)
+            const b = await cachedText('i815D:' + q, 24 * 3600e3, () => gtext(q), 'explain');
+            const paras = [...b.matchAll(/<(?:strong|p)[^>]*class="explain[^"]*"[^>]*>([\s\S]*?)<\/(?:strong|p)>/g)]
+              .map((m) => dclean(m[1])).filter(Boolean);
+            if (!paras.length) return text(`판독 실패 — 본문(explain) 없음(목록형 상세 또는 구조 상이). 브라우저로 열람: ${q}`);
+            const flat = dclean(b);
+            const np = flat.match(/신문명\s+(.{1,40}?)\s+발행일\s+([\d.\-]+)/);
+            const prod = flat.match(/생산정보\s+(\S.{0,60}?)\s+(?:기사제목|자료명|자료내용)/);
+            let body = paras.join('\n');
+            if (body.length > 4000) body = body.slice(0, 4000) + ` …(총 ${body.length}자 — 전문은 원문 링크)`;
+            return text('독립기념관 자료 판독\n'
+              + (np ? `신문명: ${np[1]} · 발행일: ${np[2]}\n` : '') + (prod ? `생산정보: ${prod[1]}\n` : '')
+              + `【자료내용】\n${body}\n원문: ${q}\n`
+              + '※ 출처: 독립기념관 한국독립운동정보시스템 — 게재 시 출처 표기. 원문이미지는 페이지 뷰어에서. 권리 초판정: judge_rights.');
+          }
+          const items = await COLLECT.i815(q, Math.min(max_results, 10));
+          if (!items.length) return text(`독립기념관 '${q}' — 0건. 인명·사건명·부대명 등으로 재시도하거나 cross_search(variants)로 표기 변형을 팬아웃하십시오.`);
+          return text(`독립기념관 '${q}' — ${items.length}건:\n` + items.map((it) => `- ${it.title}\n  ${it.url}`).join('\n')
+            + '\n※ detail.do URL을 mode=i815 query로 재투입 → 자료 본문 판독.');
+        } catch (e) { return text(`독립기념관 오류(${String(e && e.message || e).slice(0, 60)}) — 잠시 후 재시도 또는 브라우저: https://search.i815.or.kr`); }
+      }
       if (mode === 'gonghun') { // 공훈전자사료관 — 이름 목록 / mngNo 심층 판독(공적조서·공훈록 본문)
         try {
           const b64d = (s) => { try { return Buffer.from(s, 'base64').toString('utf8'); } catch { return ''; } };
