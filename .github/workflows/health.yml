@@ -1,5 +1,5 @@
 name: health
-# 주간 소스 헬스체크 — 프로덕션 13채널 골든 질의 실측(source_profile health).
+# 주간 소스 헬스체크 — 프로덕션 21채널 골든 질의 실측(source_profile health, 채널별 ms 포함).
 # 🔴(차단·타임아웃)가 3채널 이상이면 실패 → 알림. 기지(旣知) 🔴: gallica(BnF 차단)·foia(opengov 타임아웃).
 # 기지 채널이 복구되거나 새로 죽으면 이 임계값을 조정할 것.
 on:

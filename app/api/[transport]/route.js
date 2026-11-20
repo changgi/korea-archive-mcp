@@ -466,7 +466,8 @@ const COLLECT = {
   },
   nlk: async (q, n) => {
     const key = process.env.NLK_API_KEY; if (!key) return [];
-    const xml = await gtext(`https://www.nl.go.kr/NL/search/openApi/search.do?key=${encodeURIComponent(key)}&apiType=xml&srchTarget=total&kwd=${encodeURIComponent(q)}&pageSize=${n}&pageNum=1`);
+    // 실측 7.7s(최저속 축) — 6h TTL 캐시(마커 <item> — 정상 결과만)
+    const xml = await cachedText(`nlk:${q}:${n}`, 6 * 3600e3, () => gtext(`https://www.nl.go.kr/NL/search/openApi/search.do?key=${encodeURIComponent(key)}&apiType=xml&srchTarget=total&kwd=${encodeURIComponent(q)}&pageSize=${n}&pageNum=1`), '<item>');
     return (xml.match(/<item>[\s\S]*?<\/item>/g) || []).map((it) => { let lk = xtag(it, 'detail_link') || xtag(it, 'org_link'); if (lk.startsWith('/')) lk = 'https://www.nl.go.kr' + lk; return { title: xtag(it, 'title_info') || xtag(it, 'title'), date: xtag(it, 'pub_year_info'), id: xtag(it, 'type_name'), url: lk }; });
   },
   nedb: async (q, n) => { const recs = await loadNedbIndex(); return recs ? nedbFileSearch(recs, q, n) : []; },
@@ -513,13 +514,33 @@ const COLLECT = {
     const list = Array.isArray(r['목록']) ? r['목록'] : [];
     return list.slice(0, n).map((t) => ({ title: String(t), date: '', id: '', url: 'https://kyudb.snu.ac.kr' }));
   },
-  i815: async (q, n) => { // 독립기념관 한국독립운동정보시스템 — GET 실측(2026-11-19). 카테고리 집계+직행 링크(신호 채널)
-    const b = await gtext('https://search.i815.or.kr/main/totalSearch.do?searchWord=' + encodeURIComponent(q) + '&searchMenu=all');
-    const out = [];
+  i815: async (q, n) => { // 독립기념관 — v1.32 목록 실체화: 최대 카테고리의 실제 자료 제목+GET 딥링크(data-mngno/gubun → detail.do), 나머지는 집계 신호
+    const base = 'https://search.i815.or.kr';
+    const b = await gtext(base + '/main/totalSearch.do?searchWord=' + encodeURIComponent(q) + '&searchMenu=all');
+    const cats = [];
     for (const m of b.matchAll(/href="(\/main\/moreContentsSearchList\.do[^"]*)"[^>]*>([^<]+?)\s*([\d,]+)\s*건</g)) {
       if (m[3] === '0') continue;
-      out.push({ title: `독립기념관 ${norm(m[2])} ${m[3]}건`, date: '', id: '', url: 'https://search.i815.or.kr' + m[1].replace(/&amp;/g, '&') });
-      if (out.length >= Math.min(n, 6)) break;
+      cats.push({ u: m[1].replace(/&amp;/g, '&'), name: norm(m[2]), cnt: parseInt(m[3].replace(/,/g, ''), 10), disp: m[3] });
+    }
+    const out = [];
+    if (cats.length) {
+      const top = cats.reduce((a, c) => (c.cnt > a.cnt ? c : a));
+      try { // 구분(gubun)→상세 GET 경로 — 목록 페이지 contentsFrm(method=get) 역공학(2026-11-20 실측)
+        const DETAIL = { 2: ['contents/mijooAcademy/mijooAcademyDetailList.do', 'mngNo'], 3: ['contents/proGovernment/proGovernmentDetailList.do', 'mngNo'],
+          4: ['contents/independenceFighter/detail.do', 'independenceFighterId'], 7: ['contents/missionary/detail.do', 'missionaryId'],
+          8: ['contents/newsPaper/detail.do', 'newsPaperId'], 9: ['contents/medicalData/MedicalDataDetailList.do', 'mngNo'], 9999: ['contents/microFilm/detail.do', 'adminId'] };
+        const lb = await gtext(base + top.u);
+        for (const m of lb.matchAll(/data-mngno="([^"]+)"[^>]*data-gubun="(\d+)"[^>]*>([\s\S]*?)<\/strong>/g)) {
+          const d = DETAIL[m[2]];
+          out.push({ title: `[${top.name}] ${norm(m[3].replace(/<[^>]+>/g, ''))}`.slice(0, 110), date: '', id: m[1],
+            url: d ? `${base}/${d[0]}?${d[1]}=${encodeURIComponent(m[1])}&sortNo=${m[2]}` : base + top.u });
+          if (out.length >= Math.max(2, n - 2)) break;
+        }
+      } catch { /* 목록 실패 — 집계 신호로 폴백 */ }
+    }
+    for (const c of cats) {
+      if (out.length >= n) break;
+      out.push({ title: `독립기념관 ${c.name} ${c.disp}건`, date: '', id: '', url: base + c.u });
     }
     return out;
   },
