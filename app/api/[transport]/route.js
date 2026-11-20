@@ -607,7 +607,10 @@ const COLLECT = {
     return out;
   },
   foia: async (q, n) => { // 정보공개 원문 라이브 채널: 서울정보소통광장 결재문서 — 전용 도구(foia_search)와 동일 경로
-    const b = await gtext('https://opengov.seoul.go.kr/sanction/list?searchKeyword=' + encodeURIComponent(q));
+    // 기지 차단(연결 리셋 ~11s×2회 재시도=21s 소모 실측) — 단발 6s fail-fast로 health·연합 탐침 시간 보호. 복구 시 자동 정상화
+    const r = await fetch('https://opengov.seoul.go.kr/sanction/list?searchKeyword=' + encodeURIComponent(q), { headers: { 'User-Agent': UA }, signal: AbortSignal.timeout(6000) });
+    if (!r.ok) throw new Error(`HTTP ${r.status}`);
+    const b = await r.text();
     const seen = new Set(); const out = [];
     const re = /<a[^>]+href="(\/sanction\/\d+)"[^>]*>([\s\S]*?)<\/a>/g; let m;
     while ((m = re.exec(b)) && out.length < n) { const t = norm(m[2]).replace(/^제목\s*:\s*/, ''); if (t && !seen.has(m[1])) { seen.add(m[1]); out.push({ title: t, date: '', id: '', url: 'https://opengov.seoul.go.kr' + m[1] }); } }
@@ -1173,10 +1176,35 @@ const JB_CROSS = `국내외 대조 절차 — 순서를 틀리면 헛수고한�
 
 
   server.tool('nedb_search',
-    "Search 국사편찬위 한국사데이터베이스 (db.history.go.kr) + 조선 사료 심층 판독 (verified POST routes from the Han-river vessel study). mode: total=통합검색(기본) · law=법전·편람 조문 검색(한문 원문 제공 여부 판정) · record=등록류 검색(座目 회의명단 자동 필터 — 검색 건수를 지표로 쓰기 전 필수) · item=levelId 본문 판독(미공개/파싱실패 구분 — query에 levelId) · sibling=★형제 조 전수 스캔(query에 levelId — 조문을 하나라도 열었으면 반드시 이어 호출, 총론만 읽으면 핵심을 놓친다) · matrix=법전 수록 대조표(query에 쉼표구분 어휘 ≤8 — 부재의 발견) · origin=어휘 연원 추적(query='용어' 또는 '용어,영역') · sjw=승정원일기(왕대 분포·최초 용례 — 연대가 뒤집힐 수 있다) · kyujanggak=규장각 목록+해제 동시(절목·사목류는 해제에서 발견) · aks=한국고문서자료관(archive.aks.ac.kr) 문중·서원 고문서 — 소장처 172곳 검색→분류→문서 면·썸네일(query=소장처명 또는 L-ID·분류ID·'분류ID/문서ID'). · jacar=일본 아시아역사자료센터(한→일 자동 변환 검색·레퍼런스코드 메타 직행·±span×100 인접 채굴) · gonghun=공훈전자사료관 독립유공자(query=이름 검색→mngNo 숫자 투입 시 공적조서·공훈록 본문 판독) · i815=독립기념관(query=키워드 목록→detail.do URL 투입 시 당대 신문기사·독립운동가 자료 본문 판독). 판정 우선: '601건'이 아니라 '492건이 座目입니다'를 반환한다.",
-    { query: z.string().describe("검색어 · levelId(item/sibling) · 쉼표구분 어휘(matrix) · '용어,영역'(origin) · 소장처명/L-ID(aks) · 이름/mngNo(gonghun)"), db: z.string().default(''), max_results: z.number().int().min(1).max(50).default(15), mode: z.enum(['total', 'law', 'record', 'item', 'sibling', 'matrix', 'origin', 'sjw', 'kyujanggak', 'aks', 'jacar', 'gonghun', 'i815']).default('total'), span: z.number().int().min(2).max(12).default(8).describe('sibling 모드 스캔 폭') },
+    "Search 국사편찬위 한국사데이터베이스 (db.history.go.kr) + 조선 사료 심층 판독 (verified POST routes from the Han-river vessel study). mode: total=통합검색(기본) · law=법전·편람 조문 검색(한문 원문 제공 여부 판정) · record=등록류 검색(座目 회의명단 자동 필터 — 검색 건수를 지표로 쓰기 전 필수) · item=levelId 본문 판독(미공개/파싱실패 구분 — query에 levelId) · sibling=★형제 조 전수 스캔(query에 levelId — 조문을 하나라도 열었으면 반드시 이어 호출, 총론만 읽으면 핵심을 놓친다) · matrix=법전 수록 대조표(query에 쉼표구분 어휘 ≤8 — 부재의 발견) · origin=어휘 연원 추적(query='용어' 또는 '용어,영역') · sjw=승정원일기(왕대 분포·최초 용례 — 연대가 뒤집힐 수 있다) · kyujanggak=규장각 목록+해제 동시(절목·사목류는 해제에서 발견) · aks=한국고문서자료관(archive.aks.ac.kr) 문중·서원 고문서 — 소장처 172곳 검색→분류→문서 면·썸네일(query=소장처명 또는 L-ID·분류ID·'분류ID/문서ID'). · jacar=일본 아시아역사자료센터(한→일 자동 변환 검색·레퍼런스코드 메타 직행·±span×100 인접 채굴) · gonghun=공훈전자사료관 독립유공자(query=이름 검색→mngNo 숫자 투입 시 공적조서·공훈록 본문 판독) · i815=독립기념관(query=키워드 목록→detail.do URL 투입 시 당대 신문기사·독립운동가 자료 본문 판독) · ktv=KTV e영상역사관(query=키워드 목록→ehistory view URL 투입 시 대한뉴스·기록영상 해설/제작연도/상영시간 판독, KOGL). 판정 우선: '601건'이 아니라 '492건이 座目입니다'를 반환한다.",
+    { query: z.string().describe("검색어 · levelId(item/sibling) · 쉼표구분 어휘(matrix) · '용어,영역'(origin) · 소장처명/L-ID(aks) · 이름/mngNo(gonghun)"), db: z.string().default(''), max_results: z.number().int().min(1).max(50).default(15), mode: z.enum(['total', 'law', 'record', 'item', 'sibling', 'matrix', 'origin', 'sjw', 'kyujanggak', 'aks', 'jacar', 'gonghun', 'i815', 'ktv']).default('total'), span: z.number().int().min(2).max(12).default(8).describe('sibling 모드 스캔 폭') },
     async ({ query, max_results, mode, span }) => {
       const q = query.trim();
+      if (mode === 'ktv') { // KTV e영상역사관 — 키워드 목록 / ehistory view URL 판독(대한뉴스·기록영상 해설, KOGL)
+        try {
+          if (/^https?:\/\/www\.ehistory\.go\.kr\/view\//.test(q)) { // 상세 판독 — ehistory 도메인 한정(임의 URL 페치 방지)
+            const b = await cachedText('ktvD:' + q, 24 * 3600e3, () => gtext(q), 'board_header');
+            const pick = (re2) => dclean((b.match(re2) || [])[1] || '');
+            const title = pick(/board_header[\s\S]*?<h4>\s*<strong>([\s\S]*?)<\/strong>/);
+            const pdate = pick(/<p class="date">[\s\S]*?<\/strong>([\s\S]*?)<\/p>/);
+            const ptime = pick(/<p class="time">[\s\S]*?<\/strong>([\s\S]*?)<\/p>/);
+            const origin = pick(/<p class="origin">[\s\S]*?<\/strong>([\s\S]*?)<\/p>/);
+            const raw = (b.match(/<div class="txt">([\s\S]*?)<\/div>/) || [])[1] || '';
+            let body = raw.replace(/<br\s*\/?>/gi, '\n').replace(/<[^>]+>/g, ' ')
+              .split('\n').map((l) => l.replace(/\s+/g, ' ').trim()).join('\n').replace(/\n{3,}/g, '\n\n').trim();
+            if (!title && !body) return text(`판독 실패 — 영상 상세 구조 상이. 브라우저로 열람: ${q}`);
+            if (body.length > 4000) body = body.slice(0, 4000) + ` …(총 ${body.length}자 — 전문은 원문 링크)`;
+            return text(`KTV e영상역사관 영상 판독 — ${title || '(제목 미상)'}\n`
+              + [pdate && `제작연도: ${pdate}`, ptime && `상영시간: ${ptime}`, origin && `출처: ${origin}`].filter(Boolean).join(' · ') + '\n'
+              + (body ? `【해설】\n${body}\n` : '') + `원문(영상 재생): ${q}\n`
+              + '※ KTV 콘텐츠는 KOGL(공공누리) — judge_rights에 "KOGL" 표기로 초판정. 게재 시 출처 표기.');
+          }
+          const items = await COLLECT.ktv(q, Math.min(max_results, 10));
+          if (!items.length) return text(`KTV e영상역사관 '${q}' — 0건. '대한뉴스'·사건명·인명으로 재시도하십시오.`);
+          return text(`KTV e영상역사관 '${q}' — ${items.length}건:\n` + items.map((it) => `- ${it.title}\n  ${it.url}`).join('\n')
+            + '\n※ view URL을 mode=ktv query로 재투입 → 영상 해설·제작연도·상영시간 판독.');
+        } catch (e) { return text(`KTV 오류(${String(e && e.message || e).slice(0, 60)}) — 잠시 후 재시도 또는 브라우저: https://www.ehistory.go.kr`); }
+      }
       if (mode === 'i815') { // 독립기념관 — 키워드 목록 / detail.do URL 본문 판독(당대 신문기사·독립운동가 자료)
         try {
           if (/^https?:\/\/search\.i815\.or\.kr\//.test(q)) { // 상세 판독 — i815 도메인 한정(임의 URL 페치 방지)
