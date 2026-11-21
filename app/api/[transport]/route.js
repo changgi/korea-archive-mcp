@@ -600,10 +600,28 @@ const COLLECT = {
     }
     return out;
   },
-  seoul: async (q, n) => { // 서울기록원 컬렉션 매칭 — 전용 도구(seoul_archives_search)와 동일 경로
-    const b = await gtext('https://archives.seoul.go.kr/catalog?search_api_fulltext=' + encodeURIComponent(q));
-    const out = []; const re = /href="(\/catalog\/result\?[^"]*collects=[^"]*)"[^>]*>([\s\S]*?)<\/a>/g; let m;
-    while ((m = re.exec(b)) && out.length < n) { const nm = norm(m[2]); if (nm && nm.includes('컬렉션')) out.push({ title: nm, date: '', id: '', url: 'https://archives.seoul.go.kr' + m[1] }); }
+  seoul: async (q, n) => { // 서울기록원 — v1.36 기록 단위 실체화: /catalog/result 서버 렌더 파싱 + fnDetail 딥링크(/item·/aggregation GET 실측)
+    const base = 'https://archives.seoul.go.kr';
+    const deep = base + '/catalog/result?regclass=ALL&query=' + encodeURIComponent(q);
+    const b = await gtext(deep);
+    const out = []; const used = new Set();
+    // ① 시리즈형: fnDetail 직후 2600자 내 d02 제목이 따르는 블록 — 제목+딥링크 완결
+    for (const seg of b.split("fnDetail('").slice(1)) {
+      const path = (seg.match(/^(\/[a-z-]+\/\d+)/) || [])[1];
+      if (!path) continue;
+      const tt = (seg.slice(0, 2600).match(/<p class="d02">\s*<span><b>([\s\S]*?)<\/b>/) || [])[1];
+      if (tt) { used.add(norm(tt.replace(/<[^>]+>/g, ''))); out.push({ title: norm(tt.replace(/<[^>]+>/g, '')).slice(0, 110), date: '', id: path.split('/')[2] || '', url: base + path }); }
+      else out.push({ title: `[기록건·사진] ${path.split('/')[1]} ${path.split('/')[2]} — 제목·이용조건은 상세 URL 판독`, date: '', id: path.split('/')[2] || '', url: base + path });
+      if (out.length >= n) break;
+    }
+    // ② 컬렉션 카드형: d02 제목만 있고 링크는 JS 바인딩 — 제목+전체결과 URL로 신호
+    if (out.length < n) for (const m of b.matchAll(/<p class="d02">\s*<span><b>([\s\S]*?)<\/b>/g)) {
+      const tt = norm(m[1].replace(/<[^>]+>/g, ''));
+      if (!tt || used.has(tt)) continue;
+      used.add(tt);
+      out.push({ title: `[컬렉션] ${tt}`.slice(0, 110), date: '', id: '', url: deep });
+      if (out.length >= n) break;
+    }
     return out;
   },
   foia: async (q, n) => { // 정보공개 원문 라이브 채널: 서울정보소통광장 결재문서 — 전용 도구(foia_search)와 동일 경로
@@ -1581,18 +1599,39 @@ item_cd 5종(자료 성격별): ART 도설·회화 / ETC 두루마리·축 / DRR
     });
 
   server.tool('seoul_archives_search',
-    "Search 서울기록원 (archives.seoul.go.kr) — server fetches the catalog and returns collections matching the term plus the full-result URL. Seoul municipal records/photos/oral histories.",
-    { query: z.string(), max_results: z.number().int().min(1).max(50).default(15) },
+    "Search 서울기록원 (archives.seoul.go.kr) — 기록 단위 검색(시리즈·기록건 제목+상세 딥링크). query에 /item·/aggregation 상세 URL 투입 시 심층 판독: 식별번호(RG-SR-IT)·기술계층·법적지위·소장처·이용조건(judge_rights 투입)·기술 본문. Seoul municipal records/photos/oral histories.",
+    { query: z.string().describe('검색어 또는 archives.seoul.go.kr/item·/aggregation 상세 URL'), max_results: z.number().int().min(1).max(50).default(15) },
     async ({ query, max_results }) => {
-      const land = 'https://archives.seoul.go.kr/catalog?search_api_fulltext=' + encodeURIComponent(query);
-      const deep = 'https://archives.seoul.go.kr/catalog/result?regclass=RC_ITEM&search_api_fulltext=' + encodeURIComponent(query);
+      const q = query.trim();
+      const deep = 'https://archives.seoul.go.kr/catalog/result?regclass=ALL&query=' + encodeURIComponent(q);
+      if (/^https?:\/\/archives\.seoul\.go\.kr\/(item|aggregation)\/\d+/.test(q)) { // 상세 판독 — 도메인 한정(임의 URL 페치 방지)
+        try {
+          const b = await cachedText('seoulD:' + q, 24 * 3600e3, () => gtext(q), '기술계층');
+          const flat = dclean(b);
+          const pick = (re2) => ((flat.match(re2) || [])[1] || '').trim();
+          const title = pick(/<-\s*(.{2,90}?)\s+(?:기술계층|생산자)/);
+          const sid = pick(/식별번호\s+(\S{4,30})/);
+          const layers = [...flat.matchAll(/기술계층\s+(\S{2,20}\([A-Za-z]+\))/g)];
+          const layer = layers.length ? layers[layers.length - 1][1] : ''; // 첫 일치는 브레드크럼 — 마지막이 본 기록의 계층
+          const legal = pick(/법적지위\s+(\S{2,12})/);
+          const use = pick(/이용조건\s+이용유형\s+(.{2,40}?)\s+(?:이용주기|검색도구|공개|관련)/);
+          const useNote = pick(/이용주기\s+(.{5,160}?)\s+(?:검색도구|공개|관련)/);
+          const desc = pick(/상세정보\s+기술\s+([\s\S]{10,1500}?)\s+(?:생산이력|입수이력|보존이력|관련 기록|열람|공개된)/);
+          if (!sid && !title && !desc) return text(`상세 파싱 실패 — URL을 확인하거나 브라우저로 열람: ${q}`);
+          return text(`서울기록원 상세 — ${title || '(제목 미상)'}\n`
+            + [sid && `식별번호 ${sid}`, layer, legal && `법적지위 ${legal}`].filter(Boolean).join(' · ') + '\n'
+            + (use ? `이용조건: ${use}${useNote ? ` — ${useNote}` : ''}\n` : '')
+            + (desc ? `【기술】\n${desc}\n` : '') + `원문: ${q}\n`
+            + '※ 출처: 서울기록원 — 게재 시 출처 표기. 이용조건·법적지위를 judge_rights에 투입해 초판정.');
+        } catch (e) { return text(`서울기록원 상세 오류(${String(e && e.message || e).slice(0, 60)}) — 브라우저로 열람: ${q}`); }
+      }
       try {
-        const b = await gtext(land);
-        const cols = []; const re = /href="(\/catalog\/result\?[^"]*collects=[^"]*)"[^>]*>([\s\S]*?)<\/a>/g; let m;
-        while ((m = re.exec(b))) { const nm = dclean(m[2]); if (nm && nm.includes('컬렉션')) cols.push([nm, 'https://archives.seoul.go.kr' + m[1]]); }
-        if (cols.length) return text(`서울기록원 '${query}' — 매칭 컬렉션 ${cols.length}개:\n` + cols.slice(0, max_results).map(([n, u]) => `- ${n}\n  ${u}`).join('\n') + `\n전체 항목: ${deep}`);
-        return text(agentBrowse('서울기록원', query, deep, '매칭 컬렉션 미검출'));
-      } catch (e) { return text(agentBrowse('서울기록원', query, deep, `자동조회 실패(${e.message})`)); }
+        const items = await COLLECT.seoul(q, Math.min(max_results, 20));
+        if (items.length) return text(`서울기록원 '${q}' — ${items.length}건(시리즈·기록건):\n`
+          + items.map((it) => `- ${it.title}\n  ${it.url}`).join('\n')
+          + `\n전체 결과: ${deep}\n※ 상세 URL을 query로 재투입 → 식별번호·이용조건·기술 본문 판독.`);
+        return text(agentBrowse('서울기록원', q, deep, '기록 미검출'));
+      } catch (e) { return text(agentBrowse('서울기록원', q, deep, `자동조회 실패(${e.message})`)); }
     });
 
   server.tool('warmemo_search',
