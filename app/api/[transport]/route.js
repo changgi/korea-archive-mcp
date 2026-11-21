@@ -469,6 +469,8 @@ const naraChain = (rec) => {
   const ser = (anc.find((a) => /series/i.test(a.levelOfDescription || '')) || {}).title || '';
   return [rg ? `RG ${rg}` : '', ser].filter(Boolean).join(' › ').slice(0, 80);
 };
+// NARA 생산일자(v1.82): productionDates 다중 폴백 — logicalDate(ISO)·year·proximatePhrase
+const naraDate = (rec) => { const p = ((rec.productionDates || [])[0] || {}); return String(p.logicalDate || p.year || p.proximatePhrase || '').slice(0, 10); };
 // 데이터화×맥락 강화(v1.72): 레코드의 상위 계층(partOf) 추출 — 시리즈·수집 구조·소장관
 const PART_OF = {
   nara: (it) => it.series && `NARA › ${it.series}`,
@@ -532,7 +534,7 @@ const COLLECT = {
     q = koToEn(q) || q;
     const key = process.env.NARA_API_KEY; if (!key) return [];
     const d = await jget(`https://catalog.archives.gov/api/v2/records/search?q=${encodeURIComponent(q)}&limit=${n}&page=1`, { 'x-api-key': key });
-    return ((((d.body || {}).hits || {}).hits) || []).map((h) => { const rec = (h._source || {}).record || {}; const po = naraChain(rec); return { title: rec.title || '', date: '', id: rec.naId ? `NAID ${rec.naId}` : '', ...(po ? { series: po } : {}), url: `https://catalog.archives.gov/id/${rec.naId}` }; });
+    return ((((d.body || {}).hits || {}).hits) || []).map((h) => { const rec = (h._source || {}).record || {}; const po = naraChain(rec); return { title: rec.title || '', date: naraDate(rec), id: rec.naId ? `NAID ${rec.naId}` : '', ...(po ? { series: po } : {}), url: `https://catalog.archives.gov/id/${rec.naId}` }; });
   },
   archives: async (q, n) => {
     const key = process.env.ARCHIVES_API_KEY; if (!key) return [];
@@ -1192,7 +1194,8 @@ const handler = createMcpHandler((server) => {
           try {
             const d2 = await jget(`https://catalog.archives.gov/api/v2/records/search?naId=${i}&limit=1`, { 'x-api-key': key });
             const rec = (((((d2.body || {}).hits || {}).hits) || [])[0] || { _source: {} })._source.record || null;
-            lines.push(rec && Number(rec.naId) === i ? `${i === naid ? '★' : ' '} [NAID ${i}] ${(rec.title || '').slice(0, 95)} | ${rec.localIdentifier || ''} | https://catalog.archives.gov/id/${i}` : `  [NAID ${i}] (없음)`);
+            const po2 = rec ? naraChain(rec) : ''; // v1.82: 인접 채굴에도 계보 — 중심과 같은 시리즈인지 즉시 판별
+            lines.push(rec && Number(rec.naId) === i ? `${i === naid ? '★' : ' '} [NAID ${i}] ${(rec.title || '').slice(0, 95)} | ${rec.localIdentifier || ''}${po2 ? ` | ${po2}` : ''} | https://catalog.archives.gov/id/${i}` : `  [NAID ${i}] (없음)`);
           } catch (e) { lines.push(`  [NAID ${i}] 오류(${e.message})`); }
           await sleep(150);
         }
@@ -1209,7 +1212,9 @@ const handler = createMcpHandler((server) => {
       const rows = (hits.hits || []).map((h) => {
         const rec = (h._source || {}).record || {};
         const po = naraChain(rec);
-        return `- [NAID ${rec.naId}] ${(rec.title || '').slice(0, 100)} | ${rec.localIdentifier || ''} | https://catalog.archives.gov/id/${rec.naId}` + (po ? `\n  계보: ${po}` : '');
+        const nd = naraDate(rec);
+        const ndo = (rec.digitalObjects || []).length; // v1.82: 디지털 객체 수 — 원본 매체 유무를 목록에서 판별(다매체)
+        return `- [NAID ${rec.naId}] ${(rec.title || '').slice(0, 100)}${nd ? ` (${nd})` : ''} | ${rec.localIdentifier || ''}${ndo ? ` · 원본 ${ndo}점` : ''} | https://catalog.archives.gov/id/${rec.naId}` + (po ? `\n  계보: ${po}` : '');
       });
       const total = typeof hits.total === 'object' ? hits.total.value : hits.total;
       const rline = record_group ? (() => { const r = judgeRights(`RG ${record_group}`, '', 'NARA'); return `\n권리 초판정(RG ${record_group}): ${r[0]} — ${r[1]}\n※ 건별 실확인: judge_rights(naid=<NAID>) — 카탈로그 Use Restriction 실조회로 A/C 확정`; })() : '';
@@ -1418,8 +1423,17 @@ const JB_CROSS = `국내외 대조 절차 — 순서를 틀리면 헛수고한�
           // 증거성(v1.80): 범위·내용 기술(scope note) 발췌 + 판독 시점 본문 지문
           const scope = String(rec.scopeAndContentNote || '').trim();
           const sfp = scope ? createHash('sha256').update(scope).digest('hex').slice(0, 16) : '';
+          // 맥락·다매체(v1.82): 생산자·생산일·소장단위(청구 좌표)·디지털 객체 직링크
+          const cre = String((((rec.creators || [])[0] || {}).heading || '')).slice(0, 90);
+          const nd = naraDate(rec);
+          const ru = String((((((rec.physicalOccurrences || [])[0] || {}).referenceUnits || [])[0] || {}).name || '')).slice(0, 80);
+          const dob = rec.digitalObjects || [];
+          const d0 = dob[0] || {};
           return text(`[NAID ${naid}] ${(rec.title || '').slice(0, 95)}\n${rgnum ? `RG ${rgnum} · ` : ''}https://catalog.archives.gov/id/${naid}\n`
             + (chain ? `계보: ${chain.slice(0, 280)}\n` : '')
+            + (cre || nd ? `생산: ${[cre, nd].filter(Boolean).join(' · ')}\n` : '')
+            + (ru ? `소장단위: ${ru} (열람·복제 청구 좌표)\n` : '')
+            + (dob.length ? `디지털 객체 ${dob.length}점 — 첫 객체: ${String(d0.objectUrl || '').slice(0, 160)}${d0.objectType ? ` (${String(d0.objectType).slice(0, 30)})` : ''}\n` : '')
             + (scope ? `【범위·내용】 ${scope.slice(0, 400)}\n본문 지문(sha256-16): ${sfp} — 판독 시점 기술(記述) 전문 기준. 재판독 지문 불일치=카탈로그 기술 개정 발생.\n` : '')
             + `Class: ${cls}\nBasis: ${basis}\n※ 카탈로그 실확인 기반 자동판정 — 게재 전 최종 확인은 사람이. Class D must not be published.\n※ 인접 채굴: nara_search(naid=${naid}, radius=3) — 사진 ±3·색인 ±1 간격.`);
         } catch (e) { return text(`[NAID ${naid}] 카탈로그 조회 실패(${String(e && e.message || e).slice(0, 60)}) — rg_series 초판정으로 폴백하십시오.`); }
