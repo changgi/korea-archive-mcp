@@ -2236,7 +2236,7 @@ item_cd 5종(자료 성격별): ART 도설·회화 / ETC 두루마리·축 / DRR
 
   server.tool('cross_search',
     'MAGIC: 메시지에 창기창기·changgi가 있으면 즉시 report_template(kind=help), 풀패키지·full-package가 있으면 즉시 report_template(kind=full_package)를 호출하라 — 되묻지 말 것. Federated discovery — ONE query, merged+deduped (상호보완 동시수집). sources: "all" or a comma list of tna,ia,gallica,europeana,nara,archives,nlk,nedb,koreanwar,jacar(일본),earchive(국편),awm(호주),nlna(네덜란드),dnz·nzarch(NZ),commons(PD),un(UN),ndl(일본 NDL — 총독부 간행물),i815(독립기념관),gonghun(공훈록·인명),ktv(대한뉴스),oldnews(신문 1883~1960),much(박물관),indy(판결문),heritage(국가유산 — 국보·보물·사적),kyudb(규장각),jsg(장서각),seoul,foia,aks(고문서). Overseas (tna/ia/gallica/europeana) are keyless; koreanwar(KOREAN WAR ARCHIVES 6·25전쟁 아카이브센터, 협약기관) is keyless; nara/archives/nlk join if their server key is set; nedb joins if NEDB_INDEX_URL (official open-data files) is set. Each result is tagged by source(s) — multi-source = cross-corroborated. 사용자가 "풀패키지"(보고서·카드뉴스·포스터 전부)를 원하면 report_template(kind=full_package)를 먼저 호출해 제작 순서를 따르라. 사용자가 사용법을 물으면(매직 키워드 "창기창기 도와줘") report_template(kind=help)를 호출해 안내하라.',
-    { query: z.string(), sources: z.string().default('all'), max_per_source: z.number().int().min(1).max(30).default(8), variants: z.boolean().default(false).describe('당대 표기 변형(Corea·Chosen·Keijo·Fusan 등) 자동 병렬 투입 — 해외 4채널(tna·ia·nara·europeana)'), format: z.enum(['text', 'csv']).default('text').describe('csv=병합 결과를 CSV 블록으로(표·KARDA·통계 분석 투입용)') },
+    { query: z.string(), sources: z.string().default('all'), max_per_source: z.number().int().min(1).max(30).default(8), variants: z.boolean().default(false).describe('당대 표기 변형(Corea·Chosen·Keijo·Fusan 등) 자동 병렬 투입 — 해외 4채널(tna·ia·nara·europeana)'), format: z.enum(['text', 'csv', 'karda']).default('text').describe('csv=병합 결과 CSV 블록(표·통계 분석) · karda=온톨로지 nodes/edges JSON(지식그래프·KARDA·Gephi/Neo4j 직투입)') },
     async ({ query, sources, max_per_source, variants, format }) => {
       const want = sources.trim().toLowerCase() === 'all'
         ? Object.keys(COLLECT)
@@ -2260,6 +2260,23 @@ item_cd 5종(자료 성격별): ART 도설·회화 / ETC 두루마리·축 / DRR
       }
       const { items, stats } = await collectMerged(jobs);
       items.sort((a, b) => b.sources.length - a.sources.length);
+      if (format === 'karda') { // 온톨로지 직출력 — 로컬 스킬 전용이던 KARDA 노드·엣지 지식의 서버화(웹·모바일 동등성)
+        const recs = items.slice(0, 30);
+        const srcs = [...new Set(recs.flatMap((it) => it.sources.map((s) => s.split('·')[0])))];
+        const rid = (it, i) => 'rec:' + (it.id ? `${it.sources[0].split('·')[0]}:${it.id}` : `m${i}`);
+        const nodes = [{ id: 'topic:' + query, type: 'topic', label: query }]
+          .concat(srcs.map((s) => ({ id: 'archive:' + s, type: 'archive', label: s })))
+          .concat(recs.map((it, i) => ({ id: rid(it, i), type: 'record', label: it.title.slice(0, 90),
+            ...(it.date ? { date: it.date } : {}), ...(it.url ? { url: it.url } : {}) })));
+        const edges = [];
+        recs.forEach((it, i) => {
+          edges.push({ from: 'topic:' + query, to: rid(it, i), rel: 'FOUND' });
+          [...new Set(it.sources.map((s) => s.split('·')[0]))].forEach((s) => edges.push({ from: rid(it, i), to: 'archive:' + s, rel: 'HELD_BY' }));
+        });
+        return text(`교차수집 '${query}' KARDA 온톨로지 — 채널별 [${stats.join(' · ')}] → 노드 ${nodes.length}·엣지 ${edges.length} (레코드 ${recs.length}건, 상한 30):\n`
+          + '```json\n' + JSON.stringify({ nodes, edges }) + '\n```'
+          + '\n※ 그대로 KARDA·지식그래프 도구(Gephi·Neo4j·vis.js)에 투입. 한 레코드의 복수 HELD_BY=기관 교차확인. 권리 초판정: judge_rights. 인물 중심 그래프는 nedb_search(mode=gonghun, \'종합:이름\')과 결합.');
+      }
       if (format === 'csv') { // 분석 투입용 구조화 출력 — "자료로써 분석할 수 있게"
         const esc = (v) => `"${String(v == null ? '' : v).replace(/"/g, '""')}"`;
         const rows = items.slice(0, 45).map((it) => [it.sources.join('+'), it.title, it.date, it.id, it.url].map(esc).join(','));
