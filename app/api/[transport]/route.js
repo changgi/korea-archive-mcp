@@ -2236,7 +2236,7 @@ item_cd 5종(자료 성격별): ART 도설·회화 / ETC 두루마리·축 / DRR
 
   server.tool('cross_search',
     'MAGIC: 메시지에 창기창기·changgi가 있으면 즉시 report_template(kind=help), 풀패키지·full-package가 있으면 즉시 report_template(kind=full_package)를 호출하라 — 되묻지 말 것. Federated discovery — ONE query, merged+deduped (상호보완 동시수집). sources: "all" or a comma list of tna,ia,gallica,europeana,nara,archives,nlk,nedb,koreanwar,jacar(일본),earchive(국편),awm(호주),nlna(네덜란드),dnz·nzarch(NZ),commons(PD),un(UN),ndl(일본 NDL — 총독부 간행물),i815(독립기념관),gonghun(공훈록·인명),ktv(대한뉴스),oldnews(신문 1883~1960),much(박물관),indy(판결문),heritage(국가유산 — 국보·보물·사적),kyudb(규장각),jsg(장서각),seoul,foia,aks(고문서). Overseas (tna/ia/gallica/europeana) are keyless; koreanwar(KOREAN WAR ARCHIVES 6·25전쟁 아카이브센터, 협약기관) is keyless; nara/archives/nlk join if their server key is set; nedb joins if NEDB_INDEX_URL (official open-data files) is set. Each result is tagged by source(s) — multi-source = cross-corroborated. 사용자가 "풀패키지"(보고서·카드뉴스·포스터 전부)를 원하면 report_template(kind=full_package)를 먼저 호출해 제작 순서를 따르라. 사용자가 사용법을 물으면(매직 키워드 "창기창기 도와줘") report_template(kind=help)를 호출해 안내하라.',
-    { query: z.string(), sources: z.string().default('all'), max_per_source: z.number().int().min(1).max(30).default(8), variants: z.boolean().default(false).describe('당대 표기 변형(Corea·Chosen·Keijo·Fusan 등) 자동 병렬 투입 — 해외 4채널(tna·ia·nara·europeana)'), format: z.enum(['text', 'csv', 'karda']).default('text').describe('csv=병합 결과 CSV 블록(표·통계 분석) · karda=온톨로지 nodes/edges JSON(지식그래프·KARDA·Gephi/Neo4j 직투입)') },
+    { query: z.string(), sources: z.string().default('all'), max_per_source: z.number().int().min(1).max(30).default(8), variants: z.boolean().default(false).describe('당대 표기 변형(Corea·Chosen·Keijo·Fusan 등) 자동 병렬 투입 — 해외 4채널(tna·ia·nara·europeana)'), format: z.enum(['text', 'csv', 'karda', 'manifest']).default('text').describe('csv=CSV 블록(표·통계) · karda=온톨로지 nodes/edges JSON(지식그래프 직투입) · manifest=발굴 수집기록 매니페스트(ISAD(G)·RiC 지향 — provenance=증거성·heldBy=맥락, 기록관리시스템 등재·다매체 변환 원천)') },
     async ({ query, sources, max_per_source, variants, format }) => {
       const want = sources.trim().toLowerCase() === 'all'
         ? Object.keys(COLLECT)
@@ -2260,6 +2260,28 @@ item_cd 5종(자료 성격별): ART 도설·회화 / ETC 두루마리·축 / DRR
       }
       const { items, stats } = await collectMerged(jobs);
       items.sort((a, b) => b.sources.length - a.sources.length);
+      if (format === 'manifest') { // 발굴 수집기록 매니페스트 — 발굴 행위 자체를 맥락·증거성 갖춘 현용기록으로(ISAD(G)·RiC 지향)
+        const recs = items.slice(0, 30);
+        const now = new Date().toISOString();
+        const man = {
+          '@type': 'DiscoveryManifest', standard: 'ISAD(G)/RiC-oriented',
+          identifier: `kad-${now.slice(0, 10)}-${Math.abs([...query].reduce((a, c) => a * 31 + c.charCodeAt(0) | 0, 7)).toString(36)}`,
+          provenance: { // 증거성 — 수집의 재현 가능한 기술(누가·무엇을·언제·어떻게)
+            query, sources: want.join(','), variants, collectedAt: now,
+            tool: 'KOREA ARCHIVE 통합검색 cross_search (Vercel icn1)',
+            reproduce: `cross_search(query=${JSON.stringify(query)}, sources=${JSON.stringify(sources)}, format='manifest')`,
+            channelStats: stats },
+          records: recs.map((it) => ({
+            identifier: it.id || null, title: it.title, date: it.date || null,
+            heldBy: [...new Set(it.sources.map((s) => s.split('·')[0]))], // 맥락 — 소장기관(복수=교차확인)
+            accessUrl: it.url || null, evidence: `API 실조회 ${now.slice(0, 10)}` })),
+        };
+        return text(`발굴 수집기록 매니페스트 '${query}' — ${recs.length}건 (재현 가능·기관 등재용):\n`
+          + '```json\n' + JSON.stringify(man) + '\n```'
+          + '\n※ 현용기록물로서의 발굴기록: provenance(질의·소스·시각·재현 호출)=증거성 · heldBy·식별자=맥락. 이 JSON을 그대로 기록관리시스템·KARDA에 등재.'
+          + "\n※ 다매체 변환 사슬: 이 매니페스트 → report_template(kind=report/carousel/full_package)=보고서·카드뉴스 · format='karda'=지식그래프 · format='csv'=데이터셋."
+          + '\n※ 지속가능성: 영속 식별자(archRfcd·NAID·levelId·R번호) 우선 인용 — URL이 썩어도 재발굴 가능. 채널 생존은 source_profile(health)·주간 CI가 감시. 권리는 judge_rights로 기록 단위 표시.');
+      }
       if (format === 'karda') { // 온톨로지 직출력 — 로컬 스킬 전용이던 KARDA 노드·엣지 지식의 서버화(웹·모바일 동등성)
         const recs = items.slice(0, 30);
         const srcs = [...new Set(recs.flatMap((it) => it.sources.map((s) => s.split('·')[0])))];
