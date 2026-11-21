@@ -508,9 +508,8 @@ const COLLECT = {
   heritage: async (q, n) => { // 국가유산포털(국가유산청) OpenAPI — 무키 XML(이 작업망에선 차단·icn1 도달 확인). 국보·보물·사적 축
     const b = await gtext('https://www.khs.go.kr/cha/SearchKindOpenapiList.do?ccbaMnm1=' + encodeURIComponent(q) + '&pageUnit=' + Math.min(n, 15));
     const out = [];
-    if (!b.includes('<item')) return [{ title: '[진단] 응답 선두: ' + b.slice(0, 150).replace(/\s+/g, ' '), date: '', id: '', url: 'https://www.khs.go.kr' }]; // TODO 진단 후 제거
     for (const it of b.split('<item>').slice(1)) {
-      const g = (t) => ((it.match(new RegExp(`<${t}>([^<]*)<`)) || [])[1] || '').trim();
+      const g = (t) => xtag(it, t); // CDATA 래핑 대응(기존 xtag 재사용)
       const name = g('ccbaMnm1');
       if (!name) continue;
       const cpno = g('ccbaCpno');
@@ -518,6 +517,7 @@ const COLLECT = {
         date: '', id: cpno, url: cpno ? `https://www.heritage.go.kr/heri/cul/culSelectDetail.do?ccbaCpno=${cpno}` : 'https://www.heritage.go.kr' });
       if (out.length >= n) break;
     }
+    if (!out.length) return [{ title: '[진단] 파싱 0 — 응답 선두: ' + b.slice(0, 150).replace(/\s+/g, ' '), date: '', id: '', url: 'https://www.khs.go.kr' }]; // TODO 확인 후 제거
     return out;
   },
   indy: async (q, n) => { // 국가기록원 독립운동판결문 테마관 — GET 실측(2026-11-21). 판결기관·날짜·주문+상세 딥링크(gonghun 수형기록의 원문 창구)
