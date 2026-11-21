@@ -43,7 +43,7 @@ Vercel 원격 MCP 서버(Node `app/api/[transport]/route.js`, 리전 icn1) + 자
 3. 기록 단위 이용조건 실문구: earchive·서울기록원·koreanwar_item — judge_rights 투입 안내 자동 부착
 
 ## 자가 감시
-- `source_profile('health')`: 30채널 골든 질의 + 채널별 ms. 주간 GitHub Actions(health.yml) + retry-blocked(보류 복구 감지 — 인명사전·NZ 합류 실적) + nz-harvest(Archives NZ 주간 인덱스).
+- `source_profile('health')`: 30채널 골든 질의 + 채널별 ms. 주간 GitHub Actions(health.yml) + retry-blocked(보류 복구 감지 — 인명사전·NZ 합류 실적) + nz-harvest(Archives NZ 주간 인덱스). + fixity-watch(골든 7종 본문 지문 주간 대조 — 공개 원장 /fixity-ledger.json, 개정 이력 자동 축적).
 - CI(verify.yml): node --check · 도구 20종 · 설명 1024자 · 24KB 가드 · 3사본 패리티 · py_compile — 푸시마다.
 - 2026-11-21 전수 실측: 🟢 **28** · 🟡 nedb(인덱스 대기) · 🔴 기지 2(gallica BnF 403 · foia 리셋 — 6s fail-fast). 응답 중앙값 ~1.1s
 
