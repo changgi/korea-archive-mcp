@@ -32,7 +32,8 @@ jobs:
           probe "미국 LOC JSON" "https://www.loc.gov/search/?q=Korea&fo=json&c=2" '"results"'
           probe "호주 NAA RecordSearch" "https://recordsearch.naa.gov.au/SearchNRetrieve/Interface/SearchScreens/BasicSearch.aspx" "RecordSearch"
           # Archives NZ: v1.58 합류 완료(nz-probe 10차 역공학 — federated-search 공개 API 발견) → 목록 제외.
-          probe "뉴질랜드 Papers Past" "https://paperspast.natlib.govt.nz/newspapers" "Papers Past"
+          # Papers Past: v1.57부터 DigitalNZ 집계 API(dnz)로 우회 복구됨(18,725건) — 직접 API가 열리면 업그레이드.
+          probe "뉴질랜드 Papers Past(직접 — dnz 우회 중)" "https://paperspast.natlib.govt.nz/newspapers" "Papers Past"
           probe "캐나다 LAC" "https://recherche-collection-search.bac-lac.gc.ca/eng/Home/Search?q=Korea" "Library and Archives Canada"
           probe "UN Archives AtoM" "https://search.archives.un.org/informationobject/browse?query=Korea" "search-result"
           if [ $recovered -eq 1 ]; then

@@ -598,7 +598,8 @@ const COLLECT = {
     } catch { // 간헐 Incapsula(클라우드 IP 신뢰점수) — GH 주간 수확 정적 인덱스 폴백(자체 도메인)
       const ix = await cachedText('nzIdx', 6 * 3600e3, () => gtext('https://korea-archive-mcp.vercel.app/nz-index.json'), '"records"');
       const j = JSON.parse(ix); const ql = en.toLowerCase();
-      return (j.records || []).filter((r) => String(r.title || '').toLowerCase().includes(ql)).slice(0, n)
+      // R번호(id) 질의도 매칭 — 라이브 차단 중 'R17717658' 재조회가 0건이 되지 않게(실측 교훈)
+      return (j.records || []).filter((r) => String(r.title || '').toLowerCase().includes(ql) || String(r.id || '').toLowerCase() === ql).slice(0, n)
         .map((r) => ({ title: `${String(r.title).slice(0, 86)}${r.access ? ` [${r.access}]` : ''} ·주간인덱스`,
           date: String(r.date || ''), id: String(r.id || ''),
           url: `https://collections.archives.govt.nz/web/arena/search#/entity/aims-archive/${r.id}` }));
