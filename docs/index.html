@@ -3,186 +3,412 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>KOREA ARCHIVE 통합검색 — 30개 문서고 연합 발굴 MCP</title>
-<meta name="description" content="한국 관련 기록을 9개국 30개 문서고에서 한국어 한 번의 질의로 발굴하고, 발굴 자체를 현용기록물로 만드는 원격 MCP 서버.">
+<title>KOREA ARCHIVE 통합검색 — 전 세계 문서고의 한국 기록을 한국어 한 문장으로</title>
+<meta name="description" content="미국·영국·프랑스·일본 등 9개국 30개 문서고에서 한국 관련 기록을 한국어 한 문장으로 찾고, 원문·출처·이용 권리까지 정리해 주는 무료 AI 도구.">
 <style>
 :root{
-  --bg:#0d1117; --panel:#161b22; --line:#30363d; --ink:#e6edf3; --sub:#8b949e;
-  --gold:#d4a72c; --blue:#58a6ff; --green:#3fb950; --purple:#bc8cff;
-  --serif:'Noto Serif KR',"Nanum Myeongjo",serif; --sans:'Pretendard','Apple SD Gothic Neo','Noto Sans KR',sans-serif;
+  --paper:#fbfaf7; --card:#ffffff; --ink:#1c1f24; --body:#3a3f47; --muted:#6a707a; --line:#e6e2d9;
+  --accent:#8a5a14; --accent-bg:#f6ecd9; --blue:#1d5fbf; --blue-bg:#e8f0fc; --green:#1f7a3d; --green-bg:#e5f4ea;
+  --serif:'Noto Serif KR','Nanum Myeongjo','AppleMyungjo',serif;
+  --sans:'Pretendard','Apple SD Gothic Neo','Noto Sans KR','Malgun Gothic',sans-serif;
+  --mono:'D2Coding','SFMono-Regular',Consolas,monospace;
 }
 *{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.65}
-a{color:var(--blue);text-decoration:none}a:hover{text-decoration:underline}
-.wrap{max-width:980px;margin:0 auto;padding:0 20px}
-header{padding:72px 0 48px;text-align:center;border-bottom:1px solid var(--line);
-  background:radial-gradient(ellipse 70% 60% at 50% 0%,#1a2333 0%,var(--bg) 70%)}
-.eyebrow{letter-spacing:.35em;color:var(--gold);font-size:.78rem;font-weight:700}
-h1{font-family:var(--serif);font-size:clamp(1.9rem,5vw,3rem);margin:14px 0 6px;font-weight:900}
-.tag{color:var(--sub);font-size:1.02rem;max-width:640px;margin:10px auto 0}
-.tag b{color:var(--ink)}
-.cta{margin-top:30px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
-.btn{display:inline-block;padding:11px 22px;border-radius:8px;font-weight:700;font-size:.92rem;border:1px solid var(--line)}
-.btn.primary{background:var(--gold);color:#1a1200;border-color:var(--gold)}
-.btn.primary:hover{filter:brightness(1.1);text-decoration:none}
-.btn.ghost:hover{border-color:var(--sub);text-decoration:none}
-.stats{display:flex;gap:0;justify-content:center;flex-wrap:wrap;margin-top:40px}
-.stat{padding:8px 28px;border-left:1px solid var(--line);text-align:center}
-.stat:first-child{border-left:0}
-.stat b{display:block;font-family:var(--serif);font-size:1.7rem;color:var(--gold)}
-.stat span{color:var(--sub);font-size:.8rem}
-section{padding:52px 0;border-bottom:1px solid var(--line)}
-h2{font-family:var(--serif);font-size:1.45rem;margin-bottom:8px}
-h2 .n{color:var(--gold);margin-right:10px}
-.lead{color:var(--sub);margin-bottom:26px;max-width:720px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px}
-.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:18px 20px}
-.card h3{font-size:1rem;margin-bottom:6px}
-.card h3 .dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:8px}
-.card p{color:var(--sub);font-size:.88rem}
-.card code{background:#0d1117;border:1px solid var(--line);border-radius:5px;padding:1px 6px;font-size:.82em;color:var(--purple)}
-.chain{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:22px;display:grid;gap:0}
-.step{display:grid;grid-template-columns:86px 1fr;gap:16px;padding:13px 4px;border-top:1px dashed var(--line)}
-.step:first-child{border-top:0}
-.step b{font-family:var(--serif);color:var(--gold)}
-.step div{color:var(--sub);font-size:.9rem}
-.step div strong{color:var(--ink);font-weight:600}
-.connect{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:22px}
-.connect pre{background:#0d1117;border:1px solid var(--line);border-radius:8px;padding:14px 16px;overflow-x:auto;
-  font-size:.85rem;color:var(--green);margin:12px 0}
-.kbd{color:var(--gold);font-weight:700}
-.flags{font-size:1.3rem;letter-spacing:.18em;margin:8px 0 2px}
-.src-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
-.chip{background:#0d1117;border:1px solid var(--line);border-radius:999px;padding:4px 13px;font-size:.78rem;color:var(--sub)}
-.chip b{color:var(--ink);font-weight:600}
-footer{padding:40px 0 60px;text-align:center;color:var(--sub);font-size:.82rem}
-footer .sep{margin:0 8px;color:var(--line)}
-.notice{border-left:3px solid var(--gold);padding:10px 16px;background:var(--panel);border-radius:0 8px 8px 0;
-  color:var(--sub);font-size:.88rem;margin-top:22px}
-.notice b{color:var(--ink)}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+body{background:var(--paper);color:var(--body);font-family:var(--sans);font-size:18px;line-height:1.75;word-break:keep-all}
+a{color:var(--blue)}
+.wrap{max-width:1040px;margin:0 auto;padding:0 24px}
+.narrow{max-width:760px}
+
+/* 상단 메뉴 */
+nav{position:sticky;top:0;z-index:10;background:rgba(251,250,247,.94);backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:60px;gap:16px}
+nav .logo{font-weight:800;color:var(--ink);text-decoration:none;font-size:1rem;white-space:nowrap}
+nav .links{display:flex;gap:22px;font-size:.92rem;overflow-x:auto}
+nav .links a{color:var(--body);text-decoration:none;white-space:nowrap}
+nav .links a:hover{color:var(--accent)}
+
+/* 첫 화면 */
+.hero{padding:88px 0 72px;text-align:center}
+.pill{display:inline-block;background:var(--accent-bg);color:var(--accent);font-weight:700;font-size:.85rem;padding:6px 16px;border-radius:999px}
+.hero h1{font-family:var(--serif);color:var(--ink);font-size:clamp(2rem,5.4vw,3.4rem);line-height:1.3;margin:22px 0 18px;font-weight:900}
+.hero h1 em{font-style:normal;color:var(--accent)}
+.hero p.sub{font-size:1.15rem;max-width:640px;margin:0 auto;color:var(--body)}
+.buttons{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:34px}
+.btn{display:inline-block;padding:14px 26px;border-radius:10px;font-weight:700;font-size:1rem;text-decoration:none;border:2px solid var(--ink)}
+.btn.main{background:var(--ink);color:#fff}
+.btn.sub{background:transparent;color:var(--ink)}
+.btn:hover{transform:translateY(-1px)}
+.facts{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-top:40px}
+.facts span{background:var(--card);border:1px solid var(--line);border-radius:999px;padding:8px 18px;font-size:.92rem;color:var(--ink)}
+.facts b{color:var(--accent)}
+
+/* 공통 섹션 */
+section{padding:80px 0;border-top:1px solid var(--line)}
+section.tint{background:#f4f1ea}
+.kicker{color:var(--accent);font-weight:800;font-size:.85rem;letter-spacing:.12em}
+h2{font-family:var(--serif);color:var(--ink);font-size:clamp(1.6rem,3.6vw,2.2rem);line-height:1.35;margin:8px 0 16px;font-weight:800}
+.intro{font-size:1.08rem;max-width:720px;margin-bottom:40px}
+
+/* 문제 제시 */
+.compare{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px,100%),1fr));gap:20px}
+.box{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:28px}
+.box h3{color:var(--ink);font-size:1.15rem;margin-bottom:10px}
+.terms{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.term{font-family:var(--mono);font-size:.9rem;padding:4px 12px;border-radius:8px}
+.term.no{background:#fbe9e7;color:#a1291b;text-decoration:line-through}
+.term.yes{background:var(--green-bg);color:var(--green);font-weight:700}
+
+/* 대화 예시 */
+.chats{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(440px,100%),1fr));gap:24px}
+.chat{min-width:0;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:26px;display:flex;flex-direction:column;gap:14px}
+.chat .label{font-size:.8rem;font-weight:800;color:var(--muted);letter-spacing:.08em}
+.say{align-self:flex-start;background:var(--blue-bg);color:#123b78;font-weight:700;padding:12px 18px;border-radius:16px 16px 16px 4px;font-size:1.02rem}
+.get{font-size:.98rem}
+.get b{color:var(--ink)}
+.out{background:#1c1f24;color:#e9e4d8;font-family:var(--mono);font-size:.84rem;line-height:1.65;padding:14px 16px;border-radius:10px;white-space:pre-wrap;overflow-wrap:anywhere}
+.out .hl{color:#f0c674}
+
+/* 시작하기 */
+.steps{display:grid;gap:18px;max-width:760px}
+.step{display:grid;grid-template-columns:56px 1fr;gap:18px;align-items:start;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px}
+.num{width:44px;height:44px;border-radius:50%;background:var(--ink);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1.1rem}
+.step h3{color:var(--ink);font-size:1.1rem;margin-bottom:4px}
+.copy{display:flex;align-items:center;gap:10px;margin-top:10px;flex-wrap:wrap}
+.copy code{font-family:var(--mono);font-size:.92rem;background:#f1eee6;border:1px solid var(--line);padding:8px 12px;border-radius:8px;color:var(--ink);word-break:break-all}
+.copy button{font:inherit;font-size:.88rem;font-weight:700;padding:8px 14px;border-radius:8px;border:1px solid var(--ink);background:var(--card);cursor:pointer}
+.alt{font-size:.92rem;color:var(--muted);margin-top:18px}
+
+/* 기관 */
+.regions{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(230px,100%),1fr));gap:16px}
+.region{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px}
+.region .flag{font-size:1.7rem;line-height:1}
+.region h3{color:var(--ink);font-size:1.02rem;margin:8px 0 4px}
+.region p{font-size:.92rem;color:var(--body);line-height:1.6}
+.region.home{grid-column:1/-1;background:var(--accent-bg);border-color:#ead7b4}
+
+/* 기능 */
+.features{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px,100%),1fr));gap:20px}
+.feat{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:26px}
+.feat .ic{font-size:2rem;line-height:1}
+.feat h3{color:var(--ink);font-size:1.15rem;margin:12px 0 8px}
+.feat p{font-size:.98rem}
+.feat .ex{margin-top:12px;font-size:.9rem;background:#f6f4ee;border-radius:10px;padding:10px 14px;color:var(--body)}
+.feat .ex b{color:var(--accent)}
+
+/* 받는 형태 */
+.formats{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(260px,100%),1fr));gap:18px}
+.fmt{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:24px;text-align:center}
+.fmt .ic{font-size:2.4rem}
+.fmt h3{color:var(--ink);margin:10px 0 6px;font-size:1.1rem}
+.fmt p{font-size:.95rem}
+
+/* 신뢰 */
+.trust{display:grid;gap:14px;max-width:780px}
+.trust li{list-style:none;background:var(--card);border:1px solid var(--line);border-left:5px solid var(--green);border-radius:10px;padding:16px 20px}
+.trust b{color:var(--ink)}
+
+/* 용어·질문 */
+details{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:0;margin-bottom:12px;max-width:820px}
+summary{cursor:pointer;padding:18px 22px;font-weight:700;color:var(--ink);list-style:none;position:relative}
+summary::-webkit-details-marker{display:none}
+summary::after{content:'＋';position:absolute;right:22px;color:var(--muted)}
+details[open] summary::after{content:'－'}
+details .ans{padding:0 22px 20px;font-size:.98rem}
+dl{display:grid;grid-template-columns:150px 1fr;gap:0;max-width:820px;background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+dt,dd{padding:15px 20px;border-bottom:1px solid var(--line)}
+dt{font-weight:800;color:var(--ink);background:#f6f4ee}
+dd{font-size:.97rem}
+dl>*:nth-last-child(-n+2){border-bottom:0}
+
+/* 마지막 안내 */
+.final{text-align:center}
+.final p{font-size:1.1rem;margin:0 auto 30px;max-width:600px}
+footer{padding:44px 0 60px;text-align:center;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);line-height:1.9}
+
+@media (max-width:560px){
+  body{font-size:17px}
+  .chats{grid-template-columns:1fr}
+  dl{grid-template-columns:1fr}
+  dt{border-bottom:0;padding-bottom:4px}
+  nav .links{display:none}
+  .step{grid-template-columns:1fr}
+}
 </style>
 </head>
 <body>
 
-<header>
+<nav>
   <div class="wrap">
-    <div class="eyebrow">KOREA ARCHIVE 통합검색</div>
-    <h1>아홉 나라 서른 문서고,<br>한국어 한 번의 질의</h1>
-    <p class="tag">한국 관련 기록(1860~현대)을 <b>30개 아카이브</b>에서 동시에 발굴하고,
-    발굴 자체를 <b>맥락·증거성을 갖춘 현용기록물</b>로 만들어 전파하는 원격 MCP 서버.</p>
-    <div class="cta">
-      <a class="btn primary" href="https://korea-archive-mcp.vercel.app/help.html">사용 안내 보기</a>
-      <a class="btn ghost" href="https://korea-archive-mcp.vercel.app/ingitda.html">기록잇다 — 즉석 연합검색</a>
-      <a class="btn ghost" href="https://github.com/changgi/korea-archive-mcp">GitHub 저장소</a>
+    <a class="logo" href="#top">🏛️ KOREA ARCHIVE 통합검색</a>
+    <div class="links">
+      <a href="#examples">이렇게 써요</a>
+      <a href="#start">시작하기</a>
+      <a href="#where">찾는 곳</a>
+      <a href="#features">기능</a>
+      <a href="#faq">자주 묻는 질문</a>
     </div>
-    <div class="stats">
-      <div class="stat"><b>30</b><span>연합 문서고 · 9개국</span></div>
-      <div class="stat"><b>20</b><span>MCP 도구 (PlayMCP 준수)</span></div>
-      <div class="stat"><b>28/30</b><span>partOf 계층 채널</span></div>
-      <div class="stat"><b>14</b><span>심층 판독 채널</span></div>
-      <div class="stat"><b>8</b><span>골든 지문 · 주간 감시</span></div>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="wrap">
+    <span class="pill">설치 없이 · 무료 · AI 비서에 연결해서 쓰는 도구</span>
+    <h1>전 세계 문서고에 흩어진<br><em>한국의 기록</em>을<br>한국어 한 문장으로 찾습니다</h1>
+    <p class="sub">미국·영국·프랑스·일본 등 <b>9개국 30곳</b>의 문서고를 동시에 찾고,
+    찾은 기록의 <b>원문·출처·이용 권리</b>까지 정리해 드립니다.</p>
+    <div class="buttons">
+      <a class="btn main" href="#start">3분 만에 시작하기</a>
+      <a class="btn sub" href="#examples">어떻게 쓰는지 보기</a>
+    </div>
+    <div class="facts">
+      <span>🌏 문서고 <b>30곳</b></span>
+      <span>📖 원문까지 읽는 곳 <b>14곳</b></span>
+      <span>🤝 6·25전쟁 아카이브센터 <b>협약</b></span>
     </div>
   </div>
 </header>
 
-<section>
+<section class="tint">
   <div class="wrap">
-    <h2><span class="n">01</span>연결은 URL 하나</h2>
-    <p class="lead">설치 없이 커넥터 주소만 추가하면 웹·모바일·데스크톱 어디서든 같은 기능을 씁니다.</p>
-    <div class="connect">
-      <b>Claude</b> — 설정 → 커넥터 → 커스텀 커넥터 추가
-      <pre>https://korea-archive-mcp.vercel.app/api/mcp</pre>
-      <b>Claude Code</b>
-      <pre>claude mcp add --transport http korea-archive https://korea-archive-mcp.vercel.app/api/mcp</pre>
-      매직 키워드 — <span class="kbd">"○○ 풀패키지로 만들어줘"</span> (조사→보고서→카드뉴스→보존 패키지까지 산출물 12종)
-      · <span class="kbd">"창기창기 도와줘"</span> (처음 사용자 안내)
+    <div class="kicker">왜 필요한가요</div>
+    <h2>오늘의 단어로는<br>그 시대 기록을 찾을 수 없습니다</h2>
+    <p class="intro">한국 관련 기록은 전 세계 문서고에 수백만 건이 있지만, 일반 검색으로는 대부분 보이지 않습니다.
+    이 도구는 두 가지 벽을 대신 넘어 줍니다.</p>
+    <div class="compare">
+      <div class="box">
+        <h3>① 기록은 그 시대의 말로 적혀 있습니다</h3>
+        <p>1910~45년 기록에서 서울은 "Seoul"이 아니었습니다. 지금 이름으로 검색하면 대부분을 놓칩니다.</p>
+        <div class="terms">
+          <span class="term no">Seoul</span><span class="term yes">Keijo</span>
+          <span class="term no">Busan</span><span class="term yes">Fusan</span>
+          <span class="term no">Korea</span><span class="term yes">Chosen · Corea</span>
+        </div>
+      </div>
+      <div class="box">
+        <h3>② 나라마다 언어와 검색법이 다릅니다</h3>
+        <p>같은 "장진호"도 문서고마다 다르게 적혀 있습니다. 이 도구가 알아서 바꿔 찾습니다.</p>
+        <div class="terms">
+          <span class="term yes">🇺🇸 Chosin Reservoir</span>
+          <span class="term yes">🇯🇵 長津湖</span>
+          <span class="term yes">🇰🇷 장진호</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="examples">
+  <div class="wrap">
+    <div class="kicker">이렇게 써요</div>
+    <h2>평소 말투로 부탁하면 됩니다</h2>
+    <p class="intro">아래는 모두 <b>실제로 돌려 본 결과</b>입니다. 결과 상자는 도구가 돌려준 응답의 일부입니다.</p>
+    <div class="chats">
+
+      <div class="chat">
+        <span class="label">여러 나라를 한 번에</span>
+        <div class="say">"장진호 전투 기록 찾아줘"</div>
+        <p class="get">"장진호"를 <b>Chosin Reservoir</b>로 바꿔 미국 국립기록관리청에서만 <b>512건</b>을 찾고,
+        다른 문서고 결과와 합쳐 보여 줍니다. 여러 곳에서 나온 기록은 <b>교차확인</b>으로 표시됩니다.</p>
+        <div class="out">NARA '장진호' → 영문 자동 변환 <span class="hl">'Chosin Reservoir'</span> — total 512
+- Fifth Marine Regiment Gets Into Hills and Cold Weather
+  Around Chosin Reservoir <span class="hl">(1950-11-02)</span> · 원본 2점
+  계보: RG 127 › General Photograph File of the U.S. Marine Corps</div>
+      </div>
+
+      <div class="chat">
+        <span class="label">당시 신문 찾기</span>
+        <div class="say">"안중근 의거 당시 신문 기사 찾아줘"</div>
+        <p class="get">신문 이름·날짜에 <b>몇 면 몇 단</b>까지 붙여 줍니다. 논문 각주에 그대로 옮길 수 있습니다.</p>
+        <div class="out">- 안중근소식 — 대한매일신보 <span class="hl">[3면 3단]</span> (19091109)
+- 안중근소식 — 대한매일신보 <span class="hl">[2면 2단]</span> (19091211)
+- 안중근변호 — 대한매일신보 <span class="hl">[2면 2단]</span> (19091211)</div>
+      </div>
+
+      <div class="chat">
+        <span class="label">이 사진, 써도 될까?</span>
+        <div class="say">"이 미국 기록 사진 써도 되는지 확인해줘"</div>
+        <p class="get">미국 국립기록관리청 목록을 직접 조회해 <b>권리 등급, 촬영일, 실물 위치, 원본 파일</b>을 알려 줍니다.</p>
+        <div class="out">Class: <span class="hl">A</span> — Use Restriction 'Unrestricted' 실확인
+생산: 1950-11-02
+소장단위: National Archives at College Park - Still Pictures
+디지털 객체 2점 — 원본 JPG 직링크</div>
+      </div>
+
+      <div class="chat">
+        <span class="label">하나 찾으면 옆도 훑기</span>
+        <div class="say">"인천상륙작전 영상, 같은 묶음 더 찾아줘"</div>
+        <p class="get">한 건의 기록 번호 앞뒤를 자동으로 확인해 <b>D-DAY 연속 필름 5편</b>을 한 번에 찾았습니다.</p>
+        <div class="out">  [22013] WAR-LOADING LSTs, KOBE ; WAR INVASION AT INCHON, D-DAY
+  [22014] BEACH LANDING ON WOLMI-DO (INCHON), KOREA D-DAY
+<span class="hl">★</span> [22015] WOLMI-DO IS & INCHON ; MACARTHUR LANDING IN INCHON
+  [22016] RALLY OF S KOREAN POLITICAL PARTY, PUSAN …
+  [22017] INCHON ; MACARTHUR GOES ASHORE, INCHON</div>
+      </div>
+
+      <div class="chat">
+        <span class="label">인물 기록 모아 보기</span>
+        <div class="say">"유관순 공훈록 보여줘"</div>
+        <p class="get">공훈전자사료관에서 <b>공적조서·공훈록 전문·수형 기록·묘소·현충시설</b>을 한 번에 가져옵니다.
+        "종합 정리해줘"라고 하면 독립운동인명사전·판결문과 함께 대조해 줍니다.</p>
+      </div>
+
+      <div class="chat">
+        <span class="label">결과물까지 한 번에</span>
+        <div class="say">"장진호 풀패키지로 만들어줘"</div>
+        <p class="get">조사를 마친 뒤 <b>잡지형 보고서, 카드뉴스 8장, 포스터, 발표 자료</b>까지 이어서 만듭니다.
+        결과물에는 실제 기록과 출처만 들어갑니다.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="tint" id="start">
+  <div class="wrap">
+    <div class="kicker">시작하기</div>
+    <h2>설치할 것은 없습니다. 주소 하나면 됩니다</h2>
+    <p class="intro">Claude(AI 비서)를 기준으로 설명합니다. 웹·스마트폰 앱 모두 같습니다.</p>
+    <div class="steps">
+      <div class="step"><div class="num">1</div><div>
+        <h3>Claude 설정에서 커넥터 메뉴를 엽니다</h3>
+        <p>설정 → <b>커넥터</b> → <b>커스텀 커넥터 추가</b></p></div></div>
+      <div class="step"><div class="num">2</div><div>
+        <h3>아래 주소를 붙여 넣습니다</h3>
+        <div class="copy"><code id="url">https://korea-archive-mcp.vercel.app/api/mcp</code>
+          <button type="button" onclick="navigator.clipboard.writeText(document.getElementById('url').textContent);this.textContent='복사됨 ✓'">주소 복사</button></div></div></div>
+      <div class="step"><div class="num">3</div><div>
+        <h3>대화창에 이렇게 말해 보세요</h3>
+        <p><b>"창기창기 도와줘"</b>라고 하면 사용법을 친절하게 안내합니다. 바로 <b>"○○ 기록 찾아줘"</b>라고 해도 됩니다.</p></div></div>
+    </div>
+    <p class="alt">카카오 PlayMCP에서는 "KOREA ARCHIVE 통합검색"을 검색해 연결합니다.
+    Claude Code(개발자용)는 <code>claude mcp add --transport http korea-archive https://korea-archive-mcp.vercel.app/api/mcp</code></p>
+  </div>
+</section>
+
+<section id="where">
+  <div class="wrap">
+    <div class="kicker">찾는 곳</div>
+    <h2>9개국 30곳을 동시에 찾습니다</h2>
+    <p class="intro">한 번 물으면 아래 기관을 한꺼번에 찾아 결과를 합쳐 드립니다.</p>
+    <div class="regions">
+      <div class="region"><div class="flag">🇺🇸</div><h3>미국</h3><p>국립기록관리청(NARA) · 인터넷 아카이브</p></div>
+      <div class="region"><div class="flag">🇬🇧</div><h3>영국</h3><p>국립기록관(TNA)</p></div>
+      <div class="region"><div class="flag">🇫🇷</div><h3>프랑스</h3><p>국립도서관(Gallica)</p></div>
+      <div class="region"><div class="flag">🇪🇺</div><h3>유럽 전역</h3><p>유로피아나 — 유럽 4,000여 기관 통합</p></div>
+      <div class="region"><div class="flag">🇳🇱</div><h3>네덜란드</h3><p>국립문서보관소</p></div>
+      <div class="region"><div class="flag">🇯🇵</div><h3>일본</h3><p>아시아역사자료센터 · 국립국회도서관</p></div>
+      <div class="region"><div class="flag">🇦🇺</div><h3>호주</h3><p>전쟁기념관</p></div>
+      <div class="region"><div class="flag">🇳🇿</div><h3>뉴질랜드</h3><p>국립기록원 · 디지털NZ</p></div>
+      <div class="region"><div class="flag">🌐</div><h3>국제</h3><p>UN 디지털도서관 · 위키미디어 공용(저작권 만료 사진)</p></div>
+      <div class="region home"><div class="flag">🇰🇷</div><h3>한국</h3>
+        <p><b>6·25전쟁 아카이브센터(협약기관)</b> · 국가기록원 · 국립중앙도서관 · 대한민국신문아카이브 · 서울기록원 ·
+        국사편찬위원회 · 공훈전자사료관 · 독립기념관 · 독립운동판결문 · 국가유산포털 · 대한민국역사박물관 ·
+        KTV 영상역사관 · 장서각 · 규장각 · 한국고문서자료관 · 정보공개포털</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="tint" id="features">
+  <div class="wrap">
+    <div class="kicker">핵심 기능</div>
+    <h2>찾기만 하는 게 아니라, 읽고 확인하고 정리합니다</h2>
+    <div class="features">
+      <div class="feat"><div class="ic">🌐</div><h3>우리말로 묻고, 그 나라 말로 찾기</h3>
+        <p>한국어 질문을 각 문서고의 언어로 자동으로 바꿉니다.</p>
+        <div class="ex">병인양요 → <b>expédition de Corée 1866</b> (프랑스)</div></div>
+      <div class="feat"><div class="ic">🕰️</div><h3>그 시대 이름으로도 찾기</h3>
+        <p>옛 지명·옛 국호로 적힌 기록까지 함께 찾습니다.</p>
+        <div class="ex">인천 → <b>Chemulpo</b> · 한국 → <b>Chosen</b></div></div>
+      <div class="feat"><div class="ic">✅</div><h3>여러 곳에서 확인된 기록 표시</h3>
+        <p>같은 기록이 두 문서고 이상에서 나오면 교차확인으로 표시해, 믿을 만한 기록부터 고를 수 있습니다.</p></div>
+      <div class="feat"><div class="ic">📖</div><h3>원문까지 읽기</h3>
+        <p>목록에서 끝나지 않고 본문을 가져옵니다. 공훈록, 판결문, 고문헌 해제, 국가유산 해설, 옛 신문, UN 문서 등 14곳.</p></div>
+      <div class="feat"><div class="ic">🔍</div><h3>하나 찾으면 옆 번호도</h3>
+        <p>기록은 번호가 이어진 묶음으로 보관됩니다. 앞뒤 번호를 훑어 같은 묶음을 찾아냅니다.</p></div>
+      <div class="feat"><div class="ic">⚖️</div><h3>써도 되는지 등급 표시</h3>
+        <p>A(자유 이용)~D(이용 불가)로 표시합니다. 공공누리 유형을 자동으로 읽고, 미국 기록은 이용 제한 항목을 직접 조회합니다.
+        찾는 것은 막지 않고 표시만 합니다.</p></div>
     </div>
   </div>
 </section>
 
 <section>
   <div class="wrap">
-    <h2><span class="n">02</span>연합 검색망</h2>
-    <p class="lead">한국어 질의는 각 문서고의 색인 언어로 자동 변환됩니다(장진호→Chosin Reservoir·長津湖, 병인양요→expédition de Corée).
-    복수 문서고가 같은 기록을 내면 <b>교차확인</b>으로 표시합니다.</p>
-    <div class="flags">🇺🇸 🇬🇧 🇫🇷 🇪🇺 🇳🇱 🇯🇵 🇦🇺 🇳🇿 🇰🇷 🌐</div>
-    <div class="src-row">
-      <span class="chip"><b>NARA</b> 미국 국립기록관리청 — 계보·소장단위·원본 직링크(최심도)</span>
-      <span class="chip"><b>TNA</b> 영국국립기록관</span>
-      <span class="chip"><b>Gallica</b> 프랑스국립도서관</span>
-      <span class="chip"><b>Europeana</b></span>
-      <span class="chip"><b>JACAR</b>·<b>NDL</b> 일본</span>
-      <span class="chip"><b>AWM</b> 호주전쟁기념관</span>
-      <span class="chip"><b>Archives NZ</b> · DigitalNZ</span>
-      <span class="chip"><b>Nationaal Archief</b> 네덜란드</span>
-      <span class="chip"><b>UN</b> Digital Library</span>
-      <span class="chip"><b>Wikimedia Commons</b> PD 원본</span>
-      <span class="chip"><b>Internet Archive</b></span>
-      <span class="chip">🤝 <b>KOREAN WAR ARCHIVES 6·25전쟁 아카이브센터</b> (MOU 협약기관)</span>
-      <span class="chip">국가기록원 · 국립중앙도서관 · 서울기록원 · 한국사DB · 전자사료관</span>
-      <span class="chip">공훈전자사료관 · 독립기념관(+인명사전) · 독립운동판결문</span>
-      <span class="chip">신문아카이브(면·단) · 국가유산포털 · 역사박물관 · KTV · 장서각 · 규장각 · 고문서자료관 · 정보공개포털</span>
-    </div>
-    <div class="notice"><b>발굴 우선 원칙</b> — 권리·접근 제약은 발굴을 막는 사유가 아니라 표시 대상입니다.
-    결과마다 권리 상태를 표시하고(KOGL 1~4유형 · NARA Use Restriction 실조회), 게재 단계에서 사람이 최종 확정합니다.</div>
-  </div>
-</section>
-
-<section>
-  <div class="wrap">
-    <h2><span class="n">03</span>발굴이 기록이 됩니다 — 현용기록물화 사슬</h2>
-    <p class="lead">검색 결과를 흘려보내지 않습니다. 발굴 행위 자체가 표준 지향 기록이 되어 변환·전파·검증됩니다.</p>
-    <div class="chain">
-      <div class="step"><b>생산</b><div>JSON-LD 수집기록 매니페스트(ISAD(G)·RiC 지향) — <strong>재현 호출문·채널 통계</strong>가 증거성,
-        기관 정식명·영속 식별자·<strong>상위 계층(partOf 28채널)</strong>이 맥락</div></div>
-      <div class="step"><b>데이터화</b><div>CSV(partOf·media 열)·지식그래프(series 노드·PART_OF 엣지)·매니페스트가
-        <strong>같은 node 키</strong>를 공유 — 스프레드시트·Gephi·Neo4j·KARDA 직투입</div></div>
-      <div class="step"><b>전파</b><div>보고서·카드뉴스·포스터가 매니페스트를 부록으로 상속하고,
-        이미지도 <strong>media 직링크</strong>(NARA·Commons 실조회 원본)에서 소싱 — 데이터와 지면의 계보 일치</div></div>
-      <div class="step"><b>지속</b><div>sha256 fixity + 본문 지문 10채널 + <a href="https://korea-archive-mcp.vercel.app/fixity-ledger.json">공개 지문 원장</a>(골든 8종 주간 재계산·개정 이력) —
-        재판독 지문 불일치는 <strong>원문 개정 발생</strong>의 신호</div></div>
+    <div class="kicker">결과 받기</div>
+    <h2>찾은 결과를 쓰기 좋은 형태로 드립니다</h2>
+    <p class="intro">대화로 보는 것 말고도, 필요하면 아래 형태로 받을 수 있습니다.
+    모두 <b>소장 기관·소속 분류·원본 이미지 주소</b>를 담고 있어 나중에 출처를 다시 확인할 수 있습니다.</p>
+    <div class="formats">
+      <div class="fmt"><div class="ic">📊</div><h3>표 (CSV)</h3>
+        <p>"표로 정리해줘" — 엑셀·구글 시트에 바로 붙여 넣어 분석합니다.</p></div>
+      <div class="fmt"><div class="ic">🕸️</div><h3>관계도</h3>
+        <p>"관계도로 보여줘" — 기록·기관·분류가 어떻게 이어지는지 그림으로 봅니다.</p></div>
+      <div class="fmt"><div class="ic">📜</div><h3>수집 기록서</h3>
+        <p>"수집 기록서로 남겨줘" — 언제, 어디서, 어떤 검색어로 찾았는지 적힌 증빙입니다. 기록관리시스템에 등록할 수 있습니다.</p></div>
     </div>
   </div>
 </section>
 
-<section>
+<section class="tint">
   <div class="wrap">
-    <h2><span class="n">04</span>발굴을 깊게 만드는 장치</h2>
-    <div class="grid">
-      <div class="card"><h3><span class="dot" style="background:var(--gold)"></span>심층 판독 14채널</h3>
-        <p>발굴한 번호·URL을 재투입하면 본문이 나옵니다 — 공훈록 전문, 판결문 사건개요·주문, 장서각 해제,
-        국가유산 해설, 신문 OCR 원문, UN 요약+6개 언어 PDF, NARA 계보·소장단위·디지털 객체.</p></div>
-      <div class="card"><h3><span class="dot" style="background:var(--blue)"></span>인접 채굴</h3>
-        <p>하나 찾으면 양옆을 훑습니다. NARA NAID ±N(계보로 시리즈 경계 탐지)·TNA·IA 일련번호·6·25아카이브 archRfcd —
-        같은 컬렉션의 절반이 다른 표기로 숨어 있는 사례를 복구합니다.</p></div>
-      <div class="card"><h3><span class="dot" style="background:var(--purple)"></span>당대 표기 팬아웃</h3>
-        <p><code>variants=true</code> — Corea·Chosen·Keijo·Fusan 등 당대 표기를 해외 채널에 자동 병렬 투입.
-        현대어 검색이 놓치는 19세기~일제기 기록을 건집니다.</p></div>
-      <div class="card"><h3><span class="dot" style="background:var(--green)"></span>자가 감시 4종</h3>
-        <p>GitHub Actions 주간 — 30채널 헬스체크 · 차단 6곳 복구 탐침 · Archives NZ 수확 인덱스 ·
-        골든 8종 지문 재계산(원장 대조). 채널이 죽거나 원문이 바뀌면 먼저 압니다.</p></div>
-    </div>
+    <div class="kicker">믿을 수 있게</div>
+    <h2>지켜 온 원칙</h2>
+    <ul class="trust">
+      <li><b>실제 기록만 씁니다.</b> AI가 그린 인물이나 장면은 쓰지 않습니다.</li>
+      <li><b>직접 확인한 정보만 씁니다.</b> 모든 주소와 수치는 각 기관 시스템을 실제로 조회한 결과입니다.</li>
+      <li><b>원문이 바뀌면 알아챕니다.</b> 주요 기록 8건의 확인값을 <a href="https://korea-archive-mcp.vercel.app/fixity-ledger.json">공개 장부</a>에 올려 두고 매주 다시 대조합니다.</li>
+      <li><b>매주 스스로 점검합니다.</b> 30개 문서고가 정상 작동하는지 자동으로 확인합니다.</li>
+      <li><b>출처를 밝힙니다.</b> 협약기관인 6·25전쟁 아카이브센터 기록에는 출처를 반드시 함께 적습니다.</li>
+    </ul>
   </div>
 </section>
 
-<section>
+<section id="faq">
   <div class="wrap">
-    <h2><span class="n">05</span>실물 산출 예제</h2>
-    <div class="grid">
-      <div class="card"><h3>📰 발굴 보고서</h3><p>잡지·저널급 HTML 19규칙 — <a href="https://korea-archive-mcp.vercel.app/examples/hanriver.html">한강의 배, 잊힌 물류</a></p></div>
-      <div class="card"><h3>🎞 강연 풀덱</h3><p>403장 — <a href="https://korea-archive-mcp.vercel.app/examples/joseon-deck.html">조선의 배와 물길</a></p></div>
-      <div class="card"><h3>🔎 즉석 연합검색</h3><p>브라우저에서 바로 — <a href="https://korea-archive-mcp.vercel.app/ingitda.html">기록잇다</a></p></div>
-      <div class="card"><h3>📋 심사 시연 21선</h3><p>전 기능 실측 질의 — <a href="https://github.com/changgi/korea-archive-mcp/blob/main/docs/playmcp-review-pack.md">playmcp-review-pack.md</a></p></div>
+    <div class="kicker">용어 풀이</div>
+    <h2>처음 보는 말이 있다면</h2>
+    <dl>
+      <dt>커넥터</dt><dd>AI 비서에 새 능력을 붙이는 연결 주소입니다. 이 도구는 주소 하나로 연결됩니다.</dd>
+      <dt>교차확인</dt><dd>같은 기록이 두 곳 이상의 문서고에서 나온 경우입니다.</dd>
+      <dt>원문 읽기(판독)</dt><dd>목록이 아니라 기록 본문과 상세 정보를 가져와 읽는 것입니다.</dd>
+      <dt>옆 번호 훑기</dt><dd>찾은 기록의 앞뒤 번호를 확인해 같은 묶음의 기록을 찾는 방법입니다.</dd>
+      <dt>소속 분류</dt><dd>기록이 속한 상위 묶음입니다. 예) 미국 해병대 기록군 › 해병대 사진철</dd>
+      <dt>확인값(지문)</dt><dd>기록 내용으로 만든 고유한 값입니다. 원문이 조금만 바뀌어도 값이 달라져 변경을 알아챌 수 있습니다.</dd>
+    </dl>
+
+    <h2 style="margin-top:64px">자주 묻는 질문</h2>
+    <details><summary>정말 무료인가요?</summary>
+      <div class="ans">네. 연결 주소는 누구나 무료로 쓸 수 있습니다. Claude 같은 AI 비서 이용 요금은 각 서비스 정책을 따릅니다.</div></details>
+    <details><summary>찾은 사진을 바로 책이나 SNS에 써도 되나요?</summary>
+      <div class="ans">도구가 알려 주는 권리 등급은 <b>1차 판정</b>입니다. A·B 등급이라도 게재 전에 소장 기관의 이용 조건을 사람이 최종 확인해 주세요. D 등급은 쓰지 않아야 합니다.</div></details>
+    <details><summary>영어나 일본어를 몰라도 되나요?</summary>
+      <div class="ans">네. 한국어로 물으면 각 문서고의 언어로 바꿔 찾고, 결과도 한국어 설명과 함께 보여 줍니다. 원문 제목은 원래 언어 그대로 보여 드려 출처를 정확히 남길 수 있게 합니다.</div></details>
+    <details><summary>어떤 문서고가 지금 작동하는지 알 수 있나요?</summary>
+      <div class="ans">"채널 상태 점검해줘"라고 하면 30곳을 실제로 조회해 정상(🟢)·주의(🟡)·차단(🔴)으로 보여 줍니다. 외부 기관 사정으로 막힌 곳은 그 사실과 대신 찾는 방법을 함께 안내합니다.</div></details>
+    <details><summary>컴퓨터에 설치해서 쓰고 싶어요</summary>
+      <div class="ans">Claude 데스크톱·Claude Code용 플러그인 버전이 있습니다. <a href="https://github.com/changgi/korea-archive-marketplace">korea-archive-marketplace</a>에서 설치 방법을 확인하세요.</div></details>
+  </div>
+</section>
+
+<section class="tint final">
+  <div class="wrap">
+    <h2>지금 바로 첫 기록을 찾아보세요</h2>
+    <p>주소 하나를 등록하고 "창기창기 도와줘"라고 말하면 시작입니다.</p>
+    <div class="buttons">
+      <a class="btn main" href="#start">시작하기</a>
+      <a class="btn sub" href="https://korea-archive-mcp.vercel.app/help.html">자세한 사용 안내</a>
+      <a class="btn sub" href="https://github.com/changgi/korea-archive-mcp">GitHub</a>
     </div>
   </div>
 </section>
 
 <footer>
-  <div class="wrap">
-    MIT License<span class="sep">·</span>Methodology: Song, Chang-Gi (2026), National Archives of Korea
-    <span class="sep">·</span>협약: KOREAN WAR ARCHIVES 6·25전쟁 아카이브센터
-    <br>콘텐츠 신뢰 원칙 — 실물 기록만, 실확인 링크만, 게재윤리 4단계
-  </div>
+  MIT License · 방법론: 송창기 (2026), 국가기록원<br>
+  협약: KOREAN WAR ARCHIVES 6·25전쟁 아카이브센터 ·
+  <a href="https://github.com/changgi/korea-archive-mcp">원격 서버</a> ·
+  <a href="https://github.com/changgi/korea-archive-marketplace">플러그인</a> ·
+  <a href="https://korea-archive-mcp.vercel.app/help-en.html">English</a>
 </footer>
 
 </body>
