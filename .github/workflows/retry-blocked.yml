@@ -31,11 +31,7 @@ jobs:
           probe "민주화운동 오픈아카이브" "https://archives.kdemo.or.kr/search?query=%EB%B6%80%EB%A7%88" "검색결과"
           probe "미국 LOC JSON" "https://www.loc.gov/search/?q=Korea&fo=json&c=2" '"results"'
           probe "호주 NAA RecordSearch" "https://recordsearch.naa.gov.au/SearchNRetrieve/Interface/SearchScreens/BasicSearch.aspx" "RecordSearch"
-          # Archives NZ: 2차 실측(2026-11-21) GH IP에 실페이지 200 서빙 + icn1 robots 허용 확인.
-          # 그러나 Arena는 JS SPA(서버사이드 결과 HTML 없음) + 개발망 Incapsula 차단 → 합류 불능 사유가
-          # 도달성이 아님 — 관찰 전용(복구 신호 비발화). 재평가 조건: Arena 서버사이드 검색/API 발견 시.
-          hc=$(curl -sSL -m 20 -A "$UA" -o /tmp/probe_body -w '%{http_code}' "https://collections.archives.govt.nz/web/arena" 2>/dev/null)
-          echo "👁 뉴질랜드 Archives NZ(관찰 전용 — JS SPA): http=$hc" | tee -a "$GITHUB_STEP_SUMMARY"
+          # Archives NZ: v1.58 합류 완료(nz-probe 10차 역공학 — federated-search 공개 API 발견) → 목록 제외.
           probe "뉴질랜드 Papers Past" "https://paperspast.natlib.govt.nz/newspapers" "Papers Past"
           probe "캐나다 LAC" "https://recherche-collection-search.bac-lac.gc.ca/eng/Home/Search?q=Korea" "Library and Archives Canada"
           probe "UN Archives AtoM" "https://search.archives.un.org/informationobject/browse?query=Korea" "search-result"
