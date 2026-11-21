@@ -1309,12 +1309,17 @@ const JB_CROSS = `국내외 대조 절차 — 순서를 틀리면 헛수고한�
           const hm = q.match(/ccbaCpno=(\d{13})/) || q.match(/^(\d{13})$/);
           if (hm) {
             const cpno = hm[1];
-            const kdcd = cpno.slice(1, 3), ctcd = cpno.slice(3, 5), asno = cpno.slice(5);
-            const b = await cachedText('heriD:' + cpno, 24 * 3600e3,
-              () => gtext(`https://www.khs.go.kr/cha/SearchKindOpenapiDt.do?ccbaKdcd=${kdcd}&ccbaAsno=${asno}&ccbaCtcd=${ctcd}`), 'ccbaMnm1');
-            const g = (t) => xtag(b, t);
+            const kdcd = cpno.slice(1, 3), ctcd = cpno.slice(3, 5), asno8 = cpno.slice(5);
+            // asno 포맷이 종목별로 달라 후보 순차 시도(8자리·4자리·무패딩 — 빈 레코드면 다음)
+            const cands = [...new Set([asno8, asno8.slice(0, 4), String(parseInt(asno8, 10))])];
+            let b = ''; let g = (t) => xtag(b, t);
+            for (const asno of cands) {
+              b = await cachedText(`heriD:${kdcd}|${asno}|${ctcd}`, 24 * 3600e3,
+                () => gtext(`https://www.khs.go.kr/cha/SearchKindOpenapiDt.do?ccbaKdcd=${kdcd}&ccbaAsno=${asno}&ccbaCtcd=${ctcd}`), '<ccbaMnm1>');
+              if (xtag(b, 'ccbaMnm1')) break;
+            }
             const name = g('ccbaMnm1');
-            if (!name) return text(`[${cpno}] 상세 미발견 — 진단: ` + b.slice(0, 200).replace(/\s+/g, ' ')); // TODO 진단 후 제거
+            if (!name) return text(`[${cpno}] 상세 미발견 — ccbaCpno를 확인하거나 mode=heritage에 키워드를 넣으십시오.`);
             let content = dclean(g('content'));
             if (content.length > 3500) content = content.slice(0, 3500) + ` …(총 ${content.length}자 — 전문은 포털)`;
             return text(`국가유산 판독 — ${name}${g('ccbaMnm2') ? `(${g('ccbaMnm2')})` : ''} [${g('ccmaName') || ''}${g('crltsnoNm') ? ` ${g('crltsnoNm')}` : ''}]\n`
