@@ -1203,10 +1203,39 @@ const JB_CROSS = `국내외 대조 절차 — 순서를 틀리면 헛수고한�
 
 
   server.tool('nedb_search',
-    "Search 국사편찬위 한국사데이터베이스 (db.history.go.kr) + 조선 사료 심층 판독 (verified POST routes from the Han-river vessel study). mode: total=통합검색(기본) · law=법전·편람 조문 검색(한문 원문 제공 여부 판정) · record=등록류 검색(座目 회의명단 자동 필터 — 검색 건수를 지표로 쓰기 전 필수) · item=levelId 본문 판독(미공개/파싱실패 구분 — query에 levelId) · sibling=★형제 조 전수 스캔(query에 levelId — 조문을 하나라도 열었으면 반드시 이어 호출, 총론만 읽으면 핵심을 놓친다) · matrix=법전 수록 대조표(query에 쉼표구분 어휘 ≤8 — 부재의 발견) · origin=어휘 연원 추적(query='용어' 또는 '용어,영역') · sjw=승정원일기(왕대 분포·최초 용례 — 연대가 뒤집힐 수 있다) · kyujanggak=규장각 목록+해제 동시(절목·사목류는 해제에서 발견) · aks=한국고문서자료관(archive.aks.ac.kr) 문중·서원 고문서 — 소장처 172곳 검색→분류→문서 면·썸네일(query=소장처명 또는 L-ID·분류ID·'분류ID/문서ID'). · jacar=일본 아시아역사자료센터(한→일 자동 변환 검색·레퍼런스코드 메타 직행·±span×100 인접 채굴) · gonghun=공훈전자사료관 독립유공자(query=이름 검색→mngNo 숫자 투입 시 공적조서·공훈록 본문 판독) · i815=독립기념관(query=키워드 목록→detail.do URL 투입 시 당대 신문기사·독립운동가 자료 본문 판독) · ktv=KTV e영상역사관(키워드 목록→ehistory view URL 투입 시 영상 해설·상영정보 판독, KOGL) · earchive=국편 전자사료관(키워드 목록→'키워드|순번' 투입 시 상세: 열람·이용조건·등록번호). 판정 우선: '601건'이 아니라 '492건이 座目'을 반환.",
-    { query: z.string().describe("검색어 · levelId(item/sibling) · 쉼표구분 어휘(matrix) · '용어,영역'(origin) · 소장처명/L-ID(aks) · 이름/mngNo(gonghun)"), db: z.string().default(''), max_results: z.number().int().min(1).max(50).default(15), mode: z.enum(['total', 'law', 'record', 'item', 'sibling', 'matrix', 'origin', 'sjw', 'kyujanggak', 'aks', 'jacar', 'gonghun', 'i815', 'ktv', 'earchive']).default('total'), span: z.number().int().min(2).max(12).default(8).describe('sibling 모드 스캔 폭') },
+    "Search 국사편찬위 한국사데이터베이스 (db.history.go.kr) + 조선 사료 심층 판독 (verified POST routes from the Han-river vessel study). mode: total=통합검색(기본) · law=법전·편람 조문(한문 원문 제공 판정) · record=등록류(座目 자동 필터 — 건수 지표화 전 필수) · item=levelId 본문 판독(미공개/파싱실패 구분) · sibling=★형제 조 전수 스캔(levelId — 조문을 열었으면 반드시 이어 호출, 총론만으론 핵심을 놓친다) · matrix=법전 수록 대조(쉼표구분 어휘 ≤8 — 부재의 발견) · origin=어휘 연원('용어' 또는 '용어,영역') · sjw=승정원일기(왕대 분포·최초 용례) · kyujanggak=규장각 목록+해제(절목류는 해제에서 발견) · aks=한국고문서자료관(문중·서원 — 소장처 172곳→분류→문서 면·썸네일, query=소장처명/L-ID/'분류ID/문서ID') · jacar=일본 아시아역사자료센터(한→일 자동 변환 검색·레퍼런스코드 메타 직행·±span×100 인접 채굴) · gonghun=공훈전자사료관 독립유공자(query=이름 검색→mngNo 숫자 투입 시 공적조서·공훈록 본문 판독) · i815=독립기념관(query=키워드 목록→detail.do URL 투입 시 당대 신문기사·독립운동가 자료 본문 판독) · ktv=KTV e영상역사관(키워드 목록→ehistory view URL 투입 시 영상 해설·상영정보 판독, KOGL) · earchive=국편 전자사료관(키워드 목록→'키워드|순번' 투입 시 상세: 열람·이용조건·등록번호) · commons=위키미디어 공용(키워드 목록→File URL 투입 시 라이선스·원 소장처·설명 판독). 판정 우선: '601건'이 아니라 '492건이 座目'을 반환.",
+    { query: z.string().describe("검색어 · levelId(item/sibling) · 쉼표구분 어휘(matrix) · '용어,영역'(origin) · 소장처명/L-ID(aks) · 이름/mngNo(gonghun)"), db: z.string().default(''), max_results: z.number().int().min(1).max(50).default(15), mode: z.enum(['total', 'law', 'record', 'item', 'sibling', 'matrix', 'origin', 'sjw', 'kyujanggak', 'aks', 'jacar', 'gonghun', 'i815', 'ktv', 'earchive', 'commons']).default('total'), span: z.number().int().min(2).max(12).default(8).describe('sibling 모드 스캔 폭') },
     async ({ query, max_results, mode, span }) => {
       const q = query.trim();
+      if (mode === 'commons') { // 위키미디어 공용 — 키워드 목록 / File URL 판독(라이선스·원 소장처·설명)
+        try {
+          const UAH = { 'User-Agent': 'KoreaArchiveMCP/1.0 (https://github.com/changgi/korea-archive-mcp; archival discovery)' };
+          const fm = q.match(/^https?:\/\/commons\.wikimedia\.org\/wiki\/(File:.+)$/i) || q.match(/^(File:.+)$/i);
+          if (fm) {
+            const title = decodeURIComponent(fm[1]).replace(/_/g, ' ');
+            const d = JSON.parse(await cachedText('commonsD:' + title, 24 * 3600e3,
+              async () => JSON.stringify(await jget('https://commons.wikimedia.org/w/api.php?action=query&prop=imageinfo&iiprop=url%7Cextmetadata%7Csize&format=json&titles=' + encodeURIComponent(title), UAH)), 'imageinfo'));
+            const page = Object.values((d.query || {}).pages || {})[0] || {};
+            const ii = (page.imageinfo || [{}])[0] || {};
+            const em = ii.extmetadata || {};
+            const g = (k) => dclean(String((em[k] || {}).value || ''));
+            const lic = g('LicenseShortName');
+            if (!ii.url && !lic) return text(`'${title}' — 파일 미발견 또는 메타 없음. File: 제목/URL을 확인하십시오.`);
+            const rights = /public domain/i.test(lic) ? 'A(퍼블릭 도메인 표기)' : /^cc/i.test(lic) ? `B(${lic} — 조건 준수 시 이용)` : `D('${lic || '미표기'}' — 확인 필요)`;
+            return text(`위키미디어 공용 파일 판독 — ${title.replace(/^File:/, '')}\n`
+              + [g('DateTimeOriginal') && `촬영/제작: ${g('DateTimeOriginal').slice(0, 40)}`, g('Artist') && `작가: ${g('Artist').slice(0, 70)}`, ii.width && `원본 ${ii.width}×${ii.height}`].filter(Boolean).join(' · ') + '\n'
+              + `라이선스: ${lic || '(미표기)'} → 권리 초판정 ${rights}\n`
+              + (g('Credit') ? `출처(원 소장처): ${g('Credit').slice(0, 160)}\n` : '')
+              + (g('ImageDescription') ? `【설명】\n${g('ImageDescription').slice(0, 1200)}\n` : '')
+              + (ii.url ? `원본 이미지: ${ii.url}\n` : '') + `파일 페이지: https://commons.wikimedia.org/wiki/${encodeURIComponent(title.replace(/ /g, '_'))}\n`
+              + '※ 라이선스는 업로더 기재 — 게재 전 원 소장처(NH·NARA 번호 등) 카탈로그와 교차검증(nara_search·judge_rights).');
+          }
+          const items = await COLLECT.commons(q, Math.min(max_results, 10));
+          if (!items.length) return text(`위키미디어 공용 '${q}' — 0건. 영문 지명·사건명으로 재시도하십시오.`);
+          return text(`위키미디어 공용 '${q}' — ${items.length}건:\n` + items.map((it) => `- ${it.title}\n  ${it.url}`).join('\n')
+            + '\n※ 파일 URL(또는 File:제목)을 mode=commons query로 재투입 → 라이선스·원 소장처·설명 판독.');
+        } catch (e) { return text(`위키미디어 공용 오류(${String(e && e.message || e).slice(0, 60)}) — 공유 IP 요청 제한(429)일 수 있음. 잠시 후 재시도 또는 브라우저: https://commons.wikimedia.org`); }
+      }
       if (mode === 'earchive') { // 국편 전자사료관 — 키워드 목록 / '키워드|순번' 세션 상세(검색 폼+searchPosition 재제출 — 2026-11-21 역공학)
         try {
           const pm = q.match(/^(.+)\|(\d{1,3})$/);
