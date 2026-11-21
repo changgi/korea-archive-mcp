@@ -210,7 +210,7 @@ async function collectMerged(collectors) {
         if (!raw || !norm(raw.title)) continue;
         const k = dedupKey({ ...raw });
         if (map.has(k)) { const e = map.get(k); if (!e.sources.includes(name)) { e.sources.push(name); if (!e.url && raw.url) e.url = raw.url; } }
-        else map.set(k, { title: norm(raw.title), date: raw.date || '', id: raw.id || '', url: raw.url || '', sources: [name] });
+        else map.set(k, { title: norm(raw.title), date: raw.date || '', id: raw.id || '', url: raw.url || '', ...(raw.series ? { series: String(raw.series).slice(0, 80) } : {}), sources: [name] });
       }
     } else stats.push(`${name}:—`);
   });
@@ -462,6 +462,12 @@ const DEEP_READ = {
   nara: (it) => it.id && `judge_rights(naid=${String(it.id).replace(/\D/g, '')})`,
   seoul: (it) => it.url && `seoul_archives_search(query='${it.url}')`,
 };
+// 데이터화×맥락 강화(v1.72): 레코드의 상위 계층(partOf) 추출 — 시리즈·수집 구조·소장관
+const PART_OF = {
+  nzarch: (it) => it.series && `Series: ${it.series}`,
+  koreanwar: (it) => { const m = String(it.id || '').match(/^(\d{4})-([A-Z]{2})-(\d{2})-([A-Z]+)-([A-Z])-\d+$/); return m && `수집 ${m[1]} › ${m[2]} › ${m[4]}-${m[5]}`; },
+  jacar: (it) => { const o = { A: '국립공문서관', B: '외무성 외교사료관', C: '방위성 방위연구소' }[String(it.id || '')[0]]; return o && `JACAR › ${o}`; },
+};
 const COLLECT = {
   tna: async (q, n) => {
     q = koToEn(q) || q;
@@ -631,7 +637,7 @@ const COLLECT = {
         const cf = (k) => { try { return String(e.custom[k].value[0].value); } catch { return ''; } };
         const acc = cf('accessStatus');
         return { title: `${norm(String(e.name || '(무제)')).slice(0, 92)}${acc ? ` [${acc}]` : ''}`,
-          date: cf('resultDate'), id: String(e.id || ''),
+          date: cf('resultDate'), id: String(e.id || ''), ...(cf('series') ? { series: cf('series') } : {}),
           url: e.id ? `https://collections.archives.govt.nz/web/arena/search#/entity/aims-archive/${e.id}?q=${encodeURIComponent(en)}` : '' };
       });
     } catch { // 간헐 Incapsula(클라우드 IP 신뢰점수) — GH 주간 수확 정적 인덱스 폴백(자체 도메인)
@@ -2372,6 +2378,7 @@ item_cd 5종(자료 성격별): ART 도설·회화 / ETC 두루마리·축 / DRR
               identifier: it.id || null, title: it.title, date: it.date || null,
               heldBy: hb.map((k) => ({ id: k, name: (ARCHIVE_META[k] || {}).n || k, country: (ARCHIVE_META[k] || {}).c || '' })), // 맥락 — 기관 정식명·국가
               accessUrl: it.url || null, evidence: `API 실조회 ${now.slice(0, 10)}`,
+              ...((PART_OF[hb[0]] && PART_OF[hb[0]](it)) ? { partOf: PART_OF[hb[0]](it) } : {}), // 맥락 — 상위 계층
               ...(dr ? { deepRead: dr } : {}) }; // 증거성 — 판독 재현 호출문
           }),
         };
@@ -2395,9 +2402,16 @@ item_cd 5종(자료 성격별): ART 도설·회화 / ETC 두루마리·축 / DRR
           .concat(recs.map((it, i) => ({ id: rid(it, i), type: 'record', label: it.title.slice(0, 90),
             ...(it.id ? { identifier: it.id } : {}), // manifest와 동일 식별자 — 상호 참조
             ...(it.date ? { date: it.date } : {}), ...(it.url ? { url: it.url } : {}) })));
-        const edges = [];
+        const edges = []; const serSeen = new Set();
         recs.forEach((it, i) => {
           edges.push({ from: 'topic:' + query, to: rid(it, i), rel: 'FOUND' });
+          const hb0 = it.sources[0].split('·')[0];
+          const po = PART_OF[hb0] && PART_OF[hb0](it);
+          if (po) { // 계층 맥락 — series 노드·PART_OF 엣지(v1.72)
+            const sid = 'series:' + po;
+            if (!serSeen.has(sid)) { serSeen.add(sid); nodes.push({ id: sid, type: 'series', label: po }); }
+            edges.push({ from: rid(it, i), to: sid, rel: 'PART_OF' });
+          }
           [...new Set(it.sources.map((s) => s.split('·')[0]))].forEach((s) => edges.push({ from: rid(it, i), to: 'archive:' + s, rel: 'HELD_BY' }));
         });
         return text(`교차수집 '${query}' KARDA 온톨로지 — 채널별 [${stats.join(' · ')}] → 노드 ${nodes.length}·엣지 ${edges.length} (레코드 ${recs.length}건, 상한 30):\n`
