@@ -523,7 +523,11 @@ const COLLECT = {
     const key = process.env.ARCHIVES_API_KEY; if (!key) return [];
     const sk = /%[0-9A-Fa-f]{2}/.test(key) ? key : encodeURIComponent(key);
     const xml = await gtext(`https://apis.data.go.kr/1741050/openapi/searcharc?serviceKey=${sk}&query=${encodeURIComponent(q)}&start=1&limit=${n}`);
-    return (xml.match(/<item>[\s\S]*?<\/item>/g) || []).map((i) => ({ title: xtag(i, 'title'), date: xtag(i, 'prod_year'), id: xtag(i, 'prod_name'), ...(xtag(i, 'prod_name') ? { series: xtag(i, 'prod_name') } : {}), url: xtag(i, 'link') }));
+    return (xml.match(/<item>[\s\S]*?<\/item>/g) || []).map((i) => {
+      const link = xtag(i, 'link');
+      const rid = ((link.match(/rc_rfile_no=(\d+)/) || [])[1] || '') + ((link.match(/rc_ritem_no=(\d+)/) || [])[1] ? '-' + (link.match(/rc_ritem_no=0*(\d+)/) || [])[1] : '');
+      return { title: xtag(i, 'title'), date: xtag(i, 'prod_year'), id: rid || xtag(i, 'prod_name'), ...(xtag(i, 'prod_name') ? { series: xtag(i, 'prod_name') } : {}), url: link };
+    });
   },
   nlk: async (q, n) => {
     const key = process.env.NLK_API_KEY; if (!key) return [];
