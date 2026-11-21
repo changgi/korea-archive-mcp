@@ -425,6 +425,43 @@ const JA_MAP = [['조선총독부', '朝鮮総督府'], ['이토 히로부미', 
 const koToJa = (q) => { let out = q, hit = false; for (const [k, j] of JA_MAP) { if (out.includes(k)) { out = out.split(k).join(j); hit = true; } } return hit ? out : null; };
 
 // normalized per-source collectors → [{title,date,id,url}]; compliant channels only (robots-OK APIs / officially-published files)
+// 소장기관 정식명·국가 — 맥락 강화(v1.71): manifest heldBy·karda archive 노드에 주입
+const ARCHIVE_META = {
+  tna: { n: 'The National Archives (영국 국립기록관)', c: 'GB' }, ia: { n: 'Internet Archive', c: 'INT' },
+  gallica: { n: 'Gallica (프랑스 국립도서관 BnF)', c: 'FR' }, europeana: { n: 'Europeana', c: 'EU' },
+  nara: { n: 'U.S. National Archives (NARA)', c: 'US' }, archives: { n: '국가기록원', c: 'KR' },
+  nlk: { n: '국립중앙도서관', c: 'KR' }, nedb: { n: '국가기록원 개방데이터', c: 'KR' },
+  koreanwar: { n: 'KOREAN WAR ARCHIVES 6·25전쟁 아카이브센터', c: 'KR' },
+  jacar: { n: '아시아역사자료센터 JACAR', c: 'JP' }, earchive: { n: '국사편찬위원회 전자사료관', c: 'KR' },
+  i815: { n: '독립기념관 한국독립운동정보시스템', c: 'KR' }, gonghun: { n: '국가보훈부 공훈전자사료관', c: 'KR' },
+  ktv: { n: 'KTV e영상역사관', c: 'KR' }, oldnews: { n: '국립중앙도서관 대한민국 신문 아카이브', c: 'KR' },
+  much: { n: '대한민국역사박물관', c: 'KR' }, indy: { n: '국가기록원 독립운동판결문', c: 'KR' },
+  heritage: { n: '국가유산청 국가유산포털', c: 'KR' }, kyudb: { n: '서울대 규장각한국학연구원', c: 'KR' },
+  jsg: { n: '한국학중앙연구원 장서각', c: 'KR' }, awm: { n: 'Australian War Memorial', c: 'AU' },
+  nlna: { n: 'Nationaal Archief (네덜란드)', c: 'NL' }, dnz: { n: 'DigitalNZ (뉴질랜드 집계)', c: 'NZ' },
+  nzarch: { n: 'Archives New Zealand Te Rua Mahara', c: 'NZ' }, commons: { n: 'Wikimedia Commons', c: 'INT' },
+  un: { n: 'UN Digital Library', c: 'INT' }, ndl: { n: '일본 국립국회도서관 NDL', c: 'JP' },
+  seoul: { n: '서울기록원', c: 'KR' }, foia: { n: '정보공개포털·서울소통광장', c: 'KR' },
+  aks: { n: '한국학중앙연구원 한국고문서자료관', c: 'KR' },
+};
+// 증거성 강화(v1.71): 레코드별 심층 판독 재현 호출문 — 발굴→판독 증거 사슬
+const DEEP_READ = {
+  gonghun: (it) => it.id && `nedb_search(mode='gonghun', query='${it.id}')`,
+  i815: (it) => it.url && `nedb_search(mode='i815', query='${it.url}')`,
+  un: (it) => it.url && `nedb_search(mode='un', query='${it.url}')`,
+  nzarch: (it) => it.id && `nedb_search(mode='nzarch', query='${it.id}')`,
+  jsg: (it) => it.id && `nedb_search(mode='jsg', query='${it.id}')`,
+  much: (it) => it.url && `nedb_search(mode='much', query='${it.url}')`,
+  indy: (it) => it.url && `nedb_search(mode='indy', query='${it.url}')`,
+  heritage: (it) => it.id && `nedb_search(mode='heritage', query='${it.id}')`,
+  ktv: (it) => it.url && `nedb_search(mode='ktv', query='${it.url}')`,
+  jacar: (it) => it.id && `nedb_search(mode='jacar', query='${it.id}')`,
+  oldnews: (it) => it.id && `nedb_search(mode='oldnews', query='${it.id}')`,
+  commons: (it) => it.url && `nedb_search(mode='commons', query='${it.url}')`,
+  koreanwar: (it) => it.id && `koreanwar_item(archRfcd='${it.id}')`,
+  nara: (it) => it.id && `judge_rights(naid=${String(it.id).replace(/\D/g, '')})`,
+  seoul: (it) => it.url && `seoul_archives_search(query='${it.url}')`,
+};
 const COLLECT = {
   tna: async (q, n) => {
     q = koToEn(q) || q;
@@ -2327,11 +2364,16 @@ item_cd 5종(자료 성격별): ART 도설·회화 / ETC 두루마리·축 / DRR
             tool: 'KOREA ARCHIVE 통합검색 cross_search (Vercel icn1)',
             reproduce: `cross_search(query=${JSON.stringify(query)}, sources=${JSON.stringify(sources)}, format='manifest')`,
             channelStats: stats },
-          records: recs.map((it, i) => ({
-            '@type': 'rico:Record', node: rid2(it, i), // karda 그래프 노드와 같은 키
-            identifier: it.id || null, title: it.title, date: it.date || null,
-            heldBy: [...new Set(it.sources.map((s) => s.split('·')[0]))], // 맥락 — 소장기관(복수=교차확인)
-            accessUrl: it.url || null, evidence: `API 실조회 ${now.slice(0, 10)}` })),
+          records: recs.map((it, i) => {
+            const hb = [...new Set(it.sources.map((s) => s.split('·')[0]))];
+            const dr = DEEP_READ[hb[0]] && DEEP_READ[hb[0]](it);
+            return {
+              '@type': 'rico:Record', node: rid2(it, i), // karda 그래프 노드와 같은 키
+              identifier: it.id || null, title: it.title, date: it.date || null,
+              heldBy: hb.map((k) => ({ id: k, name: (ARCHIVE_META[k] || {}).n || k, country: (ARCHIVE_META[k] || {}).c || '' })), // 맥락 — 기관 정식명·국가
+              accessUrl: it.url || null, evidence: `API 실조회 ${now.slice(0, 10)}`,
+              ...(dr ? { deepRead: dr } : {}) }; // 증거성 — 판독 재현 호출문
+          }),
         };
         man.recordsFixity = 'sha256:' + createHash('sha256').update(JSON.stringify(man.records)).digest('hex'); // 내장 무결성
         const mj = JSON.stringify(man);
@@ -2349,7 +2391,7 @@ item_cd 5종(자료 성격별): ART 도설·회화 / ETC 두루마리·축 / DRR
         const srcs = [...new Set(recs.flatMap((it) => it.sources.map((s) => s.split('·')[0])))];
         const rid = (it, i) => 'rec:' + (it.id ? `${it.sources[0].split('·')[0]}:${it.id}` : `m${i}`);
         const nodes = [{ id: 'topic:' + query, type: 'topic', label: query }]
-          .concat(srcs.map((s) => ({ id: 'archive:' + s, type: 'archive', label: s })))
+          .concat(srcs.map((s) => ({ id: 'archive:' + s, type: 'archive', label: (ARCHIVE_META[s] || {}).n || s, ...(((ARCHIVE_META[s] || {}).c) ? { country: ARCHIVE_META[s].c } : {}) })))
           .concat(recs.map((it, i) => ({ id: rid(it, i), type: 'record', label: it.title.slice(0, 90),
             ...(it.id ? { identifier: it.id } : {}), // manifest와 동일 식별자 — 상호 참조
             ...(it.date ? { date: it.date } : {}), ...(it.url ? { url: it.url } : {}) })));
@@ -2362,11 +2404,12 @@ item_cd 5종(자료 성격별): ART 도설·회화 / ETC 두루마리·축 / DRR
           + '```json\n' + JSON.stringify({ nodes, edges }) + '\n```'
           + '\n※ 그대로 KARDA·지식그래프 도구(Gephi·Neo4j·vis.js)에 투입. 한 레코드의 복수 HELD_BY=기관 교차확인. 권리 초판정: judge_rights. 인물 중심 그래프는 nedb_search(mode=gonghun, \'종합:이름\')과 결합.');
       }
-      if (format === 'csv') { // 분석 투입용 구조화 출력 — "자료로써 분석할 수 있게"
+      if (format === 'csv') { // 분석 투입용 구조화 출력 — "자료로써 분석할 수 있게". node=karda·manifest와 동일 조인 키(v1.71)
         const esc = (v) => `"${String(v == null ? '' : v).replace(/"/g, '""')}"`;
-        const rows = items.slice(0, 45).map((it) => [it.sources.join('+'), it.title, it.date, it.id, it.url].map(esc).join(','));
+        const ridc = (it, i) => 'rec:' + (it.id ? `${it.sources[0].split('·')[0]}:${it.id}` : `m${i}`);
+        const rows = items.slice(0, 45).map((it, i) => [ridc(it, i), it.sources.join('+'), it.title, it.date, it.id, it.url].map(esc).join(','));
         return text(`교차수집 '${query}' CSV — 채널별 [${stats.join(' · ')}] → 병합 ${items.length}건 (45건 상한):\n`
-          + 'sources,title,date,id,url\n' + rows.join('\n')
+          + 'node,sources,title,date,id,url\n' + rows.join('\n')
           + '\n※ 그대로 스프레드시트·KARDA 온톨로지(nodes/edges)·통계 분석에 투입 가능. 권리 초판정: judge_rights.');
       }
       const lines = items.slice(0, 45).map((it) => `- [${it.sources.join('+')}] ${it.title.slice(0, 95)}${it.date ? ` (${it.date})` : ''}${it.url ? ' ' + it.url : ''}`);
