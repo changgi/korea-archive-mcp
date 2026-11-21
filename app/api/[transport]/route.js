@@ -484,6 +484,8 @@ const PART_OF = {
   seoul: (it) => it.series && `기술단위 › ${it.series}`,
   archives: (it) => it.series && `생산기관 › ${it.series}`,
   nlk: (it) => it.series && `자료유형 › ${it.series}`,
+  jsg: (it) => it.series && `四部 › ${it.series}`,
+  kyudb: (it) => it.series && `소장 › ${it.series}`,
 };
 const COLLECT = {
   tna: async (q, n) => {
@@ -704,7 +706,9 @@ const COLLECT = {
       const t = norm(m[2]);
       if (!t || seen.has(m[1]) || /^JSG_K1-[1-5]$/.test(m[1])) continue;
       seen.add(m[1]);
-      out.push({ title: t.slice(0, 95), date: '', id: m[1].startsWith('JSG_') ? m[1].slice(4) : '', url: 'https://jsg.aks.ac.kr/dir/view?dataId=' + encodeURIComponent(m[1]) });
+      const jid = m[1].startsWith('JSG_') ? m[1].slice(4) : '';
+      const sb = { K1: '經部(K1)', K2: '史部(K2)', K3: '子部(K3)', K4: '集部(K4)' }[jid.split('-')[0]];
+      out.push({ title: t.slice(0, 95), date: '', id: jid, ...(sb ? { series: sb } : {}), url: 'https://jsg.aks.ac.kr/dir/view?dataId=' + encodeURIComponent(m[1]) });
       if (out.length >= n) break;
     }
     return out;
@@ -712,7 +716,7 @@ const COLLECT = {
   kyudb: async (q, n) => { // 서울대 규장각 — 기존 jKyu(목록+해제 POST) 코어 재사용
     const r = await jKyu(q);
     const list = Array.isArray(r['목록']) ? r['목록'] : [];
-    return list.slice(0, n).map((t) => ({ title: String(t), date: '', id: '', url: 'https://kyudb.snu.ac.kr' }));
+    return list.slice(0, n).map((t) => { const km = String(t).match(/(奎|古|想白|一簑)\s*\d/); const kn = km && { '奎': '규장각도서(奎)', '古': '고도서(古)', '想白': '상백문고', '一簑': '일사문고' }[km[1]]; return { title: String(t), date: '', id: '', ...(kn ? { series: kn } : {}), url: 'https://kyudb.snu.ac.kr' }; });
   },
   i815: async (q, n) => { // 독립기념관 — v1.32 목록 실체화: 최대 카테고리의 실제 자료 제목+GET 딥링크(data-mngno/gubun → detail.do), 나머지는 집계 신호
     const base = 'https://search.i815.or.kr';
