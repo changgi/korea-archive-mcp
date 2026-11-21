@@ -1351,7 +1351,17 @@ const JB_CROSS = `국내외 대조 절차 — 순서를 틀리면 헛수고한�
           if (!rn) return text("nzarch 판독: R번호(예 R17717658)를 입력하십시오. 번호는 cross_search(sources='nzarch')가 제공.");
           const b = await gtext('https://collections.archives.govt.nz/federated-search/customers/aims/search?size=3&facetSize=0&start=0&isFuzzy=false&sourceId=aims-archive&q=' + rn);
           const line = b.split('\n').find((l) => l.startsWith('data:') && l.includes('"totalHits"'));
-          if (!line) return text(`[${rn}] 간헐 차단 — 잠시 후 재시도 또는 브라우저: https://collections.archives.govt.nz/web/arena/search#/entity/aims-archive/${rn}`);
+          if (!line) { // 간헐 Incapsula — 주간 수확 인덱스로 축약 판독 폴백
+            try {
+              const ix = await cachedText('nzIdx', 6 * 3600e3, () => gtext('https://korea-archive-mcp.vercel.app/nz-index.json'), '"records"');
+              const r = (JSON.parse(ix).records || []).find((x) => String(x.id) === rn);
+              if (r) return text(`Archives NZ 판독(축약 — ·주간인덱스, 라이브 간헐 차단 중) — ${rn}\n제목: ${r.title}\n`
+                + [r.date && `연대 ${r.date}`, r.series && `시리즈 ${r.series}`, r.access && `접근 상태 ${r.access}`].filter(Boolean).join(' · ') + '\n'
+                + `레코드: https://collections.archives.govt.nz/web/arena/search#/entity/aims-archive/${rn}\n`
+                + '※ 전체 메타(생산 기관·열람 방법·메타 지문)는 라이브 재시도 시 제공. 출처: Archives New Zealand.');
+            } catch { /* 인덱스도 실패 — 아래 안내 */ }
+            return text(`[${rn}] 간헐 차단 — 잠시 후 재시도 또는 브라우저: https://collections.archives.govt.nz/web/arena/search#/entity/aims-archive/${rn}`);
+          }
           const j = JSON.parse(line.slice(5));
           const h = (j.hits || []).find((x) => ((x.entity || {}).id || '') === rn) || (j.hits || [])[0];
           if (!h) return text(`[${rn}] 레코드 미발견 — 번호를 확인하십시오.`);
