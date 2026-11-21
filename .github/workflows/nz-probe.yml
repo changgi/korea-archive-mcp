@@ -1,38 +1,18 @@
 name: nz-probe
-# Archives NZ 역공학 6차 — AIMS는 UI 글루 확정. 이번: importmap 전체(포틀릿 ESM 경로) +
-# result 포틀릿의 Wicket 리소스 URL을 페이지에서 동적 추출해 직접 호출(서버사이드 조각 확인).
+# Archives NZ 역공학 7차(결정타) — GH 러너에서 헤드리스 크롬으로 검색 페이지를 실제 로드,
+# 네트워크 요청 전수 캡처(XHR URL·상태·JSON 응답 머리). 스크립트는 base64 임베드(YAML heredoc 함정 회피).
 on:
   workflow_dispatch: {}
 jobs:
   recon:
     runs-on: ubuntu-latest
+    timeout-minutes: 8
     steps:
-      - name: importmap·Wicket 리소스 추적
+      - name: 브라우저 네트워크 캡처
+        timeout-minutes: 6
         run: |
-          set +e
-          UA="Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
-          B="https://collections.archives.govt.nz"
-          curl -sSL -m 30 -A "$UA" -c /tmp/cj -o /tmp/p2 "$B/web/arena/search?q=Korea"
-          echo "::group::importmap full"
-          tr '\n' ' ' < /tmp/p2 | grep -oE '<script type="importmap">.{0,4500}' | head -c 4600; echo
-          echo "::endgroup::"
-          echo "::group::esm/module scripts"
-          grep -oE '<script[^>]*type="module"[^>]*>' /tmp/p2 | head -10
-          grep -oE '"/o/[a-zA-Z0-9_.-]*federated[^"]*"' /tmp/p2 | sort -u | head -10
-          grep -oE '"/o/[^"]*__liferay__[^"]*"' /tmp/p2 | sort -u | head -20
-          echo "::endgroup::"
-          echo "::group::result portlet wicket urls"
-          grep -oE '(https://[^"]*|/web/arena[^"]*)(_federated_search_result_portlet_|federated_search_result_portlet)[^"]*' /tmp/p2 | sort -u | head -10
-          echo "::endgroup::"
-          U=$(grep -oE 'https://[^"]*federated_search_result_portlet[^"]*' /tmp/p2 | head -1 | sed 's/&amp;/\&/g')
-          if [ -n "$U" ]; then
-            hc=$(curl -sSL -m 25 -A "$UA" -b /tmp/cj -c /tmp/cj -o /tmp/w -w '%{http_code} %{size_download} %{content_type}' "$U")
-            echo "[wicket-call] $U"
-            echo " → $hc"
-            echo "::group::wicket response head"
-            head -c 1200 /tmp/w
-            echo; echo "::endgroup::"
-          else
-            echo "no result-portlet wicket url in page"
-          fi
-          true
+          set -e
+          npm init -y >/dev/null 2>&1
+          npm i playwright-core@1 >/dev/null 2>&1
+          echo "aW1wb3J0IHsgY2hyb21pdW0gfSBmcm9tICdwbGF5d3JpZ2h0LWNvcmUnOwpjb25zdCBiID0gYXdhaXQgY2hyb21pdW0ubGF1bmNoKHsgY2hhbm5lbDogJ2Nocm9tZScsIGFyZ3M6IFsnLS1uby1zYW5kYm94J10gfSk7CmNvbnN0IHAgPSBhd2FpdCBiLm5ld1BhZ2UoKTsKY29uc3Qgc2VlbiA9IFtdOwpwLm9uKCdyZXNwb25zZScsIGFzeW5jIChyKSA9PiB7CiAgY29uc3QgdSA9IHIudXJsKCk7CiAgaWYgKCEvY29sbGVjdGlvbnNcLmFyY2hpdmVzXC5nb3Z0XC5uenxheGllbGwvLnRlc3QodSkpIHJldHVybjsKICBpZiAoL1wuKGNzc3xwbmd8anBnfHN2Z3x3b2ZmfGljb3xnaWYpKFw/fCQpLy50ZXN0KHUpKSByZXR1cm47CiAgY29uc3QgY3QgPSAoci5oZWFkZXJzKClbJ2NvbnRlbnQtdHlwZSddIHx8ICcnKTsKICBsZXQgaGVhZCA9ICcnOwogIGlmICgvanNvbnx4bWx8dGV4dFwvcGxhaW4vLnRlc3QoY3QpKSB7IHRyeSB7IGhlYWQgPSAoYXdhaXQgci50ZXh0KCkpLnNsaWNlKDAsIDQwMCk7IH0gY2F0Y2gge30gfQogIHNlZW4ucHVzaCh7IHU6IHUuc2xpY2UoMCwgMjIwKSwgczogci5zdGF0dXMoKSwgY3Q6IGN0LnNsaWNlKDAsIDQwKSwgaGVhZCB9KTsKfSk7CmF3YWl0IHAuZ290bygnaHR0cHM6Ly9jb2xsZWN0aW9ucy5hcmNoaXZlcy5nb3Z0Lm56L3dlYi9hcmVuYS9zZWFyY2g/cT1Lb3JlYScsIHsgd2FpdFVudGlsOiAnbmV0d29ya2lkbGUnLCB0aW1lb3V0OiA5MDAwMCB9KS5jYXRjaChlID0+IGNvbnNvbGUubG9nKCdnb3RvOicsIGUubWVzc2FnZSkpOwphd2FpdCBwLndhaXRGb3JUaW1lb3V0KDEyMDAwKTsKY29uc3QgaGl0cyA9IGF3YWl0IHAuZXZhbHVhdGUoKCkgPT4gewogIGNvbnN0IG91dCA9IFtdOwogIGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3JBbGwoJ2FbaHJlZl0nKS5mb3JFYWNoKGEgPT4gewogICAgY29uc3QgaCA9IGEuZ2V0QXR0cmlidXRlKCdocmVmJykgfHwgJyc7CiAgICBpZiAoL3JlY29yZHxlbnRpdHl8ZGV0YWlsfGl0ZW18cmVzdWx0L2kudGVzdChoKSkgb3V0LnB1c2goKGEudGV4dENvbnRlbnQgfHwgJycpLnRyaW0oKS5zbGljZSgwLCA4MCkgKyAnIHwgJyArIGguc2xpY2UoMCwgMTYwKSk7CiAgfSk7CiAgcmV0dXJuIG91dC5zbGljZSgwLCAyMCk7Cn0pOwpjb25zb2xlLmxvZygnPT0gTkVUV09SSyA9PScpOwpmb3IgKGNvbnN0IHIgb2Ygc2VlbikgeyBjb25zb2xlLmxvZyhgWyR7ci5zfV0gJHtyLmN0fSAke3IudX1gKTsgaWYgKHIuaGVhZCkgY29uc29sZS5sb2coJyAgIGhlYWQ6Jywgci5oZWFkLnJlcGxhY2UoL1xzKy9nLCAnICcpKTsgfQpjb25zb2xlLmxvZygnPT0gUkVTVUxUIExJTktTID09Jyk7CmhpdHMuZm9yRWFjaChoID0+IGNvbnNvbGUubG9nKCctJywgaCkpOwpjb25zb2xlLmxvZygnPT0gQk9EWSBTTklQUEVUID09Jyk7CmNvbnNvbGUubG9nKChhd2FpdCBwLmV2YWx1YXRlKCgpID0+IGRvY3VtZW50LmJvZHkuaW5uZXJUZXh0LnNsaWNlKDAsIDEyMDApKSkucmVwbGFjZSgvXG57Mix9L2csICdcbicpKTsKYXdhaXQgYi5jbG9zZSgpOwo=" | base64 -d > cap.mjs
+          node cap.mjs
