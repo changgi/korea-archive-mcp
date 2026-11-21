@@ -210,22 +210,24 @@ async function collectMerged(collectors) {
         if (!raw || !norm(raw.title)) continue;
         const k = dedupKey({ ...raw });
         if (map.has(k)) { const e = map.get(k); if (!e.sources.includes(name)) { e.sources.push(name); if (!e.url && raw.url) e.url = raw.url; } }
-        else map.set(k, { title: norm(raw.title), date: raw.date || '', id: raw.id || '', url: raw.url || '', ...(raw.series ? { series: String(raw.series).slice(0, 80) } : {}), ...(raw.media ? { media: String(raw.media).slice(0, 180) } : {}), ...(raw.sameAs ? { sameAs: String(raw.sameAs) } : {}), sources: [name] });
+        else map.set(k, { title: norm(raw.title), date: raw.date || '', id: raw.id || '', url: raw.url || '', ...(raw.series ? { series: String(raw.series).slice(0, 80) } : {}), ...(raw.media ? { media: String(raw.media).slice(0, 180) } : {}), ...(raw.sameAs ? { sameAs: String(raw.sameAs) } : {}), ...(raw.lid ? { lid: String(raw.lid) } : {}), sources: [name] });
       }
     } else stats.push(`${name}:—`);
   });
   // v1.86: 동일 기록 병합 — sameAs(원본 식별자)가 다른 레코드의 id와 같으면 한 건으로 합치고 출처를 모두 남긴다(제목 언어가 달라도 교차확인)
   const items = [...map.values()];
   const byId = new Map(items.filter((it) => it.id).map((it) => [String(it.id), it]));
+  for (const it of items) if (it.lid && !byId.has(it.lid)) byId.set(it.lid, it); // NARA 고유번호(127-N-A4560형)로도 대조 — 실재할 때만 병합
   const drop = new Set();
   for (const it of items) {
     const tgt = it.sameAs && byId.get(it.sameAs);
     if (!tgt || tgt === it) continue;
     for (const s of it.sources) if (!tgt.sources.includes(s)) tgt.sources.push(s);
-    const link = `${it.sources[0].split('·')[0]}:${it.id}`; // 복수 기관 연결은 누적(덮어쓰기 금지)
+    const link = `${it.sources[0].split('·')[0]}:${it.id || it.url}`; // 복수 기관 연결은 누적(덮어쓰기 금지)
     tgt.sameAs = tgt.sameAs && tgt.sameAs !== link ? `${tgt.sameAs} | ${link}` : link;
     if (!tgt.altTitle && norm(it.title).toLowerCase() !== norm(tgt.title).toLowerCase()) tgt.altTitle = it.title.slice(0, 110); // 다른 기관 제목(언어가 다르면) 보존
     if (!tgt.date && it.date) tgt.date = it.date;
+    if (!tgt.media && it.media) tgt.media = it.media; // 원본에 매체가 없으면 재게시본 원본 파일 승계
     drop.add(it);
   }
   return { items: items.filter((it) => !drop.has(it)), stats };
@@ -549,7 +551,7 @@ const COLLECT = {
     q = koToEn(q) || q;
     const key = process.env.NARA_API_KEY; if (!key) return [];
     const d = await jget(`https://catalog.archives.gov/api/v2/records/search?q=${encodeURIComponent(q)}&limit=${n}&page=1`, { 'x-api-key': key });
-    return ((((d.body || {}).hits || {}).hits) || []).map((h) => { const rec = (h._source || {}).record || {}; const po = naraChain(rec); const d0u = String((((rec.digitalObjects || [])[0]) || {}).objectUrl || ''); return { title: rec.title || '', date: naraDate(rec), id: rec.naId ? `NAID ${rec.naId}` : '', ...(po ? { series: po } : {}), ...(d0u ? { media: d0u } : {}), url: `https://catalog.archives.gov/id/${rec.naId}` }; });
+    return ((((d.body || {}).hits || {}).hits) || []).map((h) => { const rec = (h._source || {}).record || {}; const po = naraChain(rec); const d0u = String((((rec.digitalObjects || [])[0]) || {}).objectUrl || ''); return { title: rec.title || '', date: naraDate(rec), id: rec.naId ? `NAID ${rec.naId}` : '', ...(rec.localIdentifier ? { lid: `NARA ${String(rec.localIdentifier).toUpperCase()}` } : {}), ...(po ? { series: po } : {}), ...(d0u ? { media: d0u } : {}), url: `https://catalog.archives.gov/id/${rec.naId}` }; });
   },
   archives: async (q, n) => {
     const key = process.env.ARCHIVES_API_KEY; if (!key) return [];
@@ -672,7 +674,9 @@ const COLLECT = {
       const t2 = String(it.title || '');
       const cat = String((((it.categories || [])[0] || {}).title || '')).replace(/^Category:/, '');
       const iiu = String((((it.imageinfo || [])[0] || {}).url || '')).split('?')[0]; // v1.84: 원본 파일 직링크(utm 추적 파라미터 제거 — 절단 없는 영속 URL)
-      return { title: t2.replace(/^File:/, '').slice(0, 110), date: '', id: '', ...(cat ? { series: cat.slice(0, 80) } : {}), ...(iiu ? { media: iiu } : {}), url: 'https://commons.wikimedia.org/wiki/' + encodeURIComponent(t2.replace(/ /g, '_')) };
+      // v1.88: NARA 기증본 파일명 규칙 — '… - NARA - <NAID>.tif'(520782 실측 일치) · 'NARA <고유번호> …'(127-N-A4501형)
+      const cn = (t2.match(/[-_ ]NARA[-_ ]+(\d{5,10})\.\w+$/i) || [])[1]; const cl = !cn && (t2.match(/^File:NARA[ _]+(\d{2,3}[A-Z]?-[A-Z0-9]+-[A-Z0-9-]+?)[ _]/i) || [])[1];
+      return { title: t2.replace(/^File:/, '').slice(0, 110), date: '', id: '', ...(cat ? { series: cat.slice(0, 80) } : {}), ...(iiu ? { media: iiu } : {}), ...(cn ? { sameAs: `NAID ${cn}` } : cl ? { sameAs: `NARA ${cl.toUpperCase()}` } : {}), url: 'https://commons.wikimedia.org/wiki/' + encodeURIComponent(t2.replace(/ /g, '_')) };
     });
   },
 
