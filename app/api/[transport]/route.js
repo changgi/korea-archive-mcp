@@ -479,6 +479,11 @@ const PART_OF = {
   un: (it) => it.series && `UN › ${it.series}`,
   gallica: (it) => it.series && `Gallica › ${it.series}`,
   much: (it) => it.series && `박물관 › ${it.series}`,
+  i815: (it) => it.series && `자료 › ${it.series}`,
+  ktv: (it) => it.series && `영상 › ${it.series}`,
+  seoul: (it) => it.series && `기술단위 › ${it.series}`,
+  archives: (it) => it.series && `생산기관 › ${it.series}`,
+  nlk: (it) => it.series && `자료유형 › ${it.series}`,
 };
 const COLLECT = {
   tna: async (q, n) => {
@@ -518,13 +523,13 @@ const COLLECT = {
     const key = process.env.ARCHIVES_API_KEY; if (!key) return [];
     const sk = /%[0-9A-Fa-f]{2}/.test(key) ? key : encodeURIComponent(key);
     const xml = await gtext(`https://apis.data.go.kr/1741050/openapi/searcharc?serviceKey=${sk}&query=${encodeURIComponent(q)}&start=1&limit=${n}`);
-    return (xml.match(/<item>[\s\S]*?<\/item>/g) || []).map((i) => ({ title: xtag(i, 'title'), date: xtag(i, 'prod_year'), id: xtag(i, 'prod_name'), url: xtag(i, 'link') }));
+    return (xml.match(/<item>[\s\S]*?<\/item>/g) || []).map((i) => ({ title: xtag(i, 'title'), date: xtag(i, 'prod_year'), id: xtag(i, 'prod_name'), ...(xtag(i, 'prod_name') ? { series: xtag(i, 'prod_name') } : {}), url: xtag(i, 'link') }));
   },
   nlk: async (q, n) => {
     const key = process.env.NLK_API_KEY; if (!key) return [];
     // 실측 7.7s(최저속 축) — 6h TTL 캐시(마커 <item> — 정상 결과만)
     const xml = await cachedText(`nlk:${q}:${n}`, 6 * 3600e3, () => gtext(`https://www.nl.go.kr/NL/search/openApi/search.do?key=${encodeURIComponent(key)}&apiType=xml&srchTarget=total&kwd=${encodeURIComponent(q)}&pageSize=${n}&pageNum=1`), '<item>');
-    return (xml.match(/<item>[\s\S]*?<\/item>/g) || []).map((it) => { let lk = xtag(it, 'detail_link') || xtag(it, 'org_link'); if (lk.startsWith('/')) lk = 'https://www.nl.go.kr' + lk; return { title: xtag(it, 'title_info') || xtag(it, 'title'), date: xtag(it, 'pub_year_info'), id: xtag(it, 'type_name'), url: lk }; });
+    return (xml.match(/<item>[\s\S]*?<\/item>/g) || []).map((it) => { let lk = xtag(it, 'detail_link') || xtag(it, 'org_link'); if (lk.startsWith('/')) lk = 'https://www.nl.go.kr' + lk; return { title: xtag(it, 'title_info') || xtag(it, 'title'), date: xtag(it, 'pub_year_info'), id: xtag(it, 'type_name'), ...(xtag(it, 'type_name') ? { series: xtag(it, 'type_name') } : {}), url: lk }; });
   },
   nedb: async (q, n) => { const recs = await loadNedbIndex(); return recs ? nedbFileSearch(recs, q, n) : []; },
   koreanwar: async (q, n) => (await kwSearch({ keyword: q, viewType: 'archive' })).cards.slice(0, n).map((c) => ({ title: c.title, date: '', id: c.id, url: c.url })),
@@ -724,6 +729,7 @@ const COLLECT = {
         for (const m of lb.matchAll(/data-mngno="([^"]+)"[^>]*data-gubun="(\d+)"[^>]*>([\s\S]*?)<\/strong>/g)) {
           const d = DETAIL[m[2]];
           out.push({ title: `[${top.name}] ${norm(m[3].replace(/<[^>]+>/g, ''))}`.slice(0, 110), date: '', id: m[1],
+            series: top.name,
             url: d ? `${base}/${d[0]}?${d[1]}=${encodeURIComponent(m[1])}&sortNo=${m[2]}` : base + top.u });
           if (out.length >= Math.max(2, n - 2)) break;
         }
@@ -760,7 +766,8 @@ const COLLECT = {
     for (const m of b.matchAll(/href="(https:\/\/www\.ehistory\.go\.kr\/view\/[^"]+)"[^>]*>\s*(?:<[^>]+>\s*)*([^<]{4,80})/g)) {
       const t = norm(m[2]);
       if (!t || /paging|overflow/.test(t)) continue;
-      out.push({ title: t, date: '', id: '', url: m[1].replace(/&amp;/g, '&') });
+      const kt = (t.match(/^(대한뉴스|리버티뉴스|문화영화|대한뉴우스)/) || [])[1];
+      out.push({ title: t, date: '', id: '', ...(kt ? { series: kt } : {}), url: m[1].replace(/&amp;/g, '&') });
       if (out.length >= n) break;
     }
     return out;
@@ -802,7 +809,7 @@ const COLLECT = {
       const path = (seg.match(/^(\/[a-z-]+\/\d+)/) || [])[1];
       if (!path) continue;
       const tt = (seg.slice(0, 2600).match(/<p class="d02">\s*<span><b>([\s\S]*?)<\/b>/) || [])[1];
-      if (tt) { used.add(norm(tt.replace(/<[^>]+>/g, ''))); out.push({ title: norm(tt.replace(/<[^>]+>/g, '')).slice(0, 110), date: '', id: path.split('/')[2] || '', url: base + path }); }
+      if (tt) { used.add(norm(tt.replace(/<[^>]+>/g, ''))); out.push({ title: norm(tt.replace(/<[^>]+>/g, '')).slice(0, 110), date: '', id: path.split('/')[2] || '', ...(path.split('/')[1] ? { series: path.split('/')[1] } : {}), url: base + path }); }
       else out.push({ title: `[기록건·사진] ${path.split('/')[1]} ${path.split('/')[2]} — 제목·이용조건은 상세 URL 판독`, date: '', id: path.split('/')[2] || '', url: base + path });
       if (out.length >= n) break;
     }
