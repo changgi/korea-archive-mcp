@@ -210,11 +210,23 @@ async function collectMerged(collectors) {
         if (!raw || !norm(raw.title)) continue;
         const k = dedupKey({ ...raw });
         if (map.has(k)) { const e = map.get(k); if (!e.sources.includes(name)) { e.sources.push(name); if (!e.url && raw.url) e.url = raw.url; } }
-        else map.set(k, { title: norm(raw.title), date: raw.date || '', id: raw.id || '', url: raw.url || '', ...(raw.series ? { series: String(raw.series).slice(0, 80) } : {}), ...(raw.media ? { media: String(raw.media).slice(0, 180) } : {}), sources: [name] });
+        else map.set(k, { title: norm(raw.title), date: raw.date || '', id: raw.id || '', url: raw.url || '', ...(raw.series ? { series: String(raw.series).slice(0, 80) } : {}), ...(raw.media ? { media: String(raw.media).slice(0, 180) } : {}), ...(raw.sameAs ? { sameAs: String(raw.sameAs) } : {}), sources: [name] });
       }
     } else stats.push(`${name}:—`);
   });
-  return { items: [...map.values()], stats };
+  // v1.86: 동일 기록 병합 — sameAs(원본 식별자)가 다른 레코드의 id와 같으면 한 건으로 합치고 출처를 모두 남긴다(제목 언어가 달라도 교차확인)
+  const items = [...map.values()];
+  const byId = new Map(items.filter((it) => it.id).map((it) => [String(it.id), it]));
+  const drop = new Set();
+  for (const it of items) {
+    const tgt = it.sameAs && byId.get(it.sameAs);
+    if (!tgt || tgt === it) continue;
+    for (const s of it.sources) if (!tgt.sources.includes(s)) tgt.sources.push(s);
+    tgt.sameAs = `${it.sources[0].split('·')[0]}:${it.id}`; tgt.altTitle = it.title.slice(0, 110);
+    if (!tgt.date && it.date) tgt.date = it.date;
+    drop.add(it);
+  }
+  return { items: items.filter((it) => !drop.has(it)), stats };
 }
 // nedb: 국사편찬위 한국사DB의 data.go.kr 공식 개방파일(KOGL)을 미리 인덱싱해 웹 배치한 것을 검색 — robots 무관(라이브 스크래핑 없음).
 // NEDB_INDEX_URL 에 ingest-opendata.mjs로 만든 nedb_index.json(호스팅 URL)을 지정하면 활성화.
@@ -553,7 +565,12 @@ const COLLECT = {
     return (xml.match(/<item>[\s\S]*?<\/item>/g) || []).map((it) => { let lk = xtag(it, 'detail_link') || xtag(it, 'org_link'); if (lk.startsWith('/')) lk = 'https://www.nl.go.kr' + lk; return { title: xtag(it, 'title_info') || xtag(it, 'title'), date: xtag(it, 'pub_year_info'), id: xtag(it, 'type_name'), ...(xtag(it, 'type_name') ? { series: xtag(it, 'type_name') } : {}), url: lk }; });
   },
   nedb: async (q, n) => { const recs = await loadNedbIndex(); return recs ? nedbFileSearch(recs, q, n) : []; },
-  koreanwar: async (q, n) => (await kwSearch({ keyword: q, viewType: 'archive' })).cards.slice(0, n).map((c) => ({ title: c.title, date: '', id: c.id, ...(c.hierarchy ? { series: c.hierarchy } : {}), url: c.url })), // v1.84: 사이트 상위계층 실값 승격(없으면 PART_OF가 id 패턴 폴백)
+  koreanwar: async (q, n) => {
+    const cards = (await kwSearch({ keyword: q, viewType: 'archive' })).cards.slice(0, n);
+    // v1.86: 상위 5건 상세 병렬 조회(24h 캐시·6s 상한) — 원본 NAID(sameAs)·생산시기 확보 → NARA 원본과 동일 기록 병합
+    const det = await Promise.race([Promise.all(cards.slice(0, 5).map((c) => kwDetail(c.id).catch(() => null))), sleep(6000).then(() => [])]);
+    return cards.map((c, i) => { const d = det[i] || {}; return { title: c.title, date: d.date || '', id: c.id, ...(c.hierarchy ? { series: c.hierarchy } : {}), ...(d.naid ? { sameAs: `NAID ${d.naid}` } : {}), url: c.url }; }); // v1.84: 상위계층 실값 승격
+  },
   ndl: async (q, n) => { // 일본 국립국회도서관 서치 — OpenSearch 무키 실측(2026-11-21). 조선총독부 간행물·관보·도판 축(JACAR 공문서와 상보). 한→일 JA_MAP 우선 변환
     const ja = koToJa(q) || koToEn(q) || q;
     const b = await gtext(`https://ndlsearch.ndl.go.jp/api/opensearch?any=${encodeURIComponent(ja)}&cnt=${Math.min(n, 10)}`,
@@ -1032,6 +1049,16 @@ function kwParseCards(html) {
     cards.push({ title: kwClean(m[4]), id: m[2] === 'archRfcd' ? m[3] : `book:${m[3]}`, url: `${KW_BASE}/${m[1]}?${m[2]}=${encodeURIComponent(m[3])}`, producer: meta['생산기관/생산자'] || '', hierarchy: meta['상위계층'] || '', rg: rg ? rg[1] : '' });
   }
   return cards;
+}
+// v1.86: 협약기관 상세 → 원본 연결 메타(입수처 NARA NAID·생산시기). 같은 원본의 국내 재수집본↔해외 원본 동일성 확정용
+async function kwDetail(ref) {
+  if (!ref || ref.startsWith('book:')) return null;
+  const b = await cachedText('kwd:' + ref, 24 * 3600e3, () => gtext(`${KW_BASE}/searchDetail.do?archRfcd=${encodeURIComponent(ref)}`, KW_UA), '<dt');
+  const rows = [...b.matchAll(/<dt[^>]*>\s*([\s\S]{1,60}?)\s*<\/dt>\s*<dd[^>]*>([\s\S]{0,400}?)<\/dd>/g)].map((m) => [kwClean(m[1]), kwClean(m[2])]);
+  const all = rows.map(([, v]) => v).join(' ');
+  const naid = (all.match(/catalog\.archives\.gov\/id\/(\d+)/) || [])[1] || '';
+  const pd = ((rows.find(([k]) => /생산시기/.test(k)) || [])[1] || '').match(/\d{4}(?:-\d{2}){0,2}/);
+  return { naid, date: pd ? pd[0] : '' };
 }
 async function kwSearch(params) {
   const u = new URL(KW_BASE + '/search.do');
@@ -2445,7 +2472,7 @@ item_cd 5종(자료 성격별): ART 도설·회화 / ETC 두루마리·축 / DRR
         const man = {
           '@context': { dcterms: 'http://purl.org/dc/terms/', rico: 'https://www.ica.org/standards/RiC/ontology#',
             title: 'dcterms:title', date: 'dcterms:date', identifier: 'dcterms:identifier', provenance: 'dcterms:provenance',
-            accessUrl: 'dcterms:source', media: 'dcterms:hasFormat', heldBy: { '@id': 'rico:hasOrHadHolder' }, records: { '@id': 'rico:hasRecordSetMember' } },
+            accessUrl: 'dcterms:source', media: 'dcterms:hasFormat', sameAs: 'http://www.w3.org/2002/07/owl#sameAs', altTitle: 'dcterms:alternative', heldBy: { '@id': 'rico:hasOrHadHolder' }, records: { '@id': 'rico:hasRecordSetMember' } },
           '@type': ['DiscoveryManifest', 'rico:RecordSet'], standard: 'ISAD(G)/RiC-oriented',
           identifier: `kad-${now.slice(0, 10)}-${Math.abs([...query].reduce((a, c) => a * 31 + c.charCodeAt(0) | 0, 7)).toString(36)}`,
           recordsFixity: '', // 아래에서 채움 — records 배열 JSON의 sha256(JSON 단독 전파 시에도 내장 무결성)
@@ -2463,6 +2490,7 @@ item_cd 5종(자료 성격별): ART 도설·회화 / ETC 두루마리·축 / DRR
               heldBy: hb.map((k) => ({ id: k, name: (ARCHIVE_META[k] || {}).n || k, country: (ARCHIVE_META[k] || {}).c || '' })), // 맥락 — 기관 정식명·국가
               accessUrl: it.url || null, evidence: `API 실조회 ${now.slice(0, 10)}`,
               ...(it.media ? { media: it.media } : {}), // 다매체 — 원본 매체 직링크(게재 소싱)
+              ...(it.sameAs ? { sameAs: it.sameAs } : {}), ...(it.altTitle ? { altTitle: it.altTitle } : {}), // 맥락·증거성 — 기관 간 동일 기록(재수집본↔원본)
               ...((PART_OF[hb[0]] && PART_OF[hb[0]](it)) ? { partOf: PART_OF[hb[0]](it) } : {}), // 맥락 — 상위 계층
               ...(dr ? { deepRead: dr } : {}) }; // 증거성 — 판독 재현 호출문
           }),
@@ -2486,7 +2514,7 @@ item_cd 5종(자료 성격별): ART 도설·회화 / ETC 두루마리·축 / DRR
           .concat(srcs.map((s) => ({ id: 'archive:' + s, type: 'archive', label: (ARCHIVE_META[s] || {}).n || s, ...(((ARCHIVE_META[s] || {}).c) ? { country: ARCHIVE_META[s].c } : {}) })))
           .concat(recs.map((it, i) => ({ id: rid(it, i), type: 'record', label: it.title.slice(0, 90),
             ...(it.id ? { identifier: it.id } : {}), // manifest와 동일 식별자 — 상호 참조
-            ...(it.date ? { date: it.date } : {}), ...(it.url ? { url: it.url } : {}), ...(it.media ? { media: it.media } : {}) })));
+            ...(it.date ? { date: it.date } : {}), ...(it.url ? { url: it.url } : {}), ...(it.media ? { media: it.media } : {}), ...(it.altTitle ? { altTitle: it.altTitle } : {}) })));
         const edges = []; const serSeen = new Set();
         recs.forEach((it, i) => {
           edges.push({ from: 'topic:' + query, to: rid(it, i), rel: 'FOUND' });
@@ -2498,6 +2526,7 @@ item_cd 5종(자료 성격별): ART 도설·회화 / ETC 두루마리·축 / DRR
             edges.push({ from: rid(it, i), to: sid, rel: 'PART_OF' });
           }
           [...new Set(it.sources.map((s) => s.split('·')[0]))].forEach((s) => edges.push({ from: rid(it, i), to: 'archive:' + s, rel: 'HELD_BY' }));
+          if (it.sameAs) { const sa = 'ext:' + it.sameAs; if (!serSeen.has(sa)) { serSeen.add(sa); nodes.push({ id: sa, type: 'identifier', label: it.sameAs }); } edges.push({ from: rid(it, i), to: sa, rel: 'SAME_AS' }); } // v1.86 기관 간 동일 기록
         });
         return text(`교차수집 '${query}' KARDA 온톨로지 — 채널별 [${stats.join(' · ')}] → 노드 ${nodes.length}·엣지 ${edges.length} (레코드 ${recs.length}건, 상한 30):\n`
           + '```json\n' + JSON.stringify({ nodes, edges }) + '\n```'
@@ -2506,12 +2535,12 @@ item_cd 5종(자료 성격별): ART 도설·회화 / ETC 두루마리·축 / DRR
       if (format === 'csv') { // 분석 투입용 구조화 출력 — "자료로써 분석할 수 있게". node=karda·manifest와 동일 조인 키(v1.71)
         const esc = (v) => `"${String(v == null ? '' : v).replace(/"/g, '""')}"`;
         const ridc = (it, i) => 'rec:' + (it.id ? `${it.sources[0].split('·')[0]}:${it.id}` : `m${i}`);
-        const rows = items.slice(0, 45).map((it, i) => { const hb0 = it.sources[0].split('·')[0]; const po = (PART_OF[hb0] && PART_OF[hb0](it)) || ''; return [ridc(it, i), it.sources.join('+'), it.title, it.date, it.id, it.url, po, it.media || ''].map(esc).join(','); });
+        const rows = items.slice(0, 45).map((it, i) => { const hb0 = it.sources[0].split('·')[0]; const po = (PART_OF[hb0] && PART_OF[hb0](it)) || ''; return [ridc(it, i), it.sources.join('+'), it.title, it.date, it.id, it.url, po, it.media || '', it.sameAs || ''].map(esc).join(','); });
         return text(`교차수집 '${query}' CSV — 채널별 [${stats.join(' · ')}] → 병합 ${items.length}건 (45건 상한):\n`
-          + 'node,sources,title,date,id,url,partOf,media\n' + rows.join('\n')
+          + 'node,sources,title,date,id,url,partOf,media,sameAs\n' + rows.join('\n')
           + '\n※ 그대로 스프레드시트·KARDA 온톨로지(nodes/edges)·통계 분석에 투입 가능. 권리 초판정: judge_rights.');
       }
-      const lines = items.slice(0, 45).map((it) => `- [${it.sources.join('+')}] ${it.title.slice(0, 95)}${it.date ? ` (${it.date})` : ''}${it.url ? ' ' + it.url : ''}`);
+      const lines = items.slice(0, 45).map((it) => `- [${it.sources.join('+')}] ${it.title.slice(0, 95)}${it.date ? ` (${it.date})` : ''}${it.url ? ' ' + it.url : ''}${it.altTitle ? `\n  ↔ 동일 기록: ${it.altTitle.slice(0, 80)} (${it.sameAs})` : (it.sameAs ? `\n  ↔ 원본: ${it.sameAs}` : '')}`);
       return text(`교차수집 '${query}' — 채널별 [${stats.join(' · ')}] → 병합 ${items.length}건 (복수출처 우선 정렬):\n` + (lines.join('\n') || '(0)')
         + '\n※ [출처] 복수 표기 = 교차확인된 record. 국내(nara·archives·nlk)는 서버 키, nedb는 NEDB_INDEX_URL(공식 개방파일) 설정 시 포함. open.go.kr 본체(브라우저 전용)는 foia_search 전용 도구로.\n※ 발굴 우선 — 권리는 표시: 게재 전 judge_rights(참조코드·KOGL·naid)로 초판정. variants=true로 당대 표기(Corea·Chosen·Keijo…) 자동 팬아웃.'
         + '\n※ 심층 판독 이어가기: [i815]→nedb_search(mode=i815, 상세URL) · [gonghun]→mode=gonghun(mngNo) · [ktv]→mode=ktv(view URL) · [earchive]→mode=earchive(\'키워드|순번\') · [jacar]→mode=jacar(레퍼런스코드) · [seoul]→seoul_archives_search(상세URL) · [koreanwar]→koreanwar_item(archRfcd) · [nara]→judge_rights(naid).');
