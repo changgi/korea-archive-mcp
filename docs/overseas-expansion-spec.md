@@ -30,3 +30,9 @@
 
 ## (v1.26) AWM 심화
 - 상세 파싱 확장: **권리 자동 태그**(Item copyright 'Copyright expired - public domain' → `· 권리:PD(저작권 만료)`) + Conflict 기간을 date 필드로 — 발굴 우선·권리 표시 원칙의 해외 적용 1호.
+
+## 재점검 (2026-11-21)
+- 호주 NAA RecordSearch: Cloudflare 403 — 보류 지속. 대안: Trove API(api.trove.nla.gov.au, 무료 키 — 신문·사진) 키 확보 시 합류 후보.
+- 뉴질랜드 Archives NZ(collections.archives.govt.nz): Incapsula 게이트 — Papers Past와 동일 계열, 보류.
+- 미국 LOC(www.loc.gov): /search·/photos·chronicling-america 전 JSON 엔드포인트가 데이터센터 IP에 Cloudflare 403 — 보류(갈리카 계열).
+- **위키미디어 공용 합류(v1.37)**: commons.wikimedia.org API 키 불요 — list=search(srnamespace=6). 공유 IP 429 가능(예의 UA 필수), per-file 라이선스는 파일 페이지에서 확인. PD 재수집본의 원 소장처(NH·NARA 번호) 역추적 창구.
