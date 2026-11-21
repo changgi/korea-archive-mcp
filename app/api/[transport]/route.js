@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { createHash } from 'node:crypto';
 import { createMcpHandler } from 'mcp-handler';
 import { DATA } from '../../../lib/data.js';
 import { judgeRights } from '../../../lib/rights.js';
@@ -1659,8 +1660,10 @@ const JB_CROSS = `국내외 대조 절차 — 순서를 틀리면 헛수고한�
               let bio = seg.slice((hm ? hm[0] : head).length).trim();
               const cut = bio.search(/참고문헌|저작권 안내/);
               if (cut > 0) bio = bio.slice(0, cut).trim();
+              const fp = createHash('sha256').update(head + '\n' + bio).digest('hex').slice(0, 16); // 판독 시점 본문 지문(고정성)
               if (bio.length > 3200) bio = bio.slice(0, 3200) + ` …(전기 총 ${bio.length}자 — 전문은 원문)`;
               return text(`독립기념관 한국독립운동인명사전 — 항목 ${t}\n【기본정보】 ${head}\n【전기】\n${bio}\n원문: ${du}\n`
+                + `본문 지문(sha256-16): ${fp} — 판독 시점 전문(기본정보+전기) 기준. 재판독 지문 불일치=원문 개정 발생(인용 검증용).\n`
                 + "※ 공공저작물 — 출처 표기(독립기념관 한국독립운동인명사전) 시 이용 가능. 이명·한자명은 gonghun·jacar·oldnews('본문:이명') 재검색에 투입.");
             }
             const b = await gtext('https://search.i815.or.kr/dictionary/searchResult.do?searchType=all&searchWord=' + encodeURIComponent(t));
@@ -1744,7 +1747,7 @@ const JB_CROSS = `국내외 대조 절차 — 순서를 틀리면 헛수고한�
             const aw = flat.match(/포상년도\s*([\d/]+)\s*훈격\s*(\S{1,30})/);
             const summary = strip(pick(/id="achivement_1"[^>]*>([\s\S]*?)<\/div>/));
             const i2 = b.indexOf('id="tab2"');
-            let rok = '', rokInfo = '';
+            let rok = '', rokInfo = '', gfp = '';
             if (i2 >= 0) {
               const seg = strip(b.slice(b.indexOf('>', i2) + 1, i2 + 30000));
               rokInfo = (seg.match(/수록정보[:\s]*([^)]{3,40}\))/) || [])[1] || '';
@@ -1752,6 +1755,7 @@ const JB_CROSS = `국내외 대조 절차 — 순서를 틀리면 헛수고한�
               // 본문 경계: 게시판(감사의 글)·JS 찌꺼기 절단. 수형기록·묘소·현충시설 표는 분석 가치가 있어 유지
               body = body.split('감사의 글')[0].replace(/function\s+fn[\s\S]*$/, '').replace(/\$\{\w+\}/g, '').trim();
               rok = body.length > 4000 ? body.slice(0, 4000) + ` …(총 ${body.length}자 — 전문은 원문 링크)` : body;
+              gfp = createHash('sha256').update((summary || '') + '\n' + body).digest('hex').slice(0, 16); // 판독 시점 본문 지문(고정성)
             }
             if (!name && !summary) return text(`[mngNo ${q}] 공훈전자사료관 상세 파싱 실패 — 관리번호를 확인하거나 mode=gonghun에 이름으로 검색하십시오.`);
             return text(`공훈전자사료관 독립유공자 [관리번호 ${q}] ${name}${hanja ? `(${hanja})` : ''}${alias ? ` — 이명: ${alias}` : ''}\n`
@@ -1759,6 +1763,7 @@ const JB_CROSS = `국내외 대조 절차 — 순서를 틀리면 헛수고한�
               + `【공적개요(공적조서)】\n${summary || '(없음)'}\n`
               + (rok ? `【공훈록${rokInfo ? ` — ${rokInfo}` : ''}】\n${rok}\n` : '')
               + `원문: https://e-gonghun.mpva.go.kr/user/ContribuReportDetail.do?goTocode=20001&mngNo=${q}&pageTitle=Report\n`
+              + (gfp ? `본문 지문(sha256-16): ${gfp} — 판독 시점 전문(공적조서+공훈록) 기준. 재판독 지문 불일치=원문 개정 발생(인용 검증용).\n` : '')
               + `※ 출처: 국가보훈부 공훈전자사료관 — 게재 시 출처 표기. 공적조서·공훈록은 원칙적 수정불가 원문(정부포상 결정·전문가 집필). 권리 초판정: judge_rights.`);
           }
           const items = await COLLECT.gonghun(q, Math.min(max_results, 10));
@@ -2282,9 +2287,12 @@ item_cd 5종(자료 성격별): ART 도설·회화 / ETC 두루마리·축 / DRR
             heldBy: [...new Set(it.sources.map((s) => s.split('·')[0]))], // 맥락 — 소장기관(복수=교차확인)
             accessUrl: it.url || null, evidence: `API 실조회 ${now.slice(0, 10)}` })),
         };
+        const mj = JSON.stringify(man);
+        const fx = createHash('sha256').update(mj).digest('hex'); // 고정성(fixity) — 전파 중 변조 검증
         return text(`발굴 수집기록 매니페스트 '${query}' — ${recs.length}건 (재현 가능·기관 등재용):\n`
-          + '```json\n' + JSON.stringify(man) + '\n```'
-          + '\n※ 현용기록물로서의 발굴기록: provenance(질의·소스·시각·재현 호출)=증거성 · heldBy·식별자=맥락. 이 JSON을 그대로 기록관리시스템·KARDA에 등재.'
+          + '```json\n' + mj + '\n```'
+          + `\nfixity(sha256): ${fx} — 위 JSON 바이트의 지문. 전파·보관본 대조 시 불일치=변조/손상.`
+          + '\n※ 현용기록물로서의 발굴기록: provenance(질의·소스·시각·재현 호출)=증거성 · heldBy·식별자=맥락 · fixity=고정성. 이 JSON을 그대로 기록관리시스템·KARDA에 등재.'
           + "\n※ 다매체 변환 사슬: 이 매니페스트 → report_template(kind=report/carousel/full_package)=보고서·카드뉴스 · format='karda'=지식그래프 · format='csv'=데이터셋."
           + '\n※ 지속가능성: 영속 식별자(archRfcd·NAID·levelId·R번호) 우선 인용 — URL이 썩어도 재발굴 가능. 채널 생존은 source_profile(health)·주간 CI가 감시. 권리는 judge_rights로 기록 단위 표시.');
       }
