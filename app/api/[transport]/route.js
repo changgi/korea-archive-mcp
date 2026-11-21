@@ -638,7 +638,7 @@ const COLLECT = {
     const d = await r.json();
     const first = (v) => (Array.isArray(v) ? v[0] : v) || '';
     return (d.hits || []).slice(0, n).map((h) => ({
-      title: `${first(h.label)} — ${first(h.newspaperKorName)}`.slice(0, 110),
+      title: `${first(h.label)} — ${first(h.newspaperKorName)}${first(h.newsposition) ? ` [${first(h.newsposition)}]` : ''}`.slice(0, 110), // v1.85: 지면 위치(n면 n단) — 신문 인용 좌표
       date: String(h.issued_date || ''), id: first(h.uri), ...(first(h.newspaperKorName) ? { series: first(h.newspaperKorName) } : {}),
       url: first(h.uri) ? `https://nl.go.kr/newspaper/detail.do?content_id=${first(h.uri)}` : 'https://nl.go.kr/newspaper/' }));
   },

@@ -292,9 +292,9 @@
 
 <h2>7½. 발굴이 기록이 됩니다 — 현용기록물화 사슬</h2>
 <div class="four sans">
-  <div><b>생산</b>발굴 자체가 수집기록 매니페스트(JSON-LD)로 — 질의·소스·시각·재현 호출문이 증거성, 소장기관·영속 식별자가 맥락</div>
-  <div><b>데이터화</b>표준 지향(ISAD(G)·RiC) 직렬화 + 지식그래프(nodes/edges)와 동일 키 공유 — 기록관리시스템·KARDA 등재용</div>
-  <div><b>전파</b>보고서·카드뉴스 등 어떤 매체로 변환돼도 매니페스트가 따라갑니다(부록·sources.txt) — 받은 사람이 원 발굴로 복귀 가능</div>
+  <div><b>생산</b>발굴 자체가 수집기록 매니페스트(JSON-LD)로 — 질의·소스·시각·재현 호출문이 증거성, 소장기관·영속 식별자·상위 계층(partOf, 28채널 — RG·시리즈·문고·수집구조)이 맥락</div>
+  <div><b>데이터화</b>표준 지향(ISAD(G)·RiC) 직렬화 + 지식그래프(nodes/edges)와 동일 키 공유 — CSV·그래프·매니페스트가 계보(partOf)와 원본 매체 직링크(media — NARA·Commons 실조회 URL)까지 운반</div>
+  <div><b>전파</b>보고서·카드뉴스 등 어떤 매체로 변환돼도 매니페스트가 따라갑니다(부록·sources.txt) — 이미지도 media 직링크에서 소싱해 데이터와 지면의 계보가 일치, 받은 사람이 원 발굴로 복귀 가능</div>
   <div><b>지속</b>sha256 고정성(변조·원문 개정 감지)·영속 식별자 우선 인용·채널 주간 자동 감시 — 공개 지문 원장(<a href="/fixity-ledger.json">fixity-ledger.json</a>)으로 누구나 대조 가능합니다</div>
 </div>
 <p class="small">"○○ 매니페스트로 내줘"(format=manifest) · "그래프로"(karda) · "CSV로"(csv) — 풀패키지는 보존 패키지(manifest.json 동봉)로 납품됩니다.</p>
