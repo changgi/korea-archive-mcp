@@ -517,7 +517,6 @@ const COLLECT = {
         date: '', id: cpno, url: cpno ? `https://www.heritage.go.kr/heri/cul/culSelectDetail.do?ccbaCpno=${cpno}` : 'https://www.heritage.go.kr' });
       if (out.length >= n) break;
     }
-    if (!out.length) return [{ title: '[진단] 파싱 0 — 응답 선두: ' + b.slice(0, 150).replace(/\s+/g, ' '), date: '', id: '', url: 'https://www.khs.go.kr' }]; // TODO 확인 후 제거
     return out;
   },
   indy: async (q, n) => { // 국가기록원 독립운동판결문 테마관 — GET 실측(2026-11-21). 판결기관·날짜·주문+상세 딥링크(gonghun 수형기록의 원문 창구)
