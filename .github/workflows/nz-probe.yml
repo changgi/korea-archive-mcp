@@ -1,0 +1,41 @@
+name: nz-probe
+# Archives NZ(collections.archives.govt.nz) 역공학 일회성 탐사 — GH 러너만 Incapsula를 통과하므로
+# 여기서 SPA의 XHR/JSON 엔드포인트를 찾는다(개발망 차단 우회). 발견 시 수집기 설계 → icn1 직결 시도,
+# 불가 시 GH 주간 수확→정적 인덱스 폴백. 탐사 완료 후 이 워크플로는 삭제한다.
+on:
+  workflow_dispatch: {}
+jobs:
+  recon:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Arena 엔드포인트 탐사
+        run: |
+          set +e
+          UA="Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
+          B="https://collections.archives.govt.nz"
+          say(){ echo "::group::$1"; shift; "$@"; echo "::endgroup::"; }
+          fetch(){ # name url
+            hc=$(curl -sSL -m 25 -A "$UA" -c /tmp/cj -b /tmp/cj -o "/tmp/$1" -w '%{http_code} %{size_download} %{content_type}' "$2")
+            echo "[$1] $2 → $hc"
+          }
+          fetch p1 "$B/web/arena"
+          say "p1 scripts" grep -oE '(src|href)="[^"]+"' /tmp/p1 | sort -u | grep -viE '\.css|fonts|favicon' | head -40
+          say "p1 api hints" grep -oiE '[a-z0-9/_.-]{0,60}(api|rest|json|solr|opac|portlet|service)[a-z0-9/_.?=&-]{0,80}' /tmp/p1 | sort -u | head -40
+          fetch p2 "$B/web/arena/search?q=Korea"
+          say "p2 head" head -c 800 /tmp/p2
+          say "p2 result markers" grep -oiE 'search-result|hitlist|arena-record|data-[a-z-]*id="[^"]{1,30}"' /tmp/p2 | sort -u | head -20
+          fetch p3 "$B/api/wwwopac.ashx?command=search&database=collect&search=all&limit=2&output=json"
+          say "p3 head" head -c 500 /tmp/p3
+          fetch p4 "$B/web/arena/search?p_p_id=searchResult_WAR_arenaportlet&p_p_lifecycle=2&facet=&query=Korea"
+          say "p4 head" head -c 500 /tmp/p4
+          # SPA 번들에서 XHR 경로 추출 — 가장 큰 JS 2개
+          say "p1 js files" grep -oE 'src="[^"]+\.js[^"]*"' /tmp/p1 | sed 's/src="//; s/"$//' | head -10
+          for j in $(grep -oE 'src="[^"]+\.js[^"]*"' /tmp/p1 | sed 's/src="//; s/"$//' | head -4); do
+            case "$j" in http*) u="$j";; /*) u="$B$j";; *) u="$B/web/$j";; esac
+            curl -sSL -m 25 -A "$UA" -o /tmp/js -w "[js] $u → %{http_code} %{size_download}\n" "$u"
+            echo "::group::xhr paths in $u"
+            grep -oE '"(/[a-zA-Z0-9_/.-]{3,70})"' /tmp/js | sort -u | grep -iE 'api|search|record|solr|query|rest' | head -30
+            grep -oE 'https?://[a-zA-Z0-9_./-]{5,80}' /tmp/js | sort -u | grep -vE 'w3\.org|schema\.org|liferay\.com' | head -20
+            echo "::endgroup::"
+          done
+          true
