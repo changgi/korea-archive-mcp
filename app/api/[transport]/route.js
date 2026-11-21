@@ -473,6 +473,12 @@ const PART_OF = {
   ia: (it) => it.series && `IA Collection › ${it.series}`,
   tna: (it) => it.series && `TNA › ${it.series}`,
   europeana: (it) => it.series && `Europeana › ${it.series}`,
+  gonghun: (it) => it.series && `운동계열 › ${it.series}`,
+  indy: (it) => it.series && `판결기관 › ${it.series}`,
+  heritage: (it) => it.series && `지정 › ${it.series}`,
+  un: (it) => it.series && `UN › ${it.series}`,
+  gallica: (it) => it.series && `Gallica › ${it.series}`,
+  much: (it) => it.series && `박물관 › ${it.series}`,
 };
 const COLLECT = {
   tna: async (q, n) => {
@@ -493,7 +499,7 @@ const COLLECT = {
     const xml = await r.text();
     return xml.split('<srw:record>').slice(1, n + 1).map((b) => {
       const g = (t) => { const m = b.match(new RegExp(`<dc:${t}[^>]*>([^<]*)<`)); return m ? m[1].trim() : ''; };
-      return { title: g('title'), date: g('date'), id: g('identifier'), url: g('identifier') };
+      const ak = (g('identifier').match(/ark:\/12148\/(btv|bpt6k|bd6t)/) || [])[1]; const akn = { btv: '도판·사진(btv)', bpt6k: '인쇄본(bpt6k)', bd6t: '정기간행물(bd6t)' }[ak]; return { title: g('title'), date: g('date'), id: g('identifier'), ...(akn ? { series: akn } : {}), url: g('identifier') };
     });
   },
   europeana: async (q, n) => {
@@ -550,7 +556,7 @@ const COLLECT = {
       if (!recid) continue;
       const sym = sf(seg, '191', 'a');
       const title = norm(sf(seg, '245', 'a') + ' ' + sf(seg, '245', 'b')).replace(/[\s/:]+$/, '');
-      out.push({ title: `${sym ? `[${sym}] ` : ''}${title}`.slice(0, 110), date: sf(seg, '269', 'a') || sf(seg, '260', 'c'), id: sym || recid, url: 'https://digitallibrary.un.org/record/' + recid });
+      out.push({ title: `${sym ? `[${sym}] ` : ''}${title}`.slice(0, 110), date: sf(seg, '269', 'a') || sf(seg, '260', 'c'), id: sym || recid, ...(sym && sym.includes('/') ? { series: sym.split('/').slice(0, 2).join('/') } : {}), url: 'https://digitallibrary.un.org/record/' + recid });
       if (out.length >= n) break;
     }
     return out;
@@ -565,7 +571,7 @@ const COLLECT = {
       const cpno = g('ccbaCpno');
       const rawId = (g('ccbaKdcd') && g('ccbaAsno') && g('ccbaCtcd')) ? `${g('ccbaKdcd')}-${g('ccbaAsno')}-${g('ccbaCtcd')}` : cpno; // 상세 API 원값 보존
       out.push({ title: `${name}${g('ccbaMnm2') ? `(${g('ccbaMnm2')})` : ''}${g('ccmaName') ? ` [${g('ccmaName')}]` : ''}${g('ccbaCtcdNm') ? ` — ${g('ccbaCtcdNm')} ${g('ccsiName')}` : ''}`.slice(0, 110),
-        date: '', id: rawId, url: cpno ? `https://www.heritage.go.kr/heri/cul/culSelectDetail.do?ccbaCpno=${cpno}` : 'https://www.heritage.go.kr' });
+        date: '', id: rawId, ...(g('ccmaName') ? { series: g('ccmaName') } : {}), url: cpno ? `https://www.heritage.go.kr/heri/cul/culSelectDetail.do?ccbaCpno=${cpno}` : 'https://www.heritage.go.kr' });
       if (out.length >= n) break;
     }
     return out;
@@ -574,7 +580,7 @@ const COLLECT = {
     const b = await gtext('https://theme.archives.go.kr/next/indy/listkeywordSrch.do?keyword=' + encodeURIComponent(q) + '&listSize=' + Math.min(n, 20));
     const out = [];
     for (const m of b.matchAll(/<a href="(\/next\/indy\/viewIndyDetail\.do[^"]+)">\s*<span>\s*([^<]+?)\s*<\/span>[\s\S]{0,400}?<td class="left">([^<]*)<\/td>\s*<td>(\d{8})<\/td>\s*<td class="left">([^<]*)<\/td>/g)) {
-      out.push({ title: `[판결문] ${norm(m[2])} — ${norm(m[3])} · ${norm(m[5]).slice(0, 40)}`.slice(0, 115), date: m[4], id: '', url: 'https://theme.archives.go.kr' + m[1].replace(/&amp;/g, '&') });
+      out.push({ title: `[판결문] ${norm(m[2])} — ${norm(m[3])} · ${norm(m[5]).slice(0, 40)}`.slice(0, 115), date: m[4], id: '', ...(norm(m[3]) ? { series: norm(m[3]) } : {}), url: 'https://theme.archives.go.kr' + m[1].replace(/&amp;/g, '&') });
       if (out.length >= n) break;
     }
     return out;
@@ -587,7 +593,7 @@ const COLLECT = {
     const b = await r.text();
     const out = [];
     for (const m of b.matchAll(/<a href="(\/archive\/[\w/]+view\.do\?idnbr=[^"]+)">[\s\S]{0,420}?<strong>([\s\S]*?)<\/strong>[\s\S]{0,320}?자료연대\s*:\s*([^<]{1,20})/g)) {
-      out.push({ title: norm(m[2].replace(/<[^>]+>/g, '')).slice(0, 110), date: norm(m[3]), id: (m[1].match(/idnbr=([\w-]+)/) || [])[1] || '', url: 'https://archive.much.go.kr' + m[1] });
+      out.push({ title: norm(m[2].replace(/<[^>]+>/g, '')).slice(0, 110), date: norm(m[3]), id: (m[1].match(/idnbr=([\w-]+)/) || [])[1] || '', ...((m[1].split('/')[2] || '') ? { series: m[1].split('/')[2] } : {}), url: 'https://archive.much.go.kr' + m[1] });
       if (out.length >= n) break;
     }
     if (out.length < n) for (const c of b.matchAll(/<strong>([가-힣 ]{2,12})<\/strong><span>총 "([\d,]+)건"/g)) { // 카테고리 집계 신호 보충
@@ -741,6 +747,7 @@ const COLLECT = {
       const tds = [...seg.matchAll(/<td[^>]*>\s*([^<]{1,60}?)\s*</g)].map((x) => norm(x[1])).filter(Boolean).slice(0, 6);
       // tds: 한자명·생몰년·운동계열·포상년도·포상훈격·생존여부
       out.push({ title: `${name}${tds[0] ? `(${tds[0]})` : ''} ${tds[1] || ''} · ${tds[2] || ''} · ${tds[3] || ''} ${tds[4] || ''}`.replace(/\s+/g, ' ').trim(),
+        ...(tds[2] ? { series: tds[2] } : {}),
         date: tds[3] || '', id: mn[1],
         url: `https://e-gonghun.mpva.go.kr/user/ContribuReportDetail.do?goTocode=20001&mngNo=${mn[1]}&pageTitle=Report` });
       if (out.length >= n) break;
