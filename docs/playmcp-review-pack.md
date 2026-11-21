@@ -42,7 +42,7 @@
 17. **박물관 실물+KOGL 자동**: `nedb_search("PS…-003418-…", mode="much")` — 「판문점 미루나무 작전」 영화 포스터: 재질·크기·**공공누리 제4유형→B 자동 초판정**·설명.
 18. **국가유산 해설**: `nedb_search("근정전", mode="heritage")` → 복합 id → 재투입 — [국보]·시대(1867 중건)·**해설 전문**(정도전 작명·다포식·12지신상). 전시·공간사 맥락 직결.
 19. **매직 키워드**: "장진호 풀패키지로 만들어줘" → full_package 오케스트레이션 / "창기창기 도와줘" → help.
-20. **현용기록물화 사슬(데이터화 3종)**: `cross_search("유관순", format="manifest")` — ISAD(G)·RiC 지향 JSON-LD 수집기록(provenance=증거성·heldBy=맥락·**fixity sha256**=고정성, 재현 호출문 포함) / `format="karda"` — 지식그래프 nodes/edges(매니페스트와 node 키 공유) / 판독 상세('사전:614'·mngNo)엔 **판독 시점 본문 지문** — 재판독 불일치=원문 개정 감지. 풀패키지 9단계(보존 패키지 SIP)가 전 산출물에 manifest.json 동봉(2026-11-21 실측).
+20. **현용기록물화 사슬(데이터화 3종)**: `cross_search("유관순", format="manifest")` — ISAD(G)·RiC 지향 JSON-LD 수집기록(provenance=증거성·heldBy=맥락·**fixity sha256**=고정성, 재현 호출문 포함) / `format="karda"` — 지식그래프 nodes/edges(매니페스트와 node 키 공유) / 판독 상세('사전:614'·mngNo)엔 **판독 시점 본문 지문** — 재판독 불일치=원문 개정 감지. 풀패키지 9단계(보존 패키지 SIP)가 전 산출물에 manifest.json 동봉(2026-11-21 실측). **공개 지문 원장**(https://korea-archive-mcp.vercel.app/fixity-ledger.json) — 골든 7종 주간 감시·개정 이력 공개, 제3자 대조 가능.
 
 ## 알려진 채널 상태 (health 실측, 2026-11-21 — 30채널)
 - 🟢 **28채널 정상** — 신규 합류 10소스(oldnews·much·indy·commons·un·ndl·heritage·dnz·nzarch·인명사전) 전부 녹색. 응답시간 중앙값 ~1.1s
