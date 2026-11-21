@@ -471,13 +471,15 @@ const PART_OF = {
   aks: (it) => it.series && `고문서 › ${it.series}`,
   dnz: (it) => it.series && `NZ › ${it.series}`,
   ia: (it) => it.series && `IA Collection › ${it.series}`,
+  tna: (it) => it.series && `TNA › ${it.series}`,
+  europeana: (it) => it.series && `Europeana › ${it.series}`,
 };
 const COLLECT = {
   tna: async (q, n) => {
     q = koToEn(q) || q;
     const query = /^[A-Z]+ \d+\/\d+$/.test(q.trim()) ? `"${q.trim()}"` : q;
     const d = await tnaFetch(query, n);
-    return (d.records || []).map((r) => ({ title: r.title || r.description, date: r.coveringDates || '', id: r.reference || '', url: `https://discovery.nationalarchives.gov.uk/details/r/${r.id}` }));
+    return (d.records || []).map((r) => { const ref = String(r.reference || ''); return { title: r.title || r.description, date: r.coveringDates || '', id: ref, ...(ref.includes('/') ? { series: ref.split('/')[0] } : {}), url: `https://discovery.nationalarchives.gov.uk/details/r/${r.id}` }; });
   },
   ia: async (q, n) => {
     q = koToEn(q) || q;
@@ -498,7 +500,7 @@ const COLLECT = {
     q = koToEn(q) || q;
     const key = process.env.EUROPEANA_API_KEY || 'api2demo';
     const d = await jget(`https://api.europeana.eu/record/v2/search.json?wskey=${key}&query=${encodeURIComponent(q)}&rows=${n}&profile=standard`);
-    return (d.items || []).map((it) => ({ title: (it.title || ['?'])[0], date: (it.year || [''])[0], id: it.id || '', url: it.guid || '' }));
+    return (d.items || []).map((it) => ({ title: (it.title || ['?'])[0], date: (it.year || [''])[0], id: it.id || '', ...(((it.dataProvider || [])[0]) ? { series: (it.dataProvider || [])[0] } : {}), url: it.guid || '' }));
   },
   nara: async (q, n) => {
     q = koToEn(q) || q;
@@ -2427,9 +2429,9 @@ item_cd 5종(자료 성격별): ART 도설·회화 / ETC 두루마리·축 / DRR
       if (format === 'csv') { // 분석 투입용 구조화 출력 — "자료로써 분석할 수 있게". node=karda·manifest와 동일 조인 키(v1.71)
         const esc = (v) => `"${String(v == null ? '' : v).replace(/"/g, '""')}"`;
         const ridc = (it, i) => 'rec:' + (it.id ? `${it.sources[0].split('·')[0]}:${it.id}` : `m${i}`);
-        const rows = items.slice(0, 45).map((it, i) => [ridc(it, i), it.sources.join('+'), it.title, it.date, it.id, it.url].map(esc).join(','));
+        const rows = items.slice(0, 45).map((it, i) => { const hb0 = it.sources[0].split('·')[0]; const po = (PART_OF[hb0] && PART_OF[hb0](it)) || ''; return [ridc(it, i), it.sources.join('+'), it.title, it.date, it.id, it.url, po].map(esc).join(','); });
         return text(`교차수집 '${query}' CSV — 채널별 [${stats.join(' · ')}] → 병합 ${items.length}건 (45건 상한):\n`
-          + 'node,sources,title,date,id,url\n' + rows.join('\n')
+          + 'node,sources,title,date,id,url,partOf\n' + rows.join('\n')
           + '\n※ 그대로 스프레드시트·KARDA 온톨로지(nodes/edges)·통계 분석에 투입 가능. 권리 초판정: judge_rights.');
       }
       const lines = items.slice(0, 45).map((it) => `- [${it.sources.join('+')}] ${it.title.slice(0, 95)}${it.date ? ` (${it.date})` : ''}${it.url ? ' ' + it.url : ''}`);
