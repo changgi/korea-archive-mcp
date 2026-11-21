@@ -222,7 +222,9 @@ async function collectMerged(collectors) {
     const tgt = it.sameAs && byId.get(it.sameAs);
     if (!tgt || tgt === it) continue;
     for (const s of it.sources) if (!tgt.sources.includes(s)) tgt.sources.push(s);
-    tgt.sameAs = `${it.sources[0].split('·')[0]}:${it.id}`; tgt.altTitle = it.title.slice(0, 110);
+    const link = `${it.sources[0].split('·')[0]}:${it.id}`; // 복수 기관 연결은 누적(덮어쓰기 금지)
+    tgt.sameAs = tgt.sameAs && tgt.sameAs !== link ? `${tgt.sameAs} | ${link}` : link;
+    if (!tgt.altTitle && norm(it.title).toLowerCase() !== norm(tgt.title).toLowerCase()) tgt.altTitle = it.title.slice(0, 110); // 다른 기관 제목(언어가 다르면) 보존
     if (!tgt.date && it.date) tgt.date = it.date;
     drop.add(it);
   }
@@ -524,7 +526,8 @@ const COLLECT = {
   ia: async (q, n) => {
     q = koToEn(q) || q;
     const d = await jget(`https://archive.org/advancedsearch.php?q=${encodeURIComponent(q)}&fl[]=identifier&fl[]=title&fl[]=date&fl[]=collection&rows=${n}&output=json`);
-    return ((d.response || {}).docs || []).map((x) => ({ title: String(x.title || ''), date: x.date || '', id: x.identifier, ...((Array.isArray(x.collection) ? x.collection[0] : x.collection) ? { series: String(Array.isArray(x.collection) ? x.collection[0] : x.collection) } : {}), url: `https://archive.org/details/${x.identifier}` }));
+    // v1.87: NARA 재게시본 식별자 gov.archives.arc.<NAID> → sameAs(원본 NAID) — 추가 조회 없이 동일 기록 병합(44175 실측 일치)
+    return ((d.response || {}).docs || []).map((x) => { const an = (String(x.identifier || '').match(/^gov\.archives\.arc\.(\d+)$/) || [])[1]; return { title: String(x.title || ''), date: x.date || '', id: x.identifier, ...((Array.isArray(x.collection) ? x.collection[0] : x.collection) ? { series: String(Array.isArray(x.collection) ? x.collection[0] : x.collection) } : {}), ...(an ? { sameAs: `NAID ${an}` } : {}), url: `https://archive.org/details/${x.identifier}` }; });
   },
   gallica: async (q, n) => {
     q = gallicaKoToFr(q) || q;
