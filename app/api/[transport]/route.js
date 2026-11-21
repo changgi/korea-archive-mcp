@@ -651,7 +651,7 @@ const COLLECT = {
     return Object.values((d.query || {}).pages || {}).sort((a, b) => (a.index || 0) - (b.index || 0)).map((it) => {
       const t2 = String(it.title || '');
       const cat = String((((it.categories || [])[0] || {}).title || '')).replace(/^Category:/, '');
-      const iiu = String((((it.imageinfo || [])[0] || {}).url || '')); // v1.84: 원본 파일 직링크(다매체 — PD 사진 즉시 소싱)
+      const iiu = String((((it.imageinfo || [])[0] || {}).url || '')).split('?')[0]; // v1.84: 원본 파일 직링크(utm 추적 파라미터 제거 — 절단 없는 영속 URL)
       return { title: t2.replace(/^File:/, '').slice(0, 110), date: '', id: '', ...(cat ? { series: cat.slice(0, 80) } : {}), ...(iiu ? { media: iiu } : {}), url: 'https://commons.wikimedia.org/wiki/' + encodeURIComponent(t2.replace(/ /g, '_')) };
     });
   },
