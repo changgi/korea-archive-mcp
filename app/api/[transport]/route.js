@@ -1341,10 +1341,34 @@ const JB_CROSS = `국내외 대조 절차 — 순서를 틀리면 헛수고한�
 
 
   server.tool('nedb_search',
-    "국사편찬위 한국사DB(db.history.go.kr) 검색 + 기관별 심층 판독 모드. mode: total=통합검색(기본) · law=법전·편람 조문(한문 원문 제공 판정) · record=등록류(座目 자동 필터 — 건수 지표화 전 필수) · item=levelId 본문 판독(미공개/파싱실패 구분) · sibling=★형제 조 전수 스캔(levelId — 조문을 열었으면 반드시 이어 호출, 총론만으론 핵심을 놓친다) · matrix=법전 수록 대조(쉼표구분 어휘 ≤8 — 부재의 발견) · origin=어휘 연원('용어' 또는 '용어,영역') · sjw=승정원일기(왕대 분포·최초 용례) · kyujanggak=규장각 목록+해제(절목류는 해제에서 발견) · aks=한국고문서자료관(문중·서원 172곳→분류→문서 면·썸네일) · jacar=일본 아시아역사자료센터(한→일 변환·레퍼런스코드 직행·±span×100 인접) · gonghun=공훈전자사료관(이름→mngNo 투입 시 공적조서·공훈록) · i815=독립기념관(detail URL=본문·사전:이름/번호=전기·훈격) · ktv=KTV(→view URL 투입 시 영상 해설·상영정보, KOGL) · earchive=국편 전자사료관(키워드 목록→'키워드|순번' 투입 시 상세: 열람·이용조건·등록번호) · commons=위키미디어 공용(키워드 목록→File URL 투입 시 라이선스·원 소장처·설명 판독) · jsg=장서각(→청구기호 K2-… 투입 시 서지·해제 전문) · un=UN(→recid 투입 시 요약·주제·PDF) · oldnews=신문(CNTS=색인어·관련기사 · '본문:…[|1905-1910]'=OCR+연대) · much=박물관(→idnbr 투입 시 재질·공공누리·설명) · indy=판결문(이름→상세 URL 투입 시 죄명·주문·사건개요·원문 뷰어) · heritage=국가유산(국보·보물·사적 목록+딥링크. cpno 상세는 일부만 — 실패 시 포털 안내). 판정 우선: '601건' 아니라 '492건이 座目'을 반환.",
-    { query: z.string().describe("검색어 · levelId(item/sibling) · 쉼표구분 어휘(matrix) · '용어,영역'(origin) · 소장처명/L-ID(aks) · 이름/mngNo(gonghun)"), db: z.string().default(''), max_results: z.number().int().min(1).max(50).default(15), mode: z.enum(['total', 'law', 'record', 'item', 'sibling', 'matrix', 'origin', 'sjw', 'kyujanggak', 'aks', 'jacar', 'gonghun', 'i815', 'ktv', 'earchive', 'commons', 'jsg', 'un', 'oldnews', 'much', 'indy', 'heritage']).default('total'), span: z.number().int().min(2).max(12).default(8).describe('sibling 모드 스캔 폭') },
+    "국사편찬위 한국사DB(db.history.go.kr) 검색 + 기관별 심층 판독 모드. mode: total=통합검색(기본) · law=법전·편람 조문(한문 원문 제공 판정) · record=등록류(座目 자동 필터 — 건수 지표화 전 필수) · item=levelId 본문 판독(미공개/파싱실패 구분) · sibling=★형제 조 전수 스캔(levelId — 조문을 열었으면 반드시 이어 호출, 총론만으론 핵심을 놓친다) · matrix=법전 수록 대조(쉼표구분 어휘 ≤8 — 부재의 발견) · origin=어휘 연원('용어' 또는 '용어,영역') · sjw=승정원일기(왕대 분포·최초 용례) · kyujanggak=규장각 목록+해제(절목류는 해제에서 발견) · aks=한국고문서자료관(문중·서원 172곳→분류→문서 면·썸네일) · jacar=일본 아시아역사자료센터(한→일 변환·레퍼런스코드 직행·±span×100 인접) · gonghun=공훈전자사료관(이름→mngNo 투입 시 공적조서·공훈록) · i815=독립기념관(detail URL=본문·사전:이름/번호=전기·훈격) · ktv=KTV(→view URL 투입 시 영상 해설·상영정보, KOGL) · earchive=국편 전자사료관(키워드 목록→'키워드|순번' 투입 시 상세: 열람·이용조건·등록번호) · commons=위키미디어 공용(키워드 목록→File URL 투입 시 라이선스·원 소장처·설명 판독) · jsg=장서각(→청구기호 K2-… 투입 시 서지·해제 전문) · un=UN(→recid 투입 시 요약·주제·PDF) · oldnews=신문(CNTS=색인어·관련기사 · '본문:…[|1905-1910]'=OCR+연대) · much=박물관(→idnbr 투입 시 재질·공공누리·설명) · indy=판결문(이름→상세 URL 투입 시 죄명·주문·사건개요·원문 뷰어) · heritage=국가유산(목록+딥링크. cpno 상세 일부) · nzarch=NZ기록원(R번호=상세 메타). 판정 우선: 건수 아니라 '492건이 座目'을 반환.",
+    { query: z.string().describe("검색어 · levelId(item/sibling) · 쉼표구분 어휘(matrix) · '용어,영역'(origin) · 소장처명/L-ID(aks) · 이름/mngNo(gonghun)"), db: z.string().default(''), max_results: z.number().int().min(1).max(50).default(15), mode: z.enum(['total', 'law', 'record', 'item', 'sibling', 'matrix', 'origin', 'sjw', 'kyujanggak', 'aks', 'jacar', 'gonghun', 'i815', 'ktv', 'earchive', 'commons', 'jsg', 'un', 'oldnews', 'much', 'indy', 'heritage', 'nzarch']).default('total'), span: z.number().int().min(2).max(12).default(8).describe('sibling 모드 스캔 폭') },
     async ({ query, max_results, mode, span }) => {
       const q = query.trim();
+      if (mode === 'nzarch') { // Archives NZ 상세 판독 — R번호 투입 시 entity 전체 메타(시리즈·기관·계층·열람·권리) + 메타 지문. v1.69
+        try {
+          const rn = q.match(/^[Rr](\d{5,9})$/) ? 'R' + q.match(/^[Rr](\d{5,9})$/)[1] : (q.match(/^\d{5,9}$/) ? 'R' + q : null);
+          if (!rn) return text("nzarch 판독: R번호(예 R17717658)를 입력하십시오. 번호는 cross_search(sources='nzarch')가 제공.");
+          const b = await gtext('https://collections.archives.govt.nz/federated-search/customers/aims/search?size=3&facetSize=0&start=0&isFuzzy=false&sourceId=aims-archive&q=' + rn);
+          const line = b.split('\n').find((l) => l.startsWith('data:') && l.includes('"totalHits"'));
+          if (!line) return text(`[${rn}] 간헐 차단 — 잠시 후 재시도 또는 브라우저: https://collections.archives.govt.nz/web/arena/search#/entity/aims-archive/${rn}`);
+          const j = JSON.parse(line.slice(5));
+          const h = (j.hits || []).find((x) => ((x.entity || {}).id || '') === rn) || (j.hits || [])[0];
+          if (!h) return text(`[${rn}] 레코드 미발견 — 번호를 확인하십시오.`);
+          const e = h.entity || {};
+          const cf = (k) => { try { return String(e.custom[k].value.map((v) => v.value).join(' | ')); } catch { return ''; } };
+          const mfp = createHash('sha256').update(String(e.name || '') + '\n' + JSON.stringify(e.custom || {})).digest('hex').slice(0, 16);
+          return text(`Archives NZ(Te Rua Mahara) 판독 — ${e.id || rn}\n제목: ${e.name || '(무제)'}\n`
+            + [e.descriptionLevel && `기술계층 ${e.descriptionLevel}`, cf('itemLevel') && `형태 ${cf('itemLevel')}`, cf('resultDate') && `연대 ${cf('resultDate')}`, e.holdingsLocation && `소장 ${e.holdingsLocation}`].filter(Boolean).join(' · ') + '\n'
+            + (cf('series') ? `시리즈: ${cf('series')}${e.parentId ? ` (Series ${e.parentId})` : ''}\n` : '')
+            + (cf('resultField4') ? `생산 기관: ${cf('resultField4').replace(/^Agency:\s*/, '')}\n` : '')
+            + (cf('accessStatus') ? `접근 상태: ${cf('accessStatus')} — 발굴 우선: 권리는 표시 대상\n` : '')
+            + ((e.orderType || []).length ? `열람 방법: ${e.orderType.join(' · ')}\n` : '')
+            + `메타 지문(sha256-16): ${mfp} — 판독 시점 기술(記述) 전체 기준. 재판독 지문 불일치=기술 개정 발생.\n`
+            + `레코드: https://collections.archives.govt.nz/web/arena/search#/entity/aims-archive/${e.id || rn}\n`
+            + '※ 출처: Archives New Zealand Te Rua Mahara o te Kāwanatanga — 게재 시 출처 표기. May be restricted는 기관 열람 신청 대상.');
+        } catch (err) { return text(`Archives NZ 오류(${String(err && err.message || err).slice(0, 60)}) — 잠시 후 재시도.`); }
+      }
       if (mode === 'heritage') { // 국가유산 — 키워드 목록 / ccbaCpno 상세(해설·시대·소유/관리). cpno=구분1+종목2+시도2+지정8 분해
         try {
           const rid = q.match(/^(\d{2})-([0-9A-Za-z]+)-(\d{2})$/); // 목록이 보존한 원값(kdcd-asno-ctcd)
