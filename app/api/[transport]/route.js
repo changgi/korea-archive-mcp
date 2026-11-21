@@ -1203,10 +1203,43 @@ const JB_CROSS = `국내외 대조 절차 — 순서를 틀리면 헛수고한�
 
 
   server.tool('nedb_search',
-    "Search 국사편찬위 한국사데이터베이스 (db.history.go.kr) + 조선 사료 심층 판독 (verified POST routes from the Han-river vessel study). mode: total=통합검색(기본) · law=법전·편람 조문(한문 원문 제공 판정) · record=등록류(座目 자동 필터 — 건수 지표화 전 필수) · item=levelId 본문 판독(미공개/파싱실패 구분) · sibling=★형제 조 전수 스캔(levelId — 조문을 열었으면 반드시 이어 호출, 총론만으론 핵심을 놓친다) · matrix=법전 수록 대조(쉼표구분 어휘 ≤8 — 부재의 발견) · origin=어휘 연원('용어' 또는 '용어,영역') · sjw=승정원일기(왕대 분포·최초 용례) · kyujanggak=규장각 목록+해제(절목류는 해제에서 발견) · aks=한국고문서자료관(문중·서원 — 소장처 172곳→분류→문서 면·썸네일, query=소장처명/L-ID/'분류ID/문서ID') · jacar=일본 아시아역사자료센터(한→일 자동 변환 검색·레퍼런스코드 메타 직행·±span×100 인접 채굴) · gonghun=공훈전자사료관 독립유공자(query=이름 검색→mngNo 숫자 투입 시 공적조서·공훈록 본문 판독) · i815=독립기념관(query=키워드 목록→detail.do URL 투입 시 당대 신문기사·독립운동가 자료 본문 판독) · ktv=KTV e영상역사관(키워드 목록→ehistory view URL 투입 시 영상 해설·상영정보 판독, KOGL) · earchive=국편 전자사료관(키워드 목록→'키워드|순번' 투입 시 상세: 열람·이용조건·등록번호) · commons=위키미디어 공용(키워드 목록→File URL 투입 시 라이선스·원 소장처·설명 판독). 판정 우선: '601건'이 아니라 '492건이 座目'을 반환.",
-    { query: z.string().describe("검색어 · levelId(item/sibling) · 쉼표구분 어휘(matrix) · '용어,영역'(origin) · 소장처명/L-ID(aks) · 이름/mngNo(gonghun)"), db: z.string().default(''), max_results: z.number().int().min(1).max(50).default(15), mode: z.enum(['total', 'law', 'record', 'item', 'sibling', 'matrix', 'origin', 'sjw', 'kyujanggak', 'aks', 'jacar', 'gonghun', 'i815', 'ktv', 'earchive', 'commons']).default('total'), span: z.number().int().min(2).max(12).default(8).describe('sibling 모드 스캔 폭') },
+    "Search 국사편찬위 한국사데이터베이스 (db.history.go.kr) + 조선 사료 심층 판독 (verified POST routes from the Han-river vessel study). mode: total=통합검색(기본) · law=법전·편람 조문(한문 원문 제공 판정) · record=등록류(座目 자동 필터 — 건수 지표화 전 필수) · item=levelId 본문 판독(미공개/파싱실패 구분) · sibling=★형제 조 전수 스캔(levelId — 조문을 열었으면 반드시 이어 호출, 총론만으론 핵심을 놓친다) · matrix=법전 수록 대조(쉼표구분 어휘 ≤8 — 부재의 발견) · origin=어휘 연원('용어' 또는 '용어,영역') · sjw=승정원일기(왕대 분포·최초 용례) · kyujanggak=규장각 목록+해제(절목류는 해제에서 발견) · aks=한국고문서자료관(문중·서원 — 소장처 172곳→분류→문서 면·썸네일, query=소장처명/L-ID/'분류ID/문서ID') · jacar=일본 아시아역사자료센터(한→일 자동 변환 검색·레퍼런스코드 메타 직행·±span×100 인접 채굴) · gonghun=공훈전자사료관 독립유공자(query=이름 검색→mngNo 숫자 투입 시 공적조서·공훈록 본문 판독) · i815=독립기념관(query=키워드 목록→detail.do URL 투입 시 당대 신문기사·독립운동가 자료 본문 판독) · ktv=KTV e영상역사관(키워드 목록→ehistory view URL 투입 시 영상 해설·상영정보 판독, KOGL) · earchive=국편 전자사료관(키워드 목록→'키워드|순번' 투입 시 상세: 열람·이용조건·등록번호) · commons=위키미디어 공용(키워드 목록→File URL 투입 시 라이선스·원 소장처·설명 판독) · jsg=장서각(키워드 목록→청구기호 K2-…/URL 투입 시 서지·해제 전문 판독). 판정 우선: '601건'이 아니라 '492건이 座目'을 반환.",
+    { query: z.string().describe("검색어 · levelId(item/sibling) · 쉼표구분 어휘(matrix) · '용어,영역'(origin) · 소장처명/L-ID(aks) · 이름/mngNo(gonghun)"), db: z.string().default(''), max_results: z.number().int().min(1).max(50).default(15), mode: z.enum(['total', 'law', 'record', 'item', 'sibling', 'matrix', 'origin', 'sjw', 'kyujanggak', 'aks', 'jacar', 'gonghun', 'i815', 'ktv', 'earchive', 'commons', 'jsg']).default('total'), span: z.number().int().min(2).max(12).default(8).describe('sibling 모드 스캔 폭') },
     async ({ query, max_results, mode, span }) => {
       const q = query.trim();
+      if (mode === 'jsg') { // 장서각 — 키워드 목록 / 청구기호·URL 서지+해제 전문 판독(서버 렌더 실측 2026-11-21)
+        try {
+          const dm = q.match(/dataId=(JSG_[\w.-]+)/) || q.match(/^(JSG_[\w.-]+)$/) || q.match(/^([A-Z]\d+(?:-\d+)*(?:[A-Za-z]*\d*)?)$/);
+          if (dm && !/\s/.test(q) && (dm[1].startsWith('JSG_') || /^[A-Z]\d/.test(dm[1]))) {
+            const did = dm[1].startsWith('JSG_') ? dm[1] : 'JSG_' + dm[1];
+            const b = await cachedText('jsgD:' + did, 24 * 3600e3, () => gtext('https://jsg.aks.ac.kr/dir/view?dataId=' + encodeURIComponent(did)), '청구기호');
+            const flat = dclean(b).replace(/&middot;/g, '·');
+            const pick = (re2) => ((flat.match(re2) || [])[1] || '').trim();
+            const name = pick(/자료명\(한글\)\s*([^·]{2,60}?)\s*·/);
+            const callno = pick(/청구기호\s+(\S{2,20})/);
+            const mf = pick(/MF번호\s+(\S{2,20})/);
+            // 분류 3종은 연쇄 앵커로 — 단독 매칭은 내비게이션 필터 라벨과 혼동(실측)
+            const cm = flat.match(/유형분류\s+(\S{2,20})\s+주제분류\s+(\S{2,30})\s+수집분류\s+(\S{2,30})/) || [];
+            const cls = cm[1] || ''; const subj = cm[2] || '';
+            const i0 = flat.indexOf('정의 ');
+            let haeje = '';
+            if (i0 >= 0) {
+              haeje = flat.slice(i0, i0 + 6000).split(/집필자|관련 멀티미디어|장서각 디지털아카이브 바로가기/)[0].trim();
+              if (haeje.length > 4000) haeje = haeje.slice(0, 4000) + ` …(총 ${haeje.length}자 — 전문은 원문 링크)`;
+            }
+            if (!callno && !haeje) return text(`'${did}' — 상세 미발견 또는 구조 상이. 청구기호(K2-…)를 확인하거나 mode=jsg에 검색어를 넣으십시오.`);
+            return text(`장서각 서지·해제 판독 — ${name || did}\n`
+              + [callno && `청구기호 ${callno}`, mf && `MF ${mf}`, cls, subj].filter(Boolean).join(' · ') + '\n'
+              + (haeje ? `【해제】\n${haeje}\n` : '')
+              + `원문·이미지: https://jsg.aks.ac.kr/dir/view?dataId=${encodeURIComponent(did)}\n`
+              + '※ 출처: 한국학중앙연구원 장서각 — 게재 시 출처 표기, 이미지 재이용은 기관 이용조건 준수. 해제 인용은 국역·해설(학술 인용 시 집필 해제임을 명기).');
+          }
+          const items = await COLLECT.jsg(q, Math.min(max_results, 10));
+          if (!items.length) return text(`장서각 '${q}' — 0건. 서명·주제어(의궤·등록 등)로 재시도하십시오.`);
+          return text(`장서각 '${q}' — ${items.length}건:\n` + items.map((it) => `- ${it.title}${it.id ? ` [${it.id}]` : ''}\n  ${it.url}`).join('\n')
+            + '\n※ 청구기호(K2-… 등)나 상세 URL을 mode=jsg query로 재투입 → 서지·해제 전문 판독.');
+        } catch (e) { return text(`장서각 오류(${String(e && e.message || e).slice(0, 60)}) — 잠시 후 재시도 또는 브라우저: https://jsg.aks.ac.kr`); }
+      }
       if (mode === 'commons') { // 위키미디어 공용 — 키워드 목록 / File URL 판독(라이선스·원 소장처·설명)
         try {
           const UAH = { 'User-Agent': 'KoreaArchiveMCP/1.0 (https://github.com/changgi/korea-archive-mcp; archival discovery)' };
