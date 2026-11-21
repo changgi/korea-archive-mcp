@@ -1356,10 +1356,12 @@ const JB_CROSS = `국내외 대조 절차 — 순서를 틀리면 헛수고한�
             const name = g('ccbaMnm1');
             if (!name) return text(`[${q}] 상세 미매칭 — 포털에서 열람하십시오(목록의 딥링크).`);
             let content = dclean(g('content'));
+            const hfp = content ? createHash('sha256').update(content).digest('hex').slice(0, 16) : ''; // 판독 시점 해설 지문
             if (content.length > 3500) content = content.slice(0, 3500) + ` …(총 ${content.length}자 — 전문은 포털)`;
             return text(`국가유산 판독 — ${name}${g('ccbaMnm2') ? `(${g('ccbaMnm2')})` : ''} [${g('ccmaName') || ''}]\n`
               + [g('ccbaPoss') && `소유 ${g('ccbaPoss')}`, g('ccbaAdmin') && `관리 ${g('ccbaAdmin')}`, g('ccceName') && `시대 ${g('ccceName')}`, g('ccbaLcad') && `소재 ${dclean(g('ccbaLcad')).slice(0, 60)}`].filter(Boolean).join(' · ') + '\n'
               + (content ? `【해설】\n${content}\n` : '')
+              + (hfp ? `본문 지문(sha256-16): ${hfp} — 판독 시점 해설 전문 기준. 재판독 지문 불일치=원문 개정 발생.\n` : '')
               + '※ 출처: 국가유산청 국가유산포털 — 게재 시 출처 표기. 사진 이용은 공공누리 유형 확인.');
           }
           const hm = q.match(/ccbaCpno=(\d{13})/) || q.match(/^(\d{13})$/);
@@ -1378,10 +1380,12 @@ const JB_CROSS = `국내외 대조 절차 — 순서를 틀리면 헛수고한�
             const name = g('ccbaMnm1');
             if (!name) return text(`[${cpno}] 상세 API 미매칭(기관 식별 편차 — 2026-11-21 명세 기록). 해설은 포털에서: https://www.heritage.go.kr/heri/cul/culSelectDetail.do?ccbaCpno=${cpno}`);
             let content = dclean(g('content'));
+            const hfp = content ? createHash('sha256').update(content).digest('hex').slice(0, 16) : ''; // 판독 시점 해설 지문
             if (content.length > 3500) content = content.slice(0, 3500) + ` …(총 ${content.length}자 — 전문은 포털)`;
             return text(`국가유산 판독 — ${name}${g('ccbaMnm2') ? `(${g('ccbaMnm2')})` : ''} [${g('ccmaName') || ''}${g('crltsnoNm') ? ` ${g('crltsnoNm')}` : ''}]\n`
               + [g('ccbaPoss') && `소유 ${g('ccbaPoss')}`, g('ccbaAdmin') && `관리 ${g('ccbaAdmin')}`, g('ccceName') && `시대 ${g('ccceName')}`, g('ccbaLcad') && `소재 ${dclean(g('ccbaLcad')).slice(0, 60)}`].filter(Boolean).join(' · ') + '\n'
               + (content ? `【해설】\n${content}\n` : '')
+              + (hfp ? `본문 지문(sha256-16): ${hfp} — 판독 시점 해설 전문 기준. 재판독 지문 불일치=원문 개정 발생.\n` : '')
               + `포털 상세: https://www.heritage.go.kr/heri/cul/culSelectDetail.do?ccbaCpno=${cpno}\n`
               + '※ 출처: 국가유산청 국가유산포털 — 게재 시 출처 표기(해설문 인용 시 포털 명기). 사진 이용은 공공누리 유형 확인.');
           }
@@ -1411,6 +1415,7 @@ const JB_CROSS = `국내외 대조 절차 — 순서를 틀리면 헛수고한�
               + [addr && `본적/주소 ${addr}`, organ && `판결기관 ${organ}`, vdate && `판결 ${vdate}`].filter(Boolean).join(' · ') + '\n'
               + (crime ? `죄명: ${crime}\n` : '') + (sent ? `주문: ${sent}\n` : '')
               + (kase ? `【사건개요】\n${kase}\n` : '')
+              + (kase ? `본문 지문(sha256-16): ${createHash('sha256').update(kase + '\n' + (sent || '')).digest('hex').slice(0, 16)} — 판독 시점 사건개요·주문 기준. 재판독 지문 불일치=원문 개정 발생.\n` : '')
               + (evnt ? `판결문 원문 뷰어: https://theme.archives.go.kr/viewer/common/archWebViewer.do?archiveEventId=${evnt}\n` : '')
               + '※ 출처: 국가기록원 독립운동판결문 — 게재 시 출처 표기. 수형 사실의 존엄 고려(게재윤리). gonghun 수형기록과 교차검증 권장.');
           }
@@ -1540,14 +1545,17 @@ const JB_CROSS = `국내외 대조 절차 — 순서를 틀리면 헛수고한�
             const cls = cm[1] || ''; const subj = cm[2] || '';
             const i0 = flat.indexOf('정의 ');
             let haeje = '';
+            let jfp = '';
             if (i0 >= 0) {
               haeje = flat.slice(i0, i0 + 6000).split(/집필자|관련 멀티미디어|장서각 디지털아카이브 바로가기/)[0].trim();
+              jfp = createHash('sha256').update(haeje).digest('hex').slice(0, 16); // 판독 시점 해제 지문
               if (haeje.length > 4000) haeje = haeje.slice(0, 4000) + ` …(총 ${haeje.length}자 — 전문은 원문 링크)`;
             }
             if (!callno && !haeje) return text(`'${did}' — 상세 미발견 또는 구조 상이. 청구기호(K2-…)를 확인하거나 mode=jsg에 검색어를 넣으십시오.`);
             return text(`장서각 서지·해제 판독 — ${name || did}\n`
               + [callno && `청구기호 ${callno}`, mf && `MF ${mf}`, cls, subj].filter(Boolean).join(' · ') + '\n'
               + (haeje ? `【해제】\n${haeje}\n` : '')
+              + (jfp ? `본문 지문(sha256-16): ${jfp} — 판독 시점 해제 전문 기준. 재판독 지문 불일치=원문 개정 발생.\n` : '')
               + `원문·이미지: https://jsg.aks.ac.kr/dir/view?dataId=${encodeURIComponent(did)}\n`
               + '※ 출처: 한국학중앙연구원 장서각 — 게재 시 출처 표기, 이미지 재이용은 기관 이용조건 준수. 해제 인용은 국역·해설(학술 인용 시 집필 해제임을 명기).');
           }
