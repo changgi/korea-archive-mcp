@@ -476,13 +476,15 @@ const COLLECT = {
     const ja = koToJa(q) || koToEn(q) || q;
     const b = await gtext(`https://ndlsearch.ndl.go.jp/api/opensearch?any=${encodeURIComponent(ja)}&cnt=${Math.min(n, 10)}`,
       { 'User-Agent': 'KoreaArchiveMCP/1.0 (https://github.com/changgi/korea-archive-mcp; archival discovery)' });
+    if (b.includes('<error>') && b.includes('429')) throw new Error('NDL 동시접속 제한(429) — 잠시 후 재시도');
     const out = [];
     for (const item of b.split('<item>').slice(1)) {
       const g = (t) => ((item.match(new RegExp(`<${t}[^>]*>([^<]+)`)) || [])[1] || '').trim();
       const title = g('title'); const link = g('link');
       if (!title || !link) continue;
-      const cat = g('category');
-      out.push({ title: `${title}${cat ? ` [${cat}]` : ''}`.slice(0, 110), date: g('dc:date'), id: '', url: link });
+      const cats = [...item.matchAll(/<category>([^<]+)/g)].map((m) => m[1]).join('·'); // 자료형·매체(紙/デジタル)
+      const author = g('author');
+      out.push({ title: `${title}${cats ? ` [${cats}]` : ''}${author ? ` — ${author}` : ''}`.slice(0, 120), date: g('dc:date'), id: '', url: link });
       if (out.length >= n) break;
     }
     return out;
@@ -1234,10 +1236,38 @@ const JB_CROSS = `국내외 대조 절차 — 순서를 틀리면 헛수고한�
 
 
   server.tool('nedb_search',
-    "Search 국사편찬위 한국사데이터베이스 (db.history.go.kr) + 조선 사료 심층 판독 (verified POST routes from the Han-river vessel study). mode: total=통합검색(기본) · law=법전·편람 조문(한문 원문 제공 판정) · record=등록류(座目 자동 필터 — 건수 지표화 전 필수) · item=levelId 본문 판독(미공개/파싱실패 구분) · sibling=★형제 조 전수 스캔(levelId — 조문을 열었으면 반드시 이어 호출, 총론만으론 핵심을 놓친다) · matrix=법전 수록 대조(쉼표구분 어휘 ≤8 — 부재의 발견) · origin=어휘 연원('용어' 또는 '용어,영역') · sjw=승정원일기(왕대 분포·최초 용례) · kyujanggak=규장각 목록+해제(절목류는 해제에서 발견) · aks=한국고문서자료관(문중·서원 — 소장처 172곳→분류→문서 면·썸네일, query=소장처명/L-ID/'분류ID/문서ID') · jacar=일본 아시아역사자료센터(한→일 자동 변환 검색·레퍼런스코드 메타 직행·±span×100 인접 채굴) · gonghun=공훈전자사료관 독립유공자(query=이름 검색→mngNo 숫자 투입 시 공적조서·공훈록 본문 판독) · i815=독립기념관(query=키워드 목록→detail.do URL 투입 시 당대 신문기사·독립운동가 자료 본문 판독) · ktv=KTV e영상역사관(키워드 목록→ehistory view URL 투입 시 영상 해설·상영정보 판독, KOGL) · earchive=국편 전자사료관(키워드 목록→'키워드|순번' 투입 시 상세: 열람·이용조건·등록번호) · commons=위키미디어 공용(키워드 목록→File URL 투입 시 라이선스·원 소장처·설명 판독) · jsg=장서각(키워드 목록→청구기호 K2-…/URL 투입 시 서지·해제 전문 판독). 판정 우선: '601건'이 아니라 '492건이 座目'을 반환.",
-    { query: z.string().describe("검색어 · levelId(item/sibling) · 쉼표구분 어휘(matrix) · '용어,영역'(origin) · 소장처명/L-ID(aks) · 이름/mngNo(gonghun)"), db: z.string().default(''), max_results: z.number().int().min(1).max(50).default(15), mode: z.enum(['total', 'law', 'record', 'item', 'sibling', 'matrix', 'origin', 'sjw', 'kyujanggak', 'aks', 'jacar', 'gonghun', 'i815', 'ktv', 'earchive', 'commons', 'jsg']).default('total'), span: z.number().int().min(2).max(12).default(8).describe('sibling 모드 스캔 폭') },
+    "국사편찬위 한국사DB(db.history.go.kr) 검색 + 기관별 심층 판독 모드. mode: total=통합검색(기본) · law=법전·편람 조문(한문 원문 제공 판정) · record=등록류(座目 자동 필터 — 건수 지표화 전 필수) · item=levelId 본문 판독(미공개/파싱실패 구분) · sibling=★형제 조 전수 스캔(levelId — 조문을 열었으면 반드시 이어 호출, 총론만으론 핵심을 놓친다) · matrix=법전 수록 대조(쉼표구분 어휘 ≤8 — 부재의 발견) · origin=어휘 연원('용어' 또는 '용어,영역') · sjw=승정원일기(왕대 분포·최초 용례) · kyujanggak=규장각 목록+해제(절목류는 해제에서 발견) · aks=한국고문서자료관(문중·서원 — 소장처 172곳→분류→문서 면·썸네일, query=소장처명/L-ID/'분류ID/문서ID') · jacar=일본 아시아역사자료센터(한→일 변환·레퍼런스코드 직행·±span×100 인접) · gonghun=공훈전자사료관(이름 검색→mngNo 투입 시 공적조서·공훈록 판독) · i815=독립기념관(query=키워드 목록→detail.do URL 투입 시 당대 신문기사·독립운동가 자료 본문 판독) · ktv=KTV(→view URL 투입 시 영상 해설·상영정보, KOGL) · earchive=국편 전자사료관(키워드 목록→'키워드|순번' 투입 시 상세: 열람·이용조건·등록번호) · commons=위키미디어 공용(키워드 목록→File URL 투입 시 라이선스·원 소장처·설명 판독) · jsg=장서각(키워드 목록→청구기호 K2-…/URL 투입 시 서지·해제 전문 판독) · un=UN 디지털도서관(키워드 목록→recid/URL 투입 시 요약·주제·언어별 PDF 직링크). 판정 우선: '601건' 아니라 '492건이 座目'을 반환.",
+    { query: z.string().describe("검색어 · levelId(item/sibling) · 쉼표구분 어휘(matrix) · '용어,영역'(origin) · 소장처명/L-ID(aks) · 이름/mngNo(gonghun)"), db: z.string().default(''), max_results: z.number().int().min(1).max(50).default(15), mode: z.enum(['total', 'law', 'record', 'item', 'sibling', 'matrix', 'origin', 'sjw', 'kyujanggak', 'aks', 'jacar', 'gonghun', 'i815', 'ktv', 'earchive', 'commons', 'jsg', 'un']).default('total'), span: z.number().int().min(2).max(12).default(8).describe('sibling 모드 스캔 폭') },
     async ({ query, max_results, mode, span }) => {
       const q = query.trim();
+      if (mode === 'un') { // UN 디지털도서관 — 키워드 목록 / recid·URL 판독(요약·주제·언어별 PDF)
+        try {
+          const UAH = { 'User-Agent': 'KoreaArchiveMCP/1.0 (https://github.com/changgi/korea-archive-mcp; archival discovery)' };
+          const rm = q.match(/digitallibrary\.un\.org\/record\/(\d+)/) || q.match(/^(\d{4,9})$/);
+          if (rm) {
+            const recid = rm[1];
+            const d = JSON.parse(await cachedText('unD:' + recid, 24 * 3600e3,
+              async () => JSON.stringify(await jget(`https://digitallibrary.un.org/search?p=recid%3A${recid}&of=recjson&rg=1`, UAH)), 'recid'));
+            const r = Array.isArray(d) ? d[0] : null;
+            if (!r) return text(`[recid ${recid}] 레코드 미발견 — record URL 또는 recid를 확인하십시오.`);
+            const files = (r.files || []).filter((f) => f && f.url);
+            const sym = ((files[0] || {}).full_name || '').replace(/-[A-Z]{2}\.pdf$/i, '').replace(/_/g, '/');
+            const en = files.find((f) => /english/i.test(f.description || '') || /-EN\.pdf$/i.test(f.full_name || ''));
+            const subs = (r.subject || []).map((s2) => s2.term).filter(Boolean).slice(0, 6).join(' · ');
+            const abs = dclean(String((r.abstract || {}).summary || ''));
+            return text(`UN 디지털도서관 판독 — ${sym || `recid ${recid}`}\n`
+              + [(r.imprint || {}).date && `발행: ${(r.imprint || {}).date}`, subs && `주제: ${subs}`].filter(Boolean).join(' · ') + '\n'
+              + (abs ? `【요약】\n${abs.slice(0, 1500)}\n` : '')
+              + (en ? `영문 PDF: ${en.url}\n` : '') + (files.length > 1 ? `전체 언어판 ${files.length}종: ` + files.map((f) => f.description).filter(Boolean).join('·') + '\n' : '')
+              + `레코드: https://digitallibrary.un.org/record/${recid}\n`
+              + '※ UN 공식문서 — 출처 표기 하에 인용 가능(문서기호 병기). 결의·보고서 원문은 PDF 직링크로 분석 투입.');
+          }
+          const items = await COLLECT.un(q, Math.min(max_results, 10));
+          if (!items.length) return text(`UN 디지털도서관 '${q}' — 0건. 영문 사건명·문서기호(S/RES/84 등)로 재시도하십시오.`);
+          return text(`UN 디지털도서관 '${q}' — ${items.length}건:\n` + items.map((it) => `- ${it.title}${it.date ? ` (${it.date})` : ''}\n  ${it.url}`).join('\n')
+            + '\n※ record URL(또는 recid 숫자)을 mode=un query로 재투입 → 요약·주제·언어별 PDF 직링크 판독.');
+        } catch (e) { return text(`UN 디지털도서관 오류(${String(e && e.message || e).slice(0, 60)}) — 잠시 후 재시도 또는 브라우저: https://digitallibrary.un.org`); }
+      }
       if (mode === 'jsg') { // 장서각 — 키워드 목록 / 청구기호·URL 서지+해제 전문 판독(서버 렌더 실측 2026-11-21)
         try {
           const dm = q.match(/dataId=(JSG_[\w.-]+)/) || q.match(/^(JSG_[\w.-]+)$/) || q.match(/^([A-Z]\d+(?:-\d+)*(?:[A-Za-z]*\d*)?)$/);
