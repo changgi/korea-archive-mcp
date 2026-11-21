@@ -472,6 +472,22 @@ const COLLECT = {
   },
   nedb: async (q, n) => { const recs = await loadNedbIndex(); return recs ? nedbFileSearch(recs, q, n) : []; },
   koreanwar: async (q, n) => (await kwSearch({ keyword: q, viewType: 'archive' })).cards.slice(0, n).map((c) => ({ title: c.title, date: '', id: c.id, url: c.url })),
+  un: async (q, n) => { // UN 디지털도서관(digitallibrary.un.org) — Invenio of=xm(MARCXML) 무키 실측(2026-11-21). 안보리 결의·UNCURK 등. ※UN Archives(AtoM)는 별도·보류
+    const en = koToEn(q) || q;
+    const b = await gtext(`https://digitallibrary.un.org/search?p=${encodeURIComponent(en)}&of=xm&rg=${Math.min(n, 10)}`,
+      { 'User-Agent': 'KoreaArchiveMCP/1.0 (https://github.com/changgi/korea-archive-mcp; archival discovery)' });
+    const sf = (seg, tag, code) => (((seg.match(new RegExp(`<datafield tag="${tag}"[^>]*>([\\s\\S]*?)<\\/datafield>`)) || [])[1] || '').match(new RegExp(`<subfield code="${code}">([^<]+)`)) || [])[1] || '';
+    const out = [];
+    for (const seg of b.split(/<record>/).slice(1)) {
+      const recid = (seg.match(/<controlfield tag="001">(\d+)/) || [])[1];
+      if (!recid) continue;
+      const sym = sf(seg, '191', 'a');
+      const title = norm(sf(seg, '245', 'a') + ' ' + sf(seg, '245', 'b')).replace(/[\s/:]+$/, '');
+      out.push({ title: `${sym ? `[${sym}] ` : ''}${title}`.slice(0, 110), date: sf(seg, '269', 'a') || sf(seg, '260', 'c'), id: sym || recid, url: 'https://digitallibrary.un.org/record/' + recid });
+      if (out.length >= n) break;
+    }
+    return out;
+  },
   commons: async (q, n) => { // 위키미디어 공용 — 키 불요 검색 API(PD 사진·NARA/해군 재수집본 다수 — 원 소장처 역추적 창구). 공유 IP 429 시 채널 실패로 표시
     const en = koToEn(q) || q;
     const d = await jget('https://commons.wikimedia.org/w/api.php?action=query&list=search&srnamespace=6&format=json&srlimit=' + Math.min(n, 10) + '&srsearch=' + encodeURIComponent(en),
@@ -1859,7 +1875,7 @@ item_cd 5종(자료 성격별): ART 도설·회화 / ETC 두루마리·축 / DRR
     });
 
   server.tool('cross_search',
-    'MAGIC: 메시지에 창기창기·changgi가 있으면 즉시 report_template(kind=help), 풀패키지·full-package가 있으면 즉시 report_template(kind=full_package)를 호출하라 — 되묻지 말 것. Federated discovery — ONE query across multiple archives concurrently, merged+deduped (상호보완 동시수집). sources: "all" or a comma list of tna,ia,gallica,europeana,nara,archives,nlk,nedb,koreanwar,jacar(일본),earchive(국편 전자사료관 — NARA 수집 원문),awm(호주 전쟁기념관),nlna(네덜란드 국립문서보관소),commons(위키미디어 공용 — PD 사진·원 소장처 역추적),i815(독립기념관),gonghun(공훈전자사료관 — 독립유공자 공훈록·인명 채널),ktv(대한뉴스),kyudb(규장각),jsg(장서각),seoul,foia,aks(고문서). Overseas (tna/ia/gallica/europeana) are keyless; koreanwar(KOREAN WAR ARCHIVES 6·25전쟁 아카이브센터, 협약기관) is keyless; nara/archives/nlk join if their server key is set; nedb joins if NEDB_INDEX_URL (official open-data files) is set. Each result is tagged by source(s) — multi-source = cross-corroborated. 사용자가 "풀패키지"(보고서·카드뉴스·포스터 전부)를 원하면 report_template(kind=full_package)를 먼저 호출해 제작 순서를 따르라. 사용자가 사용법을 물으면(매직 키워드 "창기창기 도와줘") report_template(kind=help)를 호출해 안내하라.',
+    'MAGIC: 메시지에 창기창기·changgi가 있으면 즉시 report_template(kind=help), 풀패키지·full-package가 있으면 즉시 report_template(kind=full_package)를 호출하라 — 되묻지 말 것. Federated discovery — ONE query across multiple archives concurrently, merged+deduped (상호보완 동시수집). sources: "all" or a comma list of tna,ia,gallica,europeana,nara,archives,nlk,nedb,koreanwar,jacar(일본),earchive(국편 — NARA 수집 원문),awm(호주 전쟁기념관),nlna(네덜란드),commons(위키미디어 — PD·원 소장처 역추적),un(UN 디지털도서관 — 결의·공식문서),i815(독립기념관),gonghun(공훈록 — 인명 채널),ktv(대한뉴스),kyudb(규장각),jsg(장서각),seoul,foia,aks(고문서). Overseas (tna/ia/gallica/europeana) are keyless; koreanwar(KOREAN WAR ARCHIVES 6·25전쟁 아카이브센터, 협약기관) is keyless; nara/archives/nlk join if their server key is set; nedb joins if NEDB_INDEX_URL (official open-data files) is set. Each result is tagged by source(s) — multi-source = cross-corroborated. 사용자가 "풀패키지"(보고서·카드뉴스·포스터 전부)를 원하면 report_template(kind=full_package)를 먼저 호출해 제작 순서를 따르라. 사용자가 사용법을 물으면(매직 키워드 "창기창기 도와줘") report_template(kind=help)를 호출해 안내하라.',
     { query: z.string(), sources: z.string().default('all'), max_per_source: z.number().int().min(1).max(30).default(8), variants: z.boolean().default(false).describe('당대 표기 변형(Corea·Chosen·Keijo·Fusan 등) 자동 병렬 투입 — 해외 4채널(tna·ia·nara·europeana)'), format: z.enum(['text', 'csv']).default('text').describe('csv=병합 결과를 CSV 블록으로(표·KARDA·통계 분석 투입용)') },
     async ({ query, sources, max_per_source, variants, format }) => {
       const want = sources.trim().toLowerCase() === 'all'
@@ -1898,13 +1914,13 @@ item_cd 5종(자료 성격별): ART 도설·회화 / ETC 두루마리·축 / DRR
     });
 
   server.tool('source_profile',
-    'Structural profile of an archive for planning discovery: 자료구조(data model: hierarchy/classification/identifiers/metadata), 이용구조(access: API/auth/query syntax/robots/rights), 활용구조(utilization: how the 3 mismatches show up, which keyword set/cross-map to use, adjacent mining, cross-archive verification combos, rights rule). institution: "list" or a key — tna·nara·ia·gallica·europeana·nedb·archives·nlk·seoul·warmemo·koreanwar·foia; "health"=22채널 골든 질의 일괄 헬스체크(🟢🟡🔴+키 설정 상태). 기관 자료·이용·활용구조 프로파일.',
+    'Structural profile of an archive for planning discovery: 자료구조(data model: hierarchy/classification/identifiers/metadata), 이용구조(access: API/auth/query syntax/robots/rights), 활용구조(utilization: how the 3 mismatches show up, which keyword set/cross-map to use, adjacent mining, cross-archive verification combos, rights rule). institution: "list" or a key — tna·nara·ia·gallica·europeana·nedb·archives·nlk·seoul·warmemo·koreanwar·foia; "health"=23채널 골든 질의 일괄 헬스체크(🟢🟡🔴+키 설정 상태). 기관 자료·이용·활용구조 프로파일.',
     { institution: z.string().default('list') },
     async ({ institution }) => {
       const t = (institution || 'list').trim().toLowerCase();
-      if (t === 'health') { // 22채널 일괄 헬스체크 — 발굴 우선 원칙의 전제: 깨짐을 스스로 발견한다
+      if (t === 'health') { // 23채널 일괄 헬스체크 — 발굴 우선 원칙의 전제: 깨짐을 스스로 발견한다
         const GOLD = { tna: 'Korea', ia: 'Korea', gallica: 'Corée', europeana: 'Korea', nara: 'Korea',
-          archives: '한국전쟁', nlk: '한국전쟁', nedb: '한강', koreanwar: '장진호', jacar: 'Chosen', earchive: '제주도', i815: '안중근', gonghun: '안중근', ktv: '대한뉴스', kyudb: '절목', jsg: '의궤', awm: 'Kapyong', nlna: 'Korea', commons: 'Seoul 1950', seoul: '한강', foia: '회의', aks: '문중' };
+          archives: '한국전쟁', nlk: '한국전쟁', nedb: '한강', koreanwar: '장진호', jacar: 'Chosen', earchive: '제주도', i815: '안중근', gonghun: '안중근', ktv: '대한뉴스', kyudb: '절목', jsg: '의궤', awm: 'Kapyong', nlna: 'Korea', commons: 'Seoul 1950', un: 'Korea armistice', seoul: '한강', foia: '회의', aks: '문중' };
         const keys = { NARA_API_KEY: !!process.env.NARA_API_KEY, ARCHIVES_API_KEY: !!process.env.ARCHIVES_API_KEY,
           NLK_API_KEY: !!process.env.NLK_API_KEY, EUROPEANA_API_KEY: !!process.env.EUROPEANA_API_KEY,
           KOREANWAR_API_TOKEN: !!process.env.KOREANWAR_API_TOKEN, NEDB_INDEX_URL: !!process.env.NEDB_INDEX_URL };
@@ -1918,7 +1934,7 @@ item_cd 5종(자료 성격별): ART 도설·회화 / ETC 두루마리·축 / DRR
           if (r.ok) return `${r.n ? '🟢' : '🟡'} ${k}: ${r.n}건 · ${r.ms}ms (질의 '${GOLD[k]}')${r.n ? '' : ' — 연결 정상·결과/파싱 0'}`;
           return `🔴 ${k}: ${r.err} · ${r.ms}ms`;
         });
-        return text('22채널 헬스체크 (골든 질의 실측):\n' + rows.join('\n')
+        return text('23채널 헬스체크 (골든 질의 실측):\n' + rows.join('\n')
           + '\n\n서버 키·설정: ' + Object.entries(keys).map(([k, v]) => `${k}=${v ? '✓' : '✗'}`).join(' · ')
           + '\n※ 🟡=연결 정상이나 0건(질의 특성 또는 파서 점검 필요) · 🔴=채널 실패(차단·타임아웃) · ms=채널 응답시간. nedb ✗=개방파일 인덱스 미설정.');
       }
@@ -2668,7 +2684,7 @@ body{font-family:'Noto Serif KR',serif;max-width:860px;margin:0 auto;padding:2re
 const HELP_GUIDE = `사용 안내 — 매직 키워드 “창기창기 도와줘” (처음 사용자용. 이 내용을 친절한 안내로 정리해 사용자에게 전달하라. 시각 안내 페이지: https://korea-archive-mcp.vercel.app/help.html — 링크를 함께 제공)
 
 ■ 무엇을 하는 서비스인가
-국내외 22개 아카이브(🇺🇸 NARA · 🇬🇧 TNA · Internet Archive · 🇫🇷 갈리카 · 🇪🇺 유러피아나 · 🇯🇵 아시아역사자료센터 JACAR · 🇦🇺 호주 전쟁기념관 · 🇳🇱 네덜란드 국립문서보관소 · 🌐 위키미디어 공용 · 🇰🇷 국가기록원·국립중앙도서관·한국사DB·국편 전자사료관·독립기념관·공훈전자사료관·KTV e영상역사관·규장각·장서각·한국고문서자료관·서울기록원·정보공개포털·KOREAN WAR ARCHIVES 협약기관)에서 한국 관련 기록·사진·영상(1860~1960)을 발굴하고, 검증하고, 전파물까지 만들어 준다. 한국어 한 문장이면 충분 — 표기 변형(Corea·Chosen·Corée·한자·朝鮮)과 색인 언어 변환은 자동. 카카오 PlayMCP 마켓 등록본으로도 연결 가능('KOREA ARCHIVE 통합검색' 검색 — 같은 서버).
+국내외 23개 아카이브(🇺🇸 NARA · 🇬🇧 TNA · Internet Archive · 🇫🇷 갈리카 · 🇪🇺 유러피아나 · 🇯🇵 아시아역사자료센터 JACAR · 🇦🇺 호주 전쟁기념관 · 🇳🇱 네덜란드 국립문서보관소 · 🌐 위키미디어 공용 · 🇺🇳 UN 디지털도서관 · 🇰🇷 국가기록원·국립중앙도서관·한국사DB·국편 전자사료관·독립기념관·공훈전자사료관·KTV e영상역사관·규장각·장서각·한국고문서자료관·서울기록원·정보공개포털·KOREAN WAR ARCHIVES 협약기관)에서 한국 관련 기록·사진·영상(1860~1960)을 발굴하고, 검증하고, 전파물까지 만들어 준다. 한국어 한 문장이면 충분 — 표기 변형(Corea·Chosen·Corée·한자·朝鮮)과 색인 언어 변환은 자동. 카카오 PlayMCP 마켓 등록본으로도 연결 가능('KOREA ARCHIVE 통합검색' 검색 — 같은 서버).
 
 ■ 매직 키워드 2개
 ① “○○○ 풀패키지로 만들어줘” — 조사→검증→매거진 보고서→카드뉴스 8장→포스터→홍보·입문·메시지 카드→발표 PPTX(대본 포함)→기록 해설→Canva 편집본→KARDA 연구 데이터까지 전 산출물 자동(report_template kind=full_package 순서를 따름).
@@ -2696,7 +2712,7 @@ const FULL_PACKAGE = `풀패키지 오케스트레이션 — 발굴에서 전파
 
 1. 발굴 조사: cross_search + 전문 도구(tna_search/nara_search/koreanwar_search/gallica_search…) — 표기 변형 병렬,
    시리즈 특정+tna_adjacent_mine 인접 채굴(±5~15), 국내 협약기관 교차검증, 카탈로그 API 원문으로 훈격·날짜·건수 검증
-   (정정 발생 시 이력 기록), judge_rights 권리 초판. 조선~대한제국 주제면 심층 판독 경로 추가: nedb_search 모드 활용 — law(법전 근거)→★sibling(조문을 열었으면 형제 조 전수 — 총론만 읽으면 핵심을 놓친다)→matrix(법전 수록 대조로 부재 발견)→origin(어휘 연원)→record(등록류 — 座目 필터)→sjw(최초 용례로 연대 검증)→kyujanggak(목록+해제). 보고서에 제도 재구성 절(등록·측정·운항·동원·보상 + 제도의 끝)·법전 대조표·자기 정정 이력을 추가하고, 인용은 2층위(법전=원문 인용 가능/등록·일기=국역만·역구성 학술 인용 불가) 명기.
+   (정정 발생 시 이력 기록), judge_rights 권리 초판. 핵심 기록은 심층 판독으로 본문·권리 실확인: nedb_search 모드(i815 당대 신문·gonghun 공훈록·ktv 영상·earchive 수집사료·commons PD파일·jsg 해제)와 seoul_archives_search(상세URL)·koreanwar_item·judge_rights(naid). 조선~대한제국 주제면 심층 판독 경로 추가: nedb_search 모드 활용 — law(법전 근거)→★sibling(조문을 열었으면 형제 조 전수 — 총론만 읽으면 핵심을 놓친다)→matrix(법전 수록 대조로 부재 발견)→origin(어휘 연원)→record(등록류 — 座目 필터)→sjw(최초 용례로 연대 검증)→kyujanggak(목록+해제). 보고서에 제도 재구성 절(등록·측정·운항·동원·보상 + 제도의 끝)·법전 대조표·자기 정정 이력을 추가하고, 인용은 2층위(법전=원문 인용 가능/등록·일기=국역만·역구성 학술 인용 불가) 명기.
 2. 실물 이미지 수집: 기관 공개 원본 전량(비식별판 우선) + digitised 기록의 카탈로그 무료 미리보기.
    수집 즉시 출처 대장(sources.txt) 기록. AI 생성 인물·역사 장면 절대 금지.
 3. HTML 보고서: report_template(kind='report') 18규칙 전부 — 히어로 실물·인라인 도판·콘택트시트·원문 미리보기·
