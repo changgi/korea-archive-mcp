@@ -1,7 +1,6 @@
 name: nz-probe
-# Archives NZ 역공학 9차(판정) — 8차 확정: /federated-search/customers/aims/search?q=… (브라우저 200, 'Korea' 1,356건).
-# 이번: 같은 URL을 평문 curl로 — 보호 우회 없이, 공개 API로 쓸 수 있는지만 판정한다.
-# (401이면: 봇 보호 뒤의 엔드포인트 — 우회 수확기는 만들지 않고 브라우저 경로 안내로 결론)
+# Archives NZ 역공학 10차(마지막) — 9차 판정: 평문 GET 200(공개 API, SSE 프레임 JSON).
+# 이번: size=1 전체 히트 JSON 구조 덤프 → 수집기 파서 확정. 이후 이 워크플로 삭제.
 on:
   workflow_dispatch: {}
 jobs:
@@ -9,16 +8,14 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
-      - name: 평문 curl 판정
+      - name: 단건 전체 JSON
         timeout-minutes: 4
         run: |
           set +e
           UA="Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
-          S="https://collections.archives.govt.nz/federated-search/customers/aims/search?size=5&facetSize=0&start=0&q=Korea&isFuzzy=true&sourceId=aims-archive"
-          echo "--- A) search 평문 GET"
-          hc=$(curl -sS -m 20 -A "$UA" -H "Accept: application/json" -o /tmp/a -w '%{http_code} %{size_download}' "$S"); echo "A: $hc"
-          head -c 800 /tmp/a | tr '\n' ' '; echo
-          echo "--- C) hints 평문 GET"
-          hc=$(curl -sS -m 20 -A "$UA" -o /tmp/c -w '%{http_code} %{size_download}' "https://collections.archives.govt.nz/federated-search/customers/aims/hints?size=5&q=Korea"); echo "C: $hc"
-          head -c 300 /tmp/c; echo
+          curl -sS -m 20 -A "$UA" -o /tmp/a "https://collections.archives.govt.nz/federated-search/customers/aims/search?size=1&facetSize=0&start=0&q=Chosin&isFuzzy=true&sourceId=aims-archive"
+          echo "size: $(wc -c </tmp/a)"
+          sed -n 's/^data://p' /tmp/a | head -1 | head -c 6500; echo
+          echo "---- 제목 후보 키"
+          sed -n 's/^data://p' /tmp/a | head -1 | grep -oE '"(title|name|label|description|heading)[A-Za-z]*":' | sort -u
           true
