@@ -1327,7 +1327,8 @@ const JB_CROSS = `국내외 대조 절차 — 순서를 틀리면 헛수고한�
             const cpno = hm[1];
             const kdcd = cpno.slice(1, 3), ctcd = cpno.slice(3, 5), asno8 = cpno.slice(5);
             // asno 포맷이 종목별로 달라 후보 순차 시도(8자리·4자리·무패딩 — 빈 레코드면 다음)
-            const cands = [...new Set([asno8, asno8.slice(0, 4), String(parseInt(asno8, 10))])];
+            // 기관 원값 asno는 13자리('00'+지정4+'0000000') — 실측 역산 후보를 최우선
+            const cands = [...new Set(['00' + asno8.slice(0, 4) + '0000000', asno8, asno8.slice(0, 4)])];
             let b = ''; let g = (t) => xtag(b, t);
             for (const asno of cands) {
               b = await cachedText(`heriD:${kdcd}|${asno}|${ctcd}`, 24 * 3600e3,
