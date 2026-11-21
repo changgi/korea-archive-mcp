@@ -1,39 +1,44 @@
 name: nz-probe
-# Archives NZ 역공학 탐사 2차 — 1차 발견: Arena는 Wicket SSR, /web/arena/search?q=Korea 에
-# 'search-result' 마커 실존(서버사이드 결과 HTML 존재 추정). 이번: 결과 블록 구조·링크 패턴 덤프.
-# GH 러너만 Incapsula 통과. 탐사 완료 후 이 워크플로는 삭제한다.
+# Archives NZ 역공학 3차 — 2차 판정: search?q= 의 'search-result' 5건은 federated-search-result-portlet
+# CSS 참조였음(SSR 아님). 결과는 연합검색 포틀릿의 XHR. 이번: 포틀릿 JS·인라인 설정에서 API 베이스 추출.
 on:
   workflow_dispatch: {}
 jobs:
   recon:
     runs-on: ubuntu-latest
     steps:
-      - name: 검색 결과 구조 덤프
+      - name: 연합검색 포틀릿 해부
         run: |
           set +e
           UA="Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
           B="https://collections.archives.govt.nz"
-          hc=$(curl -sSL -m 30 -A "$UA" -c /tmp/cj -b /tmp/cj -o /tmp/p2 -w '%{http_code} %{size_download}' "$B/web/arena/search?q=Korea")
-          echo "[search?q=Korea] $hc"
-          echo "search-result count: $(grep -oc 'search-result' /tmp/p2)"
-          echo "::group::occurrences context"
-          grep -oE '.{120}search-result.{260}' /tmp/p2 | head -8
+          curl -sSL -m 30 -A "$UA" -c /tmp/cj -b /tmp/cj -o /tmp/p2 "$B/web/arena/search?q=Korea"
+          echo "::group::federated mentions"
+          grep -oE '[a-zA-Z0-9"=_ /:?&.-]{0,70}federated[a-zA-Z0-9"=_ /:?&.-]{0,90}' /tmp/p2 | sort -u | head -40
           echo "::endgroup::"
-          echo "::group::record-ish hrefs"
-          grep -oE 'href="[^"]*(record|entity|result|detail|item)[^"]*"' /tmp/p2 | sort -u | head -30
+          echo "::group::data-* urls & config"
+          grep -oE 'data-[a-z-]+="[^"]{5,160}"' /tmp/p2 | sort -u | head -40
           echo "::endgroup::"
-          echo "::group::result count text"
-          grep -oE '[0-9][0-9,]* (results|records|hits)' /tmp/p2 | head -5
-          grep -oE 'id="[a-z0-9]{1,4}"[^>]{0,80}' /tmp/p2 | head -10
+          echo "::group::inline scripts mentioning search/api"
+          tr '>' '>\n' < /tmp/p2 | grep -iE 'apiUrl|api-url|searchUrl|baseUrl|endpoint|azureweb|cloudfront|amazonaws|axiell' | head -30
           echo "::endgroup::"
-          # Wicket 리소스 리스너 변형들
-          for u in "/web/arena/search?q=Korea&p_p_state=exclusive" "/web/arena/results?q=Korea" "/web/arena/search?query=Korea"; do
-            hc=$(curl -sSL -m 25 -A "$UA" -c /tmp/cj -b /tmp/cj -o /tmp/px -w '%{http_code} %{size_download}' "$B$u")
-            echo "[$u] $hc · search-result=$(grep -oc 'search-result' /tmp/px) · titles=$(grep -oc 'arena-record-title\|result-title' /tmp/px)"
+          for j in \
+            "/o/federated-search-input-portlet-5.10.0/js/main.js" \
+            "/o/federated-search-result-portlet-5.10.0/js/main.js" \
+            "/o/federated-search-input-portlet-5.10.0/js/index.js" \
+            "/o/federated-search-result-portlet-5.10.0/js/index.js"; do
+            hc=$(curl -sSL -m 25 -A "$UA" -o /tmp/js -w '%{http_code} %{size_download}' "$B$j")
+            echo "[$j] $hc"
+            if [ -s /tmp/js ]; then
+              echo "::group::urls in $j"
+              grep -oE 'https?://[a-zA-Z0-9_./?&=-]{5,100}' /tmp/js | sort -u | head -20
+              grep -oE '"/[a-zA-Z0-9_/.?&=-]{3,80}"' /tmp/js | sort -u | grep -iE 'api|search|record|query|solr' | head -25
+              echo "::endgroup::"
+            fi
           done
-          # 결과 본문이 늦게 로드되면: wicket ajax 엔드포인트 흔적
-          echo "::group::wicket ajax urls in p2"
-          grep -oE '"[^"]*\?[^"]*wicket[^"]*"|wicket:interface[^"&]*' /tmp/p2 | head -15
-          grep -oE 'Wicket\.Ajax\.(ajax|baseUrl)[^;]{0,140}' /tmp/p2 | head -10
-          echo "::endgroup::"
+          # Liferay JSON-WS·OSGi JAX-RS 흔한 베이스
+          for u in "/o/federated-search/v1/search?q=Korea" "/o/federated-search/search?q=Korea" "/api/jsonws" ; do
+            hc=$(curl -sS -m 20 -A "$UA" -o /tmp/px -w '%{http_code} %{size_download}' "$B$u")
+            echo "[$u] $hc · head: $(head -c 150 /tmp/px | tr '\n' ' ')"
+          done
           true
