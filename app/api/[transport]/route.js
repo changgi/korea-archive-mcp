@@ -1058,7 +1058,7 @@ async function kwDetail(ref) {
   const all = rows.map(([, v]) => v).join(' ');
   const naid = (all.match(/catalog\.archives\.gov\/id\/(\d+)/) || [])[1] || '';
   const pd = ((rows.find(([k]) => /생산시기/.test(k)) || [])[1] || '').match(/\d{4}(?:-\d{2}){0,2}/);
-  return { naid, date: pd ? pd[0] : '' };
+  return { naid, date: pd ? pd[0].replace(/(-00)+$/, '') : '' }; // '1950-12-00'(일 미상) → '1950-12' ISO 축약
 }
 async function kwSearch(params) {
   const u = new URL(KW_BASE + '/search.do');
