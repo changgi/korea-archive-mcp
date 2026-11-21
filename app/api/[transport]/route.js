@@ -469,6 +469,8 @@ const PART_OF = {
   jacar: (it) => { const o = { A: '국립공문서관', B: '외무성 외교사료관', C: '방위성 방위연구소' }[String(it.id || '')[0]]; return o && `JACAR › ${o}`; },
   oldnews: (it) => it.series && `신문 › ${it.series}`,
   aks: (it) => it.series && `고문서 › ${it.series}`,
+  dnz: (it) => it.series && `NZ › ${it.series}`,
+  ia: (it) => it.series && `IA Collection › ${it.series}`,
 };
 const COLLECT = {
   tna: async (q, n) => {
@@ -479,8 +481,8 @@ const COLLECT = {
   },
   ia: async (q, n) => {
     q = koToEn(q) || q;
-    const d = await jget(`https://archive.org/advancedsearch.php?q=${encodeURIComponent(q)}&fl[]=identifier&fl[]=title&fl[]=date&rows=${n}&output=json`);
-    return ((d.response || {}).docs || []).map((x) => ({ title: String(x.title || ''), date: x.date || '', id: x.identifier, url: `https://archive.org/details/${x.identifier}` }));
+    const d = await jget(`https://archive.org/advancedsearch.php?q=${encodeURIComponent(q)}&fl[]=identifier&fl[]=title&fl[]=date&fl[]=collection&rows=${n}&output=json`);
+    return ((d.response || {}).docs || []).map((x) => ({ title: String(x.title || ''), date: x.date || '', id: x.identifier, ...((Array.isArray(x.collection) ? x.collection[0] : x.collection) ? { series: String(Array.isArray(x.collection) ? x.collection[0] : x.collection) } : {}), url: `https://archive.org/details/${x.identifier}` }));
   },
   gallica: async (q, n) => {
     q = gallicaKoToFr(q) || q;
@@ -658,7 +660,9 @@ const COLLECT = {
       + '&fields=id,title,display_date,landing_url,content_partner,primary_collection&text=' + encodeURIComponent(en));
     return (((d || {}).search || {}).results || []).map((r) => ({
       title: `${norm(String(r.title || '(무제)'))} — ${((r.content_partner || [])[0] || '')}${(r.primary_collection || [])[0] ? '·' + (r.primary_collection || [])[0] : ''}`.slice(0, 115),
-      date: String(r.display_date || ''), id: String(r.id || ''), url: String(r.landing_url || '') }));
+      date: String(r.display_date || ''), id: String(r.id || ''),
+      ...(((r.content_partner || [])[0]) ? { series: `${(r.content_partner || [])[0]}${(r.primary_collection || [])[0] ? ' › ' + (r.primary_collection || [])[0] : ''}` } : {}),
+      url: String(r.landing_url || '') }));
   },
   awm: async (q, n) => { // 호주 전쟁기념관(AWM) — 검색 모자이크(SSR C-id) → 상세 병렬로 제목·수장번호 (2026-11-20 실측: 가평 파노라마 HOBJ3144 등)
     const en = koToEn(q) || q;
