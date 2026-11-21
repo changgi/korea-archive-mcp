@@ -1123,7 +1123,7 @@ const handler = createMcpHandler((server) => {
 const JB_RECIPES = `발굴 완주 레시피 — 주제 유형별 발굴→판독→권리 순서 (전 단계 실측 검증, 2026-11-21)
 공통 원칙: ①cross_search로 폭 확보(variants=당대 표기) ②신호가 나온 소스의 전용 도구/판독 모드로 심층 ③권리는 표시(judge_rights·naid·라이선스) ④0건=부재가 아니다(표기 변형·인접 채굴·관리 행정으로 전환).
 
-① 인물(독립운동가): gonghun(이름→mngNo→공훈록·수형기록. 훈격·이명 확보) → 이명·한자명으로 i815 재검색(당대 신문 전문 판독) → jacar(일본 측 — 한자명) → commons(초상·PD) → 수형기록의 판결문은 국가기록원 교차.
+① 인물(독립운동가): gonghun(이름→mngNo→공훈록·수형기록. 훈격·이명 확보) → 이명·한자명으로 i815·oldnews 재검색(당대 신문 — oldnews는 '본문:이명' OCR 전문까지) → jacar(일본 측 — 한자명) → commons(초상·PD) → 수형기록의 판결문은 국가기록원 교차.
 ② 한국전쟁 전투·부대: koreanwar(협약 — archRfcd→koreanwar_item 인접 채굴) → nara(RG 교차+naid 인접, judge_rights(naid) 실확인) → tna(연대 필터)·awm(가평 등 영연방)·nlna(네덜란드) → un(안보리 결의 — recid 판독으로 PDF) → commons(PD 사진·원 소장처 역추적).
 ③ 조선 제도·고문헌: nedb law(법전 근거)→★sibling(형제 조 전수)→sjw(최초 용례) → kyujanggak(목록+해제)·jsg(청구기호→해제 전문) → aks(문중 고문서) → 인용 2층위 준수.
 ④ 일제강점기 정책·기관: ndl(총독부 간행물·통계연보·관보) ⇄ jacar(공문서 메타·인접 ±100) → nedb(한국사DB)·earchive('키워드|순번' 이용조건) → i815(민족 측 시각 대조).
@@ -1259,12 +1259,29 @@ const JB_CROSS = `국내외 대조 절차 — 순서를 틀리면 헛수고한�
 
 
   server.tool('nedb_search',
-    "국사편찬위 한국사DB(db.history.go.kr) 검색 + 기관별 심층 판독 모드. mode: total=통합검색(기본) · law=법전·편람 조문(한문 원문 제공 판정) · record=등록류(座目 자동 필터 — 건수 지표화 전 필수) · item=levelId 본문 판독(미공개/파싱실패 구분) · sibling=★형제 조 전수 스캔(levelId — 조문을 열었으면 반드시 이어 호출, 총론만으론 핵심을 놓친다) · matrix=법전 수록 대조(쉼표구분 어휘 ≤8 — 부재의 발견) · origin=어휘 연원('용어' 또는 '용어,영역') · sjw=승정원일기(왕대 분포·최초 용례) · kyujanggak=규장각 목록+해제(절목류는 해제에서 발견) · aks=한국고문서자료관(문중·서원 — 소장처 172곳→분류→문서 면·썸네일, query=소장처명/L-ID/'분류ID/문서ID') · jacar=일본 아시아역사자료센터(한→일 변환·레퍼런스코드 직행·±span×100 인접) · gonghun=공훈전자사료관(이름 검색→mngNo 투입 시 공적조서·공훈록 판독) · i815=독립기념관(query=키워드 목록→detail.do URL 투입 시 당대 신문기사·독립운동가 자료 본문 판독) · ktv=KTV(→view URL 투입 시 영상 해설·상영정보, KOGL) · earchive=국편 전자사료관(키워드 목록→'키워드|순번' 투입 시 상세: 열람·이용조건·등록번호) · commons=위키미디어 공용(키워드 목록→File URL 투입 시 라이선스·원 소장처·설명 판독) · jsg=장서각(키워드 목록→청구기호 K2-…/URL 투입 시 서지·해제 전문 판독) · un=UN(→recid/URL 투입 시 요약·주제·PDF 직링크) · oldnews=신문아카이브(키워드 목록→CNTS/URL 투입 시 색인어 전체·관련기사 연쇄·주제어 판독). 판정 우선: '601건' 아니라 '492건이 座目'을 반환.",
+    "국사편찬위 한국사DB(db.history.go.kr) 검색 + 기관별 심층 판독 모드. mode: total=통합검색(기본) · law=법전·편람 조문(한문 원문 제공 판정) · record=등록류(座目 자동 필터 — 건수 지표화 전 필수) · item=levelId 본문 판독(미공개/파싱실패 구분) · sibling=★형제 조 전수 스캔(levelId — 조문을 열었으면 반드시 이어 호출, 총론만으론 핵심을 놓친다) · matrix=법전 수록 대조(쉼표구분 어휘 ≤8 — 부재의 발견) · origin=어휘 연원('용어' 또는 '용어,영역') · sjw=승정원일기(왕대 분포·최초 용례) · kyujanggak=규장각 목록+해제(절목류는 해제에서 발견) · aks=한국고문서자료관(문중·서원 — 소장처 172곳→분류→문서 면·썸네일, query=소장처명/L-ID/'분류ID/문서ID') · jacar=일본 아시아역사자료센터(한→일 변환·레퍼런스코드 직행·±span×100 인접) · gonghun=공훈전자사료관(이름 검색→mngNo 투입 시 공적조서·공훈록 판독) · i815=독립기념관(query=키워드 목록→detail.do URL 투입 시 당대 신문기사·독립운동가 자료 본문 판독) · ktv=KTV(→view URL 투입 시 영상 해설·상영정보, KOGL) · earchive=국편 전자사료관(키워드 목록→'키워드|순번' 투입 시 상세: 열람·이용조건·등록번호) · commons=위키미디어 공용(키워드 목록→File URL 투입 시 라이선스·원 소장처·설명 판독) · jsg=장서각(키워드 목록→청구기호 K2-…/URL 투입 시 서지·해제 전문 판독) · un=UN(→recid/URL 투입 시 요약·주제·PDF 직링크) · oldnews=신문아카이브(키워드 목록 · CNTS/URL=색인어·관련기사 판독 · '본문:키워드'=OCR 전문 발췌). 판정 우선: '601건' 아니라 '492건이 座目'을 반환.",
     { query: z.string().describe("검색어 · levelId(item/sibling) · 쉼표구분 어휘(matrix) · '용어,영역'(origin) · 소장처명/L-ID(aks) · 이름/mngNo(gonghun)"), db: z.string().default(''), max_results: z.number().int().min(1).max(50).default(15), mode: z.enum(['total', 'law', 'record', 'item', 'sibling', 'matrix', 'origin', 'sjw', 'kyujanggak', 'aks', 'jacar', 'gonghun', 'i815', 'ktv', 'earchive', 'commons', 'jsg', 'un', 'oldnews']).default('total'), span: z.number().int().min(2).max(12).default(8).describe('sibling 모드 스캔 폭') },
     async ({ query, max_results, mode, span }) => {
       const q = query.trim();
-      if (mode === 'oldnews') { // 대한민국신문아카이브 — 키워드 목록 / CNTS·URL 판독(색인어·관련기사·주제어)
+      if (mode === 'oldnews') { // 대한민국신문아카이브 — 키워드 목록 / CNTS·URL 판독 / '본문:키워드' OCR 전문 발췌
         try {
+          const bm = q.match(/^본문[:：]\s*(.+)$/);
+          if (bm) { // OCR 본문 전문 검색 — 색인어에 없는 표현·인용구까지(search_bodytext.do 역공학 2026-11-21)
+            const kw = bm[1].trim();
+            const r2 = await fetch('https://nl.go.kr/newspaper/search_bodytext.do', { method: 'POST',
+              headers: { 'User-Agent': UA, 'Content-Type': 'application/json', Referer: 'https://nl.go.kr/newspaper/bodytext_search.do' },
+              body: JSON.stringify({ search_keyword: kw, page_size: Math.min(max_results, 10), page_no: 1 }), signal: AbortSignal.timeout(FETCH_TIMEOUT) });
+            if (!r2.ok) throw new Error(`HTTP ${r2.status}`);
+            const d2 = await r2.json();
+            const f1 = (v) => (Array.isArray(v) ? v[0] : v) || '';
+            const rows = (d2.hits || []).map((h) => {
+              const ex = dclean(String(f1(h.highlight_abstract) || f1(h.abstract) || ''));
+              return `- ${f1(h.label)} — ${f1(h.newspaperKorName)} (${h.issued_date || ''})\n  발췌: ${ex.slice(0, 180)}\n  ${f1(h.uri) ? `https://nl.go.kr/newspaper/detail.do?content_id=${f1(h.uri)}` : ''}`;
+            });
+            if (!rows.length) return text(`신문아카이브 본문검색 '${kw}' — 0건. 당대 표기(국한문·옛 한글)로 재시도하십시오.`);
+            return text(`신문아카이브 OCR 본문검색 '${kw}' — 총 ${d2.total_count || rows.length}건(상위 ${rows.length}):\n` + rows.join('\n')
+              + '\n※ 발췌는 OCR 원문(국한문 그대로). CNTS를 mode=oldnews로 재투입 → 색인어·관련기사 연쇄.');
+          }
           const cm = q.match(/content_id=(CNTS-[\d]+)/) || q.match(/^(CNTS-[\d]+)$/);
           if (cm) {
             const cid = cm[1];
