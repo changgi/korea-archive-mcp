@@ -560,7 +560,8 @@ const COLLECT = {
       url: first(h.uri) ? `https://nl.go.kr/newspaper/detail.do?content_id=${first(h.uri)}` : 'https://nl.go.kr/newspaper/' }));
   },
   commons: async (q, n) => { // 위키미디어 공용 — 키 불요 검색 API(PD 사진·NARA/해군 재수집본 다수 — 원 소장처 역추적 창구). 공유 IP 429 시 채널 실패로 표시
-    const en = koToEn(q) || q;
+    // commons는 한국어 네이티브 검색 가능 — TOPICS 미등재어(인명 등)가 'Korea' 단독으로 뭉개지면 원질의 유지(v1.62 실측 교정: '유관순'→일제감시대상인물카드 직결)
+    const t = koToEn(q); const en = (!t || t === 'Korea') ? q : t;
     const d = await jget('https://commons.wikimedia.org/w/api.php?action=query&list=search&srnamespace=6&format=json&srlimit=' + Math.min(n, 10) + '&srsearch=' + encodeURIComponent(en),
       { 'User-Agent': 'KoreaArchiveMCP/1.0 (https://github.com/changgi/korea-archive-mcp; archival discovery)' });
     return ((d.query || {}).search || []).map((it) => {
@@ -2263,15 +2264,20 @@ item_cd 5종(자료 성격별): ART 도설·회화 / ETC 두루마리·축 / DRR
       if (format === 'manifest') { // 발굴 수집기록 매니페스트 — 발굴 행위 자체를 맥락·증거성 갖춘 현용기록으로(ISAD(G)·RiC 지향)
         const recs = items.slice(0, 30);
         const now = new Date().toISOString();
+        const rid2 = (it, i) => 'rec:' + (it.id ? `${it.sources[0].split('·')[0]}:${it.id}` : `m${i}`); // karda 그래프와 동일 키 — 상호 참조
         const man = {
-          '@type': 'DiscoveryManifest', standard: 'ISAD(G)/RiC-oriented',
+          '@context': { dcterms: 'http://purl.org/dc/terms/', rico: 'https://www.ica.org/standards/RiC/ontology#',
+            title: 'dcterms:title', date: 'dcterms:date', identifier: 'dcterms:identifier', provenance: 'dcterms:provenance',
+            accessUrl: 'dcterms:source', heldBy: { '@id': 'rico:hasOrHadHolder' }, records: { '@id': 'rico:hasRecordSetMember' } },
+          '@type': ['DiscoveryManifest', 'rico:RecordSet'], standard: 'ISAD(G)/RiC-oriented',
           identifier: `kad-${now.slice(0, 10)}-${Math.abs([...query].reduce((a, c) => a * 31 + c.charCodeAt(0) | 0, 7)).toString(36)}`,
           provenance: { // 증거성 — 수집의 재현 가능한 기술(누가·무엇을·언제·어떻게)
             query, sources: want.join(','), variants, collectedAt: now,
             tool: 'KOREA ARCHIVE 통합검색 cross_search (Vercel icn1)',
             reproduce: `cross_search(query=${JSON.stringify(query)}, sources=${JSON.stringify(sources)}, format='manifest')`,
             channelStats: stats },
-          records: recs.map((it) => ({
+          records: recs.map((it, i) => ({
+            '@type': 'rico:Record', node: rid2(it, i), // karda 그래프 노드와 같은 키
             identifier: it.id || null, title: it.title, date: it.date || null,
             heldBy: [...new Set(it.sources.map((s) => s.split('·')[0]))], // 맥락 — 소장기관(복수=교차확인)
             accessUrl: it.url || null, evidence: `API 실조회 ${now.slice(0, 10)}` })),
@@ -2289,6 +2295,7 @@ item_cd 5종(자료 성격별): ART 도설·회화 / ETC 두루마리·축 / DRR
         const nodes = [{ id: 'topic:' + query, type: 'topic', label: query }]
           .concat(srcs.map((s) => ({ id: 'archive:' + s, type: 'archive', label: s })))
           .concat(recs.map((it, i) => ({ id: rid(it, i), type: 'record', label: it.title.slice(0, 90),
+            ...(it.id ? { identifier: it.id } : {}), // manifest와 동일 식별자 — 상호 참조
             ...(it.date ? { date: it.date } : {}), ...(it.url ? { url: it.url } : {}) })));
         const edges = [];
         recs.forEach((it, i) => {
