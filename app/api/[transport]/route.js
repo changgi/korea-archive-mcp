@@ -210,7 +210,7 @@ async function collectMerged(collectors) {
         if (!raw || !norm(raw.title)) continue;
         const k = dedupKey({ ...raw });
         if (map.has(k)) { const e = map.get(k); if (!e.sources.includes(name)) { e.sources.push(name); if (!e.url && raw.url) e.url = raw.url; } }
-        else map.set(k, { title: norm(raw.title), date: raw.date || '', id: raw.id || '', url: raw.url || '', ...(raw.series ? { series: String(raw.series).slice(0, 80) } : {}), sources: [name] });
+        else map.set(k, { title: norm(raw.title), date: raw.date || '', id: raw.id || '', url: raw.url || '', ...(raw.series ? { series: String(raw.series).slice(0, 80) } : {}), ...(raw.media ? { media: String(raw.media).slice(0, 180) } : {}), sources: [name] });
       }
     } else stats.push(`${name}:—`);
   });
@@ -534,7 +534,7 @@ const COLLECT = {
     q = koToEn(q) || q;
     const key = process.env.NARA_API_KEY; if (!key) return [];
     const d = await jget(`https://catalog.archives.gov/api/v2/records/search?q=${encodeURIComponent(q)}&limit=${n}&page=1`, { 'x-api-key': key });
-    return ((((d.body || {}).hits || {}).hits) || []).map((h) => { const rec = (h._source || {}).record || {}; const po = naraChain(rec); return { title: rec.title || '', date: naraDate(rec), id: rec.naId ? `NAID ${rec.naId}` : '', ...(po ? { series: po } : {}), url: `https://catalog.archives.gov/id/${rec.naId}` }; });
+    return ((((d.body || {}).hits || {}).hits) || []).map((h) => { const rec = (h._source || {}).record || {}; const po = naraChain(rec); const d0u = String((((rec.digitalObjects || [])[0]) || {}).objectUrl || ''); return { title: rec.title || '', date: naraDate(rec), id: rec.naId ? `NAID ${rec.naId}` : '', ...(po ? { series: po } : {}), ...(d0u ? { media: d0u } : {}), url: `https://catalog.archives.gov/id/${rec.naId}` }; });
   },
   archives: async (q, n) => {
     const key = process.env.ARCHIVES_API_KEY; if (!key) return [];
@@ -2444,7 +2444,7 @@ item_cd 5종(자료 성격별): ART 도설·회화 / ETC 두루마리·축 / DRR
         const man = {
           '@context': { dcterms: 'http://purl.org/dc/terms/', rico: 'https://www.ica.org/standards/RiC/ontology#',
             title: 'dcterms:title', date: 'dcterms:date', identifier: 'dcterms:identifier', provenance: 'dcterms:provenance',
-            accessUrl: 'dcterms:source', heldBy: { '@id': 'rico:hasOrHadHolder' }, records: { '@id': 'rico:hasRecordSetMember' } },
+            accessUrl: 'dcterms:source', media: 'dcterms:hasFormat', heldBy: { '@id': 'rico:hasOrHadHolder' }, records: { '@id': 'rico:hasRecordSetMember' } },
           '@type': ['DiscoveryManifest', 'rico:RecordSet'], standard: 'ISAD(G)/RiC-oriented',
           identifier: `kad-${now.slice(0, 10)}-${Math.abs([...query].reduce((a, c) => a * 31 + c.charCodeAt(0) | 0, 7)).toString(36)}`,
           recordsFixity: '', // 아래에서 채움 — records 배열 JSON의 sha256(JSON 단독 전파 시에도 내장 무결성)
@@ -2461,6 +2461,7 @@ item_cd 5종(자료 성격별): ART 도설·회화 / ETC 두루마리·축 / DRR
               identifier: it.id || null, title: it.title, date: it.date || null,
               heldBy: hb.map((k) => ({ id: k, name: (ARCHIVE_META[k] || {}).n || k, country: (ARCHIVE_META[k] || {}).c || '' })), // 맥락 — 기관 정식명·국가
               accessUrl: it.url || null, evidence: `API 실조회 ${now.slice(0, 10)}`,
+              ...(it.media ? { media: it.media } : {}), // 다매체 — 원본 매체 직링크(게재 소싱)
               ...((PART_OF[hb[0]] && PART_OF[hb[0]](it)) ? { partOf: PART_OF[hb[0]](it) } : {}), // 맥락 — 상위 계층
               ...(dr ? { deepRead: dr } : {}) }; // 증거성 — 판독 재현 호출문
           }),
@@ -2473,7 +2474,7 @@ item_cd 5종(자료 성격별): ART 도설·회화 / ETC 두루마리·축 / DRR
           + `\nfixity(sha256): ${fx} — 위 JSON 바이트의 지문. 전파·보관본 대조 시 불일치=변조/손상.`
           + '\n공개 지문 원장(골든 기록 주간 감시·개정 이력): https://korea-archive-mcp.vercel.app/fixity-ledger.json'
           + '\n※ 현용기록물로서의 발굴기록: provenance(질의·소스·시각·재현 호출)=증거성 · heldBy·식별자=맥락 · fixity=고정성. 이 JSON을 그대로 기록관리시스템·KARDA에 등재.'
-          + "\n※ 다매체 변환 사슬: 이 매니페스트 → report_template(kind=report/carousel/full_package)=보고서·카드뉴스 · format='karda'=지식그래프 · format='csv'=데이터셋."
+          + "\n※ 다매체 변환 사슬: 이 매니페스트 → report_template(kind=report/carousel/full_package)=보고서·카드뉴스 · format='karda'=지식그래프 · format='csv'=데이터셋 · media 필드=원본 매체 직링크(게재 소싱)."
           + '\n※ 지속가능성: 영속 식별자(archRfcd·NAID·levelId·R번호) 우선 인용 — URL이 썩어도 재발굴 가능. 채널 생존은 source_profile(health)·주간 CI가 감시. 권리는 judge_rights로 기록 단위 표시.');
       }
       if (format === 'karda') { // 온톨로지 직출력 — 로컬 스킬 전용이던 KARDA 노드·엣지 지식의 서버화(웹·모바일 동등성)
@@ -2484,7 +2485,7 @@ item_cd 5종(자료 성격별): ART 도설·회화 / ETC 두루마리·축 / DRR
           .concat(srcs.map((s) => ({ id: 'archive:' + s, type: 'archive', label: (ARCHIVE_META[s] || {}).n || s, ...(((ARCHIVE_META[s] || {}).c) ? { country: ARCHIVE_META[s].c } : {}) })))
           .concat(recs.map((it, i) => ({ id: rid(it, i), type: 'record', label: it.title.slice(0, 90),
             ...(it.id ? { identifier: it.id } : {}), // manifest와 동일 식별자 — 상호 참조
-            ...(it.date ? { date: it.date } : {}), ...(it.url ? { url: it.url } : {}) })));
+            ...(it.date ? { date: it.date } : {}), ...(it.url ? { url: it.url } : {}), ...(it.media ? { media: it.media } : {}) })));
         const edges = []; const serSeen = new Set();
         recs.forEach((it, i) => {
           edges.push({ from: 'topic:' + query, to: rid(it, i), rel: 'FOUND' });
@@ -2504,9 +2505,9 @@ item_cd 5종(자료 성격별): ART 도설·회화 / ETC 두루마리·축 / DRR
       if (format === 'csv') { // 분석 투입용 구조화 출력 — "자료로써 분석할 수 있게". node=karda·manifest와 동일 조인 키(v1.71)
         const esc = (v) => `"${String(v == null ? '' : v).replace(/"/g, '""')}"`;
         const ridc = (it, i) => 'rec:' + (it.id ? `${it.sources[0].split('·')[0]}:${it.id}` : `m${i}`);
-        const rows = items.slice(0, 45).map((it, i) => { const hb0 = it.sources[0].split('·')[0]; const po = (PART_OF[hb0] && PART_OF[hb0](it)) || ''; return [ridc(it, i), it.sources.join('+'), it.title, it.date, it.id, it.url, po].map(esc).join(','); });
+        const rows = items.slice(0, 45).map((it, i) => { const hb0 = it.sources[0].split('·')[0]; const po = (PART_OF[hb0] && PART_OF[hb0](it)) || ''; return [ridc(it, i), it.sources.join('+'), it.title, it.date, it.id, it.url, po, it.media || ''].map(esc).join(','); });
         return text(`교차수집 '${query}' CSV — 채널별 [${stats.join(' · ')}] → 병합 ${items.length}건 (45건 상한):\n`
-          + 'node,sources,title,date,id,url,partOf\n' + rows.join('\n')
+          + 'node,sources,title,date,id,url,partOf,media\n' + rows.join('\n')
           + '\n※ 그대로 스프레드시트·KARDA 온톨로지(nodes/edges)·통계 분석에 투입 가능. 권리 초판정: judge_rights.');
       }
       const lines = items.slice(0, 45).map((it) => `- [${it.sources.join('+')}] ${it.title.slice(0, 95)}${it.date ? ` (${it.date})` : ''}${it.url ? ' ' + it.url : ''}`);
