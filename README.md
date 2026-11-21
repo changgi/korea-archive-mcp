@@ -1,82 +1,111 @@
-# Korea Archive MCP — Remote server (Vercel)
+<div align="center">
 
-Remote MCP server exposing **20** Korea-records discovery tools (해외 6 + 국내 9 + 유틸 5) over Streamable HTTP — PlayMCP 개발가이드 준수(≤20 tools, annotations, Streamable HTTP, stateless, **응답 24KB 공통 가드**).
+# 🏛️ KOREA ARCHIVE 통합검색
+### Korea Archive MCP — 30개 문서고 연합 발굴 원격 MCP 서버
 
-> **발굴 우선 원칙** — 자료를 전부 찾아 분석 가능하게 하고, 권리관계는 표시(judge_rights·KOGL·건별 권리 태그)로 제공한다. 연대 필터(`year_from`/`year_to`)·페이지는 TNA·IA·Gallica·Europeana·NARA·국가기록원·NLK·6·25아카이브에, 인접 채굴(±N 옆 훑기)은 TNA·NARA(NAID)·IA(일련번호)·6·25아카이브 4기관에 선다.
-No local Python needed by users — they just add a connector URL.
+[![Sources](https://img.shields.io/badge/sources-30_archives_·_9_countries-1f6feb?style=flat-square)](#-연합-검색망-30소스)
+[![Tools](https://img.shields.io/badge/MCP_tools-20_(PlayMCP_준수)-2da44e?style=flat-square)](#-도구-20종)
+[![Hierarchy](https://img.shields.io/badge/partOf_계층-28%2F30_채널-8250df?style=flat-square)](#-현용기록물화-사슬--발굴이-기록이-됩니다)
+[![Fixity](https://img.shields.io/badge/공개_지문_원장-골든_8종_주간_감시-d4a72c?style=flat-square)](https://korea-archive-mcp.vercel.app/fixity-ledger.json)
+[![Region](https://img.shields.io/badge/Vercel-icn1_(Seoul)-black?style=flat-square&logo=vercel)](https://korea-archive-mcp.vercel.app)
+[![License](https://img.shields.io/badge/license-MIT-lightgrey?style=flat-square)](#라이선스--방법론)
 
-## Deploy (once)
-1. Push this folder to GitHub (e.g. `korea-archive-mcp`)
-2. vercel.com → Add New Project → Import the repo → Deploy (Next.js auto-detected)
-3. **Function region → Seoul (icn1).** Korean government sites (`archives.seoul.go.kr`, `opengov.seoul.go.kr`, …)
-   block foreign/datacenter egress IPs, so from the default US region their fetch fails ("fetch failed") and
-   the tool falls back to a web-search handoff. This repo pins the region to Seoul via `preferredRegion = 'icn1'`
-   (in `app/api/[transport]/route.js`) and `vercel.json` `"regions": ["icn1"]`. If your plan/setup ignores those,
-   set it manually: Project Settings → Functions → Function Region → **Seoul, South Korea (icn1)**, then redeploy.
-4. Env vars (Project Settings → Environment Variables) — all optional:
-   - `NARA_API_KEY` — enables nara_search (free: Catalog_API@nara.gov)
-   - `EUROPEANA_API_KEY` — heavier europeana_search use (free: apis.europeana.eu; a shared demo key works without it)
-   - `ARCHIVES_API_KEY` — enables archives_search / 국가기록원 (free: data.go.kr 15000153)
-   - `NLK_API_KEY` — enables nlk_search / 국립중앙도서관 (free: www.nl.go.kr Open API)
-   - `KOREANWAR_API_TOKEN` — enables the OpenAPI channel of koreanwar_search / KOREAN WAR ARCHIVES 6·25전쟁 아카이브센터 (협약기관).
-     Apply via the site's Q&A board ("API 문의"). **실측(2026-08-19): 발급 토큰은 Referer 바인딩**
-     (`https://korea-archive-mcp.vercel.app/`) — 서버가 해당 Referer 헤더를 자동 첨부하므로 환경변수만 넣으면 동작.
-     Scraped search works keyless meanwhile; the token adds the official-metadata channel (KOGL·이용조건·저작권 필드,
-     pbrcList.do — keyword param 없음·pageSize 상한 100 실측). `KOREANWAR_API_PAGES` (default 3) caps pages/query.
-   - `FETCH_PROXY_PREFIX` — *last-resort bypass* if a site still blocks even the Seoul region (some Korean gov
-     sites block all cloud/datacenter ASNs). Point it at a read-through proxy that returns **raw** content, e.g.
-     `https://api.allorigins.win/raw?url=` (append target) or `https://r.jina.ai/` (uses the sent `X-Return-Format: html`).
-     Off by default. Use `{url}` in the value as a placeholder for the URL-encoded target if the proxy needs it mid-path.
-   - `NEDB_INDEX_URL` — **robots-compliant 한국사DB search.** `db.history.go.kr` disallows generic crawlers in
-     robots.txt, so instead of scraping it, use the OFFICIAL data.go.kr open-data files (KOGL): download the
-     한국사DB datasets (비변사등록·한국사료총서·근현대인물 등), run `node scripts/ingest-opendata.mjs <folder>` to build
-     `nedb_index.json`, host it (e.g. this deploy's `public/`), and set `NEDB_INDEX_URL` to that URL. Then
-     `nedb_search` and `cross_search` serve results from the official files — no live scraping. (Tailor the field
-     map in `scripts/ingest-opendata.mjs` to each dataset's actual XML/CSV structure.)
+**한국 관련 기록(1860~현대)을 9개국 30개 문서고에서 한국어 한 번의 질의로 발굴하고,**
+**발굴 자체를 맥락·증거성을 갖춘 현용기록물(JSON-LD 매니페스트·지식그래프·CSV)로 만들어 전파하는 서버.**
 
-## Web layer (same deployment)
-- **Landing** `/` — 브랜드 랜딩(연결법·도구 지도·실물 링크) · **사용 안내** `/help.html` · **English** `/help-en.html`
-- **기록잇다** `/ingitda.html` + `/api/overseas` — 6문서고 연합 즉석 검색(TNA·IA·Gallica·Europeana·KWA[한국어 실검색]·NARA[키 감지]), 문서고별 검증/노이즈 표기 판별
-- **실물 예제** `/examples/hanriver.html`(한강 강배 보고서 원본) · `/examples/joseon-deck.html`(강연 풀덱 403장)
+[사용 안내](https://korea-archive-mcp.vercel.app/help.html) · [English Guide](https://korea-archive-mcp.vercel.app/help-en.html) · [기록잇다(즉석 연합검색)](https://korea-archive-mcp.vercel.app/ingitda.html) · [공개 지문 원장](https://korea-archive-mcp.vercel.app/fixity-ledger.json) · [심사 시연 21선](docs/playmcp-review-pack.md)
 
-## Users connect with one URL
-- Claude (web/desktop): Settings → Connectors → Add custom connector → `https://<deployment>.vercel.app/api/mcp`
-- Claude Code: `claude mcp add --transport http korea-archive https://<deployment>.vercel.app/api/mcp`
-- <deployment> is `korea-archive-mcp` so  → `https://korea-archive-mcp.vercel.app/api/mcp`
+</div>
 
-## Tools (20 — PlayMCP 개발가이드 준수: 서버당 20개 이하)
-- **Overseas (6):** tna_search · tna_adjacent_mine · nara_search · ia_search(검색+identifier 메타 조회 통합) · gallica_search · europeana_search
-- **Domestic (9):** **nedb_search**(한국사DB + **조선 사료 심층 판독 10모드** — law·record(座目 필터)·item·★sibling(형제 조 전수)·matrix(부재 발견)·origin·sjw(왕대 분포)·kyujanggak(목록+해제·이미지 패턴 지식)·**aks**(한국고문서자료관 — 소장처 172곳 내장 카탈로그→분류→문서 면·썸네일)) · archives_search(국가기록원·**연대 후처리 필터**) · nlk_search(국립중앙도서관·category 이중채널·**연대 후처리 필터**) · seoul_archives_search(서울기록원) · foia_search(정보공개포털 외 — source 파라미터) · warmemo_search(전쟁기념관 — 구 사이트 개편 시 **6·25아카이브 자동 폴백**) · **koreanwar_search**(KOREAN WAR ARCHIVES 통합검색+전투정보 scope(기관 69건+**후기 단계 서버 앵커 16건**)+OpenAPI 공식 메타 채널) · **koreanwar_item**(건별 메타·권리 + radius 인접 채굴) · scrape_plan
-- **Utility (5):** **query_bank**(검증 키워드셋 + **조사 전략 6토픽** — walls·identifiers·persons·crosscheck·world(6개국 서고 지도)·cities(도시명 계보)) · judge_rights(**공공누리 KOGL 1~4유형 자동 판정** 포함) · **report_template**(**kind 9종** — report·carousel·canva_prompts·**full_package**(매직 키워드 '풀패키지' — 산출물 12종 오케스트레이션)·magazine·**help**(매직 키워드 '창기창기 도와줘')·citation(한국사DB·국회도서관 인용 형식)·annotation(기록 해설 규칙)·**exhibit**(AKS 고문서 전시형)) · **cross_search**(**13소스** 동시 교차수집·병합 + **variants 당대 표기 팬아웃** + **format=csv**) · **source_profile**(기관 3층 프로파일 + **health 13채널 헬스체크**)
+---
 
-### 매직 키워드 · MCP 프롬프트 · 사용 안내
-- **MCP prompts 2종**(웹·모바일 + 메뉴 노출): `full-package`(topic 인자) · `changgi-help` — server `instructions`에도 트리거 규칙 명시
-- 매직 키워드: **"○○○ 풀패키지로 만들어줘"** → 조사→검증→매거진 보고서→카드뉴스→포스터→홍보·입문·메시지 카드→발표 PPTX→기록 해설→Canva 편집본→KARDA·시연 영상까지 산출물 12종 / **"창기창기 도와줘"** → 처음 사용자 안내
-- 사용 안내 페이지(정적 서빙): **`/help.html`** — 커버리지·조사 방법론·산출물 12종·실전 미리보기 갤러리 14섹션(글로스터 1호·장진호 2호·한강·강연 세트·기록잇다)
-- 로컬 스킬(`.claude/skills/` — 서버와 패리티): korea-full-package·changgi-help·insta-carousel·archival-discovery-pipeline·joseon-source-mining(+excavation)·khdb/nanet-citation·kyujanggak-images·record-annotation
+## ⚡ 연결은 URL 하나
 
-### KOREAN WAR ARCHIVES 6·25전쟁 아카이브센터 (koreanwar.or.kr — MOU 협약기관)
-TNA-style structured toolset for KOREAN WAR ARCHIVES (정식 명칭; 전쟁기념관재단, 55,000+ items):
-`koreanwar_search`(통합검색 — 상위계층 breadcrumb에서 NARA Record Group을 추출해 원본 역추적 링크 제공; 생산연도·수집구분 서버측 필터, pageSize 10/20/50; `scope=battle`이면 전투정보 DB) →
-`koreanwar_item`(생산처·생산시기·입수처[NARA NAID 직결]·열람 및 이용조건; `radius=1~8`이면 archRfcd 일련번호 ±N 동일 시리즈 인접 채굴 — 정중한 3건 배치 병렬).
-All requests carry a partner-identifying User-Agent and polite pacing.
-`KOREANWAR_API_TOKEN` 설정 즉시 공식 OpenAPI 메타 채널(pbrcList.do — KOGL·이용조건·저작권 필드)이 자동 병행된다(토큰은 Referer 바인딩 발급 — 서버가 자동 처리).
+| 클라이언트 | 방법 |
+|---|---|
+| **Claude** (웹·모바일·데스크톱) | 설정 → 커넥터 → 커스텀 커넥터 추가 → `https://korea-archive-mcp.vercel.app/api/mcp` |
+| **Claude Code** | `claude mcp add --transport http korea-archive https://korea-archive-mcp.vercel.app/api/mcp` |
+| **PlayMCP** (카카오) | "KOREA ARCHIVE 통합검색" 검색 → 연결 |
 
-### PlayMCP 개발가이드 준수 (2026.06.12판)
-- Streamable HTTP · Remote(public URL) · stateless — mcp-handler 기반 충족
-- 도구 20개 이하(24→20 통합) · 도구명 영문/숫자/underscore · "kakao" 문자열 미사용
-- 전 도구 annotations(title·readOnlyHint·destructiveHint·openWorldHint·idempotentHint) 지정 — 전부 read-only·비파괴
-- description: PlayMCP 등록 서비스명 "KOREA ARCHIVE 통합검색" 병기 + 1024자 이내 자동 보장
-- 응답은 정제 텍스트(마크다운형) — API 원본 미투과 · 인접 채굴은 배치 병렬로 p99 3s 내 응답
+매직 키워드 — **"○○ 풀패키지로 만들어줘"**(조사→보고서→카드뉴스→포스터→보존 패키지 SIP까지 산출물 12종) · **"창기창기 도와줘"**(처음 사용자 안내).
 
-### cross_search — 상호보완 동시수집 (13소스)
-`cross_search(query, sources="all")` runs one query across **13 sources** — TNA·IA·Gallica·Europeana (keyless) + NARA·archives·nlk (if key) + nedb (if `NEDB_INDEX_URL`) + koreanwar·warmemo·seoul·foia(서울소통광장 원문)·aks(고문서 소장처 내장 카탈로그) — **concurrently**, then merges & dedups, tagging each record by which source(s) found it (multi-source = cross-corroborated).
-- `variants=true`: 당대 표기(Corean·Corea·Chosen·Keijo·Fusan·Chemulpo·Gensan·Heijo·Quelpaert·Taikyu) 최대 2종을 해외 4채널에 자동 병렬 투입 — 채널 태그에 변형 표시(예 `ia·Corean`).
-- `format="csv"`: 병합 결과를 `sources,title,date,id,url` CSV 블록으로 — 스프레드시트·KARDA 온톨로지·통계 분석 직투입.
-- 채널 상태 점검: `source_profile(institution="health")` — 13채널 골든 질의 일괄 실측(🟢🟡🔴) + 서버 키 설정 상태. GitHub Actions `health` 워크플로가 주간 자동 실행.
+## 🌏 연합 검색망 30소스
 
-## Skills (`.claude/skills/`)
-- **insta-carousel** — 발굴조사 결과를 인스타그램 캐러셀 카드뉴스(1080×1080 PNG)로 제작: 실물 이미지 소싱·라이선스 판정·레이아웃·헤드리스 크롬 렌더링·캡션.
-- **archival-discovery-pipeline** — 발굴이 식별자·URL을 확보하면 **실물을 여는** 후속 파이프라인: 프레임 단위 영상·이미지 분석, 문자 영역 탐지·OCR·VLM 교차검증 판독(슬레이트·표지판·현수막), 당대 지명·부대 식별, 재기술, 게재 윤리 4단계 판정, RiC-O/CIDOC-CRM 온톨로지·KARDA 노드엣지 변환, 논문 도판·정합 검사. MCP 도구(`nara_search`·`tna_adjacent_mine`·`koreanwar_search`·`judge_rights` 등)와 왕복 구조로 연동 — 판독에서 나온 단서(ROLL·과제번호·촬영자·부대)로 다시 발굴 도구를 호출해 자매편을 찾는다. 의존: `pip install pillow numpy opencv-python matplotlib` + ffmpeg (OCR 보조: tesseract).
+`cross_search("장진호")` 한 번이 아래 전체를 동시 수집·병합·중복제거하고, 복수 출처 레코드는 **교차확인**으로 표시합니다. 한국어 질의는 색인 언어로 자동 변환됩니다(TOPICS 85항목 · 한→일 48항목 · 한→불).
+
+| 권역 | 소스 |
+|---|---|
+| 🇺🇸 미국 | **NARA**(계보·생산일·소장단위·scope 지문·원본 직링크 — 최심도 채널) · Internet Archive |
+| 🇬🇧🇫🇷🇪🇺 유럽 | TNA 영국국립기록관 · Gallica 프랑스국립도서관 · Europeana · 🇳🇱 Nationaal Archief · 🇩🇪(DDB 키 대기) |
+| 🇯🇵 일본 | JACAR 아시아역사자료센터 · NDL 국립국회도서관 |
+| 🇦🇺🇳🇿 오세아니아 | Australian War Memorial · DigitalNZ · **Archives NZ**(공개 API 역공학 10차로 합류) |
+| 🌐 국제 | UN Digital Library · Wikimedia Commons(PD 원본 직링크) |
+| 🇰🇷 국내 14+ | **KOREAN WAR ARCHIVES 6·25전쟁 아카이브센터(MOU 협약기관)** · 국가기록원 · 국립중앙도서관 · 대한민국신문아카이브(면·단 좌표) · 서울기록원 · 국사편찬위 한국사DB·전자사료관 · 공훈전자사료관 · 독립기념관(+한국독립운동인명사전) · 독립운동판결문 · 국가유산포털 · 대한민국역사박물관 · KTV e영상역사관 · 장서각 · 규장각 · 한국고문서자료관 · 정보공개포털 |
+
+> **발굴 우선 원칙** — 권리·접근 제약은 발굴을 막는 사유가 아니라 **표시 대상**입니다. 결과마다 권리 상태를 표시하고(`judge_rights` — KOGL 1~4유형·NARA Use Restriction 실조회), 기술적 불능 소스만 제외하되 대체 경로를 안내합니다.
+
+## 🧬 현용기록물화 사슬 — 발굴이 기록이 됩니다
+
+```
+발굴(cross_search) ──► 생산: JSON-LD 수집기록 매니페스트 (ISAD(G)·RiC 지향)
+                        provenance=질의·소스·시각·재현 호출문 (증거성)
+                        heldBy=기관 정식명·국가 / partOf=상위 계층 28채널 (맥락)
+                        media=실조회 검증 원본 직링크 (다매체)
+                  ──► 데이터화: format=csv(partOf·media 열) · karda(지식그래프 — series 노드·PART_OF 엣지)
+                        세 매체가 같은 node 키를 공유 — 상호 참조
+                  ──► 전파: 보고서·카드뉴스·포스터가 매니페스트를 부록으로 상속
+                        이미지도 media 직링크에서 소싱 — 데이터와 지면의 계보 일치
+                  ──► 지속: sha256 fixity + 본문 지문 10채널 + 공개 지문 원장(골든 8종 주간 감시)
+                        영속 식별자(NAID·archRfcd·R번호·레퍼런스코드) 우선 인용
+```
+
+- **계층(partOf) 28/30채널**: NARA `RG 127 › General Photograph File…` · 협약기관 `수집 > 미국 > NARA > RG 111…` · 장서각 四部 · 규장각 문고(奎·古·想白·一簑) · NL 토이강(2.05 외무부…) · UN 문서기호 · Gallica ark 유형 등 — 응답에 재료가 없던 채널은 식별자 분해·패턴 도출로 **구축**
+- **심층 판독 14채널**: 발굴한 번호·URL을 재투입하면 본문·메타·권리가 나옵니다 — 공훈록 전문, 판결문 사건개요, 장서각 해제, 국가유산 해설, 신문 OCR 원문, UN 요약+6개 언어 PDF, NARA 계보·소장단위·디지털 객체…
+- **인접 채굴**: 하나 찾으면 양옆을 훑습니다 — NARA NAID ±N(계보로 시리즈 경계 탐지) · TNA · IA 일련번호 · 6·25아카이브 archRfcd
+
+## 🛠 도구 20종
+
+PlayMCP 제약(도구 ≤20 · 응답 ≤24KB · read-only annotations)을 CI가 푸시마다 검증합니다. 확장은 전부 **파라미터 모드**로.
+
+| 묶음 | 도구 |
+|---|---|
+| 해외 (6) | `tna_search` · `tna_adjacent_mine` · `nara_search`(RG 교차·NAID 인접·계보·원본 점수) · `ia_search` · `gallica_search` · `europeana_search` |
+| 국내 (9) | `nedb_search`(**판독 14모드** — 조선 사료 10 + gonghun·i815 사전·jsg·jacar·un·commons·oldnews·much·indy·heritage·ktv·earchive·nzarch) · `archives_search` · `nlk_search` · `seoul_archives_search` · `foia_search` · `warmemo_search` · `koreanwar_search` · `koreanwar_item` · `scrape_plan` |
+| 유틸 (5) | `cross_search`(**30소스** · variants 당대 표기 팬아웃 · **format=text/csv/karda/manifest**) · `judge_rights`(KOGL 자동 + NARA naid 실조회) · `query_bank`(검증 키워드·전략 토픽) · `report_template`(kind 9종 — 보고서 19규칙·카드뉴스·풀패키지·전시·인용·해설) · `source_profile`(**health 30채널 실측**) |
+
+## 🔭 자가 감시 4종 (GitHub Actions, 주간)
+
+| 워크플로 | 역할 |
+|---|---|
+| `health` | 30채널 골든 질의 실측(🟢🟡🔴 + 응답시간) |
+| `retry-blocked` | 차단 6곳 복구 탐침(HTTP 코드+콘텐츠 마커 — 오탐 교정 완료) |
+| `nz-harvest` | Archives NZ 주간 수확 → `public/nz-index.json`(간헐 차단 폴백) |
+| `fixity-watch` | 골든 8종 본문 지문 재계산 → [공개 원장](https://korea-archive-mcp.vercel.app/fixity-ledger.json) 대조·개정 이력 축적 (NARA는 시크릿 `NARA_API_KEY` 설정 시) |
+
+## 🚀 배포 (직접 운영 시)
+
+<details>
+<summary><b>Vercel 배포·환경변수 안내 펼치기</b></summary>
+
+1. 이 저장소를 GitHub에 푸시 → vercel.com → Import → Deploy (Next.js 자동 감지)
+2. **Function 리전 → Seoul (icn1) 필수.** 국내 공공 사이트가 해외 데이터센터 IP를 차단하므로 `preferredRegion='icn1'`·`vercel.json`이 고정합니다. 플랜이 무시하면 Project Settings → Functions → Function Region → Seoul 수동 설정.
+3. 환경변수(전부 선택):
+   - `NARA_API_KEY` — nara_search·judge_rights(naid) 활성 (무료: Catalog_API@nara.gov)
+   - `ARCHIVES_API_KEY` — 국가기록원 (data.go.kr 15000153) · `NLK_API_KEY` — 국립중앙도서관 · `EUROPEANA_API_KEY`
+   - `KOREANWAR_API_TOKEN` — 협약기관 공식 OpenAPI 메타 채널(Referer 바인딩 — 서버 자동 처리)
+   - `NEDB_INDEX_URL` — 한국사DB **robots 준수** 검색: data.go.kr 공식 개방파일을 `scripts/ingest-opendata.mjs`로 인덱싱해 호스팅 후 지정
+   - `FETCH_PROXY_PREFIX` — 최후 수단 read-through 프록시 (기본 꺼짐)
+
+같은 배포가 웹 레이어도 서빙: `/`(랜딩) · `/help.html` · `/help-en.html` · `/ingitda.html`(+`/api/overseas`) · `/examples/`(한강 보고서·강연 풀덱 403장) · `/fixity-ledger.json` · `/nz-index.json`
+</details>
+
+## 🏗 구조 원칙
+
+- **웹·모바일 동등성** — 지식(규칙·템플릿·프롬프트)은 전부 MCP 도구 응답으로 노출. 로컬 스킬(`.claude/skills/` 10종)과 서버 상수는 패리티 유지
+- **3사본 패리티** — 본 저장소(route.js) ↔ [korea-archive-marketplace](https://github.com/changgi/korea-archive-marketplace)(Python plugin server.py·mcp/server.py). `ci-verify`·`ci-parity`가 푸시마다 검증
+- **콘텐츠 신뢰** — 실물 기록만(AI 생성 인물·장면 금지), 링크·수치·훈격은 실확인만, 협약기관 출처 표기, 게재윤리 4단계
+
+## 라이선스 · 방법론
 
 MIT · Methodology: Song, Chang-Gi (2026), National Archives of Korea
+협약: KOREAN WAR ARCHIVES 6·25전쟁 아카이브센터 (koreanwar.or.kr — MOU)
