@@ -1,32 +1,32 @@
 name: nz-probe
-# Archives NZ 역공학 4차 — 3차 발견: 인라인 설정의 프록시 경로(/federated-search · /local-rest/api/v1 · /transaction).
-# 이번: 그 경로들을 직접 타격해 공개 REST의 실존·스키마를 확인한다.
+# Archives NZ 역공학 5차 — 4차 확정: /local-rest/api/v1 은 공개 Axiell JAX-RS(무인증, 404는 JSON).
+# 이번: JS에서 getLocalApiEndpoint() 뒤에 붙는 실제 경로 추출 + 서브경로 브루트.
 on:
   workflow_dispatch: {}
 jobs:
   recon:
     runs-on: ubuntu-latest
     steps:
-      - name: 프록시 REST 타격
+      - name: local-rest 경로 발굴
         run: |
           set +e
           UA="Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
           B="https://collections.archives.govt.nz"
-          hit(){ hc=$(curl -sS -m 20 -A "$UA" -H "Accept: application/json" -o /tmp/r -w '%{http_code} %{size_download} %{content_type}' "$B$1"); echo "[$1] $hc"; echo "  head: $(head -c 300 /tmp/r | tr '\n' ' ')"; }
-          hit "/federated-search"
-          hit "/federated-search/"
-          hit "/federated-search/search?q=Korea"
-          hit "/federated-search/search?query=Korea"
-          hit "/federated-search/api/search?query=Korea"
-          hit "/federated-search/v1/search?query=Korea"
-          hit "/federated-search/swagger.json"
-          hit "/federated-search/openapi.json"
-          hit "/local-rest/api/v1"
-          hit "/local-rest/api/v1/"
-          hit "/local-rest/api/v1/search?q=Korea"
-          hit "/local-rest/api/v1/records?q=Korea"
-          hit "/local-rest/api/v1/swagger.json"
-          hit "/local-rest/api/v1/openapi.json"
-          hit "/local-rest/api/v1/api-docs"
-          hit "/transaction"
+          curl -sSL -m 30 -A "$UA" -o /tmp/p2 "$B/web/arena/search?q=Korea"
+          echo "::group::endpoint usage in page"
+          grep -oE '.{0,60}(getLocalApiEndpoint|getFederatedSearchApiEndpoint)\(\).{0,160}' /tmp/p2 | head -20
+          grep -oE '.{0,40}local-rest.{0,140}' /tmp/p2 | head -20
+          echo "::endgroup::"
+          curl -sSL -m 30 -A "$UA" -o /tmp/aj "$B/o/frontend-js-web/arena/arena.js"
+          echo "[arena.js] size=$(wc -c </tmp/aj)"
+          echo "::group::endpoint usage in arena.js"
+          grep -oE '.{0,60}(LocalApiEndpoint|FederatedSearchApiEndpoint|local-rest)[^;]{0,160}' /tmp/aj | head -30
+          echo "::endgroup::"
+          hit(){ hc=$(curl -sS -m 20 -A "$UA" -H "Accept: application/json" -o /tmp/r -w '%{http_code} %{size_download}' "$B/local-rest/api/v1$1"); echo "[$1] $hc · $(head -c 220 /tmp/r | tr '\n' ' ')"; }
+          for p in "/search-records?query=Korea" "/catalogue-records?query=Korea" "/catalogue-records/search?query=Korea" \
+                   "/records/search?query=Korea" "/search/catalogue-records?query=Korea" "/searchResult?query=Korea" \
+                   "/search?query=Korea" "/catalogue/search?query=Korea" "/arena-search?query=Korea" \
+                   "/installations" "/portal-sites" "/organisations" "/branches" "/system/status" "/application.wadl"; do
+            hit "$p"
+          done
           true
