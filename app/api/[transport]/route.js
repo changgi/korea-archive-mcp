@@ -1290,14 +1290,14 @@ const JB_CROSS = `국내외 대조 절차 — 순서를 틀리면 헛수고한�
               () => gtext('https://archive.much.go.kr/archive/nrms/view.do?idnbr=' + encodeURIComponent(id2)), '소장품번호');
             const flat = dclean(b);
             const pick = (re2) => ((flat.match(re2) || [])[1] || '').trim();
-            const mat = pick(/재질\s+(\S{1,14})\s+작가/);
-            const artist = pick(/작가\s+(.{1,40}?)\s+크기/);
-            const size = pick(/크기\s+(\S{1,50}?)\s+소장품번호/);
-            const no2 = pick(/소장품번호\s+(\S{2,20})/);
+            const mat = pick(/재질\s*(\S{1,14})\s*작가/);
+            const artist = pick(/작가\s*(.{1,40}?)\s*크기/);
+            const size = pick(/크기\s*(\S{1,50}?)\s*소장품번호/);
+            const no2 = pick(/소장품번호\s*(\S{2,20})/);
             const km = flat.match(/제\s*(\d)\s*유형\s*:\s*(.{3,60}?)\s*본 저작물/);
             const di = flat.indexOf('이용할 수 있습니다.');
             let desc = di >= 0 ? flat.slice(di + 11, di + 1700).trim() : '';
-            desc = desc.split(/활용정보|이전글|다음글|사이트맵|COPYRIGHT/i)[0].trim();
+            desc = desc.split(/자료열람|활용정보|이전글|다음글|사이트맵|COPYRIGHT/i)[0].replace(/&times;|×/g, '').trim();
             if (!no2 && !desc) return text(`[${id2}] 상세 미발견 또는 구조 상이 — idnbr을 확인하거나 mode=much에 검색어를 넣으십시오.`);
             const rline = km ? (() => { const r2 = judgeRights(`KOGL ${km[1]}`, '', '역사박물관'); return `\n권리 초판정(공공누리 제${km[1]}유형 — ${km[2].trim()}): ${r2[0]} — ${r2[1]}`; })() : '';
             return text(`역사박물관 소장품 판독 — [${id2}]\n`
