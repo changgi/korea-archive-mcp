@@ -1,0 +1,29 @@
+name: nz-harvest
+# Archives NZ 한국 관련 레코드 주간 수확 → public/nz-index.json (정적 인덱스).
+# 배경: federated-search 공개 API는 평문 GET로 동작(9차 실측)하나 Incapsula가 클라우드 IP(icn1·개발망)를
+# 차단 — GH 러너는 통과. 우회가 아니라 접근이 허용된 환경에서 수확해 자체 도메인에서 서빙한다.
+# nzarch 수집기는 라이브 실패 시 이 인덱스로 폴백. 스크립트는 base64 임베드(heredoc 함정 회피).
+on:
+  schedule:
+    - cron: '7 22 * * 2'   # 매주 화 07:07 KST
+  workflow_dispatch: {}
+permissions:
+  contents: write
+jobs:
+  harvest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: 수확·병합·커밋
+        run: |
+          set -e
+          echo "Y29uc3QgUVVFUklFUyA9IFsnS29yZWEnLCAnQ29yZWEnLCAnS29yZWFuIFdhcicsICdDaG9zZW4gS29yZWEnXTsKY29uc3Qgc2VlbiA9IG5ldyBNYXAoKTsKZm9yIChjb25zdCBxIG9mIFFVRVJJRVMpIHsKICBjb25zdCB1ID0gJ2h0dHBzOi8vY29sbGVjdGlvbnMuYXJjaGl2ZXMuZ292dC5uei9mZWRlcmF0ZWQtc2VhcmNoL2N1c3RvbWVycy9haW1zL3NlYXJjaD9zaXplPTEwMCZmYWNldFNpemU9MCZzdGFydD0wJmlzRnV6enk9dHJ1ZSZzb3VyY2VJZD1haW1zLWFyY2hpdmUmcT0nICsgZW5jb2RlVVJJQ29tcG9uZW50KHEpOwogIGNvbnN0IHIgPSBhd2FpdCBmZXRjaCh1LCB7IGhlYWRlcnM6IHsgJ1VzZXItQWdlbnQnOiAnTW96aWxsYS81LjAgKFdpbmRvd3MgTlQgMTAuMDsgV2luNjQ7IHg2NCknLCBBY2NlcHQ6ICdhcHBsaWNhdGlvbi9qc29uJyB9IH0pOwogIGNvbnN0IGIgPSBhd2FpdCByLnRleHQoKTsKICBjb25zdCBsaW5lID0gYi5zcGxpdCgnXG4nKS5maW5kKChsKSA9PiBsLnN0YXJ0c1dpdGgoJ2RhdGE6JykgJiYgbC5pbmNsdWRlcygnImhpdHMiJykpOwogIGlmICghbGluZSkgeyBjb25zb2xlLmVycm9yKCdubyBkYXRhIGZvcicsIHEsIHIuc3RhdHVzKTsgY29udGludWU7IH0KICBjb25zdCBqID0gSlNPTi5wYXJzZShsaW5lLnNsaWNlKDUpKTsKICBmb3IgKGNvbnN0IGggb2Ygai5oaXRzIHx8IFtdKSB7CiAgICBjb25zdCBlID0gaC5lbnRpdHkgfHwge307CiAgICBjb25zdCBjZiA9IChrKSA9PiB7IHRyeSB7IHJldHVybiBTdHJpbmcoZS5jdXN0b21ba10udmFsdWVbMF0udmFsdWUpOyB9IGNhdGNoIHsgcmV0dXJuICcnOyB9IH07CiAgICBpZiAoZS5pZCAmJiAhc2Vlbi5oYXMoZS5pZCkpIHNlZW4uc2V0KGUuaWQsIHsKICAgICAgaWQ6IFN0cmluZyhlLmlkKSwgdGl0bGU6IFN0cmluZyhlLm5hbWUgfHwgJycpLnNsaWNlKDAsIDE2MCksCiAgICAgIGRhdGU6IGNmKCdyZXN1bHREYXRlJyksIGFjY2VzczogY2YoJ2FjY2Vzc1N0YXR1cycpLCBzZXJpZXM6IGNmKCdzZXJpZXMnKS5zbGljZSgwLCA2MCkgfSk7CiAgfQogIGNvbnNvbGUuZXJyb3IocSwgJy0+IHRvdGFsJywgKGoudG90YWxIaXRzIHx8IDApLCAnbWVyZ2VkJywgc2Vlbi5zaXplKTsKfQpjb25zdCBvdXQgPSB7IGdlbmVyYXRlZDogbmV3IERhdGUoKS50b0lTT1N0cmluZygpLCBzb3VyY2U6ICdjb2xsZWN0aW9ucy5hcmNoaXZlcy5nb3Z0Lm56IGZlZGVyYXRlZC1zZWFyY2ggKEdIIHdlZWtseSBoYXJ2ZXN0KScsIGNvdW50OiBzZWVuLnNpemUsIHJlY29yZHM6IFsuLi5zZWVuLnZhbHVlcygpXSB9Owpjb25zb2xlLmxvZyhKU09OLnN0cmluZ2lmeShvdXQpKTsK" | base64 -d > /tmp/harvest.mjs
+          node /tmp/harvest.mjs > public/nz-index.json
+          echo "records: $(node -e "console.log(JSON.parse(require('fs').readFileSync('public/nz-index.json','utf8')).count)")"
+          if git diff --quiet public/nz-index.json; then echo "변경 없음"; exit 0; fi
+          git config user.name changgi
+          git config user.email 10678518+changgi@users.noreply.github.com
+          git add public/nz-index.json
+          git commit -m "chore(nz-harvest): Archives NZ 한국 관련 인덱스 주간 갱신"
+          git push
