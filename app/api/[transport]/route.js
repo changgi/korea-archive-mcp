@@ -1518,7 +1518,7 @@ const JB_CROSS = `국내외 대조 절차 — 순서를 틀리면 헛수고한�
             const abs = dclean(String((r.abstract || {}).summary || ''));
             return text(`UN 디지털도서관 판독 — ${sym || `recid ${recid}`}\n`
               + [(r.imprint || {}).date && `발행: ${(r.imprint || {}).date}`, subs && `주제: ${subs}`].filter(Boolean).join(' · ') + '\n'
-              + (abs ? `【요약】\n${abs.slice(0, 1500)}\n` : '')
+              + (abs ? `【요약】\n${abs.slice(0, 1500)}\n본문 지문(sha256-16): ${createHash('sha256').update(abs).digest('hex').slice(0, 16)} — 판독 시점 요약 전문 기준. 재판독 지문 불일치=원문 개정 발생.\n` : '')
               + (en ? `영문 PDF: ${en.url}\n` : '') + (files.length > 1 ? `전체 언어판 ${files.length}종: ` + files.map((f) => f.description).filter(Boolean).join('·') + '\n' : '')
               + `레코드: https://digitallibrary.un.org/record/${recid}\n`
               + '※ UN 공식문서 — 출처 표기 하에 인용 가능(문서기호 병기). 결의·보고서 원문은 PDF 직링크로 분석 투입.');
@@ -1639,10 +1639,13 @@ const JB_CROSS = `국내외 대조 절차 — 순서를 틀리면 헛수고한�
             let body = raw.replace(/<br\s*\/?>/gi, '\n').replace(/<[^>]+>/g, ' ')
               .split('\n').map((l) => l.replace(/\s+/g, ' ').trim()).join('\n').replace(/\n{3,}/g, '\n\n').trim();
             if (!title && !body) return text(`판독 실패 — 영상 상세 구조 상이. 브라우저로 열람: ${q}`);
+            const kfp = body ? createHash('sha256').update(body).digest('hex').slice(0, 16) : ''; // 판독 시점 해설 지문
             if (body.length > 4000) body = body.slice(0, 4000) + ` …(총 ${body.length}자 — 전문은 원문 링크)`;
             return text(`KTV e영상역사관 영상 판독 — ${title || '(제목 미상)'}\n`
               + [pdate && `제작연도: ${pdate}`, ptime && `상영시간: ${ptime}`, origin && `출처: ${origin}`].filter(Boolean).join(' · ') + '\n'
-              + (body ? `【해설】\n${body}\n` : '') + `원문(영상 재생): ${q}\n`
+              + (body ? `【해설】\n${body}\n` : '')
+              + (kfp ? `본문 지문(sha256-16): ${kfp} — 판독 시점 해설 전문 기준. 재판독 지문 불일치=원문 개정 발생.\n` : '')
+              + `원문(영상 재생): ${q}\n`
               + '※ KTV 콘텐츠는 KOGL(공공누리) — judge_rights에 "KOGL" 표기로 초판정. 게재 시 출처 표기.');
           }
           const items = await COLLECT.ktv(q, Math.min(max_results, 10));
@@ -2284,6 +2287,7 @@ item_cd 5종(자료 성격별): ART 도설·회화 / ETC 두루마리·축 / DRR
             accessUrl: 'dcterms:source', heldBy: { '@id': 'rico:hasOrHadHolder' }, records: { '@id': 'rico:hasRecordSetMember' } },
           '@type': ['DiscoveryManifest', 'rico:RecordSet'], standard: 'ISAD(G)/RiC-oriented',
           identifier: `kad-${now.slice(0, 10)}-${Math.abs([...query].reduce((a, c) => a * 31 + c.charCodeAt(0) | 0, 7)).toString(36)}`,
+          recordsFixity: '', // 아래에서 채움 — records 배열 JSON의 sha256(JSON 단독 전파 시에도 내장 무결성)
           provenance: { // 증거성 — 수집의 재현 가능한 기술(누가·무엇을·언제·어떻게)
             query, sources: want.join(','), variants, collectedAt: now,
             tool: 'KOREA ARCHIVE 통합검색 cross_search (Vercel icn1)',
@@ -2295,6 +2299,7 @@ item_cd 5종(자료 성격별): ART 도설·회화 / ETC 두루마리·축 / DRR
             heldBy: [...new Set(it.sources.map((s) => s.split('·')[0]))], // 맥락 — 소장기관(복수=교차확인)
             accessUrl: it.url || null, evidence: `API 실조회 ${now.slice(0, 10)}` })),
         };
+        man.recordsFixity = 'sha256:' + createHash('sha256').update(JSON.stringify(man.records)).digest('hex'); // 내장 무결성
         const mj = JSON.stringify(man);
         const fx = createHash('sha256').update(mj).digest('hex'); // 고정성(fixity) — 전파 중 변조 검증
         return text(`발굴 수집기록 매니페스트 '${query}' — ${recs.length}건 (재현 가능·기관 등재용):\n`
