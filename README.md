@@ -1,111 +1,261 @@
 <div align="center">
 
 # 🏛️ KOREA ARCHIVE 통합검색
-### Korea Archive MCP — 30개 문서고 연합 발굴 원격 MCP 서버
 
-[![Sources](https://img.shields.io/badge/sources-30_archives_·_9_countries-1f6feb?style=flat-square)](#-연합-검색망-30소스)
-[![Tools](https://img.shields.io/badge/MCP_tools-20_(PlayMCP_준수)-2da44e?style=flat-square)](#-도구-20종)
-[![Hierarchy](https://img.shields.io/badge/partOf_계층-28%2F30_채널-8250df?style=flat-square)](#-현용기록물화-사슬--발굴이-기록이-됩니다)
-[![Fixity](https://img.shields.io/badge/공개_지문_원장-골든_8종_주간_감시-d4a72c?style=flat-square)](https://korea-archive-mcp.vercel.app/fixity-ledger.json)
-[![Region](https://img.shields.io/badge/Vercel-icn1_(Seoul)-black?style=flat-square&logo=vercel)](https://korea-archive-mcp.vercel.app)
-[![License](https://img.shields.io/badge/license-MIT-lightgrey?style=flat-square)](#라이선스--방법론)
+**전 세계 문서고에 흩어진 한국 기록을, 한국어 한 문장으로 찾아 주는 AI 도구**
 
-**한국 관련 기록(1860~현대)을 9개국 30개 문서고에서 한국어 한 번의 질의로 발굴하고,**
-**발굴 자체를 맥락·증거성을 갖춘 현용기록물(JSON-LD 매니페스트·지식그래프·CSV)로 만들어 전파하는 서버.**
+[![30개 문서고](https://img.shields.io/badge/문서고-30곳_·_9개국-1f6feb?style=for-the-badge)](#-어디서-찾아-주나요)
+[![설치 불필요](https://img.shields.io/badge/설치-필요_없음-2da44e?style=for-the-badge)](#-3분-만에-시작하기)
+[![무료](https://img.shields.io/badge/이용-무료-d4a72c?style=for-the-badge)](#-3분-만에-시작하기)
 
-[사용 안내](https://korea-archive-mcp.vercel.app/help.html) · [English Guide](https://korea-archive-mcp.vercel.app/help-en.html) · [기록잇다(즉석 연합검색)](https://korea-archive-mcp.vercel.app/ingitda.html) · [공개 지문 원장](https://korea-archive-mcp.vercel.app/fixity-ledger.json) · [심사 시연 21선](docs/playmcp-review-pack.md)
+[**소개 페이지**](https://changgi.github.io/korea-archive-mcp/) · [**사용 안내**](https://korea-archive-mcp.vercel.app/help.html) · [English](https://korea-archive-mcp.vercel.app/help-en.html) · [플러그인 버전](https://github.com/changgi/korea-archive-marketplace)
 
 </div>
 
 ---
 
-## ⚡ 연결은 URL 하나
+## 💡 한 줄 요약
 
-| 클라이언트 | 방법 |
-|---|---|
-| **Claude** (웹·모바일·데스크톱) | 설정 → 커넥터 → 커스텀 커넥터 추가 → `https://korea-archive-mcp.vercel.app/api/mcp` |
-| **Claude Code** | `claude mcp add --transport http korea-archive https://korea-archive-mcp.vercel.app/api/mcp` |
-| **PlayMCP** (카카오) | "KOREA ARCHIVE 통합검색" 검색 → 연결 |
+> 미국·영국·프랑스·일본·호주·뉴질랜드·네덜란드·UN과 국내 기관의 문서고 30곳을
+> **한 번에 검색**하고, 찾은 기록의 **원문·출처·이용 권리까지 정리**해 주는 도구입니다.
+> Claude(AI 비서)에 연결해서 대화하듯 쓰면 됩니다.
 
-매직 키워드 — **"○○ 풀패키지로 만들어줘"**(조사→보고서→카드뉴스→포스터→보존 패키지 SIP까지 산출물 12종) · **"창기창기 도와줘"**(처음 사용자 안내).
+### 이런 분께 필요합니다
 
-## 🌏 연합 검색망 30소스
+- 📚 **연구자·학생** — 논문에 쓸 1차 사료를 해외 문서고까지 뒤져야 할 때
+- 🏛️ **기록관·박물관 실무자** — 전시·콘텐츠에 쓸 실물 사진과 그 출처·권리를 확인해야 할 때
+- ✍️ **기자·작가·PD** — 특정 사건·인물의 원본 기록을 빠르게 모아야 할 때
+- 🙋 **역사에 관심 있는 누구나** — "우리 동네 옛 모습", "할아버지가 겪은 전쟁"을 직접 찾아보고 싶을 때
 
-`cross_search("장진호")` 한 번이 아래 전체를 동시 수집·병합·중복제거하고, 복수 출처 레코드는 **교차확인**으로 표시합니다. 한국어 질의는 색인 언어로 자동 변환됩니다(TOPICS 85항목 · 한→일 48항목 · 한→불).
+---
 
-| 권역 | 소스 |
-|---|---|
-| 🇺🇸 미국 | **NARA**(계보·생산일·소장단위·scope 지문·원본 직링크 — 최심도 채널) · Internet Archive |
-| 🇬🇧🇫🇷🇪🇺 유럽 | TNA 영국국립기록관 · Gallica 프랑스국립도서관 · Europeana · 🇳🇱 Nationaal Archief · 🇩🇪(DDB 키 대기) |
-| 🇯🇵 일본 | JACAR 아시아역사자료센터 · NDL 국립국회도서관 |
-| 🇦🇺🇳🇿 오세아니아 | Australian War Memorial · DigitalNZ · **Archives NZ**(공개 API 역공학 10차로 합류) |
-| 🌐 국제 | UN Digital Library · Wikimedia Commons(PD 원본 직링크) |
-| 🇰🇷 국내 14+ | **KOREAN WAR ARCHIVES 6·25전쟁 아카이브센터(MOU 협약기관)** · 국가기록원 · 국립중앙도서관 · 대한민국신문아카이브(면·단 좌표) · 서울기록원 · 국사편찬위 한국사DB·전자사료관 · 공훈전자사료관 · 독립기념관(+한국독립운동인명사전) · 독립운동판결문 · 국가유산포털 · 대한민국역사박물관 · KTV e영상역사관 · 장서각 · 규장각 · 한국고문서자료관 · 정보공개포털 |
+## 🤔 왜 만들었나요?
 
-> **발굴 우선 원칙** — 권리·접근 제약은 발굴을 막는 사유가 아니라 **표시 대상**입니다. 결과마다 권리 상태를 표시하고(`judge_rights` — KOGL 1~4유형·NARA Use Restriction 실조회), 기술적 불능 소스만 제외하되 대체 경로를 안내합니다.
+한국 관련 기록은 전 세계 문서고에 수백만 건이 있지만, **일반 검색으로는 대부분 찾을 수 없습니다.**
 
-## 🧬 현용기록물화 사슬 — 발굴이 기록이 됩니다
+**이유 ① 기록은 그 시대의 말로 적혀 있습니다.**
+1910~45년 기록에서 서울은 "Seoul"이 아니라 **"Keijo"**, 부산은 **"Fusan"**, 한국은 **"Chosen"·"Corea"** 입니다. 오늘의 단어로 검색하면 그 시대 기록 대부분을 놓칩니다.
+
+**이유 ② 문서고마다 언어와 검색 방식이 다릅니다.**
+"장진호"를 찾으려면 미국 문서고에선 `Chosin Reservoir`, 일본에선 `長津湖`로 검색해야 하고, 사이트마다 사용법도 제각각입니다.
+
+**이 도구는 이 두 벽을 대신 넘어 줍니다.** 한국어로 물으면 각 문서고의 언어와 그 시대 표기로 바꿔서 30곳을 동시에 찾습니다.
+
+---
+
+## 🚀 3분 만에 시작하기
+
+설치할 프로그램은 없습니다. AI 비서에 주소 하나만 등록하면 됩니다.
+
+**Claude 웹·앱을 쓰는 경우**
+1. Claude 설정 → **커넥터** → **커스텀 커넥터 추가**
+2. 아래 주소를 붙여 넣기
 
 ```
-발굴(cross_search) ──► 생산: JSON-LD 수집기록 매니페스트 (ISAD(G)·RiC 지향)
-                        provenance=질의·소스·시각·재현 호출문 (증거성)
-                        heldBy=기관 정식명·국가 / partOf=상위 계층 28채널 (맥락)
-                        media=실조회 검증 원본 직링크 (다매체)
-                  ──► 데이터화: format=csv(partOf·media 열) · karda(지식그래프 — series 노드·PART_OF 엣지)
-                        세 매체가 같은 node 키를 공유 — 상호 참조
-                  ──► 전파: 보고서·카드뉴스·포스터가 매니페스트를 부록으로 상속
-                        이미지도 media 직링크에서 소싱 — 데이터와 지면의 계보 일치
-                  ──► 지속: sha256 fixity + 본문 지문 10채널 + 공개 지문 원장(골든 8종 주간 감시)
-                        영속 식별자(NAID·archRfcd·R번호·레퍼런스코드) 우선 인용
+https://korea-archive-mcp.vercel.app/api/mcp
 ```
 
-- **계층(partOf) 28/30채널**: NARA `RG 127 › General Photograph File…` · 협약기관 `수집 > 미국 > NARA > RG 111…` · 장서각 四部 · 규장각 문고(奎·古·想白·一簑) · NL 토이강(2.05 외무부…) · UN 문서기호 · Gallica ark 유형 등 — 응답에 재료가 없던 채널은 식별자 분해·패턴 도출로 **구축**
-- **심층 판독 14채널**: 발굴한 번호·URL을 재투입하면 본문·메타·권리가 나옵니다 — 공훈록 전문, 판결문 사건개요, 장서각 해제, 국가유산 해설, 신문 OCR 원문, UN 요약+6개 언어 PDF, NARA 계보·소장단위·디지털 객체…
-- **인접 채굴**: 하나 찾으면 양옆을 훑습니다 — NARA NAID ±N(계보로 시리즈 경계 탐지) · TNA · IA 일련번호 · 6·25아카이브 archRfcd
+3. 대화창에 **"창기창기 도와줘"** 라고 입력하면 사용법을 안내해 줍니다.
 
-## 🛠 도구 20종
+<details>
+<summary>Claude Code(개발자용 터미널)를 쓰는 경우</summary>
 
-PlayMCP 제약(도구 ≤20 · 응답 ≤24KB · read-only annotations)을 CI가 푸시마다 검증합니다. 확장은 전부 **파라미터 모드**로.
+```bash
+claude mcp add --transport http korea-archive https://korea-archive-mcp.vercel.app/api/mcp
+```
+</details>
+
+<details>
+<summary>카카오 PlayMCP를 쓰는 경우</summary>
+
+PlayMCP에서 **"KOREA ARCHIVE 통합검색"** 을 검색해 연결합니다.
+</details>
+
+---
+
+## 💬 이렇게 말해 보세요
+
+평소 말투로 부탁하면 됩니다. 아래는 **실제로 돌려 본 결과**입니다.
+
+### 1. 여러 나라 문서고를 한 번에 찾기
+> 🗣️ **"장진호 전투 기록 찾아줘"**
+
+→ "장진호"를 영어 `Chosin Reservoir`로 자동으로 바꿔서 미국 국립기록관리청에서만 **512건**을 찾고, 다른 문서고 결과와 합쳐 보여 줍니다. 두 곳 이상에서 나온 기록은 **"교차확인됨"** 으로 표시됩니다.
+
+### 2. 인물의 공식 기록 모아 보기
+> 🗣️ **"유관순 공훈록 보여줘"**
+
+→ 국가보훈부 공훈전자사료관에서 **공적조서·공훈록 전문·수형 기록(판결문)·묘소·현충시설**을 한 번에 가져옵니다.
+"유관순 종합 정리해줘"처럼 물으면 공훈록·한국독립운동인명사전·판결문 세 곳을 함께 대조해, 이름이 같은 다른 사람과도 구분해 줍니다.
+
+### 3. 당시 신문에서 찾기
+> 🗣️ **"안중근 의거 당시 신문 기사 찾아줘"**
+
+→ 대한민국신문아카이브에서 이렇게 찾아 줍니다.
+```
+안중근소식 — 대한매일신보 [3면 3단] (1909년 11월 9일)
+```
+**신문 이름·날짜·몇 면 몇 단**까지 나오니 논문 각주에 바로 옮길 수 있습니다.
+
+### 4. 이 사진, 써도 되나요?
+> 🗣️ **"이 미국 기록 사진 게재해도 되는지 확인해줘"** (기록 번호 276537577)
+
+→ 미국 국립기록관리청 목록을 직접 조회해서 알려 줍니다. (실제 응답 일부)
+```
+Class: A — 이용 제한 없음(Unrestricted) 실확인, 출처 표기 권장
+생산: 1950-11-02
+소장단위: National Archives at College Park - Still Pictures
+디지털 객체 2점 — 원본 JPG 직링크
+【범위·내용】 Original Caption: 1st Mar Div Korea 2 Nov 50 … Fifth Marine Regiment
+             gets into hills and cold weather around Chosin Reservoir.
+```
+등급, 촬영일, 실물이 있는 곳, 원본 파일, 당시 사진 설명까지 한 번에 확인할 수 있습니다.
+
+### 5. 찾은 결과를 엑셀로 받기
+> 🗣️ **"장진호 기록 찾아서 표로 정리해줘"**
+
+→ 기록마다 **제목·날짜·소장 기관·소속 분류·원본 이미지 주소**가 한 줄씩 담긴 표(CSV)를 줍니다. 엑셀이나 구글 시트에 그대로 붙여 넣을 수 있습니다.
+
+### 6. 한 문장으로 결과물까지
+> 🗣️ **"장진호 풀패키지로 만들어줘"**
+
+→ 조사부터 시작해 **잡지형 보고서, 인스타그램 카드뉴스 8장, 포스터, 발표 자료**까지 이어서 만듭니다. 모든 결과물에는 실제 기록과 출처만 들어갑니다.
+
+---
+
+## 🌏 어디서 찾아 주나요?
+
+**9개국 30곳**의 문서고·도서관·박물관을 동시에 찾습니다.
+
+| 지역 | 기관 |
+|---|---|
+| 🇺🇸 미국 | 국립기록관리청(NARA) · 인터넷 아카이브 |
+| 🇬🇧 영국 | 국립기록관(TNA) |
+| 🇫🇷 프랑스 | 국립도서관(Gallica) |
+| 🇪🇺 유럽 | 유로피아나(유럽 4,000여 기관 통합) |
+| 🇳🇱 네덜란드 | 국립문서보관소 |
+| 🇯🇵 일본 | 아시아역사자료센터 · 국립국회도서관 |
+| 🇦🇺 호주 | 전쟁기념관 |
+| 🇳🇿 뉴질랜드 | 국립기록원 · 디지털NZ |
+| 🌐 국제 | UN 디지털도서관 · 위키미디어 공용(저작권 만료 사진) |
+| 🇰🇷 한국 | **6·25전쟁 아카이브센터(협약기관)** · 국가기록원 · 국립중앙도서관 · 대한민국신문아카이브 · 서울기록원 · 국사편찬위원회 · 공훈전자사료관 · 독립기념관 · 독립운동판결문 · 국가유산포털 · 대한민국역사박물관 · KTV 영상역사관 · 장서각 · 규장각 · 한국고문서자료관 · 정보공개포털 |
+
+---
+
+## 🧰 무엇을 할 수 있나요? — 핵심 기능 7가지
+
+### 1. 🌐 우리말로 묻고, 그 나라 말로 찾기
+한국어로 물으면 각 문서고의 언어로 바꿔 찾습니다.
+**예)** 장진호 → `Chosin Reservoir`(미국) · `長津湖`(일본) / 병인양요 → `expédition de Corée 1866`(프랑스)
+
+### 2. 🕰️ 그 시대 이름으로도 찾기
+옛 지명·옛 국호로 적힌 기록까지 함께 찾습니다.
+**예)** 서울 → Keijo · 부산 → Fusan · 인천 → Chemulpo · 한국 → Chosen, Corea
+
+### 3. ✅ 여러 곳에서 확인된 기록 표시
+같은 기록이 두 문서고 이상에서 나오면 **교차확인** 표시가 붙습니다. 믿을 만한 기록을 먼저 고를 수 있습니다.
+
+### 4. 📖 찾은 기록의 원문까지 읽기
+목록만 보여 주고 끝나지 않습니다. 기록 번호를 다시 넣으면 **본문을 직접 가져옵니다.**
+공훈록 전문, 판결문 사건 개요, 장서각 고문헌 해제, 국가유산 해설, 옛 신문 원문, UN 문서 요약 등 **14곳**에서 이렇게 깊이 읽을 수 있습니다.
+
+### 5. 🔍 하나 찾으면 옆 번호도 훑기
+문서고 기록은 번호가 이어진 묶음으로 보관됩니다. 한 건을 찾으면 **앞뒤 번호를 자동으로 확인**해 같은 묶음의 기록을 찾아냅니다.
+**예)** 인천상륙작전 영상 1건 → 앞뒤 4건을 더 찾아 D-DAY 연속 필름 5편 확보
+
+### 6. ⚖️ 써도 되는지 알려 주기
+기록마다 이용 권리를 **A(자유 이용)부터 D(이용 불가)까지** 등급으로 표시합니다. 공공누리 1~4유형을 자동으로 읽고, 미국 기록은 목록의 이용 제한 항목을 직접 조회합니다.
+권리가 걸려 있어도 **찾는 것 자체는 막지 않고 표시만** 합니다. 최종 판단은 사람이 합니다.
+
+### 7. 📦 찾은 결과를 "기록"으로 남기기
+검색 결과를 그냥 흘려보내지 않고, 나중에 다시 확인할 수 있는 형태로 정리해 줍니다.
+
+| 받을 수 있는 형태 | 쓰임 |
+|---|---|
+| 📊 **표(CSV)** | 엑셀·통계 분석에 바로 사용 |
+| 🕸️ **관계도(그래프)** | 기록·기관·분류의 연결을 그림으로 보기 |
+| 📜 **수집 기록서(매니페스트)** | 언제, 어디서, 어떻게 찾았는지 적힌 증빙. 기록관리시스템 등록용 |
+
+---
+
+## 🛡️ 믿을 수 있게 만들었습니다
+
+- **실제 기록만** — AI가 그린 인물이나 장면은 쓰지 않습니다.
+- **직접 확인한 링크만** — 모든 주소와 수치는 각 기관 시스템을 실제로 조회한 결과입니다.
+- **원문이 바뀌면 알아챕니다** — 공훈록·판결문·장서각 해제 같은 주요 기록 8건의 확인값을 [공개 확인 장부](https://korea-archive-mcp.vercel.app/fixity-ledger.json)에 올려 두고, 매주 자동으로 다시 계산해 대조합니다.
+- **매주 스스로 점검합니다** — 30개 문서고가 정상 작동하는지 자동으로 확인합니다.
+- **협약기관 출처를 표기합니다** — 6·25전쟁 아카이브센터 기록에는 출처를 반드시 함께 적습니다.
+
+---
+
+## 📖 용어 풀이
+
+| 용어 | 쉬운 설명 |
+|---|---|
+| **MCP 커넥터** | AI 비서(Claude 등)에 새 능력을 붙이는 연결 주소. 이 도구는 주소 하나로 연결됩니다. |
+| **교차확인** | 같은 기록이 두 곳 이상의 문서고에서 나온 경우 |
+| **판독** | 목록이 아니라 기록 본문·상세 정보를 가져와 읽는 것 |
+| **인접 채굴** | 찾은 기록의 앞뒤 번호를 훑어 같은 묶음의 기록을 찾는 방법 |
+| **소속 분류(계층)** | 기록이 속한 상위 묶음. 예) 미국 해병대 기록군 › 해병대 사진철 |
+| **원본 직링크** | 기록 이미지·문서 파일로 바로 이어지는 주소 |
+| **매니페스트** | 무엇을, 언제, 어디서, 어떤 검색어로 찾았는지 적은 수집 증빙 문서 |
+| **지문(확인값)** | 기록 내용으로 만든 고유 확인값. 원문이 조금만 바뀌어도 값이 달라져 변경을 알아챕니다. |
+
+---
+
+## 👩‍💻 개발자·운영자를 위한 정보
+
+<details>
+<summary><b>도구 20종 목록</b></summary>
 
 | 묶음 | 도구 |
 |---|---|
-| 해외 (6) | `tna_search` · `tna_adjacent_mine` · `nara_search`(RG 교차·NAID 인접·계보·원본 점수) · `ia_search` · `gallica_search` · `europeana_search` |
-| 국내 (9) | `nedb_search`(**판독 14모드** — 조선 사료 10 + gonghun·i815 사전·jsg·jacar·un·commons·oldnews·much·indy·heritage·ktv·earchive·nzarch) · `archives_search` · `nlk_search` · `seoul_archives_search` · `foia_search` · `warmemo_search` · `koreanwar_search` · `koreanwar_item` · `scrape_plan` |
-| 유틸 (5) | `cross_search`(**30소스** · variants 당대 표기 팬아웃 · **format=text/csv/karda/manifest**) · `judge_rights`(KOGL 자동 + NARA naid 실조회) · `query_bank`(검증 키워드·전략 토픽) · `report_template`(kind 9종 — 보고서 19규칙·카드뉴스·풀패키지·전시·인용·해설) · `source_profile`(**health 30채널 실측**) |
+| 해외 (6) | `tna_search` · `tna_adjacent_mine` · `nara_search` · `ia_search` · `gallica_search` · `europeana_search` |
+| 국내 (9) | `nedb_search`(판독 14모드) · `archives_search` · `nlk_search` · `seoul_archives_search` · `foia_search` · `warmemo_search` · `koreanwar_search` · `koreanwar_item` · `scrape_plan` |
+| 유틸 (5) | `cross_search`(30곳 동시 검색 · `format=text/csv/karda/manifest`) · `judge_rights` · `query_bank` · `report_template` · `source_profile`(`health`=30곳 상태 점검) |
 
-## 🔭 자가 감시 4종 (GitHub Actions, 주간)
-
-| 워크플로 | 역할 |
-|---|---|
-| `health` | 30채널 골든 질의 실측(🟢🟡🔴 + 응답시간) |
-| `retry-blocked` | 차단 6곳 복구 탐침(HTTP 코드+콘텐츠 마커 — 오탐 교정 완료) |
-| `nz-harvest` | Archives NZ 주간 수확 → `public/nz-index.json`(간헐 차단 폴백) |
-| `fixity-watch` | 골든 8종 본문 지문 재계산 → [공개 원장](https://korea-archive-mcp.vercel.app/fixity-ledger.json) 대조·개정 이력 축적 (NARA는 시크릿 `NARA_API_KEY` 설정 시) |
-
-## 🚀 배포 (직접 운영 시)
-
-<details>
-<summary><b>Vercel 배포·환경변수 안내 펼치기</b></summary>
-
-1. 이 저장소를 GitHub에 푸시 → vercel.com → Import → Deploy (Next.js 자동 감지)
-2. **Function 리전 → Seoul (icn1) 필수.** 국내 공공 사이트가 해외 데이터센터 IP를 차단하므로 `preferredRegion='icn1'`·`vercel.json`이 고정합니다. 플랜이 무시하면 Project Settings → Functions → Function Region → Seoul 수동 설정.
-3. 환경변수(전부 선택):
-   - `NARA_API_KEY` — nara_search·judge_rights(naid) 활성 (무료: Catalog_API@nara.gov)
-   - `ARCHIVES_API_KEY` — 국가기록원 (data.go.kr 15000153) · `NLK_API_KEY` — 국립중앙도서관 · `EUROPEANA_API_KEY`
-   - `KOREANWAR_API_TOKEN` — 협약기관 공식 OpenAPI 메타 채널(Referer 바인딩 — 서버 자동 처리)
-   - `NEDB_INDEX_URL` — 한국사DB **robots 준수** 검색: data.go.kr 공식 개방파일을 `scripts/ingest-opendata.mjs`로 인덱싱해 호스팅 후 지정
-   - `FETCH_PROXY_PREFIX` — 최후 수단 read-through 프록시 (기본 꺼짐)
-
-같은 배포가 웹 레이어도 서빙: `/`(랜딩) · `/help.html` · `/help-en.html` · `/ingitda.html`(+`/api/overseas`) · `/examples/`(한강 보고서·강연 풀덱 403장) · `/fixity-ledger.json` · `/nz-index.json`
+카카오 PlayMCP 기준(도구 20개 이하, 응답 24KB 이하, 읽기 전용)을 코드를 올릴 때마다 자동으로 검사합니다.
 </details>
 
-## 🏗 구조 원칙
+<details>
+<summary><b>직접 배포하기 (Vercel)</b></summary>
 
-- **웹·모바일 동등성** — 지식(규칙·템플릿·프롬프트)은 전부 MCP 도구 응답으로 노출. 로컬 스킬(`.claude/skills/` 10종)과 서버 상수는 패리티 유지
-- **3사본 패리티** — 본 저장소(route.js) ↔ [korea-archive-marketplace](https://github.com/changgi/korea-archive-marketplace)(Python plugin server.py·mcp/server.py). `ci-verify`·`ci-parity`가 푸시마다 검증
-- **콘텐츠 신뢰** — 실물 기록만(AI 생성 인물·장면 금지), 링크·수치·훈격은 실확인만, 협약기관 출처 표기, 게재윤리 4단계
+1. 이 저장소를 Vercel에 연결해 배포합니다. Next.js로 자동 인식됩니다.
+2. **실행 지역은 서울(icn1)이어야 합니다.** 국내 공공 사이트가 해외 서버 접속을 막기 때문입니다. 코드에 고정돼 있지만, 적용되지 않으면 Project Settings → Functions → Function Region에서 Seoul을 직접 고릅니다.
+3. 환경변수는 모두 선택 사항입니다.
+   - `NARA_API_KEY` — 미국 국립기록관리청 검색 (무료 발급: Catalog_API@nara.gov)
+   - `ARCHIVES_API_KEY` — 국가기록원 (data.go.kr 15000153)
+   - `NLK_API_KEY` — 국립중앙도서관
+   - `EUROPEANA_API_KEY` — 유로피아나 대량 이용 시
+   - `KOREANWAR_API_TOKEN` — 6·25전쟁 아카이브센터 공식 API
+   - `NEDB_INDEX_URL` — 한국사DB 공식 개방 파일 색인 (`scripts/ingest-opendata.mjs`로 생성)
+   - `FETCH_PROXY_PREFIX` — 차단 사이트 우회용 프록시 (기본은 꺼져 있음)
+</details>
 
-## 라이선스 · 방법론
+<details>
+<summary><b>자동 점검 (GitHub Actions, 매주)</b></summary>
 
-MIT · Methodology: Song, Chang-Gi (2026), National Archives of Korea
-협약: KOREAN WAR ARCHIVES 6·25전쟁 아카이브센터 (koreanwar.or.kr — MOU)
+| 작업 | 하는 일 |
+|---|---|
+| `health` | 30개 문서고의 정상 작동 여부와 응답 속도 확인 |
+| `retry-blocked` | 접속이 막힌 6곳이 다시 열렸는지 확인 |
+| `nz-harvest` | 뉴질랜드 국립기록원 목록을 미리 받아 두기(접속 불안정 대비) |
+| `fixity-watch` | 주요 기록 8건의 내용 변경 여부 확인 → [공개 장부](https://korea-archive-mcp.vercel.app/fixity-ledger.json) 갱신 |
+</details>
+
+<details>
+<summary><b>저장소 구조와 원칙</b></summary>
+
+- 원격 서버 본체: `app/api/[transport]/route.js`
+- 같은 기능의 파이썬 버전은 [korea-archive-marketplace](https://github.com/changgi/korea-archive-marketplace)에 있습니다. 두 저장소는 코드를 올릴 때마다 기능이 같은지 자동으로 검사합니다(`scripts/ci-parity.mjs`).
+- 같은 배포에서 웹 페이지도 제공합니다: `/help.html` · `/help-en.html` · `/ingitda.html`(브라우저 즉석 검색) · `/examples/`(실제 결과물 예시)
+</details>
+
+---
+
+<div align="center">
+
+MIT License · 방법론: 송창기 (2026), 국가기록원
+협약: KOREAN WAR ARCHIVES 6·25전쟁 아카이브센터
+
+</div>
