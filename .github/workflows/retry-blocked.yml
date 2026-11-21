@@ -1,6 +1,6 @@
 name: retry-blocked
 # 보류 소스 주간 재점검 — 복구 감지 시 실패(알림)로 띄운다.
-# 전례: 공훈전자사료관(v1.30)·역사박물관(v1.47) — 재점검에서 복구 발견 → 당일 합류.
+# 전례: 공훈전자사료관(v1.30)·역사박물관(v1.47)·i815 인명사전(v1.56 — 이 워크플로 1차 실행이 감지, 당일 합류).
 # 복구 판정: HTTP 200 + 마커 문자열(차단 페이지 오탐 방지). 복구 감지 시 exit 1 → 워크플로 실패 알림 → 합류 작업 착수.
 on:
   schedule:
@@ -15,25 +15,26 @@ jobs:
           set +e
           UA="Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
           recovered=0
+          # 1차 실행(2026-11-21) 교훈: curl은 403에도 exit 0 → HTTP 코드 실측 필수.
+          # 마커는 차단 페이지(JS 챌린지·Incapsula·보안확인)에 절대 없을 문자열로 — URL 에코 문자열 금지.
           probe() { # name url marker
-            body=$(curl -sSL -m 20 -A "$UA" "$2" 2>/dev/null)
+            hc=$(curl -sSL -m 20 -A "$UA" -o /tmp/probe_body -w '%{http_code}' "$2" 2>/dev/null)
             code=$?
-            if [ $code -eq 0 ] && echo "$body" | grep -q "$3"; then
-              echo "✅ 복구 감지: $1 — $2 (마커 '$3' 확인) → 합류 검토 착수" | tee -a "$GITHUB_STEP_SUMMARY"
+            if [ $code -eq 0 ] && [ "$hc" = "200" ] && grep -q "$3" /tmp/probe_body; then
+              echo "✅ 복구 감지: $1 — $2 (HTTP 200 + 마커 '$3') → 합류 검토 착수" | tee -a "$GITHUB_STEP_SUMMARY"
               recovered=1
             else
-              echo "⛔ $1: 여전히 차단/오류 (curl=$code)" | tee -a "$GITHUB_STEP_SUMMARY"
+              echo "⛔ $1: 여전히 차단/오류 (curl=$code http=$hc)" | tee -a "$GITHUB_STEP_SUMMARY"
             fi
           }
-          echo "## 보류 소스 주간 재점검" >> "$GITHUB_STEP_SUMMARY"
+          echo "## 보류 소스 주간 재점검 (GH IP 기준 — 복구 감지 시 icn1 재실측 후 합류)" >> "$GITHUB_STEP_SUMMARY"
           probe "민주화운동 오픈아카이브" "https://archives.kdemo.or.kr/search?query=%EB%B6%80%EB%A7%88" "검색결과"
           probe "미국 LOC JSON" "https://www.loc.gov/search/?q=Korea&fo=json&c=2" '"results"'
           probe "호주 NAA RecordSearch" "https://recordsearch.naa.gov.au/SearchNRetrieve/Interface/SearchScreens/BasicSearch.aspx" "RecordSearch"
-          probe "뉴질랜드 Archives NZ" "https://collections.archives.govt.nz/web/arena" "arena"
+          probe "뉴질랜드 Archives NZ" "https://collections.archives.govt.nz/web/arena" "Archives New Zealand"
           probe "뉴질랜드 Papers Past" "https://paperspast.natlib.govt.nz/newspapers" "Papers Past"
-          probe "캐나다 LAC" "https://recherche-collection-search.bac-lac.gc.ca/eng/Home/Search?q=Korea" "collection"
-          probe "UN Archives AtoM" "https://search.archives.un.org/informationobject/browse?query=Korea" "informationobject"
-          probe "i815 인명사전" "https://search.i815.or.kr/dictionary/main.do" "사전"
+          probe "캐나다 LAC" "https://recherche-collection-search.bac-lac.gc.ca/eng/Home/Search?q=Korea" "Library and Archives Canada"
+          probe "UN Archives AtoM" "https://search.archives.un.org/informationobject/browse?query=Korea" "search-result"
           if [ $recovered -eq 1 ]; then
             echo "::error::보류 소스 복구 감지 — 합류 검토가 필요합니다(요약 참조)."
             exit 1

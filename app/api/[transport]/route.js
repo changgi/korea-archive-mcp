@@ -1165,7 +1165,7 @@ const handler = createMcpHandler((server) => {
 const JB_RECIPES = `발굴 완주 레시피 — 주제 유형별 발굴→판독→권리 순서 (전 단계 실측 검증, 2026-11-21)
 공통 원칙: ①cross_search로 폭 확보(variants=당대 표기) ②신호가 나온 소스의 전용 도구/판독 모드로 심층 ③권리는 표시(judge_rights·naid·라이선스) ④0건=부재가 아니다(표기 변형·인접 채굴·관리 행정으로 전환).
 
-① 인물(독립운동가): gonghun(이름→mngNo→공훈록·수형기록. 훈격·이명 확보) → 이명·한자명으로 i815·oldnews 재검색(당대 신문 — oldnews는 '본문:이명' OCR 전문까지) → jacar(일본 측 — 한자명) → commons(초상·PD) → 수형기록의 판결문 원문은 indy(국가기록원 판결문 테마관 — 판결기관·주문·원문) 직행.
+① 인물(독립운동가): gonghun(이름→mngNo→공훈록·수형기록. 훈격·이명 확보) + i815 '사전:이름'(인명사전 — 전기 전문·생몰·본관·이명) → 이명·한자명으로 i815·oldnews 재검색(당대 신문 — oldnews는 '본문:이명' OCR 전문까지) → jacar(일본 측 — 한자명) → commons(초상·PD) → 수형기록의 판결문 원문은 indy(국가기록원 판결문 테마관 — 판결기관·주문·원문) 직행.
 ② 한국전쟁 전투·부대: koreanwar(협약 — archRfcd→koreanwar_item 인접 채굴) → nara(RG 교차+naid 인접, judge_rights(naid) 실확인) → tna(연대 필터)·awm(가평 등 영연방)·nlna(네덜란드) → un(안보리 결의 — recid 판독으로 PDF) → commons(PD 사진·원 소장처 역추적).
 ③ 조선 제도·고문헌: nedb law(법전 근거)→★sibling(형제 조 전수)→sjw(최초 용례) → kyujanggak(목록+해제)·jsg(청구기호→해제 전문) → aks(문중 고문서) → 인용 2층위 준수.
 ④ 일제강점기 정책·기관: ndl(총독부 간행물·통계연보·관보) ⇄ jacar(공문서 메타·인접 ±100) → nedb(한국사DB)·earchive('키워드|순번' 이용조건) → i815(민족 측 시각 대조).
@@ -1301,7 +1301,7 @@ const JB_CROSS = `국내외 대조 절차 — 순서를 틀리면 헛수고한�
 
 
   server.tool('nedb_search',
-    "국사편찬위 한국사DB(db.history.go.kr) 검색 + 기관별 심층 판독 모드. mode: total=통합검색(기본) · law=법전·편람 조문(한문 원문 제공 판정) · record=등록류(座目 자동 필터 — 건수 지표화 전 필수) · item=levelId 본문 판독(미공개/파싱실패 구분) · sibling=★형제 조 전수 스캔(levelId — 조문을 열었으면 반드시 이어 호출, 총론만으론 핵심을 놓친다) · matrix=법전 수록 대조(쉼표구분 어휘 ≤8 — 부재의 발견) · origin=어휘 연원('용어' 또는 '용어,영역') · sjw=승정원일기(왕대 분포·최초 용례) · kyujanggak=규장각 목록+해제(절목류는 해제에서 발견) · aks=한국고문서자료관(문중·서원 172곳→분류→문서 면·썸네일) · jacar=일본 아시아역사자료센터(한→일 변환·레퍼런스코드 직행·±span×100 인접) · gonghun=공훈전자사료관(이름→mngNo 투입 시 공적조서·공훈록) · i815=독립기념관(→detail URL 투입 시 당대 신문·자료 본문) · ktv=KTV(→view URL 투입 시 영상 해설·상영정보, KOGL) · earchive=국편 전자사료관(키워드 목록→'키워드|순번' 투입 시 상세: 열람·이용조건·등록번호) · commons=위키미디어 공용(키워드 목록→File URL 투입 시 라이선스·원 소장처·설명 판독) · jsg=장서각(→청구기호 K2-… 투입 시 서지·해제 전문) · un=UN(→recid 투입 시 요약·주제·PDF) · oldnews=신문(CNTS=색인어·관련기사 · '본문:…[|1905-1910]'=OCR+연대) · much=박물관(→idnbr 투입 시 재질·공공누리·설명) · indy=판결문(이름→상세 URL 투입 시 죄명·주문·사건개요·원문 뷰어) · heritage=국가유산(국보·보물·사적 목록+딥링크. cpno 상세는 일부만 — 실패 시 포털 안내). 판정 우선: '601건' 아니라 '492건이 座目'을 반환.",
+    "국사편찬위 한국사DB(db.history.go.kr) 검색 + 기관별 심층 판독 모드. mode: total=통합검색(기본) · law=법전·편람 조문(한문 원문 제공 판정) · record=등록류(座目 자동 필터 — 건수 지표화 전 필수) · item=levelId 본문 판독(미공개/파싱실패 구분) · sibling=★형제 조 전수 스캔(levelId — 조문을 열었으면 반드시 이어 호출, 총론만으론 핵심을 놓친다) · matrix=법전 수록 대조(쉼표구분 어휘 ≤8 — 부재의 발견) · origin=어휘 연원('용어' 또는 '용어,영역') · sjw=승정원일기(왕대 분포·최초 용례) · kyujanggak=규장각 목록+해제(절목류는 해제에서 발견) · aks=한국고문서자료관(문중·서원 172곳→분류→문서 면·썸네일) · jacar=일본 아시아역사자료센터(한→일 변환·레퍼런스코드 직행·±span×100 인접) · gonghun=공훈전자사료관(이름→mngNo 투입 시 공적조서·공훈록) · i815=독립기념관(detail URL=본문·사전:이름/번호=전기·훈격) · ktv=KTV(→view URL 투입 시 영상 해설·상영정보, KOGL) · earchive=국편 전자사료관(키워드 목록→'키워드|순번' 투입 시 상세: 열람·이용조건·등록번호) · commons=위키미디어 공용(키워드 목록→File URL 투입 시 라이선스·원 소장처·설명 판독) · jsg=장서각(→청구기호 K2-… 투입 시 서지·해제 전문) · un=UN(→recid 투입 시 요약·주제·PDF) · oldnews=신문(CNTS=색인어·관련기사 · '본문:…[|1905-1910]'=OCR+연대) · much=박물관(→idnbr 투입 시 재질·공공누리·설명) · indy=판결문(이름→상세 URL 투입 시 죄명·주문·사건개요·원문 뷰어) · heritage=국가유산(국보·보물·사적 목록+딥링크. cpno 상세는 일부만 — 실패 시 포털 안내). 판정 우선: '601건' 아니라 '492건이 座目'을 반환.",
     { query: z.string().describe("검색어 · levelId(item/sibling) · 쉼표구분 어휘(matrix) · '용어,영역'(origin) · 소장처명/L-ID(aks) · 이름/mngNo(gonghun)"), db: z.string().default(''), max_results: z.number().int().min(1).max(50).default(15), mode: z.enum(['total', 'law', 'record', 'item', 'sibling', 'matrix', 'origin', 'sjw', 'kyujanggak', 'aks', 'jacar', 'gonghun', 'i815', 'ktv', 'earchive', 'commons', 'jsg', 'un', 'oldnews', 'much', 'indy', 'heritage']).default('total'), span: z.number().int().min(2).max(12).default(8).describe('sibling 모드 스캔 폭') },
     async ({ query, max_results, mode, span }) => {
       const q = query.trim();
@@ -1605,6 +1605,40 @@ const JB_CROSS = `국내외 대조 절차 — 순서를 틀리면 헛수고한�
       }
       if (mode === 'i815') { // 독립기념관 — 키워드 목록 / detail.do URL 본문 판독(당대 신문기사·독립운동가 자료)
         try {
+          if (/^사전\s*[:：]/.test(q)) { // 한국독립운동인명사전 — v1.56 복구 합류(retry-blocked 주간 재점검 실측으로 감지)
+            const t = q.replace(/^사전\s*[:：]/, '').trim();
+            const noScript = (s) => s.replace(/<script[\s\S]*?<\/script>/gi, '');
+            if (/^\d+$/.test(t)) { // 상세 — 기본정보(생몰·본관·이명·훈격) + 전기 본문
+              const du = `https://search.i815.or.kr/dictionary/detail.do?searchWord=&reSearchWord=&searchType=all&index=&id=${t}`;
+              const b = await cachedText('i815W:' + t, 24 * 3600e3, () => gtext(du), '기본정보');
+              const flat = dclean(noScript(b));
+              const ix = flat.indexOf('기본정보');
+              if (ix < 0) return text(`인명사전 상세 실패(id=${t}) — '사전:이름' 검색으로 번호를 다시 확보하십시오. 브라우저: ${du}`);
+              const seg = flat.slice(ix);
+              const hm = seg.match(/^기본정보\s*([\s\S]{0,600}?포상훈격\(연도\)\s*\S+)\s/);
+              const head = hm ? hm[1] : seg.slice(0, 350);
+              let bio = seg.slice((hm ? hm[0] : head).length).trim();
+              const cut = bio.search(/참고문헌|저작권 안내/);
+              if (cut > 0) bio = bio.slice(0, cut).trim();
+              if (bio.length > 3200) bio = bio.slice(0, 3200) + ` …(전기 총 ${bio.length}자 — 전문은 원문)`;
+              return text(`독립기념관 한국독립운동인명사전 — 항목 ${t}\n【기본정보】 ${head}\n【전기】\n${bio}\n원문: ${du}\n`
+                + "※ 공공저작물 — 출처 표기(독립기념관 한국독립운동인명사전) 시 이용 가능. 이명·한자명은 gonghun·jacar·oldnews('본문:이명') 재검색에 투입.");
+            }
+            const b = await gtext('https://search.i815.or.kr/dictionary/searchResult.do?searchType=all&searchWord=' + encodeURIComponent(t));
+            const rows = [];
+            for (const blk of noScript(b).split('thumb_txt_case01').slice(1, 1 + Math.min(max_results, 15))) {
+              const id = (blk.match(/goDetail\((\d+)\)/) || [])[1];
+              const tt = blk.match(/dict_txt_title[^>]*>([\s\S]*?)<\/strong>/);
+              if (!id || !tt) continue;
+              const line = dclean(blk);
+              const ser = (line.match(/운동계열:\s*([\s\S]{1,40}?)\s*관련단체:/) || [])[1];
+              const act = (line.match(/주요활동:\s*([\s\S]{1,130}?)\s*본문내용:/) || [])[1];
+              rows.push(`- [${id}] ${dclean(tt[1])}${ser ? ' · ' + ser.trim() : ''}${act ? `\n  ${act.trim()}` : ''}`);
+            }
+            if (!rows.length) return text(`인명사전 '${t}' — 0건. 한자명·이명으로 재시도(이명은 mode=gonghun이 제공).`);
+            return text(`한국독립운동인명사전 '${t}' — ${rows.length}건:\n` + rows.join('\n')
+              + "\n※ '사전:번호' 재투입 → 기본정보(생몰·본관·이명·포상훈격)+전기 전문 판독. 공공저작물(출처 표기).");
+          }
           if (/^https?:\/\/search\.i815\.or\.kr\//.test(q)) { // 상세 판독 — i815 도메인 한정(임의 URL 페치 방지)
             const b = await cachedText('i815D:' + q, 24 * 3600e3, () => gtext(q), 'explain');
             const paras = [...b.matchAll(/<(?:strong|p)[^>]*class="explain[^"]*"[^>]*>([\s\S]*?)<\/(?:strong|p)>/g)]
@@ -1623,7 +1657,7 @@ const JB_CROSS = `국내외 대조 절차 — 순서를 틀리면 헛수고한�
           const items = await COLLECT.i815(q, Math.min(max_results, 10));
           if (!items.length) return text(`독립기념관 '${q}' — 0건. 인명·사건명·부대명 등으로 재시도하거나 cross_search(variants)로 표기 변형을 팬아웃하십시오.`);
           return text(`독립기념관 '${q}' — ${items.length}건:\n` + items.map((it) => `- ${it.title}\n  ${it.url}`).join('\n')
-            + '\n※ detail.do URL을 mode=i815 query로 재투입 → 자료 본문 판독.');
+            + "\n※ detail.do URL을 mode=i815 query로 재투입 → 자료 본문 판독. '사전:이름' → 한국독립운동인명사전(전기·생몰·훈격).");
         } catch (e) { return text(`독립기념관 오류(${String(e && e.message || e).slice(0, 60)}) — 잠시 후 재시도 또는 브라우저: https://search.i815.or.kr`); }
       }
       if (mode === 'gonghun') { // 공훈전자사료관 — 이름 목록 / mngNo 심층 판독(공적조서·공훈록 본문)
