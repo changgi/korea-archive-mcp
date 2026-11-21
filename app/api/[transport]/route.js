@@ -1277,10 +1277,41 @@ const JB_CROSS = `국내외 대조 절차 — 순서를 틀리면 헛수고한�
 
 
   server.tool('nedb_search',
-    "국사편찬위 한국사DB(db.history.go.kr) 검색 + 기관별 심층 판독 모드. mode: total=통합검색(기본) · law=법전·편람 조문(한문 원문 제공 판정) · record=등록류(座目 자동 필터 — 건수 지표화 전 필수) · item=levelId 본문 판독(미공개/파싱실패 구분) · sibling=★형제 조 전수 스캔(levelId — 조문을 열었으면 반드시 이어 호출, 총론만으론 핵심을 놓친다) · matrix=법전 수록 대조(쉼표구분 어휘 ≤8 — 부재의 발견) · origin=어휘 연원('용어' 또는 '용어,영역') · sjw=승정원일기(왕대 분포·최초 용례) · kyujanggak=규장각 목록+해제(절목류는 해제에서 발견) · aks=한국고문서자료관(문중·서원 — 소장처 172곳→분류→문서 면·썸네일, query=소장처명/L-ID/'분류ID/문서ID') · jacar=일본 아시아역사자료센터(한→일 변환·레퍼런스코드 직행·±span×100 인접) · gonghun=공훈전자사료관(이름 검색→mngNo 투입 시 공적조서·공훈록 판독) · i815=독립기념관(query=키워드 목록→detail.do URL 투입 시 당대 신문기사·독립운동가 자료 본문 판독) · ktv=KTV(→view URL 투입 시 영상 해설·상영정보, KOGL) · earchive=국편 전자사료관(키워드 목록→'키워드|순번' 투입 시 상세: 열람·이용조건·등록번호) · commons=위키미디어 공용(키워드 목록→File URL 투입 시 라이선스·원 소장처·설명 판독) · jsg=장서각(키워드 목록→청구기호 K2-…/URL 투입 시 서지·해제 전문 판독) · un=UN(→recid/URL 투입 시 요약·주제·PDF 직링크) · oldnews=신문아카이브(키워드 목록 · CNTS/URL=색인어·관련기사 판독 · '본문:키워드'=OCR 전문 발췌). 판정 우선: '601건' 아니라 '492건이 座目'을 반환.",
-    { query: z.string().describe("검색어 · levelId(item/sibling) · 쉼표구분 어휘(matrix) · '용어,영역'(origin) · 소장처명/L-ID(aks) · 이름/mngNo(gonghun)"), db: z.string().default(''), max_results: z.number().int().min(1).max(50).default(15), mode: z.enum(['total', 'law', 'record', 'item', 'sibling', 'matrix', 'origin', 'sjw', 'kyujanggak', 'aks', 'jacar', 'gonghun', 'i815', 'ktv', 'earchive', 'commons', 'jsg', 'un', 'oldnews']).default('total'), span: z.number().int().min(2).max(12).default(8).describe('sibling 모드 스캔 폭') },
+    "국사편찬위 한국사DB(db.history.go.kr) 검색 + 기관별 심층 판독 모드. mode: total=통합검색(기본) · law=법전·편람 조문(한문 원문 제공 판정) · record=등록류(座目 자동 필터 — 건수 지표화 전 필수) · item=levelId 본문 판독(미공개/파싱실패 구분) · sibling=★형제 조 전수 스캔(levelId — 조문을 열었으면 반드시 이어 호출, 총론만으론 핵심을 놓친다) · matrix=법전 수록 대조(쉼표구분 어휘 ≤8 — 부재의 발견) · origin=어휘 연원('용어' 또는 '용어,영역') · sjw=승정원일기(왕대 분포·최초 용례) · kyujanggak=규장각 목록+해제(절목류는 해제에서 발견) · aks=한국고문서자료관(문중·서원 — 소장처 172곳→분류→문서 면·썸네일, query=소장처명/L-ID/'분류ID/문서ID') · jacar=일본 아시아역사자료센터(한→일 변환·레퍼런스코드 직행·±span×100 인접) · gonghun=공훈전자사료관(이름 검색→mngNo 투입 시 공적조서·공훈록 판독) · i815=독립기념관(→detail URL 투입 시 당대 신문·자료 본문) · ktv=KTV(→view URL 투입 시 영상 해설·상영정보, KOGL) · earchive=국편 전자사료관(키워드 목록→'키워드|순번' 투입 시 상세: 열람·이용조건·등록번호) · commons=위키미디어 공용(키워드 목록→File URL 투입 시 라이선스·원 소장처·설명 판독) · jsg=장서각(→청구기호 K2-… 투입 시 서지·해제 전문) · un=UN(→recid/URL 투입 시 요약·주제·PDF 직링크) · oldnews=신문아카이브(키워드 목록 · CNTS/URL=색인어·관련기사 · '본문:키워드'=OCR 전문) · much=역사박물관(키워드 목록→idnbr/URL 투입 시 재질·크기·공공누리 유형·설명 판독). 판정 우선: '601건' 아니라 '492건이 座目'을 반환.",
+    { query: z.string().describe("검색어 · levelId(item/sibling) · 쉼표구분 어휘(matrix) · '용어,영역'(origin) · 소장처명/L-ID(aks) · 이름/mngNo(gonghun)"), db: z.string().default(''), max_results: z.number().int().min(1).max(50).default(15), mode: z.enum(['total', 'law', 'record', 'item', 'sibling', 'matrix', 'origin', 'sjw', 'kyujanggak', 'aks', 'jacar', 'gonghun', 'i815', 'ktv', 'earchive', 'commons', 'jsg', 'un', 'oldnews', 'much']).default('total'), span: z.number().int().min(2).max(12).default(8).describe('sibling 모드 스캔 폭') },
     async ({ query, max_results, mode, span }) => {
       const q = query.trim();
+      if (mode === 'much') { // 역사박물관 — 키워드 목록 / idnbr·URL 판독(재질·크기·공공누리 유형·설명)
+        try {
+          const im = q.match(/idnbr=([A-Z]{2}[\w-]+)/) || q.match(/^(PS\d[\w-]{8,})$/);
+          if (im) {
+            const id2 = im[1];
+            const b = await cachedText('muchD:' + id2, 24 * 3600e3,
+              () => gtext('https://archive.much.go.kr/archive/nrms/view.do?idnbr=' + encodeURIComponent(id2)), '소장품번호');
+            const flat = dclean(b);
+            const pick = (re2) => ((flat.match(re2) || [])[1] || '').trim();
+            const mat = pick(/재질\s+(\S{1,14})\s+작가/);
+            const artist = pick(/작가\s+(.{1,40}?)\s+크기/);
+            const size = pick(/크기\s+(\S{1,50}?)\s+소장품번호/);
+            const no2 = pick(/소장품번호\s+(\S{2,20})/);
+            const km = flat.match(/제\s*(\d)\s*유형\s*:\s*(.{3,60}?)\s*본 저작물/);
+            const di = flat.indexOf('이용할 수 있습니다.');
+            let desc = di >= 0 ? flat.slice(di + 11, di + 1700).trim() : '';
+            desc = desc.split(/활용정보|이전글|다음글|사이트맵|COPYRIGHT/i)[0].trim();
+            if (!no2 && !desc) return text(`[${id2}] 상세 미발견 또는 구조 상이 — idnbr을 확인하거나 mode=much에 검색어를 넣으십시오.`);
+            const rline = km ? (() => { const r2 = judgeRights(`KOGL ${km[1]}`, '', '역사박물관'); return `\n권리 초판정(공공누리 제${km[1]}유형 — ${km[2].trim()}): ${r2[0]} — ${r2[1]}`; })() : '';
+            return text(`역사박물관 소장품 판독 — [${id2}]\n`
+              + [no2 && `소장품번호 ${no2}`, mat && `재질 ${mat}`, artist && `작가 ${artist}`, size && `크기 ${size}`].filter(Boolean).join(' · ') + rline + '\n'
+              + (desc ? `【설명】\n${desc}\n` : '')
+              + `원문·이미지: https://archive.much.go.kr/archive/nrms/view.do?idnbr=${encodeURIComponent(id2)}\n`
+              + '※ 출처: 대한민국역사박물관 근현대사아카이브 — 게재 시 출처 표기, 공공누리 유형 조건 준수.');
+          }
+          const items = await COLLECT.much(q, Math.min(max_results, 10));
+          if (!items.length) return text(`역사박물관 '${q}' — 0건. 사건명·실물 유형(포스터·잡지 등)으로 재시도하십시오.`);
+          return text(`역사박물관 '${q}' — ${items.length}건:\n` + items.map((it) => `- ${it.title}${it.date ? ` (${it.date})` : ''}\n  ${it.url}`).join('\n')
+            + '\n※ idnbr(또는 상세 URL)을 mode=much query로 재투입 → 재질·크기·공공누리 유형·설명 판독.');
+        } catch (e) { return text(`역사박물관 오류(${String(e && e.message || e).slice(0, 60)}) — 잠시 후 재시도 또는 브라우저: https://archive.much.go.kr`); }
+      }
       if (mode === 'oldnews') { // 대한민국신문아카이브 — 키워드 목록 / CNTS·URL 판독 / '본문:키워드' OCR 전문 발췌
         try {
           const bm = q.match(/^본문[:：]\s*(.+)$/);
