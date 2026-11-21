@@ -23,8 +23,9 @@
 1. **다국어 변환**: `tna_search("임진강", year_from=1950, year_to=1953)` — 영문 자동 변환 + 연대 필터(Korea 13,533→2,553건 축소 실측).
 2. **협약기관**: `koreanwar_search("인천상륙")` — 55,000+ 소장, NARA RG 역추적 링크. `scope="battle"`로 전투정보.
 3. **인접 채굴 5기관**: `nara_search(naid=22015, radius=2)` — 인천상륙 D-DAY 연속 필름(111-ADC-8247~8251) 일괄 발굴. `ia_search(identifier="111-adc-10076", radius=2)` · JACAR ±span×100 · TNA · 6·25아카이브.
-4. **교차검색 29소스**: `cross_search("장진호")` — 채널별 건수 태그, 복수출처=교차확인. 미·영·프·EU·일·호주·네덜란드·뉴질랜드(DigitalNZ) + 국내 14기관.
+4. **교차검색 30소스**: `cross_search("장진호")` — 채널별 건수 태그, 복수출처=교차확인. 미·영·프·EU·일·호주·네덜란드·뉴질랜드 2채널 + 국내 14기관.
    - `cross_search("한국전쟁", sources="dnz")` — 한→영 자동 변환, 터닝불도서관 1951~53 한국전 사진(TAPUHI)·Papers Past 직결(직접 차단 소스의 집계 API 우회 복구, 2026-11-21 실측).
+   - `cross_search("한국전쟁", sources="nzarch")` — **뉴질랜드 국립기록원**(Archives NZ·역공학 10차로 공개 API 발견): Kayforce·전쟁일지 DAK1-7, **권리 태그(Open/Restricted) 자동 표시**. 간헐 차단 시 주간 수확 인덱스 폴백('·주간인덱스' 표기 — 2026-11-21 실측).
 5. **당대 표기 팬아웃**: `cross_search("한국전쟁", variants=true)` — `ia·Corean` 변형만으로 추가 4건 실측.
 6. **분석 투입**: `cross_search("장진호", format="csv")` — CSV 직출력.
 7. **고문서**: `nedb_search("송준길", mode="aks")` — 소장처 172곳→분류→문서 266건→건별 27면 썸네일 실측.
@@ -42,8 +43,8 @@
 18. **국가유산 해설**: `nedb_search("근정전", mode="heritage")` → 복합 id → 재투입 — [국보]·시대(1867 중건)·**해설 전문**(정도전 작명·다포식·12지신상). 전시·공간사 맥락 직결.
 19. **매직 키워드**: "장진호 풀패키지로 만들어줘" → full_package 오케스트레이션 / "창기창기 도와줘" → help.
 
-## 알려진 채널 상태 (health 실측, 2026-11-21 — 29채널)
-- 🟢 **26채널 정상** — 신규 합류 8소스(oldnews·much·indy·commons·un·ndl·heritage·dnz) 전부 녹색. 응답시간 중앙값 ~1.1s
+## 알려진 채널 상태 (health 실측, 2026-11-21 — 30채널)
+- 🟢 **28채널 정상** — 신규 합류 10소스(oldnews·much·indy·commons·un·ndl·heritage·dnz·nzarch·인명사전) 전부 녹색. 응답시간 중앙값 ~1.1s
 - 🟡 nedb(개방파일 인덱스 미설정 — NEDB_INDEX_URL 설정 시 합류)
 - 🔴 기지 2: gallica(BnF 서버 차단 — 사실 명시+브라우저 안내로 우아한 성능저하) · foia(opengov 리셋 — 6s fail-fast로 영향 격리)
 - `source_profile("health")`로 언제든 실측(채널별 ms). 주간 GitHub Actions 자동 감시.
