@@ -583,7 +583,7 @@ const COLLECT = {
     const b = await gtext('https://collections.archives.govt.nz/federated-search/customers/aims/search?size=' + Math.min(n, 20)
       + '&facetSize=0&start=0&isFuzzy=true&sourceId=aims-archive&q=' + encodeURIComponent(en));
     const line = b.split('\n').find((l) => l.startsWith('data:') && l.includes('"hits"'));
-    if (!line) return [];
+    if (!line) throw new Error('nodata▸' + b.slice(0, 90).replace(/\s+/g, ' ')); // 일시 진단 — icn1 수신 응답 선두 노출(교정 후 제거)
     const j = JSON.parse(line.slice(5));
     return (j.hits || []).map((h) => {
       const e = h.entity || {};
