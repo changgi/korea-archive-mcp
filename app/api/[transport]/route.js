@@ -210,7 +210,7 @@ async function collectMerged(collectors) {
         if (!raw || !norm(raw.title)) continue;
         const k = dedupKey({ ...raw });
         if (map.has(k)) { const e = map.get(k); if (!e.sources.includes(name)) { e.sources.push(name); if (!e.url && raw.url) e.url = raw.url; } }
-        else map.set(k, { title: norm(raw.title), date: raw.date || '', id: raw.id || '', url: raw.url || '', ...(raw.series ? { series: String(raw.series).slice(0, 80) } : {}), ...(raw.media ? { media: String(raw.media).slice(0, 180) } : {}), ...(raw.sameAs ? { sameAs: String(raw.sameAs) } : {}), ...(raw.lid ? { lid: String(raw.lid) } : {}), sources: [name] });
+        else map.set(k, { title: norm(raw.title), date: raw.date || '', id: raw.id || '', url: raw.url || '', ...(raw.series ? { series: String(raw.series).slice(0, 80) } : {}), ...(raw.media ? { media: String(raw.media).slice(0, 600) } : {}), ...(raw.sameAs ? { sameAs: String(raw.sameAs) } : {}), ...(raw.lid ? { lid: String(raw.lid) } : {}), sources: [name] });
       }
     } else stats.push(`${name}:—`);
   });
