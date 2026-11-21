@@ -580,19 +580,29 @@ const COLLECT = {
   nzarch: async (q, n) => { // Archives NZ Collections(Te Rua Mahara) — 연합검색 공개 API(SSE 프레임 JSON, 무키 평문 GET 실측).
     // v1.58: 사용자 요청 → GH 러너(유일한 Incapsula 통과 환경) 역공학 10차로 완결. accessStatus=권리 표시(발굴 우선).
     const en = koToEn(q) || q;
-    const b = await gtext('https://collections.archives.govt.nz/federated-search/customers/aims/search?size=' + Math.min(n, 20)
-      + '&facetSize=0&start=0&isFuzzy=true&sourceId=aims-archive&q=' + encodeURIComponent(en));
-    const line = b.split('\n').find((l) => l.startsWith('data:') && l.includes('"hits"'));
-    if (!line) throw new Error('nodata▸' + b.slice(0, 90).replace(/\s+/g, ' ')); // 일시 진단 — icn1 수신 응답 선두 노출(교정 후 제거)
-    const j = JSON.parse(line.slice(5));
-    return (j.hits || []).map((h) => {
-      const e = h.entity || {};
-      const cf = (k) => { try { return String(e.custom[k].value[0].value); } catch { return ''; } };
-      const acc = cf('accessStatus');
-      return { title: `${norm(String(e.name || '(무제)')).slice(0, 92)}${acc ? ` [${acc}]` : ''}`,
-        date: cf('resultDate'), id: String(e.id || ''),
-        url: e.id ? `https://collections.archives.govt.nz/web/arena/search#/entity/aims-archive/${e.id}?q=${encodeURIComponent(en)}` : '' };
-    });
+    try {
+      const b = await gtext('https://collections.archives.govt.nz/federated-search/customers/aims/search?size=' + Math.min(n, 20)
+        + '&facetSize=0&start=0&isFuzzy=true&sourceId=aims-archive&q=' + encodeURIComponent(en));
+      // 0건 응답엔 hits 키가 없다(totalHits만) — totalHits로 스트림 판별(실측 함정)
+      const line = b.split('\n').find((l) => l.startsWith('data:') && l.includes('"totalHits"'));
+      if (!line) throw new Error('no-stream');
+      const j = JSON.parse(line.slice(5));
+      return (j.hits || []).map((h) => {
+        const e = h.entity || {};
+        const cf = (k) => { try { return String(e.custom[k].value[0].value); } catch { return ''; } };
+        const acc = cf('accessStatus');
+        return { title: `${norm(String(e.name || '(무제)')).slice(0, 92)}${acc ? ` [${acc}]` : ''}`,
+          date: cf('resultDate'), id: String(e.id || ''),
+          url: e.id ? `https://collections.archives.govt.nz/web/arena/search#/entity/aims-archive/${e.id}?q=${encodeURIComponent(en)}` : '' };
+      });
+    } catch { // 간헐 Incapsula(클라우드 IP 신뢰점수) — GH 주간 수확 정적 인덱스 폴백(자체 도메인)
+      const ix = await cachedText('nzIdx', 6 * 3600e3, () => gtext('https://korea-archive-mcp.vercel.app/nz-index.json'), '"records"');
+      const j = JSON.parse(ix); const ql = en.toLowerCase();
+      return (j.records || []).filter((r) => String(r.title || '').toLowerCase().includes(ql)).slice(0, n)
+        .map((r) => ({ title: `${String(r.title).slice(0, 86)}${r.access ? ` [${r.access}]` : ''} ·주간인덱스`,
+          date: String(r.date || ''), id: String(r.id || ''),
+          url: `https://collections.archives.govt.nz/web/arena/search#/entity/aims-archive/${r.id}` }));
+    }
   },
   dnz: async (q, n) => { // DigitalNZ 집계 API(무키 JSON) — v1.57 합류: Papers Past(직접 차단 — 본 API로 우회 복구)·터닝불도서관·Te Papa 등 NZ 30+기관
     const en = koToEn(q) || q;
