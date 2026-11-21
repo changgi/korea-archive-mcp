@@ -494,6 +494,11 @@ const PART_OF = {
   nlk: (it) => it.series && `자료유형 › ${it.series}`,
   jsg: (it) => it.series && `四部 › ${it.series}`,
   kyudb: (it) => it.series && `소장 › ${it.series}`,
+  ndl: (it) => it.series && `NDL › ${it.series}`,
+  awm: (it) => it.series && `AWM 유형 › ${it.series}`,
+  nlna: (it) => it.series && `NA(NL) › ${it.series}`,
+  earchive: (it) => it.series && `수집처 › ${it.series}`,
+  commons: (it) => it.series && `Commons › ${it.series}`,
 };
 const COLLECT = {
   tna: async (q, n) => {
@@ -557,9 +562,10 @@ const COLLECT = {
       const g = (t) => ((item.match(new RegExp(`<${t}[^>]*>([^<]+)`)) || [])[1] || '').trim();
       const title = g('title'); const link = g('link');
       if (!title || !link) continue;
-      const cats = [...item.matchAll(/<category>([^<]+)/g)].map((m) => m[1]).join('·'); // 자료형·매체(紙/デジタル)
+      const catArr = [...item.matchAll(/<category>([^<]+)/g)].map((m) => m[1]); // 자료형·매체(紙/デジタル)
+      const cats = catArr.join('·');
       const author = g('author');
-      out.push({ title: `${title}${cats ? ` [${cats}]` : ''}${author ? ` — ${author}` : ''}`.slice(0, 120), date: g('dc:date'), id: '', url: link });
+      out.push({ title: `${title}${cats ? ` [${cats}]` : ''}${author ? ` — ${author}` : ''}`.slice(0, 120), date: g('dc:date'), id: '', ...(catArr[0] ? { series: catArr[0] } : {}), url: link });
       if (out.length >= n) break;
     }
     return out;
@@ -637,21 +643,30 @@ const COLLECT = {
   commons: async (q, n) => { // 위키미디어 공용 — 키 불요 검색 API(PD 사진·NARA/해군 재수집본 다수 — 원 소장처 역추적 창구). 공유 IP 429 시 채널 실패로 표시
     // commons는 한국어 네이티브 검색 가능 — TOPICS 미등재어(인명 등)가 'Korea' 단독으로 뭉개지면 원질의 유지(v1.62 실측 교정: '유관순'→일제감시대상인물카드 직결)
     const t = koToEn(q); const en = (!t || t === 'Korea') ? q : t;
-    const d = await jget('https://commons.wikimedia.org/w/api.php?action=query&list=search&srnamespace=6&format=json&srlimit=' + Math.min(n, 10) + '&srsearch=' + encodeURIComponent(en),
+    // v1.81: list=search → generator=search + prop=categories 1콜 전환 — 파일의 소속 카테고리(큐레이션 계층)를 목록 레벨에서 확보
+    const d = await jget('https://commons.wikimedia.org/w/api.php?action=query&generator=search&gsrnamespace=6&format=json&gsrlimit=' + Math.min(n, 10) + '&gsrsearch=' + encodeURIComponent(en) + '&prop=categories&clshow=!hidden&cllimit=3',
       { 'User-Agent': 'KoreaArchiveMCP/1.0 (https://github.com/changgi/korea-archive-mcp; archival discovery)' });
-    return ((d.query || {}).search || []).map((it) => {
-      const t = String(it.title || '');
-      return { title: t.replace(/^File:/, '').slice(0, 110), date: '', id: '', url: 'https://commons.wikimedia.org/wiki/' + encodeURIComponent(t.replace(/ /g, '_')) };
+    return Object.values((d.query || {}).pages || {}).sort((a, b) => (a.index || 0) - (b.index || 0)).map((it) => {
+      const t2 = String(it.title || '');
+      const cat = String((((it.categories || [])[0] || {}).title || '')).replace(/^Category:/, '');
+      return { title: t2.replace(/^File:/, '').slice(0, 110), date: '', id: '', ...(cat ? { series: cat.slice(0, 80) } : {}), url: 'https://commons.wikimedia.org/wiki/' + encodeURIComponent(t2.replace(/ /g, '_')) };
     });
   },
+
   nlna: async (q, n) => { // 네덜란드 국립문서보관소 — 공개 JSON API 실측(2026-11-20, Playwright 역추적). 주한 대사관 문서군 등
     const en = koToEn(q) || q;
     const d = await jget(`https://zvt.nationaalarchief.nl/api/search/eads?page=1&rows=${Math.min(n, 10)}&q=${encodeURIComponent(en)}&sortBy=_score`);
-    return ((d && d.results) || []).slice(0, n).map((r) => ({
-      title: norm(String(r.title || '')).slice(0, 95) + (r.type === 'ARCHIVE' ? ' [문서군]' : ''),
-      date: String(r.period || ''), id: String(r.id || ''),
-      url: 'https://www.nationaalarchief.nl/onderzoeken/archief/' + encodeURIComponent(String(r.id || '')),
-    }));
+    // v1.81: 토이강(toegang) 번호 첫 두 세그먼트 = 형성기관 클러스터(2.05 외무부 등 — 2.05.202 'Zuid-Korea 대사관' 실측)
+    const NLNA_CL = { '2.04': '내무부(Binnenlandse Zaken)', '2.05': '외무부(Buitenlandse Zaken)', '2.09': '법무부(Justitie)', '2.10': '식민성(Koloniën)', '2.12': '해군(Marine)', '2.13': '국방부(Defensie)', '2.19': '민간단체 문서', '2.21': '개인·가문 문서', '2.24': '사진·영상 컬렉션' };
+    return ((d && d.results) || []).slice(0, n).map((r) => {
+      const cl = String(r.id || '').split('.').slice(0, 2).join('.');
+      const ser = NLNA_CL[cl] ? `${cl} ${NLNA_CL[cl]}` : (cl.includes('.') ? `토이강 ${cl}` : '');
+      return {
+        title: norm(String(r.title || '')).slice(0, 95) + (r.type === 'ARCHIVE' ? ' [문서군]' : ''),
+        date: String(r.period || ''), id: String(r.id || ''), ...(ser ? { series: ser } : {}),
+        url: 'https://www.nationaalarchief.nl/onderzoeken/archief/' + encodeURIComponent(String(r.id || '')),
+      };
+    });
   },
   nzarch: async (q, n) => { // Archives NZ Collections(Te Rua Mahara) — 연합검색 공개 API(SSE 프레임 JSON, 무키 평문 GET 실측).
     // v1.58: 사용자 요청 → GH 러너(유일한 Incapsula 통과 환경) 역공학 10차로 완결. accessStatus=권리 표시(발굴 우선).
@@ -702,7 +717,8 @@ const COLLECT = {
         const acc = d.match(/(?:Accession Number|ID number)[^A-Z0-9]{0,40}([A-Z0-9/.\-]{3,20})/);
         const pd = /Copyright expired - public domain|publicdomain\/mark/.test(d);
         const conf = d.match(/Conflict[^<]*<\/[a-z0-9]+>\s*<[^>]*>\s*(?:<[^>]+>\s*)*([^<]{4,40})/);
-        return { title: (h1 ? norm(h1[1]) : cid) + (pd ? ' · 권리:PD(저작권 만료)' : ''), date: conf ? norm(conf[1]) : '', id: acc ? acc[1] : cid, url: 'https://www.awm.gov.au/collection/' + cid };
+        const ot = d.match(/Object type<\/th>\s*<td>\s*([^<]{2,40})/); // v1.81: 소장품 유형(Photograph·Film·Firearm 등 — C285584 실측)
+        return { title: (h1 ? norm(h1[1]) : cid) + (pd ? ' · 권리:PD(저작권 만료)' : ''), date: conf ? norm(conf[1]) : '', id: acc ? acc[1] : cid, ...(ot ? { series: norm(ot[1]) } : {}), url: 'https://www.awm.gov.au/collection/' + cid };
       } catch { return null; }
     }));
     return out.filter(Boolean);
@@ -795,10 +811,16 @@ const COLLECT = {
       signal: AbortSignal.timeout(FETCH_TIMEOUT) });
     const b = await r.text();
     const out = [];
-    for (const m of b.matchAll(/fnGoCatalogView\('(\d+)'[^"]*"\s+title="([^"]{3,120})"/g)) {
-      const seg = b.slice(m.index, m.index + 700);
-      const sid = (seg.match(/([A-Z]{2,3}\d{3}_[0-9A-Za-z_]{6,})/) || [])[1] || '';
-      out.push({ title: norm(m[2]), date: '', id: sid || m[1], url: 'https://archive.history.go.kr' });
+    // v1.81: 행 하단 스팬 전면 수확 — code(사료ID)·국내외·국가·소장기관·생산기간 (2026-11-21 실측: AUS033… → 미국 › 국립문서기록관리청)
+    for (const seg of b.split('fnGoCatalogView(').slice(1)) {
+      const t = (seg.match(/title="([^"]{3,140})/) || [])[1];
+      if (!t) continue;
+      const sid = (seg.match(/<span class="code">([^<]+)</) || [])[1] || (seg.match(/^'(\d+)'/) || [])[1] || '';
+      const spans = [...seg.slice(0, 2500).matchAll(/<span class="date">\s*([^<]{1,80}?)\s*<\/span>/g)].map((x) => norm(x[1]));
+      const meta = spans.filter((s) => !/^생산/.test(s)); // [국내외, 국가, 소장기관]
+      const ser = [meta[1] || '', (meta[2] || '').split('(')[0].trim()].filter(Boolean).join(' › ');
+      const prod = ((spans.find((s) => s.startsWith('생산기간')) || '').match(/[\d.~\s]{4,24}/) || [''])[0].trim();
+      out.push({ title: norm(t).slice(0, 110), date: prod, id: norm(sid), ...(ser ? { series: ser.slice(0, 60) } : {}), url: 'https://archive.history.go.kr' });
       if (out.length >= n) break;
     }
     return out;
