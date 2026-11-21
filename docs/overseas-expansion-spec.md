@@ -36,3 +36,7 @@
 - 뉴질랜드 Archives NZ(collections.archives.govt.nz): Incapsula 게이트 — Papers Past와 동일 계열, 보류.
 - 미국 LOC(www.loc.gov): /search·/photos·chronicling-america 전 JSON 엔드포인트가 데이터센터 IP에 Cloudflare 403 — 보류(갈리카 계열).
 - **위키미디어 공용 합류(v1.37)**: commons.wikimedia.org API 키 불요 — list=search(srnamespace=6). 공유 IP 429 가능(예의 UA 필수), per-file 라이선스는 파일 페이지에서 확인. PD 재수집본의 원 소장처(NH·NARA 번호) 역추적 창구.
+
+## 국가유산포털 상세 API 식별 편차 (2026-11-21)
+- 목록(SearchKindOpenapiList)은 무키·CDATA로 정상(ccbaCpno 딥링크 포함). **상세(SearchKindOpenapiDt)는 cpno 분해값(kdcd·asno·ctcd — 8/4/무패딩 3후보)으로도 빈 레코드** — 기관 측 asno 체계가 cpno 표기와 다른 것으로 판정(진단 2사이클 실측).
+- 수렴: mode=heritage 상세는 시도 후 실패 시 포털 상세 링크 안내(목록 가치는 완전). 재역공학 시 목록 XML의 ccbaKdcd/ccbaAsno 원값 캡처가 열쇠 후보.
