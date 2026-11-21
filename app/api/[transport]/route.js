@@ -467,6 +467,8 @@ const PART_OF = {
   nzarch: (it) => it.series && `Series: ${it.series}`,
   koreanwar: (it) => { const m = String(it.id || '').match(/^(\d{4})-([A-Z]{2})-(\d{2})-([A-Z]+)-([A-Z])-\d+$/); return m && `수집 ${m[1]} › ${m[2]} › ${m[4]}-${m[5]}`; },
   jacar: (it) => { const o = { A: '국립공문서관', B: '외무성 외교사료관', C: '방위성 방위연구소' }[String(it.id || '')[0]]; return o && `JACAR › ${o}`; },
+  oldnews: (it) => it.series && `신문 › ${it.series}`,
+  aks: (it) => it.series && `고문서 › ${it.series}`,
 };
 const COLLECT = {
   tna: async (q, n) => {
@@ -600,7 +602,7 @@ const COLLECT = {
     const first = (v) => (Array.isArray(v) ? v[0] : v) || '';
     return (d.hits || []).slice(0, n).map((h) => ({
       title: `${first(h.label)} — ${first(h.newspaperKorName)}`.slice(0, 110),
-      date: String(h.issued_date || ''), id: first(h.uri),
+      date: String(h.issued_date || ''), id: first(h.uri), ...(first(h.newspaperKorName) ? { series: first(h.newspaperKorName) } : {}),
       url: first(h.uri) ? `https://nl.go.kr/newspaper/detail.do?content_id=${first(h.uri)}` : 'https://nl.go.kr/newspaper/' }));
   },
   commons: async (q, n) => { // 위키미디어 공용 — 키 불요 검색 API(PD 사진·NARA/해군 재수집본 다수 — 원 소장처 역추적 창구). 공유 IP 429 시 채널 실패로 표시
@@ -814,7 +816,7 @@ const COLLECT = {
   aks: async (q, n) => { // 한국고문서자료관 소장처 매칭(내장 카탈로그 — 네트워크 0)
     const toks = q.split(/\s+/).filter(Boolean);
     return AKS_CAT.filter((c) => toks.length && toks.every((t) => (c.name + ' ' + c.grp).includes(t))).slice(0, n)
-      .map((c) => ({ title: `[고문서 소장처] ${c.name} (${c.grp})`, date: '', id: c.id, url: AKS_BASE + '/viewer/viewer.do' }));
+      .map((c) => ({ title: `[고문서 소장처] ${c.name} (${c.grp})`, date: '', id: c.id, series: c.grp, url: AKS_BASE + '/viewer/viewer.do' }));
   },
 };
 
