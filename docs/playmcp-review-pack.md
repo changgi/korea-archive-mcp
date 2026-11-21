@@ -23,13 +23,13 @@
 1. **다국어 변환**: `tna_search("임진강", year_from=1950, year_to=1953)` — 영문 자동 변환 + 연대 필터(Korea 13,533→2,553건 축소 실측).
 2. **협약기관**: `koreanwar_search("인천상륙")` — 55,000+ 소장, NARA RG 역추적 링크. `scope="battle"`로 전투정보.
 3. **인접 채굴 5기관**: `nara_search(naid=22015, radius=2)` — 인천상륙 D-DAY 연속 필름(111-ADC-8247~8251) 일괄 발굴. `ia_search(identifier="111-adc-10076", radius=2)` · JACAR ±span×100 · TNA · 6·25아카이브.
-4. **교차검색 23소스**: `cross_search("장진호")` — 채널별 건수 태그, 복수출처=교차확인. 미·영·프·EU·일·호주·네덜란드 + 국내 14기관.
+4. **교차검색 24소스**: `cross_search("장진호")` — 채널별 건수 태그, 복수출처=교차확인. 미·영·프·EU·일·호주·네덜란드 + 국내 14기관.
 5. **당대 표기 팬아웃**: `cross_search("한국전쟁", variants=true)` — `ia·Corean` 변형만으로 추가 4건 실측.
 6. **분석 투입**: `cross_search("장진호", format="csv")` — CSV 직출력.
 7. **고문서**: `nedb_search("송준길", mode="aks")` — 소장처 172곳→분류→문서 266건→건별 27면 썸네일 실측.
 8. **독립유공자 심층 판독**: `nedb_search("유관순", mode="gonghun")` → mngNo 3536 → `nedb_search("3536", mode="gonghun")` — 공적조서·공훈록 전문·수형기록(판결문)·묘소·현충시설 11곳 한 번에 (국가보훈부 공훈전자사료관, 2026-11-20 실측).
 9. **권리 표시 자동화**: `judge_rights("KOGL 1")` → Class A. `judge_rights(naid=22015)` → NARA 카탈로그 **Use Restriction 실조회** 'Restricted - Possibly · Copyright' → C 자동판정 / naid=535795 → 'Unrestricted' → A 확정 (발굴 우선 — 권리는 표시).
-10. **자가 점검**: `source_profile("health")` — 23채널 골든 질의 실측 + 채널별 응답시간(ms). 주간 CI 자동 실행.
+10. **자가 점검**: `source_profile("health")` — 24채널 골든 질의 실측 + 채널별 응답시간(ms). 주간 CI 자동 실행.
 11. **일본 측 기록**: `nedb_search("B04014056900", mode="jacar")` — 레퍼런스코드 메타 직행(Title·이미지 수·기밀등급), ±span 인접 채굴.
 12. **매직 키워드**: "장진호 풀패키지로 만들어줘" → full_package 오케스트레이션 / "창기창기 도와줘" → help.
 
