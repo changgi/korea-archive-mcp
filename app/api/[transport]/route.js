@@ -1614,8 +1614,8 @@ item_cd 5종(자료 성격별): ART 도설·회화 / ETC 두루마리·축 / DRR
           const layers = [...flat.matchAll(/기술계층\s+(\S{2,20}\([A-Za-z]+\))/g)];
           const layer = layers.length ? layers[layers.length - 1][1] : ''; // 첫 일치는 브레드크럼 — 마지막이 본 기록의 계층
           const legal = pick(/법적지위\s+(\S{2,12})/);
-          const use = pick(/이용조건\s+이용유형\s+(.{2,40}?)\s+(?:이용주기|검색도구|공개|관련)/);
-          const useNote = pick(/이용주기\s+(.{5,160}?)\s+(?:검색도구|공개|관련)/);
+          const use = pick(/이용조건\s*이용유형\s*(.{2,40}?)\s*(?:이용주기|검색도구|공개|관련)/);
+          const useNote = pick(/이용주기\s*(.{5,160}?)\s*(?:검색도구|공개|관련)/);
           const desc = pick(/상세정보\s+기술\s+([\s\S]{10,1500}?)\s+(?:생산이력|입수이력|보존이력|관련 기록|열람|공개된)/);
           if (!sid && !title && !desc) return text(`상세 파싱 실패 — URL을 확인하거나 브라우저로 열람: ${q}`);
           return text(`서울기록원 상세 — ${title || '(제목 미상)'}\n`
