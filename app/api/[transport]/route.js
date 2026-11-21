@@ -1392,7 +1392,7 @@ const JB_CROSS = `국내외 대조 절차 — 순서를 틀리면 헛수고한�
           else if (urs) basis += ` · Use Restriction '${urs.slice(0, 80)}' (판정 불변 — 문구 확인 필요)`;
           else basis += ' · 카탈로그에 Use Restriction 미기재 — RG 초판정 유지';
           // 맥락(v1.80): ancestors 전 계층 체인 — RG › 시리즈 › 파일단위, 각 층 NAID 포함(상·하위 항행 좌표)
-          const chain = (rec.ancestors || []).map((a) => `${(a.levelOfDescription || '').replace(/recordGroup/i, 'RG')} ${a.recordGroupNumber || ''}${a.title ? ' ' + String(a.title).slice(0, 60) : ''}${a.naId ? ` [NAID ${a.naId}]` : ''}`.trim()).join(' › ');
+          const chain = (rec.ancestors || []).map((a) => `${(a.levelOfDescription || '').replace(/recordGroup/i, 'RG')} ${a.recordGroupNumber || ''}${a.title ? ' ' + String(a.title).slice(0, 60) : ''}${a.naId ? ` [NAID ${a.naId}]` : ''}`.replace(/\s+/g, ' ').trim()).join(' › ');
           // 증거성(v1.80): 범위·내용 기술(scope note) 발췌 + 판독 시점 본문 지문
           const scope = String(rec.scopeAndContentNote || '').trim();
           const sfp = scope ? createHash('sha256').update(scope).digest('hex').slice(0, 16) : '';
