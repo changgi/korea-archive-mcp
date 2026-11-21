@@ -1300,10 +1300,35 @@ const JB_CROSS = `국내외 대조 절차 — 순서를 틀리면 헛수고한�
 
 
   server.tool('nedb_search',
-    "국사편찬위 한국사DB(db.history.go.kr) 검색 + 기관별 심층 판독 모드. mode: total=통합검색(기본) · law=법전·편람 조문(한문 원문 제공 판정) · record=등록류(座目 자동 필터 — 건수 지표화 전 필수) · item=levelId 본문 판독(미공개/파싱실패 구분) · sibling=★형제 조 전수 스캔(levelId — 조문을 열었으면 반드시 이어 호출, 총론만으론 핵심을 놓친다) · matrix=법전 수록 대조(쉼표구분 어휘 ≤8 — 부재의 발견) · origin=어휘 연원('용어' 또는 '용어,영역') · sjw=승정원일기(왕대 분포·최초 용례) · kyujanggak=규장각 목록+해제(절목류는 해제에서 발견) · aks=한국고문서자료관(문중·서원 172곳→분류→문서 면·썸네일) · jacar=일본 아시아역사자료센터(한→일 변환·레퍼런스코드 직행·±span×100 인접) · gonghun=공훈전자사료관(이름→mngNo 투입 시 공적조서·공훈록) · i815=독립기념관(→detail URL 투입 시 당대 신문·자료 본문) · ktv=KTV(→view URL 투입 시 영상 해설·상영정보, KOGL) · earchive=국편 전자사료관(키워드 목록→'키워드|순번' 투입 시 상세: 열람·이용조건·등록번호) · commons=위키미디어 공용(키워드 목록→File URL 투입 시 라이선스·원 소장처·설명 판독) · jsg=장서각(→청구기호 K2-… 투입 시 서지·해제 전문) · un=UN(→recid/URL 투입 시 요약·주제·PDF 직링크) · oldnews=신문아카이브(키워드 목록 · CNTS/URL=색인어·관련기사 · '본문:키워드[|1905-1910]'=OCR 전문+연대) · much=역사박물관(→idnbr/URL 투입 시 재질·공공누리·설명) · indy=독립운동판결문(이름 목록→상세 URL 투입 시 죄명·주문·사건개요·원문 뷰어). 판정 우선: '601건' 아니라 '492건이 座目'을 반환.",
-    { query: z.string().describe("검색어 · levelId(item/sibling) · 쉼표구분 어휘(matrix) · '용어,영역'(origin) · 소장처명/L-ID(aks) · 이름/mngNo(gonghun)"), db: z.string().default(''), max_results: z.number().int().min(1).max(50).default(15), mode: z.enum(['total', 'law', 'record', 'item', 'sibling', 'matrix', 'origin', 'sjw', 'kyujanggak', 'aks', 'jacar', 'gonghun', 'i815', 'ktv', 'earchive', 'commons', 'jsg', 'un', 'oldnews', 'much', 'indy']).default('total'), span: z.number().int().min(2).max(12).default(8).describe('sibling 모드 스캔 폭') },
+    "국사편찬위 한국사DB(db.history.go.kr) 검색 + 기관별 심층 판독 모드. mode: total=통합검색(기본) · law=법전·편람 조문(한문 원문 제공 판정) · record=등록류(座目 자동 필터 — 건수 지표화 전 필수) · item=levelId 본문 판독(미공개/파싱실패 구분) · sibling=★형제 조 전수 스캔(levelId — 조문을 열었으면 반드시 이어 호출, 총론만으론 핵심을 놓친다) · matrix=법전 수록 대조(쉼표구분 어휘 ≤8 — 부재의 발견) · origin=어휘 연원('용어' 또는 '용어,영역') · sjw=승정원일기(왕대 분포·최초 용례) · kyujanggak=규장각 목록+해제(절목류는 해제에서 발견) · aks=한국고문서자료관(문중·서원 172곳→분류→문서 면·썸네일) · jacar=일본 아시아역사자료센터(한→일 변환·레퍼런스코드 직행·±span×100 인접) · gonghun=공훈전자사료관(이름→mngNo 투입 시 공적조서·공훈록) · i815=독립기념관(→detail URL 투입 시 당대 신문·자료 본문) · ktv=KTV(→view URL 투입 시 영상 해설·상영정보, KOGL) · earchive=국편 전자사료관(키워드 목록→'키워드|순번' 투입 시 상세: 열람·이용조건·등록번호) · commons=위키미디어 공용(키워드 목록→File URL 투입 시 라이선스·원 소장처·설명 판독) · jsg=장서각(→청구기호 K2-… 투입 시 서지·해제 전문) · un=UN(→recid 투입 시 요약·주제·PDF) · oldnews=신문(CNTS=색인어·관련기사 · '본문:…[|1905-1910]'=OCR+연대) · much=박물관(→idnbr 투입 시 재질·공공누리·설명) · indy=판결문(이름→상세 URL 투입 시 죄명·주문·사건개요·원문 뷰어) · heritage=국가유산(키워드 목록→ccbaCpno 13자리 투입 시 해설·시대·소유/관리 판독). 판정 우선: '601건' 아니라 '492건이 座目'을 반환.",
+    { query: z.string().describe("검색어 · levelId(item/sibling) · 쉼표구분 어휘(matrix) · '용어,영역'(origin) · 소장처명/L-ID(aks) · 이름/mngNo(gonghun)"), db: z.string().default(''), max_results: z.number().int().min(1).max(50).default(15), mode: z.enum(['total', 'law', 'record', 'item', 'sibling', 'matrix', 'origin', 'sjw', 'kyujanggak', 'aks', 'jacar', 'gonghun', 'i815', 'ktv', 'earchive', 'commons', 'jsg', 'un', 'oldnews', 'much', 'indy', 'heritage']).default('total'), span: z.number().int().min(2).max(12).default(8).describe('sibling 모드 스캔 폭') },
     async ({ query, max_results, mode, span }) => {
       const q = query.trim();
+      if (mode === 'heritage') { // 국가유산 — 키워드 목록 / ccbaCpno 상세(해설·시대·소유/관리). cpno=구분1+종목2+시도2+지정8 분해
+        try {
+          const hm = q.match(/ccbaCpno=(\d{13})/) || q.match(/^(\d{13})$/);
+          if (hm) {
+            const cpno = hm[1];
+            const kdcd = cpno.slice(1, 3), ctcd = cpno.slice(3, 5), asno = cpno.slice(5);
+            const b = await cachedText('heriD:' + cpno, 24 * 3600e3,
+              () => gtext(`https://www.khs.go.kr/cha/SearchKindOpenapiDt.do?ccbaKdcd=${kdcd}&ccbaAsno=${asno}&ccbaCtcd=${ctcd}`), 'ccbaMnm1');
+            const g = (t) => xtag(b, t);
+            const name = g('ccbaMnm1');
+            if (!name) return text(`[${cpno}] 상세 미발견 — ccbaCpno를 확인하거나 mode=heritage에 키워드를 넣으십시오.`);
+            let content = dclean(g('content'));
+            if (content.length > 3500) content = content.slice(0, 3500) + ` …(총 ${content.length}자 — 전문은 포털)`;
+            return text(`국가유산 판독 — ${name}${g('ccbaMnm2') ? `(${g('ccbaMnm2')})` : ''} [${g('ccmaName') || ''}${g('crltsnoNm') ? ` ${g('crltsnoNm')}` : ''}]\n`
+              + [g('ccbaPoss') && `소유 ${g('ccbaPoss')}`, g('ccbaAdmin') && `관리 ${g('ccbaAdmin')}`, g('ccceName') && `시대 ${g('ccceName')}`, g('ccbaLcad') && `소재 ${dclean(g('ccbaLcad')).slice(0, 60)}`].filter(Boolean).join(' · ') + '\n'
+              + (content ? `【해설】\n${content}\n` : '')
+              + `포털 상세: https://www.heritage.go.kr/heri/cul/culSelectDetail.do?ccbaCpno=${cpno}\n`
+              + '※ 출처: 국가유산청 국가유산포털 — 게재 시 출처 표기(해설문 인용 시 포털 명기). 사진 이용은 공공누리 유형 확인.');
+          }
+          const items = await COLLECT.heritage(q, Math.min(max_results, 15));
+          if (!items.length) return text(`국가유산 '${q}' — 0건. 유산 명칭(전각·사적명 등)으로 재시도하십시오.`);
+          return text(`국가유산 '${q}' — ${items.length}건:\n` + items.map((it) => `- ${it.title}${it.id ? ` [${it.id}]` : ''}\n  ${it.url}`).join('\n')
+            + '\n※ ccbaCpno(13자리)를 mode=heritage query로 재투입 → 해설·시대·소유/관리 판독.');
+        } catch (e) { return text(`국가유산 오류(${String(e && e.message || e).slice(0, 60)}) — 잠시 후 재시도 또는 브라우저: https://www.heritage.go.kr`); }
+      }
       if (mode === 'indy') { // 독립운동판결문 — 이름 목록 / 상세 URL 판독(죄명·주문·사건개요·원문 뷰어)
         try {
           if (/viewIndyDetail\.do/.test(q) && /^https?:\/\/theme\.archives\.go\.kr\//.test(q)) {
