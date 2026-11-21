@@ -1176,10 +1176,42 @@ const JB_CROSS = `국내외 대조 절차 — 순서를 틀리면 헛수고한�
 
 
   server.tool('nedb_search',
-    "Search 국사편찬위 한국사데이터베이스 (db.history.go.kr) + 조선 사료 심층 판독 (verified POST routes from the Han-river vessel study). mode: total=통합검색(기본) · law=법전·편람 조문 검색(한문 원문 제공 여부 판정) · record=등록류 검색(座目 회의명단 자동 필터 — 검색 건수를 지표로 쓰기 전 필수) · item=levelId 본문 판독(미공개/파싱실패 구분 — query에 levelId) · sibling=★형제 조 전수 스캔(query에 levelId — 조문을 하나라도 열었으면 반드시 이어 호출, 총론만 읽으면 핵심을 놓친다) · matrix=법전 수록 대조표(query에 쉼표구분 어휘 ≤8 — 부재의 발견) · origin=어휘 연원 추적(query='용어' 또는 '용어,영역') · sjw=승정원일기(왕대 분포·최초 용례 — 연대가 뒤집힐 수 있다) · kyujanggak=규장각 목록+해제 동시(절목·사목류는 해제에서 발견) · aks=한국고문서자료관(archive.aks.ac.kr) 문중·서원 고문서 — 소장처 172곳 검색→분류→문서 면·썸네일(query=소장처명 또는 L-ID·분류ID·'분류ID/문서ID'). · jacar=일본 아시아역사자료센터(한→일 자동 변환 검색·레퍼런스코드 메타 직행·±span×100 인접 채굴) · gonghun=공훈전자사료관 독립유공자(query=이름 검색→mngNo 숫자 투입 시 공적조서·공훈록 본문 판독) · i815=독립기념관(query=키워드 목록→detail.do URL 투입 시 당대 신문기사·독립운동가 자료 본문 판독) · ktv=KTV e영상역사관(query=키워드 목록→ehistory view URL 투입 시 대한뉴스·기록영상 해설/제작연도/상영시간 판독, KOGL). 판정 우선: '601건'이 아니라 '492건이 座目입니다'를 반환한다.",
-    { query: z.string().describe("검색어 · levelId(item/sibling) · 쉼표구분 어휘(matrix) · '용어,영역'(origin) · 소장처명/L-ID(aks) · 이름/mngNo(gonghun)"), db: z.string().default(''), max_results: z.number().int().min(1).max(50).default(15), mode: z.enum(['total', 'law', 'record', 'item', 'sibling', 'matrix', 'origin', 'sjw', 'kyujanggak', 'aks', 'jacar', 'gonghun', 'i815', 'ktv']).default('total'), span: z.number().int().min(2).max(12).default(8).describe('sibling 모드 스캔 폭') },
+    "Search 국사편찬위 한국사데이터베이스 (db.history.go.kr) + 조선 사료 심층 판독 (verified POST routes from the Han-river vessel study). mode: total=통합검색(기본) · law=법전·편람 조문 검색(한문 원문 제공 여부 판정) · record=등록류 검색(座目 회의명단 자동 필터 — 검색 건수를 지표로 쓰기 전 필수) · item=levelId 본문 판독(미공개/파싱실패 구분 — query에 levelId) · sibling=★형제 조 전수 스캔(query에 levelId — 조문을 하나라도 열었으면 반드시 이어 호출, 총론만 읽으면 핵심을 놓친다) · matrix=법전 수록 대조표(query에 쉼표구분 어휘 ≤8 — 부재의 발견) · origin=어휘 연원 추적(query='용어' 또는 '용어,영역') · sjw=승정원일기(왕대 분포·최초 용례 — 연대가 뒤집힐 수 있다) · kyujanggak=규장각 목록+해제 동시(절목·사목류는 해제에서 발견) · aks=한국고문서자료관(archive.aks.ac.kr) 문중·서원 고문서 — 소장처 172곳 검색→분류→문서 면·썸네일(query=소장처명 또는 L-ID·분류ID·'분류ID/문서ID'). · jacar=일본 아시아역사자료센터(한→일 자동 변환 검색·레퍼런스코드 메타 직행·±span×100 인접 채굴) · gonghun=공훈전자사료관 독립유공자(query=이름 검색→mngNo 숫자 투입 시 공적조서·공훈록 본문 판독) · i815=독립기념관(query=키워드 목록→detail.do URL 투입 시 당대 신문기사·독립운동가 자료 본문 판독) · ktv=KTV e영상역사관(키워드 목록→ehistory view URL 투입 시 영상 해설·상영정보 판독, KOGL) · earchive=국편 전자사료관(키워드 목록→'키워드|순번' 투입 시 상세: 열람·이용조건·등록번호). 판정 우선: '601건'이 아니라 '492건이 座目'을 반환.",
+    { query: z.string().describe("검색어 · levelId(item/sibling) · 쉼표구분 어휘(matrix) · '용어,영역'(origin) · 소장처명/L-ID(aks) · 이름/mngNo(gonghun)"), db: z.string().default(''), max_results: z.number().int().min(1).max(50).default(15), mode: z.enum(['total', 'law', 'record', 'item', 'sibling', 'matrix', 'origin', 'sjw', 'kyujanggak', 'aks', 'jacar', 'gonghun', 'i815', 'ktv', 'earchive']).default('total'), span: z.number().int().min(2).max(12).default(8).describe('sibling 모드 스캔 폭') },
     async ({ query, max_results, mode, span }) => {
       const q = query.trim();
+      if (mode === 'earchive') { // 국편 전자사료관 — 키워드 목록 / '키워드|순번' 세션 상세(검색 폼+searchPosition 재제출 — 2026-11-21 역공학)
+        try {
+          const pm = q.match(/^(.+)\|(\d{1,3})$/);
+          if (pm) {
+            const kw = pm[1].trim(); const pos = pm[2];
+            const form = (extra) => new URLSearchParams({ allSearchQuery: kw, searchQuery: kw, searchPageIndex: '1', searchPageUnit: '10', searchPageSize: '10', ...extra });
+            const hdr = { 'User-Agent': UA, 'Content-Type': 'application/x-www-form-urlencoded' };
+            const r1 = await fetch('https://archive.history.go.kr/search/searchResult.do', { method: 'POST', headers: hdr, body: form({}), signal: AbortSignal.timeout(FETCH_TIMEOUT) });
+            const ck = (r1.headers.getSetCookie ? r1.headers.getSetCookie() : [r1.headers.get('set-cookie') || '']).map((c) => String(c).split(';')[0]).filter(Boolean).join('; ');
+            const r2 = await fetch('https://archive.history.go.kr/record/catalog/catalogView.do', { method: 'POST', headers: { ...hdr, Cookie: ck, Referer: 'https://archive.history.go.kr/search/searchResult.do' }, body: form({ searchPosition: pos }), signal: AbortSignal.timeout(FETCH_TIMEOUT) });
+            const b = await r2.text();
+            const title = dclean(((b.match(/<div class="info-box">\s*<div>\s*<p>([\s\S]*?)<\/p>/) || [])[1] || ''));
+            // 메타는 row-box(label/value) 앵커로 — 평문 매칭은 내비게이션 '열람·이용조건' 메뉴와 혼동(실측)
+            const rowVal = (name) => dclean((b.match(new RegExp(`<div class="label">${name}<\\/div>\\s*<div class="value">\\s*<p>([\\s\\S]*?)<\\/p>`)) || [])[1] || '');
+            const sid = (b.match(/사료건(?:&nbsp;|\s)*([0-9A-Za-z_]{6,})/) || [])[1] || '';
+            const series = (dclean(b).match(/사료계열\s+([0-9A-Za-z_]{5,24})/) || [])[1] || '';
+            const acc = rowVal('열람조건');
+            const use = rowVal('이용조건');
+            const reg = (b.match(/<th scope="col">등록번호<\/th>\s*<th scope="col">청구기호<\/th>\s*<\/tr>\s*<tr>\s*<td>\s*([0-9A-Za-z]*)\s*<\/td>\s*<td>\s*([\s\S]*?)\s*<\/td>/) || []);
+            if (!title) return text(`'${kw}' ${pos}번 상세 파싱 실패 — 순번 범위(0~9, 페이지1 기준)와 키워드를 확인하십시오.`);
+            return text(`국편 전자사료관 상세 [${kw} · ${pos}번] ${title}\n`
+              + [sid && `사료건 ${sid}`, series && `사료계열 ${series}`, reg[1] && `등록번호 ${reg[1]}`, reg[2] && dclean(reg[2]) && `청구기호 ${dclean(reg[2])}`].filter(Boolean).join(' · ') + '\n'
+              + (acc ? `열람조건: ${acc}\n` : '') + (use ? `이용조건: ${use}\n` : '')
+              + '원문 열람: https://archive.history.go.kr 에서 사료ID·청구기호로 재검색\n'
+              + '※ 출처: 국사편찬위원회 전자사료관. 이용조건 문구를 judge_rights(archive 필드)에 투입해 초판정. 해외 수집 사료는 원 소장처(NARA 등) 권리 확인 병행.');
+          }
+          const items = await COLLECT.earchive(q, Math.min(max_results, 10));
+          if (!items.length) return text(`국편 전자사료관 '${q}' — 0건. 다른 표기·주제어로 재시도하십시오.`);
+          return text(`국편 전자사료관 '${q}' — ${items.length}건:\n` + items.map((it, i) => `- [${i}] ${it.title}${it.id ? ` (${it.id})` : ''}`).join('\n')
+            + `\n※ '${q}|순번'을 mode=earchive query로 재투입 → 상세 판독(열람·이용조건·청구기호). 순번은 위 대괄호(페이지1 기준 0~9).`);
+        } catch (e) { return text(`국편 전자사료관 오류(${String(e && e.message || e).slice(0, 60)}) — 잠시 후 재시도 또는 브라우저: https://archive.history.go.kr`); }
+      }
       if (mode === 'ktv') { // KTV e영상역사관 — 키워드 목록 / ehistory view URL 판독(대한뉴스·기록영상 해설, KOGL)
         try {
           if (/^https?:\/\/www\.ehistory\.go\.kr\/view\//.test(q)) { // 상세 판독 — ehistory 도메인 한정(임의 URL 페치 방지)

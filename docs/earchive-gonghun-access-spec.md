@@ -8,7 +8,11 @@ NARA 등 해외 수집 사료의 **국내 원문 창구**(사료ID AUS…=미국
 - **파싱**: `fnGoCatalogView('<catalogId>'` 호출 + 같은 태그의 `title="…"` 속성, 인접 700자 내 사료ID
   `[A-Z]{2,3}\d{3}_…`(DCB=국내 충북, DJE=제주, AUS=미국 수집 등 소장·수집 접두).
 - **상세 딥링크 없음**: `/record/catalog/catalogView.do?catalogId=…` GET은 302→404 — 세션 기반 POST 뷰.
-  → 수집기는 사료ID를 표기하고, 이용자는 사이트에서 사료ID로 재검색해 직행.
+  → (v1.35에서 해제) **세션 상세 역공학 성공(2026-11-21)**: fnGoCatalogView는 catalogId가 아니라
+  **검색 폼 전체+`searchPosition`을 재제출**하는 설계 — 같은 쿠키로 ①`POST /search/searchResult.do`(세션 수립)
+  ②`POST /record/catalog/catalogView.do`(동일 폼+searchPosition=순번) 2단 호출 시 상세 44KB가 열린다.
+  row-box(label/value)에서 열람조건·이용조건(권리 문구 — judge_rights 투입), 등록번호/청구기호 표, 사료건 ID 추출.
+  ※ 평문 매칭은 내비게이션 '열람·이용조건' 메뉴와 혼동 — 반드시 HTML 앵커로. `nedb_search(mode='earchive', query='키워드|순번')`로 제공.
 - GET `?keyword=`류는 전부 무시(검색 폼이 POST 전용) — JACAR과 같은 '조용한 무시' 함정 계열.
 
 ## ② 공훈전자사료관 (e-gonghun.mpva.go.kr) — 보류 ⛔ (2026-11-19 기준)
