@@ -1314,7 +1314,7 @@ const JB_CROSS = `국내외 대조 절차 — 순서를 틀리면 헛수고한�
               () => gtext(`https://www.khs.go.kr/cha/SearchKindOpenapiDt.do?ccbaKdcd=${kdcd}&ccbaAsno=${asno}&ccbaCtcd=${ctcd}`), 'ccbaMnm1');
             const g = (t) => xtag(b, t);
             const name = g('ccbaMnm1');
-            if (!name) return text(`[${cpno}] 상세 미발견 — ccbaCpno를 확인하거나 mode=heritage에 키워드를 넣으십시오.`);
+            if (!name) return text(`[${cpno}] 상세 미발견 — 진단: ` + b.slice(0, 200).replace(/\s+/g, ' ')); // TODO 진단 후 제거
             let content = dclean(g('content'));
             if (content.length > 3500) content = content.slice(0, 3500) + ` …(총 ${content.length}자 — 전문은 포털)`;
             return text(`국가유산 판독 — ${name}${g('ccbaMnm2') ? `(${g('ccbaMnm2')})` : ''} [${g('ccmaName') || ''}${g('crltsnoNm') ? ` ${g('crltsnoNm')}` : ''}]\n`
