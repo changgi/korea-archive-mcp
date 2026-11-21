@@ -1108,6 +1108,17 @@ const handler = createMcpHandler((server) => {
       return text(`Europeana '${query}'${en ? ` → 영문 자동 변환 '${eff}'` : ''}${media_type ? ` [${media_type}]` : ''}${ytag} — total ${d.totalResults}:\n` + (items.map((it) => { const rt = rshort(it.rights); return `- ${String((it.title || ['?'])[0]).slice(0, 90)} (${(it.year || [''])[0]}) — ${String((it.dataProvider || [''])[0]).slice(0, 40)}${rt ? ` | 권리:${rt}` : ''} | ${it.guid || ''}`; }).join('\n') || '(0)') + '\nTip: multilingual — Corée(fr)·Korea-Krieg(de)·Corea(it/es)' + (demo ? '\n(shared demo key in use — for heavy use, set a free EUROPEANA_API_KEY from apis.europeana.eu)' : ''));
     });
 
+const JB_RECIPES = `발굴 완주 레시피 — 주제 유형별 발굴→판독→권리 순서 (전 단계 실측 검증, 2026-11-21)
+공통 원칙: ①cross_search로 폭 확보(variants=당대 표기) ②신호가 나온 소스의 전용 도구/판독 모드로 심층 ③권리는 표시(judge_rights·naid·라이선스) ④0건=부재가 아니다(표기 변형·인접 채굴·관리 행정으로 전환).
+
+① 인물(독립운동가): gonghun(이름→mngNo→공훈록·수형기록. 훈격·이명 확보) → 이명·한자명으로 i815 재검색(당대 신문 전문 판독) → jacar(일본 측 — 한자명) → commons(초상·PD) → 수형기록의 판결문은 국가기록원 교차.
+② 한국전쟁 전투·부대: koreanwar(협약 — archRfcd→koreanwar_item 인접 채굴) → nara(RG 교차+naid 인접, judge_rights(naid) 실확인) → tna(연대 필터)·awm(가평 등 영연방)·nlna(네덜란드) → un(안보리 결의 — recid 판독으로 PDF) → commons(PD 사진·원 소장처 역추적).
+③ 조선 제도·고문헌: nedb law(법전 근거)→★sibling(형제 조 전수)→sjw(최초 용례) → kyujanggak(목록+해제)·jsg(청구기호→해제 전문) → aks(문중 고문서) → 인용 2층위 준수.
+④ 일제강점기 정책·기관: ndl(총독부 간행물·통계연보·관보) ⇄ jacar(공문서 메타·인접 ±100) → nedb(한국사DB)·earchive('키워드|순번' 이용조건) → i815(민족 측 시각 대조).
+⑤ 도시·공간사(서울 등): seoul_archives_search(기록 단위→상세 URL 판독: 식별번호·이용조건) → archives(국가기록원) → ktv(대한뉴스 view URL 판독) → commons·ia(항공·거리 사진) → cities 열쇠(Keijo·1914 경계).
+⑥ 사진·영상 소싱(게재용): commons(File 판독 — PD→A 자동, 원본 고해상) → ia(identifier radius) → nara(naid→judge_rights 실확인) → ktv(KOGL) → 게재윤리 4단계·출처 표기.
+※ 각 단계의 투입 형식은 cross_search 푸터와 nedb_search 설명이 안내. 전 산출물 제작은 "풀패키지".`;
+
 const JB_ALLIES = `한국전 참전·지원국 발굴 지도 — 22개국 소스 매핑 (◉=보유 소스 직행 / ○=대체 경로)
 ◉ 미국: nara(RG 111·127·242·342·428)·ia·earchive(국내 수집 원문) ◉ 영국: tna(WO 281 부대 전쟁일지·ADM·AIR)
 ◉ 호주: awm(사진·유물 — PD 다수, 가평) ◉ 네덜란드: nlna(주한대사관 2.05.202·UN파견대 2.13.56·적십자 2.19.309)
@@ -1152,7 +1163,7 @@ const JB_CROSS = `국내외 대조 절차 — 순서를 틀리면 헛수고한�
 미기술 자료를 만나면: 기증이 어려우면 사본수집(공공기록물법 46조 — 국가기록원)·국립중앙도서관 책다모아(02-590-0700). 판단은 기관이 한다, 소장자는 연락만 하면 된다.`;
 
   server.tool('query_bank',
-    'Browse validated discovery keywords (Song 2026). topic: "list" for groups, a group id (G-01..G-22, N-01..N-07), "RG" for NARA Record Group cross-map, "TNA" for the 14 strategy layers, "domestic" for the 5 domestic archives, or a domestic key (nedb/archives/nlk/warmemo/seoul) / domestic group id (e.g. NAK-L1). 전략 지식: "walls"=열한 겹의 벽(실패 원인 11층+대응), "identifiers"=식별자 해독(번호 규칙·옆 훑기), "persons"=인명 열쇠(표기 변형·색인 함정), "crosscheck"=국내외 대조 절차, "world"=6개국+ 서고 지도, "cities"=도시명 계보 대조(Keijo·Fusan·1914 경계), "allies"=한국전 참전·지원 22개국 발굴 지도(보유 소스 매핑·부대 고유명 열쇠). 검증 쿼리 뱅크+조사 전략.',
+    'Browse validated discovery keywords (Song 2026). topic: "list" for groups, a group id (G-01..G-22, N-01..N-07), "RG" for NARA Record Group cross-map, "TNA" for the 14 strategy layers, "domestic" for the 5 domestic archives, or a domestic key (nedb/archives/nlk/warmemo/seoul) / domestic group id (e.g. NAK-L1). 전략 지식: "walls"=열한 겹의 벽(실패 원인 11층+대응), "identifiers"=식별자 해독(번호 규칙·옆 훑기), "persons"=인명 열쇠(표기 변형·색인 함정), "crosscheck"=국내외 대조 절차, "world"=6개국+ 서고 지도, "cities"=도시명 계보 대조(Keijo·Fusan·1914 경계), "allies"=한국전 참전·지원 22개국 발굴 지도(보유 소스 매핑·부대 고유명 열쇠), "recipes"=주제 유형별 발굴→판독→권리 완주 레시피 6종(인물·전투·조선·일제강점기·도시·이미지 소싱). 검증 쿼리 뱅크+조사 전략.',
     { topic: z.string().default('list') },
     async ({ topic }) => {
       const t = topic.trim();
@@ -1181,7 +1192,7 @@ const JB_CROSS = `국내외 대조 절차 — 순서를 틀리면 헛수고한�
         const g = v.groups.find((g) => g.id.toUpperCase() === t.toUpperCase());
         if (g) return text(`${g.id} ${g.ko} (${v.name}) [${g.dim}]:\n` + g.kws.map((k) => `- ${k}`).join('\n'));
       }
-      const STRAT = { walls: JB_WALLS, identifiers: JB_IDENT, persons: JB_PERSONS, crosscheck: JB_CROSS, world: JB_WORLD, cities: JB_CITIES, allies: JB_ALLIES };
+      const STRAT = { walls: JB_WALLS, identifiers: JB_IDENT, persons: JB_PERSONS, crosscheck: JB_CROSS, world: JB_WORLD, cities: JB_CITIES, allies: JB_ALLIES, recipes: JB_RECIPES };
       if (STRAT[t.toLowerCase()]) return text(STRAT[t.toLowerCase()]);
       return text('Group not found — topic="list"(해외 G/N/RG/TNA)·"domestic"·전략(walls/identifiers/persons/crosscheck)');
     });
