@@ -462,8 +462,16 @@ const DEEP_READ = {
   nara: (it) => it.id && `judge_rights(naid=${String(it.id).replace(/\D/g, '')})`,
   seoul: (it) => it.url && `seoul_archives_search(query='${it.url}')`,
 };
+// NARA 계보(v1.80): ancestors 배열 → "RG n › 시리즈" 축약 체인 (수집기·전용 도구·판정 공용)
+const naraChain = (rec) => {
+  const anc = rec.ancestors || [];
+  const rg = rec.recordGroupNumber || anc.map((a) => a.recordGroupNumber).find(Boolean) || '';
+  const ser = (anc.find((a) => /series/i.test(a.levelOfDescription || '')) || {}).title || '';
+  return [rg ? `RG ${rg}` : '', ser].filter(Boolean).join(' › ').slice(0, 80);
+};
 // 데이터화×맥락 강화(v1.72): 레코드의 상위 계층(partOf) 추출 — 시리즈·수집 구조·소장관
 const PART_OF = {
+  nara: (it) => it.series && `NARA › ${it.series}`,
   nzarch: (it) => it.series && `Series: ${it.series}`,
   koreanwar: (it) => { const m = String(it.id || '').match(/^(\d{4})-([A-Z]{2})-(\d{2})-([A-Z]+)-([A-Z])-\d+$/); return m && `수집 ${m[1]} › ${m[2]} › ${m[4]}-${m[5]}`; },
   jacar: (it) => { const o = { A: '국립공문서관', B: '외무성 외교사료관', C: '방위성 방위연구소' }[String(it.id || '')[0]]; return o && `JACAR › ${o}`; },
@@ -519,7 +527,7 @@ const COLLECT = {
     q = koToEn(q) || q;
     const key = process.env.NARA_API_KEY; if (!key) return [];
     const d = await jget(`https://catalog.archives.gov/api/v2/records/search?q=${encodeURIComponent(q)}&limit=${n}&page=1`, { 'x-api-key': key });
-    return ((((d.body || {}).hits || {}).hits) || []).map((h) => { const rec = (h._source || {}).record || {}; return { title: rec.title || '', date: '', id: rec.naId ? `NAID ${rec.naId}` : '', url: `https://catalog.archives.gov/id/${rec.naId}` }; });
+    return ((((d.body || {}).hits || {}).hits) || []).map((h) => { const rec = (h._source || {}).record || {}; const po = naraChain(rec); return { title: rec.title || '', date: '', id: rec.naId ? `NAID ${rec.naId}` : '', ...(po ? { series: po } : {}), url: `https://catalog.archives.gov/id/${rec.naId}` }; });
   },
   archives: async (q, n) => {
     const key = process.env.ARCHIVES_API_KEY; if (!key) return [];
@@ -1178,7 +1186,8 @@ const handler = createMcpHandler((server) => {
       const hits = ((d.body || {}).hits || {});
       const rows = (hits.hits || []).map((h) => {
         const rec = (h._source || {}).record || {};
-        return `- [NAID ${rec.naId}] ${(rec.title || '').slice(0, 100)} | ${rec.localIdentifier || ''} | https://catalog.archives.gov/id/${rec.naId}`;
+        const po = naraChain(rec);
+        return `- [NAID ${rec.naId}] ${(rec.title || '').slice(0, 100)} | ${rec.localIdentifier || ''} | https://catalog.archives.gov/id/${rec.naId}` + (po ? `\n  계보: ${po}` : '');
       });
       const total = typeof hits.total === 'object' ? hits.total.value : hits.total;
       const rline = record_group ? (() => { const r = judgeRights(`RG ${record_group}`, '', 'NARA'); return `\n권리 초판정(RG ${record_group}): ${r[0]} — ${r[1]}\n※ 건별 실확인: judge_rights(naid=<NAID>) — 카탈로그 Use Restriction 실조회로 A/C 확정`; })() : '';
@@ -1382,7 +1391,15 @@ const JB_CROSS = `국내외 대조 절차 — 순서를 틀리면 헛수고한�
           else if (/restricted/i.test(urs)) { cls = 'C'; basis = `NARA 카탈로그 Use Restriction '${urs}' 실확인 — 제한 표기, 기관 확인 필요`; }
           else if (urs) basis += ` · Use Restriction '${urs.slice(0, 80)}' (판정 불변 — 문구 확인 필요)`;
           else basis += ' · 카탈로그에 Use Restriction 미기재 — RG 초판정 유지';
-          return text(`[NAID ${naid}] ${(rec.title || '').slice(0, 95)}\n${rgnum ? `RG ${rgnum} · ` : ''}https://catalog.archives.gov/id/${naid}\nClass: ${cls}\nBasis: ${basis}\n※ 카탈로그 실확인 기반 자동판정 — 게재 전 최종 확인은 사람이. Class D must not be published.`);
+          // 맥락(v1.80): ancestors 전 계층 체인 — RG › 시리즈 › 파일단위, 각 층 NAID 포함(상·하위 항행 좌표)
+          const chain = (rec.ancestors || []).map((a) => `${(a.levelOfDescription || '').replace(/recordGroup/i, 'RG')} ${a.recordGroupNumber || ''}${a.title ? ' ' + String(a.title).slice(0, 60) : ''}${a.naId ? ` [NAID ${a.naId}]` : ''}`.trim()).join(' › ');
+          // 증거성(v1.80): 범위·내용 기술(scope note) 발췌 + 판독 시점 본문 지문
+          const scope = String(rec.scopeAndContentNote || '').trim();
+          const sfp = scope ? createHash('sha256').update(scope).digest('hex').slice(0, 16) : '';
+          return text(`[NAID ${naid}] ${(rec.title || '').slice(0, 95)}\n${rgnum ? `RG ${rgnum} · ` : ''}https://catalog.archives.gov/id/${naid}\n`
+            + (chain ? `계보: ${chain.slice(0, 280)}\n` : '')
+            + (scope ? `【범위·내용】 ${scope.slice(0, 400)}\n본문 지문(sha256-16): ${sfp} — 판독 시점 기술(記述) 전문 기준. 재판독 지문 불일치=카탈로그 기술 개정 발생.\n` : '')
+            + `Class: ${cls}\nBasis: ${basis}\n※ 카탈로그 실확인 기반 자동판정 — 게재 전 최종 확인은 사람이. Class D must not be published.\n※ 인접 채굴: nara_search(naid=${naid}, radius=3) — 사진 ±3·색인 ±1 간격.`);
         } catch (e) { return text(`[NAID ${naid}] 카탈로그 조회 실패(${String(e && e.message || e).slice(0, 60)}) — rg_series 초판정으로 폴백하십시오.`); }
       }
       const res = judgeRights(rg_series, title, archive);
