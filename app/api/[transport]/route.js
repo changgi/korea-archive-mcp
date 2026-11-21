@@ -2741,6 +2741,7 @@ const HELP_GUIDE = `사용 안내 — 매직 키워드 “창기창기 도와줘
 · “조선시대 한강 나루의 행정을 정리해줘” (법전 판독→형제 조 전수→연대 검증 제도사)
 · “병인양요 프랑스 기록 찾아줘” / “이 참조코드 주변을 더 캐줘”(인접 채굴) / “이 기록 게재 가능한지 판정해줘”
 · “안중근 공훈록 전문 보여줘”(독립유공자 — 공적조서·수형기록·현충시설까지) / “이 NARA 기록 권리 실확인해줘”(naid)
+· “이 의궤 해제 읽어줘”(장서각 K2-…) / “안보리 결의 원문 PDF”(UN recid) / “이 1910년 기사 전문”(독립기념관 URL)
 
 ■ 검증 원칙(차별점) — 실물 기록만(AI 생성 인물·장면 금지)·원문 대조·출처 명시·정정 공개. 통과 산출물에만 검증 낙관.
 
@@ -2748,7 +2749,7 @@ const HELP_GUIDE = `사용 안내 — 매직 키워드 “창기창기 도와줘
 · 0건 → 부재가 아니다. 표기 변형·인접 채굴·“대상을 관리한 행정”으로 전환.
 · ZIP 일괄 납품은 로컬 환경 전용 — 웹·모바일은 개별 아티팩트+manifest.
 · 이미지: 웹은 기관 공개 URL 참조 — 원본은 항상 기관 링크에서 열람.
-· 조선 주제 → nedb_search 심층 판독 모드(law·sibling·matrix·origin·record·sjw·kyujanggak·aks[한국고문서자료관 — 문중·서원 고문서 172곳]). 독립유공자 인물 → mode='gonghun'(공훈록 본문 판독). 일제강점기 일본 측 → mode='jacar'.\n· 연대로 좁히기 → 주요 검색 도구의 year_from/year_to. 번호 옆 훑기(인접 채굴) → TNA·NARA(naid)·archive.org(radius)·6·25아카이브. 당대 표기 자동 팬아웃 → cross_search(variants). 채널 상태 → source_profile('health').
+· 조선 주제 → nedb_search 심층 판독 모드(law·sibling·matrix·origin·record·sjw·kyujanggak·aks[한국고문서자료관 — 문중·서원 고문서 172곳]). 심층 판독 9채널 — 발굴 결과의 URL·번호를 nedb_search 모드에 재투입: i815(당대 신문 전문)·gonghun(공적조서·공훈록)·jacar(일본 공문서 메타)·ktv(대한뉴스 해설)·earchive(수집 사료 이용조건)·commons(PD 파일 라이선스·원 소장처)·jsg(장서각 해제 전문)·un(UN 문서 요약·PDF) + seoul_archives_search(상세 URL). 연합 검색 푸터가 경로를 안내한다.\n· 연대로 좁히기 → 주요 검색 도구의 year_from/year_to. 번호 옆 훑기(인접 채굴) → TNA·NARA(naid)·archive.org(radius)·6·25아카이브. 당대 표기 자동 팬아웃 → cross_search(variants). 채널 상태 → source_profile('health').
 
 커넥터: korea-archive-mcp.vercel.app/api/mcp · 안내 페이지: korea-archive-mcp.vercel.app/help.html`;
 
