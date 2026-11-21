@@ -513,8 +513,9 @@ const COLLECT = {
       const name = g('ccbaMnm1');
       if (!name) continue;
       const cpno = g('ccbaCpno');
+      const rawId = (g('ccbaKdcd') && g('ccbaAsno') && g('ccbaCtcd')) ? `${g('ccbaKdcd')}-${g('ccbaAsno')}-${g('ccbaCtcd')}` : cpno; // 상세 API 원값 보존
       out.push({ title: `${name}${g('ccbaMnm2') ? `(${g('ccbaMnm2')})` : ''}${g('ccmaName') ? ` [${g('ccmaName')}]` : ''}${g('ccbaCtcdNm') ? ` — ${g('ccbaCtcdNm')} ${g('ccsiName')}` : ''}`.slice(0, 110),
-        date: '', id: cpno, url: cpno ? `https://www.heritage.go.kr/heri/cul/culSelectDetail.do?ccbaCpno=${cpno}` : 'https://www.heritage.go.kr' });
+        date: '', id: rawId, url: cpno ? `https://www.heritage.go.kr/heri/cul/culSelectDetail.do?ccbaCpno=${cpno}` : 'https://www.heritage.go.kr' });
       if (out.length >= n) break;
     }
     return out;
@@ -1306,6 +1307,21 @@ const JB_CROSS = `국내외 대조 절차 — 순서를 틀리면 헛수고한�
       const q = query.trim();
       if (mode === 'heritage') { // 국가유산 — 키워드 목록 / ccbaCpno 상세(해설·시대·소유/관리). cpno=구분1+종목2+시도2+지정8 분해
         try {
+          const rid = q.match(/^(\d{2})-([0-9A-Za-z]+)-(\d{2})$/); // 목록이 보존한 원값(kdcd-asno-ctcd)
+          if (rid) {
+            const [, kdcd, asno, ctcd] = rid;
+            const b = await cachedText(`heriD:${kdcd}|${asno}|${ctcd}`, 24 * 3600e3,
+              () => gtext(`https://www.khs.go.kr/cha/SearchKindOpenapiDt.do?ccbaKdcd=${kdcd}&ccbaAsno=${asno}&ccbaCtcd=${ctcd}`), '<ccbaMnm1>');
+            const g = (t) => xtag(b, t);
+            const name = g('ccbaMnm1');
+            if (!name) return text(`[${q}] 상세 미매칭 — 포털에서 열람하십시오(목록의 딥링크).`);
+            let content = dclean(g('content'));
+            if (content.length > 3500) content = content.slice(0, 3500) + ` …(총 ${content.length}자 — 전문은 포털)`;
+            return text(`국가유산 판독 — ${name}${g('ccbaMnm2') ? `(${g('ccbaMnm2')})` : ''} [${g('ccmaName') || ''}]\n`
+              + [g('ccbaPoss') && `소유 ${g('ccbaPoss')}`, g('ccbaAdmin') && `관리 ${g('ccbaAdmin')}`, g('ccceName') && `시대 ${g('ccceName')}`, g('ccbaLcad') && `소재 ${dclean(g('ccbaLcad')).slice(0, 60)}`].filter(Boolean).join(' · ') + '\n'
+              + (content ? `【해설】\n${content}\n` : '')
+              + '※ 출처: 국가유산청 국가유산포털 — 게재 시 출처 표기. 사진 이용은 공공누리 유형 확인.');
+          }
           const hm = q.match(/ccbaCpno=(\d{13})/) || q.match(/^(\d{13})$/);
           if (hm) {
             const cpno = hm[1];
@@ -1331,7 +1347,7 @@ const JB_CROSS = `국내외 대조 절차 — 순서를 틀리면 헛수고한�
           const items = await COLLECT.heritage(q, Math.min(max_results, 15));
           if (!items.length) return text(`국가유산 '${q}' — 0건. 유산 명칭(전각·사적명 등)으로 재시도하십시오.`);
           return text(`국가유산 '${q}' — ${items.length}건:\n` + items.map((it) => `- ${it.title}${it.id ? ` [${it.id}]` : ''}\n  ${it.url}`).join('\n')
-            + '\n※ ccbaCpno(13자리)를 mode=heritage query로 재투입 → 해설·시대·소유/관리 판독.');
+            + '\n※ 대괄호의 복합 id(예 11-02230000-11)를 mode=heritage query로 재투입 → 해설·시대·소유/관리 판독.');
         } catch (e) { return text(`국가유산 오류(${String(e && e.message || e).slice(0, 60)}) — 잠시 후 재시도 또는 브라우저: https://www.heritage.go.kr`); }
       }
       if (mode === 'indy') { // 독립운동판결문 — 이름 목록 / 상세 URL 판독(죄명·주문·사건개요·원문 뷰어)
