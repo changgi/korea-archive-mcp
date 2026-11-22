@@ -1,0 +1,537 @@
+{
+ "@context": "http://iiif.io/api/presentation/3/context.json",
+ "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s06.json",
+ "type": "Manifest",
+ "label": {
+  "ko": [
+   "06 · UN 디지털도서관 — 2015년, 정전협정을 둘러싼 서한"
+  ]
+ },
+ "summary": {
+  "ko": [
+   "30곳 탐방 · Ⅰ 전쟁의 기록 · 원 기록: Resolution 82 (1950) / [adopted by the Security Council at its 473rd meeting], of 25 June 1950 (1950-06-25) · United Nations Digital Library (Dag Hammarskjöld Library)"
+  ]
+ },
+ "metadata": [
+  {
+   "label": {
+    "ko": [
+     "원 기록"
+    ]
+   },
+   "value": {
+    "ko": [
+     "S/RES/82(1950) recid 112025 Resolution 82 (1950) / [adopted by the Security Council at its 473rd meeting], of 25 June 1950"
+    ]
+   }
+  },
+  {
+   "label": {
+    "ko": [
+     "소장"
+    ]
+   },
+   "value": {
+    "ko": [
+     "United Nations Digital Library (Dag Hammarskjöld Library)"
+    ]
+   }
+  }
+ ],
+ "requiredStatement": {
+  "label": {
+   "ko": [
+    "출처"
+   ]
+  },
+  "value": {
+   "ko": [
+    "United Nations Digital Library (Dag Hammarskjöld Library) — 이미지별 권리 표시 참조. 협약기관(KOREAN WAR ARCHIVES 6·25전쟁 아카이브센터) 기록은 출처 표기 필수."
+   ]
+  }
+ },
+ "provider": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/",
+   "type": "Agent",
+   "label": {
+    "ko": [
+     "KOREA ARCHIVE 통합검색"
+    ]
+   }
+  }
+ ],
+ "items": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s06/canvas/1",
+   "type": "Canvas",
+   "label": {
+    "ko": [
+     "Resolution 82 (1950) of 25 June 1950 [S/1501]"
+    ]
+   },
+   "width": 1237,
+   "height": 1600,
+   "metadata": [
+    {
+     "label": {
+      "ko": [
+       "식별자"
+      ]
+     },
+     "value": {
+      "ko": [
+       "S/RES/82(1950) — UNDL recid 112025"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "연대"
+      ]
+     },
+     "value": {
+      "ko": [
+       "1950-06-25 (수록 인쇄본 1965)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "소장"
+      ]
+     },
+     "value": {
+      "ko": [
+       "United Nations Digital Library (Dag Hammarskjöld Library)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리"
+      ]
+     },
+     "value": {
+      "ko": [
+       "Public domain — UN Official Records/UN documents (ST/AI/189/Add.9/Rev.2 ¶2) + UNDL 약관: 출처 표기(비상업)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "보이는 것"
+      ]
+     },
+     "value": {
+      "ko": [
+       "제목 '82 (1950). Resolution of 25 June 1950' / 우측 '82 (1950). Résolution du 25 juin 1950' · 문서기호 '[S/1501]' · 영어·프랑스어 2단 조판 · 본문 'The Security Council, Recalling the finding of the General Assembly in its resolution 293 (IV) of 21 October 1949...' · 'Determines that this action constitutes a breach of the peace;' 문구, 하단 쪽번호 '4'"
+      ]
+     }
+    }
+   ],
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s06/hero_s_res_82_1950_p4.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "items": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s06/canvas/1/page",
+     "type": "AnnotationPage",
+     "items": [
+      {
+       "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s06/canvas/1/page/a",
+       "type": "Annotation",
+       "motivation": "painting",
+       "target": "https://changgi.github.io/korea-archive-mcp/iiif/m/s06/canvas/1",
+       "body": {
+        "id": "https://changgi.github.io/korea-archive-mcp/iiif/img/s06/hero_s_res_82_1950_p4.jpg",
+        "type": "Image",
+        "format": "image/jpeg",
+        "width": 1237,
+        "height": 1600
+       }
+      }
+     ]
+    }
+   ],
+   "homepage": [
+    {
+     "id": "https://digitallibrary.un.org/record/112025",
+     "type": "Text",
+     "label": {
+      "ko": [
+       "원 기관 기록"
+      ]
+     },
+     "format": "text/html"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s06/canvas/2",
+   "type": "Canvas",
+   "label": {
+    "ko": [
+     "Resolutions 82(끝)·83·84(시작) (1950) — 인쇄본 p.5"
+    ]
+   },
+   "width": 1233,
+   "height": 1600,
+   "metadata": [
+    {
+     "label": {
+      "ko": [
+       "식별자"
+      ]
+     },
+     "value": {
+      "ko": [
+       "S/RES/82·83·84(1950) — UNDL recid 112025/112026/112027 (동일 면)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "연대"
+      ]
+     },
+     "value": {
+      "ko": [
+       "1950-06-27 (83) / 1950-07-07 (84)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "소장"
+      ]
+     },
+     "value": {
+      "ko": [
+       "United Nations Digital Library (Dag Hammarskjöld Library)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리"
+      ]
+     },
+     "value": {
+      "ko": [
+       "Public domain — UN Official Records/UN documents (ST/AI/189/Add.9/Rev.2 ¶2) + UNDL 약관: 출처 표기(비상업)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "보이는 것"
+      ]
+     },
+     "value": {
+      "ko": [
+       "'Adopted at the 473rd meeting by 9 votes to none, with 1 abstention (Yugoslavia).' (결의 82 채택 기록) · '83 (1950). Resolution of 27 June 1950 [S/1511]' · 'Recommends that the Members of the United Nations furnish such assistance to the Republic of Korea as may be necessary to repel the armed attack...' · '84 (1950). Resolution of 7 July 1950 [S/1588]' 시작부 · 하단 쪽번호 '5'"
+      ]
+     }
+    }
+   ],
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s06/s_res_82-84_1950_p5.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "items": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s06/canvas/2/page",
+     "type": "AnnotationPage",
+     "items": [
+      {
+       "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s06/canvas/2/page/a",
+       "type": "Annotation",
+       "motivation": "painting",
+       "target": "https://changgi.github.io/korea-archive-mcp/iiif/m/s06/canvas/2",
+       "body": {
+        "id": "https://changgi.github.io/korea-archive-mcp/iiif/img/s06/s_res_82-84_1950_p5.jpg",
+        "type": "Image",
+        "format": "image/jpeg",
+        "width": 1233,
+        "height": 1600
+       }
+      }
+     ]
+    }
+   ],
+   "homepage": [
+    {
+     "id": "https://digitallibrary.un.org/record/112026",
+     "type": "Text",
+     "label": {
+      "ko": [
+       "원 기관 기록"
+      ]
+     },
+     "format": "text/html"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s06/canvas/3",
+   "type": "Canvas",
+   "label": {
+    "ko": [
+     "Resolution 84 (1950) 본문 + 85 (1950) — 인쇄본 p.6"
+    ]
+   },
+   "width": 1239,
+   "height": 1600,
+   "metadata": [
+    {
+     "label": {
+      "ko": [
+       "식별자"
+      ]
+     },
+     "value": {
+      "ko": [
+       "S/RES/84(1950) — UNDL recid 112027"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "연대"
+      ]
+     },
+     "value": {
+      "ko": [
+       "1950-07-07"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "소장"
+      ]
+     },
+     "value": {
+      "ko": [
+       "United Nations Digital Library (Dag Hammarskjöld Library)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리"
+      ]
+     },
+     "value": {
+      "ko": [
+       "Public domain — UN Official Records/UN documents (ST/AI/189/Add.9/Rev.2 ¶2) + UNDL 약관: 출처 표기(비상업)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "보이는 것"
+      ]
+     },
+     "value": {
+      "ko": [
+       "'3. Recommends ... make such forces and other assistance available to a unified command under the United States of America;' · '5. Authorizes the unified command at its discretion to use the United Nations flag in the course of operations against North Korean forces...' · 'Adopted at the 476th meeting by 7 votes to none, with 3 abstentions (Egypt, India, Yugoslavia).' · '85 (1950). Resolution of 3"
+      ]
+     }
+    }
+   ],
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s06/s_res_84-85_1950_p6.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "items": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s06/canvas/3/page",
+     "type": "AnnotationPage",
+     "items": [
+      {
+       "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s06/canvas/3/page/a",
+       "type": "Annotation",
+       "motivation": "painting",
+       "target": "https://changgi.github.io/korea-archive-mcp/iiif/m/s06/canvas/3",
+       "body": {
+        "id": "https://changgi.github.io/korea-archive-mcp/iiif/img/s06/s_res_84-85_1950_p6.jpg",
+        "type": "Image",
+        "format": "image/jpeg",
+        "width": 1239,
+        "height": 1600
+       }
+      }
+     ]
+    }
+   ],
+   "homepage": [
+    {
+     "id": "https://digitallibrary.un.org/record/112027",
+     "type": "Text",
+     "label": {
+      "ko": [
+       "원 기관 기록"
+      ]
+     },
+     "format": "text/html"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s06/canvas/4",
+   "type": "Canvas",
+   "label": {
+    "ko": [
+     "Letter dated 19 October 2015 from the Permanent Representative of the Democratic People's Republic of Korea to the United Nations addressed to the President of the Security Council"
+    ]
+   },
+   "width": 1237,
+   "height": 1600,
+   "metadata": [
+    {
+     "label": {
+      "ko": [
+       "식별자"
+      ]
+     },
+     "value": {
+      "ko": [
+       "S/2015/799 — UNDL recid 808136"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "연대"
+      ]
+     },
+     "value": {
+      "ko": [
+       "2015-10-19"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "소장"
+      ]
+     },
+     "value": {
+      "ko": [
+       "United Nations Digital Library (Dag Hammarskjöld Library)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리"
+      ]
+     },
+     "value": {
+      "ko": [
+       "Public domain — UN Official Records/UN documents (ST/AI/189/Add.9/Rev.2 ¶2) + UNDL 약관: 출처 표기(비상업)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "보이는 것"
+      ]
+     },
+     "value": {
+      "ko": [
+       "상단 'United Nations' · 'S/2015/799' · UN 엠블럼 · 'Security Council' · 'Distr.: General 19 October 2015' / 'Original: English' · 본문: 외무성 성명(2015-10-17) 전달 — '...proposal to replace the Korean Armistice Agreement with a peace treaty between the DPRK and the United States of America (see annex)' · 서명 '(Signed) JA Song Nam, Ambassador, Permanent Representative' · 하단 '15-18087 (E) 201015', 바코드·QR코드"
+      ]
+     }
+    }
+   ],
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s06/s_2015_799_p1.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "items": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s06/canvas/4/page",
+     "type": "AnnotationPage",
+     "items": [
+      {
+       "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s06/canvas/4/page/a",
+       "type": "Annotation",
+       "motivation": "painting",
+       "target": "https://changgi.github.io/korea-archive-mcp/iiif/m/s06/canvas/4",
+       "body": {
+        "id": "https://changgi.github.io/korea-archive-mcp/iiif/img/s06/s_2015_799_p1.jpg",
+        "type": "Image",
+        "format": "image/jpeg",
+        "width": 1237,
+        "height": 1600
+       }
+      }
+     ]
+    }
+   ],
+   "homepage": [
+    {
+     "id": "https://digitallibrary.un.org/record/808136",
+     "type": "Text",
+     "label": {
+      "ko": [
+       "원 기관 기록"
+      ]
+     },
+     "format": "text/html"
+    }
+   ]
+  }
+ ],
+ "homepage": [
+  {
+   "id": "https://digitallibrary.un.org/record/112025",
+   "type": "Text",
+   "label": {
+    "ko": [
+     "원 기관 기록"
+    ]
+   },
+   "format": "text/html"
+  }
+ ],
+ "thumbnail": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s06/hero_s_res_82_1950_p4.jpg",
+   "type": "Image",
+   "format": "image/jpeg"
+  }
+ ]
+}

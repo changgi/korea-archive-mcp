@@ -1,0 +1,2046 @@
+{
+ "@context": "http://iiif.io/api/presentation/3/context.json",
+ "id": "https://changgi.github.io/korea-archive-mcp/iiif/collection.json",
+ "type": "Collection",
+ "label": {
+  "ko": [
+   "KOREA ARCHIVE 통합검색 — 30곳 탐방·100선 전체 기록 이미지"
+  ]
+ },
+ "summary": {
+  "ko": [
+   "시리즈 129개 · 이미지 800장(공공누리 제4유형 78장은 원본 무변경) · 원 기관 링크만 67건"
+  ]
+ },
+ "items": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s01.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "01 · 미국 국립기록관리청 NARA — 1950.12.24 흥남 — 필름 원본까지"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s01/hero_520782.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s02.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "02 · 6·25전쟁 아카이브센터 (협약기관) — 한국어 기록 ↔ 미국 원본, 자동으로 한 쌍"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s02/hero_kotori_march_276537585.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s03.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "03 · 호주 전쟁기념관 AWM — 1952년 4월, 가평 계곡"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s03/hero_awm_C58219.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s04.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "04 · 뉴질랜드 기록원 Archives NZ — 뉴질랜드가 계산한 한국전쟁의 비용"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s04/hero_nzapo_cover_1951.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s05.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "05 · 네덜란드 국립문서보관소 — 참전 대대·대사관·적십자 — 문서군 3개"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s05/hero_busan_arrival_1950.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s06.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "06 · UN 디지털도서관 — 2015년, 정전협정을 둘러싼 서한"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s06/hero_s_res_82_1950_p4.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s07.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "07 · 영국 국립기록관 TNA — 영국 해군이 거문도를 점령한 2년"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s07/hero_iln_1886-04-03_trip_to_corea.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s08.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "08 · 프랑스 국립도서관 Gallica — 막힌 Gallica, BnF 카탈로그로 다시 연다"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s08/varat_portfolio_1889-90_btv1b84515919_eu400.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s09.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "09 · 유로피아나 Europeana — 독일·영국 기관의 서울 — 권리도 함께"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s09/hero_wellcome_korea_street_ca1900.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s10.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "10 · 대한민국신문아카이브 (국립중앙도서관) — 1908년, 학생들의 단지동맹"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s10/hero_daehan_19080506_p2.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s12.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "12 · 위키미디어 공용 Commons — 업로더 말 대신 원 소장처에 묻는다"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s12/hero_hungnam_520782.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s13.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "13 · 국가기록원 독립운동판결문 — 1919. 6. 30 경성복심법원"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s13/hero_yugwansun_judgment_p1.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s14.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "14 · 공훈전자사료관 (국가보훈부) — 1932. 4. 29 상해 홍구공원"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s14/hero_ybg_oath_19320426.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s15.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "15 · 독립기념관 — 1932년 미국 신문이 쓴 안창호 체포"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s15/hero_ahn_arrest_clipping_1932.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s16.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "16 · 일본 아시아역사자료센터 JACAR — 일본 육군이 쓴 '조선 소요' 개요"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s16/p01_cover.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s17.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "17 · 국사편찬위원회 전자사료관 — 미군이 읽은 1940년대 편지들"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s17/hero_summation_no6_cover_1946-03.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s18.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "18 · 일본 국립국회도서관 NDL — 경성 엽서와 육지측량부 지도"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s18/hero_keijo_panorama_1930.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s19.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "19 · 한국학중앙연구원 장서각 — 1776년, 정조가 아버지 사당을 고치다"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s19/hero_hwaseong_jeondo_leaf.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s20.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "20 · 서울대 규장각한국학연구원 — 목록 2건, 해제 14건 — 숨은 편차"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s20/hero_hanyang_layer13_crop.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s21.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "21 · 한국고문서자료관 — 172곳 소장처에서 문중 찾기"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s21/hogudanja_1714.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s22.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "22 · 국가유산청 국가유산포털 — 국보 하나, 보물 하나, 시도유산 하나"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s22/hero_geunjeongjeon_1922_ndl.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s23.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "23 · 국립중앙도서관 — 음반부터 단행본까지 한 번에"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s23/hero_eonhae_p1_naratmalssami.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s24.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "24 · 국가기록원 — 1972년 대통령 현지 시찰 영상까지"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s24/hero_roof_1973_nocrop.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s25.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "25 · KTV 국민방송 e영상역사관 — 20년을 19분에 — 대한뉴스의 발자취"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s25/hero_nfp_newhq_1991_nocrop.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s26.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "26 · 대한민국역사박물관 — \"국민투표 참가하여 국론통일 이룩하자!\""
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s26/hero_1975_ballot_nocrop.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s27.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "27 · 서울기록원 — 설계도면이 기록철로 남았다"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s27/hero_cover_opening_1964.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s28.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "28 · 정보공개포털·서울정보소통광장 — 점검 중인 포털 — 그래도 길은 안내한다"
+    ]
+   }
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s29.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "29 · 인터넷 아카이브 archive.org — 인터넷 사본과 NARA 원본, 한 줄로"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s29/hero_170_shore_blasts_000297.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s30.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "30 · 디지털NZ DigitalNZ — 라디오·육성·사진 — NZ 30여 기관 한 번에"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s30/hero_slv_kiwis_artillery.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s031.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "031 · 미국 국립기록관리청 NARA — 1950.9.15 인천 — 사다리로 넘은 방파제"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s031/i_5891320.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s032.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "032 · 미국 국립기록관리청 NARA — 1950.9 서울 — 다시 오른 깃발"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s032/s_74248965.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s033.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "033 · 미국 국립기록관리청 NARA — 1953.7.27 판문점 — 서명 다섯 개"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s033/p_520995.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s034.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "034 · 미국 국립기록관리청 NARA — 1945.9.9 서울 — 내려간 깃발, 오른 깃발"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s034/p_350291339.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s035.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "035 · 미국 국립기록관리청 NARA — 1950.8 ~ 1951.1 — 남쪽으로 가는 길"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s035/p_175539219.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s036.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "036 · 6·25전쟁 아카이브센터 (협약기관) — 1950.8 낙동강 — 강을 내려다본 진지"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s036/p_280956792.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s037.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "037 · 6·25전쟁 아카이브센터 (협약기관) — 1950.10 평양 — 입성, 그리고 철수"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s037/p_542285.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s038.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "038 · 6·25전쟁 아카이브센터 (협약기관) — 1951.1.4 서울 — 철수의 필름"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s038/p_531379.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s039.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "039 · 인터넷 아카이브 — Combat Bulletin No.103 — 1950 가을"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s039/scene_12_1434.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s040.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "040 · 인터넷 아카이브 — Combat Bulletin No.113 — 1951 여름"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s040/scene_10_1225.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s041.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "041 · 영국 국립기록관 TNA — 1951 임진강 — 글로스터 대대 진지 투사도"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s041/awm_C299572.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s042.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "042 · 영국 국립기록관 TNA — 1영연방사단 — 1953년 대관식 날"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s042/awm_C280168.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s043.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "043 · 영국 국립기록관 TNA — 서울 영국 총영사관 — 사진·도면·문서철"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s043/carles_consulate_photo.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s044.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "044 · 영국 국립기록관 TNA — 1883 조영조약 — 'Affairs of Corea'"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s044/carles_n7.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s045.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "045 · 프랑스 국립도서관 BnF · Gallica — 1866 병인양요 — 해군 군의관의 논문"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s045/cheval_n56.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s046.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "046 · 프랑스 국립도서관 BnF · Gallica — Souvenir de Séoul, Corée (1900)"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s046/souv_n27_photo.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s047.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "047 · 프랑스 국립도서관 BnF · Gallica — La Corée, indépendante, russe, ou japonaise (1898)"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s047/vill_n302_plate.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s048.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "048 · 유로피아나 Europeana — NIMH — W.W. Dussel의 975고지 연작"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s048/nimh_7f13f836.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s049.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "049 · 유로피아나 Europeana — Náprstek 박물관 — 1901년 서울"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s049/naprstek_199081.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s050.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "050 · 유로피아나 Europeana — d'Anville 「Royaume de Corée」(1735)"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s050/leiden_3181739_dhalde1735.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s051.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "051 · 네덜란드 국립문서보관소 Nationaal Archief — 1951 한국 해역 — 구축함 Evertsen"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s051/hero_evertsen_heli_904-5649.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s052.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "052 · 네덜란드 국립문서보관소 Nationaal Archief — 1951–1954 귀환 — 스히폴과 덴헬더"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s052/hero_schiphol_family_934-5479.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s053.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "053 · 네덜란드 국립문서보관소 Nationaal Archief — 1951.2.12 도장과 횡성의 밤"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s053/hero_four_men_050-0728.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s054.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "054 · 호주 전쟁기념관 AWM — 1950.11 박천 — 3RAR의 북진과 철수"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s054/hero_awm_C274531.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s055.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "055 · 호주 전쟁기념관 AWM — 1951 마량산 — 코만도 작전"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s055/hero_awm_C14395.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s056.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "056 · 호주 전쟁기념관 AWM — 1953.7.27 휴전 — 후크 고지"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s056/hero_awm_C280419.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s057.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "057 · 호주 전쟁기념관 AWM — 바다와 하늘 — HMAS·77대대"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s057/hero_awm_C232942.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s058.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "058 · 뉴질랜드 기록원 Archives NZ — Archives NZ — 파일 목록과 필름 두 편"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s058/hero_slv_206572.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s059.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "059 · 디지털NZ DigitalNZ — DigitalNZ — 네 병사와 한 수병의 유품"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s059/hero_kura_footprints06441.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s060.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "060 · 디지털NZ DigitalNZ — SAFE CONDUCT PASS — 삐라와 훈장"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s060/hero_board_64995.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s061.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "061 · UN 디지털도서관 — 1951 유엔한국통일부흥위원단 보고서"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s061/un_a1881_map.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s062.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "062 · UN 디지털도서관 — 1955 UNKRA 재건 사업장 지도"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s062/un_a2936_cover.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s063.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "063 · UN 디지털도서관 — 1991.9.17 남북한 유엔 동시가입"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s063/un_a46l1.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s064.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "064 · 일본 아시아역사자료센터 JACAR — 1905.11 통감부 설치 칙령 원본"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s064/jacar_A03020645800_p2_seal.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s065.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "065 · 일본 아시아역사자료센터 JACAR — 1910 「韓國併合ニ關スル條約」 원본"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s065/jacar_A03020879400_p1.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s066.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "066 · 일본 아시아역사자료센터 JACAR — 1919.8.19 朝鮮總督府官制中改正"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s066/jacar_A03021212600_p1.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s067.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "067 · 일본 아시아역사자료센터 JACAR — 1923.9 관동대지진 — 내각 문서철"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s067/jacar_A15060090800_cover.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s068.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "068 · 일본 국립국회도서관 NDL — 1930 『萬二千峰の金剛山 朝鮮』"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s068/ndl_1178514_015_shinkeiji.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s069.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "069 · 일본 국립국회도서관 NDL — 1911 『釜山鴨緑江間写真帖』"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s069/ndl_14439887_005_busanport.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s070.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "070 · 일본 국립국회도서관 NDL — 1935 『京城案内』 — 관광협회의 포켓 가이드"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s070/ndl_1122465_01_cover.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s071.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "071 · 국립중앙도서관 대한민국신문아카이브 — 1896.4.7 독립신문 창간호 — 지면 원본"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s071/dok_18960407_p1.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s072.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "072 · 국립중앙도서관 대한민국신문아카이브 — 1907 국채보상운동 — 신문이 퍼뜨린 취지서"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s072/hwangseong_19070227_p1.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s073.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "073 · 국립중앙도서관 대한민국신문아카이브 — 1936.8.12 조선중앙일보 — 손기정 우승 다음 날"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s073/crop_dongmu_19360812.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s074.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "074 · 국립중앙도서관 대한민국신문아카이브 — 1919.3.13 신한민보 — 샌프란시스코에 닿은 3·1운동"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s074/shinhan_19190313_p1.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s075.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "075 · 국립중앙도서관 — 『靑邱圖』 — 칸과 층으로 나눈 지도"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s075/cheonggu_silla_spread.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s076.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "076 · 국립중앙도서관 — 1899 대한제국 『官報』 — 정부가 펴낸 신문"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s076/gwanbo_1899_v2.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s077.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "077 · 국립중앙도서관 — 『三綱行實圖』 — 그림과 한글 풀이"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s077/samgang_v5.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s078.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "078 · 독립기념관 한국독립운동정보시스템 — 1940 한국광복군 — 독립기념관 기록 + 신문 원본"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s078/shinhan_19411127_p1.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s079.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "079 · 독립기념관 한국독립운동정보시스템 — 대한민국임시정부 — 1919 헌법 논의, 1945 서울의 김구"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s079/nara_SC223975.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s080.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "080 · 독립기념관 한국독립운동정보시스템 — 의열단과 김원봉 — 1924 신문 1면에서 1942 광복군 부사령까지"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s080/sidae_19240425_p1.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s081.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "081 · 국가기록원 독립운동관련 판결문 — 1920.10.30 경성복심법원 — 48인의 판결원본"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s081/hero_p02_right.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s082.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "082 · 국가기록원 독립운동관련 판결문 — 1920.12.27 대구복심법원 — 대한민국애국부인회 판결"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s082/judg_p05.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s083.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "083 · 국가기록원 독립운동관련 판결문 — 1912.9.28 경성지방법원 — '모살미수' 판결"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s083/judg_p02.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s084.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "084 · 국가보훈부 공훈전자사료관 × 미국 NARA — 공적조서 관리번호 318 — 김구(金九)"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s084/hero_SC223975_photo.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s085.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "085 · 국가보훈부 공훈전자사료관 × 국립중앙도서관 신문 — 공적조서 관리번호 8884 — 이봉창(李奉昌)"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s085/seoul_19500109_p3_article.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s086.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "086 · 국가보훈부 공훈전자사료관 × 국립중앙도서관 신문 — 공적조서 관리번호 1693 — 남자현(南慈賢)"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s086/jjang_19330826_article.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s087.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "087 · 국사편찬위원회 전자사료관 × 미국 NARA — 1948.5.10 총선거 — 국편 사료 목록 × NARA 원본"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s087/state_korea1948_p001.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s088.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "088 · 국사편찬위원회 전자사료관 × 미국 NARA — 1948.5.31~7.20 제헌국회 — 국편 사료 목록 × NARA 원본"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s088/p012_right.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s089.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "089 · 국사편찬위원회 한국사DB × 국립중앙도서관 고문헌 — 1752 「均役廳事目」 — 군포 2필을 반으로"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s089/gyunyeok_p001.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s090.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "090 · 국사편찬위원회 한국사DB × 국립중앙도서관 고문헌 — 「全南道大同事目」 — 대동법, 선혜청에 합치다"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s090/daedong_p001.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s091.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "091 · 한국학중앙연구원 장서각 — 왕실 족보 선원보략 — 1679~1680 편찬"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s091/seonwon1883_p01_cover.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s092.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "092 · 한국학중앙연구원 장서각 — 1828 진작의궤 — 세자가 지은 악장"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s092/jinchan1887_cover.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s093.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "093 · 한국학중앙연구원 장서각 — 장서각 '언간' 10건 · '한글 편지' 6건"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s093/eongan1861_p1.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s094.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "094 · 서울대 규장각한국학연구원 — 규장각 목록 3건"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s094/seungnam1530_p01_cover.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s095.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "095 · 서울대 규장각한국학연구원 — 규장각 '해동지도' 해제 2건"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s095/yeoji_jeolla_full.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s096.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "096 · 서울대 규장각한국학연구원 — 규장각 목록 15건 · 해제 5건"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s096/oryun1797_p02_title.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s097.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "097 · 한국학중앙연구원 한국고문서자료관 — 1502년 3월 19일, 문과 합격증"
+    ]
+   }
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s098.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "098 · 한국학중앙연구원 한국고문서자료관 — 1592년 5월, 유성룡의 교지"
+    ]
+   }
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s099.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "099 · 한국학중앙연구원 한국고문서자료관 — 1609년 7월 12일, 서원의 명부"
+    ]
+   }
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s100.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "100 · 한국학중앙연구원 한국고문서자료관 — 제주 애월, 합격증 네 장"
+    ]
+   }
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s101.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "101 · 국가유산청 국가유산포털 — 국보 숭례문 — 1906~1930 사진첩 5권"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s101/namdaemun_1910_766880.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s102.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "102 · 국가유산청 국가유산포털 — 국보 석굴암 석굴 — 1910~1927 사진첩 속 석굴암·불국사"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s102/seokguram_1921_967741.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s103.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "103 · 국가유산청 국가유산포털 — 사적 수원 화성 — 1910·1921·1927 사진첩"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s103/hwahongmun_1927_1688584.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s104.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "104 · 국가유산청 국가유산포털 — 국보 첨성대 — 1910 사진첩 · 1917 관측소 보고서"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s104/cheomseongdae_1910_766880.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s105.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "105 · 대한민국역사박물관 — 한박15024 「공산간첩을 잡아내어 조국을 지키자」"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s105/bk19_3489_gancheopseon_nocrop.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s106.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "106 · 대한민국역사박물관 — 한박941 「88서울올림픽 포스터」 — 공익광고협의회"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s106/bk21_4216_1988_opening_nocrop.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s107.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "107 · 대한민국역사박물관 — 한박3320 60년대 가족계획 홍보 포스터 — 보건사회부"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s107/bk18_3399_1977_familyplan_nocrop.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s108.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "108 · 서울기록원 — 1967 세운상가 아파트 C동 기공식"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s108/item686_02.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s109.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "109 · 서울기록원 — 1968 여의도 — 밤섬 폭파·윤중제 공사"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s109/item7896_02.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s110.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "110 · 서울기록원 — 1974.8.15 서울 지하철 개통식"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s110/item1883_01.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s111.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "111 · 국가기록원 — 1970.7.7 경부고속도로 개통식 — 관리번호 CET0021268"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s111/aerial_3246.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s112.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "112 · 국가기록원 — 1973.7.3 포항종합제철 준공식 — CET0025021"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s112/ceremony_3208.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s113.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "113 · 국가기록원 — 1988.9.17 제24회 서울올림픽 개회식"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s113/bk13_041.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s114.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "114 · 국가기록원 — 1965.6.22 한일협정 조인 — CET0037758"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s114/bk6_170.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s115.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "115 · KTV e영상역사관 — 대한뉴스 제913호 「순조로운 지하철 공사」"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s115/opening_3255.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s116.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "116 · KTV e영상역사관 — 문화영화 「한강」(1969) × 소양강 다목적댐 사진"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s116/ceremony_3229.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s117.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "117 · KTV e영상역사관 — 정부기록사진집 11 「고리 원자력발전소 전경」 1978.07.20"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s117/kori_3492.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s118.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "118 · 정보공개포털 open.go.kr — 포털 점검 중 — 국가기록원 공개 기록으로 우회"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s118/view_3230.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s119.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "119 · 위키미디어 공용 Commons — Commons 파일 → NARA 원본·목록카드 대조"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s119/hero_531381.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s120.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "120 · 위키미디어 공용 Commons — Commons 「…NARA - 520784.tif」 → NARA 원본 대조"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s120/inchon_depot_520784.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s121.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "121 · 미국 국립기록관리청 NARA — 1950.9.15 인천 — 함상에서 본 D-데이"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s121/scene_08_340.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s122.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "122 · 미국 국립기록관리청 NARA — 1950.9.17 상륙 이틀 뒤의 인천"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s122/scene_06_307.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s123.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "123 · 미국 국립기록관리청 NARA — 1953.7.27 정전협정 조인일의 필름"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s123/scene_04_055.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s124.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "124 · 미국 국립기록관리청 NARA — 1952.2.18 판문점 정전회담 필름"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s124/scene_05_129.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s125.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "125 · 미국 국립기록관리청 NARA — 1945.9 「한국 점령 준비」 필름"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s125/scene_03_115.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s126.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "126 · 미국 국립기록관리청 NARA — 1952.8.15 대통령 취임식 — 컬러 필름"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s126/scene_03_027.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s127.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "127 · 미국 국립기록관리청 NARA — 1950.8 함재기에서 본 북한 지역"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s127/scene_06_801.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s128.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "128 · 미국 국립기록관리청 NARA — 「MUSTANGA IN KOREA」 공군 필름"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s128/scene_11_759.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s129.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "129 · 미국 국립기록관리청 NARA — 1951.1.4 인천 철수 필름"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s129/scene_07_252.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s130.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "130 · 미국 국립기록관리청 NARA — 1951.3.15 대한민국 해군사관학교"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s130/scene_08_517.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,427 @@
+{
+ "@context": "http://iiif.io/api/presentation/3/context.json",
+ "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s15.json",
+ "type": "Manifest",
+ "label": {
+  "ko": [
+   "15 · 독립기념관 — 1932년 미국 신문이 쓴 안창호 체포"
+  ]
+ },
+ "summary": {
+  "ko": [
+   "30곳 탐방 · Ⅲ 독립운동 · 원 기록: 안창호 체포기사(영자신문) (1932) (1932) · 독립기념관 한국독립운동정보시스템"
+  ]
+ },
+ "metadata": [
+  {
+   "label": {
+    "ko": [
+     "원 기록"
+    ]
+   },
+   "value": {
+    "ko": [
+     "1-A00025-012 안창호 체포기사(영자신문) (1932)"
+    ]
+   }
+  },
+  {
+   "label": {
+    "ko": [
+     "소장"
+    ]
+   },
+   "value": {
+    "ko": [
+     "독립기념관 한국독립운동정보시스템"
+    ]
+   }
+  }
+ ],
+ "requiredStatement": {
+  "label": {
+   "ko": [
+    "출처"
+   ]
+  },
+  "value": {
+   "ko": [
+    "독립기념관 한국독립운동정보시스템 — 이미지별 권리 표시 참조. 협약기관(KOREAN WAR ARCHIVES 6·25전쟁 아카이브센터) 기록은 출처 표기 필수."
+   ]
+  }
+ },
+ "provider": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/",
+   "type": "Agent",
+   "label": {
+    "ko": [
+     "KOREA ARCHIVE 통합검색"
+    ]
+   }
+  }
+ ],
+ "items": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s15/canvas/1",
+   "type": "Canvas",
+   "label": {
+    "ko": [
+     "안창호 체포기사(영자신문) (1932) — 원문이미지"
+    ]
+   },
+   "width": 818,
+   "height": 1600,
+   "metadata": [
+    {
+     "label": {
+      "ko": [
+       "식별자"
+      ]
+     },
+     "value": {
+      "ko": [
+       "독립기념관 1-A00025-012"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "연대"
+      ]
+     },
+     "value": {
+      "ko": [
+       "1932"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "소장"
+      ]
+     },
+     "value": {
+      "ko": [
+       "독립기념관 한국독립운동정보시스템"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리"
+      ]
+     },
+     "value": {
+      "ko": [
+       "조건부 — 기사 저작물은 보호기간 만료로 판단(필자 전경무 1947년 사망, 한국법상 만료 / 1932년 미국 신문 게재) · 단 독립기념관 소장 스캔, 공공누리 미부착 → 게재 전 독립기념관 사전 협의 권장(041-560-0445)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "보이는 것"
+      ]
+     },
+     "value": {
+      "ko": [
+       "두 단으로 오려 붙인 영자신문 스크랩, 황갈색 종이 · 상단 'WEDNESDAY MORNING', 표제 'KOREAN EXTOLS CAPTURED CHIEF' · 부제 'Seizure of Chang Ho Ahn in Shanghai Protested' / 'Prisoner's Family Residents of Los Angeles' / 'Political Leader Declared Opposed to Violence' · 필자 표기 'BY KYUANG MOO DUNN, Secretary, Foreign Relations, Korean National Association of America' · 소제목 'LOS ANGELES HOME', 'FORMER ESCAPES', 'RIGHT TO LIBERTY'"
+      ]
+     }
+    }
+   ],
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s15/hero_ahn_arrest_clipping_1932.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "items": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s15/canvas/1/page",
+     "type": "AnnotationPage",
+     "items": [
+      {
+       "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s15/canvas/1/page/a",
+       "type": "Annotation",
+       "motivation": "painting",
+       "target": "https://changgi.github.io/korea-archive-mcp/iiif/m/s15/canvas/1",
+       "body": {
+        "id": "https://changgi.github.io/korea-archive-mcp/iiif/img/s15/hero_ahn_arrest_clipping_1932.jpg",
+        "type": "Image",
+        "format": "image/jpeg",
+        "width": 818,
+        "height": 1600
+       }
+      }
+     ]
+    }
+   ],
+   "homepage": [
+    {
+     "id": "https://search.i815.or.kr/contents/independenceFighter/detail.do?independenceFighterId=1-A00025-012&sortNo=4",
+     "type": "Text",
+     "label": {
+      "ko": [
+       "원 기관 기록"
+      ]
+     },
+     "format": "text/html"
+    }
+   ],
+   "rights": "http://creativecommons.org/publicdomain/mark/1.0/"
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s15/canvas/2",
+   "type": "Canvas",
+   "label": {
+    "ko": [
+     "안창호 초상(1920년대 전후)"
+    ]
+   },
+   "width": 550,
+   "height": 696,
+   "metadata": [
+    {
+     "label": {
+      "ko": [
+       "식별자"
+      ]
+     },
+     "value": {
+      "ko": [
+       "Commons File:Dosan Ahn Chang-ho in 1919.jpg"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "연대"
+      ]
+     },
+     "value": {
+      "ko": [
+       "circa 1920 (Commons)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "소장"
+      ]
+     },
+     "value": {
+      "ko": [
+       "독립기념관 한국독립운동정보시스템"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리"
+      ]
+     },
+     "value": {
+      "ko": [
+       "Public Domain — Commons (작자 미상, c.1920 촬영, 보호기간 만료)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "보이는 것"
+      ]
+     },
+     "value": {
+      "ko": [
+       "콧수염이 있는 남성 상반신 흑백 초상 · 어두운 양복, 흰 셔츠 깃 · 550×696 — 원본 크기 그대로"
+      ]
+     }
+    }
+   ],
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s15/ahn_changho_c1920.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "items": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s15/canvas/2/page",
+     "type": "AnnotationPage",
+     "items": [
+      {
+       "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s15/canvas/2/page/a",
+       "type": "Annotation",
+       "motivation": "painting",
+       "target": "https://changgi.github.io/korea-archive-mcp/iiif/m/s15/canvas/2",
+       "body": {
+        "id": "https://changgi.github.io/korea-archive-mcp/iiif/img/s15/ahn_changho_c1920.jpg",
+        "type": "Image",
+        "format": "image/jpeg",
+        "width": 550,
+        "height": 696
+       }
+      }
+     ]
+    }
+   ],
+   "homepage": [
+    {
+     "id": "https://commons.wikimedia.org/wiki/File:Dosan_Ahn_Chang-ho_in_1919.jpg",
+     "type": "Text",
+     "label": {
+      "ko": [
+       "원 기관 기록"
+      ]
+     },
+     "format": "text/html"
+    }
+   ],
+   "rights": "http://creativecommons.org/publicdomain/mark/1.0/"
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s15/canvas/3",
+   "type": "Canvas",
+   "label": {
+    "ko": [
+     "로스앤젤레스 시절 안창호(사진관 초상)"
+    ]
+   },
+   "width": 307,
+   "height": 500,
+   "metadata": [
+    {
+     "label": {
+      "ko": [
+       "식별자"
+      ]
+     },
+     "value": {
+      "ko": [
+       "Commons File:Ahn Changho.jpg"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "연대"
+      ]
+     },
+     "value": {
+      "ko": [
+       "1910s (Commons 'Probably 1910s')"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "소장"
+      ]
+     },
+     "value": {
+      "ko": [
+       "독립기념관 한국독립운동정보시스템"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리"
+      ]
+     },
+     "value": {
+      "ko": [
+       "Public Domain — Commons (1910년대 미국 촬영물)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "보이는 것"
+      ]
+     },
+     "value": {
+      "ko": [
+       "조각 장식 의자에 앉은 양복 차림 남성 1명 · 우측 하단 사진관 서명/각인 · 307×500 저해상"
+      ]
+     }
+    }
+   ],
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s15/ahn_changho_la_1910s.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "items": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s15/canvas/3/page",
+     "type": "AnnotationPage",
+     "items": [
+      {
+       "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s15/canvas/3/page/a",
+       "type": "Annotation",
+       "motivation": "painting",
+       "target": "https://changgi.github.io/korea-archive-mcp/iiif/m/s15/canvas/3",
+       "body": {
+        "id": "https://changgi.github.io/korea-archive-mcp/iiif/img/s15/ahn_changho_la_1910s.jpg",
+        "type": "Image",
+        "format": "image/jpeg",
+        "width": 307,
+        "height": 500
+       }
+      }
+     ]
+    }
+   ],
+   "homepage": [
+    {
+     "id": "https://commons.wikimedia.org/wiki/File:Ahn_Changho.jpg",
+     "type": "Text",
+     "label": {
+      "ko": [
+       "원 기관 기록"
+      ]
+     },
+     "format": "text/html"
+    }
+   ],
+   "rights": "http://creativecommons.org/publicdomain/mark/1.0/"
+  }
+ ],
+ "homepage": [
+  {
+   "id": "https://search.i815.or.kr/contents/independenceFighter/detail.do?independenceFighterId=1-A00025-012&sortNo=4",
+   "type": "Text",
+   "label": {
+    "ko": [
+     "원 기관 기록"
+    ]
+   },
+   "format": "text/html"
+  }
+ ],
+ "thumbnail": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s15/hero_ahn_arrest_clipping_1932.jpg",
+   "type": "Image",
+   "format": "image/jpeg"
+  }
+ ]
+}

@@ -3621,7 +3621,7 @@ const HELP_GUIDE = `사용 안내 — 매직 키워드 “창기창기 도와줘
 · 이미지: 웹은 기관 공개 URL 참조 — 원본은 항상 기관 링크에서 열람.
 · 조선 주제 → nedb_search 심층 판독 모드(law·sibling·matrix·origin·record·sjw·kyujanggak·aks[한국고문서자료관 — 문중·서원 고문서 172곳]). 심층 판독 11채널 — 발굴 결과의 URL·번호를 nedb_search 모드에 재투입: i815(당대 신문 전문·'사전:이름'=인명사전 전기)·gonghun(공적조서·공훈록·'종합:이름'=공훈+사전+판결문 3채널 인물 대조)·jacar(일본 공문서)·ktv(대한뉴스 해설)·earchive(수집 사료 이용조건)·commons(PD 라이선스)·jsg(장서각 해제)·un(UN 요약·PDF)·oldnews(신문 색인어·관련기사·'본문:' OCR 전문)·much(소장품·공공누리 자동판정) + seoul_archives_search(상세 URL). 연합 검색 푸터가 경로를 안내한다.\n· 연대로 좁히기 → 주요 검색 도구의 year_from/year_to. 번호 옆 훑기(인접 채굴) → TNA·NARA(naid)·archive.org(radius)·6·25아카이브. 당대 표기 자동 팬아웃 → cross_search(variants). 채널 상태 → source_profile('health').\n· 데이터화 3종 → cross_search format='csv'(표·통계) · 'karda'(지식그래프 nodes/edges) · 'manifest'(수집기록 매니페스트 JSON-LD — 증거성·맥락 보존, 기록관리시스템 등재·다매체 변환의 원천).
 
-커넥터: korea-archive-mcp.vercel.app/api/mcp · 안내 페이지: korea-archive-mcp.vercel.app/help.html`;
+커넥터: korea-archive-mcp.vercel.app/api/mcp · 안내 페이지: korea-archive-mcp.vercel.app/help.html · 예제 갤러리(GitHub Pages): changgi.github.io/korea-archive-mcp/ — 30곳 탐방·100선 캐러셀, 전체 기록 IIIF 갤러리(iiif.html — 연속 보기·딥줌·IIIF 매니페스트)`;
 
 const FULL_PACKAGE = `풀패키지 오케스트레이션 — 발굴에서 전파물까지 한 번에 (매직 키워드: "풀패키지" · "전부 다 만들어줘")
 입력은 주제 하나면 충분하다. 아래 순서를 전부 수행해 모든 산출물을 함께 납품한다.

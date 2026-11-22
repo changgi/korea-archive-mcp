@@ -60,7 +60,7 @@ page = f'''<!DOCTYPE html>
 <style>{css}</style>
 </head>
 <body>
-<nav><div class="wrap"><a class="logo" href="index.html">KOREA ARCHIVE 통합검색</a><div class="links"><a href="index.html">소개</a><a href="examples.html">예제 15선</a><a href="#p1">30곳 탐방</a><a href="#status">현황</a><a href="#download">내려받기</a><a href="series100.html">100선</a></div></div></nav>
+<nav><div class="wrap"><a class="logo" href="index.html">KOREA ARCHIVE 통합검색</a><div class="links"><a href="index.html">소개</a><a href="examples.html">예제 15선</a><a href="#p1">30곳 탐방</a><a href="#status">현황</a><a href="#download">내려받기</a><a href="series100.html">100선</a><a href="iiif.html">IIIF 갤러리</a></div></div></nav>
 <header class="hero" id="top"><div class="wrap narrow">
 <span class="pill">예제 시리즈 · 30곳 전부</span>
 <h1>30곳 문서고 <em>탐방</em></h1>
