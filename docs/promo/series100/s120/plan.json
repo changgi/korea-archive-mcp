@@ -1,0 +1,102 @@
+{
+ "inst": "위키미디어 공용 Commons",
+ "flag": "🌐",
+ "say": "위키미디어 공용에서 1951 인천역 피란민 사진 찾아줘",
+ "head": "Commons 「…NARA - 520784.tif」 → NARA 원본 대조",
+ "big": "80-G-425418",
+ "facts": [
+  [
+   "Commons",
+   "NAID 520784 파일 · 3000×2394 · PD 표기"
+  ],
+  [
+   "NARA 대조",
+   "RG 80 해군부 · 1951-01-03 · Unrestricted(A)"
+  ],
+  [
+   "번호",
+   "소장 80-G-425418 · War and Conflict 1476"
+  ],
+  [
+   "같은 달",
+   "NAID 531397(1951-01-08) · 541965(1951-01-01)"
+  ]
+ ],
+ "tool": "nedb_search(mode=commons, File URL) → 【NARA 원본 대조】 → judge_rights(naid=520784)",
+ "link": "https://commons.wikimedia.org/wiki/File:Refugees_crowd_railway_depot_at_Inchon,_Korea,_in_hopes_they_may_be_next_to_get_aboard_for_trip_further_south_and..._-_NARA_-_520784.tif",
+ "tags": "#위키미디어공용 #NARA #1951피란",
+ "hero": {
+  "file": "src/inchon_depot_520784.jpg",
+  "pos": "center 45%",
+  "credit": "사진: 미국 국립기록관리청 NAID 520784 (80-G-425418, 1951-01-03 인천, Unrestricted) · 위키미디어 공용 같은 파일(Public domain)"
+ },
+ "hook": "1951년 1월 3일,<br><span class=\"g\">인천역</span> 승강장",
+ "mosaic": [
+  {
+   "file": "src/detail_right_520784.jpg",
+   "label": "원본 확대 ① 높이 올라앉은 사람들 · NAID 520784"
+  },
+  {
+   "file": "src/detail_left_520784.jpg",
+   "label": "원본 확대 ② 승강장의 짐 보따리 · NAID 520784"
+  },
+  {
+   "file": "src/kangnung_531397.jpg",
+   "label": "강릉 밖 눈길의 피란 행렬 1951-01-08 · NAID 531397"
+  },
+  {
+   "file": "src/hanriver_ice_541965.jpg",
+   "label": "얼어붙은 한강을 건너는 피란민 1951-01 · NAID 541965"
+  }
+ ],
+ "mosaic_title": "1951년 1월, <span class=\"g\">남쪽으로</span> — 원본 3점",
+ "mosaic_credit": "미국 국립기록관리청 NAID 520784(RG 80)·531397(RG 111)·541965(RG 306) · 모두 Unrestricted — Commons에서 같은 NAID 파일 확인",
+ "ann": {
+  "file": "src/inchon_depot_520784.jpg",
+  "boxes": [
+   {
+    "x": 20,
+    "y": 31,
+    "w": 53,
+    "h": 9,
+    "t": "뒤쪽: 박공 지붕을 얹은 승강장 지붕들"
+   },
+   {
+    "x": 53,
+    "y": 28,
+    "w": 9,
+    "h": 6,
+    "t": "지붕 너머 피어오르는 흰 연기"
+   },
+   {
+    "x": 74,
+    "y": 32,
+    "w": 25,
+    "h": 62,
+    "t": "오른쪽: 짐 보따리와 함께 높이 올라앉은 사람들"
+   },
+   {
+    "x": 45,
+    "y": 52,
+    "w": 24,
+    "h": 46,
+    "t": "가운데: 비어 있는 선로"
+   },
+   {
+    "x": 12,
+    "y": 57,
+    "w": 19,
+    "h": 21,
+    "t": "왼쪽 승강장: 보따리 곁에 앉고 선 사람들, 흰 치마 차림도 보인다"
+   }
+  ],
+  "credit": "NAID 520784 NARA 원본 TIFF(3000×2394) — 표시한 5곳은 사진에서 직접 읽은 것"
+ },
+ "cta_img": "src/hanriver_ice_541965.jpg",
+ "n": 120,
+ "part": [
+  "XV",
+  "현대 한국의 기록"
+ ],
+ "checked": "2026-11-22"
+}

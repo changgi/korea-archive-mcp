@@ -1,0 +1,110 @@
+{
+ "n": 120,
+ "src": "commons",
+ "record": {
+  "id": "Commons File:…NARA - 520784.tif / NAID 520784",
+  "title": "Refugees crowd railway depot at Inchon, Korea, in hopes they may be next to get aboard for trip further south…",
+  "date": "1951-01-03",
+  "inst": "위키미디어 공용 ← 미국 국립기록관리청",
+  "url": "https://commons.wikimedia.org/wiki/File:Refugees_crowd_railway_depot_at_Inchon,_Korea,_in_hopes_they_may_be_next_to_get_aboard_for_trip_further_south_and..._-_NARA_-_520784.tif"
+ },
+ "images": [
+  {
+   "file": "src/inchon_depot_520784.jpg",
+   "role": "hero",
+   "record_id": "NAID 520784 (80-G-425418)",
+   "title": "Refugees crowd railway depot at Inchon, Korea, in hopes they may be next to get aboard for trip further south…",
+   "date": "1951-01-03",
+   "url": "https://catalog.archives.gov/id/520784",
+   "rights": "A — Unrestricted",
+   "rights_evidence": "judge_rights: NARA 카탈로그 Use Restriction 'Unrestricted' 실확인",
+   "visible": [
+    "승강장 지붕",
+    "가득 찬 사람과 짐",
+    "빈 선로"
+   ],
+   "nocrop": false,
+   "w": 1800,
+   "h": 1436
+  },
+  {
+   "file": "src/detail_right_520784.jpg",
+   "role": "extra",
+   "record_id": "NAID 520784 (80-G-425418)",
+   "title": "같은 사진 오른쪽 확대(직접 자름)",
+   "date": "1951-01-03",
+   "url": "https://catalog.archives.gov/id/520784",
+   "rights": "A — Unrestricted",
+   "rights_evidence": "judge_rights: NARA 카탈로그 Use Restriction 'Unrestricted' 실확인",
+   "visible": [
+    "짐과 함께 높이 앉은 사람들"
+   ],
+   "nocrop": false,
+   "w": 540,
+   "h": 977
+  },
+  {
+   "file": "src/detail_left_520784.jpg",
+   "role": "extra",
+   "record_id": "NAID 520784 (80-G-425418)",
+   "title": "같은 사진 왼쪽 확대(직접 자름)",
+   "date": "1951-01-03",
+   "url": "https://catalog.archives.gov/id/520784",
+   "rights": "A — Unrestricted",
+   "rights_evidence": "judge_rights: NARA 카탈로그 Use Restriction 'Unrestricted' 실확인",
+   "visible": [
+    "승강장의 짐 보따리"
+   ],
+   "nocrop": false,
+   "w": 1008,
+   "h": 661
+  },
+  {
+   "file": "src/kangnung_531397.jpg",
+   "role": "extra",
+   "record_id": "NAID 531397 (111-SC-356475)",
+   "title": "Long trek southward: Seemingly endless file of Korean refugees slogs through snow outside of Kangnung…",
+   "date": "1951-01-08",
+   "url": "https://catalog.archives.gov/id/531397",
+   "rights": "A — Unrestricted",
+   "rights_evidence": "judge_rights: NARA 카탈로그 Use Restriction 'Unrestricted' 실확인",
+   "visible": [
+    "눈길의 긴 행렬",
+    "머리에 인 보따리"
+   ],
+   "nocrop": false,
+   "w": 1800,
+   "h": 1511
+  },
+  {
+   "file": "src/hanriver_ice_541965.jpg",
+   "role": "extra",
+   "record_id": "NAID 541965 (306-PS-52-02719)",
+   "title": "Refugees streaming across the frozen Han River on the ice as they flee southward…",
+   "date": "1951-01-01",
+   "url": "https://catalog.archives.gov/id/541965",
+   "rights": "A — Unrestricted",
+   "rights_evidence": "judge_rights: NARA 카탈로그 Use Restriction 'Unrestricted' 실확인",
+   "visible": [
+    "얼음 위 긴 행렬",
+    "뒤로 철교"
+   ],
+   "nocrop": false,
+   "w": 1800,
+   "h": 1413
+  }
+ ],
+ "points": [
+  "nedb_search(mode=commons) 파일 판독: 3 January 1951, 원본 3000×2394, Public domain, 'War and Conflict Number 1476'",
+  "【NARA 원본 대조】 NAID 520784, RG 80, 1951-01-03, 80-G-425418, Unrestricted",
+  "같은 Commons 검색에서 NAID 531397·541965 파일도 확인 — 모두 NARA Unrestricted"
+ ],
+ "video": {
+  "url": "",
+  "length_s": 0,
+  "rights": "",
+  "note": ""
+ },
+ "status": "ok",
+ "notes": "이미지는 NARA 원본 TIFF에서 받음(Wikimedia 직접 요청 없음 — 119에서 429 이후 중단). nedb_search(mode=commons)에 퍼센트 인코딩된 File URL(%3A·%2C)을 넣으면 '0건'으로 응답, 디코딩한 'File:' URL은 정상 판독."
+}

@@ -1,0 +1,110 @@
+{
+ "n": 75,
+ "src": "nlk",
+ "record": {
+  "id": "국립중앙도서관 CNTS-00082399626",
+  "title": "靑邱圖",
+  "date": "미상",
+  "inst": "국립중앙도서관",
+  "url": "https://viewer.nl.go.kr/nlmivs/viewWonmun_js.jsp?cno=CNTS-00082399626"
+ },
+ "images": [
+  {
+   "file": "src/cheonggu_silla_spread.jpg",
+   "role": "hero",
+   "record_id": "CNTS-00082399626",
+   "title": "「新羅九州郡縣總圖」 펼침면(29·30면 이어붙임)",
+   "date": "발행일 미상(NLK 서지 '---------')",
+   "url": "https://viewer.nl.go.kr/nlmivs/viewWonmun_js.jsp?cno=CNTS-00082399626",
+   "rights": "NLK 원문뷰어 서지 정보 '저작권유형: 이용 제한이 없습니다.' · 조선 후기 필사 지도(보호기간 만료) — 출처: 국립중앙도서관",
+   "rights_evidence": "viewer.nl.go.kr 서지 정보: 서명 靑邱圖 / 발행일 --------- / 발행자 [刊寫者未詳] / 저작권유형 이용 제한이 없습니다.",
+   "w": 1800,
+   "h": 1259,
+   "visible": [
+    "'新羅九州郡縣總圖'",
+    "'一層'~'十四層'",
+    "가로 번호 '一'~'二十二'"
+   ],
+   "nocrop": false
+  },
+  {
+   "file": "src/cheonggu_goryeo_spread.jpg",
+   "role": "extra",
+   "record_id": "CNTS-00082399626",
+   "title": "「高麗五道兩界州縣總圖」 펼침면(31·32면)",
+   "date": "발행일 미상(NLK 서지 '---------')",
+   "url": "https://viewer.nl.go.kr/nlmivs/viewWonmun_js.jsp?cno=CNTS-00082399626",
+   "rights": "NLK 원문뷰어 서지 정보 '저작권유형: 이용 제한이 없습니다.' · 조선 후기 필사 지도(보호기간 만료) — 출처: 국립중앙도서관",
+   "rights_evidence": "viewer.nl.go.kr 서지 정보: 서명 靑邱圖 / 발행일 --------- / 발행자 [刊寫者未詳] / 저작권유형 이용 제한이 없습니다.",
+   "w": 1800,
+   "h": 1273,
+   "visible": [
+    "'高麗五道兩界州縣總圖'"
+   ],
+   "nocrop": false
+  },
+  {
+   "file": "src/cheonggu_samguk.jpg",
+   "role": "extra",
+   "record_id": "CNTS-00082399626",
+   "title": "「三國前圖」(28면)",
+   "date": "발행일 미상(NLK 서지 '---------')",
+   "url": "https://viewer.nl.go.kr/nlmivs/viewWonmun_js.jsp?cno=CNTS-00082399626",
+   "rights": "NLK 원문뷰어 서지 정보 '저작권유형: 이용 제한이 없습니다.' · 조선 후기 필사 지도(보호기간 만료) — 출처: 국립중앙도서관",
+   "rights_evidence": "viewer.nl.go.kr 서지 정보: 서명 靑邱圖 / 발행일 --------- / 발행자 [刊寫者未詳] / 저작권유형 이용 제한이 없습니다.",
+   "w": 1286,
+   "h": 1800,
+   "visible": [
+    "'三國前圖'"
+   ],
+   "nocrop": false
+  },
+  {
+   "file": "src/cheonggu_je.jpg",
+   "role": "extra",
+   "record_id": "CNTS-00082399626",
+   "title": "「靑邱圖題」(6면)",
+   "date": "발행일 미상(NLK 서지 '---------')",
+   "url": "https://viewer.nl.go.kr/nlmivs/viewWonmun_js.jsp?cno=CNTS-00082399626",
+   "rights": "NLK 원문뷰어 서지 정보 '저작권유형: 이용 제한이 없습니다.' · 조선 후기 필사 지도(보호기간 만료) — 출처: 국립중앙도서관",
+   "rights_evidence": "viewer.nl.go.kr 서지 정보: 서명 靑邱圖 / 발행일 --------- / 발행자 [刊寫者未詳] / 저작권유형 이용 제한이 없습니다.",
+   "w": 1300,
+   "h": 1800,
+   "visible": [
+    "'靑邱圖題'",
+    "'COR.1-18 Vol.1' 필기"
+   ],
+   "nocrop": false
+  },
+  {
+   "file": "src/cheonggu_cover.jpg",
+   "role": "extra",
+   "record_id": "CNTS-00082399626",
+   "title": "표지(1면)",
+   "date": "발행일 미상(NLK 서지 '---------')",
+   "url": "https://viewer.nl.go.kr/nlmivs/viewWonmun_js.jsp?cno=CNTS-00082399626",
+   "rights": "NLK 원문뷰어 서지 정보 '저작권유형: 이용 제한이 없습니다.' · 조선 후기 필사 지도(보호기간 만료) — 출처: 국립중앙도서관",
+   "rights_evidence": "viewer.nl.go.kr 서지 정보: 서명 靑邱圖 / 발행일 --------- / 발행자 [刊寫者未詳] / 저작권유형 이용 제한이 없습니다.",
+   "w": 1249,
+   "h": 1800,
+   "visible": [
+    "'靑邱圖' '乾'",
+    "'COR.1-18 Vol.1'"
+   ],
+   "nocrop": false
+  }
+ ],
+ "points": [
+  "NLK 『靑邱圖』(CNTS-00082399626) 206면 — 「三國前圖」 「新羅九州郡縣總圖」 「高麗五道兩界州縣總圖」 등",
+  "지도 칸 표기: 세로 '一層'~'十四層', 가로 '一'~'二十二'",
+  "3면 'EX LIBRIS COLLIN DE PLANCY' 장서표, 표지 'COR.1-18 Vol.1'"
+ ],
+ "video": {
+  "url": "",
+  "length_s": 0,
+  "rights": "",
+  "note": "영상 없음"
+ },
+ "status": "ok",
+ "notes": "1834년본(KOL000021221)은 뷰어가 열리지 않음(헤드리스 크롬 goto networkidle/load 모두 90~200초 타임아웃, 프록시 로그 'viewer.nl.go.kr:443 ws_closed_mid_exchange ×5'; curl main.wviewer?cno=KOL000021221 GET → 32초 후 404 '정상적인 접근이 아닙니다'). 대신 다른 사본 CNTS-00082399626 사용. 이 사본은 흑백 스캔이며 장서표·청구기호는 보이는 그대로만 기재(소장 이력 추정 금지). 뷰어 페이지 이동은 goPage(n) + 15초 대기 필요."
+}
