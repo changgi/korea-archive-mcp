@@ -1,0 +1,107 @@
+{
+ "n": 60,
+ "part": [
+  "Ⅸ",
+  "참전국의 기억"
+ ],
+ "inst": "디지털NZ DigitalNZ",
+ "flag": "🇳🇿",
+ "say": "뉴질랜드에 있는 한국전쟁 삐라 찾아줘",
+ "head": "SAFE CONDUCT PASS — 삐라와 훈장",
+ "big": "64995",
+ "facts": [
+  [
+   "소장",
+   "Auckland War Memorial Museum (DigitalNZ 36655374)"
+  ],
+  [
+   "기록",
+   "'Korean War propaganda leaflet' 1950–1953"
+  ],
+  [
+   "훈장",
+   "UN Korea Medal · Korea Medal 1950-53 (55217·65225·601873)"
+  ],
+  [
+   "권리",
+   "© Auckland Museum CC BY 4.0"
+  ]
+ ],
+ "tool": "cross_search(sources=dnz) → DigitalNZ API (usage=Share)",
+ "link": "https://www.aucklandmuseum.com/discover/collections/record/64995",
+ "checked": "2026-11-22",
+ "tags": "#DigitalNZ #삐라 #한국전쟁",
+ "hero": {
+  "file": "src/hero_board_64995.jpg",
+  "pos": "center 45%",
+  "credit": "자료: © Auckland Museum CC BY 4.0 — record 64995 (400px 공개본을 확대 배치)"
+ },
+ "hook": "한자·영어·한글로 쓴<br><span class=\"g\">SAFE CONDUCT PASS</span>",
+ "mosaic": [
+  {
+   "file": "src/am_leaflet_64996.jpg",
+   "label": "'當你在朝鮮打仗的時候' 그림 삐라 · 64996",
+   "nocrop": true
+  },
+  {
+   "file": "src/am_un_service_medal_65225.jpg",
+   "label": "UN 한국 종군기장 · 65225",
+   "nocrop": true
+  },
+  {
+   "file": "src/am_korea_medal_55217.jpg",
+   "label": "Korea Medal 1950-53 · 55217",
+   "nocrop": true
+  },
+  {
+   "file": "src/am_un_medal_deakin_601873.jpg",
+   "label": "포병 W. H. Deakin의 UN 기장 · 601873",
+   "nocrop": true
+  }
+ ],
+ "mosaic_title": "종이 한 장과 <span class=\"g\">메달 세 개</span>",
+ "mosaic_credit": "© Auckland Museum CC BY 4.0 — 64996·65225·55217·601873 (DigitalNZ 경유 공개 이미지 400px)",
+ "ann": {
+  "file": "src/am_leaflet_64995.jpg",
+  "title": "Auckland Museum 64995 — 삐라 앞면",
+  "boxes": [
+   {
+    "x": 15,
+    "y": 10,
+    "w": 75,
+    "h": 23,
+    "t": "한자 '這張是 保證安全的路票!'"
+   },
+   {
+    "x": 14,
+    "y": 35,
+    "w": 70,
+    "h": 12,
+    "t": "영문 'SAFE CONDUCT PASS'"
+   },
+   {
+    "x": 14,
+    "y": 50,
+    "w": 37,
+    "h": 26,
+    "t": "'SOLDIERS OF THE UN FORCES: This certificate guarantees good treatment…'"
+   },
+   {
+    "x": 22,
+    "y": 70,
+    "w": 28,
+    "h": 20,
+    "t": "서명과 'DOUGLAS MacARTHUR · Commander-in-Chief'"
+   },
+   {
+    "x": 52,
+    "y": 50,
+    "w": 42,
+    "h": 40,
+    "t": "세로쓰기 한글 '대한민국 병사에게'… '맥아-더장군 명령'"
+   }
+  ],
+  "credit": "© Auckland Museum CC BY 4.0 — 64995 (400px 공개본) — 표시는 자료에서 직접 읽은 것"
+ },
+ "cta_img": "src/am_un_korea_medal_55218.jpg"
+}

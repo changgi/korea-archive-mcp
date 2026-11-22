@@ -1,0 +1,96 @@
+{
+ "n": 57,
+ "part": [
+  "Ⅸ",
+  "참전국의 기억"
+ ],
+ "inst": "호주 전쟁기념관 AWM",
+ "flag": "🇦🇺",
+ "say": "호주 해군 공군 한국전쟁 사진 찾아줘",
+ "head": "바다와 하늘 — HMAS·77대대",
+ "big": "D191",
+ "facts": [
+  [
+   "해군",
+   "HMAS Sydney·Bataan·Murchison (Naval Historical Collection 등)"
+  ],
+  [
+   "공군",
+   "No. 77 Squadron RAAF — 김포 1953"
+  ],
+  [
+   "원본",
+   "AWM 공개본 640px"
+  ],
+  [
+   "권리",
+   "Copyright expired - public domain"
+  ]
+ ],
+ "tool": "cross_search(sources=awm,'HMAS Korea 1951') → awm.gov.au",
+ "link": "https://www.awm.gov.au/collection/C225666",
+ "checked": "2026-11-22",
+ "tags": "#HMAS #77대대 #AWM",
+ "hero": {
+  "file": "src/hero_awm_C232942.jpg",
+  "pos": "center 50%",
+  "credit": "사진: 호주 전쟁기념관 C232942 (1951 HMAS Sydney 비행갑판, Copyright expired - public domain)"
+ },
+ "hook": "눈보라 속 <span class=\"g\">HMAS Sydney</span>,<br>1951년 한국 바다",
+ "mosaic": [
+  {
+   "file": "src/awm_C13975.jpg",
+   "label": "거친 바다의 HMAS Bataan · 1951-01"
+  },
+  {
+   "file": "src/awm_C385511.jpg",
+   "label": "한강 하구 HMAS Murchison 포격 · c. 1951"
+  },
+  {
+   "file": "src/awm_C42222.jpg",
+   "label": "김포, 77대대 Meteor · 1953"
+  },
+  {
+   "file": "src/awm_C37411.jpg",
+   "label": "한국 공군에 넘겨진 옛 77대대 Mustang · 1952-11-26"
+  }
+ ],
+ "mosaic_title": "배와 비행기 — <span class=\"g\">사진 4장</span>",
+ "mosaic_credit": "호주 전쟁기념관 C13975·C385511·C42222·C37411 (모두 Copyright expired - public domain)",
+ "ann": {
+  "file": "src/awm_C225666.jpg",
+  "title": "HMAS Bataan (D191) — 기관 기술: HMS Ocean 호위 중 항공 촬영",
+  "boxes": [
+   {
+    "x": 46,
+    "y": 57,
+    "w": 10,
+    "h": 8,
+    "t": "선체 번호 'D191'"
+   },
+   {
+    "x": 46,
+    "y": 11,
+    "w": 6,
+    "h": 30,
+    "t": "격자형 마스트"
+   },
+   {
+    "x": 60,
+    "y": 44,
+    "w": 20,
+    "h": 14,
+    "t": "함수 쪽 포탑"
+   },
+   {
+    "x": 5,
+    "y": 52,
+    "w": 30,
+    "h": 16,
+    "t": "뒤로 퍼지는 흰 물보라"
+   }
+  ],
+  "credit": "AWM C225666 (Naval Historical Collection) — 표시는 사진에서 직접 읽은 것"
+ },
+ "cta_img": "src/awm_C60557.jpg"
+}

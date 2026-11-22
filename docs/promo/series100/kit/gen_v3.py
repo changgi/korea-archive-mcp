@@ -51,20 +51,26 @@ def build(sd):
     h = P['hero']
     fit = 'contain' if h.get('nocrop') else 'cover'
     bg = '#0a0a0a'
-    cards.append(f'<div class="card" style="background:{bg}"><img class="bleed" src="{img(rel(h["file"]))}" style="object-fit:{fit}; object-position:{h.get("pos","center")}; {h.get("fx","")}"><div class="shade-top"></div>'
-        f'<div class="topz">{head(it, part)}<div style="margin-top:14px;"><span class="say2">"{E(it["say"])}"</span></div></div>'
-        f'<div class="bottom" style="padding-bottom:140px !important;"><div class="hook">{P["hook"]}</div></div>'
-        f'<div class="foot"></div><div class="frame" style="z-index:7;"></div><div class="cr">{E(h["credit"])}</div>FOOT</div>')
+    if h.get('nocrop'):  # 공공누리 4유형(변경금지): 원본 위에 글·그라데이션·필터를 얹지 않는다 — 이미지 영역과 글 영역 분리
+        cards.append(f'<div class="card" style="background:#0a0a0a"><div style="position:absolute; left:0; right:0; top:0; height:640px; background:#000;"><img src="{img(rel(h["file"]))}" style="width:100%; height:100%; object-fit:contain;"></div>'
+            f'<div style="position:absolute; left:60px; right:60px; top:668px; z-index:6;">{head(it, part)}<div class="hook" style="font-size:52px; margin-top:12px;">{P["hook"]}</div></div>'
+            f'<div class="cr">{E(h["credit"])} · 원본 무변경 게재</div>FOOT</div>')
+    else:
+        cards.append(f'<div class="card" style="background:{bg}"><img class="bleed" src="{img(rel(h["file"]))}" style="object-fit:{fit}; object-position:{h.get("pos","center")}; {h.get("fx","")}"><div class="shade-top"></div>'
+            f'<div class="topz">{head(it, part)}<div style="margin-top:14px;"><span class="say2">"{E(it["say"])}"</span></div></div>'
+            f'<div class="bottom" style="padding-bottom:140px !important;"><div class="hook">{P["hook"]}</div></div>'
+            f'<div class="foot"></div><div class="frame" style="z-index:7;"></div><div class="cr">{E(h["credit"])}</div>FOOT</div>')
     # 2 원본 모자이크
     if P.get('mosaic'):
         m = P['mosaic']; k = len(m)
         cls = {2: 'm2c', 3: 'm3c', 4: 'm22'}.get(k, 'm22')
-        cells = ''.join(f'<div class="cell"><img src="{img(rel(c["file"]), 900, 82)}" style="object-fit:{"contain" if c.get("nocrop") else "cover"}; object-position:{c.get("pos","center")};"><div class="ml">{E(c["label"])}</div></div>' for c in m[:4])
+        cells = ''.join((f'<div class="cell" style="display:flex; flex-direction:column;"><div style="flex:1; min-height:0;"><img src="{img(rel(c["file"]), 900, 82)}" style="object-fit:contain;"></div><div style="background:#000; color:#fff; font-size:18px; font-weight:800; padding:5px 10px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">{E(c["label"])}</div></div>'
+                         if c.get('nocrop') else f'<div class="cell"><img src="{img(rel(c["file"]), 900, 82)}" style="object-fit:cover; object-position:{c.get("pos","center")};"><div class="ml">{E(c["label"])}</div></div>') for c in m[:4])
         grid = f'grid-template-columns:1fr; grid-template-rows:repeat({k},1fr);' if P.get('mosaic_layout') == 'rows' else f'grid-template-rows:{"1fr 1fr" if k == 4 else "1fr"};'
         cards.append(f'<div class="card"><div class="mosaic {cls}" style="bottom:210px; {grid}">{cells}</div>'
             f'<div style="position:absolute; left:0; right:0; bottom:0; height:210px; background:#0a0c10; border-top:4px solid var(--gold); z-index:5;"></div>'
             f'<div class="hl" style="position:absolute; left:60px; right:60px; bottom:146px; z-index:8; font-size:38px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">{P["mosaic_title"]}</div>'
-            f'<div class="frame" style="z-index:7;"></div><div class="cr" style="bottom:84px; font-size:16px;">{E(P.get("mosaic_credit",""))}</div>FOOT</div>')
+            + ('' if any(c.get('nocrop') for c in m[:4]) else '<div class="frame" style="z-index:7;"></div>') + f'<div class="cr" style="bottom:84px; font-size:16px;">{E(P.get("mosaic_credit",""))}</div>FOOT</div>')
     # 3 설명(어노테이션) — 이미지 % 좌표를 그대로 쓰고, 세로가 넘치면 crop_y(이미지 비율)부터 잘라 좌표를 환산
     for a in ([P['ann']] if isinstance(P.get('ann'), dict) else P.get('ann', [])):
         from PIL import Image as _I
@@ -82,8 +88,8 @@ def build(sd):
         fitmode = 'contain' if a.get('nobox') else 'cover'
         cards.append(f'<div class="card" style="background:#0b0c10;"><div style="position:absolute; left:0; right:0; top:0; height:{H}px; overflow:hidden;">'
             f'<div style="position:relative; width:100%; height:100%;"><img src="{img(rel(a["file"]), 1600, 86)}" style="position:absolute; inset:0; width:100%; height:100%; object-fit:{fitmode}; object-position:center {posy:.1f}%;">{boxes}</div></div>'
-            f'<div class="lab" style="left:60px; top:{H - 50}px; font-size:20px; z-index:8;">{E(a.get("title", "기록 해설 — 보이는 것만 읽었습니다"))}</div>'
-            f'<div class="legend" style="top:{H}px;">{leg}</div><div class="frame" style="z-index:7;"></div><div class="cr">{E(a.get("credit", h["credit"]))}</div>FOOT</div>')
+            + (f'<div class="lab" style="left:60px; top:{H + 6}px; font-size:20px; z-index:8;">{E(a.get("title", "기록 해설"))}</div>' if a.get('nobox') else f'<div class="lab" style="left:60px; top:{H - 50}px; font-size:20px; z-index:8;">{E(a.get("title", "기록 해설 — 보이는 것만 읽었습니다"))}</div>') +
+            f'<div class="legend" style="top:{H}px; {"padding-top:52px;" if a.get("nobox") else ""}">{leg}</div>{'' if a.get('nobox') else '<div class="frame" style="z-index:7;"></div>'}<div class="cr">{E(a.get("credit", h["credit"]))}</div>FOOT</div>')
     # 4 영상 장면 해설(2×2) — 최대 2장
     for grp in P.get('scenes', []):
         cells = ''.join(f'<div class="cell"><img src="{img(rel(s["file"]), 900, 85)}"><div class="tc" style="left:10px; top:10px; font-size:24px;">{E(s["tc"])}</div><div class="scap">{E(s["cap"])}</div></div>' for s in grp['frames'][:4])
@@ -93,14 +99,20 @@ def build(sd):
             f'<div class="frame" style="z-index:7;"></div><div class="cr" style="bottom:84px; font-size:16px;">{E(grp["credit"])}</div>FOOT</div>')
     # 5 기록 카드(메타)
     rows = ''.join(f'<div class="row"><div class="k">{E(k)}</div><div class="v">{E(v)}</div></div>' for k, v in it['facts'])
-    cards.append(f'<div class="card"><img class="bleed" src="{img(rel(h["file"]), 900, 70)}" style="filter:blur(14px) brightness(.38); transform:scale(1.1);">'
+    bgf = ('<div style="position:absolute; inset:0; background:radial-gradient(circle at 30% 20%, #1c2230, #0a0c10 70%);"></div>' if h.get('nocrop')
+           else f'<img class="bleed" src="{img(rel(h["file"]), 900, 70)}" style="filter:blur(14px) brightness(.38); transform:scale(1.1);">')
+    cards.append(f'<div class="card">{bgf}'
         f'<div class="topz">{head(it, part)}<div class="hl" style="font-size:50px; margin-top:22px;">{E(it["head"])}</div>'
         f'<div class="giant" style="font-size:112px; margin-top:8px;">{E(it["big"])}</div></div>'
         f'<div class="meta" style="top:{P.get("meta_top", 520)}px;">{rows}</div><div class="frame" style="z-index:7;"></div>'
         f'<div class="cr">조회 {E(P.get("checked", "2026-11"))} 실측 · {E(it["tool"])}</div>FOOT</div>')
     # 6 직접 해 보기
     th = P.get('cta_img', h['file'])
-    cards.append(f'<div class="card"><img class="bleed" src="{img(rel(th), 1000, 72)}" style="filter:grayscale(.4) brightness(.32);">'
+    nocrop_files = {h['file']} if h.get('nocrop') else set()
+    nocrop_files |= {c['file'] for c in P.get('mosaic', []) if c.get('nocrop')}
+    bgc = ('<div style="position:absolute; inset:0; background:radial-gradient(circle at 70% 30%, #1c2230, #0a0c10 70%);"></div>' if th in nocrop_files
+           else f'<img class="bleed" src="{img(rel(th), 1000, 72)}" style="filter:grayscale(.4) brightness(.32);">')
+    cards.append(f'<div class="card">{bgc}'
         f'<div class="col" style="padding:110px 76px 160px; justify-content:center;"><div class="kick">직접 해 보기</div>'
         f'<div class="hl" style="font-size:60px; margin-top:16px;">이 한 문장이면 됩니다</div>'
         f'<div style="margin-top:28px;"><span class="say2" style="font-size:40px; padding:18px 30px;">"{E(it["say"])}"</span></div>'

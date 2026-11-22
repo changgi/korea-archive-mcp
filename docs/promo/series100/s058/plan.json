@@ -1,0 +1,133 @@
+{
+ "n": 58,
+ "part": [
+  "Ⅸ",
+  "참전국의 기억"
+ ],
+ "inst": "뉴질랜드 기록원 Archives NZ",
+ "flag": "🇳🇿",
+ "say": "뉴질랜드 기록원에 있는 한국전쟁 자료 찾아줘",
+ "head": "Archives NZ — 파일 목록과 필름 두 편",
+ "big": "R22242466",
+ "facts": [
+  [
+   "파일",
+   "R22242466 'War Forces for Korea - Visits to Korea' 1952–1954 · Open"
+  ],
+  [
+   "파일",
+   "R23447306 'War in Korea: Armistice Commission' 1951–1954 · Open"
+  ],
+  [
+   "필름",
+   "NFU 'Kiwis in Korea'(1951)·'Pictorial Parade No. 7'(1953) — CC BY 3.0"
+  ],
+  [
+   "사진",
+   "SLV H2002.199 Argus 컬렉션 (out of copyright)"
+  ]
+ ],
+ "tool": "cross_search(sources=nzarch) → nedb_search(mode=nzarch, R번호)",
+ "link": "https://collections.archives.govt.nz/web/arena/search#/entity/aims-archive/R22242466",
+ "checked": "2026-11-22",
+ "tags": "#ArchivesNZ #KForce #뉴질랜드",
+ "meta_top": 500,
+ "hero": {
+  "file": "src/hero_slv_206572.jpg",
+  "pos": "center 40%",
+  "credit": "사진: State Library Victoria H2002.199/4438 (Arthur Gulliver·Argus, 1951, 'This work is out of copyright')"
+ },
+ "hook": "한국의 <span class=\"g\">뉴질랜드군</span> —<br>목록·필름·사진으로 잇기",
+ "mosaic": [
+  {
+   "file": "src/film1951_a.jpg",
+   "label": "'Kiwis in Korea'(1951) 대표 화면"
+  },
+  {
+   "file": "src/film1951_b.jpg",
+   "label": "같은 필름 — 웃는 병사들"
+  },
+  {
+   "file": "src/film1951_c.jpg",
+   "label": "같은 필름 — 흰 저고리의 여성과 아이"
+  },
+  {
+   "file": "src/slv_kiwis_here_206077.jpg",
+   "label": "브리즈번 도착 'Kiwis here' · 1950 · SLV"
+  }
+ ],
+ "mosaic_title": "필름 한 편 + 사진 한 장 — <span class=\"g\">K-Force</span>",
+ "mosaic_credit": "Archives NZ 'Kiwis in Korea'(1951, CC BY 3.0, DigitalNZ 31946311 · YouTube 썸네일) · SLV H2002.199/4441(out of copyright)",
+ "ann": {
+  "file": "src/hero_slv_206572.jpg",
+  "crop_y": 0.25,
+  "title": "SLV 기술: 'New Zealanders somewhere in Sth. Korea regrouping…'",
+  "boxes": [
+   {
+    "x": 53,
+    "y": 61,
+    "w": 10,
+    "h": 5,
+    "t": "차체의 흰 글자 'NZ 2…'(뒷부분 가려짐)"
+   },
+   {
+    "x": 40,
+    "y": 25,
+    "w": 20,
+    "h": 13,
+    "t": "헤드폰을 쓰고 몸을 내민 사람"
+   },
+   {
+    "x": 42,
+    "y": 64,
+    "w": 9,
+    "h": 5,
+    "t": "손에서 손으로 건네는 작은 종이"
+   },
+   {
+    "x": 57,
+    "y": 43,
+    "w": 20,
+    "h": 7,
+    "t": "베레모의 모자 휘장"
+   },
+   {
+    "x": 86,
+    "y": 45,
+    "w": 7,
+    "h": 24,
+    "t": "세워 둔 소총"
+   }
+  ],
+  "credit": "State Library Victoria H2002.199/4438 (Argus 컬렉션, 1951) — 표시는 사진에서 직접 읽은 것"
+ },
+ "scenes": [
+  {
+   "title": "Archives NZ 'Pictorial Parade No. 7'(1953)",
+   "credit": "Archives New Zealand (CC BY 3.0, DigitalNZ 31946401) · YouTube 대표 썸네일 4장(시점 미표기) · 해설은 화면에서 보이는 것만",
+   "frames": [
+    {
+     "file": "video/pp1953_a.jpg",
+     "tc": "화면 1",
+     "cap": "조종석 안 — 계기판과 헬멧 쓴 조종사"
+    },
+    {
+     "file": "video/pp1953_b.jpg",
+     "tc": "화면 2",
+     "cap": "나란히 선 함정 — 선체 번호 '341'"
+    },
+    {
+     "file": "video/pp1953_c.jpg",
+     "tc": "화면 3",
+     "cap": "숟가락으로 그릇의 음식을 먹는 아이"
+    },
+    {
+     "file": "video/pp1953_d.jpg",
+     "tc": "화면 4",
+     "cap": "베레모·헤드셋 차림 병사"
+    }
+   ]
+  }
+ ],
+ "cta_img": "src/film1951_b.jpg"
+}

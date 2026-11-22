@@ -6,7 +6,7 @@
  ],
  "inst": "유로피아나 Europeana",
  "flag": "🇪🇺",
- "say": "유로피아나에서 1901년 서울 사진 찾아줘",
+ "say": "1901년 서울 사진 유로피아나에서 찾아줘",
  "head": "Náprstek 박물관 — 1901년 서울",
  "big": "As I 7553",
  "facts": [
@@ -58,39 +58,40 @@
  "mosaic_title": "같은 묶음의 <span class=\"g\">1901년 서울</span>",
  "mosaic_credit": "Náprstek Museum As I 7541·7574·7545·7577 (1901) · CC BY 4.0 Náprstek Museum of Asian, African and American Cultures · eSbírky",
  "ann": {
-  "file": "src/naprstek_198938.jpg",
-  "crop_y": 0.12,
+  "file": "src/naprstek_198938_ann.jpg",
+  "crop_y": 0.07,
   "boxes": [
    {
     "x": 77,
-    "y": 13,
+    "y": 8,
     "w": 9,
-    "h": 15,
+    "h": 21,
     "t": "기둥 꼭대기의 작업자 — 기록 설명 'montér na sloupu'"
    },
    {
     "x": 75,
-    "y": 27,
+    "y": 29,
     "w": 10,
-    "h": 30,
+    "h": 44,
     "t": "기둥에 걸친 긴 사다리"
    },
    {
     "x": 57,
-    "y": 55,
+    "y": 70,
     "w": 22,
     "h": 15,
     "t": "사람들 사이의 말 한 마리"
    },
    {
     "x": 20,
-    "y": 50,
+    "y": 63,
     "w": 37,
-    "h": 14,
+    "h": 20,
     "t": "갓 쓴 사람들이 길에 모여 섰다"
    }
   ],
-  "credit": "Náprstek As I 7540 (1901) · 기록 설명: 'koleje koňské dráhy a sloupy telefonního vedení'(마차철도 선로·전화선 기둥) · CC BY 4.0"
+  "credit": "Náprstek As I 7540 (1901) · 기록 설명: 'koleje koňské dráhy a sloupy telefonního vedení'(마차철도 선로·전화선 기둥) · CC BY 4.0",
+  "max_h": 720
  },
  "cta_img": "src/naprstek_198949.jpg",
  "meta_top": 470

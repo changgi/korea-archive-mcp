@@ -1,0 +1,97 @@
+{
+ "n": 45,
+ "src": "gallica",
+ "record": {
+  "id": "BnF ark:/12148/cb36866203v (Gallica ark 없음) · 관련 cb459968007",
+  "title": "Relation médicale d'une campagne au Japon, en Chine et en Corée / Cand. Élisée-Julien Cheval",
+  "date": "1868",
+  "inst": "Bibliothèque nationale de France (카탈로그) — 사본 BIU Santé",
+  "url": "https://catalogue.bnf.fr/ark:/12148/cb36866203v"
+ },
+ "images": [
+  {
+   "file": "cheval_n56.jpg",
+   "role": "hero",
+   "record_id": "BnF cb36866203v · IA BIUSante_TMON1868x46 n56",
+   "title": "Carte de Corée",
+   "date": "1868-06-12",
+   "url": "https://archive.org/details/BIUSante_TMON1868x46/page/n56",
+   "rights": "PD — 1868 공표 · 저자 Cheval(1868 학위) · BIU Santé 디지털본 IA 메타 rights 'Licence ouverte / Open licence Etalab'",
+   "rights_evidence": "archive.org/metadata/BIUSante_TMON1868x46 rights 필드",
+   "visible": [
+    "표제 'Carte de Corée'",
+    "'Seoul'·'Han R.'",
+    "강화 앞 'I. Ferrières'·'I. Clifford'·'I. Guérin'",
+    "'Provinces' 1~8 범례",
+    "Nota: 강화 함락일 입수한 조선 지도의 사본, 축소 M. Zuber"
+   ],
+   "w": 1291,
+   "h": 1800,
+   "nocrop": false
+  },
+  {
+   "file": "cheval_n56_lower.jpg",
+   "role": "extra",
+   "record_id": "BnF cb36866203v · IA BIUSante_TMON1868x46 n56",
+   "title": "Carte de Corée 아래쪽 절반",
+   "date": "1868-06-12",
+   "url": "https://archive.org/details/BIUSante_TMON1868x46/page/n56",
+   "rights": "PD — 1868 공표 · 저자 Cheval(1868 학위) · BIU Santé 디지털본 IA 메타 rights 'Licence ouverte / Open licence Etalab'",
+   "rights_evidence": "archive.org/metadata/BIUSante_TMON1868x46 rights 필드",
+   "visible": [
+    "Nota 문구"
+   ],
+   "w": 1800,
+   "h": 1264,
+   "nocrop": false
+  },
+  {
+   "file": "cheval_title_top.jpg",
+   "role": "page",
+   "record_id": "BnF cb36866203v · IA BIUSante_TMON1868x46 n0",
+   "title": "표지",
+   "date": "1868-06-12",
+   "url": "https://archive.org/details/BIUSante_TMON1868x46/page/n0",
+   "rights": "PD — 1868 공표 · 저자 Cheval(1868 학위) · BIU Santé 디지털본 IA 메타 rights 'Licence ouverte / Open licence Etalab'",
+   "rights_evidence": "archive.org/metadata/BIUSante_TMON1868x46 rights 필드",
+   "visible": [
+    "'RELATION MÉDICALE D'UNE CAMPAGNE AU JAPON, EN CHINE ET EN CORÉE'",
+    "'THÈSE'",
+    "'N° 46.'"
+   ],
+   "w": 1800,
+   "h": 1031,
+   "nocrop": false
+  },
+  {
+   "file": "cheval_n53_para.jpg",
+   "role": "page",
+   "record_id": "BnF cb36866203v · IA BIUSante_TMON1868x46 n53",
+   "title": "p.54 Expédition de Corée",
+   "date": "1868-06-12",
+   "url": "https://archive.org/details/BIUSante_TMON1868x46/page/n53",
+   "rights": "PD — 1868 공표 · 저자 Cheval(1868 학위) · BIU Santé 디지털본 IA 메타 rights 'Licence ouverte / Open licence Etalab'",
+   "rights_evidence": "archive.org/metadata/BIUSante_TMON1868x46 rights 필드",
+   "visible": [
+    "'Voici en quelques mots les causes qui poussèrent l'amiral Roze à pénétrer en Corée'"
+   ],
+   "w": 1800,
+   "h": 843,
+   "nocrop": false
+  }
+ ],
+ "points": [
+  "Nota: 'Cette carte est une copie d'une carte Coréenne trouvée à Kang-Hoa le jour de la prise de la ville; la réduction en a été faite par M. Zuber, Enseigne de vaisseau'",
+  "본문: '...pendant l'expédition de Corée, en septembre 1866' · 'L'occupation de l'île de Kang-Hoa'",
+  "관련 BnF 기록 H. Jouan 'L'expédition de Corée en 1866' (cb459968007, cb459968038)"
+ ],
+ "video": {
+  "url": "",
+  "length_s": 0,
+  "rights": "",
+  "note": ""
+ },
+ "status": "ok",
+ "notes": "gallica.bnf.fr 미접속(지시대로). Le Tour du monde 1873(Zuber 'Une expédition en Corée')·Le Monde illustré 1866 하반기는 IA에 사본 없음, HathiTrust는 Cloudflare 403(우회 안 함).",
+ "checked": "2026-11-22"
+}

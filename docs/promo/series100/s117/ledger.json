@@ -130,7 +130,7 @@
    "file": "src/page_3492_c.jpg",
    "role": "page",
    "record_id": "BK 19/3492",
-   "title": "같은 캡처 왼쪽 1500px",
+   "title": "사진 페이지 캡처(폭 640px로 재배치 렌더, 사진·버튼 숨김, 중간 빈칸 110px 제거)",
    "date": "1978.07.20",
    "url": "https://www.ehistory.go.kr/view/photo?mediasrcgbn=BK&mediaid=19&mediadtl=3492",
    "rights": "기관 웹페이지 캡처 — 출처 표기",
@@ -139,8 +139,8 @@
     "공공누리 마크와 문구"
    ],
    "nocrop": false,
-   "w": 1500,
-   "h": 561
+   "w": 1280,
+   "h": 734
   },
   {
    "file": "src/page_header.jpg",
@@ -157,6 +157,22 @@
    "nocrop": false,
    "w": 1280,
    "h": 97
+  },
+  {
+   "file": "src/page_3492_n.jpg",
+   "role": "page",
+   "record_id": "BK 19/3492",
+   "title": "사진 페이지 캡처 원본(폭 640px 렌더)",
+   "date": "1978.07.20",
+   "url": "https://www.ehistory.go.kr/view/photo?mediasrcgbn=BK&mediaid=19&mediadtl=3492",
+   "rights": "기관 웹페이지 캡처 — 출처 표기",
+   "rights_evidence": "직접 캡처",
+   "w": 1280,
+   "h": 754,
+   "visible": [
+    "공공누리 제4유형 문구"
+   ],
+   "nocrop": false
   }
  ],
  "points": [

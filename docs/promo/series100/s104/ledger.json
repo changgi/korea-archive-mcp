@@ -1,0 +1,87 @@
+{
+ "n": 104,
+ "src": "heritage",
+ "record": {
+  "id": "경주 첨성대 [국보] · 11-0000310000000-37",
+  "title": "국보 첨성대 — 1910 사진첩 · 1917 관측소 보고서",
+  "inst": "국가유산청 국가유산포털",
+  "url": "https://www.heritage.go.kr/heri/cul/culSelectDetail.do?ccbaCpno=1113700310000"
+ },
+ "images": [
+  {
+   "file": "src/cheomseongdae_1910_766880.jpg",
+   "role": "hero",
+   "w": 1800,
+   "h": 1366,
+   "visible": [
+    "사진: 국립국회도서관(NDL) 「大日本帝国朝鮮写真帖」(1910, 統監府 編) info:ndljp/pid/766880 코마 96 · NDL デジタルコレクション PDM(パブリックドメイン) — 「第七十二 慶州瞻星台」"
+   ],
+   "record_id": "info:ndljp/pid/766880",
+   "title": "大日本帝国朝鮮写真帖 : 日韓併合紀念",
+   "date": "1910",
+   "url": "https://dl.ndl.go.jp/pid/766880",
+   "rights": "PDM — NDL Access Restrictions 'PDM'",
+   "rights_evidence": "IIIF manifest https://dl.ndl.go.jp/api/iiif/766880/manifest.json metadata 'Access Restrictions: PDM' · 統監府 編"
+  },
+  {
+   "file": "src/cheomseongdae_1917_984832.jpg",
+   "role": "extra",
+   "w": 932,
+   "h": 1449,
+   "visible": [
+    "1917 보고서 사진 · NDL 984832"
+   ],
+   "record_id": "info:ndljp/pid/984832",
+   "title": "朝鮮古代観測記録調査報告",
+   "date": "1917",
+   "url": "https://dl.ndl.go.jp/pid/984832",
+   "rights": "PDM — NDL Access Restrictions 'PDM'",
+   "rights_evidence": "IIIF manifest https://dl.ndl.go.jp/api/iiif/984832/manifest.json metadata 'Access Restrictions: PDM' · 朝鮮総督府観測所 編"
+  },
+  {
+   "file": "src/cheomseongdae_diagram_1917_984832.jpg",
+   "role": "extra",
+   "w": 1296,
+   "h": 1113,
+   "visible": [
+    "「第九圖 瞻星臺構造略圖」"
+   ],
+   "record_id": "info:ndljp/pid/984832",
+   "title": "朝鮮古代観測記録調査報告",
+   "date": "1917",
+   "url": "https://dl.ndl.go.jp/pid/984832",
+   "rights": "PDM — NDL Access Restrictions 'PDM'",
+   "rights_evidence": "IIIF manifest https://dl.ndl.go.jp/api/iiif/984832/manifest.json metadata 'Access Restrictions: PDM' · 朝鮮総督府観測所 編"
+  },
+  {
+   "file": "src/cheomseongdae_title_1917_984832.jpg",
+   "role": "extra",
+   "w": 972,
+   "h": 1191,
+   "visible": [
+    "「六 慶州瞻星臺ノ說」"
+   ],
+   "record_id": "info:ndljp/pid/984832",
+   "title": "朝鮮古代観測記録調査報告",
+   "date": "1917",
+   "url": "https://dl.ndl.go.jp/pid/984832",
+   "rights": "PDM — NDL Access Restrictions 'PDM'",
+   "rights_evidence": "IIIF manifest https://dl.ndl.go.jp/api/iiif/984832/manifest.json metadata 'Access Restrictions: PDM' · 朝鮮総督府観測所 編"
+  }
+ ],
+ "points": [
+  "꼭대기의 정(井)자형 정상부",
+  "몸통 가운데 네모난 창 하나",
+  "아래로 갈수록 넓어지는 원통부와 기단",
+  "흰 옷 입은 사람들 — 오른쪽 끝 한 사람은 양산",
+  "오른편 굽은 소나무 한 그루"
+ ],
+ "video": {
+  "url": "",
+  "length_s": 0,
+  "rights": "",
+  "note": "영상 없음"
+ },
+ "status": "partial",
+ "notes": "국가유산포털 원본 이미지(http://www.khs.go.kr/unisearch/images/...) — http 302 → https://www.khs.go.kr/... TLS 핸드셰이크 중 Connection reset(코드 000). 우회 안 함. 대체: NDL 디지털컬렉션 PDM 사진첩(IIIF, 순차 요청)."
+}

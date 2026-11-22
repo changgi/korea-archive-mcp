@@ -1,0 +1,96 @@
+{
+ "n": 54,
+ "part": [
+  "Ⅸ",
+  "참전국의 기억"
+ ],
+ "inst": "호주 전쟁기념관 AWM",
+ "flag": "🇦🇺",
+ "say": "호주군 박천 전투 사진 찾아줘",
+ "head": "1950.11 박천 — 3RAR의 북진과 철수",
+ "big": "C274531",
+ "facts": [
+  [
+   "촬영",
+   "Claude Rudolph Holzheimer (AWM 기록)"
+  ],
+  [
+   "기록",
+   "1950-11-04 박천 철수 중 강 건너기 (3RAR C중대)"
+  ],
+  [
+   "원본",
+   "AWM 공개본 640px (고해상은 복제 신청)"
+  ],
+  [
+   "권리",
+   "Copyright expired - public domain"
+  ]
+ ],
+ "tool": "cross_search(sources=awm,'3RAR Pakchon 1950') → awm.gov.au",
+ "link": "https://www.awm.gov.au/collection/C274531",
+ "checked": "2026-11-22",
+ "tags": "#AWM #3RAR #박천",
+ "hero": {
+  "file": "src/hero_awm_C274531.jpg",
+  "pos": "center 45%",
+  "credit": "사진: 호주 전쟁기념관 C274531 (Holzheimer, 1950-11-04 박천, Copyright expired - public domain)"
+ },
+ "hook": "1950년 11월, <span class=\"g\">박천</span>의 강을<br>건너는 호주 병사들",
+ "mosaic": [
+  {
+   "file": "src/awm_C360835.jpg",
+   "label": "폐허가 된 박천 거리 · 1950-10-29"
+  },
+  {
+   "file": "src/awm_C360826.jpg",
+   "label": "박천 점령 뒤 전차 위 3RAR · 1950-10-29"
+  },
+  {
+   "file": "src/awm_C274349.jpg",
+   "label": "강 건너기 행렬 · 1950-11-04 · C274349"
+  },
+  {
+   "file": "src/awm_C360800.jpg",
+   "label": "부서진 철교에 판자 깔기 · C360800"
+  }
+ ],
+ "mosaic_title": "1950.10.29~11.4 박천 — <span class=\"g\">사진 4장</span>",
+ "mosaic_credit": "호주 전쟁기념관 C360835·C360826·C274349·C360800 (모두 Copyright expired - public domain)",
+ "ann": {
+  "file": "src/awm_C274529.jpg",
+  "crop_y": 0.0,
+  "boxes": [
+   {
+    "x": 30,
+    "y": 50,
+    "w": 14,
+    "h": 11,
+    "t": "표지판 'TRACK VEHICLE…'"
+   },
+   {
+    "x": 0,
+    "y": 42,
+    "w": 30,
+    "h": 38,
+    "t": "모래주머니를 쌓은 둑"
+   },
+   {
+    "x": 70,
+    "y": 27,
+    "w": 30,
+    "h": 50,
+    "t": "소총을 멘 병사들 — 철모·챙 넓은 모자"
+   },
+   {
+    "x": 14,
+    "y": 26,
+    "w": 13,
+    "h": 14,
+    "t": "뒤편 차량과 병사들"
+   }
+  ],
+  "credit": "AWM C274529 (1950-11-04, 640px 공개본) — 표시는 사진에서 직접 읽은 것"
+ },
+ "cta_img": "src/awm_C274553.jpg"
+}
