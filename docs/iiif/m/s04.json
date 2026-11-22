@@ -588,6 +588,16 @@
       ]
      },
      "format": "application/json"
+    },
+    {
+     "id": "https://korea-archive-mcp.vercel.app/iiif/awm/C1094311/manifest.json",
+     "type": "Manifest",
+     "label": {
+      "ko": [
+       "원 기관 원본(IIIF 브리지)"
+      ]
+     },
+     "format": "application/ld+json"
     }
    ],
    "navDate": "1951-01-01T00:00:00Z",
@@ -739,6 +749,16 @@
       ]
      },
      "format": "application/json"
+    },
+    {
+     "id": "https://korea-archive-mcp.vercel.app/iiif/awm/C1094308/manifest.json",
+     "type": "Manifest",
+     "label": {
+      "ko": [
+       "원 기관 원본(IIIF 브리지)"
+      ]
+     },
+     "format": "application/ld+json"
     }
    ],
    "navDate": "1951-01-01T00:00:00Z",
@@ -890,6 +910,16 @@
       ]
      },
      "format": "application/json"
+    },
+    {
+     "id": "https://korea-archive-mcp.vercel.app/iiif/awm/C361079/manifest.json",
+     "type": "Manifest",
+     "label": {
+      "ko": [
+       "원 기관 원본(IIIF 브리지)"
+      ]
+     },
+     "format": "application/ld+json"
     }
    ],
    "navDate": "1950-01-01T00:00:00Z",

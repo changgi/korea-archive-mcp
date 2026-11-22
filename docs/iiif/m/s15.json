@@ -439,6 +439,16 @@
       ]
      },
      "format": "application/json"
+    },
+    {
+     "id": "https://korea-archive-mcp.vercel.app/iiif/commons/File%3ADosan%20Ahn%20Chang-ho%20in%201919.jpg/manifest.json",
+     "type": "Manifest",
+     "label": {
+      "ko": [
+       "원 기관 원본(IIIF 브리지)"
+      ]
+     },
+     "format": "application/ld+json"
     }
    ],
    "navDate": "1920-01-01T00:00:00Z",
@@ -590,6 +600,16 @@
       ]
      },
      "format": "application/json"
+    },
+    {
+     "id": "https://korea-archive-mcp.vercel.app/iiif/commons/File%3AAhn%20Changho.jpg/manifest.json",
+     "type": "Manifest",
+     "label": {
+      "ko": [
+       "원 기관 원본(IIIF 브리지)"
+      ]
+     },
+     "format": "application/ld+json"
     }
    ],
    "navDate": "1910-01-01T00:00:00Z",

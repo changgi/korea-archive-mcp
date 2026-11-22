@@ -20,6 +20,8 @@ jobs:
           node --check /tmp/rights_check.mjs
           cp lib/nara_iiif.js /tmp/nara_iiif_check.mjs
           node --check /tmp/nara_iiif_check.mjs
+          cp lib/ka_iiif.js /tmp/ka_iiif_check.mjs
+          node --check /tmp/ka_iiif_check.mjs
       - name: 정적 검증 (도구 20종 · 설명 1024자 · TOPICS 컴파일 · 24KB 가드)
         run: node scripts/ci-verify.mjs
       - name: GitHub Pages 무결성 (docs 링크·IIIF 이미지·매니페스트 수)

@@ -300,6 +300,32 @@
     "\"iiif\":\"https://korea-archive-mcp\\.vercel\\.app/iiif/nara/\\d+/manifest\\.json\""
    ],
    "level": "warn"
+  },
+  {
+   "id": "bridge2-manifest",
+   "tool": "cross_search",
+   "args": {
+    "query": "Kapyong",
+    "sources": "awm",
+    "max_per_source": 3,
+    "format": "manifest"
+   },
+   "must": [
+    "\"iiif\":\"https://korea-archive-mcp\\.vercel\\.app/iiif/awm/C\\d+/manifest\\.json\""
+   ],
+   "level": "warn"
+  },
+  {
+   "id": "bridge2-heritage",
+   "tool": "nedb_search",
+   "args": {
+    "mode": "heritage",
+    "query": "11-0000010000000-11"
+   },
+   "must": [
+    "iiif/heritage/11-0000010000000-11/manifest\\.json"
+   ],
+   "level": "warn"
   }
  ]
 }
