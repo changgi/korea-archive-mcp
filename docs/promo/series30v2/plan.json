@@ -1,0 +1,872 @@
+{
+ "01": {
+  "hero": {
+   "file": "hero_520782.jpg",
+   "pos": "center 40%",
+   "credit": "사진: 미국 국립기록관리청 NAID 520782 (80-G-424513, 1950-12-19 흥남, Use Restriction Unrestricted)"
+  },
+  "hook": "1950년 12월,<br><span class=\"g\">흥남 부두</span>의 하루",
+  "mosaic": [
+   {
+    "file": "hungnam_520781.jpg",
+    "label": "LST 승선을 기다리는 피란민 · NAID 520781"
+   },
+   {
+    "file": "missouri_hungnam_520788.jpg",
+    "label": "흥남 앞바다 미주리함 포격 · NAID 520788"
+   },
+   {
+    "file": "lvt_hungnam_A5693.jpg",
+    "label": "상륙장갑차에 오르는 해병 · A-5693"
+   },
+   {
+    "file": "series30v2/video/01/scene_07_444.jpg",
+    "label": "필름 4:44 — 해안의 폭발 구름 · NAID 75392"
+   }
+  ],
+  "mosaic_title": "사진 3장 + 필름 1편 — 같은 날의 <span class=\"g\">다른 시선</span>",
+  "mosaic_credit": "미국 국립기록관리청 NAID 520781·520788(Unrestricted) · A-5693 · 영상 NAID 75392(연방 저작물, Undetermined → B)",
+  "ann": {
+   "file": "hero_520782.jpg",
+   "crop_y": 0.0,
+   "boxes": [
+    {
+     "x": 0,
+     "y": 0,
+     "w": 13,
+     "h": 3.5,
+     "t": "좌상단 인쇄 표기 'PRNC-NPC-48'"
+    },
+    {
+     "x": 43,
+     "y": 11,
+     "w": 11,
+     "h": 5,
+     "t": "큰 배 선체의 흰 글자 'CITY OF TA…'(뒷부분 가려짐)"
+    },
+    {
+     "x": 39,
+     "y": 25.5,
+     "w": 5.5,
+     "h": 5,
+     "t": "작은 배 돛대 위 태극기"
+    },
+    {
+     "x": 2,
+     "y": 29,
+     "w": 28,
+     "h": 30,
+     "t": "배와 부두를 빈틈없이 메운 사람들 — 보따리를 인 사람도 보인다"
+    }
+   ],
+   "credit": "NAID 520782 원본(3000×2465) — 표시한 4곳은 사진에서 직접 읽은 것"
+  },
+  "scenes": [
+   {
+    "title": "NAID 75392 「EVACUATION OF HUNGNAM, KOREA」 (1950-12-24, 10분 3초)",
+    "credit": "미국 국립기록관리청 NAID 75392 · 장면은 keyscenes 자동 추출(전환 89곳→13장면) · 해설은 화면에서 보이는 것만",
+    "frames": [
+     {
+      "file": "series30v2/video/01/scene_01_058.jpg",
+      "tc": "00:58",
+      "cap": "모래주머니 더미 옆 철모 쓴 병사들, 뒤로 단층 건물과 산"
+     },
+     {
+      "file": "series30v2/video/01/scene_02_124.jpg",
+      "tc": "01:24",
+      "cap": "해안에 뱃머리를 댄 상륙함들 — 선체 번호 '799'"
+     },
+     {
+      "file": "series30v2/video/01/scene_03_206.jpg",
+      "tc": "02:06",
+      "cap": "짐을 진 병사들이 원통형 탑 옆 길을 걷는다"
+     },
+     {
+      "file": "series30v2/video/01/scene_04_241.jpg",
+      "tc": "02:41",
+      "cap": "함정 옆면 사다리로 오르는 병사들"
+     }
+    ]
+   },
+   {
+    "title": "같은 필름 후반부",
+    "credit": "미국 국립기록관리청 NAID 75392 (연방 저작물, Use Restriction Undetermined → B 명기)",
+    "frames": [
+     {
+      "file": "series30v2/video/01/scene_06_350.jpg",
+      "tc": "03:50",
+      "cap": "바다 위 흰 배, 해안 곳곳에서 검은 연기 기둥"
+     },
+     {
+      "file": "series30v2/video/01/scene_07_444.jpg",
+      "tc": "04:44",
+      "cap": "해안선을 덮는 거대한 폭발 구름과 앞바다의 함정"
+     },
+     {
+      "file": "series30v2/video/01/scene_09_530.jpg",
+      "tc": "05:30",
+      "cap": "흰 별 표식 전차 — 포탑 위 기관총, 침낭·장비 적재"
+     },
+     {
+      "file": "series30v2/video/01/scene_11_614.jpg",
+      "tc": "06:14",
+      "cap": "함정 램프 안으로 들어가는 전차와 지켜보는 사람"
+     }
+    ]
+   }
+  ],
+  "cta_img": "missouri_hungnam_520788.jpg"
+ },
+ "02": {
+  "hero": {
+   "file": "hero_kotori_march_276537585.jpg",
+   "pos": "center 45%",
+   "credit": "사진: 미국 국립기록관리청 NAID 276537585 (1950-12-09 고토리, Unrestricted) · 출처 표기 KOREAN WAR ARCHIVES 6·25전쟁 아카이브센터(협약기관)"
+  },
+  "hook": "얼어붙은 길,<br><span class=\"g\">고토리</span>에서 남쪽으로",
+  "mosaic": [
+   {
+    "file": "hagaru_532409.jpg",
+    "label": "하갈우리 — 철수 소식을 듣는 해병 · NAID 532409"
+   },
+   {
+    "file": "bitter_cold_542210.jpg",
+    "label": "BITTER COLD, BITTER FIGHT · NAID 542210",
+    "pos": "center 30%"
+   },
+   {
+    "file": "hagaru_aflame_A5458.jpg",
+    "label": "'Hagaru aflame.' · A 5458"
+   },
+   {
+    "file": "kotori_camp_A5400.jpg",
+    "label": "고토리 야영 철수 · A 5400"
+   }
+  ],
+  "mosaic_title": "하갈우리에서 고토리까지 — <span class=\"g\">원본 사진 4장</span>",
+  "mosaic_credit": "미국 국립기록관리청 NAID 532409·542210(Unrestricted) · USMC 사진 A 5458·A 5400(Unrestricted) — 협약기관 기록 2022-US-02-AV-D-00207의 원본 계열",
+  "ann": {
+   "file": "hero_kotori_march_276537585.jpg",
+   "crop_y": 0.0,
+   "boxes": [
+    {
+     "x": 25,
+     "y": 4,
+     "w": 48,
+     "h": 28,
+     "t": "눈 덮인 바위 산비탈 — 길은 그 아래로 나 있다"
+    },
+    {
+     "x": 10,
+     "y": 44,
+     "w": 26,
+     "h": 16,
+     "t": "멀리까지 이어지는 행렬"
+    },
+    {
+     "x": 60,
+     "y": 38,
+     "w": 15,
+     "h": 42,
+     "t": "앞줄 — 방한 파카·철모·소총"
+    },
+    {
+     "x": 0,
+     "y": 60,
+     "w": 22,
+     "h": 22,
+     "t": "도로 왼쪽, 눈이 쌓인 돌 축대"
+    }
+   ],
+   "credit": "NAID 276537585 원 캡션: '1stMarDiv Koto-ri 9 December 1950 … march south from Koto-ri … in subzero weather'"
+  },
+  "cta_img": "bitter_cold_542210.jpg"
+ },
+ "05": {
+  "hero": {
+   "file": "hero_busan_arrival_1950.jpg",
+   "pos": "center 25%",
+   "credit": "사진: 네덜란드 국립문서보관소 Anefo 093-0425 (1950-12-07 부산, CC0)"
+  },
+  "hook": "1950년 12월,<br><span class=\"g\">부산</span>에 도착한 네덜란드 대대",
+  "mosaic": [
+   {
+    "file": "verso_busan_arrival_caption.jpg",
+    "label": "같은 사진 뒷면 — 'Poesan', 'FOTO-ANEFO 7-12-1950'"
+   },
+   {
+    "file": "departure_rotterdam_1950.jpg",
+    "label": "1950-10-26 로테르담 출항 · Anefo 904-2638"
+   },
+   {
+    "file": "klompen_korea_1951.jpg",
+    "label": "1951-01 나막신을 신은 두 지원병",
+    "pos": "center 40%"
+   },
+   {
+    "file": "truck_snow_1951.jpg",
+    "label": "1951 눈밭의 군용 트럭"
+   }
+  ],
+  "mosaic_title": "출항부터 한겨울까지 — <span class=\"g\">CC0 원본 4장</span>",
+  "mosaic_credit": "네덜란드 국립문서보관소(Nationaal Archief) Anefo 사진, CC0 — 원본 TIFF/JPEG 직접 수집",
+  "ann": {
+   "file": "hero_busan_arrival_1950.jpg",
+   "crop_y": 0.02,
+   "max_h": 760,
+   "boxes": [
+    {
+     "x": 26,
+     "y": 3,
+     "w": 36,
+     "h": 12,
+     "t": "뒤편에 정모를 쓴 장교들"
+    },
+    {
+     "x": 38,
+     "y": 17,
+     "w": 22,
+     "h": 14,
+     "t": "꽃다발 — 뒷면 캡션: 지휘관 드 아우던 중령이 '한국 애국부인회'의 꽃을 받다"
+    },
+    {
+     "x": 47,
+     "y": 22,
+     "w": 22,
+     "h": 31,
+     "t": "흰 저고리·검은 치마 차림 여성 2명"
+    }
+   ],
+   "credit": "Nationaal Archief, Fotocollectie Elsevier — bestanddeel 093-0425 (CC0) · 캡션은 사진 뒷면 타자 원문"
+  },
+  "cta_img": "retreat_parade_1951.jpg"
+ },
+ "06": {
+  "hero": {
+   "file": "hero_s_res_82_1950_p4.png",
+   "pos": "center 12%",
+   "credit": "문서: UN 안전보장이사회 결의 82 (1950-06-25, S/1501) — UN Digital Library recid 112025, 결의집 인쇄면 p.4"
+  },
+  "hook": "1950년 6월 25일,<br>안보리 <span class=\"g\">결의 82</span>",
+  "mosaic": [
+   {
+    "file": "s_res_82-84_1950_p5.png",
+    "label": "결의 83 (1950-06-27, S/1511)",
+    "pos": "center 30%"
+   },
+   {
+    "file": "s_res_84-85_1950_p6.png",
+    "label": "결의 84 — 통합사령부·UN기 사용",
+    "pos": "center 20%"
+   },
+   {
+    "file": "s_2015_799_p1.png",
+    "label": "65년 뒤: S/2015/799",
+    "pos": "center 10%"
+   }
+  ],
+  "mosaic_title": "결의 82·83·84, 그리고 <span class=\"g\">65년 뒤의 서한</span>",
+  "mosaic_credit": "UN Digital Library — S/RES/82·83·84(1950) 결의집 인쇄면 · S/2015/799 (UN 공식문서)",
+  "ann": {
+   "file": "hero_s_res_82_1950_p4.png",
+   "crop_y": 0.0,
+   "max_h": 760,
+   "boxes": [
+    {
+     "x": 12,
+     "y": 4.5,
+     "w": 36,
+     "h": 3.5,
+     "t": "'82 (1950). Resolution of 25 June 1950' — 영어 단"
+    },
+    {
+     "x": 52,
+     "y": 4.5,
+     "w": 36,
+     "h": 3.5,
+     "t": "같은 결의의 프랑스어 단 — 영·불 2단 조판"
+    },
+    {
+     "x": 21,
+     "y": 8,
+     "w": 11,
+     "h": 2.5,
+     "t": "문서기호 [S/1501]"
+    },
+    {
+     "x": 5,
+     "y": 45.2,
+     "w": 41,
+     "h": 4.2,
+     "t": "'Noting with grave concern the armed attack on the Republic of Korea…'"
+    }
+   ],
+   "credit": "S/RES/82(1950) 인쇄면 — 표시한 글자는 문서에서 그대로 옮긴 것"
+  },
+  "cta_img": "s_res_84-85_1950_p6.png"
+ },
+ "03": {
+  "hero": {
+   "file": "hero_awm_C58219.jpg",
+   "pos": "center 40%",
+   "credit": "사진: 호주 전쟁기념관 C58219 / 147350 (1951 한국, Copyright expired - public domain)"
+  },
+  "hook": "1951년 한국,<br><span class=\"g\">호주 대대</span>의 얼굴들",
+  "mosaic": [
+   {
+    "file": "awm_C276864.jpg",
+    "label": "가평 계곡 전경 · C276864"
+   },
+   {
+    "file": "awm_C276865_bcoy.jpg",
+    "label": "손글씨 'B.Coy' — 1951-04-26 B중대 · C276865"
+   },
+   {
+    "file": "awm_C276849.jpg",
+    "label": "강을 따라 난 길 · C276849"
+   },
+   {
+    "file": "awm_C276863.jpg",
+    "label": "세 봉우리 능선의 진지 · C276863"
+   }
+  ],
+  "mosaic_title": "전투가 벌어진 <span class=\"g\">가평의 지형</span> — 1952년 촬영",
+  "mosaic_credit": "Australian War Memorial C276864·C276865·C276849·C276863 (Copyright expired - public domain) — 기념관 공개 이미지 최대 640px",
+  "ann": {
+   "file": "hero_awm_C58219.jpg",
+   "crop_y": 0.0,
+   "max_h": 760,
+   "boxes": [
+    {
+     "x": 0,
+     "y": 8,
+     "w": 30,
+     "h": 20,
+     "t": "챙 넓은 모자(슬라우치 햇)를 쓴 병사들"
+    },
+    {
+     "x": 38,
+     "y": 14,
+     "w": 20,
+     "h": 20,
+     "t": "상의를 벗은 병사들"
+    },
+    {
+     "x": 70,
+     "y": 58,
+     "w": 30,
+     "h": 32,
+     "t": "앞쪽의 어린 소나무 가지"
+    },
+    {
+     "x": 0,
+     "y": 93,
+     "w": 100,
+     "h": 6,
+     "t": "사진 하단 기념관 표기 'AUSTRALIAN WAR MEMORIAL'과 번호 147350"
+    }
+   ],
+   "credit": "AWM C58219 — 기술: 'KOREA, 1951. LIEUTENANT LEONARD MONTGOMERIE MC (CENTRE, …'"
+  },
+  "cta_img": "awm_C276863.jpg"
+ },
+ "10": {
+  "hero": {
+   "file": "hero_daehan_19080506_p2.jpg",
+   "pos": "center 8%",
+   "credit": "지면: 대한매일신보 1908.5.6 2면 (국립중앙도서관 대한민국신문아카이브, 보호기간 만료)"
+  },
+  "hook": "1908년 5월 6일,<br>신문에 실린 <span class=\"g\">학생들의 단지동맹</span>",
+  "mosaic": [
+   {
+    "file": "crop_19080506_dangjidongmaeng.jpg",
+    "label": "「학도의단지동맹」 기사 부분",
+    "pos": "center 30%"
+   },
+   {
+    "file": "crop_19091109_dangjidongmaeng.jpg",
+    "label": "1909.11.9 「단지동맹」 — 안중근 보도"
+   },
+   {
+    "file": "daehan_kh_19090310_p2.jpg",
+    "label": "1909.3.10 국한문판 2면",
+    "pos": "center 10%"
+   },
+   {
+    "file": "daehan_19090428_p2.jpg",
+    "label": "1909.4.28 「단지회죄오」 수록면",
+    "pos": "center 10%"
+   }
+  ],
+  "mosaic_title": "1908~1909, 지면 속 <span class=\"g\">'단지동맹'</span> 네 번",
+  "mosaic_credit": "대한매일신보 1908.5.6·1909.3.10·1909.4.28·1909.11.9 — 국립중앙도서관 대한민국신문아카이브 원문 이미지",
+  "ann": {
+   "file": "hero_daehan_19080506_p2.jpg",
+   "crop_y": 0.0,
+   "max_h": 760,
+   "boxes": [
+    {
+     "x": 38,
+     "y": 0.3,
+     "w": 15,
+     "h": 2.5,
+     "t": "제호 '大韓每日申報'"
+    },
+    {
+     "x": 3,
+     "y": 0.3,
+     "w": 22,
+     "h": 2.5,
+     "t": "날짜 '隆熙二年五月六日' — 1908년 5월 6일"
+    },
+    {
+     "x": 88,
+     "y": 0.3,
+     "w": 9,
+     "h": 2.5,
+     "t": "면 표시 '(二)' — 2면"
+    },
+    {
+     "x": 92,
+     "y": 3,
+     "w": 7,
+     "h": 14,
+     "t": "'잡보' 란 표제 — 단지동맹 기사가 실린 난"
+    }
+   ],
+   "credit": "대한매일신보 1908.5.6 2면 원문(2382×3504) — 표시한 글자는 지면에서 직접 읽은 것"
+  },
+  "cta_img": "daehan_19091109_p3.jpg"
+ },
+ "12": {
+  "hero": {
+   "file": "supplies_drums_531394.jpg",
+   "pos": "center 50%",
+   "credit": "사진: 미국 국립기록관리청 NAID 531394 (흥남 1950-12, Unrestricted) — 위키미디어 공용 기증본에서 원 소장처 대조"
+  },
+  "hook": "이 사진, <span class=\"g\">써도 될까?</span><br>원 소장처에 묻는다",
+  "mosaic": [
+   {
+    "file": "hero_hungnam_520782.jpg",
+    "label": "Commons '… - NARA - 520782.tif' → 원본 A"
+   },
+   {
+    "file": "refugee_family_541963.jpg",
+    "label": "피란민 가족 · NAID 541963 → A"
+   },
+   {
+    "file": "children_rail_531390.jpg",
+    "label": "화차 '20556' 옆 남매 · NAID 531390 → A"
+   }
+  ],
+  "mosaic_title": "파일명 속 NAID → <span class=\"g\">NARA 원본에 직접 확인</span>",
+  "mosaic_credit": "위키미디어 공용 NARA 기증본 → judge_rights(naid) 실조회 — 모두 Use Restriction 'Unrestricted'(A)",
+  "ann": {
+   "file": "supplies_drums_531394.jpg",
+   "crop_y": 0.08,
+   "max_h": 760,
+   "boxes": [
+    {
+     "x": 22,
+     "y": 17,
+     "w": 9,
+     "h": 7,
+     "t": "상륙함 선체 번호 '898'"
+    },
+    {
+     "x": 30,
+     "y": 11,
+     "w": 42,
+     "h": 16,
+     "t": "해안에 뱃머리를 댄 상륙함들"
+    },
+    {
+     "x": 5,
+     "y": 38,
+     "w": 62,
+     "h": 42,
+     "t": "해안을 메운 드럼통 — 수천 개가 줄지어 있다"
+    }
+   ],
+   "credit": "NAID 531394 'Supplies and equipment are also evacuated…' — 표시는 사진에서 직접 읽은 것"
+  },
+  "cta_img": "missouri_salvo_520788.jpg"
+ },
+ "16": {
+  "hero": {
+   "file": "p01_cover_left.jpg",
+   "pos": "center 25%",
+   "credit": "문서: 일본 아시아역사자료센터 A04017275800 「朝鮮騷擾經過概要」 표지 (국립공문서관 소장, JACAR 이용약관 — 출처 표기)"
+  },
+  "hook": "1919년, 일본 육군이 쓴<br><span class=\"g\">'조선 소요'</span> 보고서",
+  "mosaic": [
+   {
+    "file": "p02_contents_seal.jpg",
+    "label": "목차 — 一、騷擾ノ起因 …"
+   },
+   {
+    "file": "p03_cause.jpg",
+    "label": "본문 첫 면 「騷擾ノ起因」"
+   },
+   {
+    "file": "p13_casualties.jpg",
+    "label": "「暴民側ノ死傷」 — '約一千五百名'"
+   },
+   {
+    "file": "p14_damage_table.jpg",
+    "label": "피해 일람표 — 13개 도"
+   }
+  ],
+  "mosaic_title": "14면 전부 원본 — <span class=\"g\">가해자의 기록</span>을 읽는다",
+  "mosaic_credit": "JACAR A04017275800 (国立公文書館 2A 34-6) — 원 문서 표현('騷擾'·'暴民')을 그대로 인용",
+  "ann": {
+   "file": "p01_cover_left.jpg",
+   "crop_y": 0.0,
+   "max_h": 760,
+   "boxes": [
+    {
+     "x": 46,
+     "y": 16,
+     "w": 14,
+     "h": 50,
+     "t": "세로 제목 「朝鮮騷擾經過概要」"
+    },
+    {
+     "x": 14,
+     "y": 8,
+     "w": 11,
+     "h": 13,
+     "t": "좌상단 묵서 「八年陸乙七一」"
+    },
+    {
+     "x": 60,
+     "y": 24,
+     "w": 18,
+     "h": 14,
+     "t": "서가 라벨"
+    }
+   ],
+   "credit": "JACAR A04017275800 표지 — 표시한 글자는 문서에서 직접 읽은 것"
+  },
+  "cta_img": "p14_damage_table.jpg"
+ },
+ "18": {
+  "hero": {
+   "file": "keijo_panorama_photo.jpg",
+   "pos": "center 40%",
+   "credit": "사진: 일본 국립국회도서관 『朝鮮博覽會記念寫眞帖』(1930) 「京城府全景」 — NDL 디지털 컬렉션, Public Domain Mark"
+  },
+  "hook": "1930년 <span class=\"g\">경성</span>,<br>일본 국립국회도서관에서",
+  "mosaic": [
+   {
+    "file": "kunjeongjeon_1930.jpg",
+    "label": "「勤政殿」 1930"
+   },
+   {
+    "file": "namdaemun_day_night_1930.jpg",
+    "label": "「南大門及其ノ夜景」 1930"
+   },
+   {
+    "file": "keijofushi_kyoto_zu.jpg",
+    "label": "『京城府史』 「京都圖」"
+   },
+   {
+    "file": "keijofushi_gwanghwamun.jpg",
+    "label": "『京城府史』 「舊景福宮光化門」"
+   }
+  ],
+  "mosaic_title": "사진첩과 『京城府史』 — <span class=\"g\">PDM 원본 4장</span>",
+  "mosaic_credit": "일본 국립국회도서관 디지털 컬렉션 IIIF (Public Domain Mark) — 『朝鮮博覽會記念寫眞帖』·『京城府史 第一巻』",
+  "ann": {
+   "file": "keijo_panorama_photo.jpg",
+   "crop_y": 0.0,
+   "boxes": [
+    {
+     "x": 0,
+     "y": 0,
+     "w": 100,
+     "h": 20,
+     "t": "원경을 두른 산줄기"
+    },
+    {
+     "x": 44,
+     "y": 19,
+     "w": 11,
+     "h": 9,
+     "t": "중앙 후방의 흰색 대형 건물"
+    },
+    {
+     "x": 4,
+     "y": 40,
+     "w": 52,
+     "h": 40,
+     "t": "빽빽한 지붕 — 기와와 서양식 건물이 섞여 있다"
+    }
+   ],
+   "credit": "NDL 「京城府全景」(1930) — 사진 영역만 잘라 표시"
+  },
+  "cta_img": "kunjeongjeon_1930.jpg"
+ },
+ "29": {
+  "hero": {
+   "file": "series30v2/video/29/scene_09_535.jpg",
+   "pos": "center 50%",
+   "credit": "영상: 인터넷 아카이브 428-npc-171 = 미국 국립기록관리청 NAID 75393 (1950-12-24, 연방 저작물 · Undetermined → B)"
+  },
+  "hook": "인터넷 사본과<br><span class=\"g\">NARA 원본</span>, 한 줄로",
+  "mosaic": [
+   {
+    "file": "extra_171_lst845_000117.jpg",
+    "label": "01:57 선체 번호 '845'"
+   },
+   {
+    "file": "extra_171_smoke_000387.jpg",
+    "label": "06:27 크레인 옆 연기"
+   },
+   {
+    "file": "extra_170_deck_000207.jpg",
+    "label": "428-npc-170 03:27 갑판"
+   }
+  ],
+  "mosaic_title": "IA가 만든 <span class=\"g\">시각 코드 프레임</span> — 웹에서도 장면을 본다",
+  "mosaic_credit": "archive.org 428-npc-171·170 파생 썸네일(.thumbs, 초 단위 파일명) — ia_search(identifier)가 시각 코드로 제공",
+  "ann": {
+   "file": "extra_171_slate_000357.jpg",
+   "crop_y": 0.0,
+   "boxes": [
+    {
+     "x": 35,
+     "y": 28,
+     "w": 56,
+     "h": 46,
+     "t": "손에 든 둥근 판(슬레이트)의 손글씨 — 끝자리 '/24/50'"
+    },
+    {
+     "x": 16,
+     "y": 38,
+     "w": 16,
+     "h": 34,
+     "t": "판을 든 손"
+    }
+   ],
+   "title": "05:57 — 필름 속 촬영 날짜 판",
+   "credit": "428-npc-171 05:57 프레임 — 첫 자리는 흐려 판독 불가, 카탈로그 생산일 1950-12-24와 끝자리 일치"
+  },
+  "scenes": [
+   {
+    "title": "NAID 75393 / IA 428-npc-171 「EVACUATION OF HUNGNAM KOREA」 (10분 35초)",
+    "credit": "keyscenes 자동 추출(전환 73곳 → 10장면) · 해설은 화면에서 보이는 것만 · 연방 저작물(Undetermined → B)",
+    "frames": [
+     {
+      "file": "series30v2/video/29/scene_01_032.jpg",
+      "tc": "00:32",
+      "cap": "바다 위 상륙함 한 척, 뒤로 해안선과 연기"
+     },
+     {
+      "file": "series30v2/video/29/scene_05_249.jpg",
+      "tc": "02:49",
+      "cap": "해안을 떠나는 상륙정 세 척"
+     },
+     {
+      "file": "series30v2/video/29/scene_06_416.jpg",
+      "tc": "04:16",
+      "cap": "사람이 빼곡한 큰 배의 갑판, 뒤로 크레인과 연기"
+     },
+     {
+      "file": "series30v2/video/29/scene_10_609.jpg",
+      "tc": "06:09",
+      "cap": "크레인이 선 부두에서 솟는 검은 연기"
+     }
+    ]
+   }
+  ],
+  "cta_img": "series30v2/video/29/scene_02_057.jpg"
+ },
+ "04": {
+  "hero": {
+   "file": "nzapo_stamp_1952.jpg",
+   "pos": "center 50%",
+   "credit": "우표·소인: 뉴질랜드 국립박물관 Te Papa — 한국전쟁 뉴질랜드 군사우체국(NZAPO) 소인 '444' (No Known Copyright Restrictions)"
+  },
+  "hook": "한국 전선에서<br>뉴질랜드로 간 <span class=\"g\">군사 우편</span>",
+  "mosaic": [
+   {
+    "file": "cover_1951_addr_blur.jpg",
+    "label": "1951 'On Active Service' 우편 · Te Papa (주소 흐림)"
+   },
+   {
+    "file": "ref_awm_C1094311.jpg",
+    "label": "참고: 뉴질랜드 제16야포연대 · AWM C1094311"
+   },
+   {
+    "file": "ref_awm_C1094308.jpg",
+    "label": "참고: 25파운드포 후면 · AWM C1094308"
+   },
+   {
+    "file": "ref_awm_C361079.jpg",
+    "label": "참고: 부산 기지 · AWM C361079"
+   }
+  ],
+  "mosaic_title": "케이포스(Kayforce)의 흔적 — <span class=\"g\">우편과 사진</span>",
+  "mosaic_credit": "Te Papa(No Known Copyright Restrictions) · Australian War Memorial(Copyright expired) — Archives NZ R22438362 본문은 기관 봇 차단으로 브라우저 열람 필요",
+  "ann": {
+   "file": "cover_1951_addr_blur.jpg",
+   "crop_y": 0.0,
+   "boxes": [
+    {
+     "x": 2,
+     "y": 1,
+     "w": 18,
+     "h": 8,
+     "t": "손글씨 'Air mail'"
+    },
+    {
+     "x": 27,
+     "y": 2,
+     "w": 38,
+     "h": 9,
+     "t": "'On Active Service' — 현역 군인 우편 표시"
+    },
+    {
+     "x": 72,
+     "y": 2,
+     "w": 28,
+     "h": 26,
+     "t": "'NEW ZEALAND 3d' 조지 6세 우표 2장"
+    },
+    {
+     "x": 69,
+     "y": 27,
+     "w": 19,
+     "h": 13,
+     "t": "원형 소인 안 숫자 '444'"
+    }
+   ],
+   "credit": "Te Papa Korean War cover (1951) — 수신인 이름·주소는 개인정보라 흐림 처리"
+  },
+  "cta_img": "ref_awm_C1094308.jpg"
+ },
+ "30": {
+  "hero": {
+   "file": "hero_slv_kiwis_artillery.jpg",
+   "pos": "center 40%",
+   "credit": "사진: 'Kiwis in action with their artillery' (1951) — State Library Victoria, out of copyright"
+  },
+  "hook": "1951년 한국,<br><span class=\"g\">뉴질랜드 포병</span>의 하루",
+  "mosaic": [
+   {
+    "file": "slv_anzac_soldiers.jpg",
+    "label": "호주·뉴질랜드 병사들 · SLV 1951"
+   },
+   {
+    "file": "slv_nz_regrouping.jpg",
+    "label": "재편성 중인 뉴질랜드군 · SLV 1951",
+    "pos": "center 40%"
+   },
+   {
+    "file": "slv_gnr_jensen.jpg",
+    "label": "포수 피터 젠슨(파히아투아 출신) · SLV",
+    "pos": "center 25%"
+   },
+   {
+    "file": "tepapa_bischof_pusan.jpg",
+    "label": "부산역 피란 아이들 · Te Papa(Bischof) 1951"
+   }
+  ],
+  "mosaic_title": "NZ 30여 기관 집계 창구 — <span class=\"g\">쓸 수 있는 원본</span>만 골랐다",
+  "mosaic_credit": "State Library Victoria(out of copyright) · Te Papa(No Known Copyright Restrictions) — 가평 사진 자체는 재이용 가능한 NZ 소장본이 없어 쓰지 않음",
+  "ann": {
+   "file": "hero_slv_kiwis_artillery.jpg",
+   "crop_y": 0.0,
+   "boxes": [
+    {
+     "x": 0,
+     "y": 0,
+     "w": 42,
+     "h": 22,
+     "t": "뒤편 눈 덮인 산과 소나무"
+    },
+    {
+     "x": 12,
+     "y": 12,
+     "w": 70,
+     "h": 42,
+     "t": "니트 모자·스웨터 차림의 병사 3명"
+    },
+    {
+     "x": 82,
+     "y": 10,
+     "w": 17,
+     "h": 20,
+     "t": "포의 조준경 장치"
+    }
+   ],
+   "credit": "State Library Victoria 'Kiwis in action with their artillery' (1951, Argus) — 표시는 사진에서 보이는 것만"
+  },
+  "cta_img": "slv_anzac_soldiers.jpg"
+ },
+ "27": {
+  "hero": {
+   "file": "hero_cover_opening_1964.jpg",
+   "pos": "center 40%",
+   "credit": "사진: 서울기록원 「청계천 복개공사 준공 개통식」 (1964-12-04) — 이용조건 '제한없음' · 사이트 CC BY-NC-SA 2.0 KR(비영리 소개)"
+  },
+  "hook": "1964년 12월,<br>비 오는 날의 <span class=\"g\">청계천</span>",
+  "mosaic": [
+   {
+    "file": "cover_opening_crowd_1964.jpg",
+    "label": "1964-12-04 개통식 — 우산 든 군중"
+   },
+   {
+    "file": "rebar_theft_site_1964.jpg",
+    "label": "1964-10-14 '철근 도난현장'"
+   },
+   {
+    "file": "elevated_road_1968.jpg",
+    "label": "1968-07-11 고가도로 공사현장"
+   },
+   {
+    "file": "steel_pier_1968.jpg",
+    "label": "1968-09-12 철재교각 공사"
+   }
+  ],
+  "mosaic_title": "덮고, 올리고 — <span class=\"g\">1964~1968 공사 기록</span>",
+  "mosaic_credit": "서울기록원 서울사진아카이브 — 각 기록 이용조건 '제한없음' (사이트 CC BY-NC-SA 2.0 KR)",
+  "ann": {
+   "file": "hero_cover_opening_1964.jpg",
+   "crop_y": 0.0,
+   "boxes": [
+    {
+     "x": 39,
+     "y": 0,
+     "w": 8,
+     "h": 42,
+     "t": "세로 간판 '청계천…공사준공'"
+    },
+    {
+     "x": 0,
+     "y": 7,
+     "w": 30,
+     "h": 12,
+     "t": "간판에서 사방으로 늘어진 만국기 줄"
+    },
+    {
+     "x": 40,
+     "y": 33,
+     "w": 40,
+     "h": 29,
+     "t": "비에 젖은 노면 위 코트 차림 인물들"
+    },
+    {
+     "x": 23,
+     "y": 64,
+     "w": 7,
+     "h": 17,
+     "t": "줄무늬 고깔(교통콘)"
+    }
+   ],
+   "credit": "서울기록원 「청계천 복개공사 준공 개통식」 1964-12-04 — 표시는 사진에서 보이는 것만"
+  },
+  "cta_img": "steel_pier_1968.jpg"
+ }
+}
