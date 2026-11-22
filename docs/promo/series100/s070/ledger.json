@@ -2,20 +2,77 @@
  "n": 70,
  "src": "ndl",
  "record": {
-  "id": "",
-  "title": "(미제작) 京城 지도 1930s 후보",
-  "date": "",
-  "inst": "国立国会図書館",
-  "url": ""
+  "id": "NDL PID 1122465",
+  "title": "京城案内 : 近郊、温泉 (京城観光協会 編)",
+  "date": "昭和10(1935)",
+  "inst": "国立国会図書館デジタルコレクション",
+  "url": "https://dl.ndl.go.jp/pid/1122465"
  },
- "images": [],
+ "images": [
+  {
+   "file": "ndl_1122465_01_cover.jpg",
+   "record_id": "NDL PID 1122465 R0000001",
+   "url": "https://dl.ndl.go.jp/pid/1122465",
+   "rights": "PD — NDL 'pdm'",
+   "rights_evidence": "dl.ndl.go.jp/api/item/search/info:ndljp/pid/1122465 응답: permission.rule 'internet', rights.code 'pdm'"
+  },
+  {
+   "file": "ndl_1122465_02_map.jpg",
+   "record_id": "NDL PID 1122465 R0000002",
+   "url": "https://dl.ndl.go.jp/pid/1122465",
+   "rights": "PD — NDL 'pdm'",
+   "rights_evidence": "dl.ndl.go.jp/api/item/search/info:ndljp/pid/1122465 응답: permission.rule 'internet', rights.code 'pdm'"
+  },
+  {
+   "file": "ndl_1122465_02_kumgang.jpg",
+   "record_id": "NDL PID 1122465 R0000002",
+   "url": "https://dl.ndl.go.jp/pid/1122465",
+   "rights": "PD — NDL 'pdm'",
+   "rights_evidence": "dl.ndl.go.jp/api/item/search/info:ndljp/pid/1122465 응답: permission.rule 'internet', rights.code 'pdm'"
+  },
+  {
+   "file": "ndl_1122465_12_keijo.jpg",
+   "record_id": "NDL PID 1122465 R0000012",
+   "url": "https://dl.ndl.go.jp/pid/1122465",
+   "rights": "PD — NDL 'pdm'",
+   "rights_evidence": "dl.ndl.go.jp/api/item/search/info:ndljp/pid/1122465 응답: permission.rule 'internet', rights.code 'pdm'"
+  },
+  {
+   "file": "ndl_1122465_21_meisan.jpg",
+   "record_id": "NDL PID 1122465 R0000021",
+   "url": "https://dl.ndl.go.jp/pid/1122465",
+   "rights": "PD — NDL 'pdm'",
+   "rights_evidence": "dl.ndl.go.jp/api/item/search/info:ndljp/pid/1122465 응답: permission.rule 'internet', rights.code 'pdm'"
+  },
+  {
+   "file": "ndl_1122465_21_colophon.jpg",
+   "record_id": "NDL PID 1122465 R0000021",
+   "url": "https://dl.ndl.go.jp/pid/1122465",
+   "rights": "PD — NDL 'pdm'",
+   "rights_evidence": "dl.ndl.go.jp/api/item/search/info:ndljp/pid/1122465 응답: permission.rule 'internet', rights.code 'pdm'"
+  },
+  {
+   "file": "ndl_1122465_22_back.jpg",
+   "record_id": "NDL PID 1122465 R0000022",
+   "url": "https://dl.ndl.go.jp/pid/1122465",
+   "rights": "PD — NDL 'pdm'",
+   "rights_evidence": "dl.ndl.go.jp/api/item/search/info:ndljp/pid/1122465 응답: permission.rule 'internet', rights.code 'pdm'"
+  },
+  {
+   "file": "ndl_1122465_21_colophon_p.jpg",
+   "record_id": "NDL PID 1122465 R0000021 판권 (좌우 여백 덧댐)",
+   "url": "https://dl.ndl.go.jp/pid/1122465",
+   "rights": "PD — NDL 'pdm'",
+   "rights_evidence": "dl.ndl.go.jp/api/item/search/info:ndljp/pid/1122465 응답: permission.rule 'internet', rights.code 'pdm'"
+  }
+ ],
  "points": [],
  "video": {
   "url": "",
   "length_s": 0,
   "rights": "",
-  "note": ""
+  "note": "영상 없음"
  },
- "status": "blocked",
- "notes": "[2차 시도 2026-11-22] 순차 4초 간격, NDL 요청 총 8회: cross_search(sources=ndl) '平壌 写真帖'(2건, PID 없음)·'仁川 写真帖'(1건, PID 없음) → ndlsearch opensearch title=写真帖 any=京城 → item API 967741(『朝鮮 : 写真帖』 1921, pdm — 그러나 s101~s103이 이미 사용) → opensearch title=京城 → opensearch title=京城案内(PID 후보: 1122465 京城案内:近郊、温泉 1935 京城観光協会 · 1906793 京城案内 1926 京城府教育会 · 950750 新撰京城案内 1913 朝鮮研究会 · 1122513 京城觀光の志おり) → 다음 opensearch(title=仁川 any=案内)에서 ndlsearch.ndl.go.jp HTTP 429 Too Many Requests — 규칙대로 즉시 중단. 후보 PID들의 권리(permission.rule) 미확인, 이미지 미수집. 2026-11-22 09:2x ndlsearch.ndl.go.jp/api/opensearch?title=朝鮮写真帖 → HTTP 429 Too Many Requests. 규칙대로 NDL 요청 중단. 그 전 조사: 1930s 京城 지도 후보(京城府管内圖 1934, 大京城案内地圖 1932, 都市計画準拠大京城市街地図 1937, 陸地測量部 1:50000 '京城' 1941)는 opensearch 결과에 디지털 링크 없음. 디지털화된 13712095(最新京城市街全圖 1909)·936926(京城市街全圖 1913)은 permission 'ndl_only'(관내 한정)라 사용 불가. 다음 후보: 『大日本帝国朝鮮写真帖』(1910) 다른 장면 — 단 s101~s104(heritage) 에이전트도 dl.ndl.go.jp(766880, 767136 등)를 사용한 기록이 있어 'NDL 단독 사용' 전제가 깨졌을 수 있음."
+ "status": "done",
+ "notes": "[3차 시도 2026-11-22, 메인 세션] 쿨다운 후 NDL 요청 7회(item API 1·IIIF manifest 1·이미지 5, 4초 간격) — 429 없음. 이전 2회 시도는 429로 중단(우회 없음). 판독 문구는 지면 확대로 직접 확인. 판권 두 번째 줄(발행일)은 판독 불확실하여 미기재."
 }
