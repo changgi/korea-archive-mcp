@@ -2,27 +2,27 @@
  "inst": "위키미디어 공용 Commons",
  "flag": "🌐",
  "say": "위키미디어 공용에서 1950 서울 시가전 원본 찾아줘",
- "head": "Commons 「…NARA - 531381.tif」 → NARA 원본 대조",
+ "head": "Commons 파일 → NARA 원본·목록카드 대조",
  "big": "111-SC-351392",
  "facts": [
   [
    "Commons",
-   "파일명에 NAID 531381 · 3000×2214 · Public domain 표기"
+   "NAID 531381 파일 · 3000×2214 · PD 표기"
   ],
   [
    "NARA 대조",
-   "NAID 531381 실재 · RG 111 · 1950-09-20 · Unrestricted(A)"
+   "RG 111 · 1950-09-20 · Unrestricted(A)"
   ],
   [
-   "다른 사본",
-   "Commons HD-SN-99-03081(국방부 경유): 촬영 Lt. Robert L. Strickland·Cpl. John Romanowski"
+   "목록카드",
+   "SC 351392 · FEC-50-20502"
   ],
   [
-   "번호",
-   "War and Conflict Number 1422"
+   "촬영·공개",
+   "Lt. Strickland·Cpl. Romanowski · 1950-11-08"
   ]
  ],
- "tool": "nedb_search(mode=commons, File URL) → 【NARA 원본 대조】 → judge_rights(naid=531381)",
+ "tool": "nedb_search(mode=commons, File URL) → 【NARA 원본 대조】 → judge_rights(naid=531381·365844403)",
  "link": "https://commons.wikimedia.org/wiki/File:United_Nations_troops_fighting_in_the_streets_of_Seoul,_Korea._-_NARA_-_531381.tif",
  "tags": "#위키미디어공용 #NARA #서울수복",
  "hero": {
@@ -33,64 +33,111 @@
  "hook": "1950년 9월 20일,<br><span class=\"g\">서울의 골목</span>",
  "mosaic": [
   {
+   "file": "src/shelflist_351392.jpg",
+   "label": "NARA 목록카드 SC 351392 · NAID 365844403"
+  },
+  {
    "file": "src/seoul_damage_531379.jpg",
-   "label": "서울 주거지 전쟁 피해 1950-10-18 · NAID 531379",
-   "nocrop": true
+   "label": "서울 주거지 전쟁 피해 1950-10-18 · NAID 531379"
   },
   {
    "file": "src/train_531382.jpg",
    "label": "한강 새 철교 첫 열차 '1610' · NAID 531382",
-   "nocrop": true
+   "pos": "center 45%"
   },
   {
    "file": "src/bobhope_531383.jpg",
-   "label": "서울 밥 호프 공연 관객 1950-10-23 · NAID 531383",
-   "nocrop": true
+   "label": "서울 밥 호프 공연 관객 · NAID 531383"
   }
  ],
- "mosaic_title": "같은 시리즈 이웃 번호 — <span class=\"g\">한 달 뒤의 서울</span>",
- "mosaic_credit": "미국 국립기록관리청 RG 111 Photographs of American Military Activities · NAID 531379·531382·531383(Unrestricted) — 이웃 번호의 사망·유해 장면 2건은 제외",
- "ann": {
-  "file": "src/hero_531381.jpg",
-  "boxes": [
-   {
-    "x": 30,
-    "y": 18,
-    "w": 35,
-    "h": 14,
-    "t": "맨 앞 병사가 총검을 꽂은 소총을 위로 겨눈다"
-   },
-   {
-    "x": 20,
-    "y": 42,
-    "w": 13,
-    "h": 26,
-    "t": "목에서 가슴으로 늘어진 둥근 알갱이 줄"
-   },
-   {
-    "x": 7,
-    "y": 38,
-    "w": 15,
-    "h": 24,
-    "t": "등에 묶어 멘 둥근 짐 보따리"
-   },
-   {
-    "x": 18,
-    "y": 8,
-    "w": 15,
-    "h": 14,
-    "t": "뒤쪽 문 안: 깨진 유리창"
-   },
-   {
-    "x": 72,
-    "y": 42,
-    "w": 20,
-    "h": 28,
-    "t": "오른쪽 벽: 회반죽이 떨어져 가로 줄무늬 바탕이 드러났다"
-   }
-  ],
-  "credit": "NAID 531381 NARA 원본 TIFF(3000×2214) — 표시한 5곳은 사진에서 직접 읽은 것"
- },
+ "mosaic_title": "목록카드 1장 + 이웃 번호 — <span class=\"g\">한 달 뒤의 서울</span>",
+ "mosaic_credit": "미국 국립기록관리청 RG 111 · 목록카드 NAID 365844403 p.417 · 사진 NAID 531379·531382·531383(모두 Unrestricted) — 이웃 번호의 사망·유해 장면 2건 제외",
+ "ann": [
+  {
+   "file": "src/hero_531381.jpg",
+   "boxes": [
+    {
+     "x": 30,
+     "y": 18,
+     "w": 35,
+     "h": 14,
+     "t": "맨 앞 병사가 총검을 꽂은 소총을 위로 겨눈다"
+    },
+    {
+     "x": 20,
+     "y": 42,
+     "w": 13,
+     "h": 26,
+     "t": "목에서 가슴으로 늘어진 둥근 알갱이 줄"
+    },
+    {
+     "x": 7,
+     "y": 38,
+     "w": 15,
+     "h": 24,
+     "t": "등에 묶어 멘 둥근 짐 보따리"
+    },
+    {
+     "x": 18,
+     "y": 8,
+     "w": 15,
+     "h": 14,
+     "t": "뒤쪽 문 안: 깨진 유리창"
+    },
+    {
+     "x": 72,
+     "y": 42,
+     "w": 20,
+     "h": 28,
+     "t": "오른쪽 벽: 회반죽이 떨어져 가로 줄무늬 바탕이 드러났다"
+    }
+   ],
+   "credit": "NAID 531381 NARA 원본 TIFF(3000×2214) — 표시한 5곳은 사진에서 직접 읽은 것",
+   "crop_y": 0.0
+  },
+  {
+   "file": "src/shelflist_351392.jpg",
+   "title": "기록 해설 — NARA 목록카드(Shelflist) 원본",
+   "boxes": [
+    {
+     "x": 5,
+     "y": 9.5,
+     "w": 17,
+     "h": 7,
+     "t": "카드 번호 'SC 351392' — 사진 소장 번호 111-SC-351392와 같다"
+    },
+    {
+     "x": 57,
+     "y": 1.5,
+     "w": 29,
+     "h": 10.5,
+     "t": "분류 'KOREA, SEOUL / INFANTRY-KOREA.'"
+    },
+    {
+     "x": 34,
+     "y": 9.5,
+     "w": 59,
+     "h": 10,
+     "t": "보라색 'DITTO' 도장과 손글씨 'Marines'"
+    },
+    {
+     "x": 9,
+     "y": 59.5,
+     "w": 86,
+     "h": 12.5,
+     "t": "'Signal Corps Photo#FEC-50-20502 (Lt. Strickland, Cpl. Romanowski) Released by OPI, D/D, 8 Nov 1950'"
+    },
+    {
+     "x": 9,
+     "y": 72,
+     "w": 77,
+     "h": 7.5,
+     "t": "'Copy Neg. from 35-mm' · 'Lot 18823'"
+    }
+   ],
+   "credit": "미국 국립기록관리청 NAID 365844403 「Shelflist … 111-SC-351000 to 111-SC-351999」 417번째 면(Unrestricted)"
+  }
+ ],
  "cta_img": "src/seoul_damage_531379.jpg",
  "n": 119,
  "part": [

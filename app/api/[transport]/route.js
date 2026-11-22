@@ -256,6 +256,7 @@ async function heritageImages(kdcd, asno, ctcd, main) {
   if (!urls.length) return '';
   return `【원본 이미지 ${urls.length}점】\n` + urls.slice(0, 10).map(([u, d], i) => `${i + 1}. ${u}${d ? ` — ${d.slice(0, 50)}` : ''}`).join('\n') + '\n';
 }
+const QUICK_PROFILES = {"jacar": ["일본 아시아역사자료센터 JACAR", "cross_search(sources=jacar) — 한→일 변환·레퍼런스코드", "nedb_search(mode=jacar, 'A0401…') 상세 + ±8×100 인접 채굴, 원본 PDF는 国立公文書館 뷰어", "JACAR 이용약관: 출처(센터·소장관·레퍼런스코드) 표기 조건 2차 이용 원칙 허용"], "earchive": ["국사편찬위원회 전자사료관", "cross_search(sources=earchive)", "nedb_search(mode=earchive, '키워드|순번') — 열람·이용조건·등록번호", "사료별 이용조건 표기(공개/제한적 이용) — 원 소장처 권리 확인"], "awm": ["호주 전쟁기념관 AWM", "cross_search(sources=awm) — 최대 10건 상세", "awm.gov.au/collection/C… 페이지(공개 이미지 최대 640px)", "'Copyright expired - public domain' 표기분만 게재"], "nlna": ["네덜란드 국립문서보관소", "cross_search(sources=nlna) — 문서군(inventaris)", "사진은 Europeana dataset 1417 → nationaalarchief.nl 원본(TIFF 16비트 주의)", "Anefo 등 CC0/Publiek Domein 다수 — 사진별 확인"], "dnz": ["디지털NZ DigitalNZ", "cross_search(sources=dnz) — NZ 30여 기관 집계", "각 제공기관 페이지(usage·rights 필드)", "재이용 표기(No known restrictions·CC) 확인 — Papers Past 1950년대는 usage Unknown 다수"], "nzarch": ["뉴질랜드 기록원 Archives NZ", "cross_search(sources=nzarch) — 라이브 실패 시 주간 정적 인덱스", "nedb_search(mode=nzarch, 'R22438362') — R번호 상세", "기록별 접근 상태(Open 등) — 본 사이트는 봇 차단(Incapsula)"], "commons": ["위키미디어 공용", "cross_search(sources=commons)", "nedb_search(mode=commons, File URL) — 라이선스·원 소장처, NARA 번호면 원본 자동 대조", "업로더 표기는 2차 정보 — 원 소장처 카탈로그로 확정"], "un": ["UN 디지털도서관", "cross_search(sources=un) — 문서기호 시리즈", "nedb_search(mode=un, recid) — 요약·주제·PDF 6개 언어", "UN 공식문서는 퍼블릭 도메인(ST/AI/189/Add.9/Rev.2)"], "ndl": ["일본 국립국회도서관 NDL", "cross_search(sources=ndl) — 당대 자료(~1945) 우선", "dl.ndl.go.jp IIIF(<pid>/R<7자리>) — 'Access Restrictions: PDM' 확인", "PDM(보호기간 만료) 표기분 자유 이용 · 동시 요청 시 429"], "i815": ["독립기념관 한국독립운동정보시스템", "cross_search(sources=i815)", "nedb_search(mode=i815, 상세 URL) 본문 · '사전:이름' 인명사전", "공공누리 표시 없는 원문이미지는 사전 협의 대상(041-560-0445)"], "gonghun": ["공훈전자사료관(국가보훈부)", "cross_search(sources=gonghun) — 이름", "nedb_search(mode=gonghun, mngNo) — 공적조서·공훈록 전문", "공훈록 텍스트 인용 시 출처 표기 · 인물 사진은 수형 사진 제외"], "ktv": ["KTV e영상역사관", "cross_search(sources=ktv) — 기록 탭(대한뉴스·문화영화·사진집) 병합", "nedb_search(mode=ktv, view URL) — 영상 해설 / 사진 판독(공공누리 유형·원본 경로)", "사진은 표시 유형대로(4유형=원형) · 영상 무표시분은 KTV 나누리 신청"], "oldnews": ["대한민국신문아카이브(국립중앙도서관)", "cross_search(sources=oldnews) — 단일 핵심어가 잘 걸림(띄어쓴 다어절은 완화 재검색)", "nedb_search(mode=oldnews, CNTS-…) 색인어 · '본문:…|연대' OCR", "1946년 이전 지면 보호기간 만료 — 국립중앙도서관 출처 표기"], "much": ["대한민국역사박물관 근현대사아카이브", "cross_search(sources=much)", "nedb_search(mode=much, idnbr) — 재질·크기·공공누리 유형·원본 이미지 링크", "공공누리 유형(4유형=변경금지·비상업) 준수"], "indy": ["국가기록원 독립운동판결문", "cross_search(sources=indy) — 이름(동명이인 주의)", "nedb_search(mode=indy, 상세 URL) — 죄명·주문·사건개요·원문 뷰어", "판결문은 저작권법 제7조 비보호 저작물 — 국가기록원 출처 표기"], "heritage": ["국가유산청 국가유산포털", "cross_search(sources=heritage) — 지정 종목", "nedb_search(mode=heritage, 'kdcd-asno-ctcd') — 해설·원본 이미지 목록", "사진은 공공누리 유형 확인 후 이용"], "kyudb": ["서울대 규장각한국학연구원", "cross_search(sources=kyudb)", "nedb_search(mode=kyujanggak) — 목록+해제(절목류는 해제에서)", "원문 이미지 게재는 기관 허가(02-880-5316)"], "jsg": ["한국학중앙연구원 장서각", "cross_search(sources=jsg)", "nedb_search(mode=jsg, K2-…) — 서지·해제 전문", "이미지 게재는 공문 신청·허가 대상"], "aks": ["한국고문서자료관", "cross_search(sources=aks) — 172개 소장처", "nedb_search(mode=aks) — 소장처→분류→문서 면", "사이트 재이용 조건 미표기 — 게재 전 기관 확인"]}; // v1.96.4: 상세 프로파일이 없는 18곳의 간이 프로파일(검색 경로·상세 판독·권리)
 const SOURCE_TIMEBOX_MS = 12000; // 소스별 타임박스 — 최저속(차단 대기) 소스가 전체 지연을 지배하지 않게 (실측 21.7s → ~12s)
 // v1.89: 원본 확인 — 재게시·재수집본의 sameAs NAID가 결과에 없으면 NARA 카탈로그를 직접 조회해 원본 실재를 확인하고 계보·날짜·매체를 채운다(최대 4건·6s·24h 캐시)
 async function resolveOrigins(items, stats) {
@@ -761,7 +762,11 @@ const COLLECT = {
       headers: { 'User-Agent': UA, 'Content-Type': 'application/json', Referer: 'https://nl.go.kr/newspaper/keyword_search.do' },
       body: JSON.stringify({ search_keyword: q, page_size: Math.min(n, 10), page_no: 1 }), signal: AbortSignal.timeout(FETCH_TIMEOUT) });
     if (!r.ok) throw new Error(`HTTP ${r.status}`);
-    const d = await r.json();
+    let d = await r.json();
+    if (!(d.hits || []).length && /\s/.test(String(q).trim())) { // v1.96.4: 다어절 0건 → 가장 긴 단어로 완화 재검색(실측 '독립신문 창간' 0건, '독닙신문' 정상)
+      const w = String(q).split(/\s+/).filter((x) => !/^\d+$/.test(x)).sort((x, y) => y.length - x.length)[0];
+      if (w) { const r2 = await fetch('https://nl.go.kr/newspaper/search_newspaper.do', { method: 'POST', headers: { 'User-Agent': UA, 'Content-Type': 'application/json', Referer: 'https://nl.go.kr/newspaper/keyword_search.do' }, body: JSON.stringify({ search_keyword: w, page_size: Math.min(n, 10), page_no: 1 }), signal: AbortSignal.timeout(FETCH_TIMEOUT) }); if (r2.ok) d = await r2.json(); }
+    }
     const first = (v) => (Array.isArray(v) ? v[0] : v) || '';
     return (d.hits || []).slice(0, n).map((h) => ({
       title: `${first(h.label)} — ${first(h.newspaperKorName)}${first(h.newsposition) ? ` [${first(h.newsposition)}]` : ''}`.slice(0, 110), // v1.85: 지면 위치(n면 n단) — 신문 인용 좌표
@@ -1608,7 +1613,7 @@ const JB_CROSS = `국내외 대조 절차 — 순서를 틀리면 헛수고한�
             + (ru ? `소장단위: ${ru} (열람·복제 청구 좌표)\n` : '')
             + (dob.length ? `디지털 객체 ${dob.length}점 — 최선 원본: ${String(d0.objectUrl || '').slice(0, 160)}${d0.objectType ? ` (${String(d0.objectType).slice(0, 30)}${d0.objectFileSize ? `, ${(Number(d0.objectFileSize) / 1e6).toFixed(1)}MB` : ''})` : ''}\n` : '디지털 사본 없음 — 카탈로그에 디지털 객체 미등록(medialz URL도 HTML만 반환 실측) · 열람은 소장단위에 복제 청구\n')
             + (scope ? `【범위·내용】 ${scope.slice(0, 400)}\n본문 지문(sha256-16): ${sfp} — 판독 시점 기술(記述) 전문 기준. 재판독 지문 불일치=카탈로그 기술 개정 발생.\n` : '')
-            + `Class: ${cls}\nBasis: ${basis}\n※ 카탈로그 실확인 기반 자동판정 — 게재 전 최종 확인은 사람이. Class D must not be published.\n※ 인접 채굴: nara_search(naid=${naid}, radius=3) — 사진 ±3·색인 ±1 간격.`);
+            + `Class: ${cls}\nBasis: ${basis}\n※ 카탈로그 실확인 기반 자동판정 — 게재 전 최종 확인은 사람이. Class D must not be published.\n※ 인접 채굴: nara_search(query='', naid=${naid}, radius=3) — 사진 ±3·색인 ±1 간격.`);
         } catch (e) { return text(`[NAID ${naid}] 카탈로그 조회 실패(${String(e && e.message || e).slice(0, 60)}) — rg_series 초판정으로 폴백하십시오.`); }
       }
       const res = judgeRights(rg_series, title, archive);
@@ -1906,7 +1911,8 @@ const JB_CROSS = `국내외 대조 절차 — 순서를 틀리면 헛수고한�
       if (mode === 'commons') { // 위키미디어 공용 — 키워드 목록 / File URL 판독(라이선스·원 소장처·설명)
         try {
           const UAH = { 'User-Agent': 'KoreaArchiveMCP/1.0 (https://github.com/changgi/korea-archive-mcp; archival discovery)' };
-          const fm = q.match(/^https?:\/\/commons\.wikimedia\.org\/wiki\/(File:.+)$/i) || q.match(/^(File:.+)$/i);
+          let qd = q; try { if (/%[0-9A-F]{2}/i.test(q)) qd = decodeURIComponent(q); } catch { /* 그대로 */ } // v1.96.4: 'File%3A…' 인코딩 URL 허용
+          const fm = qd.match(/^https?:\/\/commons\.wikimedia\.org\/wiki\/(File:.+)$/i) || qd.match(/^(File:.+)$/i);
           if (fm) {
             const title = decodeURIComponent(fm[1]).replace(/_/g, ' ');
             const d = JSON.parse(await cachedText('commonsD:' + title, 24 * 3600e3,
@@ -2000,7 +2006,14 @@ const JB_CROSS = `국내외 대조 절차 — 순서를 틀리면 헛수고한�
             if (!title && !body) return text(`판독 실패 — 영상 상세 구조 상이. 브라우저로 열람: ${q}`);
             const kfp = body ? createHash('sha256').update(body).digest('hex').slice(0, 16) : ''; // 판독 시점 해설 지문
             if (body.length > 4000) body = body.slice(0, 4000) + ` …(총 ${body.length}자 — 전문은 원문 링크)`;
-            return text(`KTV e영상역사관 영상 판독 — ${title || '(제목 미상)'}\n`
+            const isPhoto = /\/view\/photo\?/.test(q); // v1.96.4: 사진 상세 — 라벨·공공누리 유형·이미지 경로
+            const kogl = (b.match(/공공누리\s*(?:제\s*)?([1-4])\s*유형/) || [])[1] || '';
+            const pimg = [...new Set([...b.matchAll(/((?:https?:\/\/[^"'\s]+)?\/(?:movie_pds|photo_pds)\/[^"'\s<>]+?\.(?:jpe?g|png|gif))/gi)].map((m) => m[1]))].slice(0, 3).map((u) => (u.startsWith('http') ? u : 'https://www.ehistory.go.kr' + u));
+            if (isPhoto) return text(`KTV e영상역사관 사진 판독 — ${title || '(제목 미상)'}\n`
+              + [pdate && `촬영/제작: ${pdate}`, origin && `출처: ${origin}`, kogl && `공공누리 제${kogl}유형${kogl === '4' ? '(출처표시·상업금지·변경금지 — 자르지 말고 원형 게재)' : ''}`].filter(Boolean).join(' · ') + '\n'
+              + (body ? `【설명】\n${body}\n` : '') + (pimg.length ? `원본 이미지: ${pimg.join(' · ')}\n` : '') + `원문(사진): ${q}\n`
+              + (kogl ? `※ judge_rights(archive='KOGL ${kogl}')로 초판정.` : '※ 페이지에 공공누리 표시 미검출 — 이용 전 KTV 확인.'));
+            return text(`KTV e영상역사관 영상 판독 — ${title || '(제목 미상)'}${kogl ? ` [공공누리 제${kogl}유형]` : ''}\n`
               + [pdate && `제작연도: ${pdate}`, ptime && `상영시간: ${ptime}`, origin && `출처: ${origin}`].filter(Boolean).join(' · ') + '\n'
               + (body ? `【해설】\n${body}\n` : '')
               + (kfp ? `본문 지문(sha256-16): ${kfp} — 판독 시점 해설 전문 기준. 재판독 지문 불일치=원문 개정 발생.\n` : '')
@@ -2349,6 +2362,7 @@ item_cd 5종(자료 성격별): ART 도설·회화 / ETC 두루마리·축 / DRR
       const api = `https://apis.data.go.kr/1741050/openapi/searcharc?serviceKey=${sk}&query=${encodeURIComponent(query)}&start=1&limit=${filt ? 50 : Math.min(max_results, 50)}`;
       try {
         const xml = await gtext(api);
+        if (!xml.includes('searchError') && !xml.includes('<item>') && /<total>\s*0\s*<\/total>/.test(xml)) return text(`국가기록원 '${query}' — 0건(API 정상 응답). 띄어쓰기·다른 표기(예: '한일협정 조인', '한일회담')로 재검색하거나 포털: ${portal}`); // v1.96.4: 0건을 API 오류로 표기하던 문제
         if (xml.includes('searchError') || !xml.includes('<item>')) return text(agentBrowse('국가기록원', query, portal, `API 오류: ${xtag(xml, 'message') || '결과 없음'}`));
         const tot = xtag(xml, 'total') || '?';
         let items = xml.match(/<item>[\s\S]*?<\/item>/g) || [];
@@ -2750,6 +2764,7 @@ item_cd 5종(자료 성격별): ART 도설·회화 / ETC 두루마리·축 / DRR
           + '\n\n서버 키·설정: ' + Object.entries(keys).map(([k, v]) => `${k}=${v ? '✓' : '✗'}`).join(' · ')
           + '\n※ 🟡=연결 정상이나 0건(질의 특성 또는 파서 점검 필요) · 🔴=채널 실패(차단·타임아웃) · ms=채널 응답시간. nedb ✗=개방파일 인덱스 미설정.');
       }
+      if (t !== 'list' && !PROFILES[t] && QUICK_PROFILES[t]) { const [nm, sr, dt, rt] = QUICK_PROFILES[t]; return text(`[${t}] ${nm} — 간이 프로파일\n· 검색: ${sr}\n· 상세 판독: ${dt}\n· 권리: ${rt}\n※ 상세 프로파일(자료·이용·활용구조) 미작성 기관 — 위 경로로 발굴하고 judge_rights로 초판정.`); }
       if (t === 'list' || !PROFILES[t]) {
         const lines = Object.entries(PROFILES).map(([k, v]) => `- ${k} (${v.name_ko}) [${v.category}]`);
         return text('기관 프로파일 (source_profile institution=<key>):\n' + lines.join('\n') + (t !== 'list' && !PROFILES[t] ? `\n\n('${institution}' 프로파일 없음 — 위 목록에서 선택)` : ''));

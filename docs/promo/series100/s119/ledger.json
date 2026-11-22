@@ -76,12 +76,33 @@
    "nocrop": false,
    "w": 1800,
    "h": 1484
+  },
+  {
+   "file": "src/shelflist_351392.jpg",
+   "role": "page",
+   "record_id": "NAID 365844403 (p.417 / 111-SCX-351000-thru-351999_0417.jpg)",
+   "title": "Shelflist to U.S. Army Signal Corps Black-and-White Photographs: 111-SC-351000 to 111-SC-351999 — card SC 351392",
+   "date": "1950 (카드 기재 20 Sept 1950 / 8 Nov 1950)",
+   "url": "https://catalog.archives.gov/id/365844403",
+   "rights": "A — Unrestricted",
+   "rights_evidence": "judge_rights(naid=365844403): Use Restriction 'Unrestricted'",
+   "w": 1800,
+   "h": 1067,
+   "visible": [
+    "SC 351392",
+    "KOREA, SEOUL / INFANTRY-KOREA.",
+    "DITTO 도장, 손글씨 Marines",
+    "Signal Corps Photo#FEC-50-20502 (Lt. Strickland, Cpl. Romanowski) Released by OPI, D/D, 8 Nov 1950",
+    "Copy Neg. from 35-mm, Lot 18823"
+   ],
+   "nocrop": false
   }
  ],
  "points": [
   "nedb_search(mode=commons) 파일 판독: Taken on 20 September 1950, 원본 3000×2214, Public domain, 출처 NARA, 'War and Conflict Number 1422'",
   "【NARA 원본 대조】 NAID 531381 실재, RG 111, 생산 1950-09-20, 소장 번호 111-SC-351392, Unrestricted",
-  "Commons 사본 HD-SN-99-03081.jpg 설명: 'Lt. Robert L. Strickland and Cpl. John Romanowski. (Army) NARA FILE #: 111-SC-351392'"
+  "Commons 사본 HD-SN-99-03081.jpg 설명: 'Lt. Robert L. Strickland and Cpl. John Romanowski. (Army) NARA FILE #: 111-SC-351392'",
+  "NARA 목록카드 SC 351392(NAID 365844403 417면): FEC-50-20502, Lt. Strickland·Cpl. Romanowski, 1950-11-08 OPI 공개, 35mm 복사 네거티브, Lot 18823 — Commons DoD 사본 설명의 촬영자와 일치"
  ],
  "video": {
   "url": "",
@@ -90,5 +111,5 @@
   "note": ""
  },
  "status": "ok",
- "notes": "이미지는 Commons 대신 같은 NARA 원본 TIFF(catalog.archives.gov/medialz)에서 받음 — Wikimedia 부하 최소화. Commons thumb.php로 TIF 요청 시 400 'Empty return from File::thumbName'(TIF는 thumb.php 미지원). upload.wikimedia.org 썸네일 요청(2번째 직접 요청)에서 429 Too many requests → 이후 Wikimedia 직접 요청 중단. 이웃 번호 531378(유족 애도)·531380(유해 확인)은 존엄 규칙으로 제외."
+ "notes": "이미지는 Commons 대신 같은 NARA 원본 TIFF(catalog.archives.gov/medialz)에서 받음 — Wikimedia 부하 최소화. Commons thumb.php로 TIF 요청 시 400 'Empty return from File::thumbName'(TIF는 thumb.php 미지원). upload.wikimedia.org 썸네일 요청(2번째 직접 요청)에서 429 Too many requests → 이후 Wikimedia 직접 요청 중단. 이웃 번호 531378(유족 애도)·531380(유해 확인)은 존엄 규칙으로 제외. 목록카드는 catalog.archives.gov/proxy/records/search?naId=365844403 의 digitalObjects 목록으로 쪽 위치를 찾음(421면=351396 → 417면=351392, 2회 조회)."
 }
