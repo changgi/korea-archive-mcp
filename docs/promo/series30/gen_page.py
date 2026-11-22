@@ -36,7 +36,8 @@ for i, p in enumerate(d['parts']):
         lis = ''.join(f'<li><b>{E(k)}</b>{E(v)}</li>' for k, v in it['facts'])
         v2 = sorted((docs / 'promo' / 'series30v2' / 'build' / f'{it["n"]:02d}').glob('*.jpg'))
         strip = ''.join(f'<a href="promo/series30v2/build/{it["n"]:02d}/{f.name}" target="_blank"><img loading="lazy" src="promo/series30v2/build/{it["n"]:02d}/{f.name}" alt="{it["n"]:02d} 캐러셀 {k}/{len(v2)}"></a>' for k, f in enumerate(v2, 1))
-        setlink = f'<div class="set"><b>인스타 캐러셀 {len(v2)}장</b>{strip}</div><div class="lk"><a href="promo/series30v2/build/{it["n"]:02d}/caption.txt" target="_blank">소개글(캡션) 열기</a></div>' if v2 else ''
+        zname = f'{it["n"]:02d}_' + it['inst'].split(' (')[0].replace('/', '·') + '.zip'
+        setlink = f'<div class="set"><b>인스타 캐러셀 {len(v2)}장</b>{strip}</div><div class="lk"><a href="promo/series30v2/build/{it["n"]:02d}/caption.txt" target="_blank">소개글(캡션) 열기</a><a href="promo/series30v2/zip/{zname}" download><b>세트 내려받기(ZIP)</b></a></div>' if v2 else ''
         cover = f'promo/series30v2/build/{it["n"]:02d}/{v2[0].name}' if v2 else f'promo/series30/thumbs/s{it["n"]:02d}.jpg'
         cards.append(f'''<article class="it" id="s{it["n"]:02d}"><img loading="lazy" src="{cover}" alt="{E(it["inst"])} — {E(it["head"])} 카드">
 <div class="b"><div class="inst">{it["n"]:02d} · {it["flag"]} {E(it["inst"])}</div><h3>{E(it["head"])}</h3>
@@ -76,6 +77,7 @@ page = f'''<!DOCTYPE html>
 </div></div></section>
 <section id="download" class="tint"><div class="wrap narrow"><h2 style="font-family:var(--serif);color:var(--ink);font-size:1.7rem">내려받기 — 인스타그램 게시용</h2>
 <ul style="margin:16px 0 0 20px;line-height:2">
+<li><b>시리즈별 캐러셀 세트(카드+소개글) ZIP 30개</b> — 각 예제의 "세트 내려받기(ZIP)"</li>
 <li><a href="promo/series30/s00_cover.png" download>표지 카드</a> + 카드 30장(각 예제의 "카드 PNG")</li>
 <li><a href="promo/series30/captions.txt">게시글 캡션 30개 + 해시태그</a></li>
 <li><a href="promo/series30/schedule.md">30일 게시 일정</a></li>
