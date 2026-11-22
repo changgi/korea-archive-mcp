@@ -53,6 +53,8 @@ async function robustFetch(url, headers = {}) {
 
 const jget = async (url, headers = {}) => (await robustFetch(url, { Accept: 'application/json', ...headers })).json();
 const gtext = async (url, headers = {}) => (await robustFetch(url, headers)).text();
+// v1.96.6: 장서각은 병렬 호출 시 간헐 403 — 백오프 3회(0.9s·1.8s) 후 실패 보고(우회 아님: 같은 요청을 늦춰 재시도)
+const jsgText = async (url) => { let e0; for (let k = 0; k < 3; k++) { try { return await gtext(url); } catch (e) { e0 = e; if (!/HTTP (403|429|5\d\d)/.test(String(e && e.message))) break; await sleep(900 * (k + 1)); } } throw e0; };
 const CHELIPED_INSTALL = 'cheliped-skills 설치(https://github.com/tykimos/cheliped-skills): git clone https://github.com/tykimos/cheliped-skills && cd cheliped-skills/browser/scripts && npm install && npm run build';
 const chelipedCmd = (url) => `node cheliped-cli.mjs '${JSON.stringify([{ cmd: 'goto', args: [url] }, { cmd: 'observe' }])}'`;
 const chelipedSearch = (url, query) => `${CHELIPED_INSTALL}\n1) 관찰: ${chelipedCmd(url)}\n2) 검색: node cheliped-cli.mjs '${JSON.stringify([{ cmd: 'fill', args: ['<검색창번호>', query] }, { cmd: 'click', args: ['<버튼번호>'] }, { cmd: 'scrape' }])}'\n   (1)의 observe 결과 번호로 <검색창번호>·<버튼번호> 치환)`;
@@ -870,7 +872,7 @@ const COLLECT = {
     return out.filter(Boolean);
   },
   jsg: async (q, n) => { // AKS 장서각 — ★검색 파라미터는 q=query|<어> (플레인 q는 무시되고 전체 열람 반환 — Playwright 실브라우저 재역공학으로 확정, 2026-11-20)
-    const b = await gtext('https://jsg.aks.ac.kr/search/group?q=' + encodeURIComponent('query|' + q));
+    const b = await jsgText('https://jsg.aks.ac.kr/search/group?q=' + encodeURIComponent('query|' + q));
     const out = []; const seen = new Set();
     for (const m of b.matchAll(/href="\/dir\/view\?dataId=([^"]+)"[^>]*>([\s\S]*?)<\/a>/g)) {
       const t = norm(m[2]);
@@ -1883,15 +1885,18 @@ const JB_CROSS = `국내외 대조 절차 — 순서를 틀리면 헛수고한�
       }
       if (mode === 'jsg') { // 장서각 — 키워드 목록 / 청구기호·URL 서지+해제 전문 판독(서버 렌더 실측 2026-11-21)
         try {
-          const dm = q.match(/dataId=(JSG_[\w.-]+)/) || q.match(/^(JSG_[\w.-]+)$/) || q.match(/^([A-Z]\d+(?:-\d+)*(?:[A-Za-z]*\d*)?)$/);
-          if (dm && !/\s/.test(q) && (dm[1].startsWith('JSG_') || /^[A-Z]\d/.test(dm[1]))) {
-            const did = dm[1].startsWith('JSG_') ? dm[1] : 'JSG_' + dm[1];
-            const b = await cachedText('jsgD:' + did, 24 * 3600e3, () => gtext('https://jsg.aks.ac.kr/dir/view?dataId=' + encodeURIComponent(did)), '청구기호');
-            const flat = dclean(b).replace(/&middot;/g, '·');
+          const du = q.match(/dataId=([^&\s#]+)/); // v1.96.6: 고문서(ANC_…)·기타 접두 dataId도 상세 판독
+          const dm = du ? [0, decodeURIComponent(du[1].replace(/\+/g, '%2B'))] : (q.match(/^((?:JSG|ANC)_[\w.+-]+)$/) || q.match(/^([A-Z]\d+(?:-\d+)*(?:[A-Za-z]*\d*)?)$/));
+          if (dm && !/\s/.test(q) && (/^[A-Z]{3}_/.test(dm[1]) || /^[A-Z]\d/.test(dm[1]))) {
+            const did = /^[A-Z]{3}_/.test(dm[1]) ? dm[1] : 'JSG_' + dm[1];
+            const b = await cachedText('jsgD:' + did, 24 * 3600e3, () => jsgText('https://jsg.aks.ac.kr/dir/view?dataId=' + encodeURIComponent(did)), '청구기호');
+            const flat = dclean(b).replace(/&middot;/g, '·').replace(/\s*한국역대인물(?!정보)/g, ''); // v1.96.6: 인명 뒤 링크 라벨 제거
             const pick = (re2) => ((flat.match(re2) || [])[1] || '').trim();
-            const name = pick(/자료명\(한글\)\s*([^·]{2,60}?)\s*·/);
+            const name = pick(/자료명\(한글\)\s*([^·]{2,60}?)\s*·/) || pick(/자료명\s+(.{2,60}?)\s+(?:xml|저자)/);
+            const gx = [['소장', /소장정보\s+(.{4,90}?)\s+·/], ['집성', /집성정보\s+(.{4,90}?)\s+(?:·|형태사항)/], ['형태', /형태사항\s+(.{4,90}?)\s+\d{5}\s/], ['출판', /출판정보\s*:\s*(.{4,90}?)\s*\//]]
+              .map(([k, re2]) => { const v = did.startsWith('ANC_') ? pick(re2) : ''; return v ? `${k}: ${v.replace(/\s*·\s*/g, ' · ').replace(/^[\s·]+|[\s·]+$/g, '')}` : ''; }).filter(Boolean); // 고문서 메타
             const callno = pick(/청구기호\s+(\S{2,20})/);
-            const mf = pick(/MF번호\s+(\S{2,20})/);
+            const mf = pick(/MF번호\s+(?!유형분류)(\S{2,20})/);
             // 분류 3종은 연쇄 앵커로 — 단독 매칭은 내비게이션 필터 라벨과 혼동(실측)
             const cm = flat.match(/유형분류\s+(\S{2,20})\s+주제분류\s+(\S{2,30})\s+수집분류\s+(\S{2,30})/) || [];
             const cls = cm[1] || ''; const subj = cm[2] || '';
@@ -1905,11 +1910,11 @@ const JB_CROSS = `국내외 대조 절차 — 순서를 틀리면 헛수고한�
             }
             if (!callno && !haeje) return text(`'${did}' — 상세 미발견 또는 구조 상이. 청구기호(K2-…)를 확인하거나 mode=jsg에 검색어를 넣으십시오.`);
             return text(`장서각 서지·해제 판독 — ${name || did}\n`
-              + [callno && `청구기호 ${callno}`, mf && `MF ${mf}`, cls, subj].filter(Boolean).join(' · ') + '\n'
+              + [callno && `청구기호 ${callno}`, mf && `MF ${mf}`, cls, subj].filter(Boolean).join(' · ') + '\n' + (gx.length ? gx.join('\n') + '\n' : '')
               + (haeje ? `【해제】\n${haeje}\n` : '')
               + (jfp ? `본문 지문(sha256-16): ${jfp} — 판독 시점 해제 전문 기준. 재판독 지문 불일치=원문 개정 발생.\n` : '')
               + `원문·이미지: https://jsg.aks.ac.kr/dir/view?dataId=${encodeURIComponent(did)}\n`
-              + '※ 출처: 한국학중앙연구원 장서각 — 게재 시 출처 표기, 이미지 재이용은 기관 이용조건 준수. 해제 인용은 국역·해설(학술 인용 시 집필 해제임을 명기).');
+              + (did.startsWith('ANC_') ? '※ 고문서 원문 이미지 이용 문의: 장서각 자료보존관리팀 031-730-8874 · 고문서자료관 원자료 병행 확인.\n' : '') + '※ 출처: 한국학중앙연구원 장서각 — 게재 시 출처 표기, 이미지 재이용은 기관 이용조건 준수. 해제 인용은 국역·해설(학술 인용 시 집필 해제임을 명기).');
           }
           const items = await COLLECT.jsg(q, Math.min(max_results, 10));
           if (!items.length) return text(`장서각 '${q}' — 0건. 서명·주제어(의궤·등록 등)로 재시도하십시오.`);
