@@ -75,7 +75,7 @@ main{padding:6px 18px 80px;min-width:0}
 </style></head><body>
 <header><div class="top">
 <a class="logo" href="index.html">KOREA ARCHIVE <em>통합검색</em></a>
-<nav class="nav"><a href="index.html">소개</a><a href="series.html">30곳 탐방</a><a href="series100.html">100선</a><a href="iiif.html" style="color:var(--ink)">IIIF 갤러리</a></nav>
+<nav class="nav"><a href="index.html">소개</a><a href="series.html">30곳 탐방</a><a href="series100.html">100선</a><a href="iiif.html" style="color:var(--ink)">IIIF 갤러리</a><a href="kv.html">KV 뷰어</a></nav>
 <div class="tools">
 <input id="q" type="search" placeholder="기관·기록·연대 검색 (예: NARA, 1950, 의궤)">
 <select id="pf"><option value="">전체 부</option></select>
@@ -84,7 +84,7 @@ main{padding:6px 18px 80px;min-width:0}
 </div></div></header>
 <div class="intro">
 <h1>전체 기록 <em>IIIF 갤러리</em></h1>
-<p>30곳 탐방·100선 캐러셀에 쓰인 실물 기록 이미지를 한곳에 모았습니다. <b>격자</b>로 훑고, <b>연속</b>으로 한 장씩 크게 내려 읽고, 이미지를 누르면 <b>확대(딥줌)</b>로 세부까지 봅니다. 확대 화면에서 ← →로 다음 기록까지 이어 넘어갑니다. 모든 시리즈는 국제 표준 <a href="https://iiif.io/api/presentation/3.0/" target="_blank" rel="noopener">IIIF Presentation 3.0</a> 매니페스트로도 제공되어 Mirador·Universal Viewer 등 어떤 IIIF 뷰어에서도 열립니다(<a href="iiif/collection.json">컬렉션 JSON</a> · 전체 한 묶음 <a href="iiif/all.json">all.json</a> · <a id="mirall" target="_blank" rel="noopener">전체를 Mirador로 이어보기</a>).</p>
+<p>30곳 탐방·100선 캐러셀에 쓰인 실물 기록 이미지를 한곳에 모았습니다. <b>격자</b>로 훑고, <b>연속</b>으로 한 장씩 크게 내려 읽고, 이미지를 누르면 <b>확대(딥줌)</b>로 세부까지 봅니다. 확대 화면에서 ← →로 다음 기록까지 이어 넘어갑니다. 모든 시리즈는 국제 표준 <a href="https://iiif.io/api/presentation/3.0/" target="_blank" rel="noopener">IIIF Presentation 3.0</a> 매니페스트로도 제공되어 Mirador·Universal Viewer 등 어떤 IIIF 뷰어에서도 열립니다(<a href="iiif/collection.json">컬렉션 JSON</a> · 전체 한 묶음 <a href="iiif/all.json">all.json</a>). 전체를 다른 뷰어로: <a href="kv.html"><b>KV(KA 뷰어)</b></a> · <a id="mirall" target="_blank" rel="noopener">Mirador</a> · <a id="uvall" target="_blank" rel="noopener">Universal Viewer</a>.</p>
 <div class="stat" id="stat"></div>
 </div>
 <div class="wrap"><aside id="side"></aside><main id="main"><p style="color:var(--muted);padding:30px 0">불러오는 중…</p></main></div>
@@ -108,7 +108,9 @@ main{padding:6px 18px 80px;min-width:0}
   document.getElementById('pf').innerHTML += parts.map((p) => `<option>${esc(p)}</option>`).join('');
   const mir = (k) => 'https://projectmirador.org/embed/?iiif-content=' + encodeURIComponent(ABS + 'm/' + k + '.json');
   const uv = (k) => 'https://uv-v4.netlify.app/#?manifest=' + encodeURIComponent(ABS + 'm/' + k + '.json');
-  document.getElementById('mirall').href = 'https://projectmirador.org/embed/?iiif-content=' + encodeURIComponent(ABS + 'all.json');
+  document.getElementById('mirall').href = 'https://projectmirador.org/embed/?iiif-content=' + encodeURIComponent(ABS + 'collection.json');
+  document.getElementById('uvall').href = 'https://uv-v4.netlify.app/#?manifest=' + encodeURIComponent(ABS + 'collection.json');
+  const kv = (k, n) => 'kv.html?collection=' + encodeURIComponent(ABS + 'collection.json') + '&manifest=' + encodeURIComponent(ABS + 'm/' + k + '.json') + (n ? '&canvas=' + n : '');
   let mode = 'grid', flat = [], vis = S, stripFor = null;
 
   function render() {
@@ -125,7 +127,7 @@ main{padding:6px 18px 80px;min-width:0}
     for (const s of vis) {
       const r = s.rec;
       h += `<section class="sec" id="${s.key}"><div class="sh"><h2><small>${esc(s.part)}</small>${esc(s.flag)} ${esc(s.label)}<div class="rec">원 기록: ${esc(r.id)} ${esc(r.title)} ${r.date ? '(' + esc(r.date) + ')' : ''} · ${esc(r.inst)}</div></h2>
-<div class="acts">${r.url ? `<a href="${esc(r.url)}" target="_blank" rel="noopener">원 기관 기록 ↗</a>` : ''}<a href="${esc(s.page)}">캐러셀 보기</a><a href="${BASE}m/${s.key}.json" target="_blank">IIIF 매니페스트</a><a href="${mir(s.key)}" target="_blank" rel="noopener">Mirador로 열기</a><a href="${uv(s.key)}" target="_blank" rel="noopener">UV로 열기</a></div></div>`;
+<div class="acts">${r.url ? `<a href="${esc(r.url)}" target="_blank" rel="noopener">원 기관 기록 ↗</a>` : ''}<a href="${esc(s.page)}">캐러셀 보기</a><a href="${kv(s.key)}"><b>KV로 열기</b></a><a href="${BASE}m/${s.key}.json" target="_blank">IIIF 매니페스트</a><a href="${mir(s.key)}" target="_blank" rel="noopener">Mirador로 열기</a><a href="${uv(s.key)}" target="_blank" rel="noopener">UV로 열기</a></div></div>`;
       if (mode === 'grid') h += '<div class="grid">' + s.c.map((c) => `<figure data-g="${gi++}">${/4유형/.test(c.md['권리'] || '') ? '<span class="k4">공공누리 4유형 · 원본</span>' : ''}<img loading="lazy" src="${BASE + c.th}" alt="${esc(c.t)}"><figcaption>${esc(c.t)}</figcaption></figure>`).join('') + '</div>';
       else h += '<div class="flow">' + s.c.map((c) => `<figure data-g="${gi++}"><img loading="lazy" src="${BASE + c.img}" width="${c.w}" height="${c.h}" alt="${esc(c.t)}"><figcaption>${esc(c.t)}<span>${esc(c.md['식별자'] || '')} · ${esc(c.md['연대'] || '')} · ${esc(c.md['권리'] || '')}</span></figcaption></figure>`).join('') + '</div>';
       if (s.links.length) h += `<div class="lnk"><b>원 기관에서 열람:</b>${s.links.map((l) => `<a href="${esc(l.url)}" target="_blank" rel="noopener" title="${esc(l.rights)}">${esc(l.title.slice(0, 50))} ↗</a>`).join('')}</div>`;
@@ -155,7 +157,7 @@ main{padding:6px 18px 80px;min-width:0}
     document.getElementById('zt').textContent = s.label;
     document.getElementById('zc').textContent = `${ci + 1} / ${s.c.length} · 전체 ${g + 1} / ${flat.length}`;
     const md = Object.entries(c.md).filter(([, v2]) => v2).map(([k, v2]) => `<dt>${esc(k)}</dt><dd>${esc(v2)}</dd>`).join('');
-    document.getElementById('zinfo').innerHTML = `<h3>${esc(c.t)}</h3><dl>${md}</dl><div class="acts">${c.u ? `<a href="${esc(c.u)}" target="_blank" rel="noopener">원 기관 기록 ↗</a>` : ''}<a href="${BASE + c.img}" target="_blank">이미지 파일</a><a href="${BASE}m/${s.key}.json" target="_blank">IIIF 매니페스트</a><a href="${mir(s.key)}" target="_blank" rel="noopener">Mirador</a><a href="${esc(s.page)}">캐러셀</a></div>`;
+    document.getElementById('zinfo').innerHTML = `<h3>${esc(c.t)}</h3><dl>${md}</dl><div class="acts">${c.u ? `<a href="${esc(c.u)}" target="_blank" rel="noopener">원 기관 기록 ↗</a>` : ''}<a href="${BASE + c.img}" target="_blank">이미지 파일</a><a href="${BASE}m/${s.key}.json" target="_blank">IIIF 매니페스트</a><a href="${kv(s.key, ci + 1)}">KV</a><a href="${mir(s.key)}" target="_blank" rel="noopener">Mirador</a><a href="${esc(s.page)}">캐러셀</a></div>`;
     const zs = document.getElementById('zstrip');
     if (stripFor !== flat) { // 전체 기록 띠 — 시리즈 경계 표시, 800장 지연 로딩
       stripFor = flat; let prev = null;
