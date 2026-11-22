@@ -432,6 +432,20 @@
    "must_not": [
     "한국사DB › 한국사DB"
    ]
+  },
+  {
+   "id": "csv-download",
+   "tool": "cross_search",
+   "args": {
+    "query": "유관순",
+    "sources": "indy",
+    "max_per_source": 5,
+    "format": "csv"
+   },
+   "must": [
+    "korea-archive-mcp\\.vercel\\.app/export/csv/[A-Za-z0-9_-]+\\.csv"
+   ],
+   "level": "error"
   }
  ]
 }
