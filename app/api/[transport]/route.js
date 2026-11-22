@@ -2918,9 +2918,13 @@ item_cd 5종(자료 성격별): ART 도설·회화 / ETC 두루마리·축 / DRR
         const esc = (v) => `"${String(v == null ? '' : v).replace(/"/g, '""')}"`;
         const ridc = (it, i) => 'rec:' + (it.id ? `${it.sources[0].split('·')[0]}:${it.id}` : `m${i}`);
         const rows = items.slice(0, 45).map((it, i) => { const hb0 = it.sources[0].split('·')[0]; const po = (PART_OF[hb0] && PART_OF[hb0](it)) || ''; return [ridc(it, i), it.sources.join('+'), it.title, it.date, it.id, it.url, po, it.media || '', it.sameAs || ''].map(esc).join(','); });
-        return text(`교차수집 '${query}' CSV — 채널별 [${stats.join(' · ')}] → 병합 ${items.length}건 (45건 상한):\n`
-          + 'node,sources,title,date,id,url,partOf,media,sameAs\n' + rows.join('\n')
-          + '\n※ 그대로 스프레드시트·KARDA 온톨로지(nodes/edges)·통계 분석에 투입 가능. 권리 초판정: judge_rights.');
+        const csvBody = 'node,sources,title,date,id,url,partOf,media,sameAs\n' + rows.join('\n');
+        const head = `교차수집 '${query}' CSV — 채널별 [${stats.join(' · ')}] → 병합 ${items.length}건 (45건 상한):\n`;
+        const tail = '\n※ 그대로 스프레드시트·KARDA 온톨로지(nodes/edges)·통계 분석에 투입 가능. 권리 초판정: judge_rights.';
+        // v2.4: 파일로 받기 — 링크 안에 CSV를 압축 봉인(서버 저장 없음). 응답 24KB·URL 12,000자 넘으면 링크 생략
+        const dl = `https://korea-archive-mcp.vercel.app/export/csv/${encodeEnv({ q: String(query).slice(0, 80), at: new Date().toISOString().slice(0, 19) + 'Z', csv: csvBody })}.csv`;
+        const fits = dl.length <= 12000 && Buffer.byteLength(head + csvBody + tail + dl, 'utf8') + 300 <= 24000;
+        return text(head + csvBody + tail + (fits ? `\n📥 CSV 파일 내려받기(엑셀 한글 BOM 포함): ${dl}` : '\n📥 파일 링크 생략(크기 상한) — 위 본문을 .csv로 저장하거나 max_per_source를 줄여 다시 실행'));
       }
       const lines = items.slice(0, 45).map((it) => `- [${it.sources.join('+')}] ${it.title.slice(0, 95)}${it.date ? ` (${it.date})` : ''}${it.url ? ' ' + it.url : ''}${it.altTitle ? `\n  ↔ 동일 기록: ${it.altTitle.slice(0, 80)} (${it.sameAs})` : (it.sameAs ? `\n  ↔ ${it.sources.length > 1 ? '함께 묶인 기록' : '원본'}: ${it.sameAs}` : '')}`);
       return text(`교차수집 '${query}' — 채널별 [${stats.join(' · ')}] → 병합 ${items.length}건 (복수출처 우선 정렬):\n` + (lines.join('\n') || '(0)')
