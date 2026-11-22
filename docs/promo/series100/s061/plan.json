@@ -1,0 +1,130 @@
+{
+ "n": 61,
+ "part": [
+  "Ⅹ",
+  "국제기구와 일본의 기록"
+ ],
+ "inst": "UN 디지털도서관",
+ "flag": "🇺🇳",
+ "say": "1951년 UNCURK 보고서 찾아줘",
+ "head": "1951 유엔한국통일부흥위원단 보고서",
+ "big": "A/1881",
+ "facts": [
+  [
+   "문서",
+   "A/1881 · 총회 제6차 회기 공식기록 Supplement No. 12"
+  ],
+  [
+   "기간",
+   "1950-10-07(결의 376(V)) ~ 1951-09-05, 부산에서 서명"
+  ],
+  [
+   "같은 책",
+   "NARA NAID 519785027 — 트루먼 도서관 소장본 78점"
+  ],
+  [
+   "권리",
+   "UN 공식기록 — ST/AI/189/Add.9/Rev.2 §2(a) 퍼블릭 도메인"
+  ]
+ ],
+ "tool": "cross_search(sources=un, \"UNCURK report Korea 1951\") → judge_rights(naid=519785027)",
+ "link": "https://digitallibrary.un.org/record/704427",
+ "checked": "2026-11-22",
+ "tags": "#UN #UNCURK #유엔한국통일부흥위원단",
+ "hero": {
+  "file": "src/un_a1881_map.jpg",
+  "pos": "center 46%",
+  "credit": "UN 디지털도서관 record 704427 · A/1881 부록 XI 지도(MAP NO. 301.1, SEPTEMBER 1951) · UN 공식기록, ST/AI/189/Add.9/Rev.2 §2(a) 퍼블릭 도메인"
+ },
+ "hook": "1951년 유엔이 그린<br><span class=\"g\">한반도 지도</span>와 보고서",
+ "mosaic": [
+  {
+   "file": "src/un_a1881_cover.jpg",
+   "label": "UN 스캔본 표지 · A/1881"
+  },
+  {
+   "file": "src/un_a1881_ch1.jpg",
+   "label": "제1장 위원단의 조직 · 본문 1쪽"
+  },
+  {
+   "file": "src/nara_519785027_cover.jpg",
+   "label": "같은 책 NARA 소장본 · 트루먼 도서관 인장"
+  },
+  {
+   "file": "src/nara_519785027_back.jpg",
+   "label": "NARA본 뒤표지 · Price: 70 cents",
+   "pos": "center 85%"
+  }
+ ],
+ "mosaic_title": "같은 보고서, <span class=\"g\">두 문서고</span>의 두 사본",
+ "mosaic_credit": "UN 디지털도서관 record 704427(UN 공식기록, 퍼블릭 도메인) · NARA NAID 519785027 트루먼 도서관(Use Restriction Unrestricted → A)",
+ "ann": [
+  {
+   "file": "src/un_a1881_map.jpg",
+   "crop_y": 0.42,
+   "title": "부록 XI 지도 — 보이는 글자만 읽었습니다",
+   "boxes": [
+    {
+     "x": 78.5,
+     "y": 49.1,
+     "w": 11.5,
+     "h": 2.5,
+     "t": "지도를 가로지르는 선과 표기 '38th parallel'"
+    },
+    {
+     "x": 41.8,
+     "y": 50.7,
+     "w": 6.5,
+     "h": 1.9,
+     "t": "38선 바로 아래 표기 'Kaesong'"
+    },
+    {
+     "x": 46,
+     "y": 53.3,
+     "w": 9.5,
+     "h": 2.3,
+     "t": "수도 표기 'SEOUL'과 한강 'Han'"
+    },
+    {
+     "x": 37.6,
+     "y": 55.9,
+     "w": 8,
+     "h": 2,
+     "t": "'Inch'on' — 본문 1장: 'United Nations forces had landed at Inch'on'"
+    }
+   ],
+   "credit": "UN 디지털도서관 A/1881 75쪽(부록 XI) — 지도 범례 'Provincial boundaries as of 1945' · UN 공식기록 퍼블릭 도메인"
+  },
+  {
+   "file": "src/un_a1881_intro_crop.jpg",
+   "crop_y": 0.075,
+   "max_h": 766,
+   "title": "서문(INTRODUCTION) — 보고서가 스스로 밝힌 범위",
+   "boxes": [
+    {
+     "x": 58.9,
+     "y": 8.5,
+     "w": 17.9,
+     "h": 3.6,
+     "t": "'7 October 1950' — 위원단 설치일"
+    },
+    {
+     "x": 39.5,
+     "y": 13.2,
+     "w": 45.0,
+     "h": 3.7,
+     "t": "'resolution 376 (V), to 5 September 1951' — 설치 근거 결의와 보고서 제출일"
+    },
+    {
+     "x": 68.3,
+     "y": 70.4,
+     "w": 26.1,
+     "h": 3.6,
+     "t": "'United Nations Korean (Reconstruction Agency)' — 9장에서 협력 기술"
+    }
+   ],
+   "credit": "UN 디지털도서관 A/1881 서문 1쪽 — 같은 면 마지막 줄 'signed in Pusan and is dated 5 September 1951'"
+  }
+ ],
+ "cta_img": "src/nara_519785027_cover.jpg"
+}

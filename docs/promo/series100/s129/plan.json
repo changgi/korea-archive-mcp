@@ -1,0 +1,149 @@
+{
+ "n": 129,
+ "part": [
+  "XVI",
+  "영상으로 읽는 기록"
+ ],
+ "inst": "미국 국립기록관리청 NARA",
+ "flag": "🇺🇸",
+ "say": "1951년 인천 철수 피란민 영상 찾아줘",
+ "head": "1951.1.4 인천 철수 필름",
+ "big": "1951.1.4",
+ "facts": [
+  [
+   "계보",
+   "RG 428 해군부 › 군사활동 영상 시리즈"
+  ],
+  [
+   "생산",
+   "1951-01-04"
+  ],
+  [
+   "원본",
+   "MP4 428-NPC-135 (4분 43초)"
+  ],
+  [
+   "권리",
+   "Use Restriction 'Undetermined' → B"
+  ]
+ ],
+ "tool": "nara_search('refugees Korea', record_group=428, moving_images_only=true) → judge_rights(naid=75364) → keyscenes",
+ "link": "https://catalog.archives.gov/id/75364",
+ "checked": "2026-11-22",
+ "tags": "#NARA #1·4후퇴 #피란민",
+ "hero": {
+  "file": "video/scene_07_252.jpg",
+  "credit": "필름 02:52 장면 · 미국 국립기록관리청 NAID 75364 (428-NPC-135, 1951-01-04, 연방 저작물, Use Restriction Undetermined → B 명기)"
+ },
+ "hook": "1951년 1월 4일,<br><span class=\"g\">인천</span>을 떠나는 사람들",
+ "mosaic": [
+  {
+   "file": "video/scene_03_136.jpg",
+   "label": "필름 1:36 — 선체 번호 '1138'"
+  },
+  {
+   "file": "video/scene_05_207.jpg",
+   "label": "필름 2:07 — 상륙함 앞 병사들"
+  },
+  {
+   "file": "video/scene_06_236.jpg",
+   "label": "필름 2:36 — 물 위의 함정"
+  },
+  {
+   "file": "video/scene_02_100.jpg",
+   "label": "필름 1:00 — 화차 위의 사람들"
+  }
+ ],
+ "mosaic_title": "상륙함·병사·바다 — <span class=\"g\">철수</span>의 장면",
+ "mosaic_credit": "모두 같은 필름의 장면 · 미국 국립기록관리청 NAID 75364 (428-NPC-135, 1951-01-04, 연방 저작물, Use Restriction Undetermined → B 명기)",
+ "ann": {
+  "file": "video/scene_01_016.jpg",
+  "boxes": [
+   {
+    "x": 58,
+    "y": 13,
+    "w": 30,
+    "h": 6,
+    "t": "차량 지붕 글자 'ARMY CHAPLAIN'"
+   },
+   {
+    "x": 48,
+    "y": 15,
+    "w": 14,
+    "h": 12,
+    "t": "휘장 달린 정모를 쓴 장교"
+   },
+   {
+    "x": 0,
+    "y": 17,
+    "w": 14,
+    "h": 32,
+    "t": "왼쪽에 세워진 지프"
+   },
+   {
+    "x": 68,
+    "y": 0,
+    "w": 32,
+    "h": 12,
+    "t": "창문 달린 판자벽 건물"
+   }
+  ],
+  "credit": "필름 00:16 장면(1050×700 프레임) — 표시한 4곳은 화면에서 직접 읽은 것",
+  "crop_y": 0.0
+ },
+ "scenes": [
+  {
+   "title": "NAID 75364 「EVACUATION OF INCHON, KOREA」 (1951-01-04, 4분 43초)",
+   "credit": "미국 국립기록관리청 NAID 75364 · 장면은 keyscenes 자동 추출(전환 86곳→10장면) · 해설은 화면에서 보이는 것만",
+   "frames": [
+    {
+     "file": "video/scene_02_100.jpg",
+     "tc": "01:00",
+     "cap": "화차 위에 빼곡히 올라탄 사람들과 짐 보따리"
+    },
+    {
+     "file": "video/scene_03_136.jpg",
+     "tc": "01:36",
+     "cap": "선체 번호 '1138' 상륙함과 내려진 함수 문"
+    },
+    {
+     "file": "video/scene_04_157.jpg",
+     "tc": "01:57",
+     "cap": "해변에 늘어선 사람들과 트럭, 뒤로 상륙함들"
+    },
+    {
+     "file": "video/scene_05_207.jpg",
+     "tc": "02:07",
+     "cap": "상륙함 앞 모래밭에 모인 병사들"
+    }
+   ]
+  },
+  {
+   "title": "같은 필름 후반부",
+   "credit": "미국 국립기록관리청 NAID 75364 (428-NPC-135, 1951-01-04, 연방 저작물, Use Restriction Undetermined → B 명기)",
+   "frames": [
+    {
+     "file": "video/scene_06_236.jpg",
+     "tc": "02:36",
+     "cap": "물 위에 떠 있는 함정과 작은 배들"
+    },
+    {
+     "file": "video/scene_07_252.jpg",
+     "tc": "02:52",
+     "cap": "상륙정 안을 가득 메운 사람들"
+    },
+    {
+     "file": "video/scene_08_303.jpg",
+     "tc": "03:03",
+     "cap": "털모자 쓴 남자들이 줄지어 걷는다"
+    },
+    {
+     "file": "video/scene_10_347.jpg",
+     "tc": "03:47",
+     "cap": "보따리를 쌓아 둔 부두의 사람들, 뒤로 검은 연기"
+    }
+   ]
+  }
+ ],
+ "cta_img": "video/scene_03_136.jpg"
+}

@@ -1,0 +1,166 @@
+{
+ "n": 61,
+ "src": "un",
+ "record": {
+  "id": "A/1881 (UN DL record 704427)",
+  "title": "Report of the United Nations Commission for the Unification and Rehabilitation of Korea — GAOR 6th session, Supplement No. 12",
+  "date": "1951 (서명 1951-09-05, 부산)",
+  "inst": "United Nations Digital Library",
+  "url": "https://digitallibrary.un.org/record/704427"
+ },
+ "images": [
+  {
+   "file": "un_a1881_map.jpg",
+   "role": "hero",
+   "record_id": "A/1881 p.75 Annex XI",
+   "title": "Map No. 301.1 KOREA",
+   "date": "1951-09",
+   "url": "https://digitallibrary.un.org/record/704427",
+   "rights": "UN 공식기록 — 퍼블릭 도메인",
+   "rights_evidence": "ST/AI/189/Add.9/Rev.2 (1987-09-17) §2: 'The following categories of material will, as at present, be left in the public domain' — (a) Official Records … including periodic supplements; (b) United Nations documents: written material officially issued under a United Nations document symbol",
+   "w": 1021,
+   "h": 1800,
+   "visible": [
+    "표제 'KOREA', 'Provincial boundaries as of 1945'",
+    "'38th parallel' 선",
+    "좌하 'MAP NO. 301.1 SEPTEMBER 1951 UNITED NATIONS'",
+    "우상 'ANNEX XI'"
+   ],
+   "nocrop": false
+  },
+  {
+   "file": "un_a1881_cover.jpg",
+   "role": "extra",
+   "record_id": "A/1881 p.1",
+   "title": "표지",
+   "date": "1951",
+   "url": "https://digitallibrary.un.org/record/704427",
+   "rights": "UN 공식기록 — 퍼블릭 도메인",
+   "rights_evidence": "ST/AI/189/Add.9/Rev.2 (1987-09-17) §2: 'The following categories of material will, as at present, be left in the public domain' — (a) Official Records … including periodic supplements; (b) United Nations documents: written material officially issued under a United Nations document symbol",
+   "w": 1541,
+   "h": 1800,
+   "visible": [
+    "'REPORT OF THE UNITED NATIONS COMMISSION for the UNIFICATION AND REHABILITATION OF KOREA'",
+    "'SUPPLEMENT No. 12 (A/1881)'",
+    "'NEW YORK, 1951'",
+    "좌하 '( 76 p.)'"
+   ],
+   "nocrop": false
+  },
+  {
+   "file": "un_a1881_intro.jpg",
+   "role": "page",
+   "record_id": "A/1881 서문",
+   "title": "INTRODUCTION",
+   "date": "1951",
+   "url": "https://digitallibrary.un.org/record/704427",
+   "rights": "UN 공식기록 — 퍼블릭 도메인",
+   "rights_evidence": "ST/AI/189/Add.9/Rev.2 (1987-09-17) §2: 'The following categories of material will, as at present, be left in the public domain' — (a) Official Records … including periodic supplements; (b) United Nations documents: written material officially issued under a United Nations document symbol",
+   "w": 1541,
+   "h": 1800,
+   "visible": [
+    "'covers the period from 7 October 1950 … to 5 September 1951'",
+    "'signed in Pusan and is dated 5 September 1951'"
+   ],
+   "nocrop": false
+  },
+  {
+   "file": "un_a1881_intro_crop.jpg",
+   "role": "page",
+   "record_id": "A/1881 서문(본문 영역 크롭)",
+   "title": "INTRODUCTION",
+   "date": "1951",
+   "url": "https://digitallibrary.un.org/record/704427",
+   "rights": "UN 공식기록 — 퍼블릭 도메인",
+   "rights_evidence": "ST/AI/189/Add.9/Rev.2 (1987-09-17) §2: 'The following categories of material will, as at present, be left in the public domain' — (a) Official Records … including periodic supplements; (b) United Nations documents: written material officially issued under a United Nations document symbol",
+   "w": 924,
+   "h": 936,
+   "visible": [
+    "위와 동일"
+   ],
+   "nocrop": false
+  },
+  {
+   "file": "un_a1881_ch1.jpg",
+   "role": "extra",
+   "record_id": "A/1881 p.1 본문",
+   "title": "Part One, Chapter I. Organization of the Commission",
+   "date": "1951",
+   "url": "https://digitallibrary.un.org/record/704427",
+   "rights": "UN 공식기록 — 퍼블릭 도메인",
+   "rights_evidence": "ST/AI/189/Add.9/Rev.2 (1987-09-17) §2: 'The following categories of material will, as at present, be left in the public domain' — (a) Official Records … including periodic supplements; (b) United Nations documents: written material officially issued under a United Nations document symbol",
+   "w": 1541,
+   "h": 1800,
+   "visible": [
+    "'United Nations forces had landed at Inch'on'",
+    "'General Assembly resolution 376 (V), adopted on 7 October 1950'"
+   ],
+   "nocrop": false
+  },
+  {
+   "file": "nara_519785027_cover.jpg",
+   "role": "extra",
+   "record_id": "NAID 519785027",
+   "title": "NARA 소장본 표지(1702413-58-001.tif)",
+   "date": "1951",
+   "url": "https://catalog.archives.gov/id/519785027",
+   "rights": "A — Unrestricted",
+   "rights_evidence": "NARA judge_rights(naid=519785027): Class A — Use Restriction 'Unrestricted' 실확인",
+   "w": 1374,
+   "h": 1700,
+   "visible": [
+    "노란 표지, 우상단 원형 청색 인장 'HARRY S. TRUMAN LIBRARY \"NATIONAL ARCHIVES AND RECORDS SERVICE\" U.S. GOVERNMENT'"
+   ],
+   "nocrop": false
+  },
+  {
+   "file": "nara_519785027_back.jpg",
+   "role": "extra",
+   "record_id": "NAID 519785027",
+   "title": "NARA 소장본 뒤표지(-077.tif)",
+   "date": "1951",
+   "url": "https://catalog.archives.gov/id/519785027",
+   "rights": "A — Unrestricted",
+   "rights_evidence": "NARA judge_rights(naid=519785027): Class A — Use Restriction 'Unrestricted' 실확인",
+   "w": 1455,
+   "h": 1800,
+   "visible": [
+    "'SALES AGENTS FOR UNITED NATIONS PUBLICATIONS'",
+    "'Price: 70 cents (U.S.)'",
+    "'91655—October 1951—4150'",
+    "'Printed in U.S.A.'"
+   ],
+   "nocrop": false
+  },
+  {
+   "file": "nara_519785027_map.jpg",
+   "role": "extra",
+   "record_id": "NAID 519785027",
+   "title": "NARA 소장본 부록 XI 지도(-076.tif)",
+   "date": "1951",
+   "url": "https://catalog.archives.gov/id/519785027",
+   "rights": "A — Unrestricted",
+   "rights_evidence": "NARA judge_rights(naid=519785027): Class A — Use Restriction 'Unrestricted' 실확인",
+   "w": 1455,
+   "h": 1800,
+   "visible": [
+    "UN본과 같은 지도, 종이색 미색"
+   ],
+   "nocrop": false
+  }
+ ],
+ "points": [
+  "표지: 'GENERAL ASSEMBLY OFFICIAL RECORDS: SIXTH SESSION SUPPLEMENT No. 12 (A/1881) NEW YORK, 1951'",
+  "서문: 보고 기간 1950-10-07(결의 376(V)) ~ 1951-09-05, 'signed in Pusan'",
+  "부록 XI 지도 MAP NO. 301.1 SEPTEMBER 1951",
+  "NARA NAID 519785027(트루먼 도서관, 78점)에 같은 책의 컬러 스캔 — 뒤표지 'Price: 70 cents'"
+ ],
+ "video": {
+  "url": "",
+  "length_s": 0,
+  "rights": "",
+  "note": "영상 없음"
+ },
+ "status": "ok",
+ "notes": "UN DL MARC export(record/704427/export/xm) 856 필드 → A_1881-EN.pdf(77면, 공개 GET, 302 리다이렉트 → curl -L 필요). pdftoppm -scale-to 1800 렌더. 지도는 p77 2800px 렌더 후 지도 영역만 크롭. cross_search(sources=un)로 A/1881 검색 성공. NARA 사본은 judge_rights 첫 객체 + proxy/records/search digitalObjects 목록으로 -076/-077 획득(TIFF 58MB, 축소 저장)."
+}

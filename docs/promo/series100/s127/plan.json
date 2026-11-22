@@ -1,0 +1,154 @@
+{
+ "n": 127,
+ "part": [
+  "XVI",
+  "영상으로 읽는 기록"
+ ],
+ "inst": "미국 국립기록관리청 NARA",
+ "flag": "🇺🇸",
+ "say": "한국전쟁 항공모함 공습 영상 찾아줘",
+ "head": "1950.8 함재기에서 본 북한 지역",
+ "big": "15분 57초",
+ "facts": [
+  [
+   "계보",
+   "RG 428 해군부 › 군사활동 영상 시리즈"
+  ],
+  [
+   "생산",
+   "1950-08"
+  ],
+  [
+   "원본",
+   "MP4 428-NPC-13305 (15분 57초)"
+  ],
+  [
+   "사본",
+   "Internet Archive 428-npc-13305 (같은 MP4·장면 프레임)"
+  ],
+  [
+   "권리",
+   "Use Restriction 'Undetermined' → B"
+  ]
+ ],
+ "tool": "nara_search('carrier air strikes Korea', record_group=428) · ia_search(identifier='428-npc-13305') → judge_rights(naid=79569) → keyscenes",
+ "link": "https://catalog.archives.gov/id/79569",
+ "checked": "2026-11-22",
+ "tags": "#NARA #해군항공 #영상기록",
+ "hero": {
+  "file": "video/scene_06_801.jpg",
+  "credit": "필름 08:01 장면 · 미국 국립기록관리청 NAID 79569 (428-NPC-13305, 1950-08, 연방 저작물, Use Restriction Undetermined → B 명기)"
+ },
+ "hook": "1950년 8월,<br><span class=\"g\">함재기</span>가 내려다본 철길",
+ "mosaic": [
+  {
+   "file": "video/scene_02_350.jpg",
+   "label": "필름 3:50 — 철길 옆 마을"
+  },
+  {
+   "file": "video/scene_08_1236.jpg",
+   "label": "필름 12:36 — 지면을 덮은 연기"
+  },
+  {
+   "file": "video/scene_11_1502.jpg",
+   "label": "필름 15:02 — 마을 앞의 흰 연기"
+  },
+  {
+   "file": "video/scene_05_732.jpg",
+   "label": "필름 7:32 — 조차장의 열차"
+  }
+ ],
+ "mosaic_title": "철길·연기·마을 — <span class=\"g\">하늘</span>에서 본 장면",
+ "mosaic_credit": "모두 같은 필름의 장면 · 미국 국립기록관리청 NAID 79569 (428-NPC-13305, 1950-08, 연방 저작물, Use Restriction Undetermined → B 명기)",
+ "ann": {
+  "file": "video/scene_05_732.jpg",
+  "boxes": [
+   {
+    "x": 61,
+    "y": 55,
+    "w": 7,
+    "h": 12,
+    "t": "앞등이 빛나는 기관차"
+   },
+   {
+    "x": 41,
+    "y": 64,
+    "w": 22,
+    "h": 36,
+    "t": "흰 연기를 뿜으며 늘어선 열차"
+   },
+   {
+    "x": 70,
+    "y": 61,
+    "w": 6,
+    "h": 13,
+    "t": "선로 위의 화차"
+   },
+   {
+    "x": 84,
+    "y": 42,
+    "w": 5,
+    "h": 25,
+    "t": "선로 옆 전봇대 줄"
+   }
+  ],
+  "credit": "필름 07:32 장면(1050×700 프레임) — 표시한 4곳은 화면에서 직접 읽은 것",
+  "crop_y": 0.0
+ },
+ "scenes": [
+  {
+   "title": "NAID 79569 「CARRIER STRIKE AGAINST NORTHERN KOREA」 (1950-08, 15분 57초)",
+   "credit": "미국 국립기록관리청 NAID 79569 · 장면은 keyscenes 자동 추출(전환 421곳→11장면) · 해설은 화면에서 보이는 것만",
+   "frames": [
+    {
+     "file": "video/scene_01_209.jpg",
+     "tc": "02:09",
+     "cap": "산비탈을 따라 뻗은 철길과 그 아래 밭"
+    },
+    {
+     "file": "video/scene_03_612.jpg",
+     "tc": "06:12",
+     "cap": "논 사이로 곧게 뻗은 길"
+    },
+    {
+     "file": "video/scene_04_639.jpg",
+     "tc": "06:39",
+     "cap": "강과 밭 옆을 지나는 철로와 건물들"
+    },
+    {
+     "file": "video/scene_06_801.jpg",
+     "tc": "08:01",
+     "cap": "기관고·급수탑이 있는 철도 조차장"
+    }
+   ]
+  },
+  {
+   "title": "같은 필름 후반부",
+   "credit": "미국 국립기록관리청 NAID 79569 (428-NPC-13305, 1950-08, 연방 저작물, Use Restriction Undetermined → B 명기)",
+   "frames": [
+    {
+     "file": "video/scene_07_835.jpg",
+     "tc": "08:35",
+     "cap": "조차장 옆 마을과 원형 구조물"
+    },
+    {
+     "file": "video/scene_08_1236.jpg",
+     "tc": "12:36",
+     "cap": "지면을 덮는 거대한 연기"
+    },
+    {
+     "file": "video/scene_09_1313.jpg",
+     "tc": "13:13",
+     "cap": "산골짜기로 피어오르는 흰 연기"
+    },
+    {
+     "file": "video/scene_11_1502.jpg",
+     "tc": "15:02",
+     "cap": "나무 사이 기와집 마을 앞길의 흰 연기"
+    }
+   ]
+  }
+ ],
+ "cta_img": "video/scene_02_350.jpg",
+ "meta_top": 430
+}

@@ -1,0 +1,154 @@
+{
+ "n": 125,
+ "part": [
+  "XVI",
+  "영상으로 읽는 기록"
+ ],
+ "inst": "미국 국립기록관리청 NARA",
+ "flag": "🇺🇸",
+ "say": "1945년 미군 한국 진주 영상 찾아줘",
+ "head": "1945.9 「한국 점령 준비」 필름",
+ "big": "1945.9",
+ "facts": [
+  [
+   "계보",
+   "RG 428 해군부 › 군사활동 영상 시리즈"
+  ],
+  [
+   "생산",
+   "1945-09-01"
+  ],
+  [
+   "원본",
+   "MP4 428-NPC-15642 (8분)"
+  ],
+  [
+   "식별 카드",
+   "첫 화면 '428 NPC 15642'"
+  ],
+  [
+   "권리",
+   "Use Restriction 'Undetermined' → B"
+  ]
+ ],
+ "tool": "nara_search('Korea 1945', moving_images_only=true) → judge_rights(naid=80115) → keyscenes",
+ "link": "https://catalog.archives.gov/id/80115",
+ "checked": "2026-11-22",
+ "tags": "#NARA #미군정 #1945",
+ "hero": {
+  "file": "video/scene_03_115.jpg",
+  "credit": "필름 01:15 장면 · 미국 국립기록관리청 NAID 80115 (428-NPC-15642, 1945-09-01, 연방 저작물, Use Restriction Undetermined → B 명기)"
+ },
+ "hook": "1945년 9월,<br><span class=\"g\">한국 진주</span>를 준비하는 배들",
+ "mosaic": [
+  {
+   "file": "video/scene_01_014.jpg",
+   "label": "필름 0:14 — 함수 옆 트럭"
+  },
+  {
+   "file": "video/scene_08_452.jpg",
+   "label": "필름 4:52 — 기중기와 화물망"
+  },
+  {
+   "file": "video/scene_12_721.jpg",
+   "label": "필름 7:21 — 야자수 아래 트럭"
+  },
+  {
+   "file": "video/scene_04_207.jpg",
+   "label": "필름 2:07 — 선체 번호 310"
+  }
+ ],
+ "mosaic_title": "함정·부두·트럭 — <span class=\"g\">진주 준비</span>의 현장",
+ "mosaic_credit": "모두 같은 필름의 장면 · 미국 국립기록관리청 NAID 80115 (428-NPC-15642, 1945-09-01, 연방 저작물, Use Restriction Undetermined → B 명기)",
+ "ann": {
+  "file": "video/scene_03_115.jpg",
+  "boxes": [
+   {
+    "x": 29,
+    "y": 43,
+    "w": 12,
+    "h": 13,
+    "t": "선체 번호 '461'"
+   },
+   {
+    "x": 76,
+    "y": 17,
+    "w": 24,
+    "h": 58,
+    "t": "활짝 열린 함수 문"
+   },
+   {
+    "x": 51,
+    "y": 8,
+    "w": 17,
+    "h": 33,
+    "t": "함교 구조물"
+   },
+   {
+    "x": 83,
+    "y": 54,
+    "w": 15,
+    "h": 21,
+    "t": "램프 위에 선 사람 2명"
+   }
+  ],
+  "credit": "필름 01:15 장면(1050×700 프레임) — 표시한 4곳은 화면에서 직접 읽은 것",
+  "crop_y": 0.0
+ },
+ "scenes": [
+  {
+   "title": "NAID 80115 「PREPARATION FOR OCCUPATION OF KOREA」 (1945-09-01, 8분)",
+   "credit": "미국 국립기록관리청 NAID 80115 · 장면은 keyscenes 자동 추출(전환 57곳→11장면) · 해설은 화면에서 보이는 것만",
+   "frames": [
+    {
+     "file": "video/scene_01_014.jpg",
+     "tc": "00:14",
+     "cap": "열린 함수 옆 해변에 선 트럭과 사람"
+    },
+    {
+     "file": "video/scene_02_034.jpg",
+     "tc": "00:34",
+     "cap": "함정 앞 해변의 차량과 장비"
+    },
+    {
+     "file": "video/scene_04_207.jpg",
+     "tc": "02:07",
+     "cap": "선체 번호 '310' 함수와 갑판 위 사람들"
+    },
+    {
+     "file": "video/scene_05_306.jpg",
+     "tc": "03:06",
+     "cap": "선체 번호 '317' 앞의 지프"
+    }
+   ]
+  },
+  {
+   "title": "같은 필름 후반부",
+   "credit": "미국 국립기록관리청 NAID 80115 (428-NPC-15642, 1945-09-01, 연방 저작물, Use Restriction Undetermined → B 명기)",
+   "frames": [
+    {
+     "file": "video/scene_08_452.jpg",
+     "tc": "04:52",
+     "cap": "기중기로 화물망을 들어 올리는 부두"
+    },
+    {
+     "file": "video/scene_09_526.jpg",
+     "tc": "05:26",
+     "cap": "철모 쓴 병사들 옆으로 내려오는 화물망"
+    },
+    {
+     "file": "video/scene_10_624.jpg",
+     "tc": "06:24",
+     "cap": "선창 안에 쌓인 상자와 목재"
+    },
+    {
+     "file": "video/scene_12_721.jpg",
+     "tc": "07:21",
+     "cap": "야자수 아래 줄지어 선 트럭들"
+    }
+   ]
+  }
+ ],
+ "cta_img": "video/scene_01_014.jpg",
+ "meta_top": 430
+}

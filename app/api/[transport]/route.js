@@ -1359,7 +1359,7 @@ const handler = createMcpHandler((server) => {
         const po = naraChain(rec);
         const nd = naraDate(rec);
         const ndo = (rec.digitalObjects || []).length; // v1.82: 디지털 객체 수 — 원본 매체 유무를 목록에서 판별(다매체)
-        return `- [NAID ${rec.naId}] ${(rec.title || '').slice(0, 100)}${nd ? ` (${nd})` : ''} | ${rec.localIdentifier || ''}${ndo ? ` · 원본 ${ndo}점` : ''} | https://catalog.archives.gov/id/${rec.naId}` + (po ? `\n  계보: ${po}` : '');
+        return `- [NAID ${rec.naId}] ${(rec.title || '').slice(0, 100)}${nd ? ` (${nd})` : ''} | ${rec.localIdentifier || ''}${ndo ? ` · 원본 ${ndo}점` : ' · 디지털 사본 없음'} | https://catalog.archives.gov/id/${rec.naId}` + (po ? `\n  계보: ${po}` : '');
       });
       const total = typeof hits.total === 'object' ? hits.total.value : hits.total;
       const rline = record_group ? (() => { const r = judgeRights(`RG ${record_group}`, '', 'NARA'); return `\n권리 초판정(RG ${record_group}): ${r[0]} — ${r[1]}\n※ 건별 실확인: judge_rights(naid=<NAID>) — 카탈로그 Use Restriction 실조회로 A/C 확정`; })() : '';
@@ -1390,6 +1390,7 @@ const handler = createMcpHandler((server) => {
       if (identifier) {
         const d = await jget(`https://archive.org/metadata/${encodeURIComponent(identifier)}`);
         const md = d.metadata || {};
+        if (!d || !d.metadata || !Object.keys(d.metadata).length) return text(`archive.org '${identifier}' — 항목 없음(식별자 오기 또는 미등록). ia_search(query=…)로 검색하거나 NARA 원본은 nara_search·judge_rights(naid)로.`); // v1.96.1
         const files = (d.files || []).filter((f) => f.source === 'original').slice(0, 10);
         let scenes = ''; // v1.93: 영상 기록 장면 분석 — IA 파생 썸네일(.thumbs/<id>_<초>.jpg)을 시각 코드 장면 프레임으로(웹·모바일 경로: ffmpeg 없이 장면 열람)
         if (md.mediatype === 'movies') {
@@ -1596,7 +1597,7 @@ const JB_CROSS = `국내외 대조 절차 — 순서를 틀리면 헛수고한�
             + (chain ? `계보: ${chain.slice(0, 280)}\n` : '')
             + (cre || nd ? `생산: ${[cre, nd].filter(Boolean).join(' · ')}\n` : '')
             + (ru ? `소장단위: ${ru} (열람·복제 청구 좌표)\n` : '')
-            + (dob.length ? `디지털 객체 ${dob.length}점 — 첫 객체: ${String(d0.objectUrl || '').slice(0, 160)}${d0.objectType ? ` (${String(d0.objectType).slice(0, 30)})` : ''}\n` : '')
+            + (dob.length ? `디지털 객체 ${dob.length}점 — 첫 객체: ${String(d0.objectUrl || '').slice(0, 160)}${d0.objectType ? ` (${String(d0.objectType).slice(0, 30)})` : ''}\n` : '디지털 사본 없음 — 카탈로그에 디지털 객체 미등록(medialz URL도 HTML만 반환 실측) · 열람은 소장단위에 복제 청구\n')
             + (scope ? `【범위·내용】 ${scope.slice(0, 400)}\n본문 지문(sha256-16): ${sfp} — 판독 시점 기술(記述) 전문 기준. 재판독 지문 불일치=카탈로그 기술 개정 발생.\n` : '')
             + `Class: ${cls}\nBasis: ${basis}\n※ 카탈로그 실확인 기반 자동판정 — 게재 전 최종 확인은 사람이. Class D must not be published.\n※ 인접 채굴: nara_search(naid=${naid}, radius=3) — 사진 ±3·색인 ±1 간격.`);
         } catch (e) { return text(`[NAID ${naid}] 카탈로그 조회 실패(${String(e && e.message || e).slice(0, 60)}) — rg_series 초판정으로 폴백하십시오.`); }
