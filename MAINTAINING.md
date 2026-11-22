@@ -15,6 +15,7 @@
 | `tests/golden.json` | 골든 회귀 케이스 — 도구 출력의 **모양** | `python3 scripts/golden.py` |
 | `lib/nara_iiif.js` · `app/iiif/nara/[...p]/route.js` | **NARA→IIIF 브리지** — `/iiif/nara/{NAID}/manifest.json`·`/collection.json`·`/record.jsonld`(RiC-O) | NARA_API_KEY 사용, 6시간 캐시, CORS * |
 | `lib/ka_iiif.js` · `app/iiif/[src]/[...p]/route.js` | **IIIF 브리지 2** — `/iiif/{heritage\|much\|awm\|commons}/{id}/manifest.json` | 서울 리전(icn1) · 정직한 UA · 6시간 캐시 |
+| `lib/rec_iiif.js` · `app/iiif/rec/[...p]/route.js` | **기록 봉투 IIIF** — IIIF가 없는 모든 기록 → `/iiif/rec/{token}/manifest.json`·`card.svg`·`record.jsonld`(토큰=봉인된 기술, 서버 저장 없음) | KV `#c=` 압축 컬렉션 링크 |
 | `docs/iiif/` | 갤러리 IIIF — `hierarchy.json`(부›시리즈›이미지)·`collection.json`(평면)·`all.json`·`m/`·`c/` + 데이터 `records.csv`·`records.jsonld` | `build_iiif.py`가 생성(`_nara_ctx.json`=NARA 계보 캐시) |
 
 우리 IIIF 갤러리도 수집처다 — `cross_search(sources='gallery')`가 `docs/iiif/index.json`(Pages)을 6시간 캐시로 검색하고, `format='iiif'`면 시리즈 매니페스트(`iiif/m/sNNN.json`)를 컬렉션에 넣는다.

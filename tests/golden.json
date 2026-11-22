@@ -326,6 +326,25 @@
     "iiif/heritage/11-0000010000000-11/manifest\\.json"
    ],
    "level": "warn"
+  },
+  {
+   "id": "rec-envelope",
+   "tool": "cross_search",
+   "args": {
+    "query": "Korea armistice",
+    "sources": "tna",
+    "max_per_source": 3,
+    "format": "iiif"
+   },
+   "must": [
+    "기록 봉투",
+    "kv\\.html#c=[\\w-]{40,}",
+    "/iiif/rec/[\\w-]{40,}/manifest\\.json"
+   ],
+   "must_not": [
+    "IIIF 미제공\\(원 기관 링크로 열람"
+   ],
+   "level": "error"
   }
  ]
 }
