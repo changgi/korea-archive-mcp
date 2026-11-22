@@ -33,7 +33,7 @@
  "tags": "#손기정 #조선중앙일보 #베를린올림픽",
  "hero": {
   "file": "src/crop_dongmu_19360812.jpg",
-  "pos": "center 35%",
+  "pos": "center 12%",
   "credit": "조선중앙일보 1936.8.12 3면 「동무 孫基禎萬歲」 · 국립중앙도서관 대한민국신문아카이브 CNTS-00093655746 (원소장 연세대 중앙도서관, 이용 제한 없음)"
  },
  "hook": "가슴에 <span class=\"g\">623</span>,<br>신문은 이렇게 외쳤다<br>“동무 孫基禎萬歲”",
@@ -46,12 +46,12 @@
   {
    "file": "src/crop_marason_19360812.jpg",
    "label": "같은 날 「마라손塔上에 勝利의 喇叭소리!」",
-   "pos": "center 40%"
+   "pos": "center 75%"
   },
   {
    "file": "src/crop_maeil_19360813_top.jpg",
    "label": "매일신보 1936.8.13 7면 「凱旋·孫基禎君에 喜報」",
-   "pos": "center 70%"
+   "pos": "center 50%"
   },
   {
    "file": "src/crop_dongmu_19360812.jpg",
@@ -62,34 +62,34 @@
  "mosaic_title": "우승 다음 날 <span class=\"g\">두 신문</span>의 지면",
  "mosaic_credit": "국립중앙도서관 대한민국신문아카이브 CNTS-00093655746 · 00093655676 (조선중앙일보) · 00094786997 (매일신보) — 저작권유형 '이용 제한이 없습니다'",
  "ann": {
-  "file": "src/crop_deungwha_19360812.jpg",
+  "file": "src/crop_deungwha_right.jpg",
   "title": "조선중앙일보 1936.8.12 「孫君의 勝利는 우리의 燈火!」 — 보이는 것만",
   "boxes": [
    {
-    "x": 64,
+    "x": 40.0,
     "y": 2,
-    "w": 10,
+    "w": 16.7,
     "h": 45,
     "t": "표제 '孫君의 勝利는 우리의 燈火!'"
    },
    {
-    "x": 62.5,
+    "x": 37.5,
     "y": 33,
-    "w": 3.8,
+    "w": 6.3,
     "h": 19,
     "t": "필자 이름 '呂運弘'"
    },
    {
-    "x": 77,
+    "x": 61.7,
     "y": 38,
-    "w": 19,
+    "w": 31.7,
     "h": 28,
     "t": "종 둘레 글자 'Ich rufe die Jugend der Welt'와 오륜"
    },
    {
-    "x": 74,
+    "x": 56.7,
     "y": 71,
-    "w": 25,
+    "w": 41.7,
     "h": 20,
     "t": "'OLYMPIC GAMES BERLIN 1936 · 1st–16th AUGUST'"
    }
