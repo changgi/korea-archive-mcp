@@ -2519,7 +2519,7 @@ item_cd 5종(자료 성격별): ART 도설·회화 / ETC 두루마리·축 / DRR
               '@type': 'rico:Record', node: rid2(it, i), // karda 그래프 노드와 같은 키
               identifier: it.id || null, title: it.title, date: it.date || null,
               heldBy: hb.map((k) => ({ id: k, name: (ARCHIVE_META[k] || {}).n || k, country: (ARCHIVE_META[k] || {}).c || '' })), // 맥락 — 기관 정식명·국가
-              accessUrl: it.url || null, evidence: `API 실조회 ${now.slice(0, 10)}`,
+              accessUrl: it.url || null, evidence: `API 실조회 ${now.slice(0, 10)}` + (it.sources.includes('nara·원본확인') ? ` · NARA 카탈로그 원본 실재 확인(${it.id}) — 사본 ${it.sameAs || ''}` : (it.sameAs && it.sources.length > 1 ? ` · 기관 간 동일 기록 대조(${it.sameAs})` : '')),
               ...(it.media ? { media: it.media } : {}), // 다매체 — 원본 매체 직링크(게재 소싱)
               ...(it.sameAs ? { sameAs: it.sameAs } : {}), ...(it.altTitle ? { altTitle: it.altTitle } : {}), // 맥락·증거성 — 기관 간 동일 기록(재수집본↔원본)
               ...((PART_OF[hb[0]] && PART_OF[hb[0]](it)) ? { partOf: PART_OF[hb[0]](it) } : {}), // 맥락 — 상위 계층
@@ -3349,7 +3349,7 @@ body{font-family:'Noto Serif KR',serif;max-width:860px;margin:0 auto;padding:2re
 const HELP_GUIDE = `사용 안내 — 매직 키워드 “창기창기 도와줘” (처음 사용자용. 이 내용을 친절한 안내로 정리해 사용자에게 전달하라. 시각 안내 페이지: https://korea-archive-mcp.vercel.app/help.html — 링크를 함께 제공)
 
 ■ 무엇을 하는 서비스인가
-국내외 28개 아카이브(🇺🇸 NARA · 🇬🇧 TNA · Internet Archive · 🇫🇷 갈리카 · 🇪🇺 유러피아나 · 🇯🇵 아시아역사자료센터 JACAR · 🇦🇺 호주 전쟁기념관 · 🇳🇱 네덜란드 국립문서보관소 · 🌐 위키미디어 공용 · 🇺🇳 UN 디지털도서관 · 🇯🇵 NDL 서치 · 🇰🇷 국가기록원·국립중앙도서관(+신문아카이브 1883~1960)·한국사DB·국편 전자사료관·독립기념관·공훈전자사료관·독립운동판결문(국가기록원)·KTV e영상역사관·역사박물관·규장각·장서각·한국고문서자료관·국가유산포털·서울기록원·정보공개포털·KOREAN WAR ARCHIVES 협약기관)에서 한국 관련 기록·사진·영상(1860~1960)을 발굴하고, 검증하고, 전파물까지 만들어 준다. 한국어 한 문장이면 충분 — 표기 변형(Corea·Chosen·Corée·한자·朝鮮)과 색인 언어 변환은 자동. 카카오 PlayMCP 마켓 등록본으로도 연결 가능('KOREA ARCHIVE 통합검색' 검색 — 같은 서버).
+9개국 30개 아카이브(🇺🇸 NARA · 🇬🇧 TNA · Internet Archive · 🇫🇷 갈리카 · 🇪🇺 유러피아나 · 🇯🇵 아시아역사자료센터 JACAR · 🇦🇺 호주 전쟁기념관 · 🇳🇱 네덜란드 국립문서보관소 · 🌐 위키미디어 공용 · 🇺🇳 UN 디지털도서관 · 🇯🇵 NDL 서치 · 🇰🇷 국가기록원·국립중앙도서관(+신문아카이브 1883~1960)·한국사DB·국편 전자사료관·독립기념관·공훈전자사료관·독립운동판결문(국가기록원)·KTV e영상역사관·역사박물관·규장각·장서각·한국고문서자료관·국가유산포털·서울기록원·정보공개포털·KOREAN WAR ARCHIVES 협약기관)에서 한국 관련 기록·사진·영상(1860~현대)을 발굴하고, 검증하고, 전파물까지 만들어 준다. 한국어 한 문장이면 충분 — 표기 변형(Corea·Chosen·Corée·한자·朝鮮)과 색인 언어 변환은 자동. 카카오 PlayMCP 마켓 등록본으로도 연결 가능('KOREA ARCHIVE 통합검색' 검색 — 같은 서버).
 
 ■ 매직 키워드 2개
 ① “○○○ 풀패키지로 만들어줘” — 조사→검증→매거진 보고서→카드뉴스 8장→포스터→홍보·입문·메시지 카드→발표 PPTX(대본 포함)→기록 해설→Canva 편집본→KARDA 연구 데이터까지 전 산출물 자동(report_template kind=full_package 순서를 따름).
@@ -3361,6 +3361,7 @@ const HELP_GUIDE = `사용 안내 — 매직 키워드 “창기창기 도와줘
 · “조선시대 한강 나루의 행정을 정리해줘” (법전 판독→형제 조 전수→연대 검증 제도사)
 · “병인양요 프랑스 기록 찾아줘” / “이 참조코드 주변을 더 캐줘”(인접 채굴) / “이 기록 게재 가능한지 판정해줘”
 · “안중근 공훈록 전문 보여줘”(독립유공자 — 공적조서·수형기록·현충시설까지) / “이 NARA 기록 권리 실확인해줘”(naid)
+· “장진호 기록, 같은 것끼리 묶어서 보여줘” (협약기관 재수집본·인터넷 아카이브·위키미디어 공용 사본을 NARA 원본과 한 건으로 — 원본은 NARA 목록 직접 조회로 실재 확인, 결과에 [nara·원본확인+koreanwar] 표시)
 · “이 의궤 해제 읽어줘”(장서각 K2-…) / “안보리 결의 원문 PDF”(UN recid) / “이 1910년 기사 전문”(독립기념관 URL)
 
 ■ 검증 원칙(차별점) — 실물 기록만(AI 생성 인물·장면 금지)·원문 대조·출처 명시·정정 공개. 통과 산출물에만 검증 낙관.
