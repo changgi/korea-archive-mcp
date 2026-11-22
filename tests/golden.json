@@ -239,6 +239,34 @@
     "BattleOfTheBarricades|Barricades"
    ],
    "level": "warn"
+  },
+  {
+   "id": "gallery-source",
+   "tool": "cross_search",
+   "args": {
+    "query": "흥남",
+    "sources": "gallery",
+    "max_per_source": 3
+   },
+   "must": [
+    "\\[gallery\\]",
+    "iiif\\.html#s\\d+/\\d+"
+   ],
+   "level": "error"
+  },
+  {
+   "id": "gallery-iiif",
+   "tool": "cross_search",
+   "args": {
+    "query": "흥남",
+    "sources": "gallery",
+    "max_per_source": 3,
+    "format": "iiif"
+   },
+   "must": [
+    "iiif/m/s\\d+\\.json"
+   ],
+   "level": "error"
   }
  ]
 }

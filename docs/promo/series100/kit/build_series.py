@@ -41,3 +41,10 @@ rows = (len(ims) + 1) // 2; sh = Image.new('RGB', (1084, rows * 544), 'white')
 for i, im in enumerate(ims): sh.paste(im, ((i % 2) * 544, (i // 2) * 544))
 sh.save(sd / '_sheet.jpg', quality=80)
 print(f'OK {n:03d}: {len(jpgs)} cards → {sd}/_sheet.jpg  (Read로 반드시 육안 검수)')
+# IIIF 갤러리 자동 갱신 — 시리즈를 만들면 docs/iiif(매니페스트·이미지·썸네일)도 함께 갱신(바뀐 이미지만). 건너뛰려면 NO_IIIF=1
+if not os.environ.get('NO_IIIF'):
+    import subprocess, sys as _sys
+    _b = pathlib.Path(__file__).resolve().parents[2] / 'build_iiif.py'
+    if _b.exists():
+        r = subprocess.run([_sys.executable, str(_b)], capture_output=True, text=True)
+        print('IIIF 갤러리:', (r.stdout.strip().splitlines() or ['?'])[-1] if r.returncode == 0 else '갱신 실패 — ' + r.stderr.strip()[-200:])
