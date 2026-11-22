@@ -428,7 +428,10 @@
    "must": [
     "한국사DB › "
    ],
-   "level": "warn"
+   "level": "warn",
+   "must_not": [
+    "한국사DB › 한국사DB"
+   ]
   }
  ]
 }
