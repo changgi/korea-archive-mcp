@@ -1,0 +1,156 @@
+{
+ "n": 128,
+ "part": [
+  "XVI",
+  "영상으로 읽는 기록"
+ ],
+ "inst": "미국 국립기록관리청 NARA",
+ "flag": "🇺🇸",
+ "say": "한국전쟁 F-51 머스탱 영상 찾아줘",
+ "head": "「MUSTANGA IN KOREA」 공군 필름",
+ "big": "342-USAF-19367",
+ "facts": [
+  [
+   "계보",
+   "RG 342 공군 › 군 항공활동 영상 시리즈"
+  ],
+  [
+   "생산",
+   "카탈로그 미기재"
+  ],
+  [
+   "원본",
+   "MP4 342-USAF-19367 (8분 38초)"
+  ],
+  [
+   "권리",
+   "Use Restriction 'Unrestricted' → A"
+  ]
+ ],
+ "tool": "nara_search('Korean Air Force F-51 Mustang', moving_images_only=true) → judge_rights(naid=65890) → keyscenes",
+ "link": "https://catalog.archives.gov/id/65890",
+ "checked": "2026-11-22",
+ "tags": "#NARA #F51머스탱 #공군",
+ "hero": {
+  "file": "video/scene_11_759.jpg",
+  "credit": "필름 07:59 장면 · 미국 국립기록관리청 NAID 65890 (342-USAF-19367, Use Restriction Unrestricted → A)"
+ },
+ "hook": "프로펠러기가 줄지어 선<br><span class=\"g\">비행장</span>의 하루",
+ "mosaic": [
+  {
+   "file": "video/scene_02_112.jpg",
+   "label": "필름 1:12 — 로켓탄을 나르는 정비병"
+  },
+  {
+   "file": "video/scene_03_152.jpg",
+   "label": "필름 1:52 — 기중기 작업"
+  },
+  {
+   "file": "video/scene_07_539.jpg",
+   "label": "필름 5:39 — 비행하는 4대"
+  },
+  {
+   "file": "video/scene_01_015.jpg",
+   "label": "필름 0:15 — 줄지어 선 기체"
+  }
+ ],
+ "mosaic_title": "정비·적재·비행 — <span class=\"g\">비행장</span>의 하루",
+ "mosaic_credit": "모두 같은 필름의 장면 · 미국 국립기록관리청 NAID 65890 (342-USAF-19367, Use Restriction Unrestricted → A)",
+ "ann": {
+  "file": "video/scene_01_015.jpg",
+  "boxes": [
+   {
+    "x": 49,
+    "y": 47,
+    "w": 8,
+    "h": 7,
+    "t": "기체 번호 '485'"
+   },
+   {
+    "x": 0,
+    "y": 36,
+    "w": 37,
+    "h": 17,
+    "t": "줄지어 선 프로펠러기들"
+   },
+   {
+    "x": 26,
+    "y": 61,
+    "w": 37,
+    "h": 24,
+    "t": "탄약 상자를 실은 수레"
+   },
+   {
+    "x": 67,
+    "y": 56,
+    "w": 30,
+    "h": 29,
+    "t": "수레를 끄는 견인차와 운전자"
+   },
+   {
+    "x": 32,
+    "y": 28,
+    "w": 40,
+    "h": 9,
+    "t": "비행장 뒤편 산"
+   }
+  ],
+  "credit": "필름 00:15 장면(820×591 프레임) — 표시한 5곳은 화면에서 직접 읽은 것",
+  "crop_y": 0.0
+ },
+ "scenes": [
+  {
+   "title": "NAID 65890 「MUSTANGA IN KOREA」 (일자 미기재, 8분 38초)",
+   "credit": "미국 국립기록관리청 NAID 65890 · 장면은 keyscenes 자동 추출(전환 69곳→12장면) · 해설은 화면에서 보이는 것만",
+   "frames": [
+    {
+     "file": "video/scene_02_112.jpg",
+     "tc": "01:12",
+     "cap": "로켓탄을 안고 날개 아래로 가는 정비병"
+    },
+    {
+     "file": "video/scene_03_152.jpg",
+     "tc": "01:52",
+     "cap": "삼각 기중기로 길쭉한 통을 다루는 두 사람, 뒤로 드럼통 더미"
+    },
+    {
+     "file": "video/scene_05_417.jpg",
+     "tc": "04:17",
+     "cap": "기체 앞 풀밭에서 깃발을 든 사람"
+    },
+    {
+     "file": "video/scene_06_511.jpg",
+     "tc": "05:11",
+     "cap": "격납고 뼈대 너머 활주로와 산"
+    }
+   ]
+  },
+  {
+   "title": "같은 필름 후반부",
+   "credit": "미국 국립기록관리청 NAID 65890 (342-USAF-19367, Use Restriction Unrestricted → A)",
+   "frames": [
+    {
+     "file": "video/scene_07_539.jpg",
+     "tc": "05:39",
+     "cap": "하늘을 나는 비행기 4대"
+    },
+    {
+     "file": "video/scene_08_551.jpg",
+     "tc": "05:51",
+     "cap": "공중에서 내려다본 산과 길"
+    },
+    {
+     "file": "video/scene_09_628.jpg",
+     "tc": "06:28",
+     "cap": "공중에서 본 시가지와 철길"
+    },
+    {
+     "file": "video/scene_12_821.jpg",
+     "tc": "08:21",
+     "cap": "풀밭에 동체가 내려앉은 기체와 비행복 차림 사람"
+    }
+   ]
+  }
+ ],
+ "cta_img": "video/scene_02_112.jpg"
+}

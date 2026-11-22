@@ -1,0 +1,138 @@
+{
+ "n": 62,
+ "part": [
+  "Ⅹ",
+  "국제기구와 일본의 기록"
+ ],
+ "inst": "UN 디지털도서관",
+ "flag": "🇺🇳",
+ "say": "유엔한국재건단 UNKRA 보고서 찾아줘",
+ "head": "1955 UNKRA 재건 사업장 지도",
+ "big": "3,833곳",
+ "facts": [
+  [
+   "문서",
+   "A/2936 · 총회 제10차 회기 Supplement No. 18"
+  ],
+  [
+   "기간",
+   "1954-09-01 ~ 1955-06-30 · Agent General 제5차 보고"
+  ],
+  [
+   "지도",
+   "MAP NO. 718, AUGUST 1955 — 전체 3,833곳 중 2,119곳 완료"
+  ],
+  [
+   "권리",
+   "UN 공식기록 — ST/AI/189/Add.9/Rev.2 §2(a) 퍼블릭 도메인"
+  ]
+ ],
+ "tool": "cross_search(sources=un, \"UNKRA Korea reconstruction report Agent General\")",
+ "link": "https://digitallibrary.un.org/record/713005",
+ "checked": "2026-11-22",
+ "tags": "#UN #UNKRA #유엔한국재건단",
+ "hero": {
+  "file": "src/un_a2936_map_nw.jpg",
+  "pos": "center 18%",
+  "credit": "UN 디지털도서관 record 713005 · A/2936 부록 지도 'UNKRA PROJECT SITES AS AT 30 JUNE 1955' 서북 1/4쪽 · UN 공식기록, ST/AI/189/Add.9/Rev.2 §2(a) 퍼블릭 도메인"
+ },
+ "hook": "1955년, 유엔이 세어 본<br>재건 사업장 <span class=\"g\">3,833곳</span>",
+ "mosaic": [
+  {
+   "file": "src/un_a2936_map_nw.jpg",
+   "label": "① 서북 — 경기도·서울특별시",
+   "pos": "center 30%"
+  },
+  {
+   "file": "src/un_a2936_map_ne.jpg",
+   "label": "② 동북 — 강원도·경상북도",
+   "pos": "center 30%"
+  },
+  {
+   "file": "src/un_a2936_map_sw.jpg",
+   "label": "③ 서남 — 전라남북도·제주도",
+   "pos": "center 60%"
+  },
+  {
+   "file": "src/un_a2936_map_se.jpg",
+   "label": "④ 동남 — 경상남도·부산",
+   "pos": "center 40%"
+  }
+ ],
+ "mosaic_title": "보고서 마지막 <span class=\"g\">4쪽</span>을 이으면 한 장의 지도",
+ "mosaic_credit": "UN 디지털도서관 A/2936 PDF 34~37면(부록 지도, MAP NO. 718) · 도별 표: Project Sites / Completed · UN 공식기록 퍼블릭 도메인",
+ "ann": [
+  {
+   "file": "src/un_a2936_total_table.jpg",
+   "title": "서남 1/4쪽의 합계표 — 숫자는 원문 그대로",
+   "boxes": [
+    {
+     "x": 22,
+     "y": 5.2,
+     "w": 26,
+     "h": 5.6,
+     "t": "표 제목 'TOTAL PROJECT SITES' — 열: TOTAL SITES / COMPLETED SITES"
+    },
+    {
+     "x": 12,
+     "y": 31.0,
+     "w": 46,
+     "h": 4.0,
+     "t": "INDUSTRIES 799곳 중 397곳 완료"
+    },
+    {
+     "x": 12,
+     "y": 45.7,
+     "w": 46,
+     "h": 4.0,
+     "t": "EDUCATION 1,215곳 중 597곳 완료 — 가장 많은 분야"
+    },
+    {
+     "x": 17,
+     "y": 75.0,
+     "w": 41,
+     "h": 5.6,
+     "t": "TOTAL 3,833곳 · 완료 2,119곳"
+    }
+   ],
+   "credit": "UN 디지털도서관 A/2936 PDF 36면(부록 지도 서남 1/4) — 우측은 도별 표의 일부"
+  },
+  {
+   "file": "src/un_a2936_map_se_title.jpg",
+   "title": "동남 1/4쪽 — 지도 제목과 경상남도 표",
+   "boxes": [
+    {
+     "x": 40.5,
+     "y": 7,
+     "w": 26,
+     "h": 3.8,
+     "t": "경상남도 표 'Education 188 / 25'"
+    },
+    {
+     "x": 42.5,
+     "y": 31.5,
+     "w": 24,
+     "h": 4.5,
+     "t": "경상남도 'TOTAL 587 / 268'"
+    },
+    {
+     "x": 43,
+     "y": 46.5,
+     "w": 45,
+     "h": 30,
+     "t": "'REPUBLIC OF KOREA / UNKRA PROJECT SITES / AS AT 30 JUNE 1955'"
+    },
+    {
+     "x": 80,
+     "y": 0.5,
+     "w": 13,
+     "h": 8,
+     "t": "지도 오른쪽 끝 'TSUSHIMA ISLAND', 'JAPAN'"
+    }
+   ],
+   "credit": "UN 디지털도서관 A/2936 PDF 37면 — '(Showing Total Sites and Number Completed by Provinces)'"
+  }
+ ],
+ "cta_img": "src/un_a2936_cover.jpg",
+ "meta_top": 470
+}

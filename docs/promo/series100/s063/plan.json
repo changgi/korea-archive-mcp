@@ -1,0 +1,139 @@
+{
+ "n": 63,
+ "part": [
+  "Ⅹ",
+  "국제기구와 일본의 기록"
+ ],
+ "inst": "UN 디지털도서관",
+ "flag": "🇺🇳",
+ "say": "1991년 남북한 유엔 동시가입 결의 찾아줘",
+ "head": "1991.9.17 남북한 유엔 동시가입",
+ "big": "A/RES/46/1",
+ "facts": [
+  [
+   "결의",
+   "A/RES/46/1 · 제46차 총회 제1차 본회의 1991-09-17"
+  ],
+  [
+   "채택",
+   "초안 A/46/L.1을 'by acclamation' — 회의록 A/46/PV.1"
+  ],
+  [
+   "권고",
+   "안보리 결의 702(1991), 1991-08-08"
+  ],
+  [
+   "권리",
+   "UN 문서기호 문서 — ST/AI/189/Add.9/Rev.2 §2 퍼블릭 도메인"
+  ]
+ ],
+ "tool": "cross_search(sources=un, \"Korea admission membership 1991\")",
+ "link": "https://digitallibrary.un.org/record/133631",
+ "checked": "2026-11-22",
+ "tags": "#UN #유엔동시가입 #1991",
+ "hero": {
+  "file": "src/un_a46l1.jpg",
+  "pos": "center 45%",
+  "credit": "UN 디지털도서관 record 139619 · 결의 초안 A/46/L.1*(1991-09-18 재발행) 공동제안국 목록 · UN 문서, ST/AI/189/Add.9/Rev.2 §2(b) 퍼블릭 도메인"
+ },
+ "hook": "1991.9.17 남과 북,<br><span class=\"g\">같은 결의</span>로 유엔에",
+ "mosaic": [
+  {
+   "file": "src/un_a46pv1_cover.jpg",
+   "label": "본회의 회의록 A/46/PV.1 표지",
+   "pos": "center 30%"
+  },
+  {
+   "file": "src/un_a46pv1_p32.jpg",
+   "label": "같은 회의록 32쪽 — 채택 장면",
+   "pos": "center 40%"
+  },
+  {
+   "file": "src/un_sres702.jpg",
+   "label": "안보리 결의 702(1991) 수록 면",
+   "pos": "center 45%"
+  },
+  {
+   "file": "src/un_ares46_1.jpg",
+   "label": "총회 결의 46/1 수록 면",
+   "pos": "center 65%"
+  }
+ ],
+ "mosaic_title": "권고 → 초안 → 채택 — <span class=\"g\">4개 문서</span>로 본 하루",
+ "mosaic_credit": "UN 디지털도서관 record 127857(A/46/PV.1) · 125255(S/RES/702) · 133631(A/RES/46/1) — UN 문서기호 문서, 퍼블릭 도메인",
+ "ann": [
+  {
+   "file": "src/un_a46pv1_p32_crop.jpg",
+   "title": "회의록 A/46/PV.1 32쪽 — 밑줄까지 원문 그대로",
+   "boxes": [
+    {
+     "x": 67.2,
+     "y": 6.7,
+     "w": 16.6,
+     "h": 5.7,
+     "t": "의장 발언 '…adopts draft resolution A/46/L.1 by acclamation?'"
+    },
+    {
+     "x": 18.2,
+     "y": 12.4,
+     "w": 56.4,
+     "h": 5.7,
+     "t": "'Draft resolution A/46/L.1 was adopted (resolution 46/1'"
+    },
+    {
+     "x": 33.2,
+     "y": 23.7,
+     "w": 56.6,
+     "h": 5.7,
+     "t": "'…the Republic of Korea admitted to membership in the United Nations'"
+    },
+    {
+     "x": 18.1,
+     "y": 52.2,
+     "w": 70,
+     "h": 5.7,
+     "t": "'The delegation of the Democratic People's Republic of Korea was escorted to its place…' — 이어서 대한민국 대표단 착석"
+    }
+   ],
+   "credit": "UN 디지털도서관 A/46/PV.1(1991-09-20 임시 회의록, 회의 1991-09-17 10:30) PDF 18면 — 밑줄 친 문장은 원문 표기",
+   "crop_y": 0.0
+  },
+  {
+   "file": "src/un_ares46_1_crop.jpg",
+   "crop_y": 0.27,
+   "title": "결의 46/1 본문 — 두 개의 'Decides'",
+   "boxes": [
+    {
+     "x": 20,
+     "y": 30.5,
+     "w": 22,
+     "h": 4.2,
+     "t": "'Security Council of 8 August 1991' — 안보리 권고일"
+    },
+    {
+     "x": 7,
+     "y": 60.5,
+     "w": 85,
+     "h": 8,
+     "t": "'1. Decides to admit the Democratic People's Republic of Korea'"
+    },
+    {
+     "x": 7,
+     "y": 69.5,
+     "w": 85,
+     "h": 8,
+     "t": "'2. Decides to admit the Republic of Korea'"
+    },
+    {
+     "x": 57,
+     "y": 80.5,
+     "w": 32,
+     "h": 8.5,
+     "t": "'1st plenary meeting 17 September 1991'"
+    }
+   ],
+   "credit": "UN 디지털도서관 record 133631 A_RES_46_1-EN.pdf — 총회 결의집 12쪽에 수록된 면"
+  }
+ ],
+ "cta_img": "src/un_a46pv1_p32.jpg"
+}
