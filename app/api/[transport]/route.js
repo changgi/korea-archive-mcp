@@ -904,7 +904,10 @@ const COLLECT = {
   kyudb: async (q, n) => { // 서울대 규장각 — 기존 jKyu(목록+해제 POST) 코어 재사용
     const r = await jKyu(q);
     const list = Array.isArray(r['목록']) ? r['목록'] : [];
-    const cx = r['목록맥락'] || {};
+    const rows = r['목록항목'] || [];
+    if (rows.length) return rows.slice(0, n).map((x) => { const km = x.call.match(/^(奎|古|想白|一簑)/); const kn = km && { '奎': '규장각도서(奎)', '古': '고도서(古)', '想白': '상백문고', '一簑': '일사문고' }[km[1]];
+      return { title: `${x.title} · ${x.author}`.slice(0, 110), date: x.date, id: x.call, ...(kn ? { series: kn } : {}), url: 'https://kyudb.snu.ac.kr' }; });
+    const cx = {};
     return list.slice(0, n).map((t) => { const km = String(t).match(/(奎|古|想白|一簑)\s*\d/); const kn = km && { '奎': '규장각도서(奎)', '古': '고도서(古)', '想白': '상백문고', '一簑': '일사문고' }[km[1]]; return { title: cx[t] ? `${t} ${cx[t]}`.slice(0, 110) : String(t), date: '', id: String(t), ...(kn ? { series: kn } : {}), url: 'https://kyudb.snu.ac.kr' }; });
   },
   i815: async (q, n) => { // 독립기념관 — v1.32 목록 실체화: 최대 카테고리의 실제 자료 제목+GET 딥링크(data-mngno/gubun → detail.do), 나머지는 집계 신호
@@ -1181,9 +1184,15 @@ async function jSjw(query) {
   return { total, dist, earliest };
 }
 
+const kyuRows = (flat) => {
+  const rows = [];
+  const re = /(?:^|\s)\d{1,3}\.\s+(.{2,140}?)\s+청구기호\s*:\s*(\S{2,40})\s+편저자\s*:\s*(.{1,90}?)\s+간행년대\s*:\s*(.{1,50}?)\s+사부분류\s*:\s*(.{1,80}?)\s+(?:본문\s*:\s*(.{0,400}?)\s+)?상세정보/g;
+  for (const m of flat.matchAll(re)) rows.push({ call: m[2], title: m[1].split(/\s\d{1,3}\.\s+/).pop().trim(), author: m[3].trim(), date: m[4].trim(), cls: m[5].trim(), body: (m[6] || '').replace(/\.\.\.$/, '').trim().slice(0, 160) });
+  return rows.slice(0, 30);
+};
 async function jKyu(query) {
   // 실측 10.2s(12s 타임박스 근접 — cross_search 간헐 탈락 위험) → 목록·해제 2건 병렬 + 6h TTL 캐시
-  const ck = 'kyudb2:' + query;
+  const ck = 'kyudb3:' + query;
   const hit = _ttlCache.get(ck);
   if (hit && Date.now() - hit.t < 6 * 3600e3) return JSON.parse(hit.v);
   const out = {};
@@ -1191,10 +1200,8 @@ async function jKyu(query) {
     try {
       const b = await jdbPost(JKYU + '/search/search.do', { totalSearchString: query, searchArea: code }, { Referer: JKYU + '/' });
       out[label] = [...new Set([...b.matchAll(/(奎[\d軸]+)/g)].map((x) => x[1]))].slice(0, 30);
-      // v1.96.7: 번호만 나오던 결함 — 응답 본문에서 각 奎번호 주변 글(서명·편저자·연대가 함께 실리는 자리)을 함께 보존
-      const flat = mclean(b); const ctx = {};
-      for (const id of out[label].slice(0, 15)) { const i = flat.indexOf(id); if (i >= 0) ctx[id] = flat.slice(Math.max(0, i - 70), i + 110).replace(/\s+/g, ' ').trim(); }
-      out[label + '맥락'] = ctx;
+      // v1.96.7: 번호만 나오던 결함 — 결과 행 'N. 서명 청구기호 : 奎… 편저자 : … 간행년대 : … 사부분류 : … [본문 : …] 상세정보'(실측) 구조 판독
+      out[label + '항목'] = kyuRows(mclean(b));
     } catch (e) { out[label] = { error: e.message }; }
   }));
   // 정상 형태(양쪽 배열)이고 결과가 있을 때만 캐시 — 차단·오류 응답 오염 방지
@@ -2375,8 +2382,10 @@ const JB_CROSS = `국내외 대조 절차 — 순서를 틀리면 헛수고한�
         }
         if (mode === 'kyujanggak') {
           const r = await jKyu(q);
-          const fmt = (v, c) => Array.isArray(v) ? `${v.length}건` + ((c && Object.keys(c).length) ? '\n' + v.slice(0, 10).map((id) => `- ${id}${c[id] ? ' … ' + c[id] : ''}`).join('\n') : ` — ${v.slice(0, 12).join(' ')}`) : `오류(${v.error})`;
-          let out = `규장각 '${q}'\n목록: ${fmt(r['목록'], r['목록맥락'])}\n해제: ${fmt(r['해제'], r['해제맥락'])}`;
+          const fmt = (v, rows) => !Array.isArray(v) ? `오류(${v.error})` : (rows && rows.length)
+            ? `${v.length}건\n` + rows.slice(0, 10).map((x) => `- [${x.call}] ${x.title} · ${x.author} · ${x.date} · ${x.cls}${x.body ? `\n  해제: ${x.body}…` : ''}`).join('\n')
+            : `${v.length}건 — ${v.slice(0, 12).join(' ')}`;
+          let out = `규장각 '${q}'\n목록: ${fmt(r['목록'], r['목록항목'])}\n해제: ${fmt(r['해제'], r['해제항목'])}`;
           const lc = Array.isArray(r['목록']) ? r['목록'].length : 0; const ac = Array.isArray(r['해제']) ? r['해제'].length : 0;
           if (ac > lc) out += '\n★ 해제 검색이 목록보다 많습니다 — 절목·사목류가 상위 서명 아래 편차(編次)로 들어가 있을 수 있습니다.';
           out += `
