@@ -7,6 +7,9 @@ updates:
     open-pull-requests-limit: 3
     groups:
       runtime: { patterns: ["next", "react", "react-dom", "mcp-handler", "zod"] }
+    ignore:   # 메이저 업그레이드(next 16·zod 4·mcp-handler 2 등)는 API가 바뀌므로 자동 PR 제외 — 사람이 계획해 올린다(MAINTAINING.md)
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
   - package-ecosystem: github-actions
     directory: /
     schedule: { interval: monthly }

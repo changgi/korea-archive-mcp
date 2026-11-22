@@ -30,3 +30,15 @@ jobs:
           node scripts/ci-parity.mjs /tmp/mkt
           python3 -m py_compile /tmp/mkt/plugins/korea-archive/servers/server.py /tmp/mkt/mcp/server.py \
             /tmp/mkt/plugins/korea-archive/servers/kla/ledger.py /tmp/mkt/collector/kla/ledger.py
+  build:
+    # 실제 빌드 — 의존성 갱신(Dependabot)·코드 변경이 Vercel 배포를 깨지 않는지 병합 전에 확인
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+      - run: npx next build

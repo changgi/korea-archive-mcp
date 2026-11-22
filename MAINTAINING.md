@@ -25,7 +25,7 @@
 | `health` | 매주 월 | 30채널 골든 질의 + 같은 기록 묶기 회귀 | `auto-health` 이슈 |
 | `fixity-watch` | 매주 화 | 골든 기록 본문 지문(sha256-16) — 원문 개정 감지 | 원장(`public/fixity-ledger.json`) 이력 커밋 + 실패 |
 | `retry-blocked` · `nz-harvest` | 매주 화 | 차단 채널 재탐침 · NZ 정적 인덱스 갱신 | 실행 요약 |
-| Dependabot | 매월 | npm·Actions 의존성 갱신 PR | verify·golden이 자동 검증 |
+| Dependabot | 매월 | npm(마이너·패치만)·Actions 의존성 갱신 PR | verify의 **실제 빌드(next build)**가 병합 전 검증 |
 
 **할 일은 하나** — 저장소 Issues에서 `auto-health` 라벨을 본다. 열려 있으면 아래 3절.
 
@@ -54,6 +54,9 @@
 - [ ] `source_profile` 간이 프로파일(`QUICK_PROFILES`)·health 골든 질의 추가.
 - [ ] `tests/golden.json` 케이스 추가.
 - [ ] 스키마·설명이 바뀌면 **PlayMCP 콘솔 "정보 불러오기"** 재실행.
+
+### 메이저 업그레이드(next·zod·mcp-handler)
+자동 PR에서 제외된다. 올릴 때는 브랜치에서 `npm i <패키지>@<버전>` → `npx next build` → 로컬 `next start` 후 `python3 scripts/golden.py --url http://localhost:3000/api/mcp` → 프리뷰 배포에서 골든 재실행 → 병합. zod 4는 스키마 API(`z.coerce` 등)를, mcp-handler 2는 `createMcpHandler` 시그니처를 먼저 확인.
 
 ## 5. 배포 절차 (요약)
 
