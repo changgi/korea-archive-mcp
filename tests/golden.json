@@ -198,7 +198,8 @@
    },
    "must": [
     "IIIF 갤러리 규칙",
-    "openseadragon"
+    "openseadragon",
+    "kv\\.html"
    ],
    "level": "error"
   },

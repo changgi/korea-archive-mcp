@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>KV · KA 뷰어 (Korea Archive Viewer) — IIIF 기록 열람기 · KOREA ARCHIVE 통합검색</title>
+<meta name="description" content="KV(Korea Archive Viewer) — IIIF 매니페스트·컬렉션(Presentation 2·3)을 여는 KOREA ARCHIVE 통합검색 자체 뷰어 — 딥줌·컬렉션 탐색·메타데이터·나란히 비교·자동 넘김.">
+<style>
+:root{--bg:#0d0e11;--pn:#15171c;--ln:#2a2d35;--ink:#ecebe6;--mu:#9b9a93;--gd:#e0b04a;--bl:#24314a}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{background:var(--bg);color:var(--ink);font-family:"Pretendard","Apple SD Gothic Neo","Noto Sans KR",system-ui,sans-serif;display:flex;flex-direction:column;overflow:hidden}
+a{color:var(--gd)}
+button,select,input{font:inherit}
+.top{display:flex;align-items:center;gap:8px;padding:8px 12px;border-bottom:1px solid var(--ln);flex-wrap:wrap;background:#101216}
+.logo{font-weight:900;text-decoration:none;color:var(--ink);white-space:nowrap}.logo em{color:var(--gd);font-style:normal}
+#src{flex:1;min-width:220px;background:#1c1f26;border:1px solid var(--ln);color:var(--ink);border-radius:8px;padding:7px 10px;font-size:.86rem}
+.b{background:#1c1f26;border:1px solid var(--ln);color:#e6e5df;border-radius:8px;padding:6px 10px;font-size:.84rem;cursor:pointer;white-space:nowrap;text-decoration:none;display:inline-flex;align-items:center;gap:4px}
+.b:hover{border-color:var(--gd)}.b.on{background:var(--gd);color:#111;border-color:var(--gd);font-weight:800}
+.b.pri{background:var(--gd);color:#111;font-weight:800;border-color:var(--gd)}
+.main{flex:1;display:grid;grid-template-columns:270px minmax(0,1fr) 320px;min-height:0}
+.main.noleft{grid-template-columns:0 minmax(0,1fr) 320px}.main.noright{grid-template-columns:270px minmax(0,1fr) 0}.main.noleft.noright{grid-template-columns:0 minmax(0,1fr) 0}
+#left,#right{overflow:auto;background:var(--pn);min-width:0}
+#left{border-right:1px solid var(--ln)}#right{border-left:1px solid var(--ln);padding:12px 14px;font-size:.85rem}
+.noleft #left,.noright #right{visibility:hidden}
+#left .hd{position:sticky;top:0;background:var(--pn);padding:8px;border-bottom:1px solid var(--ln);z-index:2}
+#left input{width:100%;background:#1c1f26;border:1px solid var(--ln);color:var(--ink);border-radius:7px;padding:6px 8px;font-size:.82rem}
+#left .ct{color:var(--mu);font-size:.74rem;margin-top:5px}
+.it{display:flex;gap:8px;align-items:center;padding:6px 8px;cursor:pointer;font-size:.8rem;line-height:1.35;border-bottom:1px solid #1d2026}
+.it:hover,.it.on{background:#20242c}.it.on{box-shadow:inset 3px 0 0 var(--gd)}
+.it img{width:42px;height:42px;object-fit:cover;border-radius:4px;flex:none;background:#222}
+.it .nm{min-width:0;overflow:hidden;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical}
+.it .k{font-size:.7rem;color:var(--mu)}
+.it.coll{font-weight:800;color:var(--gd)}
+.center{display:flex;flex-direction:column;min-height:0;min-width:0}
+.panes{flex:1;display:flex;min-height:0;gap:2px;background:#000}
+.pane{flex:1;position:relative;min-width:0;display:flex;flex-direction:column}
+.pane .osd{flex:1;min-height:0}
+.pane .cap{position:absolute;left:0;right:0;top:0;z-index:4;padding:6px 10px;background:linear-gradient(rgba(0,0,0,.75),transparent);font-size:.8rem;pointer-events:none;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pane.act{outline:2px solid var(--gd);outline-offset:-2px}
+.nav{position:absolute;top:50%;transform:translateY(-50%);z-index:5;width:44px;height:44px;border-radius:50%;border:0;background:rgba(255,255,255,.88);font-size:22px;font-weight:900;cursor:pointer}
+.nav.p{left:8px}.nav.n{right:8px}.nav:disabled{opacity:.15}
+.bar{position:absolute;left:0;bottom:0;height:3px;background:var(--gd);width:0;z-index:6}
+.ctl{display:flex;gap:6px;align-items:center;padding:6px 10px;border-top:1px solid var(--ln);flex-wrap:wrap;background:#101216}
+.ctl .cnt{color:var(--mu);font-size:.8rem;font-variant-numeric:tabular-nums;margin-right:auto}
+#strip{display:flex;gap:5px;overflow-x:auto;padding:6px 10px;background:#0b0c0f;border-top:1px solid var(--ln);min-height:72px}
+#strip img{height:58px;width:58px;object-fit:cover;border-radius:4px;opacity:.45;cursor:pointer;flex:none;border:2px solid transparent;background:#1a1c22}
+#strip img.on{opacity:1;border-color:var(--gd)}
+#right h2{font-size:1rem;line-height:1.45;margin-bottom:6px;overflow-wrap:anywhere}
+#right h3{font-size:.78rem;color:var(--gd);letter-spacing:.05em;margin:14px 0 6px}
+#right .sm{color:#cfcdc6;margin:6px 0;overflow-wrap:anywhere}
+#right dl{display:grid;grid-template-columns:auto 1fr;gap:5px 10px}#right dt{color:#e0907f;font-weight:800;white-space:nowrap;max-width:9em;overflow:hidden;text-overflow:ellipsis}#right dd{color:#ddd;overflow-wrap:anywhere}
+#right .lk{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.msg{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:var(--mu);font-size:.95rem;text-align:center;padding:30px;z-index:3;pointer-events:none}
+#help{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:50;display:none;align-items:center;justify-content:center}
+#help.on{display:flex}#help>div{background:var(--pn);border:1px solid var(--ln);border-radius:12px;padding:20px 22px;max-width:560px;font-size:.88rem;line-height:1.7}
+#help kbd{background:#2a2d35;border-radius:4px;padding:0 6px}
+@media (max-width:900px){.main,.main.noleft,.main.noright{grid-template-columns:minmax(0,1fr)!important;grid-template-rows:minmax(0,1fr)}#left,#right{position:fixed;top:96px;bottom:0;width:86vw;z-index:30;box-shadow:0 0 30px #000}#left{left:0}#right{right:0}.noleft #left,.noright #right{display:none}.top{gap:6px}#src{order:9;flex-basis:100%}}
+</style></head><body>
+<div class="top">
+<a class="logo" href="index.html" title="KV — Korea Archive Viewer">KV <em>KA 뷰어</em></a>
+<button class="b" id="tl" title="목록 패널">☰ 목록</button>
+<input id="src" placeholder="IIIF 매니페스트·컬렉션 URL을 붙여 넣고 Enter (Presentation 2·3)" spellcheck="false">
+<button class="b pri" id="go">열기</button>
+<button class="b" id="cmp" title="두 창 나란히 비교 (Mirador식)">⧉ 비교</button>
+<button class="b" id="tr" title="정보 패널">ⓘ 정보</button>
+<button class="b" id="hp" title="도움말">?</button>
+<a class="b" href="iiif.html">갤러리</a>
+</div>
+<div class="main" id="main">
+<aside id="left"><div class="hd"><input id="flt" placeholder="목록 거르기"><div class="ct" id="lct"></div></div><div id="list"></div></aside>
+<section class="center">
+<div class="panes" id="panes"></div>
+<div class="ctl"><span class="cnt" id="cnt">—</span>
+<button class="b" id="pl">▶ 자동 넘김</button><select class="b" id="spd"><option value="3000">3초</option><option value="5000" selected>5초</option><option value="8000">8초</option></select>
+<button class="b" id="rot" title="90° 회전 (R)">⟳ 회전</button><button class="b" id="fs" title="전체 화면 (F)">⛶</button>
+<button class="b" id="sh" title="지금 보는 장의 주소 복사">🔗 공유</button>
+<a class="b" id="omir" target="_blank" rel="noopener">Mirador</a><a class="b" id="ouv" target="_blank" rel="noopener">UV</a></div>
+<div id="strip"></div>
+</section>
+<aside id="right"></aside>
+</div>
+<div id="help"><div><b style="color:var(--gd)">KV · KA 뷰어(Korea Archive Viewer) 사용법</b><br>
+· 주소창에 IIIF 매니페스트·컬렉션 URL을 넣고 <b>열기</b> — 우리 갤러리·Internet Archive·Europeana·Gallica·NDL 등 어디 것이든(v2·v3). 컬렉션은 왼쪽 목록에서 고릅니다.<br>
+· 주소로 바로 열기: <code>kv.html?manifest=&lt;URL&gt;</code> (또는 <code>?iiif-content=</code>) · 특정 장: <code>&amp;canvas=3</code> · 비교: <code>&amp;compare=&lt;URL2&gt;</code><br>
+· <kbd>←</kbd><kbd>→</kbd> 넘김 · <kbd>Space</kbd> 자동 넘김 · <kbd>R</kbd> 회전 · <kbd>F</kbd> 전체 화면 · <kbd>C</kbd> 비교 · 마우스 휠·두 손가락으로 확대<br>
+· <b>⧉ 비교</b>: 화면을 둘로 나눠 서로 다른 기록을 나란히 — 누른 창(노란 테두리)이 목록·넘김의 대상이 됩니다.<br>
+· 권리: 이미지마다 오른쪽 정보 패널의 권리·출처를 확인하세요. 기관 IIIF는 원 기관이 제공하는 원본입니다.<br>
+<button class="b pri" style="margin-top:12px" onclick="document.getElementById('help').classList.remove('on')">닫기</button></div></div>
+<script src="https://cdn.jsdelivr.net/npm/openseadragon@4.1.1/build/openseadragon/openseadragon.min.js"></script>
+<script>
+(() => {
+  const DEF = new URL('iiif/collection.json', location.href).href;
+  const $ = (s) => document.querySelector(s);
+  const esc = (t) => String(t ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  // ── IIIF 정규화: Presentation 2·3 → {type, id, label, summary, md[], rights, req, home[], thumb, canvases[], items[]}
+  const lab = (x) => { if (x == null) return ''; if (typeof x === 'string') return x; if (Array.isArray(x)) return x.map(lab).filter(Boolean).join(' · ');
+    if (x['@value']) return x['@value']; const v = x.ko || x.none || x.en || Object.values(x)[0]; return Array.isArray(v) ? v.join(' · ') : String(v || ''); };
+  const strip = (h) => String(h || '').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
+  const idOf = (o) => o && (o.id || o['@id']);
+  const thumbOf = (o) => { const t = [].concat(o.thumbnail || [])[0]; if (!t) return ''; if (typeof t === 'string') return t; const sv = [].concat(t.service || [])[0];
+    return idOf(t) || (sv ? idOf(sv) + '/full/,120/0/default.jpg' : ''); };
+  const cache = new Map();
+  async function getJ(u) { if (cache.has(u)) return cache.get(u); const p = fetch(u).then((r) => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); }); cache.set(u, p); p.catch(() => cache.delete(u)); return p; }
+  function norm(j) {
+    const t = String(j.type || j['@type'] || ''); const isColl = /Collection/i.test(t);
+    const md = [].concat(j.metadata || []).map((m) => [strip(lab(m.label)), strip(lab(m.value))]).filter((x) => x[1]);
+    const req = j.requiredStatement ? [strip(lab(j.requiredStatement.label)), strip(lab(j.requiredStatement.value))] : (j.attribution ? ['출처', strip(lab(j.attribution))] : null);
+    const home = [].concat(j.homepage || j.related || []).map((h) => typeof h === 'string' ? { u: h, t: '원 기관 페이지' } : { u: idOf(h), t: strip(lab(h.label)) || '원 기관 페이지' }).filter((h) => h.u);
+    const base = { id: idOf(j), label: strip(lab(j.label)), summary: strip(lab(j.summary || j.description)), md, rights: j.rights || j.license || '', req, home, thumb: thumbOf(j) };
+    if (isColl) {
+      const kids = [...[].concat(j.items || []), ...[].concat(j.collections || []), ...[].concat(j.manifests || [])].map((m) => ({ id: idOf(m), label: strip(lab(m.label)), thumb: thumbOf(m), coll: /Collection/i.test(m.type || m['@type'] || ''), inline: (m.items && /Manifest/i.test(m.type || '')) ? m : null }));
+      return { ...base, kind: 'collection', items: kids };
+    }
+    const cvs = j.items || (j.sequences && j.sequences[0] && j.sequences[0].canvases) || [];
+    const canvases = cvs.map((c, i) => {
+      let body = null; let svc = null;
+      if (c.items) { const a = ((c.items[0] || {}).items || [])[0] || {}; body = [].concat(a.body || [])[0] || {}; if (body.type === 'Choice') body = (body.items || [])[0] || {}; }
+      else if (c.images) body = (c.images[0] || {}).resource || {};
+      body = body || {}; svc = [].concat(body.service || [])[0];
+      const sid = svc && idOf(svc);
+      const cmd = [].concat(c.metadata || []).map((m) => [strip(lab(m.label)), strip(lab(m.value))]).filter((x) => x[1]);
+      const ch = [].concat(c.homepage || []).map((h) => ({ u: idOf(h), t: strip(lab(h.label)) || '원 기관 페이지' })).filter((h) => h.u);
+      return { n: i, label: strip(lab(c.label)) || `${i + 1}`, w: c.width, h: c.height, img: idOf(body), svc: sid ? sid.replace(/\/info\.json$/, '') : '', md: cmd, home: ch, rights: c.rights || '',
+        thumb: thumbOf(c) || (sid ? sid.replace(/\/info\.json$/, '') + '/full/,120/0/default.jpg' : idOf(body)) };
+    });
+    return { ...base, kind: 'manifest', canvases };
+  }
+  // ── 창(pane): OSD 1개 + 현재 매니페스트/장
+  const panes = [];
+  function mkPane() {
+    const el = document.createElement('div'); el.className = 'pane';
+    el.innerHTML = '<div class="cap"></div><div class="osd"></div><button class="nav p" aria-label="이전">‹</button><button class="nav n" aria-label="다음">›</button><div class="bar"></div><div class="msg">왼쪽 목록에서 기록을 고르세요</div>';
+    $('#panes').appendChild(el);
+    const P = { el, man: null, src: '', k: 0, rot: 0, osd: OpenSeadragon({ element: el.querySelector('.osd'), prefixUrl: 'https://cdn.jsdelivr.net/npm/openseadragon@4.1.1/build/openseadragon/images/', showNavigator: true, navigatorPosition: 'BOTTOM_RIGHT', maxZoomPixelRatio: 4, visibilityRatio: .5, crossOriginPolicy: 'Anonymous', showRotationControl: false, gestureSettingsTouch: { pinchRotate: false } }) };
+    P.osd.addHandler('open-failed', () => { if (P.man) { const c = P.man.canvases[P.k]; if (c && c.svc && c.img && !P._fb) { P._fb = 1; P.osd.open({ type: 'image', url: c.img, buildPyramid: false }); } else msg(P, '이미지를 열지 못했습니다 — 원 기관이 외부 열람(CORS)을 막았을 수 있습니다.'); } });
+    el.querySelector('.p').onclick = () => go(P, P.k - 1); el.querySelector('.n').onclick = () => go(P, P.k + 1);
+    el.addEventListener('pointerdown', () => setAct(P), true);
+    panes.push(P); setAct(P); return P;
+  }
+  let act = null;
+  function setAct(P) { act = P; panes.forEach((x) => x.el.classList.toggle('act', x === P && panes.length > 1)); renderStrip(); renderInfo(); syncCtl(); markList(); }
+  const msg = (P, t) => { const m = P.el.querySelector('.msg'); m.textContent = t || ''; m.style.display = t ? 'flex' : 'none'; };
+  async function openManifest(P, u, k = 0, inline) {
+    msg(P, '불러오는 중…');
+    try { const m = inline ? norm(inline) : norm(await getJ(u)); if (m.kind === 'collection') { msg(P, ''); await loadCollection(u, m); return; }
+      if (!m.canvases.length) { msg(P, '이미지가 없는 매니페스트입니다.'); return; }
+      P.man = m; P.src = u; msg(P, ''); go(P, Math.min(k, m.canvases.length - 1)); }
+    catch (e) { msg(P, `불러오지 못했습니다 (${e.message}). 원 기관이 외부 열람(CORS)을 막았거나 주소가 다릅니다.`); }
+  }
+  function go(P, k) {
+    if (!P.man || k < 0 || k >= P.man.canvases.length) return;
+    P.k = k; P._fb = 0; const c = P.man.canvases[k];
+    P.osd.open(c.svc ? c.svc + '/info.json' : { type: 'image', url: c.img, buildPyramid: false });
+    P.osd.viewport.setRotation(P.rot);
+    P.el.querySelector('.cap').textContent = `${P.man.label} · ${c.label}`;
+    P.el.querySelector('.p').disabled = k === 0; P.el.querySelector('.n').disabled = k === P.man.canvases.length - 1;
+    if (P === act) { renderStrip(); renderInfo(); syncCtl(); }
+    if (playing && P === act) kick();
+    updURL();
+  }
+  // ── 컬렉션 목록(왼쪽)
+  let coll = null, collSrc = '';
+  async function loadCollection(u, m) {
+    coll = m; collSrc = u; $('#flt').value = ''; renderList();
+    if (act && !act.man) { const first = coll.items.find((x) => !x.coll); if (first) openManifest(act, first.id, 0, first.inline); }
+  }
+  function renderList() {
+    if (!coll) { $('#list').innerHTML = '<p style="padding:12px;color:var(--mu);font-size:.82rem">컬렉션이 아니라 단일 매니페스트입니다.</p>'; $('#lct').textContent = ''; return; }
+    const q = $('#flt').value.trim().toLowerCase();
+    const it = coll.items.filter((x) => !q || x.label.toLowerCase().includes(q));
+    $('#lct').textContent = `${esc(coll.label).slice(0, 60)} — ${it.length}/${coll.items.length}`;
+    $('#list').innerHTML = it.map((x) => `<div class="it${x.coll ? ' coll' : ''}" data-u="${esc(x.id)}" data-c="${x.coll ? 1 : 0}"><img loading="lazy" src="${esc(x.thumb)}" alt="" onerror="this.style.visibility='hidden'"><div><div class="nm">${x.coll ? '📁 ' : ''}${esc(x.label)}</div></div></div>`).join('');
+    markList();
+  }
+  function markList() { document.querySelectorAll('#list .it').forEach((e) => e.classList.toggle('on', !!act && e.dataset.u === act.src)); }
+  $('#list').addEventListener('click', (e) => { const d = e.target.closest('.it'); if (!d) return; const x = coll.items.find((y) => y.id === d.dataset.u);
+    if (d.dataset.c === '1') { open(d.dataset.u); return; } openManifest(act, d.dataset.u, 0, x && x.inline); if (innerWidth < 900) $('#main').classList.add('noleft'); });
+  $('#flt').addEventListener('input', renderList);
+  // ── 썸네일 띠·정보 패널·하단 제어
+  function renderStrip() {
+    const P = act; if (!P || !P.man) { $('#strip').innerHTML = ''; delete $('#strip').dataset.for; return; }
+    if ($('#strip').dataset.for !== P.src || !$('#strip').children.length) { $('#strip').dataset.for = P.src; $('#strip').innerHTML = P.man.canvases.map((c, i) => `<img loading="lazy" src="${esc(c.thumb)}" data-k="${i}" title="${esc(c.label)}" alt="">`).join(''); }
+    $('#strip').querySelectorAll('img').forEach((x, i) => x.classList.toggle('on', i === P.k));
+    $('#strip').querySelector('img.on')?.scrollIntoView({ inline: 'center', block: 'nearest' });
+  }
+  $('#strip').addEventListener('click', (e) => { if (e.target.dataset.k) go(act, +e.target.dataset.k); });
+  function renderInfo() {
+    const P = act; const m = P && P.man; if (!m) { $('#right').innerHTML = coll ? `<h2>${esc(coll.label)}</h2><p class="sm">${esc(coll.summary)}</p>` : ''; return; }
+    const c = m.canvases[P.k]; const dl = (a) => a.length ? '<dl>' + a.map(([k, v]) => `<dt title="${esc(k)}">${esc(k)}</dt><dd>${esc(v)}</dd>`).join('') + '</dl>' : '';
+    const lk = (a) => a.map((h) => `<a class="b" href="${esc(h.u)}" target="_blank" rel="noopener">${esc(h.t)} ↗</a>`).join('');
+    const rt = (r) => r ? `<p class="sm">권리: ${/^https?:/.test(r) ? `<a href="${esc(r)}" target="_blank" rel="noopener">${esc(r.replace(/^https?:\/\//, ''))}</a>` : esc(r)}</p>` : '';
+    $('#right').innerHTML = `<h2>${esc(c.label)}</h2>${dl(c.md)}${rt(c.rights)}<div class="lk">${lk(c.home)}${c.img ? `<a class="b" href="${esc(c.svc ? c.svc + '/full/max/0/default.jpg' : c.img)}" target="_blank" rel="noopener">이미지 ↗</a>` : ''}</div>
+      <h3>기록 묶음(매니페스트)</h3><h2 style="font-size:.92rem">${esc(m.label)}</h2>${m.summary ? `<p class="sm">${esc(m.summary)}</p>` : ''}${dl(m.md)}${m.req ? `<p class="sm"><b>${esc(m.req[0])}</b> ${esc(m.req[1])}</p>` : ''}${rt(m.rights)}
+      <div class="lk">${lk(m.home)}<a class="b" href="${esc(P.src)}" target="_blank" rel="noopener">IIIF JSON</a></div>`;
+  }
+  function syncCtl() {
+    const P = act; $('#cnt').textContent = P && P.man ? `${P.k + 1} / ${P.man.canvases.length}` : '—';
+    const u = (P && P.src) || collSrc; $('#omir').href = 'https://projectmirador.org/embed/?iiif-content=' + encodeURIComponent(u || DEF); $('#ouv').href = 'https://uv-v4.netlify.app/#?manifest=' + encodeURIComponent(u || DEF);
+  }
+  // ── 자동 넘김
+  let playing = false, tm = null, t0 = 0;
+  const spd = () => +$('#spd').value;
+  function kick() { clearTimeout(tm); t0 = performance.now(); tm = setTimeout(() => { const P = act; if (!P || !P.man) return setPlay(false); if (P.k < P.man.canvases.length - 1) go(P, P.k + 1); else nextManifest(P) || setPlay(false); }, spd()); }
+  function nextManifest(P) { if (!coll) return false; const ms = coll.items.filter((x) => !x.coll); const i = ms.findIndex((x) => x.id === P.src); if (i < 0 || i >= ms.length - 1) return false; openManifest(P, ms[i + 1].id, 0, ms[i + 1].inline); return true; } // 컬렉션이면 다음 기록으로 이어서
+  (function tick() { panes.forEach((P) => { P.el.querySelector('.bar').style.width = playing && P === act ? Math.min(100, (performance.now() - t0) / spd() * 100) + '%' : '0'; }); requestAnimationFrame(tick); })();
+  function setPlay(on) { playing = on; $('#pl').classList.toggle('on', on); $('#pl').textContent = on ? '❚❚ 멈춤' : '▶ 자동 넘김'; on ? kick() : clearTimeout(tm); }
+  $('#pl').onclick = () => setPlay(!playing); $('#spd').onchange = () => playing && kick();
+  $('#rot').onclick = () => { const P = act; P.rot = (P.rot + 90) % 360; P.osd.viewport.setRotation(P.rot); };
+  $('#fs').onclick = () => document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen?.();
+  $('#sh').onclick = async () => { updURL(); try { await navigator.clipboard.writeText(location.href); $('#sh').textContent = '✓ 복사됨'; } catch { prompt('이 주소를 복사하세요', location.href); } setTimeout(() => ($('#sh').textContent = '🔗 공유'), 1500); };
+  $('#cmp').onclick = () => toggleCompare();
+  function toggleCompare(u2) {
+    if (panes.length === 1) { const P2 = mkPane(); $('#cmp').classList.add('on'); if (u2) openManifest(P2, u2); else if (panes[0].man) openManifest(P2, panes[0].src, Math.min(panes[0].k + 1, panes[0].man.canvases.length - 1)); }
+    else { const P2 = panes.pop(); P2.osd.destroy(); P2.el.remove(); $('#cmp').classList.remove('on'); setAct(panes[0]); }
+    updURL();
+  }
+  $('#tl').onclick = () => $('#main').classList.toggle('noleft'); $('#tr').onclick = () => $('#main').classList.toggle('noright');
+  $('#hp').onclick = () => $('#help').classList.add('on');
+  // ── 주소(?manifest=·?iiif-content=·&canvas=·&compare=)
+  function updURL() { const p = new URLSearchParams(); const P = panes[0]; const top = collSrc && P && P.src !== collSrc ? collSrc : null;
+    if (top) p.set('collection', top); if (P && P.src) p.set('manifest', P.src); if (P && P.man) p.set('canvas', P.k + 1); if (panes[1] && panes[1].src) p.set('compare', panes[1].src);
+    history.replaceState(null, '', '?' + p.toString()); }
+  async function open(u) { const P = act || panes[0]; coll = null; collSrc = ''; P.man = null; P.src = ''; $('#src').value = u; await openManifest(P, u); }
+  $('#go').onclick = () => { const u = $('#src').value.trim(); if (u) open(u); };
+  $('#src').addEventListener('keydown', (e) => { if (e.key === 'Enter') $('#go').click(); });
+  document.addEventListener('keydown', (e) => { if (e.target.tagName === 'INPUT') return; const P = act; if (!P) return;
+    if (e.key === 'ArrowRight') go(P, P.k + 1); else if (e.key === 'ArrowLeft') go(P, P.k - 1); else if (e.key === ' ') { e.preventDefault(); setPlay(!playing); }
+    else if (e.key === 'r' || e.key === 'R') $('#rot').click(); else if (e.key === 'f' || e.key === 'F') $('#fs').click(); else if (e.key === 'c' || e.key === 'C') toggleCompare(); else if (e.key === 'Escape') $('#help').classList.remove('on'); });
+  document.addEventListener('dragover', (e) => e.preventDefault());
+  document.addEventListener('drop', (e) => { e.preventDefault(); const u = (e.dataTransfer.getData('text/uri-list') || e.dataTransfer.getData('text') || '').trim().split('\n')[0]; const m = u.match(/[?&](?:manifest|iiif-content)=([^&]+)/); open(m ? decodeURIComponent(m[1]) : u); });
+  if (innerWidth < 900) $('#main').classList.add('noleft', 'noright');
+  mkPane();
+  (async () => { const q = new URLSearchParams(location.search); const man = q.get('manifest') || q.get('iiif-content'); const col = q.get('collection');
+    if (col) { $('#src').value = col; try { const m = norm(await getJ(col)); if (m.kind === 'collection') { coll = m; collSrc = col; renderList(); } } catch {} }
+    const start = man || (col ? null : DEF); if (start) { if (!col) $('#src').value = start; await openManifest(panes[0], start, Math.max(0, (+q.get('canvas') || 1) - 1)); }
+    if (q.get('compare')) toggleCompare(q.get('compare')); syncCtl(); })();
+})();
+</script>
+</body></html>
