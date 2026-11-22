@@ -1799,12 +1799,32 @@ const JB_CROSS = `국내외 대조 절차 — 순서를 틀리면 헛수고한�
             if (!ii.url && !lic) return text(`'${title}' — 파일 미발견 또는 메타 없음. File: 제목/URL을 확인하십시오.`);
             const jr = judgeRights('', '', lic); // KOGL(공공누리) 등 공용 판정 규칙 재사용
             const rights = /public domain/i.test(lic) ? 'A(퍼블릭 도메인 표기)' : /^cc/i.test(lic) ? `B(${lic} — 조건 준수 시 이용)` : jr[0] !== 'D' ? `${jr[0]}(${jr[1].replace('[자동초판] ', '')})` : `D('${lic || '미표기'}' — 확인 필요)`;
+            let nline = ''; // v1.91: 파일명의 NARA 번호 → 카탈로그 원본 자동 대조(실재·계보·Use Restriction)
+            const nm = title.match(/[-_ ]NARA[-_ ]+(\d{5,10})\.\w+$/i);
+            if (nm) {
+              const naid = nm[1], key = process.env.NARA_API_KEY;
+              nline = `【NARA 원본 대조】 파일명 NAID ${naid} — ` + (key ? '조회 시간 초과 또는 실패, judge_rights(naid=' + naid + ')로 재확인\n' : '서버 키 없음, judge_rights(naid=' + naid + ')로 확인\n');
+              if (key) await Promise.race([(async () => {
+                try {
+                  const raw = await cachedText('naid:' + naid, 24 * 3600e3, () => gtext(`https://catalog.archives.gov/api/v2/records/search?naId=${naid}&limit=1`, { Accept: 'application/json', 'x-api-key': key }), '"naId"');
+                  const rec = (((((JSON.parse(raw).body || {}).hits || {}).hits) || [])[0] || { _source: {} })._source.record;
+                  if (!rec || String(rec.naId) !== naid) { nline = `【NARA 원본 대조】 NAID ${naid} — 카탈로그에 없음(파일명 번호 오기 가능) → 업로더 라이선스만으로 게재 판단 금지\n`; return; }
+                  const ur = rec.useRestriction || {};
+                  const urs = typeof ur === 'string' ? ur : [ur.status, ur.note, (ur.specificUseRestrictions || []).join('/')].filter(Boolean).join(' · ');
+                  const cls = /unrestricted/i.test(urs) && !/restricted\s*[-–]|possibly|fully restricted/i.test(urs) ? 'A(제한 없음 실확인)' : /restricted/i.test(urs) ? 'C(제한 표기 — 기관 확인 필요)' : '판정 보류(Use Restriction 미기재)';
+                  nline = `【NARA 원본 대조】 NAID ${naid} 원본 실재 확인 — ${norm(rec.title || '').slice(0, 110)}\n`
+                    + `  계보: ${naraChain(rec) || '—'} · 생산: ${naraDate(rec) || '—'} · 소장 번호: ${rec.localIdentifier || '—'}\n`
+                    + `  Use Restriction '${urs || '미기재'}' → ${cls} · https://catalog.archives.gov/id/${naid}\n`;
+                } catch { /* 실패 — 기본 안내 유지 */ }
+              })(), sleep(6000)]);
+            }
             return text(`위키미디어 공용 파일 판독 — ${title.replace(/^File:/, '')}\n`
               + [g('DateTimeOriginal') && `촬영/제작: ${g('DateTimeOriginal').slice(0, 40)}`, g('Artist') && `작가: ${g('Artist').slice(0, 70)}`, ii.width && `원본 ${ii.width}×${ii.height}`].filter(Boolean).join(' · ') + '\n'
               + `라이선스: ${lic || '(미표기)'} → 권리 초판정 ${rights}\n`
               + (g('Credit') ? `출처(원 소장처): ${g('Credit').slice(0, 160)}\n` : '')
               + (g('ImageDescription') ? `【설명】\n${g('ImageDescription').slice(0, 1200)}\n` : '')
-              + (ii.url ? `원본 이미지: ${ii.url}\n` : '') + `파일 페이지: https://commons.wikimedia.org/wiki/${encodeURIComponent(title.replace(/ /g, '_'))}\n`
+              + nline
+              + (ii.url ? `원본 이미지: ${String(ii.url).split('?')[0]}\n` : '') + `파일 페이지: https://commons.wikimedia.org/wiki/${encodeURIComponent(title.replace(/ /g, '_'))}\n`
               + '※ 라이선스는 업로더 기재 — 게재 전 원 소장처(NH·NARA 번호 등) 카탈로그와 교차검증(nara_search·judge_rights).');
           }
           const items = await COLLECT.commons(q, Math.min(max_results, 10));
