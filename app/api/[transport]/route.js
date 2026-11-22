@@ -198,6 +198,29 @@ const norm = (s) => (s == null ? '' : String(s)).replace(/<[^>]+>/g, '').replace
 const dedupKey = (it) => norm(it.title).toLowerCase().replace(/[^a-z0-9가-힣一-鿿]/g, '').slice(0, 50) + '|' + (it.id || '');
 // run collectors concurrently; merge, dedup by title|id, union the source tags (상호보완: 한 record를 여러 채널이 확인)
 const SOURCE_TIMEBOX_MS = 12000; // 소스별 타임박스 — 최저속(차단 대기) 소스가 전체 지연을 지배하지 않게 (실측 21.7s → ~12s)
+// v1.89: 원본 확인 — 재게시·재수집본의 sameAs NAID가 결과에 없으면 NARA 카탈로그를 직접 조회해 원본 실재를 확인하고 계보·날짜·매체를 채운다(최대 4건·6s·24h 캐시)
+async function resolveOrigins(items, stats) {
+  const key = process.env.NARA_API_KEY; if (!key) return;
+  const todo = items.filter((it) => !it.sources.some((s) => s.startsWith('nara')) && /^NAID \d+$/.test(it.sameAs || '')).slice(0, 4);
+  if (!todo.length) return;
+  let ok = 0;
+  await Promise.race([Promise.all(todo.map(async (it) => {
+    try {
+      const naid = it.sameAs.slice(5);
+      const raw = await cachedText('naid:' + naid, 24 * 3600e3, () => gtext(`https://catalog.archives.gov/api/v2/records/search?naId=${naid}&limit=1`, { Accept: 'application/json', 'x-api-key': key }), '"naId"');
+      const rec = (((((JSON.parse(raw).body || {}).hits || {}).hits) || [])[0] || { _source: {} })._source.record;
+      if (!rec || String(rec.naId) !== naid) return; // 원본 미확인 — 연결 정보만 유지
+      const link = `${it.sources[0].split('·')[0]}:${it.id || it.url}`;
+      if (norm(rec.title).toLowerCase() !== norm(it.title).toLowerCase()) it.altTitle = it.title.slice(0, 110);
+      it.title = norm(rec.title || it.title); it.id = `NAID ${naid}`; it.url = `https://catalog.archives.gov/id/${naid}`; it.sameAs = link;
+      const po = naraChain(rec); if (po) it.series = po;
+      if (!it.date) it.date = naraDate(rec);
+      const d0 = String((((rec.digitalObjects || [])[0]) || {}).objectUrl || ''); if (!it.media && d0) it.media = d0;
+      it.sources.unshift('nara·원본확인'); ok++;
+    } catch { /* 조회 실패 — 연결 정보만 유지 */ }
+  })), sleep(6000)]);
+  if (ok) stats.push(`nara원본확인:${ok}`);
+}
 async function collectMerged(collectors) {
   const boxed = (fn) => Promise.race([fn(), new Promise((_, rej) => setTimeout(() => rej(new Error('timebox 12s')), SOURCE_TIMEBOX_MS))]);
   const settled = await Promise.allSettled(collectors.map((c) => boxed(c.fn)));
@@ -2471,6 +2494,7 @@ item_cd 5종(자료 성격별): ART 도설·회화 / ETC 두루마리·축 / DRR
         }
       }
       const { items, stats } = await collectMerged(jobs);
+      await resolveOrigins(items, stats);
       items.sort((a, b) => b.sources.length - a.sources.length);
       if (format === 'manifest') { // 발굴 수집기록 매니페스트 — 발굴 행위 자체를 맥락·증거성 갖춘 현용기록으로(ISAD(G)·RiC 지향)
         const recs = items.slice(0, 30);
