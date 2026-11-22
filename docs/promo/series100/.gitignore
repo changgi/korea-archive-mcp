@@ -1,0 +1,7 @@
+# 원본·영상 프레임·중간 산출물은 저장소에 넣지 않는다(카드에 임베드됨) — 대장(ledger.json)과 plan.json으로 재현
+*/src/
+*/video/
+*/build/
+*.zip
+_sheet.jpg
+s000/
