@@ -1,0 +1,134 @@
+{
+ "n": 68,
+ "part": [
+  "Ⅹ",
+  "국제기구와 일본의 기록"
+ ],
+ "inst": "일본 국립국회도서관 NDL",
+ "flag": "🇯🇵",
+ "say": "1930년 금강산 사진첩 찾아줘",
+ "head": "1930 『萬二千峰の金剛山 朝鮮』",
+ "big": "PID 1178514",
+ "facts": [
+  [
+   "자료",
+   "万二千峰の金剛山 : 朝鮮 · 徳田写真館 編 · 昭和5(1930)"
+  ],
+  [
+   "구성",
+   "NDL 디지털컬렉션 110코마 · 사진 면마다 일·영 해설"
+  ],
+  [
+   "접근",
+   "IIIF 공개 이미지 API (dl.ndl.go.jp/api/iiif)"
+  ],
+  [
+   "권리",
+   "NDL 디지털컬렉션 rights 'pdm'(퍼블릭 도메인) · 인터넷 공개"
+  ]
+ ],
+ "tool": "NDL Search OpenSearch(title=金剛山) → dl.ndl.go.jp item API(pid=1178514) → IIIF",
+ "link": "https://dl.ndl.go.jp/pid/1178514",
+ "checked": "2026-11-22",
+ "tags": "#NDL #금강산 #신계사",
+ "hero": {
+  "file": "src/ndl_1178514_015_shinkeiji.jpg",
+  "pos": "center 40%",
+  "credit": "국립국회도서관 디지털컬렉션 『万二千峰の金剛山 : 朝鮮』(徳田写真館, 1930) 15코마 'Shinkeiji Temple, Outer Kongo.' · Public Domain(NDL 'pdm')"
+ },
+ "hook": "1930년 사진첩 속<br><span class=\"g\">금강산 신계사</span>",
+ "mosaic": [
+  {
+   "file": "src/ndl_1178514_011_panorama.jpg",
+   "label": "11코마 · 펼침 파노라마 'Outer Kongo'"
+  },
+  {
+   "file": "src/ndl_1178514_013_shusenho.jpg",
+   "label": "13코마 · 'Distant view of Shusenho peak'"
+  },
+  {
+   "file": "src/ndl_1178514_033_onseiri.jpg",
+   "label": "33코마 · 'Onseiri, Outer Kongo.' 「温井里全景」"
+  },
+  {
+   "file": "src/ndl_1178514_059_hotel.jpg",
+   "label": "59코마 · 'Choanji Rail-way Hotel, Inner Kongo.'"
+  }
+ ],
+ "mosaic_title": "한 권 110코마 — <span class=\"g\">외금강·내금강</span>",
+ "mosaic_credit": "국립국회도서관 디지털컬렉션 PID 1178514 · 徳田写真館 編(1930) · NDL 권리 표시 'pdm'(퍼블릭 도메인) — 캡션은 사진첩 인쇄 문구",
+ "ann": [
+  {
+   "file": "src/ndl_1178514_015_shinkeiji.jpg",
+   "crop_y": 0.15,
+   "title": "15코마 신계사 — 사진 속에서 보이는 것",
+   "boxes": [
+    {
+     "x": 9,
+     "y": 50,
+     "w": 10.5,
+     "h": 28,
+     "t": "층층이 쌓은 석탑 — 맞은편 해설: 'The old pagoda in this photograph was built more than one thousand years ago'"
+    },
+    {
+     "x": 20.5,
+     "y": 62,
+     "w": 5,
+     "h": 17,
+     "t": "석탑 옆 작은 석조물(등 모양)"
+    },
+    {
+     "x": 44,
+     "y": 17,
+     "w": 47,
+     "h": 18,
+     "t": "겹겹이 짜 올린 처마 밑 부재와 기와 지붕"
+    },
+    {
+     "x": 73,
+     "y": 50,
+     "w": 20,
+     "h": 16,
+     "t": "벽면 두 칸에 그려진 인물 그림"
+    }
+   ],
+   "credit": "NDL PID 1178514 15코마 — 인쇄 캡션 'Shinkeiji Temple, Outer Kongo.' 「神溪寺」 · 해설 'The temple is in the west of Onseiri…'"
+  },
+  {
+   "file": "src/ndl_1178514_005_title_left.jpg",
+   "title": "5코마 표제지 — 글자와 도장",
+   "boxes": [
+    {
+     "x": 38.5,
+     "y": 24.3,
+     "w": 17,
+     "h": 4.5,
+     "t": "「萬二千峰の」"
+    },
+    {
+     "x": 30.5,
+     "y": 30.5,
+     "w": 22.5,
+     "h": 7.5,
+     "t": "「金剛山」 · 아래 「朝鮮」"
+    },
+    {
+     "x": 44.5,
+     "y": 70,
+     "w": 12.5,
+     "h": 17,
+     "t": "붉은 원형 도장(표제 위에는 붉은 사각 도장이 겹쳐 찍힘)"
+    },
+    {
+     "x": 59.5,
+     "y": 80.3,
+     "w": 22,
+     "h": 4.7,
+     "t": "「徳田寫眞館發行」"
+    }
+   ],
+   "credit": "NDL PID 1178514 5코마 왼쪽 면 — 좌상단 연필 기입"
+  }
+ ],
+ "cta_img": "src/ndl_1178514_007_map.jpg"
+}

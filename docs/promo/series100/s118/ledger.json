@@ -1,0 +1,196 @@
+{
+ "n": 118,
+ "src": "foia",
+ "record": {
+  "id": "open.go.kr 원문정보 '소양강댐'",
+  "title": "정보공개포털 원문정보 검색(점검 중) → 국가기록원 공개 기록",
+  "date": "2026-11-22 접속",
+  "inst": "행정안전부 정보공개포털 / 국가기록원",
+  "url": "https://www.open.go.kr/othicInfo/infoList/orginlInfoList.do?searchKeyword=%EC%86%8C%EC%96%91%EA%B0%95%EB%8C%90"
+ },
+ "images": [
+  {
+   "file": "src/foia_portal.jpg",
+   "role": "page",
+   "record_id": "open.go.kr orginlInfoList",
+   "title": "정보공개포털 원문정보 검색 접속 화면 — 메뉴 점검 안내",
+   "date": "2026-11-22",
+   "url": "https://www.open.go.kr/othicInfo/infoList/orginlInfoList.do?searchKeyword=%EC%86%8C%EC%96%91%EA%B0%95%EB%8C%90",
+   "rights": "기관 웹페이지 캡처 — 출처 표기",
+   "rights_evidence": "국가기관 웹페이지 화면 직접 캡처(최후 수단 규칙)",
+   "visible": [
+    "'정보공개포털 메뉴 점검 안내'",
+    "제한 기간 2026.11.12.부터",
+    "재개 일정 확정되는 대로 공지사항에 안내"
+   ],
+   "nocrop": false,
+   "w": 1280,
+   "h": 1280
+  },
+  {
+   "file": "src/foia_portal_c.jpg",
+   "role": "page",
+   "record_id": "open.go.kr",
+   "title": "같은 화면 안내 상자 부분",
+   "date": "2026-11-22",
+   "url": "https://www.open.go.kr/othicInfo/infoList/orginlInfoList.do?searchKeyword=%EC%86%8C%EC%96%91%EA%B0%95%EB%8C%90",
+   "rights": "기관 웹페이지 캡처 — 출처 표기",
+   "rights_evidence": "국가기관 웹페이지 화면 직접 캡처(최후 수단 규칙)",
+   "visible": [
+    "제한 기간·재개 일정",
+    "청구 가능 안내"
+   ],
+   "nocrop": false,
+   "w": 1000,
+   "h": 670
+  },
+  {
+   "file": "src/foia_main.jpg",
+   "role": "page",
+   "record_id": "open.go.kr",
+   "title": "정보공개포털 메인",
+   "date": "2026-11-22",
+   "url": "https://www.open.go.kr/",
+   "rights": "기관 웹페이지 캡처 — 출처 표기",
+   "rights_evidence": "국가기관 웹페이지 화면 직접 캡처(최후 수단 규칙)",
+   "visible": [
+    "공지사항 '정보공개포털 메뉴 점검 안내 2026-11-12'",
+    "'정보공개청구' 버튼"
+   ],
+   "nocrop": false,
+   "w": 1280,
+   "h": 1280
+  },
+  {
+   "file": "src/foia_main_c.jpg",
+   "role": "page",
+   "record_id": "open.go.kr",
+   "title": "메인 화면 하단 부분",
+   "date": "2026-11-22",
+   "url": "https://www.open.go.kr/",
+   "rights": "기관 웹페이지 캡처 — 출처 표기",
+   "rights_evidence": "국가기관 웹페이지 화면 직접 캡처(최후 수단 규칙)",
+   "visible": [
+    "공지사항 줄"
+   ],
+   "nocrop": false,
+   "w": 1280,
+   "h": 560
+  },
+  {
+   "file": "src/page_arch_ceremony.jpg",
+   "role": "page",
+   "record_id": "CET0068133",
+   "title": "국가기록원 상세정보 — 김종필국무총리소양강다목적댐준공식참석연설",
+   "date": "1973",
+   "url": "https://www.archives.go.kr/next/newsearch/showDetailPopup.do?rc_code=1310377&rc_rfile_no=200200073660&rc_ritem_no=000000000001",
+   "rights": "기관 웹페이지 캡처 — 출처 표기",
+   "rights_evidence": "국가기관 웹페이지 화면 직접 캡처(최후 수단 규칙)",
+   "visible": [
+    "CET0068133",
+    "촬영일자 19731015",
+    "내용요약 '…1973년 12월 준공'"
+   ],
+   "nocrop": false,
+   "w": 1280,
+   "h": 1280
+  },
+  {
+   "file": "src/page_arch_ceremony_c.jpg",
+   "role": "page",
+   "record_id": "CET0068133",
+   "title": "같은 화면 표 부분 (아래 흰 여백 90px 추가)",
+   "date": "1973",
+   "url": "https://www.archives.go.kr/next/newsearch/showDetailPopup.do?rc_code=1310377&rc_rfile_no=200200073660&rc_ritem_no=000000000001",
+   "rights": "기관 웹페이지 캡처 — 출처 표기",
+   "rights_evidence": "국가기관 웹페이지 화면 직접 캡처(최후 수단 규칙)",
+   "visible": [
+    "CET0068133"
+   ],
+   "nocrop": false,
+   "w": 1240,
+   "h": 692
+  },
+  {
+   "file": "src/page_arch_geology.jpg",
+   "role": "page",
+   "record_id": "BA0875627",
+   "title": "국가기록원 상세정보 — 소양강댐지질조사보고서",
+   "date": "1963",
+   "url": "https://www.archives.go.kr/next/newsearch/showDetailPopup.do?rc_code=1310377&rc_rfile_no=200600100026&rc_ritem_no=000000000001",
+   "rights": "기관 웹페이지 캡처 — 출처 표기",
+   "rights_evidence": "국가기관 웹페이지 화면 직접 캡처(최후 수단 규칙)",
+   "visible": [
+    "BA0875627",
+    "생산기관 건설교통부 수자원국 수자원개발과(원문 그대로)",
+    "페이지정보 1~106 / 106",
+    "공개"
+   ],
+   "nocrop": false,
+   "w": 1280,
+   "h": 1280
+  },
+  {
+   "file": "src/page_arch_geology_c.jpg",
+   "role": "page",
+   "record_id": "BA0875627",
+   "title": "같은 화면 표 부분",
+   "date": "1963",
+   "url": "https://www.archives.go.kr/next/newsearch/showDetailPopup.do?rc_code=1310377&rc_rfile_no=200600100026&rc_ritem_no=000000000001",
+   "rights": "기관 웹페이지 캡처 — 출처 표기",
+   "rights_evidence": "국가기관 웹페이지 화면 직접 캡처(최후 수단 규칙)",
+   "visible": [
+    "BA0875627"
+   ],
+   "nocrop": false,
+   "w": 1240,
+   "h": 650
+  },
+  {
+   "file": "src/page_arch_geology_c2.jpg",
+   "role": "page",
+   "record_id": "BA0875627",
+   "title": "같은 화면 표 부분(축소)",
+   "date": "1963",
+   "url": "https://www.archives.go.kr/next/newsearch/showDetailPopup.do?rc_code=1310377&rc_rfile_no=200600100026&rc_ritem_no=000000000001",
+   "rights": "기관 웹페이지 캡처 — 출처 표기",
+   "rights_evidence": "국가기관 웹페이지 화면 직접 캡처(최후 수단 규칙)",
+   "visible": [
+    "BA0875627"
+   ],
+   "nocrop": false,
+   "w": 1240,
+   "h": 465
+  },
+  {
+   "file": "src/view_3230.jpg",
+   "role": "hero",
+   "record_id": "mediasrcgbn=BK&mediaid=18&mediadtl=3230",
+   "title": "제2차 경제개발 5개년 계획의 일환으로 조선된 소양강 다목적 댐 전경",
+   "date": "1973.10.15",
+   "url": "https://www.ehistory.go.kr/view/photo?mediasrcgbn=BK&mediaid=18&mediadtl=3230",
+   "rights": "공공누리 제4유형 — 원형 그대로(자르지 않음·위에 표시 없음)",
+   "rights_evidence": "공공누리 제4유형(출처표시+상업적 이용금지+변경금지) — e영상역사관 페이지 표시 문구 직접 확인",
+   "visible": [
+    "댐과 호수 항공 사진"
+   ],
+   "nocrop": true,
+   "w": 1800,
+   "h": 1405
+  }
+ ],
+ "points": [
+  "정보공개포털: 원문정보 검색 메뉴 점검, 제한 기간 2026.11.12.부터 점검 및 정비 완료 시까지, 재개 일정 공지사항 안내, 점검 중에도 보유 기관에 청구 가능",
+  "foia_search('소양강댐') 응답: '이 기관은 자동 페치가 제한적' + 공식 검색 URL — 점검 상태는 응답에 없음",
+  "cross_search(sources=archives,foia): 'foia:—' 0건",
+  "대체: CET0068133(19731015 촬영, 내용요약 '1973년 12월 준공'), BA0875627(1963, 106쪽)"
+ ],
+ "video": {
+  "url": "",
+  "length_s": 0,
+  "rights": "",
+  "note": ""
+ },
+ "status": "partial",
+ "notes": "foia_search가 포털 점검 상태(2026.11.12~)를 보고하지 않음 — 브리프의 '점검 상태 보고' 기능이 배포본에 없거나 감지 실패. 직접 GET(HTTP 200)으로 점검 페이지 확인."
+}

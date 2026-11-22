@@ -1,0 +1,101 @@
+{
+ "n": 101,
+ "src": "heritage",
+ "record": {
+  "id": "서울 숭례문 [국보] · 11-0000010000000-11",
+  "title": "국보 숭례문 — 1906~1930 사진첩 5권",
+  "inst": "국가유산청 국가유산포털",
+  "url": "https://www.heritage.go.kr/heri/cul/culSelectDetail.do?ccbaCpno=1111100010000"
+ },
+ "images": [
+  {
+   "file": "src/namdaemun_1910_766880.jpg",
+   "role": "hero",
+   "w": 1800,
+   "h": 1297,
+   "visible": [
+    "사진: 국립국회도서관(NDL) 「大日本帝国朝鮮写真帖」(1910, 統監府 編) info:ndljp/pid/766880 코마 11 · NDL デジタルコレクション PDM(パブリックドメイン) — 「第一 京城南大門」"
+   ],
+   "record_id": "info:ndljp/pid/766880",
+   "title": "大日本帝国朝鮮写真帖 : 日韓併合紀念",
+   "date": "1910",
+   "url": "https://dl.ndl.go.jp/pid/766880",
+   "rights": "PDM — NDL Access Restrictions 'PDM'",
+   "rights_evidence": "IIIF manifest https://dl.ndl.go.jp/api/iiif/766880/manifest.json metadata 'Access Restrictions: PDM' · 統監府 編"
+  },
+  {
+   "file": "src/namdaemun_1906_767136.jpg",
+   "role": "extra",
+   "w": 1392,
+   "h": 1001,
+   "visible": [
+    "1906 「京城南大門」 · NDL 767136"
+   ],
+   "record_id": "info:ndljp/pid/767136",
+   "title": "ろせった丸満韓巡遊紀念写真帖",
+   "date": "1906",
+   "url": "https://dl.ndl.go.jp/pid/767136",
+   "rights": "PDM — NDL Access Restrictions 'PDM'",
+   "rights_evidence": "IIIF manifest https://dl.ndl.go.jp/api/iiif/767136/manifest.json metadata 'Access Restrictions: PDM' · 朝日新聞写真班 撮影"
+  },
+  {
+   "file": "src/namdaemun_1921_967741.jpg",
+   "role": "extra",
+   "w": 1344,
+   "h": 912,
+   "visible": [
+    "1921 「京城南大門通」 · NDL 967741"
+   ],
+   "record_id": "info:ndljp/pid/967741",
+   "title": "朝鮮 : 写真帖",
+   "date": "1921",
+   "url": "https://dl.ndl.go.jp/pid/967741",
+   "rights": "PDM — NDL Access Restrictions 'PDM'",
+   "rights_evidence": "IIIF manifest https://dl.ndl.go.jp/api/iiif/967741/manifest.json metadata 'Access Restrictions: PDM' · 朝鮮総督府 編"
+  },
+  {
+   "file": "src/namdaemun_1922_1899759.jpg",
+   "role": "extra",
+   "w": 1440,
+   "h": 1171,
+   "visible": [
+    "1922 「京城南大門通と鐘路通」 · NDL 1899759"
+   ],
+   "record_id": "info:ndljp/pid/1899759",
+   "title": "朝鮮之風光 : trip in Chosen",
+   "date": "1922",
+   "url": "https://dl.ndl.go.jp/pid/1899759",
+   "rights": "PDM — NDL Access Restrictions 'PDM'",
+   "rights_evidence": "IIIF manifest https://dl.ndl.go.jp/api/iiif/1899759/manifest.json metadata 'Access Restrictions: PDM' · 南滿洲鐵道京城管理局 編"
+  },
+  {
+   "file": "src/namdaemun_1930_8311162.jpg",
+   "role": "extra",
+   "w": 1344,
+   "h": 1305,
+   "visible": [
+    "1930 「南大門及其ノ夜景」 · NDL 8311162"
+   ],
+   "record_id": "info:ndljp/pid/8311162",
+   "title": "朝鮮博覧会記念写真帖",
+   "date": "1930",
+   "url": "https://dl.ndl.go.jp/pid/8311162",
+   "rights": "PDM — NDL Access Restrictions 'PDM'",
+   "rights_evidence": "IIIF manifest https://dl.ndl.go.jp/api/iiif/8311162/manifest.json metadata 'Access Restrictions: PDM' · 朝鮮総督府 編"
+  }
+ ],
+ "points": [
+  "2층 누각의 겹지붕 — 포털 해설의 '누각형 2층 건물'",
+  "석축 가운데 무지개 모양 홍예문",
+  "홍예 오른쪽에 선 가느다란 기둥 하나",
+  "바퀴 둘 달린 수레를 끄는 사람"
+ ],
+ "video": {
+  "url": "",
+  "length_s": 0,
+  "rights": "",
+  "note": "영상 없음"
+ },
+ "status": "partial",
+ "notes": "국가유산포털 원본 이미지(http://www.khs.go.kr/unisearch/images/...) — http 302 → https://www.khs.go.kr/... TLS 핸드셰이크 중 Connection reset(코드 000). 우회 안 함. 대체: NDL 디지털컬렉션 PDM 사진첩(IIIF, 순차 요청)."
+}

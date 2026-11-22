@@ -1,0 +1,100 @@
+{
+ "n": 102,
+ "src": "heritage",
+ "record": {
+  "id": "경주 석굴암 석굴 [국보] · 11-0000240000000-37",
+  "title": "국보 석굴암 석굴 — 1910~1927 사진첩 속 석굴암·불국사",
+  "inst": "국가유산청 국가유산포털",
+  "url": "https://www.heritage.go.kr/heri/cul/culSelectDetail.do?ccbaCpno=1113700240000"
+ },
+ "images": [
+  {
+   "file": "src/seokguram_1921_967741.jpg",
+   "role": "hero",
+   "w": 1295,
+   "h": 1800,
+   "visible": [
+    "사진: 국립국회도서관(NDL) 「朝鮮 : 写真帖」(1921, 朝鮮総督府 編) info:ndljp/pid/967741 코마 62 · NDL デジタルコレクション PDM(パブリックドメイン) — 「五六 石窟庵釋迦如來像」(면에 옆으로 인쇄된 사진을 바로 세움)"
+   ],
+   "record_id": "info:ndljp/pid/967741",
+   "title": "朝鮮 : 写真帖",
+   "date": "1921",
+   "url": "https://dl.ndl.go.jp/pid/967741",
+   "rights": "PDM — NDL Access Restrictions 'PDM'",
+   "rights_evidence": "IIIF manifest https://dl.ndl.go.jp/api/iiif/967741/manifest.json metadata 'Access Restrictions: PDM' · 朝鮮総督府 編"
+  },
+  {
+   "file": "src/seokguram_relief_1922_1899759.jpg",
+   "role": "extra",
+   "w": 1692,
+   "h": 1215,
+   "visible": [
+    "1922 「石窟庵壁像」 · NDL 1899759"
+   ],
+   "record_id": "info:ndljp/pid/1899759",
+   "title": "朝鮮之風光 : trip in Chosen",
+   "date": "1922",
+   "url": "https://dl.ndl.go.jp/pid/1899759",
+   "rights": "PDM — NDL Access Restrictions 'PDM'",
+   "rights_evidence": "IIIF manifest https://dl.ndl.go.jp/api/iiif/1899759/manifest.json metadata 'Access Restrictions: PDM' · 南滿洲鐵道京城管理局 編"
+  },
+  {
+   "file": "src/dabotap_1921_967741.jpg",
+   "role": "extra",
+   "w": 1344,
+   "h": 851,
+   "visible": [
+    "1921 「佛國寺多寶塔」 · NDL 967741"
+   ],
+   "record_id": "info:ndljp/pid/967741",
+   "title": "朝鮮 : 写真帖",
+   "date": "1921",
+   "url": "https://dl.ndl.go.jp/pid/967741",
+   "rights": "PDM — NDL Access Restrictions 'PDM'",
+   "rights_evidence": "IIIF manifest https://dl.ndl.go.jp/api/iiif/967741/manifest.json metadata 'Access Restrictions: PDM' · 朝鮮総督府 編"
+  },
+  {
+   "file": "src/bulguksa_1910_766880.jpg",
+   "role": "extra",
+   "w": 1344,
+   "h": 984,
+   "visible": [
+    "1910 「慶州仏国寺」 · NDL 766880"
+   ],
+   "record_id": "info:ndljp/pid/766880",
+   "title": "大日本帝国朝鮮写真帖 : 日韓併合紀念",
+   "date": "1910",
+   "url": "https://dl.ndl.go.jp/pid/766880",
+   "rights": "PDM — NDL Access Restrictions 'PDM'",
+   "rights_evidence": "IIIF manifest https://dl.ndl.go.jp/api/iiif/766880/manifest.json metadata 'Access Restrictions: PDM' · 統監府 編"
+  },
+  {
+   "file": "src/bulguksa_1927_1688584.jpg",
+   "role": "extra",
+   "w": 1476,
+   "h": 1085,
+   "visible": [
+    "1927 「佛國寺」 · NDL 1688584"
+   ],
+   "record_id": "info:ndljp/pid/1688584",
+   "title": "朝鮮之風光",
+   "date": "1927",
+   "url": "https://dl.ndl.go.jp/pid/1688584",
+   "rights": "PDM — NDL Access Restrictions 'PDM'",
+   "rights_evidence": "IIIF manifest https://dl.ndl.go.jp/api/iiif/1688584/manifest.json metadata 'Access Restrictions: PDM' · 朝鮮総督府鉄道局 編"
+  }
+ ],
+ "points": [
+  "이마 가운데 둥근 점",
+  "머리 뒤 꽃잎 무늬 광배의 테두리",
+  "한쪽 어깨는 드러나고, 반대쪽 어깨에 옷 주름"
+ ],
+ "video": {
+  "url": "",
+  "length_s": 0,
+  "rights": "",
+  "note": "영상 없음"
+ },
+ "status": "partial",
+ "notes": "국가유산포털 원본 이미지(http://www.khs.go.kr/unisearch/images/...) — http 302 → https://www.khs.go.kr/... TLS 핸드셰이크 중 Connection reset(코드 000). 우회 안 함. 대체: NDL 디지털컬렉션 PDM 사진첩(IIIF, 순차 요청)."
+}

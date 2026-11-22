@@ -6,13 +6,13 @@
  ],
  "inst": "프랑스 국립도서관 BnF · Gallica",
  "flag": "🇫🇷",
- "say": "1900년 파리 만국박람회 대한제국관 자료 찾아줘",
+ "say": "1900 파리박람회 대한제국관 찾아줘",
  "head": "Souvenir de Séoul, Corée (1900)",
  "big": "Grand prix 1",
  "facts": [
   [
    "Gallica",
-   "ark:/12148/bpt6k54937409 — 'Souvenir de Séoul, Corée' [1900], 1 vol. (VIII p.-[27] p. de pl.)"
+   "ark:/12148/bpt6k54937409 'Souvenir de Séoul, Corée' [1900] · VIII p.-[27] p. de pl."
   ],
   [
    "글",
@@ -20,11 +20,11 @@
   ],
   [
    "표지 인쇄",
-   "1 Grand prix · 2 Médailles d'or · 10 Médailles d'argent · 5 Médailles de bronze · 3 Mentions honorables"
+   "Grand prix 1 · 금 2 · 은 10 · 동 5 · Mentions honorables 3"
   ],
   [
    "권리",
-   "1900 공표, Courant 1935 사망 → PD · Gallica 조건: 비상업 재이용 자유·출처 표기"
+   "PD(1900, Courant 1935 사망) · Gallica 비상업 재이용·출처 표기"
   ]
  ],
  "tool": "gallica_search('Pavillon de la Corée exposition') → BnF 카탈로그 폴백 → Gallica ark",
@@ -36,25 +36,27 @@
   "pos": "center 45%",
   "credit": "사진: 『Souvenir de Séoul, Corée』(1900) 도판 'Salle du Trône. Vieux Palais de Séoul.' · Source gallica.bnf.fr / BnF (ark:/12148/bpt6k54937409) · PD · 사본 Internet Archive"
  },
- "hook": "1900년 파리,<br>대한제국이 내놓은 <span class=\"g\">서울 사진첩</span>",
+ "hook": "1900년 파리,<br>대한제국의 <span class=\"g\">서울 사진첩</span>",
  "mosaic": [
   {
-   "file": "src/souv_n7.jpg",
+   "file": "src/souv_n7_para.jpg",
    "label": "쿠랑의 글 'Le Pavillon Coréen au Champ-de-Mars'",
+   "pos": "center 30%",
    "nocrop": true
   },
   {
    "file": "src/souv_n29_photo.jpg",
-   "label": "'Trône de Sa Majesté l'Empereur de Corée.'"
+   "label": "'Trône de Sa Majesté l'Empereur de Corée.'",
+   "pos": "center 40%"
   },
   {
-   "file": "src/souv_n17.jpg",
-   "label": "박람회 관계자 4인 — 'Promoteur'·'Président d'honneur'",
-   "nocrop": true
+   "file": "src/souv_n17_top.jpg",
+   "label": "'Promoteur'·'Président d'honneur' — 박람회 관계자",
+   "pos": "center 40%"
   },
   {
    "file": "src/souv_n45_photo.jpg",
-   "label": "'Tireurs à l'arc dans le vieux Palais des Mûriers'"
+   "label": "'Tireurs à l'arc … Palais des Mûriers'"
   }
  ],
  "mosaic_title": "같은 앨범의 <span class=\"g\">글·사진·인물</span>",

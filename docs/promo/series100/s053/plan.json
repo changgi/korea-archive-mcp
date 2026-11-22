@@ -1,0 +1,98 @@
+{
+ "n": 53,
+ "part": [
+  "Ⅸ",
+  "참전국의 기억"
+ ],
+ "inst": "네덜란드 국립문서보관소 Nationaal Archief",
+ "flag": "🇳🇱",
+ "say": "횡성 전투 네덜란드 대대 기록 찾아줘",
+ "head": "1951.2.12 도장과 횡성의 밤",
+ "big": "2.13.56",
+ "facts": [
+  [
+   "사진",
+   "Elsevier 050-0728 · 뒷면 도장 'FOTO-ANEFO 12-2-1951'"
+  ],
+  [
+   "문서",
+   "NDVN 기록 2.13.56 — 'Van Heutsz 대대'로도 불림"
+  ],
+  [
+   "기록 손실",
+   "1951-02-12~13 밤 횡성 지휘소 피습 때 대대 기록 상당 부분 소실(인벤토리 서문)"
+  ],
+  [
+   "권리",
+   "Nationaal Archief, CC0"
+  ]
+ ],
+ "tool": "cross_search(sources=nlna,'Hoengsong') → 인벤토리 2.13.56",
+ "link": "https://www.nationaalarchief.nl/onderzoeken/archief/2.13.56",
+ "checked": "2026-11-22",
+ "tags": "#횡성전투 #VanHeutsz #네덜란드",
+ "hero": {
+  "file": "src/hero_four_men_050-0728.jpg",
+  "pos": "center 40%",
+  "credit": "사진: 네덜란드 국립문서보관소 Elsevier 050-0728 (Anefo, 1951-02-12, CC0)"
+ },
+ "hook": "'1951.2.12' 도장,<br>그날 밤 <span class=\"g\">횡성</span>이 습격당했다",
+ "mosaic": [
+  {
+   "file": "src/flood_tents_050-0769.jpg",
+   "label": "물에 잠긴 천막 · 1951-09-10 · 050-0769"
+  },
+  {
+   "file": "src/oirschot_awards_906-1180.jpg",
+   "label": "미국 훈장 32명 수여, Oirschot · 1953-11-19"
+  },
+  {
+   "file": "src/vaandel_015-0015.jpg",
+   "label": "Van Heutsz 연대에 새 연대기 · 1955-02-24",
+   "pos": "center 30%"
+  },
+  {
+   "file": "src/sabre_gift_908-1010.jpg",
+   "label": "옛 NDVN 이름의 군도 증정 · 1956-10-25"
+  }
+ ],
+ "mosaic_title": "한국에서 연대로 — <span class=\"g\">Van Heutsz</span>의 이름",
+ "mosaic_credit": "네덜란드 국립문서보관소 Elsevier 050-0769·015-0015 / Anefo 906-1180·908-1010 (모두 CC0)",
+ "ann": {
+  "file": "src/verso_050-0728.jpg",
+  "crop_y": 0.06,
+  "title": "사진 뒷면 — 타자 캡션과 날짜 도장",
+  "boxes": [
+   {
+    "x": 32,
+    "y": 10,
+    "w": 30,
+    "h": 14,
+    "t": "연필 손글씨 'Korea'"
+   },
+   {
+    "x": 6,
+    "y": 27,
+    "w": 75,
+    "h": 16,
+    "t": "타자 'Bij het Nederlands Detachement Ver. Naties in Korea'"
+   },
+   {
+    "x": 9,
+    "y": 49,
+    "w": 88,
+    "h": 15,
+    "t": "'Vier man terug van een koude nacht' — 네 사람 이름·출신지"
+   },
+   {
+    "x": 9,
+    "y": 64,
+    "w": 56,
+    "h": 13,
+    "t": "'FOTO-ANEFO 12-2-1951' 날짜 도장"
+   }
+  ],
+  "credit": "Elsevier 050-0728 뒷면 원본 — 표시는 사진에서 직접 읽은 것"
+ },
+ "cta_img": "src/vaandel_malieveld_906-9899.jpg"
+}

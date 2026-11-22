@@ -198,6 +198,8 @@ const norm = (s) => (s == null ? '' : String(s)).replace(/<[^>]+>/g, '').replace
 const dedupKey = (it) => norm(it.title).toLowerCase().replace(/[^a-z0-9가-힣一-鿿]/g, '').slice(0, 50) + '|' + (it.id || '');
 // run collectors concurrently; merge, dedup by title|id, union the source tags (상호보완: 한 record를 여러 채널이 확인)
 const mclean = (h) => String(h || '').replace(/<script[\s\S]*?<\/script>/gi, ' ').replace(/<style[\s\S]*?<\/style>/gi, ' ').replace(/<[^>]+>/g, ' ').replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&#39;|&apos;/g, "'").replace(/&quot;/g, '"').replace(/\s+/g, ' ').trim(); // v1.93: 모듈 범위 HTML 정리(도구 범위 dclean 미노출 대응)
+// v1.96.3: Europeana 원본 이미지 직링크(edmIsShownBy) — 제공기관 링크 부패 교정(Náprstek esbirky img.php·detail → /predmet/{id}, 2026-11 실측 404)
+const euMedia = (it) => { let u = String(((it.edmIsShownBy || [])[0]) || ''); const m = u.match(/esbirky\.cz\/(?:img\.php\?id=|detail\/)(\d+)/); if (m) u = `https://www.esbirky.cz/predmet/${m[1]}`; return u; };
 // v1.93: Gallica(gallica.bnf.fr)가 서버 IP 자동 조회를 403 차단 — BnF 공식 카탈로그 SRU(catalogue.bnf.fr/api/SRU, 같은 BnF 소장 기록)로 폴백.
 // UNIMARC 200$a 표제·210/214$d 연대·215$a 수량·856$u Gallica 원문 ark — 기록 수집은 계속되고, 원문(Gallica) 링크도 함께 준다.
 async function bnfCatalog(q, n, doctype) {
@@ -206,6 +208,11 @@ async function bnfCatalog(q, n, doctype) {
     const A = a.status === 'fulfilled' ? a.value : { total: 0, items: [] }, B = b.status === 'fulfilled' ? b.value : { total: 0, items: [] };
     if (a.status !== 'fulfilled' && b.status !== 'fulfilled') throw b.reason;
     const seen = new Set(); const all = [...A.items, ...B.items].filter((it) => !seen.has(it.id) && seen.add(it.id));
+    if (!all.length) { // v1.96.3: 'all' CQL은 모든 단어 일치 — 0건이면 숫자·짧은 단어를 빼고 핵심어 2개로 완화(실측: 'Corée 1866 expédition' 0건)
+      const words = String(q).split(/\s+/).filter((w) => w && !/^\d+$/.test(w) && w.length > 2);
+      const q2 = words.slice(0, 2).join(' ');
+      if (q2 && q2 !== String(q).trim()) { const r2 = await bnfCatalog(q2, n); return { ...r2, relaxed: q2 }; }
+    }
     all.sort((x, y) => (y.gallica ? 1 : 0) - (x.gallica ? 1 : 0));
     return { total: Math.max(A.total, B.total), items: all.slice(0, n) };
   }
@@ -239,12 +246,12 @@ async function openGoStatus(q) {
 }
 // v1.95: 국가유산 원본 이미지 — 상세 API imageUrl + 이미지 목록 API(SearchImageOpenapi: sn·imageUrl·ccimDesc). 원본을 '찾아 쓰게' 직링크 제공
 async function heritageImages(kdcd, asno, ctcd, main) {
-  const urls = []; if (main) urls.push([main, '대표 이미지']);
+  const urls = []; if (main) urls.push([main.replace(/^http:\/\/www\.khs\.go\.kr/, 'https://www.khs.go.kr'), '대표 이미지']);
   try {
     const b = await cachedText(`heriI:${kdcd}|${asno}|${ctcd}`, 24 * 3600e3, () => gtext(`https://www.khs.go.kr/cha/SearchImageOpenapi.do?ccbaKdcd=${kdcd}&ccbaAsno=${asno}&ccbaCtcd=${ctcd}`), '<');
     const ims = [...b.matchAll(/<imageUrl>(?:<!\[CDATA\[)?\s*([^<\]]+?)\s*(?:\]\]>)?<\/imageUrl>/g)].map((m) => m[1]);
     const ds = [...b.matchAll(/<ccimDesc>(?:<!\[CDATA\[)?\s*([^<\]]*?)\s*(?:\]\]>)?<\/ccimDesc>/g)].map((m) => m[1]);
-    ims.forEach((u, i) => { if (!urls.some(([x]) => x === u)) urls.push([u, ds[i] || '']); });
+    ims.map((u) => u.replace(/^http:\/\/www\.khs\.go\.kr/, 'https://www.khs.go.kr')).forEach((u, i) => { if (!urls.some(([x]) => x === u)) urls.push([u, ds[i] || '']); });
   } catch { /* 목록 API 실패 — 대표 이미지만 */ }
   if (!urls.length) return '';
   return `【원본 이미지 ${urls.length}점】\n` + urls.slice(0, 10).map(([u, d], i) => `${i + 1}. ${u}${d ? ` — ${d.slice(0, 50)}` : ''}`).join('\n') + '\n';
@@ -622,7 +629,7 @@ const COLLECT = {
     q = koToEn(q) || q;
     const key = process.env.EUROPEANA_API_KEY || 'api2demo';
     const d = await jget(`https://api.europeana.eu/record/v2/search.json?wskey=${key}&query=${encodeURIComponent(q)}&rows=${n}&profile=standard`);
-    return (d.items || []).map((it) => ({ title: (it.title || ['?'])[0], date: (it.year || [''])[0], id: it.id || '', ...(((it.dataProvider || [])[0]) ? { series: (it.dataProvider || [])[0] } : {}), url: String(it.guid || '').split('?')[0] }));
+    return (d.items || []).map((it) => ({ title: (it.title || ['?'])[0], date: (it.year || [''])[0], id: it.id || '', ...(((it.dataProvider || [])[0]) ? { series: (it.dataProvider || [])[0] } : {}), ...(euMedia(it) ? { media: euMedia(it) } : {}), url: String(it.guid || '').split('?')[0] }));
   },
   nara: async (q, n) => {
     q = koToEn(q) || q;
@@ -838,7 +845,7 @@ const COLLECT = {
   awm: async (q, n) => { // 호주 전쟁기념관(AWM) — 검색 모자이크(SSR C-id) → 상세 병렬로 제목·수장번호 (2026-11-20 실측: 가평 파노라마 HOBJ3144 등)
     const en = koToEn(q) || q;
     const b = await gtext('https://www.awm.gov.au/advanced-search?query=' + encodeURIComponent(en));
-    const ids = [...new Set([...b.matchAll(/href="\/collection\/(C\d+)"/g)].map((m) => m[1]))].slice(0, Math.min(n, 5));
+    const ids = [...new Set([...b.matchAll(/href="\/collection\/(C\d+)"/g)].map((m) => m[1]))].slice(0, Math.min(n, 10)); // v1.96.3: 5→10(상세 병렬 조회 상한)
     const out = await Promise.all(ids.map(async (cid) => {
       try {
         const d = await cachedText('awm:' + cid, 24 * 3600e3, () => gtext('https://www.awm.gov.au/collection/' + cid), '<h1');
@@ -1437,9 +1444,10 @@ const handler = createMcpHandler((server) => {
       if (total === undefined) { // SRU XML 아님 — Cloudflare 차단/점검 (2026-11-18 실측: 서버 IP 403) → v1.93: BnF 공식 카탈로그 SRU 폴백
         try {
           const r = await bnfCatalog(eff, max_results, '');
-          if (r.items.length) return text(`Gallica '${query}'${fr ? ` → 프랑스어 자동 변환 '${eff}'` : ''} — Gallica 서버가 자동 조회를 차단해 **BnF 공식 카탈로그**(catalogue.bnf.fr, 같은 국립도서관 소장 목록)로 수집 — total ${r.total}:\n`
+          if (r.items.length) return text(`Gallica '${query}'${fr ? ` → 프랑스어 자동 변환 '${eff}'` : ''} — Gallica 서버가 자동 조회를 차단해 **BnF 공식 카탈로그**(catalogue.bnf.fr, 같은 국립도서관 소장 목록)로 수집${r.relaxed ? ` (전체 단어 일치 0건 → '${r.relaxed}'로 완화)` : ''} — total ${r.total}:\n`
             + r.items.map((it) => `- ${it.title.slice(0, 110)} (${it.date || '연대 미상'})${it.type ? ` [${it.type}]` : ''}${it.extent ? ` · ${it.extent}` : ''}\n  ${it.gallica ? `Gallica 원문: ${it.gallica}` : `카탈로그: ${it.url}`}`).join('\n')
             + `\n※ Gallica 원문 링크는 브라우저에서 열람(서버 자동 조회만 차단). 사진 묶음(doctype i)만: '${eff}' 사진 — 카탈로그 질의에 doctype 'i'. BnF 디지털 자료 대부분 공유저작물(재이용 조건: gallica.bnf.fr/edit/und/conditions-dutilisation-des-contenus-de-gallica).`);
+          return text(`Gallica '${query}' — Gallica 서버 차단, BnF 카탈로그도 0건(완화 질의 포함). 프랑스어 핵심어(예: Corée·Séoul·인명)로 다시 검색하십시오. 브라우저: https://catalogue.bnf.fr`);
         } catch { /* 카탈로그도 실패 — 아래 대체 경로 안내 */ }
         const web = `https://gallica.bnf.fr/services/engine/search/sru?operation=searchRetrieve&version=1.2&query=${encodeURIComponent(base)}`;
         return text(`Gallica '${query}'${fr ? ` → 프랑스어 자동 변환 '${eff}'` : ''} — 서버 자동 조회가 차단되었습니다(BnF측 봇 차단 — 간헐적).\n➤ 에이전트 지시: 당신의 웹 검색/브라우저 도구로 '${eff}'를 gallica.bnf.fr에서 검색해 상위 결과(제목·연대·ark 링크)를 표로 정리해 제시하세요.\n공식 검색: https://gallica.bnf.fr/services/engine/search/sru?operation=searchRetrieve&query=${encodeURIComponent(eff)}\nSRU(차단 해제 시): ${web}`);
@@ -1470,7 +1478,7 @@ const handler = createMcpHandler((server) => {
       const items = d.items || [];
       const rshort = (r) => { const v = (Array.isArray(r) ? r[0] : r) || ''; const m = String(v).match(/(publicdomain\/(?:mark|zero)|licenses\/[a-z-]+|vocab\/[A-Za-z-]+)/); return m ? m[1].replace('licenses/', 'CC ').replace('vocab/', '') : ''; };
       const ytag = year_from || year_to ? ` [연대 ${year_from || ''}~${year_to || ''}${page > 1 ? ` · p.${page}` : ''}]` : (page > 1 ? ` [p.${page}]` : '');
-      return text(`Europeana '${query}'${en ? ` → 영문 자동 변환 '${eff}'` : ''}${media_type ? ` [${media_type}]` : ''}${ytag} — total ${d.totalResults}:\n` + (items.map((it) => { const rt = rshort(it.rights); return `- ${String((it.title || ['?'])[0]).slice(0, 90)} (${(it.year || [''])[0]}) — ${String((it.dataProvider || [''])[0]).slice(0, 40)}${rt ? ` | 권리:${rt}` : ''} | ${String(it.guid || '').split('?')[0]}`; }).join('\n') || '(0)') + '\nTip: multilingual — Corée(fr)·Korea-Krieg(de)·Corea(it/es)' + (demo ? '\n(shared demo key in use — for heavy use, set a free EUROPEANA_API_KEY from apis.europeana.eu)' : ''));
+      return text(`Europeana '${query}'${en ? ` → 영문 자동 변환 '${eff}'` : ''}${media_type ? ` [${media_type}]` : ''}${ytag} — total ${d.totalResults}:\n` + (items.map((it) => { const rt = rshort(it.rights); return `- ${String((it.title || ['?'])[0]).slice(0, 90)} (${(it.year || [''])[0]}) — ${String((it.dataProvider || [''])[0]).slice(0, 40)}${rt ? ` | 권리:${rt}` : ''} | ${String(it.guid || '').split('?')[0]}${euMedia(it) ? `\n  원본: ${euMedia(it)}` : ''}`; }).join('\n') || '(0)') + '\nTip: multilingual — Corée(fr)·Korea-Krieg(de)·Corea(it/es)' + (demo ? '\n(shared demo key in use — for heavy use, set a free EUROPEANA_API_KEY from apis.europeana.eu)' : ''));
     });
 
 const JB_RECIPES = `발굴 완주 레시피 — 주제 유형별 발굴→판독→권리 순서 (전 단계 실측 검증, 2026-11-21)

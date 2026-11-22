@@ -1,0 +1,108 @@
+{
+ "n": 79,
+ "part": [
+  "Ⅺ",
+  "신문과 독립운동"
+ ],
+ "inst": "독립기념관 한국독립운동정보시스템",
+ "flag": "🇰🇷",
+ "say": "대한민국임시정부 1919년 기록 찾아줘",
+ "head": "대한민국임시정부 — 1919 헌법 논의, 1945 서울의 김구",
+ "big": "제6호",
+ "facts": [
+  [
+   "기록",
+   "독립신문 1919-09-06 제6호 「憲法草案再讀」(독립기념관 신문자료)"
+  ],
+  [
+   "내용",
+   "'臨時憲章' 조항 삭제·이동을 둘러싼 의정원 질문·답변"
+  ],
+  [
+   "대조",
+   "신한민보 1920·1921 「대한민국림시정부공보」 · NARA 김구 사진"
+  ],
+  [
+   "권리",
+   "독립기념관=화면 캡처 · 신문=이용 제한 없음 · NARA=A"
+  ]
+ ],
+ "tool": "nedb_search(mode=i815, query='임시헌장') → DR191909060203 · judge_rights(naid=404793111)",
+ "link": "https://search.i815.or.kr/contents/newsPaper/detail.do?newsPaperId=DR191909060203&sortNo=8",
+ "checked": "2026-11-22",
+ "tags": "#대한민국임시정부 #독립기념관 #김구",
+ "hero": {
+  "file": "src/nara_SC223975.jpg",
+  "pos": "center 70%",
+  "credit": "사진: 미국 국립기록관리청 NAID 404793111 (319-AP-12715-SC223975, 1945, Use Restriction Unrestricted)"
+ },
+ "hook": "'Provincial Korean<br>Government in exile'<br>— <span class=\"g\">1945 서울</span>",
+ "mosaic": [
+  {
+   "file": "src/cap_i815_DR191909060203.jpg",
+   "label": "독립기념관 기록 화면(캡처) — 독립신문 1919.9.6 「憲法草案再讀」",
+   "pos": "center 0%"
+  },
+  {
+   "file": "src/crop_shinhan_19210303_gongbo.jpg",
+   "label": "신한민보 1921.3.3 「대한민국림시정부공보」",
+   "pos": "right top"
+  },
+  {
+   "file": "src/crop_shinhan_19200210_gongbo.jpg",
+   "label": "신한민보 1920.2.10 「대한민국림시정부공보」",
+   "pos": "right center"
+  },
+  {
+   "file": "src/nara_SC233751.jpg",
+   "label": "1946.2.14 의회 첫 회의에서 말하는 김구 · NAID 404793113",
+   "pos": "center 65%"
+  }
+ ],
+ "mosaic_title": "임시정부 <span class=\"g\">공보</span>는 미주 신문에도 실렸다",
+ "mosaic_credit": "화면 캡처: 독립기념관 DR191909060203(원문이미지 미게재) · 신한민보 CNTS-00048105296·00048272419(이용 제한 없음) · NARA NAID 404793113(Unrestricted)",
+ "ann": {
+  "file": "src/crop_nara_SC223975_top.jpg",
+  "crop_y": 0.0,
+  "title": "NARA 사진 카드 SC-223975 — 보이는 것만",
+  "boxes": [
+   {
+    "x": 6,
+    "y": 2,
+    "w": 11,
+    "h": 4,
+    "t": "사진 번호 'SC-223975'"
+   },
+   {
+    "x": 10,
+    "y": 4.5,
+    "w": 77,
+    "h": 6.5,
+    "t": "설명문 'Mr. Koo Kim, President, Provincial Korean Government in exile, sits at his desk in Seoul, Korea.'"
+   },
+   {
+    "x": 56,
+    "y": 16,
+    "w": 5,
+    "h": 4,
+    "t": "연도 '1945'"
+   },
+   {
+    "x": 37,
+    "y": 61,
+    "w": 22,
+    "h": 9,
+    "t": "둥근 테 안경을 쓴 인물"
+   },
+   {
+    "x": 64,
+    "y": 38,
+    "w": 34,
+    "h": 40,
+    "t": "뒤쪽 꽃무늬 장식 벽면"
+   }
+  ],
+  "credit": "미국 국립기록관리청 NAID 404793111 원본(2436×3288) 윗부분 — 사진 카드 설명문은 원문 그대로"
+ },
+ "cta_img": "src/nara_SC233751.jpg"
+}

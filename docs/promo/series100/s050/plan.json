@@ -6,7 +6,7 @@
  ],
  "inst": "유로피아나 Europeana",
  "flag": "🇪🇺",
- "say": "유로피아나에서 18세기 서양 한국 지도 찾아줘",
+ "say": "18세기 서양의 한국 지도 찾아줘",
  "head": "d'Anville 「Royaume de Corée」(1735)",
  "big": "Tome IV p.422",
  "facts": [
@@ -36,7 +36,7 @@
   "pos": "center 55%",
   "credit": "지도: d'Anville 'Royaume de Corée', Du Halde 1735 Tome IV p.422 · Leiden University Libraries (hdl 1887.1/item:3181739) · Public Domain Mark"
  },
- "hook": "1735년 파리에서 찍은<br>'<span class=\"g\">Royaume de Corée</span>'",
+ "hook": "1735년 파리에서 펴낸<br>'<span class=\"g\">Royaume de Corée</span>'",
  "mosaic": [
   {
    "file": "src/leiden_3181738_1737.jpg",
@@ -84,7 +84,7 @@
     "y": 64,
     "w": 19,
     "h": 29,
-    "t": "높은 모자를 쓰고 새를 든 앉은 인물"
+    "t": "높은 모자를 쓰고 새 모양을 손에 든 앉은 인물"
    },
    {
     "x": 16,
@@ -103,6 +103,6 @@
   ],
   "credit": "Leiden item 3181739 카르투슈 부분 확대 — 표시한 5곳은 지도에서 직접 읽은 것 · PDM"
  },
- "cta_img": "src/leiden_3181738_1737.jpg",
+ "cta_img": "src/leiden_3181739_cartouche.jpg",
  "meta_top": 470
 }
