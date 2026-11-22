@@ -2603,7 +2603,7 @@ item_cd 5종(자료 성격별): ART 도설·회화 / ETC 두루마리·축 / DRR
           + 'node,sources,title,date,id,url,partOf,media,sameAs\n' + rows.join('\n')
           + '\n※ 그대로 스프레드시트·KARDA 온톨로지(nodes/edges)·통계 분석에 투입 가능. 권리 초판정: judge_rights.');
       }
-      const lines = items.slice(0, 45).map((it) => `- [${it.sources.join('+')}] ${it.title.slice(0, 95)}${it.date ? ` (${it.date})` : ''}${it.url ? ' ' + it.url : ''}${it.altTitle ? `\n  ↔ 동일 기록: ${it.altTitle.slice(0, 80)} (${it.sameAs})` : (it.sameAs ? `\n  ↔ 원본: ${it.sameAs}` : '')}`);
+      const lines = items.slice(0, 45).map((it) => `- [${it.sources.join('+')}] ${it.title.slice(0, 95)}${it.date ? ` (${it.date})` : ''}${it.url ? ' ' + it.url : ''}${it.altTitle ? `\n  ↔ 동일 기록: ${it.altTitle.slice(0, 80)} (${it.sameAs})` : (it.sameAs ? `\n  ↔ ${it.sources.length > 1 ? '함께 묶인 기록' : '원본'}: ${it.sameAs}` : '')}`);
       return text(`교차수집 '${query}' — 채널별 [${stats.join(' · ')}] → 병합 ${items.length}건 (복수출처 우선 정렬):\n` + (lines.join('\n') || '(0)')
         + '\n※ [출처] 복수 표기 = 교차확인된 record. 국내(nara·archives·nlk)는 서버 키, nedb는 NEDB_INDEX_URL(공식 개방파일) 설정 시 포함. open.go.kr 본체(브라우저 전용)는 foia_search 전용 도구로.\n※ 발굴 우선 — 권리는 표시: 게재 전 judge_rights(참조코드·KOGL·naid)로 초판정. variants=true로 당대 표기(Corea·Chosen·Keijo…) 자동 팬아웃.'
         + '\n※ 심층 판독 이어가기: [i815]→nedb_search(mode=i815, 상세URL) · [gonghun]→mode=gonghun(mngNo) · [ktv]→mode=ktv(view URL) · [earchive]→mode=earchive(\'키워드|순번\') · [jacar]→mode=jacar(레퍼런스코드) · [seoul]→seoul_archives_search(상세URL) · [koreanwar]→koreanwar_item(archRfcd) · [nara]→judge_rights(naid).');

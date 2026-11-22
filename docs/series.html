@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>30곳 문서고 탐방 — KOREA ARCHIVE 통합검색 예제 시리즈</title>
+<meta name="description" content="한국어 한 문장으로 9개국 30곳 문서고를 하나씩 여는 예제 30선. 모든 결과는 2026-11-22 실제 도구 호출로 확인했습니다.">
+<style>
+:root{
+  --paper:#fbfaf7; --card:#ffffff; --ink:#1c1f24; --body:#3a3f47; --muted:#6a707a; --line:#e6e2d9;
+  --accent:#8a5a14; --accent-bg:#f6ecd9; --blue:#1d5fbf; --blue-bg:#e8f0fc; --green:#1f7a3d; --green-bg:#e5f4ea;
+  --serif:'Noto Serif KR','Nanum Myeongjo','AppleMyungjo',serif;
+  --sans:'Pretendard','Apple SD Gothic Neo','Noto Sans KR','Malgun Gothic',sans-serif;
+  --mono:'D2Coding','SFMono-Regular',Consolas,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+body{background:var(--paper);color:var(--body);font-family:var(--sans);font-size:18px;line-height:1.75;word-break:keep-all}
+a{color:var(--blue)}
+.wrap{max-width:1040px;margin:0 auto;padding:0 24px}
+.narrow{max-width:760px}
+
+/* 상단 메뉴 */
+nav{position:sticky;top:0;z-index:10;background:rgba(251,250,247,.94);backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:60px;gap:16px}
+nav .logo{font-weight:800;color:var(--ink);text-decoration:none;font-size:1rem;white-space:nowrap}
+nav .links{display:flex;gap:22px;font-size:.92rem;overflow-x:auto}
+nav .links a{color:var(--body);text-decoration:none;white-space:nowrap}
+nav .links a:hover{color:var(--accent)}
+
+/* 첫 화면 */
+.hero{padding:88px 0 72px;text-align:center}
+.pill{display:inline-block;background:var(--accent-bg);color:var(--accent);font-weight:700;font-size:.85rem;padding:6px 16px;border-radius:999px}
+.hero h1{font-family:var(--serif);color:var(--ink);font-size:clamp(2rem,5.4vw,3.4rem);line-height:1.3;margin:22px 0 18px;font-weight:900}
+.hero h1 em{font-style:normal;color:var(--accent)}
+.hero p.sub{font-size:1.15rem;max-width:640px;margin:0 auto;color:var(--body)}
+.buttons{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:34px}
+.btn{display:inline-block;padding:14px 26px;border-radius:10px;font-weight:700;font-size:1rem;text-decoration:none;border:2px solid var(--ink)}
+.btn.main{background:var(--ink);color:#fff}
+.btn.sub{background:transparent;color:var(--ink)}
+.btn:hover{transform:translateY(-1px)}
+.facts{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-top:40px}
+.facts span{background:var(--card);border:1px solid var(--line);border-radius:999px;padding:8px 18px;font-size:.92rem;color:var(--ink)}
+.facts b{color:var(--accent)}
+
+/* 공통 섹션 */
+section{padding:80px 0;border-top:1px solid var(--line)}
+section.tint{background:#f4f1ea}
+.kicker{color:var(--accent);font-weight:800;font-size:.85rem;letter-spacing:.12em}
+h2{font-family:var(--serif);color:var(--ink);font-size:clamp(1.6rem,3.6vw,2.2rem);line-height:1.35;margin:8px 0 16px;font-weight:800}
+.intro{font-size:1.08rem;max-width:720px;margin-bottom:40px}
+
+/* 문제 제시 */
+.compare{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px,100%),1fr));gap:20px}
+.box{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:28px}
+.box h3{color:var(--ink);font-size:1.15rem;margin-bottom:10px}
+.terms{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.term{font-family:var(--mono);font-size:.9rem;padding:4px 12px;border-radius:8px}
+.term.no{background:#fbe9e7;color:#a1291b;text-decoration:line-through}
+.term.yes{background:var(--green-bg);color:var(--green);font-weight:700}
+
+/* 대화 예시 */
+.chats{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(440px,100%),1fr));gap:24px}
+.chat{min-width:0;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:26px;display:flex;flex-direction:column;gap:14px}
+.chat .label{font-size:.8rem;font-weight:800;color:var(--muted);letter-spacing:.08em}
+.say{align-self:flex-start;background:var(--blue-bg);color:#123b78;font-weight:700;padding:12px 18px;border-radius:16px 16px 16px 4px;font-size:1.02rem}
+.get{font-size:.98rem}
+.get b{color:var(--ink)}
+.out{background:#1c1f24;color:#e9e4d8;font-family:var(--mono);font-size:.84rem;line-height:1.65;padding:14px 16px;border-radius:10px;white-space:pre-wrap;overflow-wrap:anywhere}
+.out .hl{color:#f0c674}
+
+/* 시작하기 */
+.steps{display:grid;gap:18px;max-width:760px}
+.step{display:grid;grid-template-columns:56px 1fr;gap:18px;align-items:start;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px}
+.num{width:44px;height:44px;border-radius:50%;background:var(--ink);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1.1rem}
+.step h3{color:var(--ink);font-size:1.1rem;margin-bottom:4px}
+.copy{display:flex;align-items:center;gap:10px;margin-top:10px;flex-wrap:wrap}
+.copy code{font-family:var(--mono);font-size:.92rem;background:#f1eee6;border:1px solid var(--line);padding:8px 12px;border-radius:8px;color:var(--ink);word-break:break-all}
+.copy button{font:inherit;font-size:.88rem;font-weight:700;padding:8px 14px;border-radius:8px;border:1px solid var(--ink);background:var(--card);cursor:pointer}
+.alt{font-size:.92rem;color:var(--muted);margin-top:18px}
+
+/* 기관 */
+.regions{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(230px,100%),1fr));gap:16px}
+.region{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px}
+.region .flag{font-size:1.7rem;line-height:1}
+.region h3{color:var(--ink);font-size:1.02rem;margin:8px 0 4px}
+.region p{font-size:.92rem;color:var(--body);line-height:1.6}
+.region.home{grid-column:1/-1;background:var(--accent-bg);border-color:#ead7b4}
+
+/* 기능 */
+.features{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px,100%),1fr));gap:20px}
+.feat{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:26px}
+.feat .ic{font-size:2rem;line-height:1}
+.feat h3{color:var(--ink);font-size:1.15rem;margin:12px 0 8px}
+.feat p{font-size:.98rem}
+.feat .ex{margin-top:12px;font-size:.9rem;background:#f6f4ee;border-radius:10px;padding:10px 14px;color:var(--body)}
+.feat .ex b{color:var(--accent)}
+
+/* 받는 형태 */
+.formats{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(260px,100%),1fr));gap:18px}
+.fmt{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:24px;text-align:center}
+.fmt .ic{font-size:2.4rem}
+.fmt h3{color:var(--ink);margin:10px 0 6px;font-size:1.1rem}
+.fmt p{font-size:.95rem}
+
+/* 신뢰 */
+.trust{display:grid;gap:14px;max-width:780px}
+.trust li{list-style:none;background:var(--card);border:1px solid var(--line);border-left:5px solid var(--green);border-radius:10px;padding:16px 20px}
+.trust b{color:var(--ink)}
+
+/* 용어·질문 */
+details{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:0;margin-bottom:12px;max-width:820px}
+summary{cursor:pointer;padding:18px 22px;font-weight:700;color:var(--ink);list-style:none;position:relative}
+summary::-webkit-details-marker{display:none}
+summary::after{content:'＋';position:absolute;right:22px;color:var(--muted)}
+details[open] summary::after{content:'－'}
+details .ans{padding:0 22px 20px;font-size:.98rem}
+dl{display:grid;grid-template-columns:150px 1fr;gap:0;max-width:820px;background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+dt,dd{padding:15px 20px;border-bottom:1px solid var(--line)}
+dt{font-weight:800;color:var(--ink);background:#f6f4ee}
+dd{font-size:.97rem}
+dl>*:nth-last-child(-n+2){border-bottom:0}
+
+/* 마지막 안내 */
+.final{text-align:center}
+.final p{font-size:1.1rem;margin:0 auto 30px;max-width:600px}
+footer{padding:44px 0 60px;text-align:center;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);line-height:1.9}
+
+@media (max-width:560px){
+  body{font-size:17px}
+  .chats{grid-template-columns:1fr}
+  dl{grid-template-columns:1fr}
+  dt{border-bottom:0;padding-bottom:4px}
+  nav .links{display:none}
+  .step{grid-template-columns:1fr}
+}
+
+.exnum{display:inline-flex;align-items:center;justify-content:center;width:46px;height:46px;border-radius:50%;background:var(--accent);color:#fff;font-weight:900;font-size:1.2rem;margin-right:12px;vertical-align:middle}
+.example{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(420px,100%),1fr));gap:28px;align-items:start;margin-top:10px}
+.example .panel{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:26px;min-width:0}
+.example h3{color:var(--ink);font-size:1.05rem;margin:18px 0 6px}
+.example h3:first-child{margin-top:0}
+.why{background:var(--accent-bg);border-radius:12px;padding:14px 18px;font-size:.97rem;margin-top:14px}
+.try{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:14px}
+.try code{font-family:var(--mono);background:#f1eee6;border:1px solid var(--line);padding:6px 10px;border-radius:8px;font-size:.88rem;color:var(--ink)}
+.try button{font:inherit;font-size:.85rem;font-weight:700;padding:6px 12px;border-radius:8px;border:1px solid var(--ink);background:var(--card);cursor:pointer}
+figure.photo{margin:0;background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden}
+figure.photo img{width:100%;display:block}
+figure.photo figcaption{padding:12px 16px;font-size:.88rem;color:var(--muted);line-height:1.6}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(300px,100%),1fr));gap:16px}
+.cards img{width:100%;border-radius:12px;border:1px solid var(--line);display:block}
+.dl{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px}
+
+.parts{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(150px,100%),1fr));gap:10px;margin-top:26px}
+.parts a{display:block;background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px 14px;text-decoration:none;color:var(--ink);font-weight:700;font-size:.95rem}
+.parts a span{display:block;color:var(--muted);font-weight:500;font-size:.8rem}
+.grid30{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px,100%),1fr));gap:22px;margin-top:26px}
+.it{background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.it img{display:block;width:100%;aspect-ratio:1/1;object-fit:cover;background:#111}
+.it .b{padding:16px 18px 18px;display:flex;flex-direction:column;gap:8px;min-width:0}
+.it .inst{font-size:.85rem;color:var(--accent);font-weight:800}
+.it h3{font-size:1.08rem;line-height:1.45;color:var(--ink)}
+.it .q{background:var(--blue-bg);color:#123c7a;border-radius:12px 12px 12px 4px;padding:8px 12px;font-weight:700;font-size:.95rem;display:flex;gap:8px;align-items:center;justify-content:space-between}
+.it .q button{border:1px solid #9bb6e0;background:#fff;border-radius:8px;font-size:.78rem;padding:3px 8px;cursor:pointer;white-space:nowrap}
+.it ul{list-style:none;font-size:.9rem;line-height:1.55}
+.it li{border-top:1px dashed var(--line);padding:5px 0;overflow-wrap:anywhere}
+.it li b{color:#8a2a1f;margin-right:6px}
+.it .tool{font-family:var(--mono);font-size:.78rem;color:var(--muted);overflow-wrap:anywhere}
+.it .lk{font-size:.85rem;display:flex;gap:14px;flex-wrap:wrap}
+.status{background:#fff7e6;border:1px solid #f0d9a8;border-radius:12px;padding:16px 18px;margin-top:20px;font-size:.95rem}
+</style>
+</head>
+<body>
+<nav><div class="wrap"><a class="logo" href="index.html">KOREA ARCHIVE 통합검색</a><div class="links"><a href="index.html">소개</a><a href="examples.html">예제 15선</a><a href="#p1">30곳 탐방</a><a href="#status">현황</a><a href="#download">내려받기</a></div></div></nav>
+<header class="hero" id="top"><div class="wrap narrow">
+<span class="pill">예제 시리즈 · 30곳 전부</span>
+<h1>30곳 문서고 <em>탐방</em></h1>
+<p class="sub">이 도구가 함께 찾는 30곳을 <b>한 곳씩</b> 열어 봅니다. 각 예제는 그곳에 맞는 한 문장 질문과, 그 질문에 실제로 돌아온 기록입니다. 모든 결과는 2026-11-22 실제 도구 호출로 확인했습니다.</p>
+<p style="font-size:1.6rem;margin-top:18px;letter-spacing:.2em">🇺🇸 🇰🇷 🇦🇺 🇳🇿 🇳🇱 🇺🇳 🇬🇧 🇫🇷 🇪🇺 🌐 🇯🇵</p>
+<div class="parts"><a href="#p1">Ⅰ 전쟁의 기록<span>01–06</span></a><a href="#p7">Ⅱ 개항과 대한제국<span>07–12</span></a><a href="#p13">Ⅲ 독립운동<span>13–18</span></a><a href="#p19">Ⅳ 조선의 기록문화<span>19–23</span></a><a href="#p24">Ⅴ 현대 한국<span>24–28</span></a><a href="#p29">Ⅵ 세계의 집계 창구<span>29–30</span></a></div>
+</div></header>
+<section id="p1" class=""><div class="wrap"><p class="pill">Ⅰ부</p><h2 style="font-family:var(--serif);color:var(--ink);font-size:1.9rem;margin:12px 0 4px">전쟁의 기록</h2><div class="grid30"><article class="it" id="s01"><img loading="lazy" src="promo/series30/thumbs/s01.jpg" alt="미국 국립기록관리청 NARA — 1950.12.24 흥남 — 필름 원본까지 카드">
+<div class="b"><div class="inst">01 · 🇺🇸 미국 국립기록관리청 NARA</div><h3>1950.12.24 흥남 — 필름 원본까지</h3>
+<div class="q"><span id="sq1">흥남 철수 영상 찾아줘</span><button type="button" onclick="navigator.clipboard.writeText(document.getElementById('sq1').textContent);this.textContent='복사됨 ✓'">복사</button></div>
+<ul><li><b>계보</b>RG 428 해군부 › 군사활동 영상 시리즈</li><li><b>생산</b>1950-12-24</li><li><b>원본</b>MP4 428-npc-170 (College Park 영상과)</li><li><b>권리</b>Use Restriction &#x27;Undetermined&#x27; → B</li></ul><div class="tool">cross_search(sources=nara) → judge_rights(naid=75392)</div>
+<div class="lk"><a href="https://catalog.archives.gov/id/75392" target="_blank" rel="noopener">원문 기록 열기 ↗</a><a href="promo/series30/s01.png" download>카드 PNG</a></div></div></article><article class="it" id="s02"><img loading="lazy" src="promo/series30/thumbs/s02.jpg" alt="6·25전쟁 아카이브센터 (협약기관) — 한국어 기록 ↔ 미국 원본, 자동으로 한 쌍 카드">
+<div class="b"><div class="inst">02 · 🇰🇷 6·25전쟁 아카이브센터 (협약기관)</div><h3>한국어 기록 ↔ 미국 원본, 자동으로 한 쌍</h3>
+<div class="q"><span id="sq2">장진호 기록, 같은 것끼리 묶어줘</span><button type="button" onclick="navigator.clipboard.writeText(document.getElementById('sq2').textContent);this.textContent='복사됨 ✓'">복사</button></div>
+<ul><li><b>협약</b>2022-US-02-AV-D-00329 장진호 전투에서 퇴각하는 미 제1해병사단 기록영상</li><li><b>원본</b>NARA NAID 24033 MARINE RETREAT IN KOREA (1950-12)</li><li><b>표시</b>[nara·원본확인+koreanwar]</li><li><b>열람</b>전체열람</li></ul><div class="tool">cross_search(sources=koreanwar) → koreanwar_item</div>
+<div class="lk"><a href="https://www.koreanwar.or.kr:8443/searchDetail.do?archRfcd=2022-US-02-AV-D-00329" target="_blank" rel="noopener">원문 기록 열기 ↗</a><a href="promo/series30/s02.png" download>카드 PNG</a></div></div></article><article class="it" id="s03"><img loading="lazy" src="promo/series30/thumbs/s03.jpg" alt="호주 전쟁기념관 AWM — 1952년 4월, 가평 계곡 카드">
+<div class="b"><div class="inst">03 · 🇦🇺 호주 전쟁기념관 AWM</div><h3>1952년 4월, 가평 계곡</h3>
+<div class="q"><span id="sq3">가평 전투 사진 보여줘</span><button type="button" onclick="navigator.clipboard.writeText(document.getElementById('sq3').textContent);this.textContent='복사됨 ✓'">복사</button></div>
+<ul><li><b>기록</b>C276864 Kapyong Valley, Korea</li><li><b>설명</b>가평 계곡과 주변 고지를 내려다본 전경</li><li><b>권리</b>Copyright expired - public domain</li></ul><div class="tool">cross_search(sources=awm)</div>
+<div class="lk"><a href="https://www.awm.gov.au/collection/C276864" target="_blank" rel="noopener">원문 기록 열기 ↗</a><a href="promo/series30/s03.png" download>카드 PNG</a></div></div></article><article class="it" id="s04"><img loading="lazy" src="promo/series30/thumbs/s04.jpg" alt="뉴질랜드 기록원 Archives NZ — 뉴질랜드가 계산한 한국전쟁의 비용 카드">
+<div class="b"><div class="inst">04 · 🇳🇿 뉴질랜드 기록원 Archives NZ</div><h3>뉴질랜드가 계산한 한국전쟁의 비용</h3>
+<div class="q"><span id="sq4">케이포스(Kayforce) 기록 찾아줘</span><button type="button" onclick="navigator.clipboard.writeText(document.getElementById('sq4').textContent);this.textContent='복사됨 ✓'">복사</button></div>
+<ul><li><b>제목</b>Kayforce - Cost of Korean War to N.Z.</li><li><b>시리즈</b>Inwards letters and registered files</li><li><b>접근</b>Open</li></ul><div class="tool">cross_search(sources=nzarch) → nedb_search(mode=nzarch)</div>
+<div class="lk"><a href="https://collections.archives.govt.nz/web/arena/search#/entity/aims-archive/R22438362" target="_blank" rel="noopener">원문 기록 열기 ↗</a><a href="promo/series30/s04.png" download>카드 PNG</a></div></div></article><article class="it" id="s05"><img loading="lazy" src="promo/series30/thumbs/s05.jpg" alt="네덜란드 국립문서보관소 — 참전 대대·대사관·적십자 — 문서군 3개 카드">
+<div class="b"><div class="inst">05 · 🇳🇱 네덜란드 국립문서보관소</div><h3>참전 대대·대사관·적십자 — 문서군 3개</h3>
+<div class="q"><span id="sq5">네덜란드에 있는 한국 기록은?</span><button type="button" onclick="navigator.clipboard.writeText(document.getElementById('sq5').textContent);this.textContent='복사됨 ✓'">복사</button></div>
+<ul><li><b>2.13.56</b>유엔 한국 파견 네덜란드 부대 1950-1954</li><li><b>2.05.202</b>주한 네덜란드 대사관 1955-1974</li><li><b>2.19.309</b>네덜란드 적십자 - 한국 1950-1960</li></ul><div class="tool">cross_search(sources=nlna)</div>
+<div class="lk"><a href="https://www.nationaalarchief.nl/onderzoeken/archief/2.13.56" target="_blank" rel="noopener">원문 기록 열기 ↗</a><a href="promo/series30/s05.png" download>카드 PNG</a></div></div></article><article class="it" id="s06"><img loading="lazy" src="promo/series30/thumbs/s06.jpg" alt="UN 디지털도서관 — 2015년, 정전협정을 둘러싼 서한 카드">
+<div class="b"><div class="inst">06 · 🇺🇳 UN 디지털도서관</div><h3>2015년, 정전협정을 둘러싼 서한</h3>
+<div class="q"><span id="sq6">정전협정 관련 UN 문서 찾아줘</span><button type="button" onclick="navigator.clipboard.writeText(document.getElementById('sq6').textContent);this.textContent='복사됨 ✓'">복사</button></div>
+<ul><li><b>기호</b>S/2015/799 (2015-10-19)</li><li><b>요약</b>북한 외무성 성명 — 정전협정을 북미 평화협정으로 대체 제안</li><li><b>지문</b>sha256-16 c969db4195015bbc</li></ul><div class="tool">cross_search(sources=un) → nedb_search(mode=un)</div>
+<div class="lk"><a href="https://digitallibrary.un.org/record/808136" target="_blank" rel="noopener">원문 기록 열기 ↗</a><a href="promo/series30/s06.png" download>카드 PNG</a></div></div></article></div></div></section><section id="p7" class="tint"><div class="wrap"><p class="pill">Ⅱ부</p><h2 style="font-family:var(--serif);color:var(--ink);font-size:1.9rem;margin:12px 0 4px">개항과 대한제국</h2><div class="grid30"><article class="it" id="s07"><img loading="lazy" src="promo/series30/thumbs/s07.jpg" alt="영국 국립기록관 TNA — 영국 해군이 거문도를 점령한 2년 카드">
+<div class="b"><div class="inst">07 · 🇬🇧 영국 국립기록관 TNA</div><h3>영국 해군이 거문도를 점령한 2년</h3>
+<div class="q"><span id="sq7">거문도 사건 영국 문서 있어?</span><button type="button" onclick="navigator.clipboard.writeText(document.getElementById('sq7').textContent);this.textContent='복사됨 ✓'">복사</button></div>
+<ul><li><b>ADM 116/70</b>Port Hamilton papers (1884-1887)</li><li><b>ADM 125/86</b>Occupation of Port Hamilton (1885-1887)</li><li><b>검색어</b>&#x27;Port Hamilton&#x27; — 당대 영국식 이름</li></ul><div class="tool">tna_search(&#x27;Port Hamilton&#x27;)</div>
+<div class="lk"><a href="https://discovery.nationalarchives.gov.uk/details/r/C3668617" target="_blank" rel="noopener">원문 기록 열기 ↗</a><a href="promo/series30/s07.png" download>카드 PNG</a></div></div></article><article class="it" id="s08"><img loading="lazy" src="promo/series30/thumbs/s08.jpg" alt="프랑스 국립도서관 Gallica — 막혀도, 길은 알려준다 카드">
+<div class="b"><div class="inst">08 · 🇫🇷 프랑스 국립도서관 Gallica</div><h3>막혀도, 길은 알려준다</h3>
+<div class="q"><span id="sq8">프랑스 국립도서관에서 &#x27;조선&#x27; 찾아줘</span><button type="button" onclick="navigator.clipboard.writeText(document.getElementById('sq8').textContent);this.textContent='복사됨 ✓'">복사</button></div>
+<ul><li><b>변환</b>조선 → Corée (프랑스어 자동)</li><li><b>상태</b>BnF가 서버 자동 조회 차단</li><li><b>안내</b>웹 검색·브라우저용 공식 검색 URL 제시</li></ul><div class="tool">gallica_search(&#x27;Corée&#x27;)</div>
+<div class="lk"><a href="https://gallica.bnf.fr/services/engine/search/sru?operation=searchRetrieve&amp;query=Cor%C3%A9e" target="_blank" rel="noopener">원문 기록 열기 ↗</a><a href="promo/series30/s08.png" download>카드 PNG</a></div></div></article><article class="it" id="s09"><img loading="lazy" src="promo/series30/thumbs/s09.jpg" alt="유로피아나 Europeana — 독일·영국 기관의 서울 — 권리도 함께 카드">
+<div class="b"><div class="inst">09 · 🇪🇺 유로피아나 Europeana</div><h3>독일·영국 기관의 서울 — 권리도 함께</h3>
+<div class="q"><span id="sq9">유럽에 있는 서울 사진 찾아줘</span><button type="button" onclick="navigator.clipboard.writeText(document.getElementById('sq9').textContent);this.textContent='복사됨 ✓'">복사</button></div>
+<ul><li><b>Deutsche Fotothek</b>Seoul, Korea. Stadttor — 권리 InC-EDU</li><li><b>Deutsche Welle</b>Pjöngjang &amp; Seoul — 권리 InC</li><li><b>표시</b>결과마다 권리 상태 자동 표기</li></ul><div class="tool">europeana_search(&#x27;Korea Seoul&#x27;)</div>
+<div class="lk"><a href="https://www.europeana.eu/item/188/item_AYX7YXUSUEUFWFGKHGZH2TTCDKHSDCDH" target="_blank" rel="noopener">원문 기록 열기 ↗</a><a href="promo/series30/s09.png" download>카드 PNG</a></div></div></article><article class="it" id="s10"><img loading="lazy" src="promo/series30/thumbs/s10.jpg" alt="대한민국신문아카이브 (국립중앙도서관) — 1908년, 학생들의 단지동맹 카드">
+<div class="b"><div class="inst">10 · 🇰🇷 대한민국신문아카이브 (국립중앙도서관)</div><h3>1908년, 학생들의 단지동맹</h3>
+<div class="q"><span id="sq10">단지동맹 신문 기사 찾아줘</span><button type="button" onclick="navigator.clipboard.writeText(document.getElementById('sq10').textContent);this.textContent='복사됨 ✓'">복사</button></div>
+<ul><li><b>기사</b>대한매일신보 2면 2단 「학도의단지동맹」</li><li><b>색인어</b>홍원 공립보통학교 · 학도 · 야학 · 동맹혈서</li><li><b>번호</b>CNTS-00095686434</li></ul><div class="tool">cross_search(sources=oldnews) → nedb_search(mode=oldnews)</div>
+<div class="lk"><a href="https://nl.go.kr/newspaper/detail.do?content_id=CNTS-00095686434" target="_blank" rel="noopener">원문 기록 열기 ↗</a><a href="promo/series30/s10.png" download>카드 PNG</a></div></div></article><article class="it" id="s11"><img loading="lazy" src="promo/series30/thumbs/s11.jpg" alt="국사편찬위원회 한국사데이터베이스 — 어느 DB에 있는지부터 알려준다 카드">
+<div class="b"><div class="inst">11 · 🇰🇷 국사편찬위원회 한국사데이터베이스</div><h3>어느 DB에 있는지부터 알려준다</h3>
+<div class="q"><span id="sq11">한국사DB에 거문도 기록 있어?</span><button type="button" onclick="navigator.clipboard.writeText(document.getElementById('sq11').textContent);this.textContent='복사됨 ✓'">복사</button></div>
+<ul><li><b>1</b>헌정사 자료 DB</li><li><b>2</b>포로신문보고서</li><li><b>다음</b>mode=law·record·sjw 등 심층 판독</li></ul><div class="tool">nedb_search(mode=total, &#x27;거문도&#x27;)</div>
+<div class="lk"><a href="https://db.history.go.kr/search/searchResultList.do?searchKeywordType=BI&amp;searchKeyword=%EA%B1%B0%EB%AC%B8%EB%8F%84" target="_blank" rel="noopener">원문 기록 열기 ↗</a><a href="promo/series30/s11.png" download>카드 PNG</a></div></div></article><article class="it" id="s12"><img loading="lazy" src="promo/series30/thumbs/s12.jpg" alt="위키미디어 공용 Commons — 업로더 말 대신 원 소장처에 묻는다 카드">
+<div class="b"><div class="inst">12 · 🌐 위키미디어 공용 Commons</div><h3>업로더 말 대신 원 소장처에 묻는다</h3>
+<div class="q"><span id="sq12">이 흥남 사진, 써도 돼?</span><button type="button" onclick="navigator.clipboard.writeText(document.getElementById('sq12').textContent);this.textContent='복사됨 ✓'">복사</button></div>
+<ul><li><b>공용</b>Public domain (업로더 기재)</li><li><b>NARA 대조</b>NAID 520782 실재 · 80-G-424513</li><li><b>원본 권리</b>Use Restriction &#x27;Unrestricted&#x27;</li></ul><div class="tool">nedb_search(mode=commons, File URL)</div>
+<div class="lk"><a href="https://catalog.archives.gov/id/520782" target="_blank" rel="noopener">원문 기록 열기 ↗</a><a href="promo/series30/s12.png" download>카드 PNG</a></div></div></article></div></div></section><section id="p13" class=""><div class="wrap"><p class="pill">Ⅲ부</p><h2 style="font-family:var(--serif);color:var(--ink);font-size:1.9rem;margin:12px 0 4px">독립운동</h2><div class="grid30"><article class="it" id="s13"><img loading="lazy" src="promo/series30/thumbs/s13.jpg" alt="국가기록원 독립운동판결문 — 1919. 6. 30 경성복심법원 카드">
+<div class="b"><div class="inst">13 · 🇰🇷 국가기록원 독립운동판결문</div><h3>1919. 6. 30 경성복심법원</h3>
+<div class="q"><span id="sq13">유관순 판결문 찾아줘</span><button type="button" onclick="navigator.clipboard.writeText(document.getElementById('sq13').textContent);this.textContent='복사됨 ✓'">복사</button></div>
+<ul><li><b>죄명</b>소요, 보안법위반</li><li><b>본적</b>충청남도 천안군 동면 용두리</li><li><b>지문</b>sha256-16 963b3b862227926e</li></ul><div class="tool">cross_search(sources=indy) → nedb_search(mode=indy)</div>
+<div class="lk"><a href="https://theme.archives.go.kr/viewer/common/archWebViewer.do?archiveEventId=0034971420" target="_blank" rel="noopener">원문 기록 열기 ↗</a><a href="promo/series30/s13.png" download>카드 PNG</a></div></div></article><article class="it" id="s14"><img loading="lazy" src="promo/series30/thumbs/s14.jpg" alt="공훈전자사료관 (국가보훈부) — 1932. 4. 29 상해 홍구공원 카드">
+<div class="b"><div class="inst">14 · 🇰🇷 공훈전자사료관 (국가보훈부)</div><h3>1932. 4. 29 상해 홍구공원</h3>
+<div class="q"><span id="sq14">윤봉길 공적조서 보여줘</span><button type="button" onclick="navigator.clipboard.writeText(document.getElementById('sq14').textContent);this.textContent='복사됨 ✓'">복사</button></div>
+<ul><li><b>생몰</b>1908-06-21 ~ 1932-12-19</li><li><b>계열</b>의열투쟁 · 한인애국단</li><li><b>번호</b>관리번호 3732 — 공적조서·공훈록 전문</li></ul><div class="tool">cross_search(sources=gonghun) → nedb_search(mode=gonghun)</div>
+<div class="lk"><a href="https://e-gonghun.mpva.go.kr/user/ContribuReportDetail.do?goTocode=20001&amp;mngNo=3732&amp;pageTitle=Report" target="_blank" rel="noopener">원문 기록 열기 ↗</a><a href="promo/series30/s14.png" download>카드 PNG</a></div></div></article><article class="it" id="s15"><img loading="lazy" src="promo/series30/thumbs/s15.jpg" alt="독립기념관 — 1932년 미국 신문이 쓴 안창호 체포 카드">
+<div class="b"><div class="inst">15 · 🇰🇷 독립기념관</div><h3>1932년 미국 신문이 쓴 안창호 체포</h3>
+<div class="q"><span id="sq15">안창호 관련 자료 찾아줘</span><button type="button" onclick="navigator.clipboard.writeText(document.getElementById('sq15').textContent);this.textContent='복사됨 ✓'">복사</button></div>
+<ul><li><b>자료</b>안창호 체포기사(영자신문) (1932)</li><li><b>기고</b>전경무 — 재미 대한인국민회 외교국장</li><li><b>범위</b>독립운동가 자료 3,074건 · 임시정부 21건</li></ul><div class="tool">cross_search(sources=i815) → nedb_search(mode=i815)</div>
+<div class="lk"><a href="https://search.i815.or.kr/contents/independenceFighter/detail.do?independenceFighterId=1-A00025-012&amp;sortNo=4" target="_blank" rel="noopener">원문 기록 열기 ↗</a><a href="promo/series30/s15.png" download>카드 PNG</a></div></div></article><article class="it" id="s16"><img loading="lazy" src="promo/series30/thumbs/s16.jpg" alt="일본 아시아역사자료센터 JACAR — 일본 육군이 쓴 &#x27;조선 소요&#x27; 개요 카드">
+<div class="b"><div class="inst">16 · 🇯🇵 일본 아시아역사자료센터 JACAR</div><h3>일본 육군이 쓴 &#x27;조선 소요&#x27; 개요</h3>
+<div class="q"><span id="sq16">3·1운동, 일본 쪽 기록은?</span><button type="button" onclick="navigator.clipboard.writeText(document.getElementById('sq16').textContent);this.textContent='복사됨 ✓'">복사</button></div>
+<ul><li><b>번호</b>A04017275800</li><li><b>제목</b>Year of 1919 … Outline of development of Korean commotion</li><li><b>인접</b>같은 철 ±8건 자동 채굴</li></ul><div class="tool">cross_search(sources=jacar) → nedb_search(mode=jacar)</div>
+<div class="lk"><a href="https://www.jacar.archives.go.jp/das/meta/A04017275800" target="_blank" rel="noopener">원문 기록 열기 ↗</a><a href="promo/series30/s16.png" download>카드 PNG</a></div></div></article><article class="it" id="s17"><img loading="lazy" src="promo/series30/thumbs/s17.jpg" alt="국사편찬위원회 전자사료관 — 미군이 읽은 1940년대 편지들 카드">
+<div class="b"><div class="inst">17 · 🇰🇷 국사편찬위원회 전자사료관</div><h3>미군이 읽은 1940년대 편지들</h3>
+<div class="q"><span id="sq17">미군정기 편지 검열 기록 있어?</span><button type="button" onclick="navigator.clipboard.writeText(document.getElementById('sq17').textContent);this.textContent='복사됨 ✓'">복사</button></div>
+<ul><li><b>사료</b>Box 7 미군정기 편지검열문서 (AUS004_64)</li><li><b>등록</b>CO0000000419 · 청구기호 CO 911.07 M678 v.2</li><li><b>조건</b>공개 · 제한적 이용(출처·비상업)</li></ul><div class="tool">cross_search(sources=earchive) → nedb_search(mode=earchive)</div>
+<div class="lk"><a href="https://archive.history.go.kr" target="_blank" rel="noopener">원문 기록 열기 ↗</a><a href="promo/series30/s17.png" download>카드 PNG</a></div></div></article><article class="it" id="s18"><img loading="lazy" src="promo/series30/thumbs/s18.jpg" alt="일본 국립국회도서관 NDL — 경성 엽서와 육지측량부 지도 카드">
+<div class="b"><div class="inst">18 · 🇯🇵 일본 국립국회도서관 NDL</div><h3>경성 엽서와 육지측량부 지도</h3>
+<div class="q"><span id="sq18">京城府 자료 찾아줘</span><button type="button" onclick="navigator.clipboard.writeText(document.getElementById('sq18').textContent);this.textContent='복사됨 ✓'">복사</button></div>
+<ul><li><b>엽서</b>一般府政を掌る京城府庁(京城名所)</li><li><b>지도</b>往十里 京畿道京城府 (1913, 陸地測量部)</li><li><b>지도</b>冠岳山 京畿道京城府・始興郡 (1937)</li></ul><div class="tool">cross_search(sources=ndl, &#x27;京城府&#x27;)</div>
+<div class="lk"><a href="https://ndlsearch.ndl.go.jp/books/R100000002-I000008260482" target="_blank" rel="noopener">원문 기록 열기 ↗</a><a href="promo/series30/s18.png" download>카드 PNG</a></div></div></article></div></div></section><section id="p19" class="tint"><div class="wrap"><p class="pill">Ⅳ부</p><h2 style="font-family:var(--serif);color:var(--ink);font-size:1.9rem;margin:12px 0 4px">조선의 기록문화</h2><div class="grid30"><article class="it" id="s19"><img loading="lazy" src="promo/series30/thumbs/s19.jpg" alt="한국학중앙연구원 장서각 — 1776년, 정조가 아버지 사당을 고치다 카드">
+<div class="b"><div class="inst">19 · 🇰🇷 한국학중앙연구원 장서각</div><h3>1776년, 정조가 아버지 사당을 고치다</h3>
+<div class="q"><span id="sq19">의궤 해제 읽어줘</span><button type="button" onclick="navigator.clipboard.writeText(document.getElementById('sq19').textContent);this.textContent='복사됨 ✓'">복사</button></div>
+<ul><li><b>청구</b>K2-3556 개건도감의궤(改建都監儀軌)</li><li><b>내용</b>경모궁(사도세자 사당) 개건 기록</li><li><b>형태</b>1책 135장 · 경모궁 개건도 수록</li></ul><div class="tool">cross_search(sources=jsg) → nedb_search(mode=jsg)</div>
+<div class="lk"><a href="https://jsg.aks.ac.kr/dir/view?dataId=JSG_K2-3556" target="_blank" rel="noopener">원문 기록 열기 ↗</a><a href="promo/series30/s19.png" download>카드 PNG</a></div></div></article><article class="it" id="s20"><img loading="lazy" src="promo/series30/thumbs/s20.jpg" alt="서울대 규장각한국학연구원 — 목록 2건, 해제 14건 — 숨은 편차 카드">
+<div class="b"><div class="inst">20 · 🇰🇷 서울대 규장각한국학연구원</div><h3>목록 2건, 해제 14건 — 숨은 편차</h3>
+<div class="q"><span id="sq20">규장각 대동여지도 찾아줘</span><button type="button" onclick="navigator.clipboard.writeText(document.getElementById('sq20').textContent);this.textContent='복사됨 ✓'">복사</button></div>
+<ul><li><b>목록</b>奎10333 · 奎12380</li><li><b>해제</b>奎10341 외 13건</li><li><b>원문</b>이미지 경로 규칙까지 안내</li></ul><div class="tool">nedb_search(mode=kyujanggak)</div>
+<div class="lk"><a href="https://kyudb.snu.ac.kr" target="_blank" rel="noopener">원문 기록 열기 ↗</a><a href="promo/series30/s20.png" download>카드 PNG</a></div></div></article><article class="it" id="s21"><img loading="lazy" src="promo/series30/thumbs/s21.jpg" alt="한국고문서자료관 — 172곳 소장처에서 문중 찾기 카드">
+<div class="b"><div class="inst">21 · 🇰🇷 한국고문서자료관</div><h3>172곳 소장처에서 문중 찾기</h3>
+<div class="q"><span id="sq21">안동김씨 집안 고문서 어디 있어?</span><button type="button" onclick="navigator.clipboard.writeText(document.getElementById('sq21').textContent);this.textContent='복사됨 ✓'">복사</button></div>
+<ul><li><b>L014423</b>공주 안동김씨 청음 김상헌 후손가</li><li><b>분류</b>문중 &gt; 충청남도</li><li><b>다음</b>소장처 → 분류 → 문서 면 열람</li></ul><div class="tool">cross_search(sources=aks) → nedb_search(mode=aks)</div>
+<div class="lk"><a href="https://archive.aks.ac.kr" target="_blank" rel="noopener">원문 기록 열기 ↗</a><a href="promo/series30/s21.png" download>카드 PNG</a></div></div></article><article class="it" id="s22"><img loading="lazy" src="promo/series30/thumbs/s22.jpg" alt="국가유산청 국가유산포털 — 국보 하나, 보물 하나, 시도유산 하나 카드">
+<div class="b"><div class="inst">22 · 🇰🇷 국가유산청 국가유산포털</div><h3>국보 하나, 보물 하나, 시도유산 하나</h3>
+<div class="q"><span id="sq22">근정전 관련 국가유산 보여줘</span><button type="button" onclick="navigator.clipboard.writeText(document.getElementById('sq22').textContent);this.textContent='복사됨 ✓'">복사</button></div>
+<ul><li><b>국보</b>경복궁 근정전(景福宮 勤政殿)</li><li><b>보물</b>근정전 정시도 및 연구시 병풍</li><li><b>시도</b>친림광화문내근정전정시시도</li></ul><div class="tool">cross_search(sources=heritage)</div>
+<div class="lk"><a href="https://www.heritage.go.kr/heri/cul/culSelectDetail.do?ccbaCpno=1111102230000" target="_blank" rel="noopener">원문 기록 열기 ↗</a><a href="promo/series30/s22.png" download>카드 PNG</a></div></div></article><article class="it" id="s23"><img loading="lazy" src="promo/series30/thumbs/s23.jpg" alt="국립중앙도서관 — 음반부터 단행본까지 한 번에 카드">
+<div class="b"><div class="inst">23 · 🇰🇷 국립중앙도서관</div><h3>음반부터 단행본까지 한 번에</h3>
+<div class="q"><span id="sq23">훈민정음 자료 얼마나 있어?</span><button type="button" onclick="navigator.clipboard.writeText(document.getElementById('sq23').textContent);this.textContent='복사됨 ✓'">복사</button></div>
+<ul><li><b>음악자료</b>훈민정음 (2017)</li><li><b>도서</b>훈민정음 (세종대왕기념사업회, 2003)</li><li><b>표시</b>소장 자료마다 이용 가능 여부</li></ul><div class="tool">nlk_search(&#x27;훈민정음&#x27;)</div>
+<div class="lk"><a href="https://www.nl.go.kr" target="_blank" rel="noopener">원문 기록 열기 ↗</a><a href="promo/series30/s23.png" download>카드 PNG</a></div></div></article></div></div></section><section id="p24" class=""><div class="wrap"><p class="pill">Ⅴ부</p><h2 style="font-family:var(--serif);color:var(--ink);font-size:1.9rem;margin:12px 0 4px">현대 한국</h2><div class="grid30"><article class="it" id="s24"><img loading="lazy" src="promo/series30/thumbs/s24.jpg" alt="국가기록원 — 1972년 대통령 현지 시찰 영상까지 카드">
+<div class="b"><div class="inst">24 · 🇰🇷 국가기록원</div><h3>1972년 대통령 현지 시찰 영상까지</h3>
+<div class="q"><span id="sq24">새마을운동 기록 찾아줘</span><button type="button" onclick="navigator.clipboard.writeText(document.getElementById('sq24').textContent);this.textContent='복사됨 ✓'">복사</button></div>
+<ul><li><b>1972</b>박정희 대통령 새마을운동 현지 시찰 (국립영화제작소) [공개]</li><li><b>1977</b>새마을운동의 성과와 방향 [공개]</li><li><b>2013</b>청도 새마을운동 화보집 [공개]</li></ul><div class="tool">archives_search(&#x27;새마을운동&#x27;)</div>
+<div class="lk"><a href="https://www.archives.go.kr" target="_blank" rel="noopener">원문 기록 열기 ↗</a><a href="promo/series30/s24.png" download>카드 PNG</a></div></div></article><article class="it" id="s25"><img loading="lazy" src="promo/series30/thumbs/s25.jpg" alt="KTV 국민방송 e영상역사관 — 20년을 19분에 — 대한뉴스의 발자취 카드">
+<div class="b"><div class="inst">25 · 🇰🇷 KTV 국민방송 e영상역사관</div><h3>20년을 19분에 — 대한뉴스의 발자취</h3>
+<div class="q"><span id="sq25">대한뉴스 옛날 영상 찾아줘</span><button type="button" onclick="navigator.clipboard.writeText(document.getElementById('sq25').textContent);this.textContent='복사됨 ✓'">복사</button></div>
+<ul><li><b>영상</b>대한뉴스의 발자취 (제1집) · 1991 제작</li><li><b>수록</b>8·15 해방 · 흥남철수 · 판문점 휴전협정 조인 · 새마을운동</li><li><b>권리</b>KOGL(공공누리) · 해설 지문 2614984d8dee3b1c</li></ul><div class="tool">nedb_search(mode=ktv)</div>
+<div class="lk"><a href="https://www.ehistory.go.kr/view/movie?mediasrcgbn=KV&amp;mediaid=1886&amp;mediadtl=8705&amp;mediagbn=MH" target="_blank" rel="noopener">원문 기록 열기 ↗</a><a href="promo/series30/s25.png" download>카드 PNG</a></div></div></article><article class="it" id="s26"><img loading="lazy" src="promo/series30/thumbs/s26.jpg" alt="대한민국역사박물관 — &quot;국민투표 참가하여 국론통일 이룩하자!&quot; 카드">
+<div class="b"><div class="inst">26 · 🇰🇷 대한민국역사박물관</div><h3>&quot;국민투표 참가하여 국론통일 이룩하자!&quot;</h3>
+<div class="q"><span id="sq26">유신 국민투표 포스터 있어?</span><button type="button" onclick="navigator.clipboard.writeText(document.getElementById('sq26').textContent);this.textContent='복사됨 ✓'">복사</button></div>
+<ul><li><b>소장</b>한박2133 · 종이 · 52.3×77.4cm</li><li><b>작가</b>중앙선거관리위원회</li><li><b>권리</b>공공누리 제4유형 → B (비상업·변경금지)</li></ul><div class="tool">cross_search(sources=much) → nedb_search(mode=much)</div>
+<div class="lk"><a href="https://archive.much.go.kr/archive/nrms/view.do?idnbr=PS01002025001-002133-00000" target="_blank" rel="noopener">원문 기록 열기 ↗</a><a href="promo/series30/s26.png" download>카드 PNG</a></div></div></article><article class="it" id="s27"><img loading="lazy" src="promo/series30/thumbs/s27.jpg" alt="서울기록원 — 설계도면이 기록철로 남았다 카드">
+<div class="b"><div class="inst">27 · 🇰🇷 서울기록원</div><h3>설계도면이 기록철로 남았다</h3>
+<div class="q"><span id="sq27">청계천 옛 공사 기록 찾아줘</span><button type="button" onclick="navigator.clipboard.writeText(document.getElementById('sq27').textContent);this.textContent='복사됨 ✓'">복사</button></div>
+<ul><li><b>기록철</b>청계천 우안제 축조공사 실시설계도</li><li><b>기록철</b>청계천 우안제 개수 기본계획도 및 실시설계도</li><li><b>법적지위</b>공공기록</li></ul><div class="tool">cross_search(sources=seoul) → seoul_archives_search</div>
+<div class="lk"><a href="https://archives.seoul.go.kr/aggregation/86222" target="_blank" rel="noopener">원문 기록 열기 ↗</a><a href="promo/series30/s27.png" download>카드 PNG</a></div></div></article><article class="it" id="s28"><img loading="lazy" src="promo/series30/thumbs/s28.jpg" alt="정보공개포털·서울정보소통광장 — 자동 조회가 막힌 곳은 열람 경로로 카드">
+<div class="b"><div class="inst">28 · 🇰🇷 정보공개포털·서울정보소통광장</div><h3>자동 조회가 막힌 곳은 열람 경로로</h3>
+<div class="q"><span id="sq28">청계천 정보공개 원문 찾아줘</span><button type="button" onclick="navigator.clipboard.writeText(document.getElementById('sq28').textContent);this.textContent='복사됨 ✓'">복사</button></div>
+<ul><li><b>상태</b>기관 측 자동 조회 제한·시간 초과</li><li><b>안내</b>공식 검색 URL + 웹 검색 지시</li><li><b>원칙</b>막혀도 소스를 빼지 않는다</li></ul><div class="tool">foia_search(&#x27;청계천&#x27;)</div>
+<div class="lk"><a href="https://www.open.go.kr" target="_blank" rel="noopener">원문 기록 열기 ↗</a><a href="promo/series30/s28.png" download>카드 PNG</a></div></div></article></div></div></section><section id="p29" class="tint"><div class="wrap"><p class="pill">Ⅵ부</p><h2 style="font-family:var(--serif);color:var(--ink);font-size:1.9rem;margin:12px 0 4px">세계의 집계 창구</h2><div class="grid30"><article class="it" id="s29"><img loading="lazy" src="promo/series30/thumbs/s29.jpg" alt="인터넷 아카이브 archive.org — 인터넷 사본과 NARA 원본, 한 줄로 카드">
+<div class="b"><div class="inst">29 · 🌐 인터넷 아카이브 archive.org</div><h3>인터넷 사본과 NARA 원본, 한 줄로</h3>
+<div class="q"><span id="sq29">흥남 철수 필름, 사본도 찾아줘</span><button type="button" onclick="navigator.clipboard.writeText(document.getElementById('sq29').textContent);this.textContent='복사됨 ✓'">복사</button></div>
+<ul><li><b>원본</b>NARA NAID 75393 EVACUATION OF HUNGNAM KOREA (1950-12-24)</li><li><b>사본</b>archive.org 428-npc-171</li><li><b>근거</b>원본 파일명 428-npc-171.mp4 일치</li></ul><div class="tool">cross_search(sources=nara,ia)</div>
+<div class="lk"><a href="https://archive.org/details/428-npc-171" target="_blank" rel="noopener">원문 기록 열기 ↗</a><a href="promo/series30/s29.png" download>카드 PNG</a></div></div></article><article class="it" id="s30"><img loading="lazy" src="promo/series30/thumbs/s30.jpg" alt="디지털NZ DigitalNZ — 라디오·육성·사진 — NZ 30여 기관 한 번에 카드">
+<div class="b"><div class="inst">30 · 🇳🇿 디지털NZ DigitalNZ</div><h3>라디오·육성·사진 — NZ 30여 기관 한 번에</h3>
+<div class="q"><span id="sq30">뉴질랜드에 남은 가평 기록은?</span><button type="button" onclick="navigator.clipboard.writeText(document.getElementById('sq30').textContent);this.textContent='복사됨 ✓'">복사</button></div>
+<ul><li><b>육성</b>Laurie Valentine describes the battle of Kapyong (NZ History)</li><li><b>사진</b>Barrel change after the Battle of Kapyong (Christchurch City Libraries, 1951-1952)</li><li><b>방송</b>Korean War citation presented to NZ veterans (RNZ, 2011)</li></ul><div class="tool">cross_search(sources=dnz, &#x27;Kapyong&#x27;)</div>
+<div class="lk"><a href="https://nzhistory.govt.nz/media/sound/laurie-valentine-describes-battle-kapyong" target="_blank" rel="noopener">원문 기록 열기 ↗</a><a href="promo/series30/s30.png" download>카드 PNG</a></div></div></article></div></div></section>
+<section id="status"><div class="wrap narrow"><h2 style="font-family:var(--serif);color:var(--ink);font-size:1.7rem">솔직한 현황 — 막힌 곳도 숨기지 않습니다</h2>
+<div class="status">
+<p><b>정상 응답 26곳</b> · 30곳 헬스체크(2026-11-22 실측).</p>
+<p style="margin-top:8px"><b>08 Gallica</b>와 <b>28 정보공개</b>는 기관 쪽에서 서버 자동 조회를 막거나 응답하지 않습니다. 그래도 수집 대상에서 빼지 않고, 응답에 <b>브라우저·웹 검색으로 여는 공식 경로</b>를 안내합니다(예제 08·28이 그 실제 응답입니다).</p>
+<p style="margin-top:8px"><b>11 한국사DB</b>는 연합검색 색인(공식 개방파일)이 아직 설정되지 않아, 전용 판독 도구(nedb_search)로 직접 조회한 결과를 실었습니다.</p>
+<p style="margin-top:8px"><b>30 DigitalNZ</b>는 이날 한때 서버 IP가 차단(403)됐다가 재실측에서 정상 응답했습니다.</p>
+<p style="margin-top:8px">이 시리즈를 만들며 찾은 도구 결함 3건(일본 국립국회도서관 일문 검색, 인터넷 아카이브 사본 묶기, 링크 추적 꼬리)은 바로 고쳐 배포했습니다 — 예제 18·29가 고친 뒤의 결과입니다.</p>
+</div></div></section>
+<section id="download" class="tint"><div class="wrap narrow"><h2 style="font-family:var(--serif);color:var(--ink);font-size:1.7rem">내려받기 — 인스타그램 게시용</h2>
+<ul style="margin:16px 0 0 20px;line-height:2">
+<li><a href="promo/series30/s00_cover.png" download>표지 카드</a> + 카드 30장(각 예제의 "카드 PNG")</li>
+<li><a href="promo/series30/captions.txt">게시글 캡션 30개 + 해시태그</a></li>
+<li><a href="promo/series30/schedule.md">30일 게시 일정</a></li>
+<li><a href="promo/series30/sources.txt">출처·권리 대장</a> (이미지 11장 권리 실확인 · 이미지가 없는 19곳은 실제 조회 결과만으로 만든 '기록 카드')</li>
+</ul></div></section>
+<section class="final"><div class="wrap narrow" style="text-align:center;padding:60px 0"><p>더 자세한 예제는 <a href="examples.html">예제 15선</a>, 연결 방법은 <a href="index.html">소개 페이지</a>에서.</p></div></section>
+</body>
+</html>
