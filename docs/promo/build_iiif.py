@@ -161,6 +161,21 @@ def main():
             'label': L('KOREA ARCHIVE 통합검색 — 30곳 탐방·100선 전체 기록 이미지'),
             'summary': L(f'시리즈 {len(manifests)}개 · 이미지 {stats["ok"] + stats["kogl4"]}장(공공누리 제4유형 {stats["kogl4"]}장은 원본 무변경) · 원 기관 링크만 {stats["link"]}건'),
             'items': manifests}
+    # 전체 이어보기 매니페스트 — 800장을 한 매니페스트에(각 장 라벨에 시리즈 번호), Mirador·UV에서 처음부터 끝까지 연속으로 넘김
+    allc = []
+    for S0 in index:
+        man0 = json.loads((OUT / 'm' / f'{S0["key"]}.json').read_text(encoding='utf-8'))
+        for c in man0['items']:
+            c = json.loads(json.dumps(c)); c['label'] = L(S0['label'].split(' — ')[0] + ' · ' + c['label']['ko'][0]); allc.append(c)
+    allm = {'@context': 'http://iiif.io/api/presentation/3/context.json', 'id': BASE + 'all.json', 'type': 'Manifest',
+            'label': L(f'KOREA ARCHIVE 통합검색 — 전체 기록 이어보기 ({len(allc)}장)'),
+            'summary': L('30곳 탐방·100선의 실물 기록 이미지 전체를 시리즈 순서대로 한 매니페스트에 담았습니다. 장마다 원 기관·식별자·권리 표시.'),
+            'requiredStatement': {'label': L('출처'), 'value': L('이미지별 원 기관·권리 표시 참조. 협약기관(KOREAN WAR ARCHIVES 6·25전쟁 아카이브센터) 기록은 출처 표기 필수.')},
+            'provider': [{'id': 'https://changgi.github.io/korea-archive-mcp/', 'type': 'Agent', 'label': L('KOREA ARCHIVE 통합검색')}],
+            'items': allc}
+    if allc:
+        allm['thumbnail'] = allc[0]['thumbnail']
+    (OUT / 'all.json').write_text(json.dumps(allm, ensure_ascii=False, separators=(',', ':')), encoding='utf-8')
     (OUT / 'collection.json').write_text(json.dumps(coll, ensure_ascii=False, indent=1), encoding='utf-8')
     (OUT / 'index.json').write_text(json.dumps({'stats': stats, 'series': index}, ensure_ascii=False, separators=(',', ':')), encoding='utf-8')
     for p in list((OUT / 'img').rglob('*.jpg')) + list((OUT / 'th').rglob('*.jpg')):
