@@ -36,6 +36,86 @@
      "6·25전쟁 아카이브센터 (협약기관)"
     ]
    }
+  },
+  {
+   "label": {
+    "ko": [
+     "계층"
+    ]
+   },
+   "value": {
+    "ko": [
+     "KOREA ARCHIVE 통합검색 › 100선 · Ⅶ 전쟁의 기록 2 › s037"
+    ]
+   }
+  },
+  {
+   "label": {
+    "ko": [
+     "수집 경로"
+    ]
+   },
+   "value": {
+    "ko": [
+     "koreanwar_search(평양 입성) → koreanwar_item → nara_search(Pyongyang) → judge_rights"
+    ]
+   }
+  },
+  {
+   "label": {
+    "ko": [
+     "확인일"
+    ]
+   },
+   "value": {
+    "ko": [
+     "2026-11-22"
+    ]
+   }
+  },
+  {
+   "label": {
+    "ko": [
+     "게재 이미지"
+    ]
+   },
+   "value": {
+    "ko": [
+     "4장 · 링크 전용 0건"
+    ]
+   }
+  }
+ ],
+ "partOf": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/c/s100-07.json",
+   "type": "Collection",
+   "label": {
+    "ko": [
+     "100선 · Ⅶ 전쟁의 기록 2"
+    ]
+   }
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/hierarchy.json",
+   "type": "Collection",
+   "label": {
+    "ko": [
+     "KOREA ARCHIVE 통합검색 — 기록 계층"
+    ]
+   }
+  }
+ ],
+ "seeAlso": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s037/ledger.json",
+   "type": "Dataset",
+   "label": {
+    "ko": [
+     "출처 대장(ledger)"
+    ]
+   },
+   "format": "application/json"
   }
  ],
  "requiredStatement": {
@@ -120,6 +200,42 @@
        "A — Unrestricted"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "e41091dd9eb544e2 — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "원 기관 계보"
+      ]
+     },
+     "value": {
+      "ko": [
+       "NARA › RG 342 Records of U.S. Air Force Commands, Activities, and Organizations › Photographs of Activities, Facilities, and Personnel"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "NARA catalog proxy API useRestriction.status='Unrestricted' (2026-11-22 실측)"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -162,6 +278,39 @@
      "format": "text/html"
     }
    ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s037/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    },
+    {
+     "id": "https://korea-archive-mcp.vercel.app/iiif/nara/542285/manifest.json",
+     "type": "Manifest",
+     "label": {
+      "ko": [
+       "NARA 원본 전체(IIIF 브리지)"
+      ]
+     },
+     "format": "application/ld+json"
+    },
+    {
+     "id": "https://korea-archive-mcp.vercel.app/iiif/nara/542285/record.jsonld",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "NARA 계층 기술(RiC-O)"
+      ]
+     },
+     "format": "application/ld+json"
+    }
+   ],
+   "navDate": "1950-10-25T00:00:00Z",
    "rights": "http://rightsstatements.org/vocab/NoC-US/1.0/"
   },
   {
@@ -234,6 +383,42 @@
        "평양 차량용 다리 1950-10-25 · NAID 348337867"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "d713a663992e97e5 — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "원 기관 계보"
+      ]
+     },
+     "value": {
+      "ko": [
+       "NARA › Photograph Collection › Photographs Relating to the Administration, Family, and Personal Life of Harry S. Truman"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "NARA catalog proxy API useRestriction.status='Unrestricted' (2026-11-22 실측)"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -276,6 +461,39 @@
      "format": "text/html"
     }
    ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s037/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    },
+    {
+     "id": "https://korea-archive-mcp.vercel.app/iiif/nara/348337867/manifest.json",
+     "type": "Manifest",
+     "label": {
+      "ko": [
+       "NARA 원본 전체(IIIF 브리지)"
+      ]
+     },
+     "format": "application/ld+json"
+    },
+    {
+     "id": "https://korea-archive-mcp.vercel.app/iiif/nara/348337867/record.jsonld",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "NARA 계층 기술(RiC-O)"
+      ]
+     },
+     "format": "application/ld+json"
+    }
+   ],
+   "navDate": "1950-10-25T00:00:00Z",
    "rights": "http://rightsstatements.org/vocab/NoC-US/1.0/"
   },
   {
@@ -348,6 +566,42 @@
        "순천 상공 C-119 공수 1950-10-20 · NAID 542206"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "0603e84218c385eb — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "원 기관 계보"
+      ]
+     },
+     "value": {
+      "ko": [
+       "NARA › RG 342 Records of U.S. Air Force Commands, Activities, and Organizations › Photographs of Activities, Facilities, and Personnel"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "NARA catalog proxy API useRestriction.status='Undetermined' (2026-11-22 실측)"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -389,7 +643,40 @@
      },
      "format": "text/html"
     }
-   ]
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s037/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    },
+    {
+     "id": "https://korea-archive-mcp.vercel.app/iiif/nara/542206/manifest.json",
+     "type": "Manifest",
+     "label": {
+      "ko": [
+       "NARA 원본 전체(IIIF 브리지)"
+      ]
+     },
+     "format": "application/ld+json"
+    },
+    {
+     "id": "https://korea-archive-mcp.vercel.app/iiif/nara/542206/record.jsonld",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "NARA 계층 기술(RiC-O)"
+      ]
+     },
+     "format": "application/ld+json"
+    }
+   ],
+   "navDate": "1950-10-20T00:00:00Z"
   },
   {
    "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s037/canvas/4",
@@ -461,6 +748,42 @@
        "표지판 윗줄 'YOU ARE NOW CROSSING' · 큰 글씨 '38TH PARALLEL' · 원형 'US' 표지와 'C.O.B 728MP', 오른쪽 원형 휘장 · 다리를 건너는 트럭, 뒤로 먼지 속 차량들 · 평양에서 철수, 38선을 다시 넘다 · NAID 541822"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "6ac6718491cf9996 — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "원 기관 계보"
+      ]
+     },
+     "value": {
+      "ko": [
+       "NARA › RG 306 Records of the U.S. Information Agency › United States Information Service Filmstrips"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "NARA catalog proxy API useRestriction.status='Unrestricted' (2026-11-22 실측)"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -503,6 +826,39 @@
      "format": "text/html"
     }
    ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s037/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    },
+    {
+     "id": "https://korea-archive-mcp.vercel.app/iiif/nara/541822/manifest.json",
+     "type": "Manifest",
+     "label": {
+      "ko": [
+       "NARA 원본 전체(IIIF 브리지)"
+      ]
+     },
+     "format": "application/ld+json"
+    },
+    {
+     "id": "https://korea-archive-mcp.vercel.app/iiif/nara/541822/record.jsonld",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "NARA 계층 기술(RiC-O)"
+      ]
+     },
+     "format": "application/ld+json"
+    }
+   ],
+   "navDate": "1950-01-01T00:00:00Z",
    "rights": "http://rightsstatements.org/vocab/NoC-US/1.0/"
   }
  ],

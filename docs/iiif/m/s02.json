@@ -36,6 +36,86 @@
      "6·25전쟁 아카이브센터(KOREAN WAR ARCHIVES, 협약기관) — 입수처 NARA RG 111"
     ]
    }
+  },
+  {
+   "label": {
+    "ko": [
+     "계층"
+    ]
+   },
+   "value": {
+    "ko": [
+     "KOREA ARCHIVE 통합검색 › 30곳 탐방 · Ⅰ 전쟁의 기록 › s02"
+    ]
+   }
+  },
+  {
+   "label": {
+    "ko": [
+     "수집 경로"
+    ]
+   },
+   "value": {
+    "ko": [
+     "cross_search(sources=koreanwar) → koreanwar_item"
+    ]
+   }
+  },
+  {
+   "label": {
+    "ko": [
+     "확인일"
+    ]
+   },
+   "value": {
+    "ko": [
+     "2026-11-22"
+    ]
+   }
+  },
+  {
+   "label": {
+    "ko": [
+     "게재 이미지"
+    ]
+   },
+   "value": {
+    "ko": [
+     "7장 · 링크 전용 0건"
+    ]
+   }
+  }
+ ],
+ "partOf": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/c/s30-01.json",
+   "type": "Collection",
+   "label": {
+    "ko": [
+     "30곳 탐방 · Ⅰ 전쟁의 기록"
+    ]
+   }
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/hierarchy.json",
+   "type": "Collection",
+   "label": {
+    "ko": [
+     "KOREA ARCHIVE 통합검색 — 기록 계층"
+    ]
+   }
+  }
+ ],
+ "seeAlso": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/promo/series30v2/img/02/ledger.json",
+   "type": "Dataset",
+   "label": {
+    "ko": [
+     "출처 대장(ledger)"
+    ]
+   },
+   "format": "application/json"
   }
  ],
  "requiredStatement": {
@@ -132,6 +212,42 @@
        "눈 덮인 산비탈 옆 도로를 걸어오는 해병 행렬 · 앞줄 인물들 방한 파카·철모·소총 · 도로 왼쪽 눈 쌓인 축대 · 원 캡션: '1stMarDiv Koto-ri 9 December 1950 Photog: Sgt. F.C. Kerr'(카탈로그)"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "1b9b022651cf4bc7 — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "원 기관 계보"
+      ]
+     },
+     "value": {
+      "ko": [
+       "NARA › RG 127 Records of the U.S. Marine Corps › General Photograph File of the U.S. Marine Corps"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "judge_rights(276537585): Use Restriction 'Unrestricted' — Class A"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -174,6 +290,39 @@
      "format": "text/html"
     }
    ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series30v2/img/02/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    },
+    {
+     "id": "https://korea-archive-mcp.vercel.app/iiif/nara/276537585/manifest.json",
+     "type": "Manifest",
+     "label": {
+      "ko": [
+       "NARA 원본 전체(IIIF 브리지)"
+      ]
+     },
+     "format": "application/ld+json"
+    },
+    {
+     "id": "https://korea-archive-mcp.vercel.app/iiif/nara/276537585/record.jsonld",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "NARA 계층 기술(RiC-O)"
+      ]
+     },
+     "format": "application/ld+json"
+    }
+   ],
+   "navDate": "1950-12-09T00:00:00Z",
    "rights": "http://rightsstatements.org/vocab/NoC-US/1.0/"
   },
   {
@@ -246,6 +395,42 @@
        "눈 맞은 해병들이 차량(지프) 옆에 기대 앉아 있음 · 철모·파카에 눈이 쌓임 · 뒤편 눈 덮인 산비탈과 줄지어 선 병사들"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "10156a03b8fc2253 — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "원 기관 계보"
+      ]
+     },
+     "value": {
+      "ko": [
+       "NARA › RG 127 Records of the U.S. Marine Corps › General Photograph File of the U.S. Marine Corps"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "judge_rights(532409): Use Restriction 'Unrestricted' — Class A"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -288,6 +473,39 @@
      "format": "text/html"
     }
    ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series30v2/img/02/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    },
+    {
+     "id": "https://korea-archive-mcp.vercel.app/iiif/nara/532409/manifest.json",
+     "type": "Manifest",
+     "label": {
+      "ko": [
+       "NARA 원본 전체(IIIF 브리지)"
+      ]
+     },
+     "format": "application/ld+json"
+    },
+    {
+     "id": "https://korea-archive-mcp.vercel.app/iiif/nara/532409/record.jsonld",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "NARA 계층 기술(RiC-O)"
+      ]
+     },
+     "format": "application/ld+json"
+    }
+   ],
+   "navDate": "1950-12-01T00:00:00Z",
    "rights": "http://rightsstatements.org/vocab/NoC-US/1.0/"
   },
   {
@@ -360,6 +578,42 @@
        "눈보라 속 해병 1명이 정면으로 걸어옴 · 철모 위에 눈, 어깨에 장비 · 오른쪽 아래 '78460A.C.' 번호 표기"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "feacdfaed7b705d2 — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "원 기관 계보"
+      ]
+     },
+     "value": {
+      "ko": [
+       "NARA › RG 342 Records of U.S. Air Force Commands, Activities, and Organizations › Photographs of Activities, Facilities, and Personnel"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "judge_rights(542210): Use Restriction 'Unrestricted' — Class A"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -402,6 +656,39 @@
      "format": "text/html"
     }
    ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series30v2/img/02/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    },
+    {
+     "id": "https://korea-archive-mcp.vercel.app/iiif/nara/542210/manifest.json",
+     "type": "Manifest",
+     "label": {
+      "ko": [
+       "NARA 원본 전체(IIIF 브리지)"
+      ]
+     },
+     "format": "application/ld+json"
+    },
+    {
+     "id": "https://korea-archive-mcp.vercel.app/iiif/nara/542210/record.jsonld",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "NARA 계층 기술(RiC-O)"
+      ]
+     },
+     "format": "application/ld+json"
+    }
+   ],
+   "navDate": "1950-12-01T00:00:00Z",
    "rights": "http://rightsstatements.org/vocab/NoC-US/1.0/"
   },
   {
@@ -474,6 +761,42 @@
        "눈 속 관목 사이로 군장 멘 해병 2~3명이 앞으로 숙이고 이동 · 왼쪽 가장자리에 필름 천공(스프로킷 구멍)"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "cf483130ffcef98b — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "원 기관 계보"
+      ]
+     },
+     "value": {
+      "ko": [
+       "NARA › RG 342 Records of U.S. Air Force Commands, Activities, and Organizations › Photographs of Activities, Facilities, and Personnel"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "judge_rights(542213): Use Restriction 'Unrestricted' — Class A"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -516,6 +839,39 @@
      "format": "text/html"
     }
    ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series30v2/img/02/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    },
+    {
+     "id": "https://korea-archive-mcp.vercel.app/iiif/nara/542213/manifest.json",
+     "type": "Manifest",
+     "label": {
+      "ko": [
+       "NARA 원본 전체(IIIF 브리지)"
+      ]
+     },
+     "format": "application/ld+json"
+    },
+    {
+     "id": "https://korea-archive-mcp.vercel.app/iiif/nara/542213/record.jsonld",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "NARA 계층 기술(RiC-O)"
+      ]
+     },
+     "format": "application/ld+json"
+    }
+   ],
+   "navDate": "1950-12-01T00:00:00Z",
    "rights": "http://rightsstatements.org/vocab/NoC-US/1.0/"
   },
   {
@@ -588,6 +944,42 @@
        "얼룩무늬 위장 천막 여러 동 · 잎 진 나무 사이 지프·차량과 안테나 · 원 캡션: '2nd Battalion men setting up command post'(카탈로그)"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "0787da1b2dd067f0 — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "원 기관 계보"
+      ]
+     },
+     "value": {
+      "ko": [
+       "NARA › RG 127 Records of the U.S. Marine Corps › General Photograph File of the U.S. Marine Corps"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "judge_rights(276537577): Use Restriction 'Unrestricted' — Class A"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -630,6 +1022,39 @@
      "format": "text/html"
     }
    ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series30v2/img/02/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    },
+    {
+     "id": "https://korea-archive-mcp.vercel.app/iiif/nara/276537577/manifest.json",
+     "type": "Manifest",
+     "label": {
+      "ko": [
+       "NARA 원본 전체(IIIF 브리지)"
+      ]
+     },
+     "format": "application/ld+json"
+    },
+    {
+     "id": "https://korea-archive-mcp.vercel.app/iiif/nara/276537577/record.jsonld",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "NARA 계층 기술(RiC-O)"
+      ]
+     },
+     "format": "application/ld+json"
+    }
+   ],
+   "navDate": "1950-11-02T00:00:00Z",
    "rights": "http://rightsstatements.org/vocab/NoC-US/1.0/"
   },
   {
@@ -702,6 +1127,42 @@
        "사진 아래 타자 캡션 'Hdqtrs No. A 5458 … Hagaru aflame.' · 검은 연기를 내며 불타는 건물 · 전신주들, 오른쪽에 2층 건물과 선 병사 2명 · 눈 덮인 길 위 포탄 구덩이"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "ffc94c4c25298554 — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "원 기관 계보"
+      ]
+     },
+     "value": {
+      "ko": [
+       "NARA › RG 127 Records of the U.S. Marine Corps › Photographic Reference File › Korea – Campaigns – Yudam-Ni/Hagaru-ri to Hungnam"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "NARA 카탈로그 API useRestriction.status='Unrestricted' 실확인(2026-11-22)"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -744,6 +1205,39 @@
      "format": "text/html"
     }
    ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series30v2/img/02/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    },
+    {
+     "id": "https://korea-archive-mcp.vercel.app/iiif/nara/74246401/manifest.json",
+     "type": "Manifest",
+     "label": {
+      "ko": [
+       "NARA 원본 전체(IIIF 브리지)"
+      ]
+     },
+     "format": "application/ld+json"
+    },
+    {
+     "id": "https://korea-archive-mcp.vercel.app/iiif/nara/74246401/record.jsonld",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "NARA 계층 기술(RiC-O)"
+      ]
+     },
+     "format": "application/ld+json"
+    }
+   ],
+   "navDate": "1950-12-01T00:00:00Z",
    "rights": "http://rightsstatements.org/vocab/NoC-US/1.0/"
   },
   {
@@ -816,6 +1310,42 @@
        "사진 아래 타자 캡션 'Hdqtrs No. A 5400  Marines strike camp at Koto-ri' · 눈보라 속 전차 여러 대와 지프 뒷모습 · 오른쪽 앞 파카 차림 병사 1명"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "ad2add1d986c5b6d — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "원 기관 계보"
+      ]
+     },
+     "value": {
+      "ko": [
+       "NARA › RG 127 Records of the U.S. Marine Corps › Photographic Reference File › Korea – Campaigns – Yudam-Ni/Hagaru-ri to Hungnam"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "NARA 카탈로그 API useRestriction.status='Unrestricted' 실확인(2026-11-22)"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -858,6 +1388,39 @@
      "format": "text/html"
     }
    ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series30v2/img/02/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    },
+    {
+     "id": "https://korea-archive-mcp.vercel.app/iiif/nara/74246392/manifest.json",
+     "type": "Manifest",
+     "label": {
+      "ko": [
+       "NARA 원본 전체(IIIF 브리지)"
+      ]
+     },
+     "format": "application/ld+json"
+    },
+    {
+     "id": "https://korea-archive-mcp.vercel.app/iiif/nara/74246392/record.jsonld",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "NARA 계층 기술(RiC-O)"
+      ]
+     },
+     "format": "application/ld+json"
+    }
+   ],
+   "navDate": "1950-12-01T00:00:00Z",
    "rights": "http://rightsstatements.org/vocab/NoC-US/1.0/"
   }
  ],
@@ -879,5 +1442,6 @@
    "type": "Image",
    "format": "image/jpeg"
   }
- ]
+ ],
+ "navDate": "1950-12-10T00:00:00Z"
 }

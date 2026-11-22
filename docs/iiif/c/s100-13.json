@@ -1,0 +1,161 @@
+{
+ "@context": "http://iiif.io/api/presentation/3/context.json",
+ "id": "https://changgi.github.io/korea-archive-mcp/iiif/c/s100-13.json",
+ "type": "Collection",
+ "label": {
+  "ko": [
+   "100선 · XIII 조선의 기록문화 2"
+  ]
+ },
+ "summary": {
+  "ko": [
+   "100선 · XIII 조선의 기록문화 2 — 시리즈 10개"
+  ]
+ },
+ "partOf": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/hierarchy.json",
+   "type": "Collection"
+  }
+ ],
+ "items": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s091.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "091 · 한국학중앙연구원 장서각 — 왕실 족보 선원보략 — 1679~1680 편찬"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s091/seonwon1883_p01_cover.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "navDate": "1679-01-01T00:00:00Z"
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s092.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "092 · 한국학중앙연구원 장서각 — 1828 진작의궤 — 세자가 지은 악장"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s092/jinchan1887_cover.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "navDate": "1828-01-01T00:00:00Z"
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s093.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "093 · 한국학중앙연구원 장서각 — 장서각 '언간' 10건 · '한글 편지' 6건"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s093/eongan1861_p1.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s094.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "094 · 서울대 규장각한국학연구원 — 규장각 목록 3건"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s094/seungnam1530_p01_cover.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s095.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "095 · 서울대 규장각한국학연구원 — 규장각 '해동지도' 해제 2건"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s095/yeoji_jeolla_full.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s096.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "096 · 서울대 규장각한국학연구원 — 규장각 목록 15건 · 해제 5건"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s096/oryun1797_p02_title.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s097.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "097 · 한국학중앙연구원 한국고문서자료관 — 1502년 3월 19일, 문과 합격증"
+    ]
+   },
+   "navDate": "1502-01-01T00:00:00Z"
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s098.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "098 · 한국학중앙연구원 한국고문서자료관 — 1592년 5월, 유성룡의 교지"
+    ]
+   },
+   "navDate": "1594-01-01T00:00:00Z"
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s099.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "099 · 한국학중앙연구원 한국고문서자료관 — 1609년 7월 12일, 서원의 명부"
+    ]
+   },
+   "navDate": "1609-01-01T00:00:00Z"
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s100.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "100 · 한국학중앙연구원 한국고문서자료관 — 제주 애월, 합격증 네 장"
+    ]
+   },
+   "navDate": "1765-01-01T00:00:00Z"
+  }
+ ]
+}

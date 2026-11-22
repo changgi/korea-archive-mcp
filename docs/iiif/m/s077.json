@@ -36,6 +36,86 @@
      "국립중앙도서관"
     ]
    }
+  },
+  {
+   "label": {
+    "ko": [
+     "계층"
+    ]
+   },
+   "value": {
+    "ko": [
+     "KOREA ARCHIVE 통합검색 › 100선 · Ⅺ 신문과 독립운동 › s077"
+    ]
+   }
+  },
+  {
+   "label": {
+    "ko": [
+     "수집 경로"
+    ]
+   },
+   "value": {
+    "ko": [
+     "nlk_search(query='三綱行實圖', category='고문헌') → CNTS-00047689274"
+    ]
+   }
+  },
+  {
+   "label": {
+    "ko": [
+     "확인일"
+    ]
+   },
+   "value": {
+    "ko": [
+     "2026-11-22"
+    ]
+   }
+  },
+  {
+   "label": {
+    "ko": [
+     "게재 이미지"
+    ]
+   },
+   "value": {
+    "ko": [
+     "8장 · 링크 전용 0건"
+    ]
+   }
+  }
+ ],
+ "partOf": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/c/s100-11.json",
+   "type": "Collection",
+   "label": {
+    "ko": [
+     "100선 · Ⅺ 신문과 독립운동"
+    ]
+   }
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/hierarchy.json",
+   "type": "Collection",
+   "label": {
+    "ko": [
+     "KOREA ARCHIVE 통합검색 — 기록 계층"
+    ]
+   }
+  }
+ ],
+ "seeAlso": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s077/ledger.json",
+   "type": "Dataset",
+   "label": {
+    "ko": [
+     "출처 대장(ledger)"
+    ]
+   },
+   "format": "application/json"
   }
  ],
  "requiredStatement": {
@@ -132,6 +212,30 @@
        "상단 한글 풀이 · '閔損單衣' 제목 · 수레·말·집·인물 판화"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "3843cf996f4e0f8e — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "viewer.nl.go.kr 서지 정보: 서명 三綱行實圖 / 저자 설순 / 발행일 壬亂以前 / 발행자 [刊寫者未詳] / 저작권유형 이용 제한이 없습니다."
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -172,6 +276,18 @@
       ]
      },
      "format": "text/html"
+    }
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s077/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
     }
    ],
    "rights": "http://creativecommons.org/publicdomain/mark/1.0/"
@@ -246,6 +362,30 @@
        "'閔損單衣' · 한글 풀이 '민손이…'"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "918f36a1b2f27347 — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "viewer.nl.go.kr 서지 정보: 서명 三綱行實圖 / 저자 설순 / 발행일 壬亂以前 / 발행자 [刊寫者未詳] / 저작권유형 이용 제한이 없습니다."
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -286,6 +426,18 @@
       ]
      },
      "format": "text/html"
+    }
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s077/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
     }
    ],
    "rights": "http://creativecommons.org/publicdomain/mark/1.0/"
@@ -360,6 +512,30 @@
        "'楊香搤虎' 제목 · 호랑이와 사람 판화"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "48e9f4873c93d7ad — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "viewer.nl.go.kr 서지 정보: 서명 三綱行實圖 / 저자 설순 / 발행일 壬亂以前 / 발행자 [刊寫者未詳] / 저작권유형 이용 제한이 없습니다."
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -400,6 +576,18 @@
       ]
      },
      "format": "text/html"
+    }
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s077/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
     }
    ],
    "rights": "http://creativecommons.org/publicdomain/mark/1.0/"
@@ -474,6 +662,30 @@
        "'子路負米' 제목"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "ba98cd83d6be4214 — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "viewer.nl.go.kr 서지 정보: 서명 三綱行實圖 / 저자 설순 / 발행일 壬亂以前 / 발행자 [刊寫者未詳] / 저작권유형 이용 제한이 없습니다."
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -514,6 +726,18 @@
       ]
      },
      "format": "text/html"
+    }
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s077/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
     }
    ],
    "rights": "http://creativecommons.org/publicdomain/mark/1.0/"
@@ -588,6 +812,30 @@
        "'江革巨孝' 제목"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "f5deaa4200d7632f — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "viewer.nl.go.kr 서지 정보: 서명 三綱行實圖 / 저자 설순 / 발행일 壬亂以前 / 발행자 [刊寫者未詳] / 저작권유형 이용 제한이 없습니다."
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -628,6 +876,18 @@
       ]
      },
      "format": "text/html"
+    }
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s077/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
     }
    ],
    "rights": "http://creativecommons.org/publicdomain/mark/1.0/"
@@ -702,6 +962,30 @@
        "'陳氏養姑' 제목"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "268f54e14b78555f — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "viewer.nl.go.kr 서지 정보: 서명 三綱行實圖 / 저자 설순 / 발행일 壬亂以前 / 발행자 [刊寫者未詳] / 저작권유형 이용 제한이 없습니다."
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -742,6 +1026,18 @@
       ]
      },
      "format": "text/html"
+    }
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s077/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
     }
    ],
    "rights": "http://creativecommons.org/publicdomain/mark/1.0/"
@@ -816,6 +1112,30 @@
        "묵서 '三綱行實 全', 'ORIENTALIA KOREAN' 라벨"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "caf78f66348e812e — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "viewer.nl.go.kr 서지 정보: 서명 三綱行實圖 / 저자 설순 / 발행일 壬亂以前 / 발행자 [刊寫者未詳] / 저작권유형 이용 제한이 없습니다."
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -856,6 +1176,18 @@
       ]
      },
      "format": "text/html"
+    }
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s077/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
     }
    ],
    "rights": "http://creativecommons.org/publicdomain/mark/1.0/"
@@ -930,6 +1262,30 @@
        "'三綱行實目錄' '孝子'"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "30191d5724b59978 — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "viewer.nl.go.kr 서지 정보: 서명 三綱行實圖 / 저자 설순 / 발행일 壬亂以前 / 발행자 [刊寫者未詳] / 저작권유형 이용 제한이 없습니다."
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -970,6 +1326,18 @@
       ]
      },
      "format": "text/html"
+    }
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s077/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
     }
    ],
    "rights": "http://creativecommons.org/publicdomain/mark/1.0/"

@@ -36,6 +36,86 @@
      "한국학중앙연구원 장서각 한국고문서자료관 (현소장처: 공주 안동김씨 청음 김상헌 후손가)"
     ]
    }
+  },
+  {
+   "label": {
+    "ko": [
+     "계층"
+    ]
+   },
+   "value": {
+    "ko": [
+     "KOREA ARCHIVE 통합검색 › 30곳 탐방 · Ⅳ 조선의 기록문화 › s21"
+    ]
+   }
+  },
+  {
+   "label": {
+    "ko": [
+     "수집 경로"
+    ]
+   },
+   "value": {
+    "ko": [
+     "cross_search(sources=aks) → nedb_search(mode=aks)"
+    ]
+   }
+  },
+  {
+   "label": {
+    "ko": [
+     "확인일"
+    ]
+   },
+   "value": {
+    "ko": [
+     "2026-11-22"
+    ]
+   }
+  },
+  {
+   "label": {
+    "ko": [
+     "게재 이미지"
+    ]
+   },
+   "value": {
+    "ko": [
+     "4장 · 링크 전용 1건"
+    ]
+   }
+  }
+ ],
+ "partOf": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/c/s30-04.json",
+   "type": "Collection",
+   "label": {
+    "ko": [
+     "30곳 탐방 · Ⅳ 조선의 기록문화"
+    ]
+   }
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/hierarchy.json",
+   "type": "Collection",
+   "label": {
+    "ko": [
+     "KOREA ARCHIVE 통합검색 — 기록 계층"
+    ]
+   }
+  }
+ ],
+ "seeAlso": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/promo/series30v2/img/21/ledger.json",
+   "type": "Dataset",
+   "label": {
+    "ko": [
+     "출처 대장(ledger)"
+    ]
+   },
+   "format": "application/json"
   }
  ],
  "requiredStatement": {
@@ -132,6 +212,30 @@
        "세로로 긴 괘지, 첫 줄 「新上面維鳩里戶籍單子」 · 「第十統內第二戶」, 4조 기재와 하단 奴婢 열거 · 좌측 「甲午 月 日」, 검은 먹 덧칠 자국 여러 곳과 긴 사선 획"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "fe1f89dfdbf4f816 — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "상세정보: 「1714년(숙종 40) · 크기 90x55.6 · 新上面 維鳩里 第10統 第2戶에 거주하는 金昌彦의 39세 戶口單子」"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -174,6 +278,19 @@
      "format": "text/html"
     }
    ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series30v2/img/21/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    }
+   ],
+   "navDate": "1714-01-01T00:00:00Z",
    "rights": "http://creativecommons.org/publicdomain/mark/1.0/"
   },
   {
@@ -246,6 +363,30 @@
        "첫 줄 「雍正十三年四月 日公山縣」 · 좌측 「行縣監」, 좌하단 붉은 관인 자국 · 가운데 큰 구멍 여러 개와 갈색 얼룩 · 우상단 라벨: 證憑類 / 準戶口 3 / 55.0×59.0"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "fdd42ab941803969 — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "상세정보: 「발급: (公山縣) · 1735년(영조 11) · 크기 55x59 · 新上面 維鳩里에 거주하는 金昌曄의 74세 準戶口」"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -288,6 +429,19 @@
      "format": "text/html"
     }
    ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series30v2/img/21/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    }
+   ],
+   "navDate": "1735-01-01T00:00:00Z",
    "rights": "http://creativecommons.org/publicdomain/mark/1.0/"
   },
   {
@@ -360,6 +514,30 @@
        "첫 줄 「道光十年庚寅九月 日」 「金進士宅奴…前明文」 · 끝부분 「田主 李進士宅奴乭伊」, 「證筆 李…」와 수결 · 우상단 라벨: 明文文記類 / 明文 1 / 34.5×36.0"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "7e9b4c98627fe99f — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "상세정보: 「발급: 이진사댁 노 돌이(李進士宅 奴 乭伊) · 1830년(순조 30) · 크기 34.5x36 · 放賣 대상: 新上面 月影垈 … 合 60斗落只」"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -402,6 +580,19 @@
      "format": "text/html"
     }
    ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series30v2/img/21/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    }
+   ],
+   "navDate": "1830-01-01T00:00:00Z",
    "rights": "http://creativecommons.org/publicdomain/mark/1.0/"
   },
   {
@@ -474,6 +665,30 @@
        "첫 줄 「東方名相大明忠臣…」 · 본문 중 「文正」 글자, 큰 글자와 작은 글자가 섞인 세로쓰기 · 우상단 라벨: 詩文類 / 致祭文(抄) 1 / 38.0×46.0"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "267ab0c3381f75da — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "상세정보: 「발급: 정조(正祖) · 크기 38x46 · 안내정보: 正祖가 文忠公 金尙容에게 내린 致祭文의 抄本 『弘齋全書』 제20권에 수록되어 있음」"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -516,6 +731,18 @@
      "format": "text/html"
     }
    ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series30v2/img/21/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    }
+   ],
    "rights": "http://creativecommons.org/publicdomain/mark/1.0/"
   }
  ],
@@ -537,5 +764,6 @@
    "type": "Image",
    "format": "image/jpeg"
   }
- ]
+ ],
+ "navDate": "1705-01-01T00:00:00Z"
 }

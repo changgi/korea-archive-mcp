@@ -36,6 +36,86 @@
      "독립기념관 한국독립운동정보시스템"
     ]
    }
+  },
+  {
+   "label": {
+    "ko": [
+     "계층"
+    ]
+   },
+   "value": {
+    "ko": [
+     "KOREA ARCHIVE 통합검색 › 100선 · Ⅺ 신문과 독립운동 › s078"
+    ]
+   }
+  },
+  {
+   "label": {
+    "ko": [
+     "수집 경로"
+    ]
+   },
+   "value": {
+    "ko": [
+     "nedb_search(mode=i815, query='한국광복군') → KM19400925-01 · nedb_search(mode=oldnews, query='광복군')"
+    ]
+   }
+  },
+  {
+   "label": {
+    "ko": [
+     "확인일"
+    ]
+   },
+   "value": {
+    "ko": [
+     "2026-11-22"
+    ]
+   }
+  },
+  {
+   "label": {
+    "ko": [
+     "게재 이미지"
+    ]
+   },
+   "value": {
+    "ko": [
+     "4장 · 링크 전용 2건"
+    ]
+   }
+  }
+ ],
+ "partOf": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/c/s100-11.json",
+   "type": "Collection",
+   "label": {
+    "ko": [
+     "100선 · Ⅺ 신문과 독립운동"
+    ]
+   }
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/hierarchy.json",
+   "type": "Collection",
+   "label": {
+    "ko": [
+     "KOREA ARCHIVE 통합검색 — 기록 계층"
+    ]
+   }
+  }
+ ],
+ "seeAlso": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s078/ledger.json",
+   "type": "Dataset",
+   "label": {
+    "ko": [
+     "출처 대장(ledger)"
+    ]
+   },
+   "format": "application/json"
   }
  ],
  "requiredStatement": {
@@ -132,6 +212,30 @@
        "제호 '新韓民報', 'The New Korea' · '特電 韓國獨立光復軍' · 인물 사진 3장"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "12fccb01f1999046 — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "viewer.nl.go.kr 서지 정보 '저작권유형 이용 제한이 없습니다.'"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -173,7 +277,20 @@
      },
      "format": "text/html"
     }
-   ]
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s078/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    }
+   ],
+   "navDate": "1941-11-27T00:00:00Z"
   },
   {
    "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s078/canvas/2",
@@ -245,6 +362,30 @@
        "'特電' · '韓國獨立光復軍' · '△중국정부로서 정식승인' · '△한국국군이 항전에 참가'"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "b6e07a736758cc99 — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "viewer.nl.go.kr 서지 정보 '저작권유형 이용 제한이 없습니다.'"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -286,7 +427,20 @@
      },
      "format": "text/html"
     }
-   ]
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s078/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    }
+   ],
+   "navDate": "1941-11-27T00:00:00Z"
   },
   {
    "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s078/canvas/3",
@@ -358,6 +512,30 @@
        "'광복군 후원금' 표제 · 깃발을 든 군인 그림과 '광복군' 글자 · 후원자 이름과 금액"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "9500707bac3f8727 — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "viewer.nl.go.kr 서지 정보 '저작권유형 이용 제한이 없습니다.'"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -399,7 +577,20 @@
      },
      "format": "text/html"
     }
-   ]
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s078/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    }
+   ],
+   "navDate": "1940-09-19T00:00:00Z"
   },
   {
    "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s078/canvas/4",
@@ -471,6 +662,30 @@
        "'在華光復軍不遠還國' · '臨時政府特派事務局에서 發表'"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "0f167aa2bdc83e3b — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "viewer.nl.go.kr 서지 정보 '저작권유형 이용 제한이 없습니다.'"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -512,7 +727,20 @@
      },
      "format": "text/html"
     }
-   ]
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s078/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    }
+   ],
+   "navDate": "1945-11-10T00:00:00Z"
   }
  ],
  "homepage": [
@@ -533,5 +761,6 @@
    "type": "Image",
    "format": "image/jpeg"
   }
- ]
+ ],
+ "navDate": "1940-09-25T00:00:00Z"
 }

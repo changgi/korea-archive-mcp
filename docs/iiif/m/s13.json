@@ -36,6 +36,86 @@
      "국가기록원 독립운동관련 판결문"
     ]
    }
+  },
+  {
+   "label": {
+    "ko": [
+     "계층"
+    ]
+   },
+   "value": {
+    "ko": [
+     "KOREA ARCHIVE 통합검색 › 30곳 탐방 · Ⅲ 독립운동 › s13"
+    ]
+   }
+  },
+  {
+   "label": {
+    "ko": [
+     "수집 경로"
+    ]
+   },
+   "value": {
+    "ko": [
+     "cross_search(sources=indy) → nedb_search(mode=indy)"
+    ]
+   }
+  },
+  {
+   "label": {
+    "ko": [
+     "확인일"
+    ]
+   },
+   "value": {
+    "ko": [
+     "2026-11-22"
+    ]
+   }
+  },
+  {
+   "label": {
+    "ko": [
+     "게재 이미지"
+    ]
+   },
+   "value": {
+    "ko": [
+     "4장 · 링크 전용 1건"
+    ]
+   }
+  }
+ ],
+ "partOf": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/c/s30-03.json",
+   "type": "Collection",
+   "label": {
+    "ko": [
+     "30곳 탐방 · Ⅲ 독립운동"
+    ]
+   }
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/hierarchy.json",
+   "type": "Collection",
+   "label": {
+    "ko": [
+     "KOREA ARCHIVE 통합검색 — 기록 계층"
+    ]
+   }
+  }
+ ],
+ "seeAlso": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/promo/series30v2/img/13/ledger.json",
+   "type": "Dataset",
+   "label": {
+    "ko": [
+     "출처 대장(ledger)"
+    ]
+   },
+   "format": "application/json"
   }
  ],
  "requiredStatement": {
@@ -132,6 +212,30 @@
        "필사 판결문 첫 면 — 우측 '判決' 표기 · 피고인 성명 중 '柳寬順' 필기 · 상단 '京城覆審法院' 및 '裁判確定 大正八年九月十一日' 날인 · '保安法違反ノ罪八'·'昭和二年勅令第十一號 大赦令ニ依リ赦免セラル' 고무인 · 하단 일련번호 '0324'"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "407d9e7b5902ffeb — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "국가기록원 저작권정책(archives.go.kr/next/neworgan/copyrightProtection.do): '공공누리 마크 유형 이용조건을 확인하신 후 해당 이용조건의 범위 안에서 이용하실 수 있습니다. 제1유형을 포함하여 어느 유형이든 출처(발행연도, 국가기록원 명칭과 홈페이지 URL, 저작물 작성자의 성명이 표시된 경우에는 그 성명도 포함)는 반드시 표시하여야 합니다.' — 판결문 뷰어 화면에는 공공누리 유형 표시 없음(확인 범위 내)"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -173,7 +277,20 @@
      },
      "format": "text/html"
     }
-   ]
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series30v2/img/13/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    }
+   ],
+   "navDate": "1919-06-30T00:00:00Z"
   },
   {
    "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s13/canvas/2",
@@ -245,6 +362,30 @@
        "중앙 접지선에 '判決原本'·'朝鮮總督府裁判所' 인쇄 · 상단 '昭和九年勅令…'·'昭和十二年勅令…' 고무인 3개 · '保安法違反ノ罪八'·'大赦令ニ依リ赦免セラル' 고무인 · 하단 '0325'"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "24823b2699141f1e — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "국가기록원 저작권정책(archives.go.kr/next/neworgan/copyrightProtection.do): '공공누리 마크 유형 이용조건을 확인하신 후 해당 이용조건의 범위 안에서 이용하실 수 있습니다. 제1유형을 포함하여 어느 유형이든 출처(발행연도, 국가기록원 명칭과 홈페이지 URL, 저작물 작성자의 성명이 표시된 경우에는 그 성명도 포함)는 반드시 표시하여야 합니다.' — 판결문 뷰어 화면에는 공공누리 유형 표시 없음(확인 범위 내)"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -286,7 +427,20 @@
      },
      "format": "text/html"
     }
-   ]
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series30v2/img/13/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    }
+   ],
+   "navDate": "1919-06-30T00:00:00Z"
   },
   {
    "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s13/canvas/3",
@@ -358,6 +512,30 @@
        "좌측 중단 '主文' 표제 · '判決原本'·'朝鮮總督府裁判所' 인쇄 · 하단 '0327'"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "cde91c5bc58abffa — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "국가기록원 저작권정책(archives.go.kr/next/neworgan/copyrightProtection.do): '공공누리 마크 유형 이용조건을 확인하신 후 해당 이용조건의 범위 안에서 이용하실 수 있습니다. 제1유형을 포함하여 어느 유형이든 출처(발행연도, 국가기록원 명칭과 홈페이지 URL, 저작물 작성자의 성명이 표시된 경우에는 그 성명도 포함)는 반드시 표시하여야 합니다.' — 판결문 뷰어 화면에는 공공누리 유형 표시 없음(확인 범위 내)"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -399,7 +577,20 @@
      },
      "format": "text/html"
     }
-   ]
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series30v2/img/13/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    }
+   ],
+   "navDate": "1919-06-30T00:00:00Z"
   },
   {
    "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s13/canvas/4",
@@ -471,6 +662,30 @@
        "좌측 '理由' 표제 · '判決原本'·'朝鮮總督府裁判所' 인쇄 · 하단 '0328'"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "b3777a76e771272d — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "국가기록원 저작권정책(archives.go.kr/next/neworgan/copyrightProtection.do): '공공누리 마크 유형 이용조건을 확인하신 후 해당 이용조건의 범위 안에서 이용하실 수 있습니다. 제1유형을 포함하여 어느 유형이든 출처(발행연도, 국가기록원 명칭과 홈페이지 URL, 저작물 작성자의 성명이 표시된 경우에는 그 성명도 포함)는 반드시 표시하여야 합니다.' — 판결문 뷰어 화면에는 공공누리 유형 표시 없음(확인 범위 내)"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -512,7 +727,20 @@
      },
      "format": "text/html"
     }
-   ]
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series30v2/img/13/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    }
+   ],
+   "navDate": "1919-06-30T00:00:00Z"
   }
  ],
  "homepage": [
@@ -533,5 +761,6 @@
    "type": "Image",
    "format": "image/jpeg"
   }
- ]
+ ],
+ "navDate": "1919-06-30T00:00:00Z"
 }

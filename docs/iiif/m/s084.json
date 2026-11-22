@@ -36,6 +36,86 @@
      "국가보훈부 공훈전자사료관"
     ]
    }
+  },
+  {
+   "label": {
+    "ko": [
+     "계층"
+    ]
+   },
+   "value": {
+    "ko": [
+     "KOREA ARCHIVE 통합검색 › 100선 · Ⅻ 판결문과 공훈 기록 › s084"
+    ]
+   }
+  },
+  {
+   "label": {
+    "ko": [
+     "수집 경로"
+    ]
+   },
+   "value": {
+    "ko": [
+     "nedb_search(mode=gonghun, '김구'→'318') · nara_search('Kim Koo') → judge_rights"
+    ]
+   }
+  },
+  {
+   "label": {
+    "ko": [
+     "확인일"
+    ]
+   },
+   "value": {
+    "ko": [
+     "2026-11-22"
+    ]
+   }
+  },
+  {
+   "label": {
+    "ko": [
+     "게재 이미지"
+    ]
+   },
+   "value": {
+    "ko": [
+     "8장 · 링크 전용 0건"
+    ]
+   }
+  }
+ ],
+ "partOf": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/c/s100-12.json",
+   "type": "Collection",
+   "label": {
+    "ko": [
+     "100선 · Ⅻ 판결문과 공훈 기록"
+    ]
+   }
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/hierarchy.json",
+   "type": "Collection",
+   "label": {
+    "ko": [
+     "KOREA ARCHIVE 통합검색 — 기록 계층"
+    ]
+   }
+  }
+ ],
+ "seeAlso": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s084/ledger.json",
+   "type": "Dataset",
+   "label": {
+    "ko": [
+     "출처 대장(ledger)"
+    ]
+   },
+   "format": "application/json"
   }
  ],
  "requiredStatement": {
@@ -132,6 +212,42 @@
        "둥근 테 안경, 짙은 양복·점무늬 넥타이 · 가슴 주머니에 필기구 2개 · 뒤로 문양 있는 벽·의자 등받이"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "fe40b7f435d2f1e9 — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "원 기관 계보"
+      ]
+     },
+     "value": {
+      "ko": [
+       "NARA › RG 319 Records of the Army Staff › Photographs of U.S. and Foreign Military Personnel, Defense Department and Other Government Officials, Royalty, and Heads of State › Kim Koo"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "judge_rights: \"NARA 카탈로그 Use Restriction 'Unrestricted' 실확인 — 제한 없음 확정\" (RG 319 › Photographs of U.S. and Foreign Military Personnel › fileUnit Kim Koo NAID 171044971)"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -174,6 +290,39 @@
      "format": "text/html"
     }
    ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s084/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    },
+    {
+     "id": "https://korea-archive-mcp.vercel.app/iiif/nara/404793111/manifest.json",
+     "type": "Manifest",
+     "label": {
+      "ko": [
+       "NARA 원본 전체(IIIF 브리지)"
+      ]
+     },
+     "format": "application/ld+json"
+    },
+    {
+     "id": "https://korea-archive-mcp.vercel.app/iiif/nara/404793111/record.jsonld",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "NARA 계층 기술(RiC-O)"
+      ]
+     },
+     "format": "application/ld+json"
+    }
+   ],
+   "navDate": "1945-01-01T00:00:00Z",
    "rights": "http://rightsstatements.org/vocab/NoC-US/1.0/"
   },
   {
@@ -246,6 +395,42 @@
        "'SC-223975' · 'Mr. Koo Kim, President, Provincial Korean Government in exile, sits at his desk in Seoul, Korea.' · '1945'"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "dd70727d45f06ee6 — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "원 기관 계보"
+      ]
+     },
+     "value": {
+      "ko": [
+       "NARA › RG 319 Records of the Army Staff › Photographs of U.S. and Foreign Military Personnel, Defense Department and Other Government Officials, Royalty, and Heads of State › Kim Koo"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "judge_rights: \"NARA 카탈로그 Use Restriction 'Unrestricted' 실확인 — 제한 없음 확정\" (RG 319 › Photographs of U.S. and Foreign Military Personnel › fileUnit Kim Koo NAID 171044971)"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -288,6 +473,39 @@
      "format": "text/html"
     }
    ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s084/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    },
+    {
+     "id": "https://korea-archive-mcp.vercel.app/iiif/nara/404793111/manifest.json",
+     "type": "Manifest",
+     "label": {
+      "ko": [
+       "NARA 원본 전체(IIIF 브리지)"
+      ]
+     },
+     "format": "application/ld+json"
+    },
+    {
+     "id": "https://korea-archive-mcp.vercel.app/iiif/nara/404793111/record.jsonld",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "NARA 계층 기술(RiC-O)"
+      ]
+     },
+     "format": "application/ld+json"
+    }
+   ],
+   "navDate": "1945-01-01T00:00:00Z",
    "rights": "http://rightsstatements.org/vocab/NoC-US/1.0/"
   },
   {
@@ -360,6 +578,42 @@
        "'SC-233942'·'2/14/46' · 문 옆에 선 경찰 — 팔에 'MP' 완장 · 모자를 든 사람과 함께 입구로 들어오는 인물"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "0e5c66eda58a95de — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "원 기관 계보"
+      ]
+     },
+     "value": {
+      "ko": [
+       "NARA › RG 319 Records of the Army Staff › Photographs of U.S. and Foreign Military Personnel, Defense Department and Other Government Officials, Royalty, and Heads of State › Kim Koo"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "judge_rights: \"NARA 카탈로그 Use Restriction 'Unrestricted' 실확인 — 제한 없음 확정\" (RG 319 › Photographs of U.S. and Foreign Military Personnel › fileUnit Kim Koo NAID 171044971)"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -402,6 +656,39 @@
      "format": "text/html"
     }
    ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s084/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    },
+    {
+     "id": "https://korea-archive-mcp.vercel.app/iiif/nara/404793115/manifest.json",
+     "type": "Manifest",
+     "label": {
+      "ko": [
+       "NARA 원본 전체(IIIF 브리지)"
+      ]
+     },
+     "format": "application/ld+json"
+    },
+    {
+     "id": "https://korea-archive-mcp.vercel.app/iiif/nara/404793115/record.jsonld",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "NARA 계층 기술(RiC-O)"
+      ]
+     },
+     "format": "application/ld+json"
+    }
+   ],
+   "navDate": "1946-02-14T00:00:00Z",
    "rights": "http://rightsstatements.org/vocab/NoC-US/1.0/"
   },
   {
@@ -474,6 +761,42 @@
        "'SC-233751'·'2/14/46' · 탁상 마이크 앞에서 종이를 든 인물 · 사진 하단 '233751' 표기"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "509af806641446b8 — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "원 기관 계보"
+      ]
+     },
+     "value": {
+      "ko": [
+       "NARA › RG 319 Records of the Army Staff › Photographs of U.S. and Foreign Military Personnel, Defense Department and Other Government Officials, Royalty, and Heads of State › Kim Koo"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "judge_rights: \"NARA 카탈로그 Use Restriction 'Unrestricted' 실확인 — 제한 없음 확정\" (RG 319 › Photographs of U.S. and Foreign Military Personnel › fileUnit Kim Koo NAID 171044971)"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -516,6 +839,39 @@
      "format": "text/html"
     }
    ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s084/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    },
+    {
+     "id": "https://korea-archive-mcp.vercel.app/iiif/nara/404793113/manifest.json",
+     "type": "Manifest",
+     "label": {
+      "ko": [
+       "NARA 원본 전체(IIIF 브리지)"
+      ]
+     },
+     "format": "application/ld+json"
+    },
+    {
+     "id": "https://korea-archive-mcp.vercel.app/iiif/nara/404793113/record.jsonld",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "NARA 계층 기술(RiC-O)"
+      ]
+     },
+     "format": "application/ld+json"
+    }
+   ],
+   "navDate": "1946-02-14T00:00:00Z",
    "rights": "http://rightsstatements.org/vocab/NoC-US/1.0/"
   },
   {
@@ -588,6 +944,42 @@
        "'SC-240648'·'2/14/46' · 서서 원고를 읽는 인물, 옆에 앉은 두 사람과 마이크"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "767bf462c04376c2 — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "원 기관 계보"
+      ]
+     },
+     "value": {
+      "ko": [
+       "NARA › RG 319 Records of the Army Staff › Photographs of U.S. and Foreign Military Personnel, Defense Department and Other Government Officials, Royalty, and Heads of State › Kim Koo"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "judge_rights: \"NARA 카탈로그 Use Restriction 'Unrestricted' 실확인 — 제한 없음 확정\" (RG 319 › Photographs of U.S. and Foreign Military Personnel › fileUnit Kim Koo NAID 171044971)"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -630,6 +1022,39 @@
      "format": "text/html"
     }
    ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s084/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    },
+    {
+     "id": "https://korea-archive-mcp.vercel.app/iiif/nara/404793117/manifest.json",
+     "type": "Manifest",
+     "label": {
+      "ko": [
+       "NARA 원본 전체(IIIF 브리지)"
+      ]
+     },
+     "format": "application/ld+json"
+    },
+    {
+     "id": "https://korea-archive-mcp.vercel.app/iiif/nara/404793117/record.jsonld",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "NARA 계층 기술(RiC-O)"
+      ]
+     },
+     "format": "application/ld+json"
+    }
+   ],
+   "navDate": "1946-02-14T00:00:00Z",
    "rights": "http://rightsstatements.org/vocab/NoC-US/1.0/"
   },
   {
@@ -702,6 +1127,42 @@
        "'SC-233942'·'2/14/46' · 문 옆에 선 경찰 — 팔에 'MP' 완장 · 모자를 든 사람과 함께 입구로 들어오는 인물"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "9f4ab06aaa71cd1a — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "원 기관 계보"
+      ]
+     },
+     "value": {
+      "ko": [
+       "NARA › RG 319 Records of the Army Staff › Photographs of U.S. and Foreign Military Personnel, Defense Department and Other Government Officials, Royalty, and Heads of State › Kim Koo"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "judge_rights: \"NARA 카탈로그 Use Restriction 'Unrestricted' 실확인 — 제한 없음 확정\" (RG 319 › Photographs of U.S. and Foreign Military Personnel › fileUnit Kim Koo NAID 171044971)"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -744,6 +1205,39 @@
      "format": "text/html"
     }
    ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s084/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    },
+    {
+     "id": "https://korea-archive-mcp.vercel.app/iiif/nara/404793115/manifest.json",
+     "type": "Manifest",
+     "label": {
+      "ko": [
+       "NARA 원본 전체(IIIF 브리지)"
+      ]
+     },
+     "format": "application/ld+json"
+    },
+    {
+     "id": "https://korea-archive-mcp.vercel.app/iiif/nara/404793115/record.jsonld",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "NARA 계층 기술(RiC-O)"
+      ]
+     },
+     "format": "application/ld+json"
+    }
+   ],
+   "navDate": "1946-02-14T00:00:00Z",
    "rights": "http://rightsstatements.org/vocab/NoC-US/1.0/"
   },
   {
@@ -816,6 +1310,42 @@
        "'SC-233751'·'2/14/46' · 탁상 마이크 앞에서 종이를 든 인물 · 사진 하단 '233751' 표기"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "c7d90373cfb283ad — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "원 기관 계보"
+      ]
+     },
+     "value": {
+      "ko": [
+       "NARA › RG 319 Records of the Army Staff › Photographs of U.S. and Foreign Military Personnel, Defense Department and Other Government Officials, Royalty, and Heads of State › Kim Koo"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "judge_rights: \"NARA 카탈로그 Use Restriction 'Unrestricted' 실확인 — 제한 없음 확정\" (RG 319 › Photographs of U.S. and Foreign Military Personnel › fileUnit Kim Koo NAID 171044971)"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -858,6 +1388,39 @@
      "format": "text/html"
     }
    ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s084/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    },
+    {
+     "id": "https://korea-archive-mcp.vercel.app/iiif/nara/404793113/manifest.json",
+     "type": "Manifest",
+     "label": {
+      "ko": [
+       "NARA 원본 전체(IIIF 브리지)"
+      ]
+     },
+     "format": "application/ld+json"
+    },
+    {
+     "id": "https://korea-archive-mcp.vercel.app/iiif/nara/404793113/record.jsonld",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "NARA 계층 기술(RiC-O)"
+      ]
+     },
+     "format": "application/ld+json"
+    }
+   ],
+   "navDate": "1946-02-14T00:00:00Z",
    "rights": "http://rightsstatements.org/vocab/NoC-US/1.0/"
   },
   {
@@ -930,6 +1493,42 @@
        "'SC-240648'·'2/14/46' · 서서 원고를 읽는 인물, 옆에 앉은 두 사람과 마이크"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "1c041ca37ae98880 — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "원 기관 계보"
+      ]
+     },
+     "value": {
+      "ko": [
+       "NARA › RG 319 Records of the Army Staff › Photographs of U.S. and Foreign Military Personnel, Defense Department and Other Government Officials, Royalty, and Heads of State › Kim Koo"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "judge_rights: \"NARA 카탈로그 Use Restriction 'Unrestricted' 실확인 — 제한 없음 확정\" (RG 319 › Photographs of U.S. and Foreign Military Personnel › fileUnit Kim Koo NAID 171044971)"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -972,6 +1571,39 @@
      "format": "text/html"
     }
    ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s084/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    },
+    {
+     "id": "https://korea-archive-mcp.vercel.app/iiif/nara/404793117/manifest.json",
+     "type": "Manifest",
+     "label": {
+      "ko": [
+       "NARA 원본 전체(IIIF 브리지)"
+      ]
+     },
+     "format": "application/ld+json"
+    },
+    {
+     "id": "https://korea-archive-mcp.vercel.app/iiif/nara/404793117/record.jsonld",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "NARA 계층 기술(RiC-O)"
+      ]
+     },
+     "format": "application/ld+json"
+    }
+   ],
+   "navDate": "1946-02-14T00:00:00Z",
    "rights": "http://rightsstatements.org/vocab/NoC-US/1.0/"
   }
  ],
@@ -993,5 +1625,6 @@
    "type": "Image",
    "format": "image/jpeg"
   }
- ]
+ ],
+ "navDate": "1962-01-01T00:00:00Z"
 }

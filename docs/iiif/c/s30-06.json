@@ -1,0 +1,57 @@
+{
+ "@context": "http://iiif.io/api/presentation/3/context.json",
+ "id": "https://changgi.github.io/korea-archive-mcp/iiif/c/s30-06.json",
+ "type": "Collection",
+ "label": {
+  "ko": [
+   "30곳 탐방 · Ⅵ 세계의 집계 창구"
+  ]
+ },
+ "summary": {
+  "ko": [
+   "30곳 탐방 · Ⅵ 세계의 집계 창구 — 시리즈 2개"
+  ]
+ },
+ "partOf": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/hierarchy.json",
+   "type": "Collection"
+  }
+ ],
+ "items": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s29.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "29 · 인터넷 아카이브 archive.org — 인터넷 사본과 NARA 원본, 한 줄로"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s29/hero_170_shore_blasts_000297.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "navDate": "1950-12-24T00:00:00Z"
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s30.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "30 · 디지털NZ DigitalNZ — 라디오·육성·사진 — NZ 30여 기관 한 번에"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s30/hero_slv_kiwis_artillery.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "navDate": "1951-01-01T00:00:00Z"
+  }
+ ]
+}

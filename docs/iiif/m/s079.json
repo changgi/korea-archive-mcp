@@ -36,6 +36,86 @@
      "독립기념관 한국독립운동정보시스템"
     ]
    }
+  },
+  {
+   "label": {
+    "ko": [
+     "계층"
+    ]
+   },
+   "value": {
+    "ko": [
+     "KOREA ARCHIVE 통합검색 › 100선 · Ⅺ 신문과 독립운동 › s079"
+    ]
+   }
+  },
+  {
+   "label": {
+    "ko": [
+     "수집 경로"
+    ]
+   },
+   "value": {
+    "ko": [
+     "nedb_search(mode=i815, query='임시헌장') → DR191909060203 · judge_rights(naid=404793111)"
+    ]
+   }
+  },
+  {
+   "label": {
+    "ko": [
+     "확인일"
+    ]
+   },
+   "value": {
+    "ko": [
+     "2026-11-22"
+    ]
+   }
+  },
+  {
+   "label": {
+    "ko": [
+     "게재 이미지"
+    ]
+   },
+   "value": {
+    "ko": [
+     "5장 · 링크 전용 2건"
+    ]
+   }
+  }
+ ],
+ "partOf": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/c/s100-11.json",
+   "type": "Collection",
+   "label": {
+    "ko": [
+     "100선 · Ⅺ 신문과 독립운동"
+    ]
+   }
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/hierarchy.json",
+   "type": "Collection",
+   "label": {
+    "ko": [
+     "KOREA ARCHIVE 통합검색 — 기록 계층"
+    ]
+   }
+  }
+ ],
+ "seeAlso": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s079/ledger.json",
+   "type": "Dataset",
+   "label": {
+    "ko": [
+     "출처 대장(ledger)"
+    ]
+   },
+   "format": "application/json"
   }
  ],
  "requiredStatement": {
@@ -132,6 +212,42 @@
        "사진 카드 'SC-223975' 설명문 · 둥근 안경, 양복 차림 인물이 책상 앞에 앉음"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "6d22a65715cc05ad — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "원 기관 계보"
+      ]
+     },
+     "value": {
+      "ko": [
+       "NARA › RG 319 Records of the Army Staff › Photographs of U.S. and Foreign Military Personnel, Defense Department and Other Government Officials, Royalty, and Heads of State › Kim Koo"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "judge_rights: 'Class: A · Basis: NARA 카탈로그 Use Restriction Unrestricted 실확인'"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -174,6 +290,39 @@
      "format": "text/html"
     }
    ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s079/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    },
+    {
+     "id": "https://korea-archive-mcp.vercel.app/iiif/nara/404793111/manifest.json",
+     "type": "Manifest",
+     "label": {
+      "ko": [
+       "NARA 원본 전체(IIIF 브리지)"
+      ]
+     },
+     "format": "application/ld+json"
+    },
+    {
+     "id": "https://korea-archive-mcp.vercel.app/iiif/nara/404793111/record.jsonld",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "NARA 계층 기술(RiC-O)"
+      ]
+     },
+     "format": "application/ld+json"
+    }
+   ],
+   "navDate": "1945-01-01T00:00:00Z",
    "rights": "http://rightsstatements.org/vocab/NoC-US/1.0/"
   },
   {
@@ -246,6 +395,42 @@
        "'Mr. Koo Kim, President, Provincial Korean Government in exile…' · '1945'"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "a63608bdac3f6855 — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "원 기관 계보"
+      ]
+     },
+     "value": {
+      "ko": [
+       "NARA › RG 319 Records of the Army Staff › Photographs of U.S. and Foreign Military Personnel, Defense Department and Other Government Officials, Royalty, and Heads of State › Kim Koo"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "위와 동일"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -288,6 +473,39 @@
      "format": "text/html"
     }
    ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s079/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    },
+    {
+     "id": "https://korea-archive-mcp.vercel.app/iiif/nara/404793111/manifest.json",
+     "type": "Manifest",
+     "label": {
+      "ko": [
+       "NARA 원본 전체(IIIF 브리지)"
+      ]
+     },
+     "format": "application/ld+json"
+    },
+    {
+     "id": "https://korea-archive-mcp.vercel.app/iiif/nara/404793111/record.jsonld",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "NARA 계층 기술(RiC-O)"
+      ]
+     },
+     "format": "application/ld+json"
+    }
+   ],
+   "navDate": "1945-01-01T00:00:00Z",
    "rights": "http://rightsstatements.org/vocab/NoC-US/1.0/"
   },
   {
@@ -360,6 +578,42 @@
        "카드 'SC-233751', '2/14/46' · 마이크 앞에서 종이를 들고 선 인물"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "08122ef3dfd9c91e — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "원 기관 계보"
+      ]
+     },
+     "value": {
+      "ko": [
+       "NARA › RG 319 Records of the Army Staff › Photographs of U.S. and Foreign Military Personnel, Defense Department and Other Government Officials, Royalty, and Heads of State › Kim Koo"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "judge_rights: Class A · Unrestricted"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -402,6 +656,39 @@
      "format": "text/html"
     }
    ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s079/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    },
+    {
+     "id": "https://korea-archive-mcp.vercel.app/iiif/nara/404793113/manifest.json",
+     "type": "Manifest",
+     "label": {
+      "ko": [
+       "NARA 원본 전체(IIIF 브리지)"
+      ]
+     },
+     "format": "application/ld+json"
+    },
+    {
+     "id": "https://korea-archive-mcp.vercel.app/iiif/nara/404793113/record.jsonld",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "NARA 계층 기술(RiC-O)"
+      ]
+     },
+     "format": "application/ld+json"
+    }
+   ],
+   "navDate": "1946-02-14T00:00:00Z",
    "rights": "http://rightsstatements.org/vocab/NoC-US/1.0/"
   },
   {
@@ -474,6 +761,30 @@
        "'대한민국림시정부공보' 표제"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "b6ceb71bdc530cf1 — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "viewer.nl.go.kr 서지 정보 '저작권유형 이용 제한이 없습니다.'"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -515,7 +826,20 @@
      },
      "format": "text/html"
     }
-   ]
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s079/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    }
+   ],
+   "navDate": "1921-03-03T00:00:00Z"
   },
   {
    "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s079/canvas/5",
@@ -587,6 +911,30 @@
        "'대한민국림시정부공보' 표제"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "40b69def2d79da3e — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "viewer.nl.go.kr 서지 정보 '저작권유형 이용 제한이 없습니다.'"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -628,7 +976,20 @@
      },
      "format": "text/html"
     }
-   ]
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s079/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    }
+   ],
+   "navDate": "1920-02-10T00:00:00Z"
   }
  ],
  "homepage": [
@@ -649,5 +1010,6 @@
    "type": "Image",
    "format": "image/jpeg"
   }
- ]
+ ],
+ "navDate": "1919-09-06T00:00:00Z"
 }

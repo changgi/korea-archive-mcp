@@ -36,6 +36,86 @@
      "국가보훈부 공훈전자사료관"
     ]
    }
+  },
+  {
+   "label": {
+    "ko": [
+     "계층"
+    ]
+   },
+   "value": {
+    "ko": [
+     "KOREA ARCHIVE 통합검색 › 100선 · Ⅻ 판결문과 공훈 기록 › s086"
+    ]
+   }
+  },
+  {
+   "label": {
+    "ko": [
+     "수집 경로"
+    ]
+   },
+   "value": {
+    "ko": [
+     "nedb_search(mode=gonghun, '1693') · nedb_search(mode=oldnews, '南慈賢')"
+    ]
+   }
+  },
+  {
+   "label": {
+    "ko": [
+     "확인일"
+    ]
+   },
+   "value": {
+    "ko": [
+     "2026-11-22"
+    ]
+   }
+  },
+  {
+   "label": {
+    "ko": [
+     "게재 이미지"
+    ]
+   },
+   "value": {
+    "ko": [
+     "4장 · 링크 전용 0건"
+    ]
+   }
+  }
+ ],
+ "partOf": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/c/s100-12.json",
+   "type": "Collection",
+   "label": {
+    "ko": [
+     "100선 · Ⅻ 판결문과 공훈 기록"
+    ]
+   }
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/hierarchy.json",
+   "type": "Collection",
+   "label": {
+    "ko": [
+     "KOREA ARCHIVE 통합검색 — 기록 계층"
+    ]
+   }
+  }
+ ],
+ "seeAlso": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s086/ledger.json",
+   "type": "Dataset",
+   "label": {
+    "ko": [
+     "출처 대장(ledger)"
+    ]
+   },
+   "format": "application/json"
   }
  ],
  "requiredStatement": {
@@ -132,6 +212,30 @@
        "표제 '斷食한지 九日만에 人事不省되여 出監' · '保釋出監한 武藤大將謀殺犯' · '新京 南慈賢의 近況' · '波瀾重疊한 過去와'"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "407a7fb020e6e35f — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "국립중앙도서관 원문 뷰어 서지정보 '저작권유형 이용 제한이 없습니다.'(viewer.nl.go.kr '서지 정보' 실확인) + 1933 공표 무기명 신문기사(보호기간 만료)"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -174,6 +278,19 @@
      "format": "text/html"
     }
    ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s086/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    }
+   ],
+   "navDate": "1933-08-26T00:00:00Z",
    "rights": "http://creativecommons.org/publicdomain/mark/1.0/"
   },
   {
@@ -246,6 +363,30 @@
        "위 4개 표제 · 본문 '○○운동'"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "4bc17192bba2e07e — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "국립중앙도서관 원문 뷰어 서지정보 '저작권유형 이용 제한이 없습니다.'(viewer.nl.go.kr '서지 정보' 실확인) + 1933 공표 무기명 신문기사(보호기간 만료)"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -288,6 +429,19 @@
      "format": "text/html"
     }
    ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s086/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    }
+   ],
+   "navDate": "1933-08-26T00:00:00Z",
    "rights": "http://creativecommons.org/publicdomain/mark/1.0/"
   },
   {
@@ -360,6 +514,30 @@
        "'入山火田民激增' 등 다른 기사 · 하단 '健胃固腸丸' 광고"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "46ea50109859c063 — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "국립중앙도서관 원문 뷰어 서지정보 '저작권유형 이용 제한이 없습니다.'(viewer.nl.go.kr '서지 정보' 실확인) + 1933 공표 무기명 신문기사(보호기간 만료)"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -402,6 +580,19 @@
      "format": "text/html"
     }
    ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s086/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    }
+   ],
+   "navDate": "1933-08-26T00:00:00Z",
    "rights": "http://creativecommons.org/publicdomain/mark/1.0/"
   },
   {
@@ -474,6 +665,30 @@
        "'○○운동'·'××' 복자"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "bb2dc5cf5be00887 — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "국립중앙도서관 원문 뷰어 서지정보 '저작권유형 이용 제한이 없습니다.'(viewer.nl.go.kr '서지 정보' 실확인) + 1933 공표 무기명 신문기사(보호기간 만료)"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -516,6 +731,19 @@
      "format": "text/html"
     }
    ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s086/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    }
+   ],
+   "navDate": "1933-08-26T00:00:00Z",
    "rights": "http://creativecommons.org/publicdomain/mark/1.0/"
   }
  ],
@@ -537,5 +765,6 @@
    "type": "Image",
    "format": "image/jpeg"
   }
- ]
+ ],
+ "navDate": "1962-01-01T00:00:00Z"
 }

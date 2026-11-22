@@ -36,6 +36,86 @@
      "국가유산청 국가유산포털"
     ]
    }
+  },
+  {
+   "label": {
+    "ko": [
+     "계층"
+    ]
+   },
+   "value": {
+    "ko": [
+     "KOREA ARCHIVE 통합검색 › 100선 · XIV 유산과 도시 › s101"
+    ]
+   }
+  },
+  {
+   "label": {
+    "ko": [
+     "수집 경로"
+    ]
+   },
+   "value": {
+    "ko": [
+     "nedb_search(mode=heritage, '숭례문') → nedb_search(mode=heritage, '11-0000010000000-11')"
+    ]
+   }
+  },
+  {
+   "label": {
+    "ko": [
+     "확인일"
+    ]
+   },
+   "value": {
+    "ko": [
+     "2026-11-22"
+    ]
+   }
+  },
+  {
+   "label": {
+    "ko": [
+     "게재 이미지"
+    ]
+   },
+   "value": {
+    "ko": [
+     "5장 · 링크 전용 0건"
+    ]
+   }
+  }
+ ],
+ "partOf": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/c/s100-14.json",
+   "type": "Collection",
+   "label": {
+    "ko": [
+     "100선 · XIV 유산과 도시"
+    ]
+   }
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/hierarchy.json",
+   "type": "Collection",
+   "label": {
+    "ko": [
+     "KOREA ARCHIVE 통합검색 — 기록 계층"
+    ]
+   }
+  }
+ ],
+ "seeAlso": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s101/ledger.json",
+   "type": "Dataset",
+   "label": {
+    "ko": [
+     "출처 대장(ledger)"
+    ]
+   },
+   "format": "application/json"
   }
  ],
  "requiredStatement": {
@@ -132,6 +212,30 @@
        "사진: 국립국회도서관(NDL) 「大日本帝国朝鮮写真帖」(1910, 統監府 編) info:ndljp/pid/766880 코마 11 · NDL デジタルコレクション PDM(パブリックドメイン) — 「第一 京城南大門」"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "3108eb297f7cee5b — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "IIIF manifest https://dl.ndl.go.jp/api/iiif/766880/manifest.json metadata 'Access Restrictions: PDM' · 統監府 編"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -174,6 +278,19 @@
      "format": "text/html"
     }
    ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s101/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    }
+   ],
+   "navDate": "1910-01-01T00:00:00Z",
    "rights": "http://creativecommons.org/publicdomain/mark/1.0/"
   },
   {
@@ -246,6 +363,30 @@
        "1906 「京城南大門」 · NDL 767136"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "6f0b5e407debab1a — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "IIIF manifest https://dl.ndl.go.jp/api/iiif/767136/manifest.json metadata 'Access Restrictions: PDM' · 朝日新聞写真班 撮影"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -288,6 +429,19 @@
      "format": "text/html"
     }
    ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s101/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    }
+   ],
+   "navDate": "1906-01-01T00:00:00Z",
    "rights": "http://creativecommons.org/publicdomain/mark/1.0/"
   },
   {
@@ -360,6 +514,30 @@
        "1921 「京城南大門通」 · NDL 967741"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "9092b6694d4d41fa — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "IIIF manifest https://dl.ndl.go.jp/api/iiif/967741/manifest.json metadata 'Access Restrictions: PDM' · 朝鮮総督府 編"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -402,6 +580,19 @@
      "format": "text/html"
     }
    ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s101/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    }
+   ],
+   "navDate": "1921-01-01T00:00:00Z",
    "rights": "http://creativecommons.org/publicdomain/mark/1.0/"
   },
   {
@@ -474,6 +665,30 @@
        "1922 「京城南大門通と鐘路通」 · NDL 1899759"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "05889d9b6ffc1fe8 — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "IIIF manifest https://dl.ndl.go.jp/api/iiif/1899759/manifest.json metadata 'Access Restrictions: PDM' · 南滿洲鐵道京城管理局 編"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -516,6 +731,19 @@
      "format": "text/html"
     }
    ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s101/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    }
+   ],
+   "navDate": "1922-01-01T00:00:00Z",
    "rights": "http://creativecommons.org/publicdomain/mark/1.0/"
   },
   {
@@ -588,6 +816,30 @@
        "1930 「南大門及其ノ夜景」 · NDL 8311162"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "4d5d8b2383cefcf6 — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "IIIF manifest https://dl.ndl.go.jp/api/iiif/8311162/manifest.json metadata 'Access Restrictions: PDM' · 朝鮮総督府 編"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -630,6 +882,19 @@
      "format": "text/html"
     }
    ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s101/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    }
+   ],
+   "navDate": "1930-01-01T00:00:00Z",
    "rights": "http://creativecommons.org/publicdomain/mark/1.0/"
   }
  ],

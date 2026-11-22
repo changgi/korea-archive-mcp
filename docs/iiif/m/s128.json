@@ -36,6 +36,86 @@
      "미국 국립기록관리청(NARA) College Park 영상과"
     ]
    }
+  },
+  {
+   "label": {
+    "ko": [
+     "계층"
+    ]
+   },
+   "value": {
+    "ko": [
+     "KOREA ARCHIVE 통합검색 › 100선 · XVI 영상으로 읽는 기록 › s128"
+    ]
+   }
+  },
+  {
+   "label": {
+    "ko": [
+     "수집 경로"
+    ]
+   },
+   "value": {
+    "ko": [
+     "nara_search('Korean Air Force F-51 Mustang', moving_images_only=true) → judge_rights(naid=65890) → keyscenes"
+    ]
+   }
+  },
+  {
+   "label": {
+    "ko": [
+     "확인일"
+    ]
+   },
+   "value": {
+    "ko": [
+     "2026-11-22"
+    ]
+   }
+  },
+  {
+   "label": {
+    "ko": [
+     "게재 이미지"
+    ]
+   },
+   "value": {
+    "ko": [
+     "10장 · 링크 전용 0건"
+    ]
+   }
+  }
+ ],
+ "partOf": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/c/s100-16.json",
+   "type": "Collection",
+   "label": {
+    "ko": [
+     "100선 · XVI 영상으로 읽는 기록"
+    ]
+   }
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/hierarchy.json",
+   "type": "Collection",
+   "label": {
+    "ko": [
+     "KOREA ARCHIVE 통합검색 — 기록 계층"
+    ]
+   }
+  }
+ ],
+ "seeAlso": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s128/ledger.json",
+   "type": "Dataset",
+   "label": {
+    "ko": [
+     "출처 대장(ledger)"
+    ]
+   },
+   "format": "application/json"
   }
  ],
  "requiredStatement": {
@@ -120,6 +200,42 @@
        "A — Unrestricted"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "5605302f5bee4e93 — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "원 기관 계보"
+      ]
+     },
+     "value": {
+      "ko": [
+       "NARA › RG 342 Records of U.S. Air Force Commands, Activities, and Organizations › Moving Images Relating to Military Aviation Activities"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "judge_rights: NARA 카탈로그 Use Restriction 'Unrestricted' 실확인 — 제한 없음 확정"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -160,6 +276,38 @@
       ]
      },
      "format": "text/html"
+    }
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s128/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    },
+    {
+     "id": "https://korea-archive-mcp.vercel.app/iiif/nara/65890/manifest.json",
+     "type": "Manifest",
+     "label": {
+      "ko": [
+       "NARA 원본 전체(IIIF 브리지)"
+      ]
+     },
+     "format": "application/ld+json"
+    },
+    {
+     "id": "https://korea-archive-mcp.vercel.app/iiif/nara/65890/record.jsonld",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "NARA 계층 기술(RiC-O)"
+      ]
+     },
+     "format": "application/ld+json"
     }
    ],
    "rights": "http://rightsstatements.org/vocab/NoC-US/1.0/"
@@ -234,6 +382,42 @@
        "기체 번호 '485' · 줄지어 선 프로펠러기들 · 탄약 상자를 실은 수레 · 수레를 끄는 견인차와 운전자 · 비행장 뒤편 산"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "50c6cb523eeaf8cd — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "원 기관 계보"
+      ]
+     },
+     "value": {
+      "ko": [
+       "NARA › RG 342 Records of U.S. Air Force Commands, Activities, and Organizations › Moving Images Relating to Military Aviation Activities"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "judge_rights: NARA 카탈로그 Use Restriction 'Unrestricted' 실확인 — 제한 없음 확정"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -274,6 +458,38 @@
       ]
      },
      "format": "text/html"
+    }
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s128/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    },
+    {
+     "id": "https://korea-archive-mcp.vercel.app/iiif/nara/65890/manifest.json",
+     "type": "Manifest",
+     "label": {
+      "ko": [
+       "NARA 원본 전체(IIIF 브리지)"
+      ]
+     },
+     "format": "application/ld+json"
+    },
+    {
+     "id": "https://korea-archive-mcp.vercel.app/iiif/nara/65890/record.jsonld",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "NARA 계층 기술(RiC-O)"
+      ]
+     },
+     "format": "application/ld+json"
     }
    ],
    "rights": "http://rightsstatements.org/vocab/NoC-US/1.0/"
@@ -348,6 +564,42 @@
        "로켓탄을 안고 날개 아래로 가는 정비병"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "2cdc3387f792da47 — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "원 기관 계보"
+      ]
+     },
+     "value": {
+      "ko": [
+       "NARA › RG 342 Records of U.S. Air Force Commands, Activities, and Organizations › Moving Images Relating to Military Aviation Activities"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "judge_rights: NARA 카탈로그 Use Restriction 'Unrestricted' 실확인 — 제한 없음 확정"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -388,6 +640,38 @@
       ]
      },
      "format": "text/html"
+    }
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s128/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    },
+    {
+     "id": "https://korea-archive-mcp.vercel.app/iiif/nara/65890/manifest.json",
+     "type": "Manifest",
+     "label": {
+      "ko": [
+       "NARA 원본 전체(IIIF 브리지)"
+      ]
+     },
+     "format": "application/ld+json"
+    },
+    {
+     "id": "https://korea-archive-mcp.vercel.app/iiif/nara/65890/record.jsonld",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "NARA 계층 기술(RiC-O)"
+      ]
+     },
+     "format": "application/ld+json"
     }
    ],
    "rights": "http://rightsstatements.org/vocab/NoC-US/1.0/"
@@ -462,6 +746,42 @@
        "삼각 기중기로 길쭉한 통을 다루는 두 사람, 뒤로 드럼통 더미"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "78007e4e1945f080 — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "원 기관 계보"
+      ]
+     },
+     "value": {
+      "ko": [
+       "NARA › RG 342 Records of U.S. Air Force Commands, Activities, and Organizations › Moving Images Relating to Military Aviation Activities"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "judge_rights: NARA 카탈로그 Use Restriction 'Unrestricted' 실확인 — 제한 없음 확정"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -502,6 +822,38 @@
       ]
      },
      "format": "text/html"
+    }
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s128/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    },
+    {
+     "id": "https://korea-archive-mcp.vercel.app/iiif/nara/65890/manifest.json",
+     "type": "Manifest",
+     "label": {
+      "ko": [
+       "NARA 원본 전체(IIIF 브리지)"
+      ]
+     },
+     "format": "application/ld+json"
+    },
+    {
+     "id": "https://korea-archive-mcp.vercel.app/iiif/nara/65890/record.jsonld",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "NARA 계층 기술(RiC-O)"
+      ]
+     },
+     "format": "application/ld+json"
     }
    ],
    "rights": "http://rightsstatements.org/vocab/NoC-US/1.0/"
@@ -576,6 +928,42 @@
        "하늘을 나는 비행기 4대"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "73cad7675d90b95c — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "원 기관 계보"
+      ]
+     },
+     "value": {
+      "ko": [
+       "NARA › RG 342 Records of U.S. Air Force Commands, Activities, and Organizations › Moving Images Relating to Military Aviation Activities"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "judge_rights: NARA 카탈로그 Use Restriction 'Unrestricted' 실확인 — 제한 없음 확정"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -616,6 +1004,38 @@
       ]
      },
      "format": "text/html"
+    }
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s128/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    },
+    {
+     "id": "https://korea-archive-mcp.vercel.app/iiif/nara/65890/manifest.json",
+     "type": "Manifest",
+     "label": {
+      "ko": [
+       "NARA 원본 전체(IIIF 브리지)"
+      ]
+     },
+     "format": "application/ld+json"
+    },
+    {
+     "id": "https://korea-archive-mcp.vercel.app/iiif/nara/65890/record.jsonld",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "NARA 계층 기술(RiC-O)"
+      ]
+     },
+     "format": "application/ld+json"
     }
    ],
    "rights": "http://rightsstatements.org/vocab/NoC-US/1.0/"
@@ -690,6 +1110,42 @@
        "기체 앞 풀밭에서 깃발을 든 사람"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "309aebcc1b692fe7 — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "원 기관 계보"
+      ]
+     },
+     "value": {
+      "ko": [
+       "NARA › RG 342 Records of U.S. Air Force Commands, Activities, and Organizations › Moving Images Relating to Military Aviation Activities"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "judge_rights: NARA 카탈로그 Use Restriction 'Unrestricted' 실확인 — 제한 없음 확정"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -730,6 +1186,38 @@
       ]
      },
      "format": "text/html"
+    }
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s128/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    },
+    {
+     "id": "https://korea-archive-mcp.vercel.app/iiif/nara/65890/manifest.json",
+     "type": "Manifest",
+     "label": {
+      "ko": [
+       "NARA 원본 전체(IIIF 브리지)"
+      ]
+     },
+     "format": "application/ld+json"
+    },
+    {
+     "id": "https://korea-archive-mcp.vercel.app/iiif/nara/65890/record.jsonld",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "NARA 계층 기술(RiC-O)"
+      ]
+     },
+     "format": "application/ld+json"
     }
    ],
    "rights": "http://rightsstatements.org/vocab/NoC-US/1.0/"
@@ -804,6 +1292,42 @@
        "격납고 뼈대 너머 활주로와 산"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "2b0a445ade251a6f — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "원 기관 계보"
+      ]
+     },
+     "value": {
+      "ko": [
+       "NARA › RG 342 Records of U.S. Air Force Commands, Activities, and Organizations › Moving Images Relating to Military Aviation Activities"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "judge_rights: NARA 카탈로그 Use Restriction 'Unrestricted' 실확인 — 제한 없음 확정"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -844,6 +1368,38 @@
       ]
      },
      "format": "text/html"
+    }
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s128/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    },
+    {
+     "id": "https://korea-archive-mcp.vercel.app/iiif/nara/65890/manifest.json",
+     "type": "Manifest",
+     "label": {
+      "ko": [
+       "NARA 원본 전체(IIIF 브리지)"
+      ]
+     },
+     "format": "application/ld+json"
+    },
+    {
+     "id": "https://korea-archive-mcp.vercel.app/iiif/nara/65890/record.jsonld",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "NARA 계층 기술(RiC-O)"
+      ]
+     },
+     "format": "application/ld+json"
     }
    ],
    "rights": "http://rightsstatements.org/vocab/NoC-US/1.0/"
@@ -918,6 +1474,42 @@
        "공중에서 내려다본 산과 길"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "98b946a4e990a9cb — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "원 기관 계보"
+      ]
+     },
+     "value": {
+      "ko": [
+       "NARA › RG 342 Records of U.S. Air Force Commands, Activities, and Organizations › Moving Images Relating to Military Aviation Activities"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "judge_rights: NARA 카탈로그 Use Restriction 'Unrestricted' 실확인 — 제한 없음 확정"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -958,6 +1550,38 @@
       ]
      },
      "format": "text/html"
+    }
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s128/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    },
+    {
+     "id": "https://korea-archive-mcp.vercel.app/iiif/nara/65890/manifest.json",
+     "type": "Manifest",
+     "label": {
+      "ko": [
+       "NARA 원본 전체(IIIF 브리지)"
+      ]
+     },
+     "format": "application/ld+json"
+    },
+    {
+     "id": "https://korea-archive-mcp.vercel.app/iiif/nara/65890/record.jsonld",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "NARA 계층 기술(RiC-O)"
+      ]
+     },
+     "format": "application/ld+json"
     }
    ],
    "rights": "http://rightsstatements.org/vocab/NoC-US/1.0/"
@@ -1032,6 +1656,42 @@
        "공중에서 본 시가지와 철길"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "eff1d595aa3bd8bc — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "원 기관 계보"
+      ]
+     },
+     "value": {
+      "ko": [
+       "NARA › RG 342 Records of U.S. Air Force Commands, Activities, and Organizations › Moving Images Relating to Military Aviation Activities"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "judge_rights: NARA 카탈로그 Use Restriction 'Unrestricted' 실확인 — 제한 없음 확정"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -1072,6 +1732,38 @@
       ]
      },
      "format": "text/html"
+    }
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s128/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    },
+    {
+     "id": "https://korea-archive-mcp.vercel.app/iiif/nara/65890/manifest.json",
+     "type": "Manifest",
+     "label": {
+      "ko": [
+       "NARA 원본 전체(IIIF 브리지)"
+      ]
+     },
+     "format": "application/ld+json"
+    },
+    {
+     "id": "https://korea-archive-mcp.vercel.app/iiif/nara/65890/record.jsonld",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "NARA 계층 기술(RiC-O)"
+      ]
+     },
+     "format": "application/ld+json"
     }
    ],
    "rights": "http://rightsstatements.org/vocab/NoC-US/1.0/"
@@ -1146,6 +1838,42 @@
        "풀밭에 동체가 내려앉은 기체와 비행복 차림 사람"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "ad8e32b3485a2091 — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "원 기관 계보"
+      ]
+     },
+     "value": {
+      "ko": [
+       "NARA › RG 342 Records of U.S. Air Force Commands, Activities, and Organizations › Moving Images Relating to Military Aviation Activities"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "judge_rights: NARA 카탈로그 Use Restriction 'Unrestricted' 실확인 — 제한 없음 확정"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -1186,6 +1914,38 @@
       ]
      },
      "format": "text/html"
+    }
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s128/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    },
+    {
+     "id": "https://korea-archive-mcp.vercel.app/iiif/nara/65890/manifest.json",
+     "type": "Manifest",
+     "label": {
+      "ko": [
+       "NARA 원본 전체(IIIF 브리지)"
+      ]
+     },
+     "format": "application/ld+json"
+    },
+    {
+     "id": "https://korea-archive-mcp.vercel.app/iiif/nara/65890/record.jsonld",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "NARA 계층 기술(RiC-O)"
+      ]
+     },
+     "format": "application/ld+json"
     }
    ],
    "rights": "http://rightsstatements.org/vocab/NoC-US/1.0/"

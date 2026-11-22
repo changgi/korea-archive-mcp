@@ -36,6 +36,86 @@
      "アジア歴史資料センター (原本所蔵: 国立公文書館)"
     ]
    }
+  },
+  {
+   "label": {
+    "ko": [
+     "계층"
+    ]
+   },
+   "value": {
+    "ko": [
+     "KOREA ARCHIVE 통합검색 › 100선 · Ⅹ 국제기구와 일본의 기록 › s067"
+    ]
+   }
+  },
+  {
+   "label": {
+    "ko": [
+     "수집 경로"
+    ]
+   },
+   "value": {
+    "ko": [
+     "JACAR 검색(kw=鮮人 震災) → nedb_search(mode=jacar, query=A15060091100)"
+    ]
+   }
+  },
+  {
+   "label": {
+    "ko": [
+     "확인일"
+    ]
+   },
+   "value": {
+    "ko": [
+     "2026-11-22"
+    ]
+   }
+  },
+  {
+   "label": {
+    "ko": [
+     "게재 이미지"
+    ]
+   },
+   "value": {
+    "ko": [
+     "11장 · 링크 전용 0건"
+    ]
+   }
+  }
+ ],
+ "partOf": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/c/s100-10.json",
+   "type": "Collection",
+   "label": {
+    "ko": [
+     "100선 · Ⅹ 국제기구와 일본의 기록"
+    ]
+   }
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/hierarchy.json",
+   "type": "Collection",
+   "label": {
+    "ko": [
+     "KOREA ARCHIVE 통합검색 — 기록 계층"
+    ]
+   }
+  }
+ ],
+ "seeAlso": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s067/ledger.json",
+   "type": "Dataset",
+   "label": {
+    "ko": [
+     "출처 대장(ledger)"
+    ]
+   },
+   "format": "application/json"
   }
  ],
  "requiredStatement": {
@@ -132,6 +212,30 @@
        "표지 제첨 「大正十二年関東大震災関係書類」 · 라벨 「特殊資料 第七類 災害関係」 · 国立公文書館 라벨 「2A 40 資 71」 · 눈금자"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "329c8641eee46983 — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "JACAR「資料画像の利用について」: 「国立公文書館と外務省外交史料館からの提供資料については、資料画像の二次利用には原則として制限はありませんが、下記のいずれかの形で資料に関する情報を記載してください。…アジア歴史資料センターと所蔵館名を併記し、可能であればレファレンスコードも記載してください。」"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -173,7 +277,20 @@
      },
      "format": "text/html"
     }
-   ]
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s067/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    }
+   ],
+   "navDate": "1923-01-01T00:00:00Z"
   },
   {
    "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s067/canvas/2",
@@ -245,6 +362,30 @@
        "목차 표"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "92e8a7552a455346 — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "JACAR「資料画像の利用について」: 「国立公文書館と外務省外交史料館からの提供資料については、資料画像の二次利用には原則として制限はありませんが、下記のいずれかの形で資料に関する情報を記載してください。…アジア歴史資料センターと所蔵館名を併記し、可能であればレファレンスコードも記載してください。」"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -286,7 +427,20 @@
      },
      "format": "text/html"
     }
-   ]
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s067/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    }
+   ],
+   "navDate": "1923-01-01T00:00:00Z"
   },
   {
    "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s067/canvas/3",
@@ -358,6 +512,30 @@
        "「閣甲 一九四」 기안, 대신 인장 칸"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "8ac493e01ec9c400 — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "JACAR「資料画像の利用について」: 「国立公文書館と外務省外交史料館からの提供資料については、資料画像の二次利用には原則として制限はありませんが、下記のいずれかの形で資料に関する情報を記載してください。…アジア歴史資料センターと所蔵館名を併記し、可能であればレファレンスコードも記載してください。」"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -399,7 +577,20 @@
      },
      "format": "text/html"
     }
-   ]
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s067/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    }
+   ],
+   "navDate": "1923-01-01T00:00:00Z"
   },
   {
    "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s067/canvas/4",
@@ -471,6 +662,30 @@
        "「一、」으로 시작하는 처리 사항 목록(필사)"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "e22ee754b30bb98f — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "JACAR「資料画像の利用について」: 「国立公文書館と外務省外交史料館からの提供資料については、資料画像の二次利用には原則として制限はありませんが、下記のいずれかの形で資料に関する情報を記載してください。…アジア歴史資料センターと所蔵館名を併記し、可能であればレファレンスコードも記載してください。」"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -512,7 +727,20 @@
      },
      "format": "text/html"
     }
-   ]
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s067/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    }
+   ],
+   "navDate": "1923-01-01T00:00:00Z"
   },
   {
    "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s067/canvas/5",
@@ -584,6 +812,30 @@
        "「閣甲第一四五號」 기안, 대신 인장"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "53a05dab358f83a8 — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "JACAR「資料画像の利用について」: 「国立公文書館と外務省外交史料館からの提供資料については、資料画像の二次利用には原則として制限はありませんが、下記のいずれかの形で資料に関する情報を記載してください。…アジア歴史資料センターと所蔵館名を併記し、可能であればレファレンスコードも記載してください。」"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -625,7 +877,20 @@
      },
      "format": "text/html"
     }
-   ]
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s067/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    }
+   ],
+   "navDate": "1923-01-01T00:00:00Z"
   },
   {
    "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s067/canvas/6",
@@ -697,6 +962,30 @@
        "「内閣告諭第二號」 · 「今次ノ震災ニ乘シ一部不逞鮮人ノ妄動アリトシテ」 · 「民衆自ラ濫ニ鮮人ニ迫害ヲ加フル」 · 먹선 삭제와 덧쓴 「フルカ」 · 「外國ニ報セラレテ決シテ好マシキコトニ非ス」"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "202effc222297d0d — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "JACAR「資料画像の利用について」: 「国立公文書館と外務省外交史料館からの提供資料については、資料画像の二次利用には原則として制限はありませんが、下記のいずれかの形で資料に関する情報を記載してください。…アジア歴史資料センターと所蔵館名を併記し、可能であればレファレンスコードも記載してください。」"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -738,7 +1027,20 @@
      },
      "format": "text/html"
     }
-   ]
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s067/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    }
+   ],
+   "navDate": "1923-01-01T00:00:00Z"
   },
   {
    "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s067/canvas/7",
@@ -810,6 +1112,30 @@
        "「大正十二年九月 日 内閣總理大臣」"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "595a08074ef19502 — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "JACAR「資料画像の利用について」: 「国立公文書館と外務省外交史料館からの提供資料については、資料画像の二次利用には原則として制限はありませんが、下記のいずれかの形で資料に関する情報を記載してください。…アジア歴史資料センターと所蔵館名を併記し、可能であればレファレンスコードも記載してください。」"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -851,7 +1177,20 @@
      },
      "format": "text/html"
     }
-   ]
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s067/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    }
+   ],
+   "navDate": "1923-01-01T00:00:00Z"
   },
   {
    "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s067/canvas/8",
@@ -923,6 +1262,30 @@
        "「嘉仁 裕仁」, 「天皇御璽」 · 「朕茲ニ緊急ノ必要アリト認メ…帝國憲法第八條第一項ニ依リ治安維持ノ為ニスル罰則ニ關スル件ヲ裁可シ」"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "7caf82417580dab1 — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "JACAR「資料画像の利用について」: 「国立公文書館と外務省外交史料館からの提供資料については、資料画像の二次利用には原則として制限はありませんが、下記のいずれかの形で資料に関する情報を記載してください。…アジア歴史資料センターと所蔵館名を併記し、可能であればレファレンスコードも記載してください。」"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -964,7 +1327,20 @@
      },
      "format": "text/html"
     }
-   ]
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s067/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    }
+   ],
+   "navDate": "1923-01-01T00:00:00Z"
   },
   {
    "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s067/canvas/9",
@@ -1036,6 +1412,30 @@
        "「大正十二年九月七日」 각 대신 부서(山本權兵衛·後藤新平 등)"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "637e556a3c22ec34 — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "JACAR「資料画像の利用について」: 「国立公文書館と外務省外交史料館からの提供資料については、資料画像の二次利用には原則として制限はありませんが、下記のいずれかの形で資料に関する情報を記載してください。…アジア歴史資料センターと所蔵館名を併記し、可能であればレファレンスコードも記載してください。」"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -1077,7 +1477,20 @@
      },
      "format": "text/html"
     }
-   ]
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s067/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    }
+   ],
+   "navDate": "1923-01-01T00:00:00Z"
   },
   {
    "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s067/canvas/10",
@@ -1149,6 +1562,30 @@
        "「勅令第四百三號 出版、通信其ノ他何等ノ方法ヲ以テスルヲ問ハス…流言浮説ヲ為シタル者ハ十年以下ノ懲役若ハ禁錮又ハ三千圓以下ノ罰金ニ處ス」"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "1e6819daea966dc1 — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "JACAR「資料画像の利用について」: 「国立公文書館と外務省外交史料館からの提供資料については、資料画像の二次利用には原則として制限はありませんが、下記のいずれかの形で資料に関する情報を記載してください。…アジア歴史資料センターと所蔵館名を併記し、可能であればレファレンスコードも記載してください。」"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -1190,7 +1627,20 @@
      },
      "format": "text/html"
     }
-   ]
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s067/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    }
+   ],
+   "navDate": "1923-01-01T00:00:00Z"
   },
   {
    "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s067/canvas/11",
@@ -1262,6 +1712,30 @@
        "「本令ハ公布ノ日ヨリ之ヲ施行ス」"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "334dcd285a97ebbc — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "JACAR「資料画像の利用について」: 「国立公文書館と外務省外交史料館からの提供資料については、資料画像の二次利用には原則として制限はありませんが、下記のいずれかの形で資料に関する情報を記載してください。…アジア歴史資料センターと所蔵館名を併記し、可能であればレファレンスコードも記載してください。」"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -1303,7 +1777,20 @@
      },
      "format": "text/html"
     }
-   ]
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s067/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    }
+   ],
+   "navDate": "1923-01-01T00:00:00Z"
   }
  ],
  "homepage": [

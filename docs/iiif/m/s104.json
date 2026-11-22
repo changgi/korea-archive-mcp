@@ -36,6 +36,86 @@
      "국가유산청 국가유산포털"
     ]
    }
+  },
+  {
+   "label": {
+    "ko": [
+     "계층"
+    ]
+   },
+   "value": {
+    "ko": [
+     "KOREA ARCHIVE 통합검색 › 100선 · XIV 유산과 도시 › s104"
+    ]
+   }
+  },
+  {
+   "label": {
+    "ko": [
+     "수집 경로"
+    ]
+   },
+   "value": {
+    "ko": [
+     "nedb_search(mode=heritage, '첨성대') → nedb_search(mode=heritage, '11-0000310000000-37')"
+    ]
+   }
+  },
+  {
+   "label": {
+    "ko": [
+     "확인일"
+    ]
+   },
+   "value": {
+    "ko": [
+     "2026-11-22"
+    ]
+   }
+  },
+  {
+   "label": {
+    "ko": [
+     "게재 이미지"
+    ]
+   },
+   "value": {
+    "ko": [
+     "4장 · 링크 전용 0건"
+    ]
+   }
+  }
+ ],
+ "partOf": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/c/s100-14.json",
+   "type": "Collection",
+   "label": {
+    "ko": [
+     "100선 · XIV 유산과 도시"
+    ]
+   }
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/hierarchy.json",
+   "type": "Collection",
+   "label": {
+    "ko": [
+     "KOREA ARCHIVE 통합검색 — 기록 계층"
+    ]
+   }
+  }
+ ],
+ "seeAlso": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s104/ledger.json",
+   "type": "Dataset",
+   "label": {
+    "ko": [
+     "출처 대장(ledger)"
+    ]
+   },
+   "format": "application/json"
   }
  ],
  "requiredStatement": {
@@ -132,6 +212,30 @@
        "사진: 국립국회도서관(NDL) 「大日本帝国朝鮮写真帖」(1910, 統監府 編) info:ndljp/pid/766880 코마 96 · NDL デジタルコレクション PDM(パブリックドメイン) — 「第七十二 慶州瞻星台」"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "6a6c14bcdb50051c — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "IIIF manifest https://dl.ndl.go.jp/api/iiif/766880/manifest.json metadata 'Access Restrictions: PDM' · 統監府 編"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -174,6 +278,19 @@
      "format": "text/html"
     }
    ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s104/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    }
+   ],
+   "navDate": "1910-01-01T00:00:00Z",
    "rights": "http://creativecommons.org/publicdomain/mark/1.0/"
   },
   {
@@ -246,6 +363,30 @@
        "1917 보고서 사진 · NDL 984832"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "6a1dabd3e4454cba — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "IIIF manifest https://dl.ndl.go.jp/api/iiif/984832/manifest.json metadata 'Access Restrictions: PDM' · 朝鮮総督府観測所 編"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -288,6 +429,19 @@
      "format": "text/html"
     }
    ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s104/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    }
+   ],
+   "navDate": "1917-01-01T00:00:00Z",
    "rights": "http://creativecommons.org/publicdomain/mark/1.0/"
   },
   {
@@ -360,6 +514,30 @@
        "「第九圖 瞻星臺構造略圖」"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "2e82f12eb84487e6 — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "IIIF manifest https://dl.ndl.go.jp/api/iiif/984832/manifest.json metadata 'Access Restrictions: PDM' · 朝鮮総督府観測所 編"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -402,6 +580,19 @@
      "format": "text/html"
     }
    ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s104/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    }
+   ],
+   "navDate": "1917-01-01T00:00:00Z",
    "rights": "http://creativecommons.org/publicdomain/mark/1.0/"
   },
   {
@@ -474,6 +665,30 @@
        "「六 慶州瞻星臺ノ說」"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "9a9919e3d86b929c — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "IIIF manifest https://dl.ndl.go.jp/api/iiif/984832/manifest.json metadata 'Access Restrictions: PDM' · 朝鮮総督府観測所 編"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -516,6 +731,19 @@
      "format": "text/html"
     }
    ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s104/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    }
+   ],
+   "navDate": "1917-01-01T00:00:00Z",
    "rights": "http://creativecommons.org/publicdomain/mark/1.0/"
   }
  ],

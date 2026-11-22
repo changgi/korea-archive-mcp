@@ -36,6 +36,86 @@
      "대한민국역사박물관"
     ]
    }
+  },
+  {
+   "label": {
+    "ko": [
+     "계층"
+    ]
+   },
+   "value": {
+    "ko": [
+     "KOREA ARCHIVE 통합검색 › 100선 · XIV 유산과 도시 › s106"
+    ]
+   }
+  },
+  {
+   "label": {
+    "ko": [
+     "수집 경로"
+    ]
+   },
+   "value": {
+    "ko": [
+     "nedb_search(mode=much, '서울올림픽 포스터') → nedb_search(mode=much, 'PS01002025001-000941-00000')"
+    ]
+   }
+  },
+  {
+   "label": {
+    "ko": [
+     "확인일"
+    ]
+   },
+   "value": {
+    "ko": [
+     "2026-11-22"
+    ]
+   }
+  },
+  {
+   "label": {
+    "ko": [
+     "게재 이미지"
+    ]
+   },
+   "value": {
+    "ko": [
+     "5장 · 링크 전용 0건"
+    ]
+   }
+  }
+ ],
+ "partOf": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/c/s100-14.json",
+   "type": "Collection",
+   "label": {
+    "ko": [
+     "100선 · XIV 유산과 도시"
+    ]
+   }
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/hierarchy.json",
+   "type": "Collection",
+   "label": {
+    "ko": [
+     "KOREA ARCHIVE 통합검색 — 기록 계층"
+    ]
+   }
+  }
+ ],
+ "seeAlso": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s106/ledger.json",
+   "type": "Dataset",
+   "label": {
+    "ko": [
+     "출처 대장(ledger)"
+    ]
+   },
+   "format": "application/json"
   }
  ],
  "requiredStatement": {
@@ -132,6 +212,30 @@
        "사진: e영상역사관 정부기록사진집 BK 21/4216 「88서울올림픽대회-개막 행사」(1988.09.17) · 공공누리 제4유형 — 원형 그대로 게재 (포스터 원본 이미지 아님 — 같은 주제의 정부 기록사진)"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "b3f031313c05b054 — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "페이지 문구: 저작물은 \"공공누리 제4유형 [출처표시+상업적 이용금지+변경금지]\" 조건에 따라 이용 할 수 있습니다."
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -172,6 +276,18 @@
       ]
      },
      "format": "text/html"
+    }
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s106/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
     }
    ]
   },
@@ -245,6 +361,30 @@
        "1985.05.21 마스코트 '호돌이'"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "10f18e4be48e3384 — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "페이지 문구: 저작물은 \"공공누리 제4유형 [출처표시+상업적 이용금지+변경금지]\" 조건에 따라 이용 할 수 있습니다."
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -285,6 +425,18 @@
       ]
      },
      "format": "text/html"
+    }
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s106/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
     }
    ]
   },
@@ -358,6 +510,30 @@
        "1987.02.22 호돌이 연날리기"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "47bfa3e85c073e0a — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "페이지 문구: 저작물은 \"공공누리 제4유형 [출처표시+상업적 이용금지+변경금지]\" 조건에 따라 이용 할 수 있습니다."
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -398,6 +574,18 @@
       ]
      },
      "format": "text/html"
+    }
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s106/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
     }
    ]
   },
@@ -471,6 +659,30 @@
        "1988.09.17 성화 점화"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "462f2addb60240b3 — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "페이지 문구: 저작물은 \"공공누리 제4유형 [출처표시+상업적 이용금지+변경금지]\" 조건에 따라 이용 할 수 있습니다."
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -511,6 +723,18 @@
       ]
      },
      "format": "text/html"
+    }
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s106/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
     }
    ]
   },
@@ -584,6 +808,30 @@
        "1988.10.05 성공개최 축하 퍼레이드"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "72a77473945bfa9c — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "페이지 문구: 저작물은 \"공공누리 제4유형 [출처표시+상업적 이용금지+변경금지]\" 조건에 따라 이용 할 수 있습니다."
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -624,6 +872,18 @@
       ]
      },
      "format": "text/html"
+    }
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s106/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
     }
    ]
   }

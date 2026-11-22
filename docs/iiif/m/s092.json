@@ -36,6 +36,86 @@
      "한국학중앙연구원 장서각"
     ]
    }
+  },
+  {
+   "label": {
+    "ko": [
+     "계층"
+    ]
+   },
+   "value": {
+    "ko": [
+     "KOREA ARCHIVE 통합검색 › 100선 · XIII 조선의 기록문화 2 › s092"
+    ]
+   }
+  },
+  {
+   "label": {
+    "ko": [
+     "수집 경로"
+    ]
+   },
+   "value": {
+    "ko": [
+     "nedb_search(mode=jsg, query='K2-2859') + nlk_search(query='進爵儀軌', category='고문헌')"
+    ]
+   }
+  },
+  {
+   "label": {
+    "ko": [
+     "확인일"
+    ]
+   },
+   "value": {
+    "ko": [
+     "2026-11-22"
+    ]
+   }
+  },
+  {
+   "label": {
+    "ko": [
+     "게재 이미지"
+    ]
+   },
+   "value": {
+    "ko": [
+     "7장 · 링크 전용 0건"
+    ]
+   }
+  }
+ ],
+ "partOf": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/c/s100-13.json",
+   "type": "Collection",
+   "label": {
+    "ko": [
+     "100선 · XIII 조선의 기록문화 2"
+    ]
+   }
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/hierarchy.json",
+   "type": "Collection",
+   "label": {
+    "ko": [
+     "KOREA ARCHIVE 통합검색 — 기록 계층"
+    ]
+   }
+  }
+ ],
+ "seeAlso": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s092/ledger.json",
+   "type": "Dataset",
+   "label": {
+    "ko": [
+     "출처 대장(ledger)"
+    ]
+   },
+   "format": "application/json"
   }
  ],
  "requiredStatement": {
@@ -132,6 +212,30 @@
        ""
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "aa72e25b142e96e3 — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "NLK 통합뷰어 서지정보: 「서명 進爵儀軌 발행일 1828---- 발행자 [刊寫者未詳] 저작권유형 이용 제한이 없습니다.」 / 「서명 進饌儀軌 발행일 1887---- 저작권유형 이용 제한이 없습니다.」"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -173,7 +277,20 @@
      },
      "format": "text/html"
     }
-   ]
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s092/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    }
+   ],
+   "navDate": "1828-01-01T00:00:00Z"
   },
   {
    "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s092/canvas/2",
@@ -245,6 +362,30 @@
        "1887 進饌儀軌 「通明殿圖」"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "2d08ee78d77f685a — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "NLK 통합뷰어 서지정보: 「서명 進爵儀軌 발행일 1828---- 발행자 [刊寫者未詳] 저작권유형 이용 제한이 없습니다.」 / 「서명 進饌儀軌 발행일 1887---- 저작권유형 이용 제한이 없습니다.」"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -286,7 +427,20 @@
      },
      "format": "text/html"
     }
-   ]
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s092/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    }
+   ],
+   "navDate": "1828-01-01T00:00:00Z"
   },
   {
    "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s092/canvas/3",
@@ -358,6 +512,30 @@
        "hero"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "1717137631068264 — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "NLK 통합뷰어 서지정보: 「서명 進爵儀軌 발행일 1828---- 발행자 [刊寫者未詳] 저작권유형 이용 제한이 없습니다.」 / 「서명 進饌儀軌 발행일 1887---- 저작권유형 이용 제한이 없습니다.」"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -399,7 +577,20 @@
      },
      "format": "text/html"
     }
-   ]
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s092/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    }
+   ],
+   "navDate": "1828-01-01T00:00:00Z"
   },
   {
    "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s092/canvas/4",
@@ -471,6 +662,30 @@
        "1887 「通明殿翌日會酌圖」"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "02d460a6ac1957e6 — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "NLK 통합뷰어 서지정보: 「서명 進爵儀軌 발행일 1828---- 발행자 [刊寫者未詳] 저작권유형 이용 제한이 없습니다.」 / 「서명 進饌儀軌 발행일 1887---- 저작권유형 이용 제한이 없습니다.」"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -512,7 +727,20 @@
      },
      "format": "text/html"
     }
-   ]
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s092/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    }
+   ],
+   "navDate": "1828-01-01T00:00:00Z"
   },
   {
    "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s092/canvas/5",
@@ -584,6 +812,30 @@
        "1828 進爵儀軌 표지 · 국립중앙도서관"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "90a224a5c7579055 — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "NLK 통합뷰어 서지정보: 「서명 進爵儀軌 발행일 1828---- 발행자 [刊寫者未詳] 저작권유형 이용 제한이 없습니다.」 / 「서명 進饌儀軌 발행일 1887---- 저작권유형 이용 제한이 없습니다.」"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -625,7 +877,20 @@
      },
      "format": "text/html"
     }
-   ]
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s092/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    }
+   ],
+   "navDate": "1828-01-01T00:00:00Z"
   },
   {
    "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s092/canvas/6",
@@ -697,6 +962,30 @@
        "같은 책 卷一 「樂章」 면"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "31fb47347a6f2652 — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "NLK 통합뷰어 서지정보: 「서명 進爵儀軌 발행일 1828---- 발행자 [刊寫者未詳] 저작권유형 이용 제한이 없습니다.」 / 「서명 進饌儀軌 발행일 1887---- 저작권유형 이용 제한이 없습니다.」"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -738,7 +1027,20 @@
      },
      "format": "text/html"
     }
-   ]
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s092/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    }
+   ],
+   "navDate": "1828-01-01T00:00:00Z"
   },
   {
    "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s092/canvas/7",
@@ -810,6 +1112,30 @@
        "「樂章」 — 악장 항목의 시작 · 「睿製進爵先唱樂章」 — 睿製(세자가 지음) · 「蓬萊雲五章章二句」 · 「睿製進爵後唱樂章」 · 「萬歲萬歲歌…」 — 노랫말"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "a562e8971b0e654a — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "NLK 통합뷰어 서지정보: 「서명 進爵儀軌 발행일 1828---- 발행자 [刊寫者未詳] 저작권유형 이용 제한이 없습니다.」 / 「서명 進饌儀軌 발행일 1887---- 저작권유형 이용 제한이 없습니다.」"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -851,7 +1177,20 @@
      },
      "format": "text/html"
     }
-   ]
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s092/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    }
+   ],
+   "navDate": "1828-01-01T00:00:00Z"
   }
  ],
  "homepage": [
@@ -872,5 +1211,6 @@
    "type": "Image",
    "format": "image/jpeg"
   }
- ]
+ ],
+ "navDate": "1828-01-01T00:00:00Z"
 }

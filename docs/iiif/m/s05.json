@@ -36,6 +36,86 @@
      "Nationaal Archief (Den Haag)"
     ]
    }
+  },
+  {
+   "label": {
+    "ko": [
+     "계층"
+    ]
+   },
+   "value": {
+    "ko": [
+     "KOREA ARCHIVE 통합검색 › 30곳 탐방 · Ⅰ 전쟁의 기록 › s05"
+    ]
+   }
+  },
+  {
+   "label": {
+    "ko": [
+     "수집 경로"
+    ]
+   },
+   "value": {
+    "ko": [
+     "cross_search(sources=nlna)"
+    ]
+   }
+  },
+  {
+   "label": {
+    "ko": [
+     "확인일"
+    ]
+   },
+   "value": {
+    "ko": [
+     "2026-11-22"
+    ]
+   }
+  },
+  {
+   "label": {
+    "ko": [
+     "게재 이미지"
+    ]
+   },
+   "value": {
+    "ko": [
+     "9장 · 링크 전용 0건"
+    ]
+   }
+  }
+ ],
+ "partOf": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/c/s30-01.json",
+   "type": "Collection",
+   "label": {
+    "ko": [
+     "30곳 탐방 · Ⅰ 전쟁의 기록"
+    ]
+   }
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/hierarchy.json",
+   "type": "Collection",
+   "label": {
+    "ko": [
+     "KOREA ARCHIVE 통합검색 — 기록 계층"
+    ]
+   }
+  }
+ ],
+ "seeAlso": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/promo/series30v2/img/05/ledger.json",
+   "type": "Dataset",
+   "label": {
+    "ko": [
+     "출처 대장(ledger)"
+    ]
+   },
+   "format": "application/json"
   }
  ],
  "requiredStatement": {
@@ -132,6 +212,30 @@
        "군복 차림 군인이 꽃다발을 받으며 허리를 숙이고 있다 · 흰 저고리·검은 치마 차림 여성 2명 · 뒤편에 정모 쓴 장교 여러 명 · 인화지 우하단 번호 '093 0425'"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "509ef8c3eeabddf5 — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "Nationaal Archief 사진 페이지 'Auteursrechthebbende: Nationaal Archief, CC0'; Europeana 레코드 /1417/... edmRights = http://creativecommons.org/publicdomain/mark/1.0/"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -174,6 +278,19 @@
      "format": "text/html"
     }
    ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series30v2/img/05/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    }
+   ],
+   "navDate": "1950-12-07T00:00:00Z",
    "rights": "http://creativecommons.org/publicdomain/zero/1.0/"
   },
   {
@@ -246,6 +363,30 @@
        "같은 사진 뒷면 타자 캡션: '...Ned rlands detachement Ver.Naties in Poesan in Korea gearriveerd.' / 'Lt.Kol.de Ouden, de Commandant ontvangt bloemen namens de Koreaanse Patriottische Vrouwenbeweging.' · 'FOTO-ANEFO 7-12-1950' 타자 문구 · 붉은 색연필 X 표시, 이름 'Ouden'에 타원 표시"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "1fafd492829202f6 — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "Nationaal Archief 사진 페이지 'Auteursrechthebbende: Nationaal Archief, CC0'; Europeana 레코드 /1417/... edmRights = http://creativecommons.org/publicdomain/mark/1.0/"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -288,6 +429,19 @@
      "format": "text/html"
     }
    ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series30v2/img/05/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    }
+   ],
+   "navDate": "1950-12-07T00:00:00Z",
    "rights": "http://creativecommons.org/publicdomain/zero/1.0/"
   },
   {
@@ -360,6 +514,30 @@
        "철모 쓴 군인들이 거수경례하며 행진 · 가로 삼색기 1개 · 뒤편 숲 비탈과 대열 · 우하단 번호 '071 0694'"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "83e9a763d544fdcf — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "Nationaal Archief 사진 페이지 'Auteursrechthebbende: Nationaal Archief, CC0'; Europeana 레코드 /1417/... edmRights = http://creativecommons.org/publicdomain/mark/1.0/"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -402,6 +580,19 @@
      "format": "text/html"
     }
    ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series30v2/img/05/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    }
+   ],
+   "navDate": "1951-07-03T00:00:00Z",
    "rights": "http://creativecommons.org/publicdomain/zero/1.0/"
   },
   {
@@ -474,6 +665,30 @@
        "군복·전투모 차림 남성 2명이 통나무에 앉아 있다 · 두 사람 모두 나막신(klompen)을 신고 있다 · 배경에 눈 덮인 땅 · 우하단 번호 '050 0727'"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "2ebdf6b8f57557eb — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "Nationaal Archief 사진 페이지 'Auteursrechthebbende: Nationaal Archief, CC0'; Europeana 레코드 /1417/... edmRights = http://creativecommons.org/publicdomain/mark/1.0/"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -516,6 +731,19 @@
      "format": "text/html"
     }
    ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series30v2/img/05/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    }
+   ],
+   "navDate": "1951-01-27T00:00:00Z",
    "rights": "http://creativecommons.org/publicdomain/zero/1.0/"
   },
   {
@@ -588,6 +816,30 @@
        "별 마크가 그려진 6륜 군용 트럭 · 트럭 적재함 측면 흰 숫자 '4658678' · 눈밭에서 썰매형 수레에 탄 군인 1명 · 우하단 번호 '050 0725'"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "d202ba0559f80b43 — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "Nationaal Archief 사진 페이지 'Auteursrechthebbende: Nationaal Archief, CC0'; Europeana 레코드 /1417/... edmRights = http://creativecommons.org/publicdomain/mark/1.0/"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -630,6 +882,19 @@
      "format": "text/html"
     }
    ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series30v2/img/05/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    }
+   ],
+   "navDate": "1951-02-06T00:00:00Z",
    "rights": "http://creativecommons.org/publicdomain/zero/1.0/"
   },
   {
@@ -702,6 +967,30 @@
        "베레모 쓴 군인 2명이 벤치에서 체스를 두고 있다 · 체스판 위 말들 · 우하단 번호 '071 0706'"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "7f41b3b60b839d28 — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "Nationaal Archief 사진 페이지 'Auteursrechthebbende: Nationaal Archief, CC0'; Europeana 레코드 /1417/... edmRights = http://creativecommons.org/publicdomain/mark/1.0/"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -744,6 +1033,19 @@
      "format": "text/html"
     }
    ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series30v2/img/05/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    }
+   ],
+   "navDate": "1950-11-13T00:00:00Z",
    "rights": "http://creativecommons.org/publicdomain/zero/1.0/"
   },
   {
@@ -816,6 +1118,30 @@
        "배 측면 현수막 'KONINKLIJKE ROTTERDAMSCHE' · 더플백을 멘 군인들이 승선 사다리를 오르고 있다 · 크레인 기둥에 숫자 '6' · 갑판 위 화물 더미와 굴뚝형 환기구"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "0844f73ed66f73cc — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "Nationaal Archief 사진 페이지 'Auteursrechthebbende: Nationaal Archief, CC0'; Europeana 레코드 /1417/... edmRights = http://creativecommons.org/publicdomain/mark/1.0/"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -858,6 +1184,19 @@
      "format": "text/html"
     }
    ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series30v2/img/05/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    }
+   ],
+   "navDate": "1950-10-26T00:00:00Z",
    "rights": "http://creativecommons.org/publicdomain/zero/1.0/"
   },
   {
@@ -930,6 +1269,30 @@
        "정모·견장 차림 인물이 군인들과 웃으며 대화 · 베레모 쓴 군인 다수 · 좌하단 번호 '015 1371'"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "ff8f6fd9b8eff4dc — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "Nationaal Archief 사진 페이지 'Auteursrechthebbende: Nationaal Archief, CC0'; Europeana 레코드 /1417/... edmRights = http://creativecommons.org/publicdomain/mark/1.0/"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -972,6 +1335,19 @@
      "format": "text/html"
     }
    ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series30v2/img/05/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    }
+   ],
+   "navDate": "1951-10-01T00:00:00Z",
    "rights": "http://creativecommons.org/publicdomain/zero/1.0/"
   },
   {
@@ -1044,6 +1420,30 @@
        "군인 2명이 볏짚 더미를 총검으로 찌르고 있다 · 배경에 기와지붕 가옥 · 바닥에 눈과 짚"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "10978798c16212ac — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "Nationaal Archief 사진 페이지 'Auteursrechthebbende: Rechtenvrij'; Europeana 레코드 /1417/... edmRights = http://creativecommons.org/publicdomain/mark/1.0/"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -1086,6 +1486,18 @@
      "format": "text/html"
     }
    ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series30v2/img/05/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    }
+   ],
    "rights": "http://creativecommons.org/publicdomain/mark/1.0/"
   }
  ],
@@ -1107,5 +1519,6 @@
    "type": "Image",
    "format": "image/jpeg"
   }
- ]
+ ],
+ "navDate": "1950-12-07T00:00:00Z"
 }

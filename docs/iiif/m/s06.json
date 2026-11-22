@@ -36,6 +36,86 @@
      "United Nations Digital Library (Dag Hammarskjöld Library)"
     ]
    }
+  },
+  {
+   "label": {
+    "ko": [
+     "계층"
+    ]
+   },
+   "value": {
+    "ko": [
+     "KOREA ARCHIVE 통합검색 › 30곳 탐방 · Ⅰ 전쟁의 기록 › s06"
+    ]
+   }
+  },
+  {
+   "label": {
+    "ko": [
+     "수집 경로"
+    ]
+   },
+   "value": {
+    "ko": [
+     "cross_search(sources=un) → nedb_search(mode=un)"
+    ]
+   }
+  },
+  {
+   "label": {
+    "ko": [
+     "확인일"
+    ]
+   },
+   "value": {
+    "ko": [
+     "2026-11-22"
+    ]
+   }
+  },
+  {
+   "label": {
+    "ko": [
+     "게재 이미지"
+    ]
+   },
+   "value": {
+    "ko": [
+     "4장 · 링크 전용 0건"
+    ]
+   }
+  }
+ ],
+ "partOf": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/c/s30-01.json",
+   "type": "Collection",
+   "label": {
+    "ko": [
+     "30곳 탐방 · Ⅰ 전쟁의 기록"
+    ]
+   }
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/hierarchy.json",
+   "type": "Collection",
+   "label": {
+    "ko": [
+     "KOREA ARCHIVE 통합검색 — 기록 계층"
+    ]
+   }
+  }
+ ],
+ "seeAlso": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/promo/series30v2/img/06/ledger.json",
+   "type": "Dataset",
+   "label": {
+    "ko": [
+     "출처 대장(ledger)"
+    ]
+   },
+   "format": "application/json"
   }
  ],
  "requiredStatement": {
@@ -132,6 +212,30 @@
        "제목 '82 (1950). Resolution of 25 June 1950' / 우측 '82 (1950). Résolution du 25 juin 1950' · 문서기호 '[S/1501]' · 영어·프랑스어 2단 조판 · 본문 'The Security Council, Recalling the finding of the General Assembly in its resolution 293 (IV) of 21 October 1949...' · 'Determines that this action constitutes a breach of the peace;' 문구, 하단 쪽번호 '4'"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "c8c826793a74c814 — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "UN 행정지시 ST/AI/189/Add.9/Rev.2 (1987-09-17) 'Copyright in United Nations publications' 제2항: \"The following categories of material will, as at present, be left in the public domain\" — (a) Official Records, (b) United Nations documents(UN 문서기호로 발행된 문서), (c) 비매 공보자료 [Wikisource 사본으로 확인]. UN Digital Libr"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -173,7 +277,20 @@
      },
      "format": "text/html"
     }
-   ]
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series30v2/img/06/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    }
+   ],
+   "navDate": "1950-06-25T00:00:00Z"
   },
   {
    "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s06/canvas/2",
@@ -245,6 +362,30 @@
        "'Adopted at the 473rd meeting by 9 votes to none, with 1 abstention (Yugoslavia).' (결의 82 채택 기록) · '83 (1950). Resolution of 27 June 1950 [S/1511]' · 'Recommends that the Members of the United Nations furnish such assistance to the Republic of Korea as may be necessary to repel the armed attack...' · '84 (1950). Resolution of 7 July 1950 [S/1588]' 시작부 · 하단 쪽번호 '5'"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "71fafa47aaa6690d — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "UN 행정지시 ST/AI/189/Add.9/Rev.2 (1987-09-17) 'Copyright in United Nations publications' 제2항: \"The following categories of material will, as at present, be left in the public domain\" — (a) Official Records, (b) United Nations documents(UN 문서기호로 발행된 문서), (c) 비매 공보자료 [Wikisource 사본으로 확인]. UN Digital Libr"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -286,7 +427,20 @@
      },
      "format": "text/html"
     }
-   ]
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series30v2/img/06/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    }
+   ],
+   "navDate": "1950-06-27T00:00:00Z"
   },
   {
    "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s06/canvas/3",
@@ -358,6 +512,30 @@
        "'3. Recommends ... make such forces and other assistance available to a unified command under the United States of America;' · '5. Authorizes the unified command at its discretion to use the United Nations flag in the course of operations against North Korean forces...' · 'Adopted at the 476th meeting by 7 votes to none, with 3 abstentions (Egypt, India, Yugoslavia).' · '85 (1950). Resolution of 3"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "9cf6213f5bc8e2c8 — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "UN 행정지시 ST/AI/189/Add.9/Rev.2 (1987-09-17) 'Copyright in United Nations publications' 제2항: \"The following categories of material will, as at present, be left in the public domain\" — (a) Official Records, (b) United Nations documents(UN 문서기호로 발행된 문서), (c) 비매 공보자료 [Wikisource 사본으로 확인]. UN Digital Libr"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -399,7 +577,20 @@
      },
      "format": "text/html"
     }
-   ]
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series30v2/img/06/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    }
+   ],
+   "navDate": "1950-07-07T00:00:00Z"
   },
   {
    "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s06/canvas/4",
@@ -471,6 +662,30 @@
        "상단 'United Nations' · 'S/2015/799' · UN 엠블럼 · 'Security Council' · 'Distr.: General 19 October 2015' / 'Original: English' · 본문: 외무성 성명(2015-10-17) 전달 — '...proposal to replace the Korean Armistice Agreement with a peace treaty between the DPRK and the United States of America (see annex)' · 서명 '(Signed) JA Song Nam, Ambassador, Permanent Representative' · 하단 '15-18087 (E) 201015', 바코드·QR코드"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "421e8a6b88d8acce — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "UN 행정지시 ST/AI/189/Add.9/Rev.2 (1987-09-17) 'Copyright in United Nations publications' 제2항: \"The following categories of material will, as at present, be left in the public domain\" — (a) Official Records, (b) United Nations documents(UN 문서기호로 발행된 문서), (c) 비매 공보자료 [Wikisource 사본으로 확인]. UN Digital Libr"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -512,7 +727,20 @@
      },
      "format": "text/html"
     }
-   ]
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series30v2/img/06/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    }
+   ],
+   "navDate": "2015-10-19T00:00:00Z"
   }
  ],
  "homepage": [
@@ -533,5 +761,6 @@
    "type": "Image",
    "format": "image/jpeg"
   }
- ]
+ ],
+ "navDate": "1950-06-25T00:00:00Z"
 }

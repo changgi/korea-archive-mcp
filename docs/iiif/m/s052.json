@@ -36,6 +36,86 @@
      "Nationaal Archief (Den Haag)"
     ]
    }
+  },
+  {
+   "label": {
+    "ko": [
+     "계층"
+    ]
+   },
+   "value": {
+    "ko": [
+     "KOREA ARCHIVE 통합검색 › 100선 · Ⅸ 참전국의 기억 › s052"
+    ]
+   }
+  },
+  {
+   "label": {
+    "ko": [
+     "수집 경로"
+    ]
+   },
+   "value": {
+    "ko": [
+     "cross_search(sources=nlna,'terugkeer Korea') + Europeana 1417"
+    ]
+   }
+  },
+  {
+   "label": {
+    "ko": [
+     "확인일"
+    ]
+   },
+   "value": {
+    "ko": [
+     "2026-11-22"
+    ]
+   }
+  },
+  {
+   "label": {
+    "ko": [
+     "게재 이미지"
+    ]
+   },
+   "value": {
+    "ko": [
+     "7장 · 링크 전용 0건"
+    ]
+   }
+  }
+ ],
+ "partOf": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/c/s100-09.json",
+   "type": "Collection",
+   "label": {
+    "ko": [
+     "100선 · Ⅸ 참전국의 기억"
+    ]
+   }
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/hierarchy.json",
+   "type": "Collection",
+   "label": {
+    "ko": [
+     "KOREA ARCHIVE 통합검색 — 기록 계층"
+    ]
+   }
+  }
+ ],
+ "seeAlso": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s052/ledger.json",
+   "type": "Dataset",
+   "label": {
+    "ko": [
+     "출처 대장(ledger)"
+    ]
+   },
+   "format": "application/json"
   }
  ],
  "requiredStatement": {
@@ -132,6 +212,30 @@
        "손을 흔드는 군인이 아이를 안고 있다 · 여성이 다른 아이를 안고 있다 · 뒤편 모자 쓴 남성"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "01c9c5108bec2f0b — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "Nationaal Archief 사진 페이지 'Auteursrechthebbende: Nationaal Archief, CC0' · Europeana dataset 1417 edmRights PDM 1.0"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -174,6 +278,19 @@
      "format": "text/html"
     }
    ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s052/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    }
+   ],
+   "navDate": "1953-05-07T00:00:00Z",
    "rights": "http://creativecommons.org/publicdomain/zero/1.0/"
   },
   {
@@ -246,6 +363,30 @@
        "카운터 앞의 군인들과 제복 직원"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "817d59dfd24243a5 — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "Nationaal Archief 사진 페이지 'Auteursrechthebbende: Nationaal Archief, CC0' · Europeana dataset 1417 edmRights PDM 1.0"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -288,6 +429,19 @@
      "format": "text/html"
     }
    ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s052/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    }
+   ],
+   "navDate": "1951-08-21T00:00:00Z",
    "rights": "http://creativecommons.org/publicdomain/zero/1.0/"
   },
   {
@@ -360,6 +514,30 @@
        "부두를 가득 메운 사람들 · 함정 갑판의 구조물"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "58e2c3273f360d13 — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "Nationaal Archief 사진 페이지 'Auteursrechthebbende: Nationaal Archief, CC0' · Europeana dataset 1417 edmRights PDM 1.0"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -402,6 +580,19 @@
      "format": "text/html"
     }
    ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s052/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    }
+   ],
+   "navDate": "1951-06-02T00:00:00Z",
    "rights": "http://creativecommons.org/publicdomain/zero/1.0/"
   },
   {
@@ -474,6 +665,30 @@
        "들어오는 군함과 부두의 대열 · 왼쪽 깃발, 오른쪽 가로등"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "16d1a3acd968d885 — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "Nationaal Archief 사진 페이지 'Auteursrechthebbende: Nationaal Archief, CC0' · Europeana dataset 1417 edmRights PDM 1.0"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -516,6 +731,19 @@
      "format": "text/html"
     }
    ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s052/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    }
+   ],
+   "navDate": "1953-03-03T00:00:00Z",
    "rights": "http://creativecommons.org/publicdomain/zero/1.0/"
   },
   {
@@ -588,6 +816,30 @@
        "악수하는 두 군인 · 가운데 여성 · 좌상단 필름 번호 스탬프"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "e86947192aba3cdc — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "Nationaal Archief 사진 페이지 'Auteursrechthebbende: Nationaal Archief, CC0' · Europeana dataset 1417 edmRights PDM 1.0"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -630,6 +882,19 @@
      "format": "text/html"
     }
    ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s052/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    }
+   ],
+   "navDate": "1954-12-10T00:00:00Z",
    "rights": "http://creativecommons.org/publicdomain/zero/1.0/"
   },
   {
@@ -702,6 +967,30 @@
        "기체 글자 'THE FLYING DUTCH…' · 계단 표지 'KLM ROYAL DUTCH AIRLINES' · 필름 번호 '8868'"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "7a88b2a95c54dd2a — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "Nationaal Archief 사진 페이지 'Auteursrechthebbende: Nationaal Archief, CC0' · Europeana dataset 1417 edmRights PDM 1.0"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -744,6 +1033,19 @@
      "format": "text/html"
     }
    ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s052/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    }
+   ],
+   "navDate": "1954-12-10T00:00:00Z",
    "rights": "http://creativecommons.org/publicdomain/zero/1.0/"
   },
   {
@@ -816,6 +1118,30 @@
        "훈장을 달아 주는 장면"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "450cdac86a434767 — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "Nationaal Archief 사진 페이지 'Auteursrechthebbende: Nationaal Archief, CC0' · Europeana dataset 1417 edmRights PDM 1.0"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -858,6 +1184,19 @@
      "format": "text/html"
     }
    ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s052/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    }
+   ],
+   "navDate": "1951-12-18T00:00:00Z",
    "rights": "http://creativecommons.org/publicdomain/zero/1.0/"
   }
  ],
@@ -879,5 +1218,6 @@
    "type": "Image",
    "format": "image/jpeg"
   }
- ]
+ ],
+ "navDate": "1954-12-10T00:00:00Z"
 }

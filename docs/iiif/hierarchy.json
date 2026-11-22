@@ -1,0 +1,284 @@
+{
+ "@context": "http://iiif.io/api/presentation/3/context.json",
+ "id": "https://changgi.github.io/korea-archive-mcp/iiif/hierarchy.json",
+ "type": "Collection",
+ "label": {
+  "ko": [
+   "KOREA ARCHIVE 통합검색 — 기록 계층(부 › 시리즈 › 이미지)"
+  ]
+ },
+ "summary": {
+  "ko": [
+   "부 16개 · 시리즈 129개 · 이미지 800장"
+  ]
+ },
+ "provider": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/",
+   "type": "Agent",
+   "label": {
+    "ko": [
+     "KOREA ARCHIVE 통합검색"
+    ]
+   }
+  }
+ ],
+ "items": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/c/s30-01.json",
+   "type": "Collection",
+   "label": {
+    "ko": [
+     "30곳 탐방 · Ⅰ 전쟁의 기록"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s01/hero_520782.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/c/s30-02.json",
+   "type": "Collection",
+   "label": {
+    "ko": [
+     "30곳 탐방 · Ⅱ 개항과 대한제국"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s07/hero_iln_1886-04-03_trip_to_corea.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/c/s30-03.json",
+   "type": "Collection",
+   "label": {
+    "ko": [
+     "30곳 탐방 · Ⅲ 독립운동"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s13/hero_yugwansun_judgment_p1.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/c/s30-04.json",
+   "type": "Collection",
+   "label": {
+    "ko": [
+     "30곳 탐방 · Ⅳ 조선의 기록문화"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s19/hero_hwaseong_jeondo_leaf.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/c/s30-05.json",
+   "type": "Collection",
+   "label": {
+    "ko": [
+     "30곳 탐방 · Ⅴ 현대 한국"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s24/hero_roof_1973_nocrop.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/c/s30-06.json",
+   "type": "Collection",
+   "label": {
+    "ko": [
+     "30곳 탐방 · Ⅵ 세계의 집계 창구"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s29/hero_170_shore_blasts_000297.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/c/s100-07.json",
+   "type": "Collection",
+   "label": {
+    "ko": [
+     "100선 · Ⅶ 전쟁의 기록 2"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s031/i_5891320.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/c/s100-08.json",
+   "type": "Collection",
+   "label": {
+    "ko": [
+     "100선 · Ⅷ 유럽이 본 한국"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s041/awm_C299572.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/c/s100-09.json",
+   "type": "Collection",
+   "label": {
+    "ko": [
+     "100선 · Ⅸ 참전국의 기억"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s051/hero_evertsen_heli_904-5649.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/c/s100-10.json",
+   "type": "Collection",
+   "label": {
+    "ko": [
+     "100선 · Ⅹ 국제기구와 일본의 기록"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s061/un_a1881_map.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/c/s100-11.json",
+   "type": "Collection",
+   "label": {
+    "ko": [
+     "100선 · Ⅺ 신문과 독립운동"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s071/dok_18960407_p1.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/c/s100-12.json",
+   "type": "Collection",
+   "label": {
+    "ko": [
+     "100선 · Ⅻ 판결문과 공훈 기록"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s081/hero_p02_right.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/c/s100-13.json",
+   "type": "Collection",
+   "label": {
+    "ko": [
+     "100선 · XIII 조선의 기록문화 2"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s091/seonwon1883_p01_cover.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/c/s100-14.json",
+   "type": "Collection",
+   "label": {
+    "ko": [
+     "100선 · XIV 유산과 도시"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s101/namdaemun_1910_766880.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/c/s100-15.json",
+   "type": "Collection",
+   "label": {
+    "ko": [
+     "100선 · XV 현대 한국의 기록"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s111/aerial_3246.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/c/s100-16.json",
+   "type": "Collection",
+   "label": {
+    "ko": [
+     "100선 · XVI 영상으로 읽는 기록"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s121/scene_08_340.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  }
+ ]
+}

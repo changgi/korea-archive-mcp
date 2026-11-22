@@ -84,7 +84,9 @@ main{padding:6px 18px 80px;min-width:0}
 </div></div></header>
 <div class="intro">
 <h1>전체 기록 <em>IIIF 갤러리</em></h1>
-<p>30곳 탐방·100선 캐러셀에 쓰인 실물 기록 이미지를 한곳에 모았습니다. <b>격자</b>로 훑고, <b>연속</b>으로 한 장씩 크게 내려 읽고, 이미지를 누르면 <b>확대(딥줌)</b>로 세부까지 봅니다. 확대 화면에서 ← →로 다음 기록까지 이어 넘어갑니다. 모든 시리즈는 국제 표준 <a href="https://iiif.io/api/presentation/3.0/" target="_blank" rel="noopener">IIIF Presentation 3.0</a> 매니페스트로도 제공되어 Mirador·Universal Viewer 등 어떤 IIIF 뷰어에서도 열립니다(<a href="iiif/collection.json">컬렉션 JSON</a> · 전체 한 묶음 <a href="iiif/all.json">all.json</a>). 전체를 다른 뷰어로: <a href="kv.html"><b>KV (Korea Archive Viewer)</b></a> — 800장 전체 연속 · <a id="mirall" target="_blank" rel="noopener">Mirador</a> · <a id="uvall" target="_blank" rel="noopener">Universal Viewer</a>.</p>
+<p>30곳 탐방·100선 캐러셀에 쓰인 실물 기록 이미지를 한곳에 모았습니다. <b>격자</b>로 훑고, <b>연속</b>으로 한 장씩 크게 내려 읽고, 이미지를 누르면 <b>확대(딥줌)</b>로 세부까지 봅니다. 확대 화면에서 ← →로 다음 기록까지 이어 넘어갑니다. 모든 시리즈는 국제 표준 <a href="https://iiif.io/api/presentation/3.0/" target="_blank" rel="noopener">IIIF Presentation 3.0</a> 매니페스트로도 제공되어 Mirador·Universal Viewer 등 어떤 IIIF 뷰어에서도 열립니다(<a href="iiif/collection.json">컬렉션 JSON</a> · 전체 한 묶음 <a href="iiif/all.json">all.json</a> · 계층 <a href="iiif/hierarchy.json">hierarchy.json</a>(부 › 시리즈 › 이미지)).
+<br><b>데이터로 받기</b>: <a href="iiif/records.csv">records.csv</a>(표·통계 — 장마다 식별자·연대·권리·계보·sha256 고정성·원 기관) · <a href="iiif/records.jsonld">records.jsonld</a>(RiC-O 기록 온톨로지 — 계층·출처·디지털 사본, 지식그래프·기록관리 등재용).
+<br><b>NARA 기록은 무엇이든 IIIF로</b>: <code>https://korea-archive-mcp.vercel.app/iiif/nara/&lt;NAID&gt;/manifest.json</code> — 계보·생산일·권리·판독 지문·원본 매체를 담은 매니페스트, <code>/collection.json</code>=시리즈의 하위 기록, <code>/record.jsonld</code>=RiC-O. 예: <a href="kv.html?manifest=https%3A%2F%2Fkorea-archive-mcp.vercel.app%2Fiiif%2Fnara%2F532396%2Fcollection.json">미 해병대 사진 시리즈를 KV로</a>. 전체를 다른 뷰어로: <a href="kv.html"><b>KV (Korea Archive Viewer)</b></a> — 800장 전체 연속 · <a id="mirall" target="_blank" rel="noopener">Mirador</a> · <a id="uvall" target="_blank" rel="noopener">Universal Viewer</a>.</p>
 <div class="stat" id="stat"></div>
 </div>
 <div class="wrap"><aside id="side"></aside><main id="main"><p style="color:var(--muted);padding:30px 0">불러오는 중…</p></main></div>
@@ -110,7 +112,7 @@ main{padding:6px 18px 80px;min-width:0}
   const uv = (k) => 'https://uv-v4.netlify.app/#?manifest=' + encodeURIComponent(ABS + 'm/' + k + '.json');
   document.getElementById('mirall').href = 'https://projectmirador.org/embed/?iiif-content=' + encodeURIComponent(ABS + 'collection.json');
   document.getElementById('uvall').href = 'https://uv-v4.netlify.app/#?manifest=' + encodeURIComponent(ABS + 'collection.json');
-  const kv = (k, n) => 'kv.html?collection=' + encodeURIComponent(ABS + 'collection.json') + '&manifest=' + encodeURIComponent(ABS + 'm/' + k + '.json') + (n ? '&canvas=' + n : '');
+  const kv = (k, n) => 'kv.html?collection=' + encodeURIComponent(ABS + 'hierarchy.json') + '&manifest=' + encodeURIComponent(ABS + 'm/' + k + '.json') + (n ? '&canvas=' + n : '');
   let mode = 'grid', flat = [], vis = S, stripFor = null;
 
   function render() {

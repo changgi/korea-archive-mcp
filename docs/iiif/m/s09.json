@@ -36,6 +36,86 @@
      "Europeana (data provider: Wellcome Collection)"
     ]
    }
+  },
+  {
+   "label": {
+    "ko": [
+     "계층"
+    ]
+   },
+   "value": {
+    "ko": [
+     "KOREA ARCHIVE 통합검색 › 30곳 탐방 · Ⅱ 개항과 대한제국 › s09"
+    ]
+   }
+  },
+  {
+   "label": {
+    "ko": [
+     "수집 경로"
+    ]
+   },
+   "value": {
+    "ko": [
+     "europeana_search('Korea Seoul')"
+    ]
+   }
+  },
+  {
+   "label": {
+    "ko": [
+     "확인일"
+    ]
+   },
+   "value": {
+    "ko": [
+     "2026-11-22"
+    ]
+   }
+  },
+  {
+   "label": {
+    "ko": [
+     "게재 이미지"
+    ]
+   },
+   "value": {
+    "ko": [
+     "6장 · 링크 전용 0건"
+    ]
+   }
+  }
+ ],
+ "partOf": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/c/s30-02.json",
+   "type": "Collection",
+   "label": {
+    "ko": [
+     "30곳 탐방 · Ⅱ 개항과 대한제국"
+    ]
+   }
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/hierarchy.json",
+   "type": "Collection",
+   "label": {
+    "ko": [
+     "KOREA ARCHIVE 통합검색 — 기록 계층"
+    ]
+   }
+  }
+ ],
+ "seeAlso": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/promo/series30v2/img/09/ledger.json",
+   "type": "Dataset",
+   "label": {
+    "ko": [
+     "출처 대장(ledger)"
+    ]
+   },
+   "format": "application/json"
   }
  ],
  "requiredStatement": {
@@ -132,6 +212,30 @@
        "기와지붕 상점이 길 오른쪽으로 길게 늘어서 있다 · 전봇대와 머리 위 전선 · 흰 옷 차림 인물이 흙길 가운데를 걷고 있다 · 상점 앞 바구니·항아리·옷가지 진열 · 우하단 흰 숫자 '94' · 길 끝 멀리 문루(門樓)형 건물"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "bfa7c3903473f91e — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "Wellcome catalogue API v2 works/fqwx2phm: license id 'pdm' label 'Public Domain Mark', credit 'Wellcome Collection'; Europeana record edmRights http://creativecommons.org/licenses/by/4.0/, dcRights 'Credit: Wellcome Collection'"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -174,6 +278,19 @@
      "format": "text/html"
     }
    ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series30v2/img/09/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    }
+   ],
+   "navDate": "1900-01-01T00:00:00Z",
    "rights": "http://creativecommons.org/licenses/by/4.0/"
   },
   {
@@ -246,6 +363,30 @@
        "입체사진(스테레오그래프) 카드 — 같은 장면 2컷 나란히 · 카드 하단 인쇄 '28. A Regimental Band at Seoul, Korea.' / 'Copyright 1904, by George W. Griffith.' · 카드 좌우 세로 인쇄 'Sold only by Griffith & Griffith' · 전각 건물 앞에 군복 차림 악대가 대열로 서 있고 큰북이 보인다"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "d9c918f1eee3e6f4 — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "Europeana edmRights http://creativecommons.org/publicdomain/mark/1.0/; Rijksmuseum dcRights 'Public Domain / Publiek Domein'"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -288,6 +429,19 @@
      "format": "text/html"
     }
    ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series30v2/img/09/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    }
+   ],
+   "navDate": "1904-01-01T00:00:00Z",
    "rights": "http://creativecommons.org/publicdomain/mark/1.0/"
   },
   {
@@ -360,6 +514,30 @@
        "갓·흰 두루마기 차림 남성 여러 명과 양복·모자 차림 남성 · 짐을 실은 말 여러 필 · 뒤편 2층 목조 건물과 돌담 · 흙 마당"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "d0316fcc31d875e4 — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "Europeana edmRights http://creativecommons.org/publicdomain/mark/1.0/ (사진가 Bruno Knochenhauer, 1898 촬영)"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -402,6 +580,19 @@
      "format": "text/html"
     }
    ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series30v2/img/09/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    }
+   ],
+   "navDate": "1898-03-20T00:00:00Z",
    "rights": "http://creativecommons.org/publicdomain/mark/1.0/"
   },
   {
@@ -474,6 +665,30 @@
        "2층 문루가 있는 성문 · 길 위 전차 선로(레일) · 긴 장대 묶음을 지고 가는 사람들 · 전봇대 · 우하단 번호 '0249.k.0021'"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "611f7aa2c568dac7 — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "Europeana edmRights http://creativecommons.org/publicdomain/zero/1.0/; 사진가 Didrik Bildt, 'Didrik Bildts resa till Asien (1902)'"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -516,6 +731,19 @@
      "format": "text/html"
     }
    ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series30v2/img/09/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    }
+   ],
+   "navDate": "1902-01-01T00:00:00Z",
    "rights": "http://creativecommons.org/publicdomain/zero/1.0/"
   },
   {
@@ -588,6 +816,30 @@
        "밭과 초가·기와 지붕 마을 너머 멀리 문루 · 흐린 하늘 · 우하단 번호 '0249.k.0019'"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "a6a21cd00e8ef94d — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "Europeana edmRights http://creativecommons.org/publicdomain/zero/1.0/; 기술 'Stadsport, Söul, Koreas hufvudstad, som hade elektronisk spårvåg före Stockholm (från Generalkatalog)'"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -630,6 +882,19 @@
      "format": "text/html"
     }
    ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series30v2/img/09/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    }
+   ],
+   "navDate": "1902-01-01T00:00:00Z",
    "rights": "http://creativecommons.org/publicdomain/zero/1.0/"
   },
   {
@@ -702,6 +967,30 @@
        "3폭 연결 다색 목판화(니시키에) · 붉은 제목 칸 '朝鮮京城之小戰' · 오른쪽 붉은 문루의 성문 · 흰 군복 병사 대열과 검은 마차, 연기 · 기마 인물"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "4b276ffb55973187 — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "Europeana edmRights http://creativecommons.org/publicdomain/mark/1.0/; dcRights 'Public Domain'"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -744,6 +1033,19 @@
      "format": "text/html"
     }
    ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series30v2/img/09/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    }
+   ],
+   "navDate": "1894-01-01T00:00:00Z",
    "rights": "http://creativecommons.org/publicdomain/mark/1.0/"
   }
  ],
@@ -765,5 +1067,6 @@
    "type": "Image",
    "format": "image/jpeg"
   }
- ]
+ ],
+ "navDate": "1900-01-01T00:00:00Z"
 }

@@ -36,6 +36,86 @@
      "국립중앙도서관"
     ]
    }
+  },
+  {
+   "label": {
+    "ko": [
+     "계층"
+    ]
+   },
+   "value": {
+    "ko": [
+     "KOREA ARCHIVE 통합검색 › 100선 · Ⅺ 신문과 독립운동 › s075"
+    ]
+   }
+  },
+  {
+   "label": {
+    "ko": [
+     "수집 경로"
+    ]
+   },
+   "value": {
+    "ko": [
+     "nlk_search(query='靑邱圖') → CNTS-00082399626"
+    ]
+   }
+  },
+  {
+   "label": {
+    "ko": [
+     "확인일"
+    ]
+   },
+   "value": {
+    "ko": [
+     "2026-11-22"
+    ]
+   }
+  },
+  {
+   "label": {
+    "ko": [
+     "게재 이미지"
+    ]
+   },
+   "value": {
+    "ko": [
+     "5장 · 링크 전용 0건"
+    ]
+   }
+  }
+ ],
+ "partOf": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/c/s100-11.json",
+   "type": "Collection",
+   "label": {
+    "ko": [
+     "100선 · Ⅺ 신문과 독립운동"
+    ]
+   }
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/hierarchy.json",
+   "type": "Collection",
+   "label": {
+    "ko": [
+     "KOREA ARCHIVE 통합검색 — 기록 계층"
+    ]
+   }
+  }
+ ],
+ "seeAlso": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s075/ledger.json",
+   "type": "Dataset",
+   "label": {
+    "ko": [
+     "출처 대장(ledger)"
+    ]
+   },
+   "format": "application/json"
   }
  ],
  "requiredStatement": {
@@ -132,6 +212,30 @@
        "'新羅九州郡縣總圖' · '一層'~'十四層' · 가로 번호 '一'~'二十二'"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "0385f25ee3a7314f — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "viewer.nl.go.kr 서지 정보: 서명 靑邱圖 / 발행일 --------- / 발행자 [刊寫者未詳] / 저작권유형 이용 제한이 없습니다."
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -172,6 +276,18 @@
       ]
      },
      "format": "text/html"
+    }
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s075/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
     }
    ],
    "rights": "http://creativecommons.org/publicdomain/mark/1.0/"
@@ -246,6 +362,30 @@
        "'高麗五道兩界州縣總圖'"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "479d3d367a24d5a6 — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "viewer.nl.go.kr 서지 정보: 서명 靑邱圖 / 발행일 --------- / 발행자 [刊寫者未詳] / 저작권유형 이용 제한이 없습니다."
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -286,6 +426,18 @@
       ]
      },
      "format": "text/html"
+    }
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s075/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
     }
    ],
    "rights": "http://creativecommons.org/publicdomain/mark/1.0/"
@@ -360,6 +512,30 @@
        "'三國前圖'"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "6f0bf46df8399298 — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "viewer.nl.go.kr 서지 정보: 서명 靑邱圖 / 발행일 --------- / 발행자 [刊寫者未詳] / 저작권유형 이용 제한이 없습니다."
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -400,6 +576,18 @@
       ]
      },
      "format": "text/html"
+    }
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s075/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
     }
    ],
    "rights": "http://creativecommons.org/publicdomain/mark/1.0/"
@@ -474,6 +662,30 @@
        "'靑邱圖題' · 'COR.1-18 Vol.1' 필기"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "a8065ca4d083a1ad — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "viewer.nl.go.kr 서지 정보: 서명 靑邱圖 / 발행일 --------- / 발행자 [刊寫者未詳] / 저작권유형 이용 제한이 없습니다."
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -514,6 +726,18 @@
       ]
      },
      "format": "text/html"
+    }
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s075/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
     }
    ],
    "rights": "http://creativecommons.org/publicdomain/mark/1.0/"
@@ -588,6 +812,30 @@
        "'靑邱圖' '乾' · 'COR.1-18 Vol.1'"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "8e3e032326b64354 — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "viewer.nl.go.kr 서지 정보: 서명 靑邱圖 / 발행일 --------- / 발행자 [刊寫者未詳] / 저작권유형 이용 제한이 없습니다."
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -628,6 +876,18 @@
       ]
      },
      "format": "text/html"
+    }
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s075/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
     }
    ],
    "rights": "http://creativecommons.org/publicdomain/mark/1.0/"

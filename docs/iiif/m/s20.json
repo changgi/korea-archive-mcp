@@ -36,6 +36,86 @@
      "서울대 규장각한국학연구원 (이미지: 국립중앙도서관 서무송古2702-88 본)"
     ]
    }
+  },
+  {
+   "label": {
+    "ko": [
+     "계층"
+    ]
+   },
+   "value": {
+    "ko": [
+     "KOREA ARCHIVE 통합검색 › 30곳 탐방 · Ⅳ 조선의 기록문화 › s20"
+    ]
+   }
+  },
+  {
+   "label": {
+    "ko": [
+     "수집 경로"
+    ]
+   },
+   "value": {
+    "ko": [
+     "nedb_search(mode=kyujanggak)"
+    ]
+   }
+  },
+  {
+   "label": {
+    "ko": [
+     "확인일"
+    ]
+   },
+   "value": {
+    "ko": [
+     "2026-11-22"
+    ]
+   }
+  },
+  {
+   "label": {
+    "ko": [
+     "게재 이미지"
+    ]
+   },
+   "value": {
+    "ko": [
+     "5장 · 링크 전용 0건"
+    ]
+   }
+  }
+ ],
+ "partOf": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/c/s30-04.json",
+   "type": "Collection",
+   "label": {
+    "ko": [
+     "30곳 탐방 · Ⅳ 조선의 기록문화"
+    ]
+   }
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/hierarchy.json",
+   "type": "Collection",
+   "label": {
+    "ko": [
+     "KOREA ARCHIVE 통합검색 — 기록 계층"
+    ]
+   }
+  }
+ ],
+ "seeAlso": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/promo/series30v2/img/20/ledger.json",
+   "type": "Dataset",
+   "label": {
+    "ko": [
+     "출처 대장(ledger)"
+    ]
+   },
+   "format": "application/json"
   }
  ],
  "requiredStatement": {
@@ -132,6 +212,30 @@
        "필사 채색본: 검은 굵은 산줄기, 파란 물길, 붉은 도로선, 노란 경계선 · 가운데 노란 원(도성)과 그 위 「三角」 표기 산 · 한강 물길과 섬, 「楮子」 「廣津」 「露梁」 「松坡」 글자 · 주변 고을 원 표시: 「楊州」「廣州」「果川」「陽川」 등 · 원본 33577×4923 띠 지도에서 x 11000–16200 구간을 잘라 2400px로 축소"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "2ab34102ac9824f5 — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "NLK getBookInfo: 「표제 大東輿地圖. 第13幅, 江原,京畿 저자 金正浩 著 발행처 [發行處不明] … 저작권 [N]저작권 만료 또는 이용허락 받은 자료로 도서관 외부에서도 열람이 가능합니다.」 + 19세기 김정호(1804?–1866?) 저작 — 보호기간 만료"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -172,6 +276,18 @@
       ]
      },
      "format": "text/html"
+    }
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series30v2/img/20/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
     }
    ]
   },
@@ -245,6 +361,30 @@
        "노랗게 칠한 원형 도성, 그 안 붉은 선 · 「三角」 산 표시와 「道峯」 「樓院」 「綠楊」 「落水」 표기 · 「十里浦」 「楮子」 「廣津」 「露梁」 글자, 한강 섬 2개"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "0030153d7de75024 — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "위와 동일"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -285,6 +425,18 @@
       ]
      },
      "format": "text/html"
+    }
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series30v2/img/20/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
     }
    ]
   },
@@ -358,6 +510,30 @@
        "가로로 길게 펼친 한 층 전체(원본 33577×4923) · 좌측 서해 섬들, 우측 동해안선 · 우측 끝 붉은 사각 인장, 소장 라벨"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "d64a0353c161f814 — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "위와 동일"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -398,6 +574,18 @@
       ]
      },
      "format": "text/html"
+    }
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series30v2/img/20/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
     }
    ]
   },
@@ -471,6 +659,30 @@
        "제첨 「大東輿地圖 第十三幅」 · 표지 묵서 고을명: 江原 京畿 漢陽 楊州 廣州 果川 高陽 始興 仁川 江華 등 · 인쇄 장서표 「傳家地理藏書 祖·徐茂松 父·徐仁明 孫·徐地亨」 · 라벨 「서무송古 2702 88 12」, 하단 촬영용 자·컬러 패치"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "785910f8a507df4a — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "위와 동일"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -511,6 +723,18 @@
       ]
      },
      "format": "text/html"
+    }
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series30v2/img/20/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
     }
    ]
   },
@@ -584,6 +808,30 @@
        "하단 제주도: 중앙 산 표시에 「漢拏山」 「白鹿潭」, 북쪽에 「三姓穴」 · 방사상 검은 산줄기와 파란 물길, 해안을 도는 붉은 도로선 · 원으로 표시한 고을 3곳(북쪽 원 안 「濟州」) · 우측 「牛島」, 상단 바다에 「上楸子」「下楸子」 등 섬들 · 우상단 붉은 사각 인장, 장차 「廿一」"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "eafb816ffa1ee385 — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "NLK getBookInfo: 「大東輿地圖. 第21幅, 全羅,濟州 저자 金正浩 著 … 저작권 [N]저작권 만료 또는 이용허락 받은 자료로 도서관 외부에서도 열람이 가능합니다.」"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -625,6 +873,18 @@
      },
      "format": "text/html"
     }
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series30v2/img/20/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    }
    ]
   }
  ],
@@ -646,5 +906,6 @@
    "type": "Image",
    "format": "image/jpeg"
   }
- ]
+ ],
+ "navDate": "1861-01-01T00:00:00Z"
 }

@@ -36,6 +36,86 @@
      "서울대 규장각한국학연구원"
     ]
    }
+  },
+  {
+   "label": {
+    "ko": [
+     "계층"
+    ]
+   },
+   "value": {
+    "ko": [
+     "KOREA ARCHIVE 통합검색 › 100선 · XIII 조선의 기록문화 2 › s095"
+    ]
+   }
+  },
+  {
+   "label": {
+    "ko": [
+     "수집 경로"
+    ]
+   },
+   "value": {
+    "ko": [
+     "nedb_search(mode=kyujanggak, query='해동지도') + nlk_search(query='輿地圖')"
+    ]
+   }
+  },
+  {
+   "label": {
+    "ko": [
+     "확인일"
+    ]
+   },
+   "value": {
+    "ko": [
+     "2026-11-22"
+    ]
+   }
+  },
+  {
+   "label": {
+    "ko": [
+     "게재 이미지"
+    ]
+   },
+   "value": {
+    "ko": [
+     "5장 · 링크 전용 0건"
+    ]
+   }
+  }
+ ],
+ "partOf": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/c/s100-13.json",
+   "type": "Collection",
+   "label": {
+    "ko": [
+     "100선 · XIII 조선의 기록문화 2"
+    ]
+   }
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/hierarchy.json",
+   "type": "Collection",
+   "label": {
+    "ko": [
+     "KOREA ARCHIVE 통합검색 — 기록 계층"
+    ]
+   }
+  }
+ ],
+ "seeAlso": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s095/ledger.json",
+   "type": "Dataset",
+   "label": {
+    "ko": [
+     "출처 대장(ledger)"
+    ]
+   },
+   "format": "application/json"
   }
  ],
  "requiredStatement": {
@@ -132,6 +212,30 @@
        "hero"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "26293f62f5a66530 — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "nlk_search: 「輿地圖 [고문헌] · [刊寫者未詳] ([朝鮮後期]) viewWonmun_js.jsp?cno=KOL000002513」 — 지도 뷰어(Map/)는 서지 정보 패널이 없어 저작권유형 문구 미확인. 조선후기 제작물로 저작권 보호기간 만료."
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -172,6 +276,18 @@
       ]
      },
      "format": "text/html"
+    }
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s095/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
     }
    ],
    "rights": "http://creativecommons.org/publicdomain/mark/1.0/"
@@ -246,6 +362,30 @@
        "붉은 원과 「濟州」 · 「漢拏」 · 「白鹿潭」 · 「牛島」 · 붉은 원과 「大靜」"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "4f3ab9124c0f153c — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "nlk_search: 「輿地圖 [고문헌] · [刊寫者未詳] ([朝鮮後期]) viewWonmun_js.jsp?cno=KOL000002513」 — 지도 뷰어(Map/)는 서지 정보 패널이 없어 저작권유형 문구 미확인. 조선후기 제작물로 저작권 보호기간 만료."
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -286,6 +426,18 @@
       ]
      },
      "format": "text/html"
+    }
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s095/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
     }
    ],
    "rights": "http://creativecommons.org/publicdomain/mark/1.0/"
@@ -360,6 +512,30 @@
        "도 이름 「全羅道」 · 「北抵忠淸道界」 — 북쪽 끝 표기 · 「抵京大路」 — 서울로 가는 큰길 · 「監」「全州」 — 테두리 두른 붉은 원 · 「碧骨堤」 글씨와 연못 그림"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "197f441535f19cde — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "nlk_search: 「輿地圖 [고문헌] · [刊寫者未詳] ([朝鮮後期]) viewWonmun_js.jsp?cno=KOL000002513」 — 지도 뷰어(Map/)는 서지 정보 패널이 없어 저작권유형 문구 미확인. 조선후기 제작물로 저작권 보호기간 만료."
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -400,6 +576,18 @@
       ]
      },
      "format": "text/html"
+    }
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s095/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
     }
    ],
    "rights": "http://creativecommons.org/publicdomain/mark/1.0/"
@@ -474,6 +662,30 @@
        "같은 면 동남쪽 바다와 고을"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "9a59975ea65bbffe — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "nlk_search: 「輿地圖 [고문헌] · [刊寫者未詳] ([朝鮮後期]) viewWonmun_js.jsp?cno=KOL000002513」 — 지도 뷰어(Map/)는 서지 정보 패널이 없어 저작권유형 문구 미확인. 조선후기 제작물로 저작권 보호기간 만료."
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -514,6 +726,18 @@
       ]
      },
      "format": "text/html"
+    }
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s095/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
     }
    ],
    "rights": "http://creativecommons.org/publicdomain/mark/1.0/"
@@ -588,6 +812,30 @@
        "같은 면 서남해 섬들"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "f8eee475c2336efe — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "nlk_search: 「輿地圖 [고문헌] · [刊寫者未詳] ([朝鮮後期]) viewWonmun_js.jsp?cno=KOL000002513」 — 지도 뷰어(Map/)는 서지 정보 패널이 없어 저작권유형 문구 미확인. 조선후기 제작물로 저작권 보호기간 만료."
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -628,6 +876,18 @@
       ]
      },
      "format": "text/html"
+    }
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s095/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
     }
    ],
    "rights": "http://creativecommons.org/publicdomain/mark/1.0/"

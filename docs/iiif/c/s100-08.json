@@ -1,0 +1,193 @@
+{
+ "@context": "http://iiif.io/api/presentation/3/context.json",
+ "id": "https://changgi.github.io/korea-archive-mcp/iiif/c/s100-08.json",
+ "type": "Collection",
+ "label": {
+  "ko": [
+   "100선 · Ⅷ 유럽이 본 한국"
+  ]
+ },
+ "summary": {
+  "ko": [
+   "100선 · Ⅷ 유럽이 본 한국 — 시리즈 10개"
+  ]
+ },
+ "partOf": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/hierarchy.json",
+   "type": "Collection"
+  }
+ ],
+ "items": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s041.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "041 · 영국 국립기록관 TNA — 1951 임진강 — 글로스터 대대 진지 투사도"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s041/awm_C299572.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "navDate": "1951-01-01T00:00:00Z"
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s042.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "042 · 영국 국립기록관 TNA — 1영연방사단 — 1953년 대관식 날"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s042/awm_C280168.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "navDate": "1954-01-01T00:00:00Z"
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s043.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "043 · 영국 국립기록관 TNA — 서울 영국 총영사관 — 사진·도면·문서철"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s043/carles_consulate_photo.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "navDate": "1911-01-01T00:00:00Z"
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s044.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "044 · 영국 국립기록관 TNA — 1883 조영조약 — 'Affairs of Corea'"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s044/carles_n7.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "navDate": "1883-01-01T00:00:00Z"
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s045.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "045 · 프랑스 국립도서관 BnF · Gallica — 1866 병인양요 — 해군 군의관의 논문"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s045/cheval_n56.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "navDate": "1868-01-01T00:00:00Z"
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s046.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "046 · 프랑스 국립도서관 BnF · Gallica — Souvenir de Séoul, Corée (1900)"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s046/souv_n27_photo.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "navDate": "1900-01-01T00:00:00Z"
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s047.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "047 · 프랑스 국립도서관 BnF · Gallica — La Corée, indépendante, russe, ou japonaise (1898)"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s047/vill_n302_plate.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "navDate": "1898-01-01T00:00:00Z"
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s048.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "048 · 유로피아나 Europeana — NIMH — W.W. Dussel의 975고지 연작"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s048/nimh_7f13f836.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "navDate": "1951-05-01T00:00:00Z"
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s049.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "049 · 유로피아나 Europeana — Náprstek 박물관 — 1901년 서울"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s049/naprstek_199081.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "navDate": "1901-01-01T00:00:00Z"
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s050.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "050 · 유로피아나 Europeana — d'Anville 「Royaume de Corée」(1735)"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s050/leiden_3181739_dhalde1735.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "navDate": "1735-01-01T00:00:00Z"
+  }
+ ]
+}
