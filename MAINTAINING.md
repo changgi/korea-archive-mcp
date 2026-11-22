@@ -14,6 +14,8 @@
 | `public/` | Vercel 정적 파일(도움말·원장·NZ 정적 인덱스) | |
 | `tests/golden.json` | 골든 회귀 케이스 — 도구 출력의 **모양** | `python3 scripts/golden.py` |
 
+우리 IIIF 갤러리도 수집처다 — `cross_search(sources='gallery')`가 `docs/iiif/index.json`(Pages)을 6시간 캐시로 검색하고, `format='iiif'`면 시리즈 매니페스트(`iiif/m/sNNN.json`)를 컬렉션에 넣는다.
+
 수집처 하나 = route.js의 `COLLECT.<이름>`(연합 검색) + 필요하면 `nedb_search` 등의 `mode` 분기(심층 판독). Python은 `_c_<이름>`·`_<이름>_mode`.
 
 ## 2. 자동 감시 — 사람이 매일 보지 않아도 되는 이유
@@ -83,7 +85,7 @@ python3 scripts/golden.py          # 프로덕션 골든 회귀
 | 100선 카드 한 시리즈 | `python3 docs/promo/series100/kit/build_series.py sNNN` | `sNNN/plan.json`·`src/` |
 | 100선 페이지 | `python3 docs/promo/series100/kit/gen_page100.py` | 각 시리즈 plan·카드 |
 | 30곳 탐방 페이지 | `cd docs/promo/series30 && python3 gen_page.py` | `series.json`·series30v2 |
-| IIIF 갤러리 | `python3 docs/promo/build_iiif.py` | 출처 대장 `ledger.json`(권리 3단계 자동 적용) |
+| IIIF 갤러리 | `python3 docs/promo/build_iiif.py` — **`build_series.py`가 시리즈 빌드 끝에 자동 실행**(끄려면 `NO_IIIF=1`) · 갱신을 잊으면 verify의 `check-docs`가 '갤러리가 출처 대장보다 오래됨'으로 실패 | 출처 대장 `ledger.json`(권리 3단계 자동 적용) |
 
 원본 이미지(`src/`)는 저장소에 넣지 않는다(.gitignore). 게재본은 카드·IIIF 이미지(권리 규칙 적용)만.
 

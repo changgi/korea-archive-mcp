@@ -27,6 +27,21 @@ if idx.exists():
     n = len(json.loads(idx.read_text(encoding='utf-8'))['series']); nm = len(list((D / 'iiif' / 'm').glob('*.json')))
     if n != nm:
         bad.append(f'iiif/index.json 시리즈 {n} ≠ 매니페스트 {nm}')
+# ④ 갤러리 최신성 — 출처 대장(ledger.json, 저장소에 있음)이 바뀌었는데 build_iiif.py를 안 돌렸으면 잡는다(권리 규칙 동일: 캡처·All Rights는 링크 전용)
+if idx.exists():
+    have = {x['key']: len(x['c']) + len(x['links']) for x in json.loads(idx.read_text(encoding='utf-8'))['series']}
+    led = {}
+    for f in glob.glob(str(D / 'promo' / 'series30v2' / 'img' / '*' / 'ledger.json')):
+        led['s' + pathlib.Path(f).parent.name] = f
+    for f in glob.glob(str(D / 'promo' / 'series100' / 's[0-9][0-9][0-9]' / 'ledger.json')):
+        k = pathlib.Path(f).parent.name
+        if k != 's000' and (pathlib.Path(f).parent / 'plan.json').exists():
+            led[k] = f
+    for k, f in sorted(led.items()):
+        ims = json.loads(open(f, encoding='utf-8').read()).get('images', [])
+        n = len({im.get('file') for im in ims if im.get('file')})
+        if n and have.get(k, 0) != n:
+            bad.append(f'IIIF 갤러리가 출처 대장보다 오래됨: {k} 대장 {n}건 ≠ 갤러리 {have.get(k, 0)}건 → python3 docs/promo/build_iiif.py')
 bad = sorted(set(bad))
 print(f'docs 무결성: 문제 {len(bad)}건' + (':\n- ' + '\n- '.join(bad[:60]) if bad else ' — 링크·이미지·매니페스트 전부 존재'))
 sys.exit(1 if bad else 0)
