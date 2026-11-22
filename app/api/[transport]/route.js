@@ -675,8 +675,10 @@ const COLLECT = {
     const NUA = { 'User-Agent': 'KoreaArchiveMCP/1.0 (https://github.com/changgi/korea-archive-mcp; archival discovery)' };
     const ndlq = (f) => gtext(`https://ndlsearch.ndl.go.jp/api/opensearch?${f}=${encodeURIComponent(ja)}&cnt=${Math.min(n, 10)}`, NUA);
     // v1.96: 수천 건 일치 시 표제 가나순이라 무관 자료 상위 — 당대 자료(until=1945)를 병행 조회하고, 검색어(신·구자체)를 표제에 포함한 것부터
-    const bc = await gtext(`https://ndlsearch.ndl.go.jp/api/opensearch?title=${encodeURIComponent(ja)}&until=1945&cnt=${Math.min(n * 3, 30)}`, NUA).catch(() => ''); // 순차 — NDL 동시접속 429 실측
-    const ba = await ndlq('title').catch(() => '');
+    // 순차 — NDL 동시접속 429 실측. v1.96.5: 두 질의 합이 소스 타임박스(12s)를 넘던 문제 — 당대 질의 5s 상한, 당대 결과가 충분하면 일반 질의 생략
+    const bc = await Promise.race([gtext(`https://ndlsearch.ndl.go.jp/api/opensearch?title=${encodeURIComponent(ja)}&until=1945&cnt=${Math.min(n * 2, 20)}`, NUA).catch(() => ''), sleep(5000).then(() => '')]);
+    const enough = (bc.match(/<item>/g) || []).length >= n;
+    const ba = enough ? '' : await Promise.race([ndlq('title').catch(() => ''), sleep(6000).then(() => '')]);
     let b = (bc.includes('<item>') ? bc.replace(/<\/channel>[\s\S]*$/, '') : '') + ba;
     if (!b.includes('<item>') && !(b.includes('<error>') && b.includes('429'))) b = await ndlq('any');
     if (b.includes('<error>') && b.includes('429')) throw new Error('NDL 동시접속 제한(429) — 잠시 후 재시도');
@@ -700,8 +702,10 @@ const COLLECT = {
     return out;
   },
   un: async (q, n) => { // UN 디지털도서관(digitallibrary.un.org) — Invenio of=xm(MARCXML) 무키 실측(2026-11-21). 안보리 결의·UNCURK 등. ※UN Archives(AtoM)는 별도·보류
-    const en = koToEn(q) || q;
-    const b = await gtext(`https://digitallibrary.un.org/search?p=${encodeURIComponent(en)}&of=xm&rg=${Math.min(n, 10)}`,
+    // v1.96.5: 문서기호(A/RES/46/1·S/RES/82(1950)) 입력은 기호 필드(191) 정확 검색 — 일반 검색은 A/RES/46/16 등 근접 기호가 섞임(실측)
+    const sym = /^[A-Z]{1,4}(\/[A-Z0-9.()-]+)+$/i.test(q.trim()) ? q.trim().toUpperCase() : '';
+    const en = sym ? `191:"${sym}"` : (koToEn(q) || q);
+    const b = await gtext(`https://digitallibrary.un.org/search?p=${encodeURIComponent(en)}&of=xm&rg=${sym ? 50 : Math.min(n, 10)}`,
       { 'User-Agent': 'KoreaArchiveMCP/1.0 (https://github.com/changgi/korea-archive-mcp; archival discovery)' });
     const sf = (seg, tag, code) => (((seg.match(new RegExp(`<datafield tag="${tag}"[^>]*>([\\s\\S]*?)<\\/datafield>`)) || [])[1] || '').match(new RegExp(`<subfield code="${code}">([^<]+)`)) || [])[1] || '';
     const out = [];
@@ -711,8 +715,9 @@ const COLLECT = {
       const sym = sf(seg, '191', 'a');
       const title = norm(sf(seg, '245', 'a') + ' ' + sf(seg, '245', 'b')).replace(/[\s/:]+$/, '');
       out.push({ title: `${sym ? `[${sym}] ` : ''}${title}`.slice(0, 110), date: sf(seg, '269', 'a') || sf(seg, '260', 'c'), id: sym || recid, ...(sym && sym.includes('/') ? { series: sym.split('/').slice(0, 2).join('/') } : {}), url: 'https://digitallibrary.un.org/record/' + recid });
-      if (out.length >= n) break;
+      if (out.length >= (sym ? 50 : n)) break;
     }
+    if (sym) { out.sort((x, y) => (String(y.title).startsWith(`[${sym}]`) ? 1 : 0) - (String(x.title).startsWith(`[${sym}]`) ? 1 : 0)); return out.slice(0, n); } // 기호 정확 일치 우선(191 필드는 접두 일치 — 실측)
     return out;
   },
   heritage: async (q, n) => { // 국가유산포털(국가유산청) OpenAPI — 무키 XML(이 작업망에선 차단·icn1 도달 확인). 국보·보물·사적 축
@@ -973,13 +978,17 @@ const COLLECT = {
     return out;
   },
   jacar: async (q, n) => { // 일본 아시아역사자료센터 — GET 검색 실측(2026-11-19, docs/jacar-access-spec.md)
-    const en = koToJa(q) || koToEn(q) || q; // 일본어 사상 우선 → 영어 → 원문
-    const b = await gtext('https://www.jacar.archives.go.jp/aj/search-en?kw=' + encodeURIComponent(en)); // 파라미터는 kw — keyword는 무시됨(실측)
+    // v1.96.5: 일문·한자 입력이 영문 'Korea'로 바뀌어 무관 결과(전후 A171…)가 나오던 결함 — 한글 없는 입력·한→일 사상은 일본어 검색(/aj/search, 일본어 표제·연대)으로
+    const hasHg = /[\uac00-\ud7a3]/.test(q); const ja = hasHg ? koToJa(q) : q;
+    const useJa = !!ja && !/[\uac00-\ud7a3]/.test(ja);
+    const kw = useJa ? ja : (koToEn(q) || q);
+    const b = await gtext(`https://www.jacar.archives.go.jp/aj/${useJa ? 'search' : 'search-en'}?kw=` + encodeURIComponent(kw)); // 파라미터는 kw — keyword는 무시됨(실측)
     const out = [];
     for (const blk of b.split('<li class="archive-result-table__body-item"').slice(1)) {
       const c = blk.match(/value="aj\d+\/([A-Z]\d{11})"/);
       const t = blk.match(/id="row-\d+-title"[\s\S]*?<span\s*>([^<]{3,150})/);
-      if (c && t) out.push({ title: norm(t[1]), date: '', id: c[1], url: 'https://www.jacar.archives.go.jp/das/meta-en/' + c[1] });
+      const dt = (blk.match(/((?:明治|大正|昭和)[０-９\d]+年(?:[^<]{0,14}?年)?)/) || [])[1] || '';
+      if (c && t) out.push({ title: norm(t[1]), date: dt, id: c[1], url: `https://www.jacar.archives.go.jp/das/meta${useJa ? '' : '-en'}/` + c[1] });
       if (out.length >= n) break;
     }
     return out;
