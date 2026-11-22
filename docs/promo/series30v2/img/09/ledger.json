@@ -1,0 +1,158 @@
+{
+ "n": 9,
+ "src": "europeana",
+ "record": {
+  "id": "Europeana /9200579/j874r7jf",
+  "title": "A line of shops beside a dusty street, with telegraph poles overhead, in Korea. Photograph, ca.1900.",
+  "date": "ca.1900",
+  "inst": "Europeana (data provider: Wellcome Collection)",
+  "url": "https://www.europeana.eu/item/9200579/j874r7jf"
+ },
+ "images": [
+  {
+   "file": "hero_wellcome_korea_street_ca1900.jpg",
+   "role": "hero",
+   "record_id": "Wellcome Collection V0048608 (work fqwx2phm / j874r7jf; Europeana /9200579/j874r7jf)",
+   "title": "A line of shops beside a dusty street, with telegraph poles overhead, in Korea. Photograph, ca.1900.",
+   "date": "approximately 1900",
+   "inst": "Wellcome Collection (London)",
+   "url": "https://wellcomecollection.org/works/j874r7jf",
+   "europeana": "https://www.europeana.eu/item/9200579/j874r7jf",
+   "rights": "Public Domain Mark (Wellcome 현행) / Europeana edmRights CC BY 4.0 — 'Credit: Wellcome Collection' 표기",
+   "rights_evidence": "Wellcome catalogue API v2 works/fqwx2phm: license id 'pdm' label 'Public Domain Mark', credit 'Wellcome Collection'; Europeana record edmRights http://creativecommons.org/licenses/by/4.0/, dcRights 'Credit: Wellcome Collection'",
+   "visible": [
+    "기와지붕 상점이 길 오른쪽으로 길게 늘어서 있다",
+    "전봇대와 머리 위 전선",
+    "흰 옷 차림 인물이 흙길 가운데를 걷고 있다",
+    "상점 앞 바구니·항아리·옷가지 진열",
+    "우하단 흰 숫자 '94'",
+    "길 끝 멀리 문루(門樓)형 건물"
+   ],
+   "w": 3093,
+   "h": 2276,
+   "nocrop": false
+  },
+  {
+   "file": "rijks_regimental_band_seoul_1904_stereo.jpg",
+   "role": "extra",
+   "record_id": "Rijksmuseum RP-F-F13137",
+   "title": "A Regimental Band at Seoul, korea",
+   "date": "1904",
+   "inst": "Rijksmuseum (Amsterdam)",
+   "url": "http://hdl.handle.net/10934/RM0001.COLLECT.278712",
+   "europeana": "https://www.europeana.eu/item/90402/RP_F_F13137",
+   "rights": "Public Domain Mark 1.0",
+   "rights_evidence": "Europeana edmRights http://creativecommons.org/publicdomain/mark/1.0/; Rijksmuseum dcRights 'Public Domain / Publiek Domein'",
+   "visible": [
+    "입체사진(스테레오그래프) 카드 — 같은 장면 2컷 나란히",
+    "카드 하단 인쇄 '28. A Regimental Band at Seoul, Korea.' / 'Copyright 1904, by George W. Griffith.'",
+    "카드 좌우 세로 인쇄 'Sold only by Griffith & Griffith'",
+    "전각 건물 앞에 군복 차림 악대가 대열로 서 있고 큰북이 보인다"
+   ],
+   "w": 2500,
+   "h": 1292,
+   "nocrop": false
+  },
+  {
+   "file": "fotothek_chemulpo_1898.jpg",
+   "role": "extra",
+   "record_id": "Deutsche Fotothek df_hauptkatalog_0508010 (Dokument 90029022)",
+   "title": "Zum Aufbruch fertig in Tschemulpo [Incheon, Chemulpo]. Posierende Expeditionsteilnehmer (Bruno Knochenhauer und Richard Zimmermann), einheimische Begleiter und Lastpferde. Aufnahme vor der japanischen Niederlassung am Hafen (im Hintergrund Villa der Firma E. Meyer & Co.), 20. März 1898",
+   "date": "1898-03-20",
+   "inst": "Deutsche Fotothek (SLUB Dresden)",
+   "url": "http://www.deutschefotothek.de/documents/obj/90029022",
+   "europeana": "https://www.europeana.eu/item/440/item_SJJ6KPYMNQUQQSK47VABOMMJXVLZCOAW",
+   "rights": "Public Domain Mark 1.0",
+   "rights_evidence": "Europeana edmRights http://creativecommons.org/publicdomain/mark/1.0/ (사진가 Bruno Knochenhauer, 1898 촬영)",
+   "visible": [
+    "갓·흰 두루마기 차림 남성 여러 명과 양복·모자 차림 남성",
+    "짐을 실은 말 여러 필",
+    "뒤편 2층 목조 건물과 돌담",
+    "흙 마당"
+   ],
+   "w": 1600,
+   "h": 1203,
+   "nocrop": false
+  },
+  {
+   "file": "smvk_seoul_gate_tram_1902.jpg",
+   "role": "extra",
+   "record_id": "Etnografiska museet (SMVK-EM) fotografi 2730906, 0249.k.0021",
+   "title": "stadsport, Seoul, spårväg, fotografi, photograph",
+   "date": "1902",
+   "inst": "Museum of Ethnography / Etnografiska museet (Stockholm)",
+   "url": "https://collections.smvk.se/carlotta-em/web/object/2730906",
+   "europeana": "https://www.europeana.eu/item/91627/SMVK_EM_fotografi_2730906",
+   "rights": "CC0 1.0",
+   "rights_evidence": "Europeana edmRights http://creativecommons.org/publicdomain/zero/1.0/; 사진가 Didrik Bildt, 'Didrik Bildts resa till Asien (1902)'",
+   "visible": [
+    "2층 문루가 있는 성문",
+    "길 위 전차 선로(레일)",
+    "긴 장대 묶음을 지고 가는 사람들",
+    "전봇대",
+    "우하단 번호 '0249.k.0021'"
+   ],
+   "w": 1000,
+   "h": 574,
+   "nocrop": false
+  },
+  {
+   "file": "smvk_seoul_gate_view_1902.jpg",
+   "role": "extra",
+   "record_id": "Etnografiska museet (SMVK-EM) fotografi 2730896, 0249.k.0019",
+   "title": "Seoul, stadsport, fotografi, photograph",
+   "date": "1902",
+   "inst": "Museum of Ethnography / Etnografiska museet (Stockholm)",
+   "url": "https://collections.smvk.se/carlotta-em/web/object/2730896",
+   "europeana": "https://www.europeana.eu/item/91627/SMVK_EM_fotografi_2730896",
+   "rights": "CC0 1.0",
+   "rights_evidence": "Europeana edmRights http://creativecommons.org/publicdomain/zero/1.0/; 기술 'Stadsport, Söul, Koreas hufvudstad, som hade elektronisk spårvåg före Stockholm (från Generalkatalog)'",
+   "visible": [
+    "밭과 초가·기와 지붕 마을 너머 멀리 문루",
+    "흐린 하늘",
+    "우하단 번호 '0249.k.0019'"
+   ],
+   "w": 1000,
+   "h": 577,
+   "nocrop": false
+  },
+  {
+   "file": "rijks_seoul_skirmish_1894_print.jpg",
+   "role": "extra",
+   "record_id": "Rijksmuseum RP-P-2010-310-1",
+   "title": "Het kleine gevecht in Seoul, Korea (Chôsen Keijô no shôsen)",
+   "date": "1894",
+   "inst": "Rijksmuseum (Amsterdam)",
+   "url": "http://hdl.handle.net/10934/RM0001.COLLECT.489426",
+   "europeana": "https://www.europeana.eu/item/90402/RP_P_2010_310_1",
+   "rights": "Public Domain Mark 1.0",
+   "rights_evidence": "Europeana edmRights http://creativecommons.org/publicdomain/mark/1.0/; dcRights 'Public Domain'",
+   "visible": [
+    "3폭 연결 다색 목판화(니시키에)",
+    "붉은 제목 칸 '朝鮮京城之小戰'",
+    "오른쪽 붉은 문루의 성문",
+    "흰 군복 병사 대열과 검은 마차, 연기",
+    "기마 인물"
+   ],
+   "note": "일본 측 청일전쟁 선전 판화 — 전투 장면(시신 묘사 없음). 맥락 설명 필수: 기술문 '일본군이 서울 왕궁 부근에서 조선 병사들을 몰아냄, 1894년 7월 초'.",
+   "w": 3000,
+   "h": 1607,
+   "nocrop": false
+  }
+ ],
+ "points": [
+  "Europeana 한 번의 검색으로 5개 기관(영국 Wellcome, 네덜란드 Rijksmuseum, 독일 Deutsche Fotothek, 스웨덴 Etnografiska museet)의 한국 사진·판화가 모인다",
+  "Rijksmuseum 입체사진 카드 인쇄 문구: '28. A Regimental Band at Seoul, Korea. Copyright 1904, by George W. Griffith.'",
+  "스웨덴 Didrik Bildt 1902년 사진 기술: 서울은 '스톡홀름보다 먼저 전차가 있었다'(som hade elektronisk spårvåg före Stockholm) — 사진에 선로가 보인다",
+  "Deutsche Fotothek: 1898-03-20 제물포(Tschemulpo) 일본인 거류지 앞, 독일 금광 탐사대 출발 장면(사진가 Bruno Knochenhauer)",
+  "Rijksmuseum 1894 판화 제목 '朝鮮京城之小戰' — 청일전쟁 중 일본 측 시각의 서울 사건 기록"
+ ],
+ "video": {
+  "url": "",
+  "length_s": 0,
+  "rights": "",
+  "note": ""
+ },
+ "status": "ok",
+ "notes": "경로: Europeana Search API(wskey=api2demo) — 'reusability=open'·rights 파라미터가 api2demo 응답에서 필터로 작동하지 않아(InC-EDU 등 섞여 나옴) 결과를 로컬에서 PDM/CC0/CC BY/BY-SA만 걸러 선택. edmIsShownBy 원본 직접 다운로드. 막힘: Finnish Heritage Agency(부산항 1904, CC BY 4.0) 이미지 서버 401, finna.fi Cloudflare 403 → 제외; British Library Flickr 원본(Korean Sketches 1898, PDM) staticflickr 429 → 제외(재시도 안 함). Etnografiska museet 이미지는 공개 해상도 1000px 한계. 제외(존엄): Wellcome '포로 치료'·'나병원' 사진, 그리스 추모식 사진. InC-EDU·BY-NC 계열(Deutsche Fotothek 다수, Berlin 민족학박물관 등) 전부 제외."
+}

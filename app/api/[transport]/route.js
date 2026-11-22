@@ -197,6 +197,37 @@ const tnaLine = (r) => `- [${r.reference || '?'}] ${(r.title || r.description ||
 const norm = (s) => (s == null ? '' : String(s)).replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim();
 const dedupKey = (it) => norm(it.title).toLowerCase().replace(/[^a-z0-9가-힣一-鿿]/g, '').slice(0, 50) + '|' + (it.id || '');
 // run collectors concurrently; merge, dedup by title|id, union the source tags (상호보완: 한 record를 여러 채널이 확인)
+// v1.93: Gallica(gallica.bnf.fr)가 서버 IP 자동 조회를 403 차단 — BnF 공식 카탈로그 SRU(catalogue.bnf.fr/api/SRU, 같은 BnF 소장 기록)로 폴백.
+// UNIMARC 200$a 표제·210/214$d 연대·215$a 수량·856$u Gallica 원문 ark — 기록 수집은 계속되고, 원문(Gallica) 링크도 함께 준다.
+async function bnfCatalog(q, n, doctype) {
+  const cql = `bib.anywhere all "${String(q).replace(/"/g, '')}"` + (doctype ? ` and bib.doctype any "${doctype}"` : '');
+  const xml = await gtext(`https://catalogue.bnf.fr/api/SRU?version=1.2&operation=searchRetrieve&query=${encodeURIComponent(cql)}&recordSchema=unimarcXchange&maximumRecords=20`, { 'User-Agent': UA });
+  const total = (xml.match(/numberOfRecords>(\d+)</) || [])[1];
+  if (total === undefined) throw new Error('BnF 카탈로그 응답 형식 아님');
+  const items = xml.split('<srw:record>').slice(1).map((b) => {
+    const sf = (tag, code) => { for (const m of b.matchAll(new RegExp(`tag="${tag}"[^>]*>([\\s\\S]*?)</mxc:datafield>`, 'g'))) { const s = m[1].match(new RegExp(`code="${code}">([^<]*)<`)); if (s) return s[1].trim(); } return ''; };
+    const ark = (b.match(/id="(ark:\/12148\/[^"]+)"/) || [])[1] || '';
+    const gal = (b.match(/(https?:\/\/gallica\.bnf\.fr\/ark:\/12148\/[A-Za-z0-9]+)/) || [])[1] || '';
+    const typ = sf('200', 'b');
+    return { title: (sf('200', 'a') || '(무제)').replace(/^\[|\]$/g, '').slice(0, 160), date: sf('210', 'd') || sf('214', 'd'), id: ark, extent: sf('215', 'a'), type: typ, gallica: gal,
+      ...(typ ? { series: `BnF › ${typ}` } : {}), url: gal || (ark ? `https://catalogue.bnf.fr/${ark}` : '') };
+  });
+  items.sort((x, y) => (y.gallica ? 1 : 0) - (x.gallica ? 1 : 0)); // Gallica 원문(디지털화) 있는 기록 우선
+  return { total: Number(total), items: items.slice(0, n) };
+}
+// v1.93: 정보공개포털 상태 실측 — 2026-11-12부터 원문정보·목록 메뉴 '점검 중'(JSON 백엔드 없음), 서울정보소통광장은 연결 시간 초과.
+// 막힌 사실과 기간을 그대로 알리고, 점검 중에도 가능한 경로(기관에 정보공개청구 · 신청내역조회)를 안내한다.
+async function openGoStatus(q) {
+  try {
+    const b = await gtext('https://www.open.go.kr/othicInfo/infoList/orginlInfoList.do?searchKeyword=' + encodeURIComponent(q || ''), { 'User-Agent': UA });
+    const t = dclean(b);
+    if (/메뉴 점검|점검 중인 메뉴/.test(t)) {
+      const per = (t.match(/제한 기간\s*([^.]*?\d{4}\.\d{1,2}\.\d{1,2}\.[^재]{0,30})/) || [])[1] || '';
+      return { maint: true, msg: `정보공개포털 원문정보 메뉴 점검 중${per ? `(제한 기간 ${per.trim()})` : ''} — 포털 공지: 점검 기간에도 자료 보유 기관에 정보공개청구 가능, 진행은 '신청내역조회'에서 확인` };
+    }
+    return { maint: false, msg: '' };
+  } catch (e) { return { maint: false, msg: `정보공개포털 응답 실패(${e.message})` }; }
+}
 const SOURCE_TIMEBOX_MS = 12000; // 소스별 타임박스 — 최저속(차단 대기) 소스가 전체 지연을 지배하지 않게 (실측 21.7s → ~12s)
 // v1.89: 원본 확인 — 재게시·재수집본의 sameAs NAID가 결과에 없으면 NARA 카탈로그를 직접 조회해 원본 실재를 확인하고 계보·날짜·매체를 채운다(최대 4건·6s·24h 캐시)
 async function resolveOrigins(items, stats) {
@@ -558,8 +589,9 @@ const COLLECT = {
   gallica: async (q, n) => {
     q = gallicaKoToFr(q) || q;
     const query = encodeURIComponent(`gallica all "${q.replace(/"/g, '')}"`);
-    const r = await robustFetch(`https://gallica.bnf.fr/SRU?operation=searchRetrieve&version=1.2&query=${query}&maximumRecords=${n}`);
-    const xml = await r.text();
+    let xml = '';
+    try { xml = await (await robustFetch(`https://gallica.bnf.fr/SRU?operation=searchRetrieve&version=1.2&query=${query}&maximumRecords=${n}`)).text(); } catch { xml = ''; }
+    if (!xml.includes('<srw:numberOfRecords>')) { const r = await bnfCatalog(q, n); return r.items.map((it) => ({ title: `${it.title}${it.gallica ? ' [Gallica 원문]' : ''}`, date: it.date, id: it.id, ...(it.series ? { series: it.series } : {}), url: it.url })); } // v1.93 BnF 카탈로그 폴백
     return xml.split('<srw:record>').slice(1, n + 1).map((b) => {
       const g = (t) => { const m = b.match(new RegExp(`<dc:${t}[^>]*>([^<]*)<`)); return m ? m[1].trim() : ''; };
       const ak = (g('identifier').match(/ark:\/12148\/(btv|bpt6k|bd6t)/) || [])[1]; const akn = { btv: '도판·사진(btv)', bpt6k: '인쇄본(bpt6k)', bd6t: '정기간행물(bd6t)' }[ak]; return { title: g('title'), date: g('date'), id: g('identifier'), ...(akn ? { series: akn } : {}), url: g('identifier') };
@@ -593,7 +625,13 @@ const COLLECT = {
     const xml = await cachedText(`nlk:${q}:${n}`, 6 * 3600e3, () => gtext(`https://www.nl.go.kr/NL/search/openApi/search.do?key=${encodeURIComponent(key)}&apiType=xml&srchTarget=total&kwd=${encodeURIComponent(q)}&pageSize=${n}&pageNum=1`), '<item>');
     return (xml.match(/<item>[\s\S]*?<\/item>/g) || []).map((it) => { let lk = xtag(it, 'detail_link') || xtag(it, 'org_link'); if (lk.startsWith('/')) lk = 'https://www.nl.go.kr' + lk; return { title: xtag(it, 'title_info') || xtag(it, 'title'), date: xtag(it, 'pub_year_info'), id: xtag(it, 'type_name'), ...(xtag(it, 'type_name') ? { series: xtag(it, 'type_name') } : {}), url: lk }; });
   },
-  nedb: async (q, n) => { const recs = await loadNedbIndex(); return recs ? nedbFileSearch(recs, q, n) : []; },
+  nedb: async (q, n) => { // v1.93: 개방파일 인덱스 미설정이면 한국사DB 통합검색 라이브 조회 — 검색어가 등장하는 DB(편찬 자료군)를 기록 단위 진입점으로 수집(0건 고정 해소)
+    const recs = await loadNedbIndex(); if (recs) return nedbFileSearch(recs, q, n);
+    const b = await gtext('https://db.history.go.kr/search/searchTotalResult.do?searchKeyword=' + encodeURIComponent(q));
+    const seen = new Set(); const out = []; const re = /href="\/item\/(\w+)\/main\.do"[^>]*>([\s\S]*?)<\/a>/g; let m;
+    while ((m = re.exec(b)) && out.length < n) { const nm = dclean(m[2].replace(/<span[^>]*class="btn-new"[^>]*>[\s\S]*?<\/span>/g, '')); if (nm && !seen.has(m[1])) { seen.add(m[1]); out.push({ title: `${nm} — '${q}' 수록`, date: '', id: m[1], series: `한국사DB › ${nm}`, url: `https://db.history.go.kr/item/${m[1]}/main.do` }); } }
+    return out;
+  },
   koreanwar: async (q, n) => {
     const cards = (await kwSearch({ keyword: q, viewType: 'archive' })).cards.slice(0, n);
     // v1.86: 상위 5건 상세 병렬 조회(24h 캐시·6s 상한) — 원본 NAID(sameAs)·생산시기 확보 → NARA 원본과 동일 기록 병합
@@ -924,7 +962,9 @@ const COLLECT = {
   },
   foia: async (q, n) => { // 정보공개 원문 라이브 채널: 서울정보소통광장 결재문서 — 전용 도구(foia_search)와 동일 경로
     // 기지 차단(연결 리셋 ~11s×2회 재시도=21s 소모 실측) — 단발 6s fail-fast로 health·연합 탐침 시간 보호. 복구 시 자동 정상화
-    const r = await fetch('https://opengov.seoul.go.kr/sanction/list?searchKeyword=' + encodeURIComponent(q), { headers: { 'User-Agent': UA }, signal: AbortSignal.timeout(6000) });
+    let r;
+    try { r = await fetch('https://opengov.seoul.go.kr/sanction/list?searchKeyword=' + encodeURIComponent(q), { headers: { 'User-Agent': UA }, signal: AbortSignal.timeout(6000) }); }
+    catch (e) { const st = await openGoStatus(q); throw new Error(`서울정보소통광장 연결 실패(${e.name === 'TimeoutError' ? '시간 초과' : e.message})${st.msg ? ' · ' + st.msg : ''} → foia_search로 청구 경로 안내`); }
     if (!r.ok) throw new Error(`HTTP ${r.status}`);
     const b = await r.text();
     const seen = new Set(); const out = [];
@@ -1315,7 +1355,19 @@ const handler = createMcpHandler((server) => {
         const d = await jget(`https://archive.org/metadata/${encodeURIComponent(identifier)}`);
         const md = d.metadata || {};
         const files = (d.files || []).filter((f) => f.source === 'original').slice(0, 10);
-        return text(`Title: ${md.title}\nDate: ${md.date} | License: ${md.licenseurl || md.rights || 'not stated'}\nDescription: ${String(md.description || '').slice(0, 300)}\nOriginal files:\n` + files.map((f) => `- ${f.name} (${(Number(f.size || 0) / 1e6).toFixed(1)}MB)`).join('\n'));
+        let scenes = ''; // v1.93: 영상 기록 장면 분석 — IA 파생 썸네일(.thumbs/<id>_<초>.jpg)을 시각 코드 장면 프레임으로(웹·모바일 경로: ffmpeg 없이 장면 열람)
+        if (md.mediatype === 'movies') {
+          const th = (d.files || []).map((f) => f.name).filter((nm) => /\.thumbs\/.+_(\d{6})\.jpg$/.test(nm)).sort();
+          const vid = (d.files || []).find((f) => /\.(mp4|mpeg4)$/i.test(f.name) && /mpeg4|h\.264/i.test(f.format || ''));
+          const naid = (String(md.description || '').match(/catalog\.archives\.gov\/id\/(\d+)/) || [])[1];
+          const pick = th.length > 12 ? Array.from({ length: 12 }, (_, i) => th[Math.round(i * (th.length - 1) / 11)]) : th;
+          const mmss = (nm) => { const sec = parseInt(nm.match(/_(\d{6})\.jpg$/)[1], 10); return `${String(Math.floor(sec / 60)).padStart(2, '0')}:${String(sec % 60).padStart(2, '0')}`; };
+          scenes = `\n【영상 장면 프레임 — ${th.length}개 중 ${pick.length}개(시각 코드)】\n` + pick.map((nm) => `- ${mmss(nm)}  https://archive.org/download/${identifier}/${nm}`).join('\n')
+            + (vid ? `\n영상 파일: https://archive.org/download/${identifier}/${encodeURIComponent(vid.name)} (${Math.round(Number(vid.length || 0))}초)` : '')
+            + (naid ? `\n↔ NARA 원본 NAID ${naid} — judge_rights(naid=${naid})로 권리 실확인` : '')
+            + `\n➤ 장면 해설: 각 프레임을 열어 '보이는 것만' 기술(인물 수·장비·문자·지형) → report_template(kind=video) 규칙으로 장면 해설 카드. 로컬은 analyze_video.py keyscenes로 장면 전환 기반 대표 프레임(고해상).`;
+        }
+        return text(`Title: ${md.title}\nDate: ${md.date} | License: ${md.licenseurl || md.rights || 'not stated'}\nDescription: ${String(md.description || '').slice(0, 300)}\nOriginal files:\n` + files.map((f) => `- ${f.name} (${(Number(f.size || 0) / 1e6).toFixed(1)}MB)`).join('\n') + scenes);
       }
       if (!query) return text('query 또는 identifier 중 하나는 필수.');
       const en = koToEn(query);
@@ -1345,7 +1397,13 @@ const handler = createMcpHandler((server) => {
       let total = (xml.match(/<srw:numberOfRecords>(\d+)</) || [])[1];
       let post = false;
       if (dateClause && total === undefined) { xml = await sru(base); total = (xml.match(/<srw:numberOfRecords>(\d+)</) || [])[1]; post = true; }
-      if (total === undefined) { // SRU XML 아님 — Cloudflare 차단/점검 (2026-11-18 실측: 서버 IP 403)
+      if (total === undefined) { // SRU XML 아님 — Cloudflare 차단/점검 (2026-11-18 실측: 서버 IP 403) → v1.93: BnF 공식 카탈로그 SRU 폴백
+        try {
+          const r = await bnfCatalog(eff, max_results, '');
+          if (r.items.length) return text(`Gallica '${query}'${fr ? ` → 프랑스어 자동 변환 '${eff}'` : ''} — Gallica 서버가 자동 조회를 차단해 **BnF 공식 카탈로그**(catalogue.bnf.fr, 같은 국립도서관 소장 목록)로 수집 — total ${r.total}:\n`
+            + r.items.map((it) => `- ${it.title.slice(0, 110)} (${it.date || '연대 미상'})${it.type ? ` [${it.type}]` : ''}${it.extent ? ` · ${it.extent}` : ''}\n  ${it.gallica ? `Gallica 원문: ${it.gallica}` : `카탈로그: ${it.url}`}`).join('\n')
+            + `\n※ Gallica 원문 링크는 브라우저에서 열람(서버 자동 조회만 차단). 사진 묶음(doctype i)만: '${eff}' 사진 — 카탈로그 질의에 doctype 'i'. BnF 디지털 자료 대부분 공유저작물(재이용 조건: gallica.bnf.fr/edit/und/conditions-dutilisation-des-contenus-de-gallica).`);
+        } catch { /* 카탈로그도 실패 — 아래 대체 경로 안내 */ }
         const web = `https://gallica.bnf.fr/services/engine/search/sru?operation=searchRetrieve&version=1.2&query=${encodeURIComponent(base)}`;
         return text(`Gallica '${query}'${fr ? ` → 프랑스어 자동 변환 '${eff}'` : ''} — 서버 자동 조회가 차단되었습니다(BnF측 봇 차단 — 간헐적).\n➤ 에이전트 지시: 당신의 웹 검색/브라우저 도구로 '${eff}'를 gallica.bnf.fr에서 검색해 상위 결과(제목·연대·ark 링크)를 표로 정리해 제시하세요.\n공식 검색: https://gallica.bnf.fr/services/engine/search/sru?operation=searchRetrieve&query=${encodeURIComponent(eff)}\nSRU(차단 해제 시): ${web}`);
       }
@@ -1386,7 +1444,7 @@ const JB_RECIPES = `발굴 완주 레시피 — 주제 유형별 발굴→판독
 ③ 조선 제도·고문헌: nedb law(법전 근거)→★sibling(형제 조 전수)→sjw(최초 용례) → kyujanggak(목록+해제)·jsg(청구기호→해제 전문) → aks(문중 고문서) → 인용 2층위 준수.
 ④ 일제강점기 정책·기관: ndl(총독부 간행물·통계연보·관보) ⇄ jacar(공문서 메타·인접 ±100) → nedb(한국사DB)·earchive('키워드|순번' 이용조건) → i815(민족 측 시각 대조).
 ⑤ 도시·공간사(서울 등): seoul_archives_search(기록 단위→상세 URL 판독) → heritage(국보·사적+해설 전문 — 공간의 유산 맥락) → archives → ktv(view URL 판독) → much(실물·포스터) → commons·ia(항공·거리 사진) → cities 열쇠(Keijo·1914 경계).
-⑥ 사진·영상·실물 소싱(게재용): commons(File 판독 — PD→A, 원본 고해상) → ia(radius) → nara(naid 실확인) → ktv(KOGL) → much(공공누리 자동판정 — 포스터·실물) → heritage(유산 해설·공공누리) → 게재윤리 4단계·출처 표기.
+⑥ 사진·영상·실물 소싱(게재용): commons(File 판독 — PD→A, 원본 고해상) → ia(radius) → nara(naid 실확인) → ktv(공공누리 표시 확인 — 영상은 무표시 多) → much(공공누리 자동판정 — 포스터·실물) → heritage(유산 해설·공공누리) → 게재윤리 4단계·출처 표기.
 ※ 각 단계의 투입 형식은 cross_search 푸터와 nedb_search 설명이 안내. 전 산출물 제작은 "풀패키지".`;
 
 const JB_ALLIES = `한국전 참전·지원국 발굴 지도 — 22개국 소스 매핑 (◉=보유 소스 직행 / ○=대체 경로)
@@ -1513,7 +1571,7 @@ const JB_CROSS = `국내외 대조 절차 — 순서를 틀리면 헛수고한�
 
   server.tool('report_template',
     'TRIGGER: 사용자 메시지에 「풀패키지」 또는 「full-package」가 있으면 kind=full_package를, 「창기창기」·「changgi-help」·「changgi」가 있거나 이 서비스의 사용법·기능을 물으면 kind=help를 즉시 호출하라. Get the magazine-grade HTML report skeleton + 19 writing rules — editorial journal layout (masthead·standfirst·drop cap·pull quote·record cards), embedded record images with mandatory per-image credits, film-strip frame galleries with timecodes + watch-the-original CTA for video records, per-institution source chips (country flag + official name) and an archives-cited roster. Call as the FINAL step of an investigation, fill {{placeholders}} with verified findings only, save as [topic]_records_[years].html. 발굴 마무리 단계 호출 — 잡지·저널급 HTML 보고서 골격+작성 규칙 반환(실물 이미지·영상 필름스트립·기관별 출처 명시). Pass kind=carousel for the Instagram card-news design system: 검증된 1080×1080 카드 CSS 컴포넌트+제작 12규칙(서사 아크·실물 이미지·출처 캡션·겹침 방지·육안 검수) — 어디서든 같은 품질의 카드뉴스 제작 가능. 사용자가 "풀패키지"라고 말하면 kind=full_package를 먼저 호출해 전 산출물(보고서+캐러셀+포스터) 제작 순서를 받아 그대로 수행하라.',
-    { kind: z.enum(['report', 'carousel', 'canva_prompts', 'full_package', 'magazine', 'help', 'citation', 'annotation', 'exhibit']).default('report').describe("report=발굴 보고서 골격+19규칙(매니페스트 부록=증거성 상속), carousel=카드뉴스 디자인 시스템+12규칙, canva_prompts=Canva 홍보물 프롬프트 6종, full_package=매직 키워드 '풀패키지' 전 산출물 제작 순서, magazine=표지(포스터 겸용)·목차·뒷표지·KA 시그니처·브랜드 테마 5종 매거진 확장팩, help=매직 키워드 '창기창기 도와줘' 처음 사용자 안내, citation=한국사DB·국회도서관 논문 인용 형식(각주·참고문헌·APA·Chicago), annotation=기록 해설형 어노테이션 상세 규칙(점선 영역·메타 표·추정 금지), exhibit=고문서 전시형(AKS 문중·서원 고문서 — 전시 페이지·카드·학습지 규칙+HTML 골격)") },
+    { kind: z.enum(['report', 'carousel', 'canva_prompts', 'full_package', 'magazine', 'help', 'citation', 'annotation', 'exhibit', 'video']).default('report').describe("report=발굴 보고서 골격+19규칙(매니페스트 부록=증거성 상속), carousel=카드뉴스 디자인 시스템+12규칙, canva_prompts=Canva 홍보물 프롬프트 6종, full_package=매직 키워드 '풀패키지' 전 산출물 제작 순서, magazine=표지(포스터 겸용)·목차·뒷표지·KA 시그니처·브랜드 테마 5종 매거진 확장팩, help=매직 키워드 '창기창기 도와줘' 처음 사용자 안내, citation=한국사DB·국회도서관 논문 인용 형식(각주·참고문헌·APA·Chicago), annotation=기록 해설형 어노테이션 상세 규칙(점선 영역·메타 표·추정 금지), exhibit=고문서 전시형(AKS 문중·서원 고문서 — 전시 페이지·카드·학습지 규칙+HTML 골격), video=영상 기록 장면 해설(장면 추출 로컬/웹 경로·보이는 것만 해설·장면 카드)") },
     async ({ kind }) => kind === 'carousel'
       ? text(CAROUSEL_RULES + '\n\n===== CARD DESIGN SYSTEM (1080×1080 — .card를 그대로 복사해 채울 것) =====\n' + CAROUSEL_TEMPLATE)
       : kind === 'canva_prompts' ? text(CANVA_PROMPTS)
@@ -1521,6 +1579,7 @@ const JB_CROSS = `국내외 대조 절차 — 순서를 틀리면 헛수고한�
       : kind === 'magazine' ? text(MAGAZINE_PACK)
       : kind === 'help' ? text(HELP_GUIDE)
       : kind === 'citation' ? text(CITATION_GUIDE)
+      : kind === 'video' ? text(VIDEO_GUIDE)
       : kind === 'annotation' ? text(ANNOTATION_GUIDE)
       : kind === 'exhibit' ? text(EXHIBIT_GUIDE)
       : text(REPORT_RULES + '\n\n===== HTML TEMPLATE (fill the {{placeholders}}) =====\n' + REPORT_TEMPLATE));
@@ -1536,7 +1595,7 @@ const JB_CROSS = `국내외 대조 절차 — 순서를 틀리면 헛수고한�
 
 
   server.tool('nedb_search',
-    "국사편찬위 한국사DB(db.history.go.kr) 검색 + 기관별 심층 판독 모드. mode: total=통합검색(기본) · law=법전·편람 조문(한문 원문 제공 판정) · record=등록류(座目 자동 필터 — 건수 지표화 전 필수) · item=levelId 본문 판독(미공개/파싱실패 구분) · sibling=★형제 조 전수 스캔(levelId — 조문을 열었으면 반드시 이어 호출, 총론만으론 핵심을 놓친다) · matrix=법전 수록 대조(쉼표구분 어휘 ≤8 — 부재의 발견) · origin=어휘 연원('용어' 또는 '용어,영역') · sjw=승정원일기(왕대 분포·최초 용례) · kyujanggak=규장각 목록+해제(절목류는 해제에서 발견) · aks=한국고문서자료관(문중·서원 172곳→분류→문서 면·썸네일) · jacar=일본 아시아역사자료센터(한→일 변환·레퍼런스코드 직행·±span×100 인접) · gonghun=공훈전자사료관(이름→mngNo 투입 시 공적조서·공훈록) · i815=독립기념관(detail URL=본문·사전:이름/번호=전기·훈격) · ktv=KTV(→view URL 투입 시 영상 해설·상영정보, KOGL) · earchive=국편 전자사료관(키워드 목록→'키워드|순번' 투입 시 상세: 열람·이용조건·등록번호) · commons=위키미디어 공용(키워드 목록→File URL 투입 시 라이선스·원 소장처·설명 판독) · jsg=장서각(→청구기호 K2-… 투입 시 서지·해제 전문) · un=UN(→recid 투입 시 요약·주제·PDF) · oldnews=신문(CNTS=색인어·관련기사 · '본문:…[|1905-1910]'=OCR+연대) · much=박물관(→idnbr 투입 시 재질·공공누리·설명) · indy=판결문(이름→상세 URL 투입 시 죄명·주문·사건개요·원문 뷰어) · heritage=국가유산(목록+딥링크. cpno 상세 일부) · nzarch=NZ기록원(R번호=상세 메타). 판정 우선: 건수 아니라 '492건이 座目'을 반환.",
+    "국사편찬위 한국사DB(db.history.go.kr) 검색 + 기관별 심층 판독 모드. mode: total=통합검색(기본) · law=법전·편람 조문(한문 원문 제공 판정) · record=등록류(座目 자동 필터 — 건수 지표화 전 필수) · item=levelId 본문 판독(미공개/파싱실패 구분) · sibling=★형제 조 전수 스캔(levelId — 조문을 열었으면 반드시 이어 호출, 총론만으론 핵심을 놓친다) · matrix=법전 수록 대조(쉼표구분 어휘 ≤8 — 부재의 발견) · origin=어휘 연원('용어' 또는 '용어,영역') · sjw=승정원일기(왕대 분포·최초 용례) · kyujanggak=규장각 목록+해제(절목류는 해제에서 발견) · aks=한국고문서자료관(문중·서원 172곳→분류→문서 면·썸네일) · jacar=일본 아시아역사자료센터(한→일 변환·레퍼런스코드 직행·±span×100 인접) · gonghun=공훈전자사료관(이름→mngNo 투입 시 공적조서·공훈록) · i815=독립기념관(detail URL=본문·사전:이름/번호=전기·훈격) · ktv=KTV(→view URL 투입 시 영상 해설·상영정보, 공공누리 표시 확인) · earchive=국편 전자사료관(키워드 목록→'키워드|순번' 투입 시 상세: 열람·이용조건·등록번호) · commons=위키미디어 공용(키워드 목록→File URL 투입 시 라이선스·원 소장처·설명 판독) · jsg=장서각(→청구기호 K2-… 투입 시 서지·해제 전문) · un=UN(→recid 투입 시 요약·주제·PDF) · oldnews=신문(CNTS=색인어·관련기사 · '본문:…[|1905-1910]'=OCR+연대) · much=박물관(→idnbr 투입 시 재질·공공누리·설명) · indy=판결문(이름→상세 URL 투입 시 죄명·주문·사건개요·원문 뷰어) · heritage=국가유산(목록+딥링크. cpno 상세 일부) · nzarch=NZ기록원(R번호=상세 메타). 판정 우선: 건수 아니라 '492건이 座目'을 반환.",
     { query: z.string().describe("검색어 · levelId(item/sibling) · 쉼표구분 어휘(matrix) · '용어,영역'(origin) · 소장처명/L-ID(aks) · 이름/mngNo(gonghun)"), db: z.string().default(''), max_results: z.number().int().min(1).max(50).default(15), mode: z.enum(['total', 'law', 'record', 'item', 'sibling', 'matrix', 'origin', 'sjw', 'kyujanggak', 'aks', 'jacar', 'gonghun', 'i815', 'ktv', 'earchive', 'commons', 'jsg', 'un', 'oldnews', 'much', 'indy', 'heritage', 'nzarch']).default('total'), span: z.number().int().min(2).max(12).default(8).describe('sibling 모드 스캔 폭') },
     async ({ query, max_results, mode, span }) => {
       const q = query.trim();
@@ -1896,7 +1955,7 @@ const JB_CROSS = `국내외 대조 절차 — 순서를 틀리면 헛수고한�
               + (body ? `【해설】\n${body}\n` : '')
               + (kfp ? `본문 지문(sha256-16): ${kfp} — 판독 시점 해설 전문 기준. 재판독 지문 불일치=원문 개정 발생.\n` : '')
               + `원문(영상 재생): ${q}\n`
-              + '※ KTV 콘텐츠는 KOGL(공공누리) — judge_rights에 "KOGL" 표기로 초판정. 게재 시 출처 표기.');
+              + '※ 권리: 페이지의 공공누리 표시를 확인 — 사진은 표시 유형대로(제4유형=변경·상업 금지), 영상 페이지에 표시가 없으면 KTV 나누리(nanuri.ktv.go.kr) 이용 신청 후 사용(2026-11 실측: 「대한뉴스의 발자취」 영상 무표시). 표시 유형을 judge_rights에 넣어 초판정.');
           }
           const items = await COLLECT.ktv(q, Math.min(max_results, 10));
           if (!items.length) return text(`KTV e영상역사관 '${q}' — 0건. '대한뉴스'·사건명·인명으로 재시도하십시오.`);
@@ -2484,6 +2543,10 @@ item_cd 5종(자료 성격별): ART 도설·회화 / ETC 두루마리·축 / DRR
       if (source === 'sen') return text(agentBrowse('서울시교육청 정보공개(열린 서울교육)', query, 'https://open.sen.go.kr/'));
       if (source === 'gyeongnam') return text(agentBrowse('경상남도기록원', query, 'https://archives.gyeongnam.go.kr/main.web'));
       const url = 'https://www.open.go.kr/othicInfo/infoList/orginlInfoList.do?searchKeyword=' + encodeURIComponent(query);
+      const st = await openGoStatus(query);
+      if (st.maint) return text(`정보공개포털 '${query}' — 실측 결과: ${st.msg}.\n`
+        + `➤ 지금 할 수 있는 것: ① 문서를 가진 기관을 특정해 정보공개청구(https://www.open.go.kr — 청구는 점검 중에도 가능) ② 서울시 결재문서는 foia_search(source='seoul_opengov') 재시도(현재 연결 시간 초과가 잦음) ③ 이미 공개된 기록물은 archives_search(국가기록원)·seoul_archives_search(서울기록원)로 같은 주제를 먼저 찾는다.\n`
+        + `원문정보 검색(점검 해제 후): ${url}`);
       return text(agentBrowse('정보공개포털(원문정보공개)', query, url) + '\n※ 미공개 문서는 포털에서 정보공개청구로 요청.');
     });
 
@@ -3334,6 +3397,17 @@ const CITATION_GUIDE = `인용 형식 가이드 — 한국사DB·국회도서관
 
 공통 원칙: 검색일 명기 · 링크는 실확인한 것만 · 기사ID/CN코드 없는 인용은 재현 불가이므로 금지.`;
 
+const VIDEO_GUIDE = `영상 기록 장면 해설 규칙 (v1.93 — 영상 분석 기능의 서버판. 로컬=analyze_video.py keyscenes, 웹·모바일=IA 시각 코드 프레임)
+
+1. 영상 찾기: cross_search/nara_search로 영상 기록 → 권리 실확인(judge_rights(naid) — Unrestricted=A, 연방 저작물 Undetermined=B 명기, Restricted=장면 사용 금지·제목만 인용). 협약기관(koreanwar) 영상은 입수처 NARA NAID로 원본 권리 확인.
+2. 장면 추출 — 환경별 경로:
+   · 로컬(Claude Code): python analyze_video.py keyscenes <영상|URL> --out <dir> — ffmpeg scene 전환 탐지 → 장면별 가장 선명한 프레임(원본 해상도, 업스케일 금지) · 리더/암전 자동 제외 → scenes.json(start·end·dur·대표 시각) + _keyscenes.jpg 밀착 인화.
+   · 웹·모바일: ia_search(identifier=<IA 영상 id>) → 【영상 장면 프레임】 시각 코드 목록(IA 파생 썸네일 .thumbs/<id>_<초>.jpg)을 열어 장면을 본다. NARA 사본(예: 428-npc-170)은 IA에 같은 번호로 있는 경우가 많다(cross_search nara,ia가 [nara+ia]로 묶음). KTV(ehistory.go.kr) 영상은 nedb_search(mode=ktv, view URL)의 해설 목록(장면 순서)을 시각 코드 대용으로 쓴다.
+3. 장면 해설은 '보이는 것만': 인물 수·복장·장비(전차·함정·선체 번호)·지형·화면 속 문자. 불명은 '판독 불가'. 사건 해석(무엇을 위한 폭파인가 등)은 기록 표제·기술(NARA Scope and Content·KTV 해설)에서 인용할 때만, 인용 출처를 붙인다.
+4. 장면 해설 카드(1080×1080): 프레임 원본을 가득(object-fit cover, 업스케일 시 흐림 감수 대신 원 크기 근처 배치) + 좌상단 시각 코드 칩(mm:ss) + 하단 2줄 해설 + 장면 번호(n/N) + 출처 한 줄(기관·식별자·권리). 영상 1편 = 표지(대표 장면) + 장면 4~8장 + 밀착 인화(전 장면 타임라인) 1장.
+5. 타임라인 카드: 밀착 인화(시각 코드 포함)로 영상 전체 흐름을 한 장에 — '몇 분 몇 초에 무엇이 보이는가'가 증거성의 핵심.
+6. 존엄: 포로·시신·부상자 클로즈업 장면은 해설 카드에서 제외(게재윤리 4단계).
+7. 출처 표기: 기관 정식명 · 영상 식별자(NAID/IA id/KTV mediaid) · 장면 시각 · 권리 등급 — 프레임마다.`;
 const ANNOTATION_GUIDE = `기록 해설형 어노테이션 규칙 — 상세판 (record-annotation 스킬의 서버판. 웹에서는 HTML/아티팩트로 동일 문법 구현)
 
 1. 영역 표시: 점선 영역 박스(dashed 1.5~2px) + 박스 모서리 바깥 번호 칩 — 점 찍기·내용 가림 금지. 좌표는 %(x,y,w,h)로 기록해 어느 해상도에서도 재현.

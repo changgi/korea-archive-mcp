@@ -1,0 +1,126 @@
+{
+ "video": "428-npc-170.mp4",
+ "duration": 603,
+ "size": "",
+ "sound": "유성",
+ "cuts": 89,
+ "scenes": [
+  {
+   "i": 1,
+   "start": 52.53,
+   "end": 71.17,
+   "dur": 18.64,
+   "t": 58.12,
+   "label": "0:58",
+   "frame": "keyframes/scene_01_058.jpg"
+  },
+  {
+   "i": 2,
+   "start": 79.9,
+   "end": 95.92,
+   "dur": 16.02,
+   "t": 84.71,
+   "label": "1:24",
+   "frame": "keyframes/scene_02_124.jpg"
+  },
+  {
+   "i": 3,
+   "start": 108.42,
+   "end": 133.87,
+   "dur": 25.45,
+   "t": 126.23,
+   "label": "2:06",
+   "frame": "keyframes/scene_03_206.jpg"
+  },
+  {
+   "i": 4,
+   "start": 148.63,
+   "end": 166.57,
+   "dur": 17.94,
+   "t": 161.19,
+   "label": "2:41",
+   "frame": "keyframes/scene_04_241.jpg"
+  },
+  {
+   "i": 5,
+   "start": 166.57,
+   "end": 197.68,
+   "dur": 31.11,
+   "t": 175.9,
+   "label": "2:55",
+   "frame": "keyframes/scene_05_255.jpg"
+  },
+  {
+   "i": 6,
+   "start": 215.65,
+   "end": 236.65,
+   "dur": 21.0,
+   "t": 230.35,
+   "label": "3:50",
+   "frame": "keyframes/scene_06_350.jpg"
+  },
+  {
+   "i": 7,
+   "start": 262.0,
+   "end": 294.7,
+   "dur": 32.7,
+   "t": 284.89,
+   "label": "4:44",
+   "frame": "keyframes/scene_07_444.jpg"
+  },
+  {
+   "i": 8,
+   "start": 294.7,
+   "end": 318.21,
+   "dur": 23.51,
+   "t": 311.16,
+   "label": "5:11",
+   "frame": "keyframes/scene_08_511.jpg"
+  },
+  {
+   "i": 9,
+   "start": 325.01,
+   "end": 341.92,
+   "dur": 16.91,
+   "t": 330.08,
+   "label": "5:30",
+   "frame": "keyframes/scene_09_530.jpg"
+  },
+  {
+   "i": 10,
+   "start": 341.92,
+   "end": 368.8,
+   "dur": 26.88,
+   "t": 360.74,
+   "label": "6:00",
+   "frame": "keyframes/scene_10_600.jpg"
+  },
+  {
+   "i": 11,
+   "start": 368.8,
+   "end": 388.9,
+   "dur": 20.1,
+   "t": 374.83,
+   "label": "6:14",
+   "frame": "keyframes/scene_11_614.jpg"
+  },
+  {
+   "i": 12,
+   "start": 402.0,
+   "end": 419.98,
+   "dur": 17.98,
+   "t": 414.59,
+   "label": "6:54",
+   "frame": "keyframes/scene_12_654.jpg"
+  },
+  {
+   "i": 13,
+   "start": 432.78,
+   "end": 452.78,
+   "dur": 20.0,
+   "t": 442.78,
+   "label": "7:22",
+   "frame": "keyframes/scene_13_722.jpg"
+  }
+ ]
+}

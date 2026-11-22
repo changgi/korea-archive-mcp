@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="UTF-8"><title>03</title><style>
+  :root{
+    --bg:#0a0c10; --panel:#14171d; --crimson:#e03540; --gold:#e8b45a; --cream:#faf3e3;
+    --sub:#8d94a2; --green:#5fd07f; --amber:#e8b45a;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{background:#000; font-family:'Noto Sans KR','Apple SD Gothic Neo','Malgun Gothic',sans-serif; padding:40px; color:var(--cream);}
+  .card{width:1080px; height:1080px; margin:0 auto 56px; position:relative; overflow:hidden;
+        background:var(--bg); box-shadow:0 10px 60px rgba(0,0,0,.7);}
+  /* 콘텐츠 컬럼 — 하단 안전영역 150px (brand/pageno와 절대 안 겹침) */
+  .col{position:relative; z-index:4; height:100%; display:flex; flex-direction:column; padding:70px 86px 150px;}
+  /* 장식 */
+  .grain{position:absolute; inset:0; pointer-events:none; opacity:.45; mix-blend-mode:overlay;
+    background-image:repeating-linear-gradient(0deg, rgba(255,255,255,.03) 0 1px, transparent 1px 3px);}
+  .frame{position:absolute; inset:24px; border:2px solid rgba(232,180,90,.55); pointer-events:none;}
+  .corner{position:absolute; width:34px; height:34px; border:4px solid var(--gold);}
+  .c-tl{top:16px; left:16px; border-right:none; border-bottom:none;}
+  .c-tr{top:16px; right:16px; border-left:none; border-bottom:none;}
+  .c-bl{bottom:16px; left:16px; border-right:none; border-top:none;}
+  .c-br{bottom:16px; right:16px; border-left:none; border-top:none;}
+  /* 타이포 */
+  .kicker{display:inline-block; background:var(--crimson); color:#fff; font-weight:900;
+          letter-spacing:.28em; font-size:24px; padding:13px 30px 13px 36px;}
+  h1{font-size:80px; line-height:1.24; font-weight:900; word-break:keep-all; color:#fff;}
+  h2{font-size:54px; line-height:1.27; font-weight:900; word-break:keep-all; color:#fff;}
+  .gold{color:var(--gold);} .red{color:var(--crimson);}
+  .lead{font-size:31px; line-height:1.6; word-break:keep-all; color:#e5ddc9;}
+  .lead b{color:var(--gold);}
+  .credit{font-size:19px; color:var(--sub); line-height:1.5;}
+  .divider{height:6px; width:150px; background:linear-gradient(90deg,var(--gold),var(--crimson)); margin:24px 0;}
+  .years{font-size:26px; color:var(--gold); font-weight:700; letter-spacing:.05em; margin:4px 0 12px; word-break:keep-all;}
+  /* 하단 고정 표기 */
+  .pageno{position:absolute; bottom:46px; right:76px; font-size:23px; color:var(--sub); letter-spacing:.12em; z-index:9;}
+  .brand{position:absolute; bottom:46px; left:76px; font-size:23px; color:var(--sub); z-index:9;}
+  .stamp{position:absolute; border:5px solid var(--crimson); color:var(--crimson); border-radius:10px;
+         padding:10px 22px; font-weight:900; font-size:28px; letter-spacing:.1em;
+         transform:rotate(-8deg); background:rgba(224,53,64,.08); z-index:6;}
+  /* 사진 프레임 */
+  .polaroid{background:#fbf8f1; padding:14px 14px 0; box-shadow:0 14px 34px rgba(0,0,0,.55);}
+  .polaroid img{display:block; width:100%;}
+  .polaroid .cap{font-size:20px; color:#3a3f49; padding:10px 4px 12px; font-weight:700; text-align:center; word-break:keep-all;}
+  .tape{position:absolute; width:140px; height:38px; background:rgba(232,180,90,.75); box-shadow:0 2px 8px rgba(0,0,0,.3); z-index:3;}
+  .shot{background:#fff; padding:10px; box-shadow:0 18px 44px rgba(0,0,0,.7);}
+  .shot img{display:block; width:100%;}
+  .shot .cap{font-size:20px; color:#3a3f49; padding:10px 4px 4px; font-weight:700; text-align:center; word-break:keep-all;}
+  /* 파노라마 필름스트립 */
+  .pano{border-top:16px solid #000; border-bottom:16px solid #000; background:#000; position:relative;
+        box-shadow:0 14px 40px rgba(0,0,0,.6);}
+  .pano:before,.pano:after{content:''; position:absolute; left:0; right:0; height:14px;
+    background-image:repeating-linear-gradient(90deg, #fff 0 22px, transparent 22px 44px); opacity:.9;}
+  .pano:before{top:-15px;} .pano:after{bottom:-15px;}
+  .pano .row{display:flex; gap:6px;}
+  .pano img{flex:1; height:300px; object-fit:cover; display:block; filter:contrast(1.15) brightness(1.05);}
+  /* 시리즈 스트립 */
+  .strip{display:flex; gap:10px;}
+  .strip img{flex:1; height:130px; object-fit:cover; border:2px solid #3a4152;}
+  /* 목록·상태 */
+  .reel{background:var(--panel); border:1px solid #262b35; border-left:10px solid var(--gold); padding:16px 24px; margin:11px 0;}
+  .reel .no{font-size:24px; font-weight:900; color:var(--gold); letter-spacing:.06em; font-family:Consolas,Menlo,monospace;}
+  .reel .t{font-size:26px; font-weight:700; margin-top:4px; word-break:keep-all; line-height:1.4; color:#f2ecdb;}
+  .reel .d{font-size:20px; color:var(--sub); margin-top:4px; word-break:keep-all;}
+  .reel.locked{border-left-color:var(--crimson);}
+  .badge{display:inline-block; border-radius:30px; padding:4px 16px; font-size:19px; font-weight:900; margin-left:8px; vertical-align:middle;}
+  .b-lock{background:#38151a; color:#ff7a83; border:1px solid #ff7a83;}
+  .b-half{background:#3a2c12; color:var(--amber); border:1px solid var(--amber);}
+  .b-open{background:#153019; color:var(--green); border:1px solid var(--green);}
+  .org{background:var(--panel); border:1px solid #262b35; border-left:8px solid var(--gold);
+       padding:13px 22px; margin:10px 0; display:flex; justify-content:space-between; align-items:center; gap:16px;}
+  .org .name{font-size:28px; font-weight:900; word-break:keep-all;}
+  .org .name small{display:block; font-size:19px; color:var(--sub); font-weight:400; margin-top:2px;}
+  .org .hits{font-size:26px; font-weight:900; white-space:nowrap;}
+  .hit-y{color:var(--green);} .hit-w{color:var(--amber);} .hit-n{color:#ff7a83;}
+  /* 3단계 분류 */
+  .tier{flex:1; background:var(--panel); border:1px solid #262b35; border-top:10px solid; padding:24px;}
+  .tier .icon{font-size:52px;}
+  .tier .t{font-size:29px; font-weight:900; margin-top:10px; word-break:keep-all;}
+  .tier .d{font-size:21px; color:var(--sub); margin-top:6px; line-height:1.5; word-break:keep-all;}
+  /* 타임라인 */
+  .tl{border-left:5px solid var(--gold); margin:20px 0 0 24px; padding-left:36px;}
+  .tl .ev{margin:0 0 24px; position:relative;}
+  .tl .ev:before{content:''; position:absolute; left:-47px; top:8px; width:18px; height:18px; border-radius:50%;
+    background:var(--crimson); border:4px solid var(--bg); box-shadow:0 0 0 3px var(--gold);}
+  .tl .yr{font-size:29px; font-weight:900; color:var(--gold); letter-spacing:.04em;}
+  .tl .tx{font-size:27px; line-height:1.5; color:#e5ddc9; word-break:keep-all; margin-top:2px;}
+  /* 인용 */
+  .quote{border-left:6px solid var(--gold); padding:14px 22px; margin-top:20px;
+         font-size:29px; line-height:1.55; color:#f2ecdb; font-style:italic; word-break:keep-all; background:rgba(232,180,90,.07);}
+  .docquote{border-left:6px solid var(--gold); padding:16px 24px; margin-top:18px;
+            font-size:30px; line-height:1.6; color:#f2ecdb; word-break:keep-all; background:rgba(232,180,90,.07);}
+  .docquote small{display:block; font-size:21px; color:var(--sub); margin-top:8px; font-style:normal;}
+  /* 빅넘버 */
+  .bignum{font-size:190px; font-weight:900; color:var(--gold); line-height:1; letter-spacing:-.02em;}
+  /* 번호 리스트 */
+  .li{display:flex; gap:22px; align-items:flex-start; margin:22px 0; font-size:31px; line-height:1.5; word-break:keep-all; color:#eee6d2;}
+  .li .n{flex:0 0 54px; height:54px; border-radius:50%; background:var(--crimson); color:#fff;
+         font-weight:900; font-size:27px; display:flex; align-items:center; justify-content:center;}
+  .li b{color:var(--gold);}
+  /* 부채꼴 스택 — 제목 아래에만 배치할 것 */
+  .fanwrap{position:relative; height:480px;}
+  .fcard{position:absolute; width:600px; background:#f5efdf; color:#20242c; padding:22px 26px;
+         box-shadow:0 18px 40px rgba(0,0,0,.65); border:1px solid #d8d0bc;}
+  .fcard .no{font-family:Consolas,Menlo,monospace; font-weight:900; font-size:25px; color:#b3262f;}
+  .fcard .t{font-size:25px; font-weight:900; margin-top:4px; line-height:1.35; word-break:keep-all;}
+  .fcard .d{font-size:19px; color:#5a6070; margin-top:4px;}
+
+  .bleed{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; filter:contrast(1.12) brightness(.95);}
+  .shade{position:absolute; inset:0; background:linear-gradient(180deg, rgba(0,0,0,.05) 35%, rgba(0,0,0,.88) 78%);}
+  .shade-top{position:absolute; inset:0; background:linear-gradient(180deg, rgba(0,0,0,.82) 0%, rgba(0,0,0,0) 32%, rgba(0,0,0,0) 55%, rgba(0,0,0,.9) 85%);}
+  .mosaic{position:absolute; inset:0; display:grid; gap:4px; background:#000;}
+  .mosaic img{width:100%; height:100%; object-fit:cover; display:block; filter:contrast(1.1);}
+  .m22{grid-template-columns:1fr 1fr; grid-template-rows:1fr 1fr;}
+  .m33{grid-template-columns:repeat(3,1fr); grid-template-rows:repeat(3,1fr);}
+  .m3c{grid-template-columns:repeat(3,1fr);}
+  .m2c{grid-template-columns:1fr 1fr;}
+  .bottom{position:absolute; left:0; right:0; bottom:0; z-index:6; padding:0 76px 168px !important;}
+  .foot{position:absolute; left:0; right:0; bottom:0; height:230px; z-index:5; background:linear-gradient(180deg, rgba(0,0,0,0), rgba(0,0,0,.93) 55%);}
+  .topz{position:absolute; left:0; right:0; top:0; z-index:5; padding:64px 76px 0;}
+  .hl{font-size:76px; line-height:1.18; font-weight:900; color:#fff; word-break:keep-all; text-shadow:0 4px 24px rgba(0,0,0,.8);}
+  .hl .g{color:var(--gold);}
+  .chip{display:inline-block; background:rgba(10,12,16,.82); border:2px solid var(--gold); color:#fff; font-weight:900; font-size:30px; padding:10px 22px; border-radius:999px; margin:16px 10px 0 0;}
+  .chip.red{border-color:var(--crimson);}
+  .say2{display:inline-block; background:rgba(29,42,68,.92); color:#cfe0ff; font-weight:800; font-size:28px; padding:12px 24px; border-radius:20px 20px 20px 6px;}
+  .cr{position:absolute; left:76px; right:76px; bottom:84px; z-index:7; font-size:17px; color:#c9cfda; text-shadow:0 2px 8px #000; line-height:1.4;}
+  .lab{position:absolute; z-index:6; background:rgba(0,0,0,.72); color:#fff; font-weight:800; font-size:24px; padding:6px 14px;}
+  .ok{position:absolute; z-index:6; right:8px; bottom:8px; background:#1f7a3d; color:#fff; font-weight:900; font-size:18px; padding:3px 10px; border-radius:6px;}
+  .giant{font-size:330px; font-weight:900; line-height:.9; color:var(--gold); text-shadow:0 10px 40px rgba(0,0,0,.9);}
+  .band{position:absolute; left:0; right:0; z-index:5; background:rgba(8,9,12,.9); padding:30px 76px; border-top:4px solid var(--gold); border-bottom:4px solid var(--gold);}
+
+  .kick{font-size:23px; color:var(--gold); font-weight:900; letter-spacing:.14em; text-shadow:0 2px 8px #000;}
+  .kick .no{display:inline-block; background:var(--crimson); color:#fff; padding:4px 14px; margin-right:12px; letter-spacing:.05em;}
+  .inst{font-size:32px; font-weight:900; color:#fff; margin-top:10px; text-shadow:0 2px 10px #000; word-break:keep-all;}
+  .hook{font-size:74px; line-height:1.16; font-weight:900; color:#fff; text-shadow:0 6px 30px rgba(0,0,0,.95); word-break:keep-all;}
+  .hook .g{color:var(--gold);}
+  .tc{position:absolute; z-index:6; background:var(--crimson); color:#fff; font-weight:900; font-family:Consolas,Menlo,monospace; font-size:28px; padding:6px 14px;}
+  .scap{position:absolute; left:0; right:0; bottom:0; z-index:6; background:linear-gradient(180deg,rgba(0,0,0,0),rgba(0,0,0,.9) 40%); color:#fff; font-size:24px; font-weight:700; line-height:1.4; padding:40px 16px 12px; word-break:keep-all;}
+  .cell{position:relative; overflow:hidden; background:#000;}
+  .cell img{width:100%; height:100%; object-fit:cover; display:block;}
+  .cell .ml{position:absolute; left:10px; top:10px; z-index:6; background:rgba(0,0,0,.75); color:#fff; font-size:19px; font-weight:800; padding:4px 10px; max-width:90%;}
+  .box{position:absolute; z-index:6; border:3px dashed #ffd36b; box-shadow:0 0 0 2px rgba(0,0,0,.55);}
+  .chipn{position:absolute; z-index:7; width:46px; height:46px; border-radius:50%; background:var(--crimson); color:#fff; font-weight:900; font-size:26px; display:flex; align-items:center; justify-content:center; border:3px solid #fff; box-shadow:0 4px 12px rgba(0,0,0,.6);}
+  .legend{position:absolute; left:0; right:0; bottom:0; z-index:6; background:rgba(8,9,12,.92); border-top:4px solid var(--gold); padding:22px 60px 112px;}
+  .legend div{display:flex; gap:14px; align-items:flex-start; font-size:25px; color:#f2ecdb; line-height:1.4; margin:6px 0; word-break:keep-all;}
+  .legend b.n{flex:0 0 36px; height:36px; border-radius:50%; background:var(--crimson); color:#fff; font-size:21px; display:flex; align-items:center; justify-content:center;}
+  .meta{position:absolute; left:70px; right:70px; z-index:6; background:rgba(244,236,216,.96); color:#1d2128; padding:30px 38px; border-top:12px solid #b3262f; box-shadow:0 24px 60px rgba(0,0,0,.75);}
+  .meta .row{display:flex; gap:20px; border-top:1px dashed #b9ad92; padding:12px 0; font-size:27px; line-height:1.4;}
+  .meta .row:first-of-type{border-top:none;}
+  .meta .k{flex:0 0 170px; font-weight:900; color:#8a2a1f; font-size:23px; padding-top:3px;}
+  .meta .v{flex:1; font-weight:700; word-break:keep-all; overflow-wrap:anywhere;}
+  .try{font-family:Consolas,Menlo,monospace; font-size:22px; color:#bcd0f0; background:rgba(20,28,44,.9); border-left:6px solid #5b8def; padding:14px 18px; margin-top:16px; word-break:break-all;}
+</style></head><body>
+<div class="card" style="background:#0a0a0a"><img class="bleed" src="{{img:../../../series30v2/img/03/hero_awm_C58219.jpg|maxdim=1400|q=84}}" style="object-fit:cover; object-position:center 40%; "><div class="shade-top"></div><div class="topz"><div class="kick"><span class="no">03</span>Ⅰ 전쟁의 기록</div><div class="inst">🇦🇺 호주 전쟁기념관 AWM</div><div style="margin-top:14px;"><span class="say2">"가평 전투 사진 보여줘"</span></div></div><div class="bottom" style="padding-bottom:140px !important;"><div class="hook">1951년 한국,<br><span class="g">호주 대대</span>의 얼굴들</div></div><div class="foot"></div><div class="frame" style="z-index:7;"></div><div class="cr">사진: 호주 전쟁기념관 C58219 / 147350 (1951 한국, Copyright expired - public domain)</div><div class="brand" style="z-index:9; text-shadow:0 2px 8px #000;">KOREA ARCHIVE 통합검색 · <span style="color:#e8b45a;">30곳 탐방 03</span></div><div class="pageno" style="z-index:9; color:#e5ddc9; text-shadow:0 2px 8px #000;">1 / 5</div></div>
+
+<div class="card"><div class="mosaic m22" style="bottom:210px; grid-template-rows:1fr 1fr;"><div class="cell"><img src="{{img:../../../series30v2/img/03/awm_C276864.jpg|maxdim=900|q=82}}" style="object-fit:cover; object-position:center;"><div class="ml">가평 계곡 전경 · C276864</div></div><div class="cell"><img src="{{img:../../../series30v2/img/03/awm_C276865_bcoy.jpg|maxdim=900|q=82}}" style="object-fit:cover; object-position:center;"><div class="ml">손글씨 &#x27;B.Coy&#x27; — 1951-04-26 B중대 · C276865</div></div><div class="cell"><img src="{{img:../../../series30v2/img/03/awm_C276849.jpg|maxdim=900|q=82}}" style="object-fit:cover; object-position:center;"><div class="ml">강을 따라 난 길 · C276849</div></div><div class="cell"><img src="{{img:../../../series30v2/img/03/awm_C276863.jpg|maxdim=900|q=82}}" style="object-fit:cover; object-position:center;"><div class="ml">세 봉우리 능선의 진지 · C276863</div></div></div><div style="position:absolute; left:0; right:0; bottom:0; height:210px; background:#0a0c10; border-top:4px solid var(--gold); z-index:5;"></div><div class="hl" style="position:absolute; left:60px; right:60px; bottom:146px; z-index:8; font-size:38px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">전투가 벌어진 <span class="g">가평의 지형</span> — 1952년 촬영</div><div class="frame" style="z-index:7;"></div><div class="cr" style="bottom:84px; font-size:16px;">Australian War Memorial C276864·C276865·C276849·C276863 (Copyright expired - public domain) — 기념관 공개 이미지 최대 640px</div><div class="brand" style="z-index:9; text-shadow:0 2px 8px #000;">KOREA ARCHIVE 통합검색 · <span style="color:#e8b45a;">30곳 탐방 03</span></div><div class="pageno" style="z-index:9; color:#e5ddc9; text-shadow:0 2px 8px #000;">2 / 5</div></div>
+
+<div class="card" style="background:#0b0c10;"><div style="position:absolute; left:0; right:0; top:0; height:760px; overflow:hidden;"><div style="position:relative; width:100%; height:100%;"><img src="{{img:../../../series30v2/img/03/hero_awm_C58219.jpg|maxdim=1600|q=86}}" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center 0.0%;"><div class="box" style="left:0%; top:8.06%; width:30%; height:20.16%;"></div><div class="chipn" style="left:max(8px, calc(0% - 20px)); top:max(8px, calc(8.06% - 20px));">1</div><div class="box" style="left:38%; top:14.11%; width:20%; height:20.16%;"></div><div class="chipn" style="left:max(8px, calc(38% - 20px)); top:max(8px, calc(14.11% - 20px));">2</div><div class="box" style="left:70%; top:58.47%; width:30%; height:32.26%;"></div><div class="chipn" style="left:max(8px, calc(70% - 20px)); top:max(8px, calc(58.47% - 20px));">3</div></div></div><div class="lab" style="left:60px; top:710px; font-size:20px; z-index:8;">기록 해설 — 보이는 것만 읽었습니다</div><div class="legend" style="top:760px;"><div><b class="n">1</b><span>챙 넓은 모자(슬라우치 햇)를 쓴 병사들</span></div><div><b class="n">2</b><span>상의를 벗은 병사들</span></div><div><b class="n">3</b><span>앞쪽의 어린 소나무 가지</span></div></div><div class="frame" style="z-index:7;"></div><div class="cr">AWM C58219 — 기술: &#x27;KOREA, 1951. LIEUTENANT LEONARD MONTGOMERIE MC (CENTRE, …&#x27;</div><div class="brand" style="z-index:9; text-shadow:0 2px 8px #000;">KOREA ARCHIVE 통합검색 · <span style="color:#e8b45a;">30곳 탐방 03</span></div><div class="pageno" style="z-index:9; color:#e5ddc9; text-shadow:0 2px 8px #000;">3 / 5</div></div>
+
+<div class="card"><img class="bleed" src="{{img:../../../series30v2/img/03/hero_awm_C58219.jpg|maxdim=900|q=70}}" style="filter:blur(14px) brightness(.38); transform:scale(1.1);"><div class="topz"><div class="kick"><span class="no">03</span>Ⅰ 전쟁의 기록</div><div class="inst">🇦🇺 호주 전쟁기념관 AWM</div><div class="hl" style="font-size:50px; margin-top:22px;">1952년 4월, 가평 계곡</div><div class="giant" style="font-size:112px; margin-top:8px;">1952.4.16</div></div><div class="meta" style="top:520px;"><div class="row"><div class="k">기록</div><div class="v">C276864 Kapyong Valley, Korea</div></div><div class="row"><div class="k">설명</div><div class="v">가평 계곡과 주변 고지를 내려다본 전경</div></div><div class="row"><div class="k">권리</div><div class="v">Copyright expired - public domain</div></div></div><div class="frame" style="z-index:7;"></div><div class="cr">조회 2026-11-22 실측 · cross_search(sources=awm)</div><div class="brand" style="z-index:9; text-shadow:0 2px 8px #000;">KOREA ARCHIVE 통합검색 · <span style="color:#e8b45a;">30곳 탐방 03</span></div><div class="pageno" style="z-index:9; color:#e5ddc9; text-shadow:0 2px 8px #000;">4 / 5</div></div>
+
+<div class="card"><img class="bleed" src="{{img:../../../series30v2/img/03/awm_C276863.jpg|maxdim=1000|q=72}}" style="filter:grayscale(.4) brightness(.32);"><div class="col" style="padding:110px 76px 160px; justify-content:center;"><div class="kick">직접 해 보기</div><div class="hl" style="font-size:60px; margin-top:16px;">이 한 문장이면 됩니다</div><div style="margin-top:28px;"><span class="say2" style="font-size:40px; padding:18px 30px;">"가평 전투 사진 보여줘"</span></div><div class="try">cross_search(sources=awm)</div><div style="font-size:26px; color:#e5ddc9; margin-top:26px; line-height:1.6; word-break:keep-all;">KOREA ARCHIVE 통합검색 커넥터를 연결한 Claude에게 한국어로 말하면<br>9개국 30곳 문서고를 함께 찾고, 원본 링크와 권리까지 알려 줍니다.</div><div style="font-size:22px; color:var(--gold); margin-top:22px; overflow-wrap:anywhere;">원문 ↗ https://www.awm.gov.au/collection/C276864</div></div><div class="frame" style="z-index:7;"></div><div class="brand" style="z-index:9; text-shadow:0 2px 8px #000;">KOREA ARCHIVE 통합검색 · <span style="color:#e8b45a;">30곳 탐방 03</span></div><div class="pageno" style="z-index:9; color:#e5ddc9; text-shadow:0 2px 8px #000;">5 / 5</div></div>
+</body></html>

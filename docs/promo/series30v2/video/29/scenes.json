@@ -1,0 +1,99 @@
+{
+ "video": "428-npc-171.mp4",
+ "duration": 634,
+ "size": "",
+ "sound": "유성",
+ "cuts": 73,
+ "scenes": [
+  {
+   "i": 1,
+   "start": 22.17,
+   "end": 42.73,
+   "dur": 20.56,
+   "t": 32.45,
+   "label": "0:32",
+   "frame": "keyframes/scene_01_032.jpg"
+  },
+  {
+   "i": 2,
+   "start": 51.57,
+   "end": 70.22,
+   "dur": 18.65,
+   "t": 57.16,
+   "label": "0:57",
+   "frame": "keyframes/scene_02_057.jpg"
+  },
+  {
+   "i": 3,
+   "start": 96.92,
+   "end": 117.3,
+   "dur": 20.38,
+   "t": 111.19,
+   "label": "1:51",
+   "frame": "keyframes/scene_03_151.jpg"
+  },
+  {
+   "i": 4,
+   "start": 139.03,
+   "end": 164.27,
+   "dur": 25.24,
+   "t": 151.65,
+   "label": "2:31",
+   "frame": "keyframes/scene_04_231.jpg"
+  },
+  {
+   "i": 5,
+   "start": 164.27,
+   "end": 182.45,
+   "dur": 18.18,
+   "t": 169.72,
+   "label": "2:49",
+   "frame": "keyframes/scene_05_249.jpg"
+  },
+  {
+   "i": 6,
+   "start": 239.5,
+   "end": 263.83,
+   "dur": 24.33,
+   "t": 256.53,
+   "label": "4:16",
+   "frame": "keyframes/scene_06_416.jpg"
+  },
+  {
+   "i": 7,
+   "start": 280.8,
+   "end": 307.62,
+   "dur": 26.82,
+   "t": 288.85,
+   "label": "4:48",
+   "frame": "keyframes/scene_07_448.jpg"
+  },
+  {
+   "i": 8,
+   "start": 307.62,
+   "end": 328.65,
+   "dur": 21.03,
+   "t": 322.34,
+   "label": "5:22",
+   "frame": "keyframes/scene_08_522.jpg"
+  },
+  {
+   "i": 9,
+   "start": 328.65,
+   "end": 351.58,
+   "dur": 22.93,
+   "t": 335.53,
+   "label": "5:35",
+   "frame": "keyframes/scene_09_535.jpg"
+  },
+  {
+   "i": 10,
+   "start": 351.58,
+   "end": 377.05,
+   "dur": 25.47,
+   "t": 369.41,
+   "label": "6:09",
+   "frame": "keyframes/scene_10_609.jpg"
+  }
+ ]
+}
