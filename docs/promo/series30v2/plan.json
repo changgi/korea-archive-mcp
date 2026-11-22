@@ -1474,5 +1474,311 @@
    "credit": "국사편찬위원회 한국사데이터베이스 비변사등록 — 2026-11-22 실조회"
   },
   "cta_img": "series30v2/img/07/chinamail_1885-05-18_p3.jpg"
+ },
+ "19": {
+  "hero": {
+   "file": "hero_hwaseong_jeondo_leaf.jpg",
+   "pos": "center 40%",
+   "credit": "목판: 국립중앙도서관 『華城城役儀軌』 卷首 「華城全圖」 (1801, 보호기간 만료 · NLK '이용 제한 없음') — 한 장의 앞뒤를 판심 기준으로 나란히 배치"
+  },
+  "hook": "1801년 목판에 새긴<br><span class=\"g\">화성</span>의 전체 모습",
+  "mosaic": [
+   {
+    "file": "hwaseong_haenggung_jeondo_leaf.jpg",
+    "label": "「行宮全圖」 — 奉壽堂·長樂堂"
+   },
+   {
+    "file": "hwaseong_jangan_oedo_leaf.jpg",
+    "label": "「長安門外圖」 — 문루와 敵臺"
+   },
+   {
+    "file": "hwaseong_daecha_leaf.jpg",
+    "label": "「大車全圖」「平車全圖」"
+   },
+   {
+    "file": "hwaseong_cover.jpg",
+    "label": "『華城城役儀軌』 표지",
+    "pos": "center 30%"
+   }
+  ],
+  "mosaic_title": "장서각 의궤 해제를 읽고, <span class=\"g\">의궤 도설 원본</span>을 본다",
+  "mosaic_credit": "국립중앙도서관 『華城城役儀軌』(1801) — 장서각 K2-3556 개건도감의궤 원본 이미지는 기관 허가 대상이라 미게재(해제만 인용)",
+  "ann": {
+   "file": "hero_hwaseong_jeondo_leaf.jpg",
+   "crop_y": 0.02,
+   "boxes": [
+    {
+     "x": 32,
+     "y": 5,
+     "w": 10,
+     "h": 11,
+     "t": "표제 「圖說 華城全圖」"
+    },
+    {
+     "x": 44,
+     "y": 4,
+     "w": 8,
+     "h": 20,
+     "t": "가운데 版心 「華城城役儀軌 卷首 圖說」"
+    },
+    {
+     "x": 10,
+     "y": 4,
+     "w": 22,
+     "h": 14,
+     "t": "성곽을 둘러싼 산줄기"
+    },
+    {
+     "x": 5,
+     "y": 30,
+     "w": 80,
+     "h": 45,
+     "t": "성 안 가옥·누각마다 한자 이름표"
+    }
+   ],
+   "credit": "『華城城役儀軌』 卷首 「華城全圖」 — 표시는 판화에서 직접 읽은 것"
+  },
+  "cta_img": "hwaseong_haenggung_jeondo_leaf.jpg"
+ },
+ "20": {
+  "hero": {
+   "file": "hero_hanyang_layer13_crop.jpg",
+   "pos": "center 45%",
+   "credit": "지도: 국립중앙도서관 소장 대동여지도 제13층(채색 필사본) 한양 부분 — NLK '저작권 만료' · 규장각 목판본(奎10333)과 다른 판본"
+  },
+  "hook": "대동여지도 속<br><span class=\"g\">한양</span>과 한강",
+  "mosaic": [
+   {
+    "file": "hanyang_detail_crop.jpg",
+    "label": "제13층 한양 부분 상세"
+   },
+   {
+    "file": "layer13_cover.jpg",
+    "label": "제13층 첩 표지 「大東輿地圖 第十三幅」",
+    "pos": "center 30%"
+   },
+   {
+    "file": "layer21_jeju.jpg",
+    "label": "제21층 — 제주 「漢拏山」 「白鹿潭」",
+    "pos": "center 70%"
+   },
+   {
+    "file": "layer13_full_strip.jpg",
+    "label": "제13층 한 층 전체(서해~동해)"
+   }
+  ],
+  "mosaic_title": "규장각 목록 2건 → <span class=\"g\">공개 원본</span>으로 펼쳐 보기",
+  "mosaic_credit": "국립중앙도서관 대동여지도(필사 채색본, 저작권 만료) — 규장각 원본 이미지는 게재 허가 대상이라 목록·해제만 인용",
+  "ann": {
+   "file": "hero_hanyang_layer13_crop.jpg",
+   "crop_y": 0.2,
+   "boxes": [
+    {
+     "x": 44,
+     "y": 38,
+     "w": 12,
+     "h": 12,
+     "t": "노랗게 칠한 원 — 도성(한양)"
+    },
+    {
+     "x": 46,
+     "y": 28,
+     "w": 10,
+     "h": 9,
+     "t": "「三角」 — 북한산"
+    },
+    {
+     "x": 0,
+     "y": 20,
+     "w": 38,
+     "h": 14,
+     "t": "파란 물길 — 한강"
+    },
+    {
+     "x": 20,
+     "y": 50,
+     "w": 60,
+     "h": 20,
+     "t": "붉은 도로선과 노란 경계선"
+    }
+   ],
+   "credit": "대동여지도 제13층(국립중앙도서관) — 표시는 지도에서 읽은 것"
+  },
+  "cta_img": "layer21_jeju.jpg"
+ },
+ "21": {
+  "hero": {
+   "file": "hero_hogudanja_1705.jpg",
+   "pos": "center 40%",
+   "credit": "고문서: 한국학중앙연구원 한국고문서자료관 공주 안동김씨 청음 김상헌 후손가 「호구단자」 (1705) — 원본 해상도 재구성 · 출처 표기(게재 전 기관 확인 권장)"
+  },
+  "hook": "1705년, 한 집안의<br><span class=\"g\">호적 신고서</span>",
+  "mosaic": [
+   {
+    "file": "hogudanja_1714.jpg",
+    "label": "호구단자 1714",
+    "pos": "center 30%"
+   },
+   {
+    "file": "junhogu_1735.jpg",
+    "label": "준호구 1735 — 공산현 관인"
+   },
+   {
+    "file": "myeongmun_1830.jpg",
+    "label": "명문(땅 문서) 1830"
+   },
+   {
+    "file": "chijemun.jpg",
+    "label": "치제문(抄)"
+   }
+  ],
+  "mosaic_title": "한 문중의 고문서 — <span class=\"g\">130년의 서류철</span>",
+  "mosaic_credit": "한국고문서자료관 L014423 — DZI 타일을 원본 해상도로 재구성 · 문서 자체는 보호기간 만료(1705~1830)",
+  "ann": {
+   "file": "hero_hogudanja_1705.jpg",
+   "crop_y": 0.0,
+   "boxes": [
+    {
+     "x": 88,
+     "y": 3,
+     "w": 5,
+     "h": 42,
+     "t": "첫 줄 — 머리 '康熙', 끝 '戶籍單子'"
+    },
+    {
+     "x": 80,
+     "y": 7,
+     "w": 5,
+     "h": 45,
+     "t": "'經仕郎金昌彦年三十丙辰生本安東' — 신고인과 본관"
+    },
+    {
+     "x": 27,
+     "y": 46,
+     "w": 32,
+     "h": 48,
+     "t": "아래쪽 노비 이름 열거"
+    }
+   ],
+   "credit": "호구단자 1705(숙종 31) — 표시한 글자는 문서에서 직접 읽은 것"
+  },
+  "cta_img": "myeongmun_1830.jpg"
+ },
+ "22": {
+  "hero": {
+   "file": "geunjeongjeon_1930_ndl.jpg",
+   "pos": "center 45%",
+   "credit": "사진: 일본 국립국회도서관 『朝鮮博覧会記念写真帖』(1930) 「勤政殿」 — Public Domain Mark"
+  },
+  "hook": "국보 <span class=\"g\">근정전</span>,<br>100년 전의 모습",
+  "mosaic": [
+   {
+    "file": "gwanghwamun_1906_ndl.jpg",
+    "label": "1906 「京城光化門」"
+   },
+   {
+    "file": "geunjeongjeon_1910_crop.jpg",
+    "label": "1910 「景福宮內勤政殿」"
+   },
+   {
+    "file": "hero_geunjeongjeon_1922_ndl.jpg",
+    "label": "1922 『朝鮮之風光』"
+   },
+   {
+    "file": "geunjeongjeon_1906_commons.jpg",
+    "label": "1906 근정전 앞 사람들"
+   }
+  ],
+  "mosaic_title": "1906 · 1910 · 1922 · 1930 — <span class=\"g\">같은 전각, 네 시점</span>",
+  "mosaic_credit": "일본 국립국회도서관 사진첩(PDM) · 위키미디어 공용(PD, 원 출처 NDL) — 국가유산포털 사진은 이 환경에서 접속 불가로 미수집",
+  "ann": {
+   "file": "geunjeongjeon_1910_crop.jpg",
+   "boxes": [
+    {
+     "x": 20,
+     "y": 10,
+     "w": 62,
+     "h": 50,
+     "t": "2층 전각 — 가운데 열린 문 2칸"
+    },
+    {
+     "x": 10,
+     "y": 58,
+     "w": 80,
+     "h": 20,
+     "t": "2단 월대와 계단"
+    },
+    {
+     "x": 0,
+     "y": 75,
+     "w": 30,
+     "h": 20,
+     "t": "앞마당 왼쪽 품계석 열"
+    }
+   ],
+   "credit": "『大日本帝国朝鮮写真帖』(1910, 統監府 編) 「景福宮內勤政殿」 — 표시는 사진에서 보이는 것만"
+  },
+  "cta_img": "gwanghwamun_1906_ndl.jpg"
+ },
+ "23": {
+  "hero": {
+   "file": "hero_eonhae_p1_naratmalssami.jpg",
+   "pos": "center 30%",
+   "credit": "고서: 국립중앙도서관 『世宗御製訓民正音』 언해본 첫 면 (NLK '저작권 만료')"
+  },
+  "hook": "\"나라의 말이 중국과 달라\"<br><span class=\"g\">훈민정음</span> 첫 면",
+  "mosaic": [
+   {
+    "file": "eonhae_p2.jpg",
+    "label": "언해본 둘째 면",
+    "pos": "center 30%"
+   },
+   {
+    "file": "eonhae_cover.jpg",
+    "label": "언해본 표지 「訓民正音」",
+    "pos": "center 40%"
+   },
+   {
+    "file": "haerye1946_ch_initials.jpg",
+    "label": "해례본 1946 영인본 — 초성",
+    "pos": "center 30%"
+   },
+   {
+    "file": "haerye1946_jejahae.jpg",
+    "label": "해례본 1946 영인본 — 「制字解」",
+    "pos": "center 30%"
+   }
+  ],
+  "mosaic_title": "언해본과 해례본(1946 영인) — <span class=\"g\">2,820건 중에서</span>",
+  "mosaic_credit": "국립중앙도서관(저작권 만료) — 해례본 원본은 간송미술관 소장, 여기 실린 것은 朝鮮語學會 1946 영인본",
+  "ann": {
+   "file": "hero_eonhae_p1_naratmalssami.jpg",
+   "crop_y": 0.05,
+   "boxes": [
+    {
+     "x": 88,
+     "y": 0,
+     "w": 11,
+     "h": 45,
+     "t": "큰 글자 「世宗御製訓民正音」 — 한자마다 독음"
+    },
+    {
+     "x": 33,
+     "y": 12,
+     "w": 9,
+     "h": 28,
+     "t": "첫머리 '나랏말…' 구절 (옛 한글 — 현대어로 '나라의 말이')"
+    },
+    {
+     "x": 44,
+     "y": 12,
+     "w": 10,
+     "h": 28,
+     "t": "「國之語音」 — 한자 옆 작은 한글 독음"
+    }
+   ],
+   "credit": "『世宗御製訓民正音』 언해본 — 표시한 글자는 면에서 직접 읽은 것"
+  },
+  "cta_img": "haerye1946_jejahae.jpg"
  }
 }

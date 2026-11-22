@@ -24,6 +24,7 @@ css += '''
 .it li b{color:#8a2a1f;margin-right:6px}
 .it .tool{font-family:var(--mono);font-size:.78rem;color:var(--muted);overflow-wrap:anywhere}
 .it .lk{font-size:.85rem;display:flex;gap:14px;flex-wrap:wrap}
+.set{margin-top:6px}.set b{display:block;font-size:.85rem;color:var(--accent);margin-bottom:6px}.set a{display:inline-block;width:calc(20% - 4px);margin:0 4px 4px 0}.set img{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:4px;display:block}
 .status{background:#fff7e6;border:1px solid #f0d9a8;border-radius:12px;padding:16px 18px;margin-top:20px;font-size:.95rem}
 '''
 parts_nav = ''.join(f'<a href="#p{p[2]}">{E(p[0])} {E(p[1])}<span>{p[2]:02d}–{p[3]:02d}</span></a>' for p in d['parts'])
@@ -33,11 +34,15 @@ for i, p in enumerate(d['parts']):
     cards = []
     for it in items:
         lis = ''.join(f'<li><b>{E(k)}</b>{E(v)}</li>' for k, v in it['facts'])
-        cards.append(f'''<article class="it" id="s{it["n"]:02d}"><img loading="lazy" src="promo/series30/thumbs/s{it["n"]:02d}.jpg" alt="{E(it["inst"])} — {E(it["head"])} 카드">
+        v2 = sorted((docs / 'promo' / 'series30v2' / 'build' / f'{it["n"]:02d}').glob('*.jpg'))
+        strip = ''.join(f'<a href="promo/series30v2/build/{it["n"]:02d}/{f.name}" target="_blank"><img loading="lazy" src="promo/series30v2/build/{it["n"]:02d}/{f.name}" alt="{it["n"]:02d} 캐러셀 {k}/{len(v2)}"></a>' for k, f in enumerate(v2, 1))
+        setlink = f'<div class="set"><b>인스타 캐러셀 {len(v2)}장</b>{strip}</div><div class="lk"><a href="promo/series30v2/build/{it["n"]:02d}/caption.txt" target="_blank">소개글(캡션) 열기</a></div>' if v2 else ''
+        cover = f'promo/series30v2/build/{it["n"]:02d}/{v2[0].name}' if v2 else f'promo/series30/thumbs/s{it["n"]:02d}.jpg'
+        cards.append(f'''<article class="it" id="s{it["n"]:02d}"><img loading="lazy" src="{cover}" alt="{E(it["inst"])} — {E(it["head"])} 카드">
 <div class="b"><div class="inst">{it["n"]:02d} · {it["flag"]} {E(it["inst"])}</div><h3>{E(it["head"])}</h3>
 <div class="q"><span id="sq{it["n"]}">{E(it["say"])}</span><button type="button" onclick="navigator.clipboard.writeText(document.getElementById('sq{it["n"]}').textContent);this.textContent='복사됨 ✓'">복사</button></div>
 <ul>{lis}</ul><div class="tool">{E(it["tool"])}</div>
-<div class="lk"><a href="{E(it["link"])}" target="_blank" rel="noopener">원문 기록 열기 ↗</a><a href="promo/series30/s{it["n"]:02d}.png" download>카드 PNG</a></div></div></article>''')
+<div class="lk"><a href="{E(it["link"])}" target="_blank" rel="noopener">원문 기록 열기 ↗</a><a href="promo/series30/s{it["n"]:02d}.png" download>요약 카드 PNG</a></div>{setlink}</div></article>''')
     secs.append(f'<section id="p{p[2]}" class="{"tint" if i % 2 else ""}"><div class="wrap"><p class="pill">{E(p[0])}부</p><h2 style="font-family:var(--serif);color:var(--ink);font-size:1.9rem;margin:12px 0 4px">{E(p[1])}</h2><div class="grid30">{"".join(cards)}</div></div></section>')
 flags = {}
 for it in d['items']: flags[it['flag']] = flags.get(it['flag'], 0) + 1
@@ -55,18 +60,19 @@ page = f'''<!DOCTYPE html>
 <header class="hero" id="top"><div class="wrap narrow">
 <span class="pill">예제 시리즈 · 30곳 전부</span>
 <h1>30곳 문서고 <em>탐방</em></h1>
-<p class="sub">이 도구가 함께 찾는 30곳을 <b>한 곳씩</b> 열어 봅니다. 각 예제는 그곳에 맞는 한 문장 질문과, 그 질문에 실제로 돌아온 기록입니다. 모든 결과는 {E(d["checked"])} 실제 도구 호출로 확인했습니다.</p>
+<p class="sub">이 도구가 함께 찾는 30곳을 <b>한 곳씩</b> 열어 봅니다. 곳마다 <b>원본 이미지로 가득 찬 인스타그램 캐러셀(4~7장)</b>과 소개글을 세트로 드립니다 — 원본 사진 한 장, 함께 찾은 원본 모음, 사진 속 글자를 짚어 읽는 해설 카드, 영상이 있으면 장면 해설까지. 각 예제는 그곳에 맞는 한 문장 질문과, 그 질문에 실제로 돌아온 기록입니다. 모든 결과는 {E(d["checked"])} 실제 도구 호출로 확인했습니다.</p>
 <p style="font-size:1.6rem;margin-top:18px;letter-spacing:.2em">{" ".join(flags)}</p>
 <div class="parts">{parts_nav}</div>
 </div></header>
 {"".join(secs)}
 <section id="status"><div class="wrap narrow"><h2 style="font-family:var(--serif);color:var(--ink);font-size:1.7rem">솔직한 현황 — 막힌 곳도 숨기지 않습니다</h2>
 <div class="status">
-<p><b>정상 응답 26곳</b> · 30곳 헬스체크({E(d["checked"])} 실측).</p>
-<p style="margin-top:8px"><b>08 Gallica</b>와 <b>28 정보공개</b>는 기관 쪽에서 서버 자동 조회를 막거나 응답하지 않습니다. 그래도 수집 대상에서 빼지 않고, 응답에 <b>브라우저·웹 검색으로 여는 공식 경로</b>를 안내합니다(예제 08·28이 그 실제 응답입니다).</p>
-<p style="margin-top:8px"><b>11 한국사DB</b>는 연합검색 색인(공식 개방파일)이 아직 설정되지 않아, 전용 판독 도구(nedb_search)로 직접 조회한 결과를 실었습니다.</p>
-<p style="margin-top:8px"><b>30 DigitalNZ</b>는 이날 한때 서버 IP가 차단(403)됐다가 재실측에서 정상 응답했습니다.</p>
-<p style="margin-top:8px">이 시리즈를 만들며 찾은 도구 결함 3건(일본 국립국회도서관 일문 검색, 인터넷 아카이브 사본 묶기, 링크 추적 꼬리)은 바로 고쳐 배포했습니다 — 예제 18·29가 고친 뒤의 결과입니다.</p>
+<p><b>이 시리즈를 만들며 고친 것</b> — 막힌 곳은 빼지 않고 도구를 고쳤습니다.</p>
+<p style="margin-top:8px"><b>08 Gallica</b>: 서버 자동 조회가 403으로 막히면 같은 국립도서관의 <b>BnF 공식 카탈로그</b>로 넘어가 기록을 수집하고, 디지털화된 Gallica 원본 링크를 함께 돌려줍니다.</p>
+<p style="margin-top:8px"><b>11 한국사DB</b>: 연합검색이 늘 0건이던 문제 → 개방파일 색인이 없으면 한국사DB를 실시간 조회합니다. 비변사등록 巨文島 4건은 등록류 판독으로 확인했습니다.</p>
+<p style="margin-top:8px"><b>28 정보공개</b>: 정보공개포털 원문정보 메뉴가 2026-11-12부터 점검 중입니다. 도구가 점검 상태를 실측해 알리고, 점검 중에도 가능한 정보공개청구·대체 검색 경로를 안내합니다.</p>
+<p style="margin-top:8px"><b>영상</b>: 영상 기록의 장면 전환을 찾아 장면별 대표 프레임을 뽑는 기능을 만들었습니다(01·29 흥남 필름 장면 해설). 웹·모바일에서는 인터넷 아카이브의 시각 코드 프레임으로 같은 일을 합니다.</p>
+<p style="margin-top:8px"><b>권리를 지킨 방식</b>: 공공누리 제4유형은 자르거나 표시를 얹지 않고 원형 그대로, 기관 허가가 필요한 이미지(장서각·규장각·독립기념관 스크랩 등)는 싣지 않고 같은 기록의 공개 원본이나 참고 이미지를 쓰고 그렇다고 적었습니다. 기관 방화벽·봇 차단은 우회하지 않았습니다.</p>
 </div></div></section>
 <section id="download" class="tint"><div class="wrap narrow"><h2 style="font-family:var(--serif);color:var(--ink);font-size:1.7rem">내려받기 — 인스타그램 게시용</h2>
 <ul style="margin:16px 0 0 20px;line-height:2">
