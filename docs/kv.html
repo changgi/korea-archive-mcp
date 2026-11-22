@@ -262,6 +262,7 @@ button,select,input{font:inherit}
   // ── 주소(?manifest=·?iiif-content=·&canvas=·&compare=)
   function updURL() { const p = new URLSearchParams(); const P = panes[0]; const top = collSrc && P && P.src !== collSrc ? collSrc : null;
     if (top) p.set('collection', top); if (P && P.src) p.set('manifest', P.src); if (P && P.man) p.set('canvas', P.k + 1); if (panes[1] && panes[1].src) p.set('compare', panes[1].src);
+    if (location.hash.startsWith('#c=')) { p.delete('collection'); history.replaceState(null, '', '?' + p.toString() + location.hash); return; } // 압축 컬렉션 링크는 유지
     history.replaceState(null, '', '?' + p.toString()); }
   async function open(u) { const P = act || panes[0]; coll = null; collSrc = ''; ms = []; flat = []; off = new Map(); fver++; P.man = null; P.src = ''; $('#src').value = u; await openManifest(P, u); }
   $('#go').onclick = () => { const u = $('#src').value.trim(); if (u) open(u); };
@@ -273,7 +274,17 @@ button,select,input{font:inherit}
   document.addEventListener('drop', (e) => { e.preventDefault(); const u = (e.dataTransfer.getData('text/uri-list') || e.dataTransfer.getData('text') || '').trim().split('\n')[0]; const m = u.match(/[?&](?:manifest|iiif-content)=([^&]+)/); open(m ? decodeURIComponent(m[1]) : u); });
   if (innerWidth < 900) $('#main').classList.add('noleft', 'noright');
   mkPane();
-  (async () => { const q = new URLSearchParams(location.search); const man = q.get('manifest') || q.get('iiif-content'); const col = q.get('collection');
+  // 주소 #c=<압축 컬렉션> — cross_search(format='iiif')가 만든 '검색 결과 전체' 링크(서버 저장 없음: 링크 자체가 컬렉션)
+  async function fromHash() {
+    const m = location.hash.match(/^#c=([\w-]+)/); if (!m) return false;
+    try { const b = Uint8Array.from(atob(m[1].replace(/-/g, '+').replace(/_/g, '/')), (c) => c.charCodeAt(0));
+      const txt = await new Response(new Blob([b]).stream().pipeThrough(new DecompressionStream('deflate-raw'))).text();
+      const j = JSON.parse(txt); const c = norm(j); $('#src').value = c.label || '검색 결과 컬렉션';
+      if (c.kind === 'collection') { await loadCollection(j.id || 'inline:search', c); return true; }
+    } catch (e) { msg(panes[0], '링크의 컬렉션을 풀지 못했습니다 — 주소가 잘렸는지 확인하십시오. (' + e.message + ')'); return true; }
+    return false;
+  }
+  (async () => { if (await fromHash()) { syncCtl(); return; } const q = new URLSearchParams(location.search); const man = q.get('manifest') || q.get('iiif-content'); const col = q.get('collection');
     if (col) { $('#src').value = col; try { const m = norm(await getJ(col)); if (m.kind === 'collection') await loadCollection(col, m); } catch {} }
     const start = man || (col ? null : DEF); if (start) { if (!col) $('#src').value = start; await openManifest(panes[0], start, Math.max(0, (+q.get('canvas') || 1) - 1)); }
     if (q.get('compare')) toggleCompare(q.get('compare')); syncCtl(); })();
