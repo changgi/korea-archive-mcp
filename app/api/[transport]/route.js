@@ -237,6 +237,18 @@ async function openGoStatus(q) {
     return { maint: false, msg: '' };
   } catch (e) { return { maint: false, msg: `정보공개포털 응답 실패(${e.message})` }; }
 }
+// v1.95: 국가유산 원본 이미지 — 상세 API imageUrl + 이미지 목록 API(SearchImageOpenapi: sn·imageUrl·ccimDesc). 원본을 '찾아 쓰게' 직링크 제공
+async function heritageImages(kdcd, asno, ctcd, main) {
+  const urls = []; if (main) urls.push([main, '대표 이미지']);
+  try {
+    const b = await cachedText(`heriI:${kdcd}|${asno}|${ctcd}`, 24 * 3600e3, () => gtext(`https://www.khs.go.kr/cha/SearchImageOpenapi.do?ccbaKdcd=${kdcd}&ccbaAsno=${asno}&ccbaCtcd=${ctcd}`), '<');
+    const ims = [...b.matchAll(/<imageUrl>(?:<!\[CDATA\[)?\s*([^<\]]+?)\s*(?:\]\]>)?<\/imageUrl>/g)].map((m) => m[1]);
+    const ds = [...b.matchAll(/<ccimDesc>(?:<!\[CDATA\[)?\s*([^<\]]*?)\s*(?:\]\]>)?<\/ccimDesc>/g)].map((m) => m[1]);
+    ims.forEach((u, i) => { if (!urls.some(([x]) => x === u)) urls.push([u, ds[i] || '']); });
+  } catch { /* 목록 API 실패 — 대표 이미지만 */ }
+  if (!urls.length) return '';
+  return `【원본 이미지 ${urls.length}점】\n` + urls.slice(0, 10).map(([u, d], i) => `${i + 1}. ${u}${d ? ` — ${d.slice(0, 50)}` : ''}`).join('\n') + '\n';
+}
 const SOURCE_TIMEBOX_MS = 12000; // 소스별 타임박스 — 최저속(차단 대기) 소스가 전체 지연을 지배하지 않게 (실측 21.7s → ~12s)
 // v1.89: 원본 확인 — 재게시·재수집본의 sameAs NAID가 결과에 없으면 NARA 카탈로그를 직접 조회해 원본 실재를 확인하고 계보·날짜·매체를 채운다(최대 4건·6s·24h 캐시)
 async function resolveOrigins(items, stats) {
@@ -1665,6 +1677,7 @@ const JB_CROSS = `국내외 대조 절차 — 순서를 틀리면 헛수고한�
               + [g('ccbaPoss') && `소유 ${g('ccbaPoss')}`, g('ccbaAdmin') && `관리 ${g('ccbaAdmin')}`, g('ccceName') && `시대 ${g('ccceName')}`, g('ccbaLcad') && `소재 ${dclean(g('ccbaLcad')).slice(0, 60)}`].filter(Boolean).join(' · ') + '\n'
               + (content ? `【해설】\n${content}\n` : '')
               + (hfp ? `본문 지문(sha256-16): ${hfp} — 판독 시점 해설 전문 기준. 재판독 지문 불일치=원문 개정 발생.\n` : '')
+              + (await heritageImages(kdcd, asno, ctcd, g('imageUrl')))
               + '※ 출처: 국가유산청 국가유산포털 — 게재 시 출처 표기. 사진 이용은 공공누리 유형 확인.');
           }
           const hm = q.match(/ccbaCpno=(\d{13})/) || q.match(/^(\d{13})$/);
@@ -1678,7 +1691,7 @@ const JB_CROSS = `국내외 대조 절차 — 순서를 틀리면 헛수고한�
             for (const asno of cands) {
               b = await cachedText(`heriD:${kdcd}|${asno}|${ctcd}`, 24 * 3600e3,
                 () => gtext(`https://www.khs.go.kr/cha/SearchKindOpenapiDt.do?ccbaKdcd=${kdcd}&ccbaAsno=${asno}&ccbaCtcd=${ctcd}`), '<ccbaMnm1>');
-              if (xtag(b, 'ccbaMnm1')) break;
+              if (xtag(b, 'ccbaMnm1')) { var usedAsno = asno; break; } // eslint-disable-line no-var
             }
             const name = g('ccbaMnm1');
             if (!name) return text(`[${cpno}] 상세 API 미매칭(기관 식별 편차 — 2026-11-21 명세 기록). 해설은 포털에서: https://www.heritage.go.kr/heri/cul/culSelectDetail.do?ccbaCpno=${cpno}`);
@@ -1689,6 +1702,7 @@ const JB_CROSS = `국내외 대조 절차 — 순서를 틀리면 헛수고한�
               + [g('ccbaPoss') && `소유 ${g('ccbaPoss')}`, g('ccbaAdmin') && `관리 ${g('ccbaAdmin')}`, g('ccceName') && `시대 ${g('ccceName')}`, g('ccbaLcad') && `소재 ${dclean(g('ccbaLcad')).slice(0, 60)}`].filter(Boolean).join(' · ') + '\n'
               + (content ? `【해설】\n${content}\n` : '')
               + (hfp ? `본문 지문(sha256-16): ${hfp} — 판독 시점 해설 전문 기준. 재판독 지문 불일치=원문 개정 발생.\n` : '')
+              + (await heritageImages(kdcd, usedAsno, ctcd, g('imageUrl')))
               + `포털 상세: https://www.heritage.go.kr/heri/cul/culSelectDetail.do?ccbaCpno=${cpno}\n`
               + '※ 출처: 국가유산청 국가유산포털 — 게재 시 출처 표기(해설문 인용 시 포털 명기). 사진 이용은 공공누리 유형 확인.');
           }
@@ -1747,7 +1761,9 @@ const JB_CROSS = `국내외 대조 절차 — 순서를 틀리면 헛수고한�
             desc = desc.split(/자료열람|활용정보|이전글|다음글|사이트맵|COPYRIGHT/i)[0].replace(/&times;|×/g, '').trim();
             if (!no2 && !desc) return text(`[${id2}] 상세 미발견 또는 구조 상이 — idnbr을 확인하거나 mode=much에 검색어를 넣으십시오.`);
             const rline = km ? (() => { const r2 = judgeRights(`KOGL ${km[1]}`, '', '역사박물관'); return `\n권리 초판정(공공누리 제${km[1]}유형 — ${km[2].trim()}): ${r2[0]} — ${r2[1]}`; })() : '';
-            return text(`역사박물관 소장품 판독 — [${id2}]\n`
+            const imgs = [...new Set([...b.matchAll(/<img[^>]+src="([^"]+)"/gi).map((m) => m[1]).filter((u) => !/\/(images?|img|common|layout|btn|icon|logo)\//i.test(u) && !/logo|icon|btn_|blank|kogl|open_?type/i.test(u) && /\.(jpe?g|png|gif)|image|file|down|view/i.test(u))])]
+              .slice(0, 6).map((u) => (u.startsWith('http') ? u : 'https://archive.much.go.kr' + (u.startsWith('/') ? '' : '/') + u)); // v1.95: 원본 이미지 직링크
+            return text((imgs.length ? `【원본 이미지 ${imgs.length}점】\n${imgs.map((u, i) => `${i + 1}. ${u}`).join('\n')}\n` : '') + `역사박물관 소장품 판독 — [${id2}]\n`
               + [no2 && `소장품번호 ${no2}`, mat && `재질 ${mat}`, artist && `작가 ${artist}`, size && `크기 ${size}`].filter(Boolean).join(' · ') + rline + '\n'
               + (desc ? `【설명】\n${desc}\n` : '')
               + `원문·이미지: https://archive.much.go.kr/archive/nrms/view.do?idnbr=${encodeURIComponent(id2)}\n`
