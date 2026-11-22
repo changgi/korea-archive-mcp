@@ -240,7 +240,8 @@ async function collectMerged(collectors) {
   // v1.86: 동일 기록 병합 — sameAs(원본 식별자)가 다른 레코드의 id와 같으면 한 건으로 합치고 출처를 모두 남긴다(제목 언어가 달라도 교차확인)
   const items = [...map.values()];
   const byId = new Map(items.filter((it) => it.id).map((it) => [String(it.id), it]));
-  for (const it of items) if (it.lid && !byId.has(it.lid)) byId.set(it.lid, it); // NARA 고유번호(127-N-A4560형)로도 대조 — 실재할 때만 병합
+  for (const it of items) if (it.lid && !byId.has(it.lid)) byId.set(it.lid, it);
+  for (const it of items) { const fb = (String(it.media || '').match(/\/(\d{2,3}[a-z]?-[a-z]{1,6}-\d+[a-z]?)(?:_\d+)?\.\w+$/i) || [])[1]; if (fb && it.sources.some((s) => s.startsWith('nara')) && !byId.has('NARA ' + fb.toUpperCase())) byId.set('NARA ' + fb.toUpperCase(), it); } // v1.91.2: NARA 디지털 객체 파일명(428-npc-171.mp4)으로도 대조 // NARA 고유번호(127-N-A4560형)로도 대조 — 실재할 때만 병합
   const drop = new Set();
   for (const it of items) {
     const tgt = it.sameAs && byId.get(it.sameAs);
@@ -552,7 +553,7 @@ const COLLECT = {
     q = koToEn(q) || q;
     const d = await jget(`https://archive.org/advancedsearch.php?q=${encodeURIComponent(q)}&fl[]=identifier&fl[]=title&fl[]=date&fl[]=collection&rows=${n}&output=json`);
     // v1.87: NARA 재게시본 식별자 gov.archives.arc.<NAID> → sameAs(원본 NAID) — 추가 조회 없이 동일 기록 병합(44175 실측 일치)
-    return ((d.response || {}).docs || []).map((x) => { const an = (String(x.identifier || '').match(/^gov\.archives\.arc\.(\d+)$/) || [])[1]; return { title: String(x.title || ''), date: x.date || '', id: x.identifier, ...((Array.isArray(x.collection) ? x.collection[0] : x.collection) ? { series: String(Array.isArray(x.collection) ? x.collection[0] : x.collection) } : {}), ...(an ? { sameAs: `NAID ${an}` } : {}), url: `https://archive.org/details/${x.identifier}` }; });
+    return ((d.response || {}).docs || []).map((x) => { const an = (String(x.identifier || '').match(/^gov\.archives\.arc\.(\d+)$/) || [])[1]; const al = (String(x.identifier || '').match(/^(\d{2,3}[a-z]?-[a-z]{1,6}-\d+[a-z]?)$/i) || [])[1]; /* v1.91.2: NARA 고유번호형 식별자(428-npc-171) → 원본 대조 */ return { title: String(x.title || ''), date: x.date || '', id: x.identifier, ...((Array.isArray(x.collection) ? x.collection[0] : x.collection) ? { series: String(Array.isArray(x.collection) ? x.collection[0] : x.collection) } : {}), ...(an ? { sameAs: `NAID ${an}` } : al ? { sameAs: `NARA ${al.toUpperCase()}` } : {}), url: `https://archive.org/details/${x.identifier}` }; });
   },
   gallica: async (q, n) => {
     q = gallicaKoToFr(q) || q;
