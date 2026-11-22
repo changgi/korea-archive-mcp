@@ -568,7 +568,7 @@ const COLLECT = {
     q = koToEn(q) || q;
     const key = process.env.EUROPEANA_API_KEY || 'api2demo';
     const d = await jget(`https://api.europeana.eu/record/v2/search.json?wskey=${key}&query=${encodeURIComponent(q)}&rows=${n}&profile=standard`);
-    return (d.items || []).map((it) => ({ title: (it.title || ['?'])[0], date: (it.year || [''])[0], id: it.id || '', ...(((it.dataProvider || [])[0]) ? { series: (it.dataProvider || [])[0] } : {}), url: it.guid || '' }));
+    return (d.items || []).map((it) => ({ title: (it.title || ['?'])[0], date: (it.year || [''])[0], id: it.id || '', ...(((it.dataProvider || [])[0]) ? { series: (it.dataProvider || [])[0] } : {}), url: String(it.guid || '').split('?')[0] }));
   },
   nara: async (q, n) => {
     q = koToEn(q) || q;
@@ -600,9 +600,14 @@ const COLLECT = {
     return cards.map((c, i) => { const d = det[i] || {}; return { title: c.title, date: d.date || '', id: c.id, ...(c.hierarchy ? { series: c.hierarchy } : {}), ...(d.naid ? { sameAs: `NAID ${d.naid}` } : {}), url: c.url }; }); // v1.84: 상위계층 실값 승격
   },
   ndl: async (q, n) => { // 일본 국립국회도서관 서치 — OpenSearch 무키 실측(2026-11-21). 조선총독부 간행물·관보·도판 축(JACAR 공문서와 상보). 한→일 JA_MAP 우선 변환
-    const ja = koToJa(q) || koToEn(q) || q;
-    const b = await gtext(`https://ndlsearch.ndl.go.jp/api/opensearch?any=${encodeURIComponent(ja)}&cnt=${Math.min(n, 10)}`,
-      { 'User-Agent': 'KoreaArchiveMCP/1.0 (https://github.com/changgi/korea-archive-mcp; archival discovery)' });
+    // v1.91.1: 일문·한자 입력(京城府·朝鮮総督府)이 영문 폴백('Korea')으로 바뀌던 결함 교정 — 한글 입력일 때만 영문 폴백, 부분 변환(京城부)은 폐기
+    const hg = (t) => /[\uac00-\ud7a3]/.test(t);
+    let ja = koToJa(q); if (!ja || hg(ja)) ja = hg(q) ? (koToEn(q) || q) : q;
+    // v1.91.1: any= 는 광역 일치 후 표제 가나순 정렬로 잡음 상위화(실측 '朝鮮総督府'→アーカイブズ…) — title= 우선, 0건이면 any= 폴백
+    const NUA = { 'User-Agent': 'KoreaArchiveMCP/1.0 (https://github.com/changgi/korea-archive-mcp; archival discovery)' };
+    const ndlq = (f) => gtext(`https://ndlsearch.ndl.go.jp/api/opensearch?${f}=${encodeURIComponent(ja)}&cnt=${Math.min(n, 10)}`, NUA);
+    let b = await ndlq('title');
+    if (!b.includes('<item>') && !(b.includes('<error>') && b.includes('429'))) b = await ndlq('any');
     if (b.includes('<error>') && b.includes('429')) throw new Error('NDL 동시접속 제한(429) — 잠시 후 재시도');
     const out = [];
     for (const item of b.split('<item>').slice(1)) {
@@ -748,8 +753,13 @@ const COLLECT = {
   },
   dnz: async (q, n) => { // DigitalNZ 집계 API(무키 JSON) — v1.57 합류: Papers Past(직접 차단 — 본 API로 우회 복구)·터닝불도서관·Te Papa 등 NZ 30+기관
     const en = koToEn(q) || q;
-    const d = await jget('https://api.digitalnz.org/v3/records.json?per_page=' + Math.min(n, 20)
-      + '&fields=id,title,display_date,landing_url,content_partner,primary_collection&text=' + encodeURIComponent(en));
+    // v1.91.1: 2026-11 실측 — 서버(icn1) 익명 호출 HTTP 403(작업망 익명은 200 — IP 기반). DNZ_API_KEY(digitalnz.org/developers 무료) 설정 시 키 헤더로 호출
+    const dk = process.env.DNZ_API_KEY;
+    let d;
+    try {
+      d = await jget('https://api.digitalnz.org/v3/records.json?per_page=' + Math.min(n, 20)
+        + '&fields=id,title,display_date,landing_url,content_partner,primary_collection&text=' + encodeURIComponent(en), dk ? { 'Authentication-Token': dk } : {});
+    } catch (e) { if (/403/.test(String(e))) throw new Error(`HTTP 403 — 서버 IP 익명 호출 차단${dk ? '(키 거부 — DNZ_API_KEY 확인)' : '(DNZ_API_KEY 미설정 — 등록 시 복구)'} · 대체: digitalnz.org/records?text=${encodeURIComponent(en)} 웹 검색`); throw e; }
     return (((d || {}).search || {}).results || []).map((r) => ({
       title: `${norm(String(r.title || '(무제)'))} — ${((r.content_partner || [])[0] || '')}${(r.primary_collection || [])[0] ? '·' + (r.primary_collection || [])[0] : ''}`.slice(0, 115),
       date: String(r.display_date || ''), id: String(r.id || ''),
@@ -1364,7 +1374,7 @@ const handler = createMcpHandler((server) => {
       const items = d.items || [];
       const rshort = (r) => { const v = (Array.isArray(r) ? r[0] : r) || ''; const m = String(v).match(/(publicdomain\/(?:mark|zero)|licenses\/[a-z-]+|vocab\/[A-Za-z-]+)/); return m ? m[1].replace('licenses/', 'CC ').replace('vocab/', '') : ''; };
       const ytag = year_from || year_to ? ` [연대 ${year_from || ''}~${year_to || ''}${page > 1 ? ` · p.${page}` : ''}]` : (page > 1 ? ` [p.${page}]` : '');
-      return text(`Europeana '${query}'${en ? ` → 영문 자동 변환 '${eff}'` : ''}${media_type ? ` [${media_type}]` : ''}${ytag} — total ${d.totalResults}:\n` + (items.map((it) => { const rt = rshort(it.rights); return `- ${String((it.title || ['?'])[0]).slice(0, 90)} (${(it.year || [''])[0]}) — ${String((it.dataProvider || [''])[0]).slice(0, 40)}${rt ? ` | 권리:${rt}` : ''} | ${it.guid || ''}`; }).join('\n') || '(0)') + '\nTip: multilingual — Corée(fr)·Korea-Krieg(de)·Corea(it/es)' + (demo ? '\n(shared demo key in use — for heavy use, set a free EUROPEANA_API_KEY from apis.europeana.eu)' : ''));
+      return text(`Europeana '${query}'${en ? ` → 영문 자동 변환 '${eff}'` : ''}${media_type ? ` [${media_type}]` : ''}${ytag} — total ${d.totalResults}:\n` + (items.map((it) => { const rt = rshort(it.rights); return `- ${String((it.title || ['?'])[0]).slice(0, 90)} (${(it.year || [''])[0]}) — ${String((it.dataProvider || [''])[0]).slice(0, 40)}${rt ? ` | 권리:${rt}` : ''} | ${String(it.guid || '').split('?')[0]}`; }).join('\n') || '(0)') + '\nTip: multilingual — Corée(fr)·Korea-Krieg(de)·Corea(it/es)' + (demo ? '\n(shared demo key in use — for heavy use, set a free EUROPEANA_API_KEY from apis.europeana.eu)' : ''));
     });
 
 const JB_RECIPES = `발굴 완주 레시피 — 주제 유형별 발굴→판독→권리 순서 (전 단계 실측 검증, 2026-11-21)
