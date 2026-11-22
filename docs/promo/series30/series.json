@@ -1,0 +1,880 @@
+{
+ "title": "30곳 문서고 탐방 — 한 문장으로 여는 세계의 한국 기록",
+ "checked": "2026-11-22",
+ "parts": [
+  [
+   "Ⅰ",
+   "전쟁의 기록",
+   1,
+   6
+  ],
+  [
+   "Ⅱ",
+   "개항과 대한제국",
+   7,
+   12
+  ],
+  [
+   "Ⅲ",
+   "독립운동",
+   13,
+   18
+  ],
+  [
+   "Ⅳ",
+   "조선의 기록문화",
+   19,
+   23
+  ],
+  [
+   "Ⅴ",
+   "현대 한국",
+   24,
+   28
+  ],
+  [
+   "Ⅵ",
+   "세계의 집계 창구",
+   29,
+   30
+  ]
+ ],
+ "items": [
+  {
+   "n": 1,
+   "src": "nara",
+   "inst": "미국 국립기록관리청 NARA",
+   "flag": "🇺🇸",
+   "say": "흥남 철수 영상 찾아줘",
+   "head": "1950.12.24 흥남 — 필름 원본까지",
+   "big": "NAID 75392",
+   "facts": [
+    [
+     "계보",
+     "RG 428 해군부 › 군사활동 영상 시리즈"
+    ],
+    [
+     "생산",
+     "1950-12-24"
+    ],
+    [
+     "원본",
+     "MP4 428-npc-170 (College Park 영상과)"
+    ],
+    [
+     "권리",
+     "Use Restriction 'Undetermined' → B"
+    ]
+   ],
+   "img": "../img2/hungnam_520781.jpg",
+   "credit": "사진: NARA NAID 520781 (1950-12-19 흥남, Unrestricted) · 영상 기록: NAID 75392",
+   "tool": "cross_search(sources=nara) → judge_rights(naid=75392)",
+   "link": "https://catalog.archives.gov/id/75392",
+   "stamp": "계보까지"
+  },
+  {
+   "n": 2,
+   "src": "koreanwar",
+   "inst": "6·25전쟁 아카이브센터 (협약기관)",
+   "flag": "🇰🇷",
+   "say": "장진호 기록, 같은 것끼리 묶어줘",
+   "head": "한국어 기록 ↔ 미국 원본, 자동으로 한 쌍",
+   "big": "4건 = 4쌍",
+   "facts": [
+    [
+     "협약",
+     "2022-US-02-AV-D-00329 장진호 전투에서 퇴각하는 미 제1해병사단 기록영상"
+    ],
+    [
+     "원본",
+     "NARA NAID 24033 MARINE RETREAT IN KOREA (1950-12)"
+    ],
+    [
+     "표시",
+     "[nara·원본확인+koreanwar]"
+    ],
+    [
+     "열람",
+     "전체열람"
+    ]
+   ],
+   "img": "../img2/chosin_542210_hi.jpg",
+   "credit": "출처: KOREAN WAR ARCHIVES 6·25전쟁 아카이브센터(협약기관) · 사진: NARA NAID 542210 (1950-12-01, Unrestricted)",
+   "tool": "cross_search(sources=koreanwar) → koreanwar_item",
+   "link": "https://www.koreanwar.or.kr:8443/searchDetail.do?archRfcd=2022-US-02-AV-D-00329",
+   "stamp": "원본확인"
+  },
+  {
+   "n": 3,
+   "src": "awm",
+   "inst": "호주 전쟁기념관 AWM",
+   "flag": "🇦🇺",
+   "say": "가평 전투 사진 보여줘",
+   "head": "1952년 4월, 가평 계곡",
+   "big": "1952.4.16",
+   "facts": [
+    [
+     "기록",
+     "C276864 Kapyong Valley, Korea"
+    ],
+    [
+     "설명",
+     "가평 계곡과 주변 고지를 내려다본 전경"
+    ],
+    [
+     "권리",
+     "Copyright expired - public domain"
+    ]
+   ],
+   "img": "../img2/awm_C276864.jpg",
+   "credit": "사진: Australian War Memorial C276864 (1952-04-16, Copyright expired)",
+   "tool": "cross_search(sources=awm)",
+   "link": "https://www.awm.gov.au/collection/C276864",
+   "stamp": "PD"
+  },
+  {
+   "n": 4,
+   "src": "nzarch",
+   "inst": "뉴질랜드 기록원 Archives NZ",
+   "flag": "🇳🇿",
+   "say": "케이포스(Kayforce) 기록 찾아줘",
+   "head": "뉴질랜드가 계산한 한국전쟁의 비용",
+   "big": "R22438362",
+   "facts": [
+    [
+     "제목",
+     "Kayforce - Cost of Korean War to N.Z."
+    ],
+    [
+     "시리즈",
+     "Inwards letters and registered files"
+    ],
+    [
+     "접근",
+     "Open"
+    ]
+   ],
+   "img": "../img2/awm_C1094311.jpg",
+   "credit": "사진: AWM C1094311 뉴질랜드 제16야포연대 25파운드포(1952-01, PD) — 참고 이미지 · 기록: Archives NZ R22438362",
+   "tool": "cross_search(sources=nzarch) → nedb_search(mode=nzarch)",
+   "link": "https://collections.archives.govt.nz/web/arena/search#/entity/aims-archive/R22438362",
+   "stamp": "Open",
+   "imglab": "참고 이미지 · 뉴질랜드 제16야포연대(AWM)"
+  },
+  {
+   "n": 5,
+   "src": "nlna",
+   "inst": "네덜란드 국립문서보관소",
+   "flag": "🇳🇱",
+   "say": "네덜란드에 있는 한국 기록은?",
+   "head": "참전 대대·대사관·적십자 — 문서군 3개",
+   "big": "3 문서군",
+   "facts": [
+    [
+     "2.13.56",
+     "유엔 한국 파견 네덜란드 부대 1950-1954"
+    ],
+    [
+     "2.05.202",
+     "주한 네덜란드 대사관 1955-1974"
+    ],
+    [
+     "2.19.309",
+     "네덜란드 적십자 - 한국 1950-1960"
+    ]
+   ],
+   "credit": "출처: Nationaal Archief 공개 API 실조회",
+   "tool": "cross_search(sources=nlna)",
+   "link": "https://www.nationaalarchief.nl/onderzoeken/archief/2.13.56",
+   "stamp": "문서군"
+  },
+  {
+   "n": 6,
+   "src": "un",
+   "inst": "UN 디지털도서관",
+   "flag": "🇺🇳",
+   "say": "정전협정 관련 UN 문서 찾아줘",
+   "head": "2015년, 정전협정을 둘러싼 서한",
+   "big": "6개 언어판",
+   "facts": [
+    [
+     "기호",
+     "S/2015/799 (2015-10-19)"
+    ],
+    [
+     "요약",
+     "북한 외무성 성명 — 정전협정을 북미 평화협정으로 대체 제안"
+    ],
+    [
+     "지문",
+     "sha256-16 c969db4195015bbc"
+    ]
+   ],
+   "img": "../img2/panmun_520995.jpg",
+   "credit": "사진: NARA NAID 520995 판문점 정전협정 조인(1953-07, Unrestricted) — 참고 이미지 · 문서: UN S/2015/799",
+   "tool": "cross_search(sources=un) → nedb_search(mode=un)",
+   "link": "https://digitallibrary.un.org/record/808136",
+   "stamp": "지문",
+   "imglab": "참고 이미지 · 1953 판문점 정전협정 조인(NARA)"
+  },
+  {
+   "n": 7,
+   "src": "tna",
+   "inst": "영국 국립기록관 TNA",
+   "flag": "🇬🇧",
+   "say": "거문도 사건 영국 문서 있어?",
+   "head": "영국 해군이 거문도를 점령한 2년",
+   "big": "602건",
+   "facts": [
+    [
+     "ADM 116/70",
+     "Port Hamilton papers (1884-1887)"
+    ],
+    [
+     "ADM 125/86",
+     "Occupation of Port Hamilton (1885-1887)"
+    ],
+    [
+     "검색어",
+     "'Port Hamilton' — 당대 영국식 이름"
+    ]
+   ],
+   "credit": "출처: The National Archives Discovery 실조회",
+   "tool": "tna_search('Port Hamilton')",
+   "link": "https://discovery.nationalarchives.gov.uk/details/r/C3668617",
+   "stamp": "당대 이름"
+  },
+  {
+   "n": 8,
+   "src": "gallica",
+   "inst": "프랑스 국립도서관 Gallica",
+   "flag": "🇫🇷",
+   "say": "프랑스 국립도서관에서 '조선' 찾아줘",
+   "head": "막혀도, 길은 알려준다",
+   "big": "403 → 대체 경로",
+   "facts": [
+    [
+     "변환",
+     "조선 → Corée (프랑스어 자동)"
+    ],
+    [
+     "상태",
+     "BnF가 서버 자동 조회 차단"
+    ],
+    [
+     "안내",
+     "웹 검색·브라우저용 공식 검색 URL 제시"
+    ]
+   ],
+   "credit": "gallica_search 실제 응답 (2026-11-22)",
+   "tool": "gallica_search('Corée')",
+   "link": "https://gallica.bnf.fr/services/engine/search/sru?operation=searchRetrieve&query=Cor%C3%A9e",
+   "stamp": "대체 경로"
+  },
+  {
+   "n": 9,
+   "src": "europeana",
+   "inst": "유로피아나 Europeana",
+   "flag": "🇪🇺",
+   "say": "유럽에 있는 서울 사진 찾아줘",
+   "head": "독일·영국 기관의 서울 — 권리도 함께",
+   "big": "862건",
+   "facts": [
+    [
+     "Deutsche Fotothek",
+     "Seoul, Korea. Stadttor — 권리 InC-EDU"
+    ],
+    [
+     "Deutsche Welle",
+     "Pjöngjang & Seoul — 권리 InC"
+    ],
+    [
+     "표시",
+     "결과마다 권리 상태 자동 표기"
+    ]
+   ],
+   "credit": "출처: Europeana API 실조회",
+   "tool": "europeana_search('Korea Seoul')",
+   "link": "https://www.europeana.eu/item/188/item_AYX7YXUSUEUFWFGKHGZH2TTCDKHSDCDH",
+   "stamp": "권리 표시"
+  },
+  {
+   "n": 10,
+   "src": "oldnews",
+   "inst": "대한민국신문아카이브 (국립중앙도서관)",
+   "flag": "🇰🇷",
+   "say": "단지동맹 신문 기사 찾아줘",
+   "head": "1908년, 학생들의 단지동맹",
+   "big": "1908.5.6",
+   "facts": [
+    [
+     "기사",
+     "대한매일신보 2면 2단 「학도의단지동맹」"
+    ],
+    [
+     "색인어",
+     "홍원 공립보통학교 · 학도 · 야학 · 동맹혈서"
+    ],
+    [
+     "번호",
+     "CNTS-00095686434"
+    ]
+   ],
+   "img": "../img3/dh_19080506_02.png",
+   "credit": "지면: 대한매일신보 1908.5.6 2면 (국립중앙도서관 대한민국신문아카이브)",
+   "tool": "cross_search(sources=oldnews) → nedb_search(mode=oldnews)",
+   "link": "https://nl.go.kr/newspaper/detail.do?content_id=CNTS-00095686434",
+   "stamp": "지면",
+   "imgmode": "page"
+  },
+  {
+   "n": 11,
+   "src": "nedb",
+   "inst": "국사편찬위원회 한국사데이터베이스",
+   "flag": "🇰🇷",
+   "say": "한국사DB에 거문도 기록 있어?",
+   "head": "어느 DB에 있는지부터 알려준다",
+   "big": "DB 2종",
+   "facts": [
+    [
+     "1",
+     "헌정사 자료 DB"
+    ],
+    [
+     "2",
+     "포로신문보고서"
+    ],
+    [
+     "다음",
+     "mode=law·record·sjw 등 심층 판독"
+    ]
+   ],
+   "credit": "출처: db.history.go.kr 통합검색 실조회",
+   "tool": "nedb_search(mode=total, '거문도')",
+   "link": "https://db.history.go.kr/search/searchResultList.do?searchKeywordType=BI&searchKeyword=%EA%B1%B0%EB%AC%B8%EB%8F%84",
+   "stamp": "DB 안내"
+  },
+  {
+   "n": 12,
+   "src": "commons",
+   "inst": "위키미디어 공용 Commons",
+   "flag": "🌐",
+   "say": "이 흥남 사진, 써도 돼?",
+   "head": "업로더 말 대신 원 소장처에 묻는다",
+   "big": "A등급",
+   "facts": [
+    [
+     "공용",
+     "Public domain (업로더 기재)"
+    ],
+    [
+     "NARA 대조",
+     "NAID 520782 실재 · 80-G-424513"
+    ],
+    [
+     "원본 권리",
+     "Use Restriction 'Unrestricted'"
+    ]
+   ],
+   "img": "../img2/hungnam_520782.jpg",
+   "credit": "사진: NARA NAID 520782 (1950-12-19 흥남, Unrestricted) — Commons 기증본",
+   "tool": "nedb_search(mode=commons, File URL)",
+   "link": "https://catalog.archives.gov/id/520782",
+   "stamp": "원본 대조"
+  },
+  {
+   "n": 13,
+   "src": "indy",
+   "inst": "국가기록원 독립운동판결문",
+   "flag": "🇰🇷",
+   "say": "유관순 판결문 찾아줘",
+   "head": "1919. 6. 30 경성복심법원",
+   "big": "징역 3년",
+   "facts": [
+    [
+     "죄명",
+     "소요, 보안법위반"
+    ],
+    [
+     "본적",
+     "충청남도 천안군 동면 용두리"
+    ],
+    [
+     "지문",
+     "sha256-16 963b3b862227926e"
+    ]
+   ],
+   "img": "../img2/keijo_honmachi.jpg",
+   "imgfx": "gray",
+   "credit": "출처: 국가기록원 독립운동판결문 · 배경: 1930년대 경성 거리(참고 이미지, PD)",
+   "tool": "cross_search(sources=indy) → nedb_search(mode=indy)",
+   "link": "https://theme.archives.go.kr/viewer/common/archWebViewer.do?archiveEventId=0034971420",
+   "stamp": "원문 뷰어",
+   "imglab": "참고 이미지 · 1930년대 경성 거리"
+  },
+  {
+   "n": 14,
+   "src": "gonghun",
+   "inst": "공훈전자사료관 (국가보훈부)",
+   "flag": "🇰🇷",
+   "say": "윤봉길 공적조서 보여줘",
+   "head": "1932. 4. 29 상해 홍구공원",
+   "big": "1962 대한민국장",
+   "facts": [
+    [
+     "생몰",
+     "1908-06-21 ~ 1932-12-19"
+    ],
+    [
+     "계열",
+     "의열투쟁 · 한인애국단"
+    ],
+    [
+     "번호",
+     "관리번호 3732 — 공적조서·공훈록 전문"
+    ]
+   ],
+   "credit": "출처: 공훈전자사료관 독립유공자 공훈록",
+   "tool": "cross_search(sources=gonghun) → nedb_search(mode=gonghun)",
+   "link": "https://e-gonghun.mpva.go.kr/user/ContribuReportDetail.do?goTocode=20001&mngNo=3732&pageTitle=Report",
+   "stamp": "공적조서"
+  },
+  {
+   "n": 15,
+   "src": "i815",
+   "inst": "독립기념관",
+   "flag": "🇰🇷",
+   "say": "안창호 관련 자료 찾아줘",
+   "head": "1932년 미국 신문이 쓴 안창호 체포",
+   "big": "3,074건",
+   "facts": [
+    [
+     "자료",
+     "안창호 체포기사(영자신문) (1932)"
+    ],
+    [
+     "기고",
+     "전경무 — 재미 대한인국민회 외교국장"
+    ],
+    [
+     "범위",
+     "독립운동가 자료 3,074건 · 임시정부 21건"
+    ]
+   ],
+   "credit": "출처: 독립기념관 한국독립운동정보시스템",
+   "tool": "cross_search(sources=i815) → nedb_search(mode=i815)",
+   "link": "https://search.i815.or.kr/contents/independenceFighter/detail.do?independenceFighterId=1-A00025-012&sortNo=4",
+   "stamp": "본문"
+  },
+  {
+   "n": 16,
+   "src": "jacar",
+   "inst": "일본 아시아역사자료센터 JACAR",
+   "flag": "🇯🇵",
+   "say": "3·1운동, 일본 쪽 기록은?",
+   "head": "일본 육군이 쓴 '조선 소요' 개요",
+   "big": "14면",
+   "facts": [
+    [
+     "번호",
+     "A04017275800"
+    ],
+    [
+     "제목",
+     "Year of 1919 … Outline of development of Korean commotion"
+    ],
+    [
+     "인접",
+     "같은 철 ±8건 자동 채굴"
+    ]
+   ],
+   "credit": "출처: JACAR(아시아역사자료센터) 실조회",
+   "tool": "cross_search(sources=jacar) → nedb_search(mode=jacar)",
+   "link": "https://www.jacar.archives.go.jp/das/meta/A04017275800",
+   "stamp": "인접 채굴"
+  },
+  {
+   "n": 17,
+   "src": "earchive",
+   "inst": "국사편찬위원회 전자사료관",
+   "flag": "🇰🇷",
+   "say": "미군정기 편지 검열 기록 있어?",
+   "head": "미군이 읽은 1940년대 편지들",
+   "big": "RG 338",
+   "facts": [
+    [
+     "사료",
+     "Box 7 미군정기 편지검열문서 (AUS004_64)"
+    ],
+    [
+     "등록",
+     "CO0000000419 · 청구기호 CO 911.07 M678 v.2"
+    ],
+    [
+     "조건",
+     "공개 · 제한적 이용(출처·비상업)"
+    ]
+   ],
+   "credit": "출처: 국사편찬위원회 전자사료관 실조회",
+   "tool": "cross_search(sources=earchive) → nedb_search(mode=earchive)",
+   "link": "https://archive.history.go.kr",
+   "stamp": "이용조건"
+  },
+  {
+   "n": 18,
+   "src": "ndl",
+   "inst": "일본 국립국회도서관 NDL",
+   "flag": "🇯🇵",
+   "say": "京城府 자료 찾아줘",
+   "head": "경성 엽서와 육지측량부 지도",
+   "big": "1913 지도",
+   "facts": [
+    [
+     "엽서",
+     "一般府政を掌る京城府庁(京城名所)"
+    ],
+    [
+     "지도",
+     "往十里 京畿道京城府 (1913, 陸地測量部)"
+    ],
+    [
+     "지도",
+     "冠岳山 京畿道京城府・始興郡 (1937)"
+    ]
+   ],
+   "credit": "출처: 국립국회도서관 서치 실조회",
+   "tool": "cross_search(sources=ndl, '京城府')",
+   "link": "https://ndlsearch.ndl.go.jp/books/R100000002-I000008260482",
+   "stamp": "지도"
+  },
+  {
+   "n": 19,
+   "src": "jsg",
+   "inst": "한국학중앙연구원 장서각",
+   "flag": "🇰🇷",
+   "say": "의궤 해제 읽어줘",
+   "head": "1776년, 정조가 아버지 사당을 고치다",
+   "big": "135장",
+   "facts": [
+    [
+     "청구",
+     "K2-3556 개건도감의궤(改建都監儀軌)"
+    ],
+    [
+     "내용",
+     "경모궁(사도세자 사당) 개건 기록"
+    ],
+    [
+     "형태",
+     "1책 135장 · 경모궁 개건도 수록"
+    ]
+   ],
+   "img": "../img2/uigwe_hwaseong23.jpg",
+   "credit": "이미지: 화성성역의궤(국립중앙박물관, 공공누리 제1유형) — 의궤의 모습 예시 · 해제: 장서각 K2-3556",
+   "tool": "cross_search(sources=jsg) → nedb_search(mode=jsg)",
+   "link": "https://jsg.aks.ac.kr/dir/view?dataId=JSG_K2-3556",
+   "stamp": "해제",
+   "imglab": "의궤의 모습 예시 · 화성성역의궤",
+   "imgfx": "dim"
+  },
+  {
+   "n": 20,
+   "src": "kyudb",
+   "inst": "서울대 규장각한국학연구원",
+   "flag": "🇰🇷",
+   "say": "규장각 대동여지도 찾아줘",
+   "head": "목록 2건, 해제 14건 — 숨은 편차",
+   "big": "2 vs 14",
+   "facts": [
+    [
+     "목록",
+     "奎10333 · 奎12380"
+    ],
+    [
+     "해제",
+     "奎10341 외 13건"
+    ],
+    [
+     "원문",
+     "이미지 경로 규칙까지 안내"
+    ]
+   ],
+   "credit": "출처: 규장각 목록·해제 검색 실조회",
+   "tool": "nedb_search(mode=kyujanggak)",
+   "link": "https://kyudb.snu.ac.kr",
+   "stamp": "해제 검색"
+  },
+  {
+   "n": 21,
+   "src": "aks",
+   "inst": "한국고문서자료관",
+   "flag": "🇰🇷",
+   "say": "안동김씨 집안 고문서 어디 있어?",
+   "head": "172곳 소장처에서 문중 찾기",
+   "big": "172곳",
+   "facts": [
+    [
+     "L014423",
+     "공주 안동김씨 청음 김상헌 후손가"
+    ],
+    [
+     "분류",
+     "문중 > 충청남도"
+    ],
+    [
+     "다음",
+     "소장처 → 분류 → 문서 면 열람"
+    ]
+   ],
+   "credit": "출처: 한국학중앙연구원 한국고문서자료관",
+   "tool": "cross_search(sources=aks) → nedb_search(mode=aks)",
+   "link": "https://archive.aks.ac.kr",
+   "stamp": "소장처"
+  },
+  {
+   "n": 22,
+   "src": "heritage",
+   "inst": "국가유산청 국가유산포털",
+   "flag": "🇰🇷",
+   "say": "근정전 관련 국가유산 보여줘",
+   "head": "국보 하나, 보물 하나, 시도유산 하나",
+   "big": "국보",
+   "facts": [
+    [
+     "국보",
+     "경복궁 근정전(景福宮 勤政殿)"
+    ],
+    [
+     "보물",
+     "근정전 정시도 및 연구시 병풍"
+    ],
+    [
+     "시도",
+     "친림광화문내근정전정시시도"
+    ]
+   ],
+   "img": "../img2/gyeongbok_1906.jpg",
+   "imgfx": "gray",
+   "credit": "사진: 1906년 경복궁(퍼블릭 도메인, 원 출처 일본 국립국회도서관) · 목록: 국가유산포털",
+   "tool": "cross_search(sources=heritage)",
+   "link": "https://www.heritage.go.kr/heri/cul/culSelectDetail.do?ccbaCpno=1111102230000",
+   "stamp": "지정 종목"
+  },
+  {
+   "n": 23,
+   "src": "nlk",
+   "inst": "국립중앙도서관",
+   "flag": "🇰🇷",
+   "say": "훈민정음 자료 얼마나 있어?",
+   "head": "음반부터 단행본까지 한 번에",
+   "big": "2,820건",
+   "facts": [
+    [
+     "음악자료",
+     "훈민정음 (2017)"
+    ],
+    [
+     "도서",
+     "훈민정음 (세종대왕기념사업회, 2003)"
+    ],
+    [
+     "표시",
+     "소장 자료마다 이용 가능 여부"
+    ]
+   ],
+   "credit": "출처: 국립중앙도서관 소장자료 검색 실조회",
+   "tool": "nlk_search('훈민정음')",
+   "link": "https://www.nl.go.kr",
+   "stamp": "전수"
+  },
+  {
+   "n": 24,
+   "src": "archives",
+   "inst": "국가기록원",
+   "flag": "🇰🇷",
+   "say": "새마을운동 기록 찾아줘",
+   "head": "1972년 대통령 현지 시찰 영상까지",
+   "big": "2,750건",
+   "facts": [
+    [
+     "1972",
+     "박정희 대통령 새마을운동 현지 시찰 (국립영화제작소) [공개]"
+    ],
+    [
+     "1977",
+     "새마을운동의 성과와 방향 [공개]"
+    ],
+    [
+     "2013",
+     "청도 새마을운동 화보집 [공개]"
+    ]
+   ],
+   "credit": "출처: 국가기록원 기록물 검색 실조회",
+   "tool": "archives_search('새마을운동')",
+   "link": "https://www.archives.go.kr",
+   "stamp": "공개"
+  },
+  {
+   "n": 25,
+   "src": "ktv",
+   "inst": "KTV 국민방송 e영상역사관",
+   "flag": "🇰🇷",
+   "say": "대한뉴스 옛날 영상 찾아줘",
+   "head": "20년을 19분에 — 대한뉴스의 발자취",
+   "big": "19분 18초",
+   "facts": [
+    [
+     "영상",
+     "대한뉴스의 발자취 (제1집) · 1991 제작"
+    ],
+    [
+     "수록",
+     "8·15 해방 · 흥남철수 · 판문점 휴전협정 조인 · 새마을운동"
+    ],
+    [
+     "권리",
+     "KOGL(공공누리) · 해설 지문 2614984d8dee3b1c"
+    ]
+   ],
+   "credit": "출처: KTV e영상역사관 (공공누리)",
+   "tool": "nedb_search(mode=ktv)",
+   "link": "https://www.ehistory.go.kr/view/movie?mediasrcgbn=KV&mediaid=1886&mediadtl=8705&mediagbn=MH",
+   "stamp": "해설"
+  },
+  {
+   "n": 26,
+   "src": "much",
+   "inst": "대한민국역사박물관",
+   "flag": "🇰🇷",
+   "say": "유신 국민투표 포스터 있어?",
+   "head": "\"국민투표 참가하여 국론통일 이룩하자!\"",
+   "big": "1975.2.12",
+   "facts": [
+    [
+     "소장",
+     "한박2133 · 종이 · 52.3×77.4cm"
+    ],
+    [
+     "작가",
+     "중앙선거관리위원회"
+    ],
+    [
+     "권리",
+     "공공누리 제4유형 → B (비상업·변경금지)"
+    ]
+   ],
+   "credit": "출처: 대한민국역사박물관 근현대사아카이브",
+   "tool": "cross_search(sources=much) → nedb_search(mode=much)",
+   "link": "https://archive.much.go.kr/archive/nrms/view.do?idnbr=PS01002025001-002133-00000",
+   "stamp": "공공누리 4"
+  },
+  {
+   "n": 27,
+   "src": "seoul",
+   "inst": "서울기록원",
+   "flag": "🇰🇷",
+   "say": "청계천 옛 공사 기록 찾아줘",
+   "head": "설계도면이 기록철로 남았다",
+   "big": "설계도",
+   "facts": [
+    [
+     "기록철",
+     "청계천 우안제 축조공사 실시설계도"
+    ],
+    [
+     "기록철",
+     "청계천 우안제 개수 기본계획도 및 실시설계도"
+    ],
+    [
+     "법적지위",
+     "공공기록"
+    ]
+   ],
+   "credit": "출처: 서울기록원 실조회",
+   "tool": "cross_search(sources=seoul) → seoul_archives_search",
+   "link": "https://archives.seoul.go.kr/aggregation/86222",
+   "stamp": "공공기록"
+  },
+  {
+   "n": 28,
+   "src": "foia",
+   "inst": "정보공개포털·서울정보소통광장",
+   "flag": "🇰🇷",
+   "say": "청계천 정보공개 원문 찾아줘",
+   "head": "자동 조회가 막힌 곳은 열람 경로로",
+   "big": "원문 경로",
+   "facts": [
+    [
+     "상태",
+     "기관 측 자동 조회 제한·시간 초과"
+    ],
+    [
+     "안내",
+     "공식 검색 URL + 웹 검색 지시"
+    ],
+    [
+     "원칙",
+     "막혀도 소스를 빼지 않는다"
+    ]
+   ],
+   "credit": "foia_search 실제 응답 (2026-11-22)",
+   "tool": "foia_search('청계천')",
+   "link": "https://www.open.go.kr",
+   "stamp": "대체 경로"
+  },
+  {
+   "n": 29,
+   "src": "ia",
+   "inst": "인터넷 아카이브 archive.org",
+   "flag": "🌐",
+   "say": "흥남 철수 필름, 사본도 찾아줘",
+   "head": "인터넷 사본과 NARA 원본, 한 줄로",
+   "big": "nara + ia",
+   "facts": [
+    [
+     "원본",
+     "NARA NAID 75393 EVACUATION OF HUNGNAM KOREA (1950-12-24)"
+    ],
+    [
+     "사본",
+     "archive.org 428-npc-171"
+    ],
+    [
+     "근거",
+     "원본 파일명 428-npc-171.mp4 일치"
+    ]
+   ],
+   "credit": "출처: NARA 카탈로그 · Internet Archive 실조회",
+   "tool": "cross_search(sources=nara,ia)",
+   "link": "https://archive.org/details/428-npc-171",
+   "stamp": "사본 묶기"
+  },
+  {
+   "n": 30,
+   "src": "dnz",
+   "inst": "디지털NZ DigitalNZ",
+   "flag": "🇳🇿",
+   "say": "뉴질랜드에 남은 가평 기록은?",
+   "head": "라디오·육성·사진 — NZ 30여 기관 한 번에",
+   "big": "3기관",
+   "facts": [
+    [
+     "육성",
+     "Laurie Valentine describes the battle of Kapyong (NZ History)"
+    ],
+    [
+     "사진",
+     "Barrel change after the Battle of Kapyong (Christchurch City Libraries, 1951-1952)"
+    ],
+    [
+     "방송",
+     "Korean War citation presented to NZ veterans (RNZ, 2011)"
+    ]
+   ],
+   "credit": "출처: DigitalNZ 집계 API 실조회",
+   "tool": "cross_search(sources=dnz, 'Kapyong')",
+   "link": "https://nzhistory.govt.nz/media/sound/laurie-valentine-describes-battle-kapyong",
+   "stamp": "집계"
+  }
+ ]
+}
