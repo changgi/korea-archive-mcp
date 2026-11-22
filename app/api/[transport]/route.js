@@ -900,17 +900,23 @@ const COLLECT = {
     }
     return out;
   },
-  ktv: async (q, n) => { // KTV e영상역사관(대한뉴스·기록영상, KOGL) — ktv.go.kr 통합검색 iframe GET 실측(2026-11-19)
-    const b = await gtext('https://www.ktv.go.kr/totalSearch/ehistory?design=new&collection=ehistory&baseKeyword=' + encodeURIComponent(q));
-    const out = [];
-    for (const m of b.matchAll(/href="(https:\/\/www\.ehistory\.go\.kr\/view\/[^"]+)"[^>]*>\s*(?:<[^>]+>\s*)*([^<]{4,80})/g)) {
-      const t = norm(m[2]);
-      if (!t || /paging|overflow/.test(t)) continue;
-      const kt = (t.match(/^(대한뉴스|리버티뉴스|문화영화|대한뉴우스)/) || [])[1];
-      out.push({ title: t, date: '', id: '', ...(kt ? { series: kt } : {}), url: m[1].replace(/&amp;/g, '&') });
-      if (out.length >= n) break;
-    }
-    return out;
+  ktv: async (q, n) => { // KTV e영상역사관 — ktv.go.kr 통합검색 iframe GET 실측(2026-11-19)
+    // v1.94: 기본 정렬이 '최신순'(sort 파라미터 무효 실측)이라 최근 대통령 영상이 상위를 독점 → 기록 탭(ehistoryStleSe)별 병렬 조회 후 교차 병합, 대통령 기록영상(DT)은 뒤로
+    const TABS = [['DH', '대한뉴스'], ['MH', '문화영화'], ['DK', '미공개 대한뉴스'], ['BK', '정부기록사진집'], ['PT', '국가기록사진'], ['', '전체']];
+    const base = 'https://www.ktv.go.kr/totalSearch/ehistory?design=new&collection=ehistory&baseKeyword=' + encodeURIComponent(q);
+    const parse = (b, label) => { const seen = new Set(); const out = [];
+      for (const m of b.matchAll(/href="(https:\/\/www\.ehistory\.go\.kr\/view\/[^"]+)"[^>]*>\s*(?:<[^>]+>\s*)*([^<]{4,80})/g)) {
+        const t = norm(m[2]); const u = m[1].replace(/&amp;/g, '&');
+        if (!t || /paging|overflow/.test(t) || seen.has(u)) continue; seen.add(u);
+        const g = (u.match(/mediagbn=(\w+)/) || [])[1] || (/\/photo\?/.test(u) ? 'PT' : '');
+        out.push({ title: t, date: '', id: '', series: label === '전체' ? ({ DT: '대통령 기록영상', DH: '대한뉴스', MH: '문화영화', DK: '미공개 대한뉴스' }[g] || 'e영상역사관') : label, url: u, _dt: g === 'DT' });
+      } return out; };
+    const res = await Promise.allSettled(TABS.map(([c, l]) => gtext(base + (c ? '&ehistoryStleSe=' + c : '')).then((b) => parse(b, l))));
+    const lists = res.map((r) => (r.status === 'fulfilled' ? r.value : []));
+    if (lists.every((l) => !l.length) && res.every((r) => r.status === 'rejected')) throw res[0].reason;
+    const seen = new Set(); const out = []; const late = [];
+    for (let k = 0; k < 10 && out.length < n; k++) for (const l of lists) { const it = l[k]; if (!it || seen.has(it.url)) continue; seen.add(it.url); (it._dt ? late : out).push(it); }
+    return [...out, ...late].slice(0, n).map(({ _dt, ...it }) => it);
   },
   earchive: async (q, n) => { // 국사편찬위 전자사료관 — POST 검색 실측(2026-11-19). NARA 수집 사료(AUS…) 원문 소장. 상세는 세션 기반이라 사료ID 표기
     const r = await fetch('https://archive.history.go.kr/search/searchResult.do', {
@@ -1968,8 +1974,8 @@ const JB_CROSS = `국내외 대조 절차 — 순서를 틀리면 헛수고한�
           }
           const items = await COLLECT.ktv(q, Math.min(max_results, 10));
           if (!items.length) return text(`KTV e영상역사관 '${q}' — 0건. '대한뉴스'·사건명·인명으로 재시도하십시오.`);
-          return text(`KTV e영상역사관 '${q}' — ${items.length}건:\n` + items.map((it) => `- ${it.title}\n  ${it.url}`).join('\n')
-            + '\n※ view URL을 mode=ktv query로 재투입 → 영상 해설·제작연도·상영시간 판독.');
+          return text(`KTV e영상역사관 '${q}' — ${items.length}건:\n` + items.map((it) => `- [${it.series || 'e영상역사관'}] ${it.title}\n  ${it.url}`).join('\n')
+            + '\n※ 기록 탭(대한뉴스·문화영화·미공개 대한뉴스·정부기록사진집·국가기록사진) 교차 병합 — 사이트 기본 최신순이 최근 영상만 올리는 문제 보정.\n※ view URL을 mode=ktv query로 재투입 → 영상 해설·제작연도·상영시간 판독.');
         } catch (e) { return text(`KTV 오류(${String(e && e.message || e).slice(0, 60)}) — 잠시 후 재시도 또는 브라우저: https://www.ehistory.go.kr`); }
       }
       if (mode === 'i815') { // 독립기념관 — 키워드 목록 / detail.do URL 본문 판독(당대 신문기사·독립운동가 자료)
