@@ -110,7 +110,7 @@ button,select,input{font:inherit}
     const home = [].concat(j.homepage || j.related || []).map((h) => typeof h === 'string' ? { u: h, t: '원 기관 페이지' } : { u: idOf(h), t: strip(lab(h.label)) || '원 기관 페이지' }).filter((h) => h.u);
     const base = { id: idOf(j), label: strip(lab(j.label)), summary: strip(lab(j.summary || j.description)), md, rights: j.rights || j.license || '', req, home, thumb: thumbOf(j) };
     if (isColl) {
-      const kids = [...[].concat(j.items || []), ...[].concat(j.collections || []), ...[].concat(j.manifests || [])].map((m) => ({ id: idOf(m), label: strip(lab(m.label)), thumb: thumbOf(m), coll: /Collection/i.test(m.type || m['@type'] || ''), inline: (m.items && /Manifest/i.test(m.type || '')) ? m : null }));
+      const kids = [...[].concat(j.items || []), ...[].concat(j.collections || []), ...[].concat(j.manifests || [])].map((m) => ({ id: idOf(m), label: strip(lab(m.label)), thumb: thumbOf(m), coll: /Collection/i.test(m.type || m['@type'] || ''), inline: m.items ? m : null })); // 매니페스트·컬렉션 모두 내장(inline) 허용 — 링크에 담긴 계층
       return { ...base, kind: 'collection', items: kids };
     }
     const cvs = j.items || (j.sequences && j.sequences[0] && j.sequences[0].canvases) || [];
@@ -185,7 +185,7 @@ button,select,input{font:inherit}
     for (const x of m.items) {
       if (!x.coll) { out.push({ ...x, group }); continue; }
       if (depth >= 3 || expandBudget-- <= 0) { out.push({ ...x, group }); continue; } // 폴더로 남김(목록에서 누르면 그 컬렉션을 연다)
-      try { const c = norm(await getJ(x.id)); if (c.kind === 'collection') await expand(c, x.label, depth + 1, out); else out.push({ ...x, coll: false, group }); } catch { /* 하위 컬렉션 실패는 건너뜀 */ }
+      try { const c = x.inline ? norm(x.inline) : norm(await getJ(x.id)); if (c.kind === 'collection') await expand(c, x.label, depth + 1, out); else out.push({ ...x, coll: false, group }); } catch { /* 하위 컬렉션 실패는 건너뜀 */ }
     }
     return out;
   }

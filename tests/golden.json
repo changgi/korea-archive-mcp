@@ -372,6 +372,35 @@
     "/iiif/tna/C\\w+/manifest\\.json"
    ],
    "level": "error"
+  },
+  {
+   "id": "grouped-iiif",
+   "tool": "cross_search",
+   "args": {
+    "query": "유관순",
+    "sources": "indy,i815,gonghun",
+    "max_per_source": 2,
+    "format": "iiif"
+   },
+   "must": [
+    "계열 [2-9]개",
+    "#g1"
+   ],
+   "level": "error"
+  },
+  {
+   "id": "kyu-class-hierarchy",
+   "tool": "cross_search",
+   "args": {
+    "query": "절목",
+    "sources": "kyudb",
+    "max_per_source": 3,
+    "format": "csv"
+   },
+   "must": [
+    "(史部|經部|子部|集部) › "
+   ],
+   "level": "error"
   }
  ]
 }
