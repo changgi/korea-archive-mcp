@@ -8,7 +8,7 @@
 [![설치 불필요](https://img.shields.io/badge/설치-필요_없음-2da44e?style=for-the-badge)](#-3분-만에-시작하기)
 [![무료](https://img.shields.io/badge/이용-무료-d4a72c?style=for-the-badge)](#-3분-만에-시작하기)
 
-[**소개 페이지**](https://changgi.github.io/korea-archive-mcp/) · [**예제 5선**](https://changgi.github.io/korea-archive-mcp/examples.html) · [**사용 안내**](https://korea-archive-mcp.vercel.app/help.html) · [English](https://korea-archive-mcp.vercel.app/help-en.html) · [플러그인 버전](https://github.com/changgi/korea-archive-marketplace)
+[**소개 페이지**](https://changgi.github.io/korea-archive-mcp/) · [**예제 15선**](https://changgi.github.io/korea-archive-mcp/examples.html) · [**사용 안내**](https://korea-archive-mcp.vercel.app/help.html) · [English](https://korea-archive-mcp.vercel.app/help-en.html) · [플러그인 버전](https://github.com/changgi/korea-archive-marketplace)
 
 </div>
 
