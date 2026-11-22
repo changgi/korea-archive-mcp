@@ -1797,7 +1797,8 @@ const JB_CROSS = `국내외 대조 절차 — 순서를 틀리면 헛수고한�
             const g = (k) => dclean(String((em[k] || {}).value || ''));
             const lic = g('LicenseShortName');
             if (!ii.url && !lic) return text(`'${title}' — 파일 미발견 또는 메타 없음. File: 제목/URL을 확인하십시오.`);
-            const rights = /public domain/i.test(lic) ? 'A(퍼블릭 도메인 표기)' : /^cc/i.test(lic) ? `B(${lic} — 조건 준수 시 이용)` : `D('${lic || '미표기'}' — 확인 필요)`;
+            const jr = judgeRights('', '', lic); // KOGL(공공누리) 등 공용 판정 규칙 재사용
+            const rights = /public domain/i.test(lic) ? 'A(퍼블릭 도메인 표기)' : /^cc/i.test(lic) ? `B(${lic} — 조건 준수 시 이용)` : jr[0] !== 'D' ? `${jr[0]}(${jr[1].replace('[자동초판] ', '')})` : `D('${lic || '미표기'}' — 확인 필요)`;
             return text(`위키미디어 공용 파일 판독 — ${title.replace(/^File:/, '')}\n`
               + [g('DateTimeOriginal') && `촬영/제작: ${g('DateTimeOriginal').slice(0, 40)}`, g('Artist') && `작가: ${g('Artist').slice(0, 70)}`, ii.width && `원본 ${ii.width}×${ii.height}`].filter(Boolean).join(' · ') + '\n'
               + `라이선스: ${lic || '(미표기)'} → 권리 초판정 ${rights}\n`
