@@ -193,6 +193,22 @@ async function tnaFetch(query, rows = 20, page = 1, yearFrom, yearTo) {
   if (yearTo) u.searchParams.set('sps.dateTo', `${yearTo}-12-31`);
   return jget(u.toString());
 }
+// v1.96.7: TNA Discovery는 단어 전부 일치(AND)·어형 그대로 — 'Korean War prisoners' 41건 vs 'Korea War prisoners' 105건 vs 'Korea POW' 216건(실측).
+// 다어절 질의는 표기 변형(Korean↔Korea · prisoners of war↔POW)과 일반어 제거(battle·records 등) 질의를 병행해 합친다.
+const TNA_GENERIC = /^(battle|battles|records?|files?|documents?|papers?|the|of|in|and|on|for|a|an)$/i;
+function tnaVariants(q) {
+  const s = String(q).trim();
+  if (!/\s/.test(s) || /"/.test(s) || /^[A-Z]+ \d+(\/\d+)?$/.test(s)) return [s];
+  const v = [s];
+  const add = (x) => { x = x.replace(/\s+/g, ' ').trim(); if (x && x.split(' ').length >= 1 && !v.includes(x)) v.push(x); };
+  const sw = s.replace(/\bKorean\b/g, 'Korea').replace(/\bKoreans\b/g, 'Korea');
+  add(sw);
+  const pw = (x) => x.replace(/\bprisoners? of war\b/gi, 'POW').replace(/\bprisoners?\b/gi, 'POW').replace(/\bwar POW\b/gi, 'POW');
+  if (pw(sw) !== sw) add(pw(sw).replace(/\bKorea War POW\b/, 'Korea POW'));
+  const core = sw.split(' ').filter((w) => !TNA_GENERIC.test(w)).join(' ');
+  if (core !== sw && core.split(' ').length >= 1) add(core);
+  return v.slice(0, 4);
+}
 const tnaLine = (r) => `- [${r.reference || '?'}] ${(r.title || r.description || '').replace(/<[^>]+>/g, '').slice(0, 110)} (${r.coveringDates || ''}) https://discovery.nationalarchives.gov.uk/details/r/${r.id}`;
 
 // ══════════ 상호보완 다중채널 수집 (concurrent collect + merge/dedup) ══════════
@@ -888,7 +904,8 @@ const COLLECT = {
   kyudb: async (q, n) => { // 서울대 규장각 — 기존 jKyu(목록+해제 POST) 코어 재사용
     const r = await jKyu(q);
     const list = Array.isArray(r['목록']) ? r['목록'] : [];
-    return list.slice(0, n).map((t) => { const km = String(t).match(/(奎|古|想白|一簑)\s*\d/); const kn = km && { '奎': '규장각도서(奎)', '古': '고도서(古)', '想白': '상백문고', '一簑': '일사문고' }[km[1]]; return { title: String(t), date: '', id: '', ...(kn ? { series: kn } : {}), url: 'https://kyudb.snu.ac.kr' }; });
+    const cx = r['목록맥락'] || {};
+    return list.slice(0, n).map((t) => { const km = String(t).match(/(奎|古|想白|一簑)\s*\d/); const kn = km && { '奎': '규장각도서(奎)', '古': '고도서(古)', '想白': '상백문고', '一簑': '일사문고' }[km[1]]; return { title: cx[t] ? `${t} ${cx[t]}`.slice(0, 110) : String(t), date: '', id: String(t), ...(kn ? { series: kn } : {}), url: 'https://kyudb.snu.ac.kr' }; });
   },
   i815: async (q, n) => { // 독립기념관 — v1.32 목록 실체화: 최대 카테고리의 실제 자료 제목+GET 딥링크(data-mngno/gubun → detail.do), 나머지는 집계 신호
     const base = 'https://search.i815.or.kr';
@@ -944,12 +961,18 @@ const COLLECT = {
     // v1.94: 기본 정렬이 '최신순'(sort 파라미터 무효 실측)이라 최근 대통령 영상이 상위를 독점 → 기록 탭(ehistoryStleSe)별 병렬 조회 후 교차 병합, 대통령 기록영상(DT)은 뒤로
     const TABS = [['DH', '대한뉴스'], ['MH', '문화영화'], ['DK', '미공개 대한뉴스'], ['BK', '정부기록사진집'], ['PT', '국가기록사진'], ['', '전체']];
     const base = 'https://www.ktv.go.kr/totalSearch/ehistory?design=new&collection=ehistory&baseKeyword=' + encodeURIComponent(q);
+    // v1.96.7: 제목은 <dt><a>…</a></dt> 전체 — 검색어 강조 <span>에서 잘려 '역사와 함께한'·'[2040호]'만 남던 결함 교정. 제작일·요지 동반
     const parse = (b, label) => { const seen = new Set(); const out = [];
-      for (const m of b.matchAll(/href="(https:\/\/www\.ehistory\.go\.kr\/view\/[^"]+)"[^>]*>\s*(?:<[^>]+>\s*)*([^<]{4,80})/g)) {
-        const t = norm(m[2]); const u = m[1].replace(/&amp;/g, '&');
+      for (const blk of b.split('<div class="list">').slice(1)) {
+        const m = blk.match(/<dt>\s*<a href="(https:\/\/www\.ehistory\.go\.kr\/view\/[^"]+)"[^>]*>([\s\S]*?)<\/a>/)
+          || blk.match(/href="(https:\/\/www\.ehistory\.go\.kr\/view\/[^"]+)"[^>]*>([^<]{4,120})/);
+        if (!m) continue;
+        const t = norm(m[2].replace(/<[^>]+>/g, '')); const u = m[1].replace(/&amp;/g, '&');
         if (!t || /paging|overflow/.test(t) || seen.has(u)) continue; seen.add(u);
         const g = (u.match(/mediagbn=(\w+)/) || [])[1] || (/\/photo\?/.test(u) ? 'PT' : '');
-        out.push({ title: t, date: '', id: '', series: label === '전체' ? ({ DT: '대통령 기록영상', DH: '대한뉴스', MH: '문화영화', DK: '미공개 대한뉴스' }[g] || 'e영상역사관') : label, url: u, _dt: g === 'DT' });
+        const dt = ((blk.match(/제작일\s*:\s*([\d.]{4,10})/) || [])[1] || '').replace(/\.00/g, '').replace(/\.$/, '');
+        const sn = norm(((blk.match(/<dd>\s*<p>([\s\S]*?)<\/p>/) || [])[1] || '').replace(/<[^>]+>/g, '')).replace(/^\.\.\.\s*|\s*\.\.\.$/g, '').slice(0, 90);
+        out.push({ title: t.slice(0, 110), date: dt, id: '', series: label === '전체' ? ({ DT: '대통령 기록영상', DH: '대한뉴스', MH: '문화영화', DK: '미공개 대한뉴스' }[g] || 'e영상역사관') : label, url: u, ...(sn ? { desc: sn } : {}), _dt: g === 'DT' });
       } return out; };
     const res = await Promise.allSettled(TABS.map(([c, l]) => gtext(base + (c ? '&ehistoryStleSe=' + c : '')).then((b) => parse(b, l))));
     const lists = res.map((r) => (r.status === 'fulfilled' ? r.value : []));
@@ -1017,6 +1040,16 @@ const COLLECT = {
       out.push({ title: `[컬렉션] ${tt}`.slice(0, 110), date: '', id: '', url: deep });
       if (out.length >= n) break;
     }
+    // v1.96.7: 기록건(사진) 행은 목록에 제목이 없다(썸네일만 — 실측) → 상세 페이지 <title>에서 제목 보강(최대 6건 병렬·5s)
+    const need = out.filter((it) => it.title.startsWith('[기록건·사진]')).slice(0, 6);
+    await Promise.all(need.map(async (it) => {
+      try {
+        const r = await fetch(it.url, { headers: { 'User-Agent': UA }, signal: AbortSignal.timeout(5000) });
+        const h = await r.text();
+        const t = ((h.match(/<title>[^<]*?상세보기\s*-\s*([^<|]{1,120}?)\s*\|/) || [])[1] || '').trim();
+        if (t) it.title = `[기록건·${it.url.includes('/item/') ? '사진' : '기록'}] ${norm(t)}`.slice(0, 110);
+      } catch { /* 제목 보강 실패 시 안내 문구 유지 */ }
+    }));
     return out;
   },
   foia: async (q, n) => { // 정보공개 원문 라이브 채널: 서울정보소통광장 결재문서 — 전용 도구(foia_search)와 동일 경로
@@ -1150,7 +1183,7 @@ async function jSjw(query) {
 
 async function jKyu(query) {
   // 실측 10.2s(12s 타임박스 근접 — cross_search 간헐 탈락 위험) → 목록·해제 2건 병렬 + 6h TTL 캐시
-  const ck = 'kyudb:' + query;
+  const ck = 'kyudb2:' + query;
   const hit = _ttlCache.get(ck);
   if (hit && Date.now() - hit.t < 6 * 3600e3) return JSON.parse(hit.v);
   const out = {};
@@ -1158,6 +1191,10 @@ async function jKyu(query) {
     try {
       const b = await jdbPost(JKYU + '/search/search.do', { totalSearchString: query, searchArea: code }, { Referer: JKYU + '/' });
       out[label] = [...new Set([...b.matchAll(/(奎[\d軸]+)/g)].map((x) => x[1]))].slice(0, 30);
+      // v1.96.7: 번호만 나오던 결함 — 응답 본문에서 각 奎번호 주변 글(서명·편저자·연대가 함께 실리는 자리)을 함께 보존
+      const flat = mclean(b); const ctx = {};
+      for (const id of out[label].slice(0, 15)) { const i = flat.indexOf(id); if (i >= 0) ctx[id] = flat.slice(Math.max(0, i - 70), i + 110).replace(/\s+/g, ' ').trim(); }
+      out[label + '맥락'] = ctx;
     } catch (e) { out[label] = { error: e.message }; }
   }));
   // 정상 형태(양쪽 배열)이고 결과가 있을 때만 캐시 — 차단·오류 응답 오염 방지
@@ -1319,11 +1356,18 @@ const handler = createMcpHandler((server) => {
       const en = koToEn(query);
       const eff = en || query;
       const q = /^[A-Z]+ \d+\/\d+$/.test(eff.trim()) ? `"${eff.trim()}"` : eff;
-      const d = await tnaFetch(q, max_results, page, year_from, year_to);
-      const recs = d.records || [];
+      const vs = page === 1 ? tnaVariants(q) : [q];
+      const rs = await Promise.allSettled(vs.map((x) => tnaFetch(x, max_results, page, year_from, year_to)));
+      if (rs[0].status !== 'fulfilled') throw rs[0].reason;
+      const d = rs[0].value; const seenR = new Set(); const recs = [];
+      for (const r of (d.records || [])) { seenR.add(r.id); recs.push(r); }
+      const vinfo = [];
+      rs.slice(1).forEach((x, i) => { if (x.status !== 'fulfilled') return; vinfo.push(`'${vs[i + 1]}' ${x.value.count ?? '?'}건`);
+        for (const r of (x.value.records || [])) if (!seenR.has(r.id) && recs.length < max_results + Math.ceil(max_results / 2)) { seenR.add(r.id); recs.push({ ...r, _v: vs[i + 1] }); } });
       const tags = [year_from || year_to ? `연대 ${year_from || ''}~${year_to || ''}` : '', page > 1 ? `p.${page}` : ''].filter(Boolean);
       const hint = (year_from || year_to) && !recs.length ? '\n※ 연대 필터는 연대 미상(Date unknown) 기록을 제외합니다 — 무필터로 재시도해 비교하십시오.' : '';
-      return text(`TNA '${query}'${en ? ` → 영문 자동 변환 '${eff}'` : ''}${tags.length ? ` [${tags.join(' · ')}]` : ''} — total ${d.count ?? '?'}:\n` + (recs.map(tnaLine).join('\n') || '(0 results)') + hint);
+      return text(`TNA '${query}'${en ? ` → 영문 자동 변환 '${eff}'` : ''}${tags.length ? ` [${tags.join(' · ')}]` : ''} — total ${d.count ?? '?'}:\n` + (recs.map((r) => tnaLine(r) + (r._v ? ` ⟨변형 '${r._v}'⟩` : '')).join('\n') || '(0 results)') + hint
+        + (vinfo.length ? `\n※ 표기 변형 병행(TNA는 단어 그대로 전부 일치): ${vinfo.join(' · ')} — ⟨변형⟩ 표시 행이 원 질의에서 빠졌던 기록. 더 보려면 그 변형으로 재검색.` : ''));
     });
 
   server.tool('tna_adjacent_mine',
@@ -2036,7 +2080,7 @@ const JB_CROSS = `국내외 대조 절차 — 순서를 틀리면 헛수고한�
           }
           const items = await COLLECT.ktv(q, Math.min(max_results, 10));
           if (!items.length) return text(`KTV e영상역사관 '${q}' — 0건. '대한뉴스'·사건명·인명으로 재시도하십시오.`);
-          return text(`KTV e영상역사관 '${q}' — ${items.length}건:\n` + items.map((it) => `- [${it.series || 'e영상역사관'}] ${it.title}\n  ${it.url}`).join('\n')
+          return text(`KTV e영상역사관 '${q}' — ${items.length}건:\n` + items.map((it) => `- [${it.series || 'e영상역사관'}] ${it.title}${it.date ? ` (${it.date})` : ''}${it.desc ? `\n  요지: ${it.desc}` : ''}\n  ${it.url}`).join('\n')
             + '\n※ 기록 탭(대한뉴스·문화영화·미공개 대한뉴스·정부기록사진집·국가기록사진) 교차 병합 — 사이트 기본 최신순이 최근 영상만 올리는 문제 보정.\n※ view URL을 mode=ktv query로 재투입 → 영상 해설·제작연도·상영시간 판독.');
         } catch (e) { return text(`KTV 오류(${String(e && e.message || e).slice(0, 60)}) — 잠시 후 재시도 또는 브라우저: https://www.ehistory.go.kr`); }
       }
@@ -2331,8 +2375,8 @@ const JB_CROSS = `국내외 대조 절차 — 순서를 틀리면 헛수고한�
         }
         if (mode === 'kyujanggak') {
           const r = await jKyu(q);
-          const fmt = (v) => Array.isArray(v) ? `${v.length}건 — ${v.slice(0, 12).join(' ')}` : `오류(${v.error})`;
-          let out = `규장각 '${q}'\n목록: ${fmt(r['목록'])}\n해제: ${fmt(r['해제'])}`;
+          const fmt = (v, c) => Array.isArray(v) ? `${v.length}건` + ((c && Object.keys(c).length) ? '\n' + v.slice(0, 10).map((id) => `- ${id}${c[id] ? ' … ' + c[id] : ''}`).join('\n') : ` — ${v.slice(0, 12).join(' ')}`) : `오류(${v.error})`;
+          let out = `규장각 '${q}'\n목록: ${fmt(r['목록'], r['목록맥락'])}\n해제: ${fmt(r['해제'], r['해제맥락'])}`;
           const lc = Array.isArray(r['목록']) ? r['목록'].length : 0; const ac = Array.isArray(r['해제']) ? r['해제'].length : 0;
           if (ac > lc) out += '\n★ 해제 검색이 목록보다 많습니다 — 절목·사목류가 상위 서명 아래 편차(編次)로 들어가 있을 수 있습니다.';
           out += `
