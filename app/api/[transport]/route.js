@@ -666,13 +666,22 @@ const COLLECT = {
     // v1.91.1: any= 는 광역 일치 후 표제 가나순 정렬로 잡음 상위화(실측 '朝鮮総督府'→アーカイブズ…) — title= 우선, 0건이면 any= 폴백
     const NUA = { 'User-Agent': 'KoreaArchiveMCP/1.0 (https://github.com/changgi/korea-archive-mcp; archival discovery)' };
     const ndlq = (f) => gtext(`https://ndlsearch.ndl.go.jp/api/opensearch?${f}=${encodeURIComponent(ja)}&cnt=${Math.min(n, 10)}`, NUA);
-    let b = await ndlq('title');
+    // v1.96: 수천 건 일치 시 표제 가나순이라 무관 자료 상위 — 당대 자료(until=1945)를 병행 조회하고, 검색어(신·구자체)를 표제에 포함한 것부터
+    const bc = await gtext(`https://ndlsearch.ndl.go.jp/api/opensearch?title=${encodeURIComponent(ja)}&until=1945&cnt=${Math.min(n * 3, 30)}`, NUA).catch(() => ''); // 순차 — NDL 동시접속 429 실측
+    const ba = await ndlq('title').catch(() => '');
+    let b = (bc.includes('<item>') ? bc.replace(/<\/channel>[\s\S]*$/, '') : '') + ba;
     if (!b.includes('<item>') && !(b.includes('<error>') && b.includes('429'))) b = await ndlq('any');
     if (b.includes('<error>') && b.includes('429')) throw new Error('NDL 동시접속 제한(429) — 잠시 후 재시도');
-    const out = [];
-    for (const item of b.split('<item>').slice(1)) {
+    const out = []; const seenL = new Set();
+    const KJ = { 總: '総', 國: '国', 鐵: '鉄', 經: '経', 會: '会', 學: '学', 臺: '台', 縣: '県', 圖: '図', 廳: '庁', 發: '発', 實: '実', 寫: '写', 眞: '真', 帖: '帖' };
+    const nk = (t) => String(t).replace(/./g, (c) => KJ[c] || c);
+    const qn = nk(ja).replace(/\s+/g, '');
+    const items = b.split('<item>').slice(1).map((item, i) => { const tt = ((item.match(/<title[^>]*>([^<]+)/) || [])[1] || ''); return { item, i, hit: nk(tt).replace(/\s+/g, '').includes(qn) ? 0 : 1 }; });
+    items.sort((x, y) => x.hit - y.hit || x.i - y.i);
+    for (const { item } of items) {
       const g = (t) => ((item.match(new RegExp(`<${t}[^>]*>([^<]+)`)) || [])[1] || '').trim();
       const title = g('title'); const link = g('link');
+      if (seenL.has(link)) continue; seenL.add(link);
       if (!title || !link) continue;
       const catArr = [...item.matchAll(/<category>([^<]+)/g)].map((m) => m[1]); // 자료형·매체(紙/デジタル)
       const cats = catArr.join('·');
