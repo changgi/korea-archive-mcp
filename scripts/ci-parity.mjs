@@ -25,4 +25,9 @@ for (const rel of ['plugins/korea-archive/servers/server.py', 'mcp/server.py']) 
   if (same) console.log(`✓ 패리티 OK (${rel}): ${py.length}종`);
   else { console.error(`✗ 패리티 불일치 (${rel})\n  node만: ${nodeTools.filter((t) => !py.includes(t))}\n  py만: ${py.filter((t) => !nodeTools.includes(t))}`); fail++; }
 }
+// v1.97.1: 본문 사본 일치 — mcp/server.py는 플러그인 server.py의 'from mcp.server.fastmcp' 이후와 같아야 한다(머리말만 다름)
+const body = (f) => { const s = fs.readFileSync(path.join(mkt, f), 'utf8'); const i = s.indexOf('from mcp.server.fastmcp'); return i < 0 ? null : s.slice(i); };
+const b1 = body('plugins/korea-archive/servers/server.py'), b2 = body('mcp/server.py');
+if (b1 && b2 && b1 === b2) console.log('✓ 본문 사본 일치 (mcp/server.py = 플러그인 server.py)');
+else { console.error('✗ 본문 사본 불일치 — marketplace에서 python3 scripts/splice_mcp.py 실행 후 커밋'); fail++; }
 process.exit(fail ? 1 : 0);

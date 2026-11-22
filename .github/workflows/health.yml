@@ -7,6 +7,9 @@ on:
   schedule:
     - cron: '23 21 * * 1'   # 매주 월 06:23 KST
   workflow_dispatch: {}
+permissions:
+  contents: read
+  issues: write
 jobs:
   health:
     runs-on: ubuntu-latest
@@ -78,3 +81,13 @@ jobs:
               print('::error::같은 기록 묶기 회귀 실패 — ' + ', '.join(fail) + ' (원 사이트 상세 구조·NARA 응답 형식 변경 의심)')
               sys.exit(1)
           EOF
+      - name: 실패 → 'auto-health' 이슈 기록
+        if: failure()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh label create auto-health --color B60205 --description "자동 감시가 발견한 장애" 2>/dev/null || true
+          url="${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          num=$(gh issue list --repo "${{ github.repository }}" --label auto-health --state open --search "헬스체크" --json number -q '.[0].number')
+          msg="주간 헬스체크 실패 — 채널 장애 또는 같은 기록 묶기 회귀. 실행 요약: $url · 조치: MAINTAINING.md '사이트가 바뀌었을 때'."
+          if [ -n "$num" ]; then gh issue comment "$num" --repo "${{ github.repository }}" --body "$msg"; else gh issue create --repo "${{ github.repository }}" --title "주간 헬스체크 실패" --label auto-health --body "$msg"; fi

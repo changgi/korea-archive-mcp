@@ -20,7 +20,11 @@ jobs:
           node --check /tmp/rights_check.mjs
       - name: 정적 검증 (도구 20종 · 설명 1024자 · TOPICS 컴파일 · 24KB 가드)
         run: node scripts/ci-verify.mjs
-      - name: marketplace 패리티 (3사본 도구명 diff + py_compile)
+      - name: GitHub Pages 무결성 (docs 링크·IIIF 이미지·매니페스트 수)
+        run: python3 scripts/check-docs.py
+      - name: 골든 케이스 파일 형식
+        run: python3 -c "import json,re;g=json.load(open('tests/golden.json'));[re.compile(r) for c in g['cases'] for r in c.get('must',[])+c.get('must_not',[])];print('golden',len(g['cases']),'cases OK')"
+      - name: marketplace 패리티 (3사본 도구명 diff · 본문 사본 일치 + py_compile)
         run: |
           git clone --depth 1 https://github.com/changgi/korea-archive-marketplace /tmp/mkt
           node scripts/ci-parity.mjs /tmp/mkt
