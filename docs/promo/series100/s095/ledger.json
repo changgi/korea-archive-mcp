@@ -1,0 +1,126 @@
+{
+ "n": 95,
+ "src": "kyudb",
+ "record": {
+  "id": "규장각 해제 奎21846 · 奎5574",
+  "title": "해동지도 (규장각 해제 검색 2건, 목록 0건)",
+  "date": "",
+  "inst": "서울대 규장각한국학연구원",
+  "url": "https://kyudb.snu.ac.kr"
+ },
+ "images": [
+  {
+   "file": "src/yeoji_jeolla_full.jpg",
+   "role": "hero",
+   "record_id": "NLK KOL000002513 sheet 00000004 (全羅道)",
+   "title": "輿地圖 全羅道 full",
+   "date": "",
+   "url": "https://viewer.nl.go.kr/nlmivs/viewWonmun_js.jsp?cno=KOL000002513",
+   "rights": "조선후기 필사 지도(보호기간 만료) — NLK 원문 공개, 출처: 국립중앙도서관",
+   "rights_evidence": "nlk_search: 「輿地圖 [고문헌] · [刊寫者未詳] ([朝鮮後期]) viewWonmun_js.jsp?cno=KOL000002513」 — 지도 뷰어(Map/)는 서지 정보 패널이 없어 저작권유형 문구 미확인. 조선후기 제작물로 저작권 보호기간 만료.",
+   "w": 1124,
+   "h": 1800,
+   "orig": "Map/MapImg 타일 m-01-01…m-16-25 (400장, 4534×7260) 재구성",
+   "visible": [
+    "hero"
+   ],
+   "nocrop": false
+  },
+  {
+   "file": "src/yeoji_jeolla_jeju.jpg",
+   "role": "extra",
+   "record_id": "NLK KOL000002513 sheet 00000004 (全羅道)",
+   "title": "輿地圖 全羅道 jeju",
+   "date": "",
+   "url": "https://viewer.nl.go.kr/nlmivs/viewWonmun_js.jsp?cno=KOL000002513",
+   "rights": "조선후기 필사 지도(보호기간 만료) — NLK 원문 공개, 출처: 국립중앙도서관",
+   "rights_evidence": "nlk_search: 「輿地圖 [고문헌] · [刊寫者未詳] ([朝鮮後期]) viewWonmun_js.jsp?cno=KOL000002513」 — 지도 뷰어(Map/)는 서지 정보 패널이 없어 저작권유형 문구 미확인. 조선후기 제작물로 저작권 보호기간 만료.",
+   "w": 1587,
+   "h": 1017,
+   "orig": "Map/MapImg 타일 m-01-01…m-16-25 (400장, 4534×7260) 재구성",
+   "visible": [
+    "붉은 원과 「濟州」",
+    "「漢拏」",
+    "「白鹿潭」",
+    "「牛島」",
+    "붉은 원과 「大靜」"
+   ],
+   "nocrop": false
+  },
+  {
+   "file": "src/yeoji_jeolla_north.jpg",
+   "role": "extra",
+   "record_id": "NLK KOL000002513 sheet 00000004 (全羅道)",
+   "title": "輿地圖 全羅道 north",
+   "date": "",
+   "url": "https://viewer.nl.go.kr/nlmivs/viewWonmun_js.jsp?cno=KOL000002513",
+   "rights": "조선후기 필사 지도(보호기간 만료) — NLK 원문 공개, 출처: 국립중앙도서관",
+   "rights_evidence": "nlk_search: 「輿地圖 [고문헌] · [刊寫者未詳] ([朝鮮後期]) viewWonmun_js.jsp?cno=KOL000002513」 — 지도 뷰어(Map/)는 서지 정보 패널이 없어 저작권유형 문구 미확인. 조선후기 제작물로 저작권 보호기간 만료.",
+   "w": 1800,
+   "h": 1064,
+   "orig": "Map/MapImg 타일 m-01-01…m-16-25 (400장, 4534×7260) 재구성",
+   "visible": [
+    "도 이름 「全羅道」",
+    "「北抵忠淸道界」 — 북쪽 끝 표기",
+    "「抵京大路」 — 서울로 가는 큰길",
+    "「監」「全州」 — 테두리 두른 붉은 원",
+    "「碧骨堤」 글씨와 연못 그림"
+   ],
+   "nocrop": false
+  },
+  {
+   "file": "src/yeoji_jeolla_se.jpg",
+   "role": "extra",
+   "record_id": "NLK KOL000002513 sheet 00000004 (全羅道)",
+   "title": "輿地圖 全羅道 se",
+   "date": "",
+   "url": "https://viewer.nl.go.kr/nlmivs/viewWonmun_js.jsp?cno=KOL000002513",
+   "rights": "조선후기 필사 지도(보호기간 만료) — NLK 원문 공개, 출처: 국립중앙도서관",
+   "rights_evidence": "nlk_search: 「輿地圖 [고문헌] · [刊寫者未詳] ([朝鮮後期]) viewWonmun_js.jsp?cno=KOL000002513」 — 지도 뷰어(Map/)는 서지 정보 패널이 없어 저작권유형 문구 미확인. 조선후기 제작물로 저작권 보호기간 만료.",
+   "w": 1800,
+   "h": 1409,
+   "orig": "Map/MapImg 타일 m-01-01…m-16-25 (400장, 4534×7260) 재구성",
+   "visible": [
+    "같은 면 동남쪽 바다와 고을"
+   ],
+   "nocrop": false
+  },
+  {
+   "file": "src/yeoji_jeolla_sw.jpg",
+   "role": "extra",
+   "record_id": "NLK KOL000002513 sheet 00000004 (全羅道)",
+   "title": "輿地圖 全羅道 sw",
+   "date": "",
+   "url": "https://viewer.nl.go.kr/nlmivs/viewWonmun_js.jsp?cno=KOL000002513",
+   "rights": "조선후기 필사 지도(보호기간 만료) — NLK 원문 공개, 출처: 국립중앙도서관",
+   "rights_evidence": "nlk_search: 「輿地圖 [고문헌] · [刊寫者未詳] ([朝鮮後期]) viewWonmun_js.jsp?cno=KOL000002513」 — 지도 뷰어(Map/)는 서지 정보 패널이 없어 저작권유형 문구 미확인. 조선후기 제작물로 저작권 보호기간 만료.",
+   "w": 1800,
+   "h": 1572,
+   "orig": "Map/MapImg 타일 m-01-01…m-16-25 (400장, 4534×7260) 재구성",
+   "visible": [
+    "같은 면 서남해 섬들"
+   ],
+   "nocrop": false
+  }
+ ],
+ "points": [
+  "도 이름 「全羅道」",
+  "「北抵忠淸道界」 — 북쪽 끝 표기",
+  "「抵京大路」 — 서울로 가는 큰길",
+  "「監」「全州」 — 테두리 두른 붉은 원",
+  "「碧骨堤」 글씨와 연못 그림",
+  "붉은 원과 「濟州」",
+  "「漢拏」",
+  "「白鹿潭」",
+  "「牛島」",
+  "붉은 원과 「大靜」"
+ ],
+ "video": {
+  "url": "",
+  "length_s": 0,
+  "rights": "",
+  "note": "영상 없음"
+ },
+ "status": "ok",
+ "notes": "NLK 지도 뷰어는 networkidle에 도달하지 않음(타일 지속 로드) → domcontentloaded 후 /Map/MapImg/<cno>/<sheet>/m-CC-RR.jpg를 페이지 안 fetch로 수집(약 1행/분). 규장각 해동지도 원본은 kyudb 접속 불가 + 기관 허가 필요로 미게재 — 카드에 같은 종류 기록의 예시 명기. 지도 해설의 저작권유형 문구 확인 못함(위 근거)."
+}
