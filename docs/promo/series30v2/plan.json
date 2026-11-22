@@ -357,13 +357,6 @@
      "w": 30,
      "h": 32,
      "t": "앞쪽의 어린 소나무 가지"
-    },
-    {
-     "x": 0,
-     "y": 93,
-     "w": 100,
-     "h": 6,
-     "t": "사진 하단 기념관 표기 'AUSTRALIAN WAR MEMORIAL'과 번호 147350"
     }
    ],
    "credit": "AWM C58219 — 기술: 'KOREA, 1951. LIEUTENANT LEONARD MONTGOMERIE MC (CENTRE, …'"
@@ -868,5 +861,351 @@
    "credit": "서울기록원 「청계천 복개공사 준공 개통식」 1964-12-04 — 표시는 사진에서 보이는 것만"
   },
   "cta_img": "steel_pier_1968.jpg"
+ },
+ "13": {
+  "hero": {
+   "file": "hero_yugwansun_judgment_p1.jpg",
+   "pos": "center 40%",
+   "credit": "판결문: 국가기록원 독립운동판결문 — 유관순 등 판결원본 1면 (1919 경성복심법원, 판결문은 저작권법 제7조 비보호 저작물 · 출처 국가기록원)"
+  },
+  "hook": "1919년, 손으로 쓴<br><span class=\"g\">유관순 판결문</span>",
+  "mosaic": [
+   {
+    "file": "judgment_p2.jpg",
+    "label": "판결원본 2면 — '判決原本'·'朝鮮總督府裁判所'"
+   },
+   {
+    "file": "judgment_p4_jumun.jpg",
+    "label": "판결원본 4면 — '主文' 시작"
+   },
+   {
+    "file": "judgment_p5_iyu.jpg",
+    "label": "판결원본 5면 — '理由' 시작"
+   },
+   {
+    "file": "page_indy_detail_0034971420.png",
+    "label": "국가기록원 상세 — 당시 18세 · 천안 용두리",
+    "pos": "center 30%"
+   }
+  ],
+  "mosaic_title": "판결원본 10면 중 4면 — <span class=\"g\">主文과 理由</span>까지",
+  "mosaic_credit": "국가기록원 독립운동관련 판결문 원본 뷰어(공개) — 사진 없이 문서만 사용(수형자 사진 제외 원칙)",
+  "ann": {
+   "file": "hero_yugwansun_judgment_p1.jpg",
+   "crop_y": 0.06,
+   "max_h": 800,
+   "boxes": [
+    {
+     "x": 17,
+     "y": 50,
+     "w": 8,
+     "h": 37,
+     "t": "피고인 성명 '柳寬順' 필기"
+    },
+    {
+     "x": 75,
+     "y": 25,
+     "w": 7,
+     "h": 11,
+     "t": "'判決' 표기"
+    },
+    {
+     "x": 68,
+     "y": 6,
+     "w": 9,
+     "h": 17,
+     "t": "'裁判確定 九月十一日' 京城覆審法院 고무인 — 상고 기각으로 확정"
+    }
+   ],
+   "credit": "판결원본 1면 원본 — 표시한 글자는 문서에서 직접 읽은 것(확정일 9.11은 고무인 문구)"
+  },
+  "cta_img": "judgment_p4_jumun.jpg"
+ },
+ "14": {
+  "hero": {
+   "file": "hero_ybg_oath_19320426.jpg",
+   "pos": "center 30%",
+   "credit": "사진: 윤봉길 한인애국단 선서 (1932-04, 퍼블릭 도메인 — 위키미디어 공용, The Archives of Korean History)"
+  },
+  "hook": "1932년 4월,<br><span class=\"g\">선서</span>하는 윤봉길",
+  "mosaic": [
+   {
+    "file": "ybg_kimgu_19320427.jpg",
+    "label": "김구와 윤봉길 (CC BY-SA 4.0)",
+    "pos": "center 30%"
+   },
+   {
+    "file": "ybg_qingdao_pre1932.jpg",
+    "label": "칭다오 시절 · 국가기록원 CET0046121",
+    "pos": "center 25%"
+   },
+   {
+    "file": "ybg_will_1932.jpg",
+    "label": "유서(보물 568-2 일부)"
+   },
+   {
+    "file": "hongkou_park_19320429_after.jpg",
+    "label": "1932-04-29 홍구공원 단상"
+   }
+  ],
+  "mosaic_title": "공적조서의 한 줄 — <span class=\"g\">원본 사진·유서</span>로 보기",
+  "mosaic_credit": "위키미디어 공용(퍼블릭 도메인 · 김구와 윤봉길 사진은 CC BY-SA 4.0, 출처 Wikimedia Commons) · 국가기록원 CET0046121",
+  "ann": {
+   "file": "hero_ybg_oath_19320426.jpg",
+   "crop_y": 0.32,
+   "max_h": 840,
+   "boxes": [
+    {
+     "x": 24,
+     "y": 65,
+     "w": 18,
+     "h": 15,
+     "t": "한 손의 권총"
+    },
+    {
+     "x": 84,
+     "y": 51,
+     "w": 13,
+     "h": 21,
+     "t": "다른 손의 수류탄 형태 물체"
+    },
+    {
+     "x": 46,
+     "y": 56,
+     "w": 36,
+     "h": 30,
+     "t": "가슴 앞 선서문 — 끝에 '韓人愛國團'"
+    }
+   ],
+   "credit": "선서 사진 — 표시는 사진에서 보이는 것만 · 공적: 공훈전자사료관 관리번호 3732"
+  },
+  "cta_img": "ybg_will_1932.jpg"
+ },
+ "15": {
+  "hero": {
+   "file": "ahn_changho_c1920.jpg",
+   "pos": "center 25%",
+   "fx": "filter:contrast(1.05);",
+   "credit": "사진: 안창호 초상 (1920년대 전후, 퍼블릭 도메인 — 위키미디어 공용)"
+  },
+  "hook": "1932년, 미국 신문이 쓴<br><span class=\"g\">안창호 체포</span>",
+  "mosaic": [
+   {
+    "file": "ahn_changho_la_1910s.jpg",
+    "label": "로스앤젤레스 시절 안창호 (PD)",
+    "pos": "center 25%"
+   },
+   {
+    "file": "page_i815_1-A00025-012.png",
+    "label": "독립기념관 자료 1-A00025-012",
+    "pos": "center 60%"
+   }
+  ],
+  "mosaic_title": "기사 원문 스크랩은 <span class=\"g\">독립기념관</span>에서 — 열람 경로까지",
+  "mosaic_credit": "독립기념관 한국독립운동정보시스템 — 영자신문 스크랩 원본 이미지는 공공누리 표시가 없어 게재 전 기관 협의 대상(카드에 미게재)",
+  "ann": {
+   "file": "page_i815_1-A00025-012.png",
+   "crop_y": 0.35,
+   "boxes": [
+    {
+     "x": 22,
+     "y": 45,
+     "w": 42,
+     "h": 5,
+     "t": "자료명 '안창호 체포기사(영자신문) (1932)'"
+    },
+    {
+     "x": 88,
+     "y": 47,
+     "w": 10,
+     "h": 4.5,
+     "t": "'원문이미지' 버튼 — 신문 스크랩 원본으로 연결"
+    },
+    {
+     "x": 22,
+     "y": 63,
+     "w": 52,
+     "h": 17,
+     "t": "자료 내용 — 'Wednesday Morning', 글 전경무(재미 대한인국민회 외교국장)"
+    }
+   ],
+   "title": "기관 페이지에서 읽은 것",
+   "credit": "독립기념관 자료 상세 페이지 캡처(출처 표기) — 표시는 화면에서 읽은 것"
+  },
+  "cta_img": "ahn_changho_la_1910s.jpg"
+ },
+ "17": {
+  "hero": {
+   "file": "hero_summation_no6_cover_1946-03.jpg",
+   "pos": "center 20%",
+   "credit": "문서: 미국 국립기록관리청 NAID 643299726 「Summation of U.S. Army Military Government Activities in Korea」 No.6 (1946-03, Unrestricted) — 미군정기 같은 시기 NARA 원본"
+  },
+  "hook": "1946년 3월,<br><span class=\"g\">미군정</span>이 쓴 한국 보고서",
+  "mosaic": [
+   {
+    "file": "summation_no6_contents.jpg",
+    "label": "목차 — 정치·경제·사회 활동",
+    "pos": "center 20%"
+   },
+   {
+    "file": "summation_no6_p1_general.jpg",
+    "label": "Section 1 — 7항 언론 경고",
+    "pos": "center 30%"
+   }
+  ],
+  "mosaic_title": "전자사료관의 편지검열 기록과 <span class=\"g\">같은 시기의 NARA 원본</span>",
+  "mosaic_credit": "NARA NAID 643299726(Unrestricted) — 국편 전자사료관 RG 338 편지검열문서(CO0000000419)는 '제한적 이용' 조건이라 원문 이미지 미게재",
+  "ann": {
+   "file": "hero_summation_no6_cover_1946-03.jpg",
+   "crop_y": 0.05,
+   "max_h": 840,
+   "boxes": [
+    {
+     "x": 17,
+     "y": 6,
+     "w": 64,
+     "h": 8,
+     "t": "'Commander-in-Chief United States Army Forces, Pacific'"
+    },
+    {
+     "x": 29,
+     "y": 16,
+     "w": 34,
+     "h": 23,
+     "t": "원 안의 한반도 지도 — 남쪽 절반만 검게 칠해져 있다"
+    },
+    {
+     "x": 17,
+     "y": 45,
+     "w": 58,
+     "h": 7,
+     "t": "표제 'SUMMATION'"
+    }
+   ],
+   "credit": "NAID 643299726 No.6 표지 원본 — 표시는 문서에서 직접 읽은 것"
+  },
+  "cta_img": "summation_no6_p1_general.jpg"
+ },
+ "24": {
+  "hero": {
+   "file": "hero_roof_1973_nocrop.jpg",
+   "nocrop": true,
+   "credit": "사진: 국가기록원 「농촌 새마을 운동 지붕 개량 작업」 (1973-07-26, 공공누리 제4유형 — 원형 그대로)"
+  },
+  "hook": "1973년 7월,<br><span class=\"g\">지붕</span>을 바꾸는 마을",
+  "mosaic": [
+   {
+    "file": "cheongdo_blocks_1972_nocrop.jpg",
+    "label": "청도 — 블록을 이고 가는 주민들 1972",
+    "nocrop": true
+   },
+   {
+    "file": "geochang_blockyard_1972_nocrop.jpg",
+    "label": "거창 부녀회 블록 작업장 1972",
+    "nocrop": true
+   },
+   {
+    "file": "yeongcheon_street_1972_nocrop.jpg",
+    "label": "영천 관정2동 시찰 1972.3.24",
+    "nocrop": true
+   },
+   {
+    "file": "yeongcheon_car_1972_nocrop.jpg",
+    "label": "영천 — 차창 밖 아이들 1972",
+    "nocrop": true
+   }
+  ],
+  "mosaic_title": "1972년 봄, <span class=\"g\">블록과 지붕</span>의 기록",
+  "mosaic_credit": "국가기록원·e영상역사관 정부기록사진집 — 공공누리 제4유형(변경 금지: 자르지 않고 원형 표시) · 영상 CEN0004672(1972)는 전용 플레이어만 제공",
+  "ann": {
+   "file": "hero_roof_1973_nocrop.jpg",
+   "nobox": true,
+   "boxes": [
+    {
+     "t": "지붕 위 남성 4명 — 2명은 서 있고 2명은 허리를 숙여 기와를 다룬다"
+    },
+    {
+     "t": "오른쪽은 기와를 걷어 낸 흙바닥과 쌓아 둔 기와"
+    },
+    {
+     "t": "뒤편 계단식 논과 산"
+    }
+   ],
+   "title": "사진에서 보이는 것(공공누리 4유형 — 원본 위에 표시하지 않음)",
+   "credit": "국가기록원 1973-07-26 — 위치는 말로 안내"
+  },
+  "cta_img": "cheongdo_blocks_1972_nocrop.jpg"
+ },
+ "25": {
+  "hero": {
+   "file": "hero_nfp_newhq_1991_nocrop.jpg",
+   "nocrop": true,
+   "credit": "사진: e영상역사관 「국립영화제작소 신청사 개관식」 (1991-09-06, 공공누리 제4유형 — 원형 그대로)"
+  },
+  "hook": "대한뉴스를 만든 곳,<br><span class=\"g\">국립영화제작소</span>",
+  "mosaic": [
+   {
+    "file": "film_day_1967_nocrop.jpg",
+    "label": "제5회 영화의 날 1967.10.27",
+    "nocrop": true
+   },
+   {
+    "file": "daehannews2000_1994a_nocrop.jpg",
+    "label": "대한뉴스 2000호 기념식 1994",
+    "nocrop": true
+   },
+   {
+    "file": "daehannews2000_1994b_nocrop.jpg",
+    "label": "대한뉴스 2000호 기념식 1994",
+    "nocrop": true
+   }
+  ],
+  "mosaic_title": "1967 · 1991 · 1994 — <span class=\"g\">대한뉴스의 현장</span>",
+  "mosaic_credit": "e영상역사관 사진(공공누리 제4유형) · 「대한뉴스의 발자취」 영상은 공공누리 표시가 없어 장면을 싣지 않음(KTV 나누리 이용 신청 대상)",
+  "ann": {
+   "file": "hero_nfp_newhq_1991_nocrop.jpg",
+   "nobox": true,
+   "boxes": [
+    {
+     "t": "현수막 '국립영화제작소 신청사 준공및 창립 30주년 기념' · '1991. 9. 6'"
+    },
+    {
+     "t": "흰 장갑을 끼고 테이프를 자르는 양복 차림 7명"
+    },
+    {
+     "t": "좌우 축하 화환 리본 — '30주년' 한자"
+    }
+   ],
+   "title": "사진에서 보이는 것(공공누리 4유형 — 원본 위에 표시하지 않음)",
+   "credit": "e영상역사관 1991-09-06 — 위치는 말로 안내"
+  },
+  "cta_img": "daehannews2000_1994a_nocrop.jpg",
+  "mosaic_layout": "rows"
+ },
+ "28": {
+  "hero": {
+   "file": "page_opengo_orginl_maintenance.png",
+   "nocrop": true,
+   "credit": "화면: 정보공개포털 메뉴 점검 안내 (2026-11-22 캡처, 출처 표기)"
+  },
+  "hook": "점검 중인 포털,<br><span class=\"g\">그래도 길은 있다</span>",
+  "ann": {
+   "file": "page_opengo_orginl_maintenance.png",
+   "nobox": true,
+   "boxes": [
+    {
+     "t": "'점검 중인 메뉴의 이용을 일시 제한합니다'"
+    },
+    {
+     "t": "제한 기간 '2026.11.12.부터 점검 및 정비 완료 시까지'"
+    },
+    {
+     "t": "공지: 점검 중에도 자료 보유 기관에 정보공개청구 가능 — 도구가 이 경로를 그대로 안내"
+    }
+   ],
+   "title": "막힌 이유를 실측해 그대로 알린다",
+   "credit": "foia_search 응답 = 포털 점검 상태 실측 + 청구·대체 검색 경로"
+  },
+  "cta_img": "page_opengo_orginl_maintenance.png"
  }
 }

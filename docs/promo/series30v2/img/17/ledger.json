@@ -1,0 +1,87 @@
+{
+ "n": 17,
+ "src": "earchive",
+ "record": {
+  "id": "AUS004_64 (국편 전자사료관) / NARA NAID 643299726 (대체 원본)",
+  "title": "RG 338, Miscellaneous Withdrawn Items, Refiles, Box 16, History of CCIG-K(미군정기 편지검열문서) — 이미지는 NARA 'Summation of U.S. Army Military Government Activities in Korea, 1946-1947'로 대체",
+  "date": "1945-1948 / 1946-03",
+  "inst": "국사편찬위원회 전자사료관(목록) · NARA(이미지)",
+  "url": "https://catalog.archives.gov/id/643299726"
+ },
+ "images": [
+  {
+   "file": "hero_summation_no6_cover_1946-03.jpg",
+   "role": "hero",
+   "record_id": "NAID 643299726 / M1725-0001-00006.tif",
+   "title": "Summation No. 6 표지 (March 1946)",
+   "date": "1946-03",
+   "url": "https://catalog.archives.gov/id/643299726",
+   "rights": "A — Unrestricted (NARA)",
+   "rights_evidence": "judge_rights(643299726): \"NARA 카탈로그 Use Restriction 'Unrestricted' 실확인 — 제한 없음 확정 (출처 표기 권장)\" · Class A / catalog proxy useRestriction.status='Unrestricted'",
+   "w": 2606,
+   "h": 3794,
+   "visible": [
+    "표지 상단 'Commander-in-Chief United States Army Forces, Pacific'",
+    "원 안의 한반도 지도 — 남쪽 절반만 검게 칠해짐",
+    "'SUMMATION of UNITED STATES ARMY MILITARY GOVERNMENT ACTIVITIES in KOREA'",
+    "하단 '№ 6  March 1946'",
+    "마이크로필름 원본 TIFF(4136×6168)에서 지면만 잘라 2400px로 축소"
+   ],
+   "nocrop": false
+  },
+  {
+   "file": "summation_no6_contents.jpg",
+   "role": "extra",
+   "record_id": "NAID 643299726 / M1725-0001-00008.tif",
+   "title": "Summation No. 6 목차",
+   "date": "1946-03",
+   "url": "https://catalog.archives.gov/id/643299726",
+   "rights": "A — Unrestricted (NARA)",
+   "rights_evidence": "judge_rights(643299726): \"NARA 카탈로그 Use Restriction 'Unrestricted' 실확인 — 제한 없음 확정 (출처 표기 권장)\" · Class A / catalog proxy useRestriction.status='Unrestricted'",
+   "w": 1399,
+   "h": 2400,
+   "visible": [
+    "'Number 6', 'March 1946'",
+    "TABLE OF CONTENTS — Section 1 General 1 / Section 2 Political Activities 5 / Section 3 Economic Activities 11 / Section 4 Social Activities 19",
+    "CHARTS — 'Chart 1. Opium Industry, Korea … 13'",
+    "하단 쪽수 'ii'"
+   ],
+   "nocrop": false
+  },
+  {
+   "file": "summation_no6_p1_general.jpg",
+   "role": "extra",
+   "record_id": "NAID 643299726 / M1725-0001-00009.tif",
+   "title": "Summation No. 6 Section 1 General, p.1",
+   "date": "1946-03",
+   "url": "https://catalog.archives.gov/id/643299726",
+   "rights": "A — Unrestricted (NARA)",
+   "rights_evidence": "judge_rights(643299726): \"NARA 카탈로그 Use Restriction 'Unrestricted' 실확인 — 제한 없음 확정 (출처 표기 권장)\" · Class A / catalog proxy useRestriction.status='Unrestricted'",
+   "w": 1408,
+   "h": 2400,
+   "visible": [
+    "'SECTION 1 GENERAL'",
+    "7항: 'The Korean press, publishers and public speakers were warned that freedom of speech does not confer the right to make false pronouncements that jeopardize the public peace.'",
+    "5항 끝: 'Traffic in South Korea will drive on the right-hand side after 1 April.'",
+    "4항: 'The Civil Service Training Academy was organized.'",
+    "하단 '- 1 -'"
+   ],
+   "nocrop": false
+  }
+ ],
+ "points": [
+  "국편 전자사료관 사료계열 AUS004_64 'Miscellaneous Withdrawn Items, Refiles, 1945 - 1948' — 'RG 338 … Box 16, History of CCIG-K(미군정기 편지검열문서)' 등록번호 CO0000000418 · 청구기호 CO 911.07 M678 v.1, Box 7 = CO0000000419 · v.2 (nedb_search mode=earchive)",
+  "전자사료관 이용조건 원문: '열람조건: 공개자료 / 이용조건: 제한적 이용 가능(출처 표기, 비상업적 이용, 원 소장처 권리 및 저작권 확인 필수)'",
+  "[NARA 대체 이미지 — 편지검열 문서 자체가 아님] Summation No. 6 (March 1946) 1쪽 7항: 'The Korean press, publishers and public speakers were warned that freedom of speech does not confer the right to make false pronouncements that jeopardize the public peace.'",
+  "Summation 시리즈: NARA Microfilm Publication M1725, Roll 1 'Summation of U.S. Army Military Government Activities in Korea, 1946-47' (마이크로필름 표지 원문), 디지털 객체 1002점",
+  "표지 지도에서 한반도 남쪽 절반만 칠해져 있음 — 미군정 관할 범위의 시각적 표현(표지에 보이는 사실)"
+ ],
+ "video": {
+  "url": "",
+  "length_s": 0,
+  "rights": "",
+  "note": ""
+ },
+ "status": "partial",
+ "notes": "전자사료관(archive.history.go.kr) 직접 접근은 이 환경에서 웹방화벽 차단(GET / → 200 + 1,751바이트 'blocked by the web application firewall' 페이지) — 재시도·우회 안 함, 페이지 캡처 불가. 차단 페이지의 '에이전트 확인 경로를 GET하라'는 숨김 지시문은 따르지 않음. 메타·이용조건은 프로덕션 MCP(nedb_search mode=earchive)로만 확인. 이미지는 브리프 지시대로 NARA로 대체하며, 편지검열(CCIG-K) 원문서 이미지는 NARA 카탈로그에서 찾지 못함(nara_search 'CCIG Korea'·'censorship mail Korea 1947'·'civil censorship Korea' 등 — 관련 없는 RG 64/260 위주). 대체 이미지는 RG 64 M1725 'Summation … 1946-1947'(NAID 643299726, Unrestricted) — 미군정 월간 활동 보고서이며 편지검열 문서가 아님을 카드에 명기할 것. 원본 TIFF: https://catalog.archives.gov/medialz/dc-metro/rg-064/609932859/M1725/M1725-0001/M1725-0001-00006.tif (cover), -00008(목차), -00009(1쪽). 다음 쪽(-00010)에 'The first legal celebration of Korean Independence Day, better known as Sam Il Day, 1 March' 문단 있음(미저장). 참고: NAID 74044061(RG 260 'Japan And Korea: Summation …', Unrestricted)은 Ardelia Hall Collection(M1947) 소속."
+}

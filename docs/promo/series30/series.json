@@ -250,26 +250,26 @@
    "inst": "프랑스 국립도서관 Gallica",
    "flag": "🇫🇷",
    "say": "프랑스 국립도서관에서 '조선' 찾아줘",
-   "head": "막혀도, 길은 알려준다",
-   "big": "403 → 대체 경로",
+   "head": "막힌 Gallica, BnF 카탈로그로 다시 연다",
+   "big": "403 → 복구",
    "facts": [
     [
      "변환",
      "조선 → Corée (프랑스어 자동)"
     ],
     [
-     "상태",
-     "BnF가 서버 자동 조회 차단"
+     "Gallica",
+     "서버 자동 조회 403 차단"
     ],
     [
-     "안내",
-     "웹 검색·브라우저용 공식 검색 URL 제시"
+     "복구",
+     "BnF 공식 카탈로그로 수집 — Gallica 원문 링크 동반"
     ]
    ],
-   "credit": "gallica_search 실제 응답 (2026-11-22)",
+   "credit": "gallica_search 응답 — BnF 카탈로그 폴백 (2026-11-22)",
    "tool": "gallica_search('Corée')",
    "link": "https://gallica.bnf.fr/services/engine/search/sru?operation=searchRetrieve&query=Cor%C3%A9e",
-   "stamp": "대체 경로"
+   "stamp": "복구"
   },
   {
    "n": 9,
@@ -733,10 +733,10 @@
     ],
     [
      "권리",
-     "KOGL(공공누리) · 해설 지문 2614984d8dee3b1c"
+     "영상 페이지 공공누리 표시 없음 → KTV 나누리 이용 신청(해설 지문 2614984d8dee3b1c)"
     ]
    ],
-   "credit": "출처: KTV e영상역사관 (공공누리)",
+   "credit": "출처: KTV e영상역사관 (영상 공공누리 표시 없음 — 이용 신청 대상)",
    "tool": "nedb_search(mode=ktv)",
    "link": "https://www.ehistory.go.kr/view/movie?mediasrcgbn=KV&mediaid=1886&mediadtl=8705&mediagbn=MH",
    "stamp": "해설"
@@ -801,16 +801,16 @@
    "inst": "정보공개포털·서울정보소통광장",
    "flag": "🇰🇷",
    "say": "청계천 정보공개 원문 찾아줘",
-   "head": "자동 조회가 막힌 곳은 열람 경로로",
+   "head": "점검 중인 포털 — 그래도 길은 안내한다",
    "big": "원문 경로",
    "facts": [
     [
      "상태",
-     "기관 측 자동 조회 제한·시간 초과"
+     "정보공개포털 원문정보 메뉴 점검 중(2026.11.12~) · 서울정보소통광장 연결 시간 초과"
     ],
     [
      "안내",
-     "공식 검색 URL + 웹 검색 지시"
+     "점검 중에도 가능한 정보공개청구·신청내역조회 경로"
     ],
     [
      "원칙",
