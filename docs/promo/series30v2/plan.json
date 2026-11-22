@@ -1207,5 +1207,55 @@
    "credit": "foia_search 응답 = 포털 점검 상태 실측 + 청구·대체 검색 경로"
   },
   "cta_img": "page_opengo_orginl_maintenance.png"
+ },
+ "26": {
+  "hero": {
+   "file": "hero_1975_ballot_nocrop.jpg",
+   "nocrop": true,
+   "credit": "사진: e영상역사관 정부기록사진집 「유신헌법 찬반 국민투표」 (1975-02-12, BK 18/3281, 공공누리 제4유형 — 원형 그대로)"
+  },
+  "hook": "1975년 2월 12일,<br><span class=\"g\">국민투표</span>의 날",
+  "mosaic": [
+   {
+    "file": "1975_count_broadcast_nocrop.jpg",
+    "label": "1975 개표 중계 — '전국도별개표현황'",
+    "nocrop": true
+   },
+   {
+    "file": "ref1972_slogan_banner_nocrop.jpg",
+    "label": "참고 1972: '十月維新은 民族의 課業이다'",
+    "nocrop": true
+   },
+   {
+    "file": "ref1972_ballot_boxes_nocrop.jpg",
+    "label": "참고 1972: 번호 붙은 투표함",
+    "nocrop": true
+   },
+   {
+    "file": "ref1972_voter_nocrop.jpg",
+    "label": "참고 1972: 목발 짚은 투표자",
+    "nocrop": true
+   }
+  ],
+  "mosaic_title": "포스터가 부른 그날 — <span class=\"g\">투표와 개표</span>",
+  "mosaic_credit": "e영상역사관 정부기록사진집(공공누리 제4유형) · 1972 사진은 참고 이미지 · 역사박물관 포스터 원본 이미지는 기관 방화벽으로 이 환경에서 수집 불가 — 원문 링크로 열람",
+  "ann": {
+   "file": "1975_count_broadcast_nocrop.jpg",
+   "nobox": true,
+   "boxes": [
+    {
+     "t": "현수막 '국민투표 합동방송반'"
+    },
+    {
+     "t": "상황판 '전국도별개표현황 10시20분 현재'"
+    },
+    {
+     "t": "유권자수 '16,788,839'"
+    }
+   ],
+   "title": "사진에서 보이는 것(공공누리 4유형 — 원본 위에 표시하지 않음)",
+   "credit": "e영상역사관 BK 18/3282 「개표 중계방송 현장」 1975 — 위치는 말로 안내"
+  },
+  "cta_img": "1975_count_broadcast_nocrop.jpg"
  }
 }
