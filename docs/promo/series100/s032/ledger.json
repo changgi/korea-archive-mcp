@@ -1,0 +1,132 @@
+{
+ "n": 32,
+ "src": "nara",
+ "record": {
+  "id": "127-GR-192",
+  "title": "1950.9 서울 — 다시 오른 깃발",
+  "inst": "미국 국립기록관리청 NARA",
+  "url": "https://catalog.archives.gov/id/74248962"
+ },
+ "images": [
+  {
+   "file": "src/s_74248965.jpg",
+   "role": "hero",
+   "w": 1413,
+   "h": 1800,
+   "visible": [],
+   "nocrop": false,
+   "record_id": "NAID 74248965 (127-GR-192-A3386)",
+   "title": "Korea – Seoul, September 1950",
+   "date": "",
+   "url": "https://catalog.archives.gov/id/74248965",
+   "orig_size": [
+    5022,
+    6399
+   ],
+   "object": "https://catalog.archives.gov/medialz/stillpix/127-gr/Korea-Seoul-September-1950/127-gr-27-192-A3386_001-ac.jpg",
+   "rights": "A — Unrestricted",
+   "rights_evidence": "NARA catalog proxy API useRestriction.status='Unrestricted' (2026-11-22 실측)"
+  },
+  {
+   "file": "src/s_74248974.jpg",
+   "role": "extra",
+   "w": 1800,
+   "h": 1413,
+   "visible": [
+    "'Government of Seoul being restored…' · A 3759"
+   ],
+   "nocrop": false,
+   "record_id": "NAID 74248974 (127-GR-192-A3759)",
+   "title": "Korea – Seoul, September 1950",
+   "date": "",
+   "url": "https://catalog.archives.gov/id/74248974",
+   "orig_size": [
+    6399,
+    5022
+   ],
+   "object": "https://catalog.archives.gov/medialz/stillpix/127-gr/Korea-Seoul-September-1950/127-gr-27-192-A3759_001-ac.jpg",
+   "rights": "A — Unrestricted",
+   "rights_evidence": "NARA catalog proxy API useRestriction.status='Unrestricted' (2026-11-22 실측)"
+  },
+  {
+   "file": "src/s_74248971.jpg",
+   "role": "extra",
+   "w": 1800,
+   "h": 1413,
+   "visible": [
+    "'Discussion between commanders' · A 3395"
+   ],
+   "nocrop": false,
+   "record_id": "NAID 74248971 (127-GR-192-A3395)",
+   "title": "Korea – Seoul, September 1950",
+   "date": "",
+   "url": "https://catalog.archives.gov/id/74248971",
+   "orig_size": [
+    6399,
+    5022
+   ],
+   "object": "https://catalog.archives.gov/medialz/stillpix/127-gr/Korea-Seoul-September-1950/127-gr-27-192-A3395_001-ac.jpg",
+   "rights": "A — Unrestricted",
+   "rights_evidence": "NARA catalog proxy API useRestriction.status='Unrestricted' (2026-11-22 실측)"
+  },
+  {
+   "file": "src/s_74248968.jpg",
+   "role": "extra",
+   "w": 1800,
+   "h": 1413,
+   "visible": [
+    "'…after capture of Seoul' · A 3394"
+   ],
+   "nocrop": false,
+   "record_id": "NAID 74248968 (127-GR-192-A3394)",
+   "title": "Korea – Seoul, September 1950",
+   "date": "",
+   "url": "https://catalog.archives.gov/id/74248968",
+   "orig_size": [
+    6399,
+    5022
+   ],
+   "object": "https://catalog.archives.gov/medialz/stillpix/127-gr/Korea-Seoul-September-1950/127-gr-27-192-A3394_001-ac.jpg",
+   "rights": "A — Unrestricted",
+   "rights_evidence": "NARA catalog proxy API useRestriction.status='Unrestricted' (2026-11-22 실측)"
+  },
+  {
+   "file": "src/s_74248962.jpg",
+   "role": "extra",
+   "w": 1800,
+   "h": 1413,
+   "visible": [
+    "건물 오른쪽 깃대에 걸린 성조기",
+    "창마다 위쪽 벽면으로 번진 검은 그을음",
+    "깃대 아래 모여 선 철모 쓴 병사들",
+    "인화지 하단 인쇄 설명 \"Up goes the American flag!\" — 좌하단 번호 'A 3376'"
+   ],
+   "nocrop": false,
+   "record_id": "NAID 74248962 (127-GR-192-A3376)",
+   "title": "Korea – Seoul, September 1950",
+   "date": "",
+   "url": "https://catalog.archives.gov/id/74248962",
+   "orig_size": [
+    6399,
+    5022
+   ],
+   "object": "https://catalog.archives.gov/medialz/stillpix/127-gr/Korea-Seoul-September-1950/127-gr-27-192-A3376_001-ac.jpg",
+   "rights": "A — Unrestricted",
+   "rights_evidence": "NARA catalog proxy API useRestriction.status='Unrestricted' (2026-11-22 실측)"
+  }
+ ],
+ "points": [
+  "건물 오른쪽 깃대에 걸린 성조기",
+  "창마다 위쪽 벽면으로 번진 검은 그을음",
+  "깃대 아래 모여 선 철모 쓴 병사들",
+  "인화지 하단 인쇄 설명 \"Up goes the American flag!\" — 좌하단 번호 'A 3376'"
+ ],
+ "video": {
+  "url": "",
+  "length_s": 0,
+  "rights": "",
+  "note": "영상 없음"
+ },
+ "status": "ok",
+ "notes": ""
+}

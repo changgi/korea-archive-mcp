@@ -1,0 +1,127 @@
+{
+ "n": 90,
+ "src": "nedb",
+ "record": {
+  "id": "승정원일기·비변사등록 '大同法' / NLK KOL000021978",
+  "title": "대동법(大同法) — 한국사DB 텍스트 기록 + 「全南道大同事目」 원본",
+  "date": "17세기",
+  "inst": "국사편찬위원회 한국사데이터베이스",
+  "url": "https://db.history.go.kr"
+ },
+ "images": [
+  {
+   "file": "src/daedong_p001.jpg",
+   "role": "hero",
+   "record_id": "KOL000021978",
+   "title": "표지",
+   "date": "간행년 미상(NLK 표기 '刊寫年未詳')",
+   "url": "https://viewer.nl.go.kr/nlmivs/viewWonmun_js.jsp?cno=KOL000021978",
+   "rights": "PD — 국립중앙도서관 '이용 제한이 없습니다', 출처 표기",
+   "rights_evidence": "국립중앙도서관 원문 뷰어 서지정보: '서명 全南道大同事目 저자 정태화 … 저작권유형 이용 제한이 없습니다.' (실확인) · 조선시대 고문헌(보호기간 만료)",
+   "w": 1390,
+   "h": 1800,
+   "visible": [
+    "표지 붓글씨 '湖南大同事目'"
+   ],
+   "nocrop": false
+  },
+  {
+   "file": "src/daedong_p002.jpg",
+   "role": "extra",
+   "record_id": "KOL000021978",
+   "title": "2면 권두",
+   "date": "간행년 미상(NLK 표기 '刊寫年未詳')",
+   "url": "https://viewer.nl.go.kr/nlmivs/viewWonmun_js.jsp?cno=KOL000021978",
+   "rights": "PD — 국립중앙도서관 '이용 제한이 없습니다', 출처 표기",
+   "rights_evidence": "국립중앙도서관 원문 뷰어 서지정보: '서명 全南道大同事目 저자 정태화 … 저작권유형 이용 제한이 없습니다.' (실확인) · 조선시대 고문헌(보호기간 만료)",
+   "w": 1390,
+   "h": 1800,
+   "visible": [
+    "'全南道大同事目'",
+    "'一全南道大同合設於宣惠廳'",
+    "'湖西之例'",
+    "'印信乙良以宣惠廳'"
+   ],
+   "nocrop": false
+  },
+  {
+   "file": "src/daedong_p002_ann.jpg",
+   "role": "page",
+   "record_id": "KOL000021978",
+   "title": "2면 상단 크롭(어노테이션용)",
+   "date": "간행년 미상(NLK 표기 '刊寫年未詳')",
+   "url": "https://viewer.nl.go.kr/nlmivs/viewWonmun_js.jsp?cno=KOL000021978",
+   "rights": "PD — 국립중앙도서관 '이용 제한이 없습니다', 출처 표기",
+   "rights_evidence": "국립중앙도서관 원문 뷰어 서지정보: '서명 全南道大同事目 저자 정태화 … 저작권유형 이용 제한이 없습니다.' (실확인) · 조선시대 고문헌(보호기간 만료)",
+   "w": 1500,
+   "h": 1068,
+   "visible": [
+    "위와 동일(상단부)"
+   ],
+   "nocrop": false
+  },
+  {
+   "file": "src/daedong_p003.jpg",
+   "role": "extra",
+   "record_id": "KOL000021978",
+   "title": "3면",
+   "date": "간행년 미상(NLK 표기 '刊寫年未詳')",
+   "url": "https://viewer.nl.go.kr/nlmivs/viewWonmun_js.jsp?cno=KOL000021978",
+   "rights": "PD — 국립중앙도서관 '이용 제한이 없습니다', 출처 표기",
+   "rights_evidence": "국립중앙도서관 원문 뷰어 서지정보: '서명 全南道大同事目 저자 정태화 … 저작권유형 이용 제한이 없습니다.' (실확인) · 조선시대 고문헌(보호기간 만료)",
+   "w": 1390,
+   "h": 1800,
+   "visible": [
+    "'一'로 시작하는 조항들",
+    "'爲白齊'"
+   ],
+   "nocrop": false
+  },
+  {
+   "file": "src/daedong_p006.jpg",
+   "role": "extra",
+   "record_id": "KOL000021978",
+   "title": "6면",
+   "date": "간행년 미상(NLK 표기 '刊寫年未詳')",
+   "url": "https://viewer.nl.go.kr/nlmivs/viewWonmun_js.jsp?cno=KOL000021978",
+   "rights": "PD — 국립중앙도서관 '이용 제한이 없습니다', 출처 표기",
+   "rights_evidence": "국립중앙도서관 원문 뷰어 서지정보: '서명 全南道大同事目 저자 정태화 … 저작권유형 이용 제한이 없습니다.' (실확인) · 조선시대 고문헌(보호기간 만료)",
+   "w": 1390,
+   "h": 1800,
+   "visible": [
+    "관청 이름이 검은 바탕 흰 글씨(음각)로 찍힘 — '工曹'·'內資寺' 등"
+   ],
+   "nocrop": false
+  },
+  {
+   "file": "src/daedong_p007.jpg",
+   "role": "extra",
+   "record_id": "KOL000021978",
+   "title": "7면",
+   "date": "간행년 미상(NLK 표기 '刊寫年未詳')",
+   "url": "https://viewer.nl.go.kr/nlmivs/viewWonmun_js.jsp?cno=KOL000021978",
+   "rights": "PD — 국립중앙도서관 '이용 제한이 없습니다', 출처 표기",
+   "rights_evidence": "국립중앙도서관 원문 뷰어 서지정보: '서명 全南道大同事目 저자 정태화 … 저작권유형 이용 제한이 없습니다.' (실확인) · 조선시대 고문헌(보호기간 만료)",
+   "w": 1390,
+   "h": 1800,
+   "visible": [
+    "'宗廟薦新'",
+    "음각 관청명 '內醫院'·'工曹' 등"
+   ],
+   "nocrop": false
+  }
+ ],
+ "points": [
+  "sjw '大同法' 129건(인조 2·효종 33·현종 12·숙종 14·경종 1·영조 44·정조 6·순조 9·철종 3·고종 5) · '大同事目' 71건 · '宣惠廳' 3607건",
+  "record(비변사등록) '大同法' 보고 115건 — bb_019r_001_08_0120 '領敦寧府事 金堉이 요청한 湖南에서의 大同法 시행…' · bb_025r_001_12_0070 '領議政 鄭太和 등이 인견하여 大同法의 施行과 廢止…'",
+  "NLK 「全南道大同事目」 53면, 저자 정태화(서지정보)"
+ ],
+ "video": {
+  "url": "",
+  "length_s": 0,
+  "rights": "",
+  "note": ""
+ },
+ "status": "ok",
+ "notes": "db.history.go.kr 차단 — 프로덕션 MCP만 사용. mode=item(bb_025r_001_12_0070·bb_058r_001_07_0030)은 '본문이 공개되지 않았습니다 — 공개 범위 문제' 반환(요약문은 반환됨). mode=total('대동법')은 'terminated' 실패 + 응답에 '에이전트 지시: 웹 검색으로…' 문구 포함. 6·7면 음각 관청명은 원본 판식 그대로. 영남대동사목(KOL000029877, 130면)도 8면 수신했으나 미사용."
+}

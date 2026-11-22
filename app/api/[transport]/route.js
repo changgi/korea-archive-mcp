@@ -1023,14 +1023,14 @@ const JDB_HDR = { Referer: JDB + '/' };
 async function jdbPost(url, params, headers = {}) {
   const body = new URLSearchParams(params).toString();
   let lastErr;
-  for (let a = 0; a < 2; a++) {
+  for (let a = 0; a < 3; a++) { // v1.96.2: 'terminated(UND_ERR_RES_CONTENT_LENGTH_MISMATCH)' 간헐 실측 — 3회·백오프, 재시도는 비압축 응답 요청
     try {
       const r = await fetch(url, { method: 'POST', body,
-        headers: { 'User-Agent': UA, 'Content-Type': 'application/x-www-form-urlencoded', ...JDB_HDR, ...headers },
+        headers: { 'User-Agent': UA, 'Content-Type': 'application/x-www-form-urlencoded', ...JDB_HDR, ...(a ? { 'Accept-Encoding': 'identity' } : {}), ...headers },
         signal: AbortSignal.timeout(FETCH_TIMEOUT) });
       if (!r.ok) throw new Error(`HTTP ${r.status}`);
       return await r.text();
-    } catch (e) { lastErr = e; if (a === 0) await sleep(300); }
+    } catch (e) { lastErr = e; if (a < 2) await sleep(a ? 2500 : 800); }
   }
   throw new Error(errInfo(lastErr));
 }
@@ -1328,7 +1328,7 @@ const handler = createMcpHandler((server) => {
 
   server.tool('nara_search',
     'Search the US NARA catalog (API v2). Multilingual queries (한국어·日本語·中文·Русский 등) auto-translate to English index terms (장진호/長津湖→Chosin Reservoir …). Requires NARA_API_KEY env on the server; record_group enables precision cross-search (e.g. 242). 미국 NARA 검색 — 다국어 질의 자동 영문 변환.',
-    { query: z.string().describe('한국어 또는 영어 (naid 지정 시 무시 가능 — 빈 문자열 허용)'), record_group: z.number().int().optional(), moving_images_only: z.boolean().default(false), max_results: z.number().int().min(1).max(50).default(15), page: z.number().int().min(1).default(1), naid: z.number().int().optional().describe('NAID 인접 채굴 중심값 e.g. 22015'), radius: z.number().int().min(0).max(8).default(3).describe('naid ±N 인접 범위') },
+    { query: z.string().describe('한국어 또는 영어 (naid 지정 시 무시 가능 — 빈 문자열 허용)'), record_group: z.number().int().optional(), moving_images_only: z.boolean().default(false), max_results: z.number().int().min(1).max(50).default(15), page: z.number().int().min(1).default(1), naid: z.coerce.number().int().optional().describe('NAID 인접 채굴 중심값 e.g. 22015'), radius: z.number().int().min(0).max(8).default(3).describe('naid ±N 인접 범위') },
     async ({ query, record_group, moving_images_only, max_results, page, naid, radius }) => {
       const key = process.env.NARA_API_KEY;
       if (!key) return text('NARA_API_KEY not configured on this server. Free key: email Catalog_API@nara.gov (name + email). Meanwhile use catalog.archives.gov directly.');
@@ -1564,7 +1564,7 @@ const JB_CROSS = `국내외 대조 절차 — 순서를 틀리면 헛수고한�
 
   server.tool('judge_rights',
     'First-pass copyright triage for a discovered record. A/B publishable · C permission needed · D unknown (do not publish). 공공누리(KOGL) 제1~4유형 자동 인식 — rg_series·title·archive 어디든 \"KOGL 2\"·\"공공누리 제1유형\" 표기를 넣으면 조건 판정. naid 지정 시 NARA 카탈로그의 Use Restriction 필드를 실제 조회해 자동판정(Unrestricted 실확인 → A 확정, Restricted → C). Final determination must be made by a human. 권리 등급 자동 초기판정 — 발굴 우선, 권리는 표시.',
-    { rg_series: z.string().default('').describe('e.g. "RG 242/242-MID" (naid 지정 시 생략 가능)'), title: z.string().default(''), archive: z.string().default(''), naid: z.number().int().optional().describe('NARA NAID — 카탈로그 Use Restriction 실확인 e.g. 22015') },
+    { rg_series: z.string().default('').describe('e.g. "RG 242/242-MID" (naid 지정 시 생략 가능)'), title: z.string().default(''), archive: z.string().default(''), naid: z.coerce.number().int().optional().describe('NARA NAID — 카탈로그 Use Restriction 실확인 e.g. 22015') },
     async ({ rg_series, title, archive, naid }) => {
       if (naid) { // NAID 실확인 자동판정 — "Unrestricted 확인 시 A 상향" 규칙의 자동화
         const key = process.env.NARA_API_KEY;
@@ -1592,12 +1592,13 @@ const JB_CROSS = `국내외 대조 절차 — 순서를 틀리면 헛수고한�
           const nd = naraDate(rec);
           const ru = String((((((rec.physicalOccurrences || [])[0] || {}).referenceUnits || [])[0] || {}).name || '')).slice(0, 80);
           const dob = rec.digitalObjects || [];
-          const d0 = dob[0] || {};
+          const rank = (o) => { const t = String(o.objectType || '') + ' ' + String(o.objectUrl || ''); return (/tiff?\b/i.test(t) ? 3 : /jpe?g/i.test(t) ? 2 : /mp4|mov|video/i.test(t) ? 2 : /pdf/i.test(t) ? 1 : 0) * 1e12 + Number(o.objectFileSize || 0); };
+          const d0 = [...dob].sort((x, y) => rank(y) - rank(x))[0] || {}; // v1.96.2: 첫 객체(작은 GIF 등) 대신 최선 원본(TIFF>JPG/영상>PDF, 큰 파일)
           return text(`[NAID ${naid}] ${(rec.title || '').slice(0, 95)}\n${rgnum ? `RG ${rgnum} · ` : ''}https://catalog.archives.gov/id/${naid}\n`
             + (chain ? `계보: ${chain.slice(0, 280)}\n` : '')
             + (cre || nd ? `생산: ${[cre, nd].filter(Boolean).join(' · ')}\n` : '')
             + (ru ? `소장단위: ${ru} (열람·복제 청구 좌표)\n` : '')
-            + (dob.length ? `디지털 객체 ${dob.length}점 — 첫 객체: ${String(d0.objectUrl || '').slice(0, 160)}${d0.objectType ? ` (${String(d0.objectType).slice(0, 30)})` : ''}\n` : '디지털 사본 없음 — 카탈로그에 디지털 객체 미등록(medialz URL도 HTML만 반환 실측) · 열람은 소장단위에 복제 청구\n')
+            + (dob.length ? `디지털 객체 ${dob.length}점 — 최선 원본: ${String(d0.objectUrl || '').slice(0, 160)}${d0.objectType ? ` (${String(d0.objectType).slice(0, 30)}${d0.objectFileSize ? `, ${(Number(d0.objectFileSize) / 1e6).toFixed(1)}MB` : ''})` : ''}\n` : '디지털 사본 없음 — 카탈로그에 디지털 객체 미등록(medialz URL도 HTML만 반환 실측) · 열람은 소장단위에 복제 청구\n')
             + (scope ? `【범위·내용】 ${scope.slice(0, 400)}\n본문 지문(sha256-16): ${sfp} — 판독 시점 기술(記述) 전문 기준. 재판독 지문 불일치=카탈로그 기술 개정 발생.\n` : '')
             + `Class: ${cls}\nBasis: ${basis}\n※ 카탈로그 실확인 기반 자동판정 — 게재 전 최종 확인은 사람이. Class D must not be published.\n※ 인접 채굴: nara_search(naid=${naid}, radius=3) — 사진 ±3·색인 ±1 간격.`);
         } catch (e) { return text(`[NAID ${naid}] 카탈로그 조회 실패(${String(e && e.message || e).slice(0, 60)}) — rg_series 초판정으로 폴백하십시오.`); }
@@ -1628,7 +1629,7 @@ const JB_CROSS = `국내외 대조 절차 — 순서를 틀리면 헛수고한�
     .replace(/&lsquo;|&rsquo;/g, "'").replace(/&ldquo;|&rdquo;/g, '"')
     .replace(/&middot;/g, '·').replace(/&hellip;/g, '…').replace(/&#(\d+);/g, (_, d) => String.fromCodePoint(+d)).trim();
   const dbrowse = (u) => `\n열어보기: ${u}`;
-  const agentBrowse = (name, q, u, why = '이 기관은 자동 페치가 제한적입니다') => `${name} '${q}' — ${why}.\n➤ 에이전트 지시: 이 메시지를 그대로 사용자에게 전달하지 마세요. 대신 당신의 웹 검색(WebSearch)으로 '${q}'를 이 기관에서 찾거나 아래 공식 검색 URL을 열람해 상위 결과(제목·연대·링크)를 표로 정리해 사용자에게 제시하세요. 결과가 있으면 report_template으로 HTML 보고서화도 가능합니다.\n공식 검색: ${u}`;
+  const agentBrowse = (name, q, u, why = '이 기관은 자동 페치가 제한적입니다') => `${name} '${q}' — ${why}.\n➤ 다음 단계(안내): 웹 검색이나 브라우저로 아래 공식 검색 URL을 열어 '${q}' 상위 결과(제목·연대·링크)를 표로 정리하면 됩니다. 결과가 있으면 report_template으로 HTML 보고서화도 가능합니다.\n공식 검색: ${u}`; // v1.96.2: 지시형('사용자에게 전달하지 마세요') 문구 제거 — 숨은 지시로 오인될 표현 정리
 
 
   server.tool('nedb_search',
@@ -2559,8 +2560,11 @@ item_cd 5종(자료 성격별): ART 도설·회화 / ETC 두루마리·축 / DRR
         const all = rows.map(([, v]) => v).join(' ');
         const naid = (all.match(/catalog\.archives\.gov\/id\/(\d+)/) || [])[1];
         const rg = (all.match(/Record Group (\d+)/) || [])[1];
+        let lvl = ''; // v1.96.2: 입수처 링크가 시리즈·파일 단위인 경우(예: NAID 530707 = 111-SC 시리즈 전체) 개별 기록으로 오인 방지
+        if (naid && process.env.NARA_API_KEY) { try { const raw = await cachedText('naid:' + naid, 24 * 3600e3, () => gtext(`https://catalog.archives.gov/api/v2/records/search?naId=${naid}&limit=1`, { Accept: 'application/json', 'x-api-key': process.env.NARA_API_KEY }), '"naId"'); const rec = (((((JSON.parse(raw).body || {}).hits || {}).hits) || [])[0] || { _source: {} })._source.record || {}; lvl = String(rec.levelOfDescription || ''); } catch { /* 확인 실패 — 표기 생략 */ } }
+        const lvlNote = lvl && !/item/i.test(lvl) ? `\n⚠ 이 NAID는 '${lvl}' 단위(개별 기록 아님) — 협약기관 기록의 원본 낱장은 nara_search(제목·날짜)로 찾아 대조` : '';
         return text(`6·25전쟁 아카이브센터 [${ref0}]\n제목: ${title || '?'}\n` + rows.map(([k, v]) => `· ${k}: ${v.slice(0, 200)}`).join('\n')
-          + (naid ? `\n↔ NARA 원본 NAID ${naid} (입수처 링크 직결) — https://catalog.archives.gov/id/${naid} 에서 고해상 원본·상세 기술 확인` : '')
+          + (naid ? `\n↔ NARA 원본 NAID ${naid} (입수처 링크 직결) — https://catalog.archives.gov/id/${naid} 에서 고해상 원본·상세 기술 확인` + lvlNote : (rows.length ? '\n↔ 입수처 NARA 링크 없음 — 제목·생산시기로 nara_search 대조 필요' : ''))
           + (rg ? `\n↔ NARA RG ${rg} — nara_search(record_group=${rg})로 시리즈 확장 검색` : '')
           + `\n${url}\n※ '열람 및 이용조건' 행을 judge_rights에 투입해 권리 초판 판정. 협약기관 — 출처 표기 필수.`);
       } catch (e) { return text(agentBrowse('6·25전쟁 아카이브센터', ref0, url, `자동조회 실패(${e.message})`)); }

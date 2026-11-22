@@ -222,6 +222,22 @@
    "nocrop": false,
    "w": 680,
    "h": 460
+  },
+  {
+   "file": "src/page_banner.jpg",
+   "role": "page",
+   "record_id": "CEQ0001330",
+   "title": "국가기록원 통합검색 화면 상단(캡처) — CTA 배경",
+   "date": "2026-11-22",
+   "url": "https://www.archives.go.kr/next/newsearch/showDetailPopup.do?rc_code=1741077&rc_rfile_no=200200096936&rc_ritem_no=000000000001",
+   "rights": "기관 웹페이지 캡처 — 출처 표기",
+   "rights_evidence": "직접 캡처",
+   "w": 420,
+   "h": 156,
+   "visible": [
+    "국가기록원 통합검색 배너의 책 사진 부분"
+   ],
+   "nocrop": false
   }
  ],
  "points": [

@@ -1,0 +1,89 @@
+{
+ "n": 44,
+ "part": [
+  "Ⅷ",
+  "유럽이 본 한국"
+ ],
+ "inst": "영국 국립기록관 TNA",
+ "flag": "🇬🇧",
+ "say": "1883년 조영조약 영국 기록 찾아줘",
+ "head": "1883 조영조약 — 'Affairs of Corea'",
+ "big": "FO 405/33",
+ "facts": [
+  [
+   "TNA 기록",
+   "FO 405/33 'Affairs of Corea. Further Correspondence. Part IV.' (1883)"
+  ],
+  [
+   "함께 찾은 기록",
+   "FO 881/4943 'COREA: Corres. Affairs of Corea. Part 4' (1883) · FO 17/962 'Consul General; Aston. Corea. Vice-Consul; Carles' (1884)"
+  ],
+  [
+   "이미지",
+   "TNA 원문 미공개 → 부영사 Carles 『Life in Corea』(1888) 지면·도판"
+  ]
+ ],
+ "tool": "tna_search('Corea', year_from=1882, year_to=1884) → FO 405/33 · FO 881/4943 · FO 17/962",
+ "link": "https://discovery.nationalarchives.gov.uk/details/r/C3731988",
+ "checked": "2026-11-22",
+ "tags": "#TNA #조영조약 #1883",
+ "hero": {
+  "file": "src/carles_n7.jpg",
+  "pos": "center 40%",
+  "credit": "도판: W. R. Carles, Life in Corea (1888) 권두 'Photo of Un-jin Miriok' · 1888 공표, 저자 1929 사망 → PD · 사본 Internet Archive lifeincorea00carl"
+ },
+ "hook": "1883년 조약 뒤,<br>영국 부영사의 <span class=\"g\">은진 미륵</span>",
+ "mosaic": [
+  {
+   "file": "src/carles_p11_para.jpg",
+   "label": "p.11 — 'The treaty with Great Britain, which had been signed in 1882, not having been ratified'",
+   "pos": "center 30%"
+  },
+  {
+   "file": "src/carles_p87_para.jpg",
+   "label": "p.87 — 'the minister who represented Great Britain for the first time at his court'",
+   "pos": "center 70%"
+  }
+ ],
+ "mosaic_title": "부영사의 책 — <span class=\"g\">조약의 현장</span>",
+ "mosaic_credit": "W. R. Carles, Life in Corea (London: Macmillan, 1888) pp.11·87 · PD · Internet Archive lifeincorea00carl",
+ "ann": {
+  "file": "src/carles_n106_crop.jpg",
+  "crop_y": 0.0,
+  "title": "기록 해설 — 지면에 인쇄된 문장만 옮겼습니다",
+  "boxes": [
+   {
+    "x": 10.8,
+    "y": 1,
+    "w": 78.3,
+    "h": 23,
+    "t": "장 요지: 'Chemulpo—Exchange of ratifications—… Audience of the king'"
+   },
+   {
+    "x": 10.8,
+    "y": 28,
+    "w": 78.3,
+    "h": 16,
+    "t": "'In the spring of 1884 Sir H. Parkes went to Corea to exchange ratifications of the treaty'"
+   },
+   {
+    "x": 10.8,
+    "y": 43,
+    "w": 78.3,
+    "h": 23,
+    "t": "'Mr. W. G. Aston, who had been appointed to act provisionally as Consul-General in Corea'"
+   },
+   {
+    "x": 54.2,
+    "y": 83,
+    "w": 35.0,
+    "h": 7.5,
+    "t": "'…my quarters as H.M. Vice-Consul in Corea' — 저자 Carles 자신의 직함"
+   }
+  ],
+  "credit": "Carles 1888, Chapter V 첫 면(p.83) — 인쇄된 문장을 그대로 옮김 · PD · IA lifeincorea00carl"
+ },
+ "cta_img": "src/carles_n41.jpg",
+ "meta_top": 500,
+ "mosaic_layout": "rows"
+}

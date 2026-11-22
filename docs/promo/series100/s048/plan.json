@@ -1,0 +1,97 @@
+{
+ "n": 48,
+ "part": [
+  "Ⅷ",
+  "유럽이 본 한국"
+ ],
+ "inst": "유로피아나 Europeana",
+ "flag": "🇪🇺",
+ "say": "유로피아나에서 네덜란드군 한국전쟁 사진 찾아줘",
+ "head": "NIMH — W.W. Dussel의 975고지 연작",
+ "big": "Heuvel 975",
+ "facts": [
+  [
+   "Europeana",
+   "'heuvel 975' 31건 — 제공 Netherlands Institute for Military History(NIMH)"
+  ],
+  [
+   "촬영",
+   "W.W. Dussel · 1951-05 · 원판 번호 2132-009-033~045 · 2132-010-010~030"
+  ],
+  [
+   "권리",
+   "CC0 1.0 (Europeana edmRights)"
+  ],
+  [
+   "영상",
+   "Polygoon 1952-08-01 'Presentation of South Korean awards to Dutch volunteers' CC BY-SA 4.0 — 영상 서버 접속 불가, 정지 화면 1장만"
+  ]
+ ],
+ "tool": "europeana_search('heuvel 975') → Europeana record API(edmRights CC0)",
+ "link": "https://www.europeana.eu/item/2021650/memorix_7f13f836_0f11_0fe1_1f0d_4db493eb386c",
+ "checked": "2026-11-22",
+ "tags": "#Europeana #네덜란드대대 #975고지",
+ "hero": {
+  "file": "src/nimh_7f13f836.jpg",
+  "pos": "center 45%",
+  "credit": "사진: W.W. Dussel, 1951-05 · NIMH 2132-009-042 '975고지를 오르다 짧은 휴식' · Europeana /2021650/memorix_7f13f836… · CC0 1.0"
+ },
+ "hook": "1951년 5월,<br>빗속의 <span class=\"g\">975고지</span>를 오르다",
+ "mosaic": [
+  {
+   "file": "src/nimh_0f8e8a43.jpg",
+   "label": "'남은 식수 한 모금' · 2132-009-045"
+  },
+  {
+   "file": "src/nimh_4c972c3a.jpg",
+   "label": "정상 도착, 안개와 어둠 · 2132-010-030"
+  },
+  {
+   "file": "src/nimh_0da5befb.jpg",
+   "label": "통신선을 던지는 Küneman · 2132-009-035"
+  },
+  {
+   "file": "src/polygoon_743088_still_0030.jpg",
+   "label": "Polygoon 1952 뉴스릴 0:30 — 서훈식 대열"
+  }
+ ],
+ "mosaic_title": "같은 필름의 <span class=\"g\">다른 컷</span>",
+ "mosaic_credit": "NIMH 2132-009-045·2132-010-030·2132-009-035(CC0) · 정지 화면: Polygoon-Profilti / Beeld en Geluid, openbeelden 743088 (CC BY-SA 4.0, Europeana 미리보기 360px)",
+ "ann": {
+  "file": "src/nimh_8fb9c5bd.jpg",
+  "crop_y": 0.3,
+  "boxes": [
+   {
+    "x": 25,
+    "y": 49,
+    "w": 20,
+    "h": 11,
+    "t": "앞사람 등의 원통형 릴 — 표면에 흰 스텐실 글자"
+   },
+   {
+    "x": 46,
+    "y": 47,
+    "w": 14,
+    "h": 10,
+    "t": "두 번째 사람 등의 같은 모양 릴"
+   },
+   {
+    "x": 29,
+    "y": 36,
+    "w": 23,
+    "h": 12,
+    "t": "철모 쓴 두 사람의 뒷모습"
+   },
+   {
+    "x": 8,
+    "y": 43,
+    "w": 10,
+    "h": 23,
+    "t": "길 왼쪽에 서서 바라보는 병사"
+   }
+  ],
+  "credit": "NIMH 2132-009-033 · 원 설명: 'Küneman en twee Amerikaanse militairen gaan een lijn uitleggen'(선 가설 출발) · CC0"
+ },
+ "cta_img": "src/nimh_4c972c3a.jpg",
+ "meta_top": 470
+}

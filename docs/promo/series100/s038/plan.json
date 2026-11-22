@@ -1,0 +1,153 @@
+{
+ "n": 38,
+ "part": [
+  "Ⅶ",
+  "전쟁의 기록 2"
+ ],
+ "inst": "6·25전쟁 아카이브센터 (협약기관)",
+ "flag": "🇰🇷",
+ "say": "6·25전쟁 아카이브센터에서 1·4 후퇴 서울 철수 영상 찾아줘",
+ "head": "1951.1.4 서울 — 철수의 필름",
+ "big": "NAID 22401",
+ "facts": [
+  [
+   "협약기관",
+   "KOREAN WAR ARCHIVES 6·25전쟁 아카이브센터 2022-US-02-AV-D-00143 '유엔군의 서울 지역 철수 기록영상'"
+  ],
+  [
+   "생산",
+   "1951-01-04 ~ 1951-01-05 · 미 육군 통신감실(RG 111)"
+  ],
+  [
+   "원본",
+   "NARA NAID 22401 · 111-ADC-8636 · 9분 56초 MP4"
+  ],
+  [
+   "권리",
+   "NARA Use Restriction 'Undetermined' — 연방 저작물 → B"
+  ]
+ ],
+ "meta_top": 470,
+ "tool": "koreanwar_search(서울 미 육군 1951) → koreanwar_item(2022-US-02-AV-D-00143) → judge_rights(naid=22401)",
+ "link": "https://catalog.archives.gov/id/22401",
+ "checked": "2026-11-22",
+ "tags": "#6·25전쟁아카이브센터 #1·4후퇴",
+ "hero": {
+  "file": "src/p_531379.jpg",
+  "pos": "center 40%",
+  "credit": "사진: 미국 국립기록관리청 NAID 531379 (111-SC-351356, 1950-10-18 서울, Unrestricted) · 발굴: KOREAN WAR ARCHIVES 6·25전쟁 아카이브센터"
+ },
+ "hook": "폐허 위의 서울,<br>그리고 <span class=\"g\">1951년 1월 4일</span>",
+ "mosaic": [
+  {
+   "file": "src/p_531387.jpg",
+   "label": "폐허에서 쓸 것을 찾는 노인 1950-11 · NAID 531387"
+  },
+  {
+   "file": "src/p_350488413.jpg",
+   "label": "건물 벽면이 부서진 서울 거리 1951 · NAID 350488413",
+   "pos": "center 60%"
+  },
+  {
+   "file": "src/p_350488509.jpg",
+   "label": "서울 거리의 유엔군 1951 · NAID 350488509"
+  },
+  {
+   "file": "video/scene_12_939.jpg",
+   "label": "필름 9:39 — 얼음 뜬 강 · NAID 22401"
+  }
+ ],
+ "mosaic_title": "서울 1950–51 — <span class=\"g\">사진 3장 + 필름</span>",
+ "mosaic_credit": "NARA NAID 531387(111-SC)·350488413·350488509(Gene Putnam) — Unrestricted · 영상 NAID 22401(B)",
+ "ann": {
+  "file": "src/p_520784.jpg",
+  "crop_y": 0.2,
+  "title": "NAID 520784 (80-G-425418) — 보이는 것만 읽었습니다",
+  "boxes": [
+   {
+    "x": 20,
+    "y": 28,
+    "w": 53,
+    "h": 9,
+    "t": "승강장 위로 이어진 지붕 세 동"
+   },
+   {
+    "x": 0,
+    "y": 38,
+    "w": 42,
+    "h": 30,
+    "t": "승강장을 메운 사람들과 짐 보따리"
+   },
+   {
+    "x": 42,
+    "y": 48,
+    "w": 26,
+    "h": 50,
+    "t": "사람들 사이로 비어 있는 선로"
+   },
+   {
+    "x": 75,
+    "y": 30,
+    "w": 25,
+    "h": 62,
+    "t": "오른쪽 가까이 웅크린 사람들과 흰 보따리"
+   }
+  ],
+  "credit": "NAID 520784 원본(3000×2394, 1951-01-03) — 원 설명 'Refugees crowd railway depot at Inchon…'"
+ },
+ "scenes": [
+  {
+   "title": "NAID 22401 「Evacuation of UN Troops, Seoul Area」",
+   "credit": "미국 국립기록관리청 NAID 22401 · 111-ADC-8636 · 발굴: KOREAN WAR ARCHIVES 6·25전쟁 아카이브센터",
+   "frames": [
+    {
+     "file": "video/scene_01_059.jpg",
+     "tc": "00:59",
+     "cap": "눈 남은 언덕길을 장비를 메고 내려오는 병사들"
+    },
+    {
+     "file": "video/scene_03_235.jpg",
+     "tc": "02:35",
+     "cap": "흰 별 표식 트럭 짐칸에 탄 병사들"
+    },
+    {
+     "file": "video/scene_04_248.jpg",
+     "tc": "02:48",
+     "cap": "가로등이 선 긴 다리 위를 줄지어 오는 지프·트럭"
+    },
+    {
+     "file": "video/scene_05_312.jpg",
+     "tc": "03:12",
+     "cap": "병사들을 가득 태운 전차가 다리를 지난다"
+    }
+   ]
+  },
+  {
+   "title": "같은 필름 후반부",
+   "credit": "미국 국립기록관리청 NAID 22401 (연방 저작물, Use Restriction Undetermined → B 명기) · 해설은 화면에서 보이는 것만",
+   "frames": [
+    {
+     "file": "video/scene_07_411.jpg",
+     "tc": "04:11",
+     "cap": "방한모·외투 차림으로 걸어오는 병사들"
+    },
+    {
+     "file": "video/scene_08_450.jpg",
+     "tc": "04:50",
+     "cap": "전신주 늘어선 길을 달리는 트럭과 지프 행렬"
+    },
+    {
+     "file": "video/scene_10_547.jpg",
+     "tc": "05:47",
+     "cap": "흰 별 표식 차량을 함께 미는 병사들"
+    },
+    {
+     "file": "video/scene_12_939.jpg",
+     "tc": "09:39",
+     "cap": "얼음 조각이 뜬 강, 건너편에 검은 연기"
+    }
+   ]
+  }
+ ],
+ "cta_img": "src/p_531387.jpg"
+}
