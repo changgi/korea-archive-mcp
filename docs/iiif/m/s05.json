@@ -1,0 +1,1111 @@
+{
+ "@context": "http://iiif.io/api/presentation/3/context.json",
+ "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s05.json",
+ "type": "Manifest",
+ "label": {
+  "ko": [
+   "05 · 네덜란드 국립문서보관소 — 참전 대대·대사관·적십자 — 문서군 3개"
+  ]
+ },
+ "summary": {
+  "ko": [
+   "30곳 탐방 · Ⅰ 전쟁의 기록 · 원 기록: Het Nederlands Detachement Verenigde Naties is in Busan(Korea) gearriveerd. Luitenant-kolonel M.P.A. den Ouden, de commandant ontvangt bloemen namens de Koreaanse Patriotitische Vrouwenbeweging (1950-12-07) · Nationaal Archief (Den Haag)"
+  ]
+ },
+ "metadata": [
+  {
+   "label": {
+    "ko": [
+     "원 기록"
+    ]
+   },
+   "value": {
+    "ko": [
+     "NL-HaNA 2.24.05.02 bestanddeel 093-0425 (ref. inventory 2.13.56 NDVN 문서는 별도) Het Nederlands Detachement Verenigde Naties is in Busan(Korea) gearriveerd. Luitenant-kolonel M.P.A. den Ouden, de commandant ontvangt bloemen namens de Koreaanse Patriotitische Vrouwenbeweging"
+    ]
+   }
+  },
+  {
+   "label": {
+    "ko": [
+     "소장"
+    ]
+   },
+   "value": {
+    "ko": [
+     "Nationaal Archief (Den Haag)"
+    ]
+   }
+  }
+ ],
+ "requiredStatement": {
+  "label": {
+   "ko": [
+    "출처"
+   ]
+  },
+  "value": {
+   "ko": [
+    "Nationaal Archief (Den Haag) — 이미지별 권리 표시 참조. 협약기관(KOREAN WAR ARCHIVES 6·25전쟁 아카이브센터) 기록은 출처 표기 필수."
+   ]
+  }
+ },
+ "provider": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/",
+   "type": "Agent",
+   "label": {
+    "ko": [
+     "KOREA ARCHIVE 통합검색"
+    ]
+   }
+  }
+ ],
+ "items": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s05/canvas/1",
+   "type": "Canvas",
+   "label": {
+    "ko": [
+     "Het Nederlands Detachement Verenigde Naties is in Busan(Korea) gearriveerd. Luitenant-kolonel M.P.A. den Ouden, de commandant ontvangt bloemen namens de Koreaanse Patriotitische Vrouwenbeweging"
+    ]
+   },
+   "width": 1194,
+   "height": 1600,
+   "metadata": [
+    {
+     "label": {
+      "ko": [
+       "식별자"
+      ]
+     },
+     "value": {
+      "ko": [
+       "NL-HaNA 2.24.05.02 inv.nr./bestanddeel 093-0425 (id ae2821a0-d0b4-102d-bcf8-003048976d84)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "연대"
+      ]
+     },
+     "value": {
+      "ko": [
+       "1950-12-07"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "소장"
+      ]
+     },
+     "value": {
+      "ko": [
+       "Nationaal Archief (Den Haag)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리"
+      ]
+     },
+     "value": {
+      "ko": [
+       "CC0 (Nationaal Archief)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "보이는 것"
+      ]
+     },
+     "value": {
+      "ko": [
+       "군복 차림 군인이 꽃다발을 받으며 허리를 숙이고 있다 · 흰 저고리·검은 치마 차림 여성 2명 · 뒤편에 정모 쓴 장교 여러 명 · 인화지 우하단 번호 '093 0425'"
+      ]
+     }
+    }
+   ],
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s05/hero_busan_arrival_1950.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "items": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s05/canvas/1/page",
+     "type": "AnnotationPage",
+     "items": [
+      {
+       "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s05/canvas/1/page/a",
+       "type": "Annotation",
+       "motivation": "painting",
+       "target": "https://changgi.github.io/korea-archive-mcp/iiif/m/s05/canvas/1",
+       "body": {
+        "id": "https://changgi.github.io/korea-archive-mcp/iiif/img/s05/hero_busan_arrival_1950.jpg",
+        "type": "Image",
+        "format": "image/jpeg",
+        "width": 1194,
+        "height": 1600
+       }
+      }
+     ]
+    }
+   ],
+   "homepage": [
+    {
+     "id": "http://hdl.handle.net/10648/ae2821a0-d0b4-102d-bcf8-003048976d84",
+     "type": "Text",
+     "label": {
+      "ko": [
+       "원 기관 기록"
+      ]
+     },
+     "format": "text/html"
+    }
+   ],
+   "rights": "http://creativecommons.org/publicdomain/zero/1.0/"
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s05/canvas/2",
+   "type": "Canvas",
+   "label": {
+    "ko": [
+     "Het Nederlands Detachement Verenigde Naties is in Busan(Korea) gearriveerd. Luitenant-kolonel M.P.A. den Ouden, de commandant ontvangt bloemen namens de Koreaanse Patriotitische Vrouwenbeweging"
+    ]
+   },
+   "width": 1600,
+   "height": 1187,
+   "metadata": [
+    {
+     "label": {
+      "ko": [
+       "식별자"
+      ]
+     },
+     "value": {
+      "ko": [
+       "NL-HaNA 2.24.05.02 inv.nr./bestanddeel 093-0425 (id ae2821a0-d0b4-102d-bcf8-003048976d84)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "연대"
+      ]
+     },
+     "value": {
+      "ko": [
+       "1950-12-07"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "소장"
+      ]
+     },
+     "value": {
+      "ko": [
+       "Nationaal Archief (Den Haag)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리"
+      ]
+     },
+     "value": {
+      "ko": [
+       "CC0 (Nationaal Archief)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "보이는 것"
+      ]
+     },
+     "value": {
+      "ko": [
+       "같은 사진 뒷면 타자 캡션: '...Ned rlands detachement Ver.Naties in Poesan in Korea gearriveerd.' / 'Lt.Kol.de Ouden, de Commandant ontvangt bloemen namens de Koreaanse Patriottische Vrouwenbeweging.' · 'FOTO-ANEFO 7-12-1950' 타자 문구 · 붉은 색연필 X 표시, 이름 'Ouden'에 타원 표시"
+      ]
+     }
+    }
+   ],
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s05/verso_busan_arrival_caption.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "items": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s05/canvas/2/page",
+     "type": "AnnotationPage",
+     "items": [
+      {
+       "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s05/canvas/2/page/a",
+       "type": "Annotation",
+       "motivation": "painting",
+       "target": "https://changgi.github.io/korea-archive-mcp/iiif/m/s05/canvas/2",
+       "body": {
+        "id": "https://changgi.github.io/korea-archive-mcp/iiif/img/s05/verso_busan_arrival_caption.jpg",
+        "type": "Image",
+        "format": "image/jpeg",
+        "width": 1600,
+        "height": 1187
+       }
+      }
+     ]
+    }
+   ],
+   "homepage": [
+    {
+     "id": "http://hdl.handle.net/10648/ae2821a0-d0b4-102d-bcf8-003048976d84",
+     "type": "Text",
+     "label": {
+      "ko": [
+       "원 기관 기록"
+      ]
+     },
+     "format": "text/html"
+    }
+   ],
+   "rights": "http://creativecommons.org/publicdomain/zero/1.0/"
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s05/canvas/3",
+   "type": "Canvas",
+   "label": {
+    "ko": [
+     "Nederlands Detachement Verenigde Naties in Korea tijdens \"Retreat-parade\". Wanneer de troepen enige tijd uit de lijn genomen worden, vindt de z.g. retreat-parade plaats. Daarbij worden waarderende woo"
+    ]
+   },
+   "width": 1600,
+   "height": 1091,
+   "metadata": [
+    {
+     "label": {
+      "ko": [
+       "식별자"
+      ]
+     },
+     "value": {
+      "ko": [
+       "NL-HaNA 2.24.05.02 inv.nr./bestanddeel 071-0694 (id ae1054ee-d0b4-102d-bcf8-003048976d84)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "연대"
+      ]
+     },
+     "value": {
+      "ko": [
+       "1951-07-03"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "소장"
+      ]
+     },
+     "value": {
+      "ko": [
+       "Nationaal Archief (Den Haag)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리"
+      ]
+     },
+     "value": {
+      "ko": [
+       "CC0 (Nationaal Archief)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "보이는 것"
+      ]
+     },
+     "value": {
+      "ko": [
+       "철모 쓴 군인들이 거수경례하며 행진 · 가로 삼색기 1개 · 뒤편 숲 비탈과 대열 · 우하단 번호 '071 0694'"
+      ]
+     }
+    }
+   ],
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s05/retreat_parade_1951.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "items": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s05/canvas/3/page",
+     "type": "AnnotationPage",
+     "items": [
+      {
+       "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s05/canvas/3/page/a",
+       "type": "Annotation",
+       "motivation": "painting",
+       "target": "https://changgi.github.io/korea-archive-mcp/iiif/m/s05/canvas/3",
+       "body": {
+        "id": "https://changgi.github.io/korea-archive-mcp/iiif/img/s05/retreat_parade_1951.jpg",
+        "type": "Image",
+        "format": "image/jpeg",
+        "width": 1600,
+        "height": 1091
+       }
+      }
+     ]
+    }
+   ],
+   "homepage": [
+    {
+     "id": "http://hdl.handle.net/10648/ae1054ee-d0b4-102d-bcf8-003048976d84",
+     "type": "Text",
+     "label": {
+      "ko": [
+       "원 기관 기록"
+      ]
+     },
+     "format": "text/html"
+    }
+   ],
+   "rights": "http://creativecommons.org/publicdomain/zero/1.0/"
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s05/canvas/4",
+   "type": "Canvas",
+   "label": {
+    "ko": [
+     "Nederlanders in de Koreaanse oorlog. Bij de vrijwilligers van het Nederlands Detachement Verenigde Naties in Korea. Twee vrijwilligers hebben uit Nederland klompen meegenomen, welke goed van pas komen"
+    ]
+   },
+   "width": 1102,
+   "height": 1600,
+   "metadata": [
+    {
+     "label": {
+      "ko": [
+       "식별자"
+      ]
+     },
+     "value": {
+      "ko": [
+       "NL-HaNA 2.24.05.02 inv.nr./bestanddeel 050-0727 (id ae03abe0-d0b4-102d-bcf8-003048976d84)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "연대"
+      ]
+     },
+     "value": {
+      "ko": [
+       "1951-01-27"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "소장"
+      ]
+     },
+     "value": {
+      "ko": [
+       "Nationaal Archief (Den Haag)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리"
+      ]
+     },
+     "value": {
+      "ko": [
+       "CC0 (Nationaal Archief)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "보이는 것"
+      ]
+     },
+     "value": {
+      "ko": [
+       "군복·전투모 차림 남성 2명이 통나무에 앉아 있다 · 두 사람 모두 나막신(klompen)을 신고 있다 · 배경에 눈 덮인 땅 · 우하단 번호 '050 0727'"
+      ]
+     }
+    }
+   ],
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s05/klompen_korea_1951.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "items": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s05/canvas/4/page",
+     "type": "AnnotationPage",
+     "items": [
+      {
+       "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s05/canvas/4/page/a",
+       "type": "Annotation",
+       "motivation": "painting",
+       "target": "https://changgi.github.io/korea-archive-mcp/iiif/m/s05/canvas/4",
+       "body": {
+        "id": "https://changgi.github.io/korea-archive-mcp/iiif/img/s05/klompen_korea_1951.jpg",
+        "type": "Image",
+        "format": "image/jpeg",
+        "width": 1102,
+        "height": 1600
+       }
+      }
+     ]
+    }
+   ],
+   "homepage": [
+    {
+     "id": "http://hdl.handle.net/10648/ae03abe0-d0b4-102d-bcf8-003048976d84",
+     "type": "Text",
+     "label": {
+      "ko": [
+       "원 기관 기록"
+      ]
+     },
+     "format": "text/html"
+    }
+   ],
+   "rights": "http://creativecommons.org/publicdomain/zero/1.0/"
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s05/canvas/5",
+   "type": "Canvas",
+   "label": {
+    "ko": [
+     "Nederlanders in de Koreaanse oorlog. Bij de Nederlandse Korea vrijwilligers. Op deze manier tracht een van de vrijwilligers op het moment dat er geen vervoer aanwezig is, hierin te voorzien"
+    ]
+   },
+   "width": 1600,
+   "height": 1070,
+   "metadata": [
+    {
+     "label": {
+      "ko": [
+       "식별자"
+      ]
+     },
+     "value": {
+      "ko": [
+       "NL-HaNA 2.24.05.02 inv.nr./bestanddeel 050-0725 (id ae03aa64-d0b4-102d-bcf8-003048976d84)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "연대"
+      ]
+     },
+     "value": {
+      "ko": [
+       "1951-02-06"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "소장"
+      ]
+     },
+     "value": {
+      "ko": [
+       "Nationaal Archief (Den Haag)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리"
+      ]
+     },
+     "value": {
+      "ko": [
+       "CC0 (Nationaal Archief)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "보이는 것"
+      ]
+     },
+     "value": {
+      "ko": [
+       "별 마크가 그려진 6륜 군용 트럭 · 트럭 적재함 측면 흰 숫자 '4658678' · 눈밭에서 썰매형 수레에 탄 군인 1명 · 우하단 번호 '050 0725'"
+      ]
+     }
+    }
+   ],
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s05/truck_snow_1951.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "items": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s05/canvas/5/page",
+     "type": "AnnotationPage",
+     "items": [
+      {
+       "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s05/canvas/5/page/a",
+       "type": "Annotation",
+       "motivation": "painting",
+       "target": "https://changgi.github.io/korea-archive-mcp/iiif/m/s05/canvas/5",
+       "body": {
+        "id": "https://changgi.github.io/korea-archive-mcp/iiif/img/s05/truck_snow_1951.jpg",
+        "type": "Image",
+        "format": "image/jpeg",
+        "width": 1600,
+        "height": 1070
+       }
+      }
+     ]
+    }
+   ],
+   "homepage": [
+    {
+     "id": "http://hdl.handle.net/10648/ae03aa64-d0b4-102d-bcf8-003048976d84",
+     "type": "Text",
+     "label": {
+      "ko": [
+       "원 기관 기록"
+      ]
+     },
+     "format": "text/html"
+    }
+   ],
+   "rights": "http://creativecommons.org/publicdomain/zero/1.0/"
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s05/canvas/6",
+   "type": "Canvas",
+   "label": {
+    "ko": [
+     "Korea-vrijwilligers met de Zuiderkruis op weg naar een haven in Korea. Twee vrijwilligers korten de tijd met een spelletje schaak"
+    ]
+   },
+   "width": 1600,
+   "height": 1075,
+   "metadata": [
+    {
+     "label": {
+      "ko": [
+       "식별자"
+      ]
+     },
+     "value": {
+      "ko": [
+       "NL-HaNA 2.24.05.02 inv.nr./bestanddeel 071-0706 (id ae105728-d0b4-102d-bcf8-003048976d84)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "연대"
+      ]
+     },
+     "value": {
+      "ko": [
+       "1950-11-13"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "소장"
+      ]
+     },
+     "value": {
+      "ko": [
+       "Nationaal Archief (Den Haag)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리"
+      ]
+     },
+     "value": {
+      "ko": [
+       "CC0 (Nationaal Archief)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "보이는 것"
+      ]
+     },
+     "value": {
+      "ko": [
+       "베레모 쓴 군인 2명이 벤치에서 체스를 두고 있다 · 체스판 위 말들 · 우하단 번호 '071 0706'"
+      ]
+     }
+    }
+   ],
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s05/zuiderkruis_chess_1950.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "items": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s05/canvas/6/page",
+     "type": "AnnotationPage",
+     "items": [
+      {
+       "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s05/canvas/6/page/a",
+       "type": "Annotation",
+       "motivation": "painting",
+       "target": "https://changgi.github.io/korea-archive-mcp/iiif/m/s05/canvas/6",
+       "body": {
+        "id": "https://changgi.github.io/korea-archive-mcp/iiif/img/s05/zuiderkruis_chess_1950.jpg",
+        "type": "Image",
+        "format": "image/jpeg",
+        "width": 1600,
+        "height": 1075
+       }
+      }
+     ]
+    }
+   ],
+   "homepage": [
+    {
+     "id": "http://hdl.handle.net/10648/ae105728-d0b4-102d-bcf8-003048976d84",
+     "type": "Text",
+     "label": {
+      "ko": [
+       "원 기관 기록"
+      ]
+     },
+     "format": "text/html"
+    }
+   ],
+   "rights": "http://creativecommons.org/publicdomain/zero/1.0/"
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s05/canvas/7",
+   "type": "Canvas",
+   "label": {
+    "ko": [
+     "Vertrek Korea-vrijwilligers uit Rotterdam met de \"Zuiderkruis\" van de Rotterdamse Lloyd"
+    ]
+   },
+   "width": 1600,
+   "height": 1270,
+   "metadata": [
+    {
+     "label": {
+      "ko": [
+       "식별자"
+      ]
+     },
+     "value": {
+      "ko": [
+       "NL-HaNA 2.24.01.09 inv.nr./bestanddeel 904-2638 (id a8e14780-d0b4-102d-bcf8-003048976d84)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "연대"
+      ]
+     },
+     "value": {
+      "ko": [
+       "1950-10-26"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "소장"
+      ]
+     },
+     "value": {
+      "ko": [
+       "Nationaal Archief (Den Haag)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리"
+      ]
+     },
+     "value": {
+      "ko": [
+       "CC0 (Nationaal Archief)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "보이는 것"
+      ]
+     },
+     "value": {
+      "ko": [
+       "배 측면 현수막 'KONINKLIJKE ROTTERDAMSCHE' · 더플백을 멘 군인들이 승선 사다리를 오르고 있다 · 크레인 기둥에 숫자 '6' · 갑판 위 화물 더미와 굴뚝형 환기구"
+      ]
+     }
+    }
+   ],
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s05/departure_rotterdam_1950.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "items": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s05/canvas/7/page",
+     "type": "AnnotationPage",
+     "items": [
+      {
+       "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s05/canvas/7/page/a",
+       "type": "Annotation",
+       "motivation": "painting",
+       "target": "https://changgi.github.io/korea-archive-mcp/iiif/m/s05/canvas/7",
+       "body": {
+        "id": "https://changgi.github.io/korea-archive-mcp/iiif/img/s05/departure_rotterdam_1950.jpg",
+        "type": "Image",
+        "format": "image/jpeg",
+        "width": 1600,
+        "height": 1270
+       }
+      }
+     ]
+    }
+   ],
+   "homepage": [
+    {
+     "id": "http://hdl.handle.net/10648/a8e14780-d0b4-102d-bcf8-003048976d84",
+     "type": "Text",
+     "label": {
+      "ko": [
+       "원 기관 기록"
+      ]
+     },
+     "format": "text/html"
+    }
+   ],
+   "rights": "http://creativecommons.org/publicdomain/zero/1.0/"
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s05/canvas/8",
+   "type": "Canvas",
+   "label": {
+    "ko": [
+     "Terugkeer van het Nederlands Detachement Verenigde Naties uit Korea met het troepenschip \"General McRae\" in Rotterdam. Prins Bernhard sprak de soldaten toe en onderhield zich met een aantal van hen pe"
+    ]
+   },
+   "width": 1600,
+   "height": 631,
+   "metadata": [
+    {
+     "label": {
+      "ko": [
+       "식별자"
+      ]
+     },
+     "value": {
+      "ko": [
+       "NL-HaNA 2.24.05.02 inv.nr./bestanddeel 015-1371 (id adb7f862-d0b4-102d-bcf8-003048976d84)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "연대"
+      ]
+     },
+     "value": {
+      "ko": [
+       "1951-10-01"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "소장"
+      ]
+     },
+     "value": {
+      "ko": [
+       "Nationaal Archief (Den Haag)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리"
+      ]
+     },
+     "value": {
+      "ko": [
+       "CC0 (Nationaal Archief)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "보이는 것"
+      ]
+     },
+     "value": {
+      "ko": [
+       "정모·견장 차림 인물이 군인들과 웃으며 대화 · 베레모 쓴 군인 다수 · 좌하단 번호 '015 1371'"
+      ]
+     }
+    }
+   ],
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s05/return_rotterdam_1951.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "items": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s05/canvas/8/page",
+     "type": "AnnotationPage",
+     "items": [
+      {
+       "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s05/canvas/8/page/a",
+       "type": "Annotation",
+       "motivation": "painting",
+       "target": "https://changgi.github.io/korea-archive-mcp/iiif/m/s05/canvas/8",
+       "body": {
+        "id": "https://changgi.github.io/korea-archive-mcp/iiif/img/s05/return_rotterdam_1951.jpg",
+        "type": "Image",
+        "format": "image/jpeg",
+        "width": 1600,
+        "height": 631
+       }
+      }
+     ]
+    }
+   ],
+   "homepage": [
+    {
+     "id": "http://hdl.handle.net/10648/adb7f862-d0b4-102d-bcf8-003048976d84",
+     "type": "Text",
+     "label": {
+      "ko": [
+       "원 기관 기록"
+      ]
+     },
+     "format": "text/html"
+    }
+   ],
+   "rights": "http://creativecommons.org/publicdomain/zero/1.0/"
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s05/canvas/9",
+   "type": "Canvas",
+   "label": {
+    "ko": [
+     "Twee Nederlandse soldaten van het Het Nederlands Detachement Verenigde Naties in Korea doorzoeken een hooimijt met bajonetten op zoek naar scherpschutters en rode guerilla's achter de frontlinie. De m"
+    ]
+   },
+   "width": 1600,
+   "height": 1275,
+   "metadata": [
+    {
+     "label": {
+      "ko": [
+       "식별자"
+      ]
+     },
+     "value": {
+      "ko": [
+       "NL-HaNA 7.000SPAond inv.nr./bestanddeel 35017_102 (id 842015fd-c750-8a9a-9c93-0798138b4116)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "연대"
+      ]
+     },
+     "value": {
+      "ko": [
+       "onbekend"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "소장"
+      ]
+     },
+     "value": {
+      "ko": [
+       "Nationaal Archief (Den Haag)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리"
+      ]
+     },
+     "value": {
+      "ko": [
+       "Public domain — Nationaal Archief 'Rechtenvrij' / Europeana PDM 1.0"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "보이는 것"
+      ]
+     },
+     "value": {
+      "ko": [
+       "군인 2명이 볏짚 더미를 총검으로 찌르고 있다 · 배경에 기와지붕 가옥 · 바닥에 눈과 짚"
+      ]
+     }
+    }
+   ],
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s05/haystack_search_inp.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "items": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s05/canvas/9/page",
+     "type": "AnnotationPage",
+     "items": [
+      {
+       "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s05/canvas/9/page/a",
+       "type": "Annotation",
+       "motivation": "painting",
+       "target": "https://changgi.github.io/korea-archive-mcp/iiif/m/s05/canvas/9",
+       "body": {
+        "id": "https://changgi.github.io/korea-archive-mcp/iiif/img/s05/haystack_search_inp.jpg",
+        "type": "Image",
+        "format": "image/jpeg",
+        "width": 1600,
+        "height": 1275
+       }
+      }
+     ]
+    }
+   ],
+   "homepage": [
+    {
+     "id": "http://hdl.handle.net/10648/842015fd-c750-8a9a-9c93-0798138b4116",
+     "type": "Text",
+     "label": {
+      "ko": [
+       "원 기관 기록"
+      ]
+     },
+     "format": "text/html"
+    }
+   ],
+   "rights": "http://creativecommons.org/publicdomain/mark/1.0/"
+  }
+ ],
+ "homepage": [
+  {
+   "id": "http://hdl.handle.net/10648/ae2821a0-d0b4-102d-bcf8-003048976d84",
+   "type": "Text",
+   "label": {
+    "ko": [
+     "원 기관 기록"
+    ]
+   },
+   "format": "text/html"
+  }
+ ],
+ "thumbnail": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s05/hero_busan_arrival_1950.jpg",
+   "type": "Image",
+   "format": "image/jpeg"
+  }
+ ]
+}

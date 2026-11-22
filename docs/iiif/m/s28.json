@@ -1,0 +1,77 @@
+{
+ "@context": "http://iiif.io/api/presentation/3/context.json",
+ "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s28.json",
+ "type": "Manifest",
+ "label": {
+  "ko": [
+   "28 · 정보공개포털·서울정보소통광장 — 점검 중인 포털 — 그래도 길은 안내한다"
+  ]
+ },
+ "summary": {
+  "ko": [
+   "30곳 탐방 · Ⅴ 현대 한국 · 원 기록: 정보공개포털 원문정보 · 서울정보소통광장 결재문서 — '청계천' (2026-11-22 확인) · 행정안전부 정보공개포털 / 서울특별시 정보소통광장"
+  ]
+ },
+ "metadata": [
+  {
+   "label": {
+    "ko": [
+     "원 기록"
+    ]
+   },
+   "value": {
+    "ko": [
+     "open.go.kr 원문정보 (searchKeyword=청계천) / opengov.seoul.go.kr 결재문서 정보공개포털 원문정보 · 서울정보소통광장 결재문서 — '청계천'"
+    ]
+   }
+  },
+  {
+   "label": {
+    "ko": [
+     "소장"
+    ]
+   },
+   "value": {
+    "ko": [
+     "행정안전부 정보공개포털 / 서울특별시 정보소통광장"
+    ]
+   }
+  }
+ ],
+ "requiredStatement": {
+  "label": {
+   "ko": [
+    "출처"
+   ]
+  },
+  "value": {
+   "ko": [
+    "행정안전부 정보공개포털 / 서울특별시 정보소통광장 — 이미지별 권리 표시 참조. 협약기관(KOREAN WAR ARCHIVES 6·25전쟁 아카이브센터) 기록은 출처 표기 필수."
+   ]
+  }
+ },
+ "provider": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/",
+   "type": "Agent",
+   "label": {
+    "ko": [
+     "KOREA ARCHIVE 통합검색"
+    ]
+   }
+  }
+ ],
+ "items": [],
+ "homepage": [
+  {
+   "id": "https://www.open.go.kr/othicInfo/infoList/orginlInfoList.do?searchKeyword=%EC%B2%AD%EA%B3%84%EC%B2%9C",
+   "type": "Text",
+   "label": {
+    "ko": [
+     "원 기관 기록"
+    ]
+   },
+   "format": "text/html"
+  }
+ ]
+}

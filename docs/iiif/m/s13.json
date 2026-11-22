@@ -1,0 +1,537 @@
+{
+ "@context": "http://iiif.io/api/presentation/3/context.json",
+ "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s13.json",
+ "type": "Manifest",
+ "label": {
+  "ko": [
+   "13 · 국가기록원 독립운동판결문 — 1919. 6. 30 경성복심법원"
+  ]
+ },
+ "summary": {
+  "ko": [
+   "30곳 탐방 · Ⅲ 독립운동 · 원 기록: 유관순(柳寬順) 판결문 — 경성복심법원 (1919-06-30) · 국가기록원 독립운동관련 판결문"
+  ]
+ },
+ "metadata": [
+  {
+   "label": {
+    "ko": [
+     "원 기록"
+    ]
+   },
+   "value": {
+    "ko": [
+     "archiveEventId 0034971420 유관순(柳寬順) 판결문 — 경성복심법원"
+    ]
+   }
+  },
+  {
+   "label": {
+    "ko": [
+     "소장"
+    ]
+   },
+   "value": {
+    "ko": [
+     "국가기록원 독립운동관련 판결문"
+    ]
+   }
+  }
+ ],
+ "requiredStatement": {
+  "label": {
+   "ko": [
+    "출처"
+   ]
+  },
+  "value": {
+   "ko": [
+    "국가기록원 독립운동관련 판결문 — 이미지별 권리 표시 참조. 협약기관(KOREAN WAR ARCHIVES 6·25전쟁 아카이브센터) 기록은 출처 표기 필수."
+   ]
+  }
+ },
+ "provider": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/",
+   "type": "Agent",
+   "label": {
+    "ko": [
+     "KOREA ARCHIVE 통합검색"
+    ]
+   }
+  }
+ ],
+ "items": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s13/canvas/1",
+   "type": "Canvas",
+   "label": {
+    "ko": [
+     "유관순 등 판결원본 1면(피고인 표기면)"
+    ]
+   },
+   "width": 1200,
+   "height": 1029,
+   "metadata": [
+    {
+     "label": {
+      "ko": [
+       "식별자"
+      ]
+     },
+     "value": {
+      "ko": [
+       "archiveEventId 0034971420 (cja000013903240344)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "연대"
+      ]
+     },
+     "value": {
+      "ko": [
+       "1919-06-30 (판결) / 1919-09-11 (확정 날인)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "소장"
+      ]
+     },
+     "value": {
+      "ko": [
+       "국가기록원 독립운동관련 판결문"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리"
+      ]
+     },
+     "value": {
+      "ko": [
+       "판결문 원본(1919, 조선총독부 경성복심법원) — 저작권법 제7조(법원의 판결은 보호받지 못하는 저작물) + 생산 100년 경과 / 국가기록원 출처 표기"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "보이는 것"
+      ]
+     },
+     "value": {
+      "ko": [
+       "필사 판결문 첫 면 — 우측 '判決' 표기 · 피고인 성명 중 '柳寬順' 필기 · 상단 '京城覆審法院' 및 '裁判確定 大正八年九月十一日' 날인 · '保安法違反ノ罪八'·'昭和二年勅令第十一號 大赦令ニ依リ赦免セラル' 고무인 · 하단 일련번호 '0324'"
+      ]
+     }
+    }
+   ],
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s13/hero_yugwansun_judgment_p1.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "items": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s13/canvas/1/page",
+     "type": "AnnotationPage",
+     "items": [
+      {
+       "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s13/canvas/1/page/a",
+       "type": "Annotation",
+       "motivation": "painting",
+       "target": "https://changgi.github.io/korea-archive-mcp/iiif/m/s13/canvas/1",
+       "body": {
+        "id": "https://changgi.github.io/korea-archive-mcp/iiif/img/s13/hero_yugwansun_judgment_p1.jpg",
+        "type": "Image",
+        "format": "image/jpeg",
+        "width": 1200,
+        "height": 1029
+       }
+      }
+     ]
+    }
+   ],
+   "homepage": [
+    {
+     "id": "https://theme.archives.go.kr/viewer/common/archWebViewer.do?archiveEventId=0034971420",
+     "type": "Text",
+     "label": {
+      "ko": [
+       "원 기관 기록"
+      ]
+     },
+     "format": "text/html"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s13/canvas/2",
+   "type": "Canvas",
+   "label": {
+    "ko": [
+     "판결원본 2면(피고인 계속)"
+    ]
+   },
+   "width": 1200,
+   "height": 1029,
+   "metadata": [
+    {
+     "label": {
+      "ko": [
+       "식별자"
+      ]
+     },
+     "value": {
+      "ko": [
+       "archiveEventId 0034971420 (cja000013903240344)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "연대"
+      ]
+     },
+     "value": {
+      "ko": [
+       "1919-06-30 (판결) / 1919-09-11 (확정 날인)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "소장"
+      ]
+     },
+     "value": {
+      "ko": [
+       "국가기록원 독립운동관련 판결문"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리"
+      ]
+     },
+     "value": {
+      "ko": [
+       "판결문 원본(1919, 조선총독부 경성복심법원) — 저작권법 제7조(법원의 판결은 보호받지 못하는 저작물) + 생산 100년 경과 / 국가기록원 출처 표기"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "보이는 것"
+      ]
+     },
+     "value": {
+      "ko": [
+       "중앙 접지선에 '判決原本'·'朝鮮總督府裁判所' 인쇄 · 상단 '昭和九年勅令…'·'昭和十二年勅令…' 고무인 3개 · '保安法違反ノ罪八'·'大赦令ニ依リ赦免セラル' 고무인 · 하단 '0325'"
+      ]
+     }
+    }
+   ],
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s13/judgment_p2.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "items": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s13/canvas/2/page",
+     "type": "AnnotationPage",
+     "items": [
+      {
+       "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s13/canvas/2/page/a",
+       "type": "Annotation",
+       "motivation": "painting",
+       "target": "https://changgi.github.io/korea-archive-mcp/iiif/m/s13/canvas/2",
+       "body": {
+        "id": "https://changgi.github.io/korea-archive-mcp/iiif/img/s13/judgment_p2.jpg",
+        "type": "Image",
+        "format": "image/jpeg",
+        "width": 1200,
+        "height": 1029
+       }
+      }
+     ]
+    }
+   ],
+   "homepage": [
+    {
+     "id": "https://theme.archives.go.kr/viewer/common/archWebViewer.do?archiveEventId=0034971420",
+     "type": "Text",
+     "label": {
+      "ko": [
+       "원 기관 기록"
+      ]
+     },
+     "format": "text/html"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s13/canvas/3",
+   "type": "Canvas",
+   "label": {
+    "ko": [
+     "판결원본 4면('主文' 시작)"
+    ]
+   },
+   "width": 1200,
+   "height": 1029,
+   "metadata": [
+    {
+     "label": {
+      "ko": [
+       "식별자"
+      ]
+     },
+     "value": {
+      "ko": [
+       "archiveEventId 0034971420 (cja000013903240344)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "연대"
+      ]
+     },
+     "value": {
+      "ko": [
+       "1919-06-30 (판결) / 1919-09-11 (확정 날인)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "소장"
+      ]
+     },
+     "value": {
+      "ko": [
+       "국가기록원 독립운동관련 판결문"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리"
+      ]
+     },
+     "value": {
+      "ko": [
+       "판결문 원본(1919, 조선총독부 경성복심법원) — 저작권법 제7조(법원의 판결은 보호받지 못하는 저작물) + 생산 100년 경과 / 국가기록원 출처 표기"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "보이는 것"
+      ]
+     },
+     "value": {
+      "ko": [
+       "좌측 중단 '主文' 표제 · '判決原本'·'朝鮮總督府裁判所' 인쇄 · 하단 '0327'"
+      ]
+     }
+    }
+   ],
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s13/judgment_p4_jumun.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "items": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s13/canvas/3/page",
+     "type": "AnnotationPage",
+     "items": [
+      {
+       "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s13/canvas/3/page/a",
+       "type": "Annotation",
+       "motivation": "painting",
+       "target": "https://changgi.github.io/korea-archive-mcp/iiif/m/s13/canvas/3",
+       "body": {
+        "id": "https://changgi.github.io/korea-archive-mcp/iiif/img/s13/judgment_p4_jumun.jpg",
+        "type": "Image",
+        "format": "image/jpeg",
+        "width": 1200,
+        "height": 1029
+       }
+      }
+     ]
+    }
+   ],
+   "homepage": [
+    {
+     "id": "https://theme.archives.go.kr/viewer/common/archWebViewer.do?archiveEventId=0034971420",
+     "type": "Text",
+     "label": {
+      "ko": [
+       "원 기관 기록"
+      ]
+     },
+     "format": "text/html"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s13/canvas/4",
+   "type": "Canvas",
+   "label": {
+    "ko": [
+     "판결원본 5면('理由' 시작)"
+    ]
+   },
+   "width": 1200,
+   "height": 1029,
+   "metadata": [
+    {
+     "label": {
+      "ko": [
+       "식별자"
+      ]
+     },
+     "value": {
+      "ko": [
+       "archiveEventId 0034971420 (cja000013903240344)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "연대"
+      ]
+     },
+     "value": {
+      "ko": [
+       "1919-06-30 (판결) / 1919-09-11 (확정 날인)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "소장"
+      ]
+     },
+     "value": {
+      "ko": [
+       "국가기록원 독립운동관련 판결문"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리"
+      ]
+     },
+     "value": {
+      "ko": [
+       "판결문 원본(1919, 조선총독부 경성복심법원) — 저작권법 제7조(법원의 판결은 보호받지 못하는 저작물) + 생산 100년 경과 / 국가기록원 출처 표기"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "보이는 것"
+      ]
+     },
+     "value": {
+      "ko": [
+       "좌측 '理由' 표제 · '判決原本'·'朝鮮總督府裁判所' 인쇄 · 하단 '0328'"
+      ]
+     }
+    }
+   ],
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s13/judgment_p5_iyu.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "items": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s13/canvas/4/page",
+     "type": "AnnotationPage",
+     "items": [
+      {
+       "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s13/canvas/4/page/a",
+       "type": "Annotation",
+       "motivation": "painting",
+       "target": "https://changgi.github.io/korea-archive-mcp/iiif/m/s13/canvas/4",
+       "body": {
+        "id": "https://changgi.github.io/korea-archive-mcp/iiif/img/s13/judgment_p5_iyu.jpg",
+        "type": "Image",
+        "format": "image/jpeg",
+        "width": 1200,
+        "height": 1029
+       }
+      }
+     ]
+    }
+   ],
+   "homepage": [
+    {
+     "id": "https://theme.archives.go.kr/viewer/common/archWebViewer.do?archiveEventId=0034971420",
+     "type": "Text",
+     "label": {
+      "ko": [
+       "원 기관 기록"
+      ]
+     },
+     "format": "text/html"
+    }
+   ]
+  }
+ ],
+ "homepage": [
+  {
+   "id": "https://theme.archives.go.kr/viewer/common/archWebViewer.do?archiveEventId=0034971420",
+   "type": "Text",
+   "label": {
+    "ko": [
+     "원 기관 기록"
+    ]
+   },
+   "format": "text/html"
+  }
+ ],
+ "thumbnail": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s13/hero_yugwansun_judgment_p1.jpg",
+   "type": "Image",
+   "format": "image/jpeg"
+  }
+ ]
+}

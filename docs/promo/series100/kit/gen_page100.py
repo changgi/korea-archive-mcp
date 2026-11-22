@@ -58,7 +58,7 @@ page = f'''<!DOCTYPE html>
 <title>100선 탐방 — KOREA ARCHIVE 통합검색</title>
 <meta name="description" content="수집처 30곳 전부가 나오는 신규 100개 시리즈 — 원본 이미지 캐러셀과 소개글 세트.">
 <style>{css}</style></head><body>
-<nav><div class="wrap"><a class="logo" href="index.html">KOREA ARCHIVE 통합검색</a><div class="links"><a href="index.html">소개</a><a href="series.html">30곳 탐방</a><a href="#p31">100선</a></div></div></nav>
+<nav><div class="wrap"><a class="logo" href="index.html">KOREA ARCHIVE 통합검색</a><div class="links"><a href="index.html">소개</a><a href="series.html">30곳 탐방</a><a href="#p31">100선</a><a href="iiif.html">IIIF 갤러리</a></div></div></nav>
 <header class="hero"><div class="wrap narrow"><span class="pill">신규 100선 · 031~130</span>
 <h1>100선 <em>탐방</em></h1>
 <p class="sub">수집처 30곳 전부에서 찾은 기록 {len(items)}개 시리즈. 시리즈마다 <b>원본 이미지로 가득 찬 인스타그램 캐러셀</b>과 소개글이 한 세트입니다 — 원본 모음, 기록을 짚어 읽는 해설 이미지{f", 영상 기록 {nv}편의 장면 해설" if nv else ""}까지. 모든 결과는 실제 도구 호출과 기관 원문으로 확인했습니다.</p>

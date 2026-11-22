@@ -1,0 +1,541 @@
+{
+ "@context": "http://iiif.io/api/presentation/3/context.json",
+ "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s21.json",
+ "type": "Manifest",
+ "label": {
+  "ko": [
+   "21 · 한국고문서자료관 — 172곳 소장처에서 문중 찾기"
+  ]
+ },
+ "summary": {
+  "ko": [
+   "30곳 탐방 · Ⅳ 조선의 기록문화 · 원 기록: 공주 안동김씨 청음 김상헌 후손가 고문서 (1705–20세기 (수록 문서 217건/569면: 증빙류 14·명문문기류 1·서간통고류 179·치부기록류 10·시문류 13)) · 한국학중앙연구원 장서각 한국고문서자료관 (현소장처: 공주 안동김씨 청음 김상헌 후손가)"
+  ]
+ },
+ "metadata": [
+  {
+   "label": {
+    "ko": [
+     "원 기록"
+    ]
+   },
+   "value": {
+    "ko": [
+     "한국고문서자료관 L014423 (고문서집성 105책) 공주 안동김씨 청음 김상헌 후손가 고문서"
+    ]
+   }
+  },
+  {
+   "label": {
+    "ko": [
+     "소장"
+    ]
+   },
+   "value": {
+    "ko": [
+     "한국학중앙연구원 장서각 한국고문서자료관 (현소장처: 공주 안동김씨 청음 김상헌 후손가)"
+    ]
+   }
+  }
+ ],
+ "requiredStatement": {
+  "label": {
+   "ko": [
+    "출처"
+   ]
+  },
+  "value": {
+   "ko": [
+    "한국학중앙연구원 장서각 한국고문서자료관 (현소장처: 공주 안동김씨 청음 김상헌 후손가) — 이미지별 권리 표시 참조. 협약기관(KOREAN WAR ARCHIVES 6·25전쟁 아카이브센터) 기록은 출처 표기 필수."
+   ]
+  }
+ },
+ "provider": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/",
+   "type": "Agent",
+   "label": {
+    "ko": [
+     "KOREA ARCHIVE 통합검색"
+    ]
+   }
+  }
+ ],
+ "items": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s21/canvas/1",
+   "type": "Canvas",
+   "label": {
+    "ko": [
+     "호구단자(戶口單子)－2"
+    ]
+   },
+   "width": 949,
+   "height": 1600,
+   "metadata": [
+    {
+     "label": {
+      "ko": [
+       "식별자"
+      ]
+     },
+     "value": {
+      "ko": [
+       "G002+AKS+KSM-XD.1714.4415-20211130.B075a_105_00002_XXX"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "연대"
+      ]
+     },
+     "value": {
+      "ko": [
+       "1714년(숙종 40)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "소장"
+      ]
+     },
+     "value": {
+      "ko": [
+       "한국학중앙연구원 장서각 한국고문서자료관 (현소장처: 공주 안동김씨 청음 김상헌 후손가)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리"
+      ]
+     },
+     "value": {
+      "ko": [
+       "보호기간 만료(1714) — 출처 표기"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "보이는 것"
+      ]
+     },
+     "value": {
+      "ko": [
+       "세로로 긴 괘지, 첫 줄 「新上面維鳩里戶籍單子」 · 「第十統內第二戶」, 4조 기재와 하단 奴婢 열거 · 좌측 「甲午 月 日」, 검은 먹 덧칠 자국 여러 곳과 긴 사선 획"
+      ]
+     }
+    }
+   ],
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s21/hogudanja_1714.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "items": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s21/canvas/1/page",
+     "type": "AnnotationPage",
+     "items": [
+      {
+       "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s21/canvas/1/page/a",
+       "type": "Annotation",
+       "motivation": "painting",
+       "target": "https://changgi.github.io/korea-archive-mcp/iiif/m/s21/canvas/1",
+       "body": {
+        "id": "https://changgi.github.io/korea-archive-mcp/iiif/img/s21/hogudanja_1714.jpg",
+        "type": "Image",
+        "format": "image/jpeg",
+        "width": 949,
+        "height": 1600
+       }
+      }
+     ]
+    }
+   ],
+   "homepage": [
+    {
+     "id": "https://archive.aks.ac.kr/link.do?dataUCI=G002+AKS+KSM-XD.1714.4415-20211130.B075a_105_00002_XXX",
+     "type": "Text",
+     "label": {
+      "ko": [
+       "원 기관 기록"
+      ]
+     },
+     "format": "text/html"
+    }
+   ],
+   "rights": "http://creativecommons.org/publicdomain/mark/1.0/"
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s21/canvas/2",
+   "type": "Canvas",
+   "label": {
+    "ko": [
+     "준호구(準戶口)－1"
+    ]
+   },
+   "width": 1600,
+   "height": 1071,
+   "metadata": [
+    {
+     "label": {
+      "ko": [
+       "식별자"
+      ]
+     },
+     "value": {
+      "ko": [
+       "G002+AKS+KSM-XD.1735.4415-20211130.B075a_105_00003_XXX"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "연대"
+      ]
+     },
+     "value": {
+      "ko": [
+       "1735년(영조 11)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "소장"
+      ]
+     },
+     "value": {
+      "ko": [
+       "한국학중앙연구원 장서각 한국고문서자료관 (현소장처: 공주 안동김씨 청음 김상헌 후손가)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리"
+      ]
+     },
+     "value": {
+      "ko": [
+       "보호기간 만료(1735) — 출처 표기"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "보이는 것"
+      ]
+     },
+     "value": {
+      "ko": [
+       "첫 줄 「雍正十三年四月 日公山縣」 · 좌측 「行縣監」, 좌하단 붉은 관인 자국 · 가운데 큰 구멍 여러 개와 갈색 얼룩 · 우상단 라벨: 證憑類 / 準戶口 3 / 55.0×59.0"
+      ]
+     }
+    }
+   ],
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s21/junhogu_1735.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "items": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s21/canvas/2/page",
+     "type": "AnnotationPage",
+     "items": [
+      {
+       "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s21/canvas/2/page/a",
+       "type": "Annotation",
+       "motivation": "painting",
+       "target": "https://changgi.github.io/korea-archive-mcp/iiif/m/s21/canvas/2",
+       "body": {
+        "id": "https://changgi.github.io/korea-archive-mcp/iiif/img/s21/junhogu_1735.jpg",
+        "type": "Image",
+        "format": "image/jpeg",
+        "width": 1600,
+        "height": 1071
+       }
+      }
+     ]
+    }
+   ],
+   "homepage": [
+    {
+     "id": "https://archive.aks.ac.kr/link.do?dataUCI=G002+AKS+KSM-XD.1735.4415-20211130.B075a_105_00003_XXX",
+     "type": "Text",
+     "label": {
+      "ko": [
+       "원 기관 기록"
+      ]
+     },
+     "format": "text/html"
+    }
+   ],
+   "rights": "http://creativecommons.org/publicdomain/mark/1.0/"
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s21/canvas/3",
+   "type": "Canvas",
+   "label": {
+    "ko": [
+     "명문(明文)"
+    ]
+   },
+   "width": 1600,
+   "height": 1071,
+   "metadata": [
+    {
+     "label": {
+      "ko": [
+       "식별자"
+      ]
+     },
+     "value": {
+      "ko": [
+       "G002+AKS+KSM-XE.1830.4415-20211130.B075a_105_00015_XXX"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "연대"
+      ]
+     },
+     "value": {
+      "ko": [
+       "1830년(순조 30)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "소장"
+      ]
+     },
+     "value": {
+      "ko": [
+       "한국학중앙연구원 장서각 한국고문서자료관 (현소장처: 공주 안동김씨 청음 김상헌 후손가)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리"
+      ]
+     },
+     "value": {
+      "ko": [
+       "보호기간 만료(1830) — 출처 표기"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "보이는 것"
+      ]
+     },
+     "value": {
+      "ko": [
+       "첫 줄 「道光十年庚寅九月 日」 「金進士宅奴…前明文」 · 끝부분 「田主 李進士宅奴乭伊」, 「證筆 李…」와 수결 · 우상단 라벨: 明文文記類 / 明文 1 / 34.5×36.0"
+      ]
+     }
+    }
+   ],
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s21/myeongmun_1830.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "items": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s21/canvas/3/page",
+     "type": "AnnotationPage",
+     "items": [
+      {
+       "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s21/canvas/3/page/a",
+       "type": "Annotation",
+       "motivation": "painting",
+       "target": "https://changgi.github.io/korea-archive-mcp/iiif/m/s21/canvas/3",
+       "body": {
+        "id": "https://changgi.github.io/korea-archive-mcp/iiif/img/s21/myeongmun_1830.jpg",
+        "type": "Image",
+        "format": "image/jpeg",
+        "width": 1600,
+        "height": 1071
+       }
+      }
+     ]
+    }
+   ],
+   "homepage": [
+    {
+     "id": "https://archive.aks.ac.kr/link.do?dataUCI=G002+AKS+KSM-XE.1830.4415-20211130.B075a_105_00015_XXX",
+     "type": "Text",
+     "label": {
+      "ko": [
+       "원 기관 기록"
+      ]
+     },
+     "format": "text/html"
+    }
+   ],
+   "rights": "http://creativecommons.org/publicdomain/mark/1.0/"
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s21/canvas/4",
+   "type": "Canvas",
+   "label": {
+    "ko": [
+     "치제문(致祭文)"
+    ]
+   },
+   "width": 1600,
+   "height": 1071,
+   "metadata": [
+    {
+     "label": {
+      "ko": [
+       "식별자"
+      ]
+     },
+     "value": {
+      "ko": [
+       "G002+AKS+KSM-XI.9999.4415-20211130.B075a_105_00205_XXX"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "연대"
+      ]
+     },
+     "value": {
+      "ko": [
+       "작성시기 미상(메타데이터 공란)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "소장"
+      ]
+     },
+     "value": {
+      "ko": [
+       "한국학중앙연구원 장서각 한국고문서자료관 (현소장처: 공주 안동김씨 청음 김상헌 후손가)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리"
+      ]
+     },
+     "value": {
+      "ko": [
+       "보호기간 만료(조선 정조대 문안의 초본) — 출처 표기"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "보이는 것"
+      ]
+     },
+     "value": {
+      "ko": [
+       "첫 줄 「東方名相大明忠臣…」 · 본문 중 「文正」 글자, 큰 글자와 작은 글자가 섞인 세로쓰기 · 우상단 라벨: 詩文類 / 致祭文(抄) 1 / 38.0×46.0"
+      ]
+     }
+    }
+   ],
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s21/chijemun.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "items": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s21/canvas/4/page",
+     "type": "AnnotationPage",
+     "items": [
+      {
+       "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s21/canvas/4/page/a",
+       "type": "Annotation",
+       "motivation": "painting",
+       "target": "https://changgi.github.io/korea-archive-mcp/iiif/m/s21/canvas/4",
+       "body": {
+        "id": "https://changgi.github.io/korea-archive-mcp/iiif/img/s21/chijemun.jpg",
+        "type": "Image",
+        "format": "image/jpeg",
+        "width": 1600,
+        "height": 1071
+       }
+      }
+     ]
+    }
+   ],
+   "homepage": [
+    {
+     "id": "https://archive.aks.ac.kr/link.do?dataUCI=G002+AKS+KSM-XI.9999.4415-20211130.B075a_105_00205_XXX",
+     "type": "Text",
+     "label": {
+      "ko": [
+       "원 기관 기록"
+      ]
+     },
+     "format": "text/html"
+    }
+   ],
+   "rights": "http://creativecommons.org/publicdomain/mark/1.0/"
+  }
+ ],
+ "homepage": [
+  {
+   "id": "https://archive.aks.ac.kr/",
+   "type": "Text",
+   "label": {
+    "ko": [
+     "원 기관 기록"
+    ]
+   },
+   "format": "text/html"
+  }
+ ],
+ "thumbnail": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s21/hogudanja_1714.jpg",
+   "type": "Image",
+   "format": "image/jpeg"
+  }
+ ]
+}

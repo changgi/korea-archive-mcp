@@ -1,0 +1,764 @@
+{
+ "@context": "http://iiif.io/api/presentation/3/context.json",
+ "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s07.json",
+ "type": "Manifest",
+ "label": {
+  "ko": [
+   "07 · 영국 국립기록관 TNA — 영국 해군이 거문도를 점령한 2년"
+  ]
+ },
+ "summary": {
+  "ko": [
+   "30곳 탐방 · Ⅱ 개항과 대한제국 · 원 기록: Port Hamilton (Geomundo) occupation 1885–1887 (1885-04-15 ~ 1887-02-27) · The National Archives (UK) — 이미지: Internet Archive 소장 ILN·China Mail"
+  ]
+ },
+ "metadata": [
+  {
+   "label": {
+    "ko": [
+     "원 기록"
+    ]
+   },
+   "value": {
+    "ko": [
+     "TNA ADM 116/70; ADM 125/86 (원문 미공개 온라인 — 동시대 공개 인쇄물로 대체) Port Hamilton (Geomundo) occupation 1885–1887"
+    ]
+   }
+  },
+  {
+   "label": {
+    "ko": [
+     "소장"
+    ]
+   },
+   "value": {
+    "ko": [
+     "The National Archives (UK) — 이미지: Internet Archive 소장 ILN·China Mail"
+    ]
+   }
+  }
+ ],
+ "requiredStatement": {
+  "label": {
+   "ko": [
+    "출처"
+   ]
+  },
+  "value": {
+   "ko": [
+    "The National Archives (UK) — 이미지: Internet Archive 소장 ILN·China Mail — 이미지별 권리 표시 참조. 협약기관(KOREAN WAR ARCHIVES 6·25전쟁 아카이브센터) 기록은 출처 표기 필수."
+   ]
+  }
+ },
+ "provider": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/",
+   "type": "Agent",
+   "label": {
+    "ko": [
+     "KOREA ARCHIVE 통합검색"
+    ]
+   }
+  }
+ ],
+ "items": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s07/canvas/1",
+   "type": "Canvas",
+   "label": {
+    "ko": [
+     "A Trip to Corea (7 sketches incl. '5. Port Hamilton')"
+    ]
+   },
+   "width": 1111,
+   "height": 1600,
+   "metadata": [
+    {
+     "label": {
+      "ko": [
+       "식별자"
+      ]
+     },
+     "value": {
+      "ko": [
+       "The Illustrated London News, Vol 88 Iss 2450, 1886-04-03, p.362 (IA sim_illustrated-london-news_1886-04-03_88_2450, leaf 19)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "연대"
+      ]
+     },
+     "value": {
+      "ko": [
+       "1886-04-03"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "소장"
+      ]
+     },
+     "value": {
+      "ko": [
+       "The National Archives (UK) — 이미지: Internet Archive 소장 ILN·China Mail"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리"
+      ]
+     },
+     "value": {
+      "ko": [
+       "Public domain — 1886 공표, 보호기간 만료(근거 기록)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "보이는 것"
+      ]
+     },
+     "value": {
+      "ko": [
+       "상단 'THE ILLUSTRATED LONDON NEWS, APRIL 3, 1886.—362' · 목판 삽화 7컷, 하단 캡션 '1. Isle and Port of Chemulpo. 2. Natives with riding-bullock. 3. Our ride to Seoul. 4. A halt by the way. 5. Port Hamilton. 6. South Gate of the city of Seoul. 7. Corean carrying a dead pig.' · 하단 제목 'A TRIP TO COREA.' · 3번 컷: 조랑말 탄 서양인 3명과 갓 쓴 인물들 · 5번 컷: 바위섬 사이 만 안쪽에 돛대 선박 여러 척"
+      ]
+     }
+    }
+   ],
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s07/hero_iln_1886-04-03_trip_to_corea.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "items": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s07/canvas/1/page",
+     "type": "AnnotationPage",
+     "items": [
+      {
+       "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s07/canvas/1/page/a",
+       "type": "Annotation",
+       "motivation": "painting",
+       "target": "https://changgi.github.io/korea-archive-mcp/iiif/m/s07/canvas/1",
+       "body": {
+        "id": "https://changgi.github.io/korea-archive-mcp/iiif/img/s07/hero_iln_1886-04-03_trip_to_corea.jpg",
+        "type": "Image",
+        "format": "image/jpeg",
+        "width": 1111,
+        "height": 1600
+       }
+      }
+     ]
+    }
+   ],
+   "homepage": [
+    {
+     "id": "https://archive.org/details/sim_illustrated-london-news_1886-04-03_88_2450/page/n19",
+     "type": "Text",
+     "label": {
+      "ko": [
+       "원 기관 기록"
+      ]
+     },
+     "format": "text/html"
+    }
+   ],
+   "rights": "http://creativecommons.org/publicdomain/mark/1.0/"
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s07/canvas/2",
+   "type": "Canvas",
+   "label": {
+    "ko": [
+     "5. Port Hamilton (ILN 1886-04-03, p.362)"
+    ]
+   },
+   "width": 1600,
+   "height": 808,
+   "metadata": [
+    {
+     "label": {
+      "ko": [
+       "식별자"
+      ]
+     },
+     "value": {
+      "ko": [
+       "같은 면 5번 컷 확대"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "연대"
+      ]
+     },
+     "value": {
+      "ko": [
+       "1886-04-03"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "소장"
+      ]
+     },
+     "value": {
+      "ko": [
+       "The National Archives (UK) — 이미지: Internet Archive 소장 ILN·China Mail"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리"
+      ]
+     },
+     "value": {
+      "ko": [
+       "Public domain — 1886 공표"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "보이는 것"
+      ]
+     },
+     "value": {
+      "ko": [
+       "좌우 바위섬과 산 사이로 열린 수로 · 수로 안쪽에 돛대 달린 선박 6척 내외 · 우하단 원 숫자 '5'"
+      ]
+     }
+    }
+   ],
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s07/iln_1886_panel5_port_hamilton.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "items": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s07/canvas/2/page",
+     "type": "AnnotationPage",
+     "items": [
+      {
+       "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s07/canvas/2/page/a",
+       "type": "Annotation",
+       "motivation": "painting",
+       "target": "https://changgi.github.io/korea-archive-mcp/iiif/m/s07/canvas/2",
+       "body": {
+        "id": "https://changgi.github.io/korea-archive-mcp/iiif/img/s07/iln_1886_panel5_port_hamilton.jpg",
+        "type": "Image",
+        "format": "image/jpeg",
+        "width": 1600,
+        "height": 808
+       }
+      }
+     ]
+    }
+   ],
+   "homepage": [
+    {
+     "id": "https://archive.org/details/sim_illustrated-london-news_1886-04-03_88_2450/page/n19",
+     "type": "Text",
+     "label": {
+      "ko": [
+       "원 기관 기록"
+      ]
+     },
+     "format": "text/html"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s07/canvas/3",
+   "type": "Canvas",
+   "label": {
+    "ko": [
+     "News item: 'From Hong-Kong we learn that the British flag has been hoisted on Port Hamilton...'"
+    ]
+   },
+   "width": 1170,
+   "height": 277,
+   "metadata": [
+    {
+     "label": {
+      "ko": [
+       "식별자"
+      ]
+     },
+     "value": {
+      "ko": [
+       "The Illustrated London News, Vol 86 Iss 2399, 1885-04-11, p.372 (IA leaf 9)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "연대"
+      ]
+     },
+     "value": {
+      "ko": [
+       "1885-04-11"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "소장"
+      ]
+     },
+     "value": {
+      "ko": [
+       "The National Archives (UK) — 이미지: Internet Archive 소장 ILN·China Mail"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리"
+      ]
+     },
+     "value": {
+      "ko": [
+       "Public domain — 1885 공표"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "보이는 것"
+      ]
+     },
+     "value": {
+      "ko": [
+       "'From Hong-Kong we learn that the British flag has been hoisted on Port Hamilton, an island of the Corean Archipelago.' · '...this harbour will, in fact, constitute a new coaling station in the Far East.'"
+      ]
+     }
+    }
+   ],
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s07/iln_1885-04-11_p372_flag_hoisted_item.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "items": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s07/canvas/3/page",
+     "type": "AnnotationPage",
+     "items": [
+      {
+       "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s07/canvas/3/page/a",
+       "type": "Annotation",
+       "motivation": "painting",
+       "target": "https://changgi.github.io/korea-archive-mcp/iiif/m/s07/canvas/3",
+       "body": {
+        "id": "https://changgi.github.io/korea-archive-mcp/iiif/img/s07/iln_1885-04-11_p372_flag_hoisted_item.jpg",
+        "type": "Image",
+        "format": "image/jpeg",
+        "width": 1170,
+        "height": 277
+       }
+      }
+     ]
+    }
+   ],
+   "homepage": [
+    {
+     "id": "https://archive.org/details/sim_illustrated-london-news_1885-04-11_86_2399/page/n9",
+     "type": "Text",
+     "label": {
+      "ko": [
+       "원 기관 기록"
+      ]
+     },
+     "format": "text/html"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s07/canvas/4",
+   "type": "Canvas",
+   "label": {
+    "ko": [
+     "ILN 1885-04-11, p.372 (Parisian Sayings and Doings / The Church / Obituary)"
+    ]
+   },
+   "width": 1105,
+   "height": 1600,
+   "metadata": [
+    {
+     "label": {
+      "ko": [
+       "식별자"
+      ]
+     },
+     "value": {
+      "ko": [
+       "The Illustrated London News 1885-04-11 p.372 전면"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "연대"
+      ]
+     },
+     "value": {
+      "ko": [
+       "1885-04-11"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "소장"
+      ]
+     },
+     "value": {
+      "ko": [
+       "The National Archives (UK) — 이미지: Internet Archive 소장 ILN·China Mail"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리"
+      ]
+     },
+     "value": {
+      "ko": [
+       "Public domain — 1885 공표"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "보이는 것"
+      ]
+     },
+     "value": {
+      "ko": [
+       "상단 '372  THE ILLUSTRATED LONDON NEWS  APRIL 11, 1885' · 3단 조판, 우상단 문장(紋章) 삽화와 'OBITUARY. EARL CAIRNS.'"
+      ]
+     }
+    }
+   ],
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s07/iln_1885-04-11_p372.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "items": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s07/canvas/4/page",
+     "type": "AnnotationPage",
+     "items": [
+      {
+       "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s07/canvas/4/page/a",
+       "type": "Annotation",
+       "motivation": "painting",
+       "target": "https://changgi.github.io/korea-archive-mcp/iiif/m/s07/canvas/4",
+       "body": {
+        "id": "https://changgi.github.io/korea-archive-mcp/iiif/img/s07/iln_1885-04-11_p372.jpg",
+        "type": "Image",
+        "format": "image/jpeg",
+        "width": 1105,
+        "height": 1600
+       }
+      }
+     ]
+    }
+   ],
+   "homepage": [
+    {
+     "id": "https://archive.org/details/sim_illustrated-london-news_1885-04-11_86_2399/page/n9",
+     "type": "Text",
+     "label": {
+      "ko": [
+       "원 기관 기록"
+      ]
+     },
+     "format": "text/html"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s07/canvas/5",
+   "type": "Canvas",
+   "label": {
+    "ko": [
+     "THE OCCUPATION OF PORT HAMILTON."
+    ]
+   },
+   "width": 402,
+   "height": 1600,
+   "metadata": [
+    {
+     "label": {
+      "ko": [
+       "식별자"
+      ]
+     },
+     "value": {
+      "ko": [
+       "The China Mail, 1885-05-18, p.3 (IA NPCM18850518)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "연대"
+      ]
+     },
+     "value": {
+      "ko": [
+       "1885-05-18"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "소장"
+      ]
+     },
+     "value": {
+      "ko": [
+       "The National Archives (UK) — 이미지: Internet Archive 소장 ILN·China Mail"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리"
+      ]
+     },
+     "value": {
+      "ko": [
+       "Public domain — 1885 공표"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "보이는 것"
+      ]
+     },
+     "value": {
+      "ko": [
+       "제목 'THE OCCUPATION OF PORT HAMILTON.' · 'The Home papers—notably the Times, the St James's Gazette, and the Pall Mall Gazette—have got sadly confused about the occupation of Port Hamilton by the British Admiral.' · 'Sir Harry Parkes did good service when he obtained, as almost the last public act of his life, the cession of Port Hamilton from the Chinese Emperor.' (인용된 Times 문단) · 'We believe, als"
+      ]
+     }
+    }
+   ],
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s07/chinamail_1885-05-18_occupation_article.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "items": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s07/canvas/5/page",
+     "type": "AnnotationPage",
+     "items": [
+      {
+       "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s07/canvas/5/page/a",
+       "type": "Annotation",
+       "motivation": "painting",
+       "target": "https://changgi.github.io/korea-archive-mcp/iiif/m/s07/canvas/5",
+       "body": {
+        "id": "https://changgi.github.io/korea-archive-mcp/iiif/img/s07/chinamail_1885-05-18_occupation_article.jpg",
+        "type": "Image",
+        "format": "image/jpeg",
+        "width": 402,
+        "height": 1600
+       }
+      }
+     ]
+    }
+   ],
+   "homepage": [
+    {
+     "id": "https://archive.org/details/NPCM18850518/page/n2",
+     "type": "Text",
+     "label": {
+      "ko": [
+       "원 기관 기록"
+      ]
+     },
+     "format": "text/html"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s07/canvas/6",
+   "type": "Canvas",
+   "label": {
+    "ko": [
+     "The China Mail, May 18, 1885, p.3"
+    ]
+   },
+   "width": 1182,
+   "height": 1600,
+   "metadata": [
+    {
+     "label": {
+      "ko": [
+       "식별자"
+      ]
+     },
+     "value": {
+      "ko": [
+       "The China Mail 1885-05-18 p.3 전면 (IA NPCM18850518 leaf 2)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "연대"
+      ]
+     },
+     "value": {
+      "ko": [
+       "1885-05-18"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "소장"
+      ]
+     },
+     "value": {
+      "ko": [
+       "The National Archives (UK) — 이미지: Internet Archive 소장 ILN·China Mail"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리"
+      ]
+     },
+     "value": {
+      "ko": [
+       "Public domain — 1885 공표"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "보이는 것"
+      ]
+     },
+     "value": {
+      "ko": [
+       "상단 'THE CHINA MAIL' 제호와 날짜 'May 18, 1885' · 6단 조판 신문 지면 · 'Marine Court', 'Police Intelligence', 'SUPREME COURT' 소제목"
+      ]
+     }
+    }
+   ],
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s07/chinamail_1885-05-18_p3.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "items": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s07/canvas/6/page",
+     "type": "AnnotationPage",
+     "items": [
+      {
+       "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s07/canvas/6/page/a",
+       "type": "Annotation",
+       "motivation": "painting",
+       "target": "https://changgi.github.io/korea-archive-mcp/iiif/m/s07/canvas/6",
+       "body": {
+        "id": "https://changgi.github.io/korea-archive-mcp/iiif/img/s07/chinamail_1885-05-18_p3.jpg",
+        "type": "Image",
+        "format": "image/jpeg",
+        "width": 1182,
+        "height": 1600
+       }
+      }
+     ]
+    }
+   ],
+   "homepage": [
+    {
+     "id": "https://archive.org/details/NPCM18850518/page/n2",
+     "type": "Text",
+     "label": {
+      "ko": [
+       "원 기관 기록"
+      ]
+     },
+     "format": "text/html"
+    }
+   ]
+  }
+ ],
+ "homepage": [
+  {
+   "id": "https://discovery.nationalarchives.gov.uk/",
+   "type": "Text",
+   "label": {
+    "ko": [
+     "원 기관 기록"
+    ]
+   },
+   "format": "text/html"
+  }
+ ],
+ "thumbnail": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s07/hero_iln_1886-04-03_trip_to_corea.jpg",
+   "type": "Image",
+   "format": "image/jpeg"
+  }
+ ]
+}

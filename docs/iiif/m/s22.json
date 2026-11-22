@@ -1,0 +1,769 @@
+{
+ "@context": "http://iiif.io/api/presentation/3/context.json",
+ "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s22.json",
+ "type": "Manifest",
+ "label": {
+  "ko": [
+   "22 · 국가유산청 국가유산포털 — 국보 하나, 보물 하나, 시도유산 하나"
+  ]
+ },
+ "summary": {
+  "ko": [
+   "30곳 탐방 · Ⅳ 조선의 기록문화 · 원 기록: 경복궁 근정전(景福宮 勤政殿) [국보] (조선 고종 4년(1867) 중건 (국가유산포털 해설)) · 국가유산청 국가유산포털 — 이미지: 일본 국립국회도서관 PDM 사진첩으로 대체"
+  ]
+ },
+ "metadata": [
+  {
+   "label": {
+    "ko": [
+     "원 기록"
+    ]
+   },
+   "value": {
+    "ko": [
+     "국가유산청 국보 경복궁 근정전 (ccbaCpno 1111102230000 / 11-0002230000000-11) 경복궁 근정전(景福宮 勤政殿) [국보]"
+    ]
+   }
+  },
+  {
+   "label": {
+    "ko": [
+     "소장"
+    ]
+   },
+   "value": {
+    "ko": [
+     "국가유산청 국가유산포털 — 이미지: 일본 국립국회도서관 PDM 사진첩으로 대체"
+    ]
+   }
+  }
+ ],
+ "requiredStatement": {
+  "label": {
+   "ko": [
+    "출처"
+   ]
+  },
+  "value": {
+   "ko": [
+    "국가유산청 국가유산포털 — 이미지: 일본 국립국회도서관 PDM 사진첩으로 대체 — 이미지별 권리 표시 참조. 협약기관(KOREAN WAR ARCHIVES 6·25전쟁 아카이브센터) 기록은 출처 표기 필수."
+   ]
+  }
+ },
+ "provider": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/",
+   "type": "Agent",
+   "label": {
+    "ko": [
+     "KOREA ARCHIVE 통합검색"
+    ]
+   }
+  }
+ ],
+ "items": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s22/canvas/1",
+   "type": "Canvas",
+   "label": {
+    "ko": [
+     "朝鮮之風光 : trip in Chosen — 景福宮勤政殿"
+    ]
+   },
+   "width": 1600,
+   "height": 1149,
+   "metadata": [
+    {
+     "label": {
+      "ko": [
+       "식별자"
+      ]
+     },
+     "value": {
+      "ko": [
+       "NDL pid 1899759 コマ32 (目次「二四、景福宮勤政殿」)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "연대"
+      ]
+     },
+     "value": {
+      "ko": [
+       "1922.3 (南滿洲鐵道株式會社京城管理局 編)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "소장"
+      ]
+     },
+     "value": {
+      "ko": [
+       "국가유산청 국가유산포털 — 이미지: 일본 국립국회도서관 PDM 사진첩으로 대체"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리"
+      ]
+     },
+     "value": {
+      "ko": [
+       "PDM (NDL IIIF manifest 'Access Restrictions: PDM')"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "보이는 것"
+      ]
+     },
+     "value": {
+      "ko": [
+       "사진첩 펼침면에 2층 전각 사진 1매, 2단 월대와 돌난간 · 전각 오른쪽 뒤로 뾰족한 산봉우리, 좌우 행각 지붕 · 사진 아래 붉은 글씨 캡션 첫머리 「景福宮勤政殿」, 이어 「李朝太祖が初めて營むだ宮闕…」 · 캡션 끝부분 「美術館其他と共に今一般に公開せられてゐる」"
+      ]
+     }
+    }
+   ],
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s22/hero_geunjeongjeon_1922_ndl.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "items": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s22/canvas/1/page",
+     "type": "AnnotationPage",
+     "items": [
+      {
+       "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s22/canvas/1/page/a",
+       "type": "Annotation",
+       "motivation": "painting",
+       "target": "https://changgi.github.io/korea-archive-mcp/iiif/m/s22/canvas/1",
+       "body": {
+        "id": "https://changgi.github.io/korea-archive-mcp/iiif/img/s22/hero_geunjeongjeon_1922_ndl.jpg",
+        "type": "Image",
+        "format": "image/jpeg",
+        "width": 1600,
+        "height": 1149
+       }
+      }
+     ]
+    }
+   ],
+   "homepage": [
+    {
+     "id": "https://dl.ndl.go.jp/pid/1899759/1/32",
+     "type": "Text",
+     "label": {
+      "ko": [
+       "원 기관 기록"
+      ]
+     },
+     "format": "text/html"
+    }
+   ],
+   "rights": "http://creativecommons.org/publicdomain/mark/1.0/"
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s22/canvas/2",
+   "type": "Canvas",
+   "label": {
+    "ko": [
+     "大日本帝国朝鮮写真帖 : 日韓併合紀念 — 경복궁 4장면"
+    ]
+   },
+   "width": 1600,
+   "height": 1131,
+   "metadata": [
+    {
+     "label": {
+      "ko": [
+       "식별자"
+      ]
+     },
+     "value": {
+      "ko": [
+       "NDL pid 766880 コマ19 (目次 第八 景福宮光化門 · 第九 景福宮 · 第十 景福宮香園亭 · 第十一 景福宮勤政殿)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "연대"
+      ]
+     },
+     "value": {
+      "ko": [
+       "明43.9 (1910), 統監府 編"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "소장"
+      ]
+     },
+     "value": {
+      "ko": [
+       "국가유산청 국가유산포털 — 이미지: 일본 국립국회도서관 PDM 사진첩으로 대체"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리"
+      ]
+     },
+     "value": {
+      "ko": [
+       "PDM"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "보이는 것"
+      ]
+     },
+     "value": {
+      "ko": [
+       "한 면에 사진 4매: 「景福宮內香園亭」「景福宮光化門」「景福宮內勤政殿」「景福宮」 · 영문 캡션 'Keun-chung Hall of the Kyong-pok Palace.' 등 · 광화문 사진에 흰옷 입은 사람 2명과 전신주"
+      ]
+     }
+    }
+   ],
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s22/gyeongbok_4views_1910_ndl.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "items": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s22/canvas/2/page",
+     "type": "AnnotationPage",
+     "items": [
+      {
+       "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s22/canvas/2/page/a",
+       "type": "Annotation",
+       "motivation": "painting",
+       "target": "https://changgi.github.io/korea-archive-mcp/iiif/m/s22/canvas/2",
+       "body": {
+        "id": "https://changgi.github.io/korea-archive-mcp/iiif/img/s22/gyeongbok_4views_1910_ndl.jpg",
+        "type": "Image",
+        "format": "image/jpeg",
+        "width": 1600,
+        "height": 1131
+       }
+      }
+     ]
+    }
+   ],
+   "homepage": [
+    {
+     "id": "https://dl.ndl.go.jp/pid/766880/1/19",
+     "type": "Text",
+     "label": {
+      "ko": [
+       "원 기관 기록"
+      ]
+     },
+     "format": "text/html"
+    }
+   ],
+   "rights": "http://creativecommons.org/publicdomain/mark/1.0/"
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s22/canvas/3",
+   "type": "Canvas",
+   "label": {
+    "ko": [
+     "1910 사진첩 「景福宮內勤政殿」 부분"
+    ]
+   },
+   "width": 1364,
+   "height": 930,
+   "metadata": [
+    {
+     "label": {
+      "ko": [
+       "식별자"
+      ]
+     },
+     "value": {
+      "ko": [
+       "NDL pid 766880 コマ19 IIIF region pct:20.5,50.5,27.5,26.5"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "연대"
+      ]
+     },
+     "value": {
+      "ko": [
+       "1910"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "소장"
+      ]
+     },
+     "value": {
+      "ko": [
+       "국가유산청 국가유산포털 — 이미지: 일본 국립국회도서관 PDM 사진첩으로 대체"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리"
+      ]
+     },
+     "value": {
+      "ko": [
+       "PDM"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "보이는 것"
+      ]
+     },
+     "value": {
+      "ko": [
+       "정면에서 본 2층 전각, 가운데 열린 문 2칸 · 2단 월대와 계단, 앞마당 왼쪽에 품계석 열 · 좌측 뒤 바위산"
+      ]
+     }
+    }
+   ],
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s22/geunjeongjeon_1910_crop.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "items": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s22/canvas/3/page",
+     "type": "AnnotationPage",
+     "items": [
+      {
+       "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s22/canvas/3/page/a",
+       "type": "Annotation",
+       "motivation": "painting",
+       "target": "https://changgi.github.io/korea-archive-mcp/iiif/m/s22/canvas/3",
+       "body": {
+        "id": "https://changgi.github.io/korea-archive-mcp/iiif/img/s22/geunjeongjeon_1910_crop.jpg",
+        "type": "Image",
+        "format": "image/jpeg",
+        "width": 1364,
+        "height": 930
+       }
+      }
+     ]
+    }
+   ],
+   "homepage": [
+    {
+     "id": "https://dl.ndl.go.jp/pid/766880/1/19",
+     "type": "Text",
+     "label": {
+      "ko": [
+       "원 기관 기록"
+      ]
+     },
+     "format": "text/html"
+    }
+   ],
+   "rights": "http://creativecommons.org/publicdomain/mark/1.0/"
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s22/canvas/4",
+   "type": "Canvas",
+   "label": {
+    "ko": [
+     "ろせった丸満韓巡遊紀念写真帖 — 京城光化門"
+    ]
+   },
+   "width": 1600,
+   "height": 1089,
+   "metadata": [
+    {
+     "label": {
+      "ko": [
+       "식별자"
+      ]
+     },
+     "value": {
+      "ko": [
+       "NDL pid 767136 コマ63 (目次「京城光化門」=コマ62 캡션면 다음) IIIF region pct:14,16,53,51"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "연대"
+      ]
+     },
+     "value": {
+      "ko": [
+       "明39.10 (1906), 朝日新聞写真班 撮影"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "소장"
+      ]
+     },
+     "value": {
+      "ko": [
+       "국가유산청 국가유산포털 — 이미지: 일본 국립국회도서관 PDM 사진첩으로 대체"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리"
+      ]
+     },
+     "value": {
+      "ko": [
+       "PDM"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "보이는 것"
+      ]
+     },
+     "value": {
+      "ko": [
+       "홍예 3개의 2층 문루, 뒤로 뾰족한 산 · 넓은 길에 갓 쓴 사람 등 10여 명, 우산 2개 · 좌우 기와 행랑, 전신주 여러 개 · 문 앞 오른쪽 해태상"
+      ]
+     }
+    }
+   ],
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s22/gwanghwamun_1906_ndl.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "items": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s22/canvas/4/page",
+     "type": "AnnotationPage",
+     "items": [
+      {
+       "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s22/canvas/4/page/a",
+       "type": "Annotation",
+       "motivation": "painting",
+       "target": "https://changgi.github.io/korea-archive-mcp/iiif/m/s22/canvas/4",
+       "body": {
+        "id": "https://changgi.github.io/korea-archive-mcp/iiif/img/s22/gwanghwamun_1906_ndl.jpg",
+        "type": "Image",
+        "format": "image/jpeg",
+        "width": 1600,
+        "height": 1089
+       }
+      }
+     ]
+    }
+   ],
+   "homepage": [
+    {
+     "id": "https://dl.ndl.go.jp/pid/767136/1/63",
+     "type": "Text",
+     "label": {
+      "ko": [
+       "원 기관 기록"
+      ]
+     },
+     "format": "text/html"
+    }
+   ],
+   "rights": "http://creativecommons.org/publicdomain/mark/1.0/"
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s22/canvas/5",
+   "type": "Canvas",
+   "label": {
+    "ko": [
+     "朝鮮博覧会記念写真帖 — 勤政殿"
+    ]
+   },
+   "width": 1600,
+   "height": 1226,
+   "metadata": [
+    {
+     "label": {
+      "ko": [
+       "식별자"
+      ]
+     },
+     "value": {
+      "ko": [
+       "NDL pid 8311162 コマ26 (目次「勤政殿 第六」) — 시리즈18과 같은 파일"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "연대"
+      ]
+     },
+     "value": {
+      "ko": [
+       "1930"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "소장"
+      ]
+     },
+     "value": {
+      "ko": [
+       "국가유산청 국가유산포털 — 이미지: 일본 국립국회도서관 PDM 사진첩으로 대체"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리"
+      ]
+     },
+     "value": {
+      "ko": [
+       "PDM"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "보이는 것"
+      ]
+     },
+     "value": {
+      "ko": [
+       "위에서 내려다본 2층 전각과 2단 월대, 박석 마당과 품계석 열 · 배후 바위산, 왼쪽 원경에 서양식 건물과 탑"
+      ]
+     }
+    }
+   ],
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s22/geunjeongjeon_1930_ndl.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "items": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s22/canvas/5/page",
+     "type": "AnnotationPage",
+     "items": [
+      {
+       "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s22/canvas/5/page/a",
+       "type": "Annotation",
+       "motivation": "painting",
+       "target": "https://changgi.github.io/korea-archive-mcp/iiif/m/s22/canvas/5",
+       "body": {
+        "id": "https://changgi.github.io/korea-archive-mcp/iiif/img/s22/geunjeongjeon_1930_ndl.jpg",
+        "type": "Image",
+        "format": "image/jpeg",
+        "width": 1600,
+        "height": 1226
+       }
+      }
+     ]
+    }
+   ],
+   "homepage": [
+    {
+     "id": "https://dl.ndl.go.jp/pid/8311162/1/26",
+     "type": "Text",
+     "label": {
+      "ko": [
+       "원 기관 기록"
+      ]
+     },
+     "format": "text/html"
+    }
+   ],
+   "rights": "http://creativecommons.org/publicdomain/mark/1.0/"
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s22/canvas/6",
+   "type": "Canvas",
+   "label": {
+    "ko": [
+     "경복궁 근정전 1906"
+    ]
+   },
+   "width": 1280,
+   "height": 962,
+   "metadata": [
+    {
+     "label": {
+      "ko": [
+       "식별자"
+      ]
+     },
+     "value": {
+      "ko": [
+       "Wikimedia Commons File:Gyeongbokgung_1906_1.jpg (기존 img2/gyeongbok_1906.jpg 복사)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "연대"
+      ]
+     },
+     "value": {
+      "ko": [
+       "1906"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "소장"
+      ]
+     },
+     "value": {
+      "ko": [
+       "국가유산청 국가유산포털 — 이미지: 일본 국립국회도서관 PDM 사진첩으로 대체"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리"
+      ]
+     },
+     "value": {
+      "ko": [
+       "Public domain — 원 출처 NDL 「ろせった丸満韓巡遊紀念写真帖」(pid 767136, PDM)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "보이는 것"
+      ]
+     },
+     "value": {
+      "ko": [
+       "2층 전각과 2단 월대, 월대 위아래에 사람 20여 명, 검은 우산 다수 · 앞마당에 풀이 자라고 품계석 열 · 좌측 뒤 산"
+      ]
+     }
+    }
+   ],
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s22/geunjeongjeon_1906_commons.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "items": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s22/canvas/6/page",
+     "type": "AnnotationPage",
+     "items": [
+      {
+       "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s22/canvas/6/page/a",
+       "type": "Annotation",
+       "motivation": "painting",
+       "target": "https://changgi.github.io/korea-archive-mcp/iiif/m/s22/canvas/6",
+       "body": {
+        "id": "https://changgi.github.io/korea-archive-mcp/iiif/img/s22/geunjeongjeon_1906_commons.jpg",
+        "type": "Image",
+        "format": "image/jpeg",
+        "width": 1280,
+        "height": 962
+       }
+      }
+     ]
+    }
+   ],
+   "homepage": [
+    {
+     "id": "https://commons.wikimedia.org/wiki/File:Gyeongbokgung_1906_1.jpg",
+     "type": "Text",
+     "label": {
+      "ko": [
+       "원 기관 기록"
+      ]
+     },
+     "format": "text/html"
+    }
+   ],
+   "rights": "http://creativecommons.org/publicdomain/mark/1.0/"
+  }
+ ],
+ "homepage": [
+  {
+   "id": "https://www.heritage.go.kr/heri/cul/culSelectDetail.do?ccbaCpno=1111102230000",
+   "type": "Text",
+   "label": {
+    "ko": [
+     "원 기관 기록"
+    ]
+   },
+   "format": "text/html"
+  }
+ ],
+ "thumbnail": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s22/hero_geunjeongjeon_1922_ndl.jpg",
+   "type": "Image",
+   "format": "image/jpeg"
+  }
+ ]
+}

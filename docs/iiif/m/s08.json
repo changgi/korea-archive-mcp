@@ -1,0 +1,424 @@
+{
+ "@context": "http://iiif.io/api/presentation/3/context.json",
+ "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s08.json",
+ "type": "Manifest",
+ "label": {
+  "ko": [
+   "08 · 프랑스 국립도서관 Gallica — 막힌 Gallica, BnF 카탈로그로 다시 연다"
+  ]
+ },
+ "summary": {
+  "ko": [
+   "30곳 탐방 · Ⅱ 개항과 대한제국 · 원 기록: [32 phot. de sites et types de Corée entre 1880 et 1896, avec les portraits du roi de Corée en 1889, Yi-hieung, ... Don 1927] [Image fixe] ([188. ou 189.] (사진 1880–1896), 1927 기증) · Bibliothèque nationale de France — Société de Géographie, SG WD-181"
+  ]
+ },
+ "metadata": [
+  {
+   "label": {
+    "ko": [
+     "원 기록"
+    ]
+   },
+   "value": {
+    "ko": [
+     "BnF ark:/12148/cb40589642r → Gallica ark:/12148/btv1b53200629w [32 phot. de sites et types de Corée entre 1880 et 1896, avec les portraits du roi de Corée en 1889, Yi-hieung, ... Don 1927] [Image fixe]"
+    ]
+   }
+  },
+  {
+   "label": {
+    "ko": [
+     "소장"
+    ]
+   },
+   "value": {
+    "ko": [
+     "Bibliothèque nationale de France — Société de Géographie, SG WD-181"
+    ]
+   }
+  }
+ ],
+ "requiredStatement": {
+  "label": {
+   "ko": [
+    "출처"
+   ]
+  },
+  "value": {
+   "ko": [
+    "Bibliothèque nationale de France — Société de Géographie, SG WD-181 — 이미지별 권리 표시 참조. 협약기관(KOREAN WAR ARCHIVES 6·25전쟁 아카이브센터) 기록은 출처 표기 필수."
+   ]
+  }
+ },
+ "provider": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/",
+   "type": "Agent",
+   "label": {
+    "ko": [
+     "KOREA ARCHIVE 통합검색"
+    ]
+   }
+  }
+ ],
+ "items": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s08/canvas/1",
+   "type": "Canvas",
+   "label": {
+    "ko": [
+     "[Recueil. Exposition d'objets coréens rapportés par Charles Varat]"
+    ]
+   },
+   "width": 400,
+   "height": 542,
+   "metadata": [
+    {
+     "label": {
+      "ko": [
+       "식별자"
+      ]
+     },
+     "value": {
+      "ko": [
+       "Gallica ark:/12148/btv1b84515919 (Europeana /9200518/ark__12148_btv1b84515919)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "연대"
+      ]
+     },
+     "value": {
+      "ko": [
+       "1889-1890"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "소장"
+      ]
+     },
+     "value": {
+      "ko": [
+       "Bibliothèque nationale de France — Société de Géographie, SG WD-181"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리"
+      ]
+     },
+     "value": {
+      "ko": [
+       "NoC-OKLR — Gallica 조건(비상업·출처 표기)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "보이는 것"
+      ]
+     },
+     "value": {
+      "ko": [
+       "붉은 천 장정 포트폴리오 표지 · 금색 테두리 선 · 끈 3쌍으로 묶여 있다"
+      ]
+     }
+    }
+   ],
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s08/varat_portfolio_1889-90_btv1b84515919_eu400.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "items": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s08/canvas/1/page",
+     "type": "AnnotationPage",
+     "items": [
+      {
+       "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s08/canvas/1/page/a",
+       "type": "Annotation",
+       "motivation": "painting",
+       "target": "https://changgi.github.io/korea-archive-mcp/iiif/m/s08/canvas/1",
+       "body": {
+        "id": "https://changgi.github.io/korea-archive-mcp/iiif/img/s08/varat_portfolio_1889-90_btv1b84515919_eu400.jpg",
+        "type": "Image",
+        "format": "image/jpeg",
+        "width": 400,
+        "height": 542
+       }
+      }
+     ]
+    }
+   ],
+   "homepage": [
+    {
+     "id": "https://gallica.bnf.fr/ark:/12148/btv1b84515919",
+     "type": "Text",
+     "label": {
+      "ko": [
+       "원 기관 기록"
+      ]
+     },
+     "format": "text/html"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s08/canvas/2",
+   "type": "Canvas",
+   "label": {
+    "ko": [
+     "[Entrée triomphale de l'armée impériale japonaise à Séoul] : [estampe] / [dessiné par Watanabe Nobukazu] (日清戦争凱旋之図)"
+    ]
+   },
+   "width": 400,
+   "height": 209,
+   "metadata": [
+    {
+     "label": {
+      "ko": [
+       "식별자"
+      ]
+     },
+     "value": {
+      "ko": [
+       "Gallica ark:/12148/btv1b530872483 (RESERVE FT 5-ZF-10 (2), Smith-Lesouëf 14087)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "연대"
+      ]
+     },
+     "value": {
+      "ko": [
+       "1894"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "소장"
+      ]
+     },
+     "value": {
+      "ko": [
+       "Bibliothèque nationale de France — Société de Géographie, SG WD-181"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리"
+      ]
+     },
+     "value": {
+      "ko": [
+       "NoC-OKLR — Gallica 조건(비상업·출처 표기)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "보이는 것"
+      ]
+     },
+     "value": {
+      "ko": [
+       "3폭 다색 목판화 · 왼쪽 관복 차림 인물 대열, 오른쪽 서양식 군복 인물들 · 상단 깃발·만국기"
+      ]
+     }
+    }
+   ],
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s08/print_1894_seoul_btv1b530872483_eu400.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "items": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s08/canvas/2/page",
+     "type": "AnnotationPage",
+     "items": [
+      {
+       "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s08/canvas/2/page/a",
+       "type": "Annotation",
+       "motivation": "painting",
+       "target": "https://changgi.github.io/korea-archive-mcp/iiif/m/s08/canvas/2",
+       "body": {
+        "id": "https://changgi.github.io/korea-archive-mcp/iiif/img/s08/print_1894_seoul_btv1b530872483_eu400.jpg",
+        "type": "Image",
+        "format": "image/jpeg",
+        "width": 400,
+        "height": 209
+       }
+      }
+     ]
+    }
+   ],
+   "homepage": [
+    {
+     "id": "https://gallica.bnf.fr/ark:/12148/btv1b530872483",
+     "type": "Text",
+     "label": {
+      "ko": [
+       "원 기관 기록"
+      ]
+     },
+     "format": "text/html"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s08/canvas/3",
+   "type": "Canvas",
+   "label": {
+    "ko": [
+     "[Entrée triomphale des soldats japonais à Séoul après les victoires de Sönghwan et d'Asan] : [estampe] / [dessiné par Seikō]"
+    ]
+   },
+   "width": 400,
+   "height": 227,
+   "metadata": [
+    {
+     "label": {
+      "ko": [
+       "식별자"
+      ]
+     },
+     "value": {
+      "ko": [
+       "Gallica ark:/12148/btv1b53087277w (RESERVE ZF-10 (2)-FT 5, Smith-Lesouëf 14069)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "연대"
+      ]
+     },
+     "value": {
+      "ko": [
+       "1894"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "소장"
+      ]
+     },
+     "value": {
+      "ko": [
+       "Bibliothèque nationale de France — Société de Géographie, SG WD-181"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리"
+      ]
+     },
+     "value": {
+      "ko": [
+       "NoC-OKLR — Gallica 조건(비상업·출처 표기)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "보이는 것"
+      ]
+     },
+     "value": {
+      "ko": [
+       "다색 목판화, 회색 대지에 부착 · 행렬과 깃발, 우상단 글 상자 · 하단 연필 메모"
+      ]
+     }
+    }
+   ],
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s08/print_1894_seoul_btv1b53087277w_eu400.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "items": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s08/canvas/3/page",
+     "type": "AnnotationPage",
+     "items": [
+      {
+       "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s08/canvas/3/page/a",
+       "type": "Annotation",
+       "motivation": "painting",
+       "target": "https://changgi.github.io/korea-archive-mcp/iiif/m/s08/canvas/3",
+       "body": {
+        "id": "https://changgi.github.io/korea-archive-mcp/iiif/img/s08/print_1894_seoul_btv1b53087277w_eu400.jpg",
+        "type": "Image",
+        "format": "image/jpeg",
+        "width": 400,
+        "height": 227
+       }
+      }
+     ]
+    }
+   ],
+   "homepage": [
+    {
+     "id": "https://gallica.bnf.fr/ark:/12148/btv1b53087277w",
+     "type": "Text",
+     "label": {
+      "ko": [
+       "원 기관 기록"
+      ]
+     },
+     "format": "text/html"
+    }
+   ]
+  }
+ ],
+ "homepage": [
+  {
+   "id": "https://catalogue.bnf.fr/ark:/12148/cb40589642r",
+   "type": "Text",
+   "label": {
+    "ko": [
+     "원 기관 기록"
+    ]
+   },
+   "format": "text/html"
+  }
+ ],
+ "thumbnail": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s08/varat_portfolio_1889-90_btv1b84515919_eu400.jpg",
+   "type": "Image",
+   "format": "image/jpeg"
+  }
+ ]
+}
