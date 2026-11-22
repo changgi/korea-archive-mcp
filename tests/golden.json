@@ -1,0 +1,244 @@
+{
+ "note": "골든 회귀 — 각 도구가 '모양'을 지키는지 본다(건수·순서가 아니라 구조). 외부 사이트 개편으로 파서가 깨지면 여기서 먼저 걸린다. 파서를 고칠 때마다 케이스를 추가할 것. level: error=실패 처리, warn=경고만(외부 쿼터·차단이 잦은 채널).",
+ "max_bytes": 24576,
+ "cases": [
+  {
+   "id": "tna-variants",
+   "tool": "tna_search",
+   "args": {
+    "query": "Korean War prisoners",
+    "max_results": 8
+   },
+   "must": [
+    "\\[[A-Z]+ \\d+/\\d+\\]",
+    "표기 변형 병행"
+   ],
+   "level": "error"
+  },
+  {
+   "id": "tna-ref-quote",
+   "tool": "tna_search",
+   "args": {
+    "query": "FO 371/84053"
+   },
+   "must": [
+    "FO 371/84053"
+   ],
+   "level": "error"
+  },
+  {
+   "id": "nara-naid",
+   "tool": "judge_rights",
+   "args": {
+    "naid": 520782
+   },
+   "must": [
+    "Unrestricted"
+   ],
+   "level": "warn"
+  },
+  {
+   "id": "koreanwar-pair",
+   "tool": "cross_search",
+   "args": {
+    "query": "장진호",
+    "sources": "nara,koreanwar",
+    "max_per_source": 5
+   },
+   "must": [
+    "koreanwar"
+   ],
+   "level": "warn"
+  },
+  {
+   "id": "ktv-full-title",
+   "tool": "nedb_search",
+   "args": {
+    "mode": "ktv",
+    "query": "대한뉴스 서울"
+   },
+   "must": [
+    "\\[문화영화\\] \\S+ \\S+",
+    "요지: "
+   ],
+   "must_not": [
+    "\\] \\[\\d+호\\]\\n"
+   ],
+   "level": "error"
+  },
+  {
+   "id": "ktv-detail",
+   "tool": "nedb_search",
+   "args": {
+    "mode": "ktv",
+    "query": "https://www.ehistory.go.kr/view/movie?mediasrcgbn=KV&mediaid=11191&mediadtl=24992&mediagbn=DH"
+   },
+   "must": [
+    "【해설】",
+    "상영시간"
+   ],
+   "level": "error"
+  },
+  {
+   "id": "seoul-item-titles",
+   "tool": "seoul_archives_search",
+   "args": {
+    "query": "한강"
+   },
+   "must": [
+    "\\[기록건·사진\\] [^\\n—]{2,}\\n"
+   ],
+   "must_not": [
+    "제목·이용조건은 상세 URL 판독[\\s\\S]*제목·이용조건은 상세 URL 판독[\\s\\S]*제목·이용조건은 상세 URL 판독"
+   ],
+   "level": "error"
+  },
+  {
+   "id": "kyu-rows",
+   "tool": "nedb_search",
+   "args": {
+    "mode": "kyujanggak",
+    "query": "절목"
+   },
+   "must": [
+    "- \\[(奎|古)[^\\]]+\\] \\S+.* · .* · ",
+    "해제: "
+   ],
+   "level": "error"
+  },
+  {
+   "id": "jsg-ancient-doc",
+   "tool": "nedb_search",
+   "args": {
+    "mode": "jsg",
+    "query": "https://jsg.aks.ac.kr/dir/view?dataId=ANC_G002%2BAKS%2BKSM-XF.0000.0000-20101008.B034a_053_00084_XXX"
+   },
+   "must": [
+    "청구기호 B034A0530084",
+    "소장: "
+   ],
+   "must_not": [
+    "한국역대인물(?!정보)"
+   ],
+   "level": "error"
+  },
+  {
+   "id": "jsg-uigwe-haeje",
+   "tool": "nedb_search",
+   "args": {
+    "mode": "jsg",
+    "query": "https://jsg.aks.ac.kr/dir/view?dataId=ARC_kh2_je_a_vsu_22189_000"
+   },
+   "must": [
+    "【해제】",
+    "간행: ",
+    "판본: "
+   ],
+   "level": "error"
+  },
+  {
+   "id": "nlk-old-books",
+   "tool": "nlk_search",
+   "args": {
+    "query": "오륜행실도",
+    "max_results": 5
+   },
+   "must": [
+    "고문헌\\(원본\\) 자동 병행",
+    "\\[고문헌\\]"
+   ],
+   "level": "error"
+  },
+  {
+   "id": "ndl-pid",
+   "tool": "cross_search",
+   "args": {
+    "query": "朝鮮写真帖",
+    "sources": "ndl",
+    "max_per_source": 8
+   },
+   "must": [
+    "디지털 PID \\d+"
+   ],
+   "level": "warn"
+  },
+  {
+   "id": "jacar-ja",
+   "tool": "cross_search",
+   "args": {
+    "query": "日韓協約",
+    "sources": "jacar",
+    "max_per_source": 3
+   },
+   "must": [
+    "\\[jacar\\]"
+   ],
+   "level": "warn"
+  },
+  {
+   "id": "iiif-format",
+   "tool": "cross_search",
+   "args": {
+    "query": "Seoul 1950",
+    "sources": "ia,europeana",
+    "max_per_source": 3,
+    "format": "iiif"
+   },
+   "must": [
+    "\"type\":\"Collection\"",
+    "iiif\\.(archive\\.org|europeana\\.eu)"
+   ],
+   "level": "error"
+  },
+  {
+   "id": "iiif-guide",
+   "tool": "report_template",
+   "args": {
+    "kind": "iiif"
+   },
+   "must": [
+    "IIIF 갤러리 규칙",
+    "openseadragon"
+   ],
+   "level": "error"
+  },
+  {
+   "id": "help-guide",
+   "tool": "report_template",
+   "args": {
+    "kind": "help"
+   },
+   "must": [
+    "창기창기",
+    "iiif.html"
+   ],
+   "level": "error"
+  },
+  {
+   "id": "csv-format",
+   "tool": "cross_search",
+   "args": {
+    "query": "Korea armistice",
+    "sources": "tna,un",
+    "max_per_source": 3,
+    "format": "csv"
+   },
+   "must": [
+    "^교차수집 .+ CSV",
+    "\\nnode,sources,title,date,id,url"
+   ],
+   "level": "error"
+  },
+  {
+   "id": "ia-item",
+   "tool": "ia_search",
+   "args": {
+    "identifier": "BattleOfTheBarricades"
+   },
+   "must": [
+    "BattleOfTheBarricades|Barricades"
+   ],
+   "level": "warn"
+  }
+ ]
+}
