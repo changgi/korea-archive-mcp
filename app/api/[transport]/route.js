@@ -5,6 +5,7 @@ import { DATA } from '../../../lib/data.js';
 import { judgeRights } from '../../../lib/rights.js';
 import { PROFILES } from '../../../lib/profiles.js';
 import { DOMESTIC } from '../../../lib/domestic_keywords.js';
+import { buildNaraManifest, naraUrls } from '../../../lib/nara_iiif.js';
 
 export const maxDuration = 60;
 // Korean government archive sites (archives.seoul.go.kr, opengov.seoul.go.kr, …) block foreign /
@@ -1424,10 +1425,21 @@ const handler = createMcpHandler((server) => {
 
   server.tool('nara_search',
     'Search the US NARA catalog (API v2). Multilingual queries (한국어·日本語·中文·Русский 등) auto-translate to English index terms (장진호/長津湖→Chosin Reservoir …). Requires NARA_API_KEY env on the server; record_group enables precision cross-search (e.g. 242). 미국 NARA 검색 — 다국어 질의 자동 영문 변환.',
-    { query: z.string().describe('한국어 또는 영어 (naid 지정 시 무시 가능 — 빈 문자열 허용)'), record_group: z.number().int().optional(), moving_images_only: z.boolean().default(false), max_results: z.number().int().min(1).max(50).default(15), page: z.number().int().min(1).default(1), naid: z.coerce.number().int().optional().describe('NAID 인접 채굴 중심값 e.g. 22015'), radius: z.number().int().min(0).max(8).default(3).describe('naid ±N 인접 범위') },
-    async ({ query, record_group, moving_images_only, max_results, page, naid, radius }) => {
+    { query: z.string().describe('한국어 또는 영어 (naid 지정 시 무시 가능 — 빈 문자열 허용)'), record_group: z.number().int().optional(), moving_images_only: z.boolean().default(false), max_results: z.number().int().min(1).max(50).default(15), page: z.number().int().min(1).default(1), naid: z.coerce.number().int().optional().describe('NAID 인접 채굴 중심값 e.g. 22015'), radius: z.number().int().min(0).max(8).default(3).describe('naid ±N 인접 범위'), output: z.enum(['text', 'iiif']).default('text').describe("iiif=naid 기록을 IIIF Presentation 3 매니페스트로(계보 partOf·생산일 navDate·권리·판독 지문·디지털 객체 — 공개 URL로 KV·Mirador에서 열림)") },
+    async ({ query, record_group, moving_images_only, max_results, page, naid, radius, output }) => {
       const key = process.env.NARA_API_KEY;
       if (!key) return text('NARA_API_KEY not configured on this server. Free key: email Catalog_API@nara.gov (name + email). Meanwhile use catalog.archives.gov directly.');
+      if (naid && output === 'iiif') { // v1.98: NARA→IIIF 브리지 — 맥락(계보)·증거성(판독 시각·기술 지문·권리 원문)·다매체(rendering)
+        try {
+          const man = await buildNaraManifest(naid, 40);
+          if (!man) return text(`[NAID ${naid}] 카탈로그에 없음 — NAID를 확인하십시오.`);
+          const U = naraUrls(naid); const lite = { ...man, items: man.items.slice(0, 12) };
+          let js = JSON.stringify(lite); if (js.length > 15000) js = JSON.stringify({ ...lite, items: lite.items.slice(0, 4), summary: undefined });
+          return text(`NARA→IIIF [NAID ${naid}] ${String(man.label.en[0]).slice(0, 90)}\n캔버스 ${man.items.length}장 · 원본 매체(rendering) ${(man.rendering || []).length}건 · 계보 ${man.partOf ? '있음(partOf → 상위 컬렉션)' : '없음'} · navDate ${man.navDate || '—'}\n`
+            + `■ 공개 매니페스트(누구나·어느 IIIF 뷰어든): ${U.manifest}\n■ KV로 보기: ${U.kv}\n■ 상위 계층 컬렉션: ${man.partOf ? man.partOf[0].id : '—'} · 이 기록의 하위 컬렉션: ${U.collection}\n■ RiC-O JSON-LD(지식그래프·기록관리 등재): ${U.ric}\n`
+            + `■ 매니페스트 JSON${man.items.length > lite.items.length ? `(앞 ${JSON.parse(js).items.length}장 — 전체는 위 URL)` : ''}:\n${js}`);
+        } catch (e) { return text(`NARA→IIIF 실패(${String(e && e.message || e).slice(0, 80)}) — 공개 URL로 재시도: ${naraUrls(naid).manifest}`); }
+      }
       if (naid) { // NAID ± 인접 채굴 — 사진 ±3·색인 ±1 간격 실무 지식. v2는 단수 naId만 수용(naIds=400 실측) → 순차 조회
         const ids = []; for (let i = naid - radius; i <= naid + radius; i++) if (i > 0) ids.push(i);
         const lines = [];
@@ -2761,6 +2773,7 @@ item_cd 5종(자료 성격별): ART 도설·회화 / ETC 두루마리·축 / DRR
           if (/archive\.org\/details\/([^/?#]+)/.test(u)) m = `https://iiif.archive.org/iiif/3/${u.match(/archive\.org\/details\/([^/?#]+)/)[1]}/manifest.json`;
           else if (/europeana\.eu\/(?:[a-z]{2}\/)?item\/([^/]+)\/([^/?#]+)/.test(u)) { const x = u.match(/europeana\.eu\/(?:[a-z]{2}\/)?item\/([^/]+)\/([^/?#]+)/); m = `https://iiif.europeana.eu/presentation/${x[1]}/${x[2]}/manifest`; }
           else if (/ark:\/12148\/([a-z0-9]+)/i.test(u) && /gallica/.test(u)) m = `https://gallica.bnf.fr/iiif/ark:/12148/${u.match(/ark:\/12148\/([a-z0-9]+)/i)[1]}/manifest.json`;
+          else if (/catalog\.archives\.gov\/id\/(\d+)/.test(u)) m = naraUrls(u.match(/catalog\.archives\.gov\/id\/(\d+)/)[1]).manifest; // v1.98: NARA→IIIF 브리지
           else if (/korea-archive-mcp\/iiif\.html#(s\d+)/.test(u)) m = `https://changgi.github.io/korea-archive-mcp/iiif/m/${u.match(/iiif\.html#(s\d+)/)[1]}.json`;
           else if (/dl\.ndl\.go\.jp\/pid\/(\d+)/.test(u)) m = `https://dl.ndl.go.jp/api/iiif/${u.match(/dl\.ndl\.go\.jp\/pid\/(\d+)/)[1]}/manifest.json`;
           if (m) ext.push({ id: m, type: 'Manifest', label: L3(`[${src}] ${norm(it.title)}${it.date ? ' (' + it.date + ')' : ''}`), homepage: [{ id: u, type: 'Text', label: L3('원 기관 기록'), format: 'text/html' }] });
