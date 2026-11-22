@@ -1,0 +1,96 @@
+{
+ "n": 47,
+ "part": [
+  "Ⅷ",
+  "유럽이 본 한국"
+ ],
+ "inst": "프랑스 국립도서관 BnF · Gallica",
+ "flag": "🇫🇷",
+ "say": "1898년 프랑스 책 속 서울 사진 찾아줘",
+ "head": "La Corée, indépendante, russe, ou japonaise (1898)",
+ "big": "50 illustrations",
+ "facts": [
+  [
+   "Gallica",
+   "ark:/12148/bpt6k3413109t — Villetard de Laguérie 『La Corée, indépendante, russe ou japonaise』 1898, VIII-304-8 p."
+  ],
+  [
+   "카탈로그",
+   "catalogue.bnf.fr ark:/12148/cb315839216 (1904년판 cb31583922j)"
+  ],
+  [
+   "사본",
+   "Duke University Libraries 스캔 · Internet Archive lacoreeindependa01vill_0"
+  ],
+  [
+   "권리",
+   "1898 공표, 저자 1913 사망 → PD"
+  ]
+ ],
+ "tool": "gallica_search('La Corée indépendante') → BnF 카탈로그 폴백 → Gallica ark",
+ "link": "https://gallica.bnf.fr/ark:/12148/bpt6k3413109t",
+ "checked": "2026-11-22",
+ "tags": "#Gallica #서울 #1898",
+ "hero": {
+  "file": "src/vill_n302_plate.jpg",
+  "pos": "center 40%",
+  "credit": "판화: Villetard de Laguérie 1898, p.285 'Séoul. — Nouvelle légation de France en construction.' · PD · 사본 Internet Archive lacoreeindependa01vill_0"
+ },
+ "hook": "1898년 서울,<br><span class=\"g\">짓고 있던</span> 프랑스 공사관",
+ "mosaic": [
+  {
+   "file": "src/vill_n190_plate.jpg",
+   "label": "'Un grand mandarin coréen en costume de ville'"
+  },
+  {
+   "file": "src/vill_n140_plate.jpg",
+   "label": "'Soldats coréens.'"
+  },
+  {
+   "file": "src/vill_n162_plate.jpg",
+   "label": "'Enfants coréens.'"
+  },
+  {
+   "file": "src/vill_n120_plate.jpg",
+   "label": "'Sortie du palais vers le Pouk-han'"
+  }
+ ],
+ "mosaic_title": "'사진을 따라 새긴' <span class=\"g\">50장</span> 중에서",
+ "mosaic_credit": "Villetard de Laguérie, La Corée (Paris: Hachette, 1898) 삽화 · PD · Gallica bpt6k3413109t / IA lacoreeindependa01vill_0",
+ "ann": {
+  "file": "src/vill_n12_mid.jpg",
+  "boxes": [
+   {
+    "x": 25,
+    "y": 5,
+    "w": 48,
+    "h": 27,
+    "t": "'OUVRAGE CONTENANT CINQUANTE ILLUSTRATIONS D'après des photographies'"
+   },
+   {
+    "x": 27,
+    "y": 44,
+    "w": 15,
+    "h": 52,
+    "t": "왼쪽: 갓을 쓴 남자"
+   },
+   {
+    "x": 42,
+    "y": 40,
+    "w": 16,
+    "h": 56,
+    "t": "가운데: 머리를 높이 올린 여성"
+   },
+   {
+    "x": 58,
+    "y": 44,
+    "w": 16,
+    "h": 52,
+    "t": "오른쪽: 높은 모자를 쓴 남자"
+   }
+  ],
+  "credit": "Villetard de Laguérie 1898 표제지 가운데 부분 — 인쇄된 문구와 보이는 인물만 표시"
+ },
+ "cta_img": "src/vill_n12_title.jpg",
+ "meta_top": 470
+}

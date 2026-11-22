@@ -1,0 +1,106 @@
+{
+ "n": 46,
+ "part": [
+  "Ⅷ",
+  "유럽이 본 한국"
+ ],
+ "inst": "프랑스 국립도서관 BnF · Gallica",
+ "flag": "🇫🇷",
+ "say": "1900년 파리 만국박람회 대한제국관 자료 찾아줘",
+ "head": "Souvenir de Séoul, Corée (1900)",
+ "big": "Grand prix 1",
+ "facts": [
+  [
+   "Gallica",
+   "ark:/12148/bpt6k54937409 — 'Souvenir de Séoul, Corée' [1900], 1 vol. (VIII p.-[27] p. de pl.)"
+  ],
+  [
+   "글",
+   "Maurice Courant 'Le Pavillon Coréen au Champ-de-Mars'"
+  ],
+  [
+   "표지 인쇄",
+   "1 Grand prix · 2 Médailles d'or · 10 Médailles d'argent · 5 Médailles de bronze · 3 Mentions honorables"
+  ],
+  [
+   "권리",
+   "1900 공표, Courant 1935 사망 → PD · Gallica 조건: 비상업 재이용 자유·출처 표기"
+  ]
+ ],
+ "tool": "gallica_search('Pavillon de la Corée exposition') → BnF 카탈로그 폴백 → Gallica ark",
+ "link": "https://gallica.bnf.fr/ark:/12148/bpt6k54937409",
+ "checked": "2026-11-22",
+ "tags": "#Gallica #파리만국박람회 #대한제국",
+ "hero": {
+  "file": "src/souv_n27_photo.jpg",
+  "pos": "center 45%",
+  "credit": "사진: 『Souvenir de Séoul, Corée』(1900) 도판 'Salle du Trône. Vieux Palais de Séoul.' · Source gallica.bnf.fr / BnF (ark:/12148/bpt6k54937409) · PD · 사본 Internet Archive"
+ },
+ "hook": "1900년 파리,<br>대한제국이 내놓은 <span class=\"g\">서울 사진첩</span>",
+ "mosaic": [
+  {
+   "file": "src/souv_n7.jpg",
+   "label": "쿠랑의 글 'Le Pavillon Coréen au Champ-de-Mars'",
+   "nocrop": true
+  },
+  {
+   "file": "src/souv_n29_photo.jpg",
+   "label": "'Trône de Sa Majesté l'Empereur de Corée.'"
+  },
+  {
+   "file": "src/souv_n17.jpg",
+   "label": "박람회 관계자 4인 — 'Promoteur'·'Président d'honneur'",
+   "nocrop": true
+  },
+  {
+   "file": "src/souv_n45_photo.jpg",
+   "label": "'Tireurs à l'arc dans le vieux Palais des Mûriers'"
+  }
+ ],
+ "mosaic_title": "같은 앨범의 <span class=\"g\">글·사진·인물</span>",
+ "mosaic_credit": "『Souvenir de Séoul, Corée』(1900) · Source gallica.bnf.fr / BnF · ark:/12148/bpt6k54937409 · PD · Gallica 이용조건(비상업·출처 표기)",
+ "ann": {
+  "file": "src/souv_n3_top.jpg",
+  "crop_y": 0.0,
+  "boxes": [
+   {
+    "x": 8,
+    "y": 0,
+    "w": 18,
+    "h": 10.5,
+    "t": "왼쪽 위 인쇄: '1 Grand prix · 2 Médailles d'or · 10 Médailles d'argent · 5 Médailles de bronze · 3 Mentions honorables'"
+   },
+   {
+    "x": 78,
+    "y": 17,
+    "w": 15,
+    "h": 9,
+    "t": "오른쪽 위 손글씨 번호 '2342'"
+   },
+   {
+    "x": 15,
+    "y": 48,
+    "w": 69,
+    "h": 15,
+    "t": "제목 'Souvenir de Séoul'"
+   },
+   {
+    "x": 20,
+    "y": 60,
+    "w": 15,
+    "h": 12,
+    "t": "둥근 장서인 — 아래쪽에 'IMPRIMÉS'"
+   },
+   {
+    "x": 40,
+    "y": 68,
+    "w": 17,
+    "h": 9,
+    "t": "'Corée'"
+   }
+  ],
+  "credit": "Gallica bpt6k54937409 표지(위쪽 62%) — 표시한 5곳은 지면에서 직접 읽은 것"
+ },
+ "cta_img": "src/souv_n39_photo.jpg",
+ "meta_top": 470
+}

@@ -1,0 +1,134 @@
+{
+ "n": 36,
+ "src": "koreanwar",
+ "record": {
+  "id": "347건",
+  "title": "1950.8 낙동강 — 강을 내려다본 진지",
+  "inst": "6·25전쟁 아카이브센터 (협약기관)",
+  "url": "https://catalog.archives.gov/id/280956792"
+ },
+ "images": [
+  {
+   "file": "src/p_280956792.jpg",
+   "role": "hero",
+   "w": 1449,
+   "h": 1800,
+   "visible": [],
+   "nocrop": false,
+   "record_id": "NAID 280956792 (127-N-A1402)",
+   "title": "Marines Dug in on the Third Objective, Overlooking Naktong river",
+   "date": "1950-08-19",
+   "url": "https://catalog.archives.gov/id/280956792",
+   "orig_size": [
+    2514,
+    3122
+   ],
+   "object": "https://catalog.archives.gov/medialz/stillpix/111-c/Batch0007/127-N-A1402_001.jpg",
+   "rights": "A — Unrestricted",
+   "rights_evidence": "NARA catalog proxy API useRestriction.status='Unrestricted' (2026-11-22 실측)"
+  },
+  {
+   "file": "src/p_74246095.jpg",
+   "role": "extra",
+   "w": 1434,
+   "h": 1800,
+   "visible": [
+    "낙동강 지역 박격포 진지 · A1313"
+   ],
+   "nocrop": false,
+   "record_id": "NAID 74246095 (127-GR-143-A1313)",
+   "title": "Korea – Campaigns – Pusan to Miryang",
+   "date": "1950-08-01",
+   "url": "https://catalog.archives.gov/id/74246095",
+   "orig_size": [
+    5030,
+    6315
+   ],
+   "object": "https://catalog.archives.gov/medialz/stillpix/127-gr/Korea-Campaigns-Pusan-to-Miryang/127-gr-21-143-A1313_001-ac.jpg",
+   "rights": "A — Unrestricted",
+   "rights_evidence": "NARA catalog proxy API useRestriction.status='Unrestricted' (2026-11-22 실측)"
+  },
+  {
+   "file": "src/p_348337779.jpg",
+   "role": "extra",
+   "w": 800,
+   "h": 632,
+   "visible": [
+    "왜관 부교 가설 1950-09-22 · NAID 348337779"
+   ],
+   "nocrop": false,
+   "record_id": "NAID 348337779 (2007-538)",
+   "title": "Construction of pontoon bridge near Waegwan, Korea during Korean War",
+   "date": "1950-09-22",
+   "url": "https://catalog.archives.gov/id/348337779",
+   "orig_size": [
+    800,
+    632
+   ],
+   "object": "https://catalog.archives.gov/medialz/presidential-libraries/truman/photographs/2007/2007-538.jpg",
+   "rights": "A — Unrestricted",
+   "rights_evidence": "NARA catalog proxy API useRestriction.status='Unrestricted' (2026-11-22 실측)"
+  },
+  {
+   "file": "src/p_348338119.jpg",
+   "role": "extra",
+   "w": 800,
+   "h": 532,
+   "visible": [
+    "왜관 베일리교 1950-10-05 · NAID 348338119"
+   ],
+   "nocrop": false,
+   "record_id": "NAID 348338119 (2007-534)",
+   "title": "Bailey Bridge over Nakdong River in Waegwan, Korea",
+   "date": "1950-10-05",
+   "url": "https://catalog.archives.gov/id/348338119",
+   "orig_size": [
+    800,
+    532
+   ],
+   "object": "https://catalog.archives.gov/medialz/presidential-libraries/truman/photographs/2007/2007-534.jpg",
+   "rights": "A — Unrestricted",
+   "rights_evidence": "NARA catalog proxy API useRestriction.status='Unrestricted' (2026-11-22 실측)"
+  },
+  {
+   "file": "src/p_531372.jpg",
+   "role": "extra",
+   "w": 1800,
+   "h": 1517,
+   "visible": [
+    "앞으로 길게 뻗은 전차 포신",
+    "포탑 옆면 흰 별 표식",
+    "전차 위에 빼곡히 올라앉은 철모 쓴 병사들",
+    "오른쪽 뒤 또 하나의 포신과 걸어오는 병사들",
+    "왼쪽 앞에 서 있는 병사"
+   ],
+   "nocrop": false,
+   "record_id": "NAID 531372 (111-SC-347856)",
+   "title": "Men of the 9th Infantry Regiment man an M-26 tank to await an enemy attempt to cross the Naktong River.",
+   "date": "1950-09-03",
+   "url": "https://catalog.archives.gov/id/531372",
+   "orig_size": [
+    3000,
+    2529
+   ],
+   "object": "https://catalog.archives.gov/medialz/stillpix/111-sc/111-SC-347856_28-1553M.TIF",
+   "rights": "A — Unrestricted",
+   "rights_evidence": "NARA catalog proxy API useRestriction.status='Unrestricted' (2026-11-22 실측)"
+  }
+ ],
+ "points": [
+  "앞으로 길게 뻗은 전차 포신",
+  "포탑 옆면 흰 별 표식",
+  "전차 위에 빼곡히 올라앉은 철모 쓴 병사들",
+  "오른쪽 뒤 또 하나의 포신과 걸어오는 병사들",
+  "왼쪽 앞에 서 있는 병사"
+ ],
+ "video": {
+  "url": "",
+  "length_s": 0,
+  "rights": "",
+  "note": "영상 없음"
+ },
+ "status": "ok",
+ "notes": "koreanwar.or.kr:8443 직접 접속 불가(프록시: 비443 포트 미지원, 443도 연결 끊김) → 협약기관 기록은 koreanwar_search/koreanwar_item 메타로만 확인, 이미지는 같은 전선 NARA 원본. koreanwar_item이 2025-US-02-PF-D-00237·00267 두 건 모두 NAID 530707(111-SC 시리즈 단위)을 '원본'으로 제시 — 품목 NAID 아님. 링크된 AV 기록 22021(111-ADC-8255)은 NARA 'Restricted - Possibly Copyright'(C)라 미사용."
+}

@@ -1,0 +1,112 @@
+{
+ "n": 88,
+ "src": "earchive",
+ "record": {
+  "id": "국편 전자사료관 AUS005_06_03V0000_915~921 · AUS005_10_00V0000_194",
+  "title": "제헌국회 사진 사료(국편 수집본) — 메타데이터",
+  "date": "1948",
+  "inst": "국사편찬위원회 전자사료관",
+  "url": "https://archive.history.go.kr"
+ },
+ "images": [
+  {
+   "file": "src/p012_right.jpg",
+   "role": "hero",
+   "record_id": "NAID 502727772 (875560-06-012.tif)",
+   "title": "17쪽 상단 크롭",
+   "date": "1948-10",
+   "url": "https://catalog.archives.gov/id/502727772",
+   "rights": "A — Unrestricted",
+   "rights_evidence": "judge_rights(naid=502727772): \"NARA 카탈로그 Use Restriction 'Unrestricted' 실확인 — 제한 없음 확정\" · 미 국무부 간행물(연방 저작물)",
+   "w": 810,
+   "h": 839,
+   "visible": [
+    "'The Constitution of the Democratic Republic of Korea'",
+    "'adopted a constitution for the Republic of Korea on July 12'",
+    "'signed and promulgated on July 17'"
+   ],
+   "nocrop": false
+  },
+  {
+   "file": "src/state_korea1948_p012.jpg",
+   "role": "page",
+   "record_id": "NAID 502727772 (875560-06-012.tif)",
+   "title": "16~17쪽 펼침",
+   "date": "1948-10",
+   "url": "https://catalog.archives.gov/id/502727772",
+   "rights": "A — Unrestricted",
+   "rights_evidence": "judge_rights(naid=502727772): \"NARA 카탈로그 Use Restriction 'Unrestricted' 실확인 — 제한 없음 확정\" · 미 국무부 간행물(연방 저작물)",
+   "w": 1800,
+   "h": 1498,
+   "visible": [
+    "'The National Assembly'",
+    "'convened as the National Assembly for the first time on May 31, 1948, and elected as chairman Syngman Rhee'"
+   ],
+   "nocrop": false
+  },
+  {
+   "file": "src/p012_left.jpg",
+   "role": "extra",
+   "record_id": "NAID 502727772 (875560-06-012.tif)",
+   "title": "16쪽 크롭",
+   "date": "1948-10",
+   "url": "https://catalog.archives.gov/id/502727772",
+   "rights": "A — Unrestricted",
+   "rights_evidence": "judge_rights(naid=502727772): \"NARA 카탈로그 Use Restriction 'Unrestricted' 실확인 — 제한 없음 확정\" · 미 국무부 간행물(연방 저작물)",
+   "w": 756,
+   "h": 1304,
+   "visible": [
+    "'The National Assembly'"
+   ],
+   "nocrop": false
+  },
+  {
+   "file": "src/p013_left.jpg",
+   "role": "extra",
+   "record_id": "NAID 502727772 (875560-06-013.tif)",
+   "title": "18쪽 크롭",
+   "date": "1948-10",
+   "url": "https://catalog.archives.gov/id/502727772",
+   "rights": "A — Unrestricted",
+   "rights_evidence": "judge_rights(naid=502727772): \"NARA 카탈로그 Use Restriction 'Unrestricted' 실확인 — 제한 없음 확정\" · 미 국무부 간행물(연방 저작물)",
+   "w": 756,
+   "h": 1304,
+   "visible": [
+    "'Selection of Executive Personnel'",
+    "'The National Assembly on July 20 elected Syngman Rhee President of the Republic of Korea and Si Yung Lee … Vice President'"
+   ],
+   "nocrop": false
+  },
+  {
+   "file": "src/p066_chron1948.jpg",
+   "role": "extra",
+   "record_id": "NAID 502727772 (875560-06-066.tif)",
+   "title": "연표 123쪽 크롭",
+   "date": "1948-10",
+   "url": "https://catalog.archives.gov/id/502727772",
+   "rights": "A — Unrestricted",
+   "rights_evidence": "judge_rights(naid=502727772): \"NARA 카탈로그 Use Restriction 'Unrestricted' 실확인 — 제한 없음 확정\" · 미 국무부 간행물(연방 저작물)",
+   "w": 756,
+   "h": 1229,
+   "visible": [
+    "'May 10 Election is held in the southern zone'",
+    "'May 31 First meeting of the National Assembly; Syngman Rhee is elected chairman of the assembly.'",
+    "'July 12 The National Assembly adopts the constitution of the Democratic Republic of Korea.'"
+   ],
+   "nocrop": false
+  }
+ ],
+ "points": [
+  "국편 전자사료관 '제헌국회' 10건 — [0] AUS005_10_00V0000_194 'Dr. Syngman Rhee addresses the Korean National Assembly at its first meeting (1) [제헌국회 개원식에서 이승만 의장의 개회사]' (IM0000114233) · [5] AUS005_06_03V0000_918 'Korean Legislative Assembly' · [7] AUS005_06_03V0000_921 '…Election as Korea's First President by an Overwhelming Majority of 180 of 196 Ballots' (IM0000112982)",
+  "국편 이용조건: '제한적 이용 가능(출처 표기, 비상업적 이용, 원 소장처 권리 및 저작권 확인 필수)'",
+  "NARA 원문 16~18쪽·연표 123쪽: 5.31 첫 소집·의장 선출, 7.12 헌법 채택, 7.17 서명·공포, 7.20 대통령·부통령 선출"
+ ],
+ "video": {
+  "url": "",
+  "length_s": 0,
+  "rights": "",
+  "note": "NARA 111-ADC-7193/7194 'INAUGURATION OF KOREAN PRESIDENT' 영상은 Class C(Restricted - Possibly Copyright) — 미사용"
+ },
+ "status": "partial",
+ "notes": "archive.history.go.kr 차단(우회 안 함) — 국편 사진 이미지 미확보, 메타만. NARA 1948 NYT 클리핑(NAID 660046816)은 제3자 신문 저작물이라 제외. 이미지는 087과 같은 국무부 보고서의 다른 쪽."
+}

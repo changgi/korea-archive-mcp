@@ -1,0 +1,152 @@
+{
+ "n": 40,
+ "part": [
+  "Ⅶ",
+  "전쟁의 기록 2"
+ ],
+ "inst": "인터넷 아카이브",
+ "flag": "🌐",
+ "say": "인터넷 아카이브에서 1951년 서울로 돌아오는 피란민 영상 찾아줘",
+ "head": "Combat Bulletin No.113 — 1951 여름",
+ "big": "No. 113",
+ "facts": [
+  [
+   "필름",
+   "COMBAT BULLETIN NO. 113 — STALEMATE IN KOREA · 18분 21초"
+  ],
+  [
+   "원 기술",
+   "'RETURN OF REFUGEES TO SEOUL — CEASE-FIRE TALKS CONTINUE'"
+  ],
+  [
+   "사본",
+   "archive.org gov.dod.dimoc.20276 · 미 국방부 DIMOC · CC0 1.0"
+  ],
+  [
+   "권리",
+   "CC0 · NARA 111-CB-113(NAID 24345) 연방 저작물"
+  ]
+ ],
+ "meta_top": 470,
+ "tool": "ia_search(Combat Bulletin Korea) → archive.org gov.dod.dimoc.20276 · nara_search(Combat Bulletin)",
+ "link": "https://archive.org/details/gov.dod.dimoc.20276",
+ "checked": "2026-11-22",
+ "tags": "#인터넷아카이브 #컴뱃불리틴",
+ "hero": {
+  "file": "video/scene_10_1225.jpg",
+  "pos": "center 50%",
+  "credit": "영상 프레임 12:25: archive.org gov.dod.dimoc.20276 「COMBAT BULLETIN NO. 113」(1951, 미 국방부, CC0) · 원본 720×480(4:3)"
+ },
+ "hook": "보따리를 이고<br><span class=\"g\">강을 건너는 사람들</span>",
+ "mosaic": [
+  {
+   "file": "video/scene_09_1152.jpg",
+   "label": "11:52 — 물가를 걷는 아이와 짐을 인 여인"
+  },
+  {
+   "file": "video/scene_11_1302.jpg",
+   "label": "13:02 — 사람을 가득 태운 뗏목"
+  },
+  {
+   "file": "video/scene_07_1011.jpg",
+   "label": "10:11 — 흰옷 차림 사람들의 무리"
+  },
+  {
+   "file": "video/scene_14_1623.jpg",
+   "label": "16:23 — 끊긴 다리 옆을 지나는 작은 배"
+  }
+ ],
+ "mosaic_title": "원 기술 'RETURN OF REFUGEES TO <span class=\"g\">SEOUL</span>'",
+ "mosaic_credit": "archive.org gov.dod.dimoc.20276 (Department of Defense, CC0 1.0) · NARA 111-CB-113 NAID 24345(Undetermined)",
+ "ann": {
+  "file": "video/scene_m_0929.jpg",
+  "crop_y": 0.03,
+  "title": "No.113 15:29 벽보 — 보이는 것만 읽었습니다",
+  "boxes": [
+   {
+    "x": 20,
+    "y": 8,
+    "w": 38,
+    "h": 9,
+    "t": "제목 글씨 '승리를 향하여'"
+   },
+   {
+    "x": 45,
+    "y": 17,
+    "w": 12,
+    "h": 24,
+    "t": "가운데 붙은 인물 사진"
+   },
+   {
+    "x": 61,
+    "y": 10,
+    "w": 12,
+    "h": 14,
+    "t": "오른쪽 위 비행기 사진"
+   },
+   {
+    "x": 61,
+    "y": 40,
+    "w": 10,
+    "h": 20,
+    "t": "하늘로 쳐든 긴 포신 사진"
+   }
+  ],
+  "credit": "archive.org gov.dod.dimoc.20276 15:29 프레임 — 정전 협상 장면 직후 화면에 잡힌 한글 벽보"
+ },
+ "scenes": [
+  {
+   "title": "No.113 — 지상전",
+   "credit": "archive.org gov.dod.dimoc.20276 · keyscenes 자동 추출(전환 166곳→15장면) · 해설은 화면에서 보이는 것만",
+   "frames": [
+    {
+     "file": "video/scene_01_040.jpg",
+     "tc": "00:40",
+     "cap": "지도 — 'KAESONG'·'SEOUL'·'38' 선, '20 JUL - 20 AUG 51'"
+    },
+    {
+     "file": "video/scene_02_652.jpg",
+     "tc": "06:52",
+     "cap": "위에서 내려다본 능선과 구불구불한 길"
+    },
+    {
+     "file": "video/scene_03_709.jpg",
+     "tc": "07:09",
+     "cap": "연기 속에서 몸을 숙이고 나아가는 병사들"
+    },
+    {
+     "file": "video/scene_04_745.jpg",
+     "tc": "07:45",
+     "cap": "포 옆에 선 철모 쓴 병사들"
+    }
+   ]
+  },
+  {
+   "title": "No.113 — 정전 협상",
+   "credit": "archive.org gov.dod.dimoc.20276 (미 국방부 DIMOC, CC0 1.0) · 자막 'CEASE-FIRE NEGOTIATIONS' 이후 장면",
+   "frames": [
+    {
+     "file": "video/scene_m_0905.jpg",
+     "tc": "15:05",
+     "cap": "기와 담장 옆 마당을 오가는 군복 차림 사람들"
+    },
+    {
+     "file": "video/scene_m_1057.jpg",
+     "tc": "17:37",
+     "cap": "벽돌 기둥 문을 나서는 정모 쓴 두 사람"
+    },
+    {
+     "file": "video/scene_m_1065.jpg",
+     "tc": "17:45",
+     "cap": "탁자보 덮인 긴 탁자들과 의자가 놓인 방"
+    },
+    {
+     "file": "video/scene_m_1097.jpg",
+     "tc": "18:17",
+     "cap": "'THE END · NO. 113 · MCMLI'와 국방부 문장"
+    }
+   ]
+  }
+ ],
+ "cta_img": "video/scene_11_1302.jpg"
+}

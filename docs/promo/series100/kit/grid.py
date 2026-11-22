@@ -3,7 +3,8 @@
 import sys
 from PIL import Image, ImageDraw
 im = Image.open(sys.argv[1]).convert('RGB'); im.thumbnail((900, 900)); d = ImageDraw.Draw(im); W, H = im.size
-for i in range(1, 10):
-    d.line([(W*i/10, 0), (W*i/10, H)], fill=(255, 0, 0)); d.line([(0, H*i/10), (W, H*i/10)], fill=(255, 0, 0))
-    d.text((W*i/10+2, 2), str(i*10), fill=(255, 255, 0)); d.text((2, H*i/10+2), str(i*10), fill=(255, 255, 0))
+st = int(sys.argv[3]) if len(sys.argv) > 3 else 10  # 격자 간격(%) — 5 권장(정밀 배치)
+for v in range(st, 100, st):
+    d.line([(W*v/100, 0), (W*v/100, H)], fill=(255, 0, 0)); d.line([(0, H*v/100), (W, H*v/100)], fill=(255, 0, 0))
+    d.text((W*v/100+2, 2), str(v), fill=(255, 255, 0)); d.text((2, H*v/100+2), str(v), fill=(255, 255, 0))
 im.save(sys.argv[2]); print(W, H)

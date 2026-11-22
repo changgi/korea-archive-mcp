@@ -1,0 +1,246 @@
+{
+ "n": 38,
+ "src": "koreanwar",
+ "record": {
+  "id": "NAID 22401",
+  "title": "1951.1.4 서울 — 철수의 필름",
+  "inst": "6·25전쟁 아카이브센터 (협약기관)",
+  "url": "https://catalog.archives.gov/id/22401"
+ },
+ "images": [
+  {
+   "file": "src/p_531379.jpg",
+   "role": "hero",
+   "w": 1800,
+   "h": 1487,
+   "visible": [],
+   "nocrop": false,
+   "record_id": "NAID 531379 (111-SC-351356)",
+   "title": "Scene of war damage in residential section of Seoul, Korea. The capitol building can be seen in the background (right).",
+   "date": "1950-10-18",
+   "url": "https://catalog.archives.gov/id/531379",
+   "orig_size": [
+    3000,
+    2479
+   ],
+   "object": "https://catalog.archives.gov/medialz/stillpix/111-sc/111-SC-351356_28-1633M.TIF",
+   "rights": "A — Unrestricted",
+   "rights_evidence": "NARA catalog proxy API useRestriction.status='Unrestricted' (2026-11-22 실측)"
+  },
+  {
+   "file": "src/p_531387.jpg",
+   "role": "extra",
+   "w": 1800,
+   "h": 1418,
+   "visible": [
+    "폐허에서 쓸 것을 찾는 노인 1950-11 · NAID 531387"
+   ],
+   "nocrop": false,
+   "record_id": "NAID 531387 (111-SC-351700)",
+   "title": "An aged Korean woman pauses in her search for salvageable materials among the ruins of Seoul, Korea.",
+   "date": "1950-11-01",
+   "url": "https://catalog.archives.gov/id/531387",
+   "orig_size": [
+    3000,
+    2363
+   ],
+   "object": "https://catalog.archives.gov/medialz/stillpix/111-sc/111-SC-351700_28-1636M.TIF",
+   "rights": "A — Unrestricted",
+   "rights_evidence": "NARA catalog proxy API useRestriction.status='Unrestricted' (2026-11-22 실측)"
+  },
+  {
+   "file": "src/p_350488413.jpg",
+   "role": "extra",
+   "w": 576,
+   "h": 800,
+   "visible": [
+    "건물 벽면이 부서진 서울 거리 1951 · NAID 350488413"
+   ],
+   "nocrop": false,
+   "record_id": "NAID 350488413 (2017-221)",
+   "title": "Street in Seoul",
+   "date": "1951-01-01",
+   "url": "https://catalog.archives.gov/id/350488413",
+   "orig_size": [
+    576,
+    800
+   ],
+   "object": "https://catalog.archives.gov/medialz/presidential-libraries/truman/photographs/2017/2017-221.jpg",
+   "rights": "A — Unrestricted",
+   "rights_evidence": "NARA catalog proxy API useRestriction.status='Unrestricted' (2026-11-22 실측)"
+  },
+  {
+   "file": "src/p_350488509.jpg",
+   "role": "extra",
+   "w": 800,
+   "h": 581,
+   "visible": [
+    "서울 거리의 유엔군 1951 · NAID 350488509"
+   ],
+   "nocrop": false,
+   "record_id": "NAID 350488509 (2017-220)",
+   "title": "United Nations Soldiers in Seoul",
+   "date": "1951-01-01",
+   "url": "https://catalog.archives.gov/id/350488509",
+   "orig_size": [
+    800,
+    581
+   ],
+   "object": "https://catalog.archives.gov/medialz/presidential-libraries/truman/photographs/2017/2017-220.jpg",
+   "rights": "A — Unrestricted",
+   "rights_evidence": "NARA catalog proxy API useRestriction.status='Unrestricted' (2026-11-22 실측)"
+  },
+  {
+   "file": "video/scene_12_939.jpg",
+   "role": "extra",
+   "w": 1050,
+   "h": 770,
+   "visible": [
+    "필름 9:39 — 얼음 뜬 강 · NAID 22401",
+    "09:39 얼음 조각이 뜬 강, 건너편에 검은 연기"
+   ],
+   "nocrop": false,
+   "record_id": "NAID 22401 3rd Bn 19th Inf, Seoul Area ; Evacuation of UN Troops, Seoul Area (111-ADC-8636) ← 6·25전쟁 아카이브센터 2022-US-02-AV-D-00143",
+   "url": "https://catalog.archives.gov/medialz/mopix/111/adc/111-adc-8636.mp4",
+   "rights": "B — Undetermined (연방 저작물, RG 111)",
+   "rights_evidence": "영상 프레임 — video 항목 참조"
+  },
+  {
+   "file": "src/p_520784.jpg",
+   "role": "extra",
+   "w": 1800,
+   "h": 1436,
+   "visible": [
+    "승강장 위로 이어진 지붕 세 동",
+    "승강장을 메운 사람들과 짐 보따리",
+    "사람들 사이로 비어 있는 선로",
+    "오른쪽 가까이 웅크린 사람들과 흰 보따리"
+   ],
+   "nocrop": false,
+   "record_id": "NAID 520784 (80-G-425418)",
+   "title": "Refugees crowd railway depot at Inchon, Korea, in hopes they may be next to get aboard for trip further south and safety from communist hordes.",
+   "date": "1951-01-03",
+   "url": "https://catalog.archives.gov/id/520784",
+   "orig_size": [
+    3000,
+    2394
+   ],
+   "object": "https://catalog.archives.gov/medialz/stillpix/080-g/080-G-0425418_28-1608M.TIF",
+   "rights": "A — Unrestricted",
+   "rights_evidence": "NARA catalog proxy API useRestriction.status='Unrestricted' (2026-11-22 실측)"
+  },
+  {
+   "file": "video/scene_01_059.jpg",
+   "role": "frame",
+   "w": 1050,
+   "h": 770,
+   "visible": [
+    "00:59 눈 남은 언덕길을 장비를 메고 내려오는 병사들"
+   ],
+   "nocrop": false,
+   "record_id": "NAID 22401 3rd Bn 19th Inf, Seoul Area ; Evacuation of UN Troops, Seoul Area (111-ADC-8636) ← 6·25전쟁 아카이브센터 2022-US-02-AV-D-00143",
+   "url": "https://catalog.archives.gov/medialz/mopix/111/adc/111-adc-8636.mp4",
+   "rights": "B — Undetermined (연방 저작물, RG 111)",
+   "rights_evidence": "영상 프레임 — video 항목 참조"
+  },
+  {
+   "file": "video/scene_03_235.jpg",
+   "role": "frame",
+   "w": 1050,
+   "h": 770,
+   "visible": [
+    "02:35 흰 별 표식 트럭 짐칸에 탄 병사들"
+   ],
+   "nocrop": false,
+   "record_id": "NAID 22401 3rd Bn 19th Inf, Seoul Area ; Evacuation of UN Troops, Seoul Area (111-ADC-8636) ← 6·25전쟁 아카이브센터 2022-US-02-AV-D-00143",
+   "url": "https://catalog.archives.gov/medialz/mopix/111/adc/111-adc-8636.mp4",
+   "rights": "B — Undetermined (연방 저작물, RG 111)",
+   "rights_evidence": "영상 프레임 — video 항목 참조"
+  },
+  {
+   "file": "video/scene_04_248.jpg",
+   "role": "frame",
+   "w": 1050,
+   "h": 770,
+   "visible": [
+    "02:48 가로등이 선 긴 다리 위를 줄지어 오는 지프·트럭"
+   ],
+   "nocrop": false,
+   "record_id": "NAID 22401 3rd Bn 19th Inf, Seoul Area ; Evacuation of UN Troops, Seoul Area (111-ADC-8636) ← 6·25전쟁 아카이브센터 2022-US-02-AV-D-00143",
+   "url": "https://catalog.archives.gov/medialz/mopix/111/adc/111-adc-8636.mp4",
+   "rights": "B — Undetermined (연방 저작물, RG 111)",
+   "rights_evidence": "영상 프레임 — video 항목 참조"
+  },
+  {
+   "file": "video/scene_05_312.jpg",
+   "role": "frame",
+   "w": 1050,
+   "h": 770,
+   "visible": [
+    "03:12 병사들을 가득 태운 전차가 다리를 지난다"
+   ],
+   "nocrop": false,
+   "record_id": "NAID 22401 3rd Bn 19th Inf, Seoul Area ; Evacuation of UN Troops, Seoul Area (111-ADC-8636) ← 6·25전쟁 아카이브센터 2022-US-02-AV-D-00143",
+   "url": "https://catalog.archives.gov/medialz/mopix/111/adc/111-adc-8636.mp4",
+   "rights": "B — Undetermined (연방 저작물, RG 111)",
+   "rights_evidence": "영상 프레임 — video 항목 참조"
+  },
+  {
+   "file": "video/scene_07_411.jpg",
+   "role": "frame",
+   "w": 1050,
+   "h": 770,
+   "visible": [
+    "04:11 방한모·외투 차림으로 걸어오는 병사들"
+   ],
+   "nocrop": false,
+   "record_id": "NAID 22401 3rd Bn 19th Inf, Seoul Area ; Evacuation of UN Troops, Seoul Area (111-ADC-8636) ← 6·25전쟁 아카이브센터 2022-US-02-AV-D-00143",
+   "url": "https://catalog.archives.gov/medialz/mopix/111/adc/111-adc-8636.mp4",
+   "rights": "B — Undetermined (연방 저작물, RG 111)",
+   "rights_evidence": "영상 프레임 — video 항목 참조"
+  },
+  {
+   "file": "video/scene_08_450.jpg",
+   "role": "frame",
+   "w": 1050,
+   "h": 770,
+   "visible": [
+    "04:50 전신주 늘어선 길을 달리는 트럭과 지프 행렬"
+   ],
+   "nocrop": false,
+   "record_id": "NAID 22401 3rd Bn 19th Inf, Seoul Area ; Evacuation of UN Troops, Seoul Area (111-ADC-8636) ← 6·25전쟁 아카이브센터 2022-US-02-AV-D-00143",
+   "url": "https://catalog.archives.gov/medialz/mopix/111/adc/111-adc-8636.mp4",
+   "rights": "B — Undetermined (연방 저작물, RG 111)",
+   "rights_evidence": "영상 프레임 — video 항목 참조"
+  },
+  {
+   "file": "video/scene_10_547.jpg",
+   "role": "frame",
+   "w": 1050,
+   "h": 770,
+   "visible": [
+    "05:47 흰 별 표식 차량을 함께 미는 병사들"
+   ],
+   "nocrop": false,
+   "record_id": "NAID 22401 3rd Bn 19th Inf, Seoul Area ; Evacuation of UN Troops, Seoul Area (111-ADC-8636) ← 6·25전쟁 아카이브센터 2022-US-02-AV-D-00143",
+   "url": "https://catalog.archives.gov/medialz/mopix/111/adc/111-adc-8636.mp4",
+   "rights": "B — Undetermined (연방 저작물, RG 111)",
+   "rights_evidence": "영상 프레임 — video 항목 참조"
+  }
+ ],
+ "points": [
+  "승강장 위로 이어진 지붕 세 동",
+  "승강장을 메운 사람들과 짐 보따리",
+  "사람들 사이로 비어 있는 선로",
+  "오른쪽 가까이 웅크린 사람들과 흰 보따리"
+ ],
+ "video": {
+  "url": "https://catalog.archives.gov/medialz/mopix/111/adc/111-adc-8636.mp4",
+  "record": "NAID 22401 3rd Bn 19th Inf, Seoul Area ; Evacuation of UN Troops, Seoul Area (111-ADC-8636) ← 6·25전쟁 아카이브센터 2022-US-02-AV-D-00143",
+  "length_s": 596,
+  "rights": "B — Undetermined (연방 저작물, RG 111)",
+  "note": "같은 계열 111-ADC 다수는 'Restricted - Possibly Copyright'(C) — 이 건만 Undetermined"
+ },
+ "status": "ok",
+ "notes": "koreanwar 2022-US-02-AV-D-00143 → NAID 22401(Undetermined) 연결 확인. 같은 검색의 00364·00254·00286·00200(111-ADC)은 모두 C."
+}

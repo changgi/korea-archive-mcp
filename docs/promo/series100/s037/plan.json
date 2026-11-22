@@ -1,0 +1,95 @@
+{
+ "n": 37,
+ "part": [
+  "Ⅶ",
+  "전쟁의 기록 2"
+ ],
+ "inst": "6·25전쟁 아카이브센터 (협약기관)",
+ "flag": "🇰🇷",
+ "say": "6·25전쟁 아카이브센터에서 1950년 평양 입성 기록 찾아줘",
+ "head": "1950.10 평양 — 입성, 그리고 철수",
+ "big": "622건",
+ "facts": [
+  [
+   "협약기관",
+   "KOREAN WAR ARCHIVES 6·25전쟁 아카이브센터 '평양 입성' 검색 622건"
+  ],
+  [
+   "대표 기록",
+   "2022-KR-02-PF-D-00055 국군 평양 입성 환영대회 사진(1950-10-31)"
+  ],
+  [
+   "원본",
+   "같은 시기 NARA 원본 342-AF-87164AC·2007-536(1950-10-25)"
+  ],
+  [
+   "권리",
+   "NARA Unrestricted(A) · 542206만 Undetermined(B)"
+  ]
+ ],
+ "meta_top": 470,
+ "tool": "koreanwar_search(평양 입성) → koreanwar_item → nara_search(Pyongyang) → judge_rights",
+ "link": "https://catalog.archives.gov/id/542285",
+ "checked": "2026-11-22",
+ "tags": "#6·25전쟁아카이브센터 #평양",
+ "hero": {
+  "file": "src/p_542285.jpg",
+  "pos": "center 55%",
+  "credit": "사진: 미국 국립기록관리청 NAID 542285 (342-AF-87164AC, 1950-10-25 평양 조차장, Unrestricted) · 발굴: KOREAN WAR ARCHIVES 6·25전쟁 아카이브센터"
+ },
+ "hook": "평양 조차장의<br><span class=\"g\">부서진 기관차</span>",
+ "mosaic": [
+  {
+   "file": "src/p_348337867.jpg",
+   "label": "평양 차량용 다리 1950-10-25 · NAID 348337867"
+  },
+  {
+   "file": "src/p_542206.jpg",
+   "label": "순천 상공 C-119 공수 1950-10-20 · NAID 542206",
+   "nocrop": true
+  },
+  {
+   "file": "src/p_541822.jpg",
+   "label": "평양에서 철수, 38선을 다시 넘다 · NAID 541822"
+  }
+ ],
+ "mosaic_title": "입성에서 철수까지 — <span class=\"g\">NARA 원본</span> 세 장",
+ "mosaic_credit": "미국 국립기록관리청 NAID 348337867(Credit U.S. Army)·541822(306-FS) — Unrestricted · 542206(342-AF) — 연방 저작물 Undetermined → B",
+ "ann": {
+  "file": "src/p_541822.jpg",
+  "crop_y": 0.04,
+  "title": "NAID 541822 (306-FS-259(21)) — 보이는 것만 읽었습니다",
+  "boxes": [
+   {
+    "x": 54,
+    "y": 8,
+    "w": 45,
+    "h": 13,
+    "t": "표지판 윗줄 'YOU ARE NOW CROSSING'"
+   },
+   {
+    "x": 55,
+    "y": 21,
+    "w": 44,
+    "h": 17,
+    "t": "큰 글씨 '38TH PARALLEL'"
+   },
+   {
+    "x": 57,
+    "y": 38,
+    "w": 42,
+    "h": 7,
+    "t": "원형 'US' 표지와 'C.O.B 728MP', 오른쪽 원형 휘장"
+   },
+   {
+    "x": 10,
+    "y": 44,
+    "w": 43,
+    "h": 29,
+    "t": "다리를 건너는 트럭, 뒤로 먼지 속 차량들"
+   }
+  ],
+  "credit": "NAID 541822 원본(3000×2365) — 원 설명 'United Nations forces withdraw from Pyongyang… recrossed the 38th parallel'"
+ },
+ "cta_img": "src/p_348337867.jpg"
+}

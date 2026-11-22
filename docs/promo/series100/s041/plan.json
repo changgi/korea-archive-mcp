@@ -1,0 +1,99 @@
+{
+ "n": 41,
+ "part": [
+  "Ⅷ",
+  "유럽이 본 한국"
+ ],
+ "inst": "영국 국립기록관 TNA",
+ "flag": "🇬🇧",
+ "say": "임진강 전투 영국군 기록 찾아줘",
+ "head": "1951 임진강 — 글로스터 대대 진지 투사도",
+ "big": "WO 308/48",
+ "facts": [
+  [
+   "TNA 기록",
+   "WO 308/48 'Tracings showing position occupied 1 Bn Gloucestershire Regiment during Imjin Battle' (1951 Apr)"
+  ],
+  [
+   "함께 찾은 기록",
+   "WO 308/47 'Reports of United States formations during Imjin Battle' (1951 Apr)"
+  ],
+  [
+   "이미지",
+   "TNA 원문 이미지는 온라인 미공개 → 호주전쟁기념관 AWM 사진(Copyright expired)"
+  ]
+ ],
+ "tool": "tna_search('Imjin') → WO 308/47·48 · AWM 컬렉션 검색('Imjin')",
+ "link": "https://discovery.nationalarchives.gov.uk/details/r/C1841489",
+ "checked": "2026-11-22",
+ "tags": "#TNA #임진강 #영연방",
+ "hero": {
+  "file": "src/awm_C299572.jpg",
+  "pos": "center 60%",
+  "credit": "사진: 호주전쟁기념관 AWM P02208.014(C299572) · 1951-10 임진강 부교 'Pintail' · 촬영 Shelton, J. J. · Copyright expired - public domain"
+ },
+ "hook": "1951년 10월,<br><span class=\"g\">임진강</span>의 고무보트 다리",
+ "mosaic": [
+  {
+   "file": "src/awm_C328674.jpg",
+   "label": "홍수에 끊긴 Teal 다리 · HOBJ3454"
+  },
+  {
+   "file": "src/awm_C326814.jpg",
+   "label": "부교를 건너는 영국 센추리온 전차 · HOBJ2247"
+  },
+  {
+   "file": "src/awm_C40082.jpg",
+   "label": "1952-53 겨울 Pintail 다리 · 044758"
+  },
+  {
+   "file": "src/awm_C359057.jpg",
+   "label": "'15 MPH ZONE BEGINS' · 1953-07-17"
+  }
+ ],
+ "mosaic_title": "임진강의 다리들 — <span class=\"g\">영연방</span>의 사진",
+ "mosaic_credit": "호주전쟁기념관 AWM C328674·C326814·C40082·C359057 — 모두 'Copyright expired - public domain' · AWM 공개본 최대 640px",
+ "ann": {
+  "file": "src/awm_C358897.jpg",
+  "boxes": [
+   {
+    "x": 33,
+    "y": 31,
+    "w": 7,
+    "h": 24,
+    "t": "왼쪽 표지: 숫자 81·87·94, 화살표는 왼쪽"
+   },
+   {
+    "x": 38.5,
+    "y": 33,
+    "w": 6,
+    "h": 36,
+    "t": "가운데 표지: 8·42·43·44·46"
+   },
+   {
+    "x": 44,
+    "y": 31,
+    "w": 6,
+    "h": 23,
+    "t": "오른쪽 표지: 41·75·77, 화살표는 왼쪽"
+   },
+   {
+    "x": 50.5,
+    "y": 36,
+    "w": 6,
+    "h": 16,
+    "t": "오른쪽 화살표 아래 '79'"
+   },
+   {
+    "x": 64,
+    "y": 21,
+    "w": 7,
+    "h": 9,
+    "t": "뒤쪽 길 위의 트럭 한 대"
+   }
+  ],
+  "credit": "AWM C358897(030525/01, 1953-07-17 Majon'ni, Luff 촬영) · AWM 기술: 화살표·숫자는 각 대대의 방향·위치, 1영연방사단 지역 표지는 호주 헌병대 제작"
+ },
+ "cta_img": "src/awm_C40082.jpg",
+ "meta_top": 500
+}

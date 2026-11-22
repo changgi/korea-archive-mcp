@@ -1,0 +1,152 @@
+{
+ "n": 39,
+ "part": [
+  "Ⅶ",
+  "전쟁의 기록 2"
+ ],
+ "inst": "인터넷 아카이브",
+ "flag": "🌐",
+ "say": "인터넷 아카이브에서 6·25 컴뱃 불리틴 영상 찾아줘",
+ "head": "Combat Bulletin No.103 — 1950 가을",
+ "big": "CB-103",
+ "facts": [
+  [
+   "필름",
+   "U.S. Army Combat Bulletin #103 「UN Offensive」 · 20분 46초"
+  ],
+  [
+   "대응",
+   "NARA NAID 24335 · 111-CB-103 (RG 111) — Undetermined"
+  ],
+  [
+   "사본",
+   "archive.org 'CB-103' · Public Domain Mark 1.0"
+  ],
+  [
+   "권리",
+   "미 육군 제작 연방 저작물 → B"
+  ]
+ ],
+ "meta_top": 470,
+ "tool": "ia_search(Combat Bulletin Korea) → ia_search(identifier=CB-103) → nara_search(Combat Bulletin)",
+ "link": "https://archive.org/details/CB-103",
+ "checked": "2026-11-22",
+ "tags": "#인터넷아카이브 #컴뱃불리틴",
+ "hero": {
+  "file": "video/scene_12_1434.jpg",
+  "pos": "center 40%",
+  "credit": "영상 프레임 14:34: archive.org CB-103 「UN Offensive」(1950, Public Domain Mark) · NARA 111-CB-103 · 원본 640×472"
+ },
+ "hook": "하늘을 덮은 <span class=\"g\">낙하산</span>,<br>1950년 가을의 필름",
+ "mosaic": [
+  {
+   "file": "video/scene_02_222.jpg",
+   "label": "02:22 — 연기 속 거리의 전차와 병사들"
+  },
+  {
+   "file": "video/scene_04_434.jpg",
+   "label": "04:34 — 수송기 램프를 오르는 병사들"
+  },
+  {
+   "file": "video/scene_07_853.jpg",
+   "label": "08:53 — 지붕이 무너진 건물"
+  },
+  {
+   "file": "video/scene_15_1742.jpg",
+   "label": "17:42 — 빼곡히 모인 병사들 앞에 선 사람"
+  }
+ ],
+ "mosaic_title": "한 편의 뉴스 필름 — <span class=\"g\">20분 46초</span>",
+ "mosaic_credit": "archive.org CB-103 (U.S. Army Combat Bulletin #103, Public Domain Mark 1.0) · NARA NAID 24335(Undetermined → B)",
+ "ann": {
+  "file": "video/scene_16_2002.jpg",
+  "crop_y": 0.05,
+  "title": "CB-103 20:02 지도 — 보이는 것만 읽었습니다",
+  "boxes": [
+   {
+    "x": 27,
+    "y": 30,
+    "w": 15,
+    "h": 11,
+    "t": "낙하산 그림 두 개"
+   },
+   {
+    "x": 1,
+    "y": 46,
+    "w": 36,
+    "h": 18,
+    "t": "'PYONGYANG'과 '20 OCT 50' 표지"
+   },
+   {
+    "x": 56,
+    "y": 30,
+    "w": 32,
+    "h": 27,
+    "t": "'WONSAN'과 '20 OCT 50'·'5 OCT 50' 표지"
+   },
+   {
+    "x": 0,
+    "y": 66,
+    "w": 100,
+    "h": 7,
+    "t": "가로로 그은 '38°' 선 — 그 아래 'SEOUL'"
+   }
+  ],
+  "credit": "archive.org CB-103 영상 20:02 프레임(640×472) — 지도 위 글자를 그대로 옮김"
+ },
+ "scenes": [
+  {
+   "title": "CB-103 「UN Offensive」 1부",
+   "credit": "archive.org CB-103 · keyscenes 자동 추출(임계 0.12) · 해설은 화면에서 보이는 것만 · 원 기술의 학살·부상자 장면은 제외",
+   "frames": [
+    {
+     "file": "video/scene_01_051.jpg",
+     "tc": "00:51",
+     "cap": "지도 — 'INCHON'·'SEOUL'·'TAEGU', '20 SEPT 50'"
+    },
+    {
+     "file": "video/scene_03_340.jpg",
+     "tc": "03:40",
+     "cap": "자막 '11th AIRBORNE FLIES TO KOREA'"
+    },
+    {
+     "file": "video/scene_04_434.jpg",
+     "tc": "04:34",
+     "cap": "수송기 뒤 램프를 오르는 장비 멘 병사들"
+    },
+    {
+     "file": "video/scene_08_1040.jpg",
+     "tc": "10:40",
+     "cap": "급수탑이 선 들판에 엎드린 병사들"
+    }
+   ]
+  },
+  {
+   "title": "CB-103 「UN Offensive」 2부",
+   "credit": "archive.org CB-103 (Public Domain Mark 1.0) · NARA 111-CB-103 NAID 24335 (연방 저작물, Undetermined → B)",
+   "frames": [
+    {
+     "file": "video/scene_10_1315.jpg",
+     "tc": "13:15",
+     "cap": "자막 '11th AIRBORNE DROPS BEHIND ENEMY LINES'"
+    },
+    {
+     "file": "video/scene_11_1334.jpg",
+     "tc": "13:34",
+     "cap": "수송기 문 앞에 선 철모 쓴 공수병들"
+    },
+    {
+     "file": "video/scene_12_1434.jpg",
+     "tc": "14:34",
+     "cap": "능선 위 하늘에 흩어진 낙하산들"
+    },
+    {
+     "file": "video/scene_16_2002.jpg",
+     "tc": "20:02",
+     "cap": "지도 — 'PYONGYANG' 위 낙하산 그림 두 개"
+    }
+   ]
+  }
+ ],
+ "cta_img": "video/scene_12_1434.jpg"
+}

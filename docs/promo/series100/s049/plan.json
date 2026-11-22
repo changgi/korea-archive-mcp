@@ -1,0 +1,97 @@
+{
+ "n": 49,
+ "part": [
+  "Ⅷ",
+  "유럽이 본 한국"
+ ],
+ "inst": "유로피아나 Europeana",
+ "flag": "🇪🇺",
+ "say": "유로피아나에서 1901년 서울 사진 찾아줘",
+ "head": "Náprstek 박물관 — 1901년 서울",
+ "big": "As I 7553",
+ "facts": [
+  [
+   "Europeana",
+   "/488/…detail_199081 'A view of the main street of the residential area of Seoul' — 제공 Náprstek Museum(프라하)"
+  ],
+  [
+   "연대",
+   "기록 연대 1901 · 소장번호 As I 7540~7584"
+  ],
+  [
+   "같은 묶음",
+   "'E.St.Vráz na schodišti v královských palácích'(As I 7542) 등 체코 여행가 Vráz 표제 기록"
+  ],
+  [
+   "권리",
+   "CC BY 4.0 — 표기 Náprstek Museum of Asian, African and American Cultures"
+  ]
+ ],
+ "tool": "europeana_search('Soul Vráz') → Europeana record API → eSbírky 원본",
+ "link": "https://www.esbirky.cz/predmet/199081",
+ "checked": "2026-11-22",
+ "tags": "#Europeana #서울 #1901",
+ "hero": {
+  "file": "src/naprstek_199081.jpg",
+  "pos": "center 50%",
+  "credit": "사진: Náprstek 박물관 As I 7553 'Pohled na hlavní ulici obytné části Soulu'(1901) · eSbírky / Europeana · CC BY 4.0 Náprstek Museum"
+ },
+ "hook": "1901년 서울 큰길,<br><span class=\"g\">프라하</span>에 남은 사진",
+ "mosaic": [
+  {
+   "file": "src/naprstek_198949.jpg",
+   "label": "경회루 — As I 7541"
+  },
+  {
+   "file": "src/naprstek_199312.jpg",
+   "label": "성문 앞 행인 — As I 7574"
+  },
+  {
+   "file": "src/naprstek_198993.jpg",
+   "label": "양산을 든 행렬 — As I 7545"
+  },
+  {
+   "file": "src/naprstek_199345.jpg",
+   "label": "풀 자란 근정전 앞뜰 — As I 7577"
+  }
+ ],
+ "mosaic_title": "같은 묶음의 <span class=\"g\">1901년 서울</span>",
+ "mosaic_credit": "Náprstek Museum As I 7541·7574·7545·7577 (1901) · CC BY 4.0 Náprstek Museum of Asian, African and American Cultures · eSbírky",
+ "ann": {
+  "file": "src/naprstek_198938.jpg",
+  "crop_y": 0.12,
+  "boxes": [
+   {
+    "x": 77,
+    "y": 13,
+    "w": 9,
+    "h": 15,
+    "t": "기둥 꼭대기의 작업자 — 기록 설명 'montér na sloupu'"
+   },
+   {
+    "x": 75,
+    "y": 27,
+    "w": 10,
+    "h": 30,
+    "t": "기둥에 걸친 긴 사다리"
+   },
+   {
+    "x": 57,
+    "y": 55,
+    "w": 22,
+    "h": 15,
+    "t": "사람들 사이의 말 한 마리"
+   },
+   {
+    "x": 20,
+    "y": 50,
+    "w": 37,
+    "h": 14,
+    "t": "갓 쓴 사람들이 길에 모여 섰다"
+   }
+  ],
+  "credit": "Náprstek As I 7540 (1901) · 기록 설명: 'koleje koňské dráhy a sloupy telefonního vedení'(마차철도 선로·전화선 기둥) · CC BY 4.0"
+ },
+ "cta_img": "src/naprstek_198949.jpg",
+ "meta_top": 470
+}
