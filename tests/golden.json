@@ -401,6 +401,34 @@
     "(史部|經部|子部|集部) › "
    ],
    "level": "error"
+  },
+  {
+   "id": "archives-partof",
+   "tool": "cross_search",
+   "args": {
+    "query": "한국전쟁",
+    "sources": "archives",
+    "max_per_source": 10,
+    "format": "csv"
+   },
+   "must": [
+    "(생산기관|국가기록원) › "
+   ],
+   "level": "warn"
+  },
+  {
+   "id": "nedb-partof",
+   "tool": "cross_search",
+   "args": {
+    "query": "안중근",
+    "sources": "nedb",
+    "max_per_source": 5,
+    "format": "csv"
+   },
+   "must": [
+    "한국사DB › "
+   ],
+   "level": "warn"
   }
  ]
 }

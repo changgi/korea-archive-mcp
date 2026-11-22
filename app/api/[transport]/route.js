@@ -631,7 +631,8 @@ const PART_OF = {
   i815: (it) => it.series && `자료 › ${it.series}`,
   ktv: (it) => it.series && `영상 › ${it.series}`,
   seoul: (it) => it.series && `기술단위 › ${it.series}`,
-  archives: (it) => it.series && `생산기관 › ${it.series}`,
+  archives: (it) => it.series && (it.series.startsWith('[유형]') ? `국가기록원 › ${it.series.slice(5).trim()}` : `생산기관 › ${it.series}`),
+  nedb: (it) => it.series && `한국사DB › ${it.series}`, // v2.3: 편찬 자료군(DB)이 곧 상위 계열
   nlk: (it) => it.series && `자료유형 › ${it.series}`,
   jsg: (it) => it.series && `四部 › ${it.series}`,
   kyudb: (it) => it.series && `소장 › ${it.series}`,
@@ -684,7 +685,10 @@ const COLLECT = {
     return (xml.match(/<item>[\s\S]*?<\/item>/g) || []).map((i) => {
       const link = xtag(i, 'link');
       const rid = ((link.match(/rc_rfile_no=(\d+)/) || [])[1] || '') + ((link.match(/rc_ritem_no=(\d+)/) || [])[1] ? '-' + (link.match(/rc_ritem_no=0*(\d+)/) || [])[1] : '');
-      return { title: xtag(i, 'title'), date: xtag(i, 'prod_year'), id: rid || xtag(i, 'prod_name'), ...(xtag(i, 'prod_name') ? { series: xtag(i, 'prod_name') } : {}), url: link };
+      // v2.3: 생산기관이 없는 항목은 링크 유형으로 계열 구축(기록물철·기록건·기록정보콘텐츠) — '[유형]' 표시로 생산기관과 구분
+      const kind = /rc_ritem_no=/.test(link) ? '기록건' : /rc_rfile_no=/.test(link) ? '기록물철' : /rc_code=/.test(link) ? '기록정보콘텐츠' : '';
+      const ser = xtag(i, 'prod_name') || (kind ? `[유형] ${kind}` : '');
+      return { title: xtag(i, 'title'), date: xtag(i, 'prod_year'), id: rid || xtag(i, 'prod_name'), ...(ser ? { series: ser } : {}), url: link };
     });
   },
   nlk: async (q, n) => {
@@ -697,7 +701,7 @@ const COLLECT = {
     const recs = await loadNedbIndex(); if (recs) return nedbFileSearch(recs, q, n);
     const b = await gtext('https://db.history.go.kr/search/searchTotalResult.do?searchKeyword=' + encodeURIComponent(q));
     const seen = new Set(); const out = []; const re = /href="\/item\/(\w+)\/main\.do"[^>]*>([\s\S]*?)<\/a>/g; let m;
-    while ((m = re.exec(b)) && out.length < n) { const nm = mclean(m[2].replace(/<span[^>]*class="btn-new"[^>]*>[\s\S]*?<\/span>/g, '')); if (nm && !seen.has(m[1])) { seen.add(m[1]); out.push({ title: `${nm} — '${q}' 수록`, date: '', id: m[1], series: `한국사DB › ${nm}`, url: `https://db.history.go.kr/item/${m[1]}/main.do` }); } }
+    while ((m = re.exec(b)) && out.length < n) { const nm = mclean(m[2].replace(/<span[^>]*class="btn-new"[^>]*>[\s\S]*?<\/span>/g, '')); if (nm && !seen.has(m[1])) { seen.add(m[1]); out.push({ series: nm, title: `${nm} — '${q}' 수록`, date: '', id: m[1], series: `한국사DB › ${nm}`, url: `https://db.history.go.kr/item/${m[1]}/main.do` }); } }
     return out;
   },
   koreanwar: async (q, n) => {
@@ -961,7 +965,7 @@ const COLLECT = {
     }
     for (const c of cats) {
       if (out.length >= n) break;
-      out.push({ title: `독립기념관 ${c.name} ${c.disp}건`, date: '', id: '', url: base + c.u });
+      out.push({ title: `독립기념관 ${c.name} ${c.disp}건`, date: '', id: '', series: c.name, url: base + c.u }); // v2.3: 집계 신호도 계열(카테고리) 부여
     }
     return out;
   },
