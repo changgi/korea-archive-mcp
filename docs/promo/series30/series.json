@@ -333,16 +333,16 @@
    "inst": "국사편찬위원회 한국사데이터베이스",
    "flag": "🇰🇷",
    "say": "한국사DB에 거문도 기록 있어?",
-   "head": "어느 DB에 있는지부터 알려준다",
-   "big": "DB 2종",
+   "head": "巨文島 — 비변사등록에서 4건",
+   "big": "실질 4건",
    "facts": [
     [
-     "1",
-     "헌정사 자료 DB"
+     "비변사등록",
+     "巨文島 검색 4건 · 座目 0건 제외 → 실질 4건"
     ],
     [
-     "2",
-     "포로신문보고서"
+     "예",
+     "bb_272r_001_10_0240 巨文島 陳結 조세 代納 議政府 啓"
     ],
     [
      "다음",
@@ -350,7 +350,7 @@
     ]
    ],
    "credit": "출처: db.history.go.kr 통합검색 실조회",
-   "tool": "nedb_search(mode=total, '거문도')",
+   "tool": "nedb_search(mode=record, '巨文島')",
    "link": "https://db.history.go.kr/search/searchResultList.do?searchKeywordType=BI&searchKeyword=%EA%B1%B0%EB%AC%B8%EB%8F%84",
    "stamp": "DB 안내"
   },

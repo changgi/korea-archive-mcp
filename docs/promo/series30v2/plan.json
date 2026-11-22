@@ -1257,5 +1257,222 @@
    "credit": "e영상역사관 BK 18/3282 「개표 중계방송 현장」 1975 — 위치는 말로 안내"
   },
   "cta_img": "1975_count_broadcast_nocrop.jpg"
+ },
+ "07": {
+  "hero": {
+   "file": "hero_iln_1886-04-03_trip_to_corea.jpg",
+   "pos": "center 45%",
+   "credit": "지면: The Illustrated London News 1886-04-03 p.362 「A Trip to Corea」 (1886 공표, 퍼블릭 도메인 — 인터넷 아카이브 스캔)"
+  },
+  "hook": "1885년, 영국 해군이<br><span class=\"g\">거문도</span>에 깃발을 올리다",
+  "mosaic": [
+   {
+    "file": "iln_1885-04-11_p372_flag_hoisted_item.png",
+    "label": "ILN 1885-04-11 — 'the British flag has been hoisted on Port Hamilton'",
+    "nocrop": true
+   },
+   {
+    "file": "chinamail_1885-05-18_p3.jpg",
+    "label": "The China Mail 1885-05-18 p.3",
+    "pos": "center 20%"
+   },
+   {
+    "file": "iln_1885-04-11_p372.jpg",
+    "label": "ILN 1885-04-11 p.372",
+    "pos": "center 20%"
+   },
+   {
+    "file": "iln_1886_panel5_port_hamilton.jpg",
+    "label": "ILN 1886 '5. Port Hamilton'"
+   }
+  ],
+  "mosaic_title": "TNA 문서(ADM 116/70)와 <span class=\"g\">같은 시기의 신문</span>",
+  "mosaic_credit": "The Illustrated London News 1885·1886 · The China Mail 1885 — 퍼블릭 도메인(인터넷 아카이브) · TNA 원문서는 온라인 미공개라 목록만",
+  "ann": {
+   "file": "iln_1886_panel5_port_hamilton.jpg",
+   "boxes": [
+    {
+     "x": 40,
+     "y": 55,
+     "w": 20,
+     "h": 12,
+     "t": "수로 안쪽에 돛대 달린 배 여러 척"
+    },
+    {
+     "x": 0,
+     "y": 5,
+     "w": 30,
+     "h": 68,
+     "t": "왼쪽 바위섬"
+    },
+    {
+     "x": 62,
+     "y": 17,
+     "w": 35,
+     "h": 60,
+     "t": "오른쪽 산과 바위 — 그 사이로 열린 수로"
+    },
+    {
+     "x": 87,
+     "y": 86,
+     "w": 8,
+     "h": 9,
+     "t": "원 숫자 '5' — 캡션 '5. Port Hamilton'"
+    }
+   ],
+   "title": "ILN 1886 판화 「5. Port Hamilton」 — 보이는 것만",
+   "credit": "ILN 1886-04-03 p.362 패널 5 — 판화(사진 아님)"
+  },
+  "cta_img": "iln_1886_panel5_port_hamilton.jpg"
+ },
+ "08": {
+  "hero": {
+   "file": "page_bnf_catalogue_cb40589642r.png",
+   "nocrop": true,
+   "credit": "화면: BnF 카탈로그 「32 phot. de sites et types de Corée entre 1880 et 1896」 (cb40589642r, Gallica btv1b53200629w) — 출처 표기"
+  },
+  "hook": "1880~1896, 조선 사진 <span class=\"g\">32점</span><br>프랑스 국립도서관에",
+  "mosaic": [
+   {
+    "file": "varat_portfolio_1889-90_btv1b84515919_eu400.jpg",
+    "label": "샤를 바라 수집품 전시 포트폴리오 1889-90",
+    "nocrop": true
+   },
+   {
+    "file": "print_1894_seoul_btv1b530872483_eu400.jpg",
+    "label": "1894 일본 목판화 — 서울 입성(선전물)",
+    "nocrop": true
+   },
+   {
+    "file": "print_1894_seoul_btv1b53087277w_eu400.jpg",
+    "label": "1894 일본 목판화 — 서울(선전물)",
+    "nocrop": true
+   }
+  ],
+  "mosaic_layout": "rows",
+  "mosaic_title": "Gallica가 막혀도 — <span class=\"g\">BnF 카탈로그로 찾았다</span>",
+  "mosaic_credit": "Europeana 미리보기(Gallica 조건 — 비상업·출처 표기) · Gallica 서버는 자동 조회 403, 원본은 브라우저로 Gallica ark 열람",
+  "ann": {
+   "file": "page_bnf_catalogue_cb40589642r.png",
+   "nobox": true,
+   "boxes": [
+    {
+     "t": "'BnF Catalogue général' — 프랑스 국립도서관 공식 목록"
+    },
+    {
+     "t": "표제 '32 phot. de sites et types de Corée entre 1880 et 1896' — 1889년 국왕 초상 등 수록"
+    },
+    {
+     "t": "'Publication : [188. ou 189.]' · 'Description matérielle : 32 phot.'"
+    }
+   ],
+   "title": "카탈로그 기록에서 읽은 것",
+   "credit": "BnF Catalogue cb40589642r — 이 기록이 Gallica 원본(btv1b53200629w)으로 연결된다"
+  },
+  "cta_img": "varat_portfolio_1889-90_btv1b84515919_eu400.jpg"
+ },
+ "09": {
+  "hero": {
+   "file": "hero_wellcome_korea_street_ca1900.jpg",
+   "pos": "center 55%",
+   "credit": "사진: Wellcome Collection 'A line of shops beside a dusty street…' (한국, 1900년경, Public Domain Mark) — Europeana 경유"
+  },
+  "hook": "1900년 무렵,<br>유럽이 간직한 <span class=\"g\">조선의 거리</span>",
+  "mosaic": [
+   {
+    "file": "rijks_regimental_band_seoul_1904_stereo.jpg",
+    "label": "1904 입체사진 '서울의 군악대' · Rijksmuseum"
+   },
+   {
+    "file": "fotothek_chemulpo_1898.jpg",
+    "label": "1898 제물포 · Deutsche Fotothek"
+   },
+   {
+    "file": "smvk_seoul_gate_tram_1902.jpg",
+    "label": "1902 서울 성문과 전차 선로 · 스톡홀름 민족학박물관"
+   },
+   {
+    "file": "rijks_seoul_skirmish_1894_print.jpg",
+    "label": "1894 '朝鮮京城之小戰' 일본 선전 목판화 · Rijksmuseum"
+   }
+  ],
+  "mosaic_title": "네 나라 네 기관 — <span class=\"g\">재이용 가능한 것만</span>",
+  "mosaic_credit": "Wellcome(PDM) · Rijksmuseum(PDM) · Deutsche Fotothek(PDM) · Etnografiska museet(CC0) — Europeana에서 권리 필터",
+  "ann": {
+   "file": "hero_wellcome_korea_street_ca1900.jpg",
+   "crop_y": 0.07,
+   "boxes": [
+    {
+     "x": 55,
+     "y": 15,
+     "w": 45,
+     "h": 45,
+     "t": "길 오른쪽으로 늘어선 기와지붕 상점"
+    },
+    {
+     "x": 12,
+     "y": 35,
+     "w": 5,
+     "h": 30,
+     "t": "전봇대와 머리 위 전선"
+    },
+    {
+     "x": 21,
+     "y": 55,
+     "w": 8,
+     "h": 28,
+     "t": "흙길 가운데 흰 옷 차림 인물"
+    },
+    {
+     "x": 49,
+     "y": 79,
+     "w": 7,
+     "h": 8,
+     "t": "사진 위 번호 '94'"
+    }
+   ],
+   "credit": "Wellcome Collection 사진(1900년경) — 표시는 사진에서 보이는 것만"
+  },
+  "cta_img": "smvk_seoul_gate_tram_1902.jpg"
+ },
+ "11": {
+  "hero": {
+   "file": "series30v2/img/07/iln_1886_panel5_port_hamilton.jpg",
+   "pos": "center 50%",
+   "credit": "참고 판화: The Illustrated London News 1886-04-03 「5. Port Hamilton」(거문도, 퍼블릭 도메인) — 한국사DB 원문 이미지는 이 환경에서 기관 방화벽으로 수집 불가"
+  },
+  "hook": "영국이 '포트 해밀턴'이라 부른 섬,<br>조선 기록에는 <span class=\"g\">巨文島</span>",
+  "mosaic": [
+   {
+    "file": "series30v2/img/07/chinamail_1885-05-18_p3.jpg",
+    "label": "참고: The China Mail 1885-05-18",
+    "pos": "center 20%"
+   },
+   {
+    "file": "series30v2/img/07/iln_1885-04-11_p372_flag_hoisted_item.png",
+    "label": "참고: ILN 1885 — 영국기 게양 보도",
+    "nocrop": true
+   }
+  ],
+  "mosaic_title": "같은 섬, <span class=\"g\">다른 이름의 기록</span>",
+  "mosaic_credit": "참고 이미지: ILN·China Mail(퍼블릭 도메인) · 조선 측 기록은 한국사DB 비변사등록 원문(텍스트)",
+  "ann": {
+   "file": "series30v2/img/07/iln_1886_panel5_port_hamilton.jpg",
+   "nobox": true,
+   "boxes": [
+    {
+     "t": "bb_268r_001_13_0250 — 巨文鎭의 殿最·軍制를 靑山鎭 例대로 시행 청하는 啓"
+    },
+    {
+     "t": "bb_272r_001_10_0240 — 巨文島 陳結 조세를 詳定例로 代納 청하는 啓"
+    },
+    {
+     "t": "4건 중 座目 0건 — 실질 4건 (mode=record)"
+    }
+   ],
+   "title": "한국사DB 비변사등록에서 찾은 巨文島 — 원문 제목 그대로",
+   "credit": "국사편찬위원회 한국사데이터베이스 비변사등록 — 2026-11-22 실조회"
+  },
+  "cta_img": "series30v2/img/07/chinamail_1885-05-18_p3.jpg"
  }
 }

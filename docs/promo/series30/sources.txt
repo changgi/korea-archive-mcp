@@ -66,8 +66,8 @@
   카드 이미지: docs/promo/img3/dh_19080506_02.png
   표기: 지면: 대한매일신보 1908.5.6 2면 (국립중앙도서관 대한민국신문아카이브)
 
-[11] 국사편찬위원회 한국사데이터베이스 — 어느 DB에 있는지부터 알려준다
-  호출: nedb_search(mode=total, '거문도')
+[11] 국사편찬위원회 한국사데이터베이스 — 巨文島 — 비변사등록에서 4건
+  호출: nedb_search(mode=record, '巨文島')
   원문: https://db.history.go.kr/search/searchResultList.do?searchKeywordType=BI&searchKeyword=%EA%B1%B0%EB%AC%B8%EB%8F%84
   카드 이미지: (이미지 없음 — 기록 카드)
   표기: 출처: db.history.go.kr 통합검색 실조회
