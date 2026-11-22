@@ -199,7 +199,9 @@
    "must": [
     "IIIF 갤러리 규칙",
     "openseadragon",
-    "kv\\.html"
+    "kv\\.html",
+    "iiif/nara/<NAID>",
+    "hierarchy\\.json"
    ],
    "level": "error"
   },
@@ -282,6 +284,20 @@
     "\"type\":\"Manifest\"",
     "\"partOf\"",
     "navDate"
+   ],
+   "level": "warn"
+  },
+  {
+   "id": "manifest-iiif-field",
+   "tool": "cross_search",
+   "args": {
+    "query": "Hungnam evacuation",
+    "sources": "nara",
+    "max_per_source": 3,
+    "format": "manifest"
+   },
+   "must": [
+    "\"iiif\":\"https://korea-archive-mcp\\.vercel\\.app/iiif/nara/\\d+/manifest\\.json\""
    ],
    "level": "warn"
   }

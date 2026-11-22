@@ -36,6 +36,86 @@
      "アジア歴史資料センター (原本所蔵: 国立公文書館)"
     ]
    }
+  },
+  {
+   "label": {
+    "ko": [
+     "계층"
+    ]
+   },
+   "value": {
+    "ko": [
+     "KOREA ARCHIVE 통합검색 › 100선 · Ⅹ 국제기구와 일본의 기록 › s065"
+    ]
+   }
+  },
+  {
+   "label": {
+    "ko": [
+     "수집 경로"
+    ]
+   },
+   "value": {
+    "ko": [
+     "nedb_search(mode=jacar, query=\"annexation treaty Korea 1910\") → query=A03020879400"
+    ]
+   }
+  },
+  {
+   "label": {
+    "ko": [
+     "확인일"
+    ]
+   },
+   "value": {
+    "ko": [
+     "2026-11-22"
+    ]
+   }
+  },
+  {
+   "label": {
+    "ko": [
+     "게재 이미지"
+    ]
+   },
+   "value": {
+    "ko": [
+     "8장 · 링크 전용 0건"
+    ]
+   }
+  }
+ ],
+ "partOf": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/c/s100-10.json",
+   "type": "Collection",
+   "label": {
+    "ko": [
+     "100선 · Ⅹ 국제기구와 일본의 기록"
+    ]
+   }
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/hierarchy.json",
+   "type": "Collection",
+   "label": {
+    "ko": [
+     "KOREA ARCHIVE 통합검색 — 기록 계층"
+    ]
+   }
+  }
+ ],
+ "seeAlso": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s065/ledger.json",
+   "type": "Dataset",
+   "label": {
+    "ko": [
+     "출처 대장(ledger)"
+    ]
+   },
+   "format": "application/json"
   }
  ],
  "requiredStatement": {
@@ -132,6 +212,30 @@
        "「朕樞密顧問ノ諮詢ヲ經タル韓國併合ニ關スル條約ヲ裁可シ茲ニ之ヲ公布セシム」 · 「睦仁」, 「天皇御璽」 인영 · 우면 「條約第四號」"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "c132e6141ed8c62c — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "JACAR「資料画像の利用について」: 「国立公文書館と外務省外交史料館からの提供資料については、資料画像の二次利用には原則として制限はありませんが、下記のいずれかの形で資料に関する情報を記載してください。…アジア歴史資料センターと所蔵館名を併記し、可能であればレファレンスコードも記載してください。」"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -173,7 +277,20 @@
      },
      "format": "text/html"
     }
-   ]
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s065/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    }
+   ],
+   "navDate": "1910-01-01T00:00:00Z"
   },
   {
    "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s065/canvas/2",
@@ -245,6 +362,30 @@
        "「條約第四號 日本國皇帝陛下及韓國皇帝陛下ハ…」 전문 · 우면 「明治四十三年八月二十九日 内閣總理大臣侯爵桂太郎 外務大臣伯爵小村壽太郎」"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "1c7b1a3b635e5047 — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "JACAR「資料画像の利用について」: 「国立公文書館と外務省外交史料館からの提供資料については、資料画像の二次利用には原則として制限はありませんが、下記のいずれかの形で資料に関する情報を記載してください。…アジア歴史資料センターと所蔵館名を併記し、可能であればレファレンスコードも記載してください。」"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -286,7 +427,20 @@
      },
      "format": "text/html"
     }
-   ]
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s065/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    }
+   ],
+   "navDate": "1910-01-01T00:00:00Z"
   },
   {
    "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s065/canvas/3",
@@ -358,6 +512,30 @@
        "第一條 「韓國皇帝陛下ハ韓國全部ニ關スル一切ノ統治權ヲ完全且永久ニ日本國皇帝陛下ニ讓與ス」 · 第二條, 第三條, 第四條 첫머리"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "9e6370bcba68025d — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "JACAR「資料画像の利用について」: 「国立公文書館と外務省外交史料館からの提供資料については、資料画像の二次利用には原則として制限はありませんが、下記のいずれかの形で資料に関する情報を記載してください。…アジア歴史資料センターと所蔵館名を併記し、可能であればレファレンスコードも記載してください。」"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -399,7 +577,20 @@
      },
      "format": "text/html"
     }
-   ]
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s065/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    }
+   ],
+   "navDate": "1910-01-01T00:00:00Z"
   },
   {
    "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s065/canvas/4",
@@ -471,6 +662,30 @@
        "第五條~第八條"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "46e4b6e2bfa55de4 — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "JACAR「資料画像の利用について」: 「国立公文書館と外務省外交史料館からの提供資料については、資料画像の二次利用には原則として制限はありませんが、下記のいずれかの形で資料に関する情報を記載してください。…アジア歴史資料センターと所蔵館名を併記し、可能であればレファレンスコードも記載してください。」"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -512,7 +727,20 @@
      },
      "format": "text/html"
     }
-   ]
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s065/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    }
+   ],
+   "navDate": "1910-01-01T00:00:00Z"
   },
   {
    "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s065/canvas/5",
@@ -584,6 +812,30 @@
        "「右證據トシテ兩全權委員ハ本條約ニ記名調印スルモノナリ」 · 「明治四十三年八月二十二日 統監子爵寺内正毅」 · 「隆熙四年八月二十二日 内閣總理大臣李完用」"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "cb8bc3c3f71c40d0 — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "JACAR「資料画像の利用について」: 「国立公文書館と外務省外交史料館からの提供資料については、資料画像の二次利用には原則として制限はありませんが、下記のいずれかの形で資料に関する情報を記載してください。…アジア歴史資料センターと所蔵館名を併記し、可能であればレファレンスコードも記載してください。」"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -625,7 +877,20 @@
      },
      "format": "text/html"
     }
-   ]
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s065/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    }
+   ],
+   "navDate": "1910-01-01T00:00:00Z"
   },
   {
    "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s065/canvas/6",
@@ -697,6 +962,30 @@
        "위와 동일"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "ba29e47bdd4748fe — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "JACAR「資料画像の利用について」: 「国立公文書館と外務省外交史料館からの提供資料については、資料画像の二次利用には原則として制限はありませんが、下記のいずれかの形で資料に関する情報を記載してください。…アジア歴史資料センターと所蔵館名を併記し、可能であればレファレンスコードも記載してください。」"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -738,7 +1027,20 @@
      },
      "format": "text/html"
     }
-   ]
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s065/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    }
+   ],
+   "navDate": "1910-01-01T00:00:00Z"
   },
   {
    "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s065/canvas/7",
@@ -810,6 +1112,30 @@
        "「外甲五六」, 「韓國併合ニ關スル條約公布ノ件」, 각료 화압"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "3e92b172882e30a9 — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "JACAR「資料画像の利用について」: 「国立公文書館と外務省外交史料館からの提供資料については、資料画像の二次利用には原則として制限はありませんが、下記のいずれかの形で資料に関する情報を記載してください。…アジア歴史資料センターと所蔵館名を併記し、可能であればレファレンスコードも記載してください。」"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -851,7 +1177,20 @@
      },
      "format": "text/html"
     }
-   ]
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s065/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    }
+   ],
+   "navDate": "1910-01-01T00:00:00Z"
   },
   {
    "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s065/canvas/8",
@@ -923,6 +1262,30 @@
        "「明治四十三年八月二十二日 樞密院議長公爵臣山縣有朋」 · 우면 「條約第四號」"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "0c30fcf1355c7fe7 — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "JACAR「資料画像の利用について」: 「国立公文書館と外務省外交史料館からの提供資料については、資料画像の二次利用には原則として制限はありませんが、下記のいずれかの形で資料に関する情報を記載してください。…アジア歴史資料センターと所蔵館名を併記し、可能であればレファレンスコードも記載してください。」"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -964,7 +1327,20 @@
      },
      "format": "text/html"
     }
-   ]
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s065/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    }
+   ],
+   "navDate": "1910-01-01T00:00:00Z"
   }
  ],
  "homepage": [

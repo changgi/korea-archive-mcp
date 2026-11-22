@@ -36,6 +36,86 @@
      "アジア歴史資料センター (原本所蔵: 国立公文書館)"
     ]
    }
+  },
+  {
+   "label": {
+    "ko": [
+     "계층"
+    ]
+   },
+   "value": {
+    "ko": [
+     "KOREA ARCHIVE 통합검색 › 100선 · Ⅹ 국제기구와 일본의 기록 › s064"
+    ]
+   }
+  },
+  {
+   "label": {
+    "ko": [
+     "수집 경로"
+    ]
+   },
+   "value": {
+    "ko": [
+     "JACAR 검색(kw=韓国ニ統監府及理事庁ヲ置クノ件) → nedb_search(mode=jacar, query=A03020645800)"
+    ]
+   }
+  },
+  {
+   "label": {
+    "ko": [
+     "확인일"
+    ]
+   },
+   "value": {
+    "ko": [
+     "2026-11-22"
+    ]
+   }
+  },
+  {
+   "label": {
+    "ko": [
+     "게재 이미지"
+    ]
+   },
+   "value": {
+    "ko": [
+     "8장 · 링크 전용 0건"
+    ]
+   }
+  }
+ ],
+ "partOf": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/c/s100-10.json",
+   "type": "Collection",
+   "label": {
+    "ko": [
+     "100선 · Ⅹ 국제기구와 일본의 기록"
+    ]
+   }
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/hierarchy.json",
+   "type": "Collection",
+   "label": {
+    "ko": [
+     "KOREA ARCHIVE 통합검색 — 기록 계층"
+    ]
+   }
+  }
+ ],
+ "seeAlso": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s064/ledger.json",
+   "type": "Dataset",
+   "label": {
+    "ko": [
+     "출처 대장(ledger)"
+    ]
+   },
+   "format": "application/json"
   }
  ],
  "requiredStatement": {
@@ -132,6 +212,30 @@
        "「朕韓國ニ統監府及理事廳ヲ置クノ件ヲ裁可シ茲ニ之ヲ公布セシム」 · 「睦仁」, 붉은 인 「天皇御璽」 · 「明治三十八年十一月二十二日」"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "201a29f03f99d6a1 — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "JACAR「資料画像の利用について」: 「国立公文書館と外務省外交史料館からの提供資料については、資料画像の二次利用には原則として制限はありませんが、下記のいずれかの形で資料に関する情報を記載してください。…アジア歴史資料センターと所蔵館名を併記し、可能であればレファレンスコードも記載してください。」"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -173,7 +277,20 @@
      },
      "format": "text/html"
     }
-   ]
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s064/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    }
+   ],
+   "navDate": "1905-01-01T00:00:00Z"
   },
   {
    "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s064/canvas/2",
@@ -245,6 +362,30 @@
        "위와 동일"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "bcc98cd85c4c140a — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "JACAR「資料画像の利用について」: 「国立公文書館と外務省外交史料館からの提供資料については、資料画像の二次利用には原則として制限はありませんが、下記のいずれかの形で資料に関する情報を記載してください。…アジア歴史資料センターと所蔵館名を併記し、可能であればレファレンスコードも記載してください。」"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -286,7 +427,20 @@
      },
      "format": "text/html"
     }
-   ]
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s064/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    }
+   ],
+   "navDate": "1905-01-01T00:00:00Z"
   },
   {
    "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s064/canvas/3",
@@ -358,6 +512,30 @@
        "「勅令第二百四十號」 · 「明治三十八年十一月十七日帝國政府ト韓國政府トノ間ニ締結シタル協約第三條ニ基キ統監府ヲ京城ニ、理事廳ヲ京城、仁川、釜山、元山、鎮南浦、木浦、馬山其ノ他須要ノ地ニ置キ」 · 「内閣總理大臣兼外務大臣伯爵桂太郎」 · 종이 봉인과 보라색 끈"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "a0e8ab2394b7bd22 — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "JACAR「資料画像の利用について」: 「国立公文書館と外務省外交史料館からの提供資料については、資料画像の二次利用には原則として制限はありませんが、下記のいずれかの形で資料に関する情報を記載してください。…アジア歴史資料センターと所蔵館名を併記し、可能であればレファレンスコードも記載してください。」"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -399,7 +577,20 @@
      },
      "format": "text/html"
     }
-   ]
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s064/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    }
+   ],
+   "navDate": "1905-01-01T00:00:00Z"
   },
   {
    "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s064/canvas/4",
@@ -471,6 +662,30 @@
        "표지 묵서 「勅令第二百四十号」"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "2ebb66c65a983ecd — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "JACAR「資料画像の利用について」: 「国立公文書館と外務省外交史料館からの提供資料については、資料画像の二次利用には原則として制限はありませんが、下記のいずれかの形で資料に関する情報を記載してください。…アジア歴史資料センターと所蔵館名を併記し、可能であればレファレンスコードも記載してください。」"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -512,7 +727,20 @@
      },
      "format": "text/html"
     }
-   ]
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s064/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    }
+   ],
+   "navDate": "1905-01-01T00:00:00Z"
   },
   {
    "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s064/canvas/5",
@@ -584,6 +812,30 @@
        "상단 「外甲五七」, 「内閣總理大臣」「法制局長官」 칸과 묵서 화압 · 「別紙外務大臣請議韓國ニ統監府及理事廳ヲ置クノ件ヲ審査スルニ相當ノ儀ト思考ス」"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "005d303437e7cc12 — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "JACAR「資料画像の利用について」: 「国立公文書館と外務省外交史料館からの提供資料については、資料画像の二次利用には原則として制限はありませんが、下記のいずれかの形で資料に関する情報を記載してください。…アジア歴史資料センターと所蔵館名を併記し、可能であればレファレンスコードも記載してください。」"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -625,7 +877,20 @@
      },
      "format": "text/html"
     }
-   ]
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s064/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    }
+   ],
+   "navDate": "1905-01-01T00:00:00Z"
   },
   {
    "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s064/canvas/6",
@@ -697,6 +962,30 @@
        "칙령안 본문 「勅令第二百四十號 明治三十八年十一月十七日…」"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "920be01f5076968a — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "JACAR「資料画像の利用について」: 「国立公文書館と外務省外交史料館からの提供資料については、資料画像の二次利用には原則として制限はありませんが、下記のいずれかの形で資料に関する情報を記載してください。…アジア歴史資料センターと所蔵館名を併記し、可能であればレファレンスコードも記載してください。」"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -738,7 +1027,20 @@
      },
      "format": "text/html"
     }
-   ]
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s064/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    }
+   ],
+   "navDate": "1905-01-01T00:00:00Z"
   },
   {
    "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s064/canvas/7",
@@ -810,6 +1112,30 @@
        "「勅令第二百六十七號 統監府及理事廳官制」 · 「第一條 韓國京城ニ統監府ヲ置ク」 · 서명 「陸軍大臣寺内正毅」"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "db75bff35d4acf6a — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "JACAR「資料画像の利用について」: 「国立公文書館と外務省外交史料館からの提供資料については、資料画像の二次利用には原則として制限はありませんが、下記のいずれかの形で資料に関する情報を記載してください。…アジア歴史資料センターと所蔵館名を併記し、可能であればレファレンスコードも記載してください。」"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -851,7 +1177,20 @@
      },
      "format": "text/html"
     }
-   ]
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s064/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    }
+   ],
+   "navDate": "1905-01-01T00:00:00Z"
   },
   {
    "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s064/canvas/8",
@@ -923,6 +1262,30 @@
        "제14~18조 면, 종이 봉인과 보라색 끈"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "c0886ab3ec89ef6d — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "JACAR「資料画像の利用について」: 「国立公文書館と外務省外交史料館からの提供資料については、資料画像の二次利用には原則として制限はありませんが、下記のいずれかの形で資料に関する情報を記載してください。…アジア歴史資料センターと所蔵館名を併記し、可能であればレファレンスコードも記載してください。」"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -964,7 +1327,20 @@
      },
      "format": "text/html"
     }
-   ]
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s064/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    }
+   ],
+   "navDate": "1905-01-01T00:00:00Z"
   }
  ],
  "homepage": [

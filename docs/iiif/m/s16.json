@@ -36,6 +36,86 @@
      "アジア歴史資料センター (原本所蔵: 国立公文書館)"
     ]
    }
+  },
+  {
+   "label": {
+    "ko": [
+     "계층"
+    ]
+   },
+   "value": {
+    "ko": [
+     "KOREA ARCHIVE 통합검색 › 30곳 탐방 · Ⅲ 독립운동 › s16"
+    ]
+   }
+  },
+  {
+   "label": {
+    "ko": [
+     "수집 경로"
+    ]
+   },
+   "value": {
+    "ko": [
+     "cross_search(sources=jacar) → nedb_search(mode=jacar)"
+    ]
+   }
+  },
+  {
+   "label": {
+    "ko": [
+     "확인일"
+    ]
+   },
+   "value": {
+    "ko": [
+     "2026-11-22"
+    ]
+   }
+  },
+  {
+   "label": {
+    "ko": [
+     "게재 이미지"
+    ]
+   },
+   "value": {
+    "ko": [
+     "5장 · 링크 전용 0건"
+    ]
+   }
+  }
+ ],
+ "partOf": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/c/s30-03.json",
+   "type": "Collection",
+   "label": {
+    "ko": [
+     "30곳 탐방 · Ⅲ 독립운동"
+    ]
+   }
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/hierarchy.json",
+   "type": "Collection",
+   "label": {
+    "ko": [
+     "KOREA ARCHIVE 통합검색 — 기록 계층"
+    ]
+   }
+  }
+ ],
+ "seeAlso": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/promo/series30v2/img/16/ledger.json",
+   "type": "Dataset",
+   "label": {
+    "ko": [
+     "출처 대장(ledger)"
+    ]
+   },
+   "format": "application/json"
   }
  ],
  "requiredStatement": {
@@ -132,6 +212,30 @@
        "표지 세로 제목 「朝鮮騷擾經過概要」 · 좌상단 묵서 「八年陸乙七一」 · 국립공문서관 라벨: 排架番号 2A 34-6, 単 2141 · 우측 인쇄 문구 「大正八年九月 陸軍省印刷」 · 하단 연필 숫자 2142 · 우하단 「アジア歴史資料センター」 워터마크"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "431d9566c11f7875 — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "JACAR「資料画像の利用について」: 「国立公文書館と外務省外交史料館からの提供資料については、資料画像の二次利用には原則として制限はありませんが、下記のいずれかの形で資料に関する情報を記載してください。…アジア歴史資料センターと所蔵館名を併記し、可能であればレファレンスコードも記載してください。（例1）アジア歴史資料センター （原本所蔵：国立公文書館） Ref.A01000012800」"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -172,6 +276,18 @@
       ]
      },
      "format": "text/html"
+    }
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series30v2/img/16/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
     }
    ]
   },
@@ -245,6 +361,30 @@
        "좌면 「朝鮮騷擾經過概要 目次」, 一、騷擾ノ起因 / 二、騷擾ノ企畫 … 항목 · 우면 중앙에 사각 주인(인장) 1과"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "3813a987c852e685 — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "위와 동일(JACAR 資料画像の利用について 1.(3))"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -285,6 +425,18 @@
       ]
      },
      "format": "text/html"
+    }
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series30v2/img/16/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
     }
    ]
   },
@@ -358,6 +510,30 @@
        "우면 제목 「朝鮮騷擾經過概要」, 소제목 「一、騷擾ノ起因」 · 좌면 목차 후반 「四、騷擾間ニ於ケル在外鮮人ノ動靜 五、鎮壓ノ爲ノ處置 六、騷擾ニ關スル損害」"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "e7f166e870126da4 — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "위와 동일"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -398,6 +574,18 @@
       ]
      },
      "format": "text/html"
+    }
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series30v2/img/16/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
     }
    ]
   },
@@ -471,6 +659,30 @@
        "세로쓰기 인쇄 본문 2면, 좌측에 접힌 표 일부 · 「暴民側ノ死傷」 단락, 「約一千五百名ニ達セリ」 문구"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "877c5328981de60b — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "위와 동일"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -511,6 +723,18 @@
       ]
      },
      "format": "text/html"
+    }
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series30v2/img/16/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
     }
    ]
   },
@@ -584,6 +808,30 @@
        "좌면 표 제목 「騷擾箇所及官公衙ノ被害一覽表」 · 13개 도(京畿道~咸鏡北道) 행, 열: 箇所數 / 同數 / 官公衙其他ノ被害 · 計 행: 六一八 / 八四七 / 一五九 · 우면: 憲兵 死六 傷九一, 警察官 死二 傷六一, 軍隊 死一 傷四 등 · 「暴民側ノ死傷 … 約一千五百名ニ達セリ」 · 하단 프레임 번호 「0000 0199」"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "065d094c565e1547 — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "위와 동일"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -624,6 +872,18 @@
       ]
      },
      "format": "text/html"
+    }
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series30v2/img/16/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
     }
    ]
   }

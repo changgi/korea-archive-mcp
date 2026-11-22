@@ -36,6 +36,86 @@
      "국사편찬위원회 한국사데이터베이스"
     ]
    }
+  },
+  {
+   "label": {
+    "ko": [
+     "계층"
+    ]
+   },
+   "value": {
+    "ko": [
+     "KOREA ARCHIVE 통합검색 › 100선 · Ⅻ 판결문과 공훈 기록 › s090"
+    ]
+   }
+  },
+  {
+   "label": {
+    "ko": [
+     "수집 경로"
+    ]
+   },
+   "value": {
+    "ko": [
+     "nedb_search(mode=sjw·record, '大同法') · nlk_search('대동사목')"
+    ]
+   }
+  },
+  {
+   "label": {
+    "ko": [
+     "확인일"
+    ]
+   },
+   "value": {
+    "ko": [
+     "2026-11-22"
+    ]
+   }
+  },
+  {
+   "label": {
+    "ko": [
+     "게재 이미지"
+    ]
+   },
+   "value": {
+    "ko": [
+     "6장 · 링크 전용 0건"
+    ]
+   }
+  }
+ ],
+ "partOf": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/c/s100-12.json",
+   "type": "Collection",
+   "label": {
+    "ko": [
+     "100선 · Ⅻ 판결문과 공훈 기록"
+    ]
+   }
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/hierarchy.json",
+   "type": "Collection",
+   "label": {
+    "ko": [
+     "KOREA ARCHIVE 통합검색 — 기록 계층"
+    ]
+   }
+  }
+ ],
+ "seeAlso": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s090/ledger.json",
+   "type": "Dataset",
+   "label": {
+    "ko": [
+     "출처 대장(ledger)"
+    ]
+   },
+   "format": "application/json"
   }
  ],
  "requiredStatement": {
@@ -132,6 +212,30 @@
        "표지 붓글씨 '湖南大同事目'"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "bb4fe404c71c0f2d — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "국립중앙도서관 원문 뷰어 서지정보: '서명 全南道大同事目 저자 정태화 … 저작권유형 이용 제한이 없습니다.' (실확인) · 조선시대 고문헌(보호기간 만료)"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -172,6 +276,18 @@
       ]
      },
      "format": "text/html"
+    }
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s090/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
     }
    ],
    "rights": "http://creativecommons.org/publicdomain/mark/1.0/"
@@ -246,6 +362,30 @@
        "'全南道大同事目' · '一全南道大同合設於宣惠廳' · '湖西之例' · '印信乙良以宣惠廳'"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "6588840f6246948d — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "국립중앙도서관 원문 뷰어 서지정보: '서명 全南道大同事目 저자 정태화 … 저작권유형 이용 제한이 없습니다.' (실확인) · 조선시대 고문헌(보호기간 만료)"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -286,6 +426,18 @@
       ]
      },
      "format": "text/html"
+    }
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s090/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
     }
    ],
    "rights": "http://creativecommons.org/publicdomain/mark/1.0/"
@@ -360,6 +512,30 @@
        "위와 동일(상단부)"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "e8e7d6f05c223c51 — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "국립중앙도서관 원문 뷰어 서지정보: '서명 全南道大同事目 저자 정태화 … 저작권유형 이용 제한이 없습니다.' (실확인) · 조선시대 고문헌(보호기간 만료)"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -400,6 +576,18 @@
       ]
      },
      "format": "text/html"
+    }
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s090/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
     }
    ],
    "rights": "http://creativecommons.org/publicdomain/mark/1.0/"
@@ -474,6 +662,30 @@
        "'一'로 시작하는 조항들 · '爲白齊'"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "21f4ed556fbe5268 — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "국립중앙도서관 원문 뷰어 서지정보: '서명 全南道大同事目 저자 정태화 … 저작권유형 이용 제한이 없습니다.' (실확인) · 조선시대 고문헌(보호기간 만료)"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -514,6 +726,18 @@
       ]
      },
      "format": "text/html"
+    }
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s090/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
     }
    ],
    "rights": "http://creativecommons.org/publicdomain/mark/1.0/"
@@ -588,6 +812,30 @@
        "관청 이름이 검은 바탕 흰 글씨(음각)로 찍힘 — '工曹'·'內資寺' 등"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "80a020e5327ab288 — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "국립중앙도서관 원문 뷰어 서지정보: '서명 全南道大同事目 저자 정태화 … 저작권유형 이용 제한이 없습니다.' (실확인) · 조선시대 고문헌(보호기간 만료)"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -628,6 +876,18 @@
       ]
      },
      "format": "text/html"
+    }
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s090/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
     }
    ],
    "rights": "http://creativecommons.org/publicdomain/mark/1.0/"
@@ -702,6 +962,30 @@
        "'宗廟薦新' · 음각 관청명 '內醫院'·'工曹' 등"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "72bd8c303b56dab3 — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "국립중앙도서관 원문 뷰어 서지정보: '서명 全南道大同事目 저자 정태화 … 저작권유형 이용 제한이 없습니다.' (실확인) · 조선시대 고문헌(보호기간 만료)"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -742,6 +1026,18 @@
       ]
      },
      "format": "text/html"
+    }
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s090/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
     }
    ],
    "rights": "http://creativecommons.org/publicdomain/mark/1.0/"

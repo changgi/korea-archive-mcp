@@ -36,6 +36,86 @@
      "The National Archives (UK) — 이미지: Internet Archive 소장 ILN·China Mail"
     ]
    }
+  },
+  {
+   "label": {
+    "ko": [
+     "계층"
+    ]
+   },
+   "value": {
+    "ko": [
+     "KOREA ARCHIVE 통합검색 › 30곳 탐방 · Ⅱ 개항과 대한제국 › s07"
+    ]
+   }
+  },
+  {
+   "label": {
+    "ko": [
+     "수집 경로"
+    ]
+   },
+   "value": {
+    "ko": [
+     "tna_search('Port Hamilton')"
+    ]
+   }
+  },
+  {
+   "label": {
+    "ko": [
+     "확인일"
+    ]
+   },
+   "value": {
+    "ko": [
+     "2026-11-22"
+    ]
+   }
+  },
+  {
+   "label": {
+    "ko": [
+     "게재 이미지"
+    ]
+   },
+   "value": {
+    "ko": [
+     "6장 · 링크 전용 0건"
+    ]
+   }
+  }
+ ],
+ "partOf": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/c/s30-02.json",
+   "type": "Collection",
+   "label": {
+    "ko": [
+     "30곳 탐방 · Ⅱ 개항과 대한제국"
+    ]
+   }
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/hierarchy.json",
+   "type": "Collection",
+   "label": {
+    "ko": [
+     "KOREA ARCHIVE 통합검색 — 기록 계층"
+    ]
+   }
+  }
+ ],
+ "seeAlso": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/promo/series30v2/img/07/ledger.json",
+   "type": "Dataset",
+   "label": {
+    "ko": [
+     "출처 대장(ledger)"
+    ]
+   },
+   "format": "application/json"
   }
  ],
  "requiredStatement": {
@@ -132,6 +212,30 @@
        "상단 'THE ILLUSTRATED LONDON NEWS, APRIL 3, 1886.—362' · 목판 삽화 7컷, 하단 캡션 '1. Isle and Port of Chemulpo. 2. Natives with riding-bullock. 3. Our ride to Seoul. 4. A halt by the way. 5. Port Hamilton. 6. South Gate of the city of Seoul. 7. Corean carrying a dead pig.' · 하단 제목 'A TRIP TO COREA.' · 3번 컷: 조랑말 탄 서양인 3명과 갓 쓴 인물들 · 5번 컷: 바위섬 사이 만 안쪽에 돛대 선박 여러 척"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "07cead8bd3d43ab7 — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "1886-04-03 영국 공표(ILN 주간지). 원화 Arthur H. Heath(1884년 방문 서신·스케치), 판각자 미상. 공표 후 139년 — 영국 CDPA 기준 작자 미상 저작물은 공표 후 70년, 실명 작자도 1884년 성인 여행자가 1955년 이후까지 생존해야 보호가 남으므로 만료가 명확. 미국 기준 1931년 이전 공표 = PD. 사본: Internet Archive 'sim_illustrated-london-news_1886-04-03_88_2450'(Serials in Microfilm, periodicals 컬렉"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -174,6 +278,19 @@
      "format": "text/html"
     }
    ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series30v2/img/07/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    }
+   ],
+   "navDate": "1886-04-03T00:00:00Z",
    "rights": "http://creativecommons.org/publicdomain/mark/1.0/"
   },
   {
@@ -246,6 +363,30 @@
        "좌우 바위섬과 산 사이로 열린 수로 · 수로 안쪽에 돛대 달린 선박 6척 내외 · 우하단 원 숫자 '5'"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "90ec4a5891fcd6e8 — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "1886-04-03 영국 공표(ILN 주간지). 원화 Arthur H. Heath(1884년 방문 서신·스케치), 판각자 미상. 공표 후 139년 — 영국 CDPA 기준 작자 미상 저작물은 공표 후 70년, 실명 작자도 1884년 성인 여행자가 1955년 이후까지 생존해야 보호가 남으므로 만료가 명확. 미국 기준 1931년 이전 공표 = PD. 사본: Internet Archive 'sim_illustrated-london-news_1886-04-03_88_2450'(Serials in Microfilm, periodicals 컬렉"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -287,7 +428,20 @@
      },
      "format": "text/html"
     }
-   ]
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series30v2/img/07/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    }
+   ],
+   "navDate": "1886-04-03T00:00:00Z"
   },
   {
    "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s07/canvas/3",
@@ -359,6 +513,30 @@
        "'From Hong-Kong we learn that the British flag has been hoisted on Port Hamilton, an island of the Corean Archipelago.' · '...this harbour will, in fact, constitute a new coaling station in the Far East.'"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "16e77c174f3461be — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "1885-04-11 영국 공표(ILN 주간지). 무기명 뉴스 기사. 공표 후 139년 — 영국 CDPA 기준 작자 미상 저작물은 공표 후 70년, 실명 작자도 1884년 성인 여행자가 1955년 이후까지 생존해야 보호가 남으므로 만료가 명확. 미국 기준 1931년 이전 공표 = PD. 사본: Internet Archive 'sim_illustrated-london-news_1885-04-11_88_2450'(Serials in Microfilm, periodicals 컬렉션, 접근 제한 표시 없음)"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -400,7 +578,20 @@
      },
      "format": "text/html"
     }
-   ]
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series30v2/img/07/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    }
+   ],
+   "navDate": "1885-04-11T00:00:00Z"
   },
   {
    "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s07/canvas/4",
@@ -472,6 +663,30 @@
        "상단 '372  THE ILLUSTRATED LONDON NEWS  APRIL 11, 1885' · 3단 조판, 우상단 문장(紋章) 삽화와 'OBITUARY. EARL CAIRNS.'"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "cf938c9ebb7dd648 — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "1885-04-11 영국 공표(ILN 주간지). 무기명 뉴스 기사. 공표 후 139년 — 영국 CDPA 기준 작자 미상 저작물은 공표 후 70년, 실명 작자도 1884년 성인 여행자가 1955년 이후까지 생존해야 보호가 남으므로 만료가 명확. 미국 기준 1931년 이전 공표 = PD. 사본: Internet Archive 'sim_illustrated-london-news_1885-04-11_88_2450'(Serials in Microfilm, periodicals 컬렉션, 접근 제한 표시 없음)"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -513,7 +728,20 @@
      },
      "format": "text/html"
     }
-   ]
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series30v2/img/07/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    }
+   ],
+   "navDate": "1885-04-11T00:00:00Z"
   },
   {
    "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s07/canvas/5",
@@ -585,6 +813,30 @@
        "제목 'THE OCCUPATION OF PORT HAMILTON.' · 'The Home papers—notably the Times, the St James's Gazette, and the Pall Mall Gazette—have got sadly confused about the occupation of Port Hamilton by the British Admiral.' · 'Sir Harry Parkes did good service when he obtained, as almost the last public act of his life, the cession of Port Hamilton from the Chinese Emperor.' (인용된 Times 문단) · 'We believe, als"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "d0e98c484755fb8a — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "1885-05-18 홍콩 공표 일간지 기사(무기명). 공표 후 140년 — 보호기간 만료 명확(무기명 저작물 공표 후 70년). 사본: Internet Archive 'NPCM18850518'(china-mail 컬렉션, 홍콩대 구 신문 디지털화본 업로드)"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -626,7 +878,20 @@
      },
      "format": "text/html"
     }
-   ]
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series30v2/img/07/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    }
+   ],
+   "navDate": "1885-05-18T00:00:00Z"
   },
   {
    "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s07/canvas/6",
@@ -698,6 +963,30 @@
        "상단 'THE CHINA MAIL' 제호와 날짜 'May 18, 1885' · 6단 조판 신문 지면 · 'Marine Court', 'Police Intelligence', 'SUPREME COURT' 소제목"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "c6470f8e0dace848 — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "1885-05-18 홍콩 공표 일간지 기사(무기명). 공표 후 140년 — 보호기간 만료 명확(무기명 저작물 공표 후 70년). 사본: Internet Archive 'NPCM18850518'(china-mail 컬렉션, 홍콩대 구 신문 디지털화본 업로드)"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -739,7 +1028,20 @@
      },
      "format": "text/html"
     }
-   ]
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series30v2/img/07/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    }
+   ],
+   "navDate": "1885-05-18T00:00:00Z"
   }
  ],
  "homepage": [
@@ -760,5 +1062,6 @@
    "type": "Image",
    "format": "image/jpeg"
   }
- ]
+ ],
+ "navDate": "1885-04-15T00:00:00Z"
 }

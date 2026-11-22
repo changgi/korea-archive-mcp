@@ -36,6 +36,86 @@
      "서울기록원"
     ]
    }
+  },
+  {
+   "label": {
+    "ko": [
+     "계층"
+    ]
+   },
+   "value": {
+    "ko": [
+     "KOREA ARCHIVE 통합검색 › 100선 · XIV 유산과 도시 › s108"
+    ]
+   }
+  },
+  {
+   "label": {
+    "ko": [
+     "수집 경로"
+    ]
+   },
+   "value": {
+    "ko": [
+     "seoul_archives_search('세운상가 기공') → seoul_archives_search('https://archives.seoul.go.kr/item/686')"
+    ]
+   }
+  },
+  {
+   "label": {
+    "ko": [
+     "확인일"
+    ]
+   },
+   "value": {
+    "ko": [
+     "2026-11-22"
+    ]
+   }
+  },
+  {
+   "label": {
+    "ko": [
+     "게재 이미지"
+    ]
+   },
+   "value": {
+    "ko": [
+     "6장 · 링크 전용 0건"
+    ]
+   }
+  }
+ ],
+ "partOf": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/c/s100-14.json",
+   "type": "Collection",
+   "label": {
+    "ko": [
+     "100선 · XIV 유산과 도시"
+    ]
+   }
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/hierarchy.json",
+   "type": "Collection",
+   "label": {
+    "ko": [
+     "KOREA ARCHIVE 통합검색 — 기록 계층"
+    ]
+   }
+  }
+ ],
+ "seeAlso": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s108/ledger.json",
+   "type": "Dataset",
+   "label": {
+    "ko": [
+     "출처 대장(ledger)"
+    ]
+   },
+   "format": "application/json"
   }
  ],
  "requiredStatement": {
@@ -132,6 +212,30 @@
        "사진: 서울기록원 RG5-SR85-IT686 「세운 상가 아파트 기공식」(1967-08-22) · 서울기록원 서울사진아카이브 · 생산 서울특별시 공보실 · 이용조건 '제한없음' · CC BY-NC-SA 2.0 KR(비영리)"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "9213fa6ac14345c2 — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "상세 페이지 '이용유형 제한없음 — 원본인 네거티브필름를 활용하기 위해서는 현 소장처인 서울역사박물관과 협의할 필요 있음' · 생산자 서울특별시 공보실(1961~1974)"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -172,6 +276,18 @@
       ]
      },
      "format": "text/html"
+    }
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s108/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
     }
    ],
    "rights": "http://creativecommons.org/licenses/by-nc-sa/2.0/"
@@ -246,6 +362,30 @@
        "1967.08.22 아파트 C동 기공식 · IT686"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "8269303e8f3e3034 — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "상세 페이지 '이용유형 제한없음 — 원본인 네거티브필름를 활용하기 위해서는 현 소장처인 서울역사박물관과 협의할 필요 있음' · 생산자 서울특별시 공보실(1961~1974)"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -286,6 +426,18 @@
       ]
      },
      "format": "text/html"
+    }
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s108/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
     }
    ],
    "rights": "http://creativecommons.org/licenses/by-nc-sa/2.0/"
@@ -360,6 +512,30 @@
        "1967.08.07 육교 기공식 · IT689"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "272a39139d8dae06 — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "상세 페이지 '이용유형 제한없음 — 원본인 네거티브필름를 활용하기 위해서는 현 소장처인 서울역사박물관과 협의할 필요 있음' · 생산자 서울특별시 공보실(1961~1974)"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -400,6 +576,18 @@
       ]
      },
      "format": "text/html"
+    }
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s108/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
     }
    ],
    "rights": "http://creativecommons.org/licenses/by-nc-sa/2.0/"
@@ -474,6 +662,30 @@
        "1967.07.21 국제관광호텔 기공식 · IT470"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "ac81c4df1e35ce3d — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "상세 페이지 '이용유형 제한없음 — 원본인 네거티브필름를 활용하기 위해서는 현 소장처인 서울역사박물관과 협의할 필요 있음' · 생산자 서울특별시 공보실(1961~1974)"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -514,6 +726,18 @@
       ]
      },
      "format": "text/html"
+    }
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s108/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
     }
    ],
    "rights": "http://creativecommons.org/licenses/by-nc-sa/2.0/"
@@ -588,6 +812,30 @@
        "1972.04.29 청계7가 램프 준공 · IT2317"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "3a64389c831489a7 — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "상세 페이지 '이용유형 제한없음 — 원본인 네거티브필름를 활용하기 위해서는 현 소장처인 서울역사박물관과 협의할 필요 있음' · 생산자 서울특별시 공보실(1961~1974)"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -628,6 +876,18 @@
       ]
      },
      "format": "text/html"
+    }
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s108/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
     }
    ],
    "rights": "http://creativecommons.org/licenses/by-nc-sa/2.0/"
@@ -702,6 +962,30 @@
        "어노테이션 원본"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "14fed3b92ef68784 — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "상세 페이지 '이용유형 제한없음 — 원본인 네거티브필름를 활용하기 위해서는 현 소장처인 서울역사박물관과 협의할 필요 있음' · 생산자 서울특별시 공보실(1961~1974)"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -742,6 +1026,18 @@
       ]
      },
      "format": "text/html"
+    }
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s108/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
     }
    ],
    "rights": "http://creativecommons.org/licenses/by-nc-sa/2.0/"

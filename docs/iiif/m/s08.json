@@ -36,6 +36,86 @@
      "Bibliothèque nationale de France — Société de Géographie, SG WD-181"
     ]
    }
+  },
+  {
+   "label": {
+    "ko": [
+     "계층"
+    ]
+   },
+   "value": {
+    "ko": [
+     "KOREA ARCHIVE 통합검색 › 30곳 탐방 · Ⅱ 개항과 대한제국 › s08"
+    ]
+   }
+  },
+  {
+   "label": {
+    "ko": [
+     "수집 경로"
+    ]
+   },
+   "value": {
+    "ko": [
+     "gallica_search('Corée')"
+    ]
+   }
+  },
+  {
+   "label": {
+    "ko": [
+     "확인일"
+    ]
+   },
+   "value": {
+    "ko": [
+     "2026-11-22"
+    ]
+   }
+  },
+  {
+   "label": {
+    "ko": [
+     "게재 이미지"
+    ]
+   },
+   "value": {
+    "ko": [
+     "3장 · 링크 전용 1건"
+    ]
+   }
+  }
+ ],
+ "partOf": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/c/s30-02.json",
+   "type": "Collection",
+   "label": {
+    "ko": [
+     "30곳 탐방 · Ⅱ 개항과 대한제국"
+    ]
+   }
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/hierarchy.json",
+   "type": "Collection",
+   "label": {
+    "ko": [
+     "KOREA ARCHIVE 통합검색 — 기록 계층"
+    ]
+   }
+  }
+ ],
+ "seeAlso": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/promo/series30v2/img/08/ledger.json",
+   "type": "Dataset",
+   "label": {
+    "ko": [
+     "출처 대장(ledger)"
+    ]
+   },
+   "format": "application/json"
   }
  ],
  "requiredStatement": {
@@ -132,6 +212,30 @@
        "붉은 천 장정 포트폴리오 표지 · 금색 테두리 선 · 끈 3쌍으로 묶여 있다"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "44a75ab2d0ab575c — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "Gallica 이용조건(gallica.bnf.fr/html/conditions-dutilisation-des-contenus-de-gallica; Europeana dcRights가 이 URL을 가리킴) — 원문 페이지는 gallica 서버 자동접근 403으로 직접 확인 불가. 공식 답변(프랑스 국회 질의 QE 23878, 2013)에 인용된 조건: \"La réutilisation non commerciale de ces contenus est libre et gratuite dans le respect de la législati"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -173,7 +277,20 @@
      },
      "format": "text/html"
     }
-   ]
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series30v2/img/08/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    }
+   ],
+   "navDate": "1889-01-01T00:00:00Z"
   },
   {
    "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s08/canvas/2",
@@ -245,6 +362,30 @@
        "3폭 다색 목판화 · 왼쪽 관복 차림 인물 대열, 오른쪽 서양식 군복 인물들 · 상단 깃발·만국기"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "11269a0fa6b30649 — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "Gallica 이용조건(gallica.bnf.fr/html/conditions-dutilisation-des-contenus-de-gallica; Europeana dcRights가 이 URL을 가리킴) — 원문 페이지는 gallica 서버 자동접근 403으로 직접 확인 불가. 공식 답변(프랑스 국회 질의 QE 23878, 2013)에 인용된 조건: \"La réutilisation non commerciale de ces contenus est libre et gratuite dans le respect de la législati"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -286,7 +427,20 @@
      },
      "format": "text/html"
     }
-   ]
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series30v2/img/08/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    }
+   ],
+   "navDate": "1894-01-01T00:00:00Z"
   },
   {
    "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s08/canvas/3",
@@ -358,6 +512,30 @@
        "다색 목판화, 회색 대지에 부착 · 행렬과 깃발, 우상단 글 상자 · 하단 연필 메모"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "db43dc758180ad43 — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "Gallica 이용조건(gallica.bnf.fr/html/conditions-dutilisation-des-contenus-de-gallica; Europeana dcRights가 이 URL을 가리킴) — 원문 페이지는 gallica 서버 자동접근 403으로 직접 확인 불가. 공식 답변(프랑스 국회 질의 QE 23878, 2013)에 인용된 조건: \"La réutilisation non commerciale de ces contenus est libre et gratuite dans le respect de la législati"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -399,7 +577,20 @@
      },
      "format": "text/html"
     }
-   ]
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series30v2/img/08/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    }
+   ],
+   "navDate": "1894-01-01T00:00:00Z"
   }
  ],
  "homepage": [
@@ -420,5 +611,6 @@
    "type": "Image",
    "format": "image/jpeg"
   }
- ]
+ ],
+ "navDate": "1880-01-01T00:00:00Z"
 }

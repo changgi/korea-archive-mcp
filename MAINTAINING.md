@@ -13,6 +13,8 @@
 | `docs/` | GitHub Pages(소개·30곳 탐방·100선·IIIF 갤러리) | Pages 원본 폴더 = `/docs` |
 | `public/` | Vercel 정적 파일(도움말·원장·NZ 정적 인덱스) | |
 | `tests/golden.json` | 골든 회귀 케이스 — 도구 출력의 **모양** | `python3 scripts/golden.py` |
+| `lib/nara_iiif.js` · `app/iiif/nara/[...p]/route.js` | **NARA→IIIF 브리지** — `/iiif/nara/{NAID}/manifest.json`·`/collection.json`·`/record.jsonld`(RiC-O) | NARA_API_KEY 사용, 6시간 캐시, CORS * |
+| `docs/iiif/` | 갤러리 IIIF — `hierarchy.json`(부›시리즈›이미지)·`collection.json`(평면)·`all.json`·`m/`·`c/` + 데이터 `records.csv`·`records.jsonld` | `build_iiif.py`가 생성(`_nara_ctx.json`=NARA 계보 캐시) |
 
 우리 IIIF 갤러리도 수집처다 — `cross_search(sources='gallery')`가 `docs/iiif/index.json`(Pages)을 6시간 캐시로 검색하고, `format='iiif'`면 시리즈 매니페스트(`iiif/m/sNNN.json`)를 컬렉션에 넣는다.
 

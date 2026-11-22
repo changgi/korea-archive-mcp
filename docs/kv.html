@@ -29,6 +29,7 @@ button,select,input{font:inherit}
 .it .nm{min-width:0;overflow:hidden;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical}
 .it .k{font-size:.7rem;color:var(--mu)}
 .it.coll{font-weight:800;color:var(--gd)}
+.grp{position:sticky;top:58px;z-index:1;background:#1b1e25;color:var(--gd);font-size:.74rem;font-weight:800;padding:5px 8px;border-bottom:1px solid var(--ln)}
 .center{display:flex;flex-direction:column;min-height:0;min-width:0}
 .panes{flex:1;display:flex;min-height:0;gap:2px;background:#000}
 .pane{flex:1;position:relative;min-width:0;display:flex;flex-direction:column}
@@ -90,7 +91,7 @@ button,select,input{font:inherit}
 <script src="https://cdn.jsdelivr.net/npm/openseadragon@4.1.1/build/openseadragon/openseadragon.min.js"></script>
 <script>
 (() => {
-  const DEF = new URL('iiif/collection.json', location.href).href;
+  const DEF = new URL('iiif/hierarchy.json', location.href).href; // 기본 = 계층(부 › 시리즈 › 이미지) — 전체 800장이 한 줄로 이어짐
   const $ = (s) => document.querySelector(s);
   const esc = (t) => String(t ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
   // ── IIIF 정규화: Presentation 2·3 → {type, id, label, summary, md[], rights, req, home[], thumb, canvases[], items[]}
@@ -133,6 +134,7 @@ button,select,input{font:inherit}
     el.innerHTML = '<div class="cap"></div><div class="osd"></div><button class="nav p" aria-label="이전">‹</button><button class="nav n" aria-label="다음">›</button><div class="bar"></div><div class="msg">왼쪽 목록에서 기록을 고르세요</div>';
     $('#panes').appendChild(el);
     const P = { el, man: null, src: '', k: 0, rot: 0, osd: OpenSeadragon({ element: el.querySelector('.osd'), prefixUrl: 'https://cdn.jsdelivr.net/npm/openseadragon@4.1.1/build/openseadragon/images/', showNavigator: true, navigatorPosition: 'BOTTOM_RIGHT', maxZoomPixelRatio: 4, visibilityRatio: .5, crossOriginPolicy: 'Anonymous', showRotationControl: false, gestureSettingsTouch: { pinchRotate: false } }) };
+    P.osd.addHandler('open', () => msg(P, ''));
     P.osd.addHandler('open-failed', () => { if (P.man) { const c = P.man.canvases[P.k]; if (c && c.svc && c.img && !P._fb) { P._fb = 1; P.osd.open({ type: 'image', url: c.img, buildPyramid: false }); } else msg(P, '이미지를 열지 못했습니다 — 원 기관이 외부 열람(CORS)을 막았을 수 있습니다.'); } });
     el.querySelector('.p').onclick = () => go(P, P.k - 1); el.querySelector('.n').onclick = () => go(P, P.k + 1);
     el.addEventListener('pointerdown', () => setAct(P), true);
@@ -178,20 +180,33 @@ button,select,input{font:inherit}
       if (++done % 12 === 0) rebuild(); } };
     fdone = false; await Promise.all(Array.from({ length: 6 }, worker)); if (token === fver) fdone = true; rebuild();
   }
+  async function expand(m, group, depth, out) { // 중첩 컬렉션(계층) 펼치기 — 부(部) › 시리즈 순서 그대로, 깊이 3까지
+    for (const x of m.items) {
+      if (!x.coll) { out.push({ ...x, group }); continue; }
+      if (depth >= 3) continue;
+      try { const c = norm(await getJ(x.id)); if (c.kind === 'collection') await expand(c, x.label, depth + 1, out); else out.push({ ...x, coll: false, group }); } catch { /* 하위 컬렉션 실패는 건너뜀 */ }
+    }
+    return out;
+  }
   async function loadCollection(u, m) {
-    coll = m; collSrc = u; $('#flt').value = ''; ms = coll.items.filter((x) => !x.coll); flat = []; off = new Map(); prefetchAll(++fver); renderList();
-    if (act && !act.man) { const first = coll.items.find((x) => !x.coll); if (first) openManifest(act, first.id, 0, first.inline); }
+    coll = m; collSrc = u; $('#flt').value = ''; flat = []; off = new Map();
+    ms = m.items.some((x) => x.coll) ? await expand(m, '', 0, []) : m.items.filter((x) => !x.coll);
+    coll.flatItems = ms; prefetchAll(++fver); renderList();
+    if (act && !act.man) { const first = ms[0]; if (first) openManifest(act, first.id, 0, first.inline); }
   }
   function renderList() {
     if (!coll) { $('#list').innerHTML = '<p style="padding:12px;color:var(--mu);font-size:.82rem">컬렉션이 아니라 단일 매니페스트입니다.</p>'; $('#lct').textContent = ''; return; }
     const q = $('#flt').value.trim().toLowerCase();
-    const it = coll.items.filter((x) => !q || x.label.toLowerCase().includes(q));
-    $('#lct').textContent = `${esc(coll.label).slice(0, 60)} — ${it.length}/${coll.items.length}`;
-    $('#list').innerHTML = it.map((x) => `<div class="it${x.coll ? ' coll' : ''}" data-u="${esc(x.id)}" data-c="${x.coll ? 1 : 0}"><img loading="lazy" src="${esc(x.thumb)}" alt="" onerror="this.style.visibility='hidden'"><div><div class="nm">${x.coll ? '📁 ' : ''}${esc(x.label)}</div></div></div>`).join('');
+    const src = coll.flatItems || coll.items;
+    const it = src.filter((x) => !q || (x.label + ' ' + (x.group || '')).toLowerCase().includes(q));
+    $('#lct').textContent = `${esc(coll.label).slice(0, 60)} — ${it.length}/${src.length}`;
+    let g0 = null;
+    $('#list').innerHTML = it.map((x) => { const hd = x.group && x.group !== g0 ? `<div class="grp">📁 ${esc(x.group)}</div>` : ''; g0 = x.group;
+      return hd + `<div class="it${x.coll ? ' coll' : ''}" data-u="${esc(x.id)}" data-c="${x.coll ? 1 : 0}"><img loading="lazy" src="${esc(x.thumb)}" alt="" onerror="this.style.visibility='hidden'"><div><div class="nm">${x.coll ? '📁 ' : ''}${esc(x.label)}</div></div></div>`; }).join('');
     markList();
   }
   function markList() { document.querySelectorAll('#list .it').forEach((e) => e.classList.toggle('on', !!act && e.dataset.u === act.src)); }
-  $('#list').addEventListener('click', (e) => { const d = e.target.closest('.it'); if (!d) return; const x = coll.items.find((y) => y.id === d.dataset.u);
+  $('#list').addEventListener('click', (e) => { const d = e.target.closest('.it'); if (!d) return; const x = (coll.flatItems || coll.items).find((y) => y.id === d.dataset.u);
     if (d.dataset.c === '1') { open(d.dataset.u); return; } openManifest(act, d.dataset.u, 0, x && x.inline); if (innerWidth < 900) $('#main').classList.add('noleft'); });
   $('#flt').addEventListener('input', renderList);
   // ── 썸네일 띠·정보 패널·하단 제어
@@ -259,7 +274,7 @@ button,select,input{font:inherit}
   if (innerWidth < 900) $('#main').classList.add('noleft', 'noright');
   mkPane();
   (async () => { const q = new URLSearchParams(location.search); const man = q.get('manifest') || q.get('iiif-content'); const col = q.get('collection');
-    if (col) { $('#src').value = col; try { const m = norm(await getJ(col)); if (m.kind === 'collection') { coll = m; collSrc = col; ms = coll.items.filter((x) => !x.coll); prefetchAll(++fver); renderList(); } } catch {} }
+    if (col) { $('#src').value = col; try { const m = norm(await getJ(col)); if (m.kind === 'collection') await loadCollection(col, m); } catch {} }
     const start = man || (col ? null : DEF); if (start) { if (!col) $('#src').value = start; await openManifest(panes[0], start, Math.max(0, (+q.get('canvas') || 1) - 1)); }
     if (q.get('compare')) toggleCompare(q.get('compare')); syncCtl(); })();
 })();

@@ -1,0 +1,101 @@
+{
+ "@context": "http://iiif.io/api/presentation/3/context.json",
+ "id": "https://changgi.github.io/korea-archive-mcp/iiif/c/s30-05.json",
+ "type": "Collection",
+ "label": {
+  "ko": [
+   "30곳 탐방 · Ⅴ 현대 한국"
+  ]
+ },
+ "summary": {
+  "ko": [
+   "30곳 탐방 · Ⅴ 현대 한국 — 시리즈 5개"
+  ]
+ },
+ "partOf": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/hierarchy.json",
+   "type": "Collection"
+  }
+ ],
+ "items": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s24.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "24 · 국가기록원 — 1972년 대통령 현지 시찰 영상까지"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s24/hero_roof_1973_nocrop.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "navDate": "1972-01-01T00:00:00Z"
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s25.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "25 · KTV 국민방송 e영상역사관 — 20년을 19분에 — 대한뉴스의 발자취"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s25/hero_nfp_newhq_1991_nocrop.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "navDate": "1991-01-01T00:00:00Z"
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s26.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "26 · 대한민국역사박물관 — \"국민투표 참가하여 국론통일 이룩하자!\""
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s26/hero_1975_ballot_nocrop.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "navDate": "1975-02-12T00:00:00Z"
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s27.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "27 · 서울기록원 — 설계도면이 기록철로 남았다"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s27/hero_cover_opening_1964.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "navDate": "1964-12-04T00:00:00Z"
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s28.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "28 · 정보공개포털·서울정보소통광장 — 점검 중인 포털 — 그래도 길은 안내한다"
+    ]
+   },
+   "navDate": "2026-11-22T00:00:00Z"
+  }
+ ]
+}

@@ -1,0 +1,189 @@
+{
+ "@context": "http://iiif.io/api/presentation/3/context.json",
+ "id": "https://changgi.github.io/korea-archive-mcp/iiif/c/s100-10.json",
+ "type": "Collection",
+ "label": {
+  "ko": [
+   "100선 · Ⅹ 국제기구와 일본의 기록"
+  ]
+ },
+ "summary": {
+  "ko": [
+   "100선 · Ⅹ 국제기구와 일본의 기록 — 시리즈 10개"
+  ]
+ },
+ "partOf": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/hierarchy.json",
+   "type": "Collection"
+  }
+ ],
+ "items": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s061.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "061 · UN 디지털도서관 — 1951 유엔한국통일부흥위원단 보고서"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s061/un_a1881_map.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "navDate": "1951-09-05T00:00:00Z"
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s062.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "062 · UN 디지털도서관 — 1955 UNKRA 재건 사업장 지도"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s062/un_a2936_cover.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "navDate": "1955-01-01T00:00:00Z"
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s063.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "063 · UN 디지털도서관 — 1991.9.17 남북한 유엔 동시가입"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s063/un_a46l1.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "navDate": "1991-09-17T00:00:00Z"
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s064.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "064 · 일본 아시아역사자료센터 JACAR — 1905.11 통감부 설치 칙령 원본"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s064/jacar_A03020645800_p2_seal.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s065.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "065 · 일본 아시아역사자료센터 JACAR — 1910 「韓國併合ニ關スル條約」 원본"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s065/jacar_A03020879400_p1.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s066.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "066 · 일본 아시아역사자료센터 JACAR — 1919.8.19 朝鮮總督府官制中改正"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s066/jacar_A03021212600_p1.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s067.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "067 · 일본 아시아역사자료센터 JACAR — 1923.9 관동대지진 — 내각 문서철"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s067/jacar_A15060090800_cover.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s068.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "068 · 일본 국립국회도서관 NDL — 1930 『萬二千峰の金剛山 朝鮮』"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s068/ndl_1178514_015_shinkeiji.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "navDate": "1930-01-01T00:00:00Z"
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s069.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "069 · 일본 국립국회도서관 NDL — 1911 『釜山鴨緑江間写真帖』"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s069/ndl_14439887_005_busanport.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "navDate": "1911-01-01T00:00:00Z"
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s070.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "070 · 일본 국립국회도서관 NDL — 1935 『京城案内』 — 관광협회의 포켓 가이드"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s070/ndl_1122465_01_cover.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "navDate": "1935-01-01T00:00:00Z"
+  }
+ ]
+}

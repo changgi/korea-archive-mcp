@@ -1,0 +1,107 @@
+{
+ "@context": "http://iiif.io/api/presentation/3/context.json",
+ "id": "https://changgi.github.io/korea-archive-mcp/iiif/c/s30-04.json",
+ "type": "Collection",
+ "label": {
+  "ko": [
+   "30곳 탐방 · Ⅳ 조선의 기록문화"
+  ]
+ },
+ "summary": {
+  "ko": [
+   "30곳 탐방 · Ⅳ 조선의 기록문화 — 시리즈 5개"
+  ]
+ },
+ "partOf": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/hierarchy.json",
+   "type": "Collection"
+  }
+ ],
+ "items": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s19.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "19 · 한국학중앙연구원 장서각 — 1776년, 정조가 아버지 사당을 고치다"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s19/hero_hwaseong_jeondo_leaf.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "navDate": "1776-01-01T00:00:00Z"
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s20.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "20 · 서울대 규장각한국학연구원 — 목록 2건, 해제 14건 — 숨은 편차"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s20/hero_hanyang_layer13_crop.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "navDate": "1861-01-01T00:00:00Z"
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s21.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "21 · 한국고문서자료관 — 172곳 소장처에서 문중 찾기"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s21/hogudanja_1714.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "navDate": "1705-01-01T00:00:00Z"
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s22.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "22 · 국가유산청 국가유산포털 — 국보 하나, 보물 하나, 시도유산 하나"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s22/hero_geunjeongjeon_1922_ndl.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "navDate": "1867-01-01T00:00:00Z"
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s23.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "23 · 국립중앙도서관 — 음반부터 단행본까지 한 번에"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s23/hero_eonhae_p1_naratmalssami.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  }
+ ]
+}

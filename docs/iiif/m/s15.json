@@ -36,6 +36,86 @@
      "독립기념관 한국독립운동정보시스템"
     ]
    }
+  },
+  {
+   "label": {
+    "ko": [
+     "계층"
+    ]
+   },
+   "value": {
+    "ko": [
+     "KOREA ARCHIVE 통합검색 › 30곳 탐방 · Ⅲ 독립운동 › s15"
+    ]
+   }
+  },
+  {
+   "label": {
+    "ko": [
+     "수집 경로"
+    ]
+   },
+   "value": {
+    "ko": [
+     "cross_search(sources=i815) → nedb_search(mode=i815)"
+    ]
+   }
+  },
+  {
+   "label": {
+    "ko": [
+     "확인일"
+    ]
+   },
+   "value": {
+    "ko": [
+     "2026-11-22"
+    ]
+   }
+  },
+  {
+   "label": {
+    "ko": [
+     "게재 이미지"
+    ]
+   },
+   "value": {
+    "ko": [
+     "3장 · 링크 전용 1건"
+    ]
+   }
+  }
+ ],
+ "partOf": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/c/s30-03.json",
+   "type": "Collection",
+   "label": {
+    "ko": [
+     "30곳 탐방 · Ⅲ 독립운동"
+    ]
+   }
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/hierarchy.json",
+   "type": "Collection",
+   "label": {
+    "ko": [
+     "KOREA ARCHIVE 통합검색 — 기록 계층"
+    ]
+   }
+  }
+ ],
+ "seeAlso": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/promo/series30v2/img/15/ledger.json",
+   "type": "Dataset",
+   "label": {
+    "ko": [
+     "출처 대장(ledger)"
+    ]
+   },
+   "format": "application/json"
   }
  ],
  "requiredStatement": {
@@ -132,6 +212,30 @@
        "두 단으로 오려 붙인 영자신문 스크랩, 황갈색 종이 · 상단 'WEDNESDAY MORNING', 표제 'KOREAN EXTOLS CAPTURED CHIEF' · 부제 'Seizure of Chang Ho Ahn in Shanghai Protested' / 'Prisoner's Family Residents of Los Angeles' / 'Political Leader Declared Opposed to Violence' · 필자 표기 'BY KYUANG MOO DUNN, Secretary, Foreign Relations, Korean National Association of America' · 소제목 'LOS ANGELES HOME', 'FORMER ESCAPES', 'RIGHT TO LIBERTY'"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "791d3349f3631998 — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "독립기념관 저작권정책(i815.or.kr/2018/guide/copyright.do): '저작권법 제24조의2에 따라 독립기념관에서 저작재산권의 전부를 보유한 저작물의 경우에는 별도의 이용허락 없이 무료로 자유이용이 가능합니다. 독립기념관 홈페이지에는 독립기념관이 저작권 전부를 갖고 있지 아니한 자료도 제공되고 있습니다 … 반드시 해당 저작권자의 허락을 받으셔야 합니다.' / '공공누리가 부착되지 않은 자료들을 이용하고자 할 경우에는 공공저작물 관리책임관 및 실무담당자와 사전에 협의하여 이용해 주시기 바랍니다.' — 상세 페이지에 "
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -174,6 +278,19 @@
      "format": "text/html"
     }
    ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series30v2/img/15/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    }
+   ],
+   "navDate": "1932-01-01T00:00:00Z",
    "rights": "http://creativecommons.org/publicdomain/mark/1.0/"
   },
   {
@@ -246,6 +363,30 @@
        "콧수염이 있는 남성 상반신 흑백 초상 · 어두운 양복, 흰 셔츠 깃 · 550×696 — 원본 크기 그대로"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "0371d400f44d1387 — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "Commons extmetadata: LicenseShortName 'Public domain', Artist 'Unknown author', DateTimeOriginal 'circa 1920', Description 'Dosan Ahn Chang-ho in 1920s', Credit newscj.com 기사"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -288,6 +429,19 @@
      "format": "text/html"
     }
    ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series30v2/img/15/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    }
+   ],
+   "navDate": "1920-01-01T00:00:00Z",
    "rights": "http://creativecommons.org/publicdomain/mark/1.0/"
   },
   {
@@ -360,6 +514,30 @@
        "조각 장식 의자에 앉은 양복 차림 남성 1명 · 우측 하단 사진관 서명/각인 · 307×500 저해상"
       ]
      }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "80cd5f9fbe651619 — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "Commons extmetadata: 'Public domain', Description 'Young Dosan Chang-ho Ahn in Los Angeles', DateTimeOriginal 'Probably 1910s'"
+      ]
+     }
     }
    ],
    "thumbnail": [
@@ -402,6 +580,19 @@
      "format": "text/html"
     }
    ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series30v2/img/15/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    }
+   ],
+   "navDate": "1910-01-01T00:00:00Z",
    "rights": "http://creativecommons.org/publicdomain/mark/1.0/"
   }
  ],
@@ -423,5 +614,6 @@
    "type": "Image",
    "format": "image/jpeg"
   }
- ]
+ ],
+ "navDate": "1932-01-01T00:00:00Z"
 }

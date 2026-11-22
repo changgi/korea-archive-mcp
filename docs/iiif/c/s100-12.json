@@ -1,0 +1,192 @@
+{
+ "@context": "http://iiif.io/api/presentation/3/context.json",
+ "id": "https://changgi.github.io/korea-archive-mcp/iiif/c/s100-12.json",
+ "type": "Collection",
+ "label": {
+  "ko": [
+   "100선 · Ⅻ 판결문과 공훈 기록"
+  ]
+ },
+ "summary": {
+  "ko": [
+   "100선 · Ⅻ 판결문과 공훈 기록 — 시리즈 10개"
+  ]
+ },
+ "partOf": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/hierarchy.json",
+   "type": "Collection"
+  }
+ ],
+ "items": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s081.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "081 · 국가기록원 독립운동관련 판결문 — 1920.10.30 경성복심법원 — 48인의 판결원본"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s081/hero_p02_right.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "navDate": "1920-10-30T00:00:00Z"
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s082.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "082 · 국가기록원 독립운동관련 판결문 — 1920.12.27 대구복심법원 — 대한민국애국부인회 판결"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s082/judg_p05.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "navDate": "1920-12-27T00:00:00Z"
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s083.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "083 · 국가기록원 독립운동관련 판결문 — 1912.9.28 경성지방법원 — '모살미수' 판결"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s083/judg_p02.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "navDate": "1912-09-28T00:00:00Z"
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s084.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "084 · 국가보훈부 공훈전자사료관 × 미국 NARA — 공적조서 관리번호 318 — 김구(金九)"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s084/hero_SC223975_photo.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "navDate": "1962-01-01T00:00:00Z"
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s085.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "085 · 국가보훈부 공훈전자사료관 × 국립중앙도서관 신문 — 공적조서 관리번호 8884 — 이봉창(李奉昌)"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s085/seoul_19500109_p3_article.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "navDate": "1962-01-01T00:00:00Z"
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s086.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "086 · 국가보훈부 공훈전자사료관 × 국립중앙도서관 신문 — 공적조서 관리번호 1693 — 남자현(南慈賢)"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s086/jjang_19330826_article.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "navDate": "1962-01-01T00:00:00Z"
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s087.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "087 · 국사편찬위원회 전자사료관 × 미국 NARA — 1948.5.10 총선거 — 국편 사료 목록 × NARA 원본"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s087/state_korea1948_p001.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "navDate": "1948-05-10T00:00:00Z"
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s088.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "088 · 국사편찬위원회 전자사료관 × 미국 NARA — 1948.5.31~7.20 제헌국회 — 국편 사료 목록 × NARA 원본"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s088/p012_right.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "navDate": "1948-01-01T00:00:00Z"
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s089.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "089 · 국사편찬위원회 한국사DB × 국립중앙도서관 고문헌 — 1752 「均役廳事目」 — 군포 2필을 반으로"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s089/gyunyeok_p001.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "navDate": "1750-01-01T00:00:00Z"
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s090.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "090 · 국사편찬위원회 한국사DB × 국립중앙도서관 고문헌 — 「全南道大同事目」 — 대동법, 선혜청에 합치다"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s090/daedong_p001.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  }
+ ]
+}
