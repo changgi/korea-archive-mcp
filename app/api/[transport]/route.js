@@ -714,7 +714,9 @@ const COLLECT = {
       const catArr = [...item.matchAll(/<category>([^<]+)/g)].map((m) => m[1]); // 자료형·매체(紙/デジタル)
       const cats = catArr.join('·');
       const author = g('author');
-      out.push({ title: `${title}${cats ? ` [${cats}]` : ''}${author ? ` — ${author}` : ''}`.slice(0, 120), date: g('dc:date'), id: '', ...(catArr[0] ? { series: catArr[0] } : {}), url: link });
+      // v1.96.8: 디지털화 자료는 dl.ndl.go.jp PID를 함께 — 권리(PDM·internet) 확인과 IIIF 원본 경로의 열쇠(별도 재조회로 429를 부르던 단계 제거)
+      const pid = (item.match(/dl\.ndl\.go\.jp\/(?:api\/iiif\/|info:ndljp\/pid\/|pid\/)(\d{5,})/) || [])[1] || '';
+      out.push({ title: `${title}${cats ? ` [${cats}]` : ''}${author ? ` — ${author}` : ''}${pid ? ` · 디지털 PID ${pid}` : ''}`.slice(0, 140), date: g('dc:date'), id: pid, ...(catArr[0] ? { series: catArr[0] } : {}), url: pid ? `https://dl.ndl.go.jp/pid/${pid}` : link });
       if (out.length >= n) break;
     }
     return out;
@@ -1945,24 +1947,26 @@ const JB_CROSS = `국내외 대조 절차 — 순서를 틀리면 헛수고한�
             const flat = dclean(b).replace(/&middot;/g, '·').replace(/\s*한국역대인물(?!정보)/g, ''); // v1.96.6: 인명 뒤 링크 라벨 제거
             const pick = (re2) => ((flat.match(re2) || [])[1] || '').trim();
             const name = pick(/자료명\(한글\)\s*([^·]{2,60}?)\s*·/) || pick(/자료명\s+(.{2,60}?)\s+(?:xml|저자)/);
+            const ed = ['간행년\\(왕력\\)\\s*(.{3,60}?)\\s*간행년', '판사항\\s*(\\S{1,20})', '간략내용\\s*(.{6,200}?)\\s*MF'].map((r) => pick(new RegExp(r))); // v1.96.8: 의궤 간행·판본·요지
+            const gx0 = [ed[0] && `간행: ${ed[0]}`, ed[1] && `판본: ${ed[1]}`, ed[2] && !flat.includes('해제내용') && `요지: ${ed[2]}`].filter(Boolean);
             const gx = [['소장', /소장정보\s+(.{4,90}?)\s+·/], ['집성', /집성정보\s+(.{4,90}?)\s+(?:·|형태사항)/], ['형태', /형태사항\s+(.{4,90}?)\s+\d{5}\s/], ['출판', /출판정보\s*:\s*(.{4,90}?)\s*\//]]
               .map(([k, re2]) => { const v = did.startsWith('ANC_') ? pick(re2) : ''; return v ? `${k}: ${v.replace(/\s*·\s*/g, ' · ').replace(/^[\s·]+|[\s·]+$/g, '')}` : ''; }).filter(Boolean); // 고문서 메타
             const callno = pick(/청구기호\s+(\S{2,20})/);
-            const mf = pick(/MF번호\s+(?!유형분류)(\S{2,20})/);
+            const mf = pick(/MF번호\s+(?!유형분류)(\S{2,20})/).replace(/,$/, '');
             // 분류 3종은 연쇄 앵커로 — 단독 매칭은 내비게이션 필터 라벨과 혼동(실측)
             const cm = flat.match(/유형분류\s+(\S{2,20})\s+주제분류\s+(\S{2,30})\s+수집분류\s+(\S{2,30})/) || [];
             const cls = cm[1] || ''; const subj = cm[2] || '';
-            const i0 = flat.indexOf('정의 ');
+            const ih = flat.indexOf('해제내용'); const i0 = ih >= 0 ? ih + 4 : flat.indexOf('정의 '); // v1.96.8: 의궤(ARC_) 페이지는 '해제내용 … 【정의】' 형식
             let haeje = '';
             let jfp = '';
             if (i0 >= 0) {
-              haeje = flat.slice(i0, i0 + 6000).split(/집필자|관련 멀티미디어|장서각 디지털아카이브 바로가기/)[0].trim();
+              haeje = flat.slice(i0, i0 + 6000).split(/집필자|관련 멀티미디어|장서각 디지털아카이브 바로가기|13455 경기도/)[0].trim();
               jfp = createHash('sha256').update(haeje).digest('hex').slice(0, 16); // 판독 시점 해제 지문
               if (haeje.length > 4000) haeje = haeje.slice(0, 4000) + ` …(총 ${haeje.length}자 — 전문은 원문 링크)`;
             }
             if (!callno && !haeje) return text(`'${did}' — 상세 미발견 또는 구조 상이. 청구기호(K2-…)를 확인하거나 mode=jsg에 검색어를 넣으십시오.`);
             return text(`장서각 서지·해제 판독 — ${name || did}\n`
-              + [callno && `청구기호 ${callno}`, mf && `MF ${mf}`, cls, subj].filter(Boolean).join(' · ') + '\n' + (gx.length ? gx.join('\n') + '\n' : '')
+              + [callno && `청구기호 ${callno}`, mf && `MF ${mf}`, cls, subj].filter(Boolean).join(' · ') + '\n' + ([...gx0, ...gx].length ? [...gx0, ...gx].join('\n') + '\n' : '')
               + (haeje ? `【해제】\n${haeje}\n` : '')
               + (jfp ? `본문 지문(sha256-16): ${jfp} — 판독 시점 해제 전문 기준. 재판독 지문 불일치=원문 개정 발생.\n` : '')
               + `원문·이미지: https://jsg.aks.ac.kr/dir/view?dataId=${encodeURIComponent(did)}\n`
@@ -2483,7 +2487,8 @@ item_cd 5종(자료 성격별): ART 도설·회화 / ETC 두루마리·축 / DRR
           // 이중채널 동시 수집: (A) 전체 소장자료 + (B) 자료유형(category) 정밀 — 상호보완
           const [totalXml, catXml] = await Promise.all([
             gtext(base),
-            category ? gtext(base + '&category=' + encodeURIComponent(category)).catch(() => null) : Promise.resolve(null),
+            // v1.96.8: category 미지정이면 '고문헌'을 자동 병행 — 전체 목록은 현대 영인·번역본이 상위를 채워 원본(1797 오륜행실도 등)이 묻힘(실측)
+            gtext(base + '&category=' + encodeURIComponent(category || '고문헌')).catch(() => null),
           ]);
           if (totalXml.includes('<error')) return text(`NLK OpenAPI 오류: ${xtag(totalXml, 'msg') || '?'} — NLK_API_KEY 확인.` + dbrowse(openUrl));
           const A = parse(totalXml);
@@ -2493,6 +2498,8 @@ item_cd 5종(자료 성격별): ART 도설·회화 / ETC 두루마리·축 / DRR
             out += `\n\n[② 자료유형 '${category}' 정밀 채널 — 총 ${B.tot}건 (동시 수집)]\n` + (B.lines.join('\n') || '(0건)')
               + `\n※ 전체+자료유형 이중채널(상호보완).`;
           } else {
+            const B = catXml && !catXml.includes('<error') ? parse(catXml) : null;
+            if (B && B.lines.length && !yfilt) out += `\n\n[② 고문헌(원본) 자동 병행 — 총 ${B.tot}건]\n` + B.lines.slice(0, 6).join('\n') + '\n※ 현대 영인·번역본에 가려지는 원본 고서를 함께 보여 줍니다.';
             out += `\n※ 전체 카탈로그 대상. category 인자(신문·고문헌 등)로 자료유형 정밀 이중수집 가능.`;
           }
           out += ` '${name}' 컬렉션 정밀검색: ${openUrl}` + (note ? `\n※ ${note}` : '');
