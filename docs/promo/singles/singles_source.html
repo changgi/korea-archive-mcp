@@ -2,7 +2,7 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<title>KOREA ARCHIVE 통합검색 — 예제 6~15 단독 카드</title>
+<title>예제 6~15 단독 v2</title>
 <style>
   :root{
     --bg:#0a0c10; --panel:#14171d; --crimson:#e03540; --gold:#e8b45a; --cream:#faf3e3;
@@ -108,183 +108,154 @@
   .fcard .t{font-size:25px; font-weight:900; margin-top:4px; line-height:1.35; word-break:keep-all;}
   .fcard .d{font-size:19px; color:#5a6070; margin-top:4px;}
 
-  .say{display:inline-block; background:#1d2a44; color:#cfe0ff; font-weight:800; font-size:30px; padding:14px 26px; border-radius:22px 22px 22px 6px; word-break:keep-all;}
-  .mono{font-family:Consolas,Menlo,monospace;}
-  .term{display:inline-block; font-family:Consolas,Menlo,monospace; font-size:30px; padding:8px 18px; border-radius:10px; margin:6px 8px 6px 0;}
-  .t-no{background:#38151a; color:#ff8a92; text-decoration:line-through;}
-  .t-yes{background:#153019; color:#7be39a; font-weight:900;}
-  .org .name small{font-size:23px; color:#b9bfcb; margin-top:4px;}
-  .next{margin-top:22px; border:2px dashed #3a4152; border-radius:14px; padding:16px 22px; font-size:26px; color:#cfe0ff; word-break:keep-all;}
-  .next b{color:#e8b45a;}
-  .ex{font-size:24px; color:var(--gold); font-weight:900; letter-spacing:.2em;}
+  .bleed{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; filter:contrast(1.12) brightness(.95);}
+  .shade{position:absolute; inset:0; background:linear-gradient(180deg, rgba(0,0,0,.05) 35%, rgba(0,0,0,.88) 78%);}
+  .shade-top{position:absolute; inset:0; background:linear-gradient(180deg, rgba(0,0,0,.82) 0%, rgba(0,0,0,0) 32%, rgba(0,0,0,0) 55%, rgba(0,0,0,.9) 85%);}
+  .mosaic{position:absolute; inset:0; display:grid; gap:4px; background:#000;}
+  .mosaic img{width:100%; height:100%; object-fit:cover; display:block; filter:contrast(1.1);}
+  .m22{grid-template-columns:1fr 1fr; grid-template-rows:1fr 1fr;}
+  .m33{grid-template-columns:repeat(3,1fr); grid-template-rows:repeat(3,1fr);}
+  .m3c{grid-template-columns:repeat(3,1fr);}
+  .m2c{grid-template-columns:1fr 1fr;}
+  .bottom{position:absolute; left:0; right:0; bottom:0; z-index:6; padding:0 76px 168px !important;}
+  .foot{position:absolute; left:0; right:0; bottom:0; height:230px; z-index:5; background:linear-gradient(180deg, rgba(0,0,0,0), rgba(0,0,0,.93) 55%);}
+  .topz{position:absolute; left:0; right:0; top:0; z-index:5; padding:64px 76px 0;}
+  .hl{font-size:76px; line-height:1.18; font-weight:900; color:#fff; word-break:keep-all; text-shadow:0 4px 24px rgba(0,0,0,.8);}
+  .hl .g{color:var(--gold);}
+  .chip{display:inline-block; background:rgba(10,12,16,.82); border:2px solid var(--gold); color:#fff; font-weight:900; font-size:30px; padding:10px 22px; border-radius:999px; margin:16px 10px 0 0;}
+  .chip.red{border-color:var(--crimson);}
+  .say2{display:inline-block; background:rgba(29,42,68,.92); color:#cfe0ff; font-weight:800; font-size:28px; padding:12px 24px; border-radius:20px 20px 20px 6px;}
+  .cr{position:absolute; left:76px; right:76px; bottom:84px; z-index:7; font-size:17px; color:#c9cfda; text-shadow:0 2px 8px #000; line-height:1.4;}
+  .lab{position:absolute; z-index:6; background:rgba(0,0,0,.72); color:#fff; font-weight:800; font-size:24px; padding:6px 14px;}
+  .ok{position:absolute; z-index:6; right:8px; bottom:8px; background:#1f7a3d; color:#fff; font-weight:900; font-size:18px; padding:3px 10px; border-radius:6px;}
+  .giant{font-size:330px; font-weight:900; line-height:.9; color:var(--gold); text-shadow:0 10px 40px rgba(0,0,0,.9);}
+  .band{position:absolute; left:0; right:0; z-index:5; background:rgba(8,9,12,.9); padding:30px 76px; border-top:4px solid var(--gold); border-bottom:4px solid var(--gold);}
 </style>
 </head>
 <body>
 
 <div class="card">
-  <div class="grain"></div><div class="frame"></div>
-  <div class="col">
-    <div><span class="kicker">예제 6 · 인물 한 번에 대조</span></div>
-    <div style="margin-top:20px;"><span class="say">"안중근 종합 정리해줘"</span></div>
-    <h2 style="margin:20px 0 6px; font-size:46px;">공훈록·인명사전·판결문,<br><span class="gold">세 곳을 한 번에</span></h2>
-    
-    <div class="reel"><div class="no">공훈전자사료관 · 국가보훈부</div><div class="t">안중근(安重根) 1879~1910 · 의열투쟁 · 1962 대한민국장</div></div>
-    <div class="reel"><div class="no">한국독립운동인명사전 · 독립기념관</div><div class="t">사전 676번 — 학술 전기 전문</div></div>
-    <div class="reel"><div class="no">독립운동판결문 · 국가기록원</div><div class="t">같은 이름 판결문까지 함께 검색</div></div>
-    <p class="lead" style="margin-top:14px; font-size:27px;">한자 이름과 생몰년으로 <b>동명이인을 가려</b> 냅니다.</p>
-    <p class="credit" style="margin-top:14px;">출처: 국가보훈부 공훈전자사료관 · 독립기념관 한국독립운동인명사전 · 국가기록원 독립운동판결문</p>
+  <div style="position:absolute; inset:0; background:#0c0b09;"></div>
+  <div style="position:absolute; left:60px; top:60px; width:560px; height:720px; z-index:3;"><img src="{{img:../img2/anjunggeun.jpg|maxdim=700|q=80}}" style="width:100%; height:100%; object-fit:cover; object-position:center 20%;"></div>
+  <div style="position:absolute; right:60px; top:60px; width:360px; z-index:3; display:flex; flex-direction:column; gap:14px;">
+    <img src="{{img:../img2/daehan_19091109_p3.jpg|maxdim=600|q=88}}" style="width:100%; height:350px; object-fit:cover; object-position:top; border:5px solid #f3ead4;">
+    <img src="{{img:../img2/daehan_19091211_p2.jpg|maxdim=600|q=88}}" style="width:100%; height:356px; object-fit:cover; object-position:top; border:5px solid #f3ead4;">
   </div>
-  <div class="brand">KOREA ARCHIVE 통합검색 · <span style="color:#e8b45a;">직접 해 보기 👉 프로필 링크</span></div><div class="pageno">예제 6 / 15</div>
+  <div class="bottom" style="padding-bottom:116px;"><div style="font-size:24px; color:var(--gold); font-weight:900; letter-spacing:.2em; text-shadow:0 2px 8px #000;">예제 6 · 인물 한 번에</div>
+    <div class="hl" style="font-size:56px; margin-top:6px;">안중근 — <span class="g">세 곳의 기록을 한 번에</span></div></div>
+  <div class="foot"></div><div class="frame" style="z-index:7;"></div>
+  <div class="cr">사진: 안중근(1910 이전, 퍼블릭 도메인) · 대한매일신보 1909.11.9·12.11 (국립중앙도서관) · 공훈록 1962 대한민국장</div>
+  <div class="brand" style="z-index:9; text-shadow:0 2px 8px #000;">KOREA ARCHIVE 통합검색 · <span style="color:#e8b45a;">직접 해 보기 👉 프로필 링크</span></div><div class="pageno" style="z-index:9; color:#e5ddc9; text-shadow:0 2px 8px #000;">예제 6 / 15</div>
 </div>
 
 <div class="card">
-  <div class="grain"></div><div class="frame"></div>
-  <div class="col">
-    <div><span class="kicker">예제 7 · 판결문 원문</span></div>
-    <div style="margin-top:20px;"><span class="say">"유관순 판결문 찾아줘"</span></div>
-    <h2 style="margin:20px 0 6px; font-size:46px;">열여덟 살의 재판,<br><span class="gold">판결문으로 남았습니다</span></h2>
-    
-    <div class="tl" style="margin-top:20px;">
-      <div class="ev"><div class="yr">1919. 6. 30 · 경성복심법원</div><div class="tx">원판결 중 피고 관련 부분 취소, <b class="gold">징역 3년</b></div></div>
-      <div class="ev"><div class="yr">1919. 9. 11</div><div class="tx">상고 기각</div></div>
-    </div>
-    <p class="lead" style="font-size:27px;">판결 기관·날짜·주문에, 사건 개요와 <b>원문 뷰어</b> 링크까지 이어집니다.</p>
-    <div class="next">이어서 → <b>"이 판결문 사건 개요 보여줘"</b><br>당시 나이·본적·죄명·주문을 판결문에서 바로 읽습니다.</div>
-    <p class="credit" style="margin-top:14px;">출처: 국가기록원 독립운동판결문 · 柳寬順 (1919)</p>
-  </div>
-  <div class="brand">KOREA ARCHIVE 통합검색 · <span style="color:#e8b45a;">직접 해 보기 👉 프로필 링크</span></div><div class="pageno">예제 7 / 15</div>
+  <img class="bleed" src="{{img:../img2/keijo_honmachi.jpg|maxdim=1200|q=80}}" style="filter:grayscale(1) contrast(1.1) brightness(.6);">
+  <div class="shade"></div>
+  <div class="topz"><div style="font-size:24px; color:var(--gold); font-weight:900; letter-spacing:.2em; text-shadow:0 2px 8px #000;">예제 7 · 판결문 원문</div><div style="margin-top:14px;"><span class="say2">"유관순 판결문 찾아줘"</span></div></div>
+  <div class="bottom" style="padding-bottom:116px;">
+    <div style="font-size:34px; color:#e5ddc9; font-weight:800;">1919. 6. 30 · 경성복심법원</div>
+    <div class="giant" style="font-size:190px;">징역 3년</div>
+    <div style="font-size:30px; color:#e5ddc9;">1919. 9. 11 상고 기각 — 판결문 원문 뷰어까지</div></div>
+  <div class="foot"></div><div class="frame" style="z-index:7;"></div>
+  <div class="cr">출처: 국가기록원 독립운동판결문 · 배경: 1930년대 경성 거리(참고 이미지, 퍼블릭 도메인) — 판결이 내려진 도시</div>
+  <div class="brand" style="z-index:9; text-shadow:0 2px 8px #000;">KOREA ARCHIVE 통합검색 · <span style="color:#e8b45a;">직접 해 보기 👉 프로필 링크</span></div><div class="pageno" style="z-index:9; color:#e5ddc9; text-shadow:0 2px 8px #000;">예제 7 / 15</div>
 </div>
 
 <div class="card">
-  <div class="grain"></div><div class="frame"></div>
-  <div class="col">
-    <div><span class="kicker">예제 8 · 신문 원문 속 반전</span></div>
-    <div style="margin-top:20px;"><span class="say">"단지동맹, 1907~1910 신문 원문에서 찾아줘"</span></div>
-    <h2 style="margin:20px 0 6px; font-size:46px;">단지동맹은 <span class="gold">안중근이 처음이 아니었다</span></h2>
-    
-    <div style="display:flex; align-items:flex-end; gap:26px; margin-top:16px;">
-      <div><div class="bignum" style="font-size:150px;">54</div><div class="credit" style="font-size:22px;">1907년 기사 수 (전체 65건)</div></div>
-      <div style="flex:1; font-size:24px; color:#e5ddc9; line-height:1.55;">1907 · 54건<br>1908 · 5건<br>1909 · 5건<br>1910 · 1건</div>
-    </div>
-    <div class="docquote" style="font-size:26px;">"二十一人 同胞學生이여 … 血心決意고 斷指同盟니"<small>황성신문 1907.2 광고 — 일본 유학생 21명의 단지동맹</small></div>
-    <p class="credit" style="margin-top:14px;">출처: 국립중앙도서관 대한민국신문아카이브 OCR 원문 검색 · 안중근의 단지동맹은 1909년</p>
+  <div style="position:absolute; inset:0; background:#14110c;"></div>
+  <img src="{{img:../img2/hwangseong_19070208_p4.jpg|maxdim=800|q=90}}" style="position:absolute; left:70px; top:70px; height:820px; z-index:3; transform:rotate(-2deg); border:6px solid #f3ead4; box-shadow:0 20px 50px rgba(0,0,0,.8);">
+  <div style="position:absolute; right:70px; top:120px; z-index:5; text-align:right;">
+    <div class="giant" style="font-size:260px;">54</div>
+    <div style="font-size:30px; color:#e5ddc9; font-weight:800;">1907년 '단지동맹' 기사</div>
+    <div style="font-size:26px; color:var(--sub); margin-top:6px;">전체 65건 중</div>
   </div>
-  <div class="brand">KOREA ARCHIVE 통합검색 · <span style="color:#e8b45a;">직접 해 보기 👉 프로필 링크</span></div><div class="pageno">예제 8 / 15</div>
+  <div style="position:absolute; right:70px; bottom:130px; width:440px; z-index:5; text-align:right;"><div style="font-size:24px; color:var(--gold); font-weight:900; letter-spacing:.2em; text-shadow:0 2px 8px #000;">예제 8 · 신문 속 반전</div>
+    <div class="hl" style="font-size:50px; margin-top:6px;">안중근보다<br><span class="g">2년 먼저</span></div>
+    <div style="font-size:24px; color:#e5ddc9; margin-top:8px;">일본 유학생 21명의 단지동맹</div></div>
+  <div class="foot"></div><div class="frame" style="z-index:7;"></div>
+  <div class="cr">황성신문 1907.2.8 4면 — 국립중앙도서관 대한민국신문아카이브 (저작권 만료) · 안중근의 단지동맹은 1909년</div>
+  <div class="brand" style="z-index:9; text-shadow:0 2px 8px #000;">KOREA ARCHIVE 통합검색 · <span style="color:#e8b45a;">직접 해 보기 👉 프로필 링크</span></div><div class="pageno" style="z-index:9; color:#e5ddc9; text-shadow:0 2px 8px #000;">예제 8 / 15</div>
 </div>
 
 <div class="card">
-  <div class="grain"></div><div class="frame"></div>
-  <div class="col">
-    <div><span class="kicker">예제 9 · 영국이 부른 서울의 이름</span></div>
-    <div style="margin-top:20px;"><span class="say">"Keijo로 영국 기록 찾아줘"</span></div>
-    <h2 style="margin:20px 0 6px; font-size:46px;">영국 문서 속 서울은<br><span class="gold">"Keijo"였습니다</span></h2>
-    
-    <div class="reel"><div class="no">1942. 11</div><div class="t">Air objective folder; East Chosen and Keijo areas</div><div class="d">공습 목표 자료철</div></div>
-    <div class="reel"><div class="no">1943</div><div class="t">Keijo, Korea</div></div>
-    <div class="reel"><div class="no">1945. 8</div><div class="t">Korea: Kyongsong (Keijo; Seoul)</div><div class="d">세 이름이 한 제목에</div></div>
-    <p class="lead" style="margin-top:12px; font-size:27px;">"Seoul"로만 찾으면 놓치는 기록입니다.</p>
-    <p class="credit" style="margin-top:14px;">출처: 영국 국립기록관(The National Archives) Discovery 검색 결과</p>
-  </div>
-  <div class="brand">KOREA ARCHIVE 통합검색 · <span style="color:#e8b45a;">직접 해 보기 👉 프로필 링크</span></div><div class="pageno">예제 9 / 15</div>
+  <div class="mosaic m2c" style="grid-template-columns:1.25fr 1fr;">
+    <img src="{{img:../img2/keijo_honmachi.jpg|maxdim=900|q=80}}" style="object-position:center 30%;"><img src="{{img:../img2/gyeongbok_1906.jpg|maxdim=900|q=80}}">
+  </div><div class="shade"></div>
+  <div class="bottom" style="padding-bottom:116px;"><div style="font-size:24px; color:var(--gold); font-weight:900; letter-spacing:.2em; text-shadow:0 2px 8px #000;">예제 9 · 영국이 부른 서울의 이름</div>
+    <div class="hl" style="margin-top:6px;">영국 문서 속 서울은<br><span class="g">"Keijo"</span></div>
+    <span class="chip">1942 공습 목표 자료철</span><span class="chip">1945 Kyongsong (Keijo; Seoul)</span></div>
+  <div class="foot"></div><div class="frame" style="z-index:7;"></div>
+  <div class="cr">사진: 1930년대 경성 혼마치 엽서 · 1906 경복궁(일본 국립국회도서관 사진첩) — 퍼블릭 도메인 · 문서: 영국 국립기록관 Discovery</div>
+  <div class="brand" style="z-index:9; text-shadow:0 2px 8px #000;">KOREA ARCHIVE 통합검색 · <span style="color:#e8b45a;">직접 해 보기 👉 프로필 링크</span></div><div class="pageno" style="z-index:9; color:#e5ddc9; text-shadow:0 2px 8px #000;">예제 9 / 15</div>
 </div>
 
 <div class="card">
-  <div class="grain"></div><div class="frame"></div>
-  <div class="col">
-    <div><span class="kicker">예제 10 · 저작권 만료 사진</span></div>
-    <div style="margin-top:20px;"><span class="say">"호주 기록에서 한국전쟁 사진 찾아줘"</span></div>
-    <div style="display:flex; gap:34px; margin-top:24px; align-items:flex-start;">
-      <div style="flex:0 0 360px; position:relative;">
-        <div class="tape" style="top:-16px; left:30%; transform:rotate(-4deg);"></div>
-        <div class="polaroid"><img src="{{img:../img/awm_044757_crop.jpg|maxdim=700|q=80}}" style="height:400px; object-fit:cover;"><div class="cap">1952 · 227고지 공습</div></div>
-      </div>
-      <div style="flex:1;">
-        <h2 style="font-size:44px;">권리 상태가<br><span class="gold">결과에 붙어 나옵니다</span></h2>
-        <div class="reel" style="margin-top:18px;"><div class="no">호주 전쟁기념관 044757</div><div class="t">AN AIRSTRIKE ON HILL 227, KOREA DURING 1952</div></div>
-        <div class="stamp" style="position:relative; display:inline-block; margin:18px 0 0 10px;">PD · 저작권 만료</div>
-      </div>
-    </div>
-    <p class="credit" style="margin-top:18px;">출처: Australian War Memorial, 044757 (Copyright expired — public domain) · 제임스타운선 227고지</p>
+  <div class="mosaic m22">
+    <img src="{{img:../img2/awm_C276864.jpg|maxdim=700|q=80}}"><img src="{{img:../img2/awm_044757_crop.jpg|maxdim=700|q=80}}">
+    <img src="{{img:../img2/awm_C276863.jpg|maxdim=700|q=80}}"><img src="{{img:../img2/awm_C276857.jpg|maxdim=700|q=80}}">
   </div>
-  <div class="brand">KOREA ARCHIVE 통합검색 · <span style="color:#e8b45a;">직접 해 보기 👉 프로필 링크</span></div><div class="pageno">예제 10 / 15</div>
+  <div class="band" style="top:400px;"><div style="font-size:24px; color:var(--gold); font-weight:900; letter-spacing:.2em; text-shadow:0 2px 8px #000;">예제 10 · 저작권 만료 사진</div>
+    <div class="hl" style="font-size:56px; margin-top:6px;">호주가 남긴 한국전쟁,<br><span class="g">권리 상태까지 함께</span></div></div>
+  <div class="foot"></div><div class="frame" style="z-index:7;"></div>
+  <div class="cr">호주 전쟁기념관(AWM) 147844·044757·147842·147839 — 가평 계곡(1952)·227고지 공습(1952) · 모두 Copyright expired - public domain</div>
+  <div class="brand" style="z-index:9; text-shadow:0 2px 8px #000;">KOREA ARCHIVE 통합검색 · <span style="color:#e8b45a;">직접 해 보기 👉 프로필 링크</span></div><div class="pageno" style="z-index:9; color:#e5ddc9; text-shadow:0 2px 8px #000;">예제 10 / 15</div>
 </div>
 
 <div class="card">
-  <div class="grain"></div><div class="frame"></div>
-  <div class="col">
-    <div><span class="kicker">예제 11 · 뉴질랜드의 한국전쟁</span></div>
-    <div style="margin-top:20px;"><span class="say">"뉴질랜드 기록에서 한국전쟁 찾아줘"</span></div>
-    <h2 style="margin:20px 0 6px; font-size:46px;">지구 반대편에도<br><span class="gold">한국전쟁 일지가 있습니다</span></h2>
-    
-    <div class="reel"><div class="no">R25538753 <span class="badge b-open">Open</span></div><div class="t">Korean War Diaries DAK1–DAK7</div></div>
-    <div class="reel"><div class="no">R22438362 <span class="badge b-open">Open</span></div><div class="t">Kayforce — Cost of Korean War to N.Z.</div></div>
-    <div class="reel locked"><div class="no">R25987088 <span class="badge b-lock">Restricted</span></div><div class="t">Korean War Resolution, 27 June 2000</div></div>
-    <p class="lead" style="margin-top:12px; font-size:27px;">열람 가능 여부(<b>Open·Restricted</b>)가 함께 표시됩니다.</p>
-    <p class="credit" style="margin-top:14px;">출처: Archives New Zealand Te Rua Mahara · 케이포스(Kayforce)=뉴질랜드 한국전쟁 파견군</p>
-  </div>
-  <div class="brand">KOREA ARCHIVE 통합검색 · <span style="color:#e8b45a;">직접 해 보기 👉 프로필 링크</span></div><div class="pageno">예제 11 / 15</div>
+  <div class="mosaic m3c" style="grid-template-columns:1.2fr 1fr 1fr;">
+    <img src="{{img:../img2/awm_C1094311.jpg|maxdim=700|q=80}}"><img src="{{img:../img2/awm_C1094308.jpg|maxdim=700|q=80}}"><img src="{{img:../img2/awm_C361079.jpg|maxdim=700|q=80}}">
+  </div><div class="shade"></div>
+  <div class="bottom" style="padding-bottom:116px;"><div style="font-size:24px; color:var(--gold); font-weight:900; letter-spacing:.2em; text-shadow:0 2px 8px #000;">예제 11 · 뉴질랜드의 한국전쟁</div>
+    <div class="hl" style="font-size:62px; margin-top:6px;">지구 반대편의<br><span class="g">한국전쟁 일지</span></div>
+    <span class="chip" style="border-color:#5fd07f;">DAK1–DAK7 · Open</span><span class="chip red">2000 결의 · Restricted</span></div>
+  <div class="foot"></div><div class="frame" style="z-index:7;"></div>
+  <div class="cr">사진: 뉴질랜드 제16야포연대(1952) — 호주 전쟁기념관 LEEJ0169·LEEJ0166·HOBJ1944 (퍼블릭 도메인) · 기록: 뉴질랜드 국립기록원</div>
+  <div class="brand" style="z-index:9; text-shadow:0 2px 8px #000;">KOREA ARCHIVE 통합검색 · <span style="color:#e8b45a;">직접 해 보기 👉 프로필 링크</span></div><div class="pageno" style="z-index:9; color:#e5ddc9; text-shadow:0 2px 8px #000;">예제 11 / 15</div>
 </div>
 
 <div class="card">
-  <div class="grain"></div><div class="frame"></div>
-  <div class="col">
-    <div><span class="kicker">예제 12 · 고문헌 해제 전문</span></div>
-    <div style="margin-top:20px;"><span class="say">"장서각 K2-3556 해제 읽어줘"</span></div>
-    <h2 style="margin:20px 0 6px; font-size:46px;">1776년 정조의 공사 기록,<br><span class="gold">해제 전문이 바로</span></h2>
-    
-    <div class="docquote" style="font-size:27px;">「개건도감의궤(改建都監儀軌)」<br>1776년(정조 즉위) 경모궁을 개축하며 공사 전 과정을 정리한 의궤<small>1책 135장 · 12행 24자 · 매 면 '奉使之印' 날인</small></div>
-    <p class="lead" style="margin-top:18px; font-size:27px;">사도세자의 사당을 고친 기록 — 건물 도면, 택일, 재료와 인력 수량까지 담겼다는 해제를 <b>그대로 읽어 줍니다</b>.</p>
-    <div class="next">이어서 → <b>원문·이미지 링크</b>도 함께 옵니다<br>jsg.aks.ac.kr/dir/view?dataId=JSG_K2-3556</div>
-    <p class="credit" style="margin-top:14px;">출처: 한국학중앙연구원 장서각 K2-3556 (해제는 집필 해설 — 인용 시 명기)</p>
-  </div>
-  <div class="brand">KOREA ARCHIVE 통합검색 · <span style="color:#e8b45a;">직접 해 보기 👉 프로필 링크</span></div><div class="pageno">예제 12 / 15</div>
+  <img class="bleed" src="{{img:../img2/uigwe_hwaseong23.jpg|maxdim=1200|q=80}}" style="filter:contrast(1.05);">
+  <div class="shade"></div>
+  <div class="bottom" style="padding-bottom:116px;"><div style="font-size:24px; color:var(--gold); font-weight:900; letter-spacing:.2em; text-shadow:0 2px 8px #000;">예제 12 · 고문헌 해제</div>
+    <div class="hl" style="font-size:64px; margin-top:6px;">1776년 정조의 공사 기록,<br><span class="g">해제 전문이 바로</span></div>
+    <span class="chip">개건도감의궤 · 1책 135장</span></div>
+  <div class="foot"></div><div class="frame" style="z-index:7;"></div>
+  <div class="cr">사진: 화성성역의궤(1801) — 국립중앙박물관, 공공누리 제1유형(출처 표시) · 의궤의 모습 예시 · 해제: 한국학중앙연구원 장서각 K2-3556</div>
+  <div class="brand" style="z-index:9; text-shadow:0 2px 8px #000;">KOREA ARCHIVE 통합검색 · <span style="color:#e8b45a;">직접 해 보기 👉 프로필 링크</span></div><div class="pageno" style="z-index:9; color:#e5ddc9; text-shadow:0 2px 8px #000;">예제 12 / 15</div>
 </div>
 
 <div class="card">
-  <div class="grain"></div><div class="frame"></div>
-  <div class="col">
-    <div><span class="kicker">예제 13 · 국가유산 해설</span></div>
-    <div style="margin-top:20px;"><span class="say">"근정전 해설 보여줘"</span></div>
-    <h2 style="margin:20px 0 6px; font-size:46px;">이름은 <span class="gold">정도전</span>이 지었습니다</h2>
-    
-    <div class="li" style="margin:14px 0;"><div class="n">1</div><div>태조 4년(<b>1395</b>) 처음 지음 · 즉위식이 열린 곳</div></div>
-    <div class="li" style="margin:14px 0;"><div class="n">2</div><div>임진왜란 때 불탄 뒤 고종 4년(<b>1867</b>) 다시 지음</div></div>
-    <div class="li" style="margin:14px 0;"><div class="n">3</div><div>"근정" = 부지런하면 잘 다스려진다 · 월대에 <b>12지신상</b></div></div>
-    <p class="lead" style="margin-top:8px; font-size:26px;">국보 경복궁 근정전 — 국가유산청 공식 해설 전문을 가져옵니다.</p>
-    <div class="next">함께 찾아진 기록 → <b>근정전 정시도 및 연구시 병풍 [보물]</b><br>같은 이름의 유산을 지정 종목과 함께 보여 줍니다.</div>
-    <p class="credit" style="margin-top:14px;">출처: 국가유산청 국가유산포털 · 경복궁 근정전 [국보]</p>
-  </div>
-  <div class="brand">KOREA ARCHIVE 통합검색 · <span style="color:#e8b45a;">직접 해 보기 👉 프로필 링크</span></div><div class="pageno">예제 13 / 15</div>
+  <img class="bleed" src="{{img:../img2/gyeongbok_1906.jpg|maxdim=1300|q=80}}" style="object-position:center 40%;">
+  <div class="shade-top"></div>
+  <div class="topz"><div style="font-size:24px; color:var(--gold); font-weight:900; letter-spacing:.2em; text-shadow:0 2px 8px #000;">예제 13 · 국가유산 해설</div><div class="hl" style="margin-top:8px;">이름은 <span class="g">정도전</span>이<br>지었습니다</div></div>
+  <div class="bottom" style="padding-bottom:116px;"><span class="chip">1395 창건</span><span class="chip">1867 중건</span><span class="chip">월대 12지신상</span></div>
+  <div class="foot"></div><div class="frame" style="z-index:7;"></div>
+  <div class="cr">사진: 1906년 경복궁 근정전 — 일본 국립국회도서관 「ろせった丸満韓巡遊紀念写真帖」(퍼블릭 도메인) · 해설: 국가유산청</div>
+  <div class="brand" style="z-index:9; text-shadow:0 2px 8px #000;">KOREA ARCHIVE 통합검색 · <span style="color:#e8b45a;">직접 해 보기 👉 프로필 링크</span></div><div class="pageno" style="z-index:9; color:#e5ddc9; text-shadow:0 2px 8px #000;">예제 13 / 15</div>
 </div>
 
 <div class="card">
-  <div class="grain"></div><div class="frame"></div>
-  <div class="col">
-    <div><span class="kicker">예제 14 · 국제기구 문서</span></div>
-    <div style="margin-top:20px;"><span class="say">"UN 문서 808136 판독해줘"</span></div>
-    <h2 style="margin:20px 0 6px; font-size:46px;">UN 안보리 문서,<br><span class="gold">6개 언어 원문까지</span></h2>
-    
-    <div class="reel"><div class="no">S/2015/799 · 2015. 10. 19</div><div class="t">정전협정을 평화협정으로 바꾸자는 북한 외무성 성명을 안보리에 전달한 문서</div><div class="d">주제: INTERNATIONAL SECURITY · KOREAN PENINSULA</div></div>
-    <div style="margin-top:18px;"><span class="term t-yes">العربية</span><span class="term t-yes">English</span><span class="term t-yes">Español</span><span class="term t-yes">Français</span><span class="term t-yes">Русский</span><span class="term t-yes">中文</span></div>
-    <p class="lead" style="margin-top:14px; font-size:27px;">요약과 함께 언어별 <b>PDF 원문 직링크</b>를 줍니다.</p>
-    <p class="credit" style="margin-top:14px;">출처: UN Digital Library, record 808136 (S/2015/799)</p>
-  </div>
-  <div class="brand">KOREA ARCHIVE 통합검색 · <span style="color:#e8b45a;">직접 해 보기 👉 프로필 링크</span></div><div class="pageno">예제 14 / 15</div>
+  <div class="mosaic m2c"><img src="{{img:../img2/panmun_520995.jpg|maxdim=800|q=80}}"><img src="{{img:../img2/panmun_520996.jpg|maxdim=800|q=80}}"></div>
+  <div class="shade"></div>
+  <div class="bottom" style="padding-bottom:116px;"><div style="font-size:24px; color:var(--gold); font-weight:900; letter-spacing:.2em; text-shadow:0 2px 8px #000;">예제 14 · 국제기구 문서</div>
+    <div class="hl" style="font-size:58px; margin-top:6px;">정전협정 그 뒤,<br><span class="g">UN 문서 6개 언어 원문</span></div>
+    <span class="chip">S/2015/799</span><span class="chip">PDF × 6</span></div>
+  <div class="foot"></div><div class="frame" style="z-index:7;"></div>
+  <div class="cr">사진: 1953.7 판문점 — 미국 국립기록관리청 NAID 520995·520996 (이용 제한 없음) · 문서: UN Digital Library 808136</div>
+  <div class="brand" style="z-index:9; text-shadow:0 2px 8px #000;">KOREA ARCHIVE 통합검색 · <span style="color:#e8b45a;">직접 해 보기 👉 프로필 링크</span></div><div class="pageno" style="z-index:9; color:#e5ddc9; text-shadow:0 2px 8px #000;">예제 14 / 15</div>
 </div>
 
 <div class="card">
-  <div class="grain"></div><div class="frame"></div>
-  <div class="col">
-    <div><span class="kicker">예제 15 · 원문이 바뀌면 알아챕니다</span></div>
-    <div style="margin-top:20px;"><span class="say">"이 해제, 지난번이랑 같은지 확인해줘"</span></div>
-    <h2 style="margin:20px 0 6px; font-size:46px;">기록 내용의 <span class="gold">지문</span>을<br>매주 다시 잽니다</h2>
-    
-    <div class="org"><div class="name">장서각 K2-3556 해제<small>오늘 다시 읽은 지문</small></div><div class="hits hit-y mono">a46e5177b8b153bd ✓</div></div>
-    <div class="org"><div class="name">근정전 해설<small>오늘 다시 읽은 지문</small></div><div class="hits hit-y mono">4adc8e6c9556179e ✓</div></div>
-    <p class="lead" style="margin-top:16px; font-size:27px;">공개 장부에 올린 값과 <b>오늘 값이 같다</b> = 원문 그대로.<br>값이 달라지면 원문이 고쳐졌다는 신호입니다. 주요 기록 8건을 매주 자동 대조합니다.</p>
-    <p class="credit" style="margin-top:14px;">공개 지문 장부: korea-archive-mcp.vercel.app/fixity-ledger.json</p>
-  </div>
-  <div class="brand">KOREA ARCHIVE 통합검색 · <span style="color:#e8b45a;">직접 해 보기 👉 프로필 링크</span></div><div class="pageno">예제 15 / 15</div>
+  <div class="mosaic m2c"><img src="{{img:../img2/uigwe_hwaseong23.jpg|maxdim=800|q=80}}"><img src="{{img:../img2/gyeongbok_1906.jpg|maxdim=800|q=80}}"></div>
+  <div class="shade"></div>
+  <span class="lab" style="left:40px; top:300px; font-family:Consolas,monospace; color:#7be39a; font-size:28px;">a46e5177b8b153bd ✓</span>
+  <span class="lab" style="left:580px; top:300px; font-family:Consolas,monospace; color:#7be39a; font-size:28px;">4adc8e6c9556179e ✓</span>
+  <div class="bottom" style="padding-bottom:116px;"><div style="font-size:24px; color:var(--gold); font-weight:900; letter-spacing:.2em; text-shadow:0 2px 8px #000;">예제 15 · 원문이 바뀌면 알아챕니다</div>
+    <div class="hl" style="font-size:60px; margin-top:6px;">기록의 <span class="g">지문</span>을<br>매주 다시 잽니다</div>
+    <span class="chip">오늘 값 = 공개 장부 값 → 원문 그대로</span></div>
+  <div class="foot"></div><div class="frame" style="z-index:7;"></div>
+  <div class="cr">장서각 K2-3556 해제 · 근정전 해설 지문 — 공개 장부 korea-archive-mcp.vercel.app/fixity-ledger.json · 사진은 각 기록의 예시 이미지</div>
+  <div class="brand" style="z-index:9; text-shadow:0 2px 8px #000;">KOREA ARCHIVE 통합검색 · <span style="color:#e8b45a;">직접 해 보기 👉 프로필 링크</span></div><div class="pageno" style="z-index:9; color:#e5ddc9; text-shadow:0 2px 8px #000;">예제 15 / 15</div>
 </div>
 
 </body>
