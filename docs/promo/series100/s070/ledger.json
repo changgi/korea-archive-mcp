@@ -1,0 +1,21 @@
+{
+ "n": 70,
+ "src": "ndl",
+ "record": {
+  "id": "",
+  "title": "(미제작) 京城 지도 1930s 후보",
+  "date": "",
+  "inst": "国立国会図書館",
+  "url": ""
+ },
+ "images": [],
+ "points": [],
+ "video": {
+  "url": "",
+  "length_s": 0,
+  "rights": "",
+  "note": ""
+ },
+ "status": "blocked",
+ "notes": "2026-11-22 09:2x ndlsearch.ndl.go.jp/api/opensearch?title=朝鮮写真帖 → HTTP 429 Too Many Requests. 규칙대로 NDL 요청 중단. 그 전 조사: 1930s 京城 지도 후보(京城府管内圖 1934, 大京城案内地圖 1932, 都市計画準拠大京城市街地図 1937, 陸地測量部 1:50000 '京城' 1941)는 opensearch 결과에 디지털 링크 없음. 디지털화된 13712095(最新京城市街全圖 1909)·936926(京城市街全圖 1913)은 permission 'ndl_only'(관내 한정)라 사용 불가. 다음 후보: 『大日本帝国朝鮮写真帖』(1910) 다른 장면 — 단 s101~s104(heritage) 에이전트도 dl.ndl.go.jp(766880, 767136 등)를 사용한 기록이 있어 'NDL 단독 사용' 전제가 깨졌을 수 있음."
+}

@@ -1,0 +1,100 @@
+{
+ "n": 93,
+ "src": "jsg",
+ "record": {
+  "id": "장서각 K4-6988 (MF35-6735)",
+  "title": "이조어필언간집(李朝御筆諺簡集) + 장서각 언간·한글 편지 목록",
+  "date": "",
+  "inst": "한국학중앙연구원 장서각",
+  "url": "https://jsg.aks.ac.kr/dir/view?dataId=JSG_K4-6988"
+ },
+ "images": [
+  {
+   "file": "src/eongan1861_p1.jpg",
+   "role": "hero",
+   "record_id": "NLK KOL202100958 p1",
+   "title": "諺簡 (1861) 1면",
+   "date": "",
+   "url": "https://viewer.nl.go.kr/nlmivs/viewWonmun_js.jsp?cno=KOL202100958",
+   "rights": "NLK 저작권유형 '이용 제한이 없습니다' — 출처: 국립중앙도서관",
+   "rights_evidence": "NLK 통합뷰어 서지정보: 「서명 諺簡 저자 아바님 수취 발행일 1861---- 발행자 朴瑄壽 發給 저작권유형 이용 제한이 없습니다.」",
+   "w": 1800,
+   "h": 1535,
+   "orig": "1993×1700",
+   "visible": [
+    "첫 줄 「아바님젼」 — 받는 사람",
+    "본문 가운데에도 「아바님」",
+    "맨 왼쪽 줄 「오월」로 시작",
+    "오른쪽 위 붉은 인장",
+    "왼쪽 아래 소장 관리 표지"
+   ],
+   "nocrop": false
+  },
+  {
+   "file": "src/eongan1861_p2.jpg",
+   "role": "extra",
+   "record_id": "NLK KOL202100958 p2",
+   "title": "諺簡 (1861) 2면",
+   "date": "",
+   "url": "https://viewer.nl.go.kr/nlmivs/viewWonmun_js.jsp?cno=KOL202100958",
+   "rights": "NLK 저작권유형 '이용 제한이 없습니다' — 출처: 국립중앙도서관",
+   "rights_evidence": "NLK 통합뷰어 서지정보: 「서명 諺簡 저자 아바님 수취 발행일 1861---- 발행자 朴瑄壽 發給 저작권유형 이용 제한이 없습니다.」",
+   "w": 1800,
+   "h": 1535,
+   "orig": "1993×1700",
+   "visible": [
+    "같은 자료 2면"
+   ],
+   "nocrop": false
+  },
+  {
+   "file": "src/eongan1861_p3.jpg",
+   "role": "extra",
+   "record_id": "NLK KOL202100958 p3",
+   "title": "諺簡 (1861) 3면",
+   "date": "",
+   "url": "https://viewer.nl.go.kr/nlmivs/viewWonmun_js.jsp?cno=KOL202100958",
+   "rights": "NLK 저작권유형 '이용 제한이 없습니다' — 출처: 국립중앙도서관",
+   "rights_evidence": "NLK 통합뷰어 서지정보: 「서명 諺簡 저자 아바님 수취 발행일 1861---- 발행자 朴瑄壽 發給 저작권유형 이용 제한이 없습니다.」",
+   "w": 1800,
+   "h": 1116,
+   "orig": "2741×1700",
+   "visible": [
+    "같은 자료 3면"
+   ],
+   "nocrop": false
+  },
+  {
+   "file": "src/eongan1861_p4.jpg",
+   "role": "extra",
+   "record_id": "NLK KOL202100958 p4",
+   "title": "諺簡 (1861) 4면",
+   "date": "",
+   "url": "https://viewer.nl.go.kr/nlmivs/viewWonmun_js.jsp?cno=KOL202100958",
+   "rights": "NLK 저작권유형 '이용 제한이 없습니다' — 출처: 국립중앙도서관",
+   "rights_evidence": "NLK 통합뷰어 서지정보: 「서명 諺簡 저자 아바님 수취 발행일 1861---- 발행자 朴瑄壽 發給 저작권유형 이용 제한이 없습니다.」",
+   "w": 1800,
+   "h": 1116,
+   "orig": "2741×1700",
+   "visible": [
+    "같은 자료 4면"
+   ],
+   "nocrop": false
+  }
+ ],
+ "points": [
+  "첫 줄 「아바님젼」 — 받는 사람",
+  "본문 가운데에도 「아바님」",
+  "맨 왼쪽 줄 「오월」로 시작",
+  "오른쪽 위 붉은 인장",
+  "왼쪽 아래 소장 관리 표지"
+ ],
+ "video": {
+  "url": "",
+  "length_s": 0,
+  "rights": "",
+  "note": "영상 없음"
+ },
+ "status": "ok",
+ "notes": "K4-6988은 서지만 있고 해제 없음. 장서각 언간 개별 문서(ANC_… URL)를 mode=jsg에 재투입하면 0건(도구 결함 의심). NLK 언간 945건 중 상당수 '이용불가' — 이용 가능한 諺簡(1861, 朴瑄壽 發給) 사용. 흘림 한글은 확실한 글자만."
+}
