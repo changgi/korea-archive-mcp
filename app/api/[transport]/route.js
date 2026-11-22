@@ -906,7 +906,7 @@ const COLLECT = {
     const list = Array.isArray(r['목록']) ? r['목록'] : [];
     const rows = r['목록항목'] || [];
     if (rows.length) return rows.slice(0, n).map((x) => { const km = x.call.match(/^(奎|古|想白|一簑)/); const kn = km && { '奎': '규장각도서(奎)', '古': '고도서(古)', '想白': '상백문고', '一簑': '일사문고' }[km[1]];
-      return { title: `${x.title} · ${x.author}`.slice(0, 110), date: x.date, id: x.call, ...(kn ? { series: kn } : {}), url: 'https://kyudb.snu.ac.kr' }; });
+      return { title: `[${x.call}] ${x.title} · ${x.author}`.slice(0, 120), date: x.date, id: x.call, ...(kn ? { series: kn } : {}), url: 'https://kyudb.snu.ac.kr' }; });
     const cx = {};
     return list.slice(0, n).map((t) => { const km = String(t).match(/(奎|古|想白|一簑)\s*\d/); const kn = km && { '奎': '규장각도서(奎)', '古': '고도서(古)', '想白': '상백문고', '一簑': '일사문고' }[km[1]]; return { title: cx[t] ? `${t} ${cx[t]}`.slice(0, 110) : String(t), date: '', id: String(t), ...(kn ? { series: kn } : {}), url: 'https://kyudb.snu.ac.kr' }; });
   },
@@ -1187,7 +1187,8 @@ async function jSjw(query) {
 const kyuRows = (flat) => {
   const rows = [];
   const re = /(?:^|\s)\d{1,3}\.\s+(.{2,140}?)\s+청구기호\s*:\s*(\S{2,40})\s+편저자\s*:\s*(.{1,90}?)\s+간행년대\s*:\s*(.{1,50}?)\s+사부분류\s*:\s*(.{1,80}?)\s+(?:본문\s*:\s*(.{0,400}?)\s+)?상세정보/g;
-  for (const m of flat.matchAll(re)) rows.push({ call: m[2], title: m[1].split(/\s\d{1,3}\.\s+/).pop().trim(), author: m[3].trim(), date: m[4].trim(), cls: m[5].trim(), body: (m[6] || '').replace(/\.\.\.$/, '').trim().slice(0, 160) });
+  const seen = new Set();
+  for (const m of flat.matchAll(re)) if (!seen.has(m[2]) && seen.add(m[2])) rows.push({ call: m[2], title: m[1].split(/\s\d{1,3}\.\s+/).pop().trim(), author: m[3].trim(), date: m[4].trim(), cls: m[5].trim(), body: (m[6] || '').replace(/\.\.\.$/, '').trim().slice(0, 160) });
   return rows.slice(0, 30);
 };
 async function jKyu(query) {
@@ -2383,10 +2384,10 @@ const JB_CROSS = `국내외 대조 절차 — 순서를 틀리면 헛수고한�
         if (mode === 'kyujanggak') {
           const r = await jKyu(q);
           const fmt = (v, rows) => !Array.isArray(v) ? `오류(${v.error})` : (rows && rows.length)
-            ? `${v.length}건\n` + rows.slice(0, 10).map((x) => `- [${x.call}] ${x.title} · ${x.author} · ${x.date} · ${x.cls}${x.body ? `\n  해제: ${x.body}…` : ''}`).join('\n')
+            ? `${Math.max(v.length, rows.length)}건\n` + rows.slice(0, 10).map((x) => `- [${x.call}] ${x.title} · ${x.author} · ${x.date} · ${x.cls}${x.body ? `\n  해제: ${x.body}…` : ''}`).join('\n')
             : `${v.length}건 — ${v.slice(0, 12).join(' ')}`;
           let out = `규장각 '${q}'\n목록: ${fmt(r['목록'], r['목록항목'])}\n해제: ${fmt(r['해제'], r['해제항목'])}`;
-          const lc = Array.isArray(r['목록']) ? r['목록'].length : 0; const ac = Array.isArray(r['해제']) ? r['해제'].length : 0;
+          const lc = Array.isArray(r['목록']) ? Math.max(r['목록'].length, (r['목록항목'] || []).length) : 0; const ac = Array.isArray(r['해제']) ? Math.max(r['해제'].length, (r['해제항목'] || []).length) : 0;
           if (ac > lc) out += '\n★ 해제 검색이 목록보다 많습니다 — 절목·사목류가 상위 서명 아래 편차(編次)로 들어가 있을 수 있습니다.';
           out += `
 ■ 원문 이미지 접근 지식(실측 2026-08-18) — GET·web_fetch 불가, ImageServlet 직접 URL은 브라우저에서 열림:
