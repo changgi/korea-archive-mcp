@@ -28,6 +28,8 @@ css += '''
 .status{background:#fff7e6;border:1px solid #f0d9a8;border-radius:12px;padding:16px 18px;margin-top:20px;font-size:.95rem}
 '''
 parts_nav = ''.join(f'<a href="#p{p[2]}">{E(p[0])} {E(p[1])}<span>{p[2]:02d}–{p[3]:02d}</span></a>' for p in d['parts'])
+import sys as _s; _s.path.insert(0, str(docs / 'promo')); from card_desc import card_descs
+V2PLAN = json.loads((docs / 'promo' / 'series30v2' / 'plan.json').read_text(encoding='utf-8'))
 secs = []
 for i, p in enumerate(d['parts']):
     items = [it for it in d['items'] if p[2] <= it['n'] <= p[3]]
@@ -35,7 +37,8 @@ for i, p in enumerate(d['parts']):
     for it in items:
         lis = ''.join(f'<li><b>{E(k)}</b>{E(v)}</li>' for k, v in it['facts'])
         v2 = sorted((docs / 'promo' / 'series30v2' / 'build' / f'{it["n"]:02d}').glob('*.jpg'))
-        strip = ''.join(f'<a href="promo/series30v2/build/{it["n"]:02d}/{f.name}" target="_blank"><img loading="lazy" src="promo/series30v2/build/{it["n"]:02d}/{f.name}" alt="{it["n"]:02d} 캐러셀 {k}/{len(v2)}"></a>' for k, f in enumerate(v2, 1))
+        _pl = V2PLAN.get(f'{it["n"]:02d}', {}); ds = card_descs(_pl, it['head'], it['say'], it['facts']) if _pl else []; ds = ds if len(ds) == len(v2) else [''] * len(v2)
+        strip = ''.join(f'<a href="promo/series30v2/build/{it["n"]:02d}/{f.name}" data-d="{E(ds[k-1])}" target="_blank"><img loading="lazy" src="promo/series30v2/build/{it["n"]:02d}/{f.name}" alt="{it["n"]:02d} 캐러셀 {k}/{len(v2)}"></a>' for k, f in enumerate(v2, 1))
         zname = f'{it["n"]:02d}_' + it['inst'].split(' (')[0].replace('/', '·') + '.zip'
         setlink = f'<div class="set"><b>인스타 캐러셀 {len(v2)}장</b>{strip}</div><div class="lk"><a href="promo/series30v2/build/{it["n"]:02d}/caption.txt" target="_blank">소개글(캡션) 열기</a><a href="promo/series30v2/zip/{zname}" download><b>세트 내려받기(ZIP)</b></a></div>' if v2 else ''
         cover = f'promo/series30v2/build/{it["n"]:02d}/{v2[0].name}' if v2 else f'promo/series30/thumbs/s{it["n"]:02d}.jpg'
@@ -84,6 +87,7 @@ page = f'''<!DOCTYPE html>
 <li><a href="promo/series30/sources.txt">출처·권리 대장</a> (이미지 11장 권리 실확인 · 이미지가 없는 19곳은 실제 조회 결과만으로 만든 '기록 카드')</li>
 </ul></div></section>
 <section class="final"><div class="wrap narrow" style="text-align:center;padding:60px 0"><p>더 자세한 예제는 <a href="examples.html">예제 15선</a>, 연결 방법은 <a href="index.html">소개 페이지</a>에서.</p></div></section>
+<script src="gallery.js" defer></script>
 </body>
 </html>
 '''

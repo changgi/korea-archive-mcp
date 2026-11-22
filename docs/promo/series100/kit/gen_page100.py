@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 """100선(031~130) 페이지 → docs/series100.html + thumbs/(표지 640·띠 200). 시리즈 폴더의 plan.json·카드만으로 생성."""
-import json, html, re, pathlib, glob
+import json, html, re, pathlib, glob, sys
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent.parent.parent))
+from card_desc import card_descs
 from PIL import Image
 S = pathlib.Path(__file__).resolve().parent.parent  # series100/
 DOCS = S.parent.parent
@@ -43,7 +45,8 @@ for i, p in enumerate(order):
     for n, P, cards in sorted(parts[p]):
         rel = f'promo/series100/s{n:03d}'
         lis = ''.join(f'<li><b>{E(k)}</b>{E(v)}</li>' for k, v in P['facts'][:3])
-        strip = ''.join(f'<a href="{rel}/{c.name}" target="_blank"><img loading="lazy" src="promo/series100/thumbs/{c.stem}.jpg" alt="{n:03d} {k}/{len(cards)}"></a>' for k, c in enumerate(cards, 1))
+        ds = card_descs(P, P['head'], P['say'], P['facts']); ds = ds if len(ds) == len(cards) else [''] * len(cards)
+        strip = ''.join(f'<a href="{rel}/{c.name}" data-d="{E(ds[k-1])}" target="_blank"><img loading="lazy" src="promo/series100/thumbs/{c.stem}.jpg" alt="{n:03d} {k}/{len(cards)}"></a>' for k, c in enumerate(cards, 1))
         vid = '<span class="vid">🎞 영상 해설</span>' if P.get('scenes') else ''
         arts.append(f'''<article class="it" id="s{n:03d}"><a href="{rel}/{cards[0].name}" target="_blank"><img loading="lazy" src="promo/series100/thumbs/{cards[0].stem}.jpg" alt="{E(P["inst"])} — {E(P["head"])}"></a>
 <div class="b"><div class="inst">{n:03d} · {P["flag"]} {E(P["inst"])}{vid}</div><h3>{E(P["head"])}</h3><div class="q">"{E(P["say"])}"</div><ul>{lis}</ul>
@@ -62,6 +65,7 @@ page = f'''<!DOCTYPE html>
 <div class="parts">{nav}</div></div></header>
 {"".join(secs)}
 <section class="final"><div class="wrap narrow" style="text-align:center;padding:60px 0"><p>권리 원칙: 공공누리 제4유형은 원형 그대로(글·필터 미적용) · 허가 대상 이미지는 미게재 · 포로·묘지·수형자 사진 제외 · 기관 차단은 우회하지 않음. 각 소개글에 출처·권리 근거.</p></div></section>
+<script src="gallery.js" defer></script>
 </body></html>'''
 (DOCS / 'series100.html').write_text(page, encoding='utf-8')
 print('series', len(items), 'video', nv, 'bytes', len(page.encode()))
