@@ -180,18 +180,21 @@ button,select,input{font:inherit}
       if (++done % 12 === 0) rebuild(); } };
     fdone = false; await Promise.all(Array.from({ length: 6 }, worker)); if (token === fver) fdone = true; rebuild();
   }
+  let expandBudget = 30; // 하위 컬렉션 자동 펼치기 상한 — 원 기관 서버 예의(넘으면 폴더로 두고 누를 때 연다)
   async function expand(m, group, depth, out) { // 중첩 컬렉션(계층) 펼치기 — 부(部) › 시리즈 순서 그대로, 깊이 3까지
     for (const x of m.items) {
       if (!x.coll) { out.push({ ...x, group }); continue; }
-      if (depth >= 3) continue;
+      if (depth >= 3 || expandBudget-- <= 0) { out.push({ ...x, group }); continue; } // 폴더로 남김(목록에서 누르면 그 컬렉션을 연다)
       try { const c = norm(await getJ(x.id)); if (c.kind === 'collection') await expand(c, x.label, depth + 1, out); else out.push({ ...x, coll: false, group }); } catch { /* 하위 컬렉션 실패는 건너뜀 */ }
     }
     return out;
   }
   async function loadCollection(u, m) {
     coll = m; collSrc = u; $('#flt').value = ''; flat = []; off = new Map();
-    ms = m.items.some((x) => x.coll) ? await expand(m, '', 0, []) : m.items.filter((x) => !x.coll);
-    coll.flatItems = ms; prefetchAll(++fver); renderList();
+    expandBudget = 30;
+    const all = m.items.some((x) => x.coll) ? await expand(m, '', 0, []) : m.items.filter((x) => !x.coll);
+    ms = all.filter((x) => !x.coll); coll.folders = all.filter((x) => x.coll);
+    coll.flatItems = [...ms, ...coll.folders]; prefetchAll(++fver); renderList();
     if (act && !act.man) { const first = ms[0]; if (first) openManifest(act, first.id, 0, first.inline); }
   }
   function renderList() {
