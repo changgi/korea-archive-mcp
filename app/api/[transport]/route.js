@@ -197,9 +197,18 @@ const tnaLine = (r) => `- [${r.reference || '?'}] ${(r.title || r.description ||
 const norm = (s) => (s == null ? '' : String(s)).replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim();
 const dedupKey = (it) => norm(it.title).toLowerCase().replace(/[^a-z0-9가-힣一-鿿]/g, '').slice(0, 50) + '|' + (it.id || '');
 // run collectors concurrently; merge, dedup by title|id, union the source tags (상호보완: 한 record를 여러 채널이 확인)
+const mclean = (h) => String(h || '').replace(/<script[\s\S]*?<\/script>/gi, ' ').replace(/<style[\s\S]*?<\/style>/gi, ' ').replace(/<[^>]+>/g, ' ').replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&#39;|&apos;/g, "'").replace(/&quot;/g, '"').replace(/\s+/g, ' ').trim(); // v1.93: 모듈 범위 HTML 정리(도구 범위 dclean 미노출 대응)
 // v1.93: Gallica(gallica.bnf.fr)가 서버 IP 자동 조회를 403 차단 — BnF 공식 카탈로그 SRU(catalogue.bnf.fr/api/SRU, 같은 BnF 소장 기록)로 폴백.
 // UNIMARC 200$a 표제·210/214$d 연대·215$a 수량·856$u Gallica 원문 ark — 기록 수집은 계속되고, 원문(Gallica) 링크도 함께 준다.
 async function bnfCatalog(q, n, doctype) {
+  if (doctype === undefined || doctype === '') { // v1.93.1: 사진·도판(doctype i) 질의를 병행 — 디지털화(Gallica 원문) 자료가 상위에 오도록
+    const [a, b] = await Promise.allSettled([bnfCatalog(q, n, 'i'), bnfCatalog(q, n, null)]);
+    const A = a.status === 'fulfilled' ? a.value : { total: 0, items: [] }, B = b.status === 'fulfilled' ? b.value : { total: 0, items: [] };
+    if (a.status !== 'fulfilled' && b.status !== 'fulfilled') throw b.reason;
+    const seen = new Set(); const all = [...A.items, ...B.items].filter((it) => !seen.has(it.id) && seen.add(it.id));
+    all.sort((x, y) => (y.gallica ? 1 : 0) - (x.gallica ? 1 : 0));
+    return { total: Math.max(A.total, B.total), items: all.slice(0, n) };
+  }
   const cql = `bib.anywhere all "${String(q).replace(/"/g, '')}"` + (doctype ? ` and bib.doctype any "${doctype}"` : '');
   const xml = await gtext(`https://catalogue.bnf.fr/api/SRU?version=1.2&operation=searchRetrieve&query=${encodeURIComponent(cql)}&recordSchema=unimarcXchange&maximumRecords=20`, { 'User-Agent': UA });
   const total = (xml.match(/numberOfRecords>(\d+)</) || [])[1];
@@ -220,7 +229,7 @@ async function bnfCatalog(q, n, doctype) {
 async function openGoStatus(q) {
   try {
     const b = await gtext('https://www.open.go.kr/othicInfo/infoList/orginlInfoList.do?searchKeyword=' + encodeURIComponent(q || ''), { 'User-Agent': UA });
-    const t = dclean(b);
+    const t = mclean(b);
     if (/메뉴 점검|점검 중인 메뉴/.test(t)) {
       const per = (t.match(/제한 기간\s*([^.]*?\d{4}\.\d{1,2}\.\d{1,2}\.[^재]{0,30})/) || [])[1] || '';
       return { maint: true, msg: `정보공개포털 원문정보 메뉴 점검 중${per ? `(제한 기간 ${per.trim()})` : ''} — 포털 공지: 점검 기간에도 자료 보유 기관에 정보공개청구 가능, 진행은 '신청내역조회'에서 확인` };
@@ -629,7 +638,7 @@ const COLLECT = {
     const recs = await loadNedbIndex(); if (recs) return nedbFileSearch(recs, q, n);
     const b = await gtext('https://db.history.go.kr/search/searchTotalResult.do?searchKeyword=' + encodeURIComponent(q));
     const seen = new Set(); const out = []; const re = /href="\/item\/(\w+)\/main\.do"[^>]*>([\s\S]*?)<\/a>/g; let m;
-    while ((m = re.exec(b)) && out.length < n) { const nm = dclean(m[2].replace(/<span[^>]*class="btn-new"[^>]*>[\s\S]*?<\/span>/g, '')); if (nm && !seen.has(m[1])) { seen.add(m[1]); out.push({ title: `${nm} — '${q}' 수록`, date: '', id: m[1], series: `한국사DB › ${nm}`, url: `https://db.history.go.kr/item/${m[1]}/main.do` }); } }
+    while ((m = re.exec(b)) && out.length < n) { const nm = mclean(m[2].replace(/<span[^>]*class="btn-new"[^>]*>[\s\S]*?<\/span>/g, '')); if (nm && !seen.has(m[1])) { seen.add(m[1]); out.push({ title: `${nm} — '${q}' 수록`, date: '', id: m[1], series: `한국사DB › ${nm}`, url: `https://db.history.go.kr/item/${m[1]}/main.do` }); } }
     return out;
   },
   koreanwar: async (q, n) => {
