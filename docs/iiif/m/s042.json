@@ -288,6 +288,16 @@
       ]
      },
      "format": "application/json"
+    },
+    {
+     "id": "https://korea-archive-mcp.vercel.app/iiif/awm/C280168/manifest.json",
+     "type": "Manifest",
+     "label": {
+      "ko": [
+       "원 기관 원본(IIIF 브리지)"
+      ]
+     },
+     "format": "application/ld+json"
     }
    ],
    "navDate": "1953-06-02T00:00:00Z",
@@ -439,6 +449,16 @@
       ]
      },
      "format": "application/json"
+    },
+    {
+     "id": "https://korea-archive-mcp.vercel.app/iiif/awm/C40078/manifest.json",
+     "type": "Manifest",
+     "label": {
+      "ko": [
+       "원 기관 원본(IIIF 브리지)"
+      ]
+     },
+     "format": "application/ld+json"
     }
    ],
    "navDate": "1953-01-01T00:00:00Z",
@@ -590,6 +610,16 @@
       ]
      },
      "format": "application/json"
+    },
+    {
+     "id": "https://korea-archive-mcp.vercel.app/iiif/awm/C328874/manifest.json",
+     "type": "Manifest",
+     "label": {
+      "ko": [
+       "원 기관 원본(IIIF 브리지)"
+      ]
+     },
+     "format": "application/ld+json"
     }
    ],
    "navDate": "1953-06-02T00:00:00Z",
@@ -741,6 +771,16 @@
       ]
      },
      "format": "application/json"
+    },
+    {
+     "id": "https://korea-archive-mcp.vercel.app/iiif/awm/C328876/manifest.json",
+     "type": "Manifest",
+     "label": {
+      "ko": [
+       "원 기관 원본(IIIF 브리지)"
+      ]
+     },
+     "format": "application/ld+json"
     }
    ],
    "navDate": "1953-06-02T00:00:00Z",
@@ -892,6 +932,16 @@
       ]
      },
      "format": "application/json"
+    },
+    {
+     "id": "https://korea-archive-mcp.vercel.app/iiif/awm/C332300/manifest.json",
+     "type": "Manifest",
+     "label": {
+      "ko": [
+       "원 기관 원본(IIIF 브리지)"
+      ]
+     },
+     "format": "application/ld+json"
     }
    ],
    "navDate": "1952-05-01T00:00:00Z",

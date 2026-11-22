@@ -8,7 +8,7 @@
   · 기관 웹페이지 캡처·All Rights Reserved → 게재하지 않고 원 기관 링크만(목록 'links')
 사용: python3 docs/promo/build_iiif.py   (재실행 시 바뀐 이미지만 다시 만든다)
 """
-import json, glob, os, re, shutil, pathlib, html, hashlib, csv, io, time, urllib.request, datetime
+import json, glob, os, re, shutil, pathlib, html, hashlib, csv, io, time, urllib.request, urllib.parse, datetime
 from PIL import Image
 
 PROMO = pathlib.Path(__file__).resolve().parent
@@ -198,6 +198,13 @@ def main():
             if nm:
                 cv['seeAlso'] += [{'id': BRIDGE + nm.group(1) + '/manifest.json', 'type': 'Manifest', 'label': L('NARA 원본 전체(IIIF 브리지)'), 'format': 'application/ld+json'},
                                   {'id': BRIDGE + nm.group(1) + '/record.jsonld', 'type': 'Dataset', 'label': L('NARA 계층 기술(RiC-O)'), 'format': 'application/ld+json'}]
+            uu = str(im.get('url') or rec.get('url') or '')  # v1.99: 원 기관 IIIF 브리지(AWM·역사박물관·위키미디어) — 원본 전체로 이어지는 길
+            bm = re.search(r'awm\.gov\.au/collection/(C\d+)', uu) or re.search(r'much\.go\.kr/.*idnbr=([A-Z]{2}[\w-]+)', uu)
+            cm = re.search(r'commons\.wikimedia\.org/wiki/(File(?:%3A|:)[^?#]+)', uu, re.I)
+            if bm or cm:
+                src_ = 'awm' if 'awm.gov.au' in uu else 'much' if 'much.go.kr' in uu else 'commons'
+                bid = urllib.parse.unquote(cm.group(1)).replace('_', ' ') if cm else bm.group(1)
+                cv['seeAlso'].append({'id': 'https://korea-archive-mcp.vercel.app/iiif/' + src_ + '/' + urllib.parse.quote(bid, safe='') + '/manifest.json', 'type': 'Manifest', 'label': L('원 기관 원본(IIIF 브리지)'), 'format': 'application/ld+json'})
             nd = nav_date(im.get('date') or rec.get('date'))
             if nd:
                 cv['navDate'] = nd

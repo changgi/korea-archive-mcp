@@ -288,6 +288,16 @@
       ]
      },
      "format": "application/json"
+    },
+    {
+     "id": "https://korea-archive-mcp.vercel.app/iiif/awm/C299572/manifest.json",
+     "type": "Manifest",
+     "label": {
+      "ko": [
+       "원 기관 원본(IIIF 브리지)"
+      ]
+     },
+     "format": "application/ld+json"
     }
    ],
    "navDate": "1951-10-01T00:00:00Z",
@@ -439,6 +449,16 @@
       ]
      },
      "format": "application/json"
+    },
+    {
+     "id": "https://korea-archive-mcp.vercel.app/iiif/awm/C328674/manifest.json",
+     "type": "Manifest",
+     "label": {
+      "ko": [
+       "원 기관 원본(IIIF 브리지)"
+      ]
+     },
+     "format": "application/ld+json"
     }
    ],
    "navDate": "1952-07-01T00:00:00Z",
@@ -590,6 +610,16 @@
       ]
      },
      "format": "application/json"
+    },
+    {
+     "id": "https://korea-archive-mcp.vercel.app/iiif/awm/C326814/manifest.json",
+     "type": "Manifest",
+     "label": {
+      "ko": [
+       "원 기관 원본(IIIF 브리지)"
+      ]
+     },
+     "format": "application/ld+json"
     }
    ],
    "rights": "http://creativecommons.org/publicdomain/mark/1.0/"
@@ -740,6 +770,16 @@
       ]
      },
      "format": "application/json"
+    },
+    {
+     "id": "https://korea-archive-mcp.vercel.app/iiif/awm/C40082/manifest.json",
+     "type": "Manifest",
+     "label": {
+      "ko": [
+       "원 기관 원본(IIIF 브리지)"
+      ]
+     },
+     "format": "application/ld+json"
     }
    ],
    "navDate": "1952-01-01T00:00:00Z",
@@ -891,6 +931,16 @@
       ]
      },
      "format": "application/json"
+    },
+    {
+     "id": "https://korea-archive-mcp.vercel.app/iiif/awm/C359057/manifest.json",
+     "type": "Manifest",
+     "label": {
+      "ko": [
+       "원 기관 원본(IIIF 브리지)"
+      ]
+     },
+     "format": "application/ld+json"
     }
    ],
    "navDate": "1953-07-17T00:00:00Z",
@@ -1042,6 +1092,16 @@
       ]
      },
      "format": "application/json"
+    },
+    {
+     "id": "https://korea-archive-mcp.vercel.app/iiif/awm/C358897/manifest.json",
+     "type": "Manifest",
+     "label": {
+      "ko": [
+       "원 기관 원본(IIIF 브리지)"
+      ]
+     },
+     "format": "application/ld+json"
     }
    ],
    "navDate": "1953-07-17T00:00:00Z",
