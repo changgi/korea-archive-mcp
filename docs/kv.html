@@ -152,7 +152,7 @@ button,select,input{font:inherit}
     P.osd.viewport.setRotation(P.rot);
     P.el.querySelector('.cap').textContent = `${P.man.label} · ${c.label}`;
     P.el.querySelector('.p').disabled = k === 0; P.el.querySelector('.n').disabled = k === P.man.canvases.length - 1;
-    if (P === act) { renderStrip(); renderInfo(); syncCtl(); }
+    if (P === act) { renderStrip(); renderInfo(); syncCtl(); markList(); }
     if (playing && P === act) kick();
     updURL();
   }
