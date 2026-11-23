@@ -278,6 +278,7 @@ function tnaVariants(q) {
 }
 // v1.98: 기록 URL → IIIF 매니페스트(기관 IIIF·NARA 브리지·우리 갤러리) — 매니페스트 형식(RiC)·IIIF 형식 공용
 const iiifFor = (u, id) => { u = String(u || ''); let x;
+  if ((x = String(id || '').match(/^(ksm|portrait|gwaebul|diary|mokgan|jcphoto|arch|design|pattern|oldbook|hyanggyo|stone|gaesong|assay):(\d+)$/))) return bridgeUrl('nrich', `${x[1]}-${x[2]}`); // v2.18 연구DB 이미지 데이터셋 → 국립문화유산연구원 IIIF 브리지
   if ((x = u.match(/catalog\.archives\.gov\/id\/(\d+)/))) return naraUrls(x[1]).manifest;
   if ((x = u.match(/discovery\.nationalarchives\.gov\.uk\/details\/r\/([A-Za-z0-9]{2,20})/))) return tnaUrls(x[1]).manifest; // v2.1: TNA 실제 계층 브리지
   // v1.99: IIIF 브리지 2 — 국가유산(목록 id kdcd-asno-ctcd)·역사박물관(idnbr)·AWM(C-id)·위키미디어(File)
