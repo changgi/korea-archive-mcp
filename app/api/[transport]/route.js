@@ -11,6 +11,8 @@ import { envelopeOf, encodeEnv, recUrls } from '../../../lib/rec_iiif.js';
 import { deflateRawSync } from 'node:zlib';
 import { tnaUrls } from '../../../lib/tna_iiif.js';
 import { stash, ledgerConf, LEDGER_PAGE } from '../../../lib/ledger.js';
+import { AsyncLocalStorage } from 'node:async_hooks';
+const REQ = new AsyncLocalStorage(); // v2.7: 요청 맥락 — 자동 검사(X-KA-Probe) 트래픽을 활용 집계에서 제외
 
 export const maxDuration = 60;
 // Korean government archive sites (archives.seoul.go.kr, opengov.seoul.go.kr, …) block foreign /
@@ -1124,10 +1126,10 @@ const COLLECT = {
       if (!ln.trim()) continue; let o; try { o = JSON.parse(ln); } catch { continue; }
       const h = `${o.title} ${o.partOf || ''} ${o.id || ''} ${(o.sources || []).join(' ')} ${o.date || ''}`.toLowerCase();
       if (!(toks.every((t) => h.includes(t)) || (en.length && en.every((t) => h.includes(t))))) continue;
-      out.push({ title: `[${(o.sources || []).join('+')} · 발견 ${o.seen}회 · 첫 ${String(o.first_seen).slice(0, 10)}] ${o.title}`.slice(0, 200), date: o.date || '', id: o.id || o.key,
-        series: o.partOf || '', url: o.url || '', media: o.media || '', ...(o.sameAs ? { sameAs: o.sameAs } : {}), seen: o.seen || 1 });
+      out.push({ title: `[${(o.sources || []).join('+')} · 발견 ${o.seen}회 · 7일 ${o.seen_7d || 0} · ${o.days_total || 1}일 · 첫 ${String(o.first_seen).slice(0, 10)}${o.rank ? ` · 활용 ${o.rank}위` : ''}] ${o.title}`.slice(0, 220), date: o.date || '', id: o.id || o.key,
+        series: o.partOf || '', url: o.url || '', media: o.media || '', ...(o.sameAs ? { sameAs: o.sameAs } : {}), seen: o.seen || 1, rank: o.rank || 1e9 });
     }
-    return out.sort((a, b) => b.seen - a.seen).slice(0, n);
+    return out.sort((a, b) => a.rank - b.rank || b.seen - a.seen).slice(0, n); // v2.7: 활용 순위(최근·지속·교차확인 가중)
   },
   aks: async (q, n) => { // 한국고문서자료관 소장처 매칭(내장 카탈로그 — 네트워크 0)
     const toks = q.split(/\s+/).filter(Boolean);
@@ -2809,7 +2811,7 @@ item_cd 5종(자료 성격별): ART 도설·회화 / ETC 두루마리·축 / DRR
       await resolveOrigins(items, stats);
       items.sort((a, b) => b.sources.length - a.sources.length);
       // v2.5 발견 누적 원장 — 발견 기록만(검색어·사용자 정보 없음) 날짜 함에 적재, 매일 GitHub 원장으로 병합. 미설정·한도 초과면 조용히 생략
-      const kept = await stash(items, { partOf: (it) => { const h = it.sources[0].split('·')[0]; return (PART_OF[h] && PART_OF[h](it)) || ''; } });
+      const kept = await stash(items, { fmt: format || 'text', probe: !!(REQ.getStore() || {}).probe, partOf: (it) => { const h = it.sources[0].split('·')[0]; return (PART_OF[h] && PART_OF[h](it)) || ''; } });
       const keptNote = kept ? `\n※ 발견 기록(검색어 제외)은 공개 누적 원장에 쌓입니다 — ${LEDGER_PAGE}` : '';
       if (format === 'iiif') { // v1.97: 연속 이미지 뷰 — 결과 중 기관 IIIF가 있는 기록의 원 매니페스트를 컬렉션으로, 위키미디어는 정지 이미지 매니페스트로
         const L3 = (t) => ({ ko: [String(t || '').slice(0, 200)] });
@@ -3825,4 +3827,5 @@ h2 .no{font-size:64px;position:absolute;top:-14px;left:-6px;opacity:.13}
 [KA 인장 SVG — 그대로 복사]
 <svg class='ka-seal' viewBox='0 0 72 72' width='30' height='30'><path d='M36 1v6M36 65v6M1 36h6M65 36h6' stroke='#8a3033' stroke-width='2.6'/><rect x='9' y='9' width='54' height='54' rx='7' fill='#8a3033'/><rect x='13.5' y='13.5' width='45' height='45' rx='4.5' fill='none' stroke='#f5f1e8' stroke-width='1.6' opacity='.75'/><path d='M22 22v28M22 36l11-14M22 36l11 14' stroke='#f5f1e8' stroke-width='4.6' fill='none' stroke-linecap='square'/><path d='M38 50l7-28 7 28M41 41h8' stroke='#f5f1e8' stroke-width='4.6' fill='none' stroke-linecap='square'/></svg>`;
 
-export { handler as GET, handler as POST, handler as DELETE };
+const wrapped = (req, ctx) => REQ.run({ probe: req.headers.get('x-ka-probe') || '' }, () => handler(req, ctx));
+export { wrapped as GET, wrapped as POST, wrapped as DELETE };
