@@ -227,9 +227,32 @@ SRC_NAME = {"nara": "미국 국립기록관리청 NARA", "tna": "영국 국립�
 def tree_path(o):
     """계층 경로 = 기관 › partOf 단계들(앞 단계가 기관명과 같으면 접음). 계층이 없으면 '(계열 미상)'을 명시."""
     src = o["key"].split(":")[0]; top = SRC_NAME.get(src, src)
-    segs = [x.strip() for x in (o.get("partOf") or "").split("›") if x.strip()]
+    segs = [x.strip() for x in (o.get("partOf") or o.get("partOf_derived") or "").split("›") if x.strip()]
     if segs and (segs[0] in top or top in segs[0] or segs[0] in ("국가기록원", "국외소재문화유산재단", "국립문화유산연구원", "IIIF 갤러리", "한국사DB", "TNA", "NARA", "AWM 유형")): segs = segs[1:] if segs[0] != "AWM 유형" else segs
     return [top] + (segs or ["(계열 미상)"])
+
+def decade(o):
+    """연대 — date → 제목 → 메타 생산일 순으로 첫 4자리 연도(1000~2099)."""
+    cands = [o.get("date") or "", o.get("title") or ""] + [str(v) for k, v in (o.get("meta") or []) if k in ("생산일", "생산연도", "연대", "날짜")]  # 제목 연도(내용 시점)가 메타 생산일(업로드일일 수 있음)보다 우선
+    for c in cands:
+        m = re.search(r"(?<!\d)(1[0-9]\d\d|20\d\d)(?!\d)", c)
+        if m: return m.group(1)[:3] + "0년대"
+    return ""
+
+def derive_path(o):
+    """v2.27 계층정보가 없는 기록에 파생 계층을 구축 — 원 기관 계층(partOf)과 구분해 '[파생]'으로 표시. 근거: 유형 표기·제목 주제부·연대·매체."""
+    src = o["key"].split(":")[0]; t = o.get("title") or ""; segs = []
+    m = re.match(r"\[([^\]]+)\]", t)
+    if m: segs.append(m.group(1))  # 서울기록원 [기록건·사진]·[컬렉션] 등 유형 표기
+    elif src == "nzarch" and " - " in t: segs.append(t.split(" - ")[0].strip()[:60])  # AIMS 제목 첫 단(주제 분류)
+    elif src == "un":
+        m2 = re.match(r"(Cooperation between the United Nations and|Report of|Question of|Letter dated|Resolution)", t)
+        segs.append(m2.group(1) if m2 else "문서")
+    elif src == "commons":
+        u = (o.get("url") or "").lower(); segs.append("영상" if re.search(r"\.(webm|ogv|mp4)$", u) else ("문서" if u.endswith((".pdf", ".djvu", ".tif")) else "이미지"))
+    d = decade(o)
+    segs.append(d or "연대 미상")
+    return "[파생] " + " › ".join(segs)
 
 def leaf_manifest(o):
     if o.get("iiif"): return o["iiif"]
@@ -463,27 +486,35 @@ def main():
         o["score"] = round(o["seen_30d"] * 2 + o["seen"] + o.get("days_total", 1) * 3 + (o.get("max_cross", 1) - 1) * 2, 1)  # 최근 활용·지속 활용(일수)·교차확인 가중
     for i, o in enumerate(sorted(led.values(), key=lambda o: (-o["score"], o["key"])), 1): o["rank"] = i
     recs = sorted(led.values(), key=lambda o: (o["first_seen"], o["key"]))
+    # v2.27 계층·IIIF가 없는 기록은 만들어 구축 — 원 기관 정보와 구분되는 필드에(partOf_derived · iiif_built)
+    for o in recs:
+        if not o.get("partOf"): o["partOf_derived"] = derive_path(o)
+        else: o.pop("partOf_derived", None)
+        o["iiif_kind"] = "기관 매니페스트" if o.get("iiif") else "브리지 매니페스트(기록 봉투)"
+        o["iiif_built"] = "" if o.get("iiif") else leaf_manifest(o)
     with open(lp, "w", encoding="utf-8") as f:
         for o in recs: f.write(json.dumps(o, ensure_ascii=False, separators=(",", ":")) + "\n")
-    cols = ["key", "sources", "title", "date", "id", "url", "partOf", "media", "sameAs", "iiif", "first_seen", "last_seen", "seen", "seen_7d", "seen_30d", "days_total", "formats", "tools", "max_cross", "trend", "rank", "score", "summary", "rights", "thumb", "meta"]
+    cols = ["key", "sources", "title", "date", "id", "url", "partOf", "partOf_derived", "media", "sameAs", "iiif", "iiif_built", "iiif_kind", "first_seen", "last_seen", "seen", "seen_7d", "seen_30d", "days_total", "formats", "tools", "max_cross", "trend", "rank", "score", "summary", "rights", "thumb", "meta"]
     fmtv = lambda v: " | ".join(f"{a}: {b}" for a, b in v) if isinstance(v, list) and v and isinstance(v[0], list) else (" ".join(f"{k}:{n}" for k, n in sorted(v.items(), key=lambda kv: -kv[1])) if isinstance(v, dict) else ("+".join(v) if isinstance(v, list) else v))
     with open(os.path.join(D, "discovered.csv"), "w", encoding="utf-8-sig", newline="") as f:
         w = csv.writer(f); w.writerow(cols)
         for o in recs: w.writerow([fmtv(o.get(c, "")) for c in cols])
     pop = sorted(recs, key=lambda o: o["rank"])
     with open(os.path.join(D, "popular.csv"), "w", encoding="utf-8-sig", newline="") as f:
-        w = csv.writer(f); pc = ["rank", "score", "seen", "seen_7d", "seen_30d", "days_total", "trend", "formats", "sources", "title", "date", "id", "partOf", "summary", "url", "iiif", "first_seen", "last_seen"]; w.writerow(pc)
+        w = csv.writer(f); pc = ["rank", "score", "seen", "seen_7d", "seen_30d", "days_total", "trend", "formats", "sources", "title", "date", "id", "partOf", "partOf_derived", "summary", "url", "iiif", "iiif_built", "first_seen", "last_seen"]; w.writerow(pc)
         for o in pop[:200]: w.writerow([fmtv(o.get(c, "")) for c in pc])
     usage["daily"] = dict(sorted(usage["daily"].items()))  # v2.26 일별 활용 전체 보존(이전 400일 제한 해제)
     json.dump(usage, open(up, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
     sets = {}
     graph = []
     for o in recs:
-        inst = o["key"].split(":")[0]; ser = o.get("partOf") or "(계열 미상)"
-        sid = f"set:{inst}:{ser}"; sets.setdefault(sid, {"@id": sid, "@type": "rico:RecordSet", "rico:title": ser, "rico:isOrWasIncludedIn": {"@id": f"inst:{inst}"}})
+        inst = o["key"].split(":")[0]; ser = o.get("partOf") or o.get("partOf_derived") or "(계열 미상)"
+        sid = f"set:{inst}:{ser}"; sets.setdefault(sid, {"@id": sid, "@type": "rico:RecordSet", "rico:title": ser, "rico:isOrWasIncludedIn": {"@id": f"inst:{inst}"},
+                                                         **({"rico:generalDescription": "KOREA ARCHIVE 파생 계층(유형·제목 주제부·연대 근거) — 원 기관 계층 아님"} if ser.startswith("[파생]") else {})})
+        mf = o.get("iiif") or o.get("iiif_built")
         graph.append({"@id": o.get("url") or f"rec:{o['key']}", "@type": "rico:Record", "rico:title": o["title"], **({"rico:identifier": o["id"]} if o.get("id") else {}),
                       **({"rico:isAssociatedWithDate": o["date"]} if o.get("date") else {}), "rico:isOrWasIncludedIn": {"@id": sid},
-                      **({"owl:sameAs": o["sameAs"]} if o.get("sameAs") else {}), **({"rico:scopeAndContent": o["summary"]} if o.get("summary") else {}),
+                      **({"owl:sameAs": o["sameAs"]} if o.get("sameAs") else {}), **({"rico:hasOrHadInstantiation": {"@id": mf, "@type": "rico:Instantiation", "rico:title": o["iiif_kind"]}} if mf else {}), **({"rico:scopeAndContent": o["summary"]} if o.get("summary") else {}),
                       "prov:wasGeneratedBy": {"@type": "prov:Activity", "prov:label": "KOREA ARCHIVE 통합검색 발견(검색어 비공개)", "prov:startedAtTime": o["first_seen"], "prov:used": o["sources"]}})
     json.dump({"@context": {"rico": "https://www.ica.org/standards/RiC/ontology#", "prov": "http://www.w3.org/ns/prov#", "owl": "http://www.w3.org/2002/07/owl#"},
                "@graph": list(sets.values()) + graph}, open(os.path.join(D, "discovered.jsonld"), "w", encoding="utf-8"), ensure_ascii=False)
@@ -512,7 +543,7 @@ def main():
     def card(o, big=True):
         th = (f"<img loading='lazy' src='{E_(o['thumb'])}' alt='' referrerpolicy='no-referrer' onerror=\"this.replaceWith(Object.assign(document.createElement('div'),{{className:'ph',textContent:'{E_(o['key'].split(':')[0])}'}}))\">"
               if o.get("thumb_ok") else f"<div class='ph'>{E_(o['key'].split(':')[0])}<small>{'원본 이미지 없음(기록 카드)' if ('card.svg' in (o.get('thumb') or '')) else ('이미지 링크만(권리·게재윤리)' if o.get('thumb') else '이미지 없음')}</small></div>")
-        chips = "".join(f"<span>{E_(x)}</span>" for x in [o.get("date"), o.get("id"), o.get("partOf")] if x)
+        chips = "".join(f"<span>{E_(x)}</span>" for x in [o.get("date"), o.get("id"), o.get("partOf") or o.get("partOf_derived")] if x)
         md = "".join(f"<dt>{E_(k)}</dt><dd>{E_(v)}</dd>" for k, v in (o.get("meta") or []))
         links = f"<a href='{E_(o.get('url') or '#')}'>원 기관</a>" + (f" · <a href='{KV}{E_(o['iiif'])}'>KV로 보기</a> · <a href='{E_(o['iiif'])}'>IIIF</a>" if o.get("iiif") else "")
         use = f"발견 {o['seen']}회 · 7일 {o['seen_7d']} · 30일 {o['seen_30d']} · {o.get('days_total', 1)}일 · {E_(o['trend'])} · 활용 {o['rank']}위 · 형식 {E_(fmtv(o.get('formats', {})))}"
