@@ -2093,6 +2093,16 @@ const JB_CROSS = `국내외 대조 절차 — 순서를 틀리면 헛수고한�
               + (toc.length ? `【목차】\n${toc.join('\n').slice(0, 1800)}\n` : '') + (img ? `표지: ${NR_B}${img}\n` : '') + `원문 뷰어(PDF 열람·내려받기): ${url}\n`
               + '※ 출처: 국립문화유산연구원 발간자료 — 공공누리 유형은 원문 페이지 표기 확인(대부분 제4유형: 출처표시·비상업·변경금지). 인용 시 보고서명·발행년도·쪽수.');
           }
+          const pm2 = q.trim().match(/^인물\s*[:：]\s*(.+)$/);
+          if (pm2) { // v2.20 인물 색인 — 금석문 찬·서, 초상화 화가, 괘불 화승, 일기 저자(동명이인 가능 — 한자 병기로 구분)
+            const P = JSON.parse(await cachedText('nrPeople', 6 * 3600e3, () => gtext('https://changgi.github.io/korea-archive-mcp/data/nrich/people.json'), '"r"'));
+            const nm = pm2[1].trim(); const keys = Object.keys(P).filter((k) => P[k].n === nm || k === nm || (P[k].h && P[k].h.includes(nm)) || (nm.length >= 2 && P[k].n.startsWith(nm) && P[k].n.length <= nm.length + 1)).slice(0, 8);
+            if (!keys.length) return text(`인물 '${nm}' — 연구DB 인물 색인(금석문 찬·서·제액, 초상화 화가, 괘불 화승, 일기 저자)에 없음. 본문 검색: cross_search(query='${nm}', sources='nrich')`);
+            let left = 40;
+            const blocks = keys.map((k) => { const e = P[k]; const tot = Object.values(e.r).reduce((a, v) => a + v.length, 0);
+              return `■ ${k} — ${tot}건 (` + Object.entries(e.r).map(([r, v]) => `${r} ${v.length}`).join(' · ') + ')\n' + Object.entries(e.r).map(([r, v]) => v.slice(0, Math.max(0, Math.min(v.length, left))).map((x) => { left--; return `  - [${r}] ${x[1]}${x[2] ? ' · ' + x[2] : ''} → ${x[0]}`; }).join('\n')).filter(Boolean).join('\n'); });
+            return text(`국립문화유산연구원 연구DB 인물 '${nm}' — ${keys.length}명(표기 기준)\n` + blocks.join('\n') + `\n※ 기록 판독: nedb_search(mode='nrich', query='<id>') · 동명이인 가능 — 한자 병기로 구분 · 서(書)에는 집자(옛 글씨를 모아 새김)가 포함될 수 있음 — 생몰년과 건립 연대 대조 · 인물 색인 https://changgi.github.io/korea-archive-mcp/data/nrich/people.json(주 1회) · RiC-O(인물=rico:Person): data/nrich/export/<키>.jsonld`);
+          }
           const dm = q.trim().match(new RegExp(`^(${NR_DS.join('|')})\\s*[:#]\\s*(\\S.*)$`));
           if (dm) { // 연구DB 기록 — 정적 색인 전체 필드(원 기관 상세 URL로 전문)
             const o = (await nrDb()).find((r) => r.id === `${dm[1]}:${dm[2]}`);
@@ -2112,7 +2122,7 @@ const JB_CROSS = `국내외 대조 절차 — 순서를 틀리면 헛수고한�
             + rp.map((r) => `- [발간자료] ${r.title} (${r.year}) · ${r.field} · ${r.kogl ? '공공누리 ' + r.kogl : ''} ${r.url}`).join('\n') + (rp.length ? '\n' : '')
             + ov.slice(0, max_results).map((r) => `- [국외문화유산] ${r.title} — ${r.nation} · ${r.holder} (${r.era}) ${r.url}`).join('\n')
             + await (async () => { if (qm) return ''; const db = await nrDbSearch(q, max_results).catch(() => []); return db.length ? `\n연구DB ${db.length}건:\n` + db.map((o) => `- [${o.dn}] ${o.t}${o.a ? ' (' + o.a + ')' : ''}${o.d ? ' · ' + o.d : ''}${o.p ? ' · ' + o.p : ''} → ${o.id}`).join('\n') : ''; })()
-            + `\n※ 상세: nedb_search(mode='nrich', query=<상세 URL 또는 ov:번호·rep:번호·연구DB id(ksm:3 등)>) · 보고서만: query='보고서:키워드' · 포털 통합검색(브라우저): ${NR_B}/search.do · 국외소재문화유산 조사 현황: https://www.nrich.go.kr/kor/page.do?menuIdx=336`);
+            + `\n※ 상세: nedb_search(mode='nrich', query=<상세 URL 또는 ov:번호·rep:번호·연구DB id(ksm:3 등)·'인물:이름'>) · 보고서만: query='보고서:키워드' · 포털 통합검색(브라우저): ${NR_B}/search.do · 국외소재문화유산 조사 현황: https://www.nrich.go.kr/kor/page.do?menuIdx=336`);
         } catch (e) { return text(`국립문화유산연구원 조회 실패(${String(e.message || e).slice(0, 60)}) — 브라우저 대체 경로: ${NR_B}/kor/index.do`); }
       }
       if (mode === 'okchf') { // v2.11 국외소재문화유산재단 — 상세 URL/'relic:ID' 판독(소장국가·소장처·관리번호·소장경위·시대·재질·크기·출판정보·설명·이미지), 그 밖은 키워드 목록
