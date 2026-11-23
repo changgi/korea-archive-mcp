@@ -135,7 +135,9 @@ button,select,input{font:inherit}
     $('#panes').appendChild(el);
     const P = { el, man: null, src: '', k: 0, rot: 0, osd: OpenSeadragon({ element: el.querySelector('.osd'), prefixUrl: 'https://cdn.jsdelivr.net/npm/openseadragon@4.1.1/build/openseadragon/images/', showNavigator: true, navigatorPosition: 'BOTTOM_RIGHT', maxZoomPixelRatio: 4, visibilityRatio: .5, crossOriginPolicy: 'Anonymous', showRotationControl: false, gestureSettingsTouch: { pinchRotate: false } }) };
     P.osd.addHandler('open', () => msg(P, ''));
-    P.osd.addHandler('open-failed', () => { if (P.man) { const c = P.man.canvases[P.k]; if (c && c.svc && c.img && !P._fb) { P._fb = 1; P.osd.open({ type: 'image', url: c.img, buildPyramid: false }); } else msg(P, '이미지를 열지 못했습니다 — 원 기관이 외부 열람(CORS)을 막았을 수 있습니다.'); } });
+    P.osd.addHandler('open-failed', () => { if (P.man) { const c = P.man.canvases[P.k]; if (c && c.svc && c.img && !P._fb) { P._fb = 1; P.osd.open({ type: 'image', url: c.img, buildPyramid: false }); }
+      else if (c && c.img && !P._nc) { P._nc = 1; P.osd.open({ type: 'image', url: c.img, buildPyramid: false, crossOriginPolicy: false }); } // v2.19.1: CORS 헤더 없는 원 기관 정지 이미지 — 일반 이미지로 다시(표시 전용)
+      else msg(P, '이미지를 열지 못했습니다 — 원 기관이 외부 열람(CORS)을 막았을 수 있습니다.'); } });
     el.querySelector('.p').onclick = () => go(P, P.k - 1); el.querySelector('.n').onclick = () => go(P, P.k + 1);
     el.addEventListener('pointerdown', () => setAct(P), true);
     panes.push(P); setAct(P); return P;
@@ -154,7 +156,7 @@ button,select,input{font:inherit}
     if (!P.man) return;
     if (k >= P.man.canvases.length) return step(P, +1); // 기록 끝 → 다음 기록 첫 장
     if (k < 0) return step(P, -1);                       // 기록 처음 → 이전 기록 마지막 장
-    P.k = k; P._fb = 0; const c = P.man.canvases[k];
+    P.k = k; P._fb = 0; P._nc = 0; const c = P.man.canvases[k];
     P.osd.open(c.svc ? c.svc + '/info.json' : { type: 'image', url: c.img, buildPyramid: false });
     P.osd.viewport.setRotation(P.rot);
     P.el.querySelector('.cap').textContent = `${P.man.label} · ${c.label}`;
