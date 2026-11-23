@@ -75,6 +75,13 @@ const nrDbSearch = async (q, n, ds) => { const toks = String(q).toLowerCase().sp
   const score = (o) => (toks.every((t) => String(o.t).toLowerCase().includes(t)) ? 0 : 1); // 명칭 일치 우선
   return rows.sort((a, b) => score(a) - score(b)).slice(0, n); };
 const nrDbItem = (o) => ({ title: `[${o.dn}] ${o.t}${o.a ? ` (${o.a})` : ''}`.slice(0, 160), date: o.d || '', id: o.id, series: ['연구DB', o.dn, (o.p || '').split(/\s+/)[0]].filter(Boolean).join(' › '), url: o.u || '' });
+// v2.21 연구원 인물 색인 조회(공용) — '인물:이름' 모드와 gonghun '종합:이름' 4번째 채널이 함께 쓴다
+const nrPeople = async () => JSON.parse(await cachedText('nrPeople', 6 * 3600e3, () => gtext('https://changgi.github.io/korea-archive-mcp/data/nrich/people.json'), '"r"'));
+const nrPeopleKeys = (P, nm) => Object.keys(P).filter((k) => P[k].n === nm || k === nm || (P[k].h && P[k].h.includes(nm)) || (nm.length >= 2 && P[k].n.startsWith(nm) && P[k].n.length <= nm.length + 1)).slice(0, 8);
+const nrYear = (d) => { const m = String(d || '').match(/(?<!\d)(\d{3,4})(?!\d)/); return m ? +m[1] : 9999; }; // 연대 문자열의 첫 연도(정렬용)
+const nrPeopleLines = (P, keys, per = 3) => keys.map((k) => { const e = P[k]; const tot = Object.values(e.r).reduce((a, v) => a + v.length, 0);
+  const ex = Object.entries(e.r).flatMap(([r, v]) => v.map((x) => [r, ...x])).sort((a, b) => nrYear(a[3]) - nrYear(b[3])).slice(0, per);
+  return `- ${k} — ${tot}건(${Object.entries(e.r).map(([r, v]) => `${r} ${v.length}`).join(' · ')})` + ex.map((x) => `\n  · [${x[0]}] ${x[2]}${x[3] ? ' · ' + x[3] : ''} → ${x[1]}`).join(''); });
 const nrField = (f) => String(f || '').split(/\s*-\s*/).filter(Boolean).join(' › ');
 // v2.14 국외 소재 교차확인 — 재단(okchf)·연구원(nrich) 두 DB에서 '명칭(괄호·한자·기호 제거)+소장처'가 같은 기록을 한 건으로 묶는다(출처 둘 다, sameAs=다른 쪽 URL)
 const OV_ALIAS = { '대영박물관': '영국박물관', 'british museum': '영국박물관', '메트로폴리탄박물관': '메트로폴리탄미술관' };
@@ -2095,13 +2102,12 @@ const JB_CROSS = `국내외 대조 절차 — 순서를 틀리면 헛수고한�
           }
           const pm2 = q.trim().match(/^인물\s*[:：]\s*(.+)$/);
           if (pm2) { // v2.20 인물 색인 — 금석문 찬·서, 초상화 화가, 괘불 화승, 일기 저자(동명이인 가능 — 한자 병기로 구분)
-            const P = JSON.parse(await cachedText('nrPeople', 6 * 3600e3, () => gtext('https://changgi.github.io/korea-archive-mcp/data/nrich/people.json'), '"r"'));
-            const nm = pm2[1].trim(); const keys = Object.keys(P).filter((k) => P[k].n === nm || k === nm || (P[k].h && P[k].h.includes(nm)) || (nm.length >= 2 && P[k].n.startsWith(nm) && P[k].n.length <= nm.length + 1)).slice(0, 8);
+            const P = await nrPeople(); const nm = pm2[1].trim(); const keys = nrPeopleKeys(P, nm);
             if (!keys.length) return text(`인물 '${nm}' — 연구DB 인물 색인(금석문 찬·서·제액, 초상화 화가, 괘불 화승, 일기 저자)에 없음. 본문 검색: cross_search(query='${nm}', sources='nrich')`);
             let left = 40;
             const blocks = keys.map((k) => { const e = P[k]; const tot = Object.values(e.r).reduce((a, v) => a + v.length, 0);
               return `■ ${k} — ${tot}건 (` + Object.entries(e.r).map(([r, v]) => `${r} ${v.length}`).join(' · ') + ')\n' + Object.entries(e.r).map(([r, v]) => v.slice(0, Math.max(0, Math.min(v.length, left))).map((x) => { left--; return `  - [${r}] ${x[1]}${x[2] ? ' · ' + x[2] : ''} → ${x[0]}`; }).join('\n')).filter(Boolean).join('\n'); });
-            return text(`국립문화유산연구원 연구DB 인물 '${nm}' — ${keys.length}명(표기 기준)\n` + blocks.join('\n') + `\n※ 기록 판독: nedb_search(mode='nrich', query='<id>') · 동명이인 가능 — 한자 병기로 구분 · 서(書)에는 집자(옛 글씨를 모아 새김)가 포함될 수 있음 — 생몰년과 건립 연대 대조 · 인물 색인 https://changgi.github.io/korea-archive-mcp/data/nrich/people.json(주 1회) · RiC-O(인물=rico:Person): data/nrich/export/<키>.jsonld`);
+            return text(`국립문화유산연구원 연구DB 인물 '${nm}' — ${keys.length}명(표기 기준)\n` + blocks.join('\n') + `\n※ 기록 판독: nedb_search(mode='nrich', query='<id>') · 동명이인 가능 — 한자 병기로 구분 · 서(書)에는 집자(옛 글씨를 모아 새김)가 포함될 수 있음 · 연대는 원 데이터 표기(피장자 시대·건립 시점 혼재 가능) — 생몰년과 대조 · 인물 색인 https://changgi.github.io/korea-archive-mcp/data/nrich/people.json(주 1회) · RiC-O(인물=rico:Person): data/nrich/export/<키>.jsonld`);
           }
           const dm = q.trim().match(new RegExp(`^(${NR_DS.join('|')})\\s*[:#]\\s*(\\S.*)$`));
           if (dm) { // 연구DB 기록 — 정적 색인 전체 필드(원 기관 상세 URL로 전문)
@@ -2434,16 +2440,18 @@ const JB_CROSS = `국내외 대조 절차 — 순서를 틀리면 헛수고한�
               return rows;
             };
             const why = (r) => r.status === 'rejected' ? String(r.reason && r.reason.message || r.reason).slice(0, 40) : '';
-            const [g, d, j] = await Promise.allSettled([COLLECT.gonghun(nm, 3), dict(), COLLECT.indy(nm, 3)]);
+            const [g, d, j, k] = await Promise.allSettled([COLLECT.gonghun(nm, 3), dict(), COLLECT.indy(nm, 3), nrPeople().then((P) => nrPeopleLines(P, nrPeopleKeys(P, nm), 3))]);
             const gv = g.status === 'fulfilled' ? g.value.map((it) => `- [mngNo ${it.id}] ${it.title}`) : [];
             const dv = d.status === 'fulfilled' ? d.value : [];
             const jv = j.status === 'fulfilled' ? j.value.map((it) => `- ${it.title} (${it.date})\n  ${it.url}`) : [];
+            const kv = k.status === 'fulfilled' ? k.value : [];
             const sec = (t, lines, e) => `【${t}】\n` + (lines.length ? lines.join('\n') : `(0건${e ? ` — 오류: ${e}` : ''})`);
-            return text(`인물 종합 대조 '${nm}' — 공훈록·인명사전·판결문 3채널 병렬:\n`
+            return text(`인물 종합 대조 '${nm}' — 공훈록·인명사전·판결문·연구원 인물 색인 4채널 병렬:\n`
               + sec('공훈전자사료관(국가보훈부) — 공적·훈격', gv, why(g)) + '\n'
               + sec('한국독립운동인명사전(독립기념관) — 학술 전기', dv, why(d)) + '\n'
               + sec('독립운동판결문(국가기록원) — 죄명·주문', jv, why(j)) + '\n'
-              + "※ 심층: mngNo 숫자 재투입=공적조서·공훈록·수형기록 · mode=i815 '사전:번호'=전기 전문 · mode=indy 상세URL=주문·사건개요·원문 뷰어.\n"
+              + sec('국립문화유산연구원 연구DB 인물 — 금석문 찬·서 · 초상화 · 괘불 화승 · 일기 저자(연대=원 데이터 표기, 생몰년과 대조)', kv, why(k)) + '\n'
+              + "※ 심층: mngNo 숫자 재투입=공적조서·공훈록·수형기록 · mode=i815 '사전:번호'=전기 전문 · mode=indy 상세URL=주문·사건개요·원문 뷰어 · mode=nrich '인물:이름'=연구원 인물 전체·'ksm:번호' 등=기록 판독.\n"
               + "※ 대조 포인트: 한자명·생몰 일치로 동명이인 분리 → 훈격(공훈)↔전기(사전)↔형량(판결문) 정합 → 이명 확보 후 oldnews '본문:이명'으로 당대 신문 확장.");
           }
           if (/^\d+$/.test(q)) { // mngNo 상세
