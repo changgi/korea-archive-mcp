@@ -48,6 +48,7 @@ L1 = lambda x: (x if isinstance(x, str) else (next(iter(x.values()), [""])[0] if
 strip = lambda t: re.sub(r"\s+", " ", html.unescape(re.sub(r"<[^>]+>", " ", str(t or "")))).strip()
 # 게재윤리 — 포로·사망자·묘지·수형자 관련은 썸네일을 싣지 않는다(링크만)
 SENSITIVE = re.compile(r"\b(POWs?|prisoners?|captured|dead|bod(y|ies)|corpses?|graves?|cemetery|burial|execution|executed|massacre|mugshot|wounded)\b|포로|시신|사망|전사자|묘지|매장|처형|학살|수형|부상자", re.I)
+NO_DERIV = re.compile(r"변경금지|제\s*[34]\s*유형|NoDerivs|\bND\b", re.I)  # 변경금지(공공누리 3·4유형·CC ND) — 카드 자르기·축소 게재는 원형 변경이므로 썸네일 대신 링크
 OPEN_RIGHTS = re.compile(r"publicdomain|creativecommons\.org/licenses|rightsstatements\.org/vocab/(NoC|NKC)|Public Domain|Unrestricted|저작권 만료|이용 제한 없음|공공누리", re.I)
 
 AR_KEEP = ["생산기관", "관리번호", "생산연도", "문서유형", "기록물형태", "매체유형", "보존기간", "공개구분", "서고정보", "페이지정보", "발간번호", "서비스권자", "기록물계열"]
@@ -92,7 +93,8 @@ DEEP = {"i815": ("nedb_search", lambda o: o.get("url") and {"mode": "i815", "que
         "ktv": ("nedb_search", lambda o: o.get("url") and {"mode": "ktv", "query": o["url"]}),
         "koreanwar": ("koreanwar_item", lambda o: o.get("id") and not str(o["id"]).startswith("book:") and {"ref_code": o["id"]}),
         "seoul": ("seoul_archives_search", lambda o: o.get("url") and {"query": o["url"]}),
-        "okchf": ("nedb_search", lambda o: o.get("url") and {"mode": "okchf", "query": o["url"]})}
+        "okchf": ("nedb_search", lambda o: o.get("url") and {"mode": "okchf", "query": o["url"]}),
+        "nrich": ("nedb_search", lambda o: o.get("url") and {"mode": "nrich", "query": o["url"]})}
 _sid = [None]
 
 def mcp_call(tool, args):
@@ -170,7 +172,7 @@ def enrich(o, budget):
     if o.get("enriched") and (o.get("enrich_status") != "fail" or o["enriched"] > (dt.date.today() - dt.timedelta(days=1)).isoformat()):
         th = o.get("thumb") or ""  # 이미 보강된 기록도 썸네일 게재 규칙은 매번 다시 적용(규칙 변경 소급)
         o["thumb_ok"] = bool(th) and not re.search(r"card\.svg|image/svg", th) and not SENSITIVE.search(f"{o.get('title', '')} {o.get('summary', '')}") and (
-            o["key"].split(":")[0] in ("nara", "gallery") or bool(OPEN_RIGHTS.search(o.get("rights") or "")))
+            o["key"].split(":")[0] in ("nara", "gallery") or (bool(OPEN_RIGHTS.search(o.get("rights") or "")) and not NO_DERIV.search(o.get("rights") or "")))
         return 0
     if m and budget <= 0:
         return 0  # 오늘 상한 소진 — 다음 실행에서 보강
@@ -208,21 +210,21 @@ def enrich(o, budget):
         o["thumb"] = o["media"]
     src = o["key"].split(":")[0]; th = o.get("thumb") or ""
     o["thumb_ok"] = bool(th) and not re.search(r"card\.svg|image/svg", th) and not SENSITIVE.search(f"{o.get('title', '')} {o.get('summary', '')}") and (
-        src in ("nara", "gallery") or bool(OPEN_RIGHTS.search(o.get("rights") or "")))
+        src in ("nara", "gallery") or (bool(OPEN_RIGHTS.search(o.get("rights") or "")) and not NO_DERIV.search(o.get("rights") or "")))
     o["enriched"] = today
     return used
 
 SRC_NAME = {"nara": "미국 국립기록관리청 NARA", "tna": "영국 국립기록관 TNA", "archives": "국가기록원", "ia": "인터넷 아카이브", "ndl": "일본 국립국회도서관", "jacar": "일본 아시아역사자료센터",
             "europeana": "Europeana", "gallica": "Gallica(BnF)", "un": "UN 디지털도서관", "awm": "호주 전쟁기념관", "commons": "위키미디어 공용", "gallery": "KOREA ARCHIVE IIIF 갤러리",
             "kyudb": "규장각", "jsg": "장서각", "nlk": "국립중앙도서관", "nedb": "한국사DB", "oldnews": "대한민국신문아카이브", "i815": "독립기념관", "gonghun": "공훈전자사료관",
-            "indy": "독립운동판결문", "koreanwar": "6·25전쟁 아카이브센터", "earchive": "국편 전자사료관", "ktv": "KTV", "seoul": "서울기록원", "okchf": "국외소재문화유산재단",
+            "indy": "독립운동판결문", "koreanwar": "6·25전쟁 아카이브센터", "earchive": "국편 전자사료관", "ktv": "KTV", "seoul": "서울기록원", "okchf": "국외소재문화유산재단", "nrich": "국립문화유산연구원",
             "much": "대한민국역사박물관", "heritage": "국가유산청", "aks": "한국고문서자료관", "nlna": "네덜란드 국립기록관", "dnz": "DigitalNZ", "nzarch": "뉴질랜드 기록원"}
 
 def tree_path(o):
     """계층 경로 = 기관 › partOf 단계들(앞 단계가 기관명과 같으면 접음). 계층이 없으면 '(계열 미상)'을 명시."""
     src = o["key"].split(":")[0]; top = SRC_NAME.get(src, src)
     segs = [x.strip() for x in (o.get("partOf") or "").split("›") if x.strip()]
-    if segs and (segs[0] in top or top in segs[0] or segs[0] in ("국가기록원", "국외소재문화유산재단", "IIIF 갤러리", "한국사DB", "TNA", "NARA", "AWM 유형")): segs = segs[1:] if segs[0] != "AWM 유형" else segs
+    if segs and (segs[0] in top or top in segs[0] or segs[0] in ("국가기록원", "국외소재문화유산재단", "국립문화유산연구원", "IIIF 갤러리", "한국사DB", "TNA", "NARA", "AWM 유형")): segs = segs[1:] if segs[0] != "AWM 유형" else segs
     return [top] + (segs or ["(계열 미상)"])
 
 def leaf_manifest(o):
