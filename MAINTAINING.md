@@ -44,7 +44,7 @@
 | `health` | 매주 월 | 30채널 골든 질의 + 같은 기록 묶기 회귀 | `auto-health` 이슈 |
 | `fixity-watch` | 매주 화 | 골든 기록 본문 지문(sha256-16) — 원문 개정 감지 | 원장(`public/fixity-ledger.json`) 이력 커밋 + 실패 |
 | `ledger` | 매일 00:17 KST | 발견 누적 원장 병합(`docs/data/`) — 처리 위치 `_state.json`, 최근 3일 함 | 실행 실패 시 다음 날 이어 받음(함 3일 보관) |
-| `nrich-harvest` | 매주 수 02:41 KST | 국립문화유산연구원 Open API 11종 → `docs/data/nrich_db.jsonl`(정적 색인) | 0건이면 기존 색인 유지(실패 종료) |
+| `nrich-harvest` | 매주 수 02:41 KST | 국립문화유산연구원 Open API 21종(30,647건) → `docs/data/nrich_db.jsonl`(정적 색인) | 0건이면 기존 색인 유지(실패 종료) |
 | `retry-blocked` · `nz-harvest` | 매주 화 | 차단 채널 재탐침 · NZ 정적 인덱스 갱신 | 실행 요약 |
 | Dependabot | 매월 | npm(마이너·패치만)·Actions 의존성 갱신 PR | verify의 **실제 빌드(next build)**가 병합 전 검증 |
 

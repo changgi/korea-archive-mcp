@@ -706,6 +706,37 @@
    ],
    "level": "warn",
    "note": "배포 직후 첫 호출은 색인 적재 중일 수 있음(3.5s 대기) — warn"
+  },
+  {
+   "id": "nrich-db-scoped",
+   "tool": "nedb_search",
+   "args": {
+    "mode": "nrich",
+    "query": "ksm:광개토",
+    "max_results": 5
+   },
+   "must": [
+    "연구DB \\[ksm\\] '광개토' — [1-9]",
+    "\\[금석문\\] 광개토"
+   ],
+   "must_not": [
+    "\\[한국고고학사전\\]"
+   ],
+   "level": "error"
+  },
+  {
+   "id": "nrich-db-material",
+   "tool": "nedb_search",
+   "args": {
+    "mode": "nrich",
+    "query": "material:미암일기",
+    "max_results": 3
+   },
+   "must": [
+    "\\[문화유산 전통재료\\(문헌 용례\\)\\]",
+    "미암일기"
+   ],
+   "level": "warn"
   }
  ]
 }
