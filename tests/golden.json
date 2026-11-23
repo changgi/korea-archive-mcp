@@ -537,6 +537,23 @@
     "&amp;"
    ],
    "level": "error"
+  },
+  {
+   "id": "okchf-photo-detail",
+   "tool": "nedb_search",
+   "args": {
+    "mode": "okchf",
+    "query": "relic_gls:94034"
+   },
+   "must": [
+    "작가: 노르베르트 베버",
+    "소장처 관리번호: BUDH_0048"
+   ],
+   "must_not": [
+    "· ·",
+    "더보기\\n"
+   ],
+   "level": "error"
   }
  ]
 }
