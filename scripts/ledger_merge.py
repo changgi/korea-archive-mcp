@@ -231,13 +231,33 @@ def tree_path(o):
     if segs and (segs[0] in top or top in segs[0] or segs[0] in ("국가기록원", "국외소재문화유산재단", "국립문화유산연구원", "IIIF 갤러리", "한국사DB", "TNA", "NARA", "AWM 유형")): segs = segs[1:] if segs[0] != "AWM 유형" else segs
     return [top] + (segs or ["(계열 미상)"])
 
+ERAS = ["선사", "고조선", "삼국", "고구려", "백제", "신라", "가야", "통일신라", "발해", "남북국", "고려", "조선", "대한제국", "일제강점기", "대한민국"]
+DATE_KEYS = ("생산일", "생산연도", "생산", "연대", "날짜", "시대", "시대분류", "출판정보", "발행", "발행일", "제작연도")
+
 def decade(o):
-    """연대 — date → 제목 → 메타 생산일 순으로 첫 4자리 연도(1000~2099)."""
-    cands = [o.get("date") or "", o.get("title") or ""] + [str(v) for k, v in (o.get("meta") or []) if k in ("생산일", "생산연도", "연대", "날짜")]  # 제목 연도(내용 시점)가 메타 생산일(업로드일일 수 있음)보다 우선
+    """연대 — date → 제목 → 메타(생산·시대·출판) 순. 4자리 연도면 'NNN0년대', 없으면 '18세기'처럼 세기, 그도 없으면 왕조·시대명. 지정일·등록일(지정 시점)은 쓰지 않는다."""
+    cands = [o.get("date") or "", o.get("title") or ""] + [str(v) for k, v in (o.get("meta") or []) if k in DATE_KEYS]  # 제목 연도(내용 시점)가 메타 생산일(업로드일일 수 있음)보다 우선
     for c in cands:
         m = re.search(r"(?<!\d)(1[0-9]\d\d|20\d\d)(?!\d)", c)
         if m: return m.group(1)[:3] + "0년대"
+    for c in cands:
+        m = re.search(r"(?<!\d)(\d{1,2})\s*(?:-\s*\d{1,2}\s*)?세기", c) or re.search(r"(?<!\d)(\d{1,2})(?:st|nd|rd|th)[ -]century", c, re.I)
+        if m and 1 <= int(m.group(1)) <= 21: return f"{int(m.group(1))}세기"
+    for c in [str(v) for k, v in (o.get("meta") or []) if k in ("시대", "시대분류")]:  # 왕조·시대명은 기관의 '시대' 필드에서만(제목의 '조선총독부'·'대한민국역사박물관' 같은 오인 방지)
+        for e in sorted(ERAS, key=len, reverse=True):
+            if e in c: return {"대한민국": "대한민국(1948~)", "일제강점기": "일제강점기"}.get(e, e + "시대")
     return ""
+
+def period_order(lbl):
+    """타임라인 정렬 — 시대명 < 세기 < 연대 순으로 시간축에 근사(세기 N → (N-1)*100년)."""
+    m = re.match(r"(\d{3,4})0년대", lbl)
+    if m: return (1, int(m.group(1)) * 10)
+    m = re.match(r"(\d{1,2})세기", lbl)
+    if m: return (1, (int(m.group(1)) - 1) * 100 + 50)
+    base = {"선사": -3000, "고조선": -1000, "삼국": 300, "고구려": 300, "백제": 300, "신라": 300, "가야": 300, "통일신라": 800, "발해": 800, "남북국": 800, "고려": 1100, "조선": 1600, "대한제국": 1900, "일제강점기": 1925, "대한민국(1948~)": 1970}
+    for e, y in base.items():
+        if lbl.startswith(e): return (1, y)
+    return (2, 0)
 
 def derive_path(o):
     """v2.27 계층정보가 없는 기록에 파생 계층을 구축 — 원 기관 계층(partOf)과 구분해 '[파생]'으로 표시. 근거: 유형 표기·제목 주제부·연대·매체."""
@@ -417,7 +437,7 @@ def kind_of(o):
     """매체 유형(인용 형식용) — 제목·URL 표기 근거. 근거가 없으면 문서."""
     t = (o.get("title", "") + " " + (o.get("url") or "") + " " + (o.get("media") or "")).lower()
     if re.search(r"영상|동영상|필름|film|motion picture|newsreel|대한뉴스|\.webm|\.mp4|video", t): return "motion_picture"
-    if re.search(r"사진|photo|\.jpe?g|\.png|\.gif|\.tif|image|도판|그림|회화|탱화|불화|초상", t): return "graphic"
+    if re.search(r"사진|圖|畵|畫|photo|\.jpe?g|\.png|\.gif|\.tif|image|도판|그림|회화|탱화|불화|초상", t): return "graphic"
     if re.search(r"지도|map\b|도면", t): return "map"
     return "document"
 
@@ -468,8 +488,19 @@ def build_media(recs):
         e["records"] += 1; h = o["key"].split(":")[0]; k = kind_of(o)
         e["by_source"][h] = e["by_source"].get(h, 0) + 1; e["by_kind"][k] = e["by_kind"].get(k, 0) + 1
         if len(e["samples"]) < 5: e["samples"].append({"title": o["title"][:120], "url": o.get("url", ""), "iiif": o.get("iiif") or o.get("iiif_built", "")})
-    json.dump({"updated": now, "note": "연대 = date → 제목 연도 → 메타 생산일(파생 규칙과 동일)", "timeline": sorted(tl.values(), key=lambda e: (e["decade"] == "연대 미상", e["decade"]))},
+    json.dump({"updated": now, "note": "구간 = 연대(4자리 연도) → 세기 → 왕조·시대명. 근거 순서 date → 제목 → 메타(생산·시대·출판). 세기·시대 구간은 시간축 근사 정렬", "timeline": sorted(tl.values(), key=lambda e: period_order(e["decade"]))},
               open(os.path.join(D, "timeline.json"), "w", encoding="utf-8"), ensure_ascii=False, indent=0)
+    # 5) 연대 타임라인 페이지 — 사람이 보는 매체(막대·대표 기록·KV 열람)
+    E_ = html.escape; KV = "https://changgi.github.io/korea-archive-mcp/kv.html?manifest="; T = sorted(tl.values(), key=lambda e: period_order(e["decade"])); mx = max((e["records"] for e in T), default=1)
+    li = lambda x: f"<li><a href='{E_(x['url'] or '#')}'>{E_(x['title'])}</a>" + (f" <a class='kv' href='{KV}{E_(x['iiif'])}'>KV</a>" if x["iiif"] else "") + "</li>"
+    KN = {"motion_picture": "영상", "graphic": "사진·그림", "map": "지도", "document": "문서"}
+    rows = "".join(f"""<section><h3>{E_(e['decade'])} <small>{e['records']}건 · {' '.join(f"{KN[k]} {n}" for k, n in sorted(e['by_kind'].items(), key=lambda kv: -kv[1]))}</small></h3>
+<div class="bar" style="width:{max(2, round(e['records'] / mx * 100))}%"></div><p class="src">{' · '.join(f"{E_(SRC_NAME.get(h, h))} {n}" for h, n in sorted(e['by_source'].items(), key=lambda kv: -kv[1]))}</p>
+<ul>{''.join(li(x) for x in e['samples'])}</ul></section>""" for e in T)
+    open(os.path.join(D, "timeline.html"), "w", encoding="utf-8").write(f"""<!DOCTYPE html><html lang="ko"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>연대 타임라인 — KOREA ARCHIVE 발견 원장</title><style>body{{font-family:system-ui,'Noto Sans KR',sans-serif;margin:0;background:#14161b;color:#e6e4dc}}main{{max-width:960px;margin:auto;padding:16px}}a{{color:#e0b04a}}
+section{{border-left:3px solid #e0b04a;padding:4px 14px;margin:14px 0}}h3{{margin:4px 0}}small{{color:#9b9a93;font-weight:400}}.bar{{height:8px;background:#e0b04a;border-radius:4px}}.src{{font-size:13px;color:#9b9a93}}li{{font-size:14px;margin:3px 0}}.kv{{font-size:12px;margin-left:6px}}</style>
+<main><h1>연대 타임라인</h1><p>발견 누적 원장 {len(recs)}건을 시대 구간으로. 구간 = 4자리 연도 → 세기 → 기관 '시대' 필드의 왕조·시대명(근거 순서 date → 제목 → 메타). 세기·시대 구간은 시간축 근사 위치. 구간마다 대표 기록 5건(IIIF·KV 열람). <a href="timeline.json">timeline.json</a> · <a href="index.html">원장</a></p>{rows}</main></html>""")
     return len(new), len(csl), len(tl)
 
 def merge_classes(recs):
@@ -652,7 +683,7 @@ details{{font-size:12px}}dl{{display:grid;grid-template-columns:auto 1fr;gap:2px
 table{{width:100%;border-collapse:collapse;font-size:14px}}td,th{{border-bottom:1px solid #2a2d35;padding:6px;text-align:left}}</style>
 <main><h1>발견 누적 원장</h1><p>KOREA ARCHIVE 통합검색 사용자가 도구로 발굴한 기록이 매일 이곳에 쌓입니다(검색어·사용자 정보 없음). 기록 <b>{st['records']:,}</b>건 · 마지막 갱신 {st['updated']} · 이번 갱신 신규 {new_recs}건 · 내용·메타정보 보강 {enr}건 · 썸네일 {thn}건</p>
 <p>{srcs}</p>
-<p><a class="b0" href="discovered.csv">CSV 내려받기</a><a class="b0" href="discovered.jsonl">JSONL</a><a class="b0" href="discovered.jsonld">RiC-O JSON-LD</a><a class="b0" href="../kv.html?manifest=https://changgi.github.io/korea-archive-mcp/data/collection.json">KV로 최근 300건 연속 보기</a><a class="b0" href="tree.html">계층구조도</a><a class="b0" href="queries/index.json">질의·회신 축적</a><a class="b0" href="classifications.json">분류 사전</a><a class="b0" href="provenance.json">발견 경로(질의↔기록)</a><a class="b0" href="feed.xml">새 발견 구독(Atom)</a><a class="b0" href="records.csl.json">인용 CSL-JSON(Zotero)</a><a class="b0" href="records.ris">인용 RIS(EndNote)</a><a class="b0" href="timeline.json">연대 타임라인</a><a class="b0" href="nrich/index.html">연구원 연구DB IIIF 계층</a><a class="b0" href="popular.csv">자주 활용 TOP 200</a><a class="b0" href="stats.json">집계</a></p>
+<p><a class="b0" href="discovered.csv">CSV 내려받기</a><a class="b0" href="discovered.jsonl">JSONL</a><a class="b0" href="discovered.jsonld">RiC-O JSON-LD</a><a class="b0" href="../kv.html?manifest=https://changgi.github.io/korea-archive-mcp/data/collection.json">KV로 최근 300건 연속 보기</a><a class="b0" href="tree.html">계층구조도</a><a class="b0" href="queries/index.json">질의·회신 축적</a><a class="b0" href="classifications.json">분류 사전</a><a class="b0" href="provenance.json">발견 경로(질의↔기록)</a><a class="b0" href="feed.xml">새 발견 구독(Atom)</a><a class="b0" href="records.csl.json">인용 CSL-JSON(Zotero)</a><a class="b0" href="records.ris">인용 RIS(EndNote)</a><a class="b0" href="timeline.html">연대 타임라인</a><a class="b0" href="nrich/index.html">연구원 연구DB IIIF 계층</a><a class="b0" href="popular.csv">자주 활용 TOP 200</a><a class="b0" href="stats.json">집계</a></p>
 <p style="font-size:13px;color:#9b9a93">주요 내용·메타정보·썸네일은 기관 IIIF·우리 브리지 매니페스트를 하루 한 번 판독해 채웁니다(하루 상한·순차 요청). 썸네일은 재이용 가능 표시가 확인된 것만 싣고, 포로·사망자·묘지·수형자 관련 기록과 허가가 필요한 이미지는 링크만 둡니다. 권리는 원 기관 표기를 따릅니다 — 게재 전 judge_rights로 확인. 모든 변경은 저장소 git 이력(docs/data/)에 남습니다.</p>
 <h2>자주 활용되는 기록 TOP 30</h2><p style="font-size:13px">점수 = 최근 30일 발견×2 + 전체 발견 + 발견된 날 수×3 + 교차확인 기관 수 가중. 자동 검사 트래픽 제외.</p><div class="g">{prow}</div>
 <h2>일별 활용(최근 14일)</h2><table><tr><th>날짜</th><th>검색 묶음</th><th>발견 기록</th><th>신규 기록</th></tr>{urow}</table><p style="font-size:13px">형식별 누계: {E_(fmtv(usage['formats']))} · <a href="usage.json">usage.json</a></p>
