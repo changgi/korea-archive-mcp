@@ -1,7 +1,57 @@
 {
- "harvested": "2026-11-23T09:01:23Z",
+ "harvested": "2026-11-23T09:56:11Z",
  "source": "국립문화유산연구원 국가유산 지식이음 Open API",
  "datasets": {
+  "design": {
+   "name": "공예도설",
+   "idx": 208,
+   "count": 31
+  },
+  "pattern": {
+   "name": "한국의 전통문양",
+   "idx": 32,
+   "count": 1296
+  },
+  "oldbook": {
+   "name": "고문헌 조사목록",
+   "idx": 31,
+   "count": 729
+  },
+  "hyanggyo": {
+   "name": "향교 건축",
+   "idx": 55,
+   "count": 108
+  },
+  "stone": {
+   "name": "석조문화유산",
+   "idx": 56,
+   "count": 518
+  },
+  "journal": {
+   "name": "한국고고학저널(호)",
+   "idx": 59,
+   "count": 31
+  },
+  "iron": {
+   "name": "제철유적",
+   "idx": 69,
+   "count": 65
+  },
+  "dolmen": {
+   "name": "영산강유역 지석묘",
+   "idx": 68,
+   "count": 1368
+  },
+  "assay": {
+   "name": "보존과학연구(분석)",
+   "idx": 71,
+   "count": 29
+  },
+  "material": {
+   "name": "문화유산 전통재료(문헌 용례)",
+   "idx": 72,
+   "count": 2098
+  },
   "ksm": {
    "name": "금석문",
    "idx": 51,
@@ -58,5 +108,5 @@
    "count": 16
   }
  },
- "total": 24374
+ "total": 30647
 }
