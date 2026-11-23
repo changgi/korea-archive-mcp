@@ -779,6 +779,20 @@
     "→ gwaebul:\\d+"
    ],
    "level": "error"
+  },
+  {
+   "id": "person-4ch",
+   "tool": "nedb_search",
+   "args": {
+    "mode": "gonghun",
+    "query": "종합:송시열"
+   },
+   "must": [
+    "4채널 병렬",
+    "【국립문화유산연구원 연구DB 인물",
+    "송시열\\(宋時烈\\) — \\d+건"
+   ],
+   "level": "error"
   }
  ]
 }
