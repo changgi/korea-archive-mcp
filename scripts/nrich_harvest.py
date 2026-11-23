@@ -230,6 +230,26 @@ def main():
         old = json.load(open(os.path.join(OUT, "nrich_db_meta.json"), encoding="utf-8"))
         for k, v in old.get("datasets", {}).items():
             meta["datasets"].setdefault(k, v)
+    # v2.22 품질 관문 — 원 기관이 열 순서를 바꾸면 명칭·URL이 비거나 건수가 급감한다. 그런 데이터셋은 지난 색인을 유지하고 경고(워크플로 실패 → auto-health 이슈)
+    warns = []
+    prevp = os.path.join(OUT, "nrich_db_meta.json"); prev = json.load(open(prevp, encoding="utf-8")).get("datasets", {}) if os.path.exists(prevp) else {}
+    for key in list({r["ds"] for r in rows} | {k for k in prev}):
+        if only and key not in only: continue
+        new = [r for r in rows if r["ds"] == key]; pc = (prev.get(key) or {}).get("count", 0)
+        url_rate = (sum(1 for r in new if r.get("u")) / len(new)) if new else 0
+        bad = (pc and len(new) < 0.7 * pc) or (new and url_rate < 0.9)
+        if not bad: continue
+        oldf = os.path.join(OUT, "nrich", f"{key}.jsonl")
+        why = f"{key}: 건수 {len(new)} (지난 {pc}) · URL 채움 {url_rate:.0%}"
+        if os.path.exists(oldf):
+            rows = [r for r in rows if r["ds"] != key] + [json.loads(l) for l in open(oldf, encoding="utf-8")]
+            meta["datasets"][key] = dict(prev.get(key) or {}, kept_previous=True); why += " → 지난 색인 유지"
+        warns.append(why)
+    if warns:
+        meta["warnings"] = warns
+        open(os.environ.get("NRICH_WARN", "/tmp/nrich_warn.md"), "w", encoding="utf-8").write("## 연구원 Open API 수집 품질 경고\n\n" + "\n".join(f"- {w}" for w in warns)
+            + "\n\n조치: 해당 데이터셋 API 응답을 열어 md_dataN 열 순서 확인 → scripts/nrich_harvest.py `DS` 표 갱신 → `python3 scripts/nrich_harvest.py <키>`로 재수집.\n")
+        print("품질 경고:", *warns, sep="\n  ", file=sys.stderr)
     if not rows:
         print("수집 0건 — 기존 색인 유지", file=sys.stderr); sys.exit(1)
     os.makedirs(OUT, exist_ok=True)
@@ -246,6 +266,7 @@ def main():
     meta["total"] = len(rows)
     json.dump(meta, open(os.path.join(OUT, "nrich_db_meta.json"), "w", encoding="utf-8"), ensure_ascii=False, indent=1)
     print(f"합계 {len(rows)}건")
+    if warns: sys.exit(3)  # 데이터는 안전하게 쓰였지만 사람이 봐야 함
 
 if __name__ == "__main__":
     main()

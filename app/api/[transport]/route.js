@@ -3168,6 +3168,12 @@ item_cd 5종(자료 성격별): ART 도설·회화 / ETC 두루마리·축 / DRR
         });
         return text('30채널 헬스체크 (골든 질의 실측):\n' + rows.join('\n')
           + '\n\n서버 키·설정: ' + Object.entries(keys).map(([k, v]) => `${k}=${v ? '✓' : '✗'}`).join(' · ')
+          + await (async () => { // v2.22 자동 파이프라인 신선도 — 정적 색인·원장이 오래되면 🔴(워크플로 고장 신호)
+            const PB = 'https://changgi.github.io/korea-archive-mcp/data/';
+            const chk = async (label, url, field, maxDays) => { try { const j = await jget(url + '?t=' + Math.floor(Date.now() / 3600e3)); const t = Date.parse(j[field]); const d = (Date.now() - t) / 86400e3;
+              return `${d <= maxDays ? '🟢' : '🔴'} ${label}: ${String(j[field]).slice(0, 16)} (${d.toFixed(1)}일 전, 기준 ${maxDays}일)${j.warnings ? ' ⚠ 품질 경고 ' + j.warnings.length : ''}`; } catch (e) { return `🔴 ${label}: 확인 실패(${String(e.message || e).slice(0, 30)})`; } };
+            const L = await Promise.all([chk('연구원 연구DB 색인(nrich-harvest, 주 1회)', PB + 'nrich_db_meta.json', 'harvested', 9), chk('발견 누적 원장(ledger, 매일)', PB + 'stats.json', 'updated', 2.5)]);
+            return '\n\n자동 파이프라인 신선도:\n' + L.join('\n'); })()
           + '\n※ 🟡=연결 정상이나 0건(질의 특성 또는 파서 점검 필요) · 🔴=채널 실패(차단·타임아웃) · ms=채널 응답시간. nedb ✗=개방파일 인덱스 미설정.');
       }
       if (t !== 'list' && !PROFILES[t] && QUICK_PROFILES[t]) { const [nm, sr, dt, rt] = QUICK_PROFILES[t]; return text(`[${t}] ${nm} — 간이 프로파일\n· 검색: ${sr}\n· 상세 판독: ${dt}\n· 권리: ${rt}\n※ 상세 프로파일(자료·이용·활용구조) 미작성 기관 — 위 경로로 발굴하고 judge_rights로 초판정.`); }

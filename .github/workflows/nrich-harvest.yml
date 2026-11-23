@@ -1,11 +1,13 @@
 name: nrich-harvest
-# 국립문화유산연구원 국가유산 지식이음 Open API 11종 → docs/data/nrich_db.jsonl 정적 색인(주 1회 — 원 기관 요청 최소, 검색은 정적 파일)
+# 국립문화유산연구원 국가유산 지식이음 Open API 21종 → docs/data/nrich_db.jsonl 정적 색인(주 1회 — 원 기관 요청 최소, 검색은 정적 파일)
+# 품질 관문(건수 급감·URL 결손) 걸린 데이터셋은 지난 색인을 유지하고 auto-health 이슈를 연다. 통과하면 이슈를 닫는다.
 on:
   schedule:
     - cron: '41 17 * * 2'   # 매주 수 02:41 KST
   workflow_dispatch:
 permissions:
   contents: write
+  issues: write
 concurrency: nrich-harvest
 jobs:
   harvest:
@@ -16,7 +18,13 @@ jobs:
       - uses: actions/setup-python@v5
         with: { python-version: '3.12' }
       - name: 수집
-        run: python3 scripts/nrich_harvest.py
+        id: run
+        run: |
+          set +e
+          NRICH_WARN=/tmp/nrich_warn.md python3 scripts/nrich_harvest.py
+          rc=$?; echo "rc=$rc" >> "$GITHUB_OUTPUT"
+          [ -f /tmp/nrich_warn.md ] && cat /tmp/nrich_warn.md >> "$GITHUB_STEP_SUMMARY"
+          [ "$rc" = "0" ] || [ "$rc" = "3" ] || exit $rc
       - name: 커밋
         run: |
           git add docs/data/nrich_db.jsonl docs/data/nrich_db_meta.json docs/data/nrich
@@ -25,3 +33,20 @@ jobs:
           git config user.email 10678518+changgi@users.noreply.github.com
           git commit -m "chore(nrich-harvest): 연구DB 정적 색인 $(date -u +%F)"
           git pull --rebase -q origin main && git push
+      - name: 경고·실패 → 이슈 / 정상 → 이슈 닫기
+        if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh label create auto-health --color B60205 --description "자동 감시가 발견한 장애" 2>/dev/null || true
+          num=$(gh issue list --label auto-health --state open --search "연구원 색인 수집" --json number -q '.[0].number')
+          run="${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          if [ "${{ steps.run.outputs.rc }}" != "0" ]; then
+            body="$( [ -f /tmp/nrich_warn.md ] && cat /tmp/nrich_warn.md || echo "수집 단계가 비정상 종료(rc=${{ steps.run.outputs.rc }}) — 기존 색인 유지." )
+
+          실행: $run · 안내: MAINTAINING.md (국립문화유산연구원 범용 Open API 항목)"
+            if [ -n "$num" ]; then gh issue comment "$num" --body "$body"; else gh issue create --title "연구원 색인 수집 경고 — Open API 응답 변화 감지" --label auto-health --body "$body"; fi
+            exit 1
+          elif [ -n "$num" ]; then
+            gh issue close "$num" --comment "연구원 색인 수집 정상 — 자동 종료 ($run)"
+          fi
