@@ -45,12 +45,12 @@
 | `golden` | main 반영 직후(배포 대기 150초) · 매주 수 | 프로덕션 도구 18케이스 출력 구조(제목 전체·해제·표기 변형·IIIF·24KB) | **`auto-health` 이슈 자동 생성/갱신**, 다음에 통과하면 자동 종료 |
 | `health` | 매주 월 | 30채널 골든 질의 + 같은 기록 묶기 회귀 | `auto-health` 이슈 |
 | `fixity-watch` | 매주 화 | 골든 기록 본문 지문(sha256-16) — 원문 개정 감지 | 원장(`public/fixity-ledger.json`) 이력 커밋 + 실패 |
-| `ledger` | 매일 00:17 KST | 발견 누적 원장 병합(`docs/data/`) — 처리 위치 `_state.json`, 최근 3일 함 | 실행 실패 시 다음 날 이어 받음(함 3일 보관) |
-| `nrich-harvest` | 매주 수 02:41 KST | 국립문화유산연구원 Open API 21종(30,647건) → `docs/data/nrich_db.jsonl`(정적 색인) | 0건이면 기존 색인 유지(실패 종료) |
+| `ledger` | 매일 00:17 KST | 발견 누적 원장 병합(`docs/data/`) — 처리 위치 `_state.json`, 최근 3일 함 | 실패 시 `auto-health` 이슈('발견 원장 병합', 3일 안에 조치 — 함 3일 보관), 정상이면 자동 종료 |
+| `nrich-harvest` | 매주 수 02:41 KST | 국립문화유산연구원 Open API 21종(30,647건) → `docs/data/nrich_db.jsonl`(정적 색인)·파생물 | **품질 관문**: 건수 30%↓ 또는 URL 채움 90%↓ 데이터셋은 지난 색인 유지 + `auto-health` 이슈('연구원 색인 수집'), 정상이면 자동 종료 |
 | `retry-blocked` · `nz-harvest` | 매주 화 | 차단 채널 재탐침 · NZ 정적 인덱스 갱신 | 실행 요약 |
 | Dependabot | 매월 | npm(마이너·패치만)·Actions 의존성 갱신 PR | verify의 **실제 빌드(next build)**가 병합 전 검증 |
 
-**할 일은 하나** — 저장소 Issues에서 `auto-health` 라벨을 본다. 열려 있으면 아래 3절.
+**할 일은 하나** — 저장소 Issues에서 `auto-health` 라벨을 본다. 한눈 점검은 `source_profile('health')` — 30채널 + **자동 파이프라인 신선도**(연구원 색인 9일·원장 2.5일 넘으면 🔴). 열려 있으면 아래 3절.
 
 ## 3. 사이트가 바뀌었을 때 (가장 흔한 장애)
 

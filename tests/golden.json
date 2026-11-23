@@ -793,6 +793,23 @@
     "송시열\\(宋時烈\\) — \\d+건"
    ],
    "level": "error"
+  },
+  {
+   "id": "health-freshness",
+   "tool": "source_profile",
+   "args": {
+    "institution": "health"
+   },
+   "must": [
+    "자동 파이프라인 신선도",
+    "연구원 연구DB 색인",
+    "발견 누적 원장"
+   ],
+   "must_not": [
+    "🔴 연구원 연구DB 색인",
+    "🔴 발견 누적 원장"
+   ],
+   "level": "warn"
   }
  ]
 }

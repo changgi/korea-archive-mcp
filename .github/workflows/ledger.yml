@@ -6,6 +6,7 @@ on:
   workflow_dispatch:
 permissions:
   contents: write
+  issues: write
 concurrency: ledger
 jobs:
   merge:
@@ -23,4 +24,20 @@ jobs:
           git config user.name changgi
           git config user.email 10678518+changgi@users.noreply.github.com
           git commit -m "chore(ledger): 발견 누적 원장 $(date -u +%F)"
-          git push
+          git pull --rebase -q origin main && git push
+      - name: 실패 → 이슈 / 정상 → 이슈 닫기
+        if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh label create auto-health --color B60205 --description "자동 감시가 발견한 장애" 2>/dev/null || true
+          num=$(gh issue list --label auto-health --state open --search "발견 원장 병합" --json number -q '.[0].number')
+          run="${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          if [ "${{ job.status }}" != "success" ]; then
+            body="발견 누적 원장 병합이 실패했습니다. 보관함(Redis 날짜 함)은 3일 보관 — 그 안에 고치면 유실 없음.
+
+          실행: $run · 점검: /api/ledger/{날짜} 응답, scripts/ledger_merge.py, MAINTAINING.md(발견 누적 원장)"
+            if [ -n "$num" ]; then gh issue comment "$num" --body "$body"; else gh issue create --title "발견 원장 병합 실패 — 3일 안에 조치" --label auto-health --body "$body"; fi
+          elif [ -n "$num" ]; then
+            gh issue close "$num" --comment "발견 원장 병합 정상 — 자동 종료 ($run)"
+          fi
