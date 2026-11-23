@@ -21,7 +21,7 @@
 | `lib/ledger.js` · `app/api/ledger/[day]/route.js` · `scripts/ledger_merge.py` | **발견 누적 원장** — cross_search 발견 기록(검색어·사용자 정보 없음)을 Upstash Redis 날짜 함(3일 보관)에 적재 → 매일 `ledger` 워크플로가 공개 읽기 주소에서 꺼내 `docs/data/`(discovered.jsonl·csv·jsonld·collection.json·index.html)에 병합·커밋 | 무료(Upstash Free 월 50만 명령 ≈ 하루 8천 검색). 미설정·한도 초과면 적재만 생략 |
 | `docs/iiif/` | 갤러리 IIIF — `hierarchy.json`(부›시리즈›이미지)·`collection.json`(평면)·`all.json`·`m/`·`c/` + 데이터 `records.csv`·`records.jsonld` | `build_iiif.py`가 생성(`_nara_ctx.json`=NARA 계보 캐시) |
 
-원장 보강 = 병합 때 기관 IIIF·우리 브리지 매니페스트를 하루 `ENRICH_MAX`(기본 80)건 순차 판독해 `summary`(주요 내용)·`meta`(메타정보 8항목)·`rights`·`thumb`를 채운다(실패는 7일 뒤 재시도). 썸네일은 재이용 가능 표시(PD·CC·NoC·공공누리·저작권 만료)·NARA·우리 갤러리·우리 카드만 싣고, 포로·사망자·묘지·수형자 관련 기록은 링크만(`SENSITIVE` 정규식). 국가기록원 링크는 `&amp;` 해제·https로 정규화(`archLink`/`_arch_link`, 원장은 `clean_url`로 소급).
+원장 보강 = 병합 때 기관 IIIF·우리 브리지 매니페스트를 하루 `ENRICH_MAX`(기본 80)건 순차 판독해 `summary`(주요 내용)·`meta`(메타정보 8항목)·`rights`·`thumb`를 채운다(실패는 다음 날 재시도). 매니페스트가 없는 국가기록원 기록은 공개 상세 페이지를 1회 판독해 메타정보(관리번호·문서유형·보존기간·서고·매체 등)와 **실제 계층**(국가기록원 › 기록물계열 › 상위 철)을 구축한다(`enrich_archives`). 썸네일은 재이용 가능 표시(PD·CC·NoC·공공누리·저작권 만료)·NARA·우리 갤러리·우리 카드만 싣고, 포로·사망자·묘지·수형자 관련 기록은 링크만(`SENSITIVE` 정규식). 국가기록원 링크는 `&amp;` 해제·https로 정규화(`archLink`/`_arch_link`, 원장은 `clean_url`로 소급).
 
 원장 중복 처리 = 같은 기록이 다시 발견되면 새 줄 대신 **활용 컬럼**을 갱신한다: `seen`(전체)·`seen_7d`·`seen_30d`·`days_total`(발견된 날 수)·`days`(날짜별 90일)·`formats`(text·csv·iiif·manifest·karda)·`max_cross`(교차확인 기관 수)·`trend`·`score`·`rank`. 자주 활용 TOP 200=`docs/data/popular.csv`, 일별 추이=`usage.json`. 자동 검사(golden.py·health.yml)는 `X-KA-Probe` 헤더로 표시되어 적재하지 않는다 — 새 자동 호출을 만들 때도 이 헤더를 붙일 것.
 
