@@ -1,13 +1,16 @@
 {
- "updated": "2026-11-23T06:22:56Z",
- "records": 123,
- "new_records": 0,
- "new_batches": 0,
+ "updated": "2026-11-23T07:06:02Z",
+ "records": 150,
+ "new_records": 27,
+ "new_batches": 1,
  "by_source": {
   "archives": 40,
+  "commons": 13,
   "nara": 12,
   "ndl": 11,
+  "ktv": 9,
   "ia": 8,
+  "seoul": 8,
   "oldnews": 6,
   "tna": 5,
   "i815": 5,
@@ -17,7 +20,6 @@
   "gallery": 3,
   "awm": 3,
   "kyudb": 3,
-  "commons": 3,
   "koreanwar": 3,
   "nlk": 3,
   "earchive": 3,
@@ -28,10 +30,10 @@
  },
  "first": "2026-11-23T03:00:15Z",
  "formats": {
-  "text": 35,
+  "text": 36,
   "csv": 1
  },
- "repeat_records": 85,
+ "repeat_records": 86,
  "top10": [
   {
    "rank": 1,
