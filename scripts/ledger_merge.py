@@ -320,6 +320,75 @@ def tok(env):
     c = zlib.compressobj(9, zlib.DEFLATED, -15)
     return base64.urlsafe_b64encode(c.compress(json.dumps(env, ensure_ascii=False, separators=(",", ":")).encode()) + c.flush()).decode().rstrip("=")
 
+def merge_queries(state, today):
+    """v2.26 모든 질의·회신 영구 축적 — 날짜 함 ka:q → docs/data/queries/YYYY-MM.jsonl.gz.
+    같은 도구·같은 인자·같은 회신 지문(h)이면 중복(seen·last만 갱신), 회신이 바뀌면 새 판으로 보존(증거성 — 응답 변화 이력). 절대 삭제하지 않는다."""
+    import gzip, hashlib
+    qdir = os.path.join(D, "queries"); os.makedirs(qdir, exist_ok=True)
+    qs = state.setdefault("qdays", {}); added = 0; books = {}
+    def book(month):
+        if month not in books:
+            f = os.path.join(qdir, f"{month}.jsonl.gz"); rows = {}
+            if os.path.exists(f):
+                for ln in gzip.open(f, "rt", encoding="utf-8"):
+                    if ln.strip(): o = json.loads(ln); rows[o["k"]] = o
+            books[month] = rows
+        return books[month]
+    for back in (2, 1, 0):
+        d = (today - dt.timedelta(days=back)).isoformat(); pos = qs.get(d, 0)
+        while True:
+            try: j = get(f"{API}{d}?kind=q&start={pos}&n=500")
+            except Exception as e: print(f"질의 {d}: 읽기 실패 {e}"); break
+            items = j.get("items") or []
+            for r in items:
+                at = r.get("at") or d; args = r.get("args") or {}
+                k = hashlib.sha256((r.get("tool", "") + json.dumps(args, ensure_ascii=False, sort_keys=True) + r.get("h", "")).encode()).hexdigest()[:20]
+                B = book(at[:7]); o = B.get(k)
+                if o: o["seen"] += 1; o["last"] = max(o["last"], at); continue
+                B[k] = {"k": k, "tool": r.get("tool", ""), "args": args, "first": at, "last": at, "seen": 1, "h": r.get("h", ""), "n": r.get("n", 0), "z": r.get("z", "")}; added += 1
+            pos += len(items)
+            if len(items) < 500: break
+        qs[d] = pos
+    keep = (today - dt.timedelta(days=10)).isoformat(); state["qdays"] = {k: v for k, v in qs.items() if k >= keep}
+    for month, rows in books.items():
+        with gzip.open(os.path.join(qdir, f"{month}.jsonl.gz"), "wt", encoding="utf-8") as fo:
+            for o in sorted(rows.values(), key=lambda o: (o["first"], o["k"])): fo.write(json.dumps(o, ensure_ascii=False, separators=(",", ":")) + "\n")
+    # 질의 색인(회신 본문 제외 — 가볍게): 전 기간 질의 목록, 도구별 건수
+    idx = []
+    for f in sorted(os.listdir(qdir)):
+        if f.endswith(".jsonl.gz"):
+            for ln in gzip.open(os.path.join(qdir, f), "rt", encoding="utf-8"):
+                if ln.strip():
+                    o = json.loads(ln); idx.append({k: o[k] for k in ("k", "tool", "args", "first", "last", "seen", "h", "n")} | {"month": f[:7]})
+    json.dump({"updated": dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"), "total": len(idx), "queries": idx}, open(os.path.join(qdir, "index.json"), "w", encoding="utf-8"), ensure_ascii=False)
+    print(f"질의 축적: 신규 {added} · 누적 {len(idx)}")
+    bt = {}
+    for o in idx: bt[o["tool"]] = bt.get(o["tool"], 0) + o["seen"]
+    recent = sorted(idx, key=lambda o: o["last"], reverse=True)[:20]
+    return {"added": added, "total": len(idx), "calls": sum(o["seen"] for o in idx), "by_tool": dict(sorted(bt.items(), key=lambda kv: -kv[1])), "recent": recent}
+
+def merge_classes(recs):
+    """v2.26 기준·분류 정보 축적 — 발견된 모든 계층 경로(기관 › 계열 › …)의 각 단계를 분류 사전으로. 지우지 않고 갱신만(사라진 경로도 보존)."""
+    p = os.path.join(D, "classifications.json")
+    C = json.load(open(p, encoding="utf-8")) if os.path.exists(p) else {"paths": {}}
+    P = C["paths"]
+    for o in recs:
+        segs = tree_path(o)
+        for i in range(1, len(segs) + 1):
+            path = " › ".join(segs[:i]); e = P.setdefault(path, {"depth": i, "first": o["first_seen"], "last": o["last_seen"], "records": 0, "sources": []})
+            e["first"] = min(e["first"], o["first_seen"]); e["last"] = max(e["last"], o["last_seen"])
+            for s_ in o["sources"]:
+                b = s_.split("·")[0]
+                if b not in e["sources"]: e["sources"].append(b)
+    cnt = {}
+    for o in recs:
+        segs = tree_path(o)
+        for i in range(1, len(segs) + 1): cnt[" › ".join(segs[:i])] = cnt.get(" › ".join(segs[:i]), 0) + 1
+    for k, e in P.items(): e["records"] = max(e.get("records", 0), cnt.get(k, 0))  # 기록 수는 줄지 않는다(지우지 않음 원칙)
+    C["updated"] = dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"); C["total"] = len(P)
+    json.dump(C, open(p, "w", encoding="utf-8"), ensure_ascii=False, indent=0)
+    return len(P)
+
 def main():
     os.makedirs(D, exist_ok=True)
     sp = os.path.join(D, "_state.json"); state = json.load(open(sp)) if os.path.exists(sp) else {"days": {}}
@@ -378,7 +447,8 @@ def main():
             if len(items) < 500: break
         state["days"][d] = pos
     keep = (today - dt.timedelta(days=10)).isoformat()
-    state["days"] = {k: v for k, v in state["days"].items() if k >= keep}
+    state["days"] = {k: v for k, v in state["days"].items() if k >= keep}  # 처리 위치(작업 상태)일 뿐 축적 정보 아님
+    nq = merge_queries(state, today)
     budget = int(os.environ.get("ENRICH_MAX", "80"))  # 하루 매니페스트 판독 상한(기관 서버 예의 — 순차·간격)
     for o in sorted(led.values(), key=lambda o: o.get("last_seen", ""), reverse=True):
         n_ = enrich(o, budget); budget -= n_
@@ -387,7 +457,7 @@ def main():
         return sum(n for k, n in o["days"].items() if (today - dt.timedelta(days=b)).isoformat() < k <= (today - dt.timedelta(days=a)).isoformat())
     cut = (today - dt.timedelta(days=90)).isoformat()
     for o in led.values():
-        o["days"] = {k: v for k, v in sorted(o["days"].items()) if k > cut}  # 날짜별 이력 90일 보관(누계는 seen·days_total)
+        o["days"] = dict(sorted(o["days"].items()))  # v2.26 축적 정보는 지우지 않는다 — 날짜별 이력 전체 보존(이전 90일 제한 해제)
         o["seen_7d"] = win(o, -1, 7); o["seen_30d"] = win(o, -1, 30); prev = win(o, 7, 14)
         o["trend"] = "신규" if o["first_seen"][:10] > (today - dt.timedelta(days=7)).isoformat() else ("↑" if o["seen_7d"] > prev else ("↓" if o["seen_7d"] < prev else "→"))
         o["score"] = round(o["seen_30d"] * 2 + o["seen"] + o.get("days_total", 1) * 3 + (o.get("max_cross", 1) - 1) * 2, 1)  # 최근 활용·지속 활용(일수)·교차확인 가중
@@ -404,8 +474,7 @@ def main():
     with open(os.path.join(D, "popular.csv"), "w", encoding="utf-8-sig", newline="") as f:
         w = csv.writer(f); pc = ["rank", "score", "seen", "seen_7d", "seen_30d", "days_total", "trend", "formats", "sources", "title", "date", "id", "partOf", "summary", "url", "iiif", "first_seen", "last_seen"]; w.writerow(pc)
         for o in pop[:200]: w.writerow([fmtv(o.get(c, "")) for c in pc])
-    keepu = (today - dt.timedelta(days=400)).isoformat()
-    usage["daily"] = {k: v for k, v in sorted(usage["daily"].items()) if k > keepu}
+    usage["daily"] = dict(sorted(usage["daily"].items()))  # v2.26 일별 활용 전체 보존(이전 400일 제한 해제)
     json.dump(usage, open(up, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
     sets = {}
     graph = []
@@ -434,7 +503,7 @@ def main():
         h = o["key"].split(":")[0]; by[h] = by.get(h, 0) + 1
     st = {"updated": dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"), "records": len(recs), "new_records": new_recs, "new_batches": new_batches,
           "by_source": dict(sorted(by.items(), key=lambda kv: -kv[1])), "first": recs[0]["first_seen"] if recs else "",
-          "formats": usage["formats"], "repeat_records": sum(1 for o in recs if o["seen"] > 1),
+          "formats": usage["formats"], "queries": {k: nq[k] for k in ("added", "total", "calls", "by_tool")}, "repeat_records": sum(1 for o in recs if o["seen"] > 1),
           "top10": [{"rank": o["rank"], "seen": o["seen"], "days": o.get("days_total", 1), "title": o["title"][:100], "url": o.get("url", "")} for o in pop[:10]]}
     json.dump(st, open(os.path.join(D, "stats.json"), "w", encoding="utf-8"), ensure_ascii=False, indent=1)
     json.dump(state, open(sp, "w"), indent=1)
@@ -456,6 +525,7 @@ def main():
     urow = "".join(f"<tr><td>{k}</td><td>{v['batches']}</td><td>{v['records']}</td><td>{v['new']}</td></tr>" for k, v in sorted(usage['daily'].items(), reverse=True)[:14])
     srcs = " · ".join(f"{E_(k)} {v}" for k, v in st["by_source"].items())
     enr = sum(1 for o in recs if o.get("enrich_status") == "ok"); thn = sum(1 for o in recs if o.get("thumb_ok"))
+    qrow = "".join(f"<tr><td>{E_(o['last'][:16])}</td><td>{E_(o['tool'])}</td><td>{E_(json.dumps(o['args'], ensure_ascii=False)[:140])}</td><td>{o['seen']}</td></tr>" for o in nq["recent"])
     open(os.path.join(D, "index.html"), "w", encoding="utf-8").write(f"""<!DOCTYPE html><html lang="ko"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>발견 누적 원장 — KOREA ARCHIVE 통합검색</title><style>body{{font-family:system-ui,'Noto Sans KR',sans-serif;margin:0;background:#14161b;color:#e6e4dc}}main{{max-width:1100px;margin:auto;padding:16px}}a{{color:#e0b04a}}
 .b0{{display:inline-block;margin:4px 8px 4px 0;padding:6px 12px;border:1px solid #e0b04a;border-radius:6px;text-decoration:none}}
@@ -467,13 +537,15 @@ details{{font-size:12px}}dl{{display:grid;grid-template-columns:auto 1fr;gap:2px
 table{{width:100%;border-collapse:collapse;font-size:14px}}td,th{{border-bottom:1px solid #2a2d35;padding:6px;text-align:left}}</style>
 <main><h1>발견 누적 원장</h1><p>KOREA ARCHIVE 통합검색 사용자가 도구로 발굴한 기록이 매일 이곳에 쌓입니다(검색어·사용자 정보 없음). 기록 <b>{st['records']:,}</b>건 · 마지막 갱신 {st['updated']} · 이번 갱신 신규 {new_recs}건 · 내용·메타정보 보강 {enr}건 · 썸네일 {thn}건</p>
 <p>{srcs}</p>
-<p><a class="b0" href="discovered.csv">CSV 내려받기</a><a class="b0" href="discovered.jsonl">JSONL</a><a class="b0" href="discovered.jsonld">RiC-O JSON-LD</a><a class="b0" href="../kv.html?manifest=https://changgi.github.io/korea-archive-mcp/data/collection.json">KV로 최근 300건 연속 보기</a><a class="b0" href="tree.html">계층구조도</a><a class="b0" href="nrich/index.html">연구원 연구DB IIIF 계층</a><a class="b0" href="popular.csv">자주 활용 TOP 200</a><a class="b0" href="stats.json">집계</a></p>
+<p><a class="b0" href="discovered.csv">CSV 내려받기</a><a class="b0" href="discovered.jsonl">JSONL</a><a class="b0" href="discovered.jsonld">RiC-O JSON-LD</a><a class="b0" href="../kv.html?manifest=https://changgi.github.io/korea-archive-mcp/data/collection.json">KV로 최근 300건 연속 보기</a><a class="b0" href="tree.html">계층구조도</a><a class="b0" href="queries/index.json">질의·회신 축적</a><a class="b0" href="classifications.json">분류 사전</a><a class="b0" href="nrich/index.html">연구원 연구DB IIIF 계층</a><a class="b0" href="popular.csv">자주 활용 TOP 200</a><a class="b0" href="stats.json">집계</a></p>
 <p style="font-size:13px;color:#9b9a93">주요 내용·메타정보·썸네일은 기관 IIIF·우리 브리지 매니페스트를 하루 한 번 판독해 채웁니다(하루 상한·순차 요청). 썸네일은 재이용 가능 표시가 확인된 것만 싣고, 포로·사망자·묘지·수형자 관련 기록과 허가가 필요한 이미지는 링크만 둡니다. 권리는 원 기관 표기를 따릅니다 — 게재 전 judge_rights로 확인. 모든 변경은 저장소 git 이력(docs/data/)에 남습니다.</p>
 <h2>자주 활용되는 기록 TOP 30</h2><p style="font-size:13px">점수 = 최근 30일 발견×2 + 전체 발견 + 발견된 날 수×3 + 교차확인 기관 수 가중. 자동 검사 트래픽 제외.</p><div class="g">{prow}</div>
 <h2>일별 활용(최근 14일)</h2><table><tr><th>날짜</th><th>검색 묶음</th><th>발견 기록</th><th>신규 기록</th></tr>{urow}</table><p style="font-size:13px">형식별 누계: {E_(fmtv(usage['formats']))} · <a href="usage.json">usage.json</a></p>
+<h2>질의·회신 축적</h2><p style="font-size:13px">모든 도구 호출의 질의(개인정보 패턴 자동 제거)와 회신 본문을 영구 보존합니다. 같은 질의·같은 회신은 한 번만 두고 횟수만 셉니다. 회신이 달라지면 새 판으로 남겨 기관 응답 변화의 증거로 씁니다. 고유 질의 {nq['total']}건 · 누적 호출 {nq['calls']}회 · 도구별 {E_(fmtv(nq['by_tool']))} · <a href="queries/index.json">queries/index.json</a> (월별 회신 원문 queries/YYYY-MM.jsonl.gz)</p><table><tr><th>최근</th><th>도구</th><th>질의</th><th>횟수</th></tr>{qrow}</table>
 <h2>최근 발견 100건</h2><div class="g">{rows}</div></main></html>""")
-    build_tree(recs)
+    build_tree(recs); ncls = merge_classes(recs)
     print(f"원장 {len(recs)}건 (신규 {new_recs}, 묶음 {new_batches})")
+    print(f"질의 고유 {nq['total']}건(신규 {nq['added']}) · 분류 경로 {ncls}개")
 
 if __name__ == "__main__":
     main()
