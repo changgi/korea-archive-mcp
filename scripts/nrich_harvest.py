@@ -60,6 +60,67 @@ DS = {
     7: ("gaesong", "개성 문화유적(북한)", lambda f: dict(t=g(f, 3), a="", d="", p=g(f, 5), x=g(f, 6), m={"지정": g(f, 4)}, k=g(f, 10), u=g(f, 11))),
 }
 
+# v2.19 계층 IIIF 컬렉션 — 이미지가 있는 데이터셋을 '데이터셋 › 지역/소장처/분류 › 기록'으로(정적 파일, KV가 구간씩 불러옴)
+PB = "https://changgi.github.io/korea-archive-mcp/data/nrich/"
+BR = "https://korea-archive-mcp.vercel.app/iiif/nrich/"
+IIIF_DS = ["ksm", "portrait", "gwaebul", "diary", "mokgan", "jcphoto", "arch", "design", "pattern", "oldbook", "hyanggyo", "stone", "gaesong", "assay"]
+REGION = ("ksm", "gwaebul", "mokgan", "arch", "hyanggyo", "stone")  # 소재지 첫 단어(시·도 등)
+HOLDER = ("portrait", "diary", "pattern", "design")                  # 소장처 전체
+SIDO = [("서울", "서울특별시"), ("부산", "부산광역시"), ("대구", "대구광역시"), ("인천", "인천광역시"), ("광주", "광주광역시"), ("대전", "대전광역시"), ("울산", "울산광역시"), ("세종", "세종특별자치시"),
+        ("경기", "경기도"), ("강원", "강원특별자치도"), ("충북", "충청북도"), ("충청북", "충청북도"), ("충남", "충청남도"), ("충청남", "충청남도"), ("전북", "전북특별자치도"), ("전라북", "전북특별자치도"),
+        ("전남광주", "전남광주통합특별시"), ("전남", "전라남도"), ("전라남", "전라남도"), ("경북", "경상북도"), ("경상북", "경상북도"), ("경산북", "경상북도"), ("경경상북", "경상북도"), ("경남", "경상남도"), ("경상남", "경상남도"), ("제주", "제주특별자치도")]
+def norm_region(g):
+    for k, v in SIDO:
+        if g.startswith(k): return v
+    return g
+
+def group_of(r):
+    ds, p, m = r["ds"], (r.get("p") or "").strip(), r.get("m") or {}
+    if ds in REGION: g = norm_region(re.sub(r"\(.*?\)", "", p.split(" ")[0])) if p else ""
+    elif ds in HOLDER: g = p
+    elif ds == "oldbook": g = m.get("판본", "")
+    elif ds == "assay": g = m.get("구분", "")
+    else: g = ""
+    return g.strip()[:40] or ("(미상)" if ds not in ("jcphoto", "gaesong") else "전체")
+
+def slug(s):
+    return re.sub(r"[^0-9A-Za-z가-힣]+", "_", s).strip("_")[:40] or "x"
+
+def build_iiif(rows):
+    out = os.path.join(OUT, "nrich", "iiif"); os.makedirs(out, exist_ok=True)
+    C = "http://iiif.io/api/presentation/3/context.json"; idx = []; page_rows = []
+    for ds in IIIF_DS:
+        rs = [r for r in rows if r["ds"] == ds]
+        if not rs: continue
+        name = rs[0]["dn"]; groups = {}
+        for r in rs: groups.setdefault(group_of(r), []).append(r)
+        small = [g for g, v in groups.items() if len(v) < 3 and len(groups) > 8]  # 작은 묶음(<3)은 '기타'로 — 묶음이 많을 때만
+        for g in small: groups.setdefault("기타", []).extend(groups.pop(g))
+        os.makedirs(os.path.join(out, ds), exist_ok=True); subs = []
+        for g, grs in sorted(groups.items(), key=lambda kv: (-len(kv[1]), kv[0])):
+            gid = f"{PB}iiif/{ds}/{slug(g)}.json"
+            items = [{"id": f"{BR}{r['id'].replace(':', '-')}/manifest.json", "type": "Manifest", "label": {"none": [(r["t"] + (f" ({r['a']})" if r.get("a") else ""))[:120]]}} for r in sorted(grs, key=lambda r: r["id"])]
+            json.dump({"@context": C, "id": gid, "type": "Collection", "label": {"ko": [f"{name} › {g} ({len(grs)})"]},
+                       "partOf": [{"id": f"{PB}iiif/{ds}.json", "type": "Collection"}], "items": items}, open(os.path.join(out, ds, f"{slug(g)}.json"), "w", encoding="utf-8"), ensure_ascii=False)
+            subs.append({"id": gid, "type": "Collection", "label": {"ko": [f"{g} ({len(grs)})"]}}); page_rows.append((ds, name, g, len(grs), gid))
+        json.dump({"@context": C, "id": f"{PB}iiif/{ds}.json", "type": "Collection", "label": {"ko": [f"국립문화유산연구원 {name} ({len(rs)})"]},
+                   "summary": {"ko": [f"{name} {len(rs)}건 — 계층: 데이터셋 › {'지역' if ds in REGION else '소장처' if ds in HOLDER else '분류'} › 기록. 이미지는 원 기관 원본(공공누리 표기 그대로)."]},
+                   "partOf": [{"id": f"{PB}iiif/index.json", "type": "Collection"}], "items": subs}, open(os.path.join(out, f"{ds}.json"), "w", encoding="utf-8"), ensure_ascii=False)
+        idx.append({"id": f"{PB}iiif/{ds}.json", "type": "Collection", "label": {"ko": [f"{name} ({len(rs)})"]}, "_n": len(rs), "_g": len(groups), "_ds": ds, "_name": name})
+    json.dump({"@context": C, "id": f"{PB}iiif/index.json", "type": "Collection", "label": {"ko": ["국립문화유산연구원 국가유산 지식이음 — 연구DB IIIF 계층"]},
+               "items": [{k: v for k, v in x.items() if not k.startswith("_")} for x in idx]}, open(os.path.join(out, "index.json"), "w", encoding="utf-8"), ensure_ascii=False)
+    KV = "https://changgi.github.io/korea-archive-mcp/kv.html?manifest="
+    E_ = _h.escape
+    secs = "".join(f"<details><summary><b>{E_(x['_name'])}</b> {x['_n']:,}건 · 묶음 {x['_g']} <a href='{KV}{x['id']}'>KV로 보기</a></summary><ul>"
+                   + "".join(f"<li>{E_(g)} <span>{n:,}</span> <a href='{KV}{gid}'>KV</a></li>" for d, nm, g, n, gid in page_rows if d == x["_ds"]) + "</ul></details>" for x in idx)
+    tot = sum(x["_n"] for x in idx)
+    open(os.path.join(OUT, "nrich", "index.html"), "w", encoding="utf-8").write(f"""<!DOCTYPE html><html lang="ko"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>국립문화유산연구원 연구DB — IIIF 계층</title><style>body{{font-family:system-ui,'Noto Sans KR',sans-serif;margin:0;background:#14161b;color:#e6e4dc}}main{{max-width:900px;margin:auto;padding:16px}}a{{color:#e0b04a}}
+details{{border-bottom:1px solid #2a2d35;padding:6px 0}}summary{{cursor:pointer;font-size:16px}}ul{{list-style:none;padding-left:14px;margin:6px 0}}li{{padding:3px 0;font-size:14px}}li span{{color:#9b9a93;font-size:12px;margin:0 6px}}</style>
+<main><h1>국립문화유산연구원 연구DB — IIIF 계층</h1><p>국가유산 지식이음 Open API(공공누리)로 매주 수집한 연구DB 중 이미지가 있는 {len(idx)}종 {tot:,}건을 <b>데이터셋 › 지역·소장처·분류 › 기록</b> IIIF 컬렉션으로 묶었습니다. 각 기록은 원 기관 원본 이미지를 변경 없이 연결한 IIIF 매니페스트(이미지가 없으면 기록 카드)입니다. KV는 큰 묶음을 48건씩 이어 불러옵니다(원 기관 서버 예의).</p>
+<p><a href='{KV}{PB}iiif/index.json'>전체 계층을 KV로</a> · <a href='iiif/index.json'>IIIF index.json</a> · 검색: KOREA ARCHIVE 통합검색 cross_search(sources='nrich') · 출처: 국립문화유산연구원 국가유산 지식이음(이용조건 각 기록 표기)</p>{secs}</main></html>""")
+    print(f"IIIF 계층: {len(idx)}종 {tot}건")
+
 def fetch(idx, first, last):
     req = urllib.request.Request(API.format(idx=idx, first=first, last=last), headers={"User-Agent": UA})
     for attempt in range(3):
@@ -70,6 +131,8 @@ def fetch(idx, first, last):
             time.sleep(5 * (attempt + 1))
 
 def main():
+    if "--iiif-only" in sys.argv:  # 수집 없이 기존 색인으로 계층 IIIF만 다시 만들기
+        build_iiif([json.loads(l) for l in open(os.path.join(OUT, "nrich_db.jsonl"), encoding="utf-8")]); return
     only = set(sys.argv[1:])
     rows, meta = [], {"harvested": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()), "source": "국립문화유산연구원 국가유산 지식이음 Open API", "datasets": {}}
     for idx, (key, name, fn) in DS.items():
@@ -113,6 +176,7 @@ def main():
     for k, rs in by.items():
         with open(os.path.join(OUT, "nrich", f"{k}.jsonl"), "w", encoding="utf-8") as fo:
             for r in sorted(rs, key=lambda r: r["id"]): fo.write(json.dumps(r, ensure_ascii=False, separators=(",", ":")) + "\n")
+    build_iiif(rows)
     meta["total"] = len(rows)
     json.dump(meta, open(os.path.join(OUT, "nrich_db_meta.json"), "w", encoding="utf-8"), ensure_ascii=False, indent=1)
     print(f"합계 {len(rows)}건")
