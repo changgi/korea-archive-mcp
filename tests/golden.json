@@ -554,6 +554,37 @@
     "더보기\\n"
    ],
    "level": "error"
+  },
+  {
+   "id": "okchf-reports",
+   "tool": "nedb_search",
+   "args": {
+    "mode": "okchf",
+    "query": "보고서:미국"
+   },
+   "must": [
+    "조사보고서 '미국'\\(제목\\+목차\\) — 전체 [1-9]",
+    "US_DF_PD\\.do\\?mode=view&articleNo=\\d+"
+   ],
+   "level": "error"
+  },
+  {
+   "id": "okchf-report-toc",
+   "tool": "nedb_search",
+   "args": {
+    "mode": "okchf",
+    "query": "pub:7043"
+   },
+   "must": [
+    "사노시향토박물관",
+    "【목차】",
+    "목차 지문\\(sha256-16\\): [0-9a-f]{16}"
+   ],
+   "must_not": [
+    "\\u200b",
+    "&nbsp;"
+   ],
+   "level": "error"
   }
  ]
 }

@@ -212,6 +212,78 @@ def enrich(o, budget):
     o["enriched"] = today
     return used
 
+SRC_NAME = {"nara": "미국 국립기록관리청 NARA", "tna": "영국 국립기록관 TNA", "archives": "국가기록원", "ia": "인터넷 아카이브", "ndl": "일본 국립국회도서관", "jacar": "일본 아시아역사자료센터",
+            "europeana": "Europeana", "gallica": "Gallica(BnF)", "un": "UN 디지털도서관", "awm": "호주 전쟁기념관", "commons": "위키미디어 공용", "gallery": "KOREA ARCHIVE IIIF 갤러리",
+            "kyudb": "규장각", "jsg": "장서각", "nlk": "국립중앙도서관", "nedb": "한국사DB", "oldnews": "대한민국신문아카이브", "i815": "독립기념관", "gonghun": "공훈전자사료관",
+            "indy": "독립운동판결문", "koreanwar": "6·25전쟁 아카이브센터", "earchive": "국편 전자사료관", "ktv": "KTV", "seoul": "서울기록원", "okchf": "국외소재문화유산재단",
+            "much": "대한민국역사박물관", "heritage": "국가유산청", "aks": "한국고문서자료관", "nlna": "네덜란드 국립기록관", "dnz": "DigitalNZ", "nzarch": "뉴질랜드 기록원"}
+
+def tree_path(o):
+    """계층 경로 = 기관 › partOf 단계들(앞 단계가 기관명과 같으면 접음). 계층이 없으면 '(계열 미상)'을 명시."""
+    src = o["key"].split(":")[0]; top = SRC_NAME.get(src, src)
+    segs = [x.strip() for x in (o.get("partOf") or "").split("›") if x.strip()]
+    if segs and (segs[0] in top or top in segs[0] or segs[0] in ("국가기록원", "국외소재문화유산재단", "IIIF 갤러리", "한국사DB", "TNA", "NARA", "AWM 유형")): segs = segs[1:] if segs[0] != "AWM 유형" else segs
+    return [top] + (segs or ["(계열 미상)"])
+
+def leaf_manifest(o):
+    if o.get("iiif"): return o["iiif"]
+    env = {"s": o["sources"], "t": o["title"][:160], "d": o.get("date", ""), "i": o.get("id", ""), "u": o.get("url", ""), "p": o.get("partOf", ""),
+           "n": o["key"].split(":")[0], "m": o.get("media", ""), "q": "발견 누적 원장", "at": o["first_seen"][:19]}
+    return f"{ORIGIN}/iiif/rec/{tok(env)}/manifest.json"
+
+def build_tree(recs):
+    """계층구조도 — tree.json(중첩 트리)·hierarchy.json(IIIF 중첩 컬렉션)·h/<기관>.json(기관별 IIIF)·tree.html(접이식 트리)."""
+    root = {"name": "발견 누적 원장", "kids": {}, "recs": []}
+    for o in recs:
+        n = root
+        for seg in tree_path(o):
+            n = n["kids"].setdefault(seg, {"name": seg, "kids": {}, "recs": []})
+        n["recs"].append(o)
+    def count(n): n["n"] = len(n["recs"]) + sum(count(k) for k in n["kids"].values()); return n["n"]
+    count(root)
+    def js(n): return {"name": n["name"], "count": n["n"], "children": [js(k) for k in sorted(n["kids"].values(), key=lambda k: -k["n"])],
+                       "records": [{"key": o["key"], "title": o["title"][:160], "url": o.get("url", ""), "date": o.get("date", ""), "seen": o["seen"]} for o in n["recs"]]}
+    json.dump(js(root), open(os.path.join(D, "tree.json"), "w", encoding="utf-8"), ensure_ascii=False)
+    PB = "https://changgi.github.io/korea-archive-mcp/data/"
+    def coll(n, cid):
+        items = [coll(k, f"{cid}/{i}") for i, k in enumerate(sorted(n["kids"].values(), key=lambda k: -k["n"]))]
+        items += [{"id": leaf_manifest(o), "type": "Manifest", "label": {"none": [o["title"][:120]]}} for o in n["recs"]]
+        return {"id": f"{PB}{cid}", "type": "Collection", "label": {"ko": [f"{n['name']} ({n['n']})"]}, "items": items}
+    os.makedirs(os.path.join(D, "h"), exist_ok=True)
+    tops = sorted(root["kids"].values(), key=lambda k: -k["n"]); idx = {}
+    for i, t in enumerate(tops):
+        slug = next((k for k, v in SRC_NAME.items() if v == t["name"]), f"src{i}")
+        c = coll(t, f"h/{slug}.json"); c["@context"] = "http://iiif.io/api/presentation/3/context.json"; c["id"] = f"{PB}h/{slug}.json"
+        json.dump(c, open(os.path.join(D, "h", f"{slug}.json"), "w", encoding="utf-8"), ensure_ascii=False); idx[t["name"]] = slug
+    json.dump({"@context": "http://iiif.io/api/presentation/3/context.json", "id": f"{PB}hierarchy.json", "type": "Collection",
+               "label": {"ko": [f"KOREA ARCHIVE 통합검색 — 발견 누적 원장 계층구조 ({root['n']}건)"]},
+               "summary": {"ko": ["기관 › 계열(원 기관 계층 또는 구축 계층) › … › 기록. 계층이 없는 기록은 '(계열 미상)'으로 명시."]},
+               "items": [{"id": f"{PB}h/{idx[t['name']]}.json", "type": "Collection", "label": {"ko": [f"{t['name']} ({t['n']})"]}} for t in tops]},
+              open(os.path.join(D, "hierarchy.json"), "w", encoding="utf-8"), ensure_ascii=False)
+    E_ = html.escape; KV = "https://changgi.github.io/korea-archive-mcp/kv.html?manifest="
+    def node_html(n, depth, href=None):
+        kids = "".join(node_html(k, depth + 1) for k in sorted(n["kids"].values(), key=lambda k: -k["n"]))
+        leaves = "".join(f"<li class='r'><a href='{E_(o.get('url') or '#')}'>{E_(o['title'][:110])}</a>{' <span>' + E_(' · '.join(x for x in (o.get('date'), o.get('id')) if x)) + '</span>' if o.get('date') or o.get('id') else ''} <a class='kv' href='{KV}{E_(leaf_manifest(o))}'>KV</a></li>" for o in n["recs"][:200])
+        more = f"<li class='r'>… 외 {len(n['recs']) - 200}건(CSV 참조)</li>" if len(n["recs"]) > 200 else ""
+        kvn = f" <a class='kv' href='{KV}{E_(href)}'>이 계층 KV로 보기</a>" if href else ""
+        miss = " miss" if n["name"] == "(계열 미상)" else ""
+        return f"<details{' open' if depth < 1 else ''}><summary class='d{min(depth, 4)}{miss}'>{E_(n['name'])} <b>{n['n']}</b>{kvn}</summary><ul>{kids}{leaves}{more}</ul></details>"
+    body = "".join(node_html(t, 0, f"{PB}h/{idx[t['name']]}.json") for t in tops)
+    miss = sum(len(k["recs"]) for t in tops for k in t["kids"].values() if k["name"] == "(계열 미상)")
+    depth = {}
+    def walk(n, d):
+        for o in n["recs"]: depth[d] = depth.get(d, 0) + 1
+        for k in n["kids"].values(): walk(k, d + 1)
+    walk(root, 0)
+    dd = " · ".join(f"{d - 1}단계 {c}건" for d, c in sorted(depth.items()) if d > 1)
+    open(os.path.join(D, "tree.html"), "w", encoding="utf-8").write(f"""<!DOCTYPE html><html lang="ko"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>계층구조도 — 발견 누적 원장</title><style>body{{font-family:system-ui,'Noto Sans KR',sans-serif;margin:0;background:#14161b;color:#e6e4dc}}main{{max-width:1000px;margin:auto;padding:16px}}a{{color:#e0b04a}}
+details{{margin:2px 0 2px 0}}ul{{list-style:none;margin:0;padding-left:16px;border-left:1px dashed #33363f}}summary{{cursor:pointer;padding:4px 2px}}summary b{{color:#9b9a93;font-weight:400;font-size:13px;margin-left:4px}}
+.d0{{font-size:18px;font-weight:700}}.d1{{font-size:16px;font-weight:600}}.d2,.d3,.d4{{font-size:15px}}.miss{{color:#c97a6a}}li.r{{font-size:14px;padding:3px 0;line-height:1.4}}li.r span{{color:#9b9a93;font-size:12px}}a.kv{{font-size:12px;border:1px solid #e0b04a;border-radius:4px;padding:0 4px;margin-left:4px;text-decoration:none}}</style>
+<main><h1>계층구조도</h1><p>발견 누적 원장 {root['n']}건을 <b>기관 › 계열(원 기관 계층 또는 구축 계층) › … › 기록</b>으로 펼친 구조입니다. 기관 {len(tops)}곳 · 계열 깊이: {dd or '—'} · 계열 미상 {miss}건(붉은색 — 계층 보강 대상).</p>
+<p><a href="index.html">← 원장</a> · <a href="tree.json">tree.json</a> · <a href="hierarchy.json">IIIF 계층 컬렉션</a> · <a href="{KV}{PB}hierarchy.json">전체 계층을 KV로</a></p>{body}</main></html>""")
+    return root
+
 def key_of(r):
     h = (r.get("s") or ["?"])[0].split("·")[0]
     return f"{h}:{r.get('i') or r.get('u') or r.get('t', '')[:80]}"
@@ -367,11 +439,12 @@ details{{font-size:12px}}dl{{display:grid;grid-template-columns:auto 1fr;gap:2px
 table{{width:100%;border-collapse:collapse;font-size:14px}}td,th{{border-bottom:1px solid #2a2d35;padding:6px;text-align:left}}</style>
 <main><h1>발견 누적 원장</h1><p>KOREA ARCHIVE 통합검색 사용자가 도구로 발굴한 기록이 매일 이곳에 쌓입니다(검색어·사용자 정보 없음). 기록 <b>{st['records']:,}</b>건 · 마지막 갱신 {st['updated']} · 이번 갱신 신규 {new_recs}건 · 내용·메타정보 보강 {enr}건 · 썸네일 {thn}건</p>
 <p>{srcs}</p>
-<p><a class="b0" href="discovered.csv">CSV 내려받기</a><a class="b0" href="discovered.jsonl">JSONL</a><a class="b0" href="discovered.jsonld">RiC-O JSON-LD</a><a class="b0" href="../kv.html?manifest=https://changgi.github.io/korea-archive-mcp/data/collection.json">KV로 최근 300건 연속 보기</a><a class="b0" href="popular.csv">자주 활용 TOP 200</a><a class="b0" href="stats.json">집계</a></p>
+<p><a class="b0" href="discovered.csv">CSV 내려받기</a><a class="b0" href="discovered.jsonl">JSONL</a><a class="b0" href="discovered.jsonld">RiC-O JSON-LD</a><a class="b0" href="../kv.html?manifest=https://changgi.github.io/korea-archive-mcp/data/collection.json">KV로 최근 300건 연속 보기</a><a class="b0" href="tree.html">계층구조도</a><a class="b0" href="popular.csv">자주 활용 TOP 200</a><a class="b0" href="stats.json">집계</a></p>
 <p style="font-size:13px;color:#9b9a93">주요 내용·메타정보·썸네일은 기관 IIIF·우리 브리지 매니페스트를 하루 한 번 판독해 채웁니다(하루 상한·순차 요청). 썸네일은 재이용 가능 표시가 확인된 것만 싣고, 포로·사망자·묘지·수형자 관련 기록과 허가가 필요한 이미지는 링크만 둡니다. 권리는 원 기관 표기를 따릅니다 — 게재 전 judge_rights로 확인. 모든 변경은 저장소 git 이력(docs/data/)에 남습니다.</p>
 <h2>자주 활용되는 기록 TOP 30</h2><p style="font-size:13px">점수 = 최근 30일 발견×2 + 전체 발견 + 발견된 날 수×3 + 교차확인 기관 수 가중. 자동 검사 트래픽 제외.</p><div class="g">{prow}</div>
 <h2>일별 활용(최근 14일)</h2><table><tr><th>날짜</th><th>검색 묶음</th><th>발견 기록</th><th>신규 기록</th></tr>{urow}</table><p style="font-size:13px">형식별 누계: {E_(fmtv(usage['formats']))} · <a href="usage.json">usage.json</a></p>
 <h2>최근 발견 100건</h2><div class="g">{rows}</div></main></html>""")
+    build_tree(recs)
     print(f"원장 {len(recs)}건 (신규 {new_recs}, 묶음 {new_batches})")
 
 if __name__ == "__main__":
