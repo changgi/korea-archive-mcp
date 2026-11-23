@@ -500,6 +500,43 @@
     "koreanwar_item\\(archRfcd="
    ],
    "level": "warn"
+  },
+  {
+   "id": "okchf-collect",
+   "tool": "cross_search",
+   "args": {
+    "query": "불화",
+    "sources": "okchf",
+    "max_per_source": 5,
+    "format": "csv"
+   },
+   "must": [
+    "\\[okchf:[1-9]",
+    "국외소재문화유산재단 › (국외문화유산|사진아카이브) › "
+   ],
+   "must_not": [
+    "jsessionid"
+   ],
+   "level": "error"
+  },
+  {
+   "id": "okchf-detail",
+   "tool": "nedb_search",
+   "args": {
+    "mode": "okchf",
+    "query": "https://www.overseaschf.or.kr/archive/search/category.do?mode=view&srSearchTy=relic&id=46493&iDivCd=1"
+   },
+   "must": [
+    "소장처: 클리블랜드미술관",
+    "소장처 관리번호: 1994\\.25",
+    "【설명】",
+    "본문 지문\\(sha256-16\\): [0-9a-f]{16}"
+   ],
+   "must_not": [
+    "&nbsp;",
+    "&amp;"
+   ],
+   "level": "error"
   }
  ]
 }
