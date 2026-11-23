@@ -632,6 +632,24 @@
     "본문 지문\\(sha256-16\\): [0-9a-f]{16}"
    ],
    "level": "error"
+  },
+  {
+   "id": "deep-hint-footer",
+   "tool": "cross_search",
+   "args": {
+    "query": "유관순",
+    "sources": "indy",
+    "max_per_source": 2
+   },
+   "must": [
+    "koreanwar_item\\(ref_code\\)",
+    "\\[okchf\\]→mode=okchf",
+    "\\[nrich\\]→mode=nrich"
+   ],
+   "must_not": [
+    "koreanwar_item\\(archRfcd\\)"
+   ],
+   "level": "error"
   }
  ]
 }

@@ -23,6 +23,8 @@
 
 원장 보강 = 병합 때 기관 IIIF·우리 브리지 매니페스트를 하루 `ENRICH_MAX`(기본 80)건 순차 판독해 `summary`(주요 내용)·`meta`(메타정보 8항목)·`rights`·`thumb`를 채운다(실패는 다음 날 재시도). 매니페스트가 없는 국가기록원 기록은 공개 상세 페이지를 1회 판독해 메타정보(관리번호·문서유형·보존기간·서고·매체 등)와 **실제 계층**(국가기록원 › 기록물계열 › 상위 철)을 구축한다(`enrich_archives`). 그 밖의 매니페스트 없는 출처(i815·indy·gonghun·jacar·oldnews·un·jsg·ktv·koreanwar·seoul)는 **우리 서버의 심층 판독 도구를 그대로 호출**해(`DEEP` 표, `X-KA-Probe: ledger` — 적재 안 함) 주요 내용·메타정보·본문 지문·원문 뷰어를 채운다 — 파서는 서버 한 곳에만 있고 골든 검사가 지킨다. 호출문은 `deep_call`에 남아 재현 가능. 썸네일은 재이용 가능 표시(PD·CC·NoC·공공누리·저작권 만료)·NARA·우리 갤러리·우리 카드만 싣고, 포로·사망자·묘지·수형자 관련 기록은 링크만(`SENSITIVE` 정규식). 국가기록원 링크는 `&amp;` 해제·https로 정규화(`archLink`/`_arch_link`, 원장은 `clean_url`로 소급).
 
+국외 소재 교차확인 = 검색 때 `linkOverseas`(Python `_link_overseas`)가 okchf·nrich의 '명칭(괄호·한자 제거)+소장처(별칭 표 `OV_ALIAS`)' 동일 기록을 한 건으로 묶고(출처 둘 다·sameAs), 원장 병합 때 tree.html '국외 소장처 교차 보기'·`overseas_holders.csv`가 소장처별 두 DB 수록 범위를 보여 준다. 소장처 별칭이 새로 보이면 `OV_ALIAS`(양쪽)와 `ledger_merge.py` ALIAS에 추가.
+
 계층구조도 = 병합 때 `build_tree`가 원장 전체를 '기관 › partOf 단계 › 기록'으로 묶어 `tree.html`(접이식)·`tree.json`·`hierarchy.json`(IIIF 중첩 컬렉션)·`h/<기관>.json`(기관별 — KV로 계층 열람)을 만든다. 계층이 없는 기록은 '(계열 미상)'(붉은색)으로 드러나 보강 대상이 된다.
 
 원장 중복 처리 = 같은 기록이 다시 발견되면 새 줄 대신 **활용 컬럼**을 갱신한다: `seen`(전체)·`seen_7d`·`seen_30d`·`days_total`(발견된 날 수)·`days`(날짜별 90일)·`formats`(text·csv·iiif·manifest·karda)·`max_cross`(교차확인 기관 수)·`trend`·`score`·`rank`. 자주 활용 TOP 200=`docs/data/popular.csv`, 일별 추이=`usage.json`. 자동 검사(golden.py·health.yml)는 `X-KA-Probe` 헤더로 표시되어 적재하지 않는다 — 새 자동 호출을 만들 때도 이 헤더를 붙일 것.
