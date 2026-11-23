@@ -585,6 +585,53 @@
     "&nbsp;"
    ],
    "level": "error"
+  },
+  {
+   "id": "nrich-collect",
+   "tool": "cross_search",
+   "args": {
+    "query": "미륵사",
+    "sources": "nrich",
+    "max_per_source": 4,
+    "format": "csv"
+   },
+   "must": [
+    "\\[nrich:[1-9]",
+    "국립문화유산연구원 › 발간자료 › "
+   ],
+   "level": "error"
+  },
+  {
+   "id": "nrich-overseas-detail",
+   "tool": "nedb_search",
+   "args": {
+    "mode": "nrich",
+    "query": "ov:68018"
+   },
+   "must": [
+    "벼루 · 硯 · Inkstone",
+    "소장처명: 영국/영국박물관",
+    "제 4유형"
+   ],
+   "must_not": [
+    "&nbsp;"
+   ],
+   "level": "error"
+  },
+  {
+   "id": "nrich-report-detail",
+   "tool": "nedb_search",
+   "args": {
+    "mode": "nrich",
+    "query": "rep:9081"
+   },
+   "must": [
+    "익산 미륵사지 출토 부재 보존 및 활용 방안",
+    "【초록】",
+    "【목차】",
+    "본문 지문\\(sha256-16\\): [0-9a-f]{16}"
+   ],
+   "level": "error"
   }
  ]
 }

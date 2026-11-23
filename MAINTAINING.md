@@ -62,6 +62,7 @@
 - NDL — 동시·연속 요청 429. 순차·타임박스 유지, 재조회 최소화(디지털 PID는 검색 결과에서 바로).
 - 한국고문서자료관(AKS) — 일반 요청 WAF 차단(브라우저 세션에서만). 규장각 — 일부 네트워크에서 연결 불가(서버는 정상).
 - 위키미디어 — 연속 요청 429. imageinfo는 한 번에 묶어 조회.
+- 국립문화유산연구원 국가유산 지식이음(portal.nrich.go.kr) — robots Allow. 발간자료는 공식 Open API(`originalTotalApi.do`, 무키, XML md_data1~13), 국외문화유산 DB는 목록 GET(`st=1` 제목 검색 — `st=3`·POST는 필터 안 됨, 2026-11 실측). 그 밖의 Open API 22종(초상화·공예도설·목간·금석문 등)은 `apiList.do?menuIdx=665` — 다음 확장 후보.
 - 국외소재문화유산재단(overseaschf.or.kr) — robots.txt `Disallow: /`. 발굴 우선 원칙에 따라 수집처로 두되 결과·프로파일에 표시하고, 정직 UA·요청 1회(목록)·상세 24h 캐시로 최소화. 이 컨테이너의 Node fetch는 프록시 경유 503이 날 수 있음(curl·Vercel은 정상) — 로컬 검증은 저장 HTML로.
 
 ## 4. 새 기능·수집처를 넣을 때 체크리스트
