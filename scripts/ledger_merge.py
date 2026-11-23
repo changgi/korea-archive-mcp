@@ -32,6 +32,8 @@ def iiif_for(u, i=""):  # Node iiifFor 패리티 — 원 기관 IIIF·우리 브
              (r"discovery\.nationalarchives\.gov\.uk/details/r/([A-Za-z0-9]{2,20})", lambda m: f"{O}/iiif/tna/{m[1]}/manifest.json"),
              (r"much\.go\.kr/.*idnbr=([A-Z]{2}[\w-]+)", lambda m: f"{O}/iiif/much/{m[1]}/manifest.json"),
              (r"awm\.gov\.au/collection/(C\d+)", lambda m: f"{O}/iiif/awm/{m[1]}/manifest.json"),
+             (r"portal\.nrich\.go\.kr/kor/(overseasSearchView|ksmUsrView|portraitNdUsrView|buddhaNdUsrView)\.do\S*?(?:mseq|ksm_idx|portrait_idx|buddha_idx)=(\d+)",
+              lambda m: f"{O}/iiif/nrich/{ {'overseasSearchView': 'ov', 'ksmUsrView': 'ksm', 'portraitNdUsrView': 'portrait', 'buddhaNdUsrView': 'gwaebul'}[m[1]] }-{m[2]}/manifest.json"),
              (r"commons\.wikimedia\.org/wiki/(File(?:%3A|:)[^?#]+)", lambda m: f"{O}/iiif/commons/{urllib.parse.quote(urllib.parse.unquote(m[1]).replace('_', ' '), safe='')}/manifest.json"),
              (r"korea-archive-mcp/iiif\.html#(s\d+)", lambda m: f"https://changgi.github.io/korea-archive-mcp/iiif/m/{m[1]}.json"),
              (r"archive\.org/details/([^/?#]+)", lambda m: f"https://iiif.archive.org/iiif/3/{m[1]}/manifest.json"),

@@ -19,7 +19,7 @@ jobs:
         run: python3 scripts/nrich_harvest.py
       - name: 커밋
         run: |
-          git add docs/data/nrich_db.jsonl docs/data/nrich_db_meta.json
+          git add docs/data/nrich_db.jsonl docs/data/nrich_db_meta.json docs/data/nrich
           if git diff --cached --quiet; then echo "색인 변경 없음"; exit 0; fi
           git config user.name changgi
           git config user.email 10678518+changgi@users.noreply.github.com

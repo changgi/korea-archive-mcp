@@ -106,6 +106,13 @@ def main():
     os.makedirs(OUT, exist_ok=True)
     with open(os.path.join(OUT, "nrich_db.jsonl"), "w", encoding="utf-8") as fo:
         for r in sorted(rows, key=lambda r: (r["ds"], r["id"])): fo.write(json.dumps(r, ensure_ascii=False, separators=(",", ":")) + "\n")
+    # v2.17 데이터셋별 분할 색인(docs/data/nrich/<키>.jsonl) — IIIF 브리지·데이터셋 안 검색이 전체(16MB+)를 읽지 않게
+    os.makedirs(os.path.join(OUT, "nrich"), exist_ok=True)
+    by = {}
+    for r in rows: by.setdefault(r["ds"], []).append(r)
+    for k, rs in by.items():
+        with open(os.path.join(OUT, "nrich", f"{k}.jsonl"), "w", encoding="utf-8") as fo:
+            for r in sorted(rs, key=lambda r: r["id"]): fo.write(json.dumps(r, ensure_ascii=False, separators=(",", ":")) + "\n")
     meta["total"] = len(rows)
     json.dump(meta, open(os.path.join(OUT, "nrich_db_meta.json"), "w", encoding="utf-8"), ensure_ascii=False, indent=1)
     print(f"합계 {len(rows)}건")

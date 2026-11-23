@@ -737,6 +737,20 @@
     "미암일기"
    ],
    "level": "warn"
+  },
+  {
+   "id": "nrich-iiif-bridge",
+   "tool": "cross_search",
+   "args": {
+    "query": "벼루",
+    "sources": "nrich",
+    "max_per_source": 4,
+    "format": "manifest"
+   },
+   "must": [
+    "iiif/nrich/ov-\\d+/manifest\\.json"
+   ],
+   "level": "error"
   }
  ]
 }
