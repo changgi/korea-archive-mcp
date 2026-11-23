@@ -34,7 +34,7 @@ const PROXY = process.env.FETCH_PROXY_PREFIX || '';
 const text = (s) => ({ content: [{ type: 'text', text: s }] });
 const OK_B = 'https://www.overseaschf.or.kr'; // v2.11 국외소재문화유산재단 — robots.txt 'Disallow: /'(표시 대상 — 발굴 우선 원칙), 정직 UA·요청 최소
 const OK_UA = { 'User-Agent': 'KoreaArchiveMCP/1.0 (+https://github.com/changgi/korea-archive-mcp; archival discovery)' };
-const okText = (h) => norm(h).replace(/&nbsp;/g, ' ').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"').replace(/&#0?39;/g, "'").replace(/&amp;/g, '&').replace(/\s+/g, ' ').trim(); // Python _clean 패리티
+const okText = (h) => norm(h).replace(/\u200b/g, '').replace(/&nbsp;/g, ' ').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"').replace(/&#0?39;/g, "'").replace(/&amp;/g, '&').replace(/\s+/g, ' ').trim(); // Python _clean 패리티
 const okList = (b) => { const out = [];
   for (const tr of String(b).split(/<tr>/).slice(1)) {
     const a = tr.match(/href="(\/archive\/search\/(?:photo|category)\.do)(?:;jsessionid=[^?"]*)?\?mode=view&(?:amp;)?srSearchTy=(\w+)&(?:amp;)?id=(\d+)&(?:amp;)?iDivCd=(\d*)"[^>]*>([\s\S]*?)<\/a>/);
@@ -47,6 +47,11 @@ const okList = (b) => { const out = [];
   }
   const total = ((String(b).match(/전체 <strong[^>]*>([\d,]+)/) || [])[1] || '').replace(/,/g, '');
   return { out, total }; };
+const OK_PD = `${OK_B}/okchf/data/US_DF_PD.do`; // v2.12 발간자료(국외 소장 한국문화유산 조사보고서) 게시판 — 제목+내용(목차) 검색
+const okPubs = (b) => [...String(b).matchAll(/<a href="\?mode=view&(?:amp;)?articleNo=(\d+)[^"]*">\s*<span class="board-item__img">\s*(?:<img src="([^"]+)")?[\s\S]*?<span class="board-item__tit">([\s\S]*?)<\/span>/g)]
+  .map((m) => ({ no: m[1], title: okText(m[3]), img: m[2] ? OK_B + m[2] : '', url: `${OK_PD}?mode=view&articleNo=${m[1]}` }));
+const okPubSearch = async (q) => { const b = await gtext(`${OK_PD}?mode=list&srSearchKey=article_title_text&srSearchVal=${encodeURIComponent(q)}&articleLimit=10`, OK_UA);
+  return { items: okPubs(b), total: ((b.match(/count-all">총 <span>([\d,]+)/) || [])[1] || '').replace(/,/g, '') }; };
 const archLink = (u) => String(u || '').replace(/&amp;/g, '&').replace(/^http:\/\/www\.archives\.go\.kr/, 'https://www.archives.go.kr'); // 국가기록원 상세 링크 정규화(v2.7.1)
 const sleep = (ms) => new Promise((res) => setTimeout(res, ms));
 
@@ -639,7 +644,7 @@ const PART_OF = {
   aks: (it) => it.series && `고문서 › ${it.series}`,
   gallery: (it) => it.series && `IIIF 갤러리 › ${it.series}`,
   ledger: (it) => it.series || '',
-  okchf: (it) => it.series && `국외소재문화유산재단 › ${it.series}`,
+  okchf: (it) => it.series && `국외소재문화유산재단 › ${it.series}`, // 발간자료 › 조사보고서 포함
   dnz: (it) => it.series && `NZ › ${it.series}`,
   ia: (it) => it.series && `IA Collection › ${it.series}`,
   tna: (it) => it.series && `TNA › ${it.series}`,
@@ -1136,9 +1141,11 @@ const COLLECT = {
     return out;
   },
   okchf: async (q, n) => { // v2.11 국외소재문화유산재단 대국민 아카이브 — 통합검색(국외문화유산·사진아카이브). 계층=유형 › 소장국가 › 소장처
-    const b = await gtext(`${OK_B}/archive/total-search.do?srSearchVal=${encodeURIComponent(q)}&pagerLimit=${n <= 10 ? 10 : n <= 20 ? 20 : 50}`, OK_UA);
-    return okList(b).out.slice(0, n).map((r) => ({ title: `[${r.type}] ${r.title} — ${[r.country, r.holder].filter(Boolean).join(' ')}`.slice(0, 160), date: '', id: r.id,
-      series: [r.type, r.country, r.holder].filter(Boolean).join(' › '), url: r.url, ...(r.img ? { media: r.img } : {}) }));
+    const [b, pub] = await Promise.all([gtext(`${OK_B}/archive/total-search.do?srSearchVal=${encodeURIComponent(q)}&pagerLimit=${n <= 10 ? 10 : n <= 20 ? 20 : 50}`, OK_UA),
+      okPubSearch(q).catch(() => ({ items: [] }))]); // 조사보고서(목차) — 소장처 단위 맥락
+    const reps = pub.items.slice(0, Math.min(3, Math.max(1, Math.floor(n / 3)))).map((r) => ({ title: `[조사보고서] ${r.title}`.slice(0, 160), date: '', id: `pub:${r.no}`, series: '발간자료 › 조사보고서', url: r.url, ...(r.img ? { media: r.img } : {}) }));
+    return reps.concat(okList(b).out.slice(0, n).map((r) => ({ title: `[${r.type}] ${r.title} — ${[r.country, r.holder].filter(Boolean).join(' ')}`.slice(0, 160), date: '', id: r.id,
+      series: [r.type, r.country, r.holder].filter(Boolean).join(' › '), url: r.url, ...(r.img ? { media: r.img } : {}) }))).slice(0, n + reps.length);
   },
   ledger: async (q, n) => { // v2.6: 발견 누적 원장 — 사용자들이 이미 발굴한 기록(검색어 없음)을 다시 검색. docs/data/discovered.jsonl 1h 캐시. 'all'에는 넣지 않는다(원 기관 결과와 중복·교차확인 오인 방지) — sources='ledger'로 명시
     const b = await cachedText('kaLedger', 3600e3, () => gtext('https://changgi.github.io/korea-archive-mcp/data/discovered.jsonl'), '"key"');
@@ -2011,6 +2018,21 @@ const JB_CROSS = `국내외 대조 절차 — 순서를 틀리면 헛수고한�
       }
       if (mode === 'okchf') { // v2.11 국외소재문화유산재단 — 상세 URL/'relic:ID' 판독(소장국가·소장처·관리번호·소장경위·시대·재질·크기·출판정보·설명·이미지), 그 밖은 키워드 목록
         try {
+          const pm = q.match(/US_DF_PD\.do\S*?articleNo=(\d+)/) || q.trim().match(/^pub\s*[:#]\s*(\d+)$/);
+          if (pm) { // 조사보고서 서지·목차
+            const url = `${OK_PD}?mode=view&articleNo=${pm[1]}`;
+            const h = (await cachedText('okP:' + pm[1], 24 * 3600e3, () => gtext(url, OK_UA), 'board-detail__tit')).replace(/<script[\s\S]*?<\/script>/g, ' ');
+            const title = okText((h.match(/board-detail__tit">([\s\S]*?)<\/h5>/) || [])[1] || `pub:${pm[1]}`);
+            const yr = okText((h.match(/발간연도 : <em>([^<]*)/) || [])[1] || '');
+            const F = {}; for (const m of h.matchAll(/<dt>([\s\S]*?)<\/dt>\s*<dd>([\s\S]*?)<\/dd>/g)) { const k = okText(m[1]); const v = okText(m[2]); if (k && v && !(k in F)) F[k] = v; }
+            const toc = ((h.match(/<div class="fr-view">([\s\S]*?)<\/div>/) || [])[1] || '').split(/<\/p>/).map(okText).filter(Boolean);
+            return text(`국외소재문화유산재단 조사보고서 판독 — ${title}\n` + [yr && `발간연도: ${yr}`, ...Object.entries(F).map(([k, v]) => `${k}: ${v}`)].filter(Boolean).join(' · ') + '\n'
+              + (toc.length ? `【목차】\n${toc.join('\n').slice(0, 2500)}\n목차 지문(sha256-16): ${createHash('sha256').update(toc.join('|')).digest('hex').slice(0, 16)}\n` : '')
+              + `원문 뷰어: ${url}\n※ 출처: 국외소재문화유산재단 발간자료 — 본문(전자책·PDF)은 재단 누리집 열람. 인용 시 보고서명·발간연도·쪽수 표기. robots 전체 Disallow(표시).`);
+          }
+          const qm = q.trim().match(/^보고서\s*[:：]\s*(.+)$/);
+          if (qm) { const { items, total } = await okPubSearch(qm[1]);
+            return text(`국외소재문화유산재단 조사보고서 '${qm[1]}'(제목+목차) — 전체 ${total || items.length}건\n` + (items.map((r) => `- ${r.title} ${r.url}`).join('\n') || '(0)') + `\n※ 서지·목차: nedb_search(mode='okchf', query=<보고서 URL>) · 전체 목록: ${OK_PD}`); }
           const um = q.match(/overseaschf\.or\.kr\/archive\/search\/(photo|category)\.do\S*?srSearchTy=(\w+)\S*?[?&]id=(\d+)/) || q.match(/overseaschf\.or\.kr\/archive\/search\/(photo|category)\.do\S*?[?&]id=(\d+)\S*?srSearchTy=(\w+)/);
           const im = q.trim().match(/^(relic|relic_gls|redemption)\s*[:#]\s*(\d+)$/);
           if (um || im) {
@@ -2035,7 +2057,7 @@ const JB_CROSS = `국내외 대조 절차 — 순서를 틀리면 헛수고한�
           const { out, total } = okList(await gtext(`${OK_B}/archive/total-search.do?srSearchVal=${encodeURIComponent(q)}&pagerLimit=${max_results <= 10 ? 10 : max_results <= 20 ? 20 : 50}`, OK_UA));
           return text(`국외소재문화유산재단 아카이브 '${q}' — 전체 ${total || out.length}건 중 ${Math.min(out.length, max_results)}건 (유형 › 소장국가 › 소장처)\n`
             + (out.slice(0, max_results).map((r) => `- [${r.type}] ${r.title} — ${r.country} · ${r.holder} ${r.url}`).join('\n') || '(0)')
-            + '\n※ 상세 판독: nedb_search(mode=\'okchf\', query=<상세 URL>) · 전체 목록 브라우저: https://www.overseaschf.or.kr/archive/total-search.do · 발간 보고서: https://www.overseaschf.or.kr/okchf/data/US_DF_PD.do · robots 전체 Disallow(표시)');
+            + '\n※ 상세 판독: nedb_search(mode=\'okchf\', query=<상세 URL>) · 조사보고서: query=\'보고서:키워드\' · 전체 목록 브라우저: https://www.overseaschf.or.kr/archive/total-search.do · 발간 보고서: https://www.overseaschf.or.kr/okchf/data/US_DF_PD.do · robots 전체 Disallow(표시)');
         } catch (e) { return text(`국외소재문화유산재단 조회 실패(${String(e.message || e).slice(0, 60)}) — 브라우저 대체 경로: https://www.overseaschf.or.kr/archive/total-search.do?srSearchVal=${encodeURIComponent(q)}`); }
       }
       if (mode === 'un') { // UN 디지털도서관 — 키워드 목록 / recid·URL 판독(요약·주제·언어별 PDF)
