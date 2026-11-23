@@ -271,6 +271,28 @@ def build_tree(recs):
         miss = " miss" if n["name"] == "(계열 미상)" else ""
         return f"<details{' open' if depth < 1 else ''}><summary class='d{min(depth, 4)}{miss}'>{E_(n['name'])} <b>{n['n']}</b>{kvn}</summary><ul>{kids}{leaves}{more}</ul></details>"
     body = "".join(node_html(t, 0, f"{PB}h/{idx[t['name']]}.json") for t in tops)
+    # v2.14 국외 소장처 교차 보기 — 재단(okchf)·연구원(nrich) 기록을 '국가 › 소장처'로 모아 두 DB의 수록 범위를 나란히(같은 소장처를 두 기관이 각각 조사·공개한 정도)
+    ALIAS = {"대영박물관": "영국박물관", "british museum": "영국박물관", "메트로폴리탄박물관": "메트로폴리탄미술관"}
+    ov = {}
+    for o in recs:
+        segs = [x.strip() for x in (o.get("partOf") or "").split("›")]
+        if "국외문화유산" not in segs: continue
+        i = segs.index("국외문화유산"); nat = segs[i + 1] if len(segs) > i + 1 else "?"; hol = segs[i + 2] if len(segs) > i + 2 else "?"
+        hol = ALIAS.get(hol.lower(), ALIAS.get(hol, hol))
+        e = ov.setdefault((nat, hol), {"okchf": 0, "nrich": 0, "recs": []})
+        for sname in o["sources"]:
+            b0 = sname.split("·")[0]
+            if b0 in ("okchf", "nrich"): e[b0] += 1
+        e["recs"].append(o)
+    with open(os.path.join(D, "overseas_holders.csv"), "w", encoding="utf-8-sig", newline="") as f:
+        w = csv.writer(f); w.writerow(["국가", "소장처", "국외소재문화유산재단(okchf)", "국립문화유산연구원(nrich)", "두 기관 모두", "기록 수"])
+        for (nat, hol), e in sorted(ov.items(), key=lambda kv: (kv[0][0], -len(kv[1]["recs"]))): w.writerow([nat, hol, e["okchf"], e["nrich"], "Y" if e["okchf"] and e["nrich"] else "", len(e["recs"])])
+    both = sum(1 for e in ov.values() if e["okchf"] and e["nrich"])
+    orow = "".join(f"<tr><td>{E_(nat)}</td><td>{E_(hol)}</td><td>{e['okchf'] or ''}</td><td>{e['nrich'] or ''}</td><td>{'◎' if e['okchf'] and e['nrich'] else ''}</td></tr>"
+                   for (nat, hol), e in sorted(ov.items(), key=lambda kv: (-(bool(kv[1]['okchf']) and bool(kv[1]['nrich'])), kv[0][0], -len(kv[1]['recs']))))
+    ovsec = (f"<h2>국외 소장처 교차 보기</h2><p>국외소재문화유산재단·국립문화유산연구원 두 DB에서 발견된 국외 소재 기록을 <b>국가 › 소장처</b>로 모았습니다. 소장처 {len(ov)}곳 · 두 기관 모두 수록 {both}곳(◎). "
+             f"같은 유물이 두 DB에 있으면 검색 결과에서 한 건으로 묶여 출처가 둘 다 표기됩니다(명칭+소장처 일치). <a href='overseas_holders.csv'>CSV</a></p>"
+             f"<table><tr><th>국가</th><th>소장처</th><th>재단</th><th>연구원</th><th>교차</th></tr>{orow}</table>") if ov else ""
     miss = sum(len(k["recs"]) for t in tops for k in t["kids"].values() if k["name"] == "(계열 미상)")
     depth = {}
     def walk(n, d):
@@ -281,9 +303,9 @@ def build_tree(recs):
     open(os.path.join(D, "tree.html"), "w", encoding="utf-8").write(f"""<!DOCTYPE html><html lang="ko"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>계층구조도 — 발견 누적 원장</title><style>body{{font-family:system-ui,'Noto Sans KR',sans-serif;margin:0;background:#14161b;color:#e6e4dc}}main{{max-width:1000px;margin:auto;padding:16px}}a{{color:#e0b04a}}
 details{{margin:2px 0 2px 0}}ul{{list-style:none;margin:0;padding-left:16px;border-left:1px dashed #33363f}}summary{{cursor:pointer;padding:4px 2px}}summary b{{color:#9b9a93;font-weight:400;font-size:13px;margin-left:4px}}
-.d0{{font-size:18px;font-weight:700}}.d1{{font-size:16px;font-weight:600}}.d2,.d3,.d4{{font-size:15px}}.miss{{color:#c97a6a}}li.r{{font-size:14px;padding:3px 0;line-height:1.4}}li.r span{{color:#9b9a93;font-size:12px}}a.kv{{font-size:12px;border:1px solid #e0b04a;border-radius:4px;padding:0 4px;margin-left:4px;text-decoration:none}}</style>
+table{{width:100%;border-collapse:collapse;font-size:14px;margin-top:8px}}td,th{{border-bottom:1px solid #2a2d35;padding:5px;text-align:left}}.d0{{font-size:18px;font-weight:700}}.d1{{font-size:16px;font-weight:600}}.d2,.d3,.d4{{font-size:15px}}.miss{{color:#c97a6a}}li.r{{font-size:14px;padding:3px 0;line-height:1.4}}li.r span{{color:#9b9a93;font-size:12px}}a.kv{{font-size:12px;border:1px solid #e0b04a;border-radius:4px;padding:0 4px;margin-left:4px;text-decoration:none}}</style>
 <main><h1>계층구조도</h1><p>발견 누적 원장 {root['n']}건을 <b>기관 › 계열(원 기관 계층 또는 구축 계층) › … › 기록</b>으로 펼친 구조입니다. 기관 {len(tops)}곳 · 계열 깊이: {dd or '—'} · 계열 미상 {miss}건(붉은색 — 계층 보강 대상).</p>
-<p><a href="index.html">← 원장</a> · <a href="tree.json">tree.json</a> · <a href="hierarchy.json">IIIF 계층 컬렉션</a> · <a href="{KV}{PB}hierarchy.json">전체 계층을 KV로</a></p>{body}</main></html>""")
+<p><a href="index.html">← 원장</a> · <a href="tree.json">tree.json</a> · <a href="hierarchy.json">IIIF 계층 컬렉션</a> · <a href="{KV}{PB}hierarchy.json">전체 계층을 KV로</a>{' · <a href="#ov">국외 소장처 교차 보기</a>' if ov else ''}</p>{body}<div id="ov">{ovsec}</div></main></html>""")
     return root
 
 def key_of(r):
