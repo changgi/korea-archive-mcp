@@ -18,6 +18,7 @@
 | `lib/rec_iiif.js` · `app/iiif/rec/[...p]/route.js` | **기록 봉투 IIIF** — IIIF가 없는 모든 기록 → `/iiif/rec/{token}/manifest.json`·`card.svg`·`record.jsonld`(토큰=봉인된 기술, 서버 저장 없음) | KV `#c=` 압축 컬렉션 링크 |
 | `lib/tna_iiif.js` · `app/iiif/tna/[...p]/route.js` | **TNA→IIIF** — 실제 계층(parentId) 재구성 매니페스트·하위 컬렉션 | 부모 기술 6시간 캐시 · 컬렉션 1회 TNA 2~8요청 |
 | `app/export/csv/[tok]/route.js` | **검색 결과 CSV 내려받기** — `cross_search(format='csv')` 응답의 📥 링크. 토큰=CSV 본문 압축(서버 저장 없음), 엑셀용 BOM | 24KB·URL 12,000자 넘으면 링크 생략 |
+| `lib/ledger.js` · `app/api/ledger/[day]/route.js` · `scripts/ledger_merge.py` | **발견 누적 원장** — cross_search 발견 기록(검색어·사용자 정보 없음)을 Upstash Redis 날짜 함(3일 보관)에 적재 → 매일 `ledger` 워크플로가 공개 읽기 주소에서 꺼내 `docs/data/`(discovered.jsonl·csv·jsonld·collection.json·index.html)에 병합·커밋 | 무료(Upstash Free 월 50만 명령 ≈ 하루 8천 검색). 미설정·한도 초과면 적재만 생략 |
 | `docs/iiif/` | 갤러리 IIIF — `hierarchy.json`(부›시리즈›이미지)·`collection.json`(평면)·`all.json`·`m/`·`c/` + 데이터 `records.csv`·`records.jsonld` | `build_iiif.py`가 생성(`_nara_ctx.json`=NARA 계보 캐시) |
 
 우리 IIIF 갤러리도 수집처다 — `cross_search(sources='gallery')`가 `docs/iiif/index.json`(Pages)을 6시간 캐시로 검색하고, `format='iiif'`면 시리즈 매니페스트(`iiif/m/sNNN.json`)를 컬렉션에 넣는다.
@@ -32,6 +33,7 @@
 | `golden` | main 반영 직후(배포 대기 150초) · 매주 수 | 프로덕션 도구 18케이스 출력 구조(제목 전체·해제·표기 변형·IIIF·24KB) | **`auto-health` 이슈 자동 생성/갱신**, 다음에 통과하면 자동 종료 |
 | `health` | 매주 월 | 30채널 골든 질의 + 같은 기록 묶기 회귀 | `auto-health` 이슈 |
 | `fixity-watch` | 매주 화 | 골든 기록 본문 지문(sha256-16) — 원문 개정 감지 | 원장(`public/fixity-ledger.json`) 이력 커밋 + 실패 |
+| `ledger` | 매일 00:17 KST | 발견 누적 원장 병합(`docs/data/`) — 처리 위치 `_state.json`, 최근 3일 함 | 실행 실패 시 다음 날 이어 받음(함 3일 보관) |
 | `retry-blocked` · `nz-harvest` | 매주 화 | 차단 채널 재탐침 · NZ 정적 인덱스 갱신 | 실행 요약 |
 | Dependabot | 매월 | npm(마이너·패치만)·Actions 의존성 갱신 PR | verify의 **실제 빌드(next build)**가 병합 전 검증 |
 
@@ -81,7 +83,7 @@ python3 scripts/golden.py          # 프로덕션 골든 회귀
 
 ## 6. 서버 설정(값은 Vercel 프로젝트 환경변수 — 저장소에 넣지 않는다)
 
-`NARA_API_KEY` · `ARCHIVES_API_KEY`(국가기록원) · `NLK_API_KEY` · `EUROPEANA_API_KEY` · `KOREANWAR_API_TOKEN`(협약기관) · `KOREANWAR_API_PAGES` · `DNZ_API_KEY`(선택) · `NEDB_INDEX_URL`(한국사DB 공식 개방파일 인덱스, 선택) · `FETCH_PROXY_PREFIX`(선택).
+`NARA_API_KEY` · `ARCHIVES_API_KEY`(국가기록원) · `NLK_API_KEY` · `EUROPEANA_API_KEY` · `KOREANWAR_API_TOKEN`(협약기관) · `KOREANWAR_API_PAGES` · `DNZ_API_KEY`(선택) · `NEDB_INDEX_URL`(한국사DB 공식 개방파일 인덱스, 선택) · `FETCH_PROXY_PREFIX`(선택) · `KV_REST_API_URL`·`KV_REST_API_TOKEN`(발견 누적 원장 — Vercel Storage의 Upstash Redis 연결 시 자동 주입, 결제 수단 등록 금지: 무료 리소스가 유료로 전환됨).
 키가 없으면 해당 채널은 결과에 "키 미설정"으로 표시되고 나머지는 계속 동작한다. `source_profile('health')` 맨 아래에 설정 상태가 나온다.
 
 ## 7. 산출물 다시 만들기
