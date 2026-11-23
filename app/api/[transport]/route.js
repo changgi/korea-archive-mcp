@@ -82,6 +82,13 @@ const nrYear = (d) => { const m = String(d || '').match(/(?<!\d)(\d{3,4})(?!\d)/
 const nrPeopleLines = (P, keys, per = 3) => keys.map((k) => { const e = P[k]; const tot = Object.values(e.r).reduce((a, v) => a + v.length, 0);
   const ex = Object.entries(e.r).flatMap(([r, v]) => v.map((x) => [r, ...x])).sort((a, b) => nrYear(a[3]) - nrYear(b[3])).slice(0, per);
   return `- ${k} — ${tot}건(${Object.entries(e.r).map(([r, v]) => `${r} ${v.length}`).join(' · ')})` + ex.map((x) => `\n  · [${x[0]}] ${x[2]}${x[3] ? ' · ' + x[3] : ''} → ${x[1]}`).join(''); });
+// v2.24 IA 관련성 — 전체 필드 검색은 Archive-It 웹 크롤링 원자료(mediatype web)·라디오 스트림이 상위를 채운다(실측 'Korea' 6건 전부 크롤링 묶음). 제목 범위 + 문서·영상·이미지, 0건이면 웹·컬렉션·계정만 제외한 넓은 질의. 고급 문법(필드:값)은 그대로.
+const iaQueries = (q) => (/\w+:/.test(q) ? [q] : [`title:(${q}) AND mediatype:(texts OR movies OR image)`, `(${q}) AND NOT mediatype:(web OR collection OR account)`]);
+const iaRank = (docs) => docs.map((x, i) => [x, /^gov\./.test(x.identifier || '') ? 0 : /^youtube-/.test(x.identifier || '') ? 2 : 1, i]).sort((a, b) => a[1] - b[1] || a[2] - b[2]).map((x) => x[0]); // 정부·기관 원본 우선, 유튜브 사본 뒤
+async function iaSearch(q, rows, fl, page = 1) { let last = null;
+  for (const qq of iaQueries(q)) { const d = await jget(`https://archive.org/advancedsearch.php?q=${encodeURIComponent(qq)}&${fl}&rows=${Math.min(100, rows * 2)}&page=${page}&output=json`); last = { d, qq };
+    if (((d.response || {}).numFound || 0) > 0) break; }
+  const r = (last.d.response || {}); return { numFound: r.numFound || 0, docs: iaRank(r.docs || []).slice(0, rows), q: last.qq }; }
 const nrField = (f) => String(f || '').split(/\s*-\s*/).filter(Boolean).join(' › ');
 // v2.14 국외 소재 교차확인 — 재단(okchf)·연구원(nrich) 두 DB에서 '명칭(괄호·한자·기호 제거)+소장처'가 같은 기록을 한 건으로 묶는다(출처 둘 다, sameAs=다른 쪽 URL)
 const OV_ALIAS = { '대영박물관': '영국박물관', 'british museum': '영국박물관', '메트로폴리탄박물관': '메트로폴리탄미술관' };
@@ -740,7 +747,7 @@ const COLLECT = {
   },
   ia: async (q, n) => {
     q = koToEn(q) || q;
-    const d = await jget(`https://archive.org/advancedsearch.php?q=${encodeURIComponent(q)}&fl[]=identifier&fl[]=title&fl[]=date&fl[]=collection&rows=${n}&output=json`);
+    const r0 = await iaSearch(q, n, 'fl[]=identifier&fl[]=title&fl[]=date&fl[]=collection'); const d = { response: { docs: r0.docs } };
     // v1.87: NARA 재게시본 식별자 gov.archives.arc.<NAID> → sameAs(원본 NAID) — 추가 조회 없이 동일 기록 병합(44175 실측 일치)
     return ((d.response || {}).docs || []).map((x) => { const an = (String(x.identifier || '').match(/^gov\.archives\.arc\.(\d+)$/) || [])[1]; const al = (String(x.identifier || '').match(/^(\d{2,3}[a-z]?-[a-z]{1,6}-\d+[a-z]?)$/i) || [])[1]; /* v1.91.2: NARA 고유번호형 식별자(428-npc-171) → 원본 대조 */ return { title: String(x.title || ''), date: x.date || '', id: x.identifier, ...((Array.isArray(x.collection) ? x.collection[0] : x.collection) ? { series: String(Array.isArray(x.collection) ? x.collection[0] : x.collection) } : {}), ...(an ? { sameAs: `NAID ${an}` } : al ? { sameAs: `NARA ${al.toUpperCase()}` } : {}), url: `https://archive.org/details/${x.identifier}` }; });
   },
@@ -1675,8 +1682,7 @@ const handler = createMcpHandler((server) => {
       let eff = en || query;
       // date:[A TO B] + page 실측 검증 (2026-11-18)
       if (year_from || year_to) eff = `(${eff}) AND date:[${year_from || 1800}-01-01 TO ${year_to || 2030}-12-31]`;
-      const u = `https://archive.org/advancedsearch.php?q=${encodeURIComponent(eff)}&fl[]=identifier&fl[]=title&fl[]=date&fl[]=licenseurl&rows=${max_results}&page=${page}&output=json`;
-      const d = await jget(u);
+      const r0 = await iaSearch(eff, max_results, 'fl[]=identifier&fl[]=title&fl[]=date&fl[]=licenseurl', page); const d = { response: { numFound: r0.numFound, docs: r0.docs } }; // v2.24 관련성 질의(iaSearch)
       const docs = ((d.response || {}).docs) || [];
       const lshort = (lu) => { const m = String(lu || '').match(/(publicdomain\/(?:mark|zero)|licenses\/[a-z-]+)/); return m ? m[1].replace('licenses/', 'CC ') : ''; };
       const tags = [year_from || year_to ? `연대 ${year_from || ''}~${year_to || ''}` : '', page > 1 ? `p.${page}` : ''].filter(Boolean);
