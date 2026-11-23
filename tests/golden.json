@@ -414,7 +414,11 @@
    "must": [
     "(생산기관|국가기록원) › "
    ],
-   "level": "warn"
+   "level": "warn",
+   "must_not": [
+    "&amp;rc_",
+    "http://www\\.archives\\.go\\.kr/next"
+   ]
   },
   {
    "id": "nedb-partof",
