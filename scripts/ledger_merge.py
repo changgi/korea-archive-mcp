@@ -50,12 +50,49 @@ strip = lambda t: re.sub(r"\s+", " ", html.unescape(re.sub(r"<[^>]+>", " ", str(
 SENSITIVE = re.compile(r"\b(POWs?|prisoners?|captured|dead|bod(y|ies)|corpses?|graves?|cemetery|burial|execution|executed|massacre|mugshot|wounded)\b|포로|시신|사망|전사자|묘지|매장|처형|학살|수형|부상자", re.I)
 OPEN_RIGHTS = re.compile(r"publicdomain|creativecommons\.org/licenses|rightsstatements\.org/vocab/(NoC|NKC)|Public Domain|Unrestricted|저작권 만료|이용 제한 없음|공공누리", re.I)
 
+AR_KEEP = ["생산기관", "관리번호", "생산연도", "문서유형", "기록물형태", "매체유형", "보존기간", "공개구분", "서고정보", "페이지정보", "발간번호", "서비스권자", "기록물계열"]
+
+def enrich_archives(o):
+    """국가기록원 상세(공개 페이지) 1회 판독 — 매니페스트가 없는 기록의 메타정보·실제 계층(기록물계열 › 상위 철) 구축."""
+    r = urllib.request.urlopen(urllib.request.Request(o["url"], headers={"User-Agent": UA}), timeout=25)
+    s = r.read().decode("utf-8", "replace")
+    s = re.sub(r"<script.*?</script>|<style.*?</style>", " ", s, flags=re.S)
+    i = s.find("제목</th>")
+    if i < 0: raise ValueError("상세 표 없음")
+    f = {}; titles = []
+    for m in re.finditer(r"<th[^>]*>(.*?)</th>\s*<td[^>]*>(.*?)</td>", s[i - 400:], re.S):
+        k = strip(m[1]); v = strip(m[2])
+        if "개인정보" in k: break
+        if k.endswith("제목"): titles.append(v); continue
+        if k in AR_KEEP and v and k not in f: f[k] = v.split("※")[0].strip()[:140]
+    parent = titles[1] if len(titles) > 1 else ""
+    if parent and strip(parent) == strip(titles[0] if titles else o.get("title", "")): parent = ""  # 간행물 등 철=건 동일 — 계층 아님
+    md = [[k, f[k]] for k in AR_KEEP if f.get(k)]
+    if parent: md.insert(0, ["상위 철", parent[:140]])
+    o["meta"] = md[:10]
+    ser = f.get("기록물계열", "")
+    if ser or parent:  # 계층 구축(실제 값 — 상세 판독)
+        o["partOf_src"] = o.get("partOf_src") or o.get("partOf", "")
+        o["partOf"] = " › ".join(x for x in ["국가기록원", ser, parent] if x)
+    bits = [f.get("생산연도"), f.get("생산기관") and f"{f['생산기관']} 생산", f.get("문서유형") and f"{f['문서유형']}" + (f"({f['기록물형태']})" if f.get("기록물형태") and f["기록물형태"] != f["문서유형"] else ""),
+            parent and f"상위 철 「{parent}」", ser and f"기록물계열 {ser}", f.get("매체유형"), f.get("페이지정보") and (f"{f['페이지정보']}쪽" if f["페이지정보"].isdigit() else f"쪽 {f['페이지정보']}"),
+            f.get("서고정보") and f"{f['서고정보']} 소장", f.get("공개구분")]
+    o["summary"] = " · ".join(b for b in bits if b)[:400] + " (국가기록원 상세 판독 — 기술 메타데이터)"
+    o["rights"] = f.get("서비스권자", "") and f"서비스권자 {f['서비스권자']} — 이용조건 원 기관 확인"
+
 def enrich(o, budget):
-    """IIIF 매니페스트 1회 판독 → 주요 내용(summary)·메타정보·썸네일·권리. 실패는 7일 뒤 재시도. 반환: 사용한 요청 수."""
+    """IIIF 매니페스트 1회 판독 → 주요 내용(summary)·메타정보·썸네일·권리. 실패는 다음 날 재시도. 반환: 사용한 요청 수."""
     m = o.get("iiif") or iiif_for(o.get("url"), o.get("id"))
     if m: o["iiif"] = m
     today = dt.date.today().isoformat()
-    if o.get("enriched") and (o.get("enrich_status") != "fail" or o["enriched"] > (dt.date.today() - dt.timedelta(days=7)).isoformat()):
+    src0 = o["key"].split(":")[0]
+    done = o.get("enrich_status") == "ok" or (o.get("enrich_status") == "fail" and o.get("enriched", "") > (dt.date.today() - dt.timedelta(days=1)).isoformat())
+    if not m and src0 == "archives" and o.get("url") and budget > 0 and not done:
+        try: enrich_archives(o); o["enrich_status"] = "ok"
+        except Exception: o["enrich_status"] = "fail"
+        o["enriched"] = today; o["thumb_ok"] = False
+        return 1
+    if o.get("enriched") and (o.get("enrich_status") != "fail" or o["enriched"] > (dt.date.today() - dt.timedelta(days=1)).isoformat()):
         th = o.get("thumb") or ""  # 이미 보강된 기록도 썸네일 게재 규칙은 매번 다시 적용(규칙 변경 소급)
         o["thumb_ok"] = bool(th) and not re.search(r"card\.svg|image/svg", th) and not SENSITIVE.search(f"{o.get('title', '')} {o.get('summary', '')}") and (
             o["key"].split(":")[0] in ("nara", "gallery") or bool(OPEN_RIGHTS.search(o.get("rights") or "")))
@@ -230,7 +267,7 @@ def main():
     KV = "https://changgi.github.io/korea-archive-mcp/kv.html?manifest="
     def card(o, big=True):
         th = (f"<img loading='lazy' src='{E_(o['thumb'])}' alt='' referrerpolicy='no-referrer' onerror=\"this.replaceWith(Object.assign(document.createElement('div'),{{className:'ph',textContent:'{E_(o['key'].split(':')[0])}'}}))\">"
-              if o.get("thumb_ok") else f"<div class='ph'>{E_(o['key'].split(':')[0])}<small>{'이미지 링크만(권리·게재윤리)' if o.get('thumb') else '이미지 없음'}</small></div>")
+              if o.get("thumb_ok") else f"<div class='ph'>{E_(o['key'].split(':')[0])}<small>{'원본 이미지 없음(기록 카드)' if ('card.svg' in (o.get('thumb') or '')) else ('이미지 링크만(권리·게재윤리)' if o.get('thumb') else '이미지 없음')}</small></div>")
         chips = "".join(f"<span>{E_(x)}</span>" for x in [o.get("date"), o.get("id"), o.get("partOf")] if x)
         md = "".join(f"<dt>{E_(k)}</dt><dd>{E_(v)}</dd>" for k, v in (o.get("meta") or []))
         links = f"<a href='{E_(o.get('url') or '#')}'>원 기관</a>" + (f" · <a href='{KV}{E_(o['iiif'])}'>KV로 보기</a> · <a href='{E_(o['iiif'])}'>IIIF</a>" if o.get("iiif") else "")
