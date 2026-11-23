@@ -91,7 +91,8 @@ DEEP = {"i815": ("nedb_search", lambda o: o.get("url") and {"mode": "i815", "que
         "jsg": ("nedb_search", lambda o: o.get("id") and {"mode": "jsg", "query": o["id"]}),
         "ktv": ("nedb_search", lambda o: o.get("url") and {"mode": "ktv", "query": o["url"]}),
         "koreanwar": ("koreanwar_item", lambda o: o.get("id") and not str(o["id"]).startswith("book:") and {"ref_code": o["id"]}),
-        "seoul": ("seoul_archives_search", lambda o: o.get("url") and {"query": o["url"]})}
+        "seoul": ("seoul_archives_search", lambda o: o.get("url") and {"query": o["url"]}),
+        "okchf": ("nedb_search", lambda o: o.get("url") and {"mode": "okchf", "query": o["url"]})}
 _sid = [None]
 
 def mcp_call(tool, args):

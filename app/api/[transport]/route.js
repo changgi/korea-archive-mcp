@@ -32,6 +32,21 @@ const FETCH_TIMEOUT = 20000;
 const PROXY = process.env.FETCH_PROXY_PREFIX || '';
 
 const text = (s) => ({ content: [{ type: 'text', text: s }] });
+const OK_B = 'https://www.overseaschf.or.kr'; // v2.11 국외소재문화유산재단 — robots.txt 'Disallow: /'(표시 대상 — 발굴 우선 원칙), 정직 UA·요청 최소
+const OK_UA = { 'User-Agent': 'KoreaArchiveMCP/1.0 (+https://github.com/changgi/korea-archive-mcp; archival discovery)' };
+const okText = (h) => norm(h).replace(/&nbsp;/g, ' ').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"').replace(/&#0?39;/g, "'").replace(/&amp;/g, '&').replace(/\s+/g, ' ').trim(); // Python _clean 패리티
+const okList = (b) => { const out = [];
+  for (const tr of String(b).split(/<tr>/).slice(1)) {
+    const a = tr.match(/href="(\/archive\/search\/(?:photo|category)\.do)(?:;jsessionid=[^?"]*)?\?mode=view&(?:amp;)?srSearchTy=(\w+)&(?:amp;)?id=(\d+)&(?:amp;)?iDivCd=(\d*)"[^>]*>([\s\S]*?)<\/a>/);
+    if (!a) continue;
+    const tds = [...tr.matchAll(/<td[^>]*>([\s\S]*?)<\/td>/g)].map((m) => m[1]);
+    const lis = [...a[5].matchAll(/<li>([\s\S]*?)<\/li>/g)].map((m) => okText(m[1])).filter(Boolean);
+    const title = okText(a[5].replace(/<span class="mo">[\s\S]*?<\/span>/, '').replace(/<ul[\s\S]*?<\/ul>/, ''));
+    const type = okText(tds[2] || ''); const img = (tr.match(/<img[^>]+src="([^"]+)"/) || [])[1] || '';
+    out.push({ title, type, country: lis[0] || '', holder: lis[1] || okText(tds[4] || ''), url: `${OK_B}${a[1]}?mode=view&srSearchTy=${a[2]}&id=${a[3]}&iDivCd=${a[4]}`, id: `${a[2]}:${a[3]}`, img: img && (img.startsWith('http') ? img : OK_B + img) });
+  }
+  const total = ((String(b).match(/전체 <strong[^>]*>([\d,]+)/) || [])[1] || '').replace(/,/g, '');
+  return { out, total }; };
 const archLink = (u) => String(u || '').replace(/&amp;/g, '&').replace(/^http:\/\/www\.archives\.go\.kr/, 'https://www.archives.go.kr'); // 국가기록원 상세 링크 정규화(v2.7.1)
 const sleep = (ms) => new Promise((res) => setTimeout(res, ms));
 
@@ -298,7 +313,7 @@ async function heritageImages(kdcd, asno, ctcd, main) {
   if (!urls.length) return '';
   return `【원본 이미지 ${urls.length}점】\n` + urls.slice(0, 10).map(([u, d], i) => `${i + 1}. ${u}${d ? ` — ${d.slice(0, 50)}` : ''}`).join('\n') + '\n';
 }
-const QUICK_PROFILES = {"ledger": ["KOREA ARCHIVE 발견 누적 원장", "cross_search(sources=ledger) — 사용자들이 도구로 이미 발굴한 기록(매일 누적, 검색어·사용자 정보 없음)", "https://changgi.github.io/korea-archive-mcp/data/ — CSV·JSONL·RiC-O·IIIF 컬렉션(최근 300건 KV)", "원 기관 권리 표기를 따름 — 발견 횟수·처음 발견일 표시, 'all'에는 포함되지 않음(명시 호출)"], "gallery": ["KOREA ARCHIVE IIIF 갤러리", "cross_search(sources=gallery) — 30곳 탐방·100선 실물 기록 800장(권리 확인 완료)", "iiif.html#sNNN/k 딥줌 · iiif/m/sNNN.json 매니페스트 · cross_search format='iiif'로 컬렉션 합류", "이미지별 권리 표시(공공누리 제4유형은 원본 무변경) — 출처 대장 기반"], "jacar": ["일본 아시아역사자료센터 JACAR", "cross_search(sources=jacar) — 한→일 변환·레퍼런스코드", "nedb_search(mode=jacar, 'A0401…') 상세 + ±8×100 인접 채굴, 원본 PDF는 国立公文書館 뷰어", "JACAR 이용약관: 출처(센터·소장관·레퍼런스코드) 표기 조건 2차 이용 원칙 허용"], "earchive": ["국사편찬위원회 전자사료관", "cross_search(sources=earchive)", "nedb_search(mode=earchive, '키워드|순번') — 열람·이용조건·등록번호", "사료별 이용조건 표기(공개/제한적 이용) — 원 소장처 권리 확인"], "awm": ["호주 전쟁기념관 AWM", "cross_search(sources=awm) — 최대 10건 상세", "awm.gov.au/collection/C… 페이지(공개 이미지 최대 640px)", "'Copyright expired - public domain' 표기분만 게재"], "nlna": ["네덜란드 국립문서보관소", "cross_search(sources=nlna) — 문서군(inventaris)", "사진은 Europeana dataset 1417 → nationaalarchief.nl 원본(TIFF 16비트 주의)", "Anefo 등 CC0/Publiek Domein 다수 — 사진별 확인"], "dnz": ["디지털NZ DigitalNZ", "cross_search(sources=dnz) — NZ 30여 기관 집계", "각 제공기관 페이지(usage·rights 필드)", "재이용 표기(No known restrictions·CC) 확인 — Papers Past 1950년대는 usage Unknown 다수"], "nzarch": ["뉴질랜드 기록원 Archives NZ", "cross_search(sources=nzarch) — 라이브 실패 시 주간 정적 인덱스", "nedb_search(mode=nzarch, 'R22438362') — R번호 상세", "기록별 접근 상태(Open 등) — 본 사이트는 봇 차단(Incapsula)"], "commons": ["위키미디어 공용", "cross_search(sources=commons)", "nedb_search(mode=commons, File URL) — 라이선스·원 소장처, NARA 번호면 원본 자동 대조", "업로더 표기는 2차 정보 — 원 소장처 카탈로그로 확정"], "un": ["UN 디지털도서관", "cross_search(sources=un) — 문서기호 시리즈", "nedb_search(mode=un, recid) — 요약·주제·PDF 6개 언어", "UN 공식문서는 퍼블릭 도메인(ST/AI/189/Add.9/Rev.2)"], "ndl": ["일본 국립국회도서관 NDL", "cross_search(sources=ndl) — 당대 자료(~1945) 우선", "dl.ndl.go.jp IIIF(<pid>/R<7자리>) — 'Access Restrictions: PDM' 확인", "PDM(보호기간 만료) 표기분 자유 이용 · 동시 요청 시 429"], "i815": ["독립기념관 한국독립운동정보시스템", "cross_search(sources=i815)", "nedb_search(mode=i815, 상세 URL) 본문 · '사전:이름' 인명사전", "공공누리 표시 없는 원문이미지는 사전 협의 대상(041-560-0445)"], "gonghun": ["공훈전자사료관(국가보훈부)", "cross_search(sources=gonghun) — 이름", "nedb_search(mode=gonghun, mngNo) — 공적조서·공훈록 전문", "공훈록 텍스트 인용 시 출처 표기 · 인물 사진은 수형 사진 제외"], "ktv": ["KTV e영상역사관", "cross_search(sources=ktv) — 기록 탭(대한뉴스·문화영화·사진집) 병합", "nedb_search(mode=ktv, view URL) — 영상 해설 / 사진 판독(공공누리 유형·원본 경로)", "사진은 표시 유형대로(4유형=원형) · 영상 무표시분은 KTV 나누리 신청"], "oldnews": ["대한민국신문아카이브(국립중앙도서관)", "cross_search(sources=oldnews) — 단일 핵심어가 잘 걸림(띄어쓴 다어절은 완화 재검색)", "nedb_search(mode=oldnews, CNTS-…) 색인어 · '본문:…|연대' OCR", "1946년 이전 지면 보호기간 만료 — 국립중앙도서관 출처 표기"], "much": ["대한민국역사박물관 근현대사아카이브", "cross_search(sources=much)", "nedb_search(mode=much, idnbr) — 재질·크기·공공누리 유형·원본 이미지 링크", "공공누리 유형(4유형=변경금지·비상업) 준수"], "indy": ["국가기록원 독립운동판결문", "cross_search(sources=indy) — 이름(동명이인 주의)", "nedb_search(mode=indy, 상세 URL) — 죄명·주문·사건개요·원문 뷰어", "판결문은 저작권법 제7조 비보호 저작물 — 국가기록원 출처 표기"], "heritage": ["국가유산청 국가유산포털", "cross_search(sources=heritage) — 지정 종목", "nedb_search(mode=heritage, 'kdcd-asno-ctcd') — 해설·원본 이미지 목록", "사진은 공공누리 유형 확인 후 이용"], "kyudb": ["서울대 규장각한국학연구원", "cross_search(sources=kyudb)", "nedb_search(mode=kyujanggak) — 목록+해제(절목류는 해제에서)", "원문 이미지 게재는 기관 허가(02-880-5316)"], "jsg": ["한국학중앙연구원 장서각", "cross_search(sources=jsg)", "nedb_search(mode=jsg, K2-…) — 서지·해제 전문", "이미지 게재는 공문 신청·허가 대상"], "aks": ["한국고문서자료관", "cross_search(sources=aks) — 172개 소장처", "nedb_search(mode=aks) — 소장처→분류→문서 면", "사이트 재이용 조건 미표기 — 게재 전 기관 확인"]}; // v1.96.4: 상세 프로파일이 없는 18곳의 간이 프로파일(검색 경로·상세 판독·권리)
+const QUICK_PROFILES = {"okchf": ["국외소재문화유산재단 대국민 아카이브", "cross_search(sources=okchf) · nedb_search(mode='okchf') — 국외문화유산 6천여 건·사진아카이브 1,800여 건(통합검색), 상세=소장국가·소장처·관리번호·소장경위·시대·재질·크기·출판정보·설명", "계층: 유형 › 소장국가 › 소장처 — 발간 보고서(국외 소장 한국문화재 조사보고서)는 https://www.overseaschf.or.kr/okchf/data/US_DF_PD.do", "권리: 소장기관과 공개 협의된 정보 — 이미지·설명 게재는 재단·소장처 이용조건 확인(허가 전 링크만). 접근: robots.txt 전체 Disallow(표시 — 발굴 우선 원칙), 정직 UA·요청 최소"], "ledger": ["KOREA ARCHIVE 발견 누적 원장", "cross_search(sources=ledger) — 사용자들이 도구로 이미 발굴한 기록(매일 누적, 검색어·사용자 정보 없음)", "https://changgi.github.io/korea-archive-mcp/data/ — CSV·JSONL·RiC-O·IIIF 컬렉션(최근 300건 KV)", "원 기관 권리 표기를 따름 — 발견 횟수·처음 발견일 표시, 'all'에는 포함되지 않음(명시 호출)"], "gallery": ["KOREA ARCHIVE IIIF 갤러리", "cross_search(sources=gallery) — 30곳 탐방·100선 실물 기록 800장(권리 확인 완료)", "iiif.html#sNNN/k 딥줌 · iiif/m/sNNN.json 매니페스트 · cross_search format='iiif'로 컬렉션 합류", "이미지별 권리 표시(공공누리 제4유형은 원본 무변경) — 출처 대장 기반"], "jacar": ["일본 아시아역사자료센터 JACAR", "cross_search(sources=jacar) — 한→일 변환·레퍼런스코드", "nedb_search(mode=jacar, 'A0401…') 상세 + ±8×100 인접 채굴, 원본 PDF는 国立公文書館 뷰어", "JACAR 이용약관: 출처(센터·소장관·레퍼런스코드) 표기 조건 2차 이용 원칙 허용"], "earchive": ["국사편찬위원회 전자사료관", "cross_search(sources=earchive)", "nedb_search(mode=earchive, '키워드|순번') — 열람·이용조건·등록번호", "사료별 이용조건 표기(공개/제한적 이용) — 원 소장처 권리 확인"], "awm": ["호주 전쟁기념관 AWM", "cross_search(sources=awm) — 최대 10건 상세", "awm.gov.au/collection/C… 페이지(공개 이미지 최대 640px)", "'Copyright expired - public domain' 표기분만 게재"], "nlna": ["네덜란드 국립문서보관소", "cross_search(sources=nlna) — 문서군(inventaris)", "사진은 Europeana dataset 1417 → nationaalarchief.nl 원본(TIFF 16비트 주의)", "Anefo 등 CC0/Publiek Domein 다수 — 사진별 확인"], "dnz": ["디지털NZ DigitalNZ", "cross_search(sources=dnz) — NZ 30여 기관 집계", "각 제공기관 페이지(usage·rights 필드)", "재이용 표기(No known restrictions·CC) 확인 — Papers Past 1950년대는 usage Unknown 다수"], "nzarch": ["뉴질랜드 기록원 Archives NZ", "cross_search(sources=nzarch) — 라이브 실패 시 주간 정적 인덱스", "nedb_search(mode=nzarch, 'R22438362') — R번호 상세", "기록별 접근 상태(Open 등) — 본 사이트는 봇 차단(Incapsula)"], "commons": ["위키미디어 공용", "cross_search(sources=commons)", "nedb_search(mode=commons, File URL) — 라이선스·원 소장처, NARA 번호면 원본 자동 대조", "업로더 표기는 2차 정보 — 원 소장처 카탈로그로 확정"], "un": ["UN 디지털도서관", "cross_search(sources=un) — 문서기호 시리즈", "nedb_search(mode=un, recid) — 요약·주제·PDF 6개 언어", "UN 공식문서는 퍼블릭 도메인(ST/AI/189/Add.9/Rev.2)"], "ndl": ["일본 국립국회도서관 NDL", "cross_search(sources=ndl) — 당대 자료(~1945) 우선", "dl.ndl.go.jp IIIF(<pid>/R<7자리>) — 'Access Restrictions: PDM' 확인", "PDM(보호기간 만료) 표기분 자유 이용 · 동시 요청 시 429"], "i815": ["독립기념관 한국독립운동정보시스템", "cross_search(sources=i815)", "nedb_search(mode=i815, 상세 URL) 본문 · '사전:이름' 인명사전", "공공누리 표시 없는 원문이미지는 사전 협의 대상(041-560-0445)"], "gonghun": ["공훈전자사료관(국가보훈부)", "cross_search(sources=gonghun) — 이름", "nedb_search(mode=gonghun, mngNo) — 공적조서·공훈록 전문", "공훈록 텍스트 인용 시 출처 표기 · 인물 사진은 수형 사진 제외"], "ktv": ["KTV e영상역사관", "cross_search(sources=ktv) — 기록 탭(대한뉴스·문화영화·사진집) 병합", "nedb_search(mode=ktv, view URL) — 영상 해설 / 사진 판독(공공누리 유형·원본 경로)", "사진은 표시 유형대로(4유형=원형) · 영상 무표시분은 KTV 나누리 신청"], "oldnews": ["대한민국신문아카이브(국립중앙도서관)", "cross_search(sources=oldnews) — 단일 핵심어가 잘 걸림(띄어쓴 다어절은 완화 재검색)", "nedb_search(mode=oldnews, CNTS-…) 색인어 · '본문:…|연대' OCR", "1946년 이전 지면 보호기간 만료 — 국립중앙도서관 출처 표기"], "much": ["대한민국역사박물관 근현대사아카이브", "cross_search(sources=much)", "nedb_search(mode=much, idnbr) — 재질·크기·공공누리 유형·원본 이미지 링크", "공공누리 유형(4유형=변경금지·비상업) 준수"], "indy": ["국가기록원 독립운동판결문", "cross_search(sources=indy) — 이름(동명이인 주의)", "nedb_search(mode=indy, 상세 URL) — 죄명·주문·사건개요·원문 뷰어", "판결문은 저작권법 제7조 비보호 저작물 — 국가기록원 출처 표기"], "heritage": ["국가유산청 국가유산포털", "cross_search(sources=heritage) — 지정 종목", "nedb_search(mode=heritage, 'kdcd-asno-ctcd') — 해설·원본 이미지 목록", "사진은 공공누리 유형 확인 후 이용"], "kyudb": ["서울대 규장각한국학연구원", "cross_search(sources=kyudb)", "nedb_search(mode=kyujanggak) — 목록+해제(절목류는 해제에서)", "원문 이미지 게재는 기관 허가(02-880-5316)"], "jsg": ["한국학중앙연구원 장서각", "cross_search(sources=jsg)", "nedb_search(mode=jsg, K2-…) — 서지·해제 전문", "이미지 게재는 공문 신청·허가 대상"], "aks": ["한국고문서자료관", "cross_search(sources=aks) — 172개 소장처", "nedb_search(mode=aks) — 소장처→분류→문서 면", "사이트 재이용 조건 미표기 — 게재 전 기관 확인"]}; // v1.96.4: 상세 프로파일이 없는 18곳의 간이 프로파일(검색 경로·상세 판독·권리)
 const SOURCE_TIMEBOX_MS = 12000; // 소스별 타임박스 — 최저속(차단 대기) 소스가 전체 지연을 지배하지 않게 (실측 21.7s → ~12s)
 // v1.89: 원본 확인 — 재게시·재수집본의 sameAs NAID가 결과에 없으면 NARA 카탈로그를 직접 조회해 원본 실재를 확인하고 계보·날짜·매체를 채운다(최대 4건·6s·24h 캐시)
 async function resolveOrigins(items, stats) {
@@ -584,7 +599,7 @@ const ARCHIVE_META = {
   nzarch: { n: 'Archives New Zealand Te Rua Mahara', c: 'NZ' }, commons: { n: 'Wikimedia Commons', c: 'INT' },
   un: { n: 'UN Digital Library', c: 'INT' }, ndl: { n: '일본 국립국회도서관 NDL', c: 'JP' },
   seoul: { n: '서울기록원', c: 'KR' }, foia: { n: '정보공개포털·서울소통광장', c: 'KR' },
-  aks: { n: '한국학중앙연구원 한국고문서자료관', c: 'KR' }, gallery: { n: 'KOREA ARCHIVE IIIF 갤러리(30곳 탐방·100선 실물 기록)', c: 'KR' }, ledger: { n: 'KOREA ARCHIVE 발견 누적 원장(사용자 발굴 기록)', c: 'KR' },
+  aks: { n: '한국학중앙연구원 한국고문서자료관', c: 'KR' }, gallery: { n: 'KOREA ARCHIVE IIIF 갤러리(30곳 탐방·100선 실물 기록)', c: 'KR' }, ledger: { n: 'KOREA ARCHIVE 발견 누적 원장(사용자 발굴 기록)', c: 'KR' }, okchf: { n: '국외소재문화유산재단 대국민 아카이브', c: 'KR' },
 };
 // 증거성 강화(v1.71): 레코드별 심층 판독 재현 호출문 — 발굴→판독 증거 사슬
 const DEEP_READ = {
@@ -601,6 +616,7 @@ const DEEP_READ = {
   oldnews: (it) => it.id && `nedb_search(mode='oldnews', query='${it.id}')`,
   commons: (it) => it.url && `nedb_search(mode='commons', query='${it.url}')`,
   koreanwar: (it) => it.id && `koreanwar_item(ref_code='${it.id}')`,
+  okchf: (it) => it.url && `nedb_search(mode='okchf', query='${it.url}')`,
   nara: (it) => it.id && `judge_rights(naid=${String(it.id).replace(/\D/g, '')})`,
   seoul: (it) => it.url && `seoul_archives_search(query='${it.url}')`,
 };
@@ -623,6 +639,7 @@ const PART_OF = {
   aks: (it) => it.series && `고문서 › ${it.series}`,
   gallery: (it) => it.series && `IIIF 갤러리 › ${it.series}`,
   ledger: (it) => it.series || '',
+  okchf: (it) => it.series && `국외소재문화유산재단 › ${it.series}`,
   dnz: (it) => it.series && `NZ › ${it.series}`,
   ia: (it) => it.series && `IA Collection › ${it.series}`,
   tna: (it) => it.series && `TNA › ${it.series}`,
@@ -1117,6 +1134,11 @@ const COLLECT = {
       if (out.length >= n) break;
     }
     return out;
+  },
+  okchf: async (q, n) => { // v2.11 국외소재문화유산재단 대국민 아카이브 — 통합검색(국외문화유산·사진아카이브). 계층=유형 › 소장국가 › 소장처
+    const b = await gtext(`${OK_B}/archive/total-search.do?srSearchVal=${encodeURIComponent(q)}&pagerLimit=${n <= 10 ? 10 : n <= 20 ? 20 : 50}`, OK_UA);
+    return okList(b).out.slice(0, n).map((r) => ({ title: `[${r.type}] ${r.title} — ${[r.country, r.holder].filter(Boolean).join(' ')}`.slice(0, 160), date: '', id: r.id,
+      series: [r.type, r.country, r.holder].filter(Boolean).join(' › '), url: r.url, ...(r.img ? { media: r.img } : {}) }));
   },
   ledger: async (q, n) => { // v2.6: 발견 누적 원장 — 사용자들이 이미 발굴한 기록(검색어 없음)을 다시 검색. docs/data/discovered.jsonl 1h 캐시. 'all'에는 넣지 않는다(원 기관 결과와 중복·교차확인 오인 방지) — sources='ledger'로 명시
     const b = await cachedText('kaLedger', 3600e3, () => gtext('https://changgi.github.io/korea-archive-mcp/data/discovered.jsonl'), '"key"');
@@ -1787,8 +1809,8 @@ const JB_CROSS = `국내외 대조 절차 — 순서를 틀리면 헛수고한�
 
 
   server.tool('nedb_search',
-    "국사편찬위 한국사DB(db.history.go.kr) 검색 + 기관별 심층 판독 모드. mode: total=통합검색(기본) · law=법전·편람 조문(한문 원문 제공 판정) · record=등록류(座目 자동 필터 — 건수 지표화 전 필수) · item=levelId 본문 판독(미공개/파싱실패 구분) · sibling=★형제 조 전수 스캔(levelId — 조문을 열었으면 반드시 이어 호출, 총론만으론 핵심을 놓친다) · matrix=법전 수록 대조(쉼표구분 어휘 ≤8 — 부재의 발견) · origin=어휘 연원('용어' 또는 '용어,영역') · sjw=승정원일기(왕대 분포·최초 용례) · kyujanggak=규장각 목록+해제(절목류는 해제에서 발견) · aks=한국고문서자료관(문중·서원 172곳→분류→문서 면·썸네일) · jacar=일본 아시아역사자료센터(한→일 변환·레퍼런스코드 직행·±span×100 인접) · gonghun=공훈전자사료관(이름→mngNo 투입 시 공적조서·공훈록) · i815=독립기념관(detail URL=본문·사전:이름/번호=전기·훈격) · ktv=KTV(→view URL 투입 시 영상 해설·상영정보, 공공누리 표시 확인) · earchive=국편 전자사료관(키워드 목록→'키워드|순번' 투입 시 상세: 열람·이용조건·등록번호) · commons=위키미디어 공용(키워드 목록→File URL 투입 시 라이선스·원 소장처·설명 판독) · jsg=장서각(→청구기호 K2-… 투입 시 서지·해제 전문) · un=UN(→recid 투입 시 요약·주제·PDF) · oldnews=신문(CNTS=색인어·관련기사 · '본문:…[|1905-1910]'=OCR+연대) · much=박물관(→idnbr 투입 시 재질·공공누리·설명) · indy=판결문(이름→상세 URL 투입 시 죄명·주문·사건개요·원문 뷰어) · heritage=국가유산(목록+딥링크. cpno 상세 일부) · nzarch=NZ기록원(R번호=상세 메타). 판정: 건수보다 '492건이 座目'.",
-    { query: z.string().describe("검색어 · levelId(item/sibling) · 쉼표구분 어휘(matrix) · '용어,영역'(origin) · 소장처명/L-ID(aks) · 이름/mngNo(gonghun)"), db: z.string().default(''), max_results: z.number().int().min(1).max(50).default(15), mode: z.enum(['total', 'law', 'record', 'item', 'sibling', 'matrix', 'origin', 'sjw', 'kyujanggak', 'aks', 'jacar', 'gonghun', 'i815', 'ktv', 'earchive', 'commons', 'jsg', 'un', 'oldnews', 'much', 'indy', 'heritage', 'nzarch']).default('total'), span: z.number().int().min(2).max(12).default(8).describe('sibling 모드 스캔 폭') },
+    "국사편찬위 한국사DB(db.history.go.kr) 검색 + 기관별 심층 판독 모드. mode: total=통합검색(기본) · law=법전·편람 조문(한문 원문 제공 판정) · record=등록류(座目 자동 필터 — 건수 지표화 전 필수) · item=levelId 본문 판독(미공개/파싱실패 구분) · sibling=★형제 조 전수 스캔(levelId — 조문을 열었으면 반드시 이어 호출, 총론만으론 핵심을 놓친다) · matrix=법전 수록 대조(쉼표구분 어휘 ≤8 — 부재의 발견) · origin=어휘 연원('용어' 또는 '용어,영역') · sjw=승정원일기(왕대 분포·최초 용례) · kyujanggak=규장각 목록+해제(절목류는 해제에서 발견) · aks=한국고문서자료관(문중·서원 172곳→분류→문서 면·썸네일) · jacar=일본 아시아역사자료센터(레퍼런스코드 직행·±span 인접) · gonghun=공훈전자사료관(이름→mngNo 투입 시 공적조서·공훈록) · i815=독립기념관(detail URL=본문·사전:이름/번호=전기·훈격) · ktv=KTV(→view URL 투입 시 영상 해설·상영정보, 공공누리 표시 확인) · earchive=국편 전자사료관(키워드 목록→'키워드|순번' 투입 시 상세: 열람·이용조건·등록번호) · commons=위키미디어 공용(키워드 목록→File URL 투입 시 라이선스·원 소장처·설명 판독) · jsg=장서각(→청구기호 K2-… 투입 시 서지·해제 전문) · un=UN(→recid 투입 시 요약·주제·PDF) · oldnews=신문(CNTS=색인어·관련기사 · '본문:…[|1905-1910]'=OCR+연대) · much=박물관(→idnbr 투입 시 재질·공공누리·설명) · indy=판결문(이름→상세 URL 투입 시 죄명·주문·사건개요·원문 뷰어) · heritage=국가유산(목록+딥링크) · nzarch=NZ기록원(R번호=상세 메타) · okchf=국외소재문화유산재단. 판정: 건수보다 '492건이 座目'.",
+    { query: z.string().describe("검색어 · levelId(item/sibling) · 쉼표구분 어휘(matrix) · '용어,영역'(origin) · 소장처명/L-ID(aks) · 이름/mngNo(gonghun)"), db: z.string().default(''), max_results: z.number().int().min(1).max(50).default(15), mode: z.enum(['total', 'law', 'record', 'item', 'sibling', 'matrix', 'origin', 'sjw', 'kyujanggak', 'aks', 'jacar', 'gonghun', 'i815', 'ktv', 'earchive', 'commons', 'jsg', 'un', 'oldnews', 'much', 'indy', 'heritage', 'nzarch', 'okchf']).default('total'), span: z.number().int().min(2).max(12).default(8).describe('sibling 모드 스캔 폭') },
     async ({ query, max_results, mode, span }) => {
       const q = query.trim();
       if (mode === 'nzarch') { // Archives NZ 상세 판독 — R번호 투입 시 entity 전체 메타(시리즈·기관·계층·열람·권리) + 메타 지문. v1.69
@@ -1986,6 +2008,35 @@ const JB_CROSS = `국내외 대조 절차 — 순서를 틀리면 헛수고한�
           return text(`신문아카이브 '${q}' — ${items.length}건:\n` + items.map((it) => `- ${it.title} (${it.date})\n  ${it.url}`).join('\n')
             + '\n※ CNTS ID(또는 상세 URL)를 mode=oldnews query로 재투입 → 색인어·관련기사 연쇄·주제어 판독.');
         } catch (e) { return text(`신문아카이브 오류(${String(e && e.message || e).slice(0, 60)}) — 잠시 후 재시도 또는 브라우저: https://nl.go.kr/newspaper/`); }
+      }
+      if (mode === 'okchf') { // v2.11 국외소재문화유산재단 — 상세 URL/'relic:ID' 판독(소장국가·소장처·관리번호·소장경위·시대·재질·크기·출판정보·설명·이미지), 그 밖은 키워드 목록
+        try {
+          const um = q.match(/overseaschf\.or\.kr\/archive\/search\/(photo|category)\.do\S*?srSearchTy=(\w+)\S*?[?&]id=(\d+)/) || q.match(/overseaschf\.or\.kr\/archive\/search\/(photo|category)\.do\S*?[?&]id=(\d+)\S*?srSearchTy=(\w+)/);
+          const im = q.trim().match(/^(relic|relic_gls|redemption)\s*[:#]\s*(\d+)$/);
+          if (um || im) {
+            const ty = im ? im[1] : (/srSearchTy=(\w+)/.exec(q) || [])[1] || 'relic'; const id = im ? im[2] : (/[?&]id=(\d+)/.exec(q) || [])[1];
+            const page = ty === 'relic_gls' ? 'photo' : ty === 'redemption' ? 'search' : 'category';
+            const url = `${OK_B}/archive/search/${page}.do?mode=view&srSearchTy=${ty}&id=${id}&iDivCd=${(/iDivCd=(\d+)/.exec(q) || [])[1] || ''}`;
+            const h = (await cachedText('okD:' + ty + id, 24 * 3600e3, () => gtext(url, OK_UA), 'tit-cont')).replace(/<script[\s\S]*?<\/script>/g, ' ');
+            const tm = h.match(/<div class="tit-cont">\s*<h2[^>]*>([\s\S]*?)<\/h2>/);
+            const title = tm ? okText(tm[1].replace(/<span[^>]*>/g, ' · ').replace(/<\/span>/g, '')) : `${ty}:${id}`;
+            const F = {}; for (const m of h.matchAll(/<(?:th|dt)[^>]*>([\s\S]*?)<\/(?:th|dt)>\s*<(?:td|dd)[^>]*>([\s\S]*?)<\/(?:td|dd)>/g)) { const k = okText(m[1]); const v = okText(m[2]); if (k && v && !(k in F)) F[k] = v; }
+            const desc = F['설명'] || ''; delete F['설명'];
+            const imgs = [...new Set([...h.matchAll(/<img[^>]+src="(\/home\/data\/attach\/[^"]+)"/g)].map((m) => OK_B + m[1]))];
+            const line = (ks) => ks.filter((k) => F[k]).map((k) => `${k}: ${F[k].slice(0, 160)}`).join(' · ');
+            return text(`국외소재문화유산재단 아카이브 판독 — ${title}\n`
+              + [line(['소장국가', '소장처', '소장처 관리번호']), line(['시대', '재질', '크기', '수량(점/책)', '촬영일', '촬영자', '촬영장소']), line(['소장경위']), line(['출판정보', '조사기관']),
+                 line(Object.keys(F).filter((k) => !['소장국가', '소장처', '소장처 관리번호', '시대', '재질', '크기', '수량(점/책)', '촬영일', '촬영자', '촬영장소', '소장경위', '출판정보', '조사기관'].includes(k)).slice(0, 6))].filter(Boolean).join('\n') + '\n'
+              + (desc ? `【설명】\n${desc.slice(0, 2500)}\n본문 지문(sha256-16): ${createHash('sha256').update(desc).digest('hex').slice(0, 16)} — 판독 시점 설명 전문 기준. 재판독 지문 불일치=원문 개정 발생.\n` : '')
+              + (imgs.length ? `이미지 ${imgs.length}장(원 기관 썸네일): ${imgs.slice(0, 4).join(' · ')}${imgs.length > 4 ? ' …' : ''}\n` : '')
+              + `원문 뷰어: ${url}\n`
+              + '※ 출처: 국외소재문화유산재단 대국민 아카이브 — 소장기관과 공개 협의된 정보. 이미지·설명 게재는 재단·소장처 이용조건 확인 후(허가 전 링크만). robots.txt 전체 Disallow — 자동 대량수집 비허용 표시, 요청 시 1건 판독만.');
+          }
+          const { out, total } = okList(await gtext(`${OK_B}/archive/total-search.do?srSearchVal=${encodeURIComponent(q)}&pagerLimit=${max_results <= 10 ? 10 : max_results <= 20 ? 20 : 50}`, OK_UA));
+          return text(`국외소재문화유산재단 아카이브 '${q}' — 전체 ${total || out.length}건 중 ${Math.min(out.length, max_results)}건 (유형 › 소장국가 › 소장처)\n`
+            + (out.slice(0, max_results).map((r) => `- [${r.type}] ${r.title} — ${r.country} · ${r.holder} ${r.url}`).join('\n') || '(0)')
+            + '\n※ 상세 판독: nedb_search(mode=\'okchf\', query=<상세 URL>) · 전체 목록 브라우저: https://www.overseaschf.or.kr/archive/total-search.do · 발간 보고서: https://www.overseaschf.or.kr/okchf/data/US_DF_PD.do · robots 전체 Disallow(표시)');
+        } catch (e) { return text(`국외소재문화유산재단 조회 실패(${String(e.message || e).slice(0, 60)}) — 브라우저 대체 경로: https://www.overseaschf.or.kr/archive/total-search.do?srSearchVal=${encodeURIComponent(q)}`); }
       }
       if (mode === 'un') { // UN 디지털도서관 — 키워드 목록 / recid·URL 판독(요약·주제·언어별 PDF)
         try {
@@ -2961,7 +3012,7 @@ item_cd 5종(자료 성격별): ART 도설·회화 / ETC 두루마리·축 / DRR
       const t = (institution || 'list').trim().toLowerCase();
       if (t === 'health') { // 30채널 일괄 헬스체크 — 발굴 우선 원칙의 전제: 깨짐을 스스로 발견한다
         const GOLD = { tna: 'Korea', ia: 'Korea', gallica: 'Corée', europeana: 'Korea', nara: 'Korea',
-          archives: '한국전쟁', nlk: '한국전쟁', nedb: '한강', koreanwar: '장진호', jacar: 'Chosen', earchive: '제주도', i815: '안중근', gonghun: '안중근', ktv: '대한뉴스', oldnews: '의병', much: '판문점', indy: '유관순', heritage: '숭례문', kyudb: '절목', jsg: '의궤', awm: 'Kapyong', nlna: 'Korea', dnz: 'Korean War', nzarch: 'Korea', commons: 'Seoul 1950', un: 'Korea armistice', ndl: '조선총독부', seoul: '한강', foia: '회의', aks: '문중', gallery: '흥남' };
+          archives: '한국전쟁', nlk: '한국전쟁', nedb: '한강', koreanwar: '장진호', jacar: 'Chosen', earchive: '제주도', i815: '안중근', gonghun: '안중근', ktv: '대한뉴스', oldnews: '의병', much: '판문점', indy: '유관순', heritage: '숭례문', kyudb: '절목', jsg: '의궤', awm: 'Kapyong', nlna: 'Korea', dnz: 'Korean War', nzarch: 'Korea', commons: 'Seoul 1950', un: 'Korea armistice', ndl: '조선총독부', seoul: '한강', foia: '회의', aks: '문중', gallery: '흥남', okchf: '불화' };
         const keys = { NARA_API_KEY: !!process.env.NARA_API_KEY, ARCHIVES_API_KEY: !!process.env.ARCHIVES_API_KEY,
           NLK_API_KEY: !!process.env.NLK_API_KEY, EUROPEANA_API_KEY: !!process.env.EUROPEANA_API_KEY,
           KOREANWAR_API_TOKEN: !!process.env.KOREANWAR_API_TOKEN, NEDB_INDEX_URL: !!process.env.NEDB_INDEX_URL, LEDGER_REDIS: !!ledgerConf() };
