@@ -895,6 +895,23 @@
     "\\(계열 미상\\)"
    ],
    "level": "warn"
+  },
+  {
+   "id": "ledger-media-formats",
+   "tool": "source_profile",
+   "args": {
+    "institution": "ledger"
+   },
+   "must": [
+    "feed\\.xml",
+    "records\\.csl\\.json",
+    "records\\.ris",
+    "provenance\\.json"
+   ],
+   "must_not": [
+    "검색어·사용자 정보 없음"
+   ],
+   "level": "error"
   }
  ]
 }
