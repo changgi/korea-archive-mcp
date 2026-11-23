@@ -765,6 +765,20 @@
     "iiif/nrich/stone-\\d+/manifest\\.json"
    ],
    "level": "warn"
+  },
+  {
+   "id": "nrich-people",
+   "tool": "nedb_search",
+   "args": {
+    "mode": "nrich",
+    "query": "인물:의겸"
+   },
+   "must": [
+    "의겸\\(義謙\\) — [1-9]\\d*건",
+    "화승\\(畫僧\\)",
+    "→ gwaebul:\\d+"
+   ],
+   "level": "error"
   }
  ]
 }

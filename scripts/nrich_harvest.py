@@ -8,7 +8,7 @@ docs/data/nrich_db.jsonl(정규화 1줄=1기록)로 만든다. 서버 cross_sear
 정규화 필드: ds(데이터셋 키)·dn(데이터셋명)·id·t(명칭)·a(한자/영문 등 이칭)·d(연대)·p(소재지·소장처)·x(해설 300자)
             ·m(부가 메타 {이름:값})·k(공공누리 유형)·u(원 기관 상세 URL)
 """
-import json, os, re, sys, time, urllib.request, html as _h
+import json, os, re, sys, time, unicodedata, urllib.request, html as _h
 
 API = "http://portal.nrich.go.kr/kor/openapi.do?idx={idx}&firstindex={first}&recordcountperpage={last}"  # 실측: firstindex=시작 행, recordcountperpage=끝 행(포함) — 명세 설명과 다름  # https는 응답 불안정(실측) — 공식 End Point 그대로 http
 UA = "KoreaArchiveMCP/1.0 (+https://github.com/changgi/korea-archive-mcp; weekly open-API index)"
@@ -118,8 +118,73 @@ def build_iiif(rows):
 <title>국립문화유산연구원 연구DB — IIIF 계층</title><style>body{{font-family:system-ui,'Noto Sans KR',sans-serif;margin:0;background:#14161b;color:#e6e4dc}}main{{max-width:900px;margin:auto;padding:16px}}a{{color:#e0b04a}}
 details{{border-bottom:1px solid #2a2d35;padding:6px 0}}summary{{cursor:pointer;font-size:16px}}ul{{list-style:none;padding-left:14px;margin:6px 0}}li{{padding:3px 0;font-size:14px}}li span{{color:#9b9a93;font-size:12px;margin:0 6px}}</style>
 <main><h1>국립문화유산연구원 연구DB — IIIF 계층</h1><p>국가유산 지식이음 Open API(공공누리)로 매주 수집한 연구DB 중 이미지가 있는 {len(idx)}종 {tot:,}건을 <b>데이터셋 › 지역·소장처·분류 › 기록</b> IIIF 컬렉션으로 묶었습니다. 각 기록은 원 기관 원본 이미지를 변경 없이 연결한 IIIF 매니페스트(이미지가 없으면 기록 카드)입니다. KV는 큰 묶음을 48건씩 이어 불러옵니다(원 기관 서버 예의).</p>
+<p>데이터: <a href='../nrich_db.jsonl'>전체 색인(JSONL)</a> · 데이터셋별 CSV·RiC-O <a href='export/ksm.csv'>금석문 CSV</a> <a href='export/ksm.jsonld'>금석문 RiC-O</a> <a href='export/diary.csv'>일기 CSV</a> <a href='export/portrait.jsonld'>초상화 RiC-O</a> <a href='export/gwaebul.jsonld'>괘불 RiC-O</a> (모든 파일: export/&lt;키&gt;.csv) · <a href='people.json'>인물 색인</a>(찬·서·화가·화승·저자 — 도구: nedb_search(mode='nrich', query='인물:이름'))</p>
 <p><a href='{KV}{PB}iiif/index.json'>전체 계층을 KV로</a> · <a href='iiif/index.json'>IIIF index.json</a> · 검색: KOREA ARCHIVE 통합검색 cross_search(sources='nrich') · 출처: 국립문화유산연구원 국가유산 지식이음(이용조건 각 기록 표기)</p>{secs}</main></html>""")
     print(f"IIIF 계층: {len(idx)}종 {tot}건")
+
+# v2.20 인물 색인·데이터 내보내기 — 맥락(누가 짓고·쓰고·그렸나)과 데이터화
+PEOPLE_F = {"ksm": [("찬자", "찬(撰)"), ("서자·제액", "서(書)")], "portrait": [("작가", "화가")], "gwaebul": [("화승", "화승(畫僧)")], "diary": [("저자", "저자")]}
+NOT_NAME = {"집자", "전면", "후면", "앞면", "뒷면", "측면", "좌측", "우측", "음각", "양각", "비신", "이수", "귀부", "탑신", "기단", "미상", "불명", "본문", "제액", "전액", "음기", "작자", "기타", "외", "등", "글씨", "찬", "서", "각", "각자", "서자", "찬자", "없음", "무", "전서", "해서", "행서", "초서", "예서"}
+ROLE_LABEL = re.compile(r"(제액|전액|두전|본문|음기|비음|서|글씨|각자|각)\s*[:：]\s*")
+def names_in(text, role):
+    """'제액 : 김상용(金尙容) 본문 : 이홍주(李弘胄)' → [(이름, 한자, 세부 역할)]. 깨진 글자 표기({media=…})·○는 이름에서 제외."""
+    text = re.sub(r"\{media=[^}]*\}", "□", str(text or "")); out = []
+    parts = ROLE_LABEL.split(text)
+    segs = [(role, parts[0])] + [(f"{role.split('(')[0]}·{parts[i]}", parts[i + 1]) for i in range(1, len(parts) - 1, 2)]
+    for r, seg in segs:
+        for m in re.finditer(r"([가-힣]{2,4})\s*(?:\(([^)]{1,20})\))?", seg):
+            n, h = m.group(1), unicodedata.normalize("NFKC", (m.group(2) or "").strip())  # 호환 한자(U+F9xx) → 표준(예: 烈)
+            if n in NOT_NAME or "□" in h: continue
+            out.append((n, h, r))
+    return out
+
+def build_people(rows):
+    P = {}
+    for r in rows:
+        for fld, role in PEOPLE_F.get(r["ds"], []):
+            for n, h, rr in names_in((r.get("m") or {}).get(fld, ""), role):
+                key = f"{n}({h})" if h else n
+                e = P.setdefault(key, {"n": n, "h": h, "r": {}})
+                lst = e["r"].setdefault(rr, [])
+                if not any(x[0] == r["id"] for x in lst): lst.append([r["id"], r["t"][:60], r.get("d", "")[:30]])
+    json.dump(P, open(os.path.join(OUT, "nrich", "people.json"), "w", encoding="utf-8"), ensure_ascii=False, separators=(",", ":"))
+    return P
+
+def build_exports(rows, people):
+    """데이터셋별 CSV(엑셀 BOM, 메타 열 합집합) + 인물 있는 4종 RiC-O JSON-LD(기록 › 묶음 계층, 인물=rico:Person, 역할=rico:hasCreator/dct:contributor)."""
+    import csv as _csv
+    ex = os.path.join(OUT, "nrich", "export"); os.makedirs(ex, exist_ok=True)
+    by = {}
+    for r in rows: by.setdefault(r["ds"], []).append(r)
+    for ds, rs in by.items():
+        mk = []
+        for r in rs:
+            for k in (r.get("m") or {}):
+                if k not in mk: mk.append(k)
+        with open(os.path.join(ex, f"{ds}.csv"), "w", encoding="utf-8-sig", newline="") as f:
+            w = _csv.writer(f); w.writerow(["id", "데이터셋", "명칭", "이칭", "연대", "소재·소장", "해설(150자)", *mk, "공공누리", "원 기관 URL", "IIIF"])
+            for r in sorted(rs, key=lambda r: r["id"]):
+                w.writerow([r["id"], r["dn"], r.get("t", ""), r.get("a", ""), r.get("d", ""), r.get("p", ""), r.get("x", ""), *[(r.get("m") or {}).get(k, "") for k in mk], r.get("k", ""), r.get("u", ""),
+                            f"{BR}{r['id'].replace(':', '-')}/manifest.json" if ds in IIIF_DS else ""])
+    pid = lambda key: f"{PB}people.json#{slug(key)}"
+    for ds in PEOPLE_F:
+        rs = by.get(ds, []); g = []; agents = {}
+        for r in rs:
+            cre, con = [], []
+            for fld, role in PEOPLE_F[ds]:
+                for n, h, rr in names_in((r.get("m") or {}).get(fld, ""), role):
+                    key = f"{n}({h})" if h else n; agents[key] = {"@id": pid(key), "@type": "rico:Person", "rico:name": key}
+                    (cre if ("찬" in rr or rr in ("화가", "화승(畫僧)", "저자")) else con).append({"@id": pid(key)})
+            o = {"@id": r.get("u") or f"{PB}{r['id']}", "@type": "rico:Record", "rico:identifier": r["id"], "rico:title": r["t"],
+                 "rico:isOrWasIncludedIn": {"@id": f"{PB}iiif/{ds}/{slug(group_of(r))}.json" if ds in IIIF_DS else f"{PB}{ds}"}}
+            if r.get("d"): o["rico:isAssociatedWithDate"] = r["d"]
+            if r.get("p"): o["rico:hasOrHadLocation"] = r["p"]
+            if cre: o["rico:hasCreator"] = cre
+            if con: o["dct:contributor"] = con
+            if r.get("k"): o["dct:rights"] = r["k"]
+            g.append(o)
+        json.dump({"@context": {"rico": "https://www.ica.org/standards/RiC/ontology#", "dct": "http://purl.org/dc/terms/"}, "@graph": list(agents.values()) + g},
+                  open(os.path.join(ex, f"{ds}.jsonld"), "w", encoding="utf-8"), ensure_ascii=False)
 
 def fetch(idx, first, last):
     req = urllib.request.Request(API.format(idx=idx, first=first, last=last), headers={"User-Agent": UA})
@@ -131,8 +196,9 @@ def fetch(idx, first, last):
             time.sleep(5 * (attempt + 1))
 
 def main():
-    if "--iiif-only" in sys.argv:  # 수집 없이 기존 색인으로 계층 IIIF만 다시 만들기
-        build_iiif([json.loads(l) for l in open(os.path.join(OUT, "nrich_db.jsonl"), encoding="utf-8")]); return
+    if "--iiif-only" in sys.argv or "--derived" in sys.argv:  # 수집 없이 기존 색인으로 파생물(계층 IIIF·인물·내보내기)만 다시 만들기
+        rows = [json.loads(l) for l in open(os.path.join(OUT, "nrich_db.jsonl"), encoding="utf-8")]
+        build_iiif(rows); build_exports(rows, build_people(rows)); return
     only = set(sys.argv[1:])
     rows, meta = [], {"harvested": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()), "source": "국립문화유산연구원 국가유산 지식이음 Open API", "datasets": {}}
     for idx, (key, name, fn) in DS.items():
@@ -176,7 +242,7 @@ def main():
     for k, rs in by.items():
         with open(os.path.join(OUT, "nrich", f"{k}.jsonl"), "w", encoding="utf-8") as fo:
             for r in sorted(rs, key=lambda r: r["id"]): fo.write(json.dumps(r, ensure_ascii=False, separators=(",", ":")) + "\n")
-    build_iiif(rows)
+    build_iiif(rows); build_exports(rows, build_people(rows))
     meta["total"] = len(rows)
     json.dump(meta, open(os.path.join(OUT, "nrich_db_meta.json"), "w", encoding="utf-8"), ensure_ascii=False, indent=1)
     print(f"합계 {len(rows)}건")
