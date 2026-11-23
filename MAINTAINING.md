@@ -64,6 +64,7 @@
 | 발견 경로(v2.28) | `discovered.*`의 `found_by` · `docs/data/provenance.json` | 질의 지문 `ak`(도구+인자 sha256-16, 키 정렬)로 묶음 | 질의 ↔ 발견 기록 양방향. 회신 원문은 `queries/<월>.jsonl.gz`에서 같은 `ak`. RiC-O에 `prov:wasInformedBy`. v2.28 이전 발견분은 `found_by` 없음(소급 불가 — 표시) |
 | 다매체 확산(v2.29) | `docs/data/feed.xml`(Atom 새 발견 100) · `records.csl.json`(Zotero·Mendeley·Pandoc) · `records.ris`(EndNote·RefWorks) · `timeline.json`(연대×기관×매체) | 매일 원장에서 재생성 | 원장(지우지 않음)에서 파생되므로 원장이 보존되는 한 재생성 가능. 매체 유형은 제목·URL 근거(`kind_of`), 연대는 파생 규칙과 동일(`decade`) |
 | 시대 구간(v2.30) | `decade()` · `timeline.json/.html` | 매일 재계산 | 4자리 연도 → 세기(18-19세기·19th century) → 기관 **`시대`·`시대분류` 필드**의 왕조·시대명. 제목의 왕조명은 쓰지 않음(조선총독부 오인 방지), 지정일·등록일 제외. 연대 미상 160→95건 |
+| 일일 기록물 등록부(v2.31) | `docs/data/records/YYYY-MM-DD.json` · `records/index.json` · `SHA256SUMS` | 산출물이 직전 등록부와 완전히 같으면 새 등록 생략 | 그날 산출물 전부의 SHA-256·바이트·건수·커밋·실행 번호 + **직전 등록부 해시(사슬)**. 같은 날 재실행은 `-2`·`-3` 판(덮어쓰지 않음). `ledger` 워크플로가 등록 후 `--verify`(사슬 끊김·최신 등록부 이후 산출물 소실 → 실패 → auto-health 이슈). 수동: `python3 scripts/records_register.py --verify`, `cd docs/data && sha256sum -c SHA256SUMS` |
 | 연구원 연구DB | `docs/data/nrich/*.jsonl` | 같은 (데이터셋,id)면 새 값 | 원 기관에서 사라진 기록은 `withdrawn: <처음 사라진 날>`로 보존 |
 
 - **원문 그대로(v2.26.1, 소유자 결정)**: 질의 인자·회신 본문은 어떤 패턴도 지우거나 바꾸지 않는다 — 질의·회신은 일반 기록에서 수집되는 기록 자체이므로 원형 보존이 증거성의 조건. 공개 저장소에 그대로 남는다는 사실은 cross_search 안내문으로 사용자에게 고지한다. `lib/ledger.js`의 `scrub()`은 쓰지 않는다(필요 시 공개본과 분리된 별도 저장소에서만 검토).
