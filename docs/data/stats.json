@@ -1,8 +1,8 @@
 {
- "updated": "2026-11-23T22:15:08Z",
+ "updated": "2026-11-23T22:31:19Z",
  "records": 376,
  "new_records": 0,
- "new_batches": 4,
+ "new_batches": 3,
  "by_source": {
   "nrich": 43,
   "archives": 40,
@@ -40,16 +40,16 @@
  "first": "2026-11-23T03:00:15Z",
  "formats": {
   "text": 47,
-  "csv": 41,
+  "csv": 44,
   "iiif": 3
  },
  "queries": {
-  "added": 4,
-  "total": 6,
-  "calls": 10,
+  "added": 5,
+  "total": 11,
+  "calls": 15,
   "by_tool": {
-   "source_profile": 5,
-   "cross_search": 5
+   "cross_search": 10,
+   "source_profile": 5
   }
  },
  "repeat_records": 125,
@@ -70,59 +70,59 @@
   },
   {
    "rank": 3,
+   "seen": 9,
+   "days": 1,
+   "title": "EVACUATION OF HUNGNAM, KOREA",
+   "url": "https://catalog.archives.gov/id/75392"
+  },
+  {
+   "rank": 4,
+   "seen": 9,
+   "days": 1,
+   "title": "EVACUATION OF HUNGNAM KOREA",
+   "url": "https://catalog.archives.gov/id/75393"
+  },
+  {
+   "rank": 5,
    "seen": 8,
    "days": 1,
    "title": "01 · 미국 국립기록관리청 NARA — 1950.12.24 흥남 — 필름 원본까지 — North Korean refugees use anything that will float ",
    "url": "https://changgi.github.io/korea-archive-mcp/iiif.html#s01/1"
   },
   {
-   "rank": 4,
+   "rank": 6,
    "seen": 8,
    "days": 1,
    "title": "12 · 위키미디어 공용 Commons — 업로더 말 대신 원 소장처에 묻는다 — Korean natives prepare to board a tank landing ship du",
    "url": "https://changgi.github.io/korea-archive-mcp/iiif.html#s12/2"
   },
   {
-   "rank": 5,
+   "rank": 7,
    "seen": 8,
    "days": 1,
    "title": "29 · 인터넷 아카이브 archive.org — 인터넷 사본과 NARA 원본, 한 줄로 — EVACUATION OF HUNGNAM, KOREA (+4장)",
    "url": "https://changgi.github.io/korea-archive-mcp/iiif.html#s29/1"
   },
   {
-   "rank": 6,
+   "rank": 8,
+   "seen": 8,
+   "days": 1,
+   "title": "EVACUATION, HUNGNAM, KOREA",
+   "url": "https://catalog.archives.gov/id/22397"
+  },
+  {
+   "rank": 9,
    "seen": 7,
    "days": 1,
    "title": "헌정사 자료 DB — '안중근' 수록",
    "url": "https://db.history.go.kr/item/cons/main.do"
   },
   {
-   "rank": 7,
+   "rank": 10,
    "seen": 7,
    "days": 1,
    "title": "포로신문보고서 — '안중근' 수록",
    "url": "https://db.history.go.kr/item/powr/main.do"
-  },
-  {
-   "rank": 8,
-   "seen": 6,
-   "days": 1,
-   "title": "EVACUATION OF HUNGNAM, KOREA",
-   "url": "https://catalog.archives.gov/id/75392"
-  },
-  {
-   "rank": 9,
-   "seen": 6,
-   "days": 1,
-   "title": "EVACUATION OF HUNGNAM KOREA",
-   "url": "https://catalog.archives.gov/id/75393"
-  },
-  {
-   "rank": 10,
-   "seen": 6,
-   "days": 1,
-   "title": "[국외문화유산] 감지금자『대방광불화엄경』제78권 — 미국 클리블랜드미술관",
-   "url": "https://www.overseaschf.or.kr/archive/search/category.do?mode=view&srSearchTy=relic&id=46493&iDivCd=1"
   }
  ]
 }
