@@ -653,16 +653,16 @@
   },
   {
    "id": "nrich-db-search",
-   "tool": "cross_search",
+   "tool": "nedb_search",
    "args": {
+    "mode": "nrich",
     "query": "신도비",
-    "sources": "nrich",
-    "max_per_source": 6,
-    "format": "csv"
+    "max_results": 5
    },
    "must": [
+    "연구DB [1-9][0-9]*건",
     "\\[금석문\\]",
-    "국립문화유산연구원 › 연구DB › 금석문 › "
+    "→ ksm:\\d+"
    ],
    "level": "error"
   },
@@ -691,6 +691,21 @@
     "\\[초상화\\(국가지정\\)\\] 이제현 초상"
    ],
    "level": "warn"
+  },
+  {
+   "id": "nrich-db-in-cross",
+   "tool": "cross_search",
+   "args": {
+    "query": "광개토",
+    "sources": "nrich",
+    "max_per_source": 6,
+    "format": "csv"
+   },
+   "must": [
+    "국립문화유산연구원 › 연구DB › "
+   ],
+   "level": "warn",
+   "note": "배포 직후 첫 호출은 색인 적재 중일 수 있음(3.5s 대기) — warn"
   }
  ]
 }
