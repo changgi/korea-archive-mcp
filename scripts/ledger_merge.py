@@ -56,6 +56,9 @@ def enrich(o, budget):
     if m: o["iiif"] = m
     today = dt.date.today().isoformat()
     if o.get("enriched") and (o.get("enrich_status") != "fail" or o["enriched"] > (dt.date.today() - dt.timedelta(days=7)).isoformat()):
+        th = o.get("thumb") or ""  # 이미 보강된 기록도 썸네일 게재 규칙은 매번 다시 적용(규칙 변경 소급)
+        o["thumb_ok"] = bool(th) and not re.search(r"card\.svg|image/svg", th) and not SENSITIVE.search(f"{o.get('title', '')} {o.get('summary', '')}") and (
+            o["key"].split(":")[0] in ("nara", "gallery") or bool(OPEN_RIGHTS.search(o.get("rights") or "")))
         return 0
     if m and budget <= 0:
         return 0  # 오늘 상한 소진 — 다음 실행에서 보강
@@ -92,8 +95,8 @@ def enrich(o, budget):
     if not o.get("thumb") and re.search(r"\.(jpe?g|png|gif)(\?|$)|thumb|image", o.get("media") or "", re.I):
         o["thumb"] = o["media"]
     src = o["key"].split(":")[0]; th = o.get("thumb") or ""
-    o["thumb_ok"] = bool(th) and not SENSITIVE.search(f"{o.get('title', '')} {o.get('summary', '')}") and (
-        src in ("nara", "gallery") or th.startswith(ORIGIN) or bool(OPEN_RIGHTS.search(o.get("rights") or "")))
+    o["thumb_ok"] = bool(th) and not re.search(r"card\.svg|image/svg", th) and not SENSITIVE.search(f"{o.get('title', '')} {o.get('summary', '')}") and (
+        src in ("nara", "gallery") or bool(OPEN_RIGHTS.search(o.get("rights") or "")))
     o["enriched"] = today
     return used
 
