@@ -878,6 +878,23 @@
     "개인정보 패턴 자동 제거"
    ],
    "level": "warn"
+  },
+  {
+   "id": "ledger-derived-hierarchy",
+   "tool": "cross_search",
+   "args": {
+    "query": "Hungnam evacuation map",
+    "sources": "ledger",
+    "max_per_source": 3,
+    "format": "csv"
+   },
+   "must": [
+    "\\[파생\\] 이미지"
+   ],
+   "must_not": [
+    "\\(계열 미상\\)"
+   ],
+   "level": "warn"
   }
  ]
 }

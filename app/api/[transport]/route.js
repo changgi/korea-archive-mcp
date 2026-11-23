@@ -1229,10 +1229,11 @@ const COLLECT = {
     const out = [];
     for (const ln of b.split('\n')) {
       if (!ln.trim()) continue; let o; try { o = JSON.parse(ln); } catch { continue; }
-      const h = `${o.title} ${o.partOf || ''} ${o.id || ''} ${(o.sources || []).join(' ')} ${o.date || ''}`.toLowerCase();
+      const h = `${o.title} ${o.partOf || o.partOf_derived || ''} ${o.id || ''} ${(o.sources || []).join(' ')} ${o.date || ''}`.toLowerCase();
       if (!(toks.every((t) => h.includes(t)) || (en.length && en.every((t) => h.includes(t))))) continue;
       out.push({ title: `[${(o.sources || []).join('+')} · 발견 ${o.seen}회 · 7일 ${o.seen_7d || 0} · ${o.days_total || 1}일 · 첫 ${String(o.first_seen).slice(0, 10)}${o.rank ? ` · 활용 ${o.rank}위` : ''}] ${o.title}`.slice(0, 220), date: o.date || '', id: o.id || o.key,
-        series: o.partOf || '', url: o.url || '', media: o.media || '', ...(o.sameAs ? { sameAs: o.sameAs } : {}), seen: o.seen || 1, rank: o.rank || 1e9 });
+        series: o.partOf || o.partOf_derived || '', url: o.url || '', // v2.27 원 기관 계층이 없으면 파생 계층([파생] 표시)
+        media: o.media || '', ...(o.sameAs ? { sameAs: o.sameAs } : {}), seen: o.seen || 1, rank: o.rank || 1e9 });
     }
     return out.sort((a, b) => a.rank - b.rank || b.seen - a.seen).slice(0, n); // v2.7: 활용 순위(최근·지속·교차확인 가중)
   },
