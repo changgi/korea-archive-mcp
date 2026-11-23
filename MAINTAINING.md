@@ -44,6 +44,7 @@
 | `health` | 매주 월 | 30채널 골든 질의 + 같은 기록 묶기 회귀 | `auto-health` 이슈 |
 | `fixity-watch` | 매주 화 | 골든 기록 본문 지문(sha256-16) — 원문 개정 감지 | 원장(`public/fixity-ledger.json`) 이력 커밋 + 실패 |
 | `ledger` | 매일 00:17 KST | 발견 누적 원장 병합(`docs/data/`) — 처리 위치 `_state.json`, 최근 3일 함 | 실행 실패 시 다음 날 이어 받음(함 3일 보관) |
+| `nrich-harvest` | 매주 수 02:41 KST | 국립문화유산연구원 Open API 11종 → `docs/data/nrich_db.jsonl`(정적 색인) | 0건이면 기존 색인 유지(실패 종료) |
 | `retry-blocked` · `nz-harvest` | 매주 화 | 차단 채널 재탐침 · NZ 정적 인덱스 갱신 | 실행 요약 |
 | Dependabot | 매월 | npm(마이너·패치만)·Actions 의존성 갱신 PR | verify의 **실제 빌드(next build)**가 병합 전 검증 |
 
@@ -65,6 +66,7 @@
 - 한국고문서자료관(AKS) — 일반 요청 WAF 차단(브라우저 세션에서만). 규장각 — 일부 네트워크에서 연결 불가(서버는 정상).
 - 위키미디어 — 연속 요청 429. imageinfo는 한 번에 묶어 조회.
 - 국립문화유산연구원 국가유산 지식이음(portal.nrich.go.kr) — robots Allow. 발간자료는 공식 Open API(`originalTotalApi.do`, 무키, XML md_data1~13), 국외문화유산 DB는 목록 GET(`st=1` 제목 검색 — `st=3`·POST는 필터 안 됨, 2026-11 실측). 그 밖의 Open API 22종(초상화·공예도설·목간·금석문 등)은 `apiList.do?menuIdx=665` — 다음 확장 후보.
+- 국립문화유산연구원 범용 Open API(`openapi.do?idx=N`) — 키워드 검색 없음 → 주 1회 전체 수집(`scripts/nrich_harvest.py`, 정적 색인). **`firstindex`=시작 행, `recordcountperpage`=끝 행(포함)** — 명세 설명과 다름(실측). https는 응답이 비는 경우가 있어 공식 End Point대로 http. 필드 번호(md_dataN)는 데이터셋별 실측표(스크립트 `DS`) — 원 기관이 열을 바꾸면 golden `nrich-db-detail`이 잡는다.
 - 국외소재문화유산재단(overseaschf.or.kr) — robots.txt `Disallow: /`. 발굴 우선 원칙에 따라 수집처로 두되 결과·프로파일에 표시하고, 정직 UA·요청 1회(목록)·상세 24h 캐시로 최소화. 이 컨테이너의 Node fetch는 프록시 경유 503이 날 수 있음(curl·Vercel은 정상) — 로컬 검증은 저장 HTML로.
 
 ## 4. 새 기능·수집처를 넣을 때 체크리스트

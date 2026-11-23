@@ -1,0 +1,62 @@
+{
+ "harvested": "2026-11-23T09:01:23Z",
+ "source": "국립문화유산연구원 국가유산 지식이음 Open API",
+ "datasets": {
+  "ksm": {
+   "name": "금석문",
+   "idx": 51,
+   "count": 6557
+  },
+  "portrait": {
+   "name": "초상화(국가지정)",
+   "idx": 209,
+   "count": 112
+  },
+  "gwaebul": {
+   "name": "괘불(국가지정 불화)",
+   "idx": 52,
+   "count": 64
+  },
+  "diary": {
+   "name": "조선시대 개인일기",
+   "idx": 205,
+   "count": 1431
+  },
+  "mokgan": {
+   "name": "목간(가야·전국)",
+   "idx": 67,
+   "count": 512
+  },
+  "jcbib": {
+   "name": "일제강점기 고적조사 문헌목록",
+   "idx": 10,
+   "count": 1006
+  },
+  "jcphoto": {
+   "name": "조선고적도보",
+   "idx": 12,
+   "count": 15
+  },
+  "dict": {
+   "name": "한국고고학사전",
+   "idx": 39,
+   "count": 13995
+  },
+  "arch": {
+   "name": "한국고고학저널(유적)",
+   "idx": 206,
+   "count": 601
+  },
+  "koguryo": {
+   "name": "고구려 유적(북한)",
+   "idx": 8,
+   "count": 65
+  },
+  "gaesong": {
+   "name": "개성 문화유적(북한)",
+   "idx": 7,
+   "count": 16
+  }
+ },
+ "total": 24374
+}

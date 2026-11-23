@@ -1,0 +1,27 @@
+name: nrich-harvest
+# 국립문화유산연구원 국가유산 지식이음 Open API 11종 → docs/data/nrich_db.jsonl 정적 색인(주 1회 — 원 기관 요청 최소, 검색은 정적 파일)
+on:
+  schedule:
+    - cron: '41 17 * * 2'   # 매주 수 02:41 KST
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency: nrich-harvest
+jobs:
+  harvest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.12' }
+      - name: 수집
+        run: python3 scripts/nrich_harvest.py
+      - name: 커밋
+        run: |
+          git add docs/data/nrich_db.jsonl docs/data/nrich_db_meta.json
+          if git diff --cached --quiet; then echo "색인 변경 없음"; exit 0; fi
+          git config user.name changgi
+          git config user.email 10678518+changgi@users.noreply.github.com
+          git commit -m "chore(nrich-harvest): 연구DB 정적 색인 $(date -u +%F)"
+          git pull --rebase -q origin main && git push
