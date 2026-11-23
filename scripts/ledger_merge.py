@@ -411,6 +411,67 @@ def build_provenance(recs):
                "provenance": out}, open(os.path.join(D, "provenance.json"), "w", encoding="utf-8"), ensure_ascii=False)
     return len(out), orphan
 
+PAGES = "https://changgi.github.io/korea-archive-mcp/data/"
+
+def kind_of(o):
+    """매체 유형(인용 형식용) — 제목·URL 표기 근거. 근거가 없으면 문서."""
+    t = (o.get("title", "") + " " + (o.get("url") or "") + " " + (o.get("media") or "")).lower()
+    if re.search(r"영상|동영상|필름|film|motion picture|newsreel|대한뉴스|\.webm|\.mp4|video", t): return "motion_picture"
+    if re.search(r"사진|photo|\.jpe?g|\.png|\.gif|\.tif|image|도판|그림|회화|탱화|불화|초상", t): return "graphic"
+    if re.search(r"지도|map\b|도면", t): return "map"
+    return "document"
+
+def build_media(recs):
+    """v2.29 다매체 확산 — 같은 원장을 구독(Atom)·인용 관리자(CSL-JSON·RIS)·시각화(연대 타임라인)로. 원 기관 표기 그대로, 파생 계층은 [파생] 유지."""
+    import xml.sax.saxutils as X
+    now = dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+    inst = lambda o: SRC_NAME.get(o["key"].split(":")[0], o["key"].split(":")[0])
+    ser = lambda o: o.get("partOf") or o.get("partOf_derived") or ""
+    yr = lambda o: (re.search(r"(?<!\d)(1[0-9]\d\d|20\d\d)(?!\d)", o.get("date") or "") or [None, None])[1] if o.get("date") else None
+    # 1) Atom 피드 — 새로 발견된 기록 100건(구독기·RSS 앱·자동화로 퍼짐)
+    new = sorted(recs, key=lambda o: o["first_seen"], reverse=True)[:100]
+    ent = "".join(f"""<entry><title>{X.escape(o['title'][:200])}</title><id>{X.escape(o.get('url') or PAGES + '#' + o['key'])}</id><link href="{X.escape(o.get('url') or PAGES)}"/>
+<updated>{o['first_seen']}</updated><author><name>{X.escape(inst(o))}</name></author>{''.join(f'<category term="{X.escape(x)}"/>' for x in o['sources'])}
+<summary>{X.escape(' · '.join(x for x in (o.get('date'), ser(o), o.get('id'), (o.get('summary') or '')[:300]) if x))}</summary></entry>""" for o in new)
+    open(os.path.join(D, "feed.xml"), "w", encoding="utf-8").write(f"""<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>KOREA ARCHIVE 통합검색 — 새로 발견된 기록</title><id>{PAGES}feed.xml</id><link rel="self" href="{PAGES}feed.xml"/><link href="{PAGES}"/>
+<updated>{now}</updated><subtitle>사용자들이 도구로 발굴한 한국 관련 기록(원 기관 링크·권리는 원 기관 표기)</subtitle>{ent}</feed>""")
+    # 2) CSL-JSON — Zotero·Mendeley·Pandoc 인용
+    csl = []
+    for o in recs:
+        it = {"id": o["key"], "type": kind_of(o), "title": o["title"], "archive": inst(o), "URL": o.get("url", ""),
+              "accessed": {"date-parts": [[int(x) for x in o["first_seen"][:10].split("-")]]}, "note": f"KOREA ARCHIVE 통합검색 발견 원장 — 처음 발견 {o['first_seen'][:10]}, 발견 {o['seen']}회"}
+        if o.get("id"): it["archive_location"] = o["id"]
+        if ser(o): it["collection-title"] = ser(o)
+        if yr(o): it["issued"] = {"date-parts": [[int(yr(o))]]}
+        elif o.get("date"): it["issued"] = {"literal": o["date"]}
+        if o.get("summary"): it["abstract"] = o["summary"][:1000]
+        csl.append(it)
+    json.dump(csl, open(os.path.join(D, "records.csl.json"), "w", encoding="utf-8"), ensure_ascii=False)
+    # 3) RIS — EndNote·RefWorks·Zotero
+    TY = {"motion_picture": "VIDEO", "graphic": "ART", "map": "MAP", "document": "GEN"}
+    with open(os.path.join(D, "records.ris"), "w", encoding="utf-8") as f:
+        for o in recs:
+            L = [f"TY  - {TY[kind_of(o)]}", f"TI  - {o['title']}", f"DB  - {inst(o)}"]
+            if yr(o): L.append(f"PY  - {yr(o)}")
+            if o.get("date"): L.append(f"DA  - {o['date']}")
+            if o.get("id"): L.append(f"AN  - {o['id']}")
+            if ser(o): L.append(f"T2  - {ser(o)}")
+            if o.get("url"): L.append(f"UR  - {o['url']}")
+            if o.get("summary"): L.append(f"AB  - {o['summary'][:1000]}")
+            L += [f"N1  - KOREA ARCHIVE 통합검색 발견 원장 — 처음 발견 {o['first_seen'][:10]} · 출처 {'+'.join(o['sources'])}", "ER  - ", ""]
+            f.write("\n".join(L) + "\n")
+    # 4) 연대 타임라인 — 시각화·전시용(연대 × 기관 × 매체)
+    tl = {}
+    for o in recs:
+        d = decade(o) or "연대 미상"; e = tl.setdefault(d, {"decade": d, "records": 0, "by_source": {}, "by_kind": {}, "samples": []})
+        e["records"] += 1; h = o["key"].split(":")[0]; k = kind_of(o)
+        e["by_source"][h] = e["by_source"].get(h, 0) + 1; e["by_kind"][k] = e["by_kind"].get(k, 0) + 1
+        if len(e["samples"]) < 5: e["samples"].append({"title": o["title"][:120], "url": o.get("url", ""), "iiif": o.get("iiif") or o.get("iiif_built", "")})
+    json.dump({"updated": now, "note": "연대 = date → 제목 연도 → 메타 생산일(파생 규칙과 동일)", "timeline": sorted(tl.values(), key=lambda e: (e["decade"] == "연대 미상", e["decade"]))},
+              open(os.path.join(D, "timeline.json"), "w", encoding="utf-8"), ensure_ascii=False, indent=0)
+    return len(new), len(csl), len(tl)
+
 def merge_classes(recs):
     """v2.26 기준·분류 정보 축적 — 발견된 모든 계층 경로(기관 › 계열 › …)의 각 단계를 분류 사전으로. 지우지 않고 갱신만(사라진 경로도 보존)."""
     p = os.path.join(D, "classifications.json")
@@ -581,7 +642,7 @@ def main():
     enr = sum(1 for o in recs if o.get("enrich_status") == "ok"); thn = sum(1 for o in recs if o.get("thumb_ok"))
     qrow = "".join(f"<tr><td>{E_(o['last'][:16])}</td><td>{E_(o['tool'])}</td><td>{E_(json.dumps(o['args'], ensure_ascii=False)[:140])}</td><td>{o['seen']}</td></tr>" for o in nq["recent"])
     open(os.path.join(D, "index.html"), "w", encoding="utf-8").write(f"""<!DOCTYPE html><html lang="ko"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>발견 누적 원장 — KOREA ARCHIVE 통합검색</title><style>body{{font-family:system-ui,'Noto Sans KR',sans-serif;margin:0;background:#14161b;color:#e6e4dc}}main{{max-width:1100px;margin:auto;padding:16px}}a{{color:#e0b04a}}
+<title>발견 누적 원장 — KOREA ARCHIVE 통합검색</title><link rel="alternate" type="application/atom+xml" title="새로 발견된 기록" href="feed.xml"><style>body{{font-family:system-ui,'Noto Sans KR',sans-serif;margin:0;background:#14161b;color:#e6e4dc}}main{{max-width:1100px;margin:auto;padding:16px}}a{{color:#e0b04a}}
 .b0{{display:inline-block;margin:4px 8px 4px 0;padding:6px 12px;border:1px solid #e0b04a;border-radius:6px;text-decoration:none}}
 .g{{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px}}.c{{background:#1c1f26;border:1px solid #2a2d35;border-radius:10px;overflow:hidden;display:flex;flex-direction:column}}
 .c img,.ph{{width:100%;height:170px;object-fit:cover;background:#0f1115}}.ph{{height:64px!important;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#6f6e68;font-weight:700;letter-spacing:.05em}}.ph small{{font-weight:400;font-size:12px;margin-top:4px}}
@@ -591,15 +652,15 @@ details{{font-size:12px}}dl{{display:grid;grid-template-columns:auto 1fr;gap:2px
 table{{width:100%;border-collapse:collapse;font-size:14px}}td,th{{border-bottom:1px solid #2a2d35;padding:6px;text-align:left}}</style>
 <main><h1>발견 누적 원장</h1><p>KOREA ARCHIVE 통합검색 사용자가 도구로 발굴한 기록이 매일 이곳에 쌓입니다(검색어·사용자 정보 없음). 기록 <b>{st['records']:,}</b>건 · 마지막 갱신 {st['updated']} · 이번 갱신 신규 {new_recs}건 · 내용·메타정보 보강 {enr}건 · 썸네일 {thn}건</p>
 <p>{srcs}</p>
-<p><a class="b0" href="discovered.csv">CSV 내려받기</a><a class="b0" href="discovered.jsonl">JSONL</a><a class="b0" href="discovered.jsonld">RiC-O JSON-LD</a><a class="b0" href="../kv.html?manifest=https://changgi.github.io/korea-archive-mcp/data/collection.json">KV로 최근 300건 연속 보기</a><a class="b0" href="tree.html">계층구조도</a><a class="b0" href="queries/index.json">질의·회신 축적</a><a class="b0" href="classifications.json">분류 사전</a><a class="b0" href="provenance.json">발견 경로(질의↔기록)</a><a class="b0" href="nrich/index.html">연구원 연구DB IIIF 계층</a><a class="b0" href="popular.csv">자주 활용 TOP 200</a><a class="b0" href="stats.json">집계</a></p>
+<p><a class="b0" href="discovered.csv">CSV 내려받기</a><a class="b0" href="discovered.jsonl">JSONL</a><a class="b0" href="discovered.jsonld">RiC-O JSON-LD</a><a class="b0" href="../kv.html?manifest=https://changgi.github.io/korea-archive-mcp/data/collection.json">KV로 최근 300건 연속 보기</a><a class="b0" href="tree.html">계층구조도</a><a class="b0" href="queries/index.json">질의·회신 축적</a><a class="b0" href="classifications.json">분류 사전</a><a class="b0" href="provenance.json">발견 경로(질의↔기록)</a><a class="b0" href="feed.xml">새 발견 구독(Atom)</a><a class="b0" href="records.csl.json">인용 CSL-JSON(Zotero)</a><a class="b0" href="records.ris">인용 RIS(EndNote)</a><a class="b0" href="timeline.json">연대 타임라인</a><a class="b0" href="nrich/index.html">연구원 연구DB IIIF 계층</a><a class="b0" href="popular.csv">자주 활용 TOP 200</a><a class="b0" href="stats.json">집계</a></p>
 <p style="font-size:13px;color:#9b9a93">주요 내용·메타정보·썸네일은 기관 IIIF·우리 브리지 매니페스트를 하루 한 번 판독해 채웁니다(하루 상한·순차 요청). 썸네일은 재이용 가능 표시가 확인된 것만 싣고, 포로·사망자·묘지·수형자 관련 기록과 허가가 필요한 이미지는 링크만 둡니다. 권리는 원 기관 표기를 따릅니다 — 게재 전 judge_rights로 확인. 모든 변경은 저장소 git 이력(docs/data/)에 남습니다.</p>
 <h2>자주 활용되는 기록 TOP 30</h2><p style="font-size:13px">점수 = 최근 30일 발견×2 + 전체 발견 + 발견된 날 수×3 + 교차확인 기관 수 가중. 자동 검사 트래픽 제외.</p><div class="g">{prow}</div>
 <h2>일별 활용(최근 14일)</h2><table><tr><th>날짜</th><th>검색 묶음</th><th>발견 기록</th><th>신규 기록</th></tr>{urow}</table><p style="font-size:13px">형식별 누계: {E_(fmtv(usage['formats']))} · <a href="usage.json">usage.json</a></p>
 <h2>질의·회신 축적</h2><p style="font-size:13px">모든 도구 호출의 질의와 회신 본문을 원문 그대로(가공·삭제 없이) 영구 보존합니다. 같은 질의·같은 회신은 한 번만 두고 횟수만 셉니다. 회신이 달라지면 새 판으로 남겨 기관 응답 변화의 증거로 씁니다. 고유 질의 {nq['total']}건 · 누적 호출 {nq['calls']}회 · 도구별 {E_(fmtv(nq['by_tool']))} · <a href="queries/index.json">queries/index.json</a> (월별 회신 원문 queries/YYYY-MM.jsonl.gz)</p><table><tr><th>최근</th><th>도구</th><th>질의</th><th>횟수</th></tr>{qrow}</table>
 <h2>최근 발견 100건</h2><div class="g">{rows}</div></main></html>""")
-    build_tree(recs); ncls = merge_classes(recs); nprov, _orph = build_provenance(recs)
+    build_tree(recs); ncls = merge_classes(recs); nprov, _orph = build_provenance(recs); nmed = build_media(recs)
     print(f"원장 {len(recs)}건 (신규 {new_recs}, 묶음 {new_batches})")
-    print(f"질의 고유 {nq['total']}건(신규 {nq['added']}) · 분류 경로 {ncls}개 · 발견 경로 질의 {nprov}종")
+    print(f"질의 고유 {nq['total']}건(신규 {nq['added']}) · 분류 경로 {ncls}개 · 발견 경로 질의 {nprov}종 · 다매체(피드 {nmed[0]}·인용 {nmed[1]}·연대 {nmed[2]})")
 
 if __name__ == "__main__":
     main()
