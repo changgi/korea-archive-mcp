@@ -1,0 +1,39 @@
+name: relevance
+# 관련성 감사 — 수집처마다 골든 질의 결과에 검색어·번역어가 실제로 있는지, 옛 오답 패턴(크롤링 묶음·메뉴 오인)이 없는지(매주 목 + 수동)
+# health(건수)가 놓치는 '그럴듯한 오답'을 잡는다. 실패 → auto-health 이슈, 통과 → 자동 종료.
+on:
+  schedule:
+    - cron: '23 18 * * 3'   # 매주 목 03:23 KST
+  workflow_dispatch:
+permissions:
+  contents: read
+  issues: write
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - name: 감사
+        id: run
+        run: |
+          set +e
+          python3 scripts/relevance_audit.py --md /tmp/rel.md
+          echo "rc=$?" >> "$GITHUB_OUTPUT"
+          cat /tmp/rel.md >> "$GITHUB_STEP_SUMMARY"
+      - name: 실패 → 이슈 / 통과 → 이슈 닫기
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh label create auto-health --color B60205 --description "자동 감시가 발견한 장애" 2>/dev/null || true
+          num=$(gh issue list --label auto-health --state open --search "관련성 감사" --json number -q '.[0].number')
+          run="${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          if [ "${{ steps.run.outputs.rc }}" != "0" ]; then
+            body="$(cat /tmp/rel.md)
+
+          실행: $run"
+            if [ -n "$num" ]; then gh issue comment "$num" --body "$body"; else gh issue create --title "관련성 감사 실패 — 수집기가 엉뚱한 결과를 읽는 중" --label auto-health --body "$body"; fi
+            exit 1
+          elif [ -n "$num" ]; then
+            gh issue close "$num" --comment "관련성 감사 전부 통과 — 자동 종료 ($run)"
+          fi
