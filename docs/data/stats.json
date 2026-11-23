@@ -1,8 +1,8 @@
 {
- "updated": "2026-11-23T15:30:35Z",
+ "updated": "2026-11-23T22:15:08Z",
  "records": 376,
- "new_records": 113,
- "new_batches": 36,
+ "new_records": 0,
+ "new_batches": 4,
  "by_source": {
   "nrich": 43,
   "archives": 40,
@@ -40,19 +40,19 @@
  "first": "2026-11-23T03:00:15Z",
  "formats": {
   "text": 47,
-  "csv": 37,
+  "csv": 41,
   "iiif": 3
  },
  "queries": {
-  "added": 2,
-  "total": 2,
-  "calls": 2,
+  "added": 4,
+  "total": 6,
+  "calls": 10,
   "by_tool": {
-   "source_profile": 1,
-   "cross_search": 1
+   "source_profile": 5,
+   "cross_search": 5
   }
  },
- "repeat_records": 122,
+ "repeat_records": 125,
  "top10": [
   {
    "rank": 1,
