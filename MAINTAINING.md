@@ -61,6 +61,7 @@
 | 발견 기록 | `docs/data/discovered.*` | 같은 key면 횟수·날짜만 | `days` 이력 전 기간 보존(90일·400일 잘라내기 폐지) |
 | 분류·계층 경로 | `docs/data/classifications.json` | 같은 경로면 갱신 | 사라진 경로도 보존, `records`는 줄지 않음 |
 | 파생 계층·IIIF(v2.27) | `discovered.*`의 `partOf_derived`·`iiif_built`·`iiif_kind` | 매일 재계산 | 원 기관 계층이 없으면 유형 표기·제목 주제부·연대·매체로 **`[파생]`** 계층을 만들고(원 기관 `partOf`와 분리), IIIF가 없으면 기록 봉투 브리지 매니페스트(`/iiif/rec/…`)를 만든다. 계층구조도·분류 사전·RiC-O(`rico:hasOrHadInstantiation`)에 반영 |
+| 발견 경로(v2.28) | `discovered.*`의 `found_by` · `docs/data/provenance.json` | 질의 지문 `ak`(도구+인자 sha256-16, 키 정렬)로 묶음 | 질의 ↔ 발견 기록 양방향. 회신 원문은 `queries/<월>.jsonl.gz`에서 같은 `ak`. RiC-O에 `prov:wasInformedBy`. v2.28 이전 발견분은 `found_by` 없음(소급 불가 — 표시) |
 | 연구원 연구DB | `docs/data/nrich/*.jsonl` | 같은 (데이터셋,id)면 새 값 | 원 기관에서 사라진 기록은 `withdrawn: <처음 사라진 날>`로 보존 |
 
 - **원문 그대로(v2.26.1, 소유자 결정)**: 질의 인자·회신 본문은 어떤 패턴도 지우거나 바꾸지 않는다 — 질의·회신은 일반 기록에서 수집되는 기록 자체이므로 원형 보존이 증거성의 조건. 공개 저장소에 그대로 남는다는 사실은 cross_search 안내문으로 사용자에게 고지한다. `lib/ledger.js`의 `scrub()`은 쓰지 않는다(필요 시 공개본과 분리된 별도 저장소에서만 검토).

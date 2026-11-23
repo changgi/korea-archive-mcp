@@ -10,7 +10,7 @@ import { bridgeUrl, kvUrl } from '../../../lib/ka_iiif.js';
 import { envelopeOf, encodeEnv, recUrls } from '../../../lib/rec_iiif.js';
 import { deflateRawSync } from 'node:zlib';
 import { tnaUrls } from '../../../lib/tna_iiif.js';
-import { stash, stashCall, ledgerConf, LEDGER_PAGE } from '../../../lib/ledger.js';
+import { stash, stashCall, argKey, ledgerConf, LEDGER_PAGE } from '../../../lib/ledger.js';
 import { AsyncLocalStorage } from 'node:async_hooks';
 const REQ = new AsyncLocalStorage(); // v2.7: 요청 맥락 — 자동 검사(X-KA-Probe) 트래픽을 활용 집계에서 제외
 
@@ -1538,7 +1538,7 @@ const handler = createMcpHandler((server) => {
     const max = 1024 - SVC.length;
     const d = (desc.length > max ? desc.slice(0, max - 1) + '…' : desc) + SVC;
     const g = guard24k(cb);
-    const logged = async (args, extra) => { const res = await g(args, extra); // v2.26 모든 질의·회신 축적(자동 검사 X-KA-Probe 제외, 실패해도 응답 영향 없음)
+    const logged = async (args, extra) => { const res = await REQ.run({ ...(REQ.getStore() || {}), ak: argKey(name, args) }, () => g(args, extra)); // v2.28 질의 지문을 요청 맥락에 — 발견 기록이 자기를 찾은 질의를 가리키게 // v2.26 모든 질의·회신 축적(자동 검사 X-KA-Probe 제외, 실패해도 응답 영향 없음)
       try { const t = ((res && res.content) || []).map((x) => x.text || '').join('\n'); await Promise.race([stashCall(name, args, t, { probe: !!(REQ.getStore() || {}).probe }), sleep(1500)]); } catch { /* 축적 실패 무시 */ }
       return res; };
     return _tool(name, d, schema,
@@ -3039,7 +3039,7 @@ item_cd 5종(자료 성격별): ART 도설·회화 / ETC 두루마리·축 / DRR
       { const linked = linkOverseas(items); if (linked.length !== items.length) { items.length = 0; items.push(...linked); stats.push('국외 교차확인 ' + linked.filter((x) => x.crossOv).length + '건'); } }
       items.sort((a, b) => b.sources.length - a.sources.length);
       // v2.5 발견 누적 원장 — 발견 기록을 날짜 함에 적재(v2.26부터 질의·회신은 래퍼가 ka:q로 원문 그대로 별도 축적), 매일 GitHub 원장으로 병합. 미설정·한도 초과면 조용히 생략
-      const kept = await stash(items, { fmt: format || 'text', probe: !!(REQ.getStore() || {}).probe, partOf: (it) => { const h = it.sources[0].split('·')[0]; return (PART_OF[h] && PART_OF[h](it)) || ''; } });
+      const kept = await stash(items, { fmt: format || 'text', probe: !!(REQ.getStore() || {}).probe, ak: (REQ.getStore() || {}).ak || '', partOf: (it) => { const h = it.sources[0].split('·')[0]; return (PART_OF[h] && PART_OF[h](it)) || ''; } });
       const keptNote = (kept || ledgerConf()) ? `\n※ 질의·회신·발견 기록은 원문 그대로 공개 누적 원장에 영구 축적됩니다(가공·삭제 없음 — 공개를 원치 않는 본인 정보는 질의에 넣지 마십시오) — ${LEDGER_PAGE}` : '';
       if (format === 'iiif') { // v1.97: 연속 이미지 뷰 — 결과 중 기관 IIIF가 있는 기록의 원 매니페스트를 컬렉션으로, 위키미디어는 정지 이미지 매니페스트로
         const L3 = (t) => ({ ko: [String(t || '').slice(0, 200)] });

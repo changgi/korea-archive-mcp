@@ -368,7 +368,7 @@ def merge_queries(state, today):
                 k = hashlib.sha256((r.get("tool", "") + json.dumps(args, ensure_ascii=False, sort_keys=True) + r.get("h", "")).encode()).hexdigest()[:20]
                 B = book(at[:7]); o = B.get(k)
                 if o: o["seen"] += 1; o["last"] = max(o["last"], at); continue
-                B[k] = {"k": k, "tool": r.get("tool", ""), "args": args, "first": at, "last": at, "seen": 1, "h": r.get("h", ""), "n": r.get("n", 0), "z": r.get("z", "")}; added += 1
+                B[k] = {"k": k, "ak": r.get("ak", ""), "tool": r.get("tool", ""), "args": args, "first": at, "last": at, "seen": 1, "h": r.get("h", ""), "n": r.get("n", 0), "z": r.get("z", "")}; added += 1
             pos += len(items)
             if len(items) < 500: break
         qs[d] = pos
@@ -382,13 +382,34 @@ def merge_queries(state, today):
         if f.endswith(".jsonl.gz"):
             for ln in gzip.open(os.path.join(qdir, f), "rt", encoding="utf-8"):
                 if ln.strip():
-                    o = json.loads(ln); idx.append({k: o[k] for k in ("k", "tool", "args", "first", "last", "seen", "h", "n")} | {"month": f[:7]})
+                    o = json.loads(ln); idx.append({k: o[k] for k in ("k", "tool", "args", "first", "last", "seen", "h", "n")} | {"ak": o.get("ak", ""), "month": f[:7]})
     json.dump({"updated": dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"), "total": len(idx), "queries": idx}, open(os.path.join(qdir, "index.json"), "w", encoding="utf-8"), ensure_ascii=False)
     print(f"질의 축적: 신규 {added} · 누적 {len(idx)}")
     bt = {}
     for o in idx: bt[o["tool"]] = bt.get(o["tool"], 0) + o["seen"]
     recent = sorted(idx, key=lambda o: o["last"], reverse=True)[:20]
     return {"added": added, "total": len(idx), "calls": sum(o["seen"] for o in idx), "by_tool": dict(sorted(bt.items(), key=lambda kv: -kv[1])), "recent": recent}
+
+def build_provenance(recs):
+    """v2.28 발견 경로(맥락·증거 사슬) — 질의 지문(ak) ↔ 발견 기록을 양방향으로. 질의는 queries/index.json, 회신 원문은 queries/<월>.jsonl.gz(같은 ak)."""
+    qp = os.path.join(D, "queries", "index.json")
+    Q = json.load(open(qp, encoding="utf-8")).get("queries", []) if os.path.exists(qp) else []
+    byak = {}
+    for q in Q:
+        if q.get("ak"):
+            e = byak.setdefault(q["ak"], {"ak": q["ak"], "tool": q["tool"], "args": q["args"], "first": q["first"], "last": q["last"], "calls": 0, "versions": 0, "records": []})
+            e["calls"] += q["seen"]; e["versions"] += 1; e["first"] = min(e["first"], q["first"]); e["last"] = max(e["last"], q["last"])
+    orphan = 0
+    for o in recs:
+        for ak in o.get("found_by") or []:
+            e = byak.get(ak)
+            if not e: e = byak[ak] = {"ak": ak, "tool": "", "args": None, "first": o["first_seen"], "last": o["last_seen"], "calls": 0, "versions": 0, "records": []}; orphan += 1
+            if o["key"] not in e["records"]: e["records"].append(o["key"])
+    out = sorted(byak.values(), key=lambda e: (-len(e["records"]), e["first"]))
+    json.dump({"updated": dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"), "queries": len(out), "linked_records": sum(1 for o in recs if o.get("found_by")),
+               "note": "ak=질의 지문(도구+인자). 회신 원문은 queries/<월>.jsonl.gz에서 같은 ak로(versions = 회신 판 수). args=None은 질의 축적(v2.26) 이전·병합 대기 분",
+               "provenance": out}, open(os.path.join(D, "provenance.json"), "w", encoding="utf-8"), ensure_ascii=False)
+    return len(out), orphan
 
 def merge_classes(recs):
     """v2.26 기준·분류 정보 축적 — 발견된 모든 계층 경로(기관 › 계열 › …)의 각 단계를 분류 사전으로. 지우지 않고 갱신만(사라진 경로도 보존)."""
@@ -466,6 +487,7 @@ def main():
                     o["max_cross"] = max(o.get("max_cross", 0), len(r.get("s") or []))
                     t = b.get("tool") or "cross_search"
                     if t not in o["tools"]: o["tools"].append(t)
+                    if b.get("ak") and b["ak"] not in o.setdefault("found_by", []): o["found_by"].append(b["ak"])  # v2.28 발견 경로 — 이 기록을 찾은 질의 지문(queries/index.json의 ak)
             pos += len(items); new_batches += len(items)
             if len(items) < 500: break
         state["days"][d] = pos
@@ -494,7 +516,7 @@ def main():
         o["iiif_built"] = "" if o.get("iiif") else leaf_manifest(o)
     with open(lp, "w", encoding="utf-8") as f:
         for o in recs: f.write(json.dumps(o, ensure_ascii=False, separators=(",", ":")) + "\n")
-    cols = ["key", "sources", "title", "date", "id", "url", "partOf", "partOf_derived", "media", "sameAs", "iiif", "iiif_built", "iiif_kind", "first_seen", "last_seen", "seen", "seen_7d", "seen_30d", "days_total", "formats", "tools", "max_cross", "trend", "rank", "score", "summary", "rights", "thumb", "meta"]
+    cols = ["key", "sources", "title", "date", "id", "url", "partOf", "partOf_derived", "media", "sameAs", "iiif", "iiif_built", "iiif_kind", "found_by", "first_seen", "last_seen", "seen", "seen_7d", "seen_30d", "days_total", "formats", "tools", "max_cross", "trend", "rank", "score", "summary", "rights", "thumb", "meta"]
     fmtv = lambda v: " | ".join(f"{a}: {b}" for a, b in v) if isinstance(v, list) and v and isinstance(v[0], list) else (" ".join(f"{k}:{n}" for k, n in sorted(v.items(), key=lambda kv: -kv[1])) if isinstance(v, dict) else ("+".join(v) if isinstance(v, list) else v))
     with open(os.path.join(D, "discovered.csv"), "w", encoding="utf-8-sig", newline="") as f:
         w = csv.writer(f); w.writerow(cols)
@@ -515,7 +537,8 @@ def main():
         graph.append({"@id": o.get("url") or f"rec:{o['key']}", "@type": "rico:Record", "rico:title": o["title"], **({"rico:identifier": o["id"]} if o.get("id") else {}),
                       **({"rico:isAssociatedWithDate": o["date"]} if o.get("date") else {}), "rico:isOrWasIncludedIn": {"@id": sid},
                       **({"owl:sameAs": o["sameAs"]} if o.get("sameAs") else {}), **({"rico:hasOrHadInstantiation": {"@id": mf, "@type": "rico:Instantiation", "rico:title": o["iiif_kind"]}} if mf else {}), **({"rico:scopeAndContent": o["summary"]} if o.get("summary") else {}),
-                      "prov:wasGeneratedBy": {"@type": "prov:Activity", "prov:label": "KOREA ARCHIVE 통합검색 발견(검색어 비공개)", "prov:startedAtTime": o["first_seen"], "prov:used": o["sources"]}})
+                      "prov:wasGeneratedBy": {"@type": "prov:Activity", "prov:label": "KOREA ARCHIVE 통합검색 발견", "prov:startedAtTime": o["first_seen"], "prov:used": o["sources"],
+                                             **({"prov:wasInformedBy": [{"@id": f"https://changgi.github.io/korea-archive-mcp/data/provenance.json#{ak}"} for ak in o["found_by"]]} if o.get("found_by") else {})}})
     json.dump({"@context": {"rico": "https://www.ica.org/standards/RiC/ontology#", "prov": "http://www.w3.org/ns/prov#", "owl": "http://www.w3.org/2002/07/owl#"},
                "@graph": list(sets.values()) + graph}, open(os.path.join(D, "discovered.jsonld"), "w", encoding="utf-8"), ensure_ascii=False)
     recent = sorted(recs, key=lambda o: o["last_seen"], reverse=True)[:300]
@@ -568,15 +591,15 @@ details{{font-size:12px}}dl{{display:grid;grid-template-columns:auto 1fr;gap:2px
 table{{width:100%;border-collapse:collapse;font-size:14px}}td,th{{border-bottom:1px solid #2a2d35;padding:6px;text-align:left}}</style>
 <main><h1>발견 누적 원장</h1><p>KOREA ARCHIVE 통합검색 사용자가 도구로 발굴한 기록이 매일 이곳에 쌓입니다(검색어·사용자 정보 없음). 기록 <b>{st['records']:,}</b>건 · 마지막 갱신 {st['updated']} · 이번 갱신 신규 {new_recs}건 · 내용·메타정보 보강 {enr}건 · 썸네일 {thn}건</p>
 <p>{srcs}</p>
-<p><a class="b0" href="discovered.csv">CSV 내려받기</a><a class="b0" href="discovered.jsonl">JSONL</a><a class="b0" href="discovered.jsonld">RiC-O JSON-LD</a><a class="b0" href="../kv.html?manifest=https://changgi.github.io/korea-archive-mcp/data/collection.json">KV로 최근 300건 연속 보기</a><a class="b0" href="tree.html">계층구조도</a><a class="b0" href="queries/index.json">질의·회신 축적</a><a class="b0" href="classifications.json">분류 사전</a><a class="b0" href="nrich/index.html">연구원 연구DB IIIF 계층</a><a class="b0" href="popular.csv">자주 활용 TOP 200</a><a class="b0" href="stats.json">집계</a></p>
+<p><a class="b0" href="discovered.csv">CSV 내려받기</a><a class="b0" href="discovered.jsonl">JSONL</a><a class="b0" href="discovered.jsonld">RiC-O JSON-LD</a><a class="b0" href="../kv.html?manifest=https://changgi.github.io/korea-archive-mcp/data/collection.json">KV로 최근 300건 연속 보기</a><a class="b0" href="tree.html">계층구조도</a><a class="b0" href="queries/index.json">질의·회신 축적</a><a class="b0" href="classifications.json">분류 사전</a><a class="b0" href="provenance.json">발견 경로(질의↔기록)</a><a class="b0" href="nrich/index.html">연구원 연구DB IIIF 계층</a><a class="b0" href="popular.csv">자주 활용 TOP 200</a><a class="b0" href="stats.json">집계</a></p>
 <p style="font-size:13px;color:#9b9a93">주요 내용·메타정보·썸네일은 기관 IIIF·우리 브리지 매니페스트를 하루 한 번 판독해 채웁니다(하루 상한·순차 요청). 썸네일은 재이용 가능 표시가 확인된 것만 싣고, 포로·사망자·묘지·수형자 관련 기록과 허가가 필요한 이미지는 링크만 둡니다. 권리는 원 기관 표기를 따릅니다 — 게재 전 judge_rights로 확인. 모든 변경은 저장소 git 이력(docs/data/)에 남습니다.</p>
 <h2>자주 활용되는 기록 TOP 30</h2><p style="font-size:13px">점수 = 최근 30일 발견×2 + 전체 발견 + 발견된 날 수×3 + 교차확인 기관 수 가중. 자동 검사 트래픽 제외.</p><div class="g">{prow}</div>
 <h2>일별 활용(최근 14일)</h2><table><tr><th>날짜</th><th>검색 묶음</th><th>발견 기록</th><th>신규 기록</th></tr>{urow}</table><p style="font-size:13px">형식별 누계: {E_(fmtv(usage['formats']))} · <a href="usage.json">usage.json</a></p>
 <h2>질의·회신 축적</h2><p style="font-size:13px">모든 도구 호출의 질의와 회신 본문을 원문 그대로(가공·삭제 없이) 영구 보존합니다. 같은 질의·같은 회신은 한 번만 두고 횟수만 셉니다. 회신이 달라지면 새 판으로 남겨 기관 응답 변화의 증거로 씁니다. 고유 질의 {nq['total']}건 · 누적 호출 {nq['calls']}회 · 도구별 {E_(fmtv(nq['by_tool']))} · <a href="queries/index.json">queries/index.json</a> (월별 회신 원문 queries/YYYY-MM.jsonl.gz)</p><table><tr><th>최근</th><th>도구</th><th>질의</th><th>횟수</th></tr>{qrow}</table>
 <h2>최근 발견 100건</h2><div class="g">{rows}</div></main></html>""")
-    build_tree(recs); ncls = merge_classes(recs)
+    build_tree(recs); ncls = merge_classes(recs); nprov, _orph = build_provenance(recs)
     print(f"원장 {len(recs)}건 (신규 {new_recs}, 묶음 {new_batches})")
-    print(f"질의 고유 {nq['total']}건(신규 {nq['added']}) · 분류 경로 {ncls}개")
+    print(f"질의 고유 {nq['total']}건(신규 {nq['added']}) · 분류 경로 {ncls}개 · 발견 경로 질의 {nprov}종")
 
 if __name__ == "__main__":
     main()
