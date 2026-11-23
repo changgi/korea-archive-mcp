@@ -650,6 +650,47 @@
     "koreanwar_item\\(archRfcd\\)"
    ],
    "level": "error"
+  },
+  {
+   "id": "nrich-db-search",
+   "tool": "cross_search",
+   "args": {
+    "query": "신도비",
+    "sources": "nrich",
+    "max_per_source": 6,
+    "format": "csv"
+   },
+   "must": [
+    "\\[금석문\\]",
+    "국립문화유산연구원 › 연구DB › 금석문 › "
+   ],
+   "level": "error"
+  },
+  {
+   "id": "nrich-db-detail",
+   "tool": "nedb_search",
+   "args": {
+    "mode": "nrich",
+    "query": "ksm:3"
+   },
+   "must": [
+    "이계신도비",
+    "서체: 해서",
+    "원문 뷰어\\(전문·이미지\\): http"
+   ],
+   "level": "error"
+  },
+  {
+   "id": "nrich-db-portrait",
+   "tool": "nedb_search",
+   "args": {
+    "mode": "nrich",
+    "query": "이제현"
+   },
+   "must": [
+    "\\[초상화\\(국가지정\\)\\] 이제현 초상"
+   ],
+   "level": "warn"
   }
  ]
 }

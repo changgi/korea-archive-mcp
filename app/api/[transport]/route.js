@@ -60,6 +60,18 @@ const nrRepApi = async (q, n) => { const x = await cachedText(`nrA:${Math.min(n,
 const nrOvList = async (q) => { const b = await cachedText('nrL:' + q, 6 * 3600e3, () => gtext(`${NR_B}/kor/overseasSearchList.do?menuIdx=840&webyn=Y&st=1&pageindex=1&sk=${encodeURIComponent(q)}`, OK_UA), 'overseasSearch');
   return [...b.matchAll(/<tr>\s*<td[^>]*>\s*\d+\s*<\/td>\s*<td>\s*<a href="\/kor\/overseasSearchView\.do\?menuIdx=840&(?:amp;)?mseq=(\d+)">([\s\S]*?)<\/a>\s*<\/td>\s*<td[^>]*>([\s\S]*?)<\/td>\s*<td[^>]*>([\s\S]*?)<\/td>\s*<td[^>]*>([\s\S]*?)<\/td>/g)]
     .map((m) => ({ mseq: m[1], title: okText(m[2]), era: okText(m[3]), holder: okText(m[4]), nation: okText(m[5]), url: `${NR_B}/kor/overseasSearchView.do?menuIdx=840&mseq=${m[1]}` })); };
+// v2.15 연구DB 정적 색인 — Open API 11종(금석문·초상화·괘불·개인일기·목간·일제강점기 고적조사 문헌·조선고적도보·고고학사전·고고학저널 유적·고구려·개성)을 주 1회 수집(scripts/nrich_harvest.py)한 docs/data/nrich_db.jsonl을 검색(원 기관 요청 0)
+const NR_DB = 'https://changgi.github.io/korea-archive-mcp/data/nrich_db.jsonl';
+const NR_DS = ['ksm', 'portrait', 'gwaebul', 'diary', 'mokgan', 'jcbib', 'jcphoto', 'dict', 'arch', 'koguryo', 'gaesong'];
+let nrDbMem = null;
+const nrDb = async () => { const t = await cachedText('nrDB', 6 * 3600e3, () => gtext(NR_DB), '"ds"');
+  if (!nrDbMem || nrDbMem.src !== t.length) nrDbMem = { src: t.length, rows: t.split('\n').filter(Boolean).map((l) => { try { const o = JSON.parse(l); o._h = [o.t, o.a, o.p, o.d, o.x, ...Object.values(o.m || {})].join(' ').toLowerCase(); return o; } catch { return null; } }).filter(Boolean) };
+  return nrDbMem.rows; };
+const nrDbSearch = async (q, n, ds) => { const toks = String(q).toLowerCase().split(/\s+/).filter(Boolean); if (!toks.length) return [];
+  const rows = (await nrDb()).filter((o) => (!ds || o.ds === ds) && toks.every((t) => o._h.includes(t)));
+  const score = (o) => (toks.every((t) => String(o.t).toLowerCase().includes(t)) ? 0 : 1); // 명칭 일치 우선
+  return rows.sort((a, b) => score(a) - score(b)).slice(0, n); };
+const nrDbItem = (o) => ({ title: `[${o.dn}] ${o.t}${o.a ? ` (${o.a})` : ''}`.slice(0, 160), date: o.d || '', id: o.id, series: ['연구DB', o.dn, (o.p || '').split(/\s+/)[0]].filter(Boolean).join(' › '), url: o.u || '' });
 const nrField = (f) => String(f || '').split(/\s*-\s*/).filter(Boolean).join(' › ');
 // v2.14 국외 소재 교차확인 — 재단(okchf)·연구원(nrich) 두 DB에서 '명칭(괄호·한자·기호 제거)+소장처'가 같은 기록을 한 건으로 묶는다(출처 둘 다, sameAs=다른 쪽 URL)
 const OV_ALIAS = { '대영박물관': '영국박물관', 'british museum': '영국박물관', '메트로폴리탄박물관': '메트로폴리탄미술관' };
@@ -645,7 +657,7 @@ const DEEP_READ = {
   commons: (it) => it.url && `nedb_search(mode='commons', query='${it.url}')`,
   koreanwar: (it) => it.id && `koreanwar_item(ref_code='${it.id}')`,
   okchf: (it) => it.url && `nedb_search(mode='okchf', query='${it.url}')`,
-  nrich: (it) => it.url && `nedb_search(mode='nrich', query='${it.url}')`,
+  nrich: (it) => (/^(ksm|portrait|gwaebul|diary|mokgan|jcbib|jcphoto|dict|arch|koguryo|gaesong):/.test(it.id || '') ? `nedb_search(mode='nrich', query='${it.id}')` : it.url && `nedb_search(mode='nrich', query='${it.url}')`),
   nara: (it) => it.id && `judge_rights(naid=${String(it.id).replace(/\D/g, '')})`,
   seoul: (it) => it.url && `seoul_archives_search(query='${it.url}')`,
 };
@@ -1166,10 +1178,11 @@ const COLLECT = {
     return out;
   },
   nrich: async (q, n) => { // v2.13 국립문화유산연구원 — 국외문화유산 DB(명칭) + 발간자료(보고서·초록·목차). 계층=국외문화유산 › 국가 › 소장처 / 발간자료 › 연구분야
-    const [ov, rp] = await Promise.all([nrOvList(q).catch(() => []), nrRepApi(q, Math.max(2, Math.ceil(n / 2))).catch(() => [])]);
+    const [ov, rp, db] = await Promise.all([nrOvList(q).catch(() => []), nrRepApi(q, Math.max(2, Math.ceil(n / 2))).catch(() => []), nrDbSearch(q, n).catch(() => [])]);
     const a = ov.slice(0, n).map((r) => ({ title: `[국외문화유산] ${r.title} — ${[r.nation, r.holder].filter(Boolean).join(' ')}`.slice(0, 160), date: r.era, id: `ov:${r.mseq}`, series: ['국외문화유산', r.nation, r.holder].filter(Boolean).join(' › '), url: r.url }));
     const b = rp.slice(0, Math.max(2, Math.ceil(n / 2))).map((r) => ({ title: `[발간자료] ${r.title}`.slice(0, 160), date: r.year, id: `rep:${r.idx}`, series: ['발간자료', nrField(r.field)].filter(Boolean).join(' › '), url: r.url, ...(r.img ? { media: r.img } : {}) }));
-    return b.concat(a).slice(0, n + b.length);
+    const c = db.map(nrDbItem);
+    return b.concat(c.slice(0, Math.max(2, Math.ceil(n / 2))), a, c.slice(Math.max(2, Math.ceil(n / 2)))).slice(0, n + b.length);
   },
   okchf: async (q, n) => { // v2.11 국외소재문화유산재단 대국민 아카이브 — 통합검색(국외문화유산·사진아카이브). 계층=유형 › 소장국가 › 소장처
     const [b, pub] = await Promise.all([cachedText(`okL:${n}:${q}`, 6 * 3600e3, () => gtext(`${OK_B}/archive/total-search.do?srSearchVal=${encodeURIComponent(q)}&pagerLimit=${n <= 10 ? 10 : n <= 20 ? 20 : 50}`, OK_UA), 'data-result'),
@@ -2074,13 +2087,22 @@ const JB_CROSS = `국내외 대조 절차 — 순서를 틀리면 헛수고한�
               + (toc.length ? `【목차】\n${toc.join('\n').slice(0, 1800)}\n` : '') + (img ? `표지: ${NR_B}${img}\n` : '') + `원문 뷰어(PDF 열람·내려받기): ${url}\n`
               + '※ 출처: 국립문화유산연구원 발간자료 — 공공누리 유형은 원문 페이지 표기 확인(대부분 제4유형: 출처표시·비상업·변경금지). 인용 시 보고서명·발행년도·쪽수.');
           }
+          const dm = q.trim().match(new RegExp(`^(${NR_DS.join('|')})\\s*[:#]\\s*(\\S+)$`));
+          if (dm) { // 연구DB 기록 — 정적 색인 전체 필드(원 기관 상세 URL로 전문)
+            const o = (await nrDb()).find((r) => r.id === `${dm[1]}:${dm[2]}`);
+            if (!o) return text(`연구DB 기록 ${dm[1]}:${dm[2]} 미발견 — 색인(${NR_DB})은 주 1회 갱신. cross_search(sources='nrich')로 다시 찾으십시오.`);
+            return text(`국립문화유산연구원 연구DB 판독 — [${o.dn}] ${o.t}${o.a ? ' · ' + o.a : ''}\n` + [o.d && `연대: ${o.d}`, o.p && `소재·소장: ${o.p}`].filter(Boolean).join(' · ') + '\n'
+              + Object.entries(o.m || {}).map(([k, v]) => `${k}: ${v}`).join('\n') + (o.x ? `\n【해설(색인 150자)】\n${o.x}…` : '') + `\n원문 뷰어(전문·이미지): ${o.u || '—'}\n`
+              + `※ 출처: 국립문화유산연구원 국가유산 지식이음 Open API(${o.dn}) — ${o.k ? '공공누리 ' + o.k : '이용조건 원문 확인'}. 정적 색인 주 1회 갱신(원 기관 요청 없음).`);
+          }
           const qm = q.trim().match(/^보고서\s*[:：]\s*(.+)$/);
           const rp = await nrRepApi(qm ? qm[1] : q, qm ? max_results : Math.max(3, Math.ceil(max_results / 2))).catch(() => []);
           const ov = qm ? [] : await nrOvList(q).catch(() => []);
           return text(`국립문화유산연구원 국가유산 지식이음 '${qm ? qm[1] : q}' — 발간자료 ${rp.length}건${qm ? '' : ` · 국외문화유산 ${ov.length}건`}\n`
             + rp.map((r) => `- [발간자료] ${r.title} (${r.year}) · ${r.field} · ${r.kogl ? '공공누리 ' + r.kogl : ''} ${r.url}`).join('\n') + (rp.length ? '\n' : '')
             + ov.slice(0, max_results).map((r) => `- [국외문화유산] ${r.title} — ${r.nation} · ${r.holder} (${r.era}) ${r.url}`).join('\n')
-            + `\n※ 상세: nedb_search(mode='nrich', query=<상세 URL 또는 ov:번호·rep:번호>) · 보고서만: query='보고서:키워드' · 포털 통합검색(브라우저): ${NR_B}/search.do · 국외소재문화유산 조사 현황: https://www.nrich.go.kr/kor/page.do?menuIdx=336`);
+            + await (async () => { if (qm) return ''; const db = await nrDbSearch(q, max_results).catch(() => []); return db.length ? `\n연구DB ${db.length}건:\n` + db.map((o) => `- [${o.dn}] ${o.t}${o.a ? ' (' + o.a + ')' : ''}${o.d ? ' · ' + o.d : ''}${o.p ? ' · ' + o.p : ''} → ${o.id}`).join('\n') : ''; })()
+            + `\n※ 상세: nedb_search(mode='nrich', query=<상세 URL 또는 ov:번호·rep:번호·연구DB id(ksm:3 등)>) · 보고서만: query='보고서:키워드' · 포털 통합검색(브라우저): ${NR_B}/search.do · 국외소재문화유산 조사 현황: https://www.nrich.go.kr/kor/page.do?menuIdx=336`);
         } catch (e) { return text(`국립문화유산연구원 조회 실패(${String(e.message || e).slice(0, 60)}) — 브라우저 대체 경로: ${NR_B}/kor/index.do`); }
       }
       if (mode === 'okchf') { // v2.11 국외소재문화유산재단 — 상세 URL/'relic:ID' 판독(소장국가·소장처·관리번호·소장경위·시대·재질·크기·출판정보·설명·이미지), 그 밖은 키워드 목록
