@@ -1,14 +1,14 @@
 {
  "daily": {
   "2026-11-23": {
-   "batches": 42,
-   "records": 287,
-   "new": 89
+   "batches": 50,
+   "records": 360,
+   "new": 143
   }
  },
  "formats": {
-  "text": 39,
-  "csv": 2,
-  "iiif": 1
+  "text": 44,
+  "csv": 4,
+  "iiif": 2
  }
 }
