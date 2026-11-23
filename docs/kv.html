@@ -143,7 +143,7 @@ button,select,input{font:inherit}
   let act = null;
   function setAct(P) { act = P; panes.forEach((x) => x.el.classList.toggle('act', x === P && panes.length > 1)); renderStrip(); renderInfo(); syncCtl(); markList(); }
   const msg = (P, t) => { const m = P.el.querySelector('.msg'); m.textContent = t || ''; m.style.display = t ? 'flex' : 'none'; };
-  async function openManifest(P, u, k = 0, inline) {
+  async function openManifest(P, u, k = 0, inline) { { const mi0 = ms.findIndex((x) => x.id === u); if (mi0 >= 0) extendPrefetch(mi0 + PF_WIN); }
     msg(P, '불러오는 중…');
     try { const m = inline ? norm(inline) : norm(await getJ(u)); if (m.kind === 'collection') { msg(P, ''); await loadCollection(u, m); return; }
       if (!m.canvases.length) { msg(P, '이미지가 없는 매니페스트입니다.'); return; }
@@ -169,16 +169,22 @@ button,select,input{font:inherit}
   function step(P, d) { // 컬렉션 안에서 이전·다음 기록으로 이어 넘김
     const i = ms.findIndex((x) => x.id === P.src); const j = i + d;
     if (i < 0 || j < 0 || j >= ms.length) { if (d > 0 && playing) setPlay(false); return false; }
-    openManifest(P, ms[j].id, d > 0 ? 0 : -1, ms[j].inline); return true;
+    extendPrefetch(j + PF_WIN); openManifest(P, ms[j].id, d > 0 ? 0 : -1, ms[j].inline); return true;
   }
-  async function prefetchAll(token) { // 모든 기록의 장 목록을 미리 받아 하나의 연속 목록(flat)으로 — 동시 6개, 진행하며 띠 갱신
-    const res = new Array(ms.length); let next = 0, done = 0;
+  // v2.19 원 기관 서버 예의 — 큰 컬렉션(수천 건)은 처음 PF_WIN건만 미리 받고, 넘겨 가며 다음 구간을 이어 받는다(동시 6개 유지)
+  var PF_WIN = 48, pfLimit = 48, pfKick = null; // var: openManifest가 먼저 불려도 TDZ 없게
+  function extendPrefetch(to) { if (to > pfLimit) { pfLimit = Math.min(ms.length, to); if (pfKick) pfKick(); } }
+  async function prefetchAll(token) { // 기록의 장 목록을 미리 받아 하나의 연속 목록(flat)으로 — 동시 6개, 구간(PF_WIN)씩, 진행하며 띠 갱신
+    const res = new Array(ms.length); let next = 0, done = 0; pfLimit = Math.min(ms.length, PF_WIN);
     const rebuild = () => { if (token !== fver) return; flat = []; off = new Map();
       res.forEach((m, mi) => { if (!m) return; off.set(ms[mi].id, flat.length); m.canvases.forEach((c, k) => flat.push({ u: ms[mi].id, mi, k, th: c.thumb, t: c.label, ml: m.label })); });
       renderStrip(true); syncCtl(); };
-    const worker = async () => { while (next < ms.length && token === fver) { const i = next++; try { res[i] = ms[i].inline ? norm(ms[i].inline) : norm(await getJ(ms[i].id)); if (res[i].kind !== 'manifest') res[i] = null; } catch { res[i] = null; }
+    const worker = async () => { while (next < pfLimit && token === fver) { const i = next++; try { res[i] = ms[i].inline ? norm(ms[i].inline) : norm(await getJ(ms[i].id)); if (res[i].kind !== 'manifest') res[i] = null; } catch { res[i] = null; }
       if (++done % 12 === 0) rebuild(); } };
-    fdone = false; await Promise.all(Array.from({ length: 6 }, worker)); if (token === fver) fdone = true; rebuild();
+    fdone = false; let running = 0;
+    const run = async () => { running++; await worker(); running--; if (!running && token === fver) { rebuild(); if (next >= ms.length) fdone = true; } };
+    pfKick = () => { if (token !== fver) return; const need = Math.min(6, pfLimit - next) - running; for (let k = 0; k < need; k++) run(); };
+    await Promise.all(Array.from({ length: 6 }, run));
   }
   let expandBudget = 30; // 하위 컬렉션 자동 펼치기 상한 — 원 기관 서버 예의(넘으면 폴더로 두고 누를 때 연다)
   async function expand(m, group, depth, out) { // 중첩 컬렉션(계층) 펼치기 — 부(部) › 시리즈 순서 그대로, 깊이 3까지
