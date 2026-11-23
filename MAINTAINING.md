@@ -21,6 +21,8 @@
 | `lib/ledger.js` · `app/api/ledger/[day]/route.js` · `scripts/ledger_merge.py` | **발견 누적 원장** — cross_search 발견 기록(검색어·사용자 정보 없음)을 Upstash Redis 날짜 함(3일 보관)에 적재 → 매일 `ledger` 워크플로가 공개 읽기 주소에서 꺼내 `docs/data/`(discovered.jsonl·csv·jsonld·collection.json·index.html)에 병합·커밋 | 무료(Upstash Free 월 50만 명령 ≈ 하루 8천 검색). 미설정·한도 초과면 적재만 생략 |
 | `docs/iiif/` | 갤러리 IIIF — `hierarchy.json`(부›시리즈›이미지)·`collection.json`(평면)·`all.json`·`m/`·`c/` + 데이터 `records.csv`·`records.jsonld` | `build_iiif.py`가 생성(`_nara_ctx.json`=NARA 계보 캐시) |
 
+발견 누적 원장도 수집처다 — `cross_search(sources='ledger')`가 `docs/data/discovered.jsonl`을 1시간 캐시로 검색(발견 횟수·처음 발견일 표시). 'all'에는 넣지 않는다(원 기관 결과와 중복·교차확인 오인 방지), 원장에서 다시 찾은 기록은 재적재하지 않는다.
+
 우리 IIIF 갤러리도 수집처다 — `cross_search(sources='gallery')`가 `docs/iiif/index.json`(Pages)을 6시간 캐시로 검색하고, `format='iiif'`면 시리즈 매니페스트(`iiif/m/sNNN.json`)를 컬렉션에 넣는다.
 
 수집처 하나 = route.js의 `COLLECT.<이름>`(연합 검색) + 필요하면 `nedb_search` 등의 `mode` 분기(심층 판독). Python은 `_c_<이름>`·`_<이름>_mode`.

@@ -462,6 +462,20 @@
     "검색어 포함"
    ],
    "level": "warn"
+  },
+  {
+   "id": "ledger-source",
+   "tool": "cross_search",
+   "args": {
+    "query": "Korea",
+    "sources": "ledger",
+    "max_per_source": 5
+   },
+   "must": [
+    "\\[ledger:[1-9]",
+    "발견 [0-9]+회\\(첫 20"
+   ],
+   "level": "warn"
   }
  ]
 }
