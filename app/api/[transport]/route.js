@@ -312,8 +312,20 @@ const mclean = (h) => String(h || '').replace(/<script[\s\S]*?<\/script>/gi, ' '
 const euMedia = (it) => { let u = String(((it.edmIsShownBy || [])[0]) || ''); const m = u.match(/esbirky\.cz\/(?:img\.php\?id=|detail\/)(\d+)/); if (m) u = `https://www.esbirky.cz/predmet/${m[1]}`; return u; };
 // v1.93: Gallica(gallica.bnf.fr)가 서버 IP 자동 조회를 403 차단 — BnF 공식 카탈로그 SRU(catalogue.bnf.fr/api/SRU, 같은 BnF 소장 기록)로 폴백.
 // UNIMARC 200$a 표제·210/214$d 연대·215$a 수량·856$u Gallica 원문 ark — 기록 수집은 계속되고, 원문(Gallica) 링크도 함께 준다.
+// v2.23 data.bnf.fr 공식 개방데이터 SPARQL — Gallica SRU는 서버 IP 403, 카탈로그(catalogue.bnf.fr)는 연결 불가(2026-11-23 실측)일 때 우선 경로. 제목 전문검색 + Gallica 원문 링크
+async function bnfSparql(q, n) {
+  const words = String(q).replace(/["'\\{}<>]/g, ' ').split(/\s+/).filter((w) => w.length > 1 && !/^\d+$/.test(w)).slice(0, 4); if (!words.length) return [];
+  const sp = `PREFIX dcterms: <http://purl.org/dc/terms/> PREFIX rdarel: <http://rdvocab.info/RDARelationshipsWEMI/> SELECT ?m ?title ?date ?g WHERE { ?m dcterms:title ?title . ?title bif:contains "${words.map((w) => `'${w}'`).join(' AND ')}" . OPTIONAL { ?m dcterms:date ?date } OPTIONAL { ?m rdarel:electronicReproduction ?g } } LIMIT ${Math.min(60, n * 4)}`;
+  const j = await jget(`https://data.bnf.fr/sparql?query=${encodeURIComponent(sp)}&format=${encodeURIComponent('application/json')}`, { 'User-Agent': UA });
+  const seen = new Set(); const out = [];
+  for (const b of ((j.results || {}).bindings || [])) { const m = (b.m || {}).value || ''; if (!m || seen.has(m)) continue; seen.add(m);
+    const ark = (m.match(/ark:\/12148\/[A-Za-z0-9]+/) || [])[0] || ''; const gal = (((b.g || {}).value) || '').replace(/^http:/, 'https:');
+    out.push({ title: String((b.title || {}).value || '(무제)').slice(0, 160), date: (b.date || {}).value || '', id: ark, gallica: gal.includes('gallica.bnf.fr') ? gal : '', series: 'BnF › data.bnf.fr', url: (gal.includes('gallica') ? gal : '') || m.replace(/#about$/, '') }); }
+  out.sort((x, y) => (y.gallica ? 1 : 0) - (x.gallica ? 1 : 0)); return out;
+}
 async function bnfCatalog(q, n, doctype) {
-  if (doctype === undefined || doctype === '') { // v1.93.1: 사진·도판(doctype i) 질의를 병행 — 디지털화(Gallica 원문) 자료가 상위에 오도록
+  if (doctype === undefined || doctype === '') {
+    try { const sp = await bnfSparql(q, n); if (sp.length) return { total: sp.length, items: sp.slice(0, n), via: 'data.bnf.fr' }; } catch { /* SPARQL 실패 → 카탈로그 */ } // v1.93.1: 사진·도판(doctype i) 질의를 병행 — 디지털화(Gallica 원문) 자료가 상위에 오도록
     const [a, b] = await Promise.allSettled([bnfCatalog(q, n, 'i'), bnfCatalog(q, n, null)]);
     const A = a.status === 'fulfilled' ? a.value : { total: 0, items: [] }, B = b.status === 'fulfilled' ? b.value : { total: 0, items: [] };
     if (a.status !== 'fulfilled' && b.status !== 'fulfilled') throw b.reason;
@@ -776,9 +788,8 @@ const COLLECT = {
   },
   nedb: async (q, n) => { // v1.93: 개방파일 인덱스 미설정이면 한국사DB 통합검색 라이브 조회 — 검색어가 등장하는 DB(편찬 자료군)를 기록 단위 진입점으로 수집(0건 고정 해소)
     const recs = await loadNedbIndex(); if (recs) return nedbFileSearch(recs, q, n);
-    const b = await gtext('https://db.history.go.kr/search/searchTotalResult.do?searchKeyword=' + encodeURIComponent(q));
-    const seen = new Set(); const out = []; const re = /href="\/item\/(\w+)\/main\.do"[^>]*>([\s\S]*?)<\/a>/g; let m;
-    while ((m = re.exec(b)) && out.length < n) { const nm = mclean(m[2].replace(/<span[^>]*class="btn-new"[^>]*>[\s\S]*?<\/span>/g, '')); if (nm && !seen.has(m[1])) { seen.add(m[1]); out.push({ series: nm, title: `${nm} — '${q}' 수록`, date: '', id: m[1], series: `한국사DB › ${nm}`, url: `https://db.history.go.kr/item/${m[1]}/main.do` }); } }
+    const dbs = (await nedbLive(q, 2)).filter((d) => d.total > 0).sort((a, b) => b.total - a.total); const out = [];
+    for (let k = 0; k < 2; k++) for (const d of dbs) { const r = d.rows[k]; if (r && out.length < n) out.push({ series: `${d.era} › ${d.name}`, title: r.title.slice(0, 140), date: nedbDate(r.id), id: r.id, url: `${JDB}/id/${r.id}` }); }
     return out;
   },
   koreanwar: async (q, n) => {
@@ -1305,6 +1316,21 @@ async function jSibling(lid, span) {
   return { stem: stem.replace(/_$/, ''), sibs, others: sibs.filter((s) => !s.requested) };
 }
 
+// v2.23 한국사DB 주요 DB 병렬 검색 — 통합검색 페이지(GET)는 검색어를 무시하고 메뉴만 돌려줘 '헌정사 자료 DB·포로신문보고서'(메뉴의 new 표시)를 결과로 오인하던 결함(실측). 시대별 하위 DB POST로 건수·기록 직접.
+const NEDB_DBS = [['joseon', 'bb', '비변사등록', '조선'], ['joseon', 'ks', '각사등록', '조선'], ['modern', 'kd', '한국독립운동사자료', '근대'], ['modern', 'ij', '대한민국임시정부자료집', '근대'],
+  ['modern', 'npda', '동아일보', '근대'], ['contemp', 'dh', '자료대한민국사', '현대'], ['contemp', 'pn', '휴전회담회의록', '현대'], ['ancient', 'sg', '삼국사기', '고대']];
+const nedbDate = (id) => { const m = String(id).match(/_(1[5-9]\d\d|20\d\d)_(\d\d)_(\d\d)/); return m ? `${m[1]}-${m[2]}-${m[3]}` : ''; };
+async function nedbLive(q, per = 3) {
+  const one = async ([site, iid, name, era]) => {
+    const b = await cachedText(`nedbL:${iid}:${per}:${q}`, 6 * 3600e3, () => jdbPost(`${JDB}/${site}/search/searchResultList.do`, { ...J_SEARCH_BASE, searchItemId: iid, pageUnit: String(per), totalWord: q }), '총');
+    const total = parseInt(((jStrip(b).match(/총\s*([\d,]+)\s*건/) || [])[1] || '0').replace(/,/g, ''), 10);
+    const seen = new Set(); const rows = []; const re = /fnGoItemLevel\('[^']*',\s*'(\w+)'[^)]*\);[^>]*>([\s\S]*?)<\/a>/g; let m;
+    while ((m = re.exec(b)) && rows.length < per) { const t = jStrip(m[2]).replace(/\s+/g, ' ').trim(); if (t && !seen.has(m[1])) { seen.add(m[1]); rows.push({ id: m[1], title: t }); } }
+    return { site, iid, name, era, total, rows };
+  };
+  const rs = await Promise.allSettled(NEDB_DBS.map(one));
+  return rs.map((r, i) => (r.status === 'fulfilled' ? r.value : { site: NEDB_DBS[i][0], iid: NEDB_DBS[i][1], name: NEDB_DBS[i][2], era: NEDB_DBS[i][3], total: -1, rows: [], err: String((r.reason && r.reason.message) || r.reason).slice(0, 40) }));
+}
 async function jRecordSearch(query, n) {
   const b = await jdbPost(JDB + '/joseon/search/searchResultList.do',
     { ...J_SEARCH_BASE, searchItemId: 'bb', searchTarget: 'bb', pageUnit: String(Math.min(n, 200)), totalWord: query });
@@ -1675,7 +1701,7 @@ const handler = createMcpHandler((server) => {
       if (total === undefined) { // SRU XML 아님 — Cloudflare 차단/점검 (2026-11-18 실측: 서버 IP 403) → v1.93: BnF 공식 카탈로그 SRU 폴백
         try {
           const r = await bnfCatalog(eff, max_results, '');
-          if (r.items.length) return text(`Gallica '${query}'${fr ? ` → 프랑스어 자동 변환 '${eff}'` : ''} — Gallica 서버가 자동 조회를 차단해 **BnF 공식 카탈로그**(catalogue.bnf.fr, 같은 국립도서관 소장 목록)로 수집${r.relaxed ? ` (전체 단어 일치 0건 → '${r.relaxed}'로 완화)` : ''} — total ${r.total}:\n`
+          if (r.items.length) return text(`Gallica '${query}'${fr ? ` → 프랑스어 자동 변환 '${eff}'` : ''} — Gallica 서버가 자동 조회를 차단해 ${r.via === 'data.bnf.fr' ? '**BnF 공식 개방데이터**(data.bnf.fr SPARQL — 같은 국립도서관 서지·Gallica 원문 링크)' : '**BnF 공식 카탈로그**(catalogue.bnf.fr, 같은 국립도서관 소장 목록)'}로 수집${r.relaxed ? ` (전체 단어 일치 0건 → '${r.relaxed}'로 완화)` : ''} — total ${r.total}:\n`
             + r.items.map((it) => `- ${it.title.slice(0, 110)} (${it.date || '연대 미상'})${it.type ? ` [${it.type}]` : ''}${it.extent ? ` · ${it.extent}` : ''}\n  ${it.gallica ? `Gallica 원문: ${it.gallica}` : `카탈로그: ${it.url}`}`).join('\n')
             + `\n※ Gallica 원문 링크는 브라우저에서 열람(서버 자동 조회만 차단). 사진 묶음(doctype i)만: '${eff}' 사진 — 카탈로그 질의에 doctype 'i'. BnF 디지털 자료 대부분 공유저작물(재이용 조건: gallica.bnf.fr/edit/und/conditions-dutilisation-des-contenus-de-gallica).`);
           return text(`Gallica '${query}' — Gallica 서버 차단, BnF 카탈로그도 0건(완화 질의 포함). 프랑스어 핵심어(예: Corée·Séoul·인명)로 다시 검색하십시오. 브라우저: https://catalogue.bnf.fr`);
@@ -2679,14 +2705,13 @@ item_cd 5종(자료 성격별): ART 도설·회화 / ETC 두루마리·축 / DRR
           + (hits.map((h) => `- [${h.id}] ${h.title.slice(0, 95)}${h.url ? ' ' + h.url : ''}`).join('\n') || '(0건 — 다른 표기(한자 원표기 등) 시도)')
           + `\n※ data.go.kr 공식 파일(KOGL) 기반 — robots 무관. 전체 통합검색(브라우저): ${browse}`);
       }
-      const api = 'https://db.history.go.kr/search/searchTotalResult.do?searchKeyword=' + encodeURIComponent(query);
       try {
-        const b = await gtext(api);
-        const seen = new Set(); const dbs = [];
-        const re = /href="\/item\/\w+\/main\.do"[^>]*>([\s\S]*?)<\/a>/g; let m;
-        while ((m = re.exec(b))) { const nm = dclean(m[1].replace(/<span[^>]*class="btn-new"[^>]*>[\s\S]*?<\/span>/g, '')); if (nm && !seen.has(nm)) { seen.add(nm); dbs.push(nm); } }
-        if (dbs.length) return text(`한국사DB '${query}' — 검색어가 등장하는 DB ${dbs.length}종:\n` + dbs.slice(0, max_results).map((d) => '- ' + d).join('\n') + dbrowse(browse) + '\n각 DB에서 문서 단위로 열람. 한자 원표기 병행 검색 권장. 조선 제도사 심층 판독은 mode=law·record·sibling·matrix·origin·sjw·kyujanggak.');
-        return text(agentBrowse('한국사DB', query, browse, '통합검색에서 매칭 DB 미검출'));
+        const dbs = await nedbLive(query, 3); const hit = dbs.filter((d) => d.total > 0).sort((a, b) => b.total - a.total);
+        if (hit.length) return text(`한국사DB '${query}' — 주요 ${NEDB_DBS.length}개 DB 직접 검색(시대별 하위 DB POST): 검색어가 나오는 DB ${hit.length}종\n`
+          + hit.map((d) => `■ [${d.era}] ${d.name} — ${d.total.toLocaleString()}건\n` + d.rows.map((r) => `  - ${r.title.slice(0, 90)}${nedbDate(r.id) ? ' (' + nedbDate(r.id) + ')' : ''} → ${JDB}/id/${r.id}`).join('\n')).join('\n')
+          + (dbs.some((d) => d.total < 0) ? `\n(조회 실패: ${dbs.filter((d) => d.total < 0).map((d) => d.name).join('·')})` : '')
+          + `\n※ 인용은 db.history.go.kr/id/<levelId>(고정 URL). 비변사등록 座目 제외·형제 조: mode=record·sibling. 그 밖의 DB(실록·승정원일기 등 100여 종): 통합검색(브라우저) ${browse}`);
+        return text(agentBrowse('한국사DB', query, browse, '주요 DB에서 0건 — 한자 원표기·다른 표기로 재시도'));
       } catch (e) { return text(agentBrowse('한국사DB', query, browse, `자동조회 실패(${e.message})`)); }
     });
 
