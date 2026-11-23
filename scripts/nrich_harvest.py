@@ -252,6 +252,18 @@ def main():
         print("품질 경고:", *warns, sep="\n  ", file=sys.stderr)
     if not rows:
         print("수집 0건 — 기존 색인 유지", file=sys.stderr); sys.exit(1)
+    # v2.26 축적 정보는 지우지 않는다 — 원 기관에서 사라진 기록은 지난 색인에서 이어받아 withdrawn(처음 사라진 날)으로 보존
+    now_ids = {(r["ds"], r["id"]) for r in rows}; kept_w = 0; today_s = time.strftime("%Y-%m-%d", time.gmtime())
+    for key in ({r["ds"] for r in rows} | set(prev)):
+        if only and key not in only: continue
+        oldf = os.path.join(OUT, "nrich", f"{key}.jsonl")
+        if not os.path.exists(oldf): continue
+        for l in open(oldf, encoding="utf-8"):
+            o = json.loads(l)
+            if (o["ds"], o["id"]) not in now_ids:
+                o.setdefault("withdrawn", today_s); rows.append(o); now_ids.add((o["ds"], o["id"])); kept_w += 1
+    if kept_w: print(f"원 기관에서 사라진 기록 {kept_w}건 — withdrawn 표시로 보존")
+    meta["withdrawn_kept"] = kept_w
     os.makedirs(OUT, exist_ok=True)
     with open(os.path.join(OUT, "nrich_db.jsonl"), "w", encoding="utf-8") as fo:
         for r in sorted(rows, key=lambda r: (r["ds"], r["id"])): fo.write(json.dumps(r, ensure_ascii=False, separators=(",", ":")) + "\n")

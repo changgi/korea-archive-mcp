@@ -859,6 +859,24 @@
     "Archive-It Crawl Data"
    ],
    "level": "error"
+  },
+  {
+   "id": "ledger-query-notice",
+   "tool": "cross_search",
+   "args": {
+    "query": "장진호",
+    "sources": "koreanwar",
+    "max_per_source": 3,
+    "format": "csv"
+   },
+   "must": [
+    "영구 축적",
+    "개인정보 패턴 자동 제거"
+   ],
+   "must_not": [
+    "검색어·사용자 정보 없음"
+   ],
+   "level": "warn"
   }
  ]
 }
