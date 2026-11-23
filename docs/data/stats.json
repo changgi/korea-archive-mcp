@@ -1,92 +1,104 @@
 {
- "updated": "2026-11-23T12:47:29Z",
- "records": 263,
- "new_records": 9,
- "new_batches": 1,
+ "updated": "2026-11-23T15:30:35Z",
+ "records": 376,
+ "new_records": 113,
+ "new_batches": 36,
  "by_source": {
+  "nrich": 43,
   "archives": 40,
-  "nrich": 38,
-  "okchf": 34,
-  "commons": 16,
-  "nara": 15,
-  "ndl": 11,
-  "ia": 11,
-  "ktv": 11,
-  "tna": 8,
-  "i815": 8,
-  "seoul": 8,
-  "europeana": 6,
-  "un": 6,
-  "awm": 6,
-  "oldnews": 6,
-  "jacar": 4,
+  "okchf": 35,
+  "ia": 23,
+  "commons": 21,
+  "nara": 20,
+  "ndl": 16,
+  "ktv": 16,
+  "i815": 13,
+  "seoul": 13,
+  "oldnews": 11,
+  "tna": 10,
+  "jacar": 9,
+  "europeana": 8,
+  "un": 8,
+  "awm": 8,
+  "gallica": 8,
+  "earchive": 8,
+  "dnz": 8,
+  "nedb": 7,
+  "koreanwar": 7,
+  "kyudb": 5,
+  "heritage": 5,
+  "nlna": 5,
+  "nzarch": 5,
+  "jsg": 5,
+  "aks": 5,
+  "much": 4,
   "gallery": 3,
-  "kyudb": 3,
-  "gallica": 3,
-  "koreanwar": 3,
   "nlk": 3,
-  "earchive": 3,
-  "dnz": 3,
-  "heritage": 3,
-  "nlna": 3,
-  "nzarch": 3,
   "indy": 2,
-  "nedb": 2,
-  "gonghun": 1
+  "gonghun": 2
  },
  "first": "2026-11-23T03:00:15Z",
  "formats": {
-  "text": 44,
-  "csv": 4,
+  "text": 47,
+  "csv": 37,
   "iiif": 3
  },
- "repeat_records": 101,
+ "queries": {
+  "added": 2,
+  "total": 2,
+  "calls": 2,
+  "by_tool": {
+   "source_profile": 1,
+   "cross_search": 1
+  }
+ },
+ "repeat_records": 122,
  "top10": [
   {
    "rank": 1,
-   "seen": 12,
+   "seen": 13,
    "days": 1,
    "title": "[판결문] 유관순(柳寬順) — 경성복심법원 · 원판결 중 피고관련 부분 취소, 징역 3년",
    "url": "https://theme.archives.go.kr/next/indy/viewIndyDetail.do?IMSI_ARCHIVE_ID=0001352062&FK_ARCHIVE_EVNT_ID=0034971420&evntdowngbn=N&indpnId=0000003833&actionType=det&flag=1&search_region="
   },
   {
    "rank": 2,
-   "seen": 12,
+   "seen": 13,
    "days": 1,
    "title": "[판결문] 유관순(柳寬順) — 불상 · 상고 기각",
    "url": "https://theme.archives.go.kr/next/indy/viewIndyDetail.do?IMSI_ARCHIVE_ID=0001352062&FK_ARCHIVE_EVNT_ID=0034971431&evntdowngbn=N&indpnId=0000003844&actionType=det&flag=1&search_region="
   },
   {
    "rank": 3,
-   "seen": 7,
+   "seen": 8,
    "days": 1,
    "title": "01 · 미국 국립기록관리청 NARA — 1950.12.24 흥남 — 필름 원본까지 — North Korean refugees use anything that will float ",
    "url": "https://changgi.github.io/korea-archive-mcp/iiif.html#s01/1"
   },
   {
    "rank": 4,
-   "seen": 7,
+   "seen": 8,
    "days": 1,
    "title": "12 · 위키미디어 공용 Commons — 업로더 말 대신 원 소장처에 묻는다 — Korean natives prepare to board a tank landing ship du",
    "url": "https://changgi.github.io/korea-archive-mcp/iiif.html#s12/2"
   },
   {
    "rank": 5,
-   "seen": 7,
+   "seen": 8,
    "days": 1,
    "title": "29 · 인터넷 아카이브 archive.org — 인터넷 사본과 NARA 원본, 한 줄로 — EVACUATION OF HUNGNAM, KOREA (+4장)",
    "url": "https://changgi.github.io/korea-archive-mcp/iiif.html#s29/1"
   },
   {
    "rank": 6,
-   "seen": 6,
+   "seen": 7,
    "days": 1,
    "title": "헌정사 자료 DB — '안중근' 수록",
    "url": "https://db.history.go.kr/item/cons/main.do"
   },
   {
    "rank": 7,
-   "seen": 6,
+   "seen": 7,
    "days": 1,
    "title": "포로신문보고서 — '안중근' 수록",
    "url": "https://db.history.go.kr/item/powr/main.do"
@@ -95,22 +107,22 @@
    "rank": 8,
    "seen": 6,
    "days": 1,
-   "title": "Korea: provision of occupation forces in Korea in the event of an armistice",
-   "url": "https://discovery.nationalarchives.gov.uk/details/r/C4711969"
+   "title": "EVACUATION OF HUNGNAM, KOREA",
+   "url": "https://catalog.archives.gov/id/75392"
   },
   {
    "rank": 9,
    "seen": 6,
    "days": 1,
-   "title": "UN Military Armistice Commission in Korea",
-   "url": "https://discovery.nationalarchives.gov.uk/details/r/C4715060"
+   "title": "EVACUATION OF HUNGNAM KOREA",
+   "url": "https://catalog.archives.gov/id/75393"
   },
   {
    "rank": 10,
    "seen": 6,
    "days": 1,
-   "title": "Korea: armistice negotiations",
-   "url": "https://discovery.nationalarchives.gov.uk/details/r/C3640680"
+   "title": "[국외문화유산] 감지금자『대방광불화엄경』제78권 — 미국 클리블랜드미술관",
+   "url": "https://www.overseaschf.or.kr/archive/search/category.do?mode=view&srSearchTy=relic&id=46493&iDivCd=1"
   }
  ]
 }
