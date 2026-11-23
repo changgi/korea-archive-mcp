@@ -10,6 +10,7 @@ import { bridgeUrl, kvUrl } from '../../../lib/ka_iiif.js';
 import { envelopeOf, encodeEnv, recUrls } from '../../../lib/rec_iiif.js';
 import { deflateRawSync } from 'node:zlib';
 import { tnaUrls } from '../../../lib/tna_iiif.js';
+import { stash, ledgerConf, LEDGER_PAGE } from '../../../lib/ledger.js';
 
 export const maxDuration = 60;
 // Korean government archive sites (archives.seoul.go.kr, opengov.seoul.go.kr, …) block foreign /
@@ -2792,6 +2793,9 @@ item_cd 5종(자료 성격별): ART 도설·회화 / ETC 두루마리·축 / DRR
       const { items, stats } = await collectMerged(jobs);
       await resolveOrigins(items, stats);
       items.sort((a, b) => b.sources.length - a.sources.length);
+      // v2.5 발견 누적 원장 — 발견 기록만(검색어·사용자 정보 없음) 날짜 함에 적재, 매일 GitHub 원장으로 병합. 미설정·한도 초과면 조용히 생략
+      const kept = await stash(items, { partOf: (it) => { const h = it.sources[0].split('·')[0]; return (PART_OF[h] && PART_OF[h](it)) || ''; } });
+      const keptNote = kept ? `\n※ 발견 기록(검색어 제외)은 공개 누적 원장에 쌓입니다 — ${LEDGER_PAGE}` : '';
       if (format === 'iiif') { // v1.97: 연속 이미지 뷰 — 결과 중 기관 IIIF가 있는 기록의 원 매니페스트를 컬렉션으로, 위키미디어는 정지 이미지 매니페스트로
         const L3 = (t) => ({ ko: [String(t || '').slice(0, 200)] });
         const ext = []; const cm = []; const none = [];
@@ -2924,12 +2928,12 @@ item_cd 5종(자료 성격별): ART 도설·회화 / ETC 두루마리·축 / DRR
         // v2.4: 파일로 받기 — 링크 안에 CSV를 압축 봉인(서버 저장 없음). 응답 24KB·URL 12,000자 넘으면 링크 생략
         const dl = `https://korea-archive-mcp.vercel.app/export/csv/${encodeEnv({ q: String(query).slice(0, 80), at: new Date().toISOString().slice(0, 19) + 'Z', csv: csvBody })}.csv`;
         const fits = dl.length <= 12000 && Buffer.byteLength(head + csvBody + tail + dl, 'utf8') + 300 <= 24000;
-        return text(head + csvBody + tail + (fits ? `\n📥 CSV 파일 내려받기(엑셀 한글 BOM 포함): ${dl}` : '\n📥 파일 링크 생략(크기 상한) — 위 본문을 .csv로 저장하거나 max_per_source를 줄여 다시 실행'));
+        return text(head + csvBody + tail + keptNote + (fits ? `\n📥 CSV 파일 내려받기(엑셀 한글 BOM 포함): ${dl}` : '\n📥 파일 링크 생략(크기 상한) — 위 본문을 .csv로 저장하거나 max_per_source를 줄여 다시 실행'));
       }
       const lines = items.slice(0, 45).map((it) => `- [${it.sources.join('+')}] ${it.title.slice(0, 95)}${it.date ? ` (${it.date})` : ''}${it.url ? ' ' + it.url : ''}${it.altTitle ? `\n  ↔ 동일 기록: ${it.altTitle.slice(0, 80)} (${it.sameAs})` : (it.sameAs ? `\n  ↔ ${it.sources.length > 1 ? '함께 묶인 기록' : '원본'}: ${it.sameAs}` : '')}`);
       return text(`교차수집 '${query}' — 채널별 [${stats.join(' · ')}] → 병합 ${items.length}건 (복수출처 우선 정렬):\n` + (lines.join('\n') || '(0)')
         + '\n※ [출처] 복수 표기 = 교차확인된 record. 국내(nara·archives·nlk)는 서버 키, nedb는 NEDB_INDEX_URL(공식 개방파일) 설정 시 포함. open.go.kr 본체(브라우저 전용)는 foia_search 전용 도구로.\n※ 발굴 우선 — 권리는 표시: 게재 전 judge_rights(참조코드·KOGL·naid)로 초판정. variants=true로 당대 표기(Corea·Chosen·Keijo…) 자동 팬아웃.'
-        + '\n※ 심층 판독 이어가기: [i815]→nedb_search(mode=i815, 상세URL) · [gonghun]→mode=gonghun(mngNo) · [ktv]→mode=ktv(view URL) · [earchive]→mode=earchive(\'키워드|순번\') · [jacar]→mode=jacar(레퍼런스코드) · [seoul]→seoul_archives_search(상세URL) · [koreanwar]→koreanwar_item(archRfcd) · [nara]→judge_rights(naid).');
+        + keptNote + '\n※ 심층 판독 이어가기: [i815]→nedb_search(mode=i815, 상세URL) · [gonghun]→mode=gonghun(mngNo) · [ktv]→mode=ktv(view URL) · [earchive]→mode=earchive(\'키워드|순번\') · [jacar]→mode=jacar(레퍼런스코드) · [seoul]→seoul_archives_search(상세URL) · [koreanwar]→koreanwar_item(archRfcd) · [nara]→judge_rights(naid).');
     });
 
   server.tool('source_profile',
@@ -2942,7 +2946,7 @@ item_cd 5종(자료 성격별): ART 도설·회화 / ETC 두루마리·축 / DRR
           archives: '한국전쟁', nlk: '한국전쟁', nedb: '한강', koreanwar: '장진호', jacar: 'Chosen', earchive: '제주도', i815: '안중근', gonghun: '안중근', ktv: '대한뉴스', oldnews: '의병', much: '판문점', indy: '유관순', heritage: '숭례문', kyudb: '절목', jsg: '의궤', awm: 'Kapyong', nlna: 'Korea', dnz: 'Korean War', nzarch: 'Korea', commons: 'Seoul 1950', un: 'Korea armistice', ndl: '조선총독부', seoul: '한강', foia: '회의', aks: '문중', gallery: '흥남' };
         const keys = { NARA_API_KEY: !!process.env.NARA_API_KEY, ARCHIVES_API_KEY: !!process.env.ARCHIVES_API_KEY,
           NLK_API_KEY: !!process.env.NLK_API_KEY, EUROPEANA_API_KEY: !!process.env.EUROPEANA_API_KEY,
-          KOREANWAR_API_TOKEN: !!process.env.KOREANWAR_API_TOKEN, NEDB_INDEX_URL: !!process.env.NEDB_INDEX_URL };
+          KOREANWAR_API_TOKEN: !!process.env.KOREANWAR_API_TOKEN, NEDB_INDEX_URL: !!process.env.NEDB_INDEX_URL, LEDGER_REDIS: !!ledgerConf() };
         const timed = await Promise.all(Object.keys(GOLD).map(async (k) => {
           const s = Date.now();
           try { const v = await COLLECT[k](GOLD[k], 3); return { ok: true, n: v.length, ms: Date.now() - s }; }

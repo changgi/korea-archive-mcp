@@ -446,6 +446,22 @@
     "korea-archive-mcp\\.vercel\\.app/export/csv/[A-Za-z0-9_-]+\\.csv"
    ],
    "level": "error"
+  },
+  {
+   "id": "ledger-kept",
+   "tool": "cross_search",
+   "args": {
+    "query": "유관순",
+    "sources": "indy",
+    "max_per_source": 3
+   },
+   "must": [
+    "공개 누적 원장에 쌓입니다 — https://changgi\\.github\\.io/korea-archive-mcp/data/"
+   ],
+   "must_not": [
+    "검색어 포함"
+   ],
+   "level": "warn"
   }
  ]
 }
