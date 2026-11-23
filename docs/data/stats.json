@@ -1,29 +1,107 @@
 {
- "updated": "2026-11-23T03:02:27Z",
- "records": 111,
- "new_records": 111,
- "new_batches": 18,
+ "updated": "2026-11-23T03:33:18Z",
+ "records": 123,
+ "new_records": 12,
+ "new_batches": 36,
  "by_source": {
   "archives": 40,
   "nara": 12,
   "ndl": 11,
-  "ia": 5,
+  "ia": 8,
+  "oldnews": 6,
+  "tna": 5,
   "i815": 5,
   "jacar": 3,
   "europeana": 3,
-  "tna": 3,
   "un": 3,
   "gallery": 3,
   "awm": 3,
   "kyudb": 3,
   "commons": 3,
   "koreanwar": 3,
-  "oldnews": 3,
+  "nlk": 3,
+  "earchive": 3,
   "indy": 2,
   "nedb": 2,
-  "nlk": 2,
   "gonghun": 1,
   "gallica": 1
  },
- "first": "2026-11-23T03:00:15Z"
+ "first": "2026-11-23T03:00:15Z",
+ "formats": {
+  "text": 35,
+  "csv": 1
+ },
+ "repeat_records": 85,
+ "top10": [
+  {
+   "rank": 1,
+   "seen": 12,
+   "days": 1,
+   "title": "[판결문] 유관순(柳寬順) — 경성복심법원 · 원판결 중 피고관련 부분 취소, 징역 3년",
+   "url": "https://theme.archives.go.kr/next/indy/viewIndyDetail.do?IMSI_ARCHIVE_ID=0001352062&FK_ARCHIVE_EVNT_ID=0034971420&evntdowngbn=N&indpnId=0000003833&actionType=det&flag=1&search_region="
+  },
+  {
+   "rank": 2,
+   "seen": 12,
+   "days": 1,
+   "title": "[판결문] 유관순(柳寬順) — 불상 · 상고 기각",
+   "url": "https://theme.archives.go.kr/next/indy/viewIndyDetail.do?IMSI_ARCHIVE_ID=0001352062&FK_ARCHIVE_EVNT_ID=0034971431&evntdowngbn=N&indpnId=0000003844&actionType=det&flag=1&search_region="
+  },
+  {
+   "rank": 3,
+   "seen": 7,
+   "days": 1,
+   "title": "01 · 미국 국립기록관리청 NARA — 1950.12.24 흥남 — 필름 원본까지 — North Korean refugees use anything that will float ",
+   "url": "https://changgi.github.io/korea-archive-mcp/iiif.html#s01/1"
+  },
+  {
+   "rank": 4,
+   "seen": 7,
+   "days": 1,
+   "title": "12 · 위키미디어 공용 Commons — 업로더 말 대신 원 소장처에 묻는다 — Korean natives prepare to board a tank landing ship du",
+   "url": "https://changgi.github.io/korea-archive-mcp/iiif.html#s12/2"
+  },
+  {
+   "rank": 5,
+   "seen": 7,
+   "days": 1,
+   "title": "29 · 인터넷 아카이브 archive.org — 인터넷 사본과 NARA 원본, 한 줄로 — EVACUATION OF HUNGNAM, KOREA (+4장)",
+   "url": "https://changgi.github.io/korea-archive-mcp/iiif.html#s29/1"
+  },
+  {
+   "rank": 6,
+   "seen": 6,
+   "days": 1,
+   "title": "Korea: provision of occupation forces in Korea in the event of an armistice",
+   "url": "https://discovery.nationalarchives.gov.uk/details/r/C4711969"
+  },
+  {
+   "rank": 7,
+   "seen": 6,
+   "days": 1,
+   "title": "UN Military Armistice Commission in Korea",
+   "url": "https://discovery.nationalarchives.gov.uk/details/r/C4715060"
+  },
+  {
+   "rank": 8,
+   "seen": 6,
+   "days": 1,
+   "title": "Korea: armistice negotiations",
+   "url": "https://discovery.nationalarchives.gov.uk/details/r/C3640680"
+  },
+  {
+   "rank": 9,
+   "seen": 5,
+   "days": 1,
+   "title": "EVACUATION OF HUNGNAM, KOREA",
+   "url": "https://catalog.archives.gov/id/75392"
+  },
+  {
+   "rank": 10,
+   "seen": 5,
+   "days": 1,
+   "title": "EVACUATION, HUNGNAM, KOREA",
+   "url": "https://catalog.archives.gov/id/22397"
+  }
+ ]
 }
