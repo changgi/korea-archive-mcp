@@ -842,6 +842,23 @@
     "gallica\\.bnf\\.fr/ark:/12148/"
    ],
    "level": "warn"
+  },
+  {
+   "id": "ia-relevance",
+   "tool": "cross_search",
+   "args": {
+    "query": "Hungnam",
+    "sources": "ia",
+    "max_per_source": 5,
+    "format": "csv"
+   },
+   "must": [
+    "(?i)hungnam"
+   ],
+   "must_not": [
+    "Archive-It Crawl Data"
+   ],
+   "level": "error"
   }
  ]
 }

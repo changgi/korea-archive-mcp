@@ -68,6 +68,8 @@
 - NDL — 동시·연속 요청 429. 순차·타임박스 유지, 재조회 최소화(디지털 PID는 검색 결과에서 바로).
 - 한국고문서자료관(AKS) — 일반 요청 WAF 차단(브라우저 세션에서만). 규장각 — 일부 네트워크에서 연결 불가(서버는 정상).
 - 위키미디어 — 연속 요청 429. imageinfo는 한 번에 묶어 조회.
+- Internet Archive — 전체 필드 검색은 Archive-It 웹 크롤링 원자료(mediatype web)·라디오 스트림이 상위를 채운다(2026-11-23 감사). `iaSearch`/`_ia_search`: 제목 범위 + texts·movies·image → 0건이면 web·collection·account 제외 질의, gov.* 원본 우선·youtube- 사본 뒤. 고급 문법(필드:값)은 그대로.
+- **관련성 감사**(health 건수 검사로는 안 잡히는 '그럴듯한 오답'): 수집처마다 골든 질의 결과에 검색어(또는 번역어)가 실제로 들어 있는지 본다. 2026-11-23 감사에서 한국사DB(메뉴 오인)·IA(크롤링 묶음) 두 건 발견·수정. 새 수집처를 넣을 때 golden에 `must`(검색어)·`must_not`(오답 패턴)을 함께 둔다.
 - 국립문화유산연구원 국가유산 지식이음(portal.nrich.go.kr) — robots Allow. 발간자료는 공식 Open API(`originalTotalApi.do`, 무키, XML md_data1~13), 국외문화유산 DB는 목록 GET(`st=1` 제목 검색 — `st=3`·POST는 필터 안 됨, 2026-11 실측). 그 밖의 Open API 22종(초상화·공예도설·목간·금석문 등)은 `apiList.do?menuIdx=665` — 다음 확장 후보.
 - 국립문화유산연구원 범용 Open API(`openapi.do?idx=N`) — 키워드 검색 없음 → 주 1회 전체 수집(`scripts/nrich_harvest.py`, 정적 색인). **`firstindex`=시작 행, `recordcountperpage`=끝 행(포함)** — 명세 설명과 다름(실측). https는 응답이 비는 경우가 있어 공식 End Point대로 http. 필드 번호(md_dataN)는 데이터셋별 실측표(스크립트 `DS`) — 원 기관이 열을 바꾸면 golden `nrich-db-detail`이 잡는다.
 - 국외소재문화유산재단(overseaschf.or.kr) — robots.txt `Disallow: /`. 발굴 우선 원칙에 따라 수집처로 두되 결과·프로파일에 표시하고, 정직 UA·요청 1회(목록)·상세 24h 캐시로 최소화. 이 컨테이너의 Node fetch는 프록시 경유 503이 날 수 있음(curl·Vercel은 정상) — 로컬 검증은 저장 HTML로.
