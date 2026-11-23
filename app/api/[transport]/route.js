@@ -600,7 +600,7 @@ const DEEP_READ = {
   jacar: (it) => it.id && `nedb_search(mode='jacar', query='${it.id}')`,
   oldnews: (it) => it.id && `nedb_search(mode='oldnews', query='${it.id}')`,
   commons: (it) => it.url && `nedb_search(mode='commons', query='${it.url}')`,
-  koreanwar: (it) => it.id && `koreanwar_item(archRfcd='${it.id}')`,
+  koreanwar: (it) => it.id && `koreanwar_item(ref_code='${it.id}')`,
   nara: (it) => it.id && `judge_rights(naid=${String(it.id).replace(/\D/g, '')})`,
   seoul: (it) => it.url && `seoul_archives_search(query='${it.url}')`,
 };

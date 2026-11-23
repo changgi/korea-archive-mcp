@@ -80,6 +80,69 @@ def enrich_archives(o):
     o["summary"] = " · ".join(b for b in bits if b)[:400] + " (국가기록원 상세 판독 — 기술 메타데이터)"
     o["rights"] = f.get("서비스권자", "") and f"서비스권자 {f['서비스권자']} — 이용조건 원 기관 확인"
 
+# v2.10: 매니페스트가 없는 국내외 기록 — 우리 서버의 검증된 심층 판독 도구(골든 검사 대상)를 그대로 호출(파서 중복 없음)
+MCP = os.environ.get("LEDGER_MCP", f"{ORIGIN}/api/mcp")
+DEEP = {"i815": ("nedb_search", lambda o: o.get("url") and {"mode": "i815", "query": o["url"]}),
+        "indy": ("nedb_search", lambda o: o.get("url") and {"mode": "indy", "query": o["url"]}),
+        "gonghun": ("nedb_search", lambda o: o.get("id") and {"mode": "gonghun", "query": o["id"]}),
+        "jacar": ("nedb_search", lambda o: o.get("id") and {"mode": "jacar", "query": o["id"]}),
+        "oldnews": ("nedb_search", lambda o: o.get("id") and {"mode": "oldnews", "query": o["id"]}),
+        "un": ("nedb_search", lambda o: o.get("url") and {"mode": "un", "query": o["url"]}),
+        "jsg": ("nedb_search", lambda o: o.get("id") and {"mode": "jsg", "query": o["id"]}),
+        "ktv": ("nedb_search", lambda o: o.get("url") and {"mode": "ktv", "query": o["url"]}),
+        "koreanwar": ("koreanwar_item", lambda o: o.get("id") and not str(o["id"]).startswith("book:") and {"ref_code": o["id"]}),
+        "seoul": ("seoul_archives_search", lambda o: o.get("url") and {"query": o["url"]})}
+_sid = [None]
+
+def mcp_call(tool, args):
+    H = {"Content-Type": "application/json", "Accept": "application/json, text/event-stream", "User-Agent": UA, "X-KA-Probe": "ledger"}  # 원장 보강 호출은 적재 안 함
+    def post(body, sid=None):
+        h = dict(H, **({"Mcp-Session-Id": sid} if sid else {}))
+        r = urllib.request.urlopen(urllib.request.Request(MCP, data=json.dumps(body).encode(), headers=h, method="POST"), timeout=90)
+        return r.headers.get("mcp-session-id"), r.read().decode("utf-8", "replace")
+    if not _sid[0]:
+        _sid[0], _ = post({"jsonrpc": "2.0", "id": 1, "method": "initialize", "params": {"protocolVersion": "2025-03-26", "capabilities": {}, "clientInfo": {"name": "ledger-merge", "version": "1"}}})
+        post({"jsonrpc": "2.0", "method": "notifications/initialized"}, _sid[0])
+    _, t = post({"jsonrpc": "2.0", "id": 2, "method": "tools/call", "params": {"name": tool, "arguments": args}}, _sid[0])
+    for ln in t.splitlines():
+        if ln.startswith("data:"):
+            j = json.loads(ln[5:]); break
+    else:
+        j = json.loads(t)
+    if "error" in j: raise ValueError(str(j["error"])[:80])
+    txt = "".join(c.get("text", "") for c in (j.get("result") or {}).get("content", []))
+    if not txt or txt.startswith("MCP error") or (j.get("result") or {}).get("isError"): raise ValueError(txt[:80])
+    return txt
+
+def parse_deep(txt):
+    """심층 판독 텍스트 → 주요 내용·메타정보·지문·원문 뷰어. 판독 결과에 있는 값만 옮긴다(재구성·추정 없음)."""
+    L = [x.strip() for x in txt.splitlines()]
+    body = []; grab = False
+    for x in L:
+        if x.startswith("【"): grab = True; continue
+        if grab:
+            if not x or x.startswith(("※", "본문 지문", "원문", "판결문 원문", "관련기사", "[")) : break
+            body.append(x)
+    meta = []
+    for x in L[:8]:
+        if x.startswith(("※", "[")): continue
+        for part in re.split(r" · | \| ", x):
+            mm = re.match(r"^([^:：]{1,14})[:：]\s*(.+)$", part.strip().lstrip("·- ").strip())
+            if mm and not mm[2].startswith("//") and "→" not in part and len(meta) < 8: meta.append([mm[1].strip(), mm[2].strip()[:140]])
+    for x in L:
+        mm = re.search(r"지문\(sha256-16\):\s*([0-9a-f]{16})", x)
+        if mm: meta.append(["본문 지문(sha256-16)", mm[1]])
+        mm = re.search(r"뷰어[^:：]*[:：]\s*(https?://\S+)", x)
+        if mm and len(meta) < 11: meta.append(["원문 뷰어", mm[1]])
+    head = [x for x in L[1:4] if x and not x.startswith(("※", "[", "【")) and "→" not in x and not x.endswith((":", "："))]
+    summ = " ".join(body) if body else " · ".join(head)
+    summ = re.sub(r"(\s*·\s*){2,}", " · ", summ).strip(" ·")
+    seen_v = set(); md = []
+    for k, v in meta:  # 같은 값(뷰어 링크 등) 중복 제거
+        if v in seen_v: continue
+        seen_v.add(v); md.append([k, v])
+    return summ[:400], md[:11]
+
 def enrich(o, budget):
     """IIIF 매니페스트 1회 판독 → 주요 내용(summary)·메타정보·썸네일·권리. 실패는 다음 날 재시도. 반환: 사용한 요청 수."""
     m = o.get("iiif") or iiif_for(o.get("url"), o.get("id"))
@@ -92,6 +155,17 @@ def enrich(o, budget):
         except Exception: o["enrich_status"] = "fail"
         o["enriched"] = today; o["thumb_ok"] = False
         return 1
+    if not m and src0 in DEEP and budget > 0 and not done:
+        tool, af = DEEP[src0]; args = af(o)
+        if args:
+            try:
+                txt = mcp_call(tool, args); summ, md = parse_deep(txt)
+                o["summary"] = (summ + " " if summ else "") + f"(KOREA ARCHIVE 심층 판독 {tool})"
+                o["meta"] = md; o["deep_call"] = f"{tool}({json.dumps(args, ensure_ascii=False)})"; o["enrich_status"] = "ok"
+            except Exception:
+                o["enrich_status"] = "fail"
+            o["enriched"] = today; o["thumb_ok"] = False
+            return 1
     if o.get("enriched") and (o.get("enrich_status") != "fail" or o["enriched"] > (dt.date.today() - dt.timedelta(days=1)).isoformat()):
         th = o.get("thumb") or ""  # 이미 보강된 기록도 썸네일 게재 규칙은 매번 다시 적용(규칙 변경 소급)
         o["thumb_ok"] = bool(th) and not re.search(r"card\.svg|image/svg", th) and not SENSITIVE.search(f"{o.get('title', '')} {o.get('summary', '')}") and (
