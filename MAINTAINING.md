@@ -63,7 +63,8 @@
 
 ### 알려진 접근 제약 (2026-11 실측)
 - 정보공개포털(open.go.kr) 원문정보 — 기관 점검 중(2026.11.12~). foia는 청구 경로 안내로 대체.
-- Gallica — 서버 IP 자동 조회 403 → BnF SRU 카탈로그로 수집, IIIF는 브라우저 뷰어에서 열림.
+- Gallica — 서버 IP 자동 조회 403, BnF 카탈로그(catalogue.bnf.fr)도 연결 불가(2026-11-23) → **data.bnf.fr 공식 SPARQL**(`bnfSparql`, 제목 전문검색 bif:contains + Gallica 원문 링크)을 우선, 0건일 때만 카탈로그. IIIF는 브라우저 뷰어에서 열림.
+- 한국사DB — 통합검색(`searchTotalResult.do`)은 GET·POST 모두 결과를 스크립트로 그려 HTML에 없음(메뉴만). **시대별 하위 DB POST**(`/{joseon|modern|contemp|ancient}/search/searchResultList.do`, `searchItemId`)가 건수·기록(fnGoItemLevel levelId)을 돌려준다 — `nedbLive`가 주요 8개 DB 병렬(6h 캐시). DB 코드 111종은 사이트 메뉴 `/{시대}/level.do?itemId=`에서 확인.
 - NDL — 동시·연속 요청 429. 순차·타임박스 유지, 재조회 최소화(디지털 PID는 검색 결과에서 바로).
 - 한국고문서자료관(AKS) — 일반 요청 WAF 차단(브라우저 세션에서만). 규장각 — 일부 네트워크에서 연결 불가(서버는 정상).
 - 위키미디어 — 연속 요청 429. imageinfo는 한 번에 묶어 조회.

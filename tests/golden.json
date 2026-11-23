@@ -810,6 +810,38 @@
     "🔴 발견 누적 원장"
    ],
    "level": "warn"
+  },
+  {
+   "id": "nedb-live-subdb",
+   "tool": "nedb_search",
+   "args": {
+    "query": "한강",
+    "max_results": 3
+   },
+   "must": [
+    "주요 8개 DB 직접 검색",
+    "비변사등록 — [1-9]",
+    "db\\.history\\.go\\.kr/id/bb_"
+   ],
+   "must_not": [
+    "헌정사 자료 DB\\n- 포로신문보고서",
+    "검색어가 등장하는 DB 2종"
+   ],
+   "level": "error"
+  },
+  {
+   "id": "gallica-databnf",
+   "tool": "cross_search",
+   "args": {
+    "query": "Corée",
+    "sources": "gallica",
+    "max_per_source": 3
+   },
+   "must": [
+    "\\[gallica:[1-9]",
+    "gallica\\.bnf\\.fr/ark:/12148/"
+   ],
+   "level": "warn"
   }
  ]
 }
