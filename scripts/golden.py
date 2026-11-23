@@ -10,7 +10,7 @@ ap.add_argument('--only', default='')
 ap.add_argument('--md', default='')
 a = ap.parse_args()
 G = json.loads((pathlib.Path(__file__).resolve().parent.parent / 'tests' / 'golden.json').read_text(encoding='utf-8'))
-H = {'Content-Type': 'application/json', 'Accept': 'application/json, text/event-stream'}
+H = {'Content-Type': 'application/json', 'Accept': 'application/json, text/event-stream', 'X-KA-Probe': 'golden'}  # 누적 원장 활용 집계 제외
 
 
 def post(body, sid=None, t=120):
