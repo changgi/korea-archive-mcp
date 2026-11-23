@@ -32,6 +32,7 @@ const FETCH_TIMEOUT = 20000;
 const PROXY = process.env.FETCH_PROXY_PREFIX || '';
 
 const text = (s) => ({ content: [{ type: 'text', text: s }] });
+const archLink = (u) => String(u || '').replace(/&amp;/g, '&').replace(/^http:\/\/www\.archives\.go\.kr/, 'https://www.archives.go.kr'); // 국가기록원 상세 링크 정규화(v2.7.1)
 const sleep = (ms) => new Promise((res) => setTimeout(res, ms));
 
 // Surface the real network cause (undici hides it behind a generic "fetch failed").
@@ -687,7 +688,7 @@ const COLLECT = {
     const sk = /%[0-9A-Fa-f]{2}/.test(key) ? key : encodeURIComponent(key);
     const xml = await gtext(`https://apis.data.go.kr/1741050/openapi/searcharc?serviceKey=${sk}&query=${encodeURIComponent(q)}&start=1&limit=${n}`);
     return (xml.match(/<item>[\s\S]*?<\/item>/g) || []).map((i) => {
-      const link = xtag(i, 'link');
+      const link = archLink(xtag(i, 'link')); // v2.7.1: API가 &amp;로 내려줌 → 클릭 시 빈 페이지(실측). 해제 + https
       const rid = ((link.match(/rc_rfile_no=(\d+)/) || [])[1] || '') + ((link.match(/rc_ritem_no=(\d+)/) || [])[1] ? '-' + (link.match(/rc_ritem_no=0*(\d+)/) || [])[1] : '');
       // v2.3: 생산기관이 없는 항목은 링크 유형으로 계열 구축(기록물철·기록건·기록정보콘텐츠) — '[유형]' 표시로 생산기관과 구분
       const kind = /rc_ritem_no=/.test(link) ? '기록건' : /rc_rfile_no=/.test(link) ? '기록물철' : /rc_code=/.test(link) ? '기록정보콘텐츠' : '';
@@ -2516,7 +2517,7 @@ item_cd 5종(자료 성격별): ART 도설·회화 / ETC 두루마리·축 / DRR
         const tot = xtag(xml, 'total') || '?';
         let items = xml.match(/<item>[\s\S]*?<\/item>/g) || [];
         if (filt) items = items.filter((i) => { const y = parseInt((xtag(i, 'prod_year').match(/\d{4}/) || [])[0], 10); return y && y >= yf && y <= yt; });
-        const lines = items.slice(0, max_results).map((i) => `- ${xtag(i, 'title').slice(0, 90)} (${xtag(i, 'prod_year')}) · ${xtag(i, 'prod_name').slice(0, 20)} [${xtag(i, 'is_open') === '1' ? '공개' : '비공개'}] ${xtag(i, 'link')}`);
+        const lines = items.slice(0, max_results).map((i) => `- ${xtag(i, 'title').slice(0, 90)} (${xtag(i, 'prod_year')}) · ${xtag(i, 'prod_name').slice(0, 20)} [${xtag(i, 'is_open') === '1' ? '공개' : '비공개'}] ${archLink(xtag(i, 'link'))}`);
         return text(`국가기록원 '${query}'${filt ? ` [생산 ${year_from || ''}~${year_to || ''} · 상위 50건 내 후처리·연대 미상 제외]` : ''} — 총 ${tot}건${filt ? ` 중 연대 일치 ${items.length}건` : ''}:\n` + (lines.join('\n') || '(0건)') + '\n공공누리(KOGL) 유형 확인 후 이용. 비공개 항목은 정보공개청구 대상.');
       } catch (e) { return text(agentBrowse('국가기록원', query, portal, `API 오류(${e.message})`)); }
     });
