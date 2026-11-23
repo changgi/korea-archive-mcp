@@ -1124,7 +1124,7 @@ const COLLECT = {
       if (!ln.trim()) continue; let o; try { o = JSON.parse(ln); } catch { continue; }
       const h = `${o.title} ${o.partOf || ''} ${o.id || ''} ${(o.sources || []).join(' ')} ${o.date || ''}`.toLowerCase();
       if (!(toks.every((t) => h.includes(t)) || (en.length && en.every((t) => h.includes(t))))) continue;
-      out.push({ title: `[${(o.sources || []).join('+')}] ${o.title}`.slice(0, 160) + ` · 발견 ${o.seen}회(첫 ${String(o.first_seen).slice(0, 10)})`, date: o.date || '', id: o.id || o.key,
+      out.push({ title: `[${(o.sources || []).join('+')} · 발견 ${o.seen}회 · 첫 ${String(o.first_seen).slice(0, 10)}] ${o.title}`.slice(0, 200), date: o.date || '', id: o.id || o.key,
         series: o.partOf || '', url: o.url || '', media: o.media || '', ...(o.sameAs ? { sameAs: o.sameAs } : {}), seen: o.seen || 1 });
     }
     return out.sort((a, b) => b.seen - a.seen).slice(0, n);
