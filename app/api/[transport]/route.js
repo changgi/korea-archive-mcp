@@ -64,9 +64,12 @@ const nrOvList = async (q) => { const b = await cachedText('nrL:' + q, 6 * 3600e
 const NR_DB = 'https://changgi.github.io/korea-archive-mcp/data/nrich_db.jsonl';
 const NR_DS = ['ksm', 'portrait', 'gwaebul', 'diary', 'mokgan', 'jcbib', 'jcphoto', 'dict', 'arch', 'koguryo', 'gaesong'];
 let nrDbMem = null;
-const nrDb = async () => { const t = await cachedText('nrDB', 6 * 3600e3, () => gtext(NR_DB), '"ds"');
+const nrDb = async () => { const t = await cachedText('nrDB', 6 * 3600e3, async () => (await fetch(NR_DB, { headers: OK_UA, signal: AbortSignal.timeout(40000) })).text(), '"ds"'); // 11.7MB — 수집기 제한과 분리된 긴 타임아웃
   if (!nrDbMem || nrDbMem.src !== t.length) nrDbMem = { src: t.length, rows: t.split('\n').filter(Boolean).map((l) => { try { const o = JSON.parse(l); o._h = [o.t, o.a, o.p, o.d, o.x, ...Object.values(o.m || {})].join(' ').toLowerCase(); return o; } catch { return null; } }).filter(Boolean) };
   return nrDbMem.rows; };
+let nrDbP = null; // v2.15.1: 색인 적재를 한 번만(동시 호출 공유), 실패 시 다음 호출에서 재시도
+const nrDbWarm = () => (nrDbP ||= nrDb().catch((e) => { nrDbP = null; throw e; }));
+const nrDbQuick = (q, n, ms = 3500) => Promise.race([nrDbWarm().then(() => nrDbSearch(q, n)), new Promise((r) => setTimeout(() => r([]), ms))]).catch(() => []); // 연합검색은 색인을 최대 3.5s만 기다림(나머지 결과 먼저)
 const nrDbSearch = async (q, n, ds) => { const toks = String(q).toLowerCase().split(/\s+/).filter(Boolean); if (!toks.length) return [];
   const rows = (await nrDb()).filter((o) => (!ds || o.ds === ds) && toks.every((t) => o._h.includes(t)));
   const score = (o) => (toks.every((t) => String(o.t).toLowerCase().includes(t)) ? 0 : 1); // 명칭 일치 우선
@@ -1178,7 +1181,7 @@ const COLLECT = {
     return out;
   },
   nrich: async (q, n) => { // v2.13 국립문화유산연구원 — 국외문화유산 DB(명칭) + 발간자료(보고서·초록·목차). 계층=국외문화유산 › 국가 › 소장처 / 발간자료 › 연구분야
-    const [ov, rp, db] = await Promise.all([nrOvList(q).catch(() => []), nrRepApi(q, Math.max(2, Math.ceil(n / 2))).catch(() => []), nrDbSearch(q, n).catch(() => [])]);
+    const [ov, rp, db] = await Promise.all([nrOvList(q).catch(() => []), nrRepApi(q, Math.max(2, Math.ceil(n / 2))).catch(() => []), nrDbQuick(q, n)]);
     const a = ov.slice(0, n).map((r) => ({ title: `[국외문화유산] ${r.title} — ${[r.nation, r.holder].filter(Boolean).join(' ')}`.slice(0, 160), date: r.era, id: `ov:${r.mseq}`, series: ['국외문화유산', r.nation, r.holder].filter(Boolean).join(' › '), url: r.url }));
     const b = rp.slice(0, Math.max(2, Math.ceil(n / 2))).map((r) => ({ title: `[발간자료] ${r.title}`.slice(0, 160), date: r.year, id: `rep:${r.idx}`, series: ['발간자료', nrField(r.field)].filter(Boolean).join(' › '), url: r.url, ...(r.img ? { media: r.img } : {}) }));
     const c = db.map(nrDbItem);
