@@ -751,6 +751,20 @@
     "iiif/nrich/ov-\\d+/manifest\\.json"
    ],
    "level": "error"
+  },
+  {
+   "id": "nrich-iiif-stone",
+   "tool": "cross_search",
+   "args": {
+    "query": "다보탑",
+    "sources": "nrich",
+    "max_per_source": 5,
+    "format": "manifest"
+   },
+   "must": [
+    "iiif/nrich/stone-\\d+/manifest\\.json"
+   ],
+   "level": "warn"
   }
  ]
 }

@@ -39,6 +39,8 @@ def iiif_for(u, i=""):  # Node iiifFor 패리티 — 원 기관 IIIF·우리 브
              (r"archive\.org/details/([^/?#]+)", lambda m: f"https://iiif.archive.org/iiif/3/{m[1]}/manifest.json"),
              (r"europeana\.eu/(?:[a-z]{2}/)?item/([^/]+)/([^/?#]+)", lambda m: f"https://iiif.europeana.eu/presentation/{m[1]}/{m[2]}/manifest"),
              (r"dl\.ndl\.go\.jp/pid/(\d+)", lambda m: f"https://dl.ndl.go.jp/api/iiif/{m[1]}/manifest.json")]
+    mi = re.match(r"^(ksm|portrait|gwaebul|diary|mokgan|jcphoto|arch|design|pattern|oldbook|hyanggyo|stone|gaesong|assay):(\d+)$", str(i or ""))
+    if mi: return f"{O}/iiif/nrich/{mi.group(1)}-{mi.group(2)}/manifest.json"  # v2.18 연구DB 이미지 데이터셋
     if "heritage.go.kr" in u and re.match(r"^\d{2}-[0-9A-Za-z]+-\d{2}$", str(i or "")):
         return f"{O}/iiif/heritage/{i}/manifest.json"
     for rx, f in rules:

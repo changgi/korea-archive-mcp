@@ -15,7 +15,7 @@
 | `tests/golden.json` | 골든 회귀 케이스 — 도구 출력의 **모양** | `python3 scripts/golden.py` |
 | `lib/nara_iiif.js` · `app/iiif/nara/[...p]/route.js` | **NARA→IIIF 브리지** — `/iiif/nara/{NAID}/manifest.json`·`/collection.json`·`/record.jsonld`(RiC-O) | NARA_API_KEY 사용, 6시간 캐시, CORS * |
 | `lib/ka_iiif.js` · `app/iiif/[src]/[...p]/route.js` | **IIIF 브리지 2** — `/iiif/{heritage\|much\|awm\|commons}/{id}/manifest.json` | 서울 리전(icn1) · 정직한 UA · 6시간 캐시 |
-| `lib/ka_iiif.js` `nrich` | **국립문화유산연구원 IIIF 브리지** — `/iiif/nrich/{ov-mseq·ksm-n·portrait-n·gwaebul-n}/manifest.json`: 명칭·해설·권리=데이터셋별 정적 색인 `docs/data/nrich/<키>.jsonl`, 이미지·상세 항목=원 페이지(원본 그대로) | 색인은 nrich-harvest가 주 1회 분할 저장 |
+| `lib/ka_iiif.js` `nrich` | **국립문화유산연구원 IIIF 브리지** — `/iiif/nrich/{키}-{번호}/manifest.json`(이미지 데이터셋 14종 + ov, 이미지 없으면 기록 카드): 명칭·해설·권리=데이터셋별 정적 색인 `docs/data/nrich/<키>.jsonl`, 이미지·상세 항목=원 페이지(원본 그대로) | 색인은 nrich-harvest가 주 1회 분할 저장 |
 | `lib/rec_iiif.js` · `app/iiif/rec/[...p]/route.js` | **기록 봉투 IIIF** — IIIF가 없는 모든 기록 → `/iiif/rec/{token}/manifest.json`·`card.svg`·`record.jsonld`(토큰=봉인된 기술, 서버 저장 없음) | KV `#c=` 압축 컬렉션 링크 |
 | `lib/tna_iiif.js` · `app/iiif/tna/[...p]/route.js` | **TNA→IIIF** — 실제 계층(parentId) 재구성 매니페스트·하위 컬렉션 | 부모 기술 6시간 캐시 · 컬렉션 1회 TNA 2~8요청 |
 | `app/export/csv/[tok]/route.js` | **검색 결과 CSV 내려받기** — `cross_search(format='csv')` 응답의 📥 링크. 토큰=CSV 본문 압축(서버 저장 없음), 엑셀용 BOM | 24KB·URL 12,000자 넘으면 링크 생략 |
