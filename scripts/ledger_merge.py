@@ -645,13 +645,17 @@ def fixity_text(o):
     m = o.get("iiif") or ""
     if m:
         j = get(m)
+        if not j.get("label") or not (j.get("metadata") or j.get("items") or j.get("sequences")): return None  # 빈·오류 응답은 지문 대상 아님(거짓 '원문 변경' 방지)
         md = [e for e in (j.get("metadata") or []) if not VOLATILE.search(json.dumps(e.get("label"), ensure_ascii=False))]
         core = {"label": j.get("label"), "summary": j.get("summary"), "metadata": md, "rights": j.get("rights"), "requiredStatement": j.get("requiredStatement"),
                 "items": len(j.get("items") or (j.get("sequences") or [{}])[0].get("canvases") or [])}
         return json.dumps(core, ensure_ascii=False, sort_keys=True)
     if src in DEEP:
         tool, af = DEEP[src]; args = af(o)
-        if args: return "\n".join(l for l in mcp_call(tool, args).splitlines() if not VOLATILE.search(l))
+        if args:
+            t = mcp_call(tool, args)
+            if re.search(r"파싱 실패|오류\(|조회 실패|시간 초과|브라우저로 열람", t[:300]): return None  # 판독 실패 응답은 지문 대상 아님
+            return "\n".join(l for l in t.splitlines() if not VOLATILE.search(l))
     return None
 
 def fixity_pass(led, today, budget):
@@ -808,7 +812,7 @@ def main():
     with open(lp, "w", encoding="utf-8") as f:
         for o in recs: f.write(json.dumps(o, ensure_ascii=False, separators=(",", ":")) + "\n")
     cols = ["key", "entry_type", "fixity", "defect_note", "link_note", "sources", "title", "date", "date_derived", "date_basis", "id", "url", "partOf", "partOf_derived", "media", "sameAs", "iiif", "iiif_built", "iiif_kind", "found_by", "first_seen", "last_seen", "seen", "seen_7d", "seen_30d", "days_total", "formats", "tools", "max_cross", "trend", "rank", "score", "summary", "rights", "thumb", "meta"]
-    fmtv = lambda v: " | ".join(f"{a}: {b}" for a, b in v) if isinstance(v, list) and v and isinstance(v[0], list) else (" ".join(f"{k}:{n}" for k, n in sorted(v.items(), key=lambda kv: -kv[1])) if isinstance(v, dict) else ("+".join(v) if isinstance(v, list) else v))
+    fmtv = lambda v: json.dumps(v, ensure_ascii=False, separators=(",", ":")) if isinstance(v, list) and v and isinstance(v[0], dict) else " | ".join(f"{a}: {b}" for a, b in v) if isinstance(v, list) and v and isinstance(v[0], list) else (" ".join(f"{k}:{n}" for k, n in sorted(v.items(), key=lambda kv: -kv[1])) if isinstance(v, dict) else ("+".join(v) if isinstance(v, list) else v))
     with open(os.path.join(D, "discovered.csv"), "w", encoding="utf-8-sig", newline="") as f:
         w = csv.writer(f); w.writerow(cols)
         for o in recs: w.writerow([fmtv(o.get(c, "")) for c in cols])
