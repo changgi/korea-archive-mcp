@@ -31,13 +31,14 @@
 "ia:cZz2ZbGZRdyX5VnyHAZQ3Dusjnccz4",
 "ia:youtube-J9Ljj6N_y8Q",
 "ia:youtube-asdl9Czb698",
-"ia:111-adc-7115"
+"ia:111-adc-7115",
+"ia:24114-kobe-japan-world-war-2-mos-vwr"
 ],
 "sources": [
 "ia"
 ],
 "first": "2026-11-23T03:00:40Z",
-"last": "2026-11-24T23:04:33Z",
+"last": "2026-11-24T23:15:56Z",
 "keys": [
 "mediatype"
 ]
@@ -1327,13 +1328,14 @@
 "Stock Footage": {
 "records": [
 "ia:t3wXp7NIGMTGQvUfLLEtBtKYxxIEfc",
-"ia:cZz2ZbGZRdyX5VnyHAZQ3Dusjnccz4"
+"ia:cZz2ZbGZRdyX5VnyHAZQ3Dusjnccz4",
+"ia:24114-kobe-japan-world-war-2-mos-vwr"
 ],
 "sources": [
 "ia"
 ],
 "first": "2026-11-24T22:40:42Z",
-"last": "2026-11-24T22:56:56Z",
+"last": "2026-11-24T23:15:56Z",
 "keys": [
 "subject"
 ]
@@ -1867,13 +1869,15 @@
 "awm:146922",
 "awm:146925",
 "awm:147450",
-"awm:146902"
+"awm:146902",
+"awm:P01813.443",
+"awm:P01813.445"
 ],
 "sources": [
 "awm"
 ],
 "first": "2026-11-23T03:01:00Z",
-"last": "2026-11-24T22:47:17Z",
+"last": "2026-11-24T23:15:56Z",
 "keys": [
 "장소"
 ]
@@ -2077,13 +2081,14 @@
 "awm:ART90315",
 "awm:P01813.438",
 "awm:ART40043",
-"awm:ART40393"
+"awm:ART40393",
+"awm:LEEJ0285"
 ],
 "sources": [
 "awm"
 ],
 "first": "2026-11-23T07:26:10Z",
-"last": "2026-11-24T22:47:17Z",
+"last": "2026-11-24T23:15:56Z",
 "keys": [
 "장소"
 ]
@@ -2540,6 +2545,46 @@
 ],
 "first": "2026-11-24T22:56:57Z",
 "last": "2026-11-24T22:56:57Z",
+"keys": [
+"장소"
+]
+},
+"Korea: Pusan": {
+"records": [
+"awm:LEEJ0285"
+],
+"sources": [
+"awm"
+],
+"first": "2026-11-24T23:15:56Z",
+"last": "2026-11-24T23:15:56Z",
+"keys": [
+"장소"
+]
+},
+"Pusan": {
+"records": [
+"awm:P01813.443",
+"awm:P01813.445"
+],
+"sources": [
+"awm"
+],
+"first": "2026-11-24T23:15:56Z",
+"last": "2026-11-24T23:15:56Z",
+"keys": [
+"장소"
+]
+},
+"Australia": {
+"records": [
+"awm:S01916"
+],
+"sources": [
+"awm"
+],
+"first": "2026-11-24T23:15:56Z",
+"last": "2026-11-24T23:15:56Z",
 "keys": [
 "장소"
 ]
@@ -4932,13 +4977,24 @@
 "nara:NAID 404791030",
 "nara:NAID 404791033",
 "nara:NAID 505634321",
-"nara:NAID 505634339"
+"nara:NAID 505634339",
+"nara:NAID 354633318",
+"nara:NAID 354633955",
+"nara:NAID 502724217",
+"nara:NAID 503330532",
+"nara:NAID 519786470",
+"nara:NAID 102044822",
+"nara:NAID 102047495",
+"nara:NAID 22656",
+"nara:NAID 22684",
+"nara:NAID 519786886",
+"nara:NAID 519786908"
 ],
 "sources": [
 "nara"
 ],
 "first": "2026-11-23T03:00:15Z",
-"last": "2026-11-24T23:10:19Z",
+"last": "2026-11-24T23:15:56Z",
 "keys": [
 "기술 수준"
 ]
@@ -4974,13 +5030,14 @@
 "nara:NAID 643349627",
 "nara:NAID 644035378",
 "nara:NAID 644119250",
-"nara:NAID 16845104"
+"nara:NAID 16845104",
+"nara:NAID 42219631"
 ],
 "sources": [
 "nara"
 ],
 "first": "2026-11-23T03:00:15Z",
-"last": "2026-11-24T23:10:19Z",
+"last": "2026-11-24T23:15:55Z",
 "keys": [
 "기술 수준"
 ]
@@ -5435,13 +5492,17 @@
 "awm:HOBJ2794",
 "awm:HOBJ3125",
 "awm:JK0465",
-"awm:JK0780"
+"awm:JK0780",
+"awm:JK0113",
+"awm:LEEJ0285",
+"awm:P01813.443",
+"awm:P01813.445"
 ],
 "sources": [
 "awm"
 ],
 "first": "2026-11-23T03:01:00Z",
-"last": "2026-11-24T22:56:57Z",
+"last": "2026-11-24T23:15:56Z",
 "keys": [
 "자료 유형"
 ]
@@ -5478,13 +5539,14 @@
 "awm:HOBJ2794",
 "awm:HOBJ3125",
 "awm:JK0465",
-"awm:JK0780"
+"awm:JK0780",
+"awm:JK0113"
 ],
 "sources": [
 "awm"
 ],
 "first": "2026-11-23T03:01:00Z",
-"last": "2026-11-24T22:56:57Z",
+"last": "2026-11-24T23:15:56Z",
 "keys": [
 "매체 형태"
 ]
@@ -5703,13 +5765,15 @@
 "records": [
 "awm:P00675.051",
 "awm:P01813.438",
-"awm:P02208.011"
+"awm:P02208.011",
+"awm:P01813.443",
+"awm:P01813.445"
 ],
 "sources": [
 "awm"
 ],
 "first": "2026-11-24T22:44:35Z",
-"last": "2026-11-24T22:56:56Z",
+"last": "2026-11-24T23:15:56Z",
 "keys": [
 "매체 형태"
 ]
@@ -5807,6 +5871,34 @@
 "last": "2026-11-24T22:56:56Z",
 "keys": [
 "format"
+]
+},
+"Sound": {
+"records": [
+"awm:S01916",
+"awm:S02688"
+],
+"sources": [
+"awm"
+],
+"first": "2026-11-24T23:15:56Z",
+"last": "2026-11-24T23:15:56Z",
+"keys": [
+"자료 유형"
+]
+},
+"Oral history": {
+"records": [
+"awm:S01916",
+"awm:S02688"
+],
+"sources": [
+"awm"
+],
+"first": "2026-11-24T23:15:56Z",
+"last": "2026-11-24T23:15:56Z",
+"keys": [
+"매체 형태"
 ]
 }
 },
@@ -6091,17 +6183,17 @@
 }
 }
 },
-"updated": "2026-11-24T23:12:05Z",
+"updated": "2026-11-24T23:18:01Z",
 "totals": {
 "매체": 4,
 "주제": 128,
-"장소": 49,
+"장소": 52,
 "분류": 93,
 "시대": 38,
 "인물": 27,
 "기관": 10,
 "기술 수준": 4,
-"형태": 46,
+"형태": 48,
 "재질": 18
 },
 "note": "원 기관 메타의 주제·지명·분류·시대·매체·인물·기관(장서각 태깅)·형태·재질·기술 수준 표기 그대로(번역·정규화 없음). records = 그 용어가 붙은 원장 기록 key. 지우지 않는다",

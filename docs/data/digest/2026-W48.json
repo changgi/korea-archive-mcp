@@ -1,16 +1,16 @@
 {
 "week": "2026-W48",
-"records": 702,
+"records": 732,
 "by_source": {
-"미국 국립기록관리청 NARA": 97,
+"미국 국립기록관리청 NARA": 109,
 "일본 국립국회도서관": 16,
 "일본 아시아역사자료센터": 9,
 "Europeana": 23,
-"인터넷 아카이브": 76,
+"인터넷 아카이브": 77,
 "영국 국립기록관 TNA": 26,
 "UN 디지털도서관": 8,
 "KOREA ARCHIVE IIIF 갤러리": 3,
-"호주 전쟁기념관": 40,
+"호주 전쟁기념관": 46,
 "독립운동판결문": 2,
 "공훈전자사료관": 2,
 "독립기념관": 7,
@@ -18,7 +18,7 @@
 "국가기록원": 40,
 "위키미디어 공용": 31,
 "Gallica(BnF)": 8,
-"6·25전쟁 아카이브센터": 66,
+"6·25전쟁 아카이브센터": 77,
 "국립중앙도서관": 11,
 "대한민국신문아카이브": 11,
 "국편 전자사료관": 8,
@@ -4949,6 +4949,216 @@
 "first_seen": "2026-11-24T23:10:19Z",
 "page": "r/0d9a2d2f4dbd.html",
 "url": "https://catalog.archives.gov/id/505634339"
+},
+{
+"key": "koreanwar:2024-FR-02-DC-D-01131",
+"title": "맥아더 사건에 대한 미 정계의 입장에 대한 전보문(1951.04.15.)",
+"first_seen": "2026-11-24T23:15:55Z",
+"page": "r/83e7ce5b7c29.html",
+"url": "https://www.koreanwar.or.kr:8443/searchDetail.do?archRfcd=2024-FR-02-DC-D-01131"
+},
+{
+"key": "koreanwar:2024-FR-02-DC-D-01326",
+"title": "거창사건으로 국정위원 일부 해임에 대한 전보문(1951.06.20.)",
+"first_seen": "2026-11-24T23:15:55Z",
+"page": "r/7698a5211f36.html",
+"url": "https://www.koreanwar.or.kr:8443/searchDetail.do?archRfcd=2024-FR-02-DC-D-01326"
+},
+{
+"key": "koreanwar:2024-FR-02-DC-D-01533",
+"title": "개성 폭격 사건 이후 중공군 프로파간다에 대한 전보문(1951.08.27.)",
+"first_seen": "2026-11-24T23:15:55Z",
+"page": "r/b42bdcb2ed19.html",
+"url": "https://www.koreanwar.or.kr:8443/searchDetail.do?archRfcd=2024-FR-02-DC-D-01533"
+},
+{
+"key": "koreanwar:2024-KR-02-AF-D-00029",
+"title": "8월 28일의 사건 개성을 폭격한 미군기 스케치 2(김성환, 1952)",
+"first_seen": "2026-11-24T23:15:55Z",
+"page": "r/5ba256b190cf.html",
+"url": "https://www.koreanwar.or.kr:8443/searchDetail.do?archRfcd=2024-KR-02-AF-D-00029"
+},
+{
+"key": "koreanwar:2024-KR-02-AF-D-00030",
+"title": "8월 28일의 사건 개성을 폭격한 미군기 스케치 1(김성환, 1950.09.14.)",
+"first_seen": "2026-11-24T23:15:55Z",
+"page": "r/6f35de6e959a.html",
+"url": "https://www.koreanwar.or.kr:8443/searchDetail.do?archRfcd=2024-KR-02-AF-D-00030"
+},
+{
+"key": "nara:NAID 354633318",
+"title": "Department of State Chronology of Principal Events Relating to the Korean Conflict, September 1950",
+"first_seen": "2026-11-24T23:15:55Z",
+"page": "r/d32a4c6afc01.html",
+"url": "https://catalog.archives.gov/id/354633318"
+},
+{
+"key": "nara:NAID 354633955",
+"title": "Department of State Chronology of Principal Events Relating to the Korean Conflict, September 1951, Research Project No. 271",
+"first_seen": "2026-11-24T23:15:55Z",
+"page": "r/bd864a0186ad.html",
+"url": "https://catalog.archives.gov/id/354633955"
+},
+{
+"key": "nara:NAID 42219631",
+"title": "No Gun Ri 2000 [Korea] [2]",
+"first_seen": "2026-11-24T23:15:55Z",
+"page": "r/6cbc7de333b4.html",
+"url": "https://catalog.archives.gov/id/42219631"
+},
+{
+"key": "nara:NAID 502724217",
+"title": "Report, Joint Daily Situation Report Number 171",
+"first_seen": "2026-11-24T23:15:55Z",
+"page": "r/2e94208d946f.html",
+"url": "https://catalog.archives.gov/id/502724217"
+},
+{
+"key": "nara:NAID 503330532",
+"title": "Memorandum from Ambassador John Muccio",
+"first_seen": "2026-11-24T23:15:55Z",
+"page": "r/cfbd6a0780ef.html",
+"url": "https://catalog.archives.gov/id/503330532"
+},
+{
+"key": "nara:NAID 519786470",
+"title": "Foreign Service Despatch from John Muccio to Department of State",
+"first_seen": "2026-11-24T23:15:55Z",
+"page": "r/8e7d59279f8c.html",
+"url": "https://catalog.archives.gov/id/519786470"
+},
+{
+"key": "awm:JK0113",
+"title": "PUSAN, SOUTH KOREA. 1951. PADRE J. PRICE LEADING THE FUNERAL PARTY AT A SERVICE HELD AT THE ... · 권리:PD(저작권 만료)",
+"first_seen": "2026-11-24T23:15:56Z",
+"page": "r/a169ff7e7a37.html",
+"url": "https://www.awm.gov.au/collection/C37271"
+},
+{
+"key": "awm:LEEJ0285",
+"title": "Grave at the United Nations (UN) Military Cemetery, Pusan, South Korea. The metal plaques on the ... · 권리:PD(저작권 만료)",
+"first_seen": "2026-11-24T23:15:56Z",
+"page": "r/3944df3aa7d5.html",
+"url": "https://www.awm.gov.au/collection/C1094452"
+},
+{
+"key": "awm:P01813.443",
+"title": "Pusan, Korea, c. 1951. Private First Class John Smith, US Army, stands alongside the sign for the ... · 권리:PD(저작권 만료)",
+"first_seen": "2026-11-24T23:15:56Z",
+"page": "r/d874d8750409.html",
+"url": "https://www.awm.gov.au/collection/C294114"
+},
+{
+"key": "awm:P01813.445",
+"title": "Pusan, Korea, c. 1951. Sick and wounded soldiers sit or lie on camp beds in a ward of the US ... · 권리:PD(저작권 만료)",
+"first_seen": "2026-11-24T23:15:56Z",
+"page": "r/b14be6cc7db5.html",
+"url": "https://www.awm.gov.au/collection/C294116"
+},
+{
+"key": "awm:S01916",
+"title": "A11060 Corporal Kevin Patrick Melican, Royal Australian Air Force (RAAF), 1951-1952, interviewed by Bill Bunbury, about",
+"first_seen": "2026-11-24T23:15:56Z",
+"page": "r/3bbdb450fe02.html",
+"url": "https://www.awm.gov.au/collection/C372921"
+},
+{
+"key": "awm:S02688",
+"title": "Wing Commander Clarence Edward Barrington Wilson (Ret) as an airframe fitter No 77 (Fighter) Squadron RAAF, Korea 1950-1",
+"first_seen": "2026-11-24T23:15:56Z",
+"page": "r/74117f9fa202.html",
+"url": "https://www.awm.gov.au/collection/C995289"
+},
+{
+"key": "ia:24114-kobe-japan-world-war-2-mos-vwr",
+"title": "1951 KOREAN WAR HOME MOVIE PUSAN WEST AIR BASE BURIAL DETAIL MARINE CORPS (SILENT) 24114",
+"first_seen": "2026-11-24T23:15:56Z",
+"page": "r/21f6823a94fd.html",
+"url": "https://archive.org/details/24114-kobe-japan-world-war-2-mos-vwr"
+},
+{
+"key": "koreanwar:1990-TR-01-PF-A-00018",
+"title": "부산에 도착하여 하선하는 튀르키예군 모습 사진",
+"first_seen": "2026-11-24T23:15:56Z",
+"page": "r/24ae9953a7c6.html",
+"url": "https://www.koreanwar.or.kr:8443/searchDetail.do?archRfcd=1990-TR-01-PF-A-00018"
+},
+{
+"key": "koreanwar:1995-US-01-PF-A-00020",
+"title": "부산항 사진",
+"first_seen": "2026-11-24T23:15:56Z",
+"page": "r/33c1ebf68846.html",
+"url": "https://www.koreanwar.or.kr:8443/searchDetail.do?archRfcd=1995-US-01-PF-A-00020"
+},
+{
+"key": "koreanwar:2011-US-01-PF-A-00647",
+"title": "부산에 도착한 여섯 번째 수송물 사진",
+"first_seen": "2026-11-24T23:15:56Z",
+"page": "r/8a9606f7789a.html",
+"url": "https://www.koreanwar.or.kr:8443/searchDetail.do?archRfcd=2011-US-01-PF-A-00647"
+},
+{
+"key": "koreanwar:2011-US-01-PF-A-00687",
+"title": "부산에서 대구로 가는 길 사진",
+"first_seen": "2026-11-24T23:15:56Z",
+"page": "r/f395a77dc86b.html",
+"url": "https://www.koreanwar.or.kr:8443/searchDetail.do?archRfcd=2011-US-01-PF-A-00687"
+},
+{
+"key": "koreanwar:2011-US-01-PF-A-00696",
+"title": "부산 방송국 앞에 주차된 군용 차량 사진",
+"first_seen": "2026-11-24T23:15:56Z",
+"page": "r/f73ad49f1638.html",
+"url": "https://www.koreanwar.or.kr:8443/searchDetail.do?archRfcd=2011-US-01-PF-A-00696"
+},
+{
+"key": "koreanwar:2011-US-01-PF-A-00697",
+"title": "부산 국군 캠프의 여군들 사진",
+"first_seen": "2026-11-24T23:15:56Z",
+"page": "r/c6ae0b2c3bf1.html",
+"url": "https://www.koreanwar.or.kr:8443/searchDetail.do?archRfcd=2011-US-01-PF-A-00697"
+},
+{
+"key": "nara:NAID 102044822",
+"title": "Greek War Memorial in Korea Unveiled, Pusan, Korea",
+"first_seen": "2026-11-24T23:15:56Z",
+"page": "r/afcd0f57bcdd.html",
+"url": "https://catalog.archives.gov/id/102044822"
+},
+{
+"key": "nara:NAID 102047495",
+"title": "United Nations Day Ceremony in Korea, Pusan, Korea",
+"first_seen": "2026-11-24T23:15:56Z",
+"page": "r/334d01ebd1bb.html",
+"url": "https://catalog.archives.gov/id/102047495"
+},
+{
+"key": "nara:NAID 22656",
+"title": "ETHIOPIAN TROOPS, PUSAN, KOREA",
+"first_seen": "2026-11-24T23:15:56Z",
+"page": "r/b2521f943f1b.html",
+"url": "https://catalog.archives.gov/id/22656"
+},
+{
+"key": "nara:NAID 22684",
+"title": "ETHIOPIAN TROOPS, PUSAN, KOREA",
+"first_seen": "2026-11-24T23:15:56Z",
+"page": "r/8d3800256757.html",
+"url": "https://catalog.archives.gov/id/22684"
+},
+{
+"key": "nara:NAID 519786886",
+"title": "Telegram from American Embassy, Pusan",
+"first_seen": "2026-11-24T23:15:56Z",
+"page": "r/7cfecc4ee93b.html",
+"url": "https://catalog.archives.gov/id/519786886"
+},
+{
+"key": "nara:NAID 519786908",
+"title": "Telegram from American Embassy, Pusan",
+"first_seen": "2026-11-24T23:15:56Z",
+"page": "r/220ee006ae92.html",
+"url": "https://catalog.archives.gov/id/519786908"
 }
 ]
 }
