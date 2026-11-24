@@ -16,16 +16,8 @@ jobs:
         run: |
           cp "app/api/[transport]/route.js" /tmp/route_check.mjs
           node --check /tmp/route_check.mjs
-          cp lib/rights.js /tmp/rights_check.mjs
-          node --check /tmp/rights_check.mjs
-          cp lib/nara_iiif.js /tmp/nara_iiif_check.mjs
-          node --check /tmp/nara_iiif_check.mjs
-          cp lib/ka_iiif.js /tmp/ka_iiif_check.mjs
-          node --check /tmp/ka_iiif_check.mjs
-          cp lib/rec_iiif.js /tmp/rec_iiif_check.mjs
-          node --check /tmp/rec_iiif_check.mjs
-          cp lib/tna_iiif.js /tmp/tna_iiif_check.mjs
-          node --check /tmp/tna_iiif_check.mjs
+          # v2.34 lib 전 파일(목록 누락으로 lib/ledger.js 구문 오류가 빌드에서야 드러난 사례)
+          for f in lib/*.js; do cp "$f" "/tmp/chk_$(basename "$f" .js).mjs"; node --check "/tmp/chk_$(basename "$f" .js).mjs" || exit 1; done
       - name: 정적 검증 (도구 20종 · 설명 1024자 · TOPICS 컴파일 · 24KB 가드)
         run: node scripts/ci-verify.mjs
       - name: GitHub Pages 무결성 (docs 링크·IIIF 이미지·매니페스트 수)
