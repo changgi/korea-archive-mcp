@@ -1229,9 +1229,10 @@ const COLLECT = {
     const out = [];
     for (const ln of b.split('\n')) {
       if (!ln.trim()) continue; let o; try { o = JSON.parse(ln); } catch { continue; }
+      if (o.entry_type === '결함 출력') continue; // v2.34 옛 파서 오류 출력 — 원장에는 증거로 보존, 검색 결과에선 제외
       const h = `${o.title} ${o.partOf || o.partOf_derived || ''} ${o.id || ''} ${(o.sources || []).join(' ')} ${o.date || ''}`.toLowerCase();
       if (!(toks.every((t) => h.includes(t)) || (en.length && en.every((t) => h.includes(t))))) continue;
-      out.push({ title: `[${(o.sources || []).join('+')} · 발견 ${o.seen}회 · 7일 ${o.seen_7d || 0} · ${o.days_total || 1}일 · 첫 ${String(o.first_seen).slice(0, 10)}${o.rank ? ` · 활용 ${o.rank}위` : ''}] ${o.title}`.slice(0, 220), date: o.date || '', id: o.id || o.key,
+      out.push({ title: `[${(o.sources || []).join('+')} · 발견 ${o.seen}회 · 7일 ${o.seen_7d || 0} · ${o.days_total || 1}일 · 첫 ${String(o.first_seen).slice(0, 10)}${o.rank ? ` · 활용 ${o.rank}위` : ''}] ${o.entry_type === '검색 안내' ? '[검색 안내] ' : ''}${o.title}${o.link_note ? ` (${o.link_note})` : ''}`.slice(0, 220), date: o.date || '', id: o.id || o.key,
         series: o.partOf || o.partOf_derived || '', url: o.url || '', // v2.27 원 기관 계층이 없으면 파생 계층([파생] 표시)
         media: o.media || '', ...(o.sameAs ? { sameAs: o.sameAs } : {}), seen: o.seen || 1, rank: o.rank || 1e9 });
     }

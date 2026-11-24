@@ -275,6 +275,20 @@ def era_year(text):
         if 1000 <= y <= 2099: return y
     return None
 
+DEFECT_RE = re.compile(r"Archive-It Crawl Data|^(헌정사 자료 DB|포로신문보고서) — '.+' 수록$")
+
+def entry_type(o):
+    """v2.34 원장 항목 유형 — 기록 / 검색 안내(결과 묶음·검색 페이지) / 결함 출력(옛 파서 오류: v2.23 한국사DB 메뉴 오인·v2.24 IA 크롤링 묶음).
+    축적 정보는 지우지 않는다 — 표시만 하고 인용·피드·타임라인·인기 순위에서 뺀다."""
+    t, u = o.get("title") or "", o.get("url") or ""
+    if DEFECT_RE.search(t): return "결함 출력"
+    if re.search(r"moreContentsSearchList|catalog/result\?", u) or re.match(r"^독립기념관 .+ \d+건$", t): return "검색 안내"
+    return "기록"
+
+def link_quality(o):
+    u = (o.get("url") or "").rstrip("/")
+    return "사이트 첫 화면 — 식별자로 원 기관 검색" if re.match(r"^https?://[^/]+$", u) or u.endswith("/viewer/viewer.do") else ""
+
 def decade(o):
     """연대 — date → 제목 → 메타(생산·시대·출판) 순. 4자리 연도면 'NNN0년대', 없으면 '18세기'처럼 세기, 그도 없으면 왕조·시대명. 지정일·등록일(지정 시점)은 쓰지 않는다."""
     cands = [o.get("date") or o.get("date_derived") or "", o.get("title") or ""] + [str(v) for k, v in (o.get("meta") or []) if k in DATE_KEYS]  # 제목 연도(내용 시점)가 메타 생산일(업로드일일 수 있음)보다 우선
@@ -485,8 +499,9 @@ def kind_of(o):
     if re.search(r"지도|map\b|도면", t): return "map"
     return "document"
 
-def build_media(recs):
+def build_media(recs_all):
     """v2.29 다매체 확산 — 같은 원장을 구독(Atom)·인용 관리자(CSL-JSON·RIS)·시각화(연대 타임라인)로. 원 기관 표기 그대로, 파생 계층은 [파생] 유지."""
+    recs = [o for o in recs_all if o.get("entry_type", "기록") == "기록"]  # v2.34 검색 안내·결함 출력은 인용·피드·타임라인에서 제외(원장에는 보존)
     import xml.sax.saxutils as X
     now = dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
     inst = lambda o: SRC_NAME.get(o["key"].split(":")[0], o["key"].split(":")[0])
@@ -648,6 +663,12 @@ def main():
     recs = sorted(led.values(), key=lambda o: (o["first_seen"], o["key"]))
     # v2.27 계층·IIIF가 없는 기록은 만들어 구축 — 원 기관 정보와 구분되는 필드에(partOf_derived · iiif_built)
     for o in recs:
+        o["entry_type"] = entry_type(o)
+        if o["entry_type"] == "결함 출력": o["defect_note"] = "옛 파서 오류 출력(한국사DB 메뉴 오인 v2.23 수정 · IA 웹 크롤링 묶음 v2.24 수정) — 기록 아님, 증거로 보존"
+        else: o.pop("defect_note", None)
+        lq_ = link_quality(o)
+        if lq_: o["link_note"] = lq_
+        else: o.pop("link_note", None)
         dd_, db_ = date_derived(o)
         if dd_: o["date_derived"], o["date_basis"] = dd_, db_
         else: o.pop("date_derived", None); o.pop("date_basis", None)
@@ -657,12 +678,12 @@ def main():
         o["iiif_built"] = "" if o.get("iiif") else leaf_manifest(o)
     with open(lp, "w", encoding="utf-8") as f:
         for o in recs: f.write(json.dumps(o, ensure_ascii=False, separators=(",", ":")) + "\n")
-    cols = ["key", "sources", "title", "date", "date_derived", "date_basis", "id", "url", "partOf", "partOf_derived", "media", "sameAs", "iiif", "iiif_built", "iiif_kind", "found_by", "first_seen", "last_seen", "seen", "seen_7d", "seen_30d", "days_total", "formats", "tools", "max_cross", "trend", "rank", "score", "summary", "rights", "thumb", "meta"]
+    cols = ["key", "entry_type", "defect_note", "link_note", "sources", "title", "date", "date_derived", "date_basis", "id", "url", "partOf", "partOf_derived", "media", "sameAs", "iiif", "iiif_built", "iiif_kind", "found_by", "first_seen", "last_seen", "seen", "seen_7d", "seen_30d", "days_total", "formats", "tools", "max_cross", "trend", "rank", "score", "summary", "rights", "thumb", "meta"]
     fmtv = lambda v: " | ".join(f"{a}: {b}" for a, b in v) if isinstance(v, list) and v and isinstance(v[0], list) else (" ".join(f"{k}:{n}" for k, n in sorted(v.items(), key=lambda kv: -kv[1])) if isinstance(v, dict) else ("+".join(v) if isinstance(v, list) else v))
     with open(os.path.join(D, "discovered.csv"), "w", encoding="utf-8-sig", newline="") as f:
         w = csv.writer(f); w.writerow(cols)
         for o in recs: w.writerow([fmtv(o.get(c, "")) for c in cols])
-    pop = sorted(recs, key=lambda o: o["rank"])
+    pop = sorted((o for o in recs if o.get("entry_type", "기록") == "기록"), key=lambda o: o["rank"])  # v2.34 인기 순위는 기록만
     with open(os.path.join(D, "popular.csv"), "w", encoding="utf-8-sig", newline="") as f:
         w = csv.writer(f); pc = ["rank", "score", "seen", "seen_7d", "seen_30d", "days_total", "trend", "formats", "sources", "title", "date", "id", "partOf", "partOf_derived", "summary", "url", "iiif", "iiif_built", "first_seen", "last_seen"]; w.writerow(pc)
         for o in pop[:200]: w.writerow([fmtv(o.get(c, "")) for c in pc])
@@ -698,7 +719,7 @@ def main():
         h = o["key"].split(":")[0]; by[h] = by.get(h, 0) + 1
     st = {"updated": dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"), "records": len(recs), "new_records": new_recs, "new_batches": new_batches,
           "by_source": dict(sorted(by.items(), key=lambda kv: -kv[1])), "first": recs[0]["first_seen"] if recs else "",
-          "formats": usage["formats"], "queries": {k: nq[k] for k in ("added", "total", "calls", "by_tool")}, "repeat_records": sum(1 for o in recs if o["seen"] > 1),
+          "formats": usage["formats"], "queries": {k: nq[k] for k in ("added", "total", "calls", "by_tool")}, "repeat_records": sum(1 for o in recs if o["seen"] > 1), "entry_types": {t: sum(1 for o in recs if o.get("entry_type", "기록") == t) for t in ("기록", "검색 안내", "결함 출력")}, "site_root_links": sum(1 for o in recs if o.get("link_note")),
           "top10": [{"rank": o["rank"], "seen": o["seen"], "days": o.get("days_total", 1), "title": o["title"][:100], "url": o.get("url", "")} for o in pop[:10]]}
     json.dump(st, open(os.path.join(D, "stats.json"), "w", encoding="utf-8"), ensure_ascii=False, indent=1)
     json.dump(state, open(sp, "w"), indent=1)

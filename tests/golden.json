@@ -931,6 +931,24 @@
     "IT11 ·"
    ],
    "level": "error"
+  },
+  {
+   "id": "ledger-no-defect",
+   "tool": "cross_search",
+   "args": {
+    "query": "안중근",
+    "sources": "ledger",
+    "max_per_source": 20,
+    "format": "csv"
+   },
+   "must": [
+    "안중근"
+   ],
+   "must_not": [
+    "헌정사 자료 DB — '안중근' 수록",
+    "포로신문보고서 — '안중근' 수록"
+   ],
+   "level": "warn"
   }
  ]
 }
