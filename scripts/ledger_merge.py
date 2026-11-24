@@ -893,6 +893,7 @@ def build_media(recs_all):
             L += [f"N1  - KOREA ARCHIVE 통합검색 발견 원장 — 처음 발견 {o['first_seen'][:10]} · 출처 {'+'.join(o['sources'])}", "ER  - ", ""]
             f.write("\n".join(L) + "\n")
     # 5) v2.53 OAI-PMH oai_dc — 아카이브·도서관 수집기(하베스터)가 읽는 표준 교환형(Dublin Core 15요소). 정적 ListRecords 1건(파생 계층·날짜는 [파생] 유지)
+    BYK = {x["key"]: x for x in recs_all}
     DCT = {"motion_picture": "MovingImage", "graphic": "StillImage", "map": "Image", "document": "Text"}
     def dc(o):
         E = lambda t, v: f"<dc:{t}>{X.escape(str(v))}</dc:{t}>" if v else ""
@@ -900,7 +901,8 @@ def build_media(recs_all):
         return "".join([E("title", o["title"]), E("identifier", o.get("url")), E("identifier", o.get("id")), E("identifier", f"{PAGES}r/{rec_slug(o['key'])}.html"), E("date", dd), E("coverage", decade(o)),
                         E("source", inst(o)), E("relation", o.get("partOf") or (o.get("partOf_derived") and f"[파생] {o['partOf_derived']}")),
                         E("description", (o.get("summary") or o.get("summary_composed") or "")[:1500]), E("rights", o.get("rights_view")), E("type", DCT[kind_of(o)]),
-                        E("relation", (o.get("iiif") if not o.get("iiif_status") else "") or o.get("iiif_built")), E("publisher", "KOREA ARCHIVE 통합검색 발견 원장(재기술·집성)")])
+                        E("relation", (o.get("iiif") if not o.get("iiif_status") else "") or o.get("iiif_built")), E("publisher", "KOREA ARCHIVE 통합검색 발견 원장(재기술·집성)"),
+                        *[E("relation", f"같은 기록(다른 소장처 {inst(BYK[b_])}): {BYK[b_].get('url') or b_} — 근거 {bs_}") for t_, b_, bs_ in REL.get(o["key"], []) if t_ == "같은 기록(다른 소장처)" and b_ in BYK]])  # v2.89 하베스터에도 같은 기록 연결
     recx = "".join(f"""<record><header><identifier>oai:changgi.github.io:korea-archive-mcp:{X.escape(o['key'])}</identifier><datestamp>{o['last_seen'][:10]}</datestamp><setSpec>{X.escape(o['key'].split(':')[0])}</setSpec></header>
 <metadata><oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/">{dc(o)}</oai_dc:dc></metadata></record>
 """ for o in recs)
