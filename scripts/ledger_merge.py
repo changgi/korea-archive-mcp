@@ -840,7 +840,7 @@ def write_quality(recs):
     R = [o for o in recs if o.get("entry_type", "기록") == "기록"]
     F = {"요약": lambda o: o.get("summary"), "요약(메타 합성 포함)": lambda o: o.get("summary") or o.get("summary_composed"), "연대": lambda o: decade(o), "기관 계층": lambda o: o.get("partOf"), "계층(파생 포함)": lambda o: o.get("partOf") or o.get("partOf_derived"),
          "기관 IIIF": lambda o: o.get("iiif"), "IIIF(브리지 포함)": lambda o: o.get("iiif") or o.get("iiif_built"), "썸네일": lambda o: o.get("thumb_ok"), "권리 표시": lambda o: o.get("rights_view"),
-         "메타": lambda o: o.get("meta"), "원문 지문": lambda o: o.get("fixity"), "발견 경로": lambda o: o.get("found_by")}
+         "메타": lambda o: o.get("meta"), "원문 지문": lambda o: o.get("fixity"), "발견 경로": lambda o: o.get("found_by"), "발견 경로(파생 포함)": lambda o: o.get("found_by") or (o.get("found_by_derived") or {}).get("tools")}
     day = dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%d")
     snap = {"records": len(R), **{k: round(100 * sum(1 for o in R if f(o)) / max(1, len(R)), 1) for k, f in F.items()}}
     p = os.path.join(D, "quality.json"); Qj = json.load(open(p, encoding="utf-8")) if os.path.exists(p) else {"note": "기록 항목별 채움률(%) 일별 시계열 — 지우지 않는다", "daily": {}}
@@ -1041,11 +1041,17 @@ def main():
         else: o.pop("date_derived", None); o.pop("date_basis", None)
         if not o.get("partOf"): o["partOf_derived"] = derive_path(o)
         else: o.pop("partOf_derived", None)
+        # v2.49 발견 경로 파생 — 질의 지문 축적(v2.28) 이전 기록은 원장이 가진 근거(발견 도구·수집처·최초/최근 발견 시각·발견 일수)로 경로를 세운다.
+        #   질의 지문(found_by)과 구분되는 필드. 질의 원문을 지어내지 않는다 — 질의 지문이 생기면 파생은 걷는다(원장 자체는 그대로).
+        if not o.get("found_by"):
+            o["found_by_derived"] = {"basis": "원장 적재 기록(질의 지문 축적 이전 — 질의 원문은 없음)", "tools": o.get("tools") or [], "sources": o.get("sources") or [],
+                                     "first_seen": o.get("first_seen", ""), "last_seen": o.get("last_seen", ""), "days_total": o.get("days_total", 0), "seen": o.get("seen", 0)}
+        else: o.pop("found_by_derived", None)
         o["iiif_kind"] = "기관 매니페스트" if o.get("iiif") else "브리지 매니페스트(기록 봉투)"
         o["iiif_built"] = "" if o.get("iiif") else leaf_manifest(o)
     with open(lp, "w", encoding="utf-8") as f:
         for o in recs: f.write(json.dumps(o, ensure_ascii=False, separators=(",", ":")) + "\n")
-    cols = ["key", "entry_type", "found_by_basis", "summary_composed", "rights_view", "rights_basis", "fixity", "defect_note", "link_note", "sources", "title", "date", "date_derived", "date_basis", "id", "url", "partOf", "partOf_derived", "media", "sameAs", "iiif", "iiif_built", "iiif_kind", "found_by", "first_seen", "last_seen", "seen", "seen_7d", "seen_30d", "days_total", "formats", "tools", "max_cross", "trend", "rank", "score", "summary", "rights", "thumb", "meta"]
+    cols = ["key", "entry_type", "found_by_basis", "summary_composed", "rights_view", "rights_basis", "fixity", "defect_note", "link_note", "sources", "title", "date", "date_derived", "date_basis", "id", "url", "partOf", "partOf_derived", "media", "sameAs", "iiif", "iiif_built", "iiif_kind", "found_by", "found_by_derived", "first_seen", "last_seen", "seen", "seen_7d", "seen_30d", "days_total", "formats", "tools", "max_cross", "trend", "rank", "score", "summary", "rights", "thumb", "meta"]
     fmtv = lambda v: json.dumps(v, ensure_ascii=False, separators=(",", ":")) if isinstance(v, list) and v and isinstance(v[0], dict) else " | ".join(f"{a}: {b}" for a, b in v) if isinstance(v, list) and v and isinstance(v[0], list) else (" ".join(f"{k}:{n}" for k, n in sorted(v.items(), key=lambda kv: -kv[1])) if isinstance(v, dict) and all(isinstance(x, (int, float)) for x in v.values()) else json.dumps(v, ensure_ascii=False, separators=(",", ":")) if isinstance(v, dict) else ("+".join(v) if isinstance(v, list) else v))
     with open(os.path.join(D, "discovered.csv"), "w", encoding="utf-8-sig", newline="") as f:
         w = csv.writer(f); w.writerow(cols)
@@ -1068,7 +1074,7 @@ def main():
                       **({"rico:hasOrHadSubject": [{"@id": concept_id(f, t)} for f, t in record_concepts(o) if f != "장소"]} if any(f != "장소" for f, t in record_concepts(o)) else {}),
                       **({"rico:isAssociatedWithPlace": [{"@id": concept_id(f, t)} for f, t in record_concepts(o) if f == "장소"]} if any(f == "장소" for f, t in record_concepts(o)) else {}),
                       **({"owl:sameAs": o["sameAs"]} if o.get("sameAs") else {}), **({"rico:hasOrHadInstantiation": {"@id": mf, "@type": "rico:Instantiation", "rico:title": o["iiif_kind"]}} if mf else {}), **({"rico:scopeAndContent": o["summary"]} if o.get("summary") else {}),
-                      "prov:wasGeneratedBy": {"@type": "prov:Activity", "prov:label": "KOREA ARCHIVE 통합검색 발견", "prov:startedAtTime": o["first_seen"], "prov:used": o["sources"],
+                      "prov:wasGeneratedBy": {"@type": "prov:Activity", "prov:label": "KOREA ARCHIVE 통합검색 발견", "prov:startedAtTime": o["first_seen"], "prov:used": o["sources"], **({"prov:endedAtTime": o["last_seen"]} if o.get("last_seen") else {}), **({"prov:wasAssociatedWith": [f"KOREA ARCHIVE 통합검색/{t}" for t in o["tools"]]} if o.get("tools") else {}),
                                              **({"prov:wasInformedBy": [{"@id": f"https://changgi.github.io/korea-archive-mcp/data/provenance.json#{ak}"} for ak in o["found_by"]]} if o.get("found_by") else {})}})
     json.dump({"@context": {"rico": "https://www.ica.org/standards/RiC/ontology#", "prov": "http://www.w3.org/ns/prov#", "owl": "http://www.w3.org/2002/07/owl#"},
                "@graph": list(sets.values()) + graph}, open(os.path.join(D, "discovered.jsonld"), "w", encoding="utf-8"), ensure_ascii=False)
