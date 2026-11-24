@@ -111,7 +111,7 @@ DEEP = {"i815": ("nedb_search", lambda o: o.get("url") and {"mode": "i815", "que
 DEEP["nedb"] = ("nedb_search", lambda o: re.match(r"^[a-z]{2,5}_[0-9a-z_]+$", o["key"].split(":", 1)[1]) and {"mode": "item", "query": o["key"].split(":", 1)[1]})  # v2.61 한국사DB 기록(levelId) — 시대별 경로 판독
 DEEP["kyudb"] = ("nedb_search", lambda o: re.match(r"^[^\x00-\x7f]{1,4}[0-9][0-9.\-]*$", str(o.get("id") or "")) and {"mode": "kyujanggak", "query": o["id"]})  # v2.55 규장각 해제(기관 해설문) — 같은 청구기호 행만 쓴다
 IIIF_V = {"awm": 2, "commons": 2}  # commons 2 = 범주(Commons, 숨김 제외)  # v2.63 우리 IIIF 브리지 판 — awm 2 = 기관 상세 표 전부(자료 유형·매체 형태·제작자·제작지·분쟁)와 본문 설명
-DEEP_V = {"seoul": 2, "aks": 2, "jsg": 2, "nedb": 3, "un": 2}  # nedb 3 = 법전 조문 판독 교정(v2.69.1 — 검색창 문구 오인)  # un 2 = 기관 MARC XML(제목·문서기호·유형·날짜·의제)  # v2.61.1 nedb 2 = 표 없는 기록(삼국사기)·원문 이미지만(신문) 판독  # v2.56 jsg 2 = 장서각 개체 태깅·인물 전거(UCI)  # v2.32 판독기 판 — 판이 오르면 이미 보강된 기록도 한 번 다시 판독(서울기록원: 기관 계층·생산자·보존이력 추가)
+DEEP_V = {"seoul": 2, "aks": 2, "jsg": 2, "nedb": 4, "un": 2}  # nedb 4 = 기술 항목 줄 판별 엄격화(v2.69.2)  # nedb 3 = 법전 조문 판독 교정(v2.69.1 — 검색창 문구 오인)  # un 2 = 기관 MARC XML(제목·문서기호·유형·날짜·의제)  # v2.61.1 nedb 2 = 표 없는 기록(삼국사기)·원문 이미지만(신문) 판독  # v2.56 jsg 2 = 장서각 개체 태깅·인물 전거(UCI)  # v2.32 판독기 판 — 판이 오르면 이미 보강된 기록도 한 번 다시 판독(서울기록원: 기관 계층·생산자·보존이력 추가)
 _sid = [None]
 
 def mcp_call(tool, args):
@@ -197,7 +197,9 @@ def enrich(o, budget):
                 txt = mcp_call(tool, args); summ, md = parse_deep(txt)
                 if src0 == "nedb" and re.search(r"문자입력기|AND OR", txt[:600]): raise ValueError("판독 결함 출력(검색창 문구) — 보강하지 않음")  # v2.69.1 방어
                 if src0 == "nedb":  # v2.61 한국사DB 원문 — 기술 항목 줄(제목·연월일·출전…)은 메타로, 본문 앞부분은 요약으로(미공개·실패는 요약 비움)
-                    L2 = txt.splitlines(); md = [[p.split(": ", 1)[0], p.split(": ", 1)[1]] for p in (L2[1].split(" · ") if len(L2) > 1 and ": " in L2[1] else []) if ": " in p]
+                    L2 = txt.splitlines()
+                    is_meta = len(L2) > 1 and re.match(r"^[가-힣A-Za-z ()]{1,12}: ", L2[1]) and all(re.match(r"^[가-힣A-Za-z ()]{1,12}: ", p) for p in L2[1].split(" · "))  # v2.69.2 기술 항목 줄만(본문 속 '‘一’: [만력]' 같은 콜론 오인 방지)
+                    md = [[p.split(": ", 1)[0], p.split(": ", 1)[1]] for p in L2[1].split(" · ")] if is_meta else []
                     bi = 2 if md else 1
                     summ = f"[한국사DB 원문 앞부분] {L2[bi][:380]}" if len(L2) > bi and not re.search(r"공개되지 않았|조회 실패|본문 텍스트 없음", txt[:1200]) else ""
                     if "공개되지 않았" in txt[:400]: md = [["본문 공개", "미공개 — 항목·URL은 유효, 기관 공개 범위(국사편찬위원회 문의 대상)"]]  # 부재가 아니라 비공개라는 증거
