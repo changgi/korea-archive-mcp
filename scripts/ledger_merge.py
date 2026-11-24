@@ -797,6 +797,35 @@ def _tna_core(j):
 SRC_FIX = {"ia": (r"archive\.org/details/([^/?#]+)", lambda m: f"https://archive.org/metadata/{m[1]}", _ia_core),
            "tna": (r"discovery\.nationalarchives\.gov\.uk/details/r/([0-9a-fA-F-]{36}|[A-Z]\d+)", lambda m: f"https://discovery.nationalarchives.gov.uk/API/records/v1/details/{m[1]}", _tna_core)}
 
+def _tna_val(v):
+    if isinstance(v, list): return " ; ".join(x for x in (_tna_val(e) for e in v) if x)
+    if isinstance(v, dict): return v.get("xReferenceName") or v.get("description") or ""
+    return strip(v) if isinstance(v, str) else (str(v) if v else "")
+
+TNA_META = [("citableReference", "참조번호"), ("coveringDates", "생산 기간"), ("heldBy", "소장처"), ("creatorName", "생산자"), ("physicalDescriptionForm", "물리 형태"),
+            ("legalStatus", "법적 지위"), ("accessConditions", "이용조건(원문)"), ("formerReferenceDep", "이전 참조번호"), ("language", "언어"), ("note", "주기(원문)")]
+
+def src_enrich(o, j):
+    """v2.54 지문용으로 받은 기관 메타데이터 API 응답에서 비어 있는 칸만 채운다(덮어쓰지 않음 · 원문 그대로 · 근거 표시)."""
+    src = o["key"].split(":")[0]
+    if src == "ia":
+        d = (j.get("metadata") or {}).get("description")
+        d = strip(" ".join(d) if isinstance(d, list) else d or "")
+        if re.fullmatch(r"(?i)no description\.?|n/?a|none", d or ""): d = ""  # 자리표시 문구는 요약 아님
+        if d and not o.get("summary"): o["summary"] = d[:600]; o["summary_basis"] = "기관 메타데이터 API(archive.org/metadata · description 원문)"
+        if not o.get("meta"):
+            m0 = j.get("metadata") or {}; v = lambda k: strip(" ; ".join(m0[k]) if isinstance(m0.get(k), list) else m0.get(k) or "")
+            md = [[lbl, v(k)[:160]] for k, lbl in (("creator", "생산자"), ("date", "생산일"), ("publisher", "발행처"), ("mediatype", "매체"), ("language", "언어"), ("imagecount", "면 수")) if v(k)]
+            rt = " · ".join(f"{k} {v(k)}" for k in ("licenseurl", "rights", "possible-copyright-status", "access-restricted-item") if v(k))
+            if rt: md.append(["이용 제한(원문)", (rt + (f" · collection {v('collection')}" if v("access-restricted-item") == "true" else ""))[:200]])
+            if md: o["meta"] = md; o["meta_basis"] = "기관 메타데이터 API(archive.org/metadata)"
+    elif src == "tna":
+        sc = (j.get("scopeContent") or {}).get("description")
+        if sc and not o.get("summary"): o["summary"] = strip(sc)[:600]; o["summary_basis"] = "기관 메타데이터 API(TNA Discovery · scopeContent 원문)"
+        if not o.get("meta"):
+            md = [[lbl, _tna_val(j.get(k))[:160]] for k, lbl in TNA_META if _tna_val(j.get(k))]
+            if md: o["meta"] = md; o["meta_basis"] = "기관 메타데이터 API(TNA Discovery records/v1/details)"
+
 def src_fix_url(o):
     sf = SRC_FIX.get(o["key"].split(":")[0])
     m = sf and re.search(sf[0], o.get("url") or "")
@@ -809,7 +838,8 @@ def fixity_text(o):
     su, core = src_fix_url(o)
     fx = o.get("fixity") or []
     if su and (not fx or fx[-1].get("pv") == SRC_PARSER_V):  # v2.52.1 기관 메타데이터 API 우선(IA IIIF는 빈 응답이 잦음) — 이미 매니페스트로 지문을 뜬 기록은 같은 근거를 유지(근거 전환이 '변경'으로 보이지 않게)
-        c = core(get(su))
+        jj = get(su); c = core(jj)
+        if c: src_enrich(o, jj)
         return json.dumps(c, ensure_ascii=False, sort_keys=True) if c else None
     if m:
         j = get(m)
@@ -1129,7 +1159,7 @@ def main():
         o["iiif_built"] = "" if (o.get("iiif") and not o.get("iiif_status")) else leaf_manifest(o)  # v2.52 기관 매니페스트가 비공개 응답이면 브리지로 대체(기관 주소는 보존)
     with open(lp, "w", encoding="utf-8") as f:
         for o in recs: f.write(json.dumps(o, ensure_ascii=False, separators=(",", ":")) + "\n")
-    cols = ["key", "entry_type", "found_by_basis", "summary_composed", "rights_view", "rights_basis", "fixity", "defect_note", "link_note", "sources", "title", "date", "date_derived", "date_basis", "id", "url", "partOf", "partOf_derived", "media", "sameAs", "iiif", "iiif_status", "iiif_built", "iiif_kind", "found_by", "found_by_derived", "first_seen", "last_seen", "seen", "seen_7d", "seen_30d", "days_total", "formats", "tools", "max_cross", "trend", "rank", "score", "summary", "rights", "thumb", "meta"]
+    cols = ["key", "entry_type", "found_by_basis", "summary_composed", "rights_view", "rights_basis", "fixity", "defect_note", "link_note", "sources", "title", "date", "date_derived", "date_basis", "id", "url", "partOf", "partOf_derived", "media", "sameAs", "iiif", "iiif_status", "iiif_built", "iiif_kind", "found_by", "found_by_derived", "first_seen", "last_seen", "seen", "seen_7d", "seen_30d", "days_total", "formats", "tools", "max_cross", "trend", "rank", "score", "summary", "summary_basis", "rights", "thumb", "meta", "meta_basis"]
     fmtv = lambda v: json.dumps(v, ensure_ascii=False, separators=(",", ":")) if isinstance(v, list) and v and isinstance(v[0], dict) else " | ".join(f"{a}: {b}" for a, b in v) if isinstance(v, list) and v and isinstance(v[0], list) else (" ".join(f"{k}:{n}" for k, n in sorted(v.items(), key=lambda kv: -kv[1])) if isinstance(v, dict) and all(isinstance(x, (int, float)) for x in v.values()) else json.dumps(v, ensure_ascii=False, separators=(",", ":")) if isinstance(v, dict) else ("+".join(v) if isinstance(v, list) else v))
     with open(os.path.join(D, "discovered.csv"), "w", encoding="utf-8-sig", newline="") as f:
         w = csv.writer(f); w.writerow(cols)
