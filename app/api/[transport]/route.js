@@ -1433,6 +1433,18 @@ const kyuRows = (flat) => {
   for (const m of flat.matchAll(re)) if (!seen.has(m[2]) && seen.add(m[2])) rows.push({ call: m[2], title: m[1].split(/\s\d{1,3}\.\s+/).pop().trim(), author: m[3].trim(), date: m[4].trim(), cls: m[5].trim(), body: (m[6] || '').replace(/\.\.\.$/, '').trim().slice(0, 160) });
   return rows.slice(0, 30);
 };
+// v2.56 장서각 해제의 기관 개체 태깅(data-xsl-tag) — 인명·지명·관청명 등과 인명 전거(한국역대인물 UCI). 원문 태그만 옮긴다(추출·추정 없음)
+const JSG_ENT = ['인명', '지명', '관청명', '관직명', '나라명', '건물명', '문헌명', '서명'];
+function jsgEntities(html) {
+  const by = {}; const uci = []; const seenU = new Set();
+  for (const m of String(html || '').matchAll(/<span data-xsl-tag="([^"]+)"([^>]*)>([\s\S]*?)(?:<div|<\/span>)/g)) {
+    if (!JSG_ENT.includes(m[1])) continue;
+    const t = m[3].replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim(); if (!t || t.length > 40) continue;
+    const a = (by[m[1]] = by[m[1]] || []); if (!a.includes(t) && a.length < 12) a.push(t);
+    const u = (m[2].match(/data-people-uci="([^"]+)"/) || [])[1]; if (u && !seenU.has(t)) { seenU.add(t); uci.push([t, u]); }
+  }
+  return { ent: JSG_ENT.filter((k) => by[k]).map((k) => [k, by[k]]), uci: uci.slice(0, 20) };
+}
 async function jKyu(query) {
   // 실측 10.2s(12s 타임박스 근접 — cross_search 간헐 탈락 위험) → 목록·해제 2건 병렬 + 6h TTL 캐시
   const ck = 'kyudb6:' + query; // v2.35.1 book_cd(강조 태그 수정) — 캐시 키 판 올림
@@ -2330,10 +2342,13 @@ const JB_CROSS = `국내외 대조 절차 — 순서를 틀리면 헛수고한�
               if (haeje.length > 4000) haeje = haeje.slice(0, 4000) + ` …(총 ${haeje.length}자 — 전문은 원문 링크)`;
             }
             if (!callno && !haeje) return text(`'${did}' — 상세 미발견 또는 구조 상이. 청구기호(K2-…)를 확인하거나 mode=jsg에 검색어를 넣으십시오.`);
+            const { ent, uci } = jsgEntities(b);
             return text(`장서각 서지·해제 판독 — ${name || did}\n`
               + [callno && `청구기호 ${callno}`, mf && `MF ${mf}`, cls, subj].filter(Boolean).join(' · ') + '\n' + ([...gx0, ...gx].length ? [...gx0, ...gx].join('\n') + '\n' : '')
+              + ent.map(([k, v]) => `${k}(장서각 태깅): ${v.join('; ')}\n`).join('')
               + (haeje ? `【해제】\n${haeje}\n` : '')
               + (jfp ? `본문 지문(sha256-16): ${jfp} — 판독 시점 해제 전문 기준. 재판독 지문 불일치=원문 개정 발생.\n` : '')
+              + (uci.length ? `인물 전거(한국역대인물 UCI): ${uci.map(([n, u]) => `${n}=${u}`).join('; ')}\n` : '')
               + `원문·이미지: https://jsg.aks.ac.kr/dir/view?dataId=${encodeURIComponent(did)}\n`
               + (did.startsWith('ANC_') ? '※ 고문서 원문 이미지 이용 문의: 장서각 자료보존관리팀 031-730-8874 · 고문서자료관 원자료 병행 확인.\n' : '') + '※ 출처: 한국학중앙연구원 장서각 — 게재 시 출처 표기, 이미지 재이용은 기관 이용조건 준수. 해제 인용은 국역·해설(학술 인용 시 집필 해제임을 명기).');
           }
