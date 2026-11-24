@@ -866,9 +866,38 @@ def _tna_core(j):
     """TNA Discovery 상세 API — 빈 값 제외 전 항목(색인용 batchId 제외)."""
     return {k: v for k, v in j.items() if _nz(v) and k != "batchId"} if j.get("id") else None
 
+def _ead_get(url):
+    """v2.62 EAD XML(네덜란드 국립문서관 등) 받기 → 핵심 구조 dict. DTD는 받지 않는다(외부 요청 없음)."""
+    import xml.etree.ElementTree as ET
+    import http.client
+    data = None
+    for k in range(3):  # 큰 EAD(수 MB)는 응답이 중간에 끊기는 일이 있다(IncompleteRead 실측) — 3회까지 다시 받는다. 끊긴 본문은 쓰지 않는다
+        try:
+            data = urllib.request.urlopen(urllib.request.Request(url, headers={"User-Agent": UA}), timeout=60).read(); break
+        except http.client.IncompleteRead:
+            time.sleep(2 * (k + 1))
+    if data is None: raise ValueError("EAD 응답 끊김(3회)")
+    raw = re.sub(r"<!DOCTYPE[^>]*>", "", data.decode("utf-8", "replace"), count=1)
+    root = ET.fromstring(raw); ad = root.find("archdesc")
+    if ad is None: return {}
+    T = lambda e: re.sub(r"\s+", " ", "".join(e.itertext())).strip() if e is not None else ""
+    did = ad.find("did") if ad.find("did") is not None else ET.Element("did")
+    out = {k: T(did.find(k)) for k in ("unittitle", "unitdate", "physdesc", "origination", "langmaterial", "unitid")}
+    for k in ("bioghist", "custodhist", "accessrestrict", "userestrict", "prefercite", "arrangement"):
+        e = ad.find(f".//{k}")
+        out[k] = re.sub(r"^(Geschiedenis van de archiefvormer|Geschiedenis van het beheer|Openbaarheidsbeperkingen|Beperkingen aan het gebruik|Aanwijzing voor het citeren)\s*", "", T(e))[:1500] if e is not None else ""
+    dsc = ad.find("dsc")
+    out["series"] = [T(c.find("did/unittitle"))[:80] for c in (dsc if dsc is not None else []) if c.tag == "c" or re.match(r"c\d\d$", c.tag)][:12]
+    out["units"] = len(dsc.findall(".//c")) if dsc is not None else 0
+    return out
+
+def _ead_core(j):
+    return {k: j.get(k) for k in ("unittitle", "unitdate", "physdesc", "origination", "langmaterial", "unitid", "bioghist", "custodhist", "accessrestrict", "userestrict", "series", "units")} if j.get("unittitle") else None
+
 # v2.52 원 기관 공개 메타데이터 API로 지문 — 매니페스트·심층 판독 경로가 없는 수집처. (URL 정규식, API 주소, 정규형)
 SRC_FIX = {"ia": (r"archive\.org/details/([^/?#]+)", lambda m: f"https://archive.org/metadata/{m[1]}", _ia_core),
-           "tna": (r"discovery\.nationalarchives\.gov\.uk/details/r/([0-9a-fA-F-]{36}|[A-Z]\d+)", lambda m: f"https://discovery.nationalarchives.gov.uk/API/records/v1/details/{m[1]}", _tna_core)}
+           "tna": (r"discovery\.nationalarchives\.gov\.uk/details/r/([0-9a-fA-F-]{36}|[A-Z]\d+)", lambda m: f"https://discovery.nationalarchives.gov.uk/API/records/v1/details/{m[1]}", _tna_core),
+           "nlna": (r"nationaalarchief\.nl/onderzoeken/archief/([0-9][0-9A-Za-z.]*[0-9A-Za-z])", lambda m: f"https://www.nationaalarchief.nl/onderzoeken/archief/{m[1]}/download/xml", _ead_core)}  # v2.62 EAD
 
 def _tna_val(v):
     if isinstance(v, list): return " ; ".join(x for x in (_tna_val(e) for e in v) if x)
@@ -881,6 +910,15 @@ TNA_META = [("citableReference", "참조번호"), ("coveringDates", "생산 기�
 def src_enrich(o, j):
     """v2.54 지문용으로 받은 기관 메타데이터 API 응답에서 비어 있는 칸만 채운다(덮어쓰지 않음 · 원문 그대로 · 근거 표시)."""
     src = o["key"].split(":")[0]
+    if src == "nlna":  # v2.62 네덜란드 국립문서관 EAD — 기록의 역사(bioghist)→요약, 기간·분량·생산자·언어·시리즈·이용 제한·인용→메타
+        if j.get("bioghist") and not o.get("summary"): o["summary"] = j["bioghist"][:600]; o["summary_basis"] = "기관 EAD(Nationaal Archief · bioghist 원문, 네덜란드어)"
+        if not o.get("meta"):
+            md = [[lbl, str(j.get(k) or "")[:200]] for k, lbl in (("unitdate", "기간"), ("physdesc", "분량"), ("origination", "생산자"), ("langmaterial", "언어"), ("unitid", "기관 식별자"),
+                                                             ("custodhist", "보존 이력"), ("accessrestrict", "이용 제한(원문)"), ("prefercite", "인용 방법(기관)")) if j.get(k)]
+            if j.get("series"): md.append(["하위 시리즈(EAD)", "; ".join(j["series"][:8])[:300]])
+            if j.get("units"): md.append(["기술 단위 수(EAD)", str(j["units"])])
+            if md: o["meta"] = md; o["meta_basis"] = "기관 EAD(Nationaal Archief download/xml)"
+        return
     if src == "ia":
         d = (j.get("metadata") or {}).get("description")
         d = strip(" ".join(d) if isinstance(d, list) else d or "")
@@ -911,7 +949,7 @@ def fixity_text(o):
     su, core = src_fix_url(o)
     fx = o.get("fixity") or []
     if su and (not fx or fx[-1].get("pv") == SRC_PARSER_V):  # v2.52.1 기관 메타데이터 API 우선(IA IIIF는 빈 응답이 잦음) — 이미 매니페스트로 지문을 뜬 기록은 같은 근거를 유지(근거 전환이 '변경'으로 보이지 않게)
-        jj = get(su); c = core(jj)
+        jj = _ead_get(su) if su.endswith("/download/xml") else get(su); c = core(jj)
         if c: src_enrich(o, jj)
         return json.dumps(c, ensure_ascii=False, sort_keys=True) if c else None
     if m:
