@@ -1,8 +1,8 @@
 {
- "updated": "2026-11-24T14:51:11Z",
+ "updated": "2026-11-24T15:03:46Z",
  "records": 422,
- "new_records": 14,
- "new_batches": 1,
+ "new_records": 0,
+ "new_batches": 0,
  "by_source": {
   "nrich": 43,
   "archives": 40,
@@ -45,10 +45,10 @@
  },
  "queries": {
   "added": 1,
-  "total": 68,
-  "calls": 86,
+  "total": 69,
+  "calls": 87,
   "by_tool": {
-   "nedb_search": 52,
+   "nedb_search": 53,
    "cross_search": 23,
    "source_profile": 8,
    "seoul_archives_search": 3
