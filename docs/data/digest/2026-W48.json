@@ -1,12 +1,12 @@
 {
 "week": "2026-W48",
-"records": 454,
+"records": 488,
 "by_source": {
-"미국 국립기록관리청 NARA": 24,
+"미국 국립기록관리청 NARA": 33,
 "일본 국립국회도서관": 16,
 "일본 아시아역사자료센터": 9,
 "Europeana": 8,
-"인터넷 아카이브": 19,
+"인터넷 아카이브": 33,
 "영국 국립기록관 TNA": 10,
 "UN 디지털도서관": 8,
 "KOREA ARCHIVE IIIF 갤러리": 3,
@@ -18,7 +18,7 @@
 "국가기록원": 40,
 "위키미디어 공용": 31,
 "Gallica(BnF)": 8,
-"6·25전쟁 아카이브센터": 11,
+"6·25전쟁 아카이브센터": 22,
 "국립중앙도서관": 11,
 "대한민국신문아카이브": 11,
 "국편 전자사료관": 8,
@@ -2725,11 +2725,25 @@
 "url": "https://archive.aks.ac.kr/link.do?dataUCI=G002+AKS+KSM-XZ.1910.1100-20250415.F13301-03-W000015"
 },
 {
+"key": "ia:428-npc-168",
+"title": "EVACUATION OF HUNGNAM, KOREA",
+"first_seen": "2026-11-24T00:00:00Z",
+"page": "r/ed4ebb7869f3.html",
+"url": "https://archive.org/details/428-npc-168"
+},
+{
 "key": "ia:428-npc-170",
 "title": "EVACUATION OF HUNGNAM, KOREA",
 "first_seen": "2026-11-24T00:00:00Z",
 "page": "r/ddfe7d47e8f8.html",
 "url": "https://archive.org/details/428-npc-170"
+},
+{
+"key": "ia:428-npc-171",
+"title": "EVACUATION OF HUNGNAM KOREA",
+"first_seen": "2026-11-24T00:00:00Z",
+"page": "r/893b3eb56184.html",
+"url": "https://archive.org/details/428-npc-171"
 },
 {
 "key": "koreanwar:2022-US-02-AV-D-00127",
@@ -2767,11 +2781,25 @@
 "url": "https://catalog.archives.gov/id/22228"
 },
 {
+"key": "nara:NAID 22373",
+"title": "EVACUATION OF HUNGNAM, KOREA",
+"first_seen": "2026-11-24T00:00:00Z",
+"page": "r/68057951818f.html",
+"url": "https://catalog.archives.gov/id/22373"
+},
+{
 "key": "nara:NAID 22375",
 "title": "EVACUATION OF HUNGNAM, KOREA",
 "first_seen": "2026-11-24T00:00:00Z",
 "page": "r/13a4417fe69e.html",
 "url": "https://catalog.archives.gov/id/22375"
+},
+{
+"key": "nara:NAID 22395",
+"title": "GEN MATTHEW B RIDGWAY, YONGPYANG, KOREA ; EVACUATION, HUNGNAM ; KMAG, MUNSAN, KOREA ; LT GEN MATTHEW",
+"first_seen": "2026-11-24T00:00:00Z",
+"page": "r/416e290818a4.html",
+"url": "https://catalog.archives.gov/id/22395"
 },
 {
 "key": "nara:NAID 22399",
@@ -3213,6 +3241,216 @@
 "first_seen": "2026-11-24T14:47:07Z",
 "page": "r/120d3a00ded1.html",
 "url": "https://www.nl.go.kr/NL/contents/search.do#viewKey=CNTS-00132076027&viewType=C"
+},
+{
+"key": "ia:111-adc-8608",
+"title": "EVACUATION OF HUNGNAM, KOREA",
+"first_seen": "2026-11-24T22:40:42Z",
+"page": "r/1344673a0866.html",
+"url": "https://archive.org/details/111-adc-8608"
+},
+{
+"key": "ia:111-adc-8630",
+"title": "GEN MATTHEW B RIDGWAY, YONGPYANG, KOREA ; EVACUATION, HUNGNAM ; KMAG, MUNSAN, KOREA ; LT GEN MATTHEW B RIDGWAY, 24TH DIV, KOREA ; MAJ GEN LEVEN C ALLEN, TAEGU, KOREA ; LT GEN MATTHEW B RIDGWAY, LOCATI",
+"first_seen": "2026-11-24T22:40:42Z",
+"page": "r/32301c80c4c2.html",
+"url": "https://archive.org/details/111-adc-8630"
+},
+{
+"key": "ia:DTIC_ADA242405",
+"title": "DTIC ADA242405: An Analysis of the Hungnam Evacuation Based on Current and Emerging Joint Doctrine",
+"first_seen": "2026-11-24T22:40:42Z",
+"page": "r/aa20a918a076.html",
+"url": "https://archive.org/details/DTIC_ADA242405"
+},
+{
+"key": "ia:t3wXp7NIGMTGQvUfLLEtBtKYxxIEfc",
+"title": "\"THAT WAR IN KOREA \" KOREAN WAR DOCUMENTARY 1950 INVASION TO HUNGNAM EVACUATION PART 1 6344",
+"first_seen": "2026-11-24T22:40:42Z",
+"page": "r/520d14ad9dc4.html",
+"url": "https://archive.org/details/t3wXp7NIGMTGQvUfLLEtBtKYxxIEfc"
+},
+{
+"key": "koreanwar:1990-US-01-PF-A-00022",
+"title": "흥남철수작전 당시 폭파되는 흥만 항구 시설 사진",
+"first_seen": "2026-11-24T22:40:42Z",
+"page": "r/833ed396c08d.html",
+"url": "https://www.koreanwar.or.kr:8443/searchDetail.do?archRfcd=1990-US-01-PF-A-00022"
+},
+{
+"key": "koreanwar:1990-US-01-PF-A-00042",
+"title": "흥남철수작전 당시 피난민 사진",
+"first_seen": "2026-11-24T22:40:42Z",
+"page": "r/f2b05d50a918.html",
+"url": "https://www.koreanwar.or.kr:8443/searchDetail.do?archRfcd=1990-US-01-PF-A-00042"
+},
+{
+"key": "koreanwar:1990-US-01-PF-A-00043",
+"title": "흥남철수작전 당시 전차상륙함(LST)에 승선하는 피난민 사진",
+"first_seen": "2026-11-24T22:40:42Z",
+"page": "r/b0f2b0aa3cf8.html",
+"url": "https://www.koreanwar.or.kr:8443/searchDetail.do?archRfcd=1990-US-01-PF-A-00043"
+},
+{
+"key": "koreanwar:1990-US-01-PF-A-00044",
+"title": "흥남철수작전 당시 흥남항 전경 사진",
+"first_seen": "2026-11-24T22:40:42Z",
+"page": "r/bac246690849.html",
+"url": "https://www.koreanwar.or.kr:8443/searchDetail.do?archRfcd=1990-US-01-PF-A-00044"
+},
+{
+"key": "koreanwar:2022-KR-02-PF-D-00119",
+"title": "흥남철수 사진(1950)",
+"first_seen": "2026-11-24T22:40:42Z",
+"page": "r/4388d5cfeff7.html",
+"url": "https://www.koreanwar.or.kr:8443/searchDetail.do?archRfcd=2022-KR-02-PF-D-00119"
+},
+{
+"key": "koreanwar:2022-KR-03-PF-A-00236",
+"title": "흥남철수 당시 배에 오르는 피란민들 사진(1950.12)",
+"first_seen": "2026-11-24T22:40:42Z",
+"page": "r/d808ff125428.html",
+"url": "https://www.koreanwar.or.kr:8443/searchDetail.do?archRfcd=2022-KR-03-PF-A-00236"
+},
+{
+"key": "koreanwar:2022-US-02-AV-D-00165",
+"title": "한국 흥남 철수 기록영상 6",
+"first_seen": "2026-11-24T22:40:42Z",
+"page": "r/40e15bfaa0f6.html",
+"url": "https://www.koreanwar.or.kr:8443/searchDetail.do?archRfcd=2022-US-02-AV-D-00165"
+},
+{
+"key": "koreanwar:2022-US-02-AV-D-00167",
+"title": "한국 흥남 철수 기록영상 9",
+"first_seen": "2026-11-24T22:40:42Z",
+"page": "r/ee28f42a08ae.html",
+"url": "https://www.koreanwar.or.kr:8443/searchDetail.do?archRfcd=2022-US-02-AV-D-00167"
+},
+{
+"key": "nara:NAID 22374",
+"title": "EVACUATION OF HUNGNAM, KOREA",
+"first_seen": "2026-11-24T22:40:42Z",
+"page": "r/a2a3baf842a6.html",
+"url": "https://catalog.archives.gov/id/22374"
+},
+{
+"key": "nara:NAID 22376",
+"title": "EVACUATION OF HUNGNAM, KOREA",
+"first_seen": "2026-11-24T22:40:42Z",
+"page": "r/27f091c2a971.html",
+"url": "https://catalog.archives.gov/id/22376"
+},
+{
+"key": "nara:NAID 22383",
+"title": "EVACUATION OF HUNGNAM, KOREA",
+"first_seen": "2026-11-24T22:40:42Z",
+"page": "r/c37463a10a1a.html",
+"url": "https://catalog.archives.gov/id/22383"
+},
+{
+"key": "nara:NAID 75389",
+"title": "EVACUATION ACTIVITIES AT HUNGNAM, KOREA",
+"first_seen": "2026-11-24T22:40:42Z",
+"page": "r/9ee45efb6cf8.html",
+"url": "https://catalog.archives.gov/id/75389"
+},
+{
+"key": "ia:ADC-10271",
+"title": "Marine Retreat Chosin Reservoir; C-119 Airdrop; Korean War, 12/1950",
+"first_seen": "2026-11-24T22:40:43Z",
+"page": "r/005e85d00cca.html",
+"url": "https://archive.org/details/ADC-10271"
+},
+{
+"key": "ia:DTIC_ADA429076",
+"title": "DTIC ADA429076: The Relationship between Cohesion and Casualty Rates: The 1st Marine Division and the 7th Infantry Division at Inchon and the Chosin Reservoir",
+"first_seen": "2026-11-24T22:40:43Z",
+"page": "r/a1f22ccccfea.html",
+"url": "https://archive.org/details/DTIC_ADA429076"
+},
+{
+"key": "ia:DTIC_ADB006731",
+"title": "DTIC ADB006731: Changjin (Chosin) Reservoir, Korea 1950: A Case Study of United States Army Tactics and Doctrine for Encircled Forces",
+"first_seen": "2026-11-24T22:40:43Z",
+"page": "r/27c71286e7ed.html",
+"url": "https://archive.org/details/DTIC_ADB006731"
+},
+{
+"key": "ia:breakoutchosinre0000russ",
+"title": "Breakout : the Chosin Reservoir campaign, Korea 1950",
+"first_seen": "2026-11-24T22:40:43Z",
+"page": "r/902e4825831f.html",
+"url": "https://archive.org/details/breakoutchosinre0000russ"
+},
+{
+"key": "ia:colderthanhellma0000owen",
+"title": "Colder than Hell : a Marine Rifle Company at Chosin Reservoir",
+"first_seen": "2026-11-24T22:40:43Z",
+"page": "r/11f2c98b2802.html",
+"url": "https://archive.org/details/colderthanhellma0000owen"
+},
+{
+"key": "ia:litvin-korea-physician-inchon-chosin",
+"title": "Interview with Dr. Henry Litvin (died in 2023 at age 99), Korean War physician, present at Inchon and Chosin Reservoir campaigns.",
+"first_seen": "2026-11-24T22:40:43Z",
+"page": "r/b6d60b08ac9b.html",
+"url": "https://archive.org/details/litvin-korea-physician-inchon-chosin"
+},
+{
+"key": "ia:lkfil-Ben_Wagner_-_The_Battle_of_the_Chosin_Reservoir",
+"title": "Ben Wagner - The Battle of the Chosin Reservoir",
+"first_seen": "2026-11-24T22:40:43Z",
+"page": "r/07473769fd7d.html",
+"url": "https://archive.org/details/lkfil-Ben_Wagner_-_The_Battle_of_the_Chosin_Reservoir"
+},
+{
+"key": "ia:the-frozen-chosen-the-1st-u.-s.-marine-division-and-the-battle-of-the-chosin-reservoir",
+"title": "The Frozen Chosen : The 1°st U.S. Marine Division and the Battle of the Chosin Reservoir",
+"first_seen": "2026-11-24T22:40:43Z",
+"page": "r/2e0f0b160a6a.html",
+"url": "https://archive.org/details/the-frozen-chosen-the-1st-u.-s.-marine-division-and-the-battle-of-the-chosin-reservoir"
+},
+{
+"key": "koreanwar:2022-US-02-AV-D-00049",
+"title": "장진호 전투 당시 미 해병대원을 싣고 이동하는 트럭 행렬 기록영상",
+"first_seen": "2026-11-24T22:40:43Z",
+"page": "r/8398e69746d5.html",
+"url": "https://www.koreanwar.or.kr:8443/searchDetail.do?archRfcd=2022-US-02-AV-D-00049"
+},
+{
+"key": "koreanwar:2022-US-02-AV-D-00245",
+"title": "한국에서의 해병대 퇴각 기록영상 1",
+"first_seen": "2026-11-24T22:40:43Z",
+"page": "r/0f5234746b6f.html",
+"url": "https://www.koreanwar.or.kr:8443/searchDetail.do?archRfcd=2022-US-02-AV-D-00245"
+},
+{
+"key": "koreanwar:2023-KR-01-AV-A-00044",
+"title": "6.25 KOREAN WAR 한국전쟁 2편: 중국군의 개입과 장진호 전투 DVD",
+"first_seen": "2026-11-24T22:40:43Z",
+"page": "r/8fc0712ebb20.html",
+"url": "https://www.koreanwar.or.kr:8443/searchDetail.do?archRfcd=2023-KR-01-AV-A-00044"
+},
+{
+"key": "nara:NAID 276537580",
+"title": "Fifth Marine Regiment Sets Up Command Post By Southern Tip of Chosin Reservoir in Latter Days of November",
+"first_seen": "2026-11-24T22:40:43Z",
+"page": "r/0118c090ad1b.html",
+"url": "https://catalog.archives.gov/id/276537580"
+},
+{
+"key": "nara:NAID 373983536",
+"title": "FICHE_272",
+"first_seen": "2026-11-24T22:40:43Z",
+"page": "r/b841058eebef.html",
+"url": "https://catalog.archives.gov/id/373983536"
+},
+{
+"key": "nara:NAID 400402185",
+"title": "FICHE_586",
+"first_seen": "2026-11-24T22:40:43Z",
+"page": "r/10a15801e7b1.html",
+"url": "https://catalog.archives.gov/id/400402185"
 }
 ]
 }

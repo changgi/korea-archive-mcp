@@ -1,5 +1,5 @@
 {
-"updated": "2026-11-24T22:29:07Z",
+"updated": "2026-11-24T22:44:00Z",
 "note": "구간 = 연대(4자리 연도·8자리 날짜·연호 연도 明治·大正·昭和·光武·隆熙·檀紀 환산) → 세기 → 왕조·시대명. 근거 순서 date → 제목 → 메타(생산·시대·출판). 세기·시대 구간은 시간축 근사 정렬",
 "timeline": [
 {
@@ -1034,18 +1034,18 @@
 },
 {
 "decade": "1950년대",
-"records": 110,
+"records": 132,
 "by_source": {
-"nara": 14,
+"nara": 20,
 "europeana": 4,
-"ia": 8,
+"ia": 14,
 "tna": 8,
 "gallery": 3,
 "awm": 8,
 "archives": 24,
 "commons": 7,
 "gallica": 2,
-"koreanwar": 11,
+"koreanwar": 21,
 "ndl": 1,
 "nlk": 1,
 "oldnews": 3,
@@ -1057,9 +1057,9 @@
 "dnz": 4
 },
 "by_kind": {
-"motion_picture": 18,
-"graphic": 17,
-"document": 75
+"motion_picture": 25,
+"graphic": 24,
+"document": 83
 },
 "samples": [
 {
@@ -1195,15 +1195,15 @@
 },
 {
 "decade": "1970년대",
-"records": 4,
+"records": 5,
 "by_source": {
 "nzarch": 1,
 "earchive": 1,
-"ia": 1,
+"ia": 2,
 "ktv": 1
 },
 "by_kind": {
-"document": 4
+"document": 5
 },
 "samples": [
 {
@@ -1225,6 +1225,11 @@
 "title": "상기하자 6.25",
 "url": "https://www.ehistory.go.kr/view/movie?mediasrcgbn=KV&mediagbn=MH&mediaid=11359&mediadtl=25509",
 "iiif": "https://korea-archive-mcp.vercel.app/iiif/rec/q1YqVrKKVsouKVOK1VEqUbJSetPc-GrHhrdTZ7yZN0HBTM_IVElHKQUobmhpbg5kZgKZQKoUSGWUlBQUW-nrl5eX66VmZBaX5BdV6qXn62UX6Zdlppbr5-YDKfvc1JTMxOKi5PSkPFvvMDUwF8T29YCwM1NsDQ2NTS0hvJSSHFsjU1MDS6AdBSDXzGgEOkjhUcMuhddrdrydOQUoACSBsnlAWZCzdZRyIU4qBFKvN8x5tWmNwuuOljcLGhXezJ7wZt5SoFQiyGNGBkZmuoaGukYmIQamViYGVgaGSrUA/manifest.json"
+},
+{
+"title": "DTIC ADB006731: Changjin (Chosin) Reservoir, Korea 1950: A Case Study of United States Army Tactics and Doctrine for Enc",
+"url": "https://archive.org/details/DTIC_ADB006731",
+"iiif": "https://iiif.archive.org/iiif/3/DTIC_ADB006731/manifest.json"
 }
 ]
 },
@@ -1273,16 +1278,17 @@
 },
 {
 "decade": "1990년대",
-"records": 24,
+"records": 25,
 "by_source": {
 "archives": 6,
 "commons": 1,
 "ndl": 1,
 "nlk": 3,
-"ktv": 13
+"ktv": 13,
+"ia": 1
 },
 "by_kind": {
-"document": 16,
+"document": 17,
 "graphic": 4,
 "motion_picture": 4
 },
@@ -1316,7 +1322,7 @@
 },
 {
 "decade": "2000년대",
-"records": 25,
+"records": 28,
 "by_source": {
 "archives": 4,
 "ktv": 5,
@@ -1325,10 +1331,11 @@
 "nrich": 5,
 "much": 1,
 "ndl": 1,
-"nlk": 1
+"nlk": 1,
+"ia": 3
 },
 "by_kind": {
-"document": 6,
+"document": 9,
 "graphic": 19
 },
 "samples": [
@@ -1361,9 +1368,9 @@
 },
 {
 "decade": "2010년대",
-"records": 26,
+"records": 29,
 "by_source": {
-"ia": 2,
+"ia": 4,
 "un": 5,
 "gonghun": 1,
 "archives": 2,
@@ -1373,10 +1380,11 @@
 "okchf": 1,
 "dnz": 2,
 "nrich": 4,
-"ndl": 1
+"ndl": 1,
+"koreanwar": 1
 },
 "by_kind": {
-"document": 15,
+"document": 18,
 "graphic": 11
 },
 "samples": [
@@ -1453,9 +1461,9 @@
 },
 {
 "decade": "연대 미상",
-"records": 56,
+"records": 60,
 "by_source": {
-"nara": 10,
+"nara": 13,
 "seoul": 12,
 "europeana": 2,
 "i815": 2,
@@ -1465,15 +1473,15 @@
 "jsg": 1,
 "kyudb": 1,
 "ndl": 1,
-"ia": 2,
+"ia": 3,
 "aks": 8,
 "commons": 6,
 "nlk": 3
 },
 "by_kind": {
-"document": 39,
-"graphic": 14,
-"motion_picture": 3
+"document": 40,
+"graphic": 16,
+"motion_picture": 4
 },
 "samples": [
 {

@@ -1,22 +1,22 @@
 {
- "updated": "2026-11-24T22:29:07Z",
- "records": 473,
- "new_records": 0,
- "new_batches": 0,
+ "updated": "2026-11-24T22:44:00Z",
+ "records": 507,
+ "new_records": 30,
+ "new_batches": 2,
  "by_source": {
   "nrich": 43,
   "archives": 40,
+  "ia": 38,
   "nedb": 36,
   "okchf": 35,
+  "nara": 33,
   "aks": 32,
   "commons": 31,
   "ktv": 28,
-  "nara": 24,
-  "ia": 24,
+  "koreanwar": 22,
   "ndl": 16,
   "i815": 13,
   "seoul": 13,
-  "koreanwar": 11,
   "nlk": 11,
   "oldnews": 11,
   "tna": 10,
@@ -39,17 +39,17 @@
  },
  "first": "2026-11-23T03:00:15Z",
  "formats": {
-  "text": 51,
+  "text": 53,
   "csv": 49,
   "iiif": 3
  },
  "queries": {
-  "added": 0,
-  "total": 81,
-  "calls": 99,
+  "added": 5,
+  "total": 86,
+  "calls": 104,
   "by_tool": {
    "nedb_search": 58,
-   "cross_search": 23,
+   "cross_search": 28,
    "source_profile": 9,
    "seoul_archives_search": 3,
    "nara_search": 2,
@@ -58,9 +58,9 @@
    "koreanwar_item": 1
   }
  },
- "repeat_records": 128,
+ "repeat_records": 129,
  "entry_types": {
-  "기록": 454,
+  "기록": 488,
   "소장처(컬렉션)": 5,
   "검색 안내": 7,
   "결함 출력": 7
@@ -83,52 +83,52 @@
   },
   {
    "rank": 3,
-   "seen": 9,
-   "days": 1,
+   "seen": 10,
+   "days": 2,
    "title": "EVACUATION OF HUNGNAM, KOREA",
    "url": "https://catalog.archives.gov/id/75392"
   },
   {
    "rank": 4,
+   "seen": 10,
+   "days": 2,
+   "title": "EVACUATION OF HUNGNAM KOREA",
+   "url": "https://catalog.archives.gov/id/75393"
+  },
+  {
+   "rank": 5,
+   "seen": 9,
+   "days": 2,
+   "title": "EVACUATION, HUNGNAM, KOREA",
+   "url": "https://catalog.archives.gov/id/22397"
+  },
+  {
+   "rank": 6,
    "seen": 8,
    "days": 2,
    "title": "[奎18933] 加士島屯土賭稅 節目 가사도둔토도세 절목 · 內藏院(朝鮮) 編/내장원(조선) 편",
    "url": "https://kyudb.snu.ac.kr/book/view.do?book_cd=GK18933_00"
   },
   {
-   "rank": 5,
-   "seen": 9,
-   "days": 1,
-   "title": "EVACUATION OF HUNGNAM KOREA",
-   "url": "https://catalog.archives.gov/id/75393"
-  },
-  {
-   "rank": 6,
+   "rank": 7,
    "seen": 8,
    "days": 1,
    "title": "01 · 미국 국립기록관리청 NARA — 1950.12.24 흥남 — 필름 원본까지 — North Korean refugees use anything that will float ",
    "url": "https://changgi.github.io/korea-archive-mcp/iiif.html#s01/1"
   },
   {
-   "rank": 7,
+   "rank": 8,
    "seen": 8,
    "days": 1,
    "title": "12 · 위키미디어 공용 Commons — 업로더 말 대신 원 소장처에 묻는다 — Korean natives prepare to board a tank landing ship du",
    "url": "https://changgi.github.io/korea-archive-mcp/iiif.html#s12/2"
   },
   {
-   "rank": 8,
+   "rank": 9,
    "seen": 8,
    "days": 1,
    "title": "29 · 인터넷 아카이브 archive.org — 인터넷 사본과 NARA 원본, 한 줄로 — EVACUATION OF HUNGNAM, KOREA (+4장)",
    "url": "https://changgi.github.io/korea-archive-mcp/iiif.html#s29/1"
-  },
-  {
-   "rank": 9,
-   "seen": 8,
-   "days": 1,
-   "title": "EVACUATION, HUNGNAM, KOREA",
-   "url": "https://catalog.archives.gov/id/22397"
   },
   {
    "rank": 10,

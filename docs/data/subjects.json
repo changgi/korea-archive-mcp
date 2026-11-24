@@ -11,13 +11,20 @@
 "ia:USRalliesUNAlliesForSanctionsAgainstNorthKorea",
 "ia:logy-does-editor-video-lol-goes-to-north-korea",
 "ia:111-adc-8610",
-"ia:428-npc-170"
+"ia:428-npc-170",
+"ia:428-npc-168",
+"ia:428-npc-171",
+"ia:111-adc-8608",
+"ia:111-adc-8630",
+"ia:t3wXp7NIGMTGQvUfLLEtBtKYxxIEfc",
+"ia:ADC-10271",
+"ia:lkfil-Ben_Wagner_-_The_Battle_of_the_Chosin_Reservoir"
 ],
 "sources": [
 "ia"
 ],
 "first": "2026-11-23T03:00:40Z",
-"last": "2026-11-24T00:00:00Z",
+"last": "2026-11-24T22:40:43Z",
 "keys": [
 "mediatype"
 ]
@@ -25,13 +32,17 @@
 "texts": {
 "records": [
 "ia:cia-readingroom-document-cia-rdp79-00927a004500030001-1",
-"ia:cia-readingroom-document-cia-rdp82-00457r007500490005-8"
+"ia:cia-readingroom-document-cia-rdp82-00457r007500490005-8",
+"ia:DTIC_ADA429076",
+"ia:DTIC_ADB006731",
+"ia:litvin-korea-physician-inchon-chosin",
+"ia:the-frozen-chosen-the-1st-u.-s.-marine-division-and-the-battle-of-the-chosin-reservoir"
 ],
 "sources": [
 "ia"
 ],
 "first": "2026-11-23T03:00:40Z",
-"last": "2026-11-23T13:50:11Z",
+"last": "2026-11-24T22:40:43Z",
 "keys": [
 "mediatype"
 ]
@@ -56,13 +67,17 @@
 "ia:111-adc-8463",
 "ia:111-adc-8634",
 "ia:111-adc-8610",
-"ia:428-npc-170"
+"ia:428-npc-170",
+"ia:428-npc-168",
+"ia:428-npc-171",
+"ia:111-adc-8608",
+"ia:111-adc-8630"
 ],
 "sources": [
 "ia"
 ],
 "first": "2026-11-23T03:00:40Z",
-"last": "2026-11-24T00:00:00Z",
+"last": "2026-11-24T22:40:42Z",
 "keys": [
 "subject"
 ]
@@ -609,15 +624,18 @@
 "dnz:22898683",
 "dnz:23044160",
 "dnz:23044233",
-"dnz:42631548"
+"dnz:42631548",
+"ia:ADC-10271"
 ],
 "sources": [
-"dnz"
+"dnz",
+"ia"
 ],
 "first": "2026-11-23T13:40:50Z",
-"last": "2026-11-23T13:40:50Z",
+"last": "2026-11-24T22:40:43Z",
 "keys": [
-"주제"
+"주제",
+"subject"
 ]
 },
 "1950-1953": {
@@ -682,15 +700,18 @@
 "Military": {
 "records": [
 "dnz:22867986",
-"dnz:23044160"
+"dnz:23044160",
+"ia:the-frozen-chosen-the-1st-u.-s.-marine-division-and-the-battle-of-the-chosin-reservoir"
 ],
 "sources": [
-"dnz"
+"dnz",
+"ia"
 ],
 "first": "2026-11-23T13:40:50Z",
-"last": "2026-11-23T13:40:50Z",
+"last": "2026-11-24T22:40:43Z",
 "keys": [
-"주제"
+"주제",
+"subject"
 ]
 },
 "Coleman": {
@@ -1234,6 +1255,176 @@
 "last": "2026-11-23T13:40:52Z",
 "keys": [
 "주제"
+]
+},
+"Stock Footage": {
+"records": [
+"ia:t3wXp7NIGMTGQvUfLLEtBtKYxxIEfc"
+],
+"sources": [
+"ia"
+],
+"first": "2026-11-24T22:40:42Z",
+"last": "2026-11-24T22:40:42Z",
+"keys": [
+"subject"
+]
+},
+"DTIC Archive": {
+"records": [
+"ia:DTIC_ADA429076",
+"ia:DTIC_ADB006731"
+],
+"sources": [
+"ia"
+],
+"first": "2026-11-24T22:40:43Z",
+"last": "2026-11-24T22:40:43Z",
+"keys": [
+"subject"
+]
+},
+"Wols": {
+"records": [
+"ia:DTIC_ADA429076"
+],
+"sources": [
+"ia"
+],
+"first": "2026-11-24T22:40:43Z",
+"last": "2026-11-24T22:40:43Z",
+"keys": [
+"subject"
+]
+},
+"Donald K": {
+"records": [
+"ia:DTIC_ADA429076"
+],
+"sources": [
+"ia"
+],
+"first": "2026-11-24T22:40:43Z",
+"last": "2026-11-24T22:40:43Z",
+"keys": [
+"subject"
+]
+},
+"*CASUALTIES": {
+"records": [
+"ia:DTIC_ADA429076"
+],
+"sources": [
+"ia"
+],
+"first": "2026-11-24T22:40:43Z",
+"last": "2026-11-24T22:40:43Z",
+"keys": [
+"subject"
+]
+},
+"*INFANTRY PERSONNEL": {
+"records": [
+"ia:DTIC_ADA429076"
+],
+"sources": [
+"ia"
+],
+"first": "2026-11-24T22:40:43Z",
+"last": "2026-11-24T22:40:43Z",
+"keys": [
+"subject"
+]
+},
+"*MARINE CORPS PERS": {
+"records": [
+"ia:DTIC_ADA429076"
+],
+"sources": [
+"ia"
+],
+"first": "2026-11-24T22:40:43Z",
+"last": "2026-11-24T22:40:43Z",
+"keys": [
+"subject"
+]
+},
+"Coombs": {
+"records": [
+"ia:DTIC_ADB006731"
+],
+"sources": [
+"ia"
+],
+"first": "2026-11-24T22:40:43Z",
+"last": "2026-11-24T22:40:43Z",
+"keys": [
+"subject"
+]
+},
+"Robert M.": {
+"records": [
+"ia:DTIC_ADB006731"
+],
+"sources": [
+"ia"
+],
+"first": "2026-11-24T22:40:43Z",
+"last": "2026-11-24T22:40:43Z",
+"keys": [
+"subject"
+]
+},
+"*WARFARE": {
+"records": [
+"ia:DTIC_ADB006731"
+],
+"sources": [
+"ia"
+],
+"first": "2026-11-24T22:40:43Z",
+"last": "2026-11-24T22:40:43Z",
+"keys": [
+"subject"
+]
+},
+"MILITARY FORCES(UNITED STATES)": {
+"records": [
+"ia:DTIC_ADB006731"
+],
+"sources": [
+"ia"
+],
+"first": "2026-11-24T22:40:43Z",
+"last": "2026-11-24T22:40:43Z",
+"keys": [
+"subject"
+]
+},
+"NORTH KO": {
+"records": [
+"ia:DTIC_ADB006731"
+],
+"sources": [
+"ia"
+],
+"first": "2026-11-24T22:40:43Z",
+"last": "2026-11-24T22:40:43Z",
+"keys": [
+"subject"
+]
+},
+"oral history": {
+"records": [
+"ia:litvin-korea-physician-inchon-chosin"
+],
+"sources": [
+"ia"
+],
+"first": "2026-11-24T22:40:43Z",
+"last": "2026-11-24T22:40:43Z",
+"keys": [
+"subject"
 ]
 }
 },
@@ -4022,13 +4213,20 @@
 "nara:NAID 22228",
 "nara:NAID 22375",
 "nara:NAID 22399",
-"nara:NAID 24142"
+"nara:NAID 24142",
+"nara:NAID 22373",
+"nara:NAID 22395",
+"nara:NAID 22374",
+"nara:NAID 22376",
+"nara:NAID 22383",
+"nara:NAID 75389",
+"nara:NAID 276537580"
 ],
 "sources": [
 "nara"
 ],
 "first": "2026-11-23T03:00:15Z",
-"last": "2026-11-24T00:00:00Z",
+"last": "2026-11-24T22:40:43Z",
 "keys": [
 "기술 수준"
 ]
@@ -4041,13 +4239,15 @@
 "nara:NAID 42219674",
 "nara:NAID 492062159",
 "nara:NAID 42219676",
-"nara:NAID 492062268"
+"nara:NAID 492062268",
+"nara:NAID 373983536",
+"nara:NAID 400402185"
 ],
 "sources": [
 "nara"
 ],
 "first": "2026-11-23T03:00:15Z",
-"last": "2026-11-24T10:25:08Z",
+"last": "2026-11-24T22:40:43Z",
 "keys": [
 "기술 수준"
 ]
@@ -4912,10 +5112,10 @@
 }
 }
 },
-"updated": "2026-11-24T22:29:07Z",
+"updated": "2026-11-24T22:44:00Z",
 "totals": {
 "매체": 3,
-"주제": 88,
+"주제": 101,
 "장소": 33,
 "분류": 93,
 "시대": 38,
