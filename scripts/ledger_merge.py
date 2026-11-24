@@ -475,12 +475,51 @@ def merge_queries(state, today):
     recent = sorted(idx, key=lambda o: o["last"], reverse=True)[:20]
     return {"added": added, "total": len(idx), "calls": sum(o["seen"] for o in idx), "by_tool": dict(sorted(bt.items(), key=lambda kv: -kv[1])), "recent": recent}
 
+def _stable(v):
+    if isinstance(v, list): return "[" + ",".join(_stable(x) for x in v) + "]"
+    if isinstance(v, dict): return "{" + ",".join(json.dumps(k, ensure_ascii=False) + ":" + _stable(v[k]) for k in sorted(v)) + "}"
+    return "null" if v is None else json.dumps(v, ensure_ascii=False)
+
+def arg_key(tool, args):
+    """lib/ledger.js argKey와 같은 값(키 정렬 직렬화 sha256-16) — 지문이 없던 v2.26~2.27 질의에도 같은 지문을 준다(29/29 일치 실측)."""
+    import hashlib
+    return hashlib.sha256((str(tool) + _stable(args or {})).encode()).hexdigest()[:16]
+
+def backfill_found_by(led):
+    """v2.41 발견 경로 소급 — 축적된 회신 원문(queries/*.jsonl.gz)에 기록의 URL 또는 노드(rec:<key>)가 실제로 들어 있으면 그 질의를 발견 경로로.
+    실시간 지문과 구분해 found_by_basis에 '회신 본문 대조(소급)'. 원장 재검색(sources=ledger)은 순환이라 제외."""
+    import gzip
+    for o in led.values():  # 먼저 실시간 지문 근거를 단다(소급이 덮지 않게)
+        for ak in o.get("found_by") or []: o.setdefault("found_by_basis", {}).setdefault(ak, "질의 지문(실시간)")
+    qd = os.path.join(D, "queries"); added = 0
+    refs = []
+    for k, o in led.items():
+        if o.get("entry_type", "기록") != "기록": continue
+        r = [f"rec:{k}"] + ([o["url"]] if len(o.get("url") or "") >= 20 and not re.match(r"^https?://[^/]+/?$", o["url"]) else [])
+        refs.append((k, r))
+    for f in sorted(os.listdir(qd)) if os.path.isdir(qd) else []:
+        if not f.endswith(".jsonl.gz"): continue
+        for ln in gzip.open(os.path.join(qd, f), "rt", encoding="utf-8"):
+            if not ln.strip(): continue
+            q = json.loads(ln); a = q.get("args") or {}
+            if "ledger" in str(a.get("sources", "")) or not q.get("z"): continue
+            try: body = zlib.decompress(base64.b64decode(q["z"] + "=" * (-len(q["z"]) % 4)), -15).decode("utf-8", "replace")
+            except Exception: continue
+            ak = q.get("ak") or arg_key(q.get("tool", ""), a)
+            for k, rr in refs:
+                if any(x in body for x in rr):
+                    o = led[k]; fb = o.setdefault("found_by", []); bs = o.setdefault("found_by_basis", {})
+                    if ak not in fb: fb.append(ak); added += 1
+                    bs.setdefault(ak, "회신 본문 대조(소급)")
+    return added
+
 def build_provenance(recs):
     """v2.28 발견 경로(맥락·증거 사슬) — 질의 지문(ak) ↔ 발견 기록을 양방향으로. 질의는 queries/index.json, 회신 원문은 queries/<월>.jsonl.gz(같은 ak)."""
     qp = os.path.join(D, "queries", "index.json")
     Q = json.load(open(qp, encoding="utf-8")).get("queries", []) if os.path.exists(qp) else []
     byak = {}
     for q in Q:
+        if not q.get("ak"): q["ak"] = arg_key(q.get("tool", ""), q.get("args"))  # v2.41 지문 이전 질의도 같은 지문으로
         if q.get("ak"):
             e = byak.setdefault(q["ak"], {"ak": q["ak"], "tool": q["tool"], "args": q["args"], "first": q["first"], "last": q["last"], "calls": 0, "versions": 0, "records": []})
             e["calls"] += q["seen"]; e["versions"] += 1; e["first"] = min(e["first"], q["first"]); e["last"] = max(e["last"], q["last"])
@@ -902,6 +941,7 @@ def main():
         if n_: time.sleep(0.6)
     for o in led.values(): o["entry_type"] = entry_type(o)
     for o in led.values(): o["entry_type"] = entry_type(o)
+    nbf = backfill_found_by(led); print(f"발견 경로 소급(회신 본문 대조) {nbf}건")
     fx_used, fx_changed, fx_pv = fixity_pass(led, today, int(os.environ.get("FIXITY_MAX", "30")))  # v2.35 하루 30건 순환(기관 서버 예의)
     print(f"고정성 재확인 {fx_used}건 · 지문 변경 {fx_changed}건 · 판독기 {fx_pv}")
     def win(o, a, b):  # a~b일 전 사이 발견 횟수
@@ -936,8 +976,8 @@ def main():
         o["iiif_built"] = "" if o.get("iiif") else leaf_manifest(o)
     with open(lp, "w", encoding="utf-8") as f:
         for o in recs: f.write(json.dumps(o, ensure_ascii=False, separators=(",", ":")) + "\n")
-    cols = ["key", "entry_type", "summary_composed", "rights_view", "rights_basis", "fixity", "defect_note", "link_note", "sources", "title", "date", "date_derived", "date_basis", "id", "url", "partOf", "partOf_derived", "media", "sameAs", "iiif", "iiif_built", "iiif_kind", "found_by", "first_seen", "last_seen", "seen", "seen_7d", "seen_30d", "days_total", "formats", "tools", "max_cross", "trend", "rank", "score", "summary", "rights", "thumb", "meta"]
-    fmtv = lambda v: json.dumps(v, ensure_ascii=False, separators=(",", ":")) if isinstance(v, list) and v and isinstance(v[0], dict) else " | ".join(f"{a}: {b}" for a, b in v) if isinstance(v, list) and v and isinstance(v[0], list) else (" ".join(f"{k}:{n}" for k, n in sorted(v.items(), key=lambda kv: -kv[1])) if isinstance(v, dict) else ("+".join(v) if isinstance(v, list) else v))
+    cols = ["key", "entry_type", "found_by_basis", "summary_composed", "rights_view", "rights_basis", "fixity", "defect_note", "link_note", "sources", "title", "date", "date_derived", "date_basis", "id", "url", "partOf", "partOf_derived", "media", "sameAs", "iiif", "iiif_built", "iiif_kind", "found_by", "first_seen", "last_seen", "seen", "seen_7d", "seen_30d", "days_total", "formats", "tools", "max_cross", "trend", "rank", "score", "summary", "rights", "thumb", "meta"]
+    fmtv = lambda v: json.dumps(v, ensure_ascii=False, separators=(",", ":")) if isinstance(v, list) and v and isinstance(v[0], dict) else " | ".join(f"{a}: {b}" for a, b in v) if isinstance(v, list) and v and isinstance(v[0], list) else (" ".join(f"{k}:{n}" for k, n in sorted(v.items(), key=lambda kv: -kv[1])) if isinstance(v, dict) and all(isinstance(x, (int, float)) for x in v.values()) else json.dumps(v, ensure_ascii=False, separators=(",", ":")) if isinstance(v, dict) else ("+".join(v) if isinstance(v, list) else v))
     with open(os.path.join(D, "discovered.csv"), "w", encoding="utf-8-sig", newline="") as f:
         w = csv.writer(f); w.writerow(cols)
         for o in recs: w.writerow([fmtv(o.get(c, "")) for c in cols])
