@@ -117,6 +117,10 @@
 - [ ] `tests/golden.json` 케이스 추가.
 - [ ] 스키마·설명이 바뀌면 **PlayMCP 콘솔 "정보 불러오기"** 재실행.
 
+### 런타임·워크플로 액션 판(v2.46)
+- Node는 **프로덕션(Vercel 프로젝트 nodeVersion 24.x)과 CI를 같은 판**으로: `package.json` `engines.node = "24.x"`, verify의 `node-version: 24`. Vercel 판을 바꾸면 둘 다 같이 바꾼다.
+- 액션은 Node 24 실행 판: `actions/checkout@v6` · `actions/setup-node@v6` · `actions/setup-python@v7`(두 저장소). 로그에 'Node.js 20 is deprecated' 경고가 다시 보이면 해당 액션 판을 올린다 — Dependabot(github-actions)이 월 1회 PR.
+
 ### 메이저 업그레이드(next·zod·mcp-handler)
 자동 PR에서 제외된다. 올릴 때는 브랜치에서 `npm i <패키지>@<버전>` → `npx next build` → 로컬 `next start` 후 `python3 scripts/golden.py --url http://localhost:3000/api/mcp` → 프리뷰 배포에서 골든 재실행 → 병합. zod 4는 스키마 API(`z.coerce` 등)를, mcp-handler 2는 `createMcpHandler` 시그니처를 먼저 확인.
 
