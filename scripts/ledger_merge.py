@@ -97,6 +97,7 @@ DEEP = {"i815": ("nedb_search", lambda o: o.get("url") and {"mode": "i815", "que
         "ktv": ("nedb_search", lambda o: o.get("url") and {"mode": "ktv", "query": o["url"]}),
         "koreanwar": ("koreanwar_item", lambda o: o.get("id") and not str(o["id"]).startswith("book:") and {"ref_code": o["id"]}),
         "seoul": ("seoul_archives_search", lambda o: o.get("url") and {"query": o["url"]}),
+        "earchive": ("nedb_search", lambda o: "catalogView.do?systemId=" in (o.get("url") or "") and {"mode": "earchive", "query": o["url"]}),
         "okchf": ("nedb_search", lambda o: o.get("url") and {"mode": "okchf", "query": o["url"]}),
         "nrich": ("nedb_search", lambda o: {"mode": "nrich", "query": o["id"] if re.match(r"^(ksm|portrait|gwaebul|diary|mokgan|jcbib|jcphoto|dict|arch|koguryo|gaesong|design|pattern|oldbook|hyanggyo|stone|journal|iron|dolmen|assay|material):", str(o.get("id", ""))) else o.get("url")} if (o.get("id") or o.get("url")) else None)}
 DEEP_V = {"seoul": 2}  # v2.32 판독기 판 — 판이 오르면 이미 보강된 기록도 한 번 다시 판독(서울기록원: 기관 계층·생산자·보존이력 추가)
@@ -283,6 +284,7 @@ def entry_type(o):
     t, u = o.get("title") or "", o.get("url") or ""
     if DEFECT_RE.search(t): return "결함 출력"
     if re.search(r"moreContentsSearchList|catalog/result\?", u) or re.match(r"^독립기념관 .+ \d+건$", t): return "검색 안내"
+    if o["key"].startswith("aks:") and t.startswith("[고문서 소장처]"): return "소장처(컬렉션)"
     return "기록"
 
 def link_quality(o):
@@ -564,6 +566,125 @@ section{{border-left:3px solid #e0b04a;padding:4px 14px;margin:14px 0}}h3{{margi
 <main><h1>연대 타임라인</h1><p>발견 누적 원장 {len(recs)}건을 시대 구간으로. 구간 = 4자리 연도 → 세기 → 기관 '시대' 필드의 왕조·시대명(근거 순서 date → 제목 → 메타). 세기·시대 구간은 시간축 근사 위치. 구간마다 대표 기록 5건(IIIF·KV 열람). <a href="timeline.json">timeline.json</a> · <a href="index.html">원장</a></p>{rows}</main></html>""")
     return len(new), len(csl), len(tl)
 
+ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..")
+
+def _csv_rows(txt):
+    L = txt.split("\n"); i = next((k for k, l in enumerate(L) if l.startswith("node,")), None)
+    if i is None: return []
+    body = []
+    for l in L[i:]:
+        if l.startswith("※"): break
+        body.append(l)
+    return [r for r in csv.DictReader(io.StringIO("\n".join(body))) if r.get("sources")]
+
+RESOLVE = {"earchive": lambda o: o.get("id") and {"query": o["id"], "sources": "earchive", "max_per_source": 5, "format": "csv"},
+           "kyudb": lambda o: o.get("id") and {"query": o["id"], "sources": "kyudb", "max_per_source": 5, "format": "csv"}}
+
+def resolve_links(led, today, budget):
+    """v2.35 원 기관 첫 화면만 가리키던 기록 → 실제 기록 고정 링크. 식별자(사료ID·청구기호)로 우리 서버를 다시 검색해 같은 식별자 행의 상세 URL을 받는다(추정 없음 — 식별자 일치만).
+    옛 URL은 지우지 않고 url_history에 남긴다."""
+    used = fixed = 0
+    for o in led.values():
+        src = o["key"].split(":")[0]
+        if used >= budget: break
+        if src not in RESOLVE or not link_quality(o) or o.get("link_tried", "") >= today.isoformat(): continue
+        args = RESOLVE[src](o)
+        if not args: continue
+        used += 1; o["link_tried"] = today.isoformat()
+        try: rows = _csv_rows(mcp_call("cross_search", args))
+        except Exception: continue
+        hit = next((r for r in rows if (r.get("id") or "").strip() == str(o["id"]).strip() and r.get("url") and not re.match(r"^https?://[^/]+/?$", r["url"])), None)
+        if hit:
+            o.setdefault("url_history", []).append({"at": today.isoformat(), "url": o.get("url", ""), "note": "원 기관 첫 화면(식별자 재검색으로 고정 상세 확보)"})
+            o["url"] = hit["url"]; o["link_src"] = f"식별자 재검색 cross_search({src}, '{o['id']}')"; fixed += 1
+            if o.get("enrich_status") in ("ok", "none", "fail"): o["enrich_status"] = ""; o.pop("enriched", None)  # 새 상세로 다시 판독
+        time.sleep(0.6)
+    return used, fixed
+
+def aks_drill(led, today, budget):
+    """v2.35 고문서자료관 소장처(컬렉션) 항목 → 안의 실제 문서를 원장 기록으로 발굴. nedb_search(mode='aks')로 분류 → 문서까지 내려가
+    문서마다 UCI 고정 링크(link.do?dataUCI=)·소장처 계층·제목 속 연도. 소장처 항목은 지우지 않고 '소장처(컬렉션)'으로 두고 하위 문서 목록을 단다."""
+    used = added = 0
+    for o in [x for x in led.values() if x["key"].startswith("aks:") and x.get("entry_type") != "결함 출력"]:
+        if used >= budget: break
+        if o.get("drilled", "") >= today.isoformat() or o.get("children"): continue
+        cid = str(o.get("id") or ""); queue = [cid] if re.match(r"^L\d{6}", cid) else []; docs = []
+        while queue and used < budget and len(docs) < 40:
+            q = queue.pop(0); used += 1
+            try: t = mcp_call("nedb_search", {"mode": "aks", "query": q})
+            except Exception: break
+            queue += re.findall(r"\[분류 (L\d{6}F[0-9A-Z]*)\]", t)
+            for m in re.finditer(r"- \[문서\] (.+)\n\s+원문 고정 링크\(UCI\): (https://archive\.aks\.ac\.kr/link\.do\?dataUCI=\S+)", t): docs.append((m[1].strip(), m[2].strip()))
+            time.sleep(0.6)
+        o["drilled"] = today.isoformat()
+        if not docs: continue
+        coll = re.sub(r"\s*\([^()]*\)$", "", re.sub(r"^\[고문서 소장처\]\s*", "", o["title"])); o["children"] = [{"title": d, "url": u} for d, u in docs]
+        for d, u in docs:
+            k = "aks:" + u.split("dataUCI=")[1]
+            if k in led: continue
+            led[k] = {"key": k, "sources": ["aks"], "title": d, "date": "", "id": u.split("dataUCI=")[1], "url": u, "partOf": f"한국고문서자료관 › {o.get('partOf') or ''} › {coll}".replace(" ›  › ", " › "),
+                      "media": "", "sameAs": "", "first_seen": today.isoformat() + "T00:00:00Z", "last_seen": today.isoformat() + "T00:00:00Z", "seen": 0, "tools": ["nedb_search"],
+                      "days": {}, "formats": {}, "days_total": 0, "max_cross": 1, "drilled_from": o["key"], "found_via": "소장처 하위 문서 발굴(nedb_search mode=aks)"}
+            added += 1
+    return used, added
+
+
+def parser_version():
+    """판독기 판 — route.js·lib/*.js 지문(ledger 체크아웃 = main = 배포본). 지문이 바뀌면 '판독기 변경 동반'으로 구분."""
+    import glob, hashlib
+    h = hashlib.sha256()
+    for f in [os.path.join(ROOT, "app", "api", "[transport]", "route.js")] + sorted(glob.glob(os.path.join(ROOT, "lib", "*.js"))):
+        if os.path.exists(f): h.update(open(f, "rb").read())
+    return h.hexdigest()[:12]
+
+VOLATILE = re.compile(r"판독 시각|발견 시각|\d{4}-\d\d-\d\dT\d\d:\d\d|캐시|cache", re.I)
+
+def fixity_text(o):
+    """원 기관 응답(우리 판독기를 거친 정규형) — 심층 판독 도구 응답 또는 IIIF 매니페스트(변동 항목 제외)."""
+    src = o["key"].split(":")[0]
+    m = o.get("iiif") or ""
+    if m:
+        j = get(m)
+        md = [e for e in (j.get("metadata") or []) if not VOLATILE.search(json.dumps(e.get("label"), ensure_ascii=False))]
+        core = {"label": j.get("label"), "summary": j.get("summary"), "metadata": md, "rights": j.get("rights"), "requiredStatement": j.get("requiredStatement"),
+                "items": len(j.get("items") or (j.get("sequences") or [{}])[0].get("canvases") or [])}
+        return json.dumps(core, ensure_ascii=False, sort_keys=True)
+    if src in DEEP:
+        tool, af = DEEP[src]; args = af(o)
+        if args: return "\n".join(l for l in mcp_call(tool, args).splitlines() if not VOLATILE.search(l))
+    return None
+
+def fixity_pass(led, today, budget):
+    """v2.35 원문 고정성(fixity) 감시 — 기록의 원 기관 응답 지문을 순환 재확인. 바뀌면 지우지 않고 이력에 추가:
+    첫 지문 / 판독기 변경 동반(우리 route.js·lib가 바뀜 — 원문 변경 아닐 수 있음) / 원문 변경 의심(판독기 그대로인데 응답이 바뀜)."""
+    import hashlib
+    pv = parser_version(); used = changed = 0
+    cand = [o for o in led.values() if o.get("entry_type", "기록") == "기록" and (o.get("iiif") or o["key"].split(":")[0] in DEEP)]
+    for o in sorted(cand, key=lambda o: o.get("fixity_checked", "")):
+        if used >= budget: break
+        if o.get("fixity_checked", "") >= today.isoformat(): continue
+        try:
+            t = fixity_text(o)
+        except Exception:
+            o["fixity_checked"] = today.isoformat(); used += 1; continue
+        used += 1; o["fixity_checked"] = today.isoformat()
+        if not t: continue
+        h = hashlib.sha256(t.encode()).hexdigest()[:16]; fx = o.setdefault("fixity", [])
+        if fx and fx[-1]["h"] == h: continue
+        kind = "첫 지문" if not fx else ("판독기 변경 동반" if fx[-1].get("pv") != pv else "원문 변경 의심")
+        fx.append({"at": today.isoformat(), "h": h, "pv": pv, "kind": kind}); changed += kind != "첫 지문"
+        time.sleep(0.6)
+    return used, changed, pv
+
+def write_fixity(recs):
+    ch = [{"key": o["key"], "title": o["title"][:160], "url": o.get("url", ""), "history": o["fixity"]} for o in recs if len(o.get("fixity") or []) > 1]
+    sus = [c for c in ch if any(f["kind"] == "원문 변경 의심" for f in c["history"])]
+    json.dump({"updated": dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"), "watched": sum(1 for o in recs if o.get("fixity")),
+               "changed_records": len(ch), "suspected_source_changes": len(sus),
+               "note": "지문 = 원 기관 응답(우리 판독기 정규형, 판독 시각 등 변동 항목 제외)의 SHA-256-16. pv = 판독기(route.js·lib) 지문. 이력은 지우지 않는다.",
+               "changes": sorted(ch, key=lambda c: c["history"][-1]["at"], reverse=True)}, open(os.path.join(D, "fixity_changes.json"), "w", encoding="utf-8"), ensure_ascii=False, indent=0)
+    return len(ch), len(sus)
+
 def merge_classes(recs):
     """v2.26 기준·분류 정보 축적 — 발견된 모든 계층 경로(기관 › 계열 › …)의 각 단계를 분류 사전으로. 지우지 않고 갱신만(사라진 경로도 보존)."""
     p = os.path.join(D, "classifications.json")
@@ -647,10 +768,18 @@ def main():
     keep = (today - dt.timedelta(days=10)).isoformat()
     state["days"] = {k: v for k, v in state["days"].items() if k >= keep}  # 처리 위치(작업 상태)일 뿐 축적 정보 아님
     nq = merge_queries(state, today)
+    for o in led.values(): o["entry_type"] = entry_type(o)
+    rl_used, rl_fixed = resolve_links(led, today, int(os.environ.get("RESOLVE_MAX", "20")))
+    ad_used, ad_added = aks_drill(led, today, int(os.environ.get("AKS_DRILL_MAX", "30")))
+    print(f"첫 화면 링크 해소 {rl_fixed}/{rl_used} · 고문서 소장처 하위 문서 발굴 {ad_added}건({ad_used}회 호출)")
     budget = int(os.environ.get("ENRICH_MAX", "80"))  # 하루 매니페스트 판독 상한(기관 서버 예의 — 순차·간격)
     for o in sorted(led.values(), key=lambda o: o.get("last_seen", ""), reverse=True):
         n_ = enrich(o, budget); budget -= n_
         if n_: time.sleep(0.6)
+    for o in led.values(): o["entry_type"] = entry_type(o)
+    for o in led.values(): o["entry_type"] = entry_type(o)
+    fx_used, fx_changed, fx_pv = fixity_pass(led, today, int(os.environ.get("FIXITY_MAX", "30")))  # v2.35 하루 30건 순환(기관 서버 예의)
+    print(f"고정성 재확인 {fx_used}건 · 지문 변경 {fx_changed}건 · 판독기 {fx_pv}")
     def win(o, a, b):  # a~b일 전 사이 발견 횟수
         return sum(n for k, n in o["days"].items() if (today - dt.timedelta(days=b)).isoformat() < k <= (today - dt.timedelta(days=a)).isoformat())
     cut = (today - dt.timedelta(days=90)).isoformat()
@@ -678,7 +807,7 @@ def main():
         o["iiif_built"] = "" if o.get("iiif") else leaf_manifest(o)
     with open(lp, "w", encoding="utf-8") as f:
         for o in recs: f.write(json.dumps(o, ensure_ascii=False, separators=(",", ":")) + "\n")
-    cols = ["key", "entry_type", "defect_note", "link_note", "sources", "title", "date", "date_derived", "date_basis", "id", "url", "partOf", "partOf_derived", "media", "sameAs", "iiif", "iiif_built", "iiif_kind", "found_by", "first_seen", "last_seen", "seen", "seen_7d", "seen_30d", "days_total", "formats", "tools", "max_cross", "trend", "rank", "score", "summary", "rights", "thumb", "meta"]
+    cols = ["key", "entry_type", "fixity", "defect_note", "link_note", "sources", "title", "date", "date_derived", "date_basis", "id", "url", "partOf", "partOf_derived", "media", "sameAs", "iiif", "iiif_built", "iiif_kind", "found_by", "first_seen", "last_seen", "seen", "seen_7d", "seen_30d", "days_total", "formats", "tools", "max_cross", "trend", "rank", "score", "summary", "rights", "thumb", "meta"]
     fmtv = lambda v: " | ".join(f"{a}: {b}" for a, b in v) if isinstance(v, list) and v and isinstance(v[0], list) else (" ".join(f"{k}:{n}" for k, n in sorted(v.items(), key=lambda kv: -kv[1])) if isinstance(v, dict) else ("+".join(v) if isinstance(v, list) else v))
     with open(os.path.join(D, "discovered.csv"), "w", encoding="utf-8-sig", newline="") as f:
         w = csv.writer(f); w.writerow(cols)
@@ -719,7 +848,7 @@ def main():
         h = o["key"].split(":")[0]; by[h] = by.get(h, 0) + 1
     st = {"updated": dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"), "records": len(recs), "new_records": new_recs, "new_batches": new_batches,
           "by_source": dict(sorted(by.items(), key=lambda kv: -kv[1])), "first": recs[0]["first_seen"] if recs else "",
-          "formats": usage["formats"], "queries": {k: nq[k] for k in ("added", "total", "calls", "by_tool")}, "repeat_records": sum(1 for o in recs if o["seen"] > 1), "entry_types": {t: sum(1 for o in recs if o.get("entry_type", "기록") == t) for t in ("기록", "검색 안내", "결함 출력")}, "site_root_links": sum(1 for o in recs if o.get("link_note")),
+          "formats": usage["formats"], "queries": {k: nq[k] for k in ("added", "total", "calls", "by_tool")}, "repeat_records": sum(1 for o in recs if o["seen"] > 1), "entry_types": {t: sum(1 for o in recs if o.get("entry_type", "기록") == t) for t in ("기록", "소장처(컬렉션)", "검색 안내", "결함 출력")}, "site_root_links": sum(1 for o in recs if o.get("link_note")),
           "top10": [{"rank": o["rank"], "seen": o["seen"], "days": o.get("days_total", 1), "title": o["title"][:100], "url": o.get("url", "")} for o in pop[:10]]}
     json.dump(st, open(os.path.join(D, "stats.json"), "w", encoding="utf-8"), ensure_ascii=False, indent=1)
     json.dump(state, open(sp, "w"), indent=1)
@@ -753,13 +882,13 @@ details{{font-size:12px}}dl{{display:grid;grid-template-columns:auto 1fr;gap:2px
 table{{width:100%;border-collapse:collapse;font-size:14px}}td,th{{border-bottom:1px solid #2a2d35;padding:6px;text-align:left}}</style>
 <main><h1>발견 누적 원장</h1><p>KOREA ARCHIVE 통합검색 사용자가 도구로 발굴한 기록이 매일 이곳에 쌓입니다(검색어·사용자 정보 없음). 기록 <b>{st['records']:,}</b>건 · 마지막 갱신 {st['updated']} · 이번 갱신 신규 {new_recs}건 · 내용·메타정보 보강 {enr}건 · 썸네일 {thn}건</p>
 <p>{srcs}</p>
-<p><a class="b0" href="discovered.csv">CSV 내려받기</a><a class="b0" href="discovered.jsonl">JSONL</a><a class="b0" href="discovered.jsonld">RiC-O JSON-LD</a><a class="b0" href="../kv.html?manifest=https://changgi.github.io/korea-archive-mcp/data/collection.json">KV로 최근 300건 연속 보기</a><a class="b0" href="tree.html">계층구조도</a><a class="b0" href="queries/index.json">질의·회신 축적</a><a class="b0" href="classifications.json">분류 사전</a><a class="b0" href="provenance.json">발견 경로(질의↔기록)</a><a class="b0" href="feed.xml">새 발견 구독(Atom)</a><a class="b0" href="records.csl.json">인용 CSL-JSON(Zotero)</a><a class="b0" href="records.ris">인용 RIS(EndNote)</a><a class="b0" href="timeline.html">연대 타임라인</a><a class="b0" href="nrich/index.html">연구원 연구DB IIIF 계층</a><a class="b0" href="popular.csv">자주 활용 TOP 200</a><a class="b0" href="stats.json">집계</a></p>
+<p><a class="b0" href="discovered.csv">CSV 내려받기</a><a class="b0" href="discovered.jsonl">JSONL</a><a class="b0" href="discovered.jsonld">RiC-O JSON-LD</a><a class="b0" href="../kv.html?manifest=https://changgi.github.io/korea-archive-mcp/data/collection.json">KV로 최근 300건 연속 보기</a><a class="b0" href="tree.html">계층구조도</a><a class="b0" href="queries/index.json">질의·회신 축적</a><a class="b0" href="classifications.json">분류 사전</a><a class="b0" href="provenance.json">발견 경로(질의↔기록)</a><a class="b0" href="fixity_changes.json">원문 변경 감시</a><a class="b0" href="feed.xml">새 발견 구독(Atom)</a><a class="b0" href="records.csl.json">인용 CSL-JSON(Zotero)</a><a class="b0" href="records.ris">인용 RIS(EndNote)</a><a class="b0" href="timeline.html">연대 타임라인</a><a class="b0" href="nrich/index.html">연구원 연구DB IIIF 계층</a><a class="b0" href="popular.csv">자주 활용 TOP 200</a><a class="b0" href="stats.json">집계</a></p>
 <p style="font-size:13px;color:#9b9a93">주요 내용·메타정보·썸네일은 기관 IIIF·우리 브리지 매니페스트를 하루 한 번 판독해 채웁니다(하루 상한·순차 요청). 썸네일은 재이용 가능 표시가 확인된 것만 싣고, 포로·사망자·묘지·수형자 관련 기록과 허가가 필요한 이미지는 링크만 둡니다. 권리는 원 기관 표기를 따릅니다 — 게재 전 judge_rights로 확인. 모든 변경은 저장소 git 이력(docs/data/)에 남습니다.</p>
 <h2>자주 활용되는 기록 TOP 30</h2><p style="font-size:13px">점수 = 최근 30일 발견×2 + 전체 발견 + 발견된 날 수×3 + 교차확인 기관 수 가중. 자동 검사 트래픽 제외.</p><div class="g">{prow}</div>
 <h2>일별 활용(최근 14일)</h2><table><tr><th>날짜</th><th>검색 묶음</th><th>발견 기록</th><th>신규 기록</th></tr>{urow}</table><p style="font-size:13px">형식별 누계: {E_(fmtv(usage['formats']))} · <a href="usage.json">usage.json</a></p>
 <h2>질의·회신 축적</h2><p style="font-size:13px">모든 도구 호출의 질의와 회신 본문을 원문 그대로(가공·삭제 없이) 영구 보존합니다. 같은 질의·같은 회신은 한 번만 두고 횟수만 셉니다. 회신이 달라지면 새 판으로 남겨 기관 응답 변화의 증거로 씁니다. 고유 질의 {nq['total']}건 · 누적 호출 {nq['calls']}회 · 도구별 {E_(fmtv(nq['by_tool']))} · <a href="queries/index.json">queries/index.json</a> (월별 회신 원문 queries/YYYY-MM.jsonl.gz)</p><table><tr><th>최근</th><th>도구</th><th>질의</th><th>횟수</th></tr>{qrow}</table>
 <h2>최근 발견 100건</h2><div class="g">{rows}</div></main></html>""")
-    build_tree(recs); ncls = merge_classes(recs); nprov, _orph = build_provenance(recs); nmed = build_media(recs)
+    build_tree(recs); ncls = merge_classes(recs); nprov, _orph = build_provenance(recs); nfx = write_fixity(recs); nmed = build_media(recs)
     print(f"원장 {len(recs)}건 (신규 {new_recs}, 묶음 {new_batches})")
     print(f"질의 고유 {nq['total']}건(신규 {nq['added']}) · 분류 경로 {ncls}개 · 발견 경로 질의 {nprov}종 · 다매체(피드 {nmed[0]}·인용 {nmed[1]}·연대 {nmed[2]})")
 

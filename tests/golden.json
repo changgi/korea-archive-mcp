@@ -949,6 +949,69 @@
     "포로신문보고서 — '안중근' 수록"
    ],
    "level": "warn"
+  },
+  {
+   "id": "earchive-direct-detail",
+   "tool": "nedb_search",
+   "args": {
+    "mode": "earchive",
+    "query": "https://archive.history.go.kr/record/catalog/catalogView.do?systemId=000000903162"
+   },
+   "must": [
+    "계층: 국사편찬위원회 전자사료관 › 사료군 AUS005",
+    "생산기간: 1950\\.12\\.11",
+    "systemId 000000903162"
+   ],
+   "must_not": [
+    "상세 파싱 실패"
+   ],
+   "level": "error"
+  },
+  {
+   "id": "earchive-systemid-link",
+   "tool": "cross_search",
+   "args": {
+    "query": "AUS005_06_02V0000_696",
+    "sources": "earchive",
+    "max_per_source": 3,
+    "format": "csv"
+   },
+   "must": [
+    "catalogView\\.do\\?systemId=\\d{6,}"
+   ],
+   "must_not": [
+    "\"https://archive\\.history\\.go\\.kr\",\""
+   ],
+   "level": "error"
+  },
+  {
+   "id": "kyudb-bookcd-link",
+   "tool": "cross_search",
+   "args": {
+    "query": "奎18933",
+    "sources": "kyudb",
+    "max_per_source": 3,
+    "format": "csv"
+   },
+   "must": [
+    "book/view\\.do\\?book_cd=GK18933_00"
+   ],
+   "must_not": [
+    "\"https://kyudb\\.snu\\.ac\\.kr\",\"소장"
+   ],
+   "level": "error"
+  },
+  {
+   "id": "aks-uci-permalink",
+   "tool": "nedb_search",
+   "args": {
+    "mode": "aks",
+    "query": "L011143F0210"
+   },
+   "must": [
+    "원문 고정 링크\\(UCI\\): https://archive\\.aks\\.ac\\.kr/link\\.do\\?dataUCI=G002\\+AKS\\+"
+   ],
+   "level": "error"
   }
  ]
 }

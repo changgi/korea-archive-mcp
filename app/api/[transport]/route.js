@@ -1029,7 +1029,8 @@ const COLLECT = {
     const rows = r['목록항목'] || [];
     if (rows.length) return rows.slice(0, n).map((x) => { const km = x.call.match(/^(奎|古|想白|一簑)/); const kn = km && { '奎': '규장각도서(奎)', '古': '고도서(古)', '想白': '상백문고', '一簑': '일사문고' }[km[1]];
       const cls = String(x.cls || '').split(/\s+/).filter(Boolean).slice(0, 4).join(' › '); // v2.2: 사부분류(史部 › 政法類 › 度支 …)를 계열로 — 조선 기록의 분류 계층
-      return { title: `[${x.call}] ${x.title} · ${x.author}`.slice(0, 120), date: x.date, id: x.call, ...((kn || cls) ? { series: [kn, cls].filter(Boolean).join(' › ') } : {}), url: 'https://kyudb.snu.ac.kr' }; });
+      const bc = (r['목록코드'] || {})[norm(x.call)] || (r['해제코드'] || {})[norm(x.call)];
+      return { title: `[${x.call}] ${x.title} · ${x.author}`.slice(0, 120), date: x.date, id: x.call, ...((kn || cls) ? { series: [kn, cls].filter(Boolean).join(' › ') } : {}), url: bc ? `${JKYU}/book/view.do?book_cd=${bc}` : 'https://kyudb.snu.ac.kr' }; });
     const cx = {};
     return list.slice(0, n).map((t) => { const km = String(t).match(/(奎|古|想白|一簑)\s*\d/); const kn = km && { '奎': '규장각도서(奎)', '古': '고도서(古)', '想白': '상백문고', '一簑': '일사문고' }[km[1]]; return { title: cx[t] ? `${t} ${cx[t]}`.slice(0, 110) : String(t), date: '', id: String(t), ...(kn ? { series: kn } : {}), url: 'https://kyudb.snu.ac.kr' }; });
   },
@@ -1123,7 +1124,8 @@ const COLLECT = {
       const meta = spans.filter((s) => !/^생산/.test(s)); // [국내외, 국가, 소장기관]
       const ser = [meta[1] || '', (meta[2] || '').split('(')[0].trim()].filter(Boolean).join(' › ');
       const prod = ((spans.find((s) => s.startsWith('생산기간')) || '').match(/[\d.~\s]{4,24}/) || [''])[0].trim();
-      out.push({ title: norm(t).slice(0, 110), date: prod, id: norm(sid), ...(ser ? { series: ser.slice(0, 60) } : {}), url: 'https://archive.history.go.kr' });
+      const sys = (seg.match(/^'(\d{6,})'/) || [])[1] || ''; // v2.35 fnGoCatalogView 첫 인자 = systemId → GET 고정 상세(세션 불필요, 2026-11-24 실측)
+      out.push({ title: norm(t).slice(0, 110), date: prod, id: norm(sid), ...(ser ? { series: ser.slice(0, 60) } : {}), url: sys ? `https://archive.history.go.kr/record/catalog/catalogView.do?systemId=${sys}` : 'https://archive.history.go.kr' });
       if (out.length >= n) break;
     }
     return out;
@@ -1379,7 +1381,7 @@ const kyuRows = (flat) => {
 };
 async function jKyu(query) {
   // 실측 10.2s(12s 타임박스 근접 — cross_search 간헐 탈락 위험) → 목록·해제 2건 병렬 + 6h TTL 캐시
-  const ck = 'kyudb3:' + query;
+  const ck = 'kyudb4:' + query; // v2.35 book_cd 포함 — 캐시 키 판 올림
   const hit = _ttlCache.get(ck);
   if (hit && Date.now() - hit.t < 6 * 3600e3) return JSON.parse(hit.v);
   const out = {};
@@ -1389,6 +1391,8 @@ async function jKyu(query) {
       out[label] = [...new Set([...b.matchAll(/(奎[\d軸]+)/g)].map((x) => x[1]))].slice(0, 30);
       // v1.96.7: 번호만 나오던 결함 — 결과 행 'N. 서명 청구기호 : 奎… 편저자 : … 간행년대 : … 사부분류 : … [본문 : …] 상세정보'(실측) 구조 판독
       out[label + '항목'] = kyuRows(mclean(b));
+      // v2.35 행별 book_cd(fn_totalSearchResultView 4번째 인자) ↔ 청구기호 — /book/view.do?book_cd= GET 고정 상세(2026-11-24 실측)
+      out[label + '코드'] = Object.fromEntries(b.split('class="schli"').slice(1).map((seg) => [norm((seg.match(/청구기호\s*:\s*([^<\n]{2,30})/) || [])[1] || ''), (seg.match(/fn_totalSearchResultView\([^)]*?'([A-Z]{1,4}\d[\w-]*_\d\d)'/) || [])[1] || '']).filter(([c, k]) => c && k).reverse()); // reverse → 같은 청구기호면 앞 행(원본 GK…)이 이김 — 뒤의 마이크로필름 사본(TM…)이 덮어쓰던 것
     } catch (e) { out[label] = { error: e.message }; }
   }));
   // 정상 형태(양쪽 배열)이고 결과가 있을 때만 캐시 — 차단·오류 응답 오염 방지
@@ -2335,6 +2339,26 @@ const JB_CROSS = `국내외 대조 절차 — 순서를 틀리면 헛수고한�
       }
       if (mode === 'earchive') { // 국편 전자사료관 — 키워드 목록 / '키워드|순번' 세션 상세(검색 폼+searchPosition 재제출 — 2026-11-21 역공학)
         try {
+          // v2.35 고정 상세 — catalogView.do?systemId= URL 또는 12자리 systemId(GET, 세션 불필요). 기관 계층(사료군 › 사료계열 › 하위사료계열)·생산·소장·주제어·해제
+          const smm = q.match(/catalogView\.do\?systemId=(\d{6,})/) || q.match(/^(\d{12})$/);
+          if (smm) {
+            const u = `https://archive.history.go.kr/record/catalog/catalogView.do?systemId=${smm[1]}`;
+            const b = await cachedText('eaD:' + smm[1], 24 * 3600e3, () => gtext(u), 'info-box');
+            const title = dclean(((b.match(/<div class="info-box">\s*<div>\s*<p>([\s\S]*?)<\/p>/) || [])[1] || ''));
+            const rowVal = (name) => dclean((b.match(new RegExp(`<div class="label">${name.replace(/[()]/g, '\\$&')}<\\/div>\\s*<div class="value">\\s*<p>([\\s\\S]*?)<\\/p>`)) || [])[1] || '').replace(/\s+/g, ' ').trim();
+            const hist = [...((b.match(/<ul class="history-box">([\s\S]*?)<div class="info-box">/) || [])[1] || '').matchAll(/title="([^"]{2,160})"[\s\S]*?<span class="type">([^<]{2,40})<\/span>/g)].map((m) => `${dclean(m[2])} ${dclean(m[1])}`.slice(0, 120));
+            const sid = (b.match(/사료건(?:&nbsp;|\s)*([0-9A-Za-z_]{6,})/) || [])[1] || '';
+            if (!title) return text(`전자사료관 systemId ${smm[1]} 상세 파싱 실패 — 브라우저로 열람: ${u}`);
+            const F = ['생산자', '생산기간', '문서번호', '소장자(처)', '사료구분', '사료유형', '언어', '취급지명', '주제어'].map((k) => [k, rowVal(k)]).filter(([, v]) => v);
+            const ab = rowVal('해제'); const acc = rowVal('열람조건'); const use = rowVal('이용조건');
+            return text(`국편 전자사료관 상세 — ${title}\n`
+              + [sid && `사료건 ${sid}`, `systemId ${smm[1]}`].filter(Boolean).join(' · ') + '\n'
+              + (hist.length ? `계층: 국사편찬위원회 전자사료관 › ${hist.join(' › ')}\n` : '')
+              + F.map(([k, v]) => `${k}: ${v.slice(0, 160)}`).join('\n') + (F.length ? '\n' : '')
+              + (acc ? `열람조건: ${acc}\n` : '') + (use ? `이용조건: ${use}\n` : '')
+              + (ab ? `【해제】\n${ab.slice(0, 1200)}\n` : '') + `원문: ${u}\n`
+              + '※ 출처: 국사편찬위원회 전자사료관. 이용조건 문구를 judge_rights에 투입해 초판정. 해외 수집 사료는 원 소장처(NARA 등) 권리 확인 병행.');
+          }
           const pm = q.match(/^(.+)\|(\d{1,3})$/);
           if (pm) {
             const kw = pm[1].trim(); const pos = pm[2];
@@ -2564,7 +2588,7 @@ const JB_CROSS = `국내외 대조 절차 — 순서를 틀리면 헛수고한�
             const kids = [...b.matchAll(/data-dataId='([^']+)'[\s\S]{0,300}?<span(?:\s+class='([^']*)')?\s+title='([^']*)'/g)]
               .map((m) => ({ id: m[1], leaf: /nochild/.test(m[2] || ''), name: m[3] }));
             const lines = kids.slice(0, 25).map((k) => k.leaf
-              ? `- [문서] ${k.name}\n  상세: mode=aks query='${q}/${k.id}'`
+              ? `- [문서] ${k.name}\n  원문 고정 링크(UCI): ${AKS_BASE}/link.do?dataUCI=${k.id}\n  상세: mode=aks query='${q}/${k.id}'`
               : `- [분류 ${k.id}] ${k.name} → mode=aks query='${k.id}'`);
             return text(`한국고문서자료관 ${col.name} [${q}] 하위 ${kids.length}건:\n` + (lines.join('\n') || '(0건)')
               + (kids.length > 25 ? `\n… 외 ${kids.length - 25}건` : '')
