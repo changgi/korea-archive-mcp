@@ -1,5 +1,5 @@
 {
-"updated": "2026-11-24T21:53:12Z",
+"updated": "2026-11-24T22:01:17Z",
 "note": "구간 = 연대(4자리 연도·8자리 날짜·연호 연도 明治·大正·昭和·光武·隆熙·檀紀 환산) → 세기 → 왕조·시대명. 근거 순서 date → 제목 → 메타(생산·시대·출판). 세기·시대 구간은 시간축 근사 정렬",
 "timeline": [
 {
@@ -1034,9 +1034,9 @@
 },
 {
 "decade": "1950년대",
-"records": 101,
+"records": 108,
 "by_source": {
-"nara": 10,
+"nara": 13,
 "europeana": 4,
 "ia": 7,
 "tna": 8,
@@ -1045,7 +1045,7 @@
 "archives": 24,
 "commons": 7,
 "gallica": 2,
-"koreanwar": 7,
+"koreanwar": 11,
 "ndl": 1,
 "nlk": 1,
 "oldnews": 3,
@@ -1057,9 +1057,9 @@
 "dnz": 4
 },
 "by_kind": {
-"motion_picture": 14,
+"motion_picture": 18,
 "graphic": 17,
-"document": 70
+"document": 73
 },
 "samples": [
 {
@@ -1453,9 +1453,9 @@
 },
 {
 "decade": "연대 미상",
-"records": 56,
+"records": 58,
 "by_source": {
-"nara": 10,
+"nara": 11,
 "seoul": 12,
 "europeana": 2,
 "i815": 2,
@@ -1465,13 +1465,13 @@
 "jsg": 1,
 "kyudb": 1,
 "ndl": 1,
-"ia": 2,
+"ia": 3,
 "aks": 8,
 "commons": 6,
 "nlk": 3
 },
 "by_kind": {
-"document": 39,
+"document": 41,
 "graphic": 14,
 "motion_picture": 3
 },

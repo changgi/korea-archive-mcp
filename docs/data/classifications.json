@@ -4,7 +4,7 @@
 "depth": 1,
 "first": "2026-11-23T03:00:15Z",
 "last": "2026-11-24T10:25:08Z",
-"records": 20,
+"records": 24,
 "sources": [
 "nara",
 "koreanwar",
@@ -14,8 +14,8 @@
 "미국 국립기록관리청 NARA › RG 111": {
 "depth": 2,
 "first": "2026-11-23T03:00:15Z",
-"last": "2026-11-23T22:30:24Z",
-"records": 7,
+"last": "2026-11-24T00:00:00Z",
+"records": 11,
 "sources": [
 "nara",
 "koreanwar"
@@ -24,8 +24,8 @@
 "미국 국립기록관리청 NARA › RG 111 › Moving Images Relating to Military Activities": {
 "depth": 3,
 "first": "2026-11-23T03:00:15Z",
-"last": "2026-11-23T22:30:24Z",
-"records": 7,
+"last": "2026-11-24T00:00:00Z",
+"records": 11,
 "sources": [
 "nara",
 "koreanwar"
@@ -151,8 +151,8 @@
 "인터넷 아카이브": {
 "depth": 1,
 "first": "2026-11-23T03:00:40Z",
-"last": "2026-11-23T13:50:11Z",
-"records": 23,
+"last": "2026-11-24T00:00:00Z",
+"records": 24,
 "sources": [
 "ia"
 ]
@@ -160,8 +160,8 @@
 "인터넷 아카이브 › IA Collection": {
 "depth": 2,
 "first": "2026-11-23T03:00:40Z",
-"last": "2026-11-23T13:50:11Z",
-"records": 23,
+"last": "2026-11-24T00:00:00Z",
+"records": 24,
 "sources": [
 "ia"
 ]
@@ -169,8 +169,8 @@
 "인터넷 아카이브 › IA Collection › FedFlix": {
 "depth": 3,
 "first": "2026-11-23T03:00:40Z",
-"last": "2026-11-23T13:50:11Z",
-"records": 4,
+"last": "2026-11-24T00:00:00Z",
+"records": 5,
 "sources": [
 "ia"
 ]
@@ -819,8 +819,8 @@
 "6·25전쟁 아카이브센터": {
 "depth": 1,
 "first": "2026-11-23T03:01:45Z",
-"last": "2026-11-23T22:30:24Z",
-"records": 7,
+"last": "2026-11-24T00:00:00Z",
+"records": 11,
 "sources": [
 "koreanwar"
 ]
@@ -2876,8 +2876,17 @@
 "sources": [
 "nedb"
 ]
+},
+"6·25전쟁 아카이브센터 › [파생] 1950년대": {
+"depth": 2,
+"first": "2026-11-24T00:00:00Z",
+"last": "2026-11-24T00:00:00Z",
+"records": 4,
+"sources": [
+"koreanwar"
+]
 }
 },
-"updated": "2026-11-24T21:53:12Z",
-"total": 319
+"updated": "2026-11-24T22:01:17Z",
+"total": 320
 }

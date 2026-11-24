@@ -1,12 +1,12 @@
 {
 "week": "2026-W48",
-"records": 445,
+"records": 454,
 "by_source": {
-"미국 국립기록관리청 NARA": 20,
+"미국 국립기록관리청 NARA": 24,
 "일본 국립국회도서관": 16,
 "일본 아시아역사자료센터": 9,
 "Europeana": 8,
-"인터넷 아카이브": 18,
+"인터넷 아카이브": 19,
 "영국 국립기록관 TNA": 10,
 "UN 디지털도서관": 8,
 "KOREA ARCHIVE IIIF 갤러리": 3,
@@ -18,7 +18,7 @@
 "국가기록원": 40,
 "위키미디어 공용": 31,
 "Gallica(BnF)": 8,
-"6·25전쟁 아카이브센터": 7,
+"6·25전쟁 아카이브센터": 11,
 "국립중앙도서관": 11,
 "대한민국신문아카이브": 11,
 "국편 전자사료관": 8,
@@ -2723,6 +2723,69 @@
 "first_seen": "2026-11-24T00:00:00Z",
 "page": "r/70898726ee85.html",
 "url": "https://archive.aks.ac.kr/link.do?dataUCI=G002+AKS+KSM-XZ.1910.1100-20250415.F13301-03-W000015"
+},
+{
+"key": "ia:428-npc-170",
+"title": "EVACUATION OF HUNGNAM, KOREA",
+"first_seen": "2026-11-24T00:00:00Z",
+"page": "r/ddfe7d47e8f8.html",
+"url": "https://archive.org/details/428-npc-170"
+},
+{
+"key": "koreanwar:2022-US-02-AV-D-00127",
+"title": "장진호 전투 이후 수송선에 승선한 미 제1해병사단 제5해병연대 및 제7해병연대 생존 병력 기록영상",
+"first_seen": "2026-11-24T00:00:00Z",
+"page": "r/2c0eada6e3fd.html",
+"url": "https://www.koreanwar.or.kr:8443/searchDetail.do?archRfcd=2022-US-02-AV-D-00127"
+},
+{
+"key": "koreanwar:2022-US-02-AV-D-00207",
+"title": "장진호 지역에서 고토리로 철수하는 미 제1해병사단 기록영상",
+"first_seen": "2026-11-24T00:00:00Z",
+"page": "r/189155ae0909.html",
+"url": "https://www.koreanwar.or.kr:8443/searchDetail.do?archRfcd=2022-US-02-AV-D-00207"
+},
+{
+"key": "koreanwar:2022-US-02-AV-D-00215",
+"title": "한국 함흥에서 미 제1해병사단의 철수 ; 장진호 지역 하갈우리에서 함흥으로 철수하는 미 제1해병사단 기록영상",
+"first_seen": "2026-11-24T00:00:00Z",
+"page": "r/6d90b09853b8.html",
+"url": "https://www.koreanwar.or.kr:8443/searchDetail.do?archRfcd=2022-US-02-AV-D-00215"
+},
+{
+"key": "koreanwar:2022-US-02-AV-D-00329",
+"title": "장진호 전투에서 퇴각하는 미 제1해병사단 기록영상",
+"first_seen": "2026-11-24T00:00:00Z",
+"page": "r/a07744707337.html",
+"url": "https://www.koreanwar.or.kr:8443/searchDetail.do?archRfcd=2022-US-02-AV-D-00329"
+},
+{
+"key": "nara:NAID 22228",
+"title": "UN DAY, SEOUL, KOREA ; KOREAN WAR, SUKCHON",
+"first_seen": "2026-11-24T00:00:00Z",
+"page": "r/8e743c72936e.html",
+"url": "https://catalog.archives.gov/id/22228"
+},
+{
+"key": "nara:NAID 22375",
+"title": "EVACUATION OF HUNGNAM, KOREA",
+"first_seen": "2026-11-24T00:00:00Z",
+"page": "r/13a4417fe69e.html",
+"url": "https://catalog.archives.gov/id/22375"
+},
+{
+"key": "nara:NAID 22399",
+"title": "KOREAN WAR, UIJONGBU ; REFUGEES, PUSAN, KOREA ; EVACUATION, HUNGNAM AREA, KOREA, BOKU-DO",
+"first_seen": "2026-11-24T00:00:00Z",
+"page": "r/8d4fa3d58689.html",
+"url": "https://catalog.archives.gov/id/22399"
+},
+{
+"key": "nara:NAID 24142",
+"title": "THE HUNGNAM STORY",
+"first_seen": "2026-11-24T00:00:00Z",
+"page": "r/6dc271dcb40a.html",
+"url": "https://catalog.archives.gov/id/24142"
 },
 {
 "key": "ktv:25325",
