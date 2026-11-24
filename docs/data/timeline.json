@@ -1,5 +1,5 @@
 {
-"updated": "2026-11-24T14:43:19Z",
+"updated": "2026-11-24T14:51:11Z",
 "note": "구간 = 연대(4자리 연도·8자리 날짜·연호 연도 明治·大正·昭和·光武·隆熙·檀紀 환산) → 세기 → 왕조·시대명. 근거 순서 date → 제목 → 메타(생산·시대·출판). 세기·시대 구간은 시간축 근사 정렬",
 "timeline": [
 {
@@ -248,12 +248,13 @@
 },
 {
 "decade": "1670년대",
-"records": 2,
+"records": 3,
 "by_source": {
-"gallica": 2
+"gallica": 2,
+"commons": 1
 },
 "by_kind": {
-"document": 2
+"document": 3
 },
 "samples": [
 {
@@ -265,6 +266,11 @@
 "title": "Relation du naufrage d'un vaisseau holandois sur la coste de l'isle de Quelpaerts, avec la description du royaume de Cor",
 "url": "https://gallica.bnf.fr/ark:/12148/bpt6k8705034n",
 "iiif": "https://korea-archive-mcp.vercel.app/iiif/rec/TZC9TgJBFIVf5WYamoX9ZRe21ERoNXaE4rI7wIbZmXV-SIgx0cTC0l5jbCxMLIylLW9iKTyEF5TE6pzJ-c7NnXvJDMtHbIZCVAWysccsy9kZF2grJaF0INFNNc44lC0nYYmVMRwdzJVAWarKgHEaBEKhjCWIg2hVRuzdqeOiQa6t8QCXvNhhJTeFrprDdK1W6Oo9faz0-pXDaP1KAI1qUMOQS72CIdZceDtmoHTh6rEHzGMlLRqmWUC2Iot6kfthFCY9v5jEQTeLwn7ap9BROLe2Mbnv__2zM5HTzlT7_zqTxqaLXhZ0gziR1GqoNfil4ev6E47kyV5LtIc6UZKow-08VtOL5IJk8_74_fEGm7vb7fMNbB_ut08vFOHuulEQpe0wbEfxeRjnSZAnGbv6AQ/manifest.json"
+},
+{
+"title": "NLC403-312001065582-112446 三水縣誌 清康熙16年(1677) 卷一.pdf",
+"url": "https://commons.wikimedia.org/wiki/File%3ANLC403-312001065582-112446_%E4%B8%89%E6%B0%B4%E7%B8%A3%E8%AA%8C_%E6%B8%85%E5%BA%B7%E7%86%9916%E5%B9%B4(1677)_%E5%8D%B7%E4%B8%80.pdf",
+"iiif": "https://korea-archive-mcp.vercel.app/iiif/commons/File%3ANLC403-312001065582-112446%20%E4%B8%89%E6%B0%B4%E7%B8%A3%E8%AA%8C%20%E6%B8%85%E5%BA%B7%E7%86%9916%E5%B9%B4%281677%29%20%E5%8D%B7%E4%B8%80.pdf/manifest.json"
 }
 ]
 },
@@ -472,6 +478,23 @@
 ]
 },
 {
+"decade": "1800년대",
+"records": 1,
+"by_source": {
+"commons": 1
+},
+"by_kind": {
+"document": 1
+},
+"samples": [
+{
+"title": "NLC403-312001082374-109538 汶志紀略 清嘉慶10年(1805) 卷二.pdf",
+"url": "https://commons.wikimedia.org/wiki/File%3ANLC403-312001082374-109538_%E6%B1%B6%E5%BF%97%E7%B4%80%E7%95%A5_%E6%B8%85%E5%98%89%E6%85%B610%E5%B9%B4(1805)_%E5%8D%B7%E4%BA%8C.pdf",
+"iiif": "https://korea-archive-mcp.vercel.app/iiif/commons/File%3ANLC403-312001082374-109538%20%E6%B1%B6%E5%BF%97%E7%B4%80%E7%95%A5%20%E6%B8%85%E5%98%89%E6%85%B610%E5%B9%B4%281805%29%20%E5%8D%B7%E4%BA%8C.pdf/manifest.json"
+}
+]
+},
+{
 "decade": "1820년대",
 "records": 1,
 "by_source": {
@@ -585,15 +608,16 @@
 },
 {
 "decade": "1880년대",
-"records": 3,
+"records": 4,
 "by_source": {
 "europeana": 1,
 "gallica": 1,
-"heritage": 1
+"heritage": 1,
+"commons": 1
 },
 "by_kind": {
 "graphic": 1,
-"document": 2
+"document": 3
 },
 "samples": [
 {
@@ -610,21 +634,27 @@
 "title": "담양 몽한각 소장 숭례문과 후적벽부 목판(潭陽 夢漢閣 所藏 崇禮門과 後赤壁賦 木板) [시도유형문화유산] — 전남광주 담양군",
 "url": "https://www.heritage.go.kr/heri/cul/culSelectDetail.do?ccbaCpno=2113603510000",
 "iiif": "https://korea-archive-mcp.vercel.app/iiif/heritage/21-0003510000000-36/manifest.json"
+},
+{
+"title": "NLC403-311998005108-105869 增修崇慶州志 清光緒10年(1884) 卷一十三.pdf",
+"url": "https://commons.wikimedia.org/wiki/File%3ANLC403-311998005108-105869_%E5%A2%9E%E4%BF%AE%E5%B4%87%E6%85%B6%E5%B7%9E%E5%BF%97_%E6%B8%85%E5%85%89%E7%B7%9210%E5%B9%B4(1884)_%E5%8D%B7%E4%B8%80%E5%8D%81%E4%B8%89.pdf",
+"iiif": "https://korea-archive-mcp.vercel.app/iiif/commons/File%3ANLC403-311998005108-105869%20%E5%A2%9E%E4%BF%AE%E5%B4%87%E6%85%B6%E5%B7%9E%E5%BF%97%20%E6%B8%85%E5%85%89%E7%B7%9210%E5%B9%B4%281884%29%20%E5%8D%B7%E4%B8%80%E5%8D%81%E4%B8%89.pdf/manifest.json"
 }
 ]
 },
 {
 "decade": "1890년대",
-"records": 8,
+"records": 9,
 "by_source": {
 "kyudb": 2,
 "oldnews": 3,
 "heritage": 1,
 "tna": 1,
-"gallica": 1
+"gallica": 1,
+"commons": 1
 },
 "by_kind": {
-"document": 7,
+"document": 8,
 "graphic": 1
 },
 "samples": [
@@ -1067,16 +1097,16 @@
 },
 {
 "decade": "1990년대",
-"records": 21,
+"records": 22,
 "by_source": {
 "archives": 6,
 "commons": 1,
 "ndl": 1,
-"nlk": 1,
+"nlk": 2,
 "ktv": 12
 },
 "by_kind": {
-"document": 14,
+"document": 15,
 "graphic": 3,
 "motion_picture": 4
 },
@@ -1110,7 +1140,7 @@
 },
 {
 "decade": "2000년대",
-"records": 24,
+"records": 25,
 "by_source": {
 "archives": 4,
 "ktv": 5,
@@ -1118,11 +1148,12 @@
 "commons": 3,
 "nrich": 5,
 "much": 1,
-"ndl": 1
+"ndl": 1,
+"nlk": 1
 },
 "by_kind": {
 "document": 6,
-"graphic": 18
+"graphic": 19
 },
 "samples": [
 {
@@ -1246,7 +1277,7 @@
 },
 {
 "decade": "연대 미상",
-"records": 55,
+"records": 63,
 "by_source": {
 "nara": 10,
 "seoul": 12,
@@ -1257,15 +1288,16 @@
 "nrich": 5,
 "nedb": 2,
 "earchive": 2,
-"jsg": 5,
+"jsg": 7,
 "kyudb": 1,
 "ndl": 1,
 "ia": 2,
-"aks": 8
+"aks": 8,
+"commons": 6
 },
 "by_kind": {
-"document": 38,
-"graphic": 14,
+"document": 44,
+"graphic": 16,
 "motion_picture": 3
 },
 "samples": [
