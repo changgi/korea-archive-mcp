@@ -1381,7 +1381,7 @@ const kyuRows = (flat) => {
 };
 async function jKyu(query) {
   // 실측 10.2s(12s 타임박스 근접 — cross_search 간헐 탈락 위험) → 목록·해제 2건 병렬 + 6h TTL 캐시
-  const ck = 'kyudb4:' + query; // v2.35 book_cd 포함 — 캐시 키 판 올림
+  const ck = 'kyudb5:' + query; // v2.35.1 book_cd(강조 태그 수정) — 캐시 키 판 올림
   const hit = _ttlCache.get(ck);
   if (hit && Date.now() - hit.t < 6 * 3600e3) return JSON.parse(hit.v);
   const out = {};
