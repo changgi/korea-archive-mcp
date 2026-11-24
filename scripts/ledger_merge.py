@@ -111,7 +111,7 @@ DEEP = {"i815": ("nedb_search", lambda o: o.get("url") and {"mode": "i815", "que
 DEEP["nedb"] = ("nedb_search", lambda o: re.match(r"^[a-z]{2,5}_[0-9a-z_]+$", o["key"].split(":", 1)[1]) and {"mode": "item", "query": o["key"].split(":", 1)[1]})  # v2.61 한국사DB 기록(levelId) — 시대별 경로 판독
 DEEP["kyudb"] = ("nedb_search", lambda o: re.match(r"^[^\x00-\x7f]{1,4}[0-9][0-9.\-]*$", str(o.get("id") or "")) and {"mode": "kyujanggak", "query": o["id"]})  # v2.55 규장각 해제(기관 해설문) — 같은 청구기호 행만 쓴다
 IIIF_V = {"awm": 2, "commons": 2}  # commons 2 = 범주(Commons, 숨김 제외)  # v2.63 우리 IIIF 브리지 판 — awm 2 = 기관 상세 표 전부(자료 유형·매체 형태·제작자·제작지·분쟁)와 본문 설명
-DEEP_V = {"seoul": 2, "aks": 2, "jsg": 2, "nedb": 4, "un": 2}  # nedb 4 = 기술 항목 줄 판별 엄격화(v2.69.2)  # nedb 3 = 법전 조문 판독 교정(v2.69.1 — 검색창 문구 오인)  # un 2 = 기관 MARC XML(제목·문서기호·유형·날짜·의제)  # v2.61.1 nedb 2 = 표 없는 기록(삼국사기)·원문 이미지만(신문) 판독  # v2.56 jsg 2 = 장서각 개체 태깅·인물 전거(UCI)  # v2.32 판독기 판 — 판이 오르면 이미 보강된 기록도 한 번 다시 판독(서울기록원: 기관 계층·생산자·보존이력 추가)
+DEEP_V = {"seoul": 2, "aks": 2, "jsg": 2, "nedb": 5, "un": 2}  # nedb 5 = 실패 응답으로 비워진 메타 복구(v2.69.3)  # nedb 4 = 기술 항목 줄 판별 엄격화(v2.69.2)  # nedb 3 = 법전 조문 판독 교정(v2.69.1 — 검색창 문구 오인)  # un 2 = 기관 MARC XML(제목·문서기호·유형·날짜·의제)  # v2.61.1 nedb 2 = 표 없는 기록(삼국사기)·원문 이미지만(신문) 판독  # v2.56 jsg 2 = 장서각 개체 태깅·인물 전거(UCI)  # v2.32 판독기 판 — 판이 오르면 이미 보강된 기록도 한 번 다시 판독(서울기록원: 기관 계층·생산자·보존이력 추가)
 _sid = [None]
 
 def mcp_call(tool, args):
@@ -195,6 +195,7 @@ def enrich(o, budget):
         if args:
             try:
                 txt = mcp_call(tool, args); summ, md = parse_deep(txt)
+                if re.search(r"조회 실패|파싱 실패|상세 파싱 실패|오류\(|시간 초과|브라우저로 열람|상세 미발견", txt[:400]): raise ValueError("판독 실패 응답 — 보강하지 않음(기존 값 보존, 다음 날 재시도)")  # v2.69.3 실패를 성공으로 받아 메타를 비우던 결함
                 if src0 == "nedb" and re.search(r"문자입력기|AND OR", txt[:600]): raise ValueError("판독 결함 출력(검색창 문구) — 보강하지 않음")  # v2.69.1 방어
                 if src0 == "nedb":  # v2.61 한국사DB 원문 — 기술 항목 줄(제목·연월일·출전…)은 메타로, 본문 앞부분은 요약으로(미공개·실패는 요약 비움)
                     L2 = txt.splitlines()
@@ -211,7 +212,8 @@ def enrich(o, budget):
                     summ = f"{hm[2]}면{' · UCI ' + hm[3] if hm[3] else ''} — 한국고문서자료관 원문 이미지(뷰어 열람)" if hm else ""
                     md = [["면 수", hm[2]]] + ([["UCI", hm[3]]] if hm and hm[3] else []) if hm else md
                 if summ or src0 not in ("kyudb", "nedb"): o["summary"] = (summ + " " if summ else "") + f"(KOREA ARCHIVE 심층 판독 {tool})"  # 규장각 해제가 없으면 요약을 비워 둔다(서지는 메타·메타 합성으로)
-                o["meta"] = md; o["deep_call"] = f"{tool}({json.dumps(args, ensure_ascii=False)})"; o["enrich_status"] = "ok"; o["deep_v"] = DEEP_V.get(src0, 1)
+                if md or not o.get("meta"): o["meta"] = md  # v2.69.3 빈 판독 결과로 축적된 메타를 지우지 않는다
+                o["deep_call"] = f"{tool}({json.dumps(args, ensure_ascii=False)})"; o["enrich_status"] = "ok"; o["deep_v"] = DEEP_V.get(src0, 1)
                 um = re.search(r"인물 전거\(한국역대인물 UCI\):\s*(.+)", txt)  # v2.56 기관이 붙인 인명 전거 — 이름=UCI
                 if um: o["authority"] = {"scheme": "한국역대인물 UCI(장서각 태깅)", "persons": dict(x.split("=", 1) for x in um[1].strip().split("; ") if "=" in x)}
                 hv = next((v for k, v in md if k == "계층"), "")
@@ -233,12 +235,13 @@ def enrich(o, budget):
         used = 1
         try:
             j = get(m)
-            o["summary"] = strip(L1(j.get("summary")) or L1(j.get("description")))[:400]
+            sm_ = strip(L1(j.get("summary")) or L1(j.get("description")))[:400]
+            if sm_ or not o.get("summary"): o["summary"] = sm_  # v2.69.3 빈 매니페스트 요약으로 축적된 요약을 지우지 않는다
             md = []
             for e in (j.get("metadata") or [])[:12]:
                 k, v = strip(L1(e.get("label"))), strip(L1(e.get("value")))
                 if k and v and k not in ("판독 시각", "변환", "발견 시각", "발견 경로") and len(md) < 8: md.append([k[:30], v[:140]])
-            o["meta"] = md
+            if md or not o.get("meta"): o["meta"] = md  # v2.69.3 빈 매니페스트 메타로 축적된 메타를 지우지 않는다
             rs = j.get("rights") or strip(L1((j.get("requiredStatement") or {}).get("value"))) or strip(L1(j.get("attribution"))) or strip(L1(j.get("license")))
             o["rights"] = str(rs)[:200]
             th = j.get("thumbnail"); th = (th[0] if isinstance(th, list) and th else th) or {}
