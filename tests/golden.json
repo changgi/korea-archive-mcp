@@ -1278,6 +1278,23 @@
    ],
    "level": "warn",
    "note": "v2.69.1 법전 조문 — 자료인용방법 다음 제목·상위목록 다음 본문(검색창 라벨을 기술 항목으로 오인하던 결함)"
+  },
+  {
+   "id": "ledger-same-record",
+   "tool": "cross_search",
+   "args": {
+    "query": "Hamhung",
+    "sources": "ledger",
+    "max_per_source": 10
+   },
+   "must": [
+    "같은 기록 \\d곳 소장",
+    "날짜 교차 일치"
+   ],
+   "must_not": [
+    "같은 기록 1곳"
+   ],
+   "level": "warn"
   }
  ]
 }
