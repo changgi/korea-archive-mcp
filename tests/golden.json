@@ -1114,6 +1114,21 @@
    ],
    "level": "warn",
    "note": "v2.49 원장 기록마다 발견 경로(질의 지문 또는 원장 적재 파생)가 보여야 — 원장 병합 후"
+  },
+  {
+   "id": "ledger-derived-date",
+   "tool": "cross_search",
+   "args": {
+    "query": "Hungnam Beach Evacuation",
+    "sources": "ledger",
+    "max_per_source": 5,
+    "format": "csv"
+   },
+   "must": [
+    "1950-12-1[0-9]"
+   ],
+   "level": "warn",
+   "note": "v2.50 전자사료관 '생산기간'에서 세운 날짜(date_derived)가 원장 검색에 [파생]으로 보여야 — 원장 병합 후"
   }
  ]
 }
