@@ -2036,9 +2036,745 @@
 "관청명(장서각 태깅)"
 ]
 }
+},
+"기술 수준": {
+"item": {
+"records": [
+"nara:NAID 22344",
+"nara:NAID 22345",
+"nara:NAID 22348",
+"nara:NAID 23203",
+"nara:NAID 23204",
+"nara:NAID 24033",
+"nara:NAID 276537577",
+"nara:NAID 22397",
+"nara:NAID 75392",
+"nara:NAID 75393",
+"nara:NAID 75390",
+"nara:NAID 75395",
+"nara:NAID 75408"
+],
+"sources": [
+"nara"
+],
+"first": "2026-11-23T03:00:15Z",
+"last": "2026-11-23T22:30:24Z",
+"keys": [
+"기술 수준"
+]
+},
+"fileUnit": {
+"records": [
+"nara:NAID 373960610",
+"nara:NAID 400397386",
+"nara:NAID 42219673",
+"nara:NAID 42219674",
+"nara:NAID 492062159",
+"nara:NAID 42219676",
+"nara:NAID 492062268"
+],
+"sources": [
+"nara"
+],
+"first": "2026-11-23T03:00:15Z",
+"last": "2026-11-24T10:25:08Z",
+"keys": [
+"기술 수준"
+]
+},
+"Piece (피스(파일))": {
+"records": [
+"tna:DO 35/2839",
+"tna:DO 35/5905",
+"tna:FO 181/1119",
+"tna:DEFE 11/293",
+"tna:DEFE 11/200",
+"tna:DEFE 11/201"
+],
+"sources": [
+"tna"
+],
+"first": "2026-11-23T03:00:46Z",
+"last": "2026-11-23T13:40:45Z",
+"keys": [
+"기술 수준"
+]
+},
+"Item (아이템)": {
+"records": [
+"tna:FO 371/110540/1071/20",
+"tna:FO 371/115328/1073/124"
+],
+"sources": [
+"tna"
+],
+"first": "2026-11-23T03:32:36Z",
+"last": "2026-11-23T03:32:36Z",
+"keys": [
+"기술 수준"
+]
 }
 },
-"updated": "2026-11-24T13:44:17Z",
+"형태": {
+"정부간행물": {
+"records": [
+"archives:200902601018-1",
+"archives:200902601743-1"
+],
+"sources": [
+"archives"
+],
+"first": "2026-11-23T03:01:15Z",
+"last": "2026-11-23T13:40:45Z",
+"keys": [
+"문서유형",
+"기록물형태"
+]
+},
+"일반문서": {
+"records": [
+"archives:201104884010-1",
+"archives:201104884104-1",
+"archives:202411656733-1",
+"archives:202411656734-1"
+],
+"sources": [
+"archives"
+],
+"first": "2026-11-23T03:01:15Z",
+"last": "2026-11-23T13:40:45Z",
+"keys": [
+"문서유형"
+]
+},
+"일반기록물": {
+"records": [
+"archives:201104884010-1",
+"archives:201104884104-1",
+"archives:202411656733-1",
+"archives:202411656734-1"
+],
+"sources": [
+"archives"
+],
+"first": "2026-11-23T03:01:15Z",
+"last": "2026-11-23T13:40:45Z",
+"keys": [
+"기록물형태"
+]
+},
+"사진/필름": {
+"records": [
+"archives:201205069333-1",
+"archives:201205069333-11",
+"archives:201205069333-12",
+"archives:201205069333-13",
+"archives:201205069333-2",
+"archives:201205069333-4",
+"archives:201205069333-5",
+"archives:201205069333-7",
+"archives:201205069333-8",
+"archives:201205069333-9",
+"archives:201808301444-30",
+"archives:202010401379-63",
+"archives:202010401379-64",
+"archives:202010401379-65",
+"archives:202010401379-66",
+"archives:202010401379-67",
+"archives:202010401384-69",
+"archives:202411621927-145",
+"archives:202411621927-146",
+"archives:202411621927-163",
+"archives:202411621927-164",
+"archives:202411622163-146",
+"archives:202411622163-164"
+],
+"sources": [
+"archives"
+],
+"first": "2026-11-23T03:01:15Z",
+"last": "2026-11-23T13:40:45Z",
+"keys": [
+"문서유형"
+]
+},
+"해외기록물": {
+"records": [
+"archives:201205069333-1",
+"archives:201205069333-11",
+"archives:201205069333-12",
+"archives:201205069333-13",
+"archives:201205069333-2",
+"archives:201205069333-4",
+"archives:201205069333-5",
+"archives:201205069333-7",
+"archives:201205069333-8",
+"archives:201205069333-9",
+"archives:201808301444-30",
+"archives:202311400025-150",
+"archives:202311400025-9",
+"archives:202311400037-44",
+"archives:202211156135-1",
+"archives:202211156136-1",
+"archives:202311400025-13",
+"archives:202411621912-29",
+"archives:202411621912-31",
+"archives:202411621913-2",
+"archives:202411621927-145",
+"archives:202411621927-146",
+"archives:202411621927-163",
+"archives:202411621927-164",
+"archives:202411622163-146",
+"archives:202411622163-164"
+],
+"sources": [
+"archives"
+],
+"first": "2026-11-23T03:01:15Z",
+"last": "2026-11-23T13:40:45Z",
+"keys": [
+"기록물형태"
+]
+},
+"사진 CD": {
+"records": [
+"archives:201205069333-1",
+"archives:201205069333-11",
+"archives:201205069333-12",
+"archives:201205069333-13",
+"archives:201205069333-2",
+"archives:201205069333-4",
+"archives:201205069333-5",
+"archives:201205069333-7",
+"archives:201205069333-8",
+"archives:201205069333-9"
+],
+"sources": [
+"archives"
+],
+"first": "2026-11-23T03:01:15Z",
+"last": "2026-11-23T13:40:45Z",
+"keys": [
+"매체유형"
+]
+},
+"녹음/동영상": {
+"records": [
+"archives:202311400025-150",
+"archives:202311400025-9",
+"archives:202311400037-44",
+"archives:200200097136-2",
+"archives:200200097143-1",
+"archives:202211156135-1",
+"archives:202211156136-1",
+"archives:202311400025-13",
+"archives:202411621912-29",
+"archives:202411621912-31",
+"archives:202411621913-2"
+],
+"sources": [
+"archives"
+],
+"first": "2026-11-23T03:01:15Z",
+"last": "2026-11-23T13:40:45Z",
+"keys": [
+"문서유형"
+]
+},
+"시청각기록물": {
+"records": [
+"archives:200200097136-2",
+"archives:200200097143-1",
+"archives:202010401379-63",
+"archives:202010401379-64",
+"archives:202010401379-65",
+"archives:202010401379-66",
+"archives:202010401379-67",
+"archives:202010401384-69"
+],
+"sources": [
+"archives"
+],
+"first": "2026-11-23T03:01:45Z",
+"last": "2026-11-23T03:01:45Z",
+"keys": [
+"기록물형태"
+]
+},
+"비디오 테이프": {
+"records": [
+"archives:200200097136-2",
+"archives:200200097143-1"
+],
+"sources": [
+"archives"
+],
+"first": "2026-11-23T03:01:45Z",
+"last": "2026-11-23T03:01:45Z",
+"keys": [
+"매체유형"
+]
+},
+"인화된사진": {
+"records": [
+"archives:202010401379-63",
+"archives:202010401379-64",
+"archives:202010401379-65",
+"archives:202010401379-66",
+"archives:202010401379-67",
+"archives:202010401384-69"
+],
+"sources": [
+"archives"
+],
+"first": "2026-11-23T03:01:45Z",
+"last": "2026-11-23T03:01:45Z",
+"keys": [
+"매체유형"
+]
+},
+"전자파일(동영상)": {
+"records": [
+"archives:202211156135-1",
+"archives:202211156136-1",
+"archives:202411621912-29",
+"archives:202411621912-31",
+"archives:202411621913-2"
+],
+"sources": [
+"archives"
+],
+"first": "2026-11-23T03:01:45Z",
+"last": "2026-11-23T03:01:45Z",
+"keys": [
+"매체유형"
+]
+},
+"전자파일(사진)": {
+"records": [
+"archives:202411621927-145",
+"archives:202411621927-146",
+"archives:202411621927-163",
+"archives:202411621927-164",
+"archives:202411622163-146",
+"archives:202411622163-164"
+],
+"sources": [
+"archives"
+],
+"first": "2026-11-23T03:01:45Z",
+"last": "2026-11-23T03:01:45Z",
+"keys": [
+"매체유형"
+]
+},
+"사진시각자료": {
+"records": [
+"earchive:AUS005_06_02V0000_696",
+"earchive:AUS005_06_02V0000_710",
+"earchive:AUS005_06_02V0000_712",
+"earchive:AUS001_41_00V0000_008",
+"earchive:AUS001_41_00V0000_009",
+"earchive:AUS005_06_02V0000_032"
+],
+"sources": [
+"earchive"
+],
+"first": "2026-11-23T03:15:42Z",
+"last": "2026-11-23T13:40:46Z",
+"keys": [
+"사료구분"
+]
+},
+"Reproduction negative (technique)": {
+"records": [
+"europeana:/440/item_SXNBOOSPFREXU5ZL3ARD7UTNINHVKP4N"
+],
+"sources": [
+"europeana"
+],
+"first": "2026-11-23T07:26:10Z",
+"last": "2026-11-23T13:40:45Z",
+"keys": [
+"format"
+]
+},
+"Stereofonico": {
+"records": [
+"europeana:/2059218/data_sounds_IT_DDS0000069047000000"
+],
+"sources": [
+"europeana"
+],
+"first": "2026-11-23T13:40:45Z",
+"last": "2026-11-23T13:40:45Z",
+"keys": [
+"format"
+]
+},
+"Altro": {
+"records": [
+"europeana:/2059218/data_sounds_IT_DDS0000069047000000"
+],
+"sources": [
+"europeana"
+],
+"first": "2026-11-23T13:40:45Z",
+"last": "2026-11-23T13:40:45Z",
+"keys": [
+"format"
+]
+},
+"디지털사진": {
+"records": [
+"earchive:AUS001_41_00V0000_008",
+"earchive:AUS001_41_00V0000_009"
+],
+"sources": [
+"earchive"
+],
+"first": "2026-11-23T13:40:46Z",
+"last": "2026-11-23T13:40:46Z",
+"keys": [
+"사료유형"
+]
+},
+"근현대문서": {
+"records": [
+"earchive:DCB050_12_00C1156",
+"earchive:DJE003_09_00C0001_002"
+],
+"sources": [
+"earchive"
+],
+"first": "2026-11-23T13:40:46Z",
+"last": "2026-11-23T13:40:46Z",
+"keys": [
+"사료구분"
+]
+},
+"보고서": {
+"records": [
+"earchive:DCB050_12_00C1156"
+],
+"sources": [
+"earchive"
+],
+"first": "2026-11-23T13:40:46Z",
+"last": "2026-11-23T13:40:46Z",
+"keys": [
+"사료유형"
+]
+},
+"공문서": {
+"records": [
+"earchive:DJE003_09_00C0001_002"
+],
+"sources": [
+"earchive"
+],
+"first": "2026-11-23T13:40:46Z",
+"last": "2026-11-23T13:40:46Z",
+"keys": [
+"사료유형"
+]
+},
+"편지": {
+"records": [
+"earchive:DJE003_09_00C0001_002"
+],
+"sources": [
+"earchive"
+],
+"first": "2026-11-23T13:40:46Z",
+"last": "2026-11-23T13:40:46Z",
+"keys": [
+"사료유형"
+]
+}
+},
+"재질": {
+"사직 > 기타": {
+"records": [
+"okchf:relic:40243",
+"okchf:relic:40323"
+],
+"sources": [
+"okchf"
+],
+"first": "2026-11-23T07:19:39Z",
+"last": "2026-11-23T13:40:53Z",
+"keys": [
+"재질"
+]
+},
+"지 > 기타": {
+"records": [
+"okchf:relic:46493",
+"okchf:relic:46492"
+],
+"sources": [
+"okchf"
+],
+"first": "2026-11-23T07:19:39Z",
+"last": "2026-11-23T13:40:53Z",
+"keys": [
+"재질"
+]
+},
+"금속 > 기타": {
+"records": [
+"okchf:relic:47104",
+"okchf:relic:47058"
+],
+"sources": [
+"okchf"
+],
+"first": "2026-11-23T07:19:40Z",
+"last": "2026-11-23T08:40:58Z",
+"keys": [
+"재질"
+]
+},
+"금속 > 동제": {
+"records": [
+"okchf:relic:46487"
+],
+"sources": [
+"okchf"
+],
+"first": "2026-11-23T08:15:26Z",
+"last": "2026-11-23T08:15:26Z",
+"keys": [
+"재질"
+]
+},
+"금속 > 황동제": {
+"records": [
+"okchf:relic:46488",
+"okchf:relic:22021",
+"okchf:relic:22025",
+"okchf:relic:40167",
+"okchf:relic:40276"
+],
+"sources": [
+"okchf"
+],
+"first": "2026-11-23T08:15:26Z",
+"last": "2026-11-23T08:40:58Z",
+"keys": [
+"재질"
+]
+},
+"사직 > 견": {
+"records": [
+"okchf:relic:46488"
+],
+"sources": [
+"okchf"
+],
+"first": "2026-11-23T08:15:26Z",
+"last": "2026-11-23T08:15:26Z",
+"keys": [
+"재질"
+]
+},
+"나무 > 기타": {
+"records": [
+"okchf:relic:46490",
+"okchf:relic:46491",
+"okchf:relic:22021",
+"okchf:relic:22022",
+"okchf:relic:22023",
+"okchf:relic:22024",
+"okchf:relic:22025",
+"okchf:relic:22027",
+"okchf:relic:22034",
+"okchf:relic:22045",
+"okchf:relic:22046",
+"okchf:relic:22050",
+"okchf:relic:40167",
+"okchf:relic:40276",
+"okchf:relic:47062",
+"okchf:relic:47070"
+],
+"sources": [
+"okchf"
+],
+"first": "2026-11-23T08:15:26Z",
+"last": "2026-11-23T08:40:58Z",
+"keys": [
+"재질"
+]
+},
+"골각패갑 > 나전": {
+"records": [
+"okchf:relic:46490",
+"okchf:relic:22021",
+"okchf:relic:22022",
+"okchf:relic:22023",
+"okchf:relic:22024",
+"okchf:relic:22025",
+"okchf:relic:22027",
+"okchf:relic:22034",
+"okchf:relic:22045",
+"okchf:relic:22046",
+"okchf:relic:22050",
+"okchf:relic:40276",
+"okchf:relic:47054",
+"okchf:relic:47055",
+"okchf:relic:47058",
+"okchf:relic:47062",
+"okchf:relic:47070"
+],
+"sources": [
+"okchf"
+],
+"first": "2026-11-23T08:15:26Z",
+"last": "2026-11-23T08:40:58Z",
+"keys": [
+"재질"
+]
+},
+"기타 > 기타": {
+"records": [
+"okchf:relic:46490",
+"okchf:relic:46492",
+"okchf:relic:40276"
+],
+"sources": [
+"okchf"
+],
+"first": "2026-11-23T08:15:26Z",
+"last": "2026-11-23T08:40:58Z",
+"keys": [
+"재질"
+]
+},
+"골각패갑 > 수각": {
+"records": [
+"okchf:relic:46491"
+],
+"sources": [
+"okchf"
+],
+"first": "2026-11-23T08:15:26Z",
+"last": "2026-11-23T08:15:26Z",
+"keys": [
+"재질"
+]
+},
+"도자기 > 청자": {
+"records": [
+"okchf:relic:21388"
+],
+"sources": [
+"okchf"
+],
+"first": "2026-11-23T08:40:58Z",
+"last": "2026-11-23T08:40:58Z",
+"keys": [
+"재질"
+]
+},
+"금속 > 백동제": {
+"records": [
+"okchf:relic:22022",
+"okchf:relic:22023",
+"okchf:relic:22050"
+],
+"sources": [
+"okchf"
+],
+"first": "2026-11-23T08:40:58Z",
+"last": "2026-11-23T08:40:58Z",
+"keys": [
+"재질"
+]
+},
+"골각패갑 > 수골": {
+"records": [
+"okchf:relic:40167"
+],
+"sources": [
+"okchf"
+],
+"first": "2026-11-23T08:40:58Z",
+"last": "2026-11-23T08:40:58Z",
+"keys": [
+"재질"
+]
+},
+"나무 > 잣나무": {
+"records": [
+"okchf:relic:47054",
+"okchf:relic:47058"
+],
+"sources": [
+"okchf"
+],
+"first": "2026-11-23T08:40:58Z",
+"last": "2026-11-23T08:40:58Z",
+"keys": [
+"재질"
+]
+},
+"나무 > 은행나무": {
+"records": [
+"okchf:relic:47055"
+],
+"sources": [
+"okchf"
+],
+"first": "2026-11-23T08:40:58Z",
+"last": "2026-11-23T08:40:58Z",
+"keys": [
+"재질"
+]
+},
+"사직": {
+"records": [
+"okchf:relic:47058"
+],
+"sources": [
+"okchf"
+],
+"first": "2026-11-23T08:40:58Z",
+"last": "2026-11-23T08:40:58Z",
+"keys": [
+"재질"
+]
+},
+"나무 > 가죽나무": {
+"records": [
+"okchf:relic:47062"
+],
+"sources": [
+"okchf"
+],
+"first": "2026-11-23T08:40:58Z",
+"last": "2026-11-23T08:40:58Z",
+"keys": [
+"재질"
+]
+},
+"종이": {
+"records": [
+"much:PS01002025001-003418-00000",
+"much:PS01002025001-021084-00000"
+],
+"sources": [
+"much"
+],
+"first": "2026-11-23T13:40:48Z",
+"last": "2026-11-23T13:40:48Z",
+"keys": [
+"재질"
+]
+}
+}
+},
+"updated": "2026-11-24T13:48:32Z",
 "totals": {
 "매체": 3,
 "주제": 35,
@@ -2046,9 +2782,12 @@
 "분류": 22,
 "시대": 38,
 "인물": 27,
-"기관": 8
+"기관": 8,
+"기술 수준": 4,
+"형태": 21,
+"재질": 18
 },
-"note": "원 기관 메타의 주제·지명·분류·시대·매체·인물·기관(장서각 태깅) 표기 그대로(번역·정규화 없음). records = 그 용어가 붙은 원장 기록 key. 지우지 않는다",
+"note": "원 기관 메타의 주제·지명·분류·시대·매체·인물·기관(장서각 태깅)·형태·재질·기술 수준 표기 그대로(번역·정규화 없음). records = 그 용어가 붙은 원장 기록 key. 지우지 않는다",
 "authority_groups": {
 "G002+AKS-KHF_24C219BE48CD5CB1670X0": [
 "숙빈",
