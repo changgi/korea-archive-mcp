@@ -109,7 +109,7 @@ DEEP = {"i815": ("nedb_search", lambda o: o.get("url") and {"mode": "i815", "que
         "okchf": ("nedb_search", lambda o: o.get("url") and {"mode": "okchf", "query": o["url"]}),
         "nrich": ("nedb_search", lambda o: {"mode": "nrich", "query": o["id"] if re.match(r"^(ksm|portrait|gwaebul|diary|mokgan|jcbib|jcphoto|dict|arch|koguryo|gaesong|design|pattern|oldbook|hyanggyo|stone|journal|iron|dolmen|assay|material):", str(o.get("id", ""))) else o.get("url")} if (o.get("id") or o.get("url")) else None)}
 DEEP["kyudb"] = ("nedb_search", lambda o: re.match(r"^[^\x00-\x7f]{1,4}[0-9][0-9.\-]*$", str(o.get("id") or "")) and {"mode": "kyujanggak", "query": o["id"]})  # v2.55 규장각 해제(기관 해설문) — 같은 청구기호 행만 쓴다
-DEEP_V = {"seoul": 2, "aks": 2}  # v2.32 판독기 판 — 판이 오르면 이미 보강된 기록도 한 번 다시 판독(서울기록원: 기관 계층·생산자·보존이력 추가)
+DEEP_V = {"seoul": 2, "aks": 2, "jsg": 2}  # v2.56 jsg 2 = 장서각 개체 태깅·인물 전거(UCI)  # v2.32 판독기 판 — 판이 오르면 이미 보강된 기록도 한 번 다시 판독(서울기록원: 기관 계층·생산자·보존이력 추가)
 _sid = [None]
 
 def mcp_call(tool, args):
@@ -201,6 +201,8 @@ def enrich(o, budget):
                     md = [["면 수", hm[2]]] + ([["UCI", hm[3]]] if hm and hm[3] else []) if hm else md
                 if summ or src0 != "kyudb": o["summary"] = (summ + " " if summ else "") + f"(KOREA ARCHIVE 심층 판독 {tool})"  # 규장각 해제가 없으면 요약을 비워 둔다(서지는 메타·메타 합성으로)
                 o["meta"] = md; o["deep_call"] = f"{tool}({json.dumps(args, ensure_ascii=False)})"; o["enrich_status"] = "ok"; o["deep_v"] = DEEP_V.get(src0, 1)
+                um = re.search(r"인물 전거\(한국역대인물 UCI\):\s*(.+)", txt)  # v2.56 기관이 붙인 인명 전거 — 이름=UCI
+                if um: o["authority"] = {"scheme": "한국역대인물 UCI(장서각 태깅)", "persons": dict(x.split("=", 1) for x in um[1].strip().split("; ") if "=" in x)}
                 hv = next((v for k, v in md if k == "계층"), "")
                 if hv and not o.get("partOf"): o["partOf"] = hv; o["partOf_src"] = "기관 상세 판독(브레드크럼)"  # 원 기관 계층 — [파생] 아님
             except Exception:
@@ -266,7 +268,7 @@ def tree_path(o):
     return [top] + (segs or ["(계열 미상)"])
 
 ERAS = ["광복이후", "광복 이후", "선사", "고조선", "삼국", "고구려", "백제", "신라", "가야", "통일신라", "발해", "남북국", "고려", "조선", "대한제국", "일제강점기", "대한민국"]
-DATE_KEYS = ("생산일", "생산연도", "생산", "연대", "날짜", "시대", "시대분류", "출판정보", "발행", "발행일", "제작연도", "제작시기", "국적/시대", "작성연대 / 간행시기", "생산기간", "발간연도", "date")  # v2.50 생산기간(전자사료관)·발간연도(국외문화유산)·date(IA·Europeana) — 인수·등록·업로드일(보존이력·addeddate)은 넣지 않는다
+DATE_KEYS = ("생산일", "생산연도", "생산", "연대", "날짜", "시대", "시대분류", "출판정보", "발행", "발행일", "제작연도", "제작시기", "국적/시대", "작성연대 / 간행시기", "생산기간", "발간연도", "date", "발행년도", "기간", "생산 기간", "생산시기", "Publication Date", "일자")  # v2.56 연구원 발행년도·TNA 기간·6·25 생산시기·NDL 발행일·서울 일자  # v2.50 생산기간(전자사료관)·발간연도(국외문화유산)·date(IA·Europeana) — 인수·등록·업로드일(보존이력·addeddate)은 넣지 않는다
 ERA_KEYS = ("시대", "시대분류", "제작시기", "국적/시대")
 
 def date_derived(o):
@@ -976,7 +978,8 @@ def write_quality(recs):
     json.dump(Qj, open(p, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
     return snap
 
-FACETS = [("주제", re.compile(r"^(주제|주제어|색인어.*|subject|키워드)$", re.I)), ("장소", re.compile(r"^(연관정보|장소|취급지명|place)$", re.I)),
+FACETS = [("주제", re.compile(r"^(주제|주제어|색인어.*|subject|키워드)$", re.I)), ("장소", re.compile(r"^(연관정보|장소|취급지명|place|지명\(장서각 태깅\))$", re.I)),
+          ("인물", re.compile(r"^인명\(장서각 태깅\)$")), ("기관", re.compile(r"^관청명\(장서각 태깅\)$")),  # v2.56 기관 개체 태깅
           ("분류", re.compile(r"^(분류|사부분류|자료분류|보고서유형분류)$")), ("시대", re.compile(r"^(시대|시대분류|국적/시대)$")), ("매체", re.compile(r"^mediatype$", re.I))]
 
 def facet_terms(k, v, fac):
@@ -988,7 +991,7 @@ def facet_terms(k, v, fac):
     if v.startswith("http"): return []
     return [(fac, t.strip()) for t in re.split(r"[;；,，·]|\s>\s|\s›\s", v) if 1 < len(t.strip()) <= 40]
 
-FACET_SLUG = {"주제": "subject", "장소": "place", "분류": "class", "시대": "period", "매체": "medium"}
+FACET_SLUG = {"주제": "subject", "장소": "place", "분류": "class", "시대": "period", "매체": "medium", "인물": "person", "기관": "agency"}
 
 def concept_id(fac, term):
     return f"{PAGES}subjects.jsonld#{FACET_SLUG.get(fac, 'x')}/" + urllib.parse.quote(term, safe="")
@@ -1016,10 +1019,12 @@ def merge_subjects(recs):
                 src = o["key"].split(":")[0]
                 if src not in e["sources"]: e["sources"].append(src)
                 if str(k) not in e["keys"]: e["keys"].append(str(k))
+                uci = ((o.get("authority") or {}).get("persons") or {}).get(t) if fac2 == "인물" else None
+                if uci: e["uci"] = uci  # v2.56 인물 전거
                 e["first"] = min(e["first"], o["first_seen"]); e["last"] = max(e["last"], o["last_seen"])
     S["updated"] = dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
     S["totals"] = {f: len(v) for f, v in S["facets"].items()}
-    S["note"] = "원 기관 메타의 주제·지명·분류·시대·매체 표기 그대로(번역·정규화 없음). records = 그 용어가 붙은 원장 기록 key. 지우지 않는다"
+    S["note"] = "원 기관 메타의 주제·지명·분류·시대·매체·인물·기관(장서각 태깅) 표기 그대로(번역·정규화 없음). records = 그 용어가 붙은 원장 기록 key. 지우지 않는다"
     json.dump(S, open(p, "w", encoding="utf-8"), ensure_ascii=False, indent=0)
     # v2.43 SKOS 개념 체계 — 패싯마다 ConceptScheme, 용어마다 Concept(prefLabel 기관 표기·출처 기관·기록 수). RiC-O 기록이 이 개념을 가리킨다
     graph = []
@@ -1029,7 +1034,8 @@ def merge_subjects(recs):
                       "dct:description": "원 기관 메타의 표기를 그대로 모은 개념 체계(번역·정규화 없음)"})
         for t, e in terms.items():
             graph.append({"@id": concept_id(f, t), "@type": "skos:Concept", "skos:prefLabel": t, "skos:inScheme": {"@id": sch},
-                          "dct:source": e["sources"], "skos:note": f"원장 기록 {len(e['records'])}건 · 메타 키 {', '.join(e['keys'])} · 처음 {e['first'][:10]}"})
+                          "dct:source": e["sources"], "skos:note": f"원장 기록 {len(e['records'])}건 · 메타 키 {', '.join(e['keys'])} · 처음 {e['first'][:10]}",
+                          **({"skos:notation": e["uci"], "dct:identifier": f"UCI {e['uci']}"} if e.get("uci") else {})})
     json.dump({"@context": {"skos": "http://www.w3.org/2004/02/skos/core#", "dct": "http://purl.org/dc/terms/"}, "@graph": graph},
               open(os.path.join(D, "subjects.jsonld"), "w", encoding="utf-8"), ensure_ascii=False)
     E_ = html.escape; by = {o["key"]: o for o in recs}
@@ -1179,7 +1185,7 @@ def main():
         o["iiif_built"] = "" if (o.get("iiif") and not o.get("iiif_status")) else leaf_manifest(o)  # v2.52 기관 매니페스트가 비공개 응답이면 브리지로 대체(기관 주소는 보존)
     with open(lp, "w", encoding="utf-8") as f:
         for o in recs: f.write(json.dumps(o, ensure_ascii=False, separators=(",", ":")) + "\n")
-    cols = ["key", "entry_type", "found_by_basis", "summary_composed", "rights_view", "rights_basis", "fixity", "defect_note", "link_note", "sources", "title", "date", "date_derived", "date_basis", "id", "url", "partOf", "partOf_derived", "media", "sameAs", "iiif", "iiif_status", "iiif_built", "iiif_kind", "found_by", "found_by_derived", "first_seen", "last_seen", "seen", "seen_7d", "seen_30d", "days_total", "formats", "tools", "max_cross", "trend", "rank", "score", "summary", "summary_basis", "rights", "thumb", "meta", "meta_basis"]
+    cols = ["key", "entry_type", "found_by_basis", "summary_composed", "rights_view", "rights_basis", "fixity", "defect_note", "link_note", "sources", "title", "date", "date_derived", "date_basis", "id", "url", "partOf", "partOf_derived", "media", "sameAs", "iiif", "iiif_status", "iiif_built", "iiif_kind", "found_by", "found_by_derived", "first_seen", "last_seen", "seen", "seen_7d", "seen_30d", "days_total", "formats", "tools", "max_cross", "trend", "rank", "score", "summary", "summary_basis", "rights", "thumb", "meta", "meta_basis", "authority"]
     fmtv = lambda v: json.dumps(v, ensure_ascii=False, separators=(",", ":")) if isinstance(v, list) and v and isinstance(v[0], dict) else " | ".join(f"{a}: {b}" for a, b in v) if isinstance(v, list) and v and isinstance(v[0], list) else (" ".join(f"{k}:{n}" for k, n in sorted(v.items(), key=lambda kv: -kv[1])) if isinstance(v, dict) and all(isinstance(x, (int, float)) for x in v.values()) else json.dumps(v, ensure_ascii=False, separators=(",", ":")) if isinstance(v, dict) else ("+".join(v) if isinstance(v, list) else v))
     with open(os.path.join(D, "discovered.csv"), "w", encoding="utf-8-sig", newline="") as f:
         w = csv.writer(f); w.writerow(cols)
