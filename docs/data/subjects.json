@@ -480,7 +480,8 @@
 },
 "ARMED INCIDENTS": {
 "records": [
-"un:S/2010/358"
+"un:S/2010/358",
+"un:S/PRST/2010/13"
 ],
 "sources": [
 "un"
@@ -998,6 +999,237 @@
 ],
 "first": "2026-11-23T13:40:50Z",
 "last": "2026-11-23T13:40:50Z",
+"keys": [
+"주제"
+]
+},
+"PEACEMAKING": {
+"records": [
+"un:A/HRC/28/NGO/9"
+],
+"sources": [
+"un"
+],
+"first": "2026-11-23T03:00:46Z",
+"last": "2026-11-23T13:40:52Z",
+"keys": [
+"주제"
+]
+},
+"KOREAN QUESTION": {
+"records": [
+"un:A/HRC/28/NGO/9",
+"un:S/2013/162"
+],
+"sources": [
+"un"
+],
+"first": "2026-11-23T03:00:46Z",
+"last": "2026-11-23T13:40:52Z",
+"keys": [
+"주제"
+]
+},
+"CONFERENCES": {
+"records": [
+"un:A/HRC/28/NGO/9"
+],
+"sources": [
+"un"
+],
+"first": "2026-11-23T03:00:46Z",
+"last": "2026-11-23T13:40:52Z",
+"keys": [
+"주제"
+]
+},
+"DEMOCRATIC PEOPLE'S REPUBLIC OF KOREA": {
+"records": [
+"un:A/HRC/28/NGO/9",
+"un:S/2013/162",
+"un:S/2010/358",
+"un:S/PRST/2010/13"
+],
+"sources": [
+"un"
+],
+"first": "2026-11-23T03:00:46Z",
+"last": "2026-11-23T13:40:52Z",
+"keys": [
+"주제"
+]
+},
+"REPUBLIC OF KOREA": {
+"records": [
+"un:A/HRC/28/NGO/9",
+"un:S/2013/162",
+"un:S/2010/358",
+"un:S/PRST/2010/13"
+],
+"sources": [
+"un"
+],
+"first": "2026-11-23T03:00:46Z",
+"last": "2026-11-23T13:40:52Z",
+"keys": [
+"주제"
+]
+},
+"KOREAN PENINSULA": {
+"records": [
+"un:S/2015/799",
+"un:S/2010/358",
+"un:S/PRST/2010/13"
+],
+"sources": [
+"un"
+],
+"first": "2026-11-23T03:00:46Z",
+"last": "2026-11-23T13:40:52Z",
+"keys": [
+"주제"
+]
+},
+"INTERNATIONAL TRADE LAW": {
+"records": [
+"un:A/C.6/81/L.5"
+],
+"sources": [
+"un"
+],
+"first": "2026-11-23T07:26:10Z",
+"last": "2026-11-23T07:26:10Z",
+"keys": [
+"주제"
+]
+},
+"TECHNICAL COOPERATION": {
+"records": [
+"un:A/C.6/81/L.5"
+],
+"sources": [
+"un"
+],
+"first": "2026-11-23T07:26:10Z",
+"last": "2026-11-23T07:26:10Z",
+"keys": [
+"주제"
+]
+},
+"MODEL LAWS": {
+"records": [
+"un:A/C.6/81/L.5"
+],
+"sources": [
+"un"
+],
+"first": "2026-11-23T07:26:10Z",
+"last": "2026-11-23T07:26:10Z",
+"keys": [
+"주제"
+]
+},
+"INFORMATION DISSEMINATION": {
+"records": [
+"un:A/C.6/81/L.5"
+],
+"sources": [
+"un"
+],
+"first": "2026-11-23T07:26:10Z",
+"last": "2026-11-23T07:26:10Z",
+"keys": [
+"주제"
+]
+},
+"WEBSITES": {
+"records": [
+"un:A/C.6/81/L.5"
+],
+"sources": [
+"un"
+],
+"first": "2026-11-23T07:26:10Z",
+"last": "2026-11-23T07:26:10Z",
+"keys": [
+"주제"
+]
+},
+"CRIMINAL INVESTIGATION": {
+"records": [
+"un:S/2010/358"
+],
+"sources": [
+"un"
+],
+"first": "2026-11-23T13:40:52Z",
+"last": "2026-11-23T13:40:52Z",
+"keys": [
+"주제"
+]
+},
+"NEGOTIATION": {
+"records": [
+"un:S/2010/358"
+],
+"sources": [
+"un"
+],
+"first": "2026-11-23T13:40:52Z",
+"last": "2026-11-23T13:40:52Z",
+"keys": [
+"주제"
+]
+},
+"SHIPS": {
+"records": [
+"un:S/2010/358",
+"un:S/PRST/2010/13"
+],
+"sources": [
+"un"
+],
+"first": "2026-11-23T13:40:52Z",
+"last": "2026-11-23T13:40:52Z",
+"keys": [
+"주제"
+]
+},
+"TER": {
+"records": [
+"un:S/2010/358"
+],
+"sources": [
+"un"
+],
+"first": "2026-11-23T13:40:52Z",
+"last": "2026-11-23T13:40:52Z",
+"keys": [
+"주제"
+]
+},
+"TERRITORIAL SEA": {
+"records": [
+"un:S/PRST/2010/13"
+],
+"sources": [
+"un"
+],
+"first": "2026-11-23T13:40:52Z",
+"last": "2026-11-23T13:40:52Z",
+"keys": [
+"주제"
+]
+},
+"REPU": {
+"records": [
+"un:S/PRST/2010/13"
+],
+"sources": [
+"un"
+],
+"first": "2026-11-23T13:40:52Z",
+"last": "2026-11-23T13:40:52Z",
 "keys": [
 "주제"
 ]
@@ -4381,10 +4613,10 @@
 }
 }
 },
-"updated": "2026-11-24T15:03:46Z",
+"updated": "2026-11-24T15:15:01Z",
 "totals": {
 "매체": 3,
-"주제": 71,
+"주제": 88,
 "장소": 33,
 "분류": 78,
 "시대": 38,
