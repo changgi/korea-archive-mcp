@@ -916,7 +916,8 @@
     "해시 사슬",
     "q/<질의 지문>\\.json",
     "records\\.bib",
-    "records\\.oai_dc\\.xml"
+    "records\\.oai_dc\\.xml",
+    "catalog\\.jsonld"
    ],
    "must_not": [
     "검색어·사용자 정보 없음"
