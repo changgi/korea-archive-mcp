@@ -1278,9 +1278,31 @@ TARGET_INST = {"kw": "koreanwar:", "nara_local": "nara:", "naid": "nara:", "ia":
 def target_ids(kind, v):
     return {"kw": {f"koreanwar:{v}".lower(), v.lower()}, "nara_local": {v.lower()}, "naid": {f"naid {v}", f"nara:naid {v}"}, "ia": {f"ia:{v}".lower()}}[kind]
 
+def kw_hier_pass(led, today, budget=10):
+    """v2.87 6·25전쟁 아카이브센터 기록 중 기관 계층이 없는 것 — koreanwar_search를 제목으로 불러 **같은 참조코드 카드**의 '계층'(기관 분류 경로)만 쓴다.
+    다른 카드·형제 기록의 계층은 쓰지 않는다. 카드가 없으면 kw_hier_tried(7일 뒤 재시도)."""
+    used = got = 0
+    for o in sorted(led.values(), key=lambda x: x["key"]):
+        if used >= budget: break
+        if not o["key"].startswith("koreanwar:") or o.get("partOf") or o.get("entry_type", "기록") != "기록": continue
+        if o.get("kw_hier_tried", "") > (today - dt.timedelta(days=7)).isoformat(): continue
+        ref = o["key"].split(":", 1)[1]; q = re.sub(r"\s*기록영상$", "", o["title"]).split(";")[-1].strip()[:40]
+        if not q: continue
+        used += 1
+        try: t = mcp_call("koreanwar_search", {"query": q, "max_results": 20})
+        except Exception as ex: print(f"koreanwar 계층 조회 실패 {ref}: {str(ex)[:60]}"); continue
+        o["kw_hier_tried"] = today.isoformat()
+        m = re.search(r"- \[" + re.escape(ref) + r"\][^\n]*\n\s+생산:[^\n]*\| 계층: ([^\n]+)", t)
+        if m:
+            o["partOf"] = "협약 › " + m[1].strip(); o["partOf_src"] = f"koreanwar_search 카드 계층(같은 참조코드 {ref}, 기관 표기 — 도구가 줄인 경우 그대로)"; got += 1
+        time.sleep(0.6)
+    return used, got
+
 def sameas_pass(led, today, budget=10):
     """v2.83 같은 기록 추적 — 기관이 같은 기록이라고 적은 상대가 원장에 없으면 그 기관에서 직접 찾아 원장 기록으로 들인다(발굴).
     정확히 같은 식별자만(NAID·로컬 식별자·참조코드·IA 식별자) — 비슷한 제목은 받지 않는다. 실패는 7일 뒤 재시도, 원래 기록에 sameas_tried."""
+    for o in led.values():  # v2.87 v2.83 추적 기록에 보강 완료 표시가 미리 붙어 IIIF 보강을 건너뛰던 결함 — 표시만 걷어 다음 보강에 들게
+        if "같은 기록 추적" in (o.get("found_via") or "") and not o.get("enrich_status") and o.get("enriched"): o.pop("enriched", None)
     ids = {}
     for o in led.values():
         for i in _loc_ids(o): ids.setdefault(i, set()).add(o["key"])
@@ -1330,7 +1352,7 @@ def sameas_pass(led, today, budget=10):
             time.sleep(0.6)
             if not rec or not rec["title"] or rec["key"] in led: continue
             rec.update({"media": "", "first_seen": now, "last_seen": now, "seen": 0, "tools": [{"kw": "koreanwar_item", "ia": "archive.org metadata API"}.get(kind, "nara_search")],
-                        "days": {}, "formats": {}, "days_total": 0, "max_cross": 1, "drilled_from": o["key"], "found_via": f"같은 기록 추적(v2.83) — {basis}", "enriched": today.isoformat()})
+                        "days": {}, "formats": {}, "days_total": 0, "max_cross": 1, "drilled_from": o["key"], "found_via": f"같은 기록 추적(v2.83) — {basis}"})
             rec.setdefault("sameAs", ""); led[rec["key"]] = rec; added += 1
             for i in _loc_ids(rec): ids.setdefault(i, set()).add(rec["key"])
         if tried: o["sameas_tried"] = tried
@@ -1842,6 +1864,8 @@ def main():
     ad_used, ad_added = aks_drill(led, today, int(os.environ.get("AKS_DRILL_MAX", "30")))
     sa_used, sa_added = sameas_pass(led, today, int(os.environ.get("SAMEAS_MAX", "12")))  # v2.83 같은 기록 추적 발굴
     print(f"같은 기록 추적 {sa_added}건 발굴(요청 {sa_used})")
+    kh_used, kh_got = kw_hier_pass(led, today, int(os.environ.get("KW_HIER_MAX", "10")))  # v2.87
+    print(f"6·25전쟁 아카이브센터 기관 계층 {kh_got}건(요청 {kh_used})")
     print(f"첫 화면 링크 해소 {rl_fixed}/{rl_used} · 고문서 소장처 하위 문서 발굴 {ad_added}건({ad_used}회 호출)")
     budget = int(os.environ.get("ENRICH_MAX", "80"))  # 하루 매니페스트 판독 상한(기관 서버 예의 — 순차·간격)
     for o in sorted(led.values(), key=lambda o: o.get("last_seen", ""), reverse=True):
