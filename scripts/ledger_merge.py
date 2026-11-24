@@ -1092,7 +1092,21 @@ def relations_page(R):
     def basis(c, t):
         return " · ".join(sorted({bs for a in c for tt, b, bs in REL.get(a, []) if tt == t and b in c}))[:400]
     same = comps("같은 기록(다른 소장처)"); day = comps("같은 날(다른 기관)")
-    sec = lambda title, note, cs, t: f"<h2>{title} <small>{len(cs)}묶음</small></h2><p><small>{note}</small></p>" + "".join(f"<div class='c'><ul>{''.join(li(k) for k in c)}</ul><p><small>근거: {E_(basis(c, t))}</small></p></div>" for c in cs)
+    import hashlib
+    sd = os.path.join(D, "same"); os.makedirs(sd, exist_ok=True); gids = {}
+    for c in same:  # v2.90 같은 기록 묶음마다 IIIF 컬렉션 — 소장처별 매니페스트(원 기관 제공 또는 우리 브리지)를 나란히, 같은 묶음은 같은 파일명(구성 key 지문)
+        gid = hashlib.sha1("|".join(sorted(c)).encode()).hexdigest()[:12]; gids[c[0]] = gid
+        items = []
+        for k in c:
+            o = by[k]; mf = (o.get("iiif") if not o.get("iiif_status") else "") or o.get("iiif_built")
+            if mf: items.append({"id": mf, "type": "Manifest", "label": {"ko": [f"{SRC_NAME.get(k.split(':')[0], k.split(':')[0])} — {o['title'][:100]}"]}})
+        json.dump({"@context": "http://iiif.io/api/presentation/3/context.json", "id": f"{PAGES}same/{gid}.json", "type": "Collection",
+                   "label": {"ko": [f"같은 기록 — {len(c)}개 소장처: {by[c[0]]['title'][:80]}"]},
+                   "summary": {"ko": ["KOREA ARCHIVE 발견 원장 — 기관 표기(sameAs·식별자·입수처 링크)로 확인된 같은 기록의 소장처별 매니페스트. 근거: " + basis(c, "같은 기록(다른 소장처)")[:300]]},
+                   "items": items}, open(os.path.join(sd, f"{gid}.json"), "w", encoding="utf-8"), ensure_ascii=False)
+    KV_ = "../kv.html?manifest="
+    kvl = lambda c, t: (f" · <a href='{KV_}{PAGES}same/{gids[c[0]]}.json'>KV로 소장처별 나란히 보기</a> · <a href='same/{gids[c[0]]}.json'>IIIF 컬렉션</a>") if t == "같은 기록(다른 소장처)" and c[0] in gids else ""
+    sec = lambda title, note, cs, t: f"<h2>{title} <small>{len(cs)}묶음</small></h2><p><small>{note}</small></p>" + "".join(f"<div class='c'><ul>{''.join(li(k) for k in c)}</ul><p><small>근거: {E_(basis(c, t))}{kvl(c, t)}</small></p></div>" for c in cs)
     open(os.path.join(D, "relations.html"), "w", encoding="utf-8").write(f"""<!DOCTYPE html><html lang="ko"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>기록↔기록 맥락 연결 — KOREA ARCHIVE 발견 원장</title>
 <style>body{{font-family:system-ui,'Noto Sans KR',sans-serif;margin:0;background:#14161b;color:#e6e4dc}}main{{max-width:900px;margin:auto;padding:16px}}a{{color:#e0b04a}}small{{color:#9b9a93}}.c{{border:1px solid #333;border-radius:8px;padding:4px 12px;margin:8px 0}}</style>
 <main><p><small>KOREA ARCHIVE 통합검색 · <a href="index.html">원장</a> · <a href="relations.json">relations.json</a> · <a href="tree.html">계층</a> · <a href="subjects.html">주제</a></small></p>
