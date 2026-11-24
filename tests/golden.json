@@ -917,7 +917,8 @@
     "q/<질의 지문>\\.json",
     "records\\.bib",
     "records\\.oai_dc\\.xml",
-    "catalog\\.jsonld"
+    "catalog\\.jsonld",
+    "sitemap\\.xml"
    ],
    "must_not": [
     "검색어·사용자 정보 없음"
