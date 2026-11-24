@@ -85,6 +85,7 @@
 6. CHANGELOG 기록 → 두 저장소 커밋·푸시 → main 반영 → `golden`이 배포 후 자동 재검사.
 
 ### 알려진 접근 제약 (2026-11 실측)
+- **정직 UA 일원화(v2.36)**: 모든 요청은 `KoreaArchiveMCP/2.36 (+저장소 URL; archival discovery; non-commercial research)` — Node `UA`·Python `_UA_KO`·harvester·kla·joseon_tools·selfcheck·스킬 참조 스크립트까지. 브라우저 UA 문자열을 다시 넣지 않는다. 프록시 경유 폴백(`FETCH_PROXY_PREFIX`·allorigins·jina)은 제거했다 — 차단은 그대로 오류로 보고하고 health·source_profile에 표시, 브라우저·웹 검색 경로를 안내한다. 정직 UA 전환 전후 관련성 감사 비교는 CHANGELOG v2.36.0.
 - 정보공개포털(open.go.kr) 원문정보 — 기관 점검 중(2026.11.12~). foia는 청구 경로 안내로 대체.
 - Gallica — 서버 IP 자동 조회 403, BnF 카탈로그(catalogue.bnf.fr)도 연결 불가(2026-11-23) → **data.bnf.fr 공식 SPARQL**(`bnfSparql`, 제목 전문검색 bif:contains + Gallica 원문 링크)을 우선, 0건일 때만 카탈로그. IIIF는 브라우저 뷰어에서 열림.
 - 한국사DB — 통합검색(`searchTotalResult.do`)은 GET·POST 모두 결과를 스크립트로 그려 HTML에 없음(메뉴만). **시대별 하위 DB POST**(`/{joseon|modern|contemp|ancient}/search/searchResultList.do`, `searchItemId`)가 건수·기록(fnGoItemLevel levelId)을 돌려준다 — `nedbLive`가 주요 8개 DB 병렬(6h 캐시). DB 코드 111종은 사이트 메뉴 `/{시대}/level.do?itemId=`에서 확인.
