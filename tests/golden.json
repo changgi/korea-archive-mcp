@@ -1099,6 +1099,21 @@
    ],
    "level": "error",
    "note": "v2.48 조회 실패 채널은 '없음'과 구분해 명시돼야 한다 — foia가 복구되면 건수 표기로 통과"
+  },
+  {
+   "id": "ledger-found-path",
+   "tool": "cross_search",
+   "args": {
+    "query": "Korea",
+    "sources": "ledger",
+    "max_per_source": 5,
+    "format": "csv"
+   },
+   "must": [
+    "경로 (?:질의 [0-9]+|원장\\(파생\\))"
+   ],
+   "level": "warn",
+   "note": "v2.49 원장 기록마다 발견 경로(질의 지문 또는 원장 적재 파생)가 보여야 — 원장 병합 후"
   }
  ]
 }
