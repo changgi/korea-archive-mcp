@@ -588,6 +588,32 @@ def rekey_ktv(led):
         n += 1
     return n
 
+GUARD_FIELDS = ("summary", "meta", "partOf", "date", "url", "iiif", "authority", "id")
+
+def loss_guard(led, prev, today):
+    """v2.70 '축적된 정보는 절대 지우지 않는다'를 기계적으로 강제 — 이번 실행 전 원장과 비교해
+    (1) 사라진 항목(별칭으로 옮겨진 것 제외)은 되살리고, (2) 값이 있던 필드가 비면 이전 값을, (3) 지문 이력이 줄면 이전 이력을 되살린다.
+    무엇을 되살렸는지 loss_guard.json에 날짜별로 남긴다(이 기록도 지우지 않는다). 반환: 되살린 건수."""
+    alias = {}
+    for k, o in led.items():
+        for a in o.get("key_aliases") or []: alias[a] = k
+    ev = []
+    for k, po in prev.items():
+        cur = led.get(k) or led.get(alias.get(k, ""))
+        if cur is None:
+            po["restored_by_guard"] = today.isoformat(); led[k] = po; ev.append({"key": k, "what": "항목 소실 → 되살림"}); continue
+        for f in GUARD_FIELDS:
+            if po.get(f) not in (None, "", [], {}) and cur.get(f) in (None, "", [], {}):
+                cur[f] = po[f]; ev.append({"key": cur["key"], "what": f"{f} 비워짐 → 이전 값 되살림"})
+        if len(po.get("fixity") or []) > len(cur.get("fixity") or []):
+            cur["fixity"] = po["fixity"]; ev.append({"key": cur["key"], "what": "지문 이력 감소 → 이전 이력 되살림"})
+    p = os.path.join(D, "loss_guard.json")
+    J = json.load(open(p, encoding="utf-8")) if os.path.exists(p) else {"note": "원장 불삭제 검사 — 사라질 뻔한 값을 되살린 기록(날짜별, 지우지 않음)", "daily": {}}
+    if ev: J["daily"].setdefault(today.isoformat(), []).extend(ev)
+    J["updated"] = dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"); J["total_restored"] = sum(len(v) for v in J["daily"].values())
+    json.dump(J, open(p, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+    return len(ev)
+
 def rekey_collisions(led):
     """v2.67 옛 규칙으로 분류어 key(nlk:기사 등)를 받은 항목을 올바른 key로 옮긴다 — 지우지 않고 이름만 바꾸며, 옛 key는 key_aliases에 남긴다.
     발견 횟수가 2 이상이면 같은 유형의 다른 기록이 합쳐졌을 수 있음을 merge_note로 밝힌다(합쳐진 기록의 URL은 첫 것만 남아 있음)."""
@@ -885,7 +911,7 @@ DISTS = [("discovered.csv", "text/csv", "발견 기록 표(CSV)"), ("discovered.
          ("records.ris", "application/x-research-info-systems", "인용 RIS"), ("records.bib", "application/x-bibtex", "인용 BibTeX"),
          ("feed.xml", "application/atom+xml", "새 발견 Atom 피드"), ("timeline.json", "application/json", "연대 타임라인"), ("tree.json", "application/json", "계층구조"),
          ("classifications.json", "application/json", "분류 사전"), ("provenance.json", "application/json", "발견 경로(질의↔기록)"), ("quality.json", "application/json", "데이터 품질 시계열"),
-         ("fixity_changes.json", "application/json", "원문 고정성 변경 이력"), ("queries/index.json", "application/json", "질의·회신 축적 색인"),
+         ("fixity_changes.json", "application/json", "원문 고정성 변경 이력"), ("loss_guard.json", "application/json", "불삭제 검사 — 되살린 값 기록"), ("queries/index.json", "application/json", "질의·회신 축적 색인"),
          ("queries/probe/index.json", "application/json", "자동 점검 질의·회신 색인"), ("records/index.json", "application/json", "일일 기록물 등록부 해시 사슬")]
 
 def build_catalog(recs, nql):
@@ -1352,6 +1378,7 @@ def main():
                 o.setdefault("days", {o.get("first_seen", "")[:10]: o.get("seen", 1)}); o.setdefault("days_total", len(o["days"]))
                 o.setdefault("formats", {}); o.setdefault("max_cross", len(o.get("sources") or []))
                 led[o["key"]] = o
+    prev_snapshot = json.loads(json.dumps(led, ensure_ascii=False))  # v2.70 불삭제 검사 기준(이번 실행 전 원장)
     nkt = rekey_ktv(led)
     if nkt: print(f"KTV key 통일(v2.69) {nkt}건 — 중복은 합산해 하나로, 옛 key는 key_aliases")
     nrk = rekey_collisions(led)
@@ -1429,6 +1456,8 @@ def main():
         o["trend"] = "신규" if o["first_seen"][:10] > (today - dt.timedelta(days=7)).isoformat() else ("↑" if o["seen_7d"] > prev else ("↓" if o["seen_7d"] < prev else "→"))
         o["score"] = round(o["seen_30d"] * 2 + o["seen"] + o.get("days_total", 1) * 3 + (o.get("max_cross", 1) - 1) * 2, 1)  # 최근 활용·지속 활용(일수)·교차확인 가중
     for i, o in enumerate(sorted(led.values(), key=lambda o: (-o["score"], o["key"])), 1): o["rank"] = i
+    ngu = loss_guard(led, prev_snapshot, today)
+    if ngu: print(f"불삭제 검사(v2.70): 사라질 뻔한 값 {ngu}건 되살림 — docs/data/loss_guard.json")
     recs = sorted(led.values(), key=lambda o: (o["first_seen"], o["key"]))
     # v2.27 계층·IIIF가 없는 기록은 만들어 구축 — 원 기관 정보와 구분되는 필드에(partOf_derived · iiif_built)
     for o in recs:
