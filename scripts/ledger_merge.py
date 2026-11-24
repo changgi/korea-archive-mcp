@@ -352,7 +352,7 @@ def derive_path(o):
     return "[파생] " + " › ".join(segs)
 
 def leaf_manifest(o):
-    if o.get("iiif"): return o["iiif"]
+    if o.get("iiif") and not o.get("iiif_status"): return o["iiif"]  # v2.52 기관 매니페스트가 비공개 응답이면 브리지
     env = {"s": o["sources"], "t": o["title"][:160], "d": o.get("date", ""), "i": o.get("id", ""), "u": o.get("url", ""), "p": o.get("partOf", ""),
            "n": o["key"].split(":")[0], "m": o.get("media", ""), "q": "발견 누적 원장", "at": o["first_seen"][:19]}
     return f"{ORIGIN}/iiif/rec/{tok(env)}/manifest.json"
@@ -574,7 +574,7 @@ def build_query_records(prov, bykey):
         for k in e["records"]:
             o = bykey.get(k)
             if not o: continue
-            mf = o.get("iiif") or o.get("iiif_built") or leaf_manifest(o)
+            mf = (o.get("iiif") if not o.get("iiif_status") else "") or o.get("iiif_built") or leaf_manifest(o)
             items.append({"id": mf, "type": "Manifest", "label": {"none": [o["title"][:120] + (f" ({o['date']})" if o.get("date") else "")]}})
         args = json.dumps(e["args"], ensure_ascii=False, sort_keys=True) if e.get("args") is not None else ""
         resp = e.get("responses", [])
@@ -750,17 +750,47 @@ def parser_version():
 
 VOLATILE = re.compile(r"판독 시각|발견 시각|\d{4}-\d\d-\d\dT\d\d:\d\d|캐시|cache", re.I)
 
+SRC_PARSER_V = "src1"  # v2.52 기관 공개 메타데이터 API 정규형 판 — 아래 SRC_FIX를 고치면 올린다
+_nz = lambda v: v not in (None, "", [], {}, 0, False)
+
+def _ia_core(j):
+    """IA 메타데이터 API — 기술 메타(변동 관리 항목 제외) + 원본 파일 이름·md5(파생본·변동 시각 제외)."""
+    md = {k: v for k, v in (j.get("metadata") or {}).items() if k not in ("backup_location", "updatedate", "updater", "curation", "next", "previous")}
+    org = sorted([f.get("name", ""), f.get("md5", "")] for f in (j.get("files") or []) if f.get("source") == "original")
+    return {"metadata": md, "originals": org} if md else None
+
+def _tna_core(j):
+    """TNA Discovery 상세 API — 빈 값 제외 전 항목(색인용 batchId 제외)."""
+    return {k: v for k, v in j.items() if _nz(v) and k != "batchId"} if j.get("id") else None
+
+# v2.52 원 기관 공개 메타데이터 API로 지문 — 매니페스트·심층 판독 경로가 없는 수집처. (URL 정규식, API 주소, 정규형)
+SRC_FIX = {"ia": (r"archive\.org/details/([^/?#]+)", lambda m: f"https://archive.org/metadata/{m[1]}", _ia_core),
+           "tna": (r"discovery\.nationalarchives\.gov\.uk/details/r/([0-9a-fA-F-]{36}|[A-Z]\d+)", lambda m: f"https://discovery.nationalarchives.gov.uk/API/records/v1/details/{m[1]}", _tna_core)}
+
+def src_fix_url(o):
+    sf = SRC_FIX.get(o["key"].split(":")[0])
+    m = sf and re.search(sf[0], o.get("url") or "")
+    return (m and sf[1](m), sf[2]) if m else (None, None)
+
 def fixity_text(o):
     """원 기관 응답(우리 판독기를 거친 정규형) — 심층 판독 도구 응답 또는 IIIF 매니페스트(변동 항목 제외)."""
     src = o["key"].split(":")[0]
     m = o.get("iiif") or ""
     if m:
         j = get(m)
+        if j.get("checkResult") == "NG":  # v2.52 NDL — 매니페스트 주소는 있으나 기관이 공개하지 않음(관내 열람 한정 등). iiif는 지우지 않고 상태만 표시
+            o["iiif_status"] = {"state": "기관 응답 비공개(checkResult NG — 기관 내 열람 한정일 수 있음)", "at": dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%d")}
+            return None
+        o.pop("iiif_status", None)
         if not j.get("label") or not (j.get("metadata") or j.get("items") or j.get("sequences")): return None  # 빈·오류 응답은 지문 대상 아님(거짓 '원문 변경' 방지)
         md = [e for e in (j.get("metadata") or []) if not VOLATILE.search(json.dumps(e.get("label"), ensure_ascii=False))]
         core = {"label": j.get("label"), "summary": j.get("summary"), "metadata": md, "rights": j.get("rights"), "requiredStatement": j.get("requiredStatement"),
                 "items": len(j.get("items") or (j.get("sequences") or [{}])[0].get("canvases") or [])}
         return json.dumps(core, ensure_ascii=False, sort_keys=True)
+    su, core = src_fix_url(o)
+    if su and not o.get("iiif"):
+        c = core(get(su))
+        return json.dumps(c, ensure_ascii=False, sort_keys=True) if c else None
     if src == "archives" and "showDetailPopup.do" in (o.get("url") or ""):  # v2.51 국가기록원 — 원장 상세 판독기(archives_fields)의 정규형
         f, titles = archives_fields(o["url"])
         if not f: return None
@@ -778,7 +808,7 @@ def fixity_pass(led, today, budget):
     첫 지문 / 판독기 변경 동반(우리 route.js·lib가 바뀜 — 원문 변경 아닐 수 있음) / 원문 변경 의심(판독기 그대로인데 응답이 바뀜)."""
     import hashlib
     pv = parser_version(); used = changed = 0
-    cand = [o for o in led.values() if o.get("entry_type", "기록") == "기록" and (o.get("iiif") or o["key"].split(":")[0] in DEEP or "showDetailPopup.do" in (o.get("url") or ""))]
+    cand = [o for o in led.values() if o.get("entry_type", "기록") == "기록" and (o.get("iiif") or o["key"].split(":")[0] in DEEP or "showDetailPopup.do" in (o.get("url") or "") or src_fix_url(o)[0])]
     for o in sorted(cand, key=lambda o: o.get("fixity_checked", "")):
         if used >= budget: break
         if o.get("fixity_checked", "") >= today.isoformat(): continue
@@ -789,7 +819,7 @@ def fixity_pass(led, today, budget):
         used += 1; o["fixity_checked"] = today.isoformat()
         if not t: continue
         h = hashlib.sha256(t.encode()).hexdigest()[:16]; fx = o.setdefault("fixity", [])
-        opv = AR_PARSER_V if (o["key"].startswith("archives:") and not o.get("iiif")) else pv  # 판독기가 원장 스크립트 안에 있는 수집처는 그 판 번호로
+        opv = AR_PARSER_V if (o["key"].startswith("archives:") and not o.get("iiif")) else SRC_PARSER_V if (src_fix_url(o)[0] and not o.get("iiif")) else pv  # 판독기가 원장 스크립트 안에 있는 수집처는 그 판 번호로
         if fx and fx[-1]["h"] == h: continue
         kind = "첫 지문" if not fx else ("판독기 변경 동반" if fx[-1].get("pv") != opv else "원문 변경 의심")
         fx.append({"at": today.isoformat(), "h": h, "pv": opv, "kind": kind}); changed += kind != "첫 지문"
@@ -856,7 +886,7 @@ def write_quality(recs):
     """v2.39 데이터 품질 시계열 — 기록 항목별 채움률을 날마다 쌓는다(지우지 않음, 같은 날은 갱신). 떨어지면 수집기·판독기 이상 신호."""
     R = [o for o in recs if o.get("entry_type", "기록") == "기록"]
     F = {"요약": lambda o: o.get("summary"), "요약(메타 합성 포함)": lambda o: o.get("summary") or o.get("summary_composed"), "연대": lambda o: decade(o), "기관 계층": lambda o: o.get("partOf"), "계층(파생 포함)": lambda o: o.get("partOf") or o.get("partOf_derived"),
-         "기관 IIIF": lambda o: o.get("iiif"), "IIIF(브리지 포함)": lambda o: o.get("iiif") or o.get("iiif_built"), "썸네일": lambda o: o.get("thumb_ok"), "권리 표시": lambda o: o.get("rights_view"),
+         "기관 IIIF": lambda o: o.get("iiif") and not o.get("iiif_status"), "IIIF(브리지 포함)": lambda o: o.get("iiif") or o.get("iiif_built"), "썸네일": lambda o: o.get("thumb_ok"), "권리 표시": lambda o: o.get("rights_view"),
          "메타": lambda o: o.get("meta"), "원문 지문": lambda o: o.get("fixity"), "발견 경로": lambda o: o.get("found_by"), "발견 경로(파생 포함)": lambda o: o.get("found_by") or (o.get("found_by_derived") or {}).get("tools")}
     day = dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%d")
     snap = {"records": len(R), **{k: round(100 * sum(1 for o in R if f(o)) / max(1, len(R)), 1) for k, f in F.items()}}
@@ -1065,10 +1095,10 @@ def main():
                                      "first_seen": o.get("first_seen", ""), "last_seen": o.get("last_seen", ""), "days_total": o.get("days_total", 0), "seen": o.get("seen", 0)}
         else: o.pop("found_by_derived", None)
         o["iiif_kind"] = "기관 매니페스트" if o.get("iiif") else "브리지 매니페스트(기록 봉투)"
-        o["iiif_built"] = "" if o.get("iiif") else leaf_manifest(o)
+        o["iiif_built"] = "" if (o.get("iiif") and not o.get("iiif_status")) else leaf_manifest(o)  # v2.52 기관 매니페스트가 비공개 응답이면 브리지로 대체(기관 주소는 보존)
     with open(lp, "w", encoding="utf-8") as f:
         for o in recs: f.write(json.dumps(o, ensure_ascii=False, separators=(",", ":")) + "\n")
-    cols = ["key", "entry_type", "found_by_basis", "summary_composed", "rights_view", "rights_basis", "fixity", "defect_note", "link_note", "sources", "title", "date", "date_derived", "date_basis", "id", "url", "partOf", "partOf_derived", "media", "sameAs", "iiif", "iiif_built", "iiif_kind", "found_by", "found_by_derived", "first_seen", "last_seen", "seen", "seen_7d", "seen_30d", "days_total", "formats", "tools", "max_cross", "trend", "rank", "score", "summary", "rights", "thumb", "meta"]
+    cols = ["key", "entry_type", "found_by_basis", "summary_composed", "rights_view", "rights_basis", "fixity", "defect_note", "link_note", "sources", "title", "date", "date_derived", "date_basis", "id", "url", "partOf", "partOf_derived", "media", "sameAs", "iiif", "iiif_status", "iiif_built", "iiif_kind", "found_by", "found_by_derived", "first_seen", "last_seen", "seen", "seen_7d", "seen_30d", "days_total", "formats", "tools", "max_cross", "trend", "rank", "score", "summary", "rights", "thumb", "meta"]
     fmtv = lambda v: json.dumps(v, ensure_ascii=False, separators=(",", ":")) if isinstance(v, list) and v and isinstance(v[0], dict) else " | ".join(f"{a}: {b}" for a, b in v) if isinstance(v, list) and v and isinstance(v[0], list) else (" ".join(f"{k}:{n}" for k, n in sorted(v.items(), key=lambda kv: -kv[1])) if isinstance(v, dict) and all(isinstance(x, (int, float)) for x in v.values()) else json.dumps(v, ensure_ascii=False, separators=(",", ":")) if isinstance(v, dict) else ("+".join(v) if isinstance(v, list) else v))
     with open(os.path.join(D, "discovered.csv"), "w", encoding="utf-8-sig", newline="") as f:
         w = csv.writer(f); w.writerow(cols)
@@ -1085,7 +1115,7 @@ def main():
         inst = o["key"].split(":")[0]; ser = o.get("partOf") or o.get("partOf_derived") or "(계열 미상)"
         sid = f"set:{inst}:{ser}"; sets.setdefault(sid, {"@id": sid, "@type": "rico:RecordSet", "rico:title": ser, "rico:isOrWasIncludedIn": {"@id": f"inst:{inst}"},
                                                          **({"rico:generalDescription": "KOREA ARCHIVE 파생 계층(유형·제목 주제부·연대 근거) — 원 기관 계층 아님"} if ser.startswith("[파생]") else {})})
-        mf = o.get("iiif") or o.get("iiif_built")
+        mf = (o.get("iiif") if not o.get("iiif_status") else "") or o.get("iiif_built")
         graph.append({"@id": o.get("url") or f"rec:{o['key']}", "@type": "rico:Record", "rico:title": o["title"], **({"rico:identifier": o["id"]} if o.get("id") else {}),
                       **({"rico:isAssociatedWithDate": o["date"]} if o.get("date") else {}), "rico:isOrWasIncludedIn": {"@id": sid},
                       **({"rico:hasOrHadSubject": [{"@id": concept_id(f, t)} for f, t in record_concepts(o) if f != "장소"]} if any(f != "장소" for f, t in record_concepts(o)) else {}),
