@@ -1028,6 +1028,12 @@ def merge_subjects(recs):
     json.dump(S, open(p, "w", encoding="utf-8"), ensure_ascii=False, indent=0)
     # v2.43 SKOS 개념 체계 — 패싯마다 ConceptScheme, 용어마다 Concept(prefLabel 기관 표기·출처 기관·기록 수). RiC-O 기록이 이 개념을 가리킨다
     graph = []
+    # v2.57 같은 전거(UCI)를 가진 표기 변이(한글·한자·'조선 영조' 등)는 지우지 않고 서로 잇는다(skos:exactMatch) — 중복 제거가 아니라 연결
+    by_uci = {}
+    for t, e in (S["facets"].get("인물") or {}).items():
+        if e.get("uci"): by_uci.setdefault(e["uci"], []).append(t)
+    S["authority_groups"] = {u: ts for u, ts in by_uci.items() if len(ts) > 1}
+    json.dump(S, open(p, "w", encoding="utf-8"), ensure_ascii=False, indent=0)
     for f, terms in S["facets"].items():
         sch = f"{PAGES}subjects.jsonld#{FACET_SLUG.get(f, 'x')}"
         graph.append({"@id": sch, "@type": "skos:ConceptScheme", "skos:prefLabel": {"@value": f"KOREA ARCHIVE 주제 색인 — {f}", "@language": "ko"},
@@ -1035,7 +1041,8 @@ def merge_subjects(recs):
         for t, e in terms.items():
             graph.append({"@id": concept_id(f, t), "@type": "skos:Concept", "skos:prefLabel": t, "skos:inScheme": {"@id": sch},
                           "dct:source": e["sources"], "skos:note": f"원장 기록 {len(e['records'])}건 · 메타 키 {', '.join(e['keys'])} · 처음 {e['first'][:10]}",
-                          **({"skos:notation": e["uci"], "dct:identifier": f"UCI {e['uci']}"} if e.get("uci") else {})})
+                          **({"skos:notation": e["uci"], "dct:identifier": f"UCI {e['uci']}"} if e.get("uci") else {}),
+                          **({"skos:exactMatch": [{"@id": concept_id(f, x)} for x in by_uci.get(e.get("uci"), []) if x != t]} if f == "인물" and len(by_uci.get(e.get("uci"), [])) > 1 else {})})
     json.dump({"@context": {"skos": "http://www.w3.org/2004/02/skos/core#", "dct": "http://purl.org/dc/terms/"}, "@graph": graph},
               open(os.path.join(D, "subjects.jsonld"), "w", encoding="utf-8"), ensure_ascii=False)
     E_ = html.escape; by = {o["key"]: o for o in recs}
