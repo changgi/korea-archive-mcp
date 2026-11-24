@@ -848,6 +848,51 @@ def write_quality(recs):
     json.dump(Qj, open(p, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
     return snap
 
+FACETS = [("주제", re.compile(r"^(주제|주제어|색인어.*|subject|키워드)$", re.I)), ("장소", re.compile(r"^(연관정보|장소|취급지명|place)$", re.I)),
+          ("분류", re.compile(r"^(분류|사부분류|자료분류|보고서유형분류)$")), ("시대", re.compile(r"^(시대|시대분류|국적/시대)$")), ("매체", re.compile(r"^mediatype$", re.I))]
+
+def facet_terms(k, v, fac):
+    """(패싯, 용어) 목록. 서울기록원 연관정보는 코드 종류로 패싯을 가른다 — GEOL=장소 · TOPIC=주제 · FUNC=분류(기능)."""
+    v = str(v)
+    if k == "연관정보":
+        cm = {"GEOL": "장소", "TOPIC": "주제", "FUNC": "분류"}
+        return [(cm[m[1]], re.sub(r"\s*,\s*[\d~\s]*$", "", m[2]).strip()) for m in re.finditer(r"\[(GEOL|TOPIC|FUNC)-\d+\]\s*(?:\([^)]*\)\s*)?([^\[]+)", v)]
+    if v.startswith("http"): return []
+    return [(fac, t.strip()) for t in re.split(r"[;；,，·]|\s>\s|\s›\s", v) if 1 < len(t.strip()) <= 40]
+
+def merge_subjects(recs):
+    """v2.42 주제 색인 — 기관이 붙인 주제어·색인어·지명·분류·시대·매체를 패싯별 용어 사전으로 축적. 지우지 않음(기록 수는 줄지 않음)."""
+    p = os.path.join(D, "subjects.json")
+    S = json.load(open(p, encoding="utf-8")) if os.path.exists(p) else {"facets": {}}
+    for o in recs:
+        if o.get("entry_type", "기록") != "기록": continue
+        for k, v in o.get("meta") or []:
+            fac = next((f for f, rx in FACETS if rx.search(str(k))), None)
+            if not fac: continue
+            for fac2, t in facet_terms(str(k), v, fac):
+                e = S["facets"].setdefault(fac2, {}).setdefault(t, {"records": [], "sources": [], "first": o["first_seen"], "last": o["last_seen"], "keys": []})
+                if o["key"] not in e["records"]: e["records"].append(o["key"])
+                src = o["key"].split(":")[0]
+                if src not in e["sources"]: e["sources"].append(src)
+                if str(k) not in e["keys"]: e["keys"].append(str(k))
+                e["first"] = min(e["first"], o["first_seen"]); e["last"] = max(e["last"], o["last_seen"])
+    S["updated"] = dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+    S["totals"] = {f: len(v) for f, v in S["facets"].items()}
+    S["note"] = "원 기관 메타의 주제·지명·분류·시대·매체 표기 그대로(번역·정규화 없음). records = 그 용어가 붙은 원장 기록 key. 지우지 않는다"
+    json.dump(S, open(p, "w", encoding="utf-8"), ensure_ascii=False, indent=0)
+    E_ = html.escape; by = {o["key"]: o for o in recs}
+    sec = []
+    for f, terms in S["facets"].items():
+        items = sorted(terms.items(), key=lambda kv: (-len(kv[1]["records"]), kv[0]))
+        li = "".join(f"<details><summary>{E_(t)} <small>{len(e['records'])}건 · {E_(', '.join(e['sources']))}</small></summary><ul>"
+                     + "".join(f"<li><a href='{E_((by.get(k) or {}).get('url') or '#')}'>{E_(((by.get(k) or {}).get('title') or k)[:100])}</a></li>" for k in e["records"][:30]) + "</ul></details>"
+                     for t, e in items)
+        sec.append(f"<h2>{E_(f)} <small>{len(terms)}개 용어</small></h2>{li}")
+    open(os.path.join(D, "subjects.html"), "w", encoding="utf-8").write(f"""<!DOCTYPE html><html lang="ko"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>주제 색인 — KOREA ARCHIVE 발견 원장</title><style>body{{font-family:system-ui,'Noto Sans KR',sans-serif;margin:0;background:#14161b;color:#e6e4dc}}main{{max-width:960px;margin:auto;padding:16px}}a{{color:#e0b04a}}details{{margin:3px 0}}small{{color:#9b9a93}}li{{font-size:14px}}</style>
+<main><h1>주제 색인</h1><p>원 기관이 기록에 붙인 주제어·색인어·지명·분류·시대·매체를 패싯별로 모았습니다(기관 표기 그대로). 지우지 않고 쌓습니다. <a href="subjects.json">subjects.json</a> · <a href="index.html">원장</a></p>{''.join(sec)}</main></html>""")
+    return S["totals"]
+
 def merge_classes(recs):
     """v2.26 기준·분류 정보 축적 — 발견된 모든 계층 경로(기관 › 계열 › …)의 각 단계를 분류 사전으로. 지우지 않고 갱신만(사라진 경로도 보존)."""
     p = os.path.join(D, "classifications.json")
@@ -1051,15 +1096,15 @@ details{{font-size:12px}}dl{{display:grid;grid-template-columns:auto 1fr;gap:2px
 table{{width:100%;border-collapse:collapse;font-size:14px}}td,th{{border-bottom:1px solid #2a2d35;padding:6px;text-align:left}}</style>
 <main><h1>발견 누적 원장</h1><p>KOREA ARCHIVE 통합검색 사용자가 도구로 발굴한 기록이 매일 이곳에 쌓입니다(검색어·사용자 정보 없음). 기록 <b>{st['records']:,}</b>건 · 마지막 갱신 {st['updated']} · 이번 갱신 신규 {new_recs}건 · 내용·메타정보 보강 {enr}건 · 썸네일 {thn}건</p>
 <p>{srcs}</p>
-<p><a class="b0" href="discovered.csv">CSV 내려받기</a><a class="b0" href="discovered.jsonl">JSONL</a><a class="b0" href="discovered.jsonld">RiC-O JSON-LD</a><a class="b0" href="../kv.html?manifest=https://changgi.github.io/korea-archive-mcp/data/collection.json">KV로 최근 300건 연속 보기</a><a class="b0" href="tree.html">계층구조도</a><a class="b0" href="queries/index.json">질의·회신 축적</a><a class="b0" href="classifications.json">분류 사전</a><a class="b0" href="provenance.json">발견 경로(질의↔기록)</a><a class="b0" href="q/index.html">질의별 발굴 기록(IIIF)</a><a class="b0" href="quality.json">데이터 품질 추이</a><a class="b0" href="fixity_changes.json">원문 변경 감시</a><a class="b0" href="feed.xml">새 발견 구독(Atom)</a><a class="b0" href="records.csl.json">인용 CSL-JSON(Zotero)</a><a class="b0" href="records.ris">인용 RIS(EndNote)</a><a class="b0" href="timeline.html">연대 타임라인</a><a class="b0" href="nrich/index.html">연구원 연구DB IIIF 계층</a><a class="b0" href="popular.csv">자주 활용 TOP 200</a><a class="b0" href="stats.json">집계</a></p>
+<p><a class="b0" href="discovered.csv">CSV 내려받기</a><a class="b0" href="discovered.jsonl">JSONL</a><a class="b0" href="discovered.jsonld">RiC-O JSON-LD</a><a class="b0" href="../kv.html?manifest=https://changgi.github.io/korea-archive-mcp/data/collection.json">KV로 최근 300건 연속 보기</a><a class="b0" href="tree.html">계층구조도</a><a class="b0" href="queries/index.json">질의·회신 축적</a><a class="b0" href="classifications.json">분류 사전</a><a class="b0" href="provenance.json">발견 경로(질의↔기록)</a><a class="b0" href="q/index.html">질의별 발굴 기록(IIIF)</a><a class="b0" href="quality.json">데이터 품질 추이</a><a class="b0" href="subjects.html">주제 색인</a><a class="b0" href="fixity_changes.json">원문 변경 감시</a><a class="b0" href="feed.xml">새 발견 구독(Atom)</a><a class="b0" href="records.csl.json">인용 CSL-JSON(Zotero)</a><a class="b0" href="records.ris">인용 RIS(EndNote)</a><a class="b0" href="timeline.html">연대 타임라인</a><a class="b0" href="nrich/index.html">연구원 연구DB IIIF 계층</a><a class="b0" href="popular.csv">자주 활용 TOP 200</a><a class="b0" href="stats.json">집계</a></p>
 <p style="font-size:13px;color:#9b9a93">주요 내용·메타정보·썸네일은 기관 IIIF·우리 브리지 매니페스트를 하루 한 번 판독해 채웁니다(하루 상한·순차 요청). 썸네일은 재이용 가능 표시가 확인된 것만 싣고, 포로·사망자·묘지·수형자 관련 기록과 허가가 필요한 이미지는 링크만 둡니다. 권리는 원 기관 표기를 따릅니다 — 게재 전 judge_rights로 확인. 모든 변경은 저장소 git 이력(docs/data/)에 남습니다.</p>
 <h2>자주 활용되는 기록 TOP 30</h2><p style="font-size:13px">점수 = 최근 30일 발견×2 + 전체 발견 + 발견된 날 수×3 + 교차확인 기관 수 가중. 자동 검사 트래픽 제외.</p><div class="g">{prow}</div>
 <h2>일별 활용(최근 14일)</h2><table><tr><th>날짜</th><th>검색 묶음</th><th>발견 기록</th><th>신규 기록</th></tr>{urow}</table><p style="font-size:13px">형식별 누계: {E_(fmtv(usage['formats']))} · <a href="usage.json">usage.json</a></p>
 <h2>질의·회신 축적</h2><p style="font-size:13px">모든 도구 호출의 질의와 회신 본문을 원문 그대로(가공·삭제 없이) 영구 보존합니다. 같은 질의·같은 회신은 한 번만 두고 횟수만 셉니다. 회신이 달라지면 새 판으로 남겨 기관 응답 변화의 증거로 씁니다. 고유 질의 {nq['total']}건 · 누적 호출 {nq['calls']}회 · 도구별 {E_(fmtv(nq['by_tool']))} · <a href="queries/index.json">queries/index.json</a> (월별 회신 원문 queries/YYYY-MM.jsonl.gz)</p><table><tr><th>최근</th><th>도구</th><th>질의</th><th>횟수</th></tr>{qrow}</table>
 <h2>최근 발견 100건</h2><div class="g">{rows}</div></main></html>""")
-    build_tree(recs); ncls = merge_classes(recs); nprov, _orph = build_provenance(recs); nfx = write_fixity(recs); nql = write_quality(recs); nmed = build_media(recs)
+    build_tree(recs); ncls = merge_classes(recs); nprov, _orph = build_provenance(recs); nfx = write_fixity(recs); nql = write_quality(recs); nsub = merge_subjects(recs); nmed = build_media(recs)
     print(f"원장 {len(recs)}건 (신규 {new_recs}, 묶음 {new_batches})")
-    print(f"질의 고유 {nq['total']}건(신규 {nq['added']}) · 분류 경로 {ncls}개 · 발견 경로 질의 {nprov}종 · 다매체(피드 {nmed[0]}·인용 {nmed[1]}·연대 {nmed[2]}) · 품질 권리 {nql['권리 표시']}% 요약 {nql['요약']}% 연대 {nql['연대']}%")
+    print(f"질의 고유 {nq['total']}건(신규 {nq['added']}) · 분류 경로 {ncls}개 · 발견 경로 질의 {nprov}종 · 다매체(피드 {nmed[0]}·인용 {nmed[1]}·연대 {nmed[2]}) · 주제 색인 {nsub} · 품질 권리 {nql['권리 표시']}% 요약 {nql['요약']}% 연대 {nql['연대']}%")
 
 if __name__ == "__main__":
     main()
