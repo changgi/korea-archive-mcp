@@ -22,6 +22,8 @@ jobs:
         run: node scripts/ci-verify.mjs
       - name: 원장 읽기·쓰기 단위 시험(모의 Redis)
         run: node scripts/ci-ledger-unit.mjs
+      - name: 원장 병합 오프라인 전 과정 시험(네트워크 차단)
+        run: python3 scripts/ci-ledger-offline.py
       - name: GitHub Pages 무결성 (docs 링크·IIIF 이미지·매니페스트 수)
         run: python3 scripts/check-docs.py
       - name: IIIF 구조 검증(Presentation 3 — 정적 docs 전체)

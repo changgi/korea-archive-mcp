@@ -448,7 +448,7 @@ def build_tree(recs):
     E_ = html.escape; KV = "https://changgi.github.io/korea-archive-mcp/kv.html?manifest="
     def node_html(n, depth, href=None):
         kids = "".join(node_html(k, depth + 1) for k in sorted(n["kids"].values(), key=lambda k: -k["n"]))
-        leaves = "".join(f"<li class='r'><a href='{E_(o.get('url') or '#')}'>{E_(o['title'][:110])}</a>{' <span>' + E_(' · '.join(x for x in (o.get('date'), o.get('id')) if x)) + '</span>' if o.get('date') or o.get('id') else ''} <a class='kv' href='{KV}{E_(leaf_manifest(o))}'>KV</a></li>" for o in n["recs"][:200])
+        leaves = "".join(f"<li class='r'><a href='{E_(o.get('url') or '#')}'>{E_(o['title'][:110])}</a>{' <span>' + E_(' · '.join(x for x in (o.get('date'), o.get('id')) if x)) + '</span>' if o.get('date') or o.get('id') else ''} <a class='kv' href='{KV}{E_(leaf_manifest(o))}'>KV</a> <a class='kv' href='r/{rec_slug(o["key"])}.html'>기록</a></li>" for o in n["recs"][:200])
         more = f"<li class='r'>… 외 {len(n['recs']) - 200}건(CSV 참조)</li>" if len(n["recs"]) > 200 else ""
         kvn = f" <a class='kv' href='{KV}{E_(href)}'>이 계층 KV로 보기</a>" if href else ""
         miss = " miss" if n["name"] == "(계열 미상)" else ""
@@ -840,7 +840,7 @@ def build_media(recs_all):
     yr = lambda o: (re.search(r"(?<!\d)(1[0-9]\d\d|20\d\d)(?:(?!\d)|(?=(?:0[1-9]|1[0-2])[0-3]\d(?!\d)))", o.get("date") or o.get("date_derived") or "") or [None, None])[1] if (o.get("date") or o.get("date_derived")) else None
     # 1) Atom 피드 — 새로 발견된 기록 100건(구독기·RSS 앱·자동화로 퍼짐)
     new = sorted(recs, key=lambda o: o["first_seen"], reverse=True)[:100]
-    ent = "".join(f"""<entry><title>{X.escape(o['title'][:200])}</title><id>{X.escape(o.get('url') or PAGES + '#' + o['key'])}</id><link href="{X.escape(o.get('url') or PAGES)}"/>
+    ent = "".join(f"""<entry><title>{X.escape(o['title'][:200])}</title><id>{X.escape(o.get('url') or PAGES + '#' + o['key'])}</id><link href="{X.escape(o.get('url') or PAGES)}"/><link rel="related" href="{PAGES}r/{rec_slug(o['key'])}.html"/>
 <updated>{o['first_seen']}</updated><author><name>{X.escape(inst(o))}</name></author>{''.join(f'<category term="{X.escape(x)}"/>' for x in o['sources'])}
 <summary>{X.escape(' · '.join(x for x in (o.get('date'), ser(o), o.get('id'), (o.get('summary') or '')[:300]) if x))}</summary></entry>""" for o in new)
     open(os.path.join(D, "feed.xml"), "w", encoding="utf-8").write(f"""<?xml version="1.0" encoding="utf-8"?>
@@ -879,7 +879,7 @@ def build_media(recs_all):
     def dc(o):
         E = lambda t, v: f"<dc:{t}>{X.escape(str(v))}</dc:{t}>" if v else ""
         dd = o.get("date") or (o.get("date_derived") and f"{o['date_derived']} [파생: {o.get('date_basis', '')}]")
-        return "".join([E("title", o["title"]), E("identifier", o.get("url")), E("identifier", o.get("id")), E("date", dd), E("coverage", decade(o)),
+        return "".join([E("title", o["title"]), E("identifier", o.get("url")), E("identifier", o.get("id")), E("identifier", f"{PAGES}r/{rec_slug(o['key'])}.html"), E("date", dd), E("coverage", decade(o)),
                         E("source", inst(o)), E("relation", o.get("partOf") or (o.get("partOf_derived") and f"[파생] {o['partOf_derived']}")),
                         E("description", (o.get("summary") or o.get("summary_composed") or "")[:1500]), E("rights", o.get("rights_view")), E("type", DCT[kind_of(o)]),
                         E("relation", (o.get("iiif") if not o.get("iiif_status") else "") or o.get("iiif_built")), E("publisher", "KOREA ARCHIVE 통합검색 발견 원장(재기술·집성)")])
@@ -945,12 +945,12 @@ def rec_slug(k):
 
 def build_record_pages(recs_all):
     """v2.73 기록마다 영구 공개 페이지(docs/data/r/<slug>.html) — 맥락(소장·계층·날짜와 근거)·증거(지문 이력·발견 경로·옛 key)·IIIF·권리를 한 장에,
-    schema.org ArchiveComponent JSON-LD로 검색엔진이 읽게. r/index.json(key→페이지)·sitemap.xml. 결함 출력은 만들지 않는다(원장에는 보존)."""
+    schema.org ArchiveComponent JSON-LD로 검색엔진이 읽게. r/index.json(key→페이지)·sitemap.xml. 결함 출력·검색 안내도 만들되 상단에 고지(v2.74 — 다른 산출물 링크가 끊기지 않게)."""
     E_ = html.escape; KV = "https://changgi.github.io/korea-archive-mcp/kv.html?manifest="
     rd = os.path.join(D, "r"); os.makedirs(rd, exist_ok=True)
     idx = {}; urls = []
     for o in recs_all:
-        if o.get("entry_type", "기록") == "결함 출력": continue
+        # v2.74 결함 출력·검색 안내도 페이지를 만든다 — 다른 산출물의 링크가 끊기지 않게, 상단에 결함 고지
         sl = rec_slug(o["key"]); idx[o["key"]] = f"r/{sl}.html"; pu = f"{PAGES}r/{sl}.html"; urls.append((pu, o.get("last_seen", "")[:10]))
         inst = SRC_NAME.get(o["key"].split(":")[0], o["key"].split(":")[0])
         part = o.get("partOf") or ""; pder = o.get("partOf_derived") or ""
@@ -969,6 +969,7 @@ def build_record_pages(recs_all):
 <title>{E_(o['title'][:120])} — KOREA ARCHIVE 발견 원장</title><link rel="canonical" href="{pu}"><script type="application/ld+json">{js}</script>
 <style>body{{font-family:system-ui,'Noto Sans KR',sans-serif;margin:0;background:#14161b;color:#e6e4dc}}main{{max-width:860px;margin:auto;padding:16px}}a{{color:#e0b04a}}th{{text-align:left;color:#9b9a93;font-weight:400;padding:3px 10px 3px 0;vertical-align:top;white-space:nowrap}}td{{padding:3px 0}}small{{color:#9b9a93}}</style>
 <main><p><small>KOREA ARCHIVE 통합검색 · 발견 원장 기록 · <a href="../index.html">원장</a> · <a href="../tree.html">계층</a> · <a href="../subjects.html">주제</a></small></p>
+{f"<p style='border:1px solid #c66;padding:8px'>⚠ {E_(o.get('entry_type', ''))} — {E_(o.get('defect_note') or '옛 판독기 오류 출력. 원장에는 증거로 보존하나 인용·피드·타임라인에서는 제외')}</p>" if o.get('entry_type', '기록') != '기록' else ''}
 <h1>{E_(o['title'][:300])}</h1><table>
 {row('소장 기관', E_(inst))}{row('원 기관 링크', f"<a href='{E_(o.get('url') or '')}'>{E_((o.get('url') or '')[:100])}</a>" if o.get('url') else '')}{row('식별자', E_(o.get('id') or ''))}
 {row('계층', E_(part) + (f" <small>(근거: {E_(o.get('partOf_src', ''))})</small>" if o.get('partOf_src') else '') if part else (E_(pder) + ' <small>[파생]</small>' if pder else ''))}
@@ -1405,7 +1406,7 @@ def merge_subjects(recs):
     for f, terms in S["facets"].items():
         items = sorted(terms.items(), key=lambda kv: (-len(kv[1]["records"]), kv[0]))
         li = "".join(f"<details><summary>{E_(t)} <small>{len(e['records'])}건 · {E_(', '.join(e['sources']))}</small></summary><ul>"
-                     + "".join(f"<li><a href='{E_((by.get(k) or {}).get('url') or '#')}'>{E_(((by.get(k) or {}).get('title') or k)[:100])}</a></li>" for k in e["records"][:30]) + "</ul></details>"
+                     + "".join(f"<li><a href='{E_((by.get(k) or {}).get('url') or '#')}'>{E_(((by.get(k) or {}).get('title') or k)[:100])}</a> <a href='r/{rec_slug(k)}.html'>기록</a></li>" for k in e["records"][:30]) + "</ul></details>"
                      for t, e in items)
         sec.append(f"<h2>{E_(f)} <small>{len(terms)}개 용어</small></h2>{li}")
     open(os.path.join(D, "subjects.html"), "w", encoding="utf-8").write(f"""<!DOCTYPE html><html lang="ko"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
@@ -1588,10 +1589,10 @@ def main():
                       **({"rico:isAssociatedWithDate": o["date"]} if o.get("date") else {}), "rico:isOrWasIncludedIn": {"@id": sid},
                       **({"rico:hasOrHadSubject": [{"@id": concept_id(f, t)} for f, t in record_concepts(o) if f != "장소"]} if any(f != "장소" for f, t in record_concepts(o)) else {}),
                       **({"rico:isAssociatedWithPlace": [{"@id": concept_id(f, t)} for f, t in record_concepts(o) if f == "장소"]} if any(f == "장소" for f, t in record_concepts(o)) else {}),
-                      **({"owl:sameAs": o["sameAs"]} if o.get("sameAs") else {}), **({"rico:hasOrHadInstantiation": {"@id": mf, "@type": "rico:Instantiation", "rico:title": o["iiif_kind"]}} if mf else {}), **({"rico:scopeAndContent": o["summary"]} if o.get("summary") else {}),
+                      "rdfs:seeAlso": {"@id": f"{PAGES}r/{rec_slug(o['key'])}.html"}, **({"owl:sameAs": o["sameAs"]} if o.get("sameAs") else {}), **({"rico:hasOrHadInstantiation": {"@id": mf, "@type": "rico:Instantiation", "rico:title": o["iiif_kind"]}} if mf else {}), **({"rico:scopeAndContent": o["summary"]} if o.get("summary") else {}),
                       "prov:wasGeneratedBy": {"@type": "prov:Activity", "prov:label": "KOREA ARCHIVE 통합검색 발견", "prov:startedAtTime": o["first_seen"], "prov:used": o["sources"], **({"prov:endedAtTime": o["last_seen"]} if o.get("last_seen") else {}), **({"prov:wasAssociatedWith": [f"KOREA ARCHIVE 통합검색/{t}" for t in o["tools"]]} if o.get("tools") else {}),
                                              **({"prov:wasInformedBy": [{"@id": f"https://changgi.github.io/korea-archive-mcp/data/provenance.json#{ak}"} for ak in o["found_by"]]} if o.get("found_by") else {})}})
-    json.dump({"@context": {"rico": "https://www.ica.org/standards/RiC/ontology#", "prov": "http://www.w3.org/ns/prov#", "owl": "http://www.w3.org/2002/07/owl#"},
+    json.dump({"@context": {"rico": "https://www.ica.org/standards/RiC/ontology#", "prov": "http://www.w3.org/ns/prov#", "owl": "http://www.w3.org/2002/07/owl#", "rdfs": "http://www.w3.org/2000/01/rdf-schema#"},
                "@graph": list(sets.values()) + graph}, open(os.path.join(D, "discovered.jsonld"), "w", encoding="utf-8"), ensure_ascii=False)
     recent = sorted(recs, key=lambda o: o["last_seen"], reverse=True)[:300]
     items = []
