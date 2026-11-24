@@ -914,6 +914,23 @@
     "검색어·사용자 정보 없음"
    ],
    "level": "error"
+  },
+  {
+   "id": "seoul-detail-hierarchy",
+   "tool": "seoul_archives_search",
+   "args": {
+    "query": "https://archives.seoul.go.kr/item/1107943"
+   },
+   "must": [
+    "계층: 서울기록원 › 시리즈 ",
+    "IT1107943",
+    "생산자: ",
+    "보존이력: "
+   ],
+   "must_not": [
+    "IT11 ·"
+   ],
+   "level": "error"
   }
  ]
 }

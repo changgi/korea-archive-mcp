@@ -99,6 +99,7 @@ DEEP = {"i815": ("nedb_search", lambda o: o.get("url") and {"mode": "i815", "que
         "seoul": ("seoul_archives_search", lambda o: o.get("url") and {"query": o["url"]}),
         "okchf": ("nedb_search", lambda o: o.get("url") and {"mode": "okchf", "query": o["url"]}),
         "nrich": ("nedb_search", lambda o: {"mode": "nrich", "query": o["id"] if re.match(r"^(ksm|portrait|gwaebul|diary|mokgan|jcbib|jcphoto|dict|arch|koguryo|gaesong|design|pattern|oldbook|hyanggyo|stone|journal|iron|dolmen|assay|material):", str(o.get("id", ""))) else o.get("url")} if (o.get("id") or o.get("url")) else None)}
+DEEP_V = {"seoul": 2}  # v2.32 판독기 판 — 판이 오르면 이미 보강된 기록도 한 번 다시 판독(서울기록원: 기관 계층·생산자·보존이력 추가)
 _sid = [None]
 
 def mcp_call(tool, args):
@@ -162,13 +163,16 @@ def enrich(o, budget):
         except Exception: o["enrich_status"] = "fail"
         o["enriched"] = today; o["thumb_ok"] = False
         return 1
+    if src0 in DEEP_V and o.get("enrich_status") == "ok" and o.get("deep_v", 1) < DEEP_V[src0]: done = False  # 판독기 개선분 소급
     if not m and src0 in DEEP and budget > 0 and not done:
         tool, af = DEEP[src0]; args = af(o)
         if args:
             try:
                 txt = mcp_call(tool, args); summ, md = parse_deep(txt)
                 o["summary"] = (summ + " " if summ else "") + f"(KOREA ARCHIVE 심층 판독 {tool})"
-                o["meta"] = md; o["deep_call"] = f"{tool}({json.dumps(args, ensure_ascii=False)})"; o["enrich_status"] = "ok"
+                o["meta"] = md; o["deep_call"] = f"{tool}({json.dumps(args, ensure_ascii=False)})"; o["enrich_status"] = "ok"; o["deep_v"] = DEEP_V.get(src0, 1)
+                hv = next((v for k, v in md if k == "계층"), "")
+                if hv and not o.get("partOf"): o["partOf"] = hv; o["partOf_src"] = "기관 상세 판독(브레드크럼)"  # 원 기관 계층 — [파생] 아님
             except Exception:
                 o["enrich_status"] = "fail"
             o["enriched"] = today; o["thumb_ok"] = False
@@ -231,21 +235,32 @@ def tree_path(o):
     if segs and (segs[0] in top or top in segs[0] or segs[0] in ("국가기록원", "국외소재문화유산재단", "국립문화유산연구원", "IIIF 갤러리", "한국사DB", "TNA", "NARA", "AWM 유형")): segs = segs[1:] if segs[0] != "AWM 유형" else segs
     return [top] + (segs or ["(계열 미상)"])
 
-ERAS = ["선사", "고조선", "삼국", "고구려", "백제", "신라", "가야", "통일신라", "발해", "남북국", "고려", "조선", "대한제국", "일제강점기", "대한민국"]
-DATE_KEYS = ("생산일", "생산연도", "생산", "연대", "날짜", "시대", "시대분류", "출판정보", "발행", "발행일", "제작연도")
+ERAS = ["광복이후", "광복 이후", "선사", "고조선", "삼국", "고구려", "백제", "신라", "가야", "통일신라", "발해", "남북국", "고려", "조선", "대한제국", "일제강점기", "대한민국"]
+DATE_KEYS = ("생산일", "생산연도", "생산", "연대", "날짜", "시대", "시대분류", "출판정보", "발행", "발행일", "제작연도", "제작시기", "국적/시대", "작성연대 / 간행시기")
+ERA_KEYS = ("시대", "시대분류", "제작시기", "국적/시대")
+
+def date_derived(o):
+    """v2.32 심층 판독 응답의 '라벨 붙은' 자기 날짜만 — 신문 발행일(제호 · YYYYMMDD · 발행)·판결일(판결 YYYYMMDD). 본문 속 연도는 쓰지 않는다."""
+    if o.get("date"): return "", ""
+    sm = o.get("summary") or ""
+    m = re.search(r"판결 (1[0-9]\d\d|20\d\d)(0[1-9]|1[0-2])([0-3]\d)(?!\d)", sm)
+    if m: return f"{m[1]}-{m[2]}-{m[3]}", "심층 판독 — 판결일"
+    m = re.match(r"^[^·]{1,40} · (1[0-9]\d\d|20\d\d)(0[1-9]|1[0-2])([0-3]\d) · 발행", sm)
+    if m: return f"{m[1]}-{m[2]}-{m[3]}", "심층 판독 — 신문 발행일"
+    return "", ""
 
 def decade(o):
     """연대 — date → 제목 → 메타(생산·시대·출판) 순. 4자리 연도면 'NNN0년대', 없으면 '18세기'처럼 세기, 그도 없으면 왕조·시대명. 지정일·등록일(지정 시점)은 쓰지 않는다."""
-    cands = [o.get("date") or "", o.get("title") or ""] + [str(v) for k, v in (o.get("meta") or []) if k in DATE_KEYS]  # 제목 연도(내용 시점)가 메타 생산일(업로드일일 수 있음)보다 우선
+    cands = [o.get("date") or o.get("date_derived") or "", o.get("title") or ""] + [str(v) for k, v in (o.get("meta") or []) if k in DATE_KEYS]  # 제목 연도(내용 시점)가 메타 생산일(업로드일일 수 있음)보다 우선
     for c in cands:
-        m = re.search(r"(?<!\d)(1[0-9]\d\d|20\d\d)(?!\d)", c)
+        m = re.search(r"(?<!\d)(1[0-9]\d\d|20\d\d)(?:(?!\d)|(?=(?:0[1-9]|1[0-2])[0-3]\d(?!\d)))", c)
         if m: return m.group(1)[:3] + "0년대"
     for c in cands:
         m = re.search(r"(?<!\d)(\d{1,2})\s*(?:-\s*\d{1,2}\s*)?세기", c) or re.search(r"(?<!\d)(\d{1,2})(?:st|nd|rd|th)[ -]century", c, re.I)
         if m and 1 <= int(m.group(1)) <= 21: return f"{int(m.group(1))}세기"
-    for c in [str(v) for k, v in (o.get("meta") or []) if k in ("시대", "시대분류")]:  # 왕조·시대명은 기관의 '시대' 필드에서만(제목의 '조선총독부'·'대한민국역사박물관' 같은 오인 방지)
+    for c in [str(v) for k, v in (o.get("meta") or []) if k in ERA_KEYS]:  # 왕조·시대명은 기관의 '시대' 필드에서만(제목의 '조선총독부'·'대한민국역사박물관' 같은 오인 방지)
         for e in sorted(ERAS, key=len, reverse=True):
-            if e in c: return {"대한민국": "대한민국(1948~)", "일제강점기": "일제강점기"}.get(e, e + "시대")
+            if e in c: return {"대한민국": "대한민국(1948~)", "일제강점기": "일제강점기", "광복이후": "광복 이후(1945~)", "광복 이후": "광복 이후(1945~)"}.get(e, e + "시대")
     return ""
 
 def period_order(lbl):
@@ -254,7 +269,7 @@ def period_order(lbl):
     if m: return (1, int(m.group(1)) * 10)
     m = re.match(r"(\d{1,2})세기", lbl)
     if m: return (1, (int(m.group(1)) - 1) * 100 + 50)
-    base = {"선사": -3000, "고조선": -1000, "삼국": 300, "고구려": 300, "백제": 300, "신라": 300, "가야": 300, "통일신라": 800, "발해": 800, "남북국": 800, "고려": 1100, "조선": 1600, "대한제국": 1900, "일제강점기": 1925, "대한민국(1948~)": 1970}
+    base = {"선사": -3000, "고조선": -1000, "삼국": 300, "고구려": 300, "백제": 300, "신라": 300, "가야": 300, "통일신라": 800, "발해": 800, "남북국": 800, "고려": 1100, "조선": 1600, "대한제국": 1900, "일제강점기": 1925, "광복 이후(1945~)": 1965, "대한민국(1948~)": 1970}
     for e, y in base.items():
         if lbl.startswith(e): return (1, y)
     return (2, 0)
@@ -447,7 +462,7 @@ def build_media(recs):
     now = dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
     inst = lambda o: SRC_NAME.get(o["key"].split(":")[0], o["key"].split(":")[0])
     ser = lambda o: o.get("partOf") or o.get("partOf_derived") or ""
-    yr = lambda o: (re.search(r"(?<!\d)(1[0-9]\d\d|20\d\d)(?!\d)", o.get("date") or "") or [None, None])[1] if o.get("date") else None
+    yr = lambda o: (re.search(r"(?<!\d)(1[0-9]\d\d|20\d\d)(?:(?!\d)|(?=(?:0[1-9]|1[0-2])[0-3]\d(?!\d)))", o.get("date") or o.get("date_derived") or "") or [None, None])[1] if (o.get("date") or o.get("date_derived")) else None
     # 1) Atom 피드 — 새로 발견된 기록 100건(구독기·RSS 앱·자동화로 퍼짐)
     new = sorted(recs, key=lambda o: o["first_seen"], reverse=True)[:100]
     ent = "".join(f"""<entry><title>{X.escape(o['title'][:200])}</title><id>{X.escape(o.get('url') or PAGES + '#' + o['key'])}</id><link href="{X.escape(o.get('url') or PAGES)}"/>
@@ -463,7 +478,9 @@ def build_media(recs):
               "accessed": {"date-parts": [[int(x) for x in o["first_seen"][:10].split("-")]]}, "note": f"KOREA ARCHIVE 통합검색 발견 원장 — 처음 발견 {o['first_seen'][:10]}, 발견 {o['seen']}회"}
         if o.get("id"): it["archive_location"] = o["id"]
         if ser(o): it["collection-title"] = ser(o)
-        if yr(o): it["issued"] = {"date-parts": [[int(yr(o))]]}
+        ymd = re.match(r"^(1[0-9]\d\d|20\d\d)-?(0[1-9]|1[0-2])-?([0-3]\d)$", (o.get("date") or o.get("date_derived") or "").strip())
+        if ymd: it["issued"] = {"date-parts": [[int(ymd[1]), int(ymd[2]), int(ymd[3])]]}  # YYYYMMDD·YYYY-MM-DD는 일 단위까지
+        elif yr(o): it["issued"] = {"date-parts": [[int(yr(o))]]}
         elif o.get("date"): it["issued"] = {"literal": o["date"]}
         if o.get("summary"): it["abstract"] = o["summary"][:1000]
         csl.append(it)
@@ -602,13 +619,16 @@ def main():
     recs = sorted(led.values(), key=lambda o: (o["first_seen"], o["key"]))
     # v2.27 계층·IIIF가 없는 기록은 만들어 구축 — 원 기관 정보와 구분되는 필드에(partOf_derived · iiif_built)
     for o in recs:
+        dd_, db_ = date_derived(o)
+        if dd_: o["date_derived"], o["date_basis"] = dd_, db_
+        else: o.pop("date_derived", None); o.pop("date_basis", None)
         if not o.get("partOf"): o["partOf_derived"] = derive_path(o)
         else: o.pop("partOf_derived", None)
         o["iiif_kind"] = "기관 매니페스트" if o.get("iiif") else "브리지 매니페스트(기록 봉투)"
         o["iiif_built"] = "" if o.get("iiif") else leaf_manifest(o)
     with open(lp, "w", encoding="utf-8") as f:
         for o in recs: f.write(json.dumps(o, ensure_ascii=False, separators=(",", ":")) + "\n")
-    cols = ["key", "sources", "title", "date", "id", "url", "partOf", "partOf_derived", "media", "sameAs", "iiif", "iiif_built", "iiif_kind", "found_by", "first_seen", "last_seen", "seen", "seen_7d", "seen_30d", "days_total", "formats", "tools", "max_cross", "trend", "rank", "score", "summary", "rights", "thumb", "meta"]
+    cols = ["key", "sources", "title", "date", "date_derived", "date_basis", "id", "url", "partOf", "partOf_derived", "media", "sameAs", "iiif", "iiif_built", "iiif_kind", "found_by", "first_seen", "last_seen", "seen", "seen_7d", "seen_30d", "days_total", "formats", "tools", "max_cross", "trend", "rank", "score", "summary", "rights", "thumb", "meta"]
     fmtv = lambda v: " | ".join(f"{a}: {b}" for a, b in v) if isinstance(v, list) and v and isinstance(v[0], list) else (" ".join(f"{k}:{n}" for k, n in sorted(v.items(), key=lambda kv: -kv[1])) if isinstance(v, dict) else ("+".join(v) if isinstance(v, list) else v))
     with open(os.path.join(D, "discovered.csv"), "w", encoding="utf-8-sig", newline="") as f:
         w = csv.writer(f); w.writerow(cols)

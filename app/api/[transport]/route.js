@@ -2823,10 +2823,19 @@ item_cd 5종(자료 성격별): ART 도설·회화 / ETC 두루마리·축 / DRR
       if (/^https?:\/\/archives\.seoul\.go\.kr\/(item|aggregation)\/\d+/.test(q)) { // 상세 판독 — 도메인 한정(임의 URL 페치 방지)
         try {
           const b = await cachedText('seoulD:' + q, 24 * 3600e3, () => gtext(q), '기술계층');
-          const flat = dclean(b);
+          const flat = dclean(b).replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&').replace(/\s+/g, ' ');
           const pick = (re2) => ((flat.match(re2) || [])[1] || '').trim();
           const title = pick(/<-\s*(.{2,90}?)\s+(?:기술계층|생산자)/);
-          const sid = pick(/식별번호\s+(\S{4,30})/);
+          const sid = pick(/식별번호\s+(\S{4,60})/); // v2.32 RG-SR-FI-IT 35자 이상 — 30자 제한으로 잘리던 결함
+          // v2.32 기관 계층(브레드크럼) — '기술계층 시리즈(Series) X 기록철(File) Y 기록건(Item) <- 제목'의 상위 단계만(원 기관 계층 그대로)
+          const crumb = pick(/기술계층\s+(.+?)\s+생산자\s/) || pick(/기술계층\s+(.+?)\s+기술계층\s/);
+          const hier = [...crumb.matchAll(/([가-힣]{2,8})\(([A-Za-z][A-Za-z -]{1,20})\)\s+(.+?)(?=\s+[가-힣]{2,8}\([A-Za-z][A-Za-z -]{1,20}\)|$)/g)]
+            .filter((m) => !/^<-/.test(m[3].trim())).map((m) => `${m[1]} ${m[3].trim().replace(/^<-\s*/, '')}`.slice(0, 80));
+          const producers = pick(/생산자\s+(.+?)\s+기술계층\s/).split(/(?<=\))\s*,?\s+(?=\S)/).map((x) => x.trim()).filter(Boolean).slice(0, 4);
+          const dateP = pick(/일자\s+\[생산\]\s*(.{0,40}?)\s+(?:연관정보|보존이력|수집|언어)/);
+          const rtype = pick(/기록유형\s+(\S{2,20})/), ptype = pick(/보존유형\s+(\S{2,10})/), atype = pick(/접근유형\s*(\S{2,10})/);
+          const custody = pick(/보존이력\s+(.{2,120}?)\s+(?:수집\/이관 기관|언어|보존유형)/), transfer = pick(/수집\/이관 기관\s+(.{2,80}?)\s+(?:언어|보존유형)/);
+          const related = pick(/연관정보\s+(.{2,160}?)\s+(?:보존이력|수집\/이관|언어)/);
           const layers = [...flat.matchAll(/기술계층\s+(\S{2,20}\([A-Za-z]+\))/g)];
           const layer = layers.length ? layers[layers.length - 1][1] : ''; // 첫 일치는 브레드크럼 — 마지막이 본 기록의 계층
           const legal = pick(/법적지위\s+(\S{2,12})/);
@@ -2836,6 +2845,12 @@ item_cd 5종(자료 성격별): ART 도설·회화 / ETC 두루마리·축 / DRR
           if (!sid && !title && !desc) return text(`상세 파싱 실패 — URL을 확인하거나 브라우저로 열람: ${q}`);
           return text(`서울기록원 상세 — ${title || '(제목 미상)'}\n`
             + [sid && `식별번호 ${sid}`, layer, legal && `법적지위 ${legal}`].filter(Boolean).join(' · ') + '\n'
+            + (hier.length ? `계층: 서울기록원 › ${hier.join(' › ')}\n` : '')
+            + (producers.length ? `생산자: ${producers.join('; ')}\n` : '')
+            + (/\d/.test(dateP) ? `일자: 생산 ${dateP}\n` : '')
+            + ([rtype && `기록유형 ${rtype}`, ptype && `보존유형 ${ptype}`, atype && `접근유형 ${atype}`].filter(Boolean).join(' · ') ? [rtype && `기록유형 ${rtype}`, ptype && `보존유형 ${ptype}`, atype && `접근유형 ${atype}`].filter(Boolean).join(' · ') + '\n' : '')
+            + (custody || transfer ? `보존이력: ${[custody, transfer && `수집/이관 ${transfer}`].filter(Boolean).join(' · ')}\n` : '')
+            + (related ? `연관정보: ${related}\n` : '')
             + (use ? `이용조건: ${use}${useNote ? ` — ${useNote}` : ''}\n` : '')
             + (desc ? `【기술】\n${desc}\n` : '') + `원문: ${q}\n`
             + '※ 출처: 서울기록원 — 게재 시 출처 표기. 이용조건·법적지위를 judge_rights에 투입해 초판정.');
