@@ -1356,7 +1356,16 @@ async function jItemRead(lid, maxChars) {
   const lines = jLines(b);
   const title = lines.find((l) => /啓$|傳敎$|事目|節目|條例|大典|要覽|謄錄/.test(l) && l.length > 8 && l.length < 140) || '';
   let k = null;
-  if (lid.startsWith('jlaw')) { const i = lines.indexOf('다음글'); k = i >= 0 ? i + 1 : null; }
+  let lawTitle = '';
+  if (lid.startsWith('jlaw')) {
+    const i = lines.indexOf('다음글'); k = i >= 0 ? i + 1 : null;
+    if (k === null) { // v2.69.1 현 조문 페이지 — '자료인용방법' 다음 줄들이 조문 제목, '상위목록' 다음부터 본문(실측 jlawa_102_0210_0010). 검색창 라벨을 기술 항목으로 오인하던 결함 차단
+      const c0 = lines.indexOf('자료인용방법'), c1 = lines.indexOf('전체목록', c0), u = lines.indexOf('상위목록', c0);
+      if (c0 >= 0 && c1 > c0) lawTitle = lines.slice(c0 + 1, c1).join(' ');
+      if (u > c0) k = u + 1;
+    }
+    if (k === null) return { lid, title: lawTitle || title, status: (lawTitle || title) ? 'not_published' : 'parse_failed' }; // 법전은 기술 항목 판독을 쓰지 않는다
+  }
   else { const i = lines.findIndex((l) => l.startsWith('◯') || l.startsWith('○')); k = i >= 0 ? i : null; }
   if (k === null) { // v2.61 '◯' 표시가 없는 기록(현대 자료·각사등록 장계 등) — 기술 항목(제목·연월일·출전·발신자…) 뒤가 본문
     const hoi = lines.indexOf('HOI'); const t2 = hoi > 0 ? lines[hoi - 1] : '';
@@ -1389,10 +1398,10 @@ async function jItemRead(lid, maxChars) {
     }
     return { lid, title: title || t2, status: (title || t2) ? 'not_published' : 'parse_failed' };
   }
-  let end = lines.slice(k).findIndex((l) => l.includes('경기도 과천시') || l.includes('개인정보'));
+  let end = lines.slice(k).findIndex((l) => l.includes('경기도 과천시') || l.includes('개인정보') || l === '디지털역사자료 인용방법');
   end = end >= 0 ? k + end : Math.min(lines.length, k + 250);
   const body = lines.slice(k, end).join(' ').slice(0, maxChars || 1200);
-  return { lid, title, body, chars: body.length, status: 'ok', isLaw: lid.startsWith('jlaw') };
+  return { lid, title: lawTitle || title, body, chars: body.length, status: 'ok', isLaw: lid.startsWith('jlaw') };
 }
 
 async function jSibling(lid, span) {

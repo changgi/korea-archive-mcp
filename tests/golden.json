@@ -1257,6 +1257,24 @@
    ],
    "level": "warn",
    "note": "v2.66 UN 판독은 기관 MARC XML(export/xm) — recjson·HTML(봇 확인)로 제목·날짜가 비던 결함"
+  },
+  {
+   "id": "nedb-item-law",
+   "tool": "nedb_search",
+   "args": {
+    "mode": "item",
+    "query": "jlawa_102_0210_0010"
+   },
+   "must": [
+    "經國大典 戶典 漕轉",
+    "諸道漕稅倉 京畿諸邑"
+   ],
+   "must_not": [
+    "문자입력기",
+    "受敎謄錄, 고종"
+   ],
+   "level": "warn",
+   "note": "v2.69.1 법전 조문 — 자료인용방법 다음 제목·상위목록 다음 본문(검색창 라벨을 기술 항목으로 오인하던 결함)"
   }
  ]
 }
