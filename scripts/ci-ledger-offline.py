@@ -20,8 +20,12 @@ g["main"]()
 after = sum(1 for l in open(os.path.join(data, "discovered.jsonl"), encoding="utf-8") if l.strip())
 bad = []
 if after < before - 5: bad.append(f"원장 항목 감소 {before}→{after}(중복 합산 허용 범위 초과)")
-for f in ("sitemap.xml", "catalog.jsonld", os.path.join("r", "index.json"), "loss_guard.json"):
+for f in ("sitemap.xml", "catalog.jsonld", "relations.json", os.path.join("r", "index.json"), "loss_guard.json"):
     if not os.path.exists(os.path.join(data, f)): bad.append(f"산출물 없음: {f}")
+try:  # v2.82 맥락 연결 — 관계마다 근거·양끝이 원장에 있는 기록
+    rj = json.load(open(os.path.join(data, "relations.json"), encoding="utf-8")); keys = {json.loads(l)["key"] for l in open(os.path.join(data, "discovered.jsonl"), encoding="utf-8") if l.strip()}
+    if any(not e.get("basis") or e["from"] not in keys or e["to"] not in keys for e in rj["edges"]): bad.append("맥락 연결 간선에 근거 없음·원장 밖 key")
+except Exception as ex: bad.append(f"relations.json 판독 실패 {ex}")
 reg = subprocess.run([sys.executable, os.path.join(tmp, "scripts", "records_register.py"), "--verify"], capture_output=True, text=True)
 if reg.returncode not in (0,): bad.append("등록부 검증 실패: " + (reg.stdout + reg.stderr)[-200:])
 shutil.rmtree(tmp, ignore_errors=True)

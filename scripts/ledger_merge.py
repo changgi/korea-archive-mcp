@@ -949,7 +949,7 @@ DISTS = [("discovered.csv", "text/csv", "발견 기록 표(CSV)"), ("discovered.
          ("records.oai_dc.xml", "application/xml", "OAI-PMH Dublin Core"), ("records.csl.json", "application/vnd.citationstyles.csl+json", "인용 CSL-JSON"),
          ("records.ris", "application/x-research-info-systems", "인용 RIS"), ("records.bib", "application/x-bibtex", "인용 BibTeX"),
          ("feed.xml", "application/atom+xml", "새 발견 Atom 피드"), ("timeline.json", "application/json", "연대 타임라인"), ("tree.json", "application/json", "계층구조"),
-         ("classifications.json", "application/json", "분류 사전"), ("provenance.json", "application/json", "발견 경로(질의↔기록)"), ("quality.json", "application/json", "데이터 품질 시계열"),
+         ("classifications.json", "application/json", "분류 사전"), ("provenance.json", "application/json", "발견 경로(질의↔기록)"), ("relations.json", "application/json", "기록↔기록 맥락 연결(근거 포함)"), ("quality.json", "application/json", "데이터 품질 시계열"),
          ("fixity_changes.json", "application/json", "원문 고정성 변경 이력"), ("loss_guard.json", "application/json", "불삭제 검사 — 되살린 값 기록"), ("queries/index.json", "application/json", "질의·회신 축적 색인"),
          ("queries/probe/index.json", "application/json", "자동 점검 질의·회신 색인"), ("records/index.json", "application/json", "일일 기록물 등록부 해시 사슬")]
 
@@ -963,12 +963,77 @@ def rec_slug(k):
     import hashlib
     return hashlib.sha1(k.encode("utf-8")).hexdigest()[:12]
 
+REL = {}  # v2.82 key → [(관계, 상대 key, 근거)] — 매 실행 재계산(원장 값에서 파생, 원장 필드는 바꾸지 않음)
+
+def _loc_ids(o):
+    """기록 하나가 기관 표기로 가진 식별자들(정규화 소문자) — key·id·옛 key·메타의 로컬 식별자/NAID"""
+    out = {o["key"].lower(), (o.get("id") or "").lower()} | {a.lower() for a in (o.get("key_aliases") or [])}
+    for k, v in (o.get("meta") or []):
+        if k in ("로컬 식별자", "NAID", "identifier", "식별자"): out.add(str(v).strip().lower())
+    if o["key"].startswith("nara:NAID "): out.add("naid " + o["key"].split(" ", 1)[1].lower())
+    return {x for x in out if x}
+
+def build_relations(recs_all):
+    """v2.82 맥락 연결 — 기록과 기록을 원장에 이미 있는 기관 표기만으로 잇는다(지어내지 않음). 관계마다 근거를 단다.
+    ① 같은 기록(다른 소장처): 기관이 준 sameAs·로컬 식별자 일치(IA 111-adc-N ↔ NARA 로컬 식별자 111-ADC-N 등)
+    ② 같은 계열: 기관 계층(partOf)이 같은 기록 — 날짜가 가까운 순 최대 8건(파생 계층은 쓰지 않음)
+    ③ 같은 날: 기관 표기 날짜(YYYY-MM-DD)가 같은 다른 기관 기록 — 교차 대조 단서
+    docs/data/relations.json(간선 목록)으로 내보내고 기록 페이지·RiC-O에 싣는다."""
+    R = [o for o in recs_all if o.get("entry_type", "기록") == "기록"]
+    by_id = {}
+    for o in R:
+        for i in _loc_ids(o): by_id.setdefault(i, set()).add(o["key"])
+    rel = {o["key"]: {} for o in R}
+    def add(a, b, t, basis):
+        if a == b or a not in rel or b not in rel: return
+        rel[a].setdefault((t, b), basis); rel[b].setdefault((t, a), basis)
+    for o in R:  # ① 기관 sameAs
+        sa = (o.get("sameAs") or "").strip()
+        if sa:
+            c = sa.lower(); cands = [c, c.replace("nara ", ""), c.split(":", 1)[-1]]
+            for x in cands:
+                for k in by_id.get(x, ()): add(o["key"], k, "같은 기록(다른 소장처)", f"기관 sameAs 표기 '{sa}'")
+        if o["key"].startswith("ia:"):  # IA 업로드가 NARA 로컬 식별자를 그대로 쓰는 경우
+            for k in by_id.get(o["key"][3:].lower(), ()):
+                if not k.startswith("ia:"): add(o["key"], k, "같은 기록(다른 소장처)", f"식별자 일치 '{o['key'][3:]}'(IA 식별자 = 기관 로컬 식별자)")
+    grp = {}
+    for o in R:
+        if o.get("partOf"): grp.setdefault((o["key"].split(":")[0], o["partOf"]), []).append(o)
+    dk = lambda o: (o.get("date") or o.get("date_derived") or "9999")
+    for (inst, part), L in grp.items():  # ② 같은 계열 — 날짜 이웃
+        if len(L) < 2: continue
+        L.sort(key=lambda o: (dk(o), o["key"]))
+        for i, o in enumerate(L):
+            for j in sorted(range(len(L)), key=lambda j: (abs(j - i), j))[1:9]:
+                rel[o["key"]].setdefault(("같은 계열", L[j]["key"]), f"같은 기관 계층 '{part[:80]}'")
+    day = {}
+    for o in R:
+        d = o.get("date") or ""
+        if re.match(r"^\d{4}-\d{2}-\d{2}$", d): day.setdefault(d, []).append(o)
+    for d, L in day.items():  # ③ 같은 날 다른 기관
+        for a in L:
+            for b in L:
+                if a["key"].split(":")[0] != b["key"].split(":")[0]: rel[a["key"]].setdefault(("같은 날(다른 기관)", b["key"]), f"기관 표기 날짜 {d}")
+    order = {"같은 기록(다른 소장처)": 0, "같은 날(다른 기관)": 1, "같은 계열": 2}
+    REL.clear()
+    for k, m in rel.items():
+        if m: REL[k] = sorted(((t, b, basis) for (t, b), basis in m.items()), key=lambda x: (order[x[0]], x[1]))
+    title = {o["key"]: o["title"] for o in R}
+    edges = [{"from": a, "to": b, "type": t, "basis": basis} for a, L in sorted(REL.items()) for t, b, basis in L if t != "같은 계열" or a < b]
+    cnt = {}
+    for e in edges: cnt[e["type"]] = cnt.get(e["type"], 0) + 1
+    json.dump({"updated": dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
+               "note": "기록↔기록 맥락 연결 — 원장의 기관 표기(sameAs·식별자·계층·날짜)에서만 파생, 관계마다 근거. 같은 기록·같은 날은 양방향, 같은 계열은 날짜 이웃 최대 8건",
+               "counts": cnt, "records_linked": len(REL), "edges": edges, "titles": {k: title[k][:160] for k in REL}},
+              open(os.path.join(D, "relations.json"), "w", encoding="utf-8"), ensure_ascii=False, separators=(",", ":"))
+    return cnt
+
 def build_record_pages(recs_all):
     """v2.73 기록마다 영구 공개 페이지(docs/data/r/<slug>.html) — 맥락(소장·계층·날짜와 근거)·증거(지문 이력·발견 경로·옛 key)·IIIF·권리를 한 장에,
     schema.org ArchiveComponent JSON-LD로 검색엔진이 읽게. r/index.json(key→페이지)·sitemap.xml. 결함 출력·검색 안내도 만들되 상단에 고지(v2.74 — 다른 산출물 링크가 끊기지 않게)."""
     E_ = html.escape; KV = "https://changgi.github.io/korea-archive-mcp/kv.html?manifest="
     rd = os.path.join(D, "r"); os.makedirs(rd, exist_ok=True)
-    idx = {}; urls = []
+    idx = {}; urls = []; TITLES = {o["key"]: o["title"] for o in recs_all}
     for o in recs_all:
         # v2.74 결함 출력·검색 안내도 페이지를 만든다 — 다른 산출물의 링크가 끊기지 않게, 상단에 결함 고지
         sl = rec_slug(o["key"]); idx[o["key"]] = f"r/{sl}.html"; pu = f"{PAGES}r/{sl}.html"; urls.append((pu, o.get("last_seen", "")[:10]))
@@ -983,7 +1048,7 @@ def build_record_pages(recs_all):
         ld = {"@context": "https://schema.org", "@type": "ArchiveComponent", "name": o["title"][:300], "url": pu, "sameAs": [x for x in (o.get("url"),) if x],
               "identifier": o.get("id") or o["key"], "holdingArchive": {"@type": "ArchiveOrganization", "name": inst}, **({"dateCreated": date or dd} if (date or dd) else {}),
               **({"isPartOf": part or pder} if (part or pder) else {}), **({"description": (o.get("summary") or o.get("summary_composed") or "")[:500]} if (o.get("summary") or o.get("summary_composed")) else {}),
-              **({"usageInfo": o["rights_view"][:300]} if o.get("rights_view") else {}), **({"associatedMedia": {"@type": "MediaObject", "contentUrl": mf, "encodingFormat": "application/ld+json;profile=iiif"}} if mf else {})}
+              **({"usageInfo": o["rights_view"][:300]} if o.get("rights_view") else {}), **({"associatedMedia": {"@type": "MediaObject", "contentUrl": mf, "encodingFormat": "application/ld+json;profile=iiif"}} if mf else {}), **({"isRelatedTo": [f"{PAGES}r/{rec_slug(b_)}.html" for t_, b_, _ in REL.get(o["key"], [])[:20]]} if REL.get(o["key"]) else {})}
         js = json.dumps(ld, ensure_ascii=False).replace("</", "<\\/")
         open(os.path.join(rd, f"{sl}.html"), "w", encoding="utf-8").write(f"""<!DOCTYPE html><html lang="ko"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>{E_(o['title'][:120])} — KOREA ARCHIVE 발견 원장</title><link rel="canonical" href="{pu}"><script type="application/ld+json">{js}</script>
@@ -997,8 +1062,9 @@ def build_record_pages(recs_all):
 {row('요약', E_(o.get('summary') or '') or (E_(o.get('summary_composed') or '')))}{row('권리', E_(o.get('rights_view') or '') + (f" <small>({E_(o.get('rights_basis', ''))})</small>" if o.get('rights_basis') else ''))}
 {row('IIIF', f"<a href='{KV}{E_(mf)}'>KV 뷰어로 보기</a> · <a href='{E_(mf)}'>매니페스트</a> <small>({E_(o.get('iiif_kind', ''))})</small>" if mf else '')}
 {row('발견', f"처음 {E_(o.get('first_seen', '')[:10])} · 최근 {E_(o.get('last_seen', '')[:10])} · {o.get('seen', 1)}회 · 출처 {E_('+'.join(o.get('sources') or []))}")}
-{row('옛 key', E_(', '.join(o.get('key_aliases') or [])))}{row('비고', E_(o.get('merge_note') or o.get('recovered') or o.get('harvested') or ''))}
+{row('같은 기록(기관 표기)', E_(o.get('sameAs') or '') + ('' if any(t_ == '같은 기록(다른 소장처)' for t_, _, _ in REL.get(o['key'], [])) else ' <small>(원장에 아직 없는 기록 — 기관 sameAs 표기 그대로)</small>') if o.get('sameAs') else '')}{row('옛 key', E_(', '.join(o.get('key_aliases') or [])))}{row('비고', E_(o.get('merge_note') or o.get('recovered') or o.get('harvested') or ''))}
 </table>{('<h2>주제·분류 (기관 표기)</h2><p>' + ' · '.join(f"<a href='../subjects.html#{E_(subj_anchor(f_, t_))}'>{E_(f_)}: {E_(t_)}</a>" for f_, t_ in record_concepts(o)[:30]) + '</p>') if record_concepts(o) else ''}
+{('<h2>관련 기록 (맥락 연결)</h2><ul>' + ''.join(f"<li>{E_(t_)} · <a href='{E_(rec_slug(b_))}.html'>{E_(TITLES.get(b_, b_)[:120])}</a> <small>({E_(bs_)})</small></li>" for t_, b_, bs_ in REL.get(o['key'], [])[:20]) + '</ul>') if REL.get(o['key']) else ''}
 {('<h2>기관 메타</h2><table>' + meta + '</table>') if meta else ''}{('<h2>원문 지문 이력</h2><ul>' + fx + '</ul>') if fx else ''}{('<h2>발견 경로</h2><ul>' + fb + '</ul>') if fb else ''}
 <p><small>원장 key <code>{E_(o['key'])}</code> · 원 기관 표기 그대로, 파생 정보는 [파생]·근거 표시 · 축적 정보는 지우지 않는다</small></p></main></html>""")
     json.dump({"updated": dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"), "pages": idx}, open(os.path.join(rd, "index.json"), "w", encoding="utf-8"), ensure_ascii=False)
@@ -1406,13 +1472,15 @@ def write_quality(recs):
     F = {"요약": lambda o: o.get("summary"), "요약(메타 합성 포함)": lambda o: o.get("summary") or o.get("summary_composed"), "연대": lambda o: decade(o), "기관 계층": lambda o: o.get("partOf"), "계층(파생 포함)": lambda o: o.get("partOf") or o.get("partOf_derived"),
          "기관 IIIF": lambda o: o.get("iiif") and not o.get("iiif_status"), "IIIF(원 기관 제공)": lambda o: iiif_kind(o).startswith("원 기관 제공"), "IIIF(원 기관 이미지로 구축)": lambda o: iiif_kind(o).startswith("원 기관 이미지"),
          "IIIF(실물 이미지 — 제공+구축)": lambda o: not iiif_kind(o).startswith("기록 봉투"), "IIIF(브리지 포함)": lambda o: o.get("iiif") or o.get("iiif_built"), "썸네일": lambda o: o.get("thumb_ok"), "권리 표시": lambda o: o.get("rights_view"),
-         "메타": lambda o: o.get("meta"), "원문 지문": lambda o: o.get("fixity"), "발견 경로": lambda o: o.get("found_by"), "발견 경로(파생 포함)": lambda o: o.get("found_by") or (o.get("found_by_derived") or {}).get("tools")}
+         "메타": lambda o: o.get("meta"), "원문 지문": lambda o: o.get("fixity"), "발견 경로": lambda o: o.get("found_by"), "발견 경로(파생 포함)": lambda o: o.get("found_by") or (o.get("found_by_derived") or {}).get("tools"),
+         "관련 기록 연결": lambda o: REL.get(o["key"]), "같은 기록(다른 소장처) 연결": lambda o: any(t == "같은 기록(다른 소장처)" for t, _, _ in REL.get(o["key"], []))}
     day = dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%d")
     snap = {"records": len(R), **{k: round(100 * sum(1 for o in R if f(o)) / max(1, len(R)), 1) for k, f in F.items()}}
     p = os.path.join(D, "quality.json"); Qj = json.load(open(p, encoding="utf-8")) if os.path.exists(p) else {"note": "기록 항목별 채움률(%) 일별 시계열 — 지우지 않는다", "daily": {}}
     Qj["definitions"] = {"기관 IIIF": "iiif 필드가 있는 기록 — 원 기관 제공과 우리 브리지(원 기관 이미지로 구축)를 함께 센다(v2.75 이전부터의 시계열이라 이름 유지)",
                          "IIIF(원 기관 제공)": "원 기관이 직접 공개한 IIIF 매니페스트", "IIIF(원 기관 이미지로 구축)": "KOREA ARCHIVE 브리지가 원 기관 이미지·메타로 만든 매니페스트",
-                         "IIIF(실물 이미지 — 제공+구축)": "위 둘의 합 — 나머지는 이미지 없는 기록 봉투", "IIIF(브리지 포함)": "기록 봉투까지 포함 — 모든 기록이 IIIF로 열림"}  # v2.75
+                         "IIIF(실물 이미지 — 제공+구축)": "위 둘의 합 — 나머지는 이미지 없는 기록 봉투", "IIIF(브리지 포함)": "기록 봉투까지 포함 — 모든 기록이 IIIF로 열림",
+                         "관련 기록 연결": "relations.json에서 다른 기록과 하나 이상 이어진 기록(같은 기록·같은 날·같은 계열, v2.82)", "같은 기록(다른 소장처) 연결": "기관 sameAs·식별자 일치로 다른 소장처의 같은 기록과 이어진 기록"}  # v2.75
     Qj["daily"][day] = snap; Qj["daily"] = dict(sorted(Qj["daily"].items())); Qj["latest"] = {"day": day, **snap}
     json.dump(Qj, open(p, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
     return snap
@@ -1672,6 +1740,7 @@ def main():
         for o in pop[:200]: w.writerow([fmtv(o.get(c, "")) for c in pc])
     usage["daily"] = dict(sorted(usage["daily"].items()))  # v2.26 일별 활용 전체 보존(이전 400일 제한 해제)
     json.dump(usage, open(up, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+    nrel = build_relations(recs)  # v2.82 기록↔기록 맥락 연결(RiC-O·기록 페이지·품질이 함께 씀)
     sets = {}
     graph = []
     for o in recs:
@@ -1683,7 +1752,7 @@ def main():
                       **({"rico:isAssociatedWithDate": o["date"]} if o.get("date") else {}), "rico:isOrWasIncludedIn": {"@id": sid},
                       **({"rico:hasOrHadSubject": [{"@id": concept_id(f, t)} for f, t in record_concepts(o) if f != "장소"]} if any(f != "장소" for f, t in record_concepts(o)) else {}),
                       **({"rico:isAssociatedWithPlace": [{"@id": concept_id(f, t)} for f, t in record_concepts(o) if f == "장소"]} if any(f == "장소" for f, t in record_concepts(o)) else {}),
-                      "rdfs:seeAlso": {"@id": f"{PAGES}r/{rec_slug(o['key'])}.html"}, **({"owl:sameAs": o["sameAs"]} if o.get("sameAs") else {}), **({"rico:hasOrHadInstantiation": {"@id": mf, "@type": "rico:Instantiation", "rico:title": o["iiif_kind"]}} if mf else {}), **({"rico:scopeAndContent": o["summary"]} if o.get("summary") else {}),
+                      "rdfs:seeAlso": {"@id": f"{PAGES}r/{rec_slug(o['key'])}.html"}, **({"owl:sameAs": o["sameAs"]} if o.get("sameAs") else {}), **({"rico:isRelatedTo": [{"@id": f"{PAGES}r/{rec_slug(b_)}.html", "rdfs:comment": f"{t_} — {bs_}"} for t_, b_, bs_ in REL.get(o["key"], [])[:20]]} if REL.get(o["key"]) else {}), **({"rico:hasOrHadInstantiation": {"@id": mf, "@type": "rico:Instantiation", "rico:title": o["iiif_kind"]}} if mf else {}), **({"rico:scopeAndContent": o["summary"]} if o.get("summary") else {}),
                       "prov:wasGeneratedBy": {"@type": "prov:Activity", "prov:label": "KOREA ARCHIVE 통합검색 발견", "prov:startedAtTime": o["first_seen"], "prov:used": o["sources"], **({"prov:endedAtTime": o["last_seen"]} if o.get("last_seen") else {}), **({"prov:wasAssociatedWith": [f"KOREA ARCHIVE 통합검색/{t}" for t in o["tools"]]} if o.get("tools") else {}),
                                              **({"prov:wasInformedBy": [{"@id": f"https://changgi.github.io/korea-archive-mcp/data/provenance.json#{ak}"} for ak in o["found_by"]]} if o.get("found_by") else {})}})
     json.dump({"@context": {"rico": "https://www.ica.org/standards/RiC/ontology#", "prov": "http://www.w3.org/ns/prov#", "owl": "http://www.w3.org/2002/07/owl#", "rdfs": "http://www.w3.org/2000/01/rdf-schema#"},
@@ -1738,14 +1807,14 @@ details{{font-size:12px}}dl{{display:grid;grid-template-columns:auto 1fr;gap:2px
 table{{width:100%;border-collapse:collapse;font-size:14px}}td,th{{border-bottom:1px solid #2a2d35;padding:6px;text-align:left}}</style>
 <main><h1>발견 누적 원장</h1><p>KOREA ARCHIVE 통합검색 사용자가 도구로 발굴한 기록이 매일 이곳에 쌓입니다(검색어·사용자 정보 없음). 기록 <b>{st['records']:,}</b>건 · 마지막 갱신 {st['updated']} · 이번 갱신 신규 {new_recs}건 · 내용·메타정보 보강 {enr}건 · 썸네일 {thn}건</p>
 <p>{srcs}</p>
-<p><a class="b0" href="discovered.csv">CSV 내려받기</a><a class="b0" href="discovered.jsonl">JSONL</a><a class="b0" href="discovered.jsonld">RiC-O JSON-LD</a><a class="b0" href="../kv.html?manifest=https://changgi.github.io/korea-archive-mcp/data/collection.json">KV로 최근 300건 연속 보기</a><a class="b0" href="tree.html">계층구조도</a><a class="b0" href="queries/index.json">질의·회신 축적</a><a class="b0" href="classifications.json">분류 사전</a><a class="b0" href="provenance.json">발견 경로(질의↔기록)</a><a class="b0" href="q/index.html">질의별 발굴 기록(IIIF)</a><a class="b0" href="quality.json">데이터 품질 추이</a><a class="b0" href="subjects.html">주제 색인</a><a class="b0" href="subjects.jsonld">주제 SKOS</a><a class="b0" href="fixity_changes.json">원문 변경 감시</a><a class="b0" href="feed.xml">새 발견 구독(Atom)</a><a class="b0" href="records.csl.json">인용 CSL-JSON(Zotero)</a><a class="b0" href="records.ris">인용 RIS(EndNote)</a><a class="b0" href="records.bib">인용 BibTeX(LaTeX)</a><a class="b0" href="catalog.jsonld">데이터 목록(DCAT)</a><a class="b0" href="r/index.json">기록별 영구 페이지</a><a class="b0" href="digest/index.html">주간 발견 소식</a><a class="b0" href="sitemap.xml">사이트맵</a><a class="b0" href="records.oai_dc.xml">OAI-PMH Dublin Core(하베스터)</a><a class="b0" href="timeline.html">연대 타임라인</a><a class="b0" href="nrich/index.html">연구원 연구DB IIIF 계층</a><a class="b0" href="popular.csv">자주 활용 TOP 200</a><a class="b0" href="stats.json">집계</a></p>
+<p><a class="b0" href="discovered.csv">CSV 내려받기</a><a class="b0" href="discovered.jsonl">JSONL</a><a class="b0" href="discovered.jsonld">RiC-O JSON-LD</a><a class="b0" href="../kv.html?manifest=https://changgi.github.io/korea-archive-mcp/data/collection.json">KV로 최근 300건 연속 보기</a><a class="b0" href="tree.html">계층구조도</a><a class="b0" href="queries/index.json">질의·회신 축적</a><a class="b0" href="classifications.json">분류 사전</a><a class="b0" href="provenance.json">발견 경로(질의↔기록)</a><a class="b0" href="relations.json">기록↔기록 맥락 연결</a><a class="b0" href="q/index.html">질의별 발굴 기록(IIIF)</a><a class="b0" href="quality.json">데이터 품질 추이</a><a class="b0" href="subjects.html">주제 색인</a><a class="b0" href="subjects.jsonld">주제 SKOS</a><a class="b0" href="fixity_changes.json">원문 변경 감시</a><a class="b0" href="feed.xml">새 발견 구독(Atom)</a><a class="b0" href="records.csl.json">인용 CSL-JSON(Zotero)</a><a class="b0" href="records.ris">인용 RIS(EndNote)</a><a class="b0" href="records.bib">인용 BibTeX(LaTeX)</a><a class="b0" href="catalog.jsonld">데이터 목록(DCAT)</a><a class="b0" href="r/index.json">기록별 영구 페이지</a><a class="b0" href="digest/index.html">주간 발견 소식</a><a class="b0" href="sitemap.xml">사이트맵</a><a class="b0" href="records.oai_dc.xml">OAI-PMH Dublin Core(하베스터)</a><a class="b0" href="timeline.html">연대 타임라인</a><a class="b0" href="nrich/index.html">연구원 연구DB IIIF 계층</a><a class="b0" href="popular.csv">자주 활용 TOP 200</a><a class="b0" href="stats.json">집계</a></p>
 <p style="font-size:13px;color:#9b9a93">주요 내용·메타정보·썸네일은 기관 IIIF·우리 브리지 매니페스트를 하루 한 번 판독해 채웁니다(하루 상한·순차 요청). 썸네일은 재이용 가능 표시가 확인된 것만 싣고, 포로·사망자·묘지·수형자 관련 기록과 허가가 필요한 이미지는 링크만 둡니다. 권리는 원 기관 표기를 따릅니다 — 게재 전 judge_rights로 확인. 모든 변경은 저장소 git 이력(docs/data/)에 남습니다.</p>
 <h2>자주 활용되는 기록 TOP 30</h2><p style="font-size:13px">점수 = 최근 30일 발견×2 + 전체 발견 + 발견된 날 수×3 + 교차확인 기관 수 가중. 자동 검사 트래픽 제외.</p><div class="g">{prow}</div>
 <h2>일별 활용(최근 14일)</h2><table><tr><th>날짜</th><th>검색 묶음</th><th>발견 기록</th><th>신규 기록</th></tr>{urow}</table><p style="font-size:13px">형식별 누계: {E_(fmtv(usage['formats']))} · <a href="usage.json">usage.json</a></p>
 <h2>질의·회신 축적</h2><p style="font-size:13px">모든 도구 호출의 질의와 회신 본문을 원문 그대로(가공·삭제 없이) 영구 보존합니다. 같은 질의·같은 회신은 한 번만 두고 횟수만 셉니다. 회신이 달라지면 새 판으로 남겨 기관 응답 변화의 증거로 씁니다. 고유 질의 {nq['total']}건 · 누적 호출 {nq['calls']}회 · 도구별 {E_(fmtv(nq['by_tool']))} · <a href="queries/index.json">queries/index.json</a> (월별 회신 원문 queries/YYYY-MM.jsonl.gz) · 자동 점검(골든·헬스·원장 보강) 질의·회신은 활용 집계와 분리해 <a href="queries/probe/index.json">queries/probe/</a>에 따로 축적(고유 {npq['total']}건 — 기관 응답 변화·장애의 증거)</p><table><tr><th>최근</th><th>도구</th><th>질의</th><th>횟수</th></tr>{qrow}</table>
 <h2>최근 발견 100건</h2><div class="g">{rows}</div></main></html>""")
     build_tree(recs); ncls = merge_classes(recs); nprov, _orph = build_provenance(recs); nfx = write_fixity(recs); nql = write_quality(recs); nsub = merge_subjects(recs); nmed = build_media(recs); npg = build_record_pages(recs); ndg = build_digest(recs, today); ncat = build_catalog(recs, nql)
-    print(f"원장 {len(recs)}건 (신규 {new_recs}, 묶음 {new_batches})")
+    print(f"원장 {len(recs)}건 (신규 {new_recs}, 묶음 {new_batches}) · 맥락 연결 {nrel}")
     print(f"질의 고유 {nq['total']}건(신규 {nq['added']}) · 분류 경로 {ncls}개 · 발견 경로 질의 {nprov}종 · 다매체(피드 {nmed[0]}·인용 {nmed[1]}·연대 {nmed[2]}) · 주제 색인 {nsub} · 품질 권리 {nql['권리 표시']}% 요약 {nql['요약']}% 연대 {nql['연대']}%")
 
 if __name__ == "__main__":
