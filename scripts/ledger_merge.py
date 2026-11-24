@@ -661,7 +661,8 @@ def aks_drill(led, today, budget):
     used = added = 0
     for o in [x for x in led.values() if x["key"].startswith("aks:") and x.get("entry_type") != "결함 출력"]:
         if used >= budget: break
-        if o.get("drilled", "") >= today.isoformat() or (o.get("children") and all(c.get("cat") for c in o["children"])): continue  # v2.40 분류(cat) 없는 옛 발굴은 한 번 다시
+        has_cat = bool(o.get("children")) and all(c.get("cat") for c in o["children"])
+        if has_cat or (o.get("drilled", "") >= today.isoformat() and not o.get("children")): continue  # v2.40 분류(cat) 없는 옛 발굴은 한 번 다시
         cid = str(o.get("id") or ""); queue = [cid] if re.match(r"^L\d{6}", cid) else []; docs = []
         while queue and used < budget and len(docs) < 40:
             q = queue.pop(0); used += 1
