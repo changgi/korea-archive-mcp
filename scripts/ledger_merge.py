@@ -1131,7 +1131,7 @@ def build_record_pages(recs_all):
     schema.org ArchiveComponent JSON-LD로 검색엔진이 읽게. r/index.json(key→페이지)·sitemap.xml. 결함 출력·검색 안내도 만들되 상단에 고지(v2.74 — 다른 산출물 링크가 끊기지 않게)."""
     E_ = html.escape; KV = "https://changgi.github.io/korea-archive-mcp/kv.html?manifest="
     rd = os.path.join(D, "r"); os.makedirs(rd, exist_ok=True)
-    idx = {}; urls = []; TITLES = {o["key"]: o["title"] for o in recs_all}
+    idx = {}; urls = []; TITLES = {o["key"]: o["title"] for o in recs_all}; TURL = {o["key"]: o.get("url") for o in recs_all if o.get("url")}
     for o in recs_all:
         # v2.74 결함 출력·검색 안내도 페이지를 만든다 — 다른 산출물의 링크가 끊기지 않게, 상단에 결함 고지
         sl = rec_slug(o["key"]); idx[o["key"]] = f"r/{sl}.html"; pu = f"{PAGES}r/{sl}.html"; urls.append((pu, o.get("last_seen", "")[:10]))
@@ -1143,7 +1143,7 @@ def build_record_pages(recs_all):
         meta = "".join(row(str(k), E_(str(v))) for k, v in (o.get("meta") or []) if not str(v).startswith("http"))
         fx = "".join(f"<li>{E_(f.get('at', ''))} · {E_(f.get('kind', ''))} · {E_(f.get('h', ''))}</li>" for f in (o.get("fixity") or []))
         fb = "".join(f"<li><a href='../q/{E_(ak)}.json'>질의 {E_(ak)}</a> — {E_((o.get('found_by_basis') or {}).get(ak, ''))}</li>" for ak in (o.get("found_by") or []))
-        ld = {"@context": "https://schema.org", "@type": "ArchiveComponent", "name": o["title"][:300], "url": pu, "sameAs": [x for x in (o.get("url"),) if x],
+        ld = {"@context": "https://schema.org", "@type": "ArchiveComponent", "name": o["title"][:300], "url": pu, "sameAs": [x for x in (o.get("url"),) if x] + [TURL[b_] for t_, b_, _ in REL.get(o["key"], []) if t_ == "같은 기록(다른 소장처)" and TURL.get(b_)],  # v2.91 다른 소장처의 같은 기록 주소
               "identifier": o.get("id") or o["key"], "holdingArchive": {"@type": "ArchiveOrganization", "name": inst}, **({"dateCreated": date or dd} if (date or dd) else {}),
               **({"isPartOf": part or pder} if (part or pder) else {}), **({"description": (o.get("summary") or o.get("summary_composed") or "")[:500]} if (o.get("summary") or o.get("summary_composed")) else {}),
               **({"usageInfo": o["rights_view"][:300]} if o.get("rights_view") else {}), **({"associatedMedia": {"@type": "MediaObject", "contentUrl": mf, "encodingFormat": "application/ld+json;profile=iiif"}} if mf else {}), **({"isRelatedTo": [f"{PAGES}r/{rec_slug(b_)}.html" for t_, b_, _ in REL.get(o["key"], [])[:20]]} if REL.get(o["key"]) else {})}
@@ -1962,7 +1962,7 @@ def main():
         for o in pop[:200]: w.writerow([fmtv(o.get(c, "")) for c in pc])
     usage["daily"] = dict(sorted(usage["daily"].items()))  # v2.26 일별 활용 전체 보존(이전 400일 제한 해제)
     json.dump(usage, open(up, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
-    sets = {}
+    sets = {}; U_ = {o["key"]: o.get("url") for o in recs if o.get("url")}  # v2.91 RiC-O owl:sameAs에 같은 기록의 다른 소장처 주소
     graph = []
     for o in recs:
         inst = o["key"].split(":")[0]; ser = o.get("partOf") or o.get("partOf_derived") or "(계열 미상)"
@@ -1973,7 +1973,7 @@ def main():
                       **({"rico:isAssociatedWithDate": o["date"]} if o.get("date") else {}), "rico:isOrWasIncludedIn": {"@id": sid},
                       **({"rico:hasOrHadSubject": [{"@id": concept_id(f, t)} for f, t in record_concepts(o) if f != "장소"]} if any(f != "장소" for f, t in record_concepts(o)) else {}),
                       **({"rico:isAssociatedWithPlace": [{"@id": concept_id(f, t)} for f, t in record_concepts(o) if f == "장소"]} if any(f == "장소" for f, t in record_concepts(o)) else {}),
-                      "rdfs:seeAlso": {"@id": f"{PAGES}r/{rec_slug(o['key'])}.html"}, **({"owl:sameAs": o["sameAs"]} if o.get("sameAs") else {}), **({"rico:isRelatedTo": [{"@id": f"{PAGES}r/{rec_slug(b_)}.html", "rdfs:comment": f"{t_} — {bs_}"} for t_, b_, bs_ in REL.get(o["key"], [])[:20]]} if REL.get(o["key"]) else {}), **({"rico:hasOrHadInstantiation": {"@id": mf, "@type": "rico:Instantiation", "rico:title": o["iiif_kind"]}} if mf else {}), **({"rico:scopeAndContent": o["summary"]} if o.get("summary") else {}),
+                      "rdfs:seeAlso": {"@id": f"{PAGES}r/{rec_slug(o['key'])}.html"}, **({"owl:sameAs": [o["sameAs"]] * bool(o.get("sameAs")) + [{"@id": U_[b_]} for t_, b_, _ in REL.get(o["key"], []) if t_ == "같은 기록(다른 소장처)" and U_.get(b_)]} if (o.get("sameAs") or any(t_ == "같은 기록(다른 소장처)" for t_, _, _ in REL.get(o["key"], []))) else {}), **({"rico:isRelatedTo": [{"@id": f"{PAGES}r/{rec_slug(b_)}.html", "rdfs:comment": f"{t_} — {bs_}"} for t_, b_, bs_ in REL.get(o["key"], [])[:20]]} if REL.get(o["key"]) else {}), **({"rico:hasOrHadInstantiation": {"@id": mf, "@type": "rico:Instantiation", "rico:title": o["iiif_kind"]}} if mf else {}), **({"rico:scopeAndContent": o["summary"]} if o.get("summary") else {}),
                       "prov:wasGeneratedBy": {"@type": "prov:Activity", "prov:label": "KOREA ARCHIVE 통합검색 발견", "prov:startedAtTime": o["first_seen"], "prov:used": o["sources"], **({"prov:endedAtTime": o["last_seen"]} if o.get("last_seen") else {}), **({"prov:wasAssociatedWith": [f"KOREA ARCHIVE 통합검색/{t}" for t in o["tools"]]} if o.get("tools") else {}),
                                              **({"prov:wasInformedBy": [{"@id": f"https://changgi.github.io/korea-archive-mcp/data/provenance.json#{ak}"} for ak in o["found_by"]]} if o.get("found_by") else {})}})
     json.dump({"@context": {"rico": "https://www.ica.org/standards/RiC/ontology#", "prov": "http://www.w3.org/ns/prov#", "owl": "http://www.w3.org/2002/07/owl#", "rdfs": "http://www.w3.org/2000/01/rdf-schema#"},
