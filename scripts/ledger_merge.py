@@ -235,7 +235,8 @@ def enrich(o, budget):
         used = 1
         try:
             j = get(m)
-            o["summary"] = strip(L1(j.get("summary")) or L1(j.get("description")))[:400]
+            sm_ = strip(L1(j.get("summary")) or L1(j.get("description")))[:400]
+            if sm_ or not o.get("summary"): o["summary"] = sm_  # v2.69.3 빈 매니페스트 요약으로 축적된 요약을 지우지 않는다
             md = []
             for e in (j.get("metadata") or [])[:12]:
                 k, v = strip(L1(e.get("label"))), strip(L1(e.get("value")))
