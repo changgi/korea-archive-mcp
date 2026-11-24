@@ -1324,7 +1324,11 @@ const jClean = (s) => String(s || '').replace(/<[^>]+>/g, '').replace(/&gt;/g, '
 const jStrip = (s) => jClean(jNoScript(s));
 const jLines = (s) => jNoScript(s).replace(/<[^>]+>/g, '\n').split('\n').map((l) => jClean(l)).filter(Boolean);
 const jCite = (lid) => `${JDB}/id/${lid}`;
-const jItemUrl = (lid) => JDB + (lid.startsWith('jlaw') ? '/joseon/item/level.do?levelId=' : '/joseon/level.do?levelId=') + lid;
+// v2.61 시대별 상세 경로 — 근대·현대·고대 DB를 조선 경로로 요청해 404가 나던 결함(실측 dh_·sg_). 접두가 표에 없으면 조선(종전 동작)
+const J_ERA = { kd: 'modern', ij: 'modern', npda: 'modern', dh: 'contemp', pn: 'contemp', sg: 'ancient' };
+const jEra = (lid) => J_ERA[String(lid).split('_')[0]] || 'joseon';
+const jItemUrl = (lid) => JDB + (lid.startsWith('jlaw') ? '/joseon/item/level.do?levelId=' : `/${jEra(lid)}/level.do?levelId=`) + lid;
+const J_LABELS = ['제목', '연월일', '출전', '발신자', '수신자', '발신일', '문서분류', '작성자', '날짜', '작성일'];
 const J_SEARCH_BASE = { pageIndex: '1', pageSize: '1', orderColumn: 'levelId', orderDir: 'ASC',
   synonym: 'off', chinessChar: 'on', titleWord: '', titleConjunction: 'AND',
   contentsWord: '', contentsConjunction: 'AND', creatorWord: '', creatorConjunction: 'AND',
@@ -1353,7 +1357,21 @@ async function jItemRead(lid, maxChars) {
   let k = null;
   if (lid.startsWith('jlaw')) { const i = lines.indexOf('다음글'); k = i >= 0 ? i + 1 : null; }
   else { const i = lines.findIndex((l) => l.startsWith('◯') || l.startsWith('○')); k = i >= 0 ? i : null; }
-  if (k === null) return { lid, title, status: title ? 'not_published' : 'parse_failed' };
+  if (k === null) { // v2.61 '◯' 표시가 없는 기록(현대 자료·각사등록 장계 등) — 기술 항목(제목·연월일·출전·발신자…) 뒤가 본문
+    const hoi = lines.indexOf('HOI'); const t2 = hoi > 0 ? lines[hoi - 1] : '';
+    const fe = lines.findIndex((l) => l.includes('개인정보취급방침') || l.includes('경기도 과천시')); const stop = fe >= 0 ? fe : lines.length;
+    const meta = [];
+    for (let i = Math.max(0, hoi); i < stop; i++) { if (J_LABELS.includes(lines[i])) meta.push([lines[i], []]); else if (meta.length) meta[meta.length - 1][1].push(lines[i]); }
+    if (meta.length) {
+      const last = meta[meta.length - 1][1]; const rest = last.splice(1); const ttl = t2 || title; // 기록 자체 제목(HOI 앞 줄) 우선
+      while (rest.length && (rest[0] === ttl || rest[0] === t2)) rest.shift();
+      const mv = meta.map(([kk, v]) => [kk, v.join(' ').slice(0, 200)]).filter(([, v]) => v);
+      const body = rest.join(' ').slice(0, maxChars || 1200);
+      if (body) return { lid, title: ttl, body, chars: body.length, status: 'ok', isLaw: false, era: jEra(lid), meta: mv };
+      return { lid, title: ttl, status: ttl ? 'not_published' : 'parse_failed', meta: mv };
+    }
+    return { lid, title: title || t2, status: (title || t2) ? 'not_published' : 'parse_failed' };
+  }
   let end = lines.slice(k).findIndex((l) => l.includes('경기도 과천시') || l.includes('개인정보'));
   end = end >= 0 ? k + end : Math.min(lines.length, k + 250);
   const body = lines.slice(k, end).join(' ').slice(0, maxChars || 1200);
@@ -2734,7 +2752,7 @@ const JB_CROSS = `국내외 대조 절차 — 순서를 틀리면 헛수고한�
         }
         if (mode === 'item') {
           const r = await jItemRead(q, 3000);
-          if (r.status === 'ok') return text(`[${q}] ${r.title || ''}\n${r.body}\n(${r.chars}자) ${jCite(q)}\n※ ${r.isLaw ? '한문 원문 제공 — 인용 가능(표점 DB 형태)' : '국역만 제공 — 역구성 한문은 학술 인용 불가'}. 조문이면 mode=sibling으로 형제 조 확인.`);
+          if (r.status === 'ok') return text(`[${q}] ${r.title || ''}\n${(r.meta || []).length ? r.meta.map(([kk, v]) => `${kk}: ${v}`).join(' · ') + '\n' : ''}${r.body}\n(${r.chars}자) ${jCite(q)}\n※ ${r.isLaw ? '한문 원문 제공 — 인용 가능(표점 DB 형태)' : r.era && r.era !== 'joseon' ? `원문 수록(${r.era === 'contemp' ? '현대' : r.era === 'modern' ? '근대' : '고대'} 자료) — 출전을 병기해 인용` : (r.meta || []).length ? '원문 수록(등록류 장계 등) — 출전·발신일 병기 인용' : '국역만 제공 — 역구성 한문은 학술 인용 불가'}. 조문이면 mode=sibling으로 형제 조 확인.`);
           if (r.status === 'not_published') return text(`[${q}] ${r.title}\n본문이 공개되지 않았습니다 — 항목은 존재하고 URL도 유효하나 공개 범위 문제입니다. 재시도로 해결되지 않으며 국사편찬위원회 문의 대상. ${jCite(q)}`);
           return text(`[${q}] 조회 실패(${r.status}${r.note ? ': ' + r.note : ''}) — levelId와 경로(jlaw*=item/level.do)를 확인하십시오.`);
         }
