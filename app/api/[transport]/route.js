@@ -26,10 +26,7 @@ export const preferredRegion = 'icn1';
 const UA = 'KoreaArchiveMCP/2.36 (+https://github.com/changgi/korea-archive-mcp; archival discovery; non-commercial research)';
 const FETCH_TIMEOUT = 20000;
 // v2.36 정직 UA 거부 기관 — 우회하지 않고 표시(실측 기록). 기관이 허용하면 결과가 다시 나오므로 이 표는 안내용(차단 판정은 응답으로)
-const UA_REFUSED = {
-  kyudb: { name: '서울대 규장각한국학연구원', since: '2026-11-24', how: '정직 UA 요청에 HTTP 403', browse: 'https://kyudb.snu.ac.kr/search/search.do', contact: '02-880-5316' },
-  ktv: { name: 'KTV e영상역사관', since: '2026-11-24', how: '정직 UA 요청에 결과 0건(같은 질의가 브라우저 UA 시절 정상)', browse: 'https://www.ktv.go.kr/totalSearch/ehistory', contact: 'KTV 국민방송' },
-};
+const UA_REFUSED = {}; // v2.37 비움 — 규장각 403은 UA가 아니라 사이트 개편(POST CSRF)이었고 GET으로 복구, KTV는 e영상역사관 자체 목록 검색으로 복구(2026-11-24 실측). 새 거부가 확인되면 추가(위장하지 않음)
 const uaRefusedNote = (k, q = '') => { const r = UA_REFUSED[k]; if (!r) return ''; return `접근 제한(정직 UA 거부) — ${r.name}: ${r.how} (실측 ${r.since}). 위장·우회하지 않습니다. 브라우저로 직접 열람: ${r.browse}${q ? ` (검색어 '${q}')` : ''} · 자동 수집 허용 문의: ${r.contact}`; };
 // v2.36 프록시 우회(FETCH_PROXY_PREFIX·allorigins·jina) 제거 — 접근 차단은 우회하지 않고 표시한다(CLAUDE.md).
 
@@ -407,6 +404,45 @@ async function resolveOrigins(items, stats) {
   })), sleep(6000)]);
   if (ok) stats.push(`nara원본확인:${ok}`);
 }
+// v2.37 e영상역사관(ehistory.go.kr) 자체 목록 검색 — 분류 목록 페이지가 GET search_type·search_text로 걸러진 타일(제목·제작연도·호수·썸네일·상세 링크)을 준다
+const EH = 'https://www.ehistory.go.kr';
+const EH_LISTS = [['koreanews/korea_news', '대한뉴스'], ['koreanews/korea_newskc', '미공개 대한뉴스'], ['movie/culture', '문화영화'], ['photo/government', '정부기록사진집'], ['photo/nation', '국가기록사진'], ['photo/korea', '한국소개사진'], ['movie/president', '대통령기록영상']]; // 분류명은 각 페이지 제목 그대로(2026-11-24 실측)
+async function ehistoryList(path, label, q) {
+  {
+    const b = await cachedText(`eh:${path}:${q}`, 6 * 3600e3, () => gtext(`${EH}/${path}?search_type=all&search_text=${encodeURIComponent(q)}`), 'tileList');
+    const out = [];
+    for (const li of b.split('<li>').slice(1)) {
+      const m = li.match(/<a href="(\/view\/(?:movie|photo)\?[^"]+)"/); const t = (li.match(/<strong class="title">([\s\S]*?)<\/strong>/) || [])[1];
+      if (!m || !t) continue;
+      const dl = norm(((li.match(/<span class="date">([\s\S]*?)<\/span>\s*<\/div>/) || [])[1] || '').replace(/<[^>]+>/g, ' '));
+      const yr = (dl.match(/(1[89]\d\d|20\d\d)(?:[.년]\s*(\d{1,2}))?(?:\.(\d{1,2}))?/) || []);
+      const no = (dl.match(/(\d{2,4})호/) || [])[1];
+      const img = (li.match(/<img src="([^"]+)"/) || [])[1];
+      const title = norm(t.replace(/<[^>]+>/g, '').replace(/&amp;/g, '&').replace(/&quot;/g, '"').replace(/&#39;/g, "'"));
+      out.push({ title: `${title}${no ? ` (${no}호)` : ''}`.slice(0, 120), date: yr[1] ? [yr[1], yr[2] && yr[2].padStart(2, '0'), yr[3] && yr[3].padStart(2, '0')].filter(Boolean).join('-') : '',
+        id: (m[1].match(/mediadtl=(\d+)/) || [])[1] ? `${label}:${(m[1].match(/mediadtl=(\d+)/) || [])[1]}` : '', series: label, url: EH + m[1].replace(/&amp;/g, '&'), ...(img ? { media: (img.startsWith('http') ? '' : EH) + img } : {}) });
+    }
+    return out;
+  }
+}
+async function ehistorySearch(q, n) {
+  // 질의에 분류명(대한뉴스·문화영화…)이 있으면 그 분류만, 나머지 낱말로 검색. 여러 낱말이 0건이면 첫 낱말로 한 번 더
+  const toks = String(q).split(/\s+/).filter(Boolean); const cats = EH_LISTS.filter(([, l]) => toks.includes(l) || toks.includes(l.replace(/\s/g, '')));
+  const kw = toks.filter((t) => !EH_LISTS.some(([, l]) => l === t || l.replace(/\s/g, '') === t)).join(' ');
+  if (cats.length && kw && kw !== q) return ehistorySearchIn(cats, kw, n);
+  const r0 = await ehistorySearchIn(EH_LISTS, q, n);
+  return r0.length || toks.length < 2 ? r0 : ehistorySearchIn(EH_LISTS, toks[0], n);
+}
+async function ehistorySearchIn(L, q, n) {
+  const one = async ([path, label]) => ehistoryList(path, label, q);
+  const res = await Promise.allSettled(L.map(one));
+  const lists = res.map((r) => (r.status === 'fulfilled' ? r.value : []));
+  const seen = new Set(); const out = [];
+  for (let k = 0; k < 20 && out.length < n; k++) for (const l of lists) { const it = l[k]; if (!it || seen.has(it.url) || out.length >= n) continue; seen.add(it.url); out.push(it); }
+  return out;
+}
+const ktvTotalSearch = (q, n) => COLLECT._ktvLegacy(q, n);
+
 async function collectMerged(collectors) {
   const boxed = (fn) => Promise.race([fn(), new Promise((_, rej) => setTimeout(() => rej(new Error('timebox 12s')), SOURCE_TIMEBOX_MS))]);
   const settled = await Promise.allSettled(collectors.map((c) => boxed(c.fn)));
@@ -1081,7 +1117,12 @@ const COLLECT = {
     }
     return out;
   },
-  ktv: async (q, n) => { // KTV e영상역사관 — ktv.go.kr 통합검색 iframe GET 실측(2026-11-19)
+  ktv: async (q, n) => { // v2.37 e영상역사관 자체 목록 검색 우선(ehistory.go.kr — 정직 UA 정상 응답, 2026-11-24 실측). ktv.go.kr 통합검색은 쿠키 확인 리다이렉트(303 → /)로 자동 요청을 받지 않음 → 보조
+    const eh = await ehistorySearch(q, n).catch(() => []);
+    if (eh.length) return eh;
+    return ktvTotalSearch(q, n);
+  },
+  _ktvLegacy: async (q, n) => { // KTV e영상역사관 — ktv.go.kr 통합검색 iframe GET 실측(2026-11-19)
     // v1.94: 기본 정렬이 '최신순'(sort 파라미터 무효 실측)이라 최근 대통령 영상이 상위를 독점 → 기록 탭(ehistoryStleSe)별 병렬 조회 후 교차 병합, 대통령 기록영상(DT)은 뒤로
     const TABS = [['DH', '대한뉴스'], ['MH', '문화영화'], ['DK', '미공개 대한뉴스'], ['BK', '정부기록사진집'], ['PT', '국가기록사진'], ['', '전체']];
     const base = 'https://www.ktv.go.kr/totalSearch/ehistory?design=new&collection=ehistory&baseKeyword=' + encodeURIComponent(q);
@@ -1378,19 +1419,21 @@ const kyuRows = (flat) => {
 };
 async function jKyu(query) {
   // 실측 10.2s(12s 타임박스 근접 — cross_search 간헐 탈락 위험) → 목록·해제 2건 병렬 + 6h TTL 캐시
-  const ck = 'kyudb5:' + query; // v2.35.1 book_cd(강조 태그 수정) — 캐시 키 판 올림
+  const ck = 'kyudb6:' + query; // v2.35.1 book_cd(강조 태그 수정) — 캐시 키 판 올림
   const hit = _ttlCache.get(ck);
   if (hit && Date.now() - hit.t < 6 * 3600e3) return JSON.parse(hit.v);
   const out = {};
   await Promise.all([['10', '목록'], ['20', '해제']].map(async ([code, label]) => {
     try {
-      const b = await jdbPost(JKYU + '/search/search.do', { totalSearchString: query, searchArea: code }, { Referer: JKYU + '/' });
+      // v2.37 사이트 개편(2026-11-24 실측): POST는 CSRF 토큰 필수(403 'CSRF Token Validation Failed') — 공개 GET 검색으로(같은 결과·정직 UA 정상)
+      const b = await gtext(`${JKYU}/search/search.do?totalSearchString=${encodeURIComponent(query)}&searchArea=${code}`, { Referer: JKYU + '/' });
       out[label] = [...new Set([...b.matchAll(/(奎[\d軸]+)/g)].map((x) => x[1]))].slice(0, 30);
       // v1.96.7: 번호만 나오던 결함 — 결과 행 'N. 서명 청구기호 : 奎… 편저자 : … 간행년대 : … 사부분류 : … [본문 : …] 상세정보'(실측) 구조 판독
       out[label + '항목'] = kyuRows(mclean(b));
       // 청구기호는 태그 제거 후 읽는다 — 청구기호 검색 시 강조 태그(<font><b>奎…</b></font>)가 끊던 것(골든 kyudb-bookcd-link 실측)
       // v2.35 행별 book_cd(fn_totalSearchResultView 4번째 인자) ↔ 청구기호 — /book/view.do?book_cd= GET 고정 상세(2026-11-24 실측)
-      out[label + '코드'] = Object.fromEntries(b.split('class="schli"').slice(1).map((seg) => [norm((seg.replace(/<[^>]+>/g, '').match(/청구기호\s*:\s*([^\n\t]{2,30})/) || [])[1] || ''), (seg.match(/fn_totalSearchResultView\([^)]*?'([A-Z]{1,4}\d[\w-]*_\d\d)'/) || [])[1] || '']).filter(([c, k]) => c && k).reverse()); // reverse → 같은 청구기호면 앞 행(원본 GK…)이 이김 — 뒤의 마이크로필름 사본(TM…)이 덮어쓰던 것
+      // v2.37 개편 마크업 data-book_cd="GK…" · 옛 onclick fn_totalSearchResultView(…'GK…') 둘 다
+      out[label + '코드'] = Object.fromEntries(b.split(/class="schli[ "]/).slice(1).map((seg) => [norm((seg.replace(/<[^>]+>/g, '').match(/청구기호\s*:\s*([^\n\t]{2,30})/) || [])[1] || ''), (seg.match(/data-book_cd="([A-Z]{1,4}\d[\w-]*_\d\d)"/) || seg.match(/fn_totalSearchResultView\([^)]*?'([A-Z]{1,4}\d[\w-]*_\d\d)'/) || [])[1] || '']).filter(([c, k]) => c && k).reverse()); // reverse → 같은 청구기호면 앞 행(원본 GK…)이 이김 — 뒤의 마이크로필름 사본(TM…)이 덮어쓰던 것
     } catch (e) { out[label] = { error: e.message }; }
   }));
   // 정상 형태(양쪽 배열)이고 결과가 있을 때만 캐시 — 차단·오류 응답 오염 방지
@@ -3054,9 +3097,9 @@ item_cd 5종(자료 성격별): ART 도설·회화 / ETC 두루마리·축 / DRR
     { query: z.string(), sources: z.string().default('all'), max_per_source: z.number().int().min(1).max(30).default(8), variants: z.boolean().default(false).describe('당대 표기 변형(Corea·Chosen·Keijo·Fusan 등) 자동 병렬 투입 — 해외 4채널(tna·ia·nara·europeana)'), format: z.enum(['text', 'csv', 'karda', 'manifest', 'iiif']).default('text').describe('iiif=IIIF 컬렉션(기관 IIIF 원 매니페스트 묶음+정지 이미지 매니페스트 — 연속 이미지 뷰) · csv=CSV 블록(표·통계) · karda=온톨로지 nodes/edges JSON(지식그래프 직투입) · manifest=발굴 수집기록 매니페스트(ISAD(G)·RiC 지향 — provenance=증거성·heldBy=맥락, 기록관리시스템 등재·다매체 변환 원천)') },
     async ({ query, sources, max_per_source, variants, format }) => {
       const want = sources.trim().toLowerCase() === 'all'
-        ? Object.keys(COLLECT).filter((k) => k !== 'ledger')
-        : sources.split(',').map((s) => s.trim().toLowerCase()).filter((s) => COLLECT[s]);
-      if (!want.length) return text('sources: "all" 또는 ' + Object.keys(COLLECT).join(','));
+        ? Object.keys(COLLECT).filter((k) => k !== 'ledger' && !k.startsWith('_'))
+        : sources.split(',').map((s) => s.trim().toLowerCase()).filter((s) => COLLECT[s] && !s.startsWith('_'));
+      if (!want.length) return text('sources: "all" 또는 ' + Object.keys(COLLECT).filter((k) => !k.startsWith('_')).join(','));
       const jobs = want.map((s) => ({ source: s, fn: () => COLLECT[s](query, max_per_source) }));
       if (variants) { // 당대 표기 자동 팬아웃 — query_bank '열한 겹의 벽' 지식의 도구화
         const eff = koToEn(query) || query;
@@ -3250,7 +3293,7 @@ item_cd 5종(자료 성격별): ART 도설·회화 / ETC 두루마리·축 / DRR
               return `${d <= maxDays ? '🟢' : '🔴'} ${label}: ${String(j[field]).slice(0, 16)} (${d.toFixed(1)}일 전, 기준 ${maxDays}일)${j.warnings ? ' ⚠ 품질 경고 ' + j.warnings.length : ''}`; } catch (e) { return `🔴 ${label}: 확인 실패(${String(e.message || e).slice(0, 30)})`; } };
             const L = await Promise.all([chk('연구원 연구DB 색인(nrich-harvest, 주 1회)', PB + 'nrich_db_meta.json', 'harvested', 9), chk('발견 누적 원장(ledger, 매일)', PB + 'stats.json', 'updated', 2.5)]);
             return '\n\n자동 파이프라인 신선도:\n' + L.join('\n')
-              + '\n\n접근 제한(정직 UA 거부 — 우회하지 않음, v2.36):\n' + Object.entries(UA_REFUSED).map(([k, r]) => `⛔ ${k} ${r.name}: ${r.how} (실측 ${r.since}) · 브라우저 ${r.browse}`).join('\n'); })()
+              + '\n\n접근 제한(정직 UA 거부 — 우회하지 않음):\n' + (Object.entries(UA_REFUSED).map(([k, r]) => `⛔ ${k} ${r.name}: ${r.how} (실측 ${r.since}) · 브라우저 ${r.browse}`).join('\n') || '없음 — 전 기관 정직 UA로 수집 중'); })()
           + '\n※ 🟡=연결 정상이나 0건(질의 특성 또는 파서 점검 필요) · 🔴=채널 실패(차단·타임아웃) · ms=채널 응답시간. nedb ✗=개방파일 인덱스 미설정.');
       }
       if (t !== 'list' && !PROFILES[t] && QUICK_PROFILES[t]) { const [nm, sr, dt, rt] = QUICK_PROFILES[t]; return text(`[${t}] ${nm} — 간이 프로파일\n· 검색: ${sr}\n· 상세 판독: ${dt}\n· 권리: ${rt}\n※ 상세 프로파일(자료·이용·활용구조) 미작성 기관 — 위 경로로 발굴하고 judge_rights로 초판정.`); }

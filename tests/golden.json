@@ -58,14 +58,16 @@
     "query": "대한뉴스 서울"
    },
    "must": [
-    "(?:\\[문화영화\\] \\S+ \\S+)|접근 제한\\(정직 UA 거부\\)",
-    "(?:요지: )|접근 제한\\(정직 UA 거부\\)"
+    "- \\[대한뉴스\\] \\S+",
+    "ehistory\\.go\\.kr/view/movie"
    ],
    "must_not": [
-    "\\] \\[\\d+호\\]\\n"
+    "\\[대한뉴스\\] \\[대한뉴스\\]",
+    "\\] \\[\\d+호\\]\\n",
+    "접근 제한"
    ],
    "level": "error",
-   "note": "v2.36 정직 UA 거부 기관 — 기관이 허용하면 원래 패턴, 거부 중이면 명시 표시가 나와야 통과(조용한 0건은 실패)"
+   "note": "v2.37 e영상역사관 자체 목록 검색(ehistory.go.kr) — '대한뉴스 서울'은 대한뉴스 분류에서 '서울'로"
   },
   {
    "id": "ktv-detail",
@@ -1014,6 +1016,40 @@
    },
    "must": [
     "원문 고정 링크\\(UCI\\): https://archive\\.aks\\.ac\\.kr/link\\.do\\?dataUCI=G002\\+AKS\\+"
+   ],
+   "level": "error"
+  },
+  {
+   "id": "ktv-ehistory-search",
+   "tool": "cross_search",
+   "args": {
+    "query": "판문점",
+    "sources": "ktv",
+    "max_per_source": 5,
+    "format": "csv"
+   },
+   "must": [
+    "판문점",
+    "https://www\\.ehistory\\.go\\.kr/view/(movie|photo)\\?"
+   ],
+   "must_not": [
+    "⛔정직UA거부"
+   ],
+   "level": "error"
+  },
+  {
+   "id": "kyudb-get-search",
+   "tool": "nedb_search",
+   "args": {
+    "mode": "kyujanggak",
+    "query": "절목"
+   },
+   "must": [
+    "- \\[(奎|古)[^\\]]+\\] \\S+"
+   ],
+   "must_not": [
+    "CSRF",
+    "HTTP 403"
    ],
    "level": "error"
   }
