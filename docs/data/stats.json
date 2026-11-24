@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-24T00:48:17Z",
+ "updated": "2026-11-24T01:20:22Z",
  "records": 376,
  "new_records": 0,
  "new_batches": 0,
@@ -55,6 +55,12 @@
   }
  },
  "repeat_records": 125,
+ "entry_types": {
+  "기록": 362,
+  "검색 안내": 7,
+  "결함 출력": 7
+ },
+ "site_root_links": 18,
  "top10": [
   {
    "rank": 1,
@@ -113,18 +119,18 @@
    "url": "https://catalog.archives.gov/id/22397"
   },
   {
-   "rank": 9,
-   "seen": 7,
+   "rank": 11,
+   "seen": 6,
    "days": 1,
-   "title": "헌정사 자료 DB — '안중근' 수록",
-   "url": "https://db.history.go.kr/item/cons/main.do"
+   "title": "[국외문화유산] 감지금자『대방광불화엄경』제78권 — 미국 클리블랜드미술관",
+   "url": "https://www.overseaschf.or.kr/archive/search/category.do?mode=view&srSearchTy=relic&id=46493&iDivCd=1"
   },
   {
-   "rank": 10,
-   "seen": 7,
+   "rank": 12,
+   "seen": 6,
    "days": 1,
-   "title": "포로신문보고서 — '안중근' 수록",
-   "url": "https://db.history.go.kr/item/powr/main.do"
+   "title": "Korea: provision of occupation forces in Korea in the event of an armistice",
+   "url": "https://discovery.nationalarchives.gov.uk/details/r/C4711969"
   }
  ]
 }

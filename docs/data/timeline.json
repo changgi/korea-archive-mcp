@@ -1,5 +1,5 @@
 {
-"updated": "2026-11-24T00:48:17Z",
+"updated": "2026-11-24T01:20:22Z",
 "note": "구간 = 연대(4자리 연도·8자리 날짜·연호 연도 明治·大正·昭和·光武·隆熙·檀紀 환산) → 세기 → 왕조·시대명. 근거 순서 date → 제목 → 메타(생산·시대·출판). 세기·시대 구간은 시간축 근사 정렬",
 "timeline": [
 {
@@ -933,9 +933,9 @@
 },
 {
 "decade": "2010년대",
-"records": 28,
+"records": 25,
 "by_source": {
-"ia": 5,
+"ia": 2,
 "un": 5,
 "gonghun": 1,
 "archives": 2,
@@ -948,7 +948,7 @@
 "ndl": 1
 },
 "by_kind": {
-"document": 17,
+"document": 14,
 "graphic": 11
 },
 "samples": [
@@ -981,9 +981,9 @@
 },
 {
 "decade": "2020년대",
-"records": 17,
+"records": 15,
 "by_source": {
-"ia": 4,
+"ia": 2,
 "commons": 4,
 "dnz": 2,
 "un": 1,
@@ -992,7 +992,7 @@
 "ndl": 1
 },
 "by_kind": {
-"document": 8,
+"document": 6,
 "graphic": 9
 },
 "samples": [
@@ -1025,18 +1025,18 @@
 },
 {
 "decade": "연대 미상",
-"records": 70,
+"records": 61,
 "by_source": {
 "nara": 10,
-"nedb": 5,
-"i815": 8,
 "earchive": 7,
-"seoul": 13,
+"seoul": 12,
 "europeana": 3,
+"i815": 2,
 "jacar": 1,
 "un": 2,
 "okchf": 2,
 "nrich": 5,
+"nedb": 3,
 "jsg": 5,
 "kyudb": 1,
 "aks": 5,
@@ -1044,9 +1044,9 @@
 "ia": 2
 },
 "by_kind": {
-"document": 51,
+"document": 43,
 "graphic": 15,
-"motion_picture": 4
+"motion_picture": 3
 },
 "samples": [
 {
@@ -1070,9 +1070,9 @@
 "iiif": "https://korea-archive-mcp.vercel.app/iiif/nara/22397/manifest.json"
 },
 {
-"title": "헌정사 자료 DB — '안중근' 수록",
-"url": "https://db.history.go.kr/item/cons/main.do",
-"iiif": "https://korea-archive-mcp.vercel.app/iiif/rec/q1YqVrKKVspLTUlSitVRKlGyUno7vefNgqlvmtYovJk34fXiHgUXJ4VHDVMU1N9M7XizZOKr7XvUFd50zHi9cK6SjlIKUAOQygRSyfl5xUBmKZCZUVJSUGylr5-SpJeRWVySX1Spl56vl12kn1mSmqsPUqifm5iZp5eSD9RQALJz6pxXW9cC7QTbtUsBixuAKvOAKsEu1VHKhdhbCKReb5jzatMahdcdLW8WNCq8mT3hzbylQKlEkF-MDIzMdA0NdY2MQwyMrQwMrQzNlWoB/manifest.json"
+"title": "Korean Refugees Are Passed into Service as Laborers to Move Ammo to Waiting Ships during the Evacuation of Hun",
+"url": "https://archive.history.go.kr",
+"iiif": "https://korea-archive-mcp.vercel.app/iiif/rec/PVA9SwNBEP0rw9b52FzMgdelEAQVxPhRiIQ12dwtktu4u3cgIkRIkVK7gFG0MDYJhqBwCP4Zy9v9Ec6pOM2bN-89ZphLoklwTDhTnUiknJyUiCEB2ZKKsxj2eC8JOdfQVBx2mda8CyI2ElpcpaLDgWnYZqdoVhpwvCNTDs1-XxbkiAkj4hBakRho6CaqICbisJGyTsKMkDHIHmwmMSmRLi5FEAjNgxaljTb129Q7pFhtf91HLUEtMmagg2r179xKJLSR6qISysqZQs8APW48cS-3bjWBr-EH2Ncsf1_8tIh29mnnmRtN82xpn-7zt6Gdzd1qgdEYo_9vKJH-70HnCHY5zVdzsOORe7wGd3fjHp5RYsWjPOr55Vqt7NX3aT2oNYI1j1x9Aw/manifest.json"
 }
 ]
 }
