@@ -32,7 +32,8 @@
 "ia:youtube-J9Ljj6N_y8Q",
 "ia:youtube-asdl9Czb698",
 "ia:111-adc-7115",
-"ia:24114-kobe-japan-world-war-2-mos-vwr"
+"ia:24114-kobe-japan-world-war-2-mos-vwr",
+"ia:111-adc-8372"
 ],
 "sources": [
 "ia"
@@ -63,13 +64,14 @@
 "ia:cia-readingroom-document-cia-rdp79r01012a018200010001-0",
 "ia:child-of-conflict",
 "ia:cia-readingroom-document-03194444",
-"ia:cia-readingroom-document-cia-rdp80t00246a018200250001-2"
+"ia:cia-readingroom-document-cia-rdp80t00246a018200250001-2",
+"ia:BattleOfTheBarricades"
 ],
 "sources": [
 "ia"
 ],
 "first": "2026-11-23T03:00:40Z",
-"last": "2026-11-24T23:10:19Z",
+"last": "2026-11-24T23:44:08Z",
 "keys": [
 "mediatype"
 ]
@@ -123,7 +125,8 @@
 "ia:111-adc-8389",
 "ia:111-adc-8582",
 "ia:111-lc-30456",
-"ia:111-adc-7115"
+"ia:111-adc-7115",
+"ia:111-adc-8372"
 ],
 "sources": [
 "ia"
@@ -2525,13 +2528,15 @@
 "Korea: Seoul": {
 "records": [
 "awm:ART40393",
-"awm:HOBJ2794"
+"awm:HOBJ2794",
+"awm:HOBJ2135",
+"awm:HOBJ2144"
 ],
 "sources": [
 "awm"
 ],
 "first": "2026-11-24T22:47:17Z",
-"last": "2026-11-24T22:56:57Z",
+"last": "2026-11-24T23:44:08Z",
 "keys": [
 "장소"
 ]
@@ -4988,13 +4993,16 @@
 "nara:NAID 22656",
 "nara:NAID 22684",
 "nara:NAID 519786886",
-"nara:NAID 519786908"
+"nara:NAID 519786908",
+"nara:NAID 117578528",
+"nara:NAID 22137",
+"nara:NAID 321495973"
 ],
 "sources": [
 "nara"
 ],
 "first": "2026-11-23T03:00:15Z",
-"last": "2026-11-24T23:15:56Z",
+"last": "2026-11-24T23:44:08Z",
 "keys": [
 "기술 수준"
 ]
@@ -5031,13 +5039,21 @@
 "nara:NAID 644035378",
 "nara:NAID 644119250",
 "nara:NAID 16845104",
-"nara:NAID 42219631"
+"nara:NAID 42219631",
+"nara:NAID 20289847",
+"nara:NAID 248334492",
+"nara:NAID 323151016",
+"nara:NAID 323154694",
+"nara:NAID 608019489",
+"nara:NAID 639185665",
+"nara:NAID 644107738",
+"nara:NAID 75442202"
 ],
 "sources": [
 "nara"
 ],
 "first": "2026-11-23T03:00:15Z",
-"last": "2026-11-24T23:15:55Z",
+"last": "2026-11-24T23:44:08Z",
 "keys": [
 "기술 수준"
 ]
@@ -5496,13 +5512,15 @@
 "awm:JK0113",
 "awm:LEEJ0285",
 "awm:P01813.443",
-"awm:P01813.445"
+"awm:P01813.445",
+"awm:HOBJ2135",
+"awm:HOBJ2144"
 ],
 "sources": [
 "awm"
 ],
 "first": "2026-11-23T03:01:00Z",
-"last": "2026-11-24T23:15:56Z",
+"last": "2026-11-24T23:44:08Z",
 "keys": [
 "자료 유형"
 ]
@@ -5540,13 +5558,15 @@
 "awm:HOBJ3125",
 "awm:JK0465",
 "awm:JK0780",
-"awm:JK0113"
+"awm:JK0113",
+"awm:HOBJ2135",
+"awm:HOBJ2144"
 ],
 "sources": [
 "awm"
 ],
 "first": "2026-11-23T03:01:00Z",
-"last": "2026-11-24T23:15:56Z",
+"last": "2026-11-24T23:44:08Z",
 "keys": [
 "매체 형태"
 ]
@@ -6183,7 +6203,7 @@
 }
 }
 },
-"updated": "2026-11-24T23:18:01Z",
+"updated": "2026-11-24T23:46:54Z",
 "totals": {
 "매체": 4,
 "주제": 128,
