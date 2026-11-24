@@ -20,7 +20,7 @@
    "@type": "dcat:Dataset",
    "dct:title": "KOREA ARCHIVE 통합검색 — 발견 누적 원장",
    "dct:description": "사용자들이 KOREA ARCHIVE 통합검색 도구로 국내외 아카이브에서 발굴한 한국 관련 기록 464건의 재기술·계층·IIIF·권리 표시·발견 경로·질의 축적. 원 기관 표기 그대로, 파생 정보는 [파생] 표시, 축적 정보는 지우지 않는다.",
-   "dct:modified": "2026-11-24T16:02:32Z",
+   "dct:modified": "2026-11-24T16:06:16Z",
    "dct:publisher": {
     "@type": "foaf:Agent",
     "foaf:name": "KOREA ARCHIVE 통합검색"
@@ -176,7 +176,7 @@
      "spdx:checksum": {
       "@type": "spdx:Checksum",
       "spdx:algorithm": "spdx:checksumAlgorithm_sha256",
-      "spdx:checksumValue": "51cab5cc4596fa44287727d7bab136fdb8b00c0089d431c4898a8b96d0b4afbe"
+      "spdx:checksumValue": "8a402c1929f4f263347c7fcc5796b079e053f1a39f56e7988300f93ace1b1c78"
      }
     },
     {
@@ -232,7 +232,7 @@
      "spdx:checksum": {
       "@type": "spdx:Checksum",
       "spdx:algorithm": "spdx:checksumAlgorithm_sha256",
-      "spdx:checksumValue": "1b4452c702ea158fd6f95636bbaf63109a9a9fcfe5522dac6ee6c1abda18fe70"
+      "spdx:checksumValue": "76751b5770e669f28e8999977d7b1355288702fe39519b091947003a717aad2a"
      }
     },
     {
@@ -246,7 +246,7 @@
      "spdx:checksum": {
       "@type": "spdx:Checksum",
       "spdx:algorithm": "spdx:checksumAlgorithm_sha256",
-      "spdx:checksumValue": "6c00bc6b6075df5e153808d2ce85b0740302f750ce3dfa1740e24e27fa2fbd50"
+      "spdx:checksumValue": "d9d32bf7f3d457d0610bae48cea24a0f505e7c335160923c0f0e6fe537072623"
      }
     },
     {
@@ -274,7 +274,7 @@
      "spdx:checksum": {
       "@type": "spdx:Checksum",
       "spdx:algorithm": "spdx:checksumAlgorithm_sha256",
-      "spdx:checksumValue": "82565f027691ac90c350dc3906ecf2f62d11191a71bc39c5f5e4c3cc1d8b4d44"
+      "spdx:checksumValue": "63c0192f2f5ce3a9e055dc2f00a1c47041b368e734b72cec138a4e4967ccef4d"
      }
     },
     {
@@ -288,7 +288,7 @@
      "spdx:checksum": {
       "@type": "spdx:Checksum",
       "spdx:algorithm": "spdx:checksumAlgorithm_sha256",
-      "spdx:checksumValue": "a9fa0c91ce203997f6ce8911b96521a124db34f67ca27366e7e87cd838ab5c13"
+      "spdx:checksumValue": "ea7cea8dfbbbf5baa69c9659c1e8685ffaadd1d6a0da452905d065495befdb44"
      }
     },
     {
@@ -316,7 +316,21 @@
      "spdx:checksum": {
       "@type": "spdx:Checksum",
       "spdx:algorithm": "spdx:checksumAlgorithm_sha256",
-      "spdx:checksumValue": "6229c476b71cde4ffe927e3266da2c8b3ad1f411ea2b868b489c2277fc13cf6d"
+      "spdx:checksumValue": "79ac3999f67c09375d0b2306070c5535b9df3ae210a99ad59c177bdf8e90680f"
+     }
+    },
+    {
+     "@type": "dcat:Distribution",
+     "dct:title": "불삭제 검사 — 되살린 값 기록",
+     "dcat:downloadURL": {
+      "@id": "https://changgi.github.io/korea-archive-mcp/data/loss_guard.json"
+     },
+     "dcat:mediaType": "application/json",
+     "dcat:byteSize": 184,
+     "spdx:checksum": {
+      "@type": "spdx:Checksum",
+      "spdx:algorithm": "spdx:checksumAlgorithm_sha256",
+      "spdx:checksumValue": "38d072cc20ca550e3b0bf3f5a90c78139f8afe89a59cdaa8ce1832e70e3ee724"
      }
     },
     {
@@ -330,7 +344,7 @@
      "spdx:checksum": {
       "@type": "spdx:Checksum",
       "spdx:algorithm": "spdx:checksumAlgorithm_sha256",
-      "spdx:checksumValue": "cd95feb45aedc4eb02dffa4c229c6fdc92ecef93993aac10373dd2440ab0dd43"
+      "spdx:checksumValue": "223972725f2dd13426c1c7ca4190a5c105a3442614cce6043f36236876023e06"
      }
     },
     {
@@ -340,11 +354,11 @@
       "@id": "https://changgi.github.io/korea-archive-mcp/data/queries/probe/index.json"
      },
      "dcat:mediaType": "application/json",
-     "dcat:byteSize": 151028,
+     "dcat:byteSize": 151684,
      "spdx:checksum": {
       "@type": "spdx:Checksum",
       "spdx:algorithm": "spdx:checksumAlgorithm_sha256",
-      "spdx:checksumValue": "189e15df733d4ff5d0bee2a72350f91aeb20ad0e6fe4608eb0b2d44ad15438c5"
+      "spdx:checksumValue": "2037ac0f511bd3dfadc7382d23ef6a3d2f2a996654569893091722fbafe0ee9a"
      }
     },
     {
@@ -354,11 +368,11 @@
       "@id": "https://changgi.github.io/korea-archive-mcp/data/records/index.json"
      },
      "dcat:mediaType": "application/json",
-     "dcat:byteSize": 5425,
+     "dcat:byteSize": 5551,
      "spdx:checksum": {
       "@type": "spdx:Checksum",
       "spdx:algorithm": "spdx:checksumAlgorithm_sha256",
-      "spdx:checksumValue": "aba9f8237fe3406ac8a0902669c167bc51f9e06f93d944c1b8e041d35db9e41d"
+      "spdx:checksumValue": "b6d55b1b43c9c6a99aa2835b66620053704d4e01ff0663dfc44f708f8c74845d"
      }
     }
    ],
