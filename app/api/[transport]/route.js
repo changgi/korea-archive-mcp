@@ -160,7 +160,7 @@ const TOPICS = [
   { p: '만민\\s?공동회', en: 'Independence Club mass meeting Seoul 1898' },
   { p: '경술\\s?국치|한일\\s?병합|한일\\s?합병|韓國倂合|韓国併合', en: 'Japan annexation of Korea 1910', fr: 'annexion de la Corée 1910' },
   { p: '토지\\s?조사\\s?사업', en: 'land survey Chosen 1910s' },
-  { p: '제주\\s?4[·.]3|4[·.]3\\s?사건', en: 'Cheju uprising 1948' }, // v2.96 일반 '제주'보다 먼저(옛 순서 결함: '제주 4·3'→'Cheju Quelpart 4·3')
+  { p: '제주\\s?4[·.]3|4[·.]3\\s?사건', en: 'Cheju-do 1948' }, // v2.96 일반 '제주'보다 먼저(옛 순서 결함: '제주 4·3'→'Cheju Quelpart 4·3')
   { p: '동양\\s?척식(?:\\s?주식\\s?회사)?|東洋拓殖', en: 'Oriental Development Company Korea' },
   { p: '산미\\s?증식', en: 'rice production Chosen Japan' },
   { p: '신사\\s?참배|神社参拝', en: 'Shinto shrine worship Korea' },
@@ -169,7 +169,7 @@ const TOPICS = [
   { p: '학병|학도병', en: 'Korean student soldiers Japanese army' },
   { p: '지원병|징병|徵兵', en: 'Korean conscription Japanese army' },
   { p: '근로\\s?정신대|여자\\s?정신대', en: 'women volunteer labor corps Korea' },
-  { p: '관동\\s?대지진|간토\\s?대지진|간토\\s?학살|関東大震災', en: 'Kanto earthquake 1923 Koreans massacre' },
+  { p: '관동\\s?대지진|간토\\s?대지진|간토\\s?학살|関東大震災', en: 'earthquake Tokyo 1923 Koreans' },
   { p: '6[·.]10\\s?만세', en: 'June 10 movement 1926 Korea' },
   { p: '광주\\s?학생\\s?운동', en: 'Kwangju student movement 1929' },
   { p: '신간회', en: 'Singanhoe Korea' },
@@ -319,7 +319,7 @@ const TOPICS = [
   { p: '을사\\s?조약|을사\\s?늑약|乙巳條約', en: 'Japan Korea protectorate treaty 1905' },
   { p: '아관\\s?파천|俄館播遷', en: 'Kojong Russian legation 1896' },
   { p: '헤이그\\s?특사|해아\\s?밀사', en: 'Hague secret emissaries Korea 1907', fr: 'La Haye Corée 1907' },
-  { p: '제주\\s?4[·.]3|4[·.]3\\s?사건', en: 'Cheju uprising 1948' },
+  { p: '제주\\s?4[·.]3|4[·.]3\\s?사건', en: 'Cheju-do 1948' },
   { p: '여순\\s?사건|여수.순천\\s?사건', en: 'Yosu rebellion 1948' },
   { p: '신탁\\s?통치', en: 'Korea trusteeship', fr: 'tutelle Corée' },
   { p: '미군정|미\\s?군정', en: 'USAMGIK military government Korea' },
