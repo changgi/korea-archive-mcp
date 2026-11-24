@@ -1,0 +1,1459 @@
+{
+"facets": {
+"매체": {
+"movies": {
+"records": [
+"ia:111-adc-8463",
+"ia:e_history_StreamRoot_DH_0463_19640411_01",
+"ia:111-adc-8634",
+"ia:QF4OCzIor4S5rHJoO2i4eNOiB5MkE2",
+"ia:CSPAN3_20200804_000000_Oral_Histories_Korean_War_Veteran_Carl_House",
+"ia:USRalliesUNAlliesForSanctionsAgainstNorthKorea",
+"ia:logy-does-editor-video-lol-goes-to-north-korea",
+"ia:111-adc-8610"
+],
+"sources": [
+"ia"
+],
+"first": "2026-11-23T03:00:40Z",
+"last": "2026-11-23T13:50:11Z",
+"keys": [
+"mediatype"
+]
+},
+"texts": {
+"records": [
+"ia:cia-readingroom-document-cia-rdp79-00927a004500030001-1",
+"ia:cia-readingroom-document-cia-rdp82-00457r007500490005-8"
+],
+"sources": [
+"ia"
+],
+"first": "2026-11-23T03:00:40Z",
+"last": "2026-11-23T13:50:11Z",
+"keys": [
+"mediatype"
+]
+},
+"audio": {
+"records": [
+"ia:VOA_Africa_20180731_190000"
+],
+"sources": [
+"ia"
+],
+"first": "2026-11-23T03:14:21Z",
+"last": "2026-11-23T03:20:49Z",
+"keys": [
+"mediatype"
+]
+}
+},
+"주제": {
+"National Archives": {
+"records": [
+"ia:111-adc-8463",
+"ia:111-adc-8634",
+"ia:111-adc-8610"
+],
+"sources": [
+"ia"
+],
+"first": "2026-11-23T03:00:40Z",
+"last": "2026-11-23T13:50:11Z",
+"keys": [
+"subject"
+]
+},
+"CIA Reading Room": {
+"records": [
+"ia:cia-readingroom-document-cia-rdp79-00927a004500030001-1",
+"ia:cia-readingroom-document-cia-rdp82-00457r007500490005-8"
+],
+"sources": [
+"ia"
+],
+"first": "2026-11-23T03:00:40Z",
+"last": "2026-11-23T13:50:11Z",
+"keys": [
+"subject"
+]
+},
+"South Korea": {
+"records": [
+"ia:e_history_StreamRoot_DH_0463_19640411_01"
+],
+"sources": [
+"ia"
+],
+"first": "2026-11-23T03:00:40Z",
+"last": "2026-11-23T03:00:40Z",
+"keys": [
+"subject"
+]
+},
+"News": {
+"records": [
+"ia:e_history_StreamRoot_DH_0463_19640411_01"
+],
+"sources": [
+"ia"
+],
+"first": "2026-11-23T03:00:40Z",
+"last": "2026-11-23T03:00:40Z",
+"keys": [
+"subject"
+]
+},
+"StreamRoot_DH": {
+"records": [
+"ia:e_history_StreamRoot_DH_0463_19640411_01"
+],
+"sources": [
+"ia"
+],
+"first": "2026-11-23T03:00:40Z",
+"last": "2026-11-23T03:00:40Z",
+"keys": [
+"subject"
+]
+},
+"DH": {
+"records": [
+"ia:e_history_StreamRoot_DH_0463_19640411_01"
+],
+"sources": [
+"ia"
+],
+"first": "2026-11-23T03:00:40Z",
+"last": "2026-11-23T03:00:40Z",
+"keys": [
+"subject"
+]
+},
+"ARMISTICES": {
+"records": [
+"un:A/HRC/28/NGO/9",
+"un:S/2013/162"
+],
+"sources": [
+"un"
+],
+"first": "2026-11-23T03:00:46Z",
+"last": "2026-11-23T13:40:52Z",
+"keys": [
+"주제"
+]
+},
+"INTERNATIONAL SECURITY": {
+"records": [
+"un:S/2015/799"
+],
+"sources": [
+"un"
+],
+"first": "2026-11-23T03:00:46Z",
+"last": "2026-11-23T13:40:52Z",
+"keys": [
+"주제"
+]
+},
+"Busan Port": {
+"records": [
+"ia:QF4OCzIor4S5rHJoO2i4eNOiB5MkE2"
+],
+"sources": [
+"ia"
+],
+"first": "2026-11-23T03:01:45Z",
+"last": "2026-11-23T03:15:42Z",
+"keys": [
+"subject"
+]
+},
+"金正得": {
+"records": [
+"oldnews:CNTS-00132257465"
+],
+"sources": [
+"oldnews"
+],
+"first": "2026-11-23T03:01:45Z",
+"last": "2026-11-23T03:01:45Z",
+"keys": [
+"색인어(기사 내용 재구성)"
+]
+},
+"톰스톤": {
+"records": [
+"oldnews:CNTS-00133841567"
+],
+"sources": [
+"oldnews"
+],
+"first": "2026-11-23T03:01:45Z",
+"last": "2026-11-23T03:01:45Z",
+"keys": [
+"색인어(기사 내용 재구성)"
+]
+},
+"맥아-더": {
+"records": [
+"oldnews:CNTS-00133841567"
+],
+"sources": [
+"oldnews"
+],
+"first": "2026-11-23T03:01:45Z",
+"last": "2026-11-23T03:01:45Z",
+"keys": [
+"색인어(기사 내용 재구성)"
+]
+},
+"막스": {
+"records": [
+"oldnews:CNTS-00133841567"
+],
+"sources": [
+"oldnews"
+],
+"first": "2026-11-23T03:01:45Z",
+"last": "2026-11-23T03:01:45Z",
+"keys": [
+"색인어(기사 내용 재구성)"
+]
+},
+"데스포-": {
+"records": [
+"oldnews:CNTS-00133841567"
+],
+"sources": [
+"oldnews"
+],
+"first": "2026-11-23T03:01:45Z",
+"last": "2026-11-23T03:01:45Z",
+"keys": [
+"색인어(기사 내용 재구성)"
+]
+},
+"興南": {
+"records": [
+"oldnews:CNTS-00133841567"
+],
+"sources": [
+"oldnews"
+],
+"first": "2026-11-23T03:01:45Z",
+"last": "2026-11-23T03:01:45Z",
+"keys": [
+"색인어(기사 내용 재구성)"
+]
+},
+"中共軍": {
+"records": [
+"oldnews:CNTS-00133841567"
+],
+"sources": [
+"oldnews"
+],
+"first": "2026-11-23T03:01:45Z",
+"last": "2026-11-23T03:01:45Z",
+"keys": [
+"색인어(기사 내용 재구성)"
+]
+},
+"흥남[興南]": {
+"records": [
+"oldnews:CNTS-00133841567"
+],
+"sources": [
+"oldnews"
+],
+"first": "2026-11-23T03:01:45Z",
+"last": "2026-11-23T03:01:45Z",
+"keys": [
+"주제"
+]
+},
+"이승만": {
+"records": [
+"oldnews:CNTS-00134989837"
+],
+"sources": [
+"oldnews"
+],
+"first": "2026-11-23T03:01:45Z",
+"last": "2026-11-23T03:01:45Z",
+"keys": [
+"색인어(기사 내용 재구성)"
+]
+},
+"미국": {
+"records": [
+"oldnews:CNTS-00134989837"
+],
+"sources": [
+"oldnews"
+],
+"first": "2026-11-23T03:01:45Z",
+"last": "2026-11-23T03:01:45Z",
+"keys": [
+"색인어(기사 내용 재구성)"
+]
+},
+"한국": {
+"records": [
+"oldnews:CNTS-00134989837"
+],
+"sources": [
+"oldnews"
+],
+"first": "2026-11-23T03:01:45Z",
+"last": "2026-11-23T03:01:45Z",
+"keys": [
+"색인어(기사 내용 재구성)"
+]
+},
+"미국(국명)[美國]": {
+"records": [
+"oldnews:CNTS-00134989837"
+],
+"sources": [
+"oldnews"
+],
+"first": "2026-11-23T03:01:45Z",
+"last": "2026-11-23T03:01:45Z",
+"keys": [
+"주제"
+]
+},
+"한국전쟁": {
+"records": [
+"earchive:AUS001_41_00V0000_008",
+"earchive:AUS001_41_00V0000_009"
+],
+"sources": [
+"earchive"
+],
+"first": "2026-11-23T13:40:46Z",
+"last": "2026-11-23T13:40:46Z",
+"keys": [
+"주제어"
+]
+},
+"제주도": {
+"records": [
+"earchive:AUS001_41_00V0000_008",
+"earchive:AUS001_41_00V0000_009"
+],
+"sources": [
+"earchive"
+],
+"first": "2026-11-23T13:40:46Z",
+"last": "2026-11-23T13:40:46Z",
+"keys": [
+"주제어"
+]
+},
+"미국공보원": {
+"records": [
+"earchive:AUS001_41_00V0000_008",
+"earchive:AUS001_41_00V0000_009"
+],
+"sources": [
+"earchive"
+],
+"first": "2026-11-23T13:40:46Z",
+"last": "2026-11-23T13:40:46Z",
+"keys": [
+"주제어"
+]
+},
+"훈시[訓示]": {
+"records": [
+"oldnews:CNTS-00048428711"
+],
+"sources": [
+"oldnews"
+],
+"first": "2026-11-23T13:40:48Z",
+"last": "2026-11-23T13:40:48Z",
+"keys": [
+"주제"
+]
+},
+"소식(안부)[消息]": {
+"records": [
+"oldnews:CNTS-00067966295"
+],
+"sources": [
+"oldnews"
+],
+"first": "2026-11-23T13:40:48Z",
+"last": "2026-11-23T13:40:48Z",
+"keys": [
+"주제"
+]
+},
+"전북 고부": {
+"records": [
+"oldnews:CNTS-00115099325"
+],
+"sources": [
+"oldnews"
+],
+"first": "2026-11-23T13:40:48Z",
+"last": "2026-11-23T13:40:48Z",
+"keys": [
+"색인어(기사 내용 재구성)"
+]
+},
+"전북 태인": {
+"records": [
+"oldnews:CNTS-00115099325"
+],
+"sources": [
+"oldnews"
+],
+"first": "2026-11-23T13:40:48Z",
+"last": "2026-11-23T13:40:48Z",
+"keys": [
+"색인어(기사 내용 재구성)"
+]
+},
+"일진회": {
+"records": [
+"oldnews:CNTS-00115099325"
+],
+"sources": [
+"oldnews"
+],
+"first": "2026-11-23T13:40:48Z",
+"last": "2026-11-23T13:40:48Z",
+"keys": [
+"색인어(기사 내용 재구성)"
+]
+},
+"의병": {
+"records": [
+"oldnews:CNTS-00115099325",
+"oldnews:CNTS-00115099511"
+],
+"sources": [
+"oldnews"
+],
+"first": "2026-11-23T13:40:48Z",
+"last": "2026-11-23T13:40:48Z",
+"keys": [
+"색인어(기사 내용 재구성)"
+]
+},
+"경상도": {
+"records": [
+"oldnews:CNTS-00115099511"
+],
+"sources": [
+"oldnews"
+],
+"first": "2026-11-23T13:40:48Z",
+"last": "2026-11-23T13:40:48Z",
+"keys": [
+"색인어(기사 내용 재구성)"
+]
+},
+"도로": {
+"records": [
+"seoul:2399",
+"seoul:7603"
+],
+"sources": [
+"seoul"
+],
+"first": "2026-11-23T13:40:52Z",
+"last": "2026-11-23T13:40:52Z",
+"keys": [
+"연관정보"
+]
+},
+"ARMED INCIDENTS": {
+"records": [
+"un:S/2010/358"
+],
+"sources": [
+"un"
+],
+"first": "2026-11-23T13:40:52Z",
+"last": "2026-11-23T13:40:52Z",
+"keys": [
+"주제"
+]
+},
+"REGIONAL SECURITY": {
+"records": [
+"un:S/PRST/2010/13"
+],
+"sources": [
+"un"
+],
+"first": "2026-11-23T13:40:52Z",
+"last": "2026-11-23T13:40:52Z",
+"keys": [
+"주제"
+]
+},
+"Roosevelt": {
+"records": [
+"ia:logy-does-editor-video-lol-goes-to-north-korea"
+],
+"sources": [
+"ia"
+],
+"first": "2026-11-23T13:50:10Z",
+"last": "2026-11-23T13:50:10Z",
+"keys": [
+"subject"
+]
+}
+},
+"장소": {
+"Asia: Korea": {
+"records": [
+"awm:147844"
+],
+"sources": [
+"awm"
+],
+"first": "2026-11-23T03:01:00Z",
+"last": "2026-11-23T13:40:50Z",
+"keys": [
+"장소"
+]
+},
+"38th Parallel": {
+"records": [
+"awm:147844"
+],
+"sources": [
+"awm"
+],
+"first": "2026-11-23T03:01:00Z",
+"last": "2026-11-23T13:40:50Z",
+"keys": [
+"장소"
+]
+},
+"Kapyong": {
+"records": [
+"awm:147844"
+],
+"sources": [
+"awm"
+],
+"first": "2026-11-23T03:01:00Z",
+"last": "2026-11-23T13:40:50Z",
+"keys": [
+"장소"
+]
+},
+"여의도광장": {
+"records": [
+"seoul:1107943"
+],
+"sources": [
+"seoul"
+],
+"first": "2026-11-23T06:39:47Z",
+"last": "2026-11-23T06:39:47Z",
+"keys": [
+"연관정보"
+]
+},
+"여의도": {
+"records": [
+"seoul:1186930"
+],
+"sources": [
+"seoul"
+],
+"first": "2026-11-23T06:39:47Z",
+"last": "2026-11-23T06:39:47Z",
+"keys": [
+"연관정보"
+]
+},
+"여의도지구": {
+"records": [
+"seoul:86310",
+"seoul:86311",
+"seoul:86312"
+],
+"sources": [
+"seoul"
+],
+"first": "2026-11-23T06:39:47Z",
+"last": "2026-11-23T06:39:47Z",
+"keys": [
+"연관정보"
+]
+},
+"한강": {
+"records": [
+"seoul:86310",
+"seoul:86311",
+"seoul:86312",
+"seoul:2399",
+"seoul:6581",
+"seoul:7598",
+"seoul:7603"
+],
+"sources": [
+"seoul"
+],
+"first": "2026-11-23T06:39:47Z",
+"last": "2026-11-23T13:40:52Z",
+"keys": [
+"연관정보"
+]
+},
+"한강시민공원": {
+"records": [
+"seoul:86310",
+"seoul:86311",
+"seoul:86312"
+],
+"sources": [
+"seoul"
+],
+"first": "2026-11-23T06:39:47Z",
+"last": "2026-11-23T06:39:47Z",
+"keys": [
+"연관정보"
+]
+}
+},
+"분류": {
+"도시계획사업": {
+"records": [
+"seoul:1186930"
+],
+"sources": [
+"seoul"
+],
+"first": "2026-11-23T06:39:47Z",
+"last": "2026-11-23T06:39:47Z",
+"keys": [
+"연관정보"
+]
+},
+"도시개발사업": {
+"records": [
+"seoul:1186930"
+],
+"sources": [
+"seoul"
+],
+"first": "2026-11-23T06:39:47Z",
+"last": "2026-11-23T06:39:47Z",
+"keys": [
+"연관정보"
+]
+},
+"택지개발": {
+"records": [
+"seoul:1186930"
+],
+"sources": [
+"seoul"
+],
+"first": "2026-11-23T06:39:47Z",
+"last": "2026-11-23T06:39:47Z",
+"keys": [
+"연관정보"
+]
+},
+"건설.건축": {
+"records": [
+"seoul:1186930"
+],
+"sources": [
+"seoul"
+],
+"first": "2026-11-23T06:39:47Z",
+"last": "2026-11-23T06:39:47Z",
+"keys": [
+"연관정보"
+]
+},
+"전적": {
+"records": [
+"okchf:relic:130144",
+"okchf:relic:130151",
+"okchf:relic:130438"
+],
+"sources": [
+"okchf"
+],
+"first": "2026-11-23T07:19:40Z",
+"last": "2026-11-23T07:19:40Z",
+"keys": [
+"사부분류"
+]
+},
+"사부(史部)": {
+"records": [
+"okchf:relic:130144",
+"okchf:relic:130151"
+],
+"sources": [
+"okchf"
+],
+"first": "2026-11-23T07:19:40Z",
+"last": "2026-11-23T07:19:40Z",
+"keys": [
+"사부분류"
+]
+},
+"편년류(編年類)": {
+"records": [
+"okchf:relic:130144",
+"okchf:relic:130151"
+],
+"sources": [
+"okchf"
+],
+"first": "2026-11-23T07:19:40Z",
+"last": "2026-11-23T07:19:40Z",
+"keys": [
+"사부분류"
+]
+},
+"자부(子部)": {
+"records": [
+"okchf:relic:130438"
+],
+"sources": [
+"okchf"
+],
+"first": "2026-11-23T07:19:40Z",
+"last": "2026-11-23T07:19:40Z",
+"keys": [
+"사부분류"
+]
+},
+"유가류(儒家類)": {
+"records": [
+"okchf:relic:130438"
+],
+"sources": [
+"okchf"
+],
+"first": "2026-11-23T07:19:40Z",
+"last": "2026-11-23T07:19:40Z",
+"keys": [
+"사부분류"
+]
+},
+"미륵사": {
+"records": [
+"nrich:rep:9079",
+"nrich:rep:9080",
+"nrich:rep:9081"
+],
+"sources": [
+"nrich"
+],
+"first": "2026-11-23T08:39:50Z",
+"last": "2026-11-23T13:40:53Z",
+"keys": [
+"보고서유형분류"
+]
+},
+"조사연구보고서": {
+"records": [
+"nrich:rep:8534",
+"nrich:rep:8809",
+"nrich:rep:326",
+"nrich:rep:349",
+"nrich:rep:682",
+"nrich:rep:275",
+"nrich:rep:297",
+"nrich:rep:351"
+],
+"sources": [
+"nrich"
+],
+"first": "2026-11-23T08:40:01Z",
+"last": "2026-11-23T10:15:35Z",
+"keys": [
+"보고서유형분류"
+]
+},
+"유리원판": {
+"records": [
+"okchf:relic_gls:92863"
+],
+"sources": [
+"okchf"
+],
+"first": "2026-11-23T08:40:58Z",
+"last": "2026-11-23T08:40:58Z",
+"keys": [
+"자료분류"
+]
+},
+"문화예술-영상예술-영화/드라마-포스터": {
+"records": [
+"much:PS01002025001-003418-00000"
+],
+"sources": [
+"much"
+],
+"first": "2026-11-23T13:40:48Z",
+"last": "2026-11-23T13:40:48Z",
+"keys": [
+"분류"
+]
+},
+"문화예술-문헌-문학-소설": {
+"records": [
+"much:PS01002025001-021084-00000"
+],
+"sources": [
+"much"
+],
+"first": "2026-11-23T13:40:48Z",
+"last": "2026-11-23T13:40:48Z",
+"keys": [
+"분류"
+]
+},
+"문화예술-행사-홍보-전단지": {
+"records": [
+"much:PS01002025003-024961-00000"
+],
+"sources": [
+"much"
+],
+"first": "2026-11-23T13:40:48Z",
+"last": "2026-11-23T13:40:48Z",
+"keys": [
+"분류"
+]
+},
+"미디어-신문/방송-잡지": {
+"records": [
+"much:PS01002025008-005391-00000"
+],
+"sources": [
+"much"
+],
+"first": "2026-11-23T13:40:48Z",
+"last": "2026-11-23T13:40:48Z",
+"keys": [
+"분류"
+]
+},
+"도로": {
+"records": [
+"seoul:2399"
+],
+"sources": [
+"seoul"
+],
+"first": "2026-11-23T13:40:52Z",
+"last": "2026-11-23T13:40:52Z",
+"keys": [
+"연관정보"
+]
+},
+"자연": {
+"records": [
+"seoul:6581"
+],
+"sources": [
+"seoul"
+],
+"first": "2026-11-23T13:40:52Z",
+"last": "2026-11-23T13:40:52Z",
+"keys": [
+"연관정보"
+]
+},
+"주택.도시계획": {
+"records": [
+"seoul:7598",
+"seoul:7603"
+],
+"sources": [
+"seoul"
+],
+"first": "2026-11-23T13:40:52Z",
+"last": "2026-11-23T13:40:52Z",
+"keys": [
+"연관정보"
+]
+}
+},
+"시대": {
+"1235": {
+"records": [
+"okchf:relic:40243"
+],
+"sources": [
+"okchf"
+],
+"first": "2026-11-23T07:19:39Z",
+"last": "2026-11-23T13:40:53Z",
+"keys": [
+"시대"
+]
+},
+"18-19세기": {
+"records": [
+"okchf:relic:40323"
+],
+"sources": [
+"okchf"
+],
+"first": "2026-11-23T07:19:39Z",
+"last": "2026-11-23T13:40:53Z",
+"keys": [
+"시대"
+]
+},
+"14세기 중반": {
+"records": [
+"okchf:relic:46493"
+],
+"sources": [
+"okchf"
+],
+"first": "2026-11-23T07:19:39Z",
+"last": "2026-11-23T13:40:53Z",
+"keys": [
+"시대"
+]
+},
+"1911": {
+"records": [
+"okchf:relic_gls:94034",
+"okchf:relic_gls:94035"
+],
+"sources": [
+"okchf"
+],
+"first": "2026-11-23T07:19:39Z",
+"last": "2026-11-23T13:40:53Z",
+"keys": [
+"시대"
+]
+},
+"1932": {
+"records": [
+"okchf:relic:130144"
+],
+"sources": [
+"okchf"
+],
+"first": "2026-11-23T07:19:40Z",
+"last": "2026-11-23T07:19:40Z",
+"keys": [
+"시대"
+]
+},
+"1938": {
+"records": [
+"okchf:relic:130151"
+],
+"sources": [
+"okchf"
+],
+"first": "2026-11-23T07:19:40Z",
+"last": "2026-11-23T07:19:40Z",
+"keys": [
+"시대"
+]
+},
+"發行年不明": {
+"records": [
+"okchf:relic:130438"
+],
+"sources": [
+"okchf"
+],
+"first": "2026-11-23T07:19:40Z",
+"last": "2026-11-23T07:19:40Z",
+"keys": [
+"시대"
+]
+},
+"조선": {
+"records": [
+"okchf:relic:47104",
+"nrich:ov:68018",
+"nrich:ov:67568",
+"nrich:ov:67569",
+"nrich:ov:67570",
+"nrich:ov:67571",
+"nrich:ov:67574",
+"nrich:ov:67575",
+"nrich:ov:67576",
+"okchf:relic:22021",
+"okchf:relic:22027",
+"okchf:relic:47054",
+"okchf:relic:47055",
+"okchf:relic:47058",
+"okchf:relic:47070",
+"nrich:ov:67588",
+"nrich:ov:67589",
+"nrich:ov:67590"
+],
+"sources": [
+"okchf",
+"nrich"
+],
+"first": "2026-11-23T07:19:40Z",
+"last": "2026-11-23T10:15:35Z",
+"keys": [
+"시대",
+"시대분류"
+]
+},
+"19세기": {
+"records": [
+"okchf:relic:47104",
+"okchf:relic:46490",
+"nrich:ov:67575",
+"nrich:ov:67576",
+"okchf:relic:47070",
+"nrich:ov:67590"
+],
+"sources": [
+"okchf",
+"nrich"
+],
+"first": "2026-11-23T07:19:40Z",
+"last": "2026-11-23T10:15:35Z",
+"keys": [
+"시대",
+"시대분류"
+]
+},
+"1916년": {
+"records": [
+"heritage:21-0000550000000-23"
+],
+"sources": [
+"heritage"
+],
+"first": "2026-11-23T07:26:10Z",
+"last": "2026-11-23T07:26:10Z",
+"keys": [
+"시대"
+]
+},
+"1893년(광자19": {
+"records": [
+"heritage:21-0001160000000-11"
+],
+"sources": [
+"heritage"
+],
+"first": "2026-11-23T07:26:10Z",
+"last": "2026-11-23T07:26:10Z",
+"keys": [
+"시대"
+]
+},
+"고종30)": {
+"records": [
+"heritage:21-0001160000000-11"
+],
+"sources": [
+"heritage"
+],
+"first": "2026-11-23T07:26:10Z",
+"last": "2026-11-23T07:26:10Z",
+"keys": [
+"시대"
+]
+},
+"1909년(융희3년)": {
+"records": [
+"heritage:21-0001860000000-11"
+],
+"sources": [
+"heritage"
+],
+"first": "2026-11-23T07:26:10Z",
+"last": "2026-11-23T07:26:10Z",
+"keys": [
+"시대"
+]
+},
+"19세기 말-20세기 초": {
+"records": [
+"okchf:relic:46488"
+],
+"sources": [
+"okchf"
+],
+"first": "2026-11-23T08:15:26Z",
+"last": "2026-11-23T08:15:26Z",
+"keys": [
+"시대"
+]
+},
+"20세기": {
+"records": [
+"okchf:relic:46491"
+],
+"sources": [
+"okchf"
+],
+"first": "2026-11-23T08:15:26Z",
+"last": "2026-11-23T08:15:26Z",
+"keys": [
+"시대"
+]
+},
+"20세기 전반": {
+"records": [
+"okchf:relic:46492",
+"okchf:relic:22023",
+"okchf:relic:22024",
+"okchf:relic:22025"
+],
+"sources": [
+"okchf"
+],
+"first": "2026-11-23T08:15:26Z",
+"last": "2026-11-23T08:40:58Z",
+"keys": [
+"시대"
+]
+},
+"고려시대": {
+"records": [
+"nrich:ov:25151",
+"nrich:ov:40786",
+"nrich:ov:14331"
+],
+"sources": [
+"nrich"
+],
+"first": "2026-11-23T08:39:50Z",
+"last": "2026-11-23T08:40:58Z",
+"keys": [
+"시대분류"
+]
+},
+"조선시대": {
+"records": [
+"nrich:ov:50825",
+"nrich:ov:50826",
+"nrich:ov:50827",
+"nrich:ov:66233",
+"nrich:ov:50824"
+],
+"sources": [
+"nrich"
+],
+"first": "2026-11-23T08:40:01Z",
+"last": "2026-11-23T08:50:48Z",
+"keys": [
+"시대분류"
+]
+},
+"19세기 말 -20세기 초": {
+"records": [
+"nrich:ov:68018"
+],
+"sources": [
+"nrich"
+],
+"first": "2026-11-23T08:40:01Z",
+"last": "2026-11-23T08:50:48Z",
+"keys": [
+"시대분류"
+]
+},
+"고려": {
+"records": [
+"nrich:ov:67567",
+"okchf:relic:21388"
+],
+"sources": [
+"nrich",
+"okchf"
+],
+"first": "2026-11-23T08:40:58Z",
+"last": "2026-11-23T08:40:58Z",
+"keys": [
+"시대분류",
+"시대"
+]
+},
+"17-18세기": {
+"records": [
+"nrich:ov:67568",
+"nrich:ov:67569",
+"nrich:ov:67570",
+"nrich:ov:67571",
+"okchf:relic:47055"
+],
+"sources": [
+"nrich",
+"okchf"
+],
+"first": "2026-11-23T08:40:58Z",
+"last": "2026-11-23T08:40:58Z",
+"keys": [
+"시대분류",
+"시대"
+]
+},
+"18세기": {
+"records": [
+"nrich:ov:67574"
+],
+"sources": [
+"nrich"
+],
+"first": "2026-11-23T08:40:58Z",
+"last": "2026-11-23T08:40:58Z",
+"keys": [
+"시대분류"
+]
+},
+"20세기 초": {
+"records": [
+"nrich:ov:67580",
+"nrich:ov:67581",
+"okchf:relic:47062"
+],
+"sources": [
+"nrich",
+"okchf"
+],
+"first": "2026-11-23T08:40:58Z",
+"last": "2026-11-23T08:40:58Z",
+"keys": [
+"시대분류",
+"시대"
+]
+},
+"13세기": {
+"records": [
+"okchf:relic:21388"
+],
+"sources": [
+"okchf"
+],
+"first": "2026-11-23T08:40:58Z",
+"last": "2026-11-23T08:40:58Z",
+"keys": [
+"시대"
+]
+},
+"19세기 후반": {
+"records": [
+"okchf:relic:22021",
+"okchf:relic:22027"
+],
+"sources": [
+"okchf"
+],
+"first": "2026-11-23T08:40:58Z",
+"last": "2026-11-23T08:40:58Z",
+"keys": [
+"시대"
+]
+},
+"19세기 말~ 20세기 초": {
+"records": [
+"okchf:relic:22022"
+],
+"sources": [
+"okchf"
+],
+"first": "2026-11-23T08:40:58Z",
+"last": "2026-11-23T08:40:58Z",
+"keys": [
+"시대"
+]
+},
+"20세기 후반": {
+"records": [
+"okchf:relic:22034",
+"okchf:relic:22045",
+"okchf:relic:22046",
+"okchf:relic:22050"
+],
+"sources": [
+"okchf"
+],
+"first": "2026-11-23T08:40:58Z",
+"last": "2026-11-23T08:40:58Z",
+"keys": [
+"시대"
+]
+},
+"19세기 전반": {
+"records": [
+"okchf:relic:40167",
+"okchf:relic:40276"
+],
+"sources": [
+"okchf"
+],
+"first": "2026-11-23T08:40:58Z",
+"last": "2026-11-23T08:40:58Z",
+"keys": [
+"시대"
+]
+},
+"1850년대": {
+"records": [
+"okchf:relic:47054"
+],
+"sources": [
+"okchf"
+],
+"first": "2026-11-23T08:40:58Z",
+"last": "2026-11-23T08:40:58Z",
+"keys": [
+"시대"
+]
+},
+"17세기": {
+"records": [
+"okchf:relic:47058"
+],
+"sources": [
+"okchf"
+],
+"first": "2026-11-23T08:40:58Z",
+"last": "2026-11-23T08:40:58Z",
+"keys": [
+"시대"
+]
+},
+"일제강점기(1910~1945)": {
+"records": [
+"okchf:relic_gls:92863"
+],
+"sources": [
+"okchf"
+],
+"first": "2026-11-23T08:40:58Z",
+"last": "2026-11-23T08:40:58Z",
+"keys": [
+"시대"
+]
+},
+"1789": {
+"records": [
+"nrich:ov:67588"
+],
+"sources": [
+"nrich"
+],
+"first": "2026-11-23T10:15:35Z",
+"last": "2026-11-23T10:15:35Z",
+"keys": [
+"시대분류"
+]
+},
+"19세기 초": {
+"records": [
+"nrich:ov:67589"
+],
+"sources": [
+"nrich"
+],
+"first": "2026-11-23T10:15:35Z",
+"last": "2026-11-23T10:15:35Z",
+"keys": [
+"시대분류"
+]
+},
+"한국-광복이후": {
+"records": [
+"much:PS01002025001-003418-00000",
+"much:PS01002025001-021084-00000",
+"much:PS01002025008-005391-00000"
+],
+"sources": [
+"much"
+],
+"first": "2026-11-23T13:40:48Z",
+"last": "2026-11-23T13:40:48Z",
+"keys": [
+"국적/시대"
+]
+},
+"한국-2000년 이후": {
+"records": [
+"much:PS01002025003-024961-00000"
+],
+"sources": [
+"much"
+],
+"first": "2026-11-23T13:40:48Z",
+"last": "2026-11-23T13:40:48Z",
+"keys": [
+"국적/시대"
+]
+},
+"조선 태조 7년(1398)": {
+"records": [
+"heritage:11-0000010000000-11"
+],
+"sources": [
+"heritage"
+],
+"first": "2026-11-23T13:40:49Z",
+"last": "2026-11-23T13:40:49Z",
+"keys": [
+"시대"
+]
+},
+"1887년(고종24)": {
+"records": [
+"heritage:21-0003510000000-36"
+],
+"sources": [
+"heritage"
+],
+"first": "2026-11-23T13:40:49Z",
+"last": "2026-11-23T13:40:49Z",
+"keys": [
+"시대"
+]
+},
+"삼국(백제)": {
+"records": [
+"nrich:arch:169"
+],
+"sources": [
+"nrich"
+],
+"first": "2026-11-23T13:40:53Z",
+"last": "2026-11-23T13:40:53Z",
+"keys": [
+"시대"
+]
+}
+}
+},
+"updated": "2026-11-24T08:11:48Z",
+"totals": {
+"매체": 3,
+"주제": 35,
+"장소": 8,
+"분류": 19,
+"시대": 38
+},
+"note": "원 기관 메타의 주제·지명·분류·시대·매체 표기 그대로(번역·정규화 없음). records = 그 용어가 붙은 원장 기록 key. 지우지 않는다"
+}
