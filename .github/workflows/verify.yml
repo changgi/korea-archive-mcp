@@ -22,6 +22,8 @@ jobs:
         run: node scripts/ci-verify.mjs
       - name: GitHub Pages 무결성 (docs 링크·IIIF 이미지·매니페스트 수)
         run: python3 scripts/check-docs.py
+      - name: IIIF 구조 검증(Presentation 3 — 정적 docs 전체)
+        run: python3 scripts/iiif_check.py
       - name: 골든 케이스 파일 형식
         run: python3 -c "import json,re;g=json.load(open('tests/golden.json'));[re.compile(r) for c in g['cases'] for r in c.get('must',[])+c.get('must_not',[])];print('golden',len(g['cases']),'cases OK')"
       - name: marketplace 패리티 (3사본 도구명 diff · 본문 사본 일치 + py_compile)

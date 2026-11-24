@@ -77,6 +77,7 @@
 | 주제 색인(v2.42) | `merge_subjects()` · `docs/data/subjects.json`·`subjects.html` | 매일 축적(지우지 않음) | 원 기관 메타의 주제(주제·주제어·색인어·subject)·장소(장소·취급지명·서울기록원 GEOL)·분류(분류·사부분류·자료분류·보고서유형분류·서울기록원 FUNC)·시대·매체를 패싯별 용어 사전으로 — 기관 표기 그대로(번역·정규화 없음). 원장 검색(`sources=ledger`)은 메타 값·요약까지 본다(Node·Python) |
 | 주제 연결 데이터(v2.43) | `docs/data/subjects.jsonld` · `discovered.jsonld` | 매일 | 패싯마다 `skos:ConceptScheme`, 용어마다 `skos:Concept`(prefLabel 기관 표기·dct:source 수집처). RiC-O 기록은 `rico:hasOrHadSubject`(주제·분류·시대·매체)·`rico:isAssociatedWithPlace`(장소)로 개념 URI를 가리킨다 — 개념 URI = `subjects.jsonld#<패싯>/<용어 URL 인코딩>`(안정 — 용어 표기가 같으면 같은 URI) |
 | 연결 데이터 검증(v2.44) | `scripts/rdf_check.py` · ledger 워크플로(커밋 뒤) | 매일 | 표준 RDF 파서(rdflib)로 discovered.jsonld·subjects.jsonld 파싱, SPARQL로 끊긴 주제·장소 링크·prefLabel/inScheme 누락 검사. 실패해도 원장은 이미 저장 — auto-health 이슈만 |
+| IIIF 구조 검증(v2.45) | `scripts/iiif_check.py` · verify(정적) · ledger(정적+브리지 표본 20) | 모든 push·매일 | Presentation 3 핵심: @context·id(http URI)·type·label 언어 맵·Collection 항목 id/type·Canvas→AnnotationPage→Annotation(painting·body·target)·이미지 캔버스 height/width·metadata/summary/requiredStatement 언어 맵·rights 단일 URI. 표준 라이브러리만. 오류 → CI 실패/auto-health 이슈, 빈 items는 경고(발견 기록 없는 질의 기록물) |
 | 연구원 연구DB | `docs/data/nrich/*.jsonl` | 같은 (데이터셋,id)면 새 값 | 원 기관에서 사라진 기록은 `withdrawn: <처음 사라진 날>`로 보존 |
 
 - **원문 그대로(v2.26.1, 소유자 결정)**: 질의 인자·회신 본문은 어떤 패턴도 지우거나 바꾸지 않는다 — 질의·회신은 일반 기록에서 수집되는 기록 자체이므로 원형 보존이 증거성의 조건. 공개 저장소에 그대로 남는다는 사실은 cross_search 안내문으로 사용자에게 고지한다. `lib/ledger.js`의 `scrub()`은 쓰지 않는다(필요 시 공개본과 분리된 별도 저장소에서만 검토).

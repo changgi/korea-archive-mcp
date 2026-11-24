@@ -33,6 +33,8 @@ jobs:
         run: |
           pip install -q rdflib
           python3 scripts/rdf_check.py
+      - name: IIIF 구조 검증(정적 + 브리지 매니페스트 표본 20, 커밋 뒤)
+        run: python3 scripts/iiif_check.py --remote 20
       - name: 실패 → 이슈 / 정상 → 이슈 닫기
         if: always()
         env:
@@ -44,7 +46,7 @@ jobs:
           if [ "${{ job.status }}" != "success" ]; then
             body="발견 누적 원장 병합 또는 일일 기록물 등록부 검증이 실패했습니다(등록부 사슬 끊김·산출물 소실 포함). 보관함(Redis 날짜 함)은 3일 보관 — 그 안에 고치면 유실 없음.
 
-          실행: $run · 점검: /api/ledger/{날짜} 응답, scripts/ledger_merge.py, python3 scripts/records_register.py --verify, pip install rdflib && python3 scripts/rdf_check.py(연결 데이터), MAINTAINING.md(영구 축적 원칙)"
+          실행: $run · 점검: /api/ledger/{날짜} 응답, scripts/ledger_merge.py, python3 scripts/records_register.py --verify, pip install rdflib && python3 scripts/rdf_check.py(연결 데이터), python3 scripts/iiif_check.py --remote 20(IIIF 구조), MAINTAINING.md(영구 축적 원칙)"
             if [ -n "$num" ]; then gh issue comment "$num" --body "$body"; else gh issue create --title "발견 원장 병합 실패 — 3일 안에 조치" --label auto-health --body "$body"; fi
           elif [ -n "$num" ]; then
             gh issue close "$num" --comment "발견 원장 병합 정상 — 자동 종료 ($run)"
