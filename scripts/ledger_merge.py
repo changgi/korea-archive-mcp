@@ -101,7 +101,7 @@ DEEP = {"i815": ("nedb_search", lambda o: o.get("url") and {"mode": "i815", "que
         "earchive": ("nedb_search", lambda o: "catalogView.do?systemId=" in (o.get("url") or "") and {"mode": "earchive", "query": o["url"]}),
         "okchf": ("nedb_search", lambda o: o.get("url") and {"mode": "okchf", "query": o["url"]}),
         "nrich": ("nedb_search", lambda o: {"mode": "nrich", "query": o["id"] if re.match(r"^(ksm|portrait|gwaebul|diary|mokgan|jcbib|jcphoto|dict|arch|koguryo|gaesong|design|pattern|oldbook|hyanggyo|stone|journal|iron|dolmen|assay|material):", str(o.get("id", ""))) else o.get("url")} if (o.get("id") or o.get("url")) else None)}
-DEEP_V = {"seoul": 2}  # v2.32 판독기 판 — 판이 오르면 이미 보강된 기록도 한 번 다시 판독(서울기록원: 기관 계층·생산자·보존이력 추가)
+DEEP_V = {"seoul": 2, "aks": 2}  # v2.32 판독기 판 — 판이 오르면 이미 보강된 기록도 한 번 다시 판독(서울기록원: 기관 계층·생산자·보존이력 추가)
 _sid = [None]
 
 def mcp_call(tool, args):
@@ -171,6 +171,10 @@ def enrich(o, budget):
         if args:
             try:
                 txt = mcp_call(tool, args); summ, md = parse_deep(txt)
+                if src0 == "aks":  # v2.40.2 고문서 문서 판독은 면 목록 — 요약은 머리줄의 면 수·UCI만(파일명 나열 아님)
+                    hm = re.search(r"문서 '(.+?)' — (\d+)면(?: · UCI (\S+))?", txt)
+                    summ = f"{hm[2]}면{' · UCI ' + hm[3] if hm[3] else ''} — 한국고문서자료관 원문 이미지(뷰어 열람)" if hm else ""
+                    md = [["면 수", hm[2]]] + ([["UCI", hm[3]]] if hm and hm[3] else []) if hm else md
                 o["summary"] = (summ + " " if summ else "") + f"(KOREA ARCHIVE 심층 판독 {tool})"
                 o["meta"] = md; o["deep_call"] = f"{tool}({json.dumps(args, ensure_ascii=False)})"; o["enrich_status"] = "ok"; o["deep_v"] = DEEP_V.get(src0, 1)
                 hv = next((v for k, v in md if k == "계층"), "")
