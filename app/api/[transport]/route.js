@@ -3146,7 +3146,10 @@ item_cd 5종(자료 성격별): ART 도설·회화 / ETC 두루마리·축 / DRR
       // v2.5 발견 누적 원장 — 발견 기록을 날짜 함에 적재(v2.26부터 질의·회신은 래퍼가 ka:q로 원문 그대로 별도 축적), 매일 GitHub 원장으로 병합. 미설정·한도 초과면 조용히 생략
       const kept = await stash(items, { fmt: format || 'text', probe: !!(REQ.getStore() || {}).probe, ak: (REQ.getStore() || {}).ak || '', partOf: (it) => { const h = it.sources[0].split('·')[0]; return (PART_OF[h] && PART_OF[h](it)) || ''; } });
       const uaNote = Object.keys(UA_REFUSED).filter((k) => stats.some((x) => x.startsWith(k + ':') && x.includes('⛔'))).map((k) => `\n※ ${uaRefusedNote(k, query)}`).join(''); // v2.36 정직 UA 거부 기관 — 0건 대신 브라우저 경로
-      const keptNote = uaNote + ((kept || ledgerConf()) ? `\n※ 질의·회신·발견 기록은 원문 그대로 공개 누적 원장에 영구 축적됩니다(가공·삭제 없음 — 공개를 원치 않는 본인 정보는 질의에 넣지 마십시오) — ${LEDGER_PAGE}` : '');
+      // v2.48 부재 단정 금지 — 조회 실패(—) 채널은 '그 기관에 없음'이 아니다. 0건(확정)과 구분해 명시
+      const failedCh = [...new Set(stats.filter((x) => /^[a-z0-9_]+(?:·[^:]+)?:—/.test(x)).map((x) => x.split(':')[0].split('·')[0]))];
+      const failNote = failedCh.length ? `\n※ 조회 실패 채널 ${failedCh.length}곳(${failedCh.join(', ')}) — 이번 응답에 없을 뿐 그 기관에 기록이 없다는 뜻이 아닙니다(시간 초과·차단·응답 끊김). 해당 수집처만 다시: sources='${failedCh.join(',')}'` : '';
+      const keptNote = failNote + uaNote + ((kept || ledgerConf()) ? `\n※ 질의·회신·발견 기록은 원문 그대로 공개 누적 원장에 영구 축적됩니다(가공·삭제 없음 — 공개를 원치 않는 본인 정보는 질의에 넣지 마십시오) — ${LEDGER_PAGE}` : '');
       if (format === 'iiif') { // v1.97: 연속 이미지 뷰 — 결과 중 기관 IIIF가 있는 기록의 원 매니페스트를 컬렉션으로, 위키미디어는 정지 이미지 매니페스트로
         const L3 = (t) => ({ ko: [String(t || '').slice(0, 200)] });
         const ext = []; const cm = []; const none = [];

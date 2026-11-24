@@ -1084,6 +1084,21 @@
    ],
    "level": "error",
    "note": "v2.46.1 끊긴 응답을 0건으로 오인해 '법전에 없음'이라는 거짓 결론을 내던 것 — 조운은 경국대전 호전·漕轉에 있다"
+  },
+  {
+   "id": "cross-failed-channel-note",
+   "tool": "cross_search",
+   "args": {
+    "query": "회의",
+    "sources": "foia",
+    "max_per_source": 3,
+    "format": "csv"
+   },
+   "must": [
+    "(?:조회 실패 채널 1곳\\(foia\\)|foia:[0-9])"
+   ],
+   "level": "error",
+   "note": "v2.48 조회 실패 채널은 '없음'과 구분해 명시돼야 한다 — foia가 복구되면 건수 표기로 통과"
   }
  ]
 }
