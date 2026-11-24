@@ -108,6 +108,7 @@ DEEP = {"i815": ("nedb_search", lambda o: o.get("url") and {"mode": "i815", "que
         "earchive": ("nedb_search", lambda o: "catalogView.do?systemId=" in (o.get("url") or "") and {"mode": "earchive", "query": o["url"]}),
         "okchf": ("nedb_search", lambda o: o.get("url") and {"mode": "okchf", "query": o["url"]}),
         "nrich": ("nedb_search", lambda o: {"mode": "nrich", "query": o["id"] if re.match(r"^(ksm|portrait|gwaebul|diary|mokgan|jcbib|jcphoto|dict|arch|koguryo|gaesong|design|pattern|oldbook|hyanggyo|stone|journal|iron|dolmen|assay|material):", str(o.get("id", ""))) else o.get("url")} if (o.get("id") or o.get("url")) else None)}
+DEEP["kyudb"] = ("nedb_search", lambda o: re.match(r"^[^\x00-\x7f]{1,4}[0-9][0-9.\-]*$", str(o.get("id") or "")) and {"mode": "kyujanggak", "query": o["id"]})  # v2.55 규장각 해제(기관 해설문) — 같은 청구기호 행만 쓴다
 DEEP_V = {"seoul": 2, "aks": 2}  # v2.32 판독기 판 — 판이 오르면 이미 보강된 기록도 한 번 다시 판독(서울기록원: 기관 계층·생산자·보존이력 추가)
 _sid = [None]
 
@@ -130,6 +131,20 @@ def mcp_call(tool, args):
     txt = "".join(c.get("text", "") for c in (j.get("result") or {}).get("content", []))
     if not txt or txt.startswith("MCP error") or (j.get("result") or {}).get("isError"): raise ValueError(txt[:80])
     return txt
+
+def kyu_own(txt, cid):
+    """규장각 판독 응답에서 이 청구기호([奎NNNN]) 행의 서지와 해제 원문만. (요약, 메타)."""
+    L = txt.splitlines(); row = ""; hj = ""
+    for i, x in enumerate(L):
+        if x.startswith(f"- [{cid}]"):
+            nx = L[i + 1] if i + 1 < len(L) else ""
+            own = nx.startswith("  해제:")  # 들여쓴 '해제:'만 이 책의 해제(들여쓰지 않은 '해제: N건'은 다음 절 머리)
+            if not row or own: row = x[len(f"- [{cid}]"):].strip()
+            if own and not hj: hj = nx.strip()[3:].strip()
+    parts = [p.strip() for p in row.split(" · ")]
+    md = [[k, v] for k, v in zip(("서명", "편저자", "연대", "분류"), parts) if v]
+    if hj: md.append(["해제(규장각, 앞부분)", hj[:300]])
+    return (f"[규장각 해제] {hj}" if hj else ""), md
 
 def parse_deep(txt):
     """심층 판독 텍스트 → 주요 내용·메타정보·지문·원문 뷰어. 판독 결과에 있는 값만 옮긴다(재구성·추정 없음)."""
@@ -178,11 +193,13 @@ def enrich(o, budget):
         if args:
             try:
                 txt = mcp_call(tool, args); summ, md = parse_deep(txt)
+                if src0 == "kyudb":  # v2.55 규장각 — 같은 청구기호 행의 서지와 해제 원문만(다른 책의 해제·안내 문구 제외)
+                    summ, md = kyu_own(txt, o["id"])
                 if src0 == "aks":  # v2.40.2 고문서 문서 판독은 면 목록 — 요약은 머리줄의 면 수·UCI만(파일명 나열 아님)
                     hm = re.search(r"문서 '(.+?)' — (\d+)면(?: · UCI (\S+))?", txt)
                     summ = f"{hm[2]}면{' · UCI ' + hm[3] if hm[3] else ''} — 한국고문서자료관 원문 이미지(뷰어 열람)" if hm else ""
                     md = [["면 수", hm[2]]] + ([["UCI", hm[3]]] if hm and hm[3] else []) if hm else md
-                o["summary"] = (summ + " " if summ else "") + f"(KOREA ARCHIVE 심층 판독 {tool})"
+                if summ or src0 != "kyudb": o["summary"] = (summ + " " if summ else "") + f"(KOREA ARCHIVE 심층 판독 {tool})"  # 규장각 해제가 없으면 요약을 비워 둔다(서지는 메타·메타 합성으로)
                 o["meta"] = md; o["deep_call"] = f"{tool}({json.dumps(args, ensure_ascii=False)})"; o["enrich_status"] = "ok"; o["deep_v"] = DEEP_V.get(src0, 1)
                 hv = next((v for k, v in md if k == "계층"), "")
                 if hv and not o.get("partOf"): o["partOf"] = hv; o["partOf_src"] = "기관 상세 판독(브레드크럼)"  # 원 기관 계층 — [파생] 아님
@@ -860,6 +877,9 @@ def fixity_text(o):
         tool, af = DEEP[src]; args = af(o)
         if args:
             t = mcp_call(tool, args)
+            if src == "kyudb":  # v2.55 이 책 행만 지문(검색 건수·다른 책 행 변화가 '원문 변경'으로 보이지 않게)
+                sm, md = kyu_own(t, o["id"])
+                return json.dumps(md, ensure_ascii=False) if md else None
             if re.search(r"파싱 실패|오류\(|조회 실패|시간 초과|브라우저로 열람", t[:300]): return None  # 판독 실패 응답은 지문 대상 아님
             return "\n".join(l for l in t.splitlines() if not VOLATILE.search(l))
     return None
