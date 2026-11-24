@@ -653,6 +653,36 @@ def build_media(recs_all):
             if o.get("summary"): L.append(f"AB  - {o['summary'][:1000]}")
             L += [f"N1  - KOREA ARCHIVE 통합검색 발견 원장 — 처음 발견 {o['first_seen'][:10]} · 출처 {'+'.join(o['sources'])}", "ER  - ", ""]
             f.write("\n".join(L) + "\n")
+    # 5) v2.53 OAI-PMH oai_dc — 아카이브·도서관 수집기(하베스터)가 읽는 표준 교환형(Dublin Core 15요소). 정적 ListRecords 1건(파생 계층·날짜는 [파생] 유지)
+    DCT = {"motion_picture": "MovingImage", "graphic": "StillImage", "map": "Image", "document": "Text"}
+    def dc(o):
+        E = lambda t, v: f"<dc:{t}>{X.escape(str(v))}</dc:{t}>" if v else ""
+        dd = o.get("date") or (o.get("date_derived") and f"{o['date_derived']} [파생: {o.get('date_basis', '')}]")
+        return "".join([E("title", o["title"]), E("identifier", o.get("url")), E("identifier", o.get("id")), E("date", dd), E("coverage", decade(o)),
+                        E("source", inst(o)), E("relation", o.get("partOf") or (o.get("partOf_derived") and f"[파생] {o['partOf_derived']}")),
+                        E("description", (o.get("summary") or o.get("summary_composed") or "")[:1500]), E("rights", o.get("rights_view")), E("type", DCT[kind_of(o)]),
+                        E("relation", (o.get("iiif") if not o.get("iiif_status") else "") or o.get("iiif_built")), E("publisher", "KOREA ARCHIVE 통합검색 발견 원장(재기술·집성)")])
+    recx = "".join(f"""<record><header><identifier>oai:changgi.github.io:korea-archive-mcp:{X.escape(o['key'])}</identifier><datestamp>{o['last_seen'][:10]}</datestamp><setSpec>{X.escape(o['key'].split(':')[0])}</setSpec></header>
+<metadata><oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/">{dc(o)}</oai_dc:dc></metadata></record>
+""" for o in recs)
+    open(os.path.join(D, "records.oai_dc.xml"), "w", encoding="utf-8").write(f"""<?xml version="1.0" encoding="utf-8"?>
+<OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/"><responseDate>{now}</responseDate><request verb="ListRecords" metadataPrefix="oai_dc">{PAGES}records.oai_dc.xml</request><ListRecords>
+{recx}</ListRecords></OAI-PMH>""")
+    # 6) v2.53 BibTeX — LaTeX·학위논문 인용(biblatex @misc)
+    import hashlib
+    bx = lambda t: re.sub(r"([{}%&$#_\\])", r"\\\1", str(t))
+    with open(os.path.join(D, "records.bib"), "w", encoding="utf-8") as f:
+        for o in recs:
+            bk = re.sub(r'[^A-Za-z0-9]+', '_', o['key'])[:48].rstrip('_') + "_" + hashlib.sha256(o['key'].encode()).hexdigest()[:8]  # 키 충돌 방지(원장 key 지문)
+            L = [f"@misc{{ka_{bk},", f"  title = {{{bx(o['title'])}}},", f"  organization = {{{bx(inst(o))}}},"]
+            if yr(o): L.append(f"  year = {{{yr(o)}}},")
+            if o.get("date"): L.append(f"  date = {{{bx(o['date'])}}},")
+            if o.get("url"): L.append(f"  url = {{{o['url']}}},")
+            if o.get("id"): L.append(f"  number = {{{bx(o['id'])}}},")
+            if ser(o): L.append(f"  series = {{{bx(ser(o))}}},")
+            L.append(f"  urldate = {{{o['first_seen'][:10]}}},")
+            L.append(f"  note = {{KOREA ARCHIVE 통합검색 발견 원장 · 출처 {bx('+'.join(o['sources']))}{' · 권리 ' + bx(o['rights_view']) if o.get('rights_view') else ''}}}")
+            f.write("\n".join(L) + "\n}\n\n")
     # 4) 연대 타임라인 — 시각화·전시용(연대 × 기관 × 매체)
     tl = {}
     for o in recs:
@@ -1176,7 +1206,7 @@ details{{font-size:12px}}dl{{display:grid;grid-template-columns:auto 1fr;gap:2px
 table{{width:100%;border-collapse:collapse;font-size:14px}}td,th{{border-bottom:1px solid #2a2d35;padding:6px;text-align:left}}</style>
 <main><h1>발견 누적 원장</h1><p>KOREA ARCHIVE 통합검색 사용자가 도구로 발굴한 기록이 매일 이곳에 쌓입니다(검색어·사용자 정보 없음). 기록 <b>{st['records']:,}</b>건 · 마지막 갱신 {st['updated']} · 이번 갱신 신규 {new_recs}건 · 내용·메타정보 보강 {enr}건 · 썸네일 {thn}건</p>
 <p>{srcs}</p>
-<p><a class="b0" href="discovered.csv">CSV 내려받기</a><a class="b0" href="discovered.jsonl">JSONL</a><a class="b0" href="discovered.jsonld">RiC-O JSON-LD</a><a class="b0" href="../kv.html?manifest=https://changgi.github.io/korea-archive-mcp/data/collection.json">KV로 최근 300건 연속 보기</a><a class="b0" href="tree.html">계층구조도</a><a class="b0" href="queries/index.json">질의·회신 축적</a><a class="b0" href="classifications.json">분류 사전</a><a class="b0" href="provenance.json">발견 경로(질의↔기록)</a><a class="b0" href="q/index.html">질의별 발굴 기록(IIIF)</a><a class="b0" href="quality.json">데이터 품질 추이</a><a class="b0" href="subjects.html">주제 색인</a><a class="b0" href="subjects.jsonld">주제 SKOS</a><a class="b0" href="fixity_changes.json">원문 변경 감시</a><a class="b0" href="feed.xml">새 발견 구독(Atom)</a><a class="b0" href="records.csl.json">인용 CSL-JSON(Zotero)</a><a class="b0" href="records.ris">인용 RIS(EndNote)</a><a class="b0" href="timeline.html">연대 타임라인</a><a class="b0" href="nrich/index.html">연구원 연구DB IIIF 계층</a><a class="b0" href="popular.csv">자주 활용 TOP 200</a><a class="b0" href="stats.json">집계</a></p>
+<p><a class="b0" href="discovered.csv">CSV 내려받기</a><a class="b0" href="discovered.jsonl">JSONL</a><a class="b0" href="discovered.jsonld">RiC-O JSON-LD</a><a class="b0" href="../kv.html?manifest=https://changgi.github.io/korea-archive-mcp/data/collection.json">KV로 최근 300건 연속 보기</a><a class="b0" href="tree.html">계층구조도</a><a class="b0" href="queries/index.json">질의·회신 축적</a><a class="b0" href="classifications.json">분류 사전</a><a class="b0" href="provenance.json">발견 경로(질의↔기록)</a><a class="b0" href="q/index.html">질의별 발굴 기록(IIIF)</a><a class="b0" href="quality.json">데이터 품질 추이</a><a class="b0" href="subjects.html">주제 색인</a><a class="b0" href="subjects.jsonld">주제 SKOS</a><a class="b0" href="fixity_changes.json">원문 변경 감시</a><a class="b0" href="feed.xml">새 발견 구독(Atom)</a><a class="b0" href="records.csl.json">인용 CSL-JSON(Zotero)</a><a class="b0" href="records.ris">인용 RIS(EndNote)</a><a class="b0" href="records.bib">인용 BibTeX(LaTeX)</a><a class="b0" href="records.oai_dc.xml">OAI-PMH Dublin Core(하베스터)</a><a class="b0" href="timeline.html">연대 타임라인</a><a class="b0" href="nrich/index.html">연구원 연구DB IIIF 계층</a><a class="b0" href="popular.csv">자주 활용 TOP 200</a><a class="b0" href="stats.json">집계</a></p>
 <p style="font-size:13px;color:#9b9a93">주요 내용·메타정보·썸네일은 기관 IIIF·우리 브리지 매니페스트를 하루 한 번 판독해 채웁니다(하루 상한·순차 요청). 썸네일은 재이용 가능 표시가 확인된 것만 싣고, 포로·사망자·묘지·수형자 관련 기록과 허가가 필요한 이미지는 링크만 둡니다. 권리는 원 기관 표기를 따릅니다 — 게재 전 judge_rights로 확인. 모든 변경은 저장소 git 이력(docs/data/)에 남습니다.</p>
 <h2>자주 활용되는 기록 TOP 30</h2><p style="font-size:13px">점수 = 최근 30일 발견×2 + 전체 발견 + 발견된 날 수×3 + 교차확인 기관 수 가중. 자동 검사 트래픽 제외.</p><div class="g">{prow}</div>
 <h2>일별 활용(최근 14일)</h2><table><tr><th>날짜</th><th>검색 묶음</th><th>발견 기록</th><th>신규 기록</th></tr>{urow}</table><p style="font-size:13px">형식별 누계: {E_(fmtv(usage['formats']))} · <a href="usage.json">usage.json</a></p>
