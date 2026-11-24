@@ -1008,6 +1008,13 @@ def date_from_same(recs):
         o["date_derived"], o["date_basis"] = best["date"], f"같은 기록의 다른 소장처 표기 — {best['inst']} {best['key']}({best['basis']})"; n += 1
     return n
 
+def ser_key(o):
+    """v2.88 같은 계열 비교 열쇠 — 기관 계층 그대로. 단 6·25전쟁 아카이브센터 카드 계층은 도구가 글자 수로 잘라('…Chief' / '…Chief Signal Of')
+    같은 계열이 갈라지므로, 기관 표기의 'Record Group 번호'까지로 비교한다(번호 뒤 설명만 버림 — 지어내지 않음)."""
+    p = o.get("partOf") or ""
+    if o["key"].startswith("koreanwar:"): p = re.sub(r"(Record Group \d+)\b.*$", r"\1", p)
+    return p
+
 def build_relations(recs_all):
     """v2.82 맥락 연결 — 기록과 기록을 원장에 이미 있는 기관 표기만으로 잇는다(지어내지 않음). 관계마다 근거를 단다.
     ① 같은 기록(다른 소장처): 기관이 준 sameAs·로컬 식별자 일치(IA 111-adc-N ↔ NARA 로컬 식별자 111-ADC-N 등)
@@ -1032,7 +1039,7 @@ def build_relations(recs_all):
                 if not k.startswith("ia:"): add(o["key"], k, "같은 기록(다른 소장처)", f"식별자 일치 '{o['key'][3:]}'(IA 식별자 = 기관 로컬 식별자)")
     grp = {}
     for o in R:
-        if o.get("partOf"): grp.setdefault((o["key"].split(":")[0], o["partOf"]), []).append(o)
+        if o.get("partOf"): grp.setdefault((o["key"].split(":")[0], ser_key(o)), []).append(o)
     dk = lambda o: (o.get("date") or o.get("date_derived") or "9999")
     for (inst, part), L in grp.items():  # ② 같은 계열 — 날짜 이웃
         if len(L) < 2: continue
