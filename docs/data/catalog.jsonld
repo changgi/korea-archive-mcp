@@ -20,7 +20,7 @@
    "@type": "dcat:Dataset",
    "dct:title": "KOREA ARCHIVE 통합검색 — 발견 누적 원장",
    "dct:description": "사용자들이 KOREA ARCHIVE 통합검색 도구로 국내외 아카이브에서 발굴한 한국 관련 기록 464건의 재기술·계층·IIIF·권리 표시·발견 경로·질의 축적. 원 기관 표기 그대로, 파생 정보는 [파생] 표시, 축적 정보는 지우지 않는다.",
-   "dct:modified": "2026-11-24T17:07:10Z",
+   "dct:modified": "2026-11-24T17:10:56Z",
    "dct:publisher": {
     "@type": "foaf:Agent",
     "foaf:name": "KOREA ARCHIVE 통합검색"
@@ -176,7 +176,7 @@
      "spdx:checksum": {
       "@type": "spdx:Checksum",
       "spdx:algorithm": "spdx:checksumAlgorithm_sha256",
-      "spdx:checksumValue": "44c8cfb3db11c0ff0cb092370f0d4a0001cab23d940b0e0eda13163728175823"
+      "spdx:checksumValue": "f9cdf86374dcddd02fac89aa469d9f308cdae0129227b769ac23be7503b634cf"
      }
     },
     {
@@ -232,7 +232,7 @@
      "spdx:checksum": {
       "@type": "spdx:Checksum",
       "spdx:algorithm": "spdx:checksumAlgorithm_sha256",
-      "spdx:checksumValue": "b9ccaa44350586fdfb51e0625eef261938d698826264db4eb2e73a343499cbd2"
+      "spdx:checksumValue": "4dc04305588c1d07adabeb1a1ff682abc22ac20d54cfec8156e316f380e8aef4"
      }
     },
     {
@@ -246,7 +246,7 @@
      "spdx:checksum": {
       "@type": "spdx:Checksum",
       "spdx:algorithm": "spdx:checksumAlgorithm_sha256",
-      "spdx:checksumValue": "016e97978d2c13790321710382aa127e968f1d80e0e599c0ad05564bf3bd6090"
+      "spdx:checksumValue": "5fcbae4b87a28e50796d9f28e79e2c13279a899b6bc2e2c7135a2daa433530d3"
      }
     },
     {
@@ -274,7 +274,7 @@
      "spdx:checksum": {
       "@type": "spdx:Checksum",
       "spdx:algorithm": "spdx:checksumAlgorithm_sha256",
-      "spdx:checksumValue": "cd3afa8a70dd26a37fcb57c388e830f0da7a673b90aeccb681e198e018af2754"
+      "spdx:checksumValue": "fa047691992ecc7f30f2272d1bae24602d583dbceda522137c16a381155326e0"
      }
     },
     {
@@ -288,7 +288,7 @@
      "spdx:checksum": {
       "@type": "spdx:Checksum",
       "spdx:algorithm": "spdx:checksumAlgorithm_sha256",
-      "spdx:checksumValue": "6d9c3f93e3ceacb52f939ec2569238ce5410b41cd2459ca5e2e73a8392c9ff23"
+      "spdx:checksumValue": "7d92d47744f9de4646f26e2f68d288305806429d5bf24d50e76cac3f2d144f62"
      }
     },
     {
@@ -316,7 +316,7 @@
      "spdx:checksum": {
       "@type": "spdx:Checksum",
       "spdx:algorithm": "spdx:checksumAlgorithm_sha256",
-      "spdx:checksumValue": "0694f236f69c8db895b3941fbea16b18fed403bc3853a1092aceb97583ecfaca"
+      "spdx:checksumValue": "9cddf7d9140c2a9a4979cc9b67a32a6b34391d8a517301f4fd7c1d54e196eaa5"
      }
     },
     {
@@ -330,7 +330,7 @@
      "spdx:checksum": {
       "@type": "spdx:Checksum",
       "spdx:algorithm": "spdx:checksumAlgorithm_sha256",
-      "spdx:checksumValue": "90ae79b20077c1ae0d0551100202b447b69e5b185677629d9c406fb24b0e4272"
+      "spdx:checksumValue": "cab5c31d94a956d15946a3f8ed29b6602c0d8a844ad77b892f304fad6e43d753"
      }
     },
     {
@@ -344,7 +344,7 @@
      "spdx:checksum": {
       "@type": "spdx:Checksum",
       "spdx:algorithm": "spdx:checksumAlgorithm_sha256",
-      "spdx:checksumValue": "34f21b471adb16f4ed8860662bcddd013a95dd89362906f22e304cb7613aa362"
+      "spdx:checksumValue": "0c5a6e52ce5c848ab191b951dfc8c35272ab7c0d7e48c6a1b0a3af6973575f87"
      }
     },
     {
@@ -358,7 +358,7 @@
      "spdx:checksum": {
       "@type": "spdx:Checksum",
       "spdx:algorithm": "spdx:checksumAlgorithm_sha256",
-      "spdx:checksumValue": "861e5b64cf96ce9c8ce1a7e58a125abe506ecf9b2eabee35d69b537cad5156be"
+      "spdx:checksumValue": "d60c6da327f1c0ebc9bd675567b920c42694a30018c32a6de7484fb6ed358f5d"
      }
     },
     {
@@ -368,11 +368,11 @@
       "@id": "https://changgi.github.io/korea-archive-mcp/data/records/index.json"
      },
      "dcat:mediaType": "application/json",
-     "dcat:byteSize": 6811,
+     "dcat:byteSize": 6937,
      "spdx:checksum": {
       "@type": "spdx:Checksum",
       "spdx:algorithm": "spdx:checksumAlgorithm_sha256",
-      "spdx:checksumValue": "ee4bdd5ebda42d902b90721eb89afb2ff69702716d9d19bd5207d93db6b1f882"
+      "spdx:checksumValue": "3d544625dfe405ded7129c233c38283f899c6cf81d28428ac4a71ee9e9c7d07b"
      }
     }
    ],
