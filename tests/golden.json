@@ -1327,6 +1327,36 @@
     "변환 'Korea armistice 회담'"
    ],
    "level": "warn"
+  },
+  {
+   "id": "topics-modern-terms",
+   "tool": "nara_search",
+   "args": {
+    "query": "제주 4·3",
+    "max_results": 3
+   },
+   "must": [
+    "영문 자동 변환 'Cheju uprising 1948'"
+   ],
+   "must_not": [
+    "Quelpart 4"
+   ],
+   "level": "warn"
+  },
+  {
+   "id": "topics-colonial-terms",
+   "tool": "tna_search",
+   "args": {
+    "query": "조선어학회",
+    "max_results": 3
+   },
+   "must": [
+    "Korean Language Society"
+   ],
+   "must_not": [
+    "Korea 어학회"
+   ],
+   "level": "warn"
   }
  ]
 }
