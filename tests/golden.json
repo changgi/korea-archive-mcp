@@ -1312,6 +1312,21 @@
     "NARA '피란민' — total"
    ],
    "level": "warn"
+  },
+  {
+   "id": "topics-korean-war-terms",
+   "tool": "nara_search",
+   "args": {
+    "query": "휴전회담",
+    "max_results": 3
+   },
+   "must": [
+    "영문 자동 변환 'armistice negotiations Korea'"
+   ],
+   "must_not": [
+    "변환 'Korea armistice 회담'"
+   ],
+   "level": "warn"
   }
  ]
 }
