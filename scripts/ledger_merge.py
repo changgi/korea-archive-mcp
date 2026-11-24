@@ -497,6 +497,50 @@ def recover_from_replies(led):
                 add += 1
     return add
 
+NEDB_ERA = {"bb": ("조선", "비변사등록"), "ks": ("조선", "각사등록"), "kd": ("근대", "한국독립운동사자료"), "ij": ("근대", "대한민국임시정부자료집"), "npda": ("근대", "동아일보"),
+            "dh": ("현대", "자료대한민국사"), "pn": ("현대", "휴전회담회의록"), "sg": ("고대", "삼국사기")}
+
+def harvest_deep_replies(led):
+    """v2.68 개별 심층 검색(nedb_search 법전·등록류·통합·KTV) 회신에 나온 기록을 원장 발견으로 거둔다 — 원장 적재가 cross_search에서만 일어나
+    사용자가 개별 도구로 찾은 기록이 질의·회신 원문에만 남던 공백. 회신에 있던 값(ID·제목·연도·URL)만, 근거(질의 지문·모드)를 harvested에. 사용자 질의만."""
+    import gzip
+    qd = os.path.join(D, "queries"); add = 0
+    ktv_have = {(re.search(r"mediadtl=(\d+)", o.get("url") or "") or [None, None])[1] for k, o in led.items() if k.startswith("ktv:")}  # 개별 영상 = mediadtl(mediaid는 시리즈)
+    for f in sorted(os.listdir(qd)) if os.path.isdir(qd) else []:
+        if not f.endswith(".jsonl.gz"): continue
+        for ln in gzip.open(os.path.join(qd, f), "rt", encoding="utf-8"):
+            if not ln.strip(): continue
+            q = json.loads(ln); a = q.get("args") or {}; mode = a.get("mode", "total")
+            if q.get("tool") != "nedb_search" or mode not in ("law", "record", "total", "ktv", "sjw") or not q.get("z"): continue
+            try: body = zlib.decompress(base64.b64decode(q["z"] + "=" * (-len(q["z"]) % 4)), -15).decode("utf-8", "replace")
+            except Exception: continue
+            ak = q.get("ak") or arg_key(q.get("tool", ""), a); head = ""
+            for line in body.splitlines():
+                if line.startswith("- "): head = line[2:].strip(); continue
+                u = line.strip()
+                m1 = re.fullmatch(r"https://db\.history\.go\.kr/id/([a-z]+_[0-9a-z_]+)", u)
+                m2 = re.fullmatch(r"https://www\.ehistory\.go\.kr/view/movie\?\S*mediadtl=(\d+)\S*", u)
+                if not head or not (m1 or m2): continue
+                if m1:
+                    lid = m1[1]; k = f"nedb:{lid}"
+                    if k in led: head = ""; continue
+                    title = re.sub(r"^\[[^\]]+\]\s*", "", head); era = NEDB_ERA.get(lid.split("_")[0])
+                    dm = re.search(r"_(1[5-9]\d\d|20\d\d)_(\d\d)_(\d\d)", lid)
+                    part = ("한국사DB › 법전·편람 › " + title.split(" ")[0]) if lid.startswith("jlaw") else (f"한국사DB › {era[0]} › {era[1]}" if era else "")
+                    o = {"key": k, "sources": ["nedb"], "title": title[:300], "date": f"{dm[1]}-{dm[2]}-{dm[3]}" if dm else "", "id": lid, "url": u, "partOf": part}
+                else:
+                    if m2[1] in ktv_have: head = ""; continue
+                    ktv_have.add(m2[1]); k = f"ktv:{u}"
+                    ym = re.search(r"\((1[89]\d\d|20\d\d)\)\s*$", head)
+                    cat = (re.match(r"^\[([^\]]+)\]\s*", head) or [None, ""])[1]  # 기존 원장 형식: 제목은 분류 머리 없이, 계층 '영상 › 분류'
+                    o = {"key": k, "sources": ["ktv"], "title": re.sub(r"\s*\((1[89]\d\d|20\d\d)\)\s*$", "", re.sub(r"^\[[^\]]+\]\s*", "", head))[:300], "date": ym[1] if ym else "", "id": "", "url": u,
+                         "partOf": f"영상 › {cat}" if cat else ""}
+                o.update({"media": "", "sameAs": "", "first_seen": q.get("first", ""), "last_seen": q.get("last", q.get("first", "")), "seen": 1, "tools": ["nedb_search"],
+                          "days": {q.get("first", "")[:10]: 1}, "days_total": 1, "formats": {}, "max_cross": 1, "found_by": [ak], "found_by_basis": {ak: "심층 검색 회신(거둠)"},
+                          "harvested": f"v2.68 nedb_search(mode={mode}) 회신에서 거둠 — 질의 지문 {ak} · queries/{f}"})
+                led[k] = o; add += 1; head = ""
+    return add
+
 def rekey_collisions(led):
     """v2.67 옛 규칙으로 분류어 key(nlk:기사 등)를 받은 항목을 올바른 key로 옮긴다 — 지우지 않고 이름만 바꾸며, 옛 key는 key_aliases에 남긴다.
     발견 횟수가 2 이상이면 같은 유형의 다른 기록이 합쳐졌을 수 있음을 merge_note로 밝힌다(합쳐진 기록의 URL은 첫 것만 남아 있음)."""
@@ -1265,6 +1309,8 @@ def main():
     if nrk: print(f"분류어 key 이동(v2.67) {nrk}건 — 지우지 않고 key_aliases에 옛 key 보존")
     nrc = recover_from_replies(led)
     if nrc: print(f"회신 원문에서 복원(v2.67) {nrc}건")
+    nhv = harvest_deep_replies(led)
+    if nhv: print(f"심층 검색 회신에서 거둠(v2.68) {nhv}건")
     today = dt.datetime.now(dt.timezone.utc).date()
     new_batches = new_recs = 0
     up = os.path.join(D, "usage.json"); usage = json.load(open(up)) if os.path.exists(up) else {"daily": {}, "formats": {}}
@@ -1369,7 +1415,7 @@ def main():
         o["iiif_built"] = "" if (o.get("iiif") and not o.get("iiif_status")) else leaf_manifest(o)  # v2.52 기관 매니페스트가 비공개 응답이면 브리지로 대체(기관 주소는 보존)
     with open(lp, "w", encoding="utf-8") as f:
         for o in recs: f.write(json.dumps(o, ensure_ascii=False, separators=(",", ":")) + "\n")
-    cols = ["key", "entry_type", "found_by_basis", "summary_composed", "rights_view", "rights_basis", "fixity", "defect_note", "link_note", "sources", "title", "date", "date_derived", "date_basis", "id", "url", "partOf", "partOf_derived", "media", "sameAs", "iiif", "iiif_status", "iiif_built", "iiif_kind", "found_by", "found_by_derived", "first_seen", "last_seen", "seen", "seen_7d", "seen_30d", "days_total", "formats", "tools", "max_cross", "trend", "rank", "score", "summary", "summary_basis", "rights", "thumb", "meta", "meta_basis", "authority", "key_aliases", "merge_note", "recovered"]
+    cols = ["key", "entry_type", "found_by_basis", "summary_composed", "rights_view", "rights_basis", "fixity", "defect_note", "link_note", "sources", "title", "date", "date_derived", "date_basis", "id", "url", "partOf", "partOf_derived", "media", "sameAs", "iiif", "iiif_status", "iiif_built", "iiif_kind", "found_by", "found_by_derived", "first_seen", "last_seen", "seen", "seen_7d", "seen_30d", "days_total", "formats", "tools", "max_cross", "trend", "rank", "score", "summary", "summary_basis", "rights", "thumb", "meta", "meta_basis", "authority", "key_aliases", "merge_note", "recovered", "harvested"]
     fmtv = lambda v: json.dumps(v, ensure_ascii=False, separators=(",", ":")) if isinstance(v, list) and v and isinstance(v[0], dict) else " | ".join(f"{a}: {b}" for a, b in v) if isinstance(v, list) and v and isinstance(v[0], list) else (" ".join(f"{k}:{n}" for k, n in sorted(v.items(), key=lambda kv: -kv[1])) if isinstance(v, dict) and all(isinstance(x, (int, float)) for x in v.values()) else json.dumps(v, ensure_ascii=False, separators=(",", ":")) if isinstance(v, dict) else ("+".join(v) if isinstance(v, list) else v))
     with open(os.path.join(D, "discovered.csv"), "w", encoding="utf-8-sig", newline="") as f:
         w = csv.writer(f); w.writerow(cols)
