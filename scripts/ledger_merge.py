@@ -463,6 +463,9 @@ table{{width:100%;border-collapse:collapse;font-size:14px;margin-top:8px}}td,th{
 def key_of(r):
     h = (r.get("s") or ["?"])[0].split("·")[0]
     i = r.get("i") or ""
+    if h == "ktv":  # v2.69 KTV 개별 영상 = mediadtl — 수집기 개편으로 key가 URL·'분류:번호'로 갈려 같은 영상이 둘이 되던 결함
+        md = re.search(r"mediadtl=(\d+)", r.get("u") or "") or re.search(r":(\d+)$", i)
+        if md: return f"ktv:{md.group(1)}"
     if h == "nlk" and i and not re.search(r"\d", i) and r.get("u"):  # v2.67 nlk 옛 수집기의 분류어 id(자료유형) — 기록 번호(viewKey)로. 다른 수집처는 숫자 없는 고유 식별자(IA 등)를 쓰므로 적용하지 않는다
         vk = re.search(r"viewKey=([^&#\s]+)", r["u"]); i = vk.group(1) if vk else ""
     return f"{h}:{i or r.get('u') or r.get('t', '')[:80]}"
@@ -530,7 +533,7 @@ def harvest_deep_replies(led):
                     o = {"key": k, "sources": ["nedb"], "title": title[:300], "date": f"{dm[1]}-{dm[2]}-{dm[3]}" if dm else "", "id": lid, "url": u, "partOf": part}
                 else:
                     if m2[1] in ktv_have: head = ""; continue
-                    ktv_have.add(m2[1]); k = f"ktv:{u}"
+                    ktv_have.add(m2[1]); k = f"ktv:{m2[1]}"
                     ym = re.search(r"\((1[89]\d\d|20\d\d)\)\s*$", head)
                     cat = (re.match(r"^\[([^\]]+)\]\s*", head) or [None, ""])[1]  # 기존 원장 형식: 제목은 분류 머리 없이, 계층 '영상 › 분류'
                     o = {"key": k, "sources": ["ktv"], "title": re.sub(r"\s*\((1[89]\d\d|20\d\d)\)\s*$", "", re.sub(r"^\[[^\]]+\]\s*", "", head))[:300], "date": ym[1] if ym else "", "id": "", "url": u,
@@ -540,6 +543,44 @@ def harvest_deep_replies(led):
                           "harvested": f"v2.68 nedb_search(mode={mode}) 회신에서 거둠 — 질의 지문 {ak} · queries/{f}"})
                 led[k] = o; add += 1; head = ""
     return add
+
+def merge_into(dst, src, old_key):
+    """v2.69 같은 기록의 중복 항목을 합친다(중복만 지운다 — 정보는 합산·보존). 횟수·날짜·출처·도구·발견 경로를 합치고, 빈 칸만 채우며, 옛 key는 key_aliases에."""
+    dst["seen"] = dst.get("seen", 1) + src.get("seen", 1)
+    for f, fn in (("first_seen", min), ("last_seen", max)):
+        if src.get(f): dst[f] = fn(dst.get(f) or src[f], src[f])
+    days = dict(dst.get("days") or {})
+    for d, n in (src.get("days") or {}).items(): days[d] = days.get(d, 0) + n
+    dst["days"] = days; dst["days_total"] = len(days)
+    for f in ("sources", "tools", "found_by"):
+        v = list(dst.get(f) or [])
+        for x in src.get(f) or []:
+            if x not in v: v.append(x)
+        if v: dst[f] = v
+    fb = dict(src.get("found_by_basis") or {}); fb.update(dst.get("found_by_basis") or {})
+    if fb: dst["found_by_basis"] = fb
+    fm = dict(dst.get("formats") or {})
+    for x, n in (src.get("formats") or {}).items(): fm[x] = fm.get(x, 0) + n
+    dst["formats"] = fm; dst["max_cross"] = max(dst.get("max_cross", 0), src.get("max_cross", 0))
+    for f, v in src.items():
+        if f not in dst or dst.get(f) in (None, "", [], {}): dst[f] = v
+    al = dst.setdefault("key_aliases", [])
+    for x in [old_key] + list(src.get("key_aliases") or []):
+        if x not in al and x != dst["key"]: al.append(x)
+
+def rekey_ktv(led):
+    """v2.69 KTV 항목을 ktv:<mediadtl>로 — 같은 영상의 중복 항목은 merge_into로 합친다."""
+    n = 0
+    for k in [k for k in led if k.startswith("ktv:")]:
+        o = led.get(k)
+        if o is None: continue
+        nk = key_of({"s": ["ktv"], "i": o.get("id") or "", "u": o.get("url") or ""})
+        if nk == k: continue
+        led.pop(k)
+        if nk in led: merge_into(led[nk], o, k)
+        else: o["key"] = nk; o.setdefault("key_aliases", []).append(k); led[nk] = o
+        n += 1
+    return n
 
 def rekey_collisions(led):
     """v2.67 옛 규칙으로 분류어 key(nlk:기사 등)를 받은 항목을 올바른 key로 옮긴다 — 지우지 않고 이름만 바꾸며, 옛 key는 key_aliases에 남긴다.
@@ -1305,6 +1346,8 @@ def main():
                 o.setdefault("days", {o.get("first_seen", "")[:10]: o.get("seen", 1)}); o.setdefault("days_total", len(o["days"]))
                 o.setdefault("formats", {}); o.setdefault("max_cross", len(o.get("sources") or []))
                 led[o["key"]] = o
+    nkt = rekey_ktv(led)
+    if nkt: print(f"KTV key 통일(v2.69) {nkt}건 — 중복은 합산해 하나로, 옛 key는 key_aliases")
     nrk = rekey_collisions(led)
     if nrk: print(f"분류어 key 이동(v2.67) {nrk}건 — 지우지 않고 key_aliases에 옛 key 보존")
     nrc = recover_from_replies(led)
