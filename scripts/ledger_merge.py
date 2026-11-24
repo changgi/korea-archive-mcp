@@ -997,6 +997,36 @@ def build_record_pages(recs_all):
     open(os.path.join(D, "sitemap.xml"), "w", encoding="utf-8").write(f'<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">{sm}</urlset>')
     return len(idx)
 
+def build_digest(recs_all, today):
+    """v2.77 주간 발견 소식 — 그 주(ISO 주)에 처음 발견된 기록을 수집처별로 묶은 HTML·JSON(docs/data/digest/YYYY-Www.*). 주마다 새 파일로 쌓고 지우지 않는다
+    (지난 주 파일은 그 주가 끝나면 더 바뀌지 않는다 — 처음 발견 시각이 고정이므로). 각 항목은 기록별 영구 페이지로."""
+    E_ = html.escape; dd = os.path.join(D, "digest"); os.makedirs(dd, exist_ok=True)
+    recs = [o for o in recs_all if o.get("entry_type", "기록") == "기록" and o.get("first_seen")]
+    weeks = {}
+    for o in recs:
+        try: y, w, _ = dt.date.fromisoformat(o["first_seen"][:10]).isocalendar()
+        except ValueError: continue
+        weeks.setdefault(f"{y}-W{w:02d}", []).append(o)
+    for wk, L in weeks.items():
+        by = {}
+        for o in sorted(L, key=lambda o: o["first_seen"]): by.setdefault(SRC_NAME.get(o["key"].split(":")[0], o["key"].split(":")[0]), []).append(o)
+        sec = "".join(f"<h2>{E_(inst)} <small>{len(v)}건</small></h2><ul>" + "".join(
+            f"<li><a href='../r/{rec_slug(o['key'])}.html'>{E_(o['title'][:140])}</a> <small>{E_(o.get('date') or o.get('date_derived') or decade(o) or '')}"
+            f"{' · ' + E_((o.get('partOf') or '')[:60]) if o.get('partOf') else ''}</small></li>" for o in v) + "</ul>" for inst, v in sorted(by.items(), key=lambda kv: -len(kv[1])))
+        open(os.path.join(dd, f"{wk}.html"), "w", encoding="utf-8").write(f"""<!DOCTYPE html><html lang="ko"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>주간 발견 소식 {wk} — KOREA ARCHIVE 발견 원장</title><link rel="alternate" type="application/atom+xml" href="../feed.xml">
+<style>body{{font-family:system-ui,'Noto Sans KR',sans-serif;margin:0;background:#14161b;color:#e6e4dc}}main{{max-width:860px;margin:auto;padding:16px}}a{{color:#e0b04a}}small{{color:#9b9a93}}li{{margin:4px 0}}</style>
+<main><p><small><a href="index.html">주간 소식 목록</a> · <a href="../index.html">원장</a></small></p><h1>주간 발견 소식 {wk}</h1>
+<p>이 주에 사용자들이 KOREA ARCHIVE 통합검색으로 처음 발굴한 기록 {len(L)}건(수집처 {len(by)}곳). 원 기관 표기 그대로, 파생 정보는 기록 페이지에 근거와 함께.</p>{sec}</main></html>""")
+        json.dump({"week": wk, "records": len(L), "by_source": {k: len(v) for k, v in by.items()}, "items": [{"key": o["key"], "title": o["title"][:200], "first_seen": o["first_seen"], "page": f"r/{rec_slug(o['key'])}.html", "url": o.get("url", "")} for o in L]},
+                  open(os.path.join(dd, f"{wk}.json"), "w", encoding="utf-8"), ensure_ascii=False, indent=0)
+    allw = sorted((f[:-5] for f in os.listdir(dd) if f.endswith(".html") and f != "index.html"), reverse=True)
+    rows = "".join(f"<li><a href='{w}.html'>{w}</a> <small>{len(weeks.get(w, [])) or ''}</small></li>" for w in allw)
+    open(os.path.join(dd, "index.html"), "w", encoding="utf-8").write(f"""<!DOCTYPE html><html lang="ko"><meta charset="utf-8"><title>주간 발견 소식 — KOREA ARCHIVE</title>
+<style>body{{font-family:system-ui,'Noto Sans KR',sans-serif;background:#14161b;color:#e6e4dc}}main{{max-width:860px;margin:auto;padding:16px}}a{{color:#e0b04a}}small{{color:#9b9a93}}</style>
+<main><h1>주간 발견 소식</h1><p>주마다 처음 발굴된 기록을 모은 소식(쌓기만 하고 지우지 않음). <a href="../feed.xml">Atom 구독</a> · <a href="../index.html">원장</a></p><ul>{rows}</ul></main></html>""")
+    return len(weeks)
+
 def build_catalog(recs, nql):
     import hashlib
     now = dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
@@ -1660,13 +1690,13 @@ details{{font-size:12px}}dl{{display:grid;grid-template-columns:auto 1fr;gap:2px
 table{{width:100%;border-collapse:collapse;font-size:14px}}td,th{{border-bottom:1px solid #2a2d35;padding:6px;text-align:left}}</style>
 <main><h1>발견 누적 원장</h1><p>KOREA ARCHIVE 통합검색 사용자가 도구로 발굴한 기록이 매일 이곳에 쌓입니다(검색어·사용자 정보 없음). 기록 <b>{st['records']:,}</b>건 · 마지막 갱신 {st['updated']} · 이번 갱신 신규 {new_recs}건 · 내용·메타정보 보강 {enr}건 · 썸네일 {thn}건</p>
 <p>{srcs}</p>
-<p><a class="b0" href="discovered.csv">CSV 내려받기</a><a class="b0" href="discovered.jsonl">JSONL</a><a class="b0" href="discovered.jsonld">RiC-O JSON-LD</a><a class="b0" href="../kv.html?manifest=https://changgi.github.io/korea-archive-mcp/data/collection.json">KV로 최근 300건 연속 보기</a><a class="b0" href="tree.html">계층구조도</a><a class="b0" href="queries/index.json">질의·회신 축적</a><a class="b0" href="classifications.json">분류 사전</a><a class="b0" href="provenance.json">발견 경로(질의↔기록)</a><a class="b0" href="q/index.html">질의별 발굴 기록(IIIF)</a><a class="b0" href="quality.json">데이터 품질 추이</a><a class="b0" href="subjects.html">주제 색인</a><a class="b0" href="subjects.jsonld">주제 SKOS</a><a class="b0" href="fixity_changes.json">원문 변경 감시</a><a class="b0" href="feed.xml">새 발견 구독(Atom)</a><a class="b0" href="records.csl.json">인용 CSL-JSON(Zotero)</a><a class="b0" href="records.ris">인용 RIS(EndNote)</a><a class="b0" href="records.bib">인용 BibTeX(LaTeX)</a><a class="b0" href="catalog.jsonld">데이터 목록(DCAT)</a><a class="b0" href="r/index.json">기록별 영구 페이지</a><a class="b0" href="sitemap.xml">사이트맵</a><a class="b0" href="records.oai_dc.xml">OAI-PMH Dublin Core(하베스터)</a><a class="b0" href="timeline.html">연대 타임라인</a><a class="b0" href="nrich/index.html">연구원 연구DB IIIF 계층</a><a class="b0" href="popular.csv">자주 활용 TOP 200</a><a class="b0" href="stats.json">집계</a></p>
+<p><a class="b0" href="discovered.csv">CSV 내려받기</a><a class="b0" href="discovered.jsonl">JSONL</a><a class="b0" href="discovered.jsonld">RiC-O JSON-LD</a><a class="b0" href="../kv.html?manifest=https://changgi.github.io/korea-archive-mcp/data/collection.json">KV로 최근 300건 연속 보기</a><a class="b0" href="tree.html">계층구조도</a><a class="b0" href="queries/index.json">질의·회신 축적</a><a class="b0" href="classifications.json">분류 사전</a><a class="b0" href="provenance.json">발견 경로(질의↔기록)</a><a class="b0" href="q/index.html">질의별 발굴 기록(IIIF)</a><a class="b0" href="quality.json">데이터 품질 추이</a><a class="b0" href="subjects.html">주제 색인</a><a class="b0" href="subjects.jsonld">주제 SKOS</a><a class="b0" href="fixity_changes.json">원문 변경 감시</a><a class="b0" href="feed.xml">새 발견 구독(Atom)</a><a class="b0" href="records.csl.json">인용 CSL-JSON(Zotero)</a><a class="b0" href="records.ris">인용 RIS(EndNote)</a><a class="b0" href="records.bib">인용 BibTeX(LaTeX)</a><a class="b0" href="catalog.jsonld">데이터 목록(DCAT)</a><a class="b0" href="r/index.json">기록별 영구 페이지</a><a class="b0" href="digest/index.html">주간 발견 소식</a><a class="b0" href="sitemap.xml">사이트맵</a><a class="b0" href="records.oai_dc.xml">OAI-PMH Dublin Core(하베스터)</a><a class="b0" href="timeline.html">연대 타임라인</a><a class="b0" href="nrich/index.html">연구원 연구DB IIIF 계층</a><a class="b0" href="popular.csv">자주 활용 TOP 200</a><a class="b0" href="stats.json">집계</a></p>
 <p style="font-size:13px;color:#9b9a93">주요 내용·메타정보·썸네일은 기관 IIIF·우리 브리지 매니페스트를 하루 한 번 판독해 채웁니다(하루 상한·순차 요청). 썸네일은 재이용 가능 표시가 확인된 것만 싣고, 포로·사망자·묘지·수형자 관련 기록과 허가가 필요한 이미지는 링크만 둡니다. 권리는 원 기관 표기를 따릅니다 — 게재 전 judge_rights로 확인. 모든 변경은 저장소 git 이력(docs/data/)에 남습니다.</p>
 <h2>자주 활용되는 기록 TOP 30</h2><p style="font-size:13px">점수 = 최근 30일 발견×2 + 전체 발견 + 발견된 날 수×3 + 교차확인 기관 수 가중. 자동 검사 트래픽 제외.</p><div class="g">{prow}</div>
 <h2>일별 활용(최근 14일)</h2><table><tr><th>날짜</th><th>검색 묶음</th><th>발견 기록</th><th>신규 기록</th></tr>{urow}</table><p style="font-size:13px">형식별 누계: {E_(fmtv(usage['formats']))} · <a href="usage.json">usage.json</a></p>
 <h2>질의·회신 축적</h2><p style="font-size:13px">모든 도구 호출의 질의와 회신 본문을 원문 그대로(가공·삭제 없이) 영구 보존합니다. 같은 질의·같은 회신은 한 번만 두고 횟수만 셉니다. 회신이 달라지면 새 판으로 남겨 기관 응답 변화의 증거로 씁니다. 고유 질의 {nq['total']}건 · 누적 호출 {nq['calls']}회 · 도구별 {E_(fmtv(nq['by_tool']))} · <a href="queries/index.json">queries/index.json</a> (월별 회신 원문 queries/YYYY-MM.jsonl.gz) · 자동 점검(골든·헬스·원장 보강) 질의·회신은 활용 집계와 분리해 <a href="queries/probe/index.json">queries/probe/</a>에 따로 축적(고유 {npq['total']}건 — 기관 응답 변화·장애의 증거)</p><table><tr><th>최근</th><th>도구</th><th>질의</th><th>횟수</th></tr>{qrow}</table>
 <h2>최근 발견 100건</h2><div class="g">{rows}</div></main></html>""")
-    build_tree(recs); ncls = merge_classes(recs); nprov, _orph = build_provenance(recs); nfx = write_fixity(recs); nql = write_quality(recs); nsub = merge_subjects(recs); nmed = build_media(recs); npg = build_record_pages(recs); ncat = build_catalog(recs, nql)
+    build_tree(recs); ncls = merge_classes(recs); nprov, _orph = build_provenance(recs); nfx = write_fixity(recs); nql = write_quality(recs); nsub = merge_subjects(recs); nmed = build_media(recs); npg = build_record_pages(recs); ndg = build_digest(recs, today); ncat = build_catalog(recs, nql)
     print(f"원장 {len(recs)}건 (신규 {new_recs}, 묶음 {new_batches})")
     print(f"질의 고유 {nq['total']}건(신규 {nq['added']}) · 분류 경로 {ncls}개 · 발견 경로 질의 {nprov}종 · 다매체(피드 {nmed[0]}·인용 {nmed[1]}·연대 {nmed[2]}) · 주제 색인 {nsub} · 품질 권리 {nql['권리 표시']}% 요약 {nql['요약']}% 연대 {nql['연대']}%")
 
