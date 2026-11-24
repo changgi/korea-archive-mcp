@@ -249,12 +249,41 @@ def date_derived(o):
     if m: return f"{m[1]}-{m[2]}-{m[3]}", "심층 판독 — 신문 발행일"
     return "", ""
 
+ERA_BASE = {"明治": 1867, "메이지": 1867, "大正": 1911, "다이쇼": 1911, "昭和": 1925, "쇼와": 1925, "平成": 1988, "令和": 2018,
+            "建陽": 1895, "건양": 1895, "光武": 1896, "광무": 1896, "隆熙": 1906, "융희": 1906, "檀紀": -2333, "단기": -2333}
+_KN = {"〇": 0, "零": 0, "一": 1, "二": 2, "三": 3, "四": 4, "五": 5, "六": 6, "七": 7, "八": 8, "九": 9}
+
+def _kanji_num(t):
+    """元·一~九·十·百·千 한자 수(예: 三十五 → 35, 四二九二 → 4292). 아라비아 숫자도."""
+    if t == "元": return 1
+    if t.isdigit(): return int(t)
+    if not any(c in t for c in "十百千"): return int("".join(str(_KN[c]) for c in t)) if all(c in _KN for c in t) else None
+    n = cur = 0
+    for c in t:
+        if c in _KN: cur = _KN[c]
+        elif c in ("十", "百", "千"):
+            n += (cur or 1) * {"十": 10, "百": 100, "千": 1000}[c]; cur = 0
+        else: return None
+    return n + cur
+
+def era_year(text):
+    """v2.33 연호 연도 → 서기(제목·날짜에 적힌 그대로만). 明治三十五年 → 1902, 檀紀四二九二年 → 1959, 光武 9년 → 1905."""
+    for m in re.finditer(r"(明治|메이지|大正|다이쇼|昭和|쇼와|平成|令和|建陽|건양|光武|광무|隆熙|융희|檀紀|단기)\s*(元|[〇零一二三四五六七八九十百千]+|\d{1,4})\s*[年년]", text or ""):
+        n = _kanji_num(m[2])
+        if n is None: continue
+        y = ERA_BASE[m[1]] + n
+        if 1000 <= y <= 2099: return y
+    return None
+
 def decade(o):
     """연대 — date → 제목 → 메타(생산·시대·출판) 순. 4자리 연도면 'NNN0년대', 없으면 '18세기'처럼 세기, 그도 없으면 왕조·시대명. 지정일·등록일(지정 시점)은 쓰지 않는다."""
     cands = [o.get("date") or o.get("date_derived") or "", o.get("title") or ""] + [str(v) for k, v in (o.get("meta") or []) if k in DATE_KEYS]  # 제목 연도(내용 시점)가 메타 생산일(업로드일일 수 있음)보다 우선
     for c in cands:
         m = re.search(r"(?<!\d)(1[0-9]\d\d|20\d\d)(?:(?!\d)|(?=(?:0[1-9]|1[0-2])[0-3]\d(?!\d)))", c)
         if m: return m.group(1)[:3] + "0년대"
+    for c in cands:  # 연호 연도(明治·大正·昭和·光武·隆熙·檀紀 …) — 서기 연도가 없을 때
+        y = era_year(c)
+        if y: return str(y)[:3] + "0년대"
     for c in cands:
         m = re.search(r"(?<!\d)(\d{1,2})\s*(?:-\s*\d{1,2}\s*)?세기", c) or re.search(r"(?<!\d)(\d{1,2})(?:st|nd|rd|th)[ -]century", c, re.I)
         if m and 1 <= int(m.group(1)) <= 21: return f"{int(m.group(1))}세기"
@@ -505,7 +534,7 @@ def build_media(recs):
         e["records"] += 1; h = o["key"].split(":")[0]; k = kind_of(o)
         e["by_source"][h] = e["by_source"].get(h, 0) + 1; e["by_kind"][k] = e["by_kind"].get(k, 0) + 1
         if len(e["samples"]) < 5: e["samples"].append({"title": o["title"][:120], "url": o.get("url", ""), "iiif": o.get("iiif") or o.get("iiif_built", "")})
-    json.dump({"updated": now, "note": "구간 = 연대(4자리 연도) → 세기 → 왕조·시대명. 근거 순서 date → 제목 → 메타(생산·시대·출판). 세기·시대 구간은 시간축 근사 정렬", "timeline": sorted(tl.values(), key=lambda e: period_order(e["decade"]))},
+    json.dump({"updated": now, "note": "구간 = 연대(4자리 연도·8자리 날짜·연호 연도 明治·大正·昭和·光武·隆熙·檀紀 환산) → 세기 → 왕조·시대명. 근거 순서 date → 제목 → 메타(생산·시대·출판). 세기·시대 구간은 시간축 근사 정렬", "timeline": sorted(tl.values(), key=lambda e: period_order(e["decade"]))},
               open(os.path.join(D, "timeline.json"), "w", encoding="utf-8"), ensure_ascii=False, indent=0)
     # 5) 연대 타임라인 페이지 — 사람이 보는 매체(막대·대표 기록·KV 열람)
     E_ = html.escape; KV = "https://changgi.github.io/korea-archive-mcp/kv.html?manifest="; T = sorted(tl.values(), key=lambda e: period_order(e["decade"])); mx = max((e["records"] for e in T), default=1)
