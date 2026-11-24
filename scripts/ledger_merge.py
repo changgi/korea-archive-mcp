@@ -493,6 +493,12 @@ def build_provenance(recs):
     build_query_records(out, {o["key"]: o for o in recs})
     return len(out), orphan
 
+def qlabel(e):
+    """사람이 읽는 질의 표기 — 도구 '질의' (주요 인자). JSON 따옴표가 뷰어에서 깨지지 않게."""
+    a = e.get("args") or {}; q = a.get("query") or a.get("ref_code") or a.get("institution") or a.get("naid") or ""
+    extra = ", ".join(f"{k}={v}" for k, v in a.items() if k in ("sources", "mode", "kind", "format") and v not in ("", None))
+    return f"{e['tool']} ‘{str(q)[:80]}’" + (f" ({extra[:80]})" if extra else "")
+
 def build_query_records(prov, bykey):
     """v2.38 질의별 발굴 기록물 — 질의 하나를 현용기록물 한 건으로: docs/data/q/<ak>.json(IIIF Collection — 그 질의가 찾은 기록의 매니페스트,
     메타데이터에 도구·인자·처음/마지막·호출 수·회신 판 지문) + q/index.html. 지우지 않는다(같은 ak면 갱신)."""
@@ -520,7 +526,7 @@ def build_query_records(prov, bykey):
               L1v("누적 호출", e["calls"]), L1v("회신 판 수", len(resp)), L1v("발견 기록 수", len(items))] + ([L1v("판독 대상 기록", ", ".join(e["read_records"][:5]))] if e.get("read_records") else [])
         md += [L1v(f"회신 판 {i + 1}", f"지문 {r['h']} · {r['first'][:16]}~{r['last'][:16]} · {r['seen']}회 · {r['bytes']}B · 원문 queries/{r['month']}.jsonl.gz") for i, r in enumerate(resp[:20])]
         col = {"@context": "http://iiif.io/api/presentation/3/context.json", "id": f"{PAGES}q/{e['ak']}.json", "type": "Collection",
-               "label": {"ko": [f"질의 발굴 기록 — {e['tool']} {args[:120]}"]},
+               "label": {"ko": [f"질의 발굴 기록 — {qlabel(e)}"]},
                "summary": {"ko": [f"KOREA ARCHIVE 통합검색 질의 한 건이 찾은 기록 {len(items)}건. 회신 원문은 질의·회신 축적(queries/)에서 같은 지문으로 확인 — 질의 → 회신 → 발견 기록의 증거 사슬."]},
                "metadata": md, "requiredStatement": {"label": {"ko": ["출처"]}, "value": {"ko": ["각 기록의 권리는 원 기관 표기를 따름 — 게재 전 judge_rights"]}},
                "seeAlso": [{"id": f"{PAGES}provenance.json", "type": "Dataset", "format": "application/json", "label": {"ko": ["발견 경로 전체"]}}], "items": items}
@@ -528,7 +534,7 @@ def build_query_records(prov, bykey):
         rows.append((e, args, len(items), len(resp)))
     E_ = html.escape; KV = "https://changgi.github.io/korea-archive-mcp/kv.html?manifest="
     kvl = lambda ak: " · <a href='" + KV + E_(PAGES + "q/" + ak + ".json") + "'>KV</a>"
-    tr = "".join(f"<tr><td>{E_(e['last'][:16])}</td><td>{E_(e['tool'])}</td><td>{E_(a[:160])}</td><td>{n}</td><td>{v}</td><td>{e['calls']}</td>"
+    tr = "".join(f"<tr><td>{E_(e['last'][:16])}</td><td>{E_(e['tool'])}</td><td>{E_(qlabel(e))}</td><td>{n}</td><td>{v}</td><td>{e['calls']}</td>"
                  f"<td><a href='{E_(e['ak'])}.json'>IIIF</a>{kvl(e['ak']) if n else ''}</td></tr>"
                  for e, a, n, v in sorted(rows, key=lambda r: r[0]["last"], reverse=True))
     open(os.path.join(qd, "index.html"), "w", encoding="utf-8").write(f"""<!DOCTYPE html><html lang="ko"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
