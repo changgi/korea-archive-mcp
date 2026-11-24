@@ -1373,6 +1373,23 @@
     "변환 'Seoul recapture 1950'"
    ],
    "level": "warn"
+  },
+  {
+   "id": "variants-era-year",
+   "tool": "cross_search",
+   "args": {
+    "query": "갑오개혁",
+    "sources": "tna",
+    "variants": true,
+    "max_per_source": 5
+   },
+   "must": [
+    "tna·Corea 1894:[1-9]"
+   ],
+   "must_not": [
+    "tna·Corea 1894:0"
+   ],
+   "level": "warn"
   }
  ]
 }

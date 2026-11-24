@@ -3311,6 +3311,7 @@ item_cd 5종(자료 성격별): ART 도설·회화 / ETC 두루마리·축 / DRR
           const re = new RegExp(`\\b${a}\\b`, 'i');
           if (re.test(eff)) vs.push([b, eff.replace(re, b)]);
         }
+        { const y = (eff.match(/\b(18[5-9]\d|190\d)\b/) || [])[1]; if (y) vs.push([`Corea ${y}`, `Corea ${y}`]); } // v2.98 개항기~대한제국기(1850~1909) 사건은 기관 색인이 사건명이 아니라 당대 국호+연도(TNA FO 405 'Corea … 1894' 실측) — 사건명 질의 0건 보완
         for (const src of ['tna', 'ia', 'nara', 'europeana']) {
           if (!want.includes(src)) continue;
           for (const [label, vq] of vs) jobs.push({ source: `${src}·${label}`, fn: () => COLLECT[src](vq, max_per_source) });
