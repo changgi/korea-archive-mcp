@@ -22,14 +22,11 @@ export const maxDuration = 60;
 // or vercel.json "regions". Overseas archives (NARA, TNA, Gallica, Europeana, archive.org) stay globally reachable.
 export const preferredRegion = 'icn1';
 
-const UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/126.0 Safari/537.36';
+// v2.36 정직 UA — 브라우저 위장 금지(CLAUDE.md 접근 원칙). 이 UA를 거부하는 기관은 우회하지 않고 health·source_profile에 '정직 UA 거부'로 표시하고 브라우저 경로를 안내한다.
+const UA = 'KoreaArchiveMCP/2.36 (+https://github.com/changgi/korea-archive-mcp; archival discovery; non-commercial research)';
 const FETCH_TIMEOUT = 20000;
-// Optional last-resort bypass for hosts that block cloud/datacenter IPs even from Seoul.
-// Set FETCH_PROXY_PREFIX to a read-through proxy that returns RAW content, e.g.
-//   "https://api.allorigins.win/raw?url="   (raw HTML, recommended for the gov scrapers)
-//   "https://r.jina.ai/"                    (uses the X-Return-Format:html header sent below)
-// Use "{url}" as a placeholder for the URL-encoded target; otherwise the target is appended.
-const PROXY = process.env.FETCH_PROXY_PREFIX || '';
+// v2.36 프록시 우회(FETCH_PROXY_PREFIX·allorigins·jina) 제거 — 접근 차단은 우회하지 않고 표시한다(CLAUDE.md).
+
 
 const text = (s) => ({ content: [{ type: 'text', text: s }] });
 const OK_B = 'https://www.overseaschf.or.kr'; // v2.11 국외소재문화유산재단 — robots.txt 'Disallow: /'(표시 대상 — 발굴 우선 원칙), 정직 UA·요청 최소
@@ -112,9 +109,8 @@ const errInfo = (e) => {
   const c = e && e.cause ? (e.cause.code || e.cause.message || String(e.cause)) : '';
   return `${(e && e.name) || 'Error'}: ${(e && e.message) || e}${c ? ` (${c})` : ''}`;
 };
-const proxied = (url) => (PROXY.includes('{url}') ? PROXY.replace('{url}', encodeURIComponent(url)) : PROXY + encodeURIComponent(url));
 
-// fetch with UA + timeout + one retry, then an optional proxy fallback for geo/ASN-blocked hosts.
+// fetch with honest UA + timeout + one retry. 차단(403 등)은 그대로 오류로 보고 — 우회 없음.
 async function robustFetch(url, headers = {}) {
   let lastErr;
   for (let attempt = 0; attempt < 2; attempt++) {
@@ -123,11 +119,6 @@ async function robustFetch(url, headers = {}) {
       if (!r.ok) throw new Error(`HTTP ${r.status}`);
       return r;
     } catch (e) { lastErr = e; if (attempt === 0) await sleep(300); }
-  }
-  if (PROXY) {
-    const r = await fetch(proxied(url), { headers: { 'User-Agent': UA, 'X-Return-Format': 'html', ...headers }, signal: AbortSignal.timeout(FETCH_TIMEOUT) });
-    if (!r.ok) throw new Error(`HTTP ${r.status} (via proxy)`);
-    return r;
   }
   throw new Error(errInfo(lastErr));
 }
@@ -466,7 +457,7 @@ function nedbFileSearch(recs, q, n) {
 // ── 한국고문서자료관(한국학중앙연구원, archive.aks.ac.kr) — 소장처 172곳 (2026-11-17 treeAjax 전수 실측) ──
 // 형식: id|상위경로(upPath)|분류|소장처명. 트리·문서목록은 라이브 조회, 이미지 일괄 수집은 로컬 전용.
 const AKS_BASE = 'https://archive.aks.ac.kr';
-const AKS_UA = { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)', 'Referer': AKS_BASE + '/viewer/viewer.do' };
+const AKS_UA = { 'User-Agent': UA, 'Referer': AKS_BASE + '/viewer/viewer.do' }; // v2.36 정직 UA
 const AKS_CAT = `L011146|01^0111|문중>서울특별시|서울 마포 반남박씨 대종중
 L011143|01^0111|문중>서울특별시|서울 마포 성주이씨 대종회
 L011144|01^0111|문중>서울특별시|서울 원주김씨 두암 김응남 종가
