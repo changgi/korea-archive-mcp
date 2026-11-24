@@ -1,8 +1,9 @@
 name: ledger
-# 발견 누적 원장 — 매일 00:17 KST, 서버 날짜 함(3일 보관)을 꺼내 docs/data/에 병합·커밋 → Pages 공개
+# 발견 누적 원장 — 매일 00:17·12:47 KST, 서버 날짜 함(3일 보관)을 꺼내 docs/data/에 병합·커밋 → Pages 공개
 on:
   schedule:
     - cron: '17 15 * * *'
+    - cron: '47 3 * * *'   # v2.81 이중 일정 — GitHub 정기 실행은 혼잡 시 건너뛰기도 한다(날짜 함 3일 보관 — 연속 누락은 유실). 처리 위치(_state.json)로 중복 없음
   workflow_dispatch:
 permissions:
   contents: write
