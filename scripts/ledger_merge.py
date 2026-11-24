@@ -939,6 +939,12 @@ DISTS = [("discovered.csv", "text/csv", "발견 기록 표(CSV)"), ("discovered.
          ("fixity_changes.json", "application/json", "원문 고정성 변경 이력"), ("loss_guard.json", "application/json", "불삭제 검사 — 되살린 값 기록"), ("queries/index.json", "application/json", "질의·회신 축적 색인"),
          ("queries/probe/index.json", "application/json", "자동 점검 질의·회신 색인"), ("records/index.json", "application/json", "일일 기록물 등록부 해시 사슬")]
 
+def iiif_kind(o):
+    m = (o.get("iiif") or "") if not o.get("iiif_status") else ""
+    if not m: return "기록 봉투(이미지 없음 — 기록 정보만 담은 브리지)"
+    if re.search(r"korea-archive-mcp\.vercel\.app/iiif/|changgi\.github\.io/korea-archive-mcp/", m): return "원 기관 이미지로 구축(KOREA ARCHIVE 브리지)"
+    return "원 기관 제공 매니페스트"
+
 def rec_slug(k):
     import hashlib
     return hashlib.sha1(k.encode("utf-8")).hexdigest()[:12]
@@ -1321,11 +1327,15 @@ def write_quality(recs):
     """v2.39 데이터 품질 시계열 — 기록 항목별 채움률을 날마다 쌓는다(지우지 않음, 같은 날은 갱신). 떨어지면 수집기·판독기 이상 신호."""
     R = [o for o in recs if o.get("entry_type", "기록") == "기록"]
     F = {"요약": lambda o: o.get("summary"), "요약(메타 합성 포함)": lambda o: o.get("summary") or o.get("summary_composed"), "연대": lambda o: decade(o), "기관 계층": lambda o: o.get("partOf"), "계층(파생 포함)": lambda o: o.get("partOf") or o.get("partOf_derived"),
-         "기관 IIIF": lambda o: o.get("iiif") and not o.get("iiif_status"), "IIIF(브리지 포함)": lambda o: o.get("iiif") or o.get("iiif_built"), "썸네일": lambda o: o.get("thumb_ok"), "권리 표시": lambda o: o.get("rights_view"),
+         "기관 IIIF": lambda o: o.get("iiif") and not o.get("iiif_status"), "IIIF(원 기관 제공)": lambda o: iiif_kind(o).startswith("원 기관 제공"), "IIIF(원 기관 이미지로 구축)": lambda o: iiif_kind(o).startswith("원 기관 이미지"),
+         "IIIF(실물 이미지 — 제공+구축)": lambda o: not iiif_kind(o).startswith("기록 봉투"), "IIIF(브리지 포함)": lambda o: o.get("iiif") or o.get("iiif_built"), "썸네일": lambda o: o.get("thumb_ok"), "권리 표시": lambda o: o.get("rights_view"),
          "메타": lambda o: o.get("meta"), "원문 지문": lambda o: o.get("fixity"), "발견 경로": lambda o: o.get("found_by"), "발견 경로(파생 포함)": lambda o: o.get("found_by") or (o.get("found_by_derived") or {}).get("tools")}
     day = dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%d")
     snap = {"records": len(R), **{k: round(100 * sum(1 for o in R if f(o)) / max(1, len(R)), 1) for k, f in F.items()}}
     p = os.path.join(D, "quality.json"); Qj = json.load(open(p, encoding="utf-8")) if os.path.exists(p) else {"note": "기록 항목별 채움률(%) 일별 시계열 — 지우지 않는다", "daily": {}}
+    Qj["definitions"] = {"기관 IIIF": "iiif 필드가 있는 기록 — 원 기관 제공과 우리 브리지(원 기관 이미지로 구축)를 함께 센다(v2.75 이전부터의 시계열이라 이름 유지)",
+                         "IIIF(원 기관 제공)": "원 기관이 직접 공개한 IIIF 매니페스트", "IIIF(원 기관 이미지로 구축)": "KOREA ARCHIVE 브리지가 원 기관 이미지·메타로 만든 매니페스트",
+                         "IIIF(실물 이미지 — 제공+구축)": "위 둘의 합 — 나머지는 이미지 없는 기록 봉투", "IIIF(브리지 포함)": "기록 봉투까지 포함 — 모든 기록이 IIIF로 열림"}  # v2.75
     Qj["daily"][day] = snap; Qj["daily"] = dict(sorted(Qj["daily"].items())); Qj["latest"] = {"day": day, **snap}
     json.dump(Qj, open(p, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
     return snap
@@ -1563,7 +1573,7 @@ def main():
             o["found_by_derived"] = {"basis": "원장 적재 기록(질의 지문 축적 이전 — 질의 원문은 없음)", "tools": o.get("tools") or [], "sources": o.get("sources") or [],
                                      "first_seen": o.get("first_seen", ""), "last_seen": o.get("last_seen", ""), "days_total": o.get("days_total", 0), "seen": o.get("seen", 0)}
         else: o.pop("found_by_derived", None)
-        o["iiif_kind"] = "기관 매니페스트" if o.get("iiif") else "브리지 매니페스트(기록 봉투)"
+        o["iiif_kind"] = iiif_kind(o)  # v2.75 원 기관 제공 · 원 기관 이미지로 구축 · 기록 봉투 — 우리 브리지를 '기관'으로 부르던 표기 교정
         o["iiif_built"] = "" if (o.get("iiif") and not o.get("iiif_status")) else leaf_manifest(o)  # v2.52 기관 매니페스트가 비공개 응답이면 브리지로 대체(기관 주소는 보존)
     with open(lp, "w", encoding="utf-8") as f:
         for o in recs: f.write(json.dumps(o, ensure_ascii=False, separators=(",", ":")) + "\n")
