@@ -824,7 +824,7 @@ const COLLECT = {
     const key = process.env.NLK_API_KEY; if (!key) return [];
     // 실측 7.7s(최저속 축) — 6h TTL 캐시(마커 <item> — 정상 결과만)
     const xml = await cachedText(`nlk:${q}:${n}`, 6 * 3600e3, () => gtext(`https://www.nl.go.kr/NL/search/openApi/search.do?key=${encodeURIComponent(key)}&apiType=xml&srchTarget=total&kwd=${encodeURIComponent(q)}&pageSize=${n}&pageNum=1`), '<item>');
-    return (xml.match(/<item>[\s\S]*?<\/item>/g) || []).map((it) => { let lk = xtag(it, 'detail_link') || xtag(it, 'org_link'); if (lk.startsWith('/')) lk = 'https://www.nl.go.kr' + lk; return { title: xtag(it, 'title_info') || xtag(it, 'title'), date: xtag(it, 'pub_year_info'), id: xtag(it, 'type_name'), ...(xtag(it, 'type_name') ? { series: xtag(it, 'type_name') } : {}), url: lk }; });
+    return (xml.match(/<item>[\s\S]*?<\/item>/g) || []).map((it) => { let lk = xtag(it, 'detail_link') || xtag(it, 'org_link'); if (lk.startsWith('/')) lk = 'https://www.nl.go.kr' + lk; return { title: xtag(it, 'title_info') || xtag(it, 'title'), date: xtag(it, 'pub_year_info'), id: ((lk.match(/viewKey=([^&#\s]+)/) || [])[1] || xtag(it, 'control_no') || ''), ...(xtag(it, 'type_name') ? { series: xtag(it, 'type_name') } : {}), url: lk }; }); // v2.67 id=기록 고유번호(viewKey) — 종전 자료유형이라 원장에서 같은 유형의 다른 기록이 한 key로 합쳐지던 결함
   },
   nedb: async (q, n) => { // v1.93: 개방파일 인덱스 미설정이면 한국사DB 통합검색 라이브 조회 — 검색어가 등장하는 DB(편찬 자료군)를 기록 단위 진입점으로 수집(0건 고정 해소)
     const recs = await loadNedbIndex(); if (recs) return nedbFileSearch(recs, q, n);

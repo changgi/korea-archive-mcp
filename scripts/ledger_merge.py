@@ -462,7 +462,56 @@ table{{width:100%;border-collapse:collapse;font-size:14px;margin-top:8px}}td,th{
 
 def key_of(r):
     h = (r.get("s") or ["?"])[0].split("·")[0]
-    return f"{h}:{r.get('i') or r.get('u') or r.get('t', '')[:80]}"
+    i = r.get("i") or ""
+    if h == "nlk" and i and not re.search(r"\d", i) and r.get("u"):  # v2.67 nlk 옛 수집기의 분류어 id(자료유형) — 기록 번호(viewKey)로. 다른 수집처는 숫자 없는 고유 식별자(IA 등)를 쓰므로 적용하지 않는다
+        vk = re.search(r"viewKey=([^&#\s]+)", r["u"]); i = vk.group(1) if vk else ""
+    return f"{h}:{i or r.get('u') or r.get('t', '')[:80]}"
+
+def recover_from_replies(led):
+    """v2.67 축적된 회신 원문(queries/*.jsonl.gz)에서 원장에 없는 nlk 기록을 복원 — 옛 분류어 key 충돌로 첫 기록만 남고 사라졌던 기록.
+    회신에 실제로 있던 값(제목·날짜·URL)만 옮기고, 복원 근거(질의 지문·회신 판)를 recovered에 남긴다. 사용자 질의만(점검 질의 제외)."""
+    import gzip
+    qd = os.path.join(D, "queries"); add = 0
+    rx = re.compile(r"^- \[([a-z0-9_·+]*nlk[a-z0-9_·+]*)\] (.+?)(?: \(([^()]{2,24})\))? (https://www\.nl\.go\.kr/NL/contents/search\.do#viewKey=([^&\s]+)&viewType=\w+)\s*$", re.M)
+    for f in sorted(os.listdir(qd)) if os.path.isdir(qd) else []:
+        if not f.endswith(".jsonl.gz"): continue
+        for ln in gzip.open(os.path.join(qd, f), "rt", encoding="utf-8"):
+            if not ln.strip(): continue
+            q = json.loads(ln)
+            if not q.get("z") or "ledger" in str((q.get("args") or {}).get("sources", "")): continue
+            try: body = zlib.decompress(base64.b64decode(q["z"] + "=" * (-len(q["z"]) % 4)), -15).decode("utf-8", "replace")
+            except Exception: continue
+            if "nl.go.kr" not in body: continue
+            rows = [(m[1], m[2], m[3] or "", m[4], m[5]) for m in rx.finditer(body)]
+            for r in _csv_rows(body):
+                vk = re.search(r"viewKey=([^&\s]+)", r.get("url") or "")
+                if vk and "nlk" in (r.get("sources") or ""): rows.append((r.get("sources"), r.get("title", ""), r.get("date", ""), r["url"], vk.group(1)))
+            for srcs, title, date, url, vk in rows:
+                k = f"nlk:{vk}"
+                if k in led: continue
+                ak = q.get("ak") or arg_key(q.get("tool", ""), q.get("args") or {})
+                led[k] = {"key": k, "sources": ["nlk"], "title": html.unescape(title.strip())[:300], "date": date.strip(), "id": vk, "url": url, "partOf": "", "media": "", "sameAs": "",
+                          "first_seen": q.get("first", ""), "last_seen": q.get("last", q.get("first", "")), "seen": 1, "tools": [q.get("tool", "cross_search")],
+                          "days": {q.get("first", "")[:10]: 1}, "days_total": 1, "formats": {}, "max_cross": len(str(srcs).split("+")), "found_by": [ak],
+                          "found_by_basis": {ak: "회신 본문 대조(복원)"}, "recovered": f"v2.67 질의 회신 원문에서 복원 — 옛 분류어 key 충돌로 원장에 없던 기록(queries/{f} k={q.get('k', '')})"}
+                add += 1
+    return add
+
+def rekey_collisions(led):
+    """v2.67 옛 규칙으로 분류어 key(nlk:기사 등)를 받은 항목을 올바른 key로 옮긴다 — 지우지 않고 이름만 바꾸며, 옛 key는 key_aliases에 남긴다.
+    발견 횟수가 2 이상이면 같은 유형의 다른 기록이 합쳐졌을 수 있음을 merge_note로 밝힌다(합쳐진 기록의 URL은 첫 것만 남아 있음)."""
+    moved = 0
+    for k in [k for k in led if ":" in k]:
+        h, i = k.split(":", 1); o = led[k]
+        if i and not re.search(r"\d", i) and not i.startswith("http") and o.get("url") and h in ("nlk",):
+            vk = re.search(r"viewKey=([^&#\s]+)", o["url"])  # 고친 수집기와 같은 key(nlk:<viewKey>) — 이후 발견이 이 항목으로 모이게
+            nk = f"{h}:{vk.group(1)}" if vk else key_of({"s": [h], "i": "", "u": o["url"]})
+            o["id"] = vk.group(1) if vk else o.get("id", "")
+            if nk == k or nk in led: continue
+            o["key"] = nk; o.setdefault("key_aliases", []).append(k)
+            if o.get("seen", 1) > 1: o["merge_note"] = f"v2.67 이전 key 충돌({k}) — 같은 자료유형의 다른 기록 최대 {o['seen']}회분이 이 항목에 합쳐졌을 수 있음(남은 URL은 첫 기록). 이후 발견은 기록별 key로 분리"
+            led[nk] = led.pop(k); moved += 1
+    return moved
 
 def tok(env):
     c = zlib.compressobj(9, zlib.DEFLATED, -15)
@@ -1212,6 +1261,10 @@ def main():
                 o.setdefault("days", {o.get("first_seen", "")[:10]: o.get("seen", 1)}); o.setdefault("days_total", len(o["days"]))
                 o.setdefault("formats", {}); o.setdefault("max_cross", len(o.get("sources") or []))
                 led[o["key"]] = o
+    nrk = rekey_collisions(led)
+    if nrk: print(f"분류어 key 이동(v2.67) {nrk}건 — 지우지 않고 key_aliases에 옛 key 보존")
+    nrc = recover_from_replies(led)
+    if nrc: print(f"회신 원문에서 복원(v2.67) {nrc}건")
     today = dt.datetime.now(dt.timezone.utc).date()
     new_batches = new_recs = 0
     up = os.path.join(D, "usage.json"); usage = json.load(open(up)) if os.path.exists(up) else {"daily": {}, "formats": {}}
@@ -1316,7 +1369,7 @@ def main():
         o["iiif_built"] = "" if (o.get("iiif") and not o.get("iiif_status")) else leaf_manifest(o)  # v2.52 기관 매니페스트가 비공개 응답이면 브리지로 대체(기관 주소는 보존)
     with open(lp, "w", encoding="utf-8") as f:
         for o in recs: f.write(json.dumps(o, ensure_ascii=False, separators=(",", ":")) + "\n")
-    cols = ["key", "entry_type", "found_by_basis", "summary_composed", "rights_view", "rights_basis", "fixity", "defect_note", "link_note", "sources", "title", "date", "date_derived", "date_basis", "id", "url", "partOf", "partOf_derived", "media", "sameAs", "iiif", "iiif_status", "iiif_built", "iiif_kind", "found_by", "found_by_derived", "first_seen", "last_seen", "seen", "seen_7d", "seen_30d", "days_total", "formats", "tools", "max_cross", "trend", "rank", "score", "summary", "summary_basis", "rights", "thumb", "meta", "meta_basis", "authority"]
+    cols = ["key", "entry_type", "found_by_basis", "summary_composed", "rights_view", "rights_basis", "fixity", "defect_note", "link_note", "sources", "title", "date", "date_derived", "date_basis", "id", "url", "partOf", "partOf_derived", "media", "sameAs", "iiif", "iiif_status", "iiif_built", "iiif_kind", "found_by", "found_by_derived", "first_seen", "last_seen", "seen", "seen_7d", "seen_30d", "days_total", "formats", "tools", "max_cross", "trend", "rank", "score", "summary", "summary_basis", "rights", "thumb", "meta", "meta_basis", "authority", "key_aliases", "merge_note", "recovered"]
     fmtv = lambda v: json.dumps(v, ensure_ascii=False, separators=(",", ":")) if isinstance(v, list) and v and isinstance(v[0], dict) else " | ".join(f"{a}: {b}" for a, b in v) if isinstance(v, list) and v and isinstance(v[0], list) else (" ".join(f"{k}:{n}" for k, n in sorted(v.items(), key=lambda kv: -kv[1])) if isinstance(v, dict) and all(isinstance(x, (int, float)) for x in v.values()) else json.dumps(v, ensure_ascii=False, separators=(",", ":")) if isinstance(v, dict) else ("+".join(v) if isinstance(v, list) else v))
     with open(os.path.join(D, "discovered.csv"), "w", encoding="utf-8-sig", newline="") as f:
         w = csv.writer(f); w.writerow(cols)
