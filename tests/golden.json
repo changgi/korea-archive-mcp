@@ -1053,6 +1053,21 @@
     "HTTP 403"
    ],
    "level": "error"
+  },
+  {
+   "id": "ledger-subject-search",
+   "tool": "cross_search",
+   "args": {
+    "query": "중공군개입",
+    "sources": "ledger",
+    "max_per_source": 5,
+    "format": "csv"
+   },
+   "must": [
+    "rec:ledger:earchive:"
+   ],
+   "level": "warn",
+   "note": "v2.42 원장 검색이 기관 주제어(전자사료관 '주제어')까지 본다 — 제목에 없는 주제어로 기록이 나와야"
   }
  ]
 }
