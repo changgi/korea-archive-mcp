@@ -3301,6 +3301,10 @@ item_cd 5종(자료 성격별): ART 도설·회화 / ETC 두루마리·축 / DRR
         : sources.split(',').map((s) => s.trim().toLowerCase()).filter((s) => COLLECT[s] && !s.startsWith('_'));
       if (!want.length) return text('sources: "all" 또는 ' + Object.keys(COLLECT).filter((k) => !k.startsWith('_')).join(','));
       const jobs = want.map((s) => ({ source: s, fn: () => COLLECT[s](query, max_per_source) }));
+      if (!variants && want.includes('tna')) { // v2.99 기본 검색에도 — 개항기~대한제국기(1850~1909) 연도가 있는 변환어면 TNA에 당대 국호+연도 1건 추가(실측: 사건명 0건, 'Corea 1876'은 FO 405 강화도조약 문서철)
+        const y = ((koToEn(query) || '').match(/\b(18[5-9]\d|190\d)\b/) || [])[1];
+        if (y) jobs.push({ source: `tna·Corea ${y}`, fn: () => COLLECT.tna(`Corea ${y}`, max_per_source) });
+      }
       if (variants) { // 당대 표기 자동 팬아웃 — query_bank '열한 겹의 벽' 지식의 도구화
         const eff = koToEn(query) || query;
         const SUBS = [['Korean', 'Corean'], ['Korea', 'Corea'], ['Korea', 'Chosen'], ['Seoul', 'Keijo'], ['Pusan', 'Fusan'],

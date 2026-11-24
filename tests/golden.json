@@ -1390,6 +1390,22 @@
     "tna·Corea 1894:0"
    ],
    "level": "warn"
+  },
+  {
+   "id": "default-era-year-tna",
+   "tool": "cross_search",
+   "args": {
+    "query": "강화도조약",
+    "sources": "tna",
+    "max_per_source": 5
+   },
+   "must": [
+    "tna·Corea 1876:[1-9]"
+   ],
+   "must_not": [
+    "tna·Corea 1876:0"
+   ],
+   "level": "warn"
   }
  ]
 }
