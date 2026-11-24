@@ -1,5 +1,5 @@
 {
-"updated": "2026-11-24T15:28:16Z",
+"updated": "2026-11-24T15:36:04Z",
 "note": "구간 = 연대(4자리 연도·8자리 날짜·연호 연도 明治·大正·昭和·光武·隆熙·檀紀 환산) → 세기 → 왕조·시대명. 근거 순서 date → 제목 → 메타(생산·시대·출판). 세기·시대 구간은 시간축 근사 정렬",
 "timeline": [
 {
@@ -1027,14 +1027,15 @@
 },
 {
 "decade": "1970년대",
-"records": 3,
+"records": 4,
 "by_source": {
 "nzarch": 1,
 "earchive": 1,
-"ia": 1
+"ia": 1,
+"ktv": 1
 },
 "by_kind": {
-"document": 3
+"document": 4
 },
 "samples": [
 {
@@ -1051,14 +1052,19 @@
 "title": "Documents On The Struggle For Democracy In Korea",
 "url": "https://archive.org/details/documentsonstrug0000emer",
 "iiif": "https://iiif.archive.org/iiif/3/documentsonstrug0000emer/manifest.json"
+},
+{
+"title": "상기하자 6.25",
+"url": "https://www.ehistory.go.kr/view/movie?mediasrcgbn=KV&mediagbn=MH&mediaid=11359&mediadtl=25509",
+"iiif": "https://korea-archive-mcp.vercel.app/iiif/rec/q1YqVrKKVsouKVOK1VEqUbJSetPc-GrHhrdTZ7yZN0HBTM_IVElHKQUobmhpbg5kZgKZQKoUSGWUlBQUW-nrl5eX66VmZBaX5BdV6qXn62UX6Zdlppbr5-YDKfvc1JTMxOKi5PSkPFvvMDUwF8T29YCwM1NsDQ2NTS0hvJSSHFsjU1MDS6AdBSDXzGgEOkjhUcMuhddrdrydOQUoACSBsnlAWZCzdZRyIU4qBFKvN8x5tWmNwuuOljcLGhXezJ7wZt5SoFQiyGNGBkZmuoaGukYmIQamViYGVgaGSrUA/manifest.json"
 }
 ]
 },
 {
 "decade": "1980년대",
-"records": 7,
+"records": 12,
 "by_source": {
-"ktv": 1,
+"ktv": 6,
 "nzarch": 1,
 "europeana": 1,
 "gallica": 1,
@@ -1066,7 +1072,8 @@
 "nlk": 1
 },
 "by_kind": {
-"document": 7
+"document": 11,
+"motion_picture": 1
 },
 "samples": [
 {
@@ -1098,18 +1105,18 @@
 },
 {
 "decade": "1990년대",
-"records": 23,
+"records": 25,
 "by_source": {
 "archives": 6,
 "commons": 1,
 "ndl": 1,
 "nlk": 3,
-"ktv": 12
+"ktv": 14
 },
 "by_kind": {
-"document": 15,
+"document": 16,
 "graphic": 4,
-"motion_picture": 4
+"motion_picture": 5
 },
 "samples": [
 {
@@ -1278,7 +1285,7 @@
 },
 {
 "decade": "연대 미상",
-"records": 64,
+"records": 93,
 "by_source": {
 "nara": 10,
 "seoul": 12,
@@ -1286,7 +1293,7 @@
 "i815": 2,
 "jacar": 1,
 "nrich": 5,
-"nedb": 2,
+"nedb": 31,
 "earchive": 2,
 "jsg": 7,
 "kyudb": 1,
@@ -1297,7 +1304,7 @@
 "nlk": 3
 },
 "by_kind": {
-"document": 45,
+"document": 74,
 "graphic": 16,
 "motion_picture": 3
 },

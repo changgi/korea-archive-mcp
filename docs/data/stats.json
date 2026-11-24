@@ -1,16 +1,17 @@
 {
- "updated": "2026-11-24T15:28:16Z",
- "records": 428,
+ "updated": "2026-11-24T15:36:04Z",
+ "records": 465,
  "new_records": 0,
  "new_batches": 0,
  "by_source": {
   "nrich": 43,
   "archives": 40,
+  "nedb": 36,
   "okchf": 35,
   "aks": 32,
   "commons": 31,
+  "ktv": 29,
   "ia": 23,
-  "ktv": 21,
   "nara": 20,
   "ndl": 16,
   "i815": 13,
@@ -25,7 +26,6 @@
   "gallica": 8,
   "earchive": 8,
   "dnz": 8,
-  "nedb": 7,
   "koreanwar": 7,
   "jsg": 7,
   "kyudb": 5,
@@ -44,7 +44,7 @@
   "iiif": 3
  },
  "queries": {
-  "added": 2,
+  "added": 0,
   "total": 71,
   "calls": 89,
   "by_tool": {
@@ -56,7 +56,7 @@
  },
  "repeat_records": 127,
  "entry_types": {
-  "기록": 409,
+  "기록": 446,
   "소장처(컬렉션)": 5,
   "검색 안내": 7,
   "결함 출력": 7
