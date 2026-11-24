@@ -860,6 +860,19 @@ def facet_terms(k, v, fac):
     if v.startswith("http"): return []
     return [(fac, t.strip()) for t in re.split(r"[;；,，·]|\s>\s|\s›\s", v) if 1 < len(t.strip()) <= 40]
 
+FACET_SLUG = {"주제": "subject", "장소": "place", "분류": "class", "시대": "period", "매체": "medium"}
+
+def concept_id(fac, term):
+    return f"{PAGES}subjects.jsonld#{FACET_SLUG.get(fac, 'x')}/" + urllib.parse.quote(term, safe="")
+
+def record_concepts(o):
+    """기록 → (패싯, 용어) 목록 — merge_subjects와 같은 규칙(기관 표기 그대로)."""
+    out = []
+    for k, v in o.get("meta") or []:
+        fac = next((f for f, rx in FACETS if rx.search(str(k))), None)
+        if fac: out += [x for x in facet_terms(str(k), v, fac) if x not in out]
+    return out
+
 def merge_subjects(recs):
     """v2.42 주제 색인 — 기관이 붙인 주제어·색인어·지명·분류·시대·매체를 패싯별 용어 사전으로 축적. 지우지 않음(기록 수는 줄지 않음)."""
     p = os.path.join(D, "subjects.json")
@@ -880,6 +893,17 @@ def merge_subjects(recs):
     S["totals"] = {f: len(v) for f, v in S["facets"].items()}
     S["note"] = "원 기관 메타의 주제·지명·분류·시대·매체 표기 그대로(번역·정규화 없음). records = 그 용어가 붙은 원장 기록 key. 지우지 않는다"
     json.dump(S, open(p, "w", encoding="utf-8"), ensure_ascii=False, indent=0)
+    # v2.43 SKOS 개념 체계 — 패싯마다 ConceptScheme, 용어마다 Concept(prefLabel 기관 표기·출처 기관·기록 수). RiC-O 기록이 이 개념을 가리킨다
+    graph = []
+    for f, terms in S["facets"].items():
+        sch = f"{PAGES}subjects.jsonld#{FACET_SLUG.get(f, 'x')}"
+        graph.append({"@id": sch, "@type": "skos:ConceptScheme", "skos:prefLabel": {"@value": f"KOREA ARCHIVE 주제 색인 — {f}", "@language": "ko"},
+                      "dct:description": "원 기관 메타의 표기를 그대로 모은 개념 체계(번역·정규화 없음)"})
+        for t, e in terms.items():
+            graph.append({"@id": concept_id(f, t), "@type": "skos:Concept", "skos:prefLabel": t, "skos:inScheme": {"@id": sch},
+                          "dct:source": e["sources"], "skos:note": f"원장 기록 {len(e['records'])}건 · 메타 키 {', '.join(e['keys'])} · 처음 {e['first'][:10]}"})
+    json.dump({"@context": {"skos": "http://www.w3.org/2004/02/skos/core#", "dct": "http://purl.org/dc/terms/"}, "@graph": graph},
+              open(os.path.join(D, "subjects.jsonld"), "w", encoding="utf-8"), ensure_ascii=False)
     E_ = html.escape; by = {o["key"]: o for o in recs}
     sec = []
     for f, terms in S["facets"].items():
@@ -1041,6 +1065,8 @@ def main():
         mf = o.get("iiif") or o.get("iiif_built")
         graph.append({"@id": o.get("url") or f"rec:{o['key']}", "@type": "rico:Record", "rico:title": o["title"], **({"rico:identifier": o["id"]} if o.get("id") else {}),
                       **({"rico:isAssociatedWithDate": o["date"]} if o.get("date") else {}), "rico:isOrWasIncludedIn": {"@id": sid},
+                      **({"rico:hasOrHadSubject": [{"@id": concept_id(f, t)} for f, t in record_concepts(o) if f != "장소"]} if any(f != "장소" for f, t in record_concepts(o)) else {}),
+                      **({"rico:isAssociatedWithPlace": [{"@id": concept_id(f, t)} for f, t in record_concepts(o) if f == "장소"]} if any(f == "장소" for f, t in record_concepts(o)) else {}),
                       **({"owl:sameAs": o["sameAs"]} if o.get("sameAs") else {}), **({"rico:hasOrHadInstantiation": {"@id": mf, "@type": "rico:Instantiation", "rico:title": o["iiif_kind"]}} if mf else {}), **({"rico:scopeAndContent": o["summary"]} if o.get("summary") else {}),
                       "prov:wasGeneratedBy": {"@type": "prov:Activity", "prov:label": "KOREA ARCHIVE 통합검색 발견", "prov:startedAtTime": o["first_seen"], "prov:used": o["sources"],
                                              **({"prov:wasInformedBy": [{"@id": f"https://changgi.github.io/korea-archive-mcp/data/provenance.json#{ak}"} for ak in o["found_by"]]} if o.get("found_by") else {})}})
@@ -1096,7 +1122,7 @@ details{{font-size:12px}}dl{{display:grid;grid-template-columns:auto 1fr;gap:2px
 table{{width:100%;border-collapse:collapse;font-size:14px}}td,th{{border-bottom:1px solid #2a2d35;padding:6px;text-align:left}}</style>
 <main><h1>발견 누적 원장</h1><p>KOREA ARCHIVE 통합검색 사용자가 도구로 발굴한 기록이 매일 이곳에 쌓입니다(검색어·사용자 정보 없음). 기록 <b>{st['records']:,}</b>건 · 마지막 갱신 {st['updated']} · 이번 갱신 신규 {new_recs}건 · 내용·메타정보 보강 {enr}건 · 썸네일 {thn}건</p>
 <p>{srcs}</p>
-<p><a class="b0" href="discovered.csv">CSV 내려받기</a><a class="b0" href="discovered.jsonl">JSONL</a><a class="b0" href="discovered.jsonld">RiC-O JSON-LD</a><a class="b0" href="../kv.html?manifest=https://changgi.github.io/korea-archive-mcp/data/collection.json">KV로 최근 300건 연속 보기</a><a class="b0" href="tree.html">계층구조도</a><a class="b0" href="queries/index.json">질의·회신 축적</a><a class="b0" href="classifications.json">분류 사전</a><a class="b0" href="provenance.json">발견 경로(질의↔기록)</a><a class="b0" href="q/index.html">질의별 발굴 기록(IIIF)</a><a class="b0" href="quality.json">데이터 품질 추이</a><a class="b0" href="subjects.html">주제 색인</a><a class="b0" href="fixity_changes.json">원문 변경 감시</a><a class="b0" href="feed.xml">새 발견 구독(Atom)</a><a class="b0" href="records.csl.json">인용 CSL-JSON(Zotero)</a><a class="b0" href="records.ris">인용 RIS(EndNote)</a><a class="b0" href="timeline.html">연대 타임라인</a><a class="b0" href="nrich/index.html">연구원 연구DB IIIF 계층</a><a class="b0" href="popular.csv">자주 활용 TOP 200</a><a class="b0" href="stats.json">집계</a></p>
+<p><a class="b0" href="discovered.csv">CSV 내려받기</a><a class="b0" href="discovered.jsonl">JSONL</a><a class="b0" href="discovered.jsonld">RiC-O JSON-LD</a><a class="b0" href="../kv.html?manifest=https://changgi.github.io/korea-archive-mcp/data/collection.json">KV로 최근 300건 연속 보기</a><a class="b0" href="tree.html">계층구조도</a><a class="b0" href="queries/index.json">질의·회신 축적</a><a class="b0" href="classifications.json">분류 사전</a><a class="b0" href="provenance.json">발견 경로(질의↔기록)</a><a class="b0" href="q/index.html">질의별 발굴 기록(IIIF)</a><a class="b0" href="quality.json">데이터 품질 추이</a><a class="b0" href="subjects.html">주제 색인</a><a class="b0" href="subjects.jsonld">주제 SKOS</a><a class="b0" href="fixity_changes.json">원문 변경 감시</a><a class="b0" href="feed.xml">새 발견 구독(Atom)</a><a class="b0" href="records.csl.json">인용 CSL-JSON(Zotero)</a><a class="b0" href="records.ris">인용 RIS(EndNote)</a><a class="b0" href="timeline.html">연대 타임라인</a><a class="b0" href="nrich/index.html">연구원 연구DB IIIF 계층</a><a class="b0" href="popular.csv">자주 활용 TOP 200</a><a class="b0" href="stats.json">집계</a></p>
 <p style="font-size:13px;color:#9b9a93">주요 내용·메타정보·썸네일은 기관 IIIF·우리 브리지 매니페스트를 하루 한 번 판독해 채웁니다(하루 상한·순차 요청). 썸네일은 재이용 가능 표시가 확인된 것만 싣고, 포로·사망자·묘지·수형자 관련 기록과 허가가 필요한 이미지는 링크만 둡니다. 권리는 원 기관 표기를 따릅니다 — 게재 전 judge_rights로 확인. 모든 변경은 저장소 git 이력(docs/data/)에 남습니다.</p>
 <h2>자주 활용되는 기록 TOP 30</h2><p style="font-size:13px">점수 = 최근 30일 발견×2 + 전체 발견 + 발견된 날 수×3 + 교차확인 기관 수 가중. 자동 검사 트래픽 제외.</p><div class="g">{prow}</div>
 <h2>일별 활용(최근 14일)</h2><table><tr><th>날짜</th><th>검색 묶음</th><th>발견 기록</th><th>신규 기록</th></tr>{urow}</table><p style="font-size:13px">형식별 누계: {E_(fmtv(usage['formats']))} · <a href="usage.json">usage.json</a></p>
