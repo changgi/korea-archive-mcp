@@ -1,6 +1,6 @@
 {
- "updated": "2026-11-24T15:15:01Z",
- "records": 422,
+ "updated": "2026-11-24T15:28:16Z",
+ "records": 428,
  "new_records": 0,
  "new_batches": 0,
  "by_source": {
@@ -15,6 +15,7 @@
   "ndl": 16,
   "i815": 13,
   "seoul": 13,
+  "nlk": 11,
   "oldnews": 11,
   "tna": 10,
   "jacar": 9,
@@ -28,7 +29,6 @@
   "koreanwar": 7,
   "jsg": 7,
   "kyudb": 5,
-  "nlk": 5,
   "heritage": 5,
   "nlna": 5,
   "nzarch": 5,
@@ -44,11 +44,11 @@
   "iiif": 3
  },
  "queries": {
-  "added": 0,
-  "total": 69,
-  "calls": 87,
+  "added": 2,
+  "total": 71,
+  "calls": 89,
   "by_tool": {
-   "nedb_search": 53,
+   "nedb_search": 55,
    "cross_search": 23,
    "source_profile": 8,
    "seoul_archives_search": 3
@@ -56,7 +56,7 @@
  },
  "repeat_records": 127,
  "entry_types": {
-  "기록": 403,
+  "기록": 409,
   "소장처(컬렉션)": 5,
   "검색 안내": 7,
   "결함 출력": 7
