@@ -1,22 +1,22 @@
 {
- "updated": "2026-11-24T22:52:49Z",
- "records": 632,
- "new_records": 22,
- "new_batches": 1,
+ "updated": "2026-11-24T23:00:25Z",
+ "records": 685,
+ "new_records": 52,
+ "new_batches": 2,
  "by_source": {
-  "nara": 65,
-  "ia": 65,
-  "koreanwar": 46,
+  "nara": 77,
+  "ia": 73,
+  "koreanwar": 58,
   "nrich": 43,
+  "awm": 40,
   "archives": 40,
   "nedb": 36,
   "okchf": 35,
   "aks": 32,
   "commons": 31,
-  "awm": 30,
   "ktv": 28,
-  "tna": 20,
-  "europeana": 18,
+  "tna": 26,
+  "europeana": 23,
   "ndl": 16,
   "i815": 13,
   "seoul": 13,
@@ -39,17 +39,17 @@
  },
  "first": "2026-11-23T03:00:15Z",
  "formats": {
-  "text": 57,
+  "text": 59,
   "csv": 49,
   "iiif": 3
  },
  "queries": {
-  "added": 1,
-  "total": 90,
-  "calls": 108,
+  "added": 2,
+  "total": 92,
+  "calls": 110,
   "by_tool": {
    "nedb_search": 58,
-   "cross_search": 32,
+   "cross_search": 34,
    "source_profile": 9,
    "seoul_archives_search": 3,
    "nara_search": 2,
@@ -60,7 +60,7 @@
  },
  "repeat_records": 142,
  "entry_types": {
-  "기록": 613,
+  "기록": 666,
   "소장처(컬렉션)": 5,
   "검색 안내": 7,
   "결함 출력": 7
@@ -132,10 +132,10 @@
   },
   {
    "rank": 10,
-   "seen": 6,
+   "seen": 7,
    "days": 2,
-   "title": "[奎19604] 加士島屯土賭稅 節目 가사도둔토도세 절목 · 內藏院(朝鮮) 編/내장원(조선) 편",
-   "url": "https://kyudb.snu.ac.kr/book/view.do?book_cd=GK19604_00"
+   "title": "Korea: armistice negotiations",
+   "url": "https://discovery.nationalarchives.gov.uk/details/r/C3640680"
   }
  ]
 }

@@ -26,13 +26,15 @@
 "ia:111-adc-8297",
 "ia:111-adc-8305",
 "ia:111-adc-8389",
-"ia:111-adc-8582"
+"ia:111-adc-8582",
+"ia:111-lc-30456",
+"ia:cZz2ZbGZRdyX5VnyHAZQ3Dusjnccz4"
 ],
 "sources": [
 "ia"
 ],
 "first": "2026-11-23T03:00:40Z",
-"last": "2026-11-24T22:47:17Z",
+"last": "2026-11-24T22:56:56Z",
 "keys": [
 "mediatype"
 ]
@@ -48,13 +50,18 @@
 "ia:DTIC_ADA290790",
 "ia:2010-teaching-english-to-north-korean-refugees-in-south-korea",
 "ia:cia-readingroom-document-cia-rdp80-00809a000600280823-7",
-"ia:gov.gpo.fdsys.CHRG-107shrg86829"
+"ia:gov.gpo.fdsys.CHRG-107shrg86829",
+"ia:cia-readingroom-document-02001999",
+"ia:cia-readingroom-document-03004633",
+"ia:cia-readingroom-document-03159060",
+"ia:cia-readingroom-document-cia-rdp86t00608r000300020047-7",
+"ia:cia-readingroom-document-cia-rdp88g01117r000802600002-3"
 ],
 "sources": [
 "ia"
 ],
 "first": "2026-11-23T03:00:40Z",
-"last": "2026-11-24T22:47:17Z",
+"last": "2026-11-24T22:56:56Z",
 "keys": [
 "mediatype"
 ]
@@ -105,7 +112,8 @@
 "ia:111-adc-8297",
 "ia:111-adc-8305",
 "ia:111-adc-8389",
-"ia:111-adc-8582"
+"ia:111-adc-8582",
+"ia:111-lc-30456"
 ],
 "sources": [
 "ia"
@@ -120,13 +128,18 @@
 "records": [
 "ia:cia-readingroom-document-cia-rdp79-00927a004500030001-1",
 "ia:cia-readingroom-document-cia-rdp82-00457r007500490005-8",
-"ia:cia-readingroom-document-cia-rdp80-00809a000600280823-7"
+"ia:cia-readingroom-document-cia-rdp80-00809a000600280823-7",
+"ia:cia-readingroom-document-02001999",
+"ia:cia-readingroom-document-03004633",
+"ia:cia-readingroom-document-03159060",
+"ia:cia-readingroom-document-cia-rdp86t00608r000300020047-7",
+"ia:cia-readingroom-document-cia-rdp88g01117r000802600002-3"
 ],
 "sources": [
 "ia"
 ],
 "first": "2026-11-23T03:00:40Z",
-"last": "2026-11-24T22:47:17Z",
+"last": "2026-11-24T22:56:56Z",
 "keys": [
 "subject"
 ]
@@ -1294,13 +1307,14 @@
 },
 "Stock Footage": {
 "records": [
-"ia:t3wXp7NIGMTGQvUfLLEtBtKYxxIEfc"
+"ia:t3wXp7NIGMTGQvUfLLEtBtKYxxIEfc",
+"ia:cZz2ZbGZRdyX5VnyHAZQ3Dusjnccz4"
 ],
 "sources": [
 "ia"
 ],
 "first": "2026-11-24T22:40:42Z",
-"last": "2026-11-24T22:40:42Z",
+"last": "2026-11-24T22:56:56Z",
 "keys": [
 "subject"
 ]
@@ -1839,13 +1853,16 @@
 "awm:HOBJ3144",
 "awm:HOBJ3145",
 "awm:F03606",
-"awm:MELJ1339"
+"awm:MELJ1339",
+"awm:P02956.002",
+"awm:P07797.002",
+"awm:P07797.003"
 ],
 "sources": [
 "awm"
 ],
 "first": "2026-11-23T03:01:00Z",
-"last": "2026-11-24T22:44:36Z",
+"last": "2026-11-24T22:56:56Z",
 "keys": [
 "장소"
 ]
@@ -2110,13 +2127,14 @@
 "awm:ART40331",
 "awm:ART40333",
 "awm:ART90301",
-"awm:F03507"
+"awm:F03507",
+"awm:JK0780"
 ],
 "sources": [
 "awm"
 ],
 "first": "2026-11-24T22:44:36Z",
-"last": "2026-11-24T22:44:36Z",
+"last": "2026-11-24T22:56:57Z",
 "keys": [
 "장소"
 ]
@@ -2242,13 +2260,16 @@
 },
 "Panmunjom": {
 "records": [
-"awm:F03606"
+"awm:F03606",
+"awm:P02956.002",
+"awm:P07797.002",
+"awm:P07797.003"
 ],
 "sources": [
 "awm"
 ],
 "first": "2026-11-24T22:44:36Z",
-"last": "2026-11-24T22:44:36Z",
+"last": "2026-11-24T22:56:56Z",
 "keys": [
 "장소"
 ]
@@ -2298,13 +2319,27 @@
 },
 "Korea: Seoul": {
 "records": [
-"awm:ART40393"
+"awm:ART40393",
+"awm:HOBJ2794"
 ],
 "sources": [
 "awm"
 ],
 "first": "2026-11-24T22:47:17Z",
-"last": "2026-11-24T22:47:17Z",
+"last": "2026-11-24T22:56:57Z",
+"keys": [
+"장소"
+]
+},
+"Korea: Jamestown Line Area": {
+"records": [
+"awm:HOBJ3125"
+],
+"sources": [
+"awm"
+],
+"first": "2026-11-24T22:56:57Z",
+"last": "2026-11-24T22:56:57Z",
 "keys": [
 "장소"
 ]
@@ -4681,13 +4716,22 @@
 "nara:NAID 20315",
 "nara:NAID 20374",
 "nara:NAID 22804",
-"nara:NAID 350288017"
+"nara:NAID 350288017",
+"nara:NAID 354632758",
+"nara:NAID 354632765",
+"nara:NAID 75849008",
+"nara:NAID 76430",
+"nara:NAID 102043858",
+"nara:NAID 102047453",
+"nara:NAID 102048217",
+"nara:NAID 25585",
+"nara:NAID 74247857"
 ],
 "sources": [
 "nara"
 ],
 "first": "2026-11-23T03:00:15Z",
-"last": "2026-11-24T22:47:17Z",
+"last": "2026-11-24T22:56:57Z",
 "keys": [
 "기술 수준"
 ]
@@ -4707,13 +4751,16 @@
 "nara:NAID 42219672",
 "nara:NAID 42219675",
 "nara:NAID 42219744",
-"nara:NAID 42219745"
+"nara:NAID 42219745",
+"nara:NAID 1555828",
+"nara:NAID 24465887",
+"nara:NAID 42219636"
 ],
 "sources": [
 "nara"
 ],
 "first": "2026-11-23T03:00:15Z",
-"last": "2026-11-24T22:47:17Z",
+"last": "2026-11-24T22:56:57Z",
 "keys": [
 "기술 수준"
 ]
@@ -4732,13 +4779,14 @@
 "tna:DEFE 11/194",
 "tna:DEFE 11/195",
 "tna:DEFE 11/204",
-"tna:WO 291/2428"
+"tna:WO 291/2428",
+"tna:PREM 11/406"
 ],
 "sources": [
 "tna"
 ],
 "first": "2026-11-23T03:00:46Z",
-"last": "2026-11-24T22:44:36Z",
+"last": "2026-11-24T22:56:56Z",
 "keys": [
 "기술 수준"
 ]
@@ -4746,13 +4794,17 @@
 "Item (아이템)": {
 "records": [
 "tna:FO 371/110540/1071/20",
-"tna:FO 371/115328/1073/124"
+"tna:FO 371/115328/1073/124",
+"tna:FO 371/105488/1071/182G",
+"tna:FO 371/105494/1071/317",
+"tna:FO 371/105500/1071/453",
+"tna:FO 371/105502/1071/486"
 ],
 "sources": [
 "tna"
 ],
 "first": "2026-11-23T03:32:36Z",
-"last": "2026-11-23T03:32:36Z",
+"last": "2026-11-24T22:56:56Z",
 "keys": [
 "기술 수준"
 ]
@@ -5155,13 +5207,21 @@
 "awm:P01813.438",
 "awm:146902",
 "awm:147378",
-"awm:147381"
+"awm:147381",
+"awm:P02208.011",
+"awm:P02956.002",
+"awm:P07797.002",
+"awm:P07797.003",
+"awm:HOBJ2794",
+"awm:HOBJ3125",
+"awm:JK0465",
+"awm:JK0780"
 ],
 "sources": [
 "awm"
 ],
 "first": "2026-11-23T03:01:00Z",
-"last": "2026-11-24T22:47:17Z",
+"last": "2026-11-24T22:56:57Z",
 "keys": [
 "자료 유형"
 ]
@@ -5194,13 +5254,17 @@
 "awm:HOBJ4308",
 "awm:HOBJ4310",
 "awm:HOBJ4316",
-"awm:HOBJ3145"
+"awm:HOBJ3145",
+"awm:HOBJ2794",
+"awm:HOBJ3125",
+"awm:JK0465",
+"awm:JK0780"
 ],
 "sources": [
 "awm"
 ],
 "first": "2026-11-23T03:01:00Z",
-"last": "2026-11-24T22:44:36Z",
+"last": "2026-11-24T22:56:57Z",
 "keys": [
 "매체 형태"
 ]
@@ -5418,13 +5482,14 @@
 "Black & white - Film copy negative": {
 "records": [
 "awm:P00675.051",
-"awm:P01813.438"
+"awm:P01813.438",
+"awm:P02208.011"
 ],
 "sources": [
 "awm"
 ],
 "first": "2026-11-24T22:44:35Z",
-"last": "2026-11-24T22:44:36Z",
+"last": "2026-11-24T22:56:56Z",
 "keys": [
 "매체 형태"
 ]
@@ -5451,6 +5516,75 @@
 ],
 "first": "2026-11-24T22:47:17Z",
 "last": "2026-11-24T22:47:17Z",
+"keys": [
+"format"
+]
+},
+"Black & white - Print silver gelatin": {
+"records": [
+"awm:P02956.002",
+"awm:P07797.002",
+"awm:P07797.003"
+],
+"sources": [
+"awm"
+],
+"first": "2026-11-24T22:56:56Z",
+"last": "2026-11-24T22:56:56Z",
+"keys": [
+"매체 형태"
+]
+},
+"Heraldry": {
+"records": [
+"awm:REL35793.002",
+"awm:REL35793.003"
+],
+"sources": [
+"awm"
+],
+"first": "2026-11-24T22:56:56Z",
+"last": "2026-11-24T22:56:56Z",
+"keys": [
+"자료 유형"
+]
+},
+"Medal": {
+"records": [
+"awm:REL35793.002",
+"awm:REL35793.003"
+],
+"sources": [
+"awm"
+],
+"first": "2026-11-24T22:56:56Z",
+"last": "2026-11-24T22:56:56Z",
+"keys": [
+"매체 형태"
+]
+},
+"electronic343": {
+"records": [
+"europeana:/9200111/BibliographicResource_1000085958010"
+],
+"sources": [
+"europeana"
+],
+"first": "2026-11-24T22:56:56Z",
+"last": "2026-11-24T22:56:56Z",
+"keys": [
+"format"
+]
+},
+"electronic34": {
+"records": [
+"europeana:/9200111/BibliographicResource_1000085970856"
+],
+"sources": [
+"europeana"
+],
+"first": "2026-11-24T22:56:56Z",
+"last": "2026-11-24T22:56:56Z",
 "keys": [
 "format"
 ]
@@ -5737,17 +5871,17 @@
 }
 }
 },
-"updated": "2026-11-24T22:52:50Z",
+"updated": "2026-11-24T23:00:25Z",
 "totals": {
 "매체": 4,
 "주제": 115,
-"장소": 48,
+"장소": 49,
 "분류": 93,
 "시대": 38,
 "인물": 27,
 "기관": 10,
 "기술 수준": 4,
-"형태": 41,
+"형태": 46,
 "재질": 18
 },
 "note": "원 기관 메타의 주제·지명·분류·시대·매체·인물·기관(장서각 태깅)·형태·재질·기술 수준 표기 그대로(번역·정규화 없음). records = 그 용어가 붙은 원장 기록 key. 지우지 않는다",

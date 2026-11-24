@@ -1,16 +1,16 @@
 {
 "week": "2026-W48",
-"records": 613,
+"records": 666,
 "by_source": {
-"미국 국립기록관리청 NARA": 65,
+"미국 국립기록관리청 NARA": 77,
 "일본 국립국회도서관": 16,
 "일본 아시아역사자료센터": 9,
-"Europeana": 18,
-"인터넷 아카이브": 60,
-"영국 국립기록관 TNA": 20,
+"Europeana": 23,
+"인터넷 아카이브": 68,
+"영국 국립기록관 TNA": 26,
 "UN 디지털도서관": 8,
 "KOREA ARCHIVE IIIF 갤러리": 3,
-"호주 전쟁기념관": 30,
+"호주 전쟁기념관": 40,
 "독립운동판결문": 2,
 "공훈전자사료관": 2,
 "독립기념관": 7,
@@ -18,7 +18,7 @@
 "국가기록원": 40,
 "위키미디어 공용": 31,
 "Gallica(BnF)": 8,
-"6·25전쟁 아카이브센터": 46,
+"6·25전쟁 아카이브센터": 58,
 "국립중앙도서관": 11,
 "대한민국신문아카이브": 11,
 "국편 전자사료관": 8,
@@ -2739,6 +2739,13 @@
 "url": "https://archive.org/details/111-adc-8255"
 },
 {
+"key": "ia:111-lc-30456",
+"title": "WAR ORPHANS, KOREA",
+"first_seen": "2026-11-24T00:00:00Z",
+"page": "r/e2095f1d2d58.html",
+"url": "https://archive.org/details/111-lc-30456"
+},
+{
 "key": "ia:428-npc-168",
 "title": "EVACUATION OF HUNGNAM, KOREA",
 "first_seen": "2026-11-24T00:00:00Z",
@@ -4326,6 +4333,370 @@
 "first_seen": "2026-11-24T22:47:17Z",
 "page": "r/a7baa4b956cb.html",
 "url": "https://catalog.archives.gov/id/42219745"
+},
+{
+"key": "awm:P02208.011",
+"title": "Imjin River area, Korea, 1951-08-08. The two cars at left have just brought Australia's Minister ... · 권리:PD(저작권 만료)",
+"first_seen": "2026-11-24T22:56:56Z",
+"page": "r/212da698e783.html",
+"url": "https://www.awm.gov.au/collection/C299568"
+},
+{
+"key": "awm:P02956.002",
+"title": "Hal Richardson (left), an Argus correspondent, and 34265 Lieutenant (Lt) George MacAfie 'Max' ... · 권리:PD(저작권 만료)",
+"first_seen": "2026-11-24T22:56:56Z",
+"page": "r/2deb139bb95c.html",
+"url": "https://www.awm.gov.au/collection/C377897"
+},
+{
+"key": "awm:P07797.002",
+"title": "Three war correspondents outside a hut during armistice negotiations. Left to right: Norman ... · 권리:PD(저작권 만료)",
+"first_seen": "2026-11-24T22:56:56Z",
+"page": "r/a1f7cce03468.html",
+"url": "https://www.awm.gov.au/collection/C1227426"
+},
+{
+"key": "awm:P07797.003",
+"title": "War correspondent Wilfred Burchett (left) and an unidentified journalist outside a hut during ... · 권리:PD(저작권 만료)",
+"first_seen": "2026-11-24T22:56:56Z",
+"page": "r/683d8e4af998.html",
+"url": "https://www.awm.gov.au/collection/C1227425"
+},
+{
+"key": "awm:REL35793.002",
+"title": "General Service Medal (1962 -): Leading Aircraftsman G O Penny, RAAF",
+"first_seen": "2026-11-24T22:56:56Z",
+"page": "r/e008cbde2c07.html",
+"url": "https://www.awm.gov.au/collection/C1190821"
+},
+{
+"key": "awm:REL35793.003",
+"title": "Defence Force Service Medal with clasp : G O Penny, RAAF",
+"first_seen": "2026-11-24T22:56:56Z",
+"page": "r/372fc75b49ef.html",
+"url": "https://www.awm.gov.au/collection/C1190822"
+},
+{
+"key": "europeana:/08602/IL5000022604",
+"title": "From Korea: Waiting for the armistice.",
+"first_seen": "2026-11-24T22:56:56Z",
+"page": "r/3b8681ab6dc6.html",
+"url": "https://www.europeana.eu/item/08602/IL5000022604"
+},
+{
+"key": "europeana:/2022043/10891_osa_49bed0a4_5f2d_4a68_a843_cced6e44301b",
+"title": "Interior Situation and Recreation to Armistice Negotiations in Korea",
+"first_seen": "2026-11-24T22:56:56Z",
+"page": "r/38ecccf91a4a.html",
+"url": "https://www.europeana.eu/item/2022043/10891_osa_49bed0a4_5f2d_4a68_a843_cced6e44301b"
+},
+{
+"key": "europeana:/9200111/BibliographicResource_1000085958010",
+"title": "Sverige och Koreakriget en studie av Sveriges hållning till Koreakonflikten 1947-1953",
+"first_seen": "2026-11-24T22:56:56Z",
+"page": "r/113614807f7d.html",
+"url": "https://www.europeana.eu/item/9200111/BibliographicResource_1000085958010"
+},
+{
+"key": "europeana:/9200111/BibliographicResource_1000085970856",
+"title": "A permanent landmark on the 38th parallel a study of the Armistice Agreements origin",
+"first_seen": "2026-11-24T22:56:56Z",
+"page": "r/7133af8a1880.html",
+"url": "https://www.europeana.eu/item/9200111/BibliographicResource_1000085970856"
+},
+{
+"key": "ia:cZz2ZbGZRdyX5VnyHAZQ3Dusjnccz4",
+"title": "\"THAT WAR IN KOREA \" KOREAN WAR DOCUMENTARY EVENTS OF 1950-53 COMBAT & ARMISTICE PART 2 6344",
+"first_seen": "2026-11-24T22:56:56Z",
+"page": "r/274d28000325.html",
+"url": "https://archive.org/details/cZz2ZbGZRdyX5VnyHAZQ3Dusjnccz4"
+},
+{
+"key": "ia:cia-readingroom-document-02001999",
+"title": "CIA Reading Room 02001999: CURRENT INTELLIGENCE BULLETIN - 1951/08/08",
+"first_seen": "2026-11-24T22:56:56Z",
+"page": "r/14fc182be82e.html",
+"url": "https://archive.org/details/cia-readingroom-document-02001999"
+},
+{
+"key": "ia:cia-readingroom-document-03004633",
+"title": "CIA Reading Room 03004633: CURRENT INTELLIGENCE BULLETIN - 1955/03/01",
+"first_seen": "2026-11-24T22:56:56Z",
+"page": "r/909cb1a5e8a2.html",
+"url": "https://archive.org/details/cia-readingroom-document-03004633"
+},
+{
+"key": "ia:cia-readingroom-document-03159060",
+"title": "CIA Reading Room 03159060: CURRENT INTELLIGENCE WEEKLY SUMMARY",
+"first_seen": "2026-11-24T22:56:56Z",
+"page": "r/cde22067e457.html",
+"url": "https://archive.org/details/cia-readingroom-document-03159060"
+},
+{
+"key": "ia:cia-readingroom-document-cia-rdp86t00608r000300020047-7",
+"title": "CIA Reading Room cia-rdp86t00608r000300020047-7: WEEKLY SUMMARY",
+"first_seen": "2026-11-24T22:56:56Z",
+"page": "r/97c8e4c5d4e5.html",
+"url": "https://archive.org/details/cia-readingroom-document-cia-rdp86t00608r000300020047-7"
+},
+{
+"key": "ia:cia-readingroom-document-cia-rdp88g01117r000802600002-3",
+"title": "CIA Reading Room cia-rdp88g01117r000802600002-3: YOUR MEETING WITH CONTADORA FOREIGN MINISTERS, FEBRUARY 10, 1986",
+"first_seen": "2026-11-24T22:56:56Z",
+"page": "r/72f90ab5f52f.html",
+"url": "https://archive.org/details/cia-readingroom-document-cia-rdp88g01117r000802600002-3"
+},
+{
+"key": "koreanwar:1989-KR-01-PF-A-00034",
+"title": "휴전 회담에 참석한 한국과 UN측 대표들 사진 2(1951)",
+"first_seen": "2026-11-24T22:56:56Z",
+"page": "r/1621f03694f3.html",
+"url": "https://www.koreanwar.or.kr:8443/searchDetail.do?archRfcd=1989-KR-01-PF-A-00034"
+},
+{
+"key": "koreanwar:1989-KR-01-PF-A-00058",
+"title": "휴전 회담 당시 한국 측 대표 사진 2(1951)",
+"first_seen": "2026-11-24T22:56:56Z",
+"page": "r/b1b5b67b09b0.html",
+"url": "https://www.koreanwar.or.kr:8443/searchDetail.do?archRfcd=1989-KR-01-PF-A-00058"
+},
+{
+"key": "koreanwar:2012-IN-01-PF-A-00022",
+"title": "1950년대 판문점 휴전 회담장에서 걸어오는 인도군",
+"first_seen": "2026-11-24T22:56:56Z",
+"page": "r/ed587f111931.html",
+"url": "https://www.koreanwar.or.kr:8443/searchDetail.do?archRfcd=2012-IN-01-PF-A-00022"
+},
+{
+"key": "koreanwar:2012-IN-01-PF-A-00033",
+"title": "1950년대 북한군 지역에서 촬영한 인도군과 휴전회담장 모습",
+"first_seen": "2026-11-24T22:56:56Z",
+"page": "r/bfa147ef7b13.html",
+"url": "https://www.koreanwar.or.kr:8443/searchDetail.do?archRfcd=2012-IN-01-PF-A-00033"
+},
+{
+"key": "koreanwar:2012-IN-01-PF-A-00034",
+"title": "북한군 지역에서 촬영한 개선문과 휴전회담장 사진(1953)",
+"first_seen": "2026-11-24T22:56:56Z",
+"page": "r/86c5e794d675.html",
+"url": "https://www.koreanwar.or.kr:8443/searchDetail.do?archRfcd=2012-IN-01-PF-A-00034"
+},
+{
+"key": "koreanwar:2012-IN-01-PF-A-00036",
+"title": "1950년대 북한군 지역에서 바라본 판문점 휴전회담장",
+"first_seen": "2026-11-24T22:56:56Z",
+"page": "r/085b5a1ed0b1.html",
+"url": "https://www.koreanwar.or.kr:8443/searchDetail.do?archRfcd=2012-IN-01-PF-A-00036"
+},
+{
+"key": "nara:NAID 1555828",
+"title": "Korea - President Park (2)",
+"first_seen": "2026-11-24T22:56:56Z",
+"page": "r/5ce3fffe7c9e.html",
+"url": "https://catalog.archives.gov/id/1555828"
+},
+{
+"key": "nara:NAID 24465887",
+"title": "Korea (5)",
+"first_seen": "2026-11-24T22:56:56Z",
+"page": "r/e054a025afb7.html",
+"url": "https://catalog.archives.gov/id/24465887"
+},
+{
+"key": "nara:NAID 354632758",
+"title": "List, Folder 42: Armistice Negotiations in Korea",
+"first_seen": "2026-11-24T22:56:56Z",
+"page": "r/b939d55ddf43.html",
+"url": "https://catalog.archives.gov/id/354632758"
+},
+{
+"key": "nara:NAID 354632765",
+"title": "List, Folder 43: Planning and Negotiations re Policy After the Armistice Talks",
+"first_seen": "2026-11-24T22:56:56Z",
+"page": "r/83090bf2ac1b.html",
+"url": "https://catalog.archives.gov/id/354632765"
+},
+{
+"key": "nara:NAID 75849008",
+"title": "Synopsis H, Korea - The Armistice Negotiations, July 1951-October 1952",
+"first_seen": "2026-11-24T22:56:56Z",
+"page": "r/0c33dbe7f1f1.html",
+"url": "https://catalog.archives.gov/id/75849008"
+},
+{
+"key": "nara:NAID 76430",
+"title": "UN & COMMUNIST ARMISTICE NEGOTIATIONS Panmunjom, Korea",
+"first_seen": "2026-11-24T22:56:56Z",
+"page": "r/c78180b5aca1.html",
+"url": "https://catalog.archives.gov/id/76430"
+},
+{
+"key": "tna:FO 371/105488/1071/182G",
+"title": "Armistice negotiations in Korea: retention of Commonwealth forces in Korea after cessation of fighting. Code...",
+"first_seen": "2026-11-24T22:56:56Z",
+"page": "r/3cd3a90b617e.html",
+"url": "https://discovery.nationalarchives.gov.uk/details/r/C6445465"
+},
+{
+"key": "tna:FO 371/105494/1071/317",
+"title": "Korean armistice negotiations: Korean objections to a divided Korea. Code FK file 1071/317",
+"first_seen": "2026-11-24T22:56:56Z",
+"page": "r/df0db22e1d29.html",
+"url": "https://discovery.nationalarchives.gov.uk/details/r/C6445598"
+},
+{
+"key": "tna:FO 371/105500/1071/453",
+"title": "Korean armistice negotiations: transport of Indian troops to Korea. Code FK file 1071/453",
+"first_seen": "2026-11-24T22:56:56Z",
+"page": "r/1a3a8f2945c4.html",
+"url": "https://discovery.nationalarchives.gov.uk/details/r/C6445726"
+},
+{
+"key": "tna:FO 371/105502/1071/486",
+"title": "Korean armistice negotiations: Swiss attitude towards their task in Korea. Code FK file 1071/486",
+"first_seen": "2026-11-24T22:56:56Z",
+"page": "r/259eefa32eb1.html",
+"url": "https://discovery.nationalarchives.gov.uk/details/r/C6445759"
+},
+{
+"key": "tna:PREM 11/406",
+"title": "Situation in Korea: employment of Korean troops in Commonwealth Division; armistice negotiations",
+"first_seen": "2026-11-24T22:56:56Z",
+"page": "r/10012beabba7.html",
+"url": "https://discovery.nationalarchives.gov.uk/details/r/C2037223"
+},
+{
+"key": "awm:HOBJ2794",
+"title": "Kim, a Korean war orphan, proudly displays a sweater with his name embroidered on the breast, ... · 권리:PD(저작권 만료)",
+"first_seen": "2026-11-24T22:56:57Z",
+"page": "r/1caa933367d7.html",
+"url": "https://www.awm.gov.au/collection/C363533"
+},
+{
+"key": "awm:HOBJ3125",
+"title": "Korea. 3 June 1952. One of the innocent victims of the Korean war, Chan, an orphan, salutes ... · 권리:PD(저작권 만료)",
+"first_seen": "2026-11-24T22:56:57Z",
+"page": "r/01245385fd58.html",
+"url": "https://www.awm.gov.au/collection/C372611"
+},
+{
+"key": "awm:JK0465",
+"title": "SEOUL, SOUTH KOREA. 1952. FLIGHT LIEUTENANT JIM MORRISON, MEDICAL OFFICER, OF NO. 77 SQUADRON ... · 권리:PD(저작권 만료)",
+"first_seen": "2026-11-24T22:56:57Z",
+"page": "r/007a9a2f9c6c.html",
+"url": "https://www.awm.gov.au/collection/C42354"
+},
+{
+"key": "awm:JK0780",
+"title": "KIMPO AREA, SOUTH KOREA. 1953. LEADING AIRCRAFTMAN BOB NEWTON OF NO. 77 SQUADRON RAAF WITH A ... · 권리:PD(저작권 만료)",
+"first_seen": "2026-11-24T22:56:57Z",
+"page": "r/440b8fab5b4b.html",
+"url": "https://www.awm.gov.au/collection/C49000"
+},
+{
+"key": "europeana:/08602/IL5000023162",
+"title": "Notizie dalla Corea.",
+"first_seen": "2026-11-24T22:56:57Z",
+"page": "r/f2cf20c47db5.html",
+"url": "https://www.europeana.eu/item/08602/IL5000023162"
+},
+{
+"key": "ia:LC-30456",
+"title": "War Orphans, Korea, 09/18/1953 - 09/20/1953",
+"first_seen": "2026-11-24T22:56:57Z",
+"page": "r/0927341a203f.html",
+"url": "https://archive.org/details/LC-30456"
+},
+{
+"key": "koreanwar:1990-AU-01-PF-A-00029",
+"title": "호주 제77전투비행대대 밥 뉴튼(Bob Newton)과 한국 전쟁 고아들 사진(1953)",
+"first_seen": "2026-11-24T22:56:57Z",
+"page": "r/94b69806ea0f.html",
+"url": "https://www.koreanwar.or.kr:8443/searchDetail.do?archRfcd=1990-AU-01-PF-A-00029"
+},
+{
+"key": "koreanwar:2022-KR-02-PF-D-00256",
+"title": "전쟁고아와 양부모 결연식 사진(1956)",
+"first_seen": "2026-11-24T22:56:57Z",
+"page": "r/5b7b09ba319e.html",
+"url": "https://www.koreanwar.or.kr:8443/searchDetail.do?archRfcd=2022-KR-02-PF-D-00256"
+},
+{
+"key": "koreanwar:2022-KR-02-PF-D-00305",
+"title": "6·25전쟁 고아1 사진(1953)",
+"first_seen": "2026-11-24T22:56:57Z",
+"page": "r/fc27b76fbb47.html",
+"url": "https://www.koreanwar.or.kr:8443/searchDetail.do?archRfcd=2022-KR-02-PF-D-00305"
+},
+{
+"key": "koreanwar:2022-KR-02-PF-D-00306",
+"title": "6·25전쟁 고아5 사진(1953)",
+"first_seen": "2026-11-24T22:56:57Z",
+"page": "r/f0ba8cba0db5.html",
+"url": "https://www.koreanwar.or.kr:8443/searchDetail.do?archRfcd=2022-KR-02-PF-D-00306"
+},
+{
+"key": "koreanwar:2022-KR-02-PF-D-00307",
+"title": "6·25전쟁 고아6 사진(1953)",
+"first_seen": "2026-11-24T22:56:57Z",
+"page": "r/2ed1652beac9.html",
+"url": "https://www.koreanwar.or.kr:8443/searchDetail.do?archRfcd=2022-KR-02-PF-D-00307"
+},
+{
+"key": "koreanwar:2022-US-02-AV-D-00366",
+"title": "한국에서의 전쟁 고아 기록영상",
+"first_seen": "2026-11-24T22:56:57Z",
+"page": "r/b1ad4dbe8a83.html",
+"url": "https://www.koreanwar.or.kr:8443/searchDetail.do?archRfcd=2022-US-02-AV-D-00366"
+},
+{
+"key": "nara:NAID 102043858",
+"title": "Bundles For Korea, Japan",
+"first_seen": "2026-11-24T22:56:57Z",
+"page": "r/8ac6019b376f.html",
+"url": "https://catalog.archives.gov/id/102043858"
+},
+{
+"key": "nara:NAID 102047453",
+"title": "U.S. Soldiers Give War Waifs Real Thanksgiving, South Korea",
+"first_seen": "2026-11-24T22:56:57Z",
+"page": "r/419712bea973.html",
+"url": "https://catalog.archives.gov/id/102047453"
+},
+{
+"key": "nara:NAID 102048217",
+"title": "War Orphans Taken Under Air Force Wing, South Korea",
+"first_seen": "2026-11-24T22:56:57Z",
+"page": "r/d6c20f5c3e4a.html",
+"url": "https://catalog.archives.gov/id/102048217"
+},
+{
+"key": "nara:NAID 25585",
+"title": "WAR ORPHANS, KOREA",
+"first_seen": "2026-11-24T22:56:57Z",
+"page": "r/34e9b69bd94b.html",
+"url": "https://catalog.archives.gov/id/25585"
+},
+{
+"key": "nara:NAID 42219636",
+"title": "Korean War Memorial",
+"first_seen": "2026-11-24T22:56:57Z",
+"page": "r/115ba5487056.html",
+"url": "https://catalog.archives.gov/id/42219636"
+},
+{
+"key": "nara:NAID 74247857",
+"title": "Korea – Natives and Native Dwellings",
+"first_seen": "2026-11-24T22:56:57Z",
+"page": "r/30a954bee158.html",
+"url": "https://catalog.archives.gov/id/74247857"
+},
+{
+"key": "tna:DA24",
+"title": "Records of the Korean Mission",
+"first_seen": "2026-11-24T22:56:57Z",
+"page": "r/e77910bd8804.html",
+"url": "https://discovery.nationalarchives.gov.uk/details/r/a8227b8e-61e8-4ea5-9d02-113114c2d678"
 }
 ]
 }
