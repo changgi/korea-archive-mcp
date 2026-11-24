@@ -1,6 +1,6 @@
 {
-"updated": "2026-11-24T00:32:26Z",
-"note": "구간 = 연대(4자리 연도) → 세기 → 왕조·시대명. 근거 순서 date → 제목 → 메타(생산·시대·출판). 세기·시대 구간은 시간축 근사 정렬",
+"updated": "2026-11-24T00:48:17Z",
+"note": "구간 = 연대(4자리 연도·8자리 날짜·연호 연도 明治·大正·昭和·光武·隆熙·檀紀 환산) → 세기 → 왕조·시대명. 근거 순서 date → 제목 → 메타(생산·시대·출판). 세기·시대 구간은 시간축 근사 정렬",
 "timeline": [
 {
 "decade": "삼국시대",
@@ -444,18 +444,34 @@
 },
 {
 "decade": "1900년대",
-"records": 7,
+"records": 12,
 "by_source": {
+"jacar": 5,
 "heritage": 1,
 "gallica": 1,
 "oldnews": 4,
 "nlna": 1
 },
 "by_kind": {
-"graphic": 1,
-"document": 6
+"document": 11,
+"graphic": 1
 },
 "samples": [
+{
+"title": "韓国併合ニ関スル閣議決定書・其三",
+"url": "https://www.jacar.archives.go.jp/das/meta/A03023677700",
+"iiif": "https://korea-archive-mcp.vercel.app/iiif/rec/q1YqVrKKVspKTE4sUorVUSpRslJ6OX_y09l7n-zd-nRCx-Pm7pfTFj1u2vm4efXLaYtfrN3wbOOup-tmPZu943Hz7qet257s6FTSUUoBans2o-_Zpt3v90x5v2fS051b3u-dhyQyGSgCVJcJVOdoYGxgZGxmbm5uYAAUKgUKZZSUFBRb6euXl5frgZ2il1iUnJFZllqsl56vl1Wgn5JYrJ-bWpKoj6a5AKjZy9HZMUjhUcMuhVdb175etvfV5q2v1-x40zLn1ZYGoJI8oBKI93SUcoFsIFUIpF5vmPNq0xqF1x0tbxY0KryZPeHNvKVAqURQABgZGJnpGhrqGhmHGBhbGRhYGZsr1QIA/manifest.json"
+},
+{
+"title": "韓国京城駐在白耳義国総領事レオン、ヴアンカー叙勲ノ件",
+"url": "https://www.jacar.archives.go.jp/das/meta/A10112616400",
+"iiif": "https://korea-archive-mcp.vercel.app/iiif/rec/q1YqVrKKVspKTE4sUorVUSpRslJ6OX_y09l7n-xa83R-38vlE57OWfF85t4XDZuf71sJFH--vf_lghlPdnU_bl7zuGnV4-bNjxsaHzdvedy0CMRuWv24ec_T_plPuzc9bu57snubko5SCtDQZzP6nm3a_X7P5Pd7Zj7duQUomgkUdTQ0MDQ0MjM0MzEwAAqVAoUySkoKiq309cvLy_XAztJLLErOyCxLLdZLz9fLKtBPSSzWz00tSdRH01wA1Ozl6OwYpPCoYZfCq61rXy_b-2rz1tdrdrxpmfNqSwNQSR5QCcSrOkq5QDaQKgRSrzfMebVpjcLrjpY3CxoV3sye8GbeUqBUIigwjAyMzHQNDXWNjEMMjK0MDKyMzZVqAQ/manifest.json"
+},
+{
+"title": "統監秘書官従五位勲六等古谷久綱外一名",
+"url": "https://www.jacar.archives.go.jp/das/meta/A10112642200",
+"iiif": "https://korea-archive-mcp.vercel.app/iiif/rec/q1YqVrKKVspKTE4sUorVUSpRslJ6vnXj89mLny-f8Wz2jqfrZjzdN_nJrilP9vY-7d70tHXt87WdT_uXvNiw_cnO1ufbNj5dMu3JjoanE3qVdJRSgJqfzeh7tmn3-z1T3u-Z-HTnFqBoJlDU0dDA0NDIzMTIyMAAKFQKFMooKSkottLXLy8v1wNbr5dYlJyRWZZarJeer5dVoJ-SWKyfm1qSqI-muQCo2cvR2TFI4VHDLoVXW9e-Xrb31eatr9fseNMy59WWBqCSPKASiJd0lHKBbCBVCKReb5jzatMahdcdLW8WNCq8mT3hzbylQKlEkKeNDIzMdA0NdY2MQwyMrQwMrIzNlWoB/manifest.json"
+},
 {
 "title": "안양암 감로도(安養庵 甘露圖) [시도유형문화유산] — 서울 종로구",
 "url": "https://www.heritage.go.kr/heri/cul/culSelectDetail.do?ccbaCpno=2111101860000",
@@ -465,37 +481,23 @@
 "title": "L'orient lointain : Chine, Corée, Mongolie, Japon, impressions et souvenirs de séjour et de tourisme [Gallica 원문]",
 "url": "https://gallica.bnf.fr/ark:/12148/bpt6k5426295j",
 "iiif": "https://korea-archive-mcp.vercel.app/iiif/rec/TVCxTsMwFPyVJy8saeM4adp4pBJICDa2qoPTuK3b1A62y4KQQGJgZAchFoZKHSomxNo_YaT9CF6ASEx379073eldEUf4gExEWaqRIMOAeMLJ6YGxSmoPpVHaC6WBQ3-qtAygb-x2hXhm9MSUCtmJqIwOQC0qK51TRjuQHpxZXkqtrINCgtuuZmZp6z1OHqlyCwmD499Y2D8-7NbvQxKQAtOjjMZIFVJh5zyMWJT0wlEe04x2Ke2NUFyiOPW-cjwM_8q3cz1uj234z5NXPp13EpayrDNDV4WuJvPz5gMO9dEPFsI3drzSeNU8JCALnBAuEHabp6-3Nezu7_Yvt3Xp_fMrSqJ-GaMsbUVRi8XnUcwTypMuuf4G/manifest.json"
-},
-{
-"title": "의병훈시 — 신한민보 [3면 6단]",
-"url": "https://nl.go.kr/newspaper/detail.do?content_id=CNTS-00048428711",
-"iiif": "https://korea-archive-mcp.vercel.app/iiif/rec/q1YqVrKKVsrPSclLLS9WitVRKlGyUnozd8brzRPfzu540z1H4VHDFIU33QveTp3zev2e15u3KEQbv165RcHsdfeKWCUdpRSgekNLA0sDEyNDIDcTyHX2CwnWNTAwMLEwMbIwNwQJlwKFM0pKCoqt9PXzcvTS8_Wyi_RBVhYkFqQW6aekliRm5uil5Nsn5-eVpOaVxGem2GIxpgDkuO4Fr9fsADprF4qzgLJ5QFmYT3SUcoE8IFUIpF5vmPNq0xqF1x0tbxY0KryZPeHNvKVAqUSQX40MjMx0DQ11jYxDDI2tTAysTCyUagE/manifest.json"
-},
-{
-"title": "졔쥬에 의병 — 신한민보 [1면 6단]",
-"url": "https://nl.go.kr/newspaper/detail.do?content_id=CNTS-00048433593",
-"iiif": "https://korea-archive-mcp.vercel.app/iiif/rec/q1YqVrKKVsrPSclLLS9WitVRKlGyUnqzcMqbpWveTJ-g8GbujNebJyo8apii8KZ7wdupc16v3_N68xaFaMPXK7comL3uXhGrpKOUAtRjaGlgaWBiaALkZgK5zn4hwboGBgYmFibGxqaWxkDhUqBwRklJQbGVvn5ejl56vl52kT7I2oLEgtQi_ZTUksTMHL2UfPvk_LyS1LyS-MwUWyzGFIAc2L3g9ZodQGftQnEWUDYPKAvzjY5SLpAHpAqB1OsNc15tWqPwuqPlzYJGhTezJ7yZtxQolQjyr5GBkZmuoaGukXGIobGViYGViYVSLQA/manifest.json"
-},
-{
-"title": "의병 창궐 — 공립신보 [1면 8단]",
-"url": "https://nl.go.kr/newspaper/detail.do?content_id=CNTS-00115099325",
-"iiif": "https://korea-archive-mcp.vercel.app/iiif/rec/q1YqVrKKVsrPSclLLS9WitVRKlGyUnozd8brzRMV3mzY-2rbBIVHDVMUXm3e-nrZ3jfdC15v3qIQbfh65RYFi9fdK2KVdJRSgBoMLQ0sDCyNDYDcTCDX2S8kWNfAwNDQ1MDS0tjIFChcChTOKCkpKLbS18_L0UvP18su0gfZWZBYkFqkn5JakpiZo5eSb5-cn1eSmlcSn5lii8WYApDrgK5YswPorF0ozgLK5gFlYV7RUcoF8oBUIZB6vWHOq01rFF53tLxZ0KjwZvaEN_OWAqUSQZ41MjAy0zU01DUyDjE0tjIxsDKxUKoFAA/manifest.json"
 }
 ]
 },
 {
 "decade": "1910년대",
-"records": 16,
+"records": 18,
 "by_source": {
 "ndl": 8,
 "indy": 2,
 "okchf": 3,
 "heritage": 1,
+"jacar": 2,
 "oldnews": 1,
 "i815": 1
 },
 "by_kind": {
-"document": 12,
+"document": 14,
 "graphic": 4
 },
 "samples": [
@@ -621,7 +623,7 @@
 },
 {
 "decade": "1950년대",
-"records": 96,
+"records": 97,
 "by_source": {
 "nara": 10,
 "europeana": 4,
@@ -638,13 +640,14 @@
 "oldnews": 3,
 "nlna": 3,
 "nzarch": 3,
+"jacar": 1,
 "i815": 1,
 "dnz": 4
 },
 "by_kind": {
 "motion_picture": 14,
 "graphic": 17,
-"document": 65
+"document": 66
 },
 "samples": [
 {
@@ -1022,15 +1025,15 @@
 },
 {
 "decade": "연대 미상",
-"records": 78,
+"records": 70,
 "by_source": {
 "nara": 10,
-"jacar": 9,
 "nedb": 5,
 "i815": 8,
 "earchive": 7,
 "seoul": 13,
 "europeana": 3,
+"jacar": 1,
 "un": 2,
 "okchf": 2,
 "nrich": 5,
@@ -1041,7 +1044,7 @@
 "ia": 2
 },
 "by_kind": {
-"document": 59,
+"document": 51,
 "graphic": 15,
 "motion_picture": 4
 },
@@ -1062,14 +1065,14 @@
 "iiif": "https://korea-archive-mcp.vercel.app/iiif/nara/400397386/manifest.json"
 },
 {
-"title": "韓国併合ニ関スル閣議決定書・其三",
-"url": "https://www.jacar.archives.go.jp/das/meta/A03023677700",
-"iiif": "https://korea-archive-mcp.vercel.app/iiif/rec/q1YqVrKKVspKTE4sUorVUSpRslJ6OX_y09l7n-zd-nRCx-Pm7pfTFj1u2vm4efXLaYtfrN3wbOOup-tmPZu943Hz7qet257s6FTSUUoBans2o-_Zpt3v90x5v2fS051b3u-dhyQyGSgCVJcJVOdoYGxgZGxmbm5uYAAUKgUKZZSUFBRb6euXl5frgZ2il1iUnJFZllqsl56vl1Wgn5JYrJ-bWpKoj6a5AKjZy9HZMUjhUcMuhVdb175etvfV5q2v1-x40zLn1ZYGoJI8oBKI93SUcoFsIFUIpF5vmPNq0xqF1x0tbxY0KryZPeHNvKVAqURQABgZGJnpGhrqGhmHGBhbGRhYGZsr1QIA/manifest.json"
+"title": "EVACUATION, HUNGNAM, KOREA",
+"url": "https://catalog.archives.gov/id/22397",
+"iiif": "https://korea-archive-mcp.vercel.app/iiif/nara/22397/manifest.json"
 },
 {
-"title": "韓国京城駐在白耳義国総領事レオン、ヴアンカー叙勲ノ件",
-"url": "https://www.jacar.archives.go.jp/das/meta/A10112616400",
-"iiif": "https://korea-archive-mcp.vercel.app/iiif/rec/q1YqVrKKVspKTE4sUorVUSpRslJ6OX_y09l7n-xa83R-38vlE57OWfF85t4XDZuf71sJFH--vf_lghlPdnU_bl7zuGnV4-bNjxsaHzdvedy0CMRuWv24ec_T_plPuzc9bu57snubko5SCtDQZzP6nm3a_X7P5Pd7Zj7duQUomgkUdTQ0MDQ0MjM0MzEwAAqVAoUySkoKiq309cvLy_XAztJLLErOyCxLLdZLz9fLKtBPSSzWz00tSdRH01wA1Ozl6OwYpPCoYZfCq61rXy_b-2rz1tdrdrxpmfNqSwNQSR5QCcSrOkq5QDaQKgRSrzfMebVpjcLrjpY3CxoV3sye8GbeUqBUIigwjAyMzHQNDXWNjEMMjK0MDKyMzZVqAQ/manifest.json"
+"title": "헌정사 자료 DB — '안중근' 수록",
+"url": "https://db.history.go.kr/item/cons/main.do",
+"iiif": "https://korea-archive-mcp.vercel.app/iiif/rec/q1YqVrKKVspLTUlSitVRKlGyUno7vefNgqlvmtYovJk34fXiHgUXJ4VHDVMU1N9M7XizZOKr7XvUFd50zHi9cK6SjlIKUAOQygRSyfl5xUBmKZCZUVJSUGylr5-SpJeRWVySX1Spl56vl12kn1mSmqsPUqifm5iZp5eSD9RQALJz6pxXW9cC7QTbtUsBixuAKvOAKsEu1VHKhdhbCKReb5jzatMahdcdLW8WNCq8mT3hzbylQKlEkF-MDIzMdA0NdY2MQwyMrQwMrQzNlWoB/manifest.json"
 }
 ]
 }
