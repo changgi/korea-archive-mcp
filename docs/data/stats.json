@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-24T22:12:48Z",
+ "updated": "2026-11-24T22:16:25Z",
  "records": 473,
  "new_records": 0,
  "new_batches": 0,
@@ -44,15 +44,16 @@
   "iiif": 3
  },
  "queries": {
-  "added": 0,
-  "total": 79,
-  "calls": 97,
+  "added": 2,
+  "total": 81,
+  "calls": 99,
   "by_tool": {
    "nedb_search": 58,
    "cross_search": 23,
    "source_profile": 9,
    "seoul_archives_search": 3,
    "nara_search": 2,
+   "koreanwar_search": 2,
    "nlk_search": 1,
    "koreanwar_item": 1
   }
