@@ -1,0 +1,3855 @@
+{
+ "note": "다국어 변환어 기관 색인 실측 — 날짜별 축적, 지우지 않는다. hit = 상위 5건 제목에 변환어 핵심 낱말이 든 수",
+ "runs": {
+  "2026-11-24": {
+   "terms": 169,
+   "weak": [
+    "Battle of Qingshanli 1920",
+    "Bloody Ridge Korea",
+    "Bodo League massacre",
+    "Cheju Quelpart",
+    "Committee for Preparation of Korean Independence",
+    "Constituent National Assembly Korea 1948",
+    "French expedition Korea 1866",
+    "Gloucestershire Regiment Korea",
+    "Hague secret emissaries Korea 1907",
+    "Imo incident 1882 Korea",
+    "Japan Korea protectorate treaty 1905",
+    "Kabo reform 1894 Korea",
+    "Kapsin coup 1884 Korea",
+    "Kochang incident",
+    "Kojong Russian legation 1896",
+    "Korea trusteeship",
+    "Korean Empire Corea",
+    "Kumgang Diamond Mountains",
+    "Kumsong offensive 1953",
+    "Kwangju student movement 1929",
+    "Left-Right Coalition Committee Korea 1946",
+    "Oriental Development Company Korea",
+    "Righteous Army Korea insurgents",
+    "Seoul recapture 1950",
+    "Shinto shrine worship Korea",
+    "Singanhoe Korea",
+    "The Independent newspaper Seoul 1896",
+    "Tonghak rebellion",
+    "Treaty of Kanghwa 1876",
+    "Triangle Hill Korea",
+    "Uiyoldan Korean righteous brotherhood",
+    "Yu Gwan-sun",
+    "Yun Bong-gil Shanghai 1932",
+    "assassination Queen Min 1895",
+    "establishment Republic of Korea 1948",
+    "land survey Chosen 1910s",
+    "name change policy Korea Japan",
+    "picture brides Korea",
+    "remains recovery Korea"
+   ],
+   "results": {
+    "Treaty of Kanghwa 1876": {
+     "pattern": "강화도\\\\s?조약|조일\\\\s?수호\\\\s?조규|병자\\\\s?수호\\\\s?조약",
+     "nara": {
+      "total": 25,
+      "hit": 0,
+      "of": 5,
+      "top": [
+       "Oct. 1, 1896-Nov. 30, 1897",
+       "Numerical File: 1155-1166/300",
+       "World War II Operations Reports - Pacific Theater: 18-006 (1 of 2)"
+      ]
+     },
+     "ia": {
+      "total": 0,
+      "hit": 0,
+      "of": 0,
+      "top": []
+     }
+    },
+    "Korea treaty ports opening": {
+     "pattern": "개항(?!장)|문호\\\\s?개방",
+     "nara": {
+      "total": 12857,
+      "hit": 3,
+      "of": 5,
+      "top": [
+       "Department of State Report, United States Policy Regarding Korea, 1834-1941, Research Project No. 29 (1947-05-",
+       "North Korea - Background",
+       "Indictment / Opening Statements"
+      ]
+     },
+     "ia": {
+      "total": 167,
+      "hit": 1,
+      "of": 5,
+      "top": [
+       "CIA Reading Room cia-rdp06t00412r000200440001-0: EGYPT: IMPACT OF ACCELERATED POPULATION G (2016-12-20)",
+       "CIA Reading Room cia-rdp82-00850r000100060009-5: JPRS ID: 8498 TRANSLATIONS ON JAPAN (2016-11-01)",
+       "CIA Reading Room cia-rdp79r01142a000500070002-5: EAST AFRICA: OUTSIDE INFLUENCE AND POTENT (1975-05-07)"
+      ]
+     }
+    },
+    "Imo incident 1882 Korea": {
+     "pattern": "임오\\\\s?군란",
+     "nara": {
+      "total": 1235,
+      "hit": 0,
+      "of": 5,
+      "top": [
+       "March 1, 1882 - December 31, 1895",
+       "Exhibits: 95 THRU 144",
+       "XXIV Corps: 2-002 (1 of 2)"
+      ]
+     },
+     "ia": {
+      "total": 0,
+      "hit": 0,
+      "of": 0,
+      "top": []
+     }
+    },
+    "Kapsin coup 1884 Korea": {
+     "pattern": "갑신\\\\s?정변",
+     "nara": {
+      "total": 1,
+      "hit": 0,
+      "of": 1,
+      "top": [
+       "Number 1396"
+      ]
+     },
+     "ia": {
+      "total": 0,
+      "hit": 0,
+      "of": 0,
+      "top": []
+     }
+    },
+    "Kabo reform 1894 Korea": {
+     "pattern": "갑오\\\\s?개혁|갑오\\\\s?경장",
+     "nara": {
+      "total": 53,
+      "hit": 0,
+      "of": 5,
+      "top": [
+       "Japan and Korea: Economic Conditions - MID 2655-H-333 THRU 2655-H-420 / Korea: General Conditions - ",
+       "Number 1362",
+       "Numerical List of International Prosecution Section (IPS) Documents Introduced as Court Exhibits THR"
+      ]
+     },
+     "ia": {
+      "total": 1,
+      "hit": 0,
+      "of": 1,
+      "top": [
+       "A concise history of Korea : from antiquity to the present (2016-01-01)"
+      ]
+     }
+    },
+    "assassination Queen Min 1895": {
+     "pattern": "을미\\\\s?사변",
+     "nara": {
+      "total": 2911,
+      "hit": 0,
+      "of": 5,
+      "top": [
+       "July 9, 1895 - Apr. 30, 1896",
+       "June 1, 1894 - June 30, 1895",
+       "October 21 - 31, 1895"
+      ]
+     },
+     "ia": {
+      "total": 1,
+      "hit": 0,
+      "of": 1,
+      "top": [
+       "Korea and Her Neighbors (2021-06-21)"
+      ]
+     }
+    },
+    "Independence Club Korea": {
+     "pattern": "독립\\\\s?협회",
+     "nara": {
+      "total": 19254,
+      "hit": 1,
+      "of": 5,
+      "top": [
+       "March 1990: 3/13/90 Economic Club of Washington, Ramada Renaissance [Economic Club brochure, Invitat",
+       "Korea - Telegrams",
+       "Correspondence Between President Harry S. Truman and Secretary of State Dean Acheson with Attachment (1950-08-"
+      ]
+     },
+     "ia": {
+      "total": 1,
+      "hit": 0,
+      "of": 1,
+      "top": [
+       "Imperialism, resistance, and reform in late nineteenth-century Korea : enlightenment and t (1988-01-01)"
+      ]
+     }
+    },
+    "The Independent newspaper Seoul 1896": {
+     "pattern": "독립\\\\s?신문",
+     "nara": {
+      "total": 3270,
+      "hit": 0,
+      "of": 5,
+      "top": [
+       "May 1, 1896 - Nov. 27, 1897",
+       "Area 10: April 1896-June 1897",
+       "July 9, 1895 - Apr. 30, 1896"
+      ]
+     },
+     "ia": {
+      "total": 1,
+      "hit": 0,
+      "of": 1,
+      "top": [
+       "CIA Reading Room cia-rdp87t00685r000200390003-3: TERRORISM REVIEW (1986-11-01)"
+      ]
+     }
+    },
+    "Independence Club mass meeting Seoul 1898": {
+     "pattern": "만민\\\\s?공동회",
+     "nara": {
+      "total": 2843,
+      "hit": 1,
+      "of": 5,
+      "top": [
+       "Dec. 1, 1897 - Aug. 27, 1898",
+       "Sept. 8, 1898 - Jan. 30, 1900",
+       "Register: 1886 - 1906 / Despaches: Volume 1: July 3, 1886 - December 21, 1898"
+      ]
+     },
+     "ia": {
+      "total": 0,
+      "hit": 0,
+      "of": 0,
+      "top": []
+     }
+    },
+    "Japan annexation of Korea 1910": {
+     "pattern": "경술\\\\s?국치|한일\\\\s?병합|한일\\\\s?합병|韓國倂合|韓国併合",
+     "nara": {
+      "total": 2426,
+      "hit": 0,
+      "of": 5,
+      "top": [
+       "Lists of Documents: 895.00/465 - 895.927/2 THRU Political Affairs: 895.00/465-536: January 22, 1910 ",
+       "Political Affairs: 895.00/537-624: February 1911 - April 1919",
+       "Department of State Report, United States Policy Regarding Korea, 1834-1941, Research Project No. 29 (1947-05-"
+      ]
+     },
+     "ia": {
+      "total": 1,
+      "hit": 1,
+      "of": 1,
+      "top": [
+       "Text of the Treaty of Annexation between Korea and Japan, signed August 22, 1910 (1910-11-01)"
+      ]
+     }
+    },
+    "land survey Chosen 1910s": {
+     "pattern": "토지\\\\s?조사\\\\s?사업",
+     "nara": {
+      "total": 1322,
+      "hit": 0,
+      "of": 5,
+      "top": [
+       "California SP Berkeley Public Library",
+       "Virginia MPS Augusta County Training School",
+       "Texas MPS Upper Settlement Rural Historic District"
+      ]
+     },
+     "ia": {
+      "total": 2,
+      "hit": 0,
+      "of": 2,
+      "top": [
+       "CIA Reading Room cia-rdp11m01338r000400470089-2: SOVIET ACTIVE MEASURES IN THE UNITED STAT (1987-12-09)",
+       "Wonder Woman Cosplay Sword (4169499) (2020-02-18)"
+      ]
+     }
+    },
+    "Cheju-do 1948": {
+     "pattern": "제주\\\\s?4[·.]3|4[·.]3\\\\s?사건",
+     "nara": {
+      "total": 664,
+      "hit": 2,
+      "of": 5,
+      "top": [
+       "MAY DAY IN KOREA, CHEJU-DO (1948-04-30)",
+       "MAY DAY IN KOREA, CHEJU-DO (1948-04-30)",
+       "Korean Villagers of Jeju-Do File Back to Their Deserted homes (1948-05-15)"
+      ]
+     },
+     "ia": {
+      "total": 5,
+      "hit": 1,
+      "of": 5,
+      "top": [
+       "CIA Reading Room 03194444: CURRENT INTELLIGENCE BULLETIN - 1955/05/18 (1955-05-18)",
+       "CIA Reading Room cia-rdp79r01012a018200010001-0: THE OUTLOOK FOR KOREA (1961-09-07)",
+       "CIA Reading Room cia-rdp80t00246a018200250001-2: (SANITIZED)UNCLASSIFIED ENGLISH-LANGUAGE  (1962-07-10)"
+      ]
+     }
+    },
+    "Oriental Development Company Korea": {
+     "pattern": "동양\\\\s?척식(?:\\\\s?주식\\\\s?회사)?|東洋拓殖",
+     "nara": {
+      "total": 9406,
+      "hit": 0,
+      "of": 5,
+      "top": [
+       "Industrial Matters: 895.6020r4 - 895.607/6 THRU Industrial Matters: Manufactures and Manufacturing: ",
+       "Japan And Korea: Summation Of United States Army Military Government Activities In Korea",
+       "Economic Matters: Financial Conditions: Financial Affairs: 894.51D14 THRU 894.510R4/72"
+      ]
+     },
+     "ia": {
+      "total": 33,
+      "hit": 0,
+      "of": 5,
+      "top": [
+       "VOA [Voice of America] Africa : October 31, 2017 02:00PM-03:00PM EDT (2017-10-31)",
+       "e_history_StreamRoot_DH_0369_19620616_01 (1962-06-16)",
+       "The Ongoing War In The Persian Gulf: Why Does It Matter To The US? (2019-08-28)"
+      ]
+     }
+    },
+    "rice production Chosen Japan": {
+     "pattern": "산미\\\\s?증식",
+     "nara": {
+      "total": 24346,
+      "hit": 1,
+      "of": 5,
+      "top": [
+       "Biotechnology, 07/15/2008, Japan, JA8047",
+       "Biotechnology: Annual Report, 07/15/2008, Japan, JA8047",
+       "INCO Industries & Commodities Rice 1966 [1]"
+      ]
+     },
+     "ia": {
+      "total": 123,
+      "hit": 0,
+      "of": 5,
+      "top": [
+       "China Mail 1950-01-20 (1950-01-20)",
+       "VOA [Voice of America] Africa : June 19, 2017 12:00AM-01:00AM EDT (2017-06-19)",
+       "VOA [Voice of America] Global English : May 05, 2020 03:00PM-04:00PM EDT (2020-05-05)"
+      ]
+     }
+    },
+    "Shinto shrine worship Korea": {
+     "pattern": "신사\\\\s?참배|神社参拝",
+     "nara": {
+      "total": 784,
+      "hit": 0,
+      "of": 5,
+      "top": [
+       "Japan [Civil Affairs Handbook - Japan - Section 17A: Cultural Institutions], 1943-1945",
+       "Japan State Visit Background 11/16 - 11/18, 1995",
+       "Japan [List Of Monuments], 1943-1945"
+      ]
+     },
+     "ia": {
+      "total": 3,
+      "hit": 0,
+      "of": 3,
+      "top": [
+       "Hanna Matt The Devine Feminine In Hinduism Buddhism (2020-10-22)",
+       "Gods and Monkeys (ep. 181) (2022-02-01)",
+       "In response to Yasukuni: the curious approach the Chinese and South Korean governments tak (2013-06-01)"
+      ]
+     }
+    },
+    "name change policy Korea Japan": {
+     "pattern": "창씨\\\\s?개명|創氏改名",
+     "nara": {
+      "total": 31385,
+      "hit": 0,
+      "of": 5,
+      "top": [
+       "Japan: 394.9145 - Korea: 395.9521",
+       "Japan [1]",
+       "Fishery Products: Japan Fishery Products Annual Report 2006, 10/04/2006, Japan, JA6052"
+      ]
+     },
+     "ia": {
+      "total": 1622,
+      "hit": 0,
+      "of": 5,
+      "top": [
+       "CIA Reading Room cia-rdp79-00927a004500030001-1: WEEKLY SUMMARY (2016-12-21)",
+       "CIA Reading Room cia-rdp79-00927a005200090001-7: WEEKLY SUMMARY (2016-12-21)",
+       "CIA Reading Room cia-rdp79-00927a010800120001-1: WEEKLY SUMMARY (2016-12-21)"
+      ]
+     }
+    },
+    "Japanese assimilation policy Korea": {
+     "pattern": "황국\\\\s?신민|내선\\\\s?일체",
+     "nara": {
+      "total": 1692,
+      "hit": 1,
+      "of": 5,
+      "top": [
+       "Immigration (Portland State 6/98) Immigrant Experience Assimilation",
+       "Asia Society 11/12/91 [OA 8317] [3]",
+       "[Korea Research] [loose]: [Korea Approaches Reunification]"
+      ]
+     },
+     "ia": {
+      "total": 30,
+      "hit": 0,
+      "of": 5,
+      "top": [
+       "e_history_StreamRoot_DH_0244_19591215_01 (1959-12-15)",
+       "CIA Reading Room cia-rdp92b00181r000300260018-1: THE INTERNATIONAL ARENA IN THE YEAR 2000 (1985-04-17)",
+       "CIA Reading Room cia-rdp97-00770r000100640001-2: INTERNATIONAL ECONOMIC & ENERGY WEEKLY (1986-11-07)"
+      ]
+     }
+    },
+    "Korean student soldiers Japanese army": {
+     "pattern": "학병|학도병",
+     "nara": {
+      "total": 10718,
+      "hit": 5,
+      "of": 5,
+      "top": [
+       "U.S. Army: Soldiers - WAAC-WACS",
+       "Foreign Locations: Italian Army, 1941 - Japanese Army, 1944",
+       "U.S. Army: U.S. Army, 1944 - U.S. Army, 1967"
+      ]
+     },
+     "ia": {
+      "total": 142,
+      "hit": 0,
+      "of": 5,
+      "top": [
+       "VOA [Voice of America] Africa : February 08, 2018 12:00AM-01:00AM EST (2018-02-08)",
+       "VOA [Voice of America] Africa : June 30, 2018 03:00PM-04:00PM EDT (2018-06-30)",
+       "VOA [Voice of America] Global English : July 08, 2020 06:00PM-07:00PM EDT (2020-07-08)"
+      ]
+     }
+    },
+    "Korean conscription Japanese army": {
+     "pattern": "지원병|징병|徵兵",
+     "nara": {
+      "total": 3258,
+      "hit": 5,
+      "of": 5,
+      "top": [
+       "U.S. Army: Draft - Minesweepers",
+       "Japan: Army - MID 2023-742/15 THRU 2023-788",
+       "10th Army: 1-011 (2 of 2)"
+      ]
+     },
+     "ia": {
+      "total": 36,
+      "hit": 0,
+      "of": 5,
+      "top": [
+       "PAM 550-81 North Korea A Country Study, 5th Edition (2008-01-01)",
+       "Stopping A Taiwan Invasion (2022-05-23)",
+       "Hong Kong Daily Press 1920-06-28 (1920-06-28)"
+      ]
+     }
+    },
+    "women volunteer labor corps Korea": {
+     "pattern": "근로\\\\s?정신대|여자\\\\s?정신대",
+     "nara": {
+      "total": 13237,
+      "hit": 2,
+      "of": 5,
+      "top": [
+       "Korea Bulletin (1950-07-12)",
+       "I Corps: 1-002 (1 of 2)",
+       "\"North Korea: A Case Study of a Soviet Satellite,\" Report of Department of State Research Mission to (1951-05-"
+      ]
+     },
+     "ia": {
+      "total": 43,
+      "hit": 0,
+      "of": 5,
+      "top": [
+       "CIA Reading Room cia-rdp88t00792r000300010002-4: NEAR EAST AND SOUTH ASIA REVIEW (1987-07-03)",
+       "CIA Reading Room cia-rdp80s01540r003000070003-4: TRANSLATIONS OF NORTH KOREAN NEWSPAPERS (1953-10-06)",
+       "CIA Reading Room 06548833: THE NEW LEFT IN EUROPE (1967-12-01)"
+      ]
+     }
+    },
+    "earthquake Tokyo 1923 Koreans": {
+     "pattern": "관동\\\\s?대지진|간토\\\\s?대지진|간토\\\\s?학살|関東大震災",
+     "nara": {
+      "total": 1176,
+      "hit": 1,
+      "of": 5,
+      "top": [
+       "1910-1929: 894.00/107 - 895.927/2",
+       "Lists of Documents: 894.40 THRU 894.629 Vessels/24",
+       "Social Matters: Calamities and Disasters: 894.48B/381-537 THRU 394.48B Services - 394.48 Relief Meas"
+      ]
+     },
+     "ia": {
+      "total": 6,
+      "hit": 3,
+      "of": 5,
+      "top": [
+       "[en] Itô Noé - Japanese anarchist and feminist ()",
+       "The Great Kanto Earthquake of 1923 (2005-01-01)",
+       "The anarchist movement in Japan: the martyrs of Tokyo - Ba Jin ()"
+      ]
+     }
+    },
+    "June 10 movement 1926 Korea": {
+     "pattern": "6[·.]10\\\\s?만세",
+     "nara": {
+      "total": 12113,
+      "hit": 2,
+      "of": 5,
+      "top": [
+       "Application numbers 6900-7349",
+       "Political Affairs: 895.00/625-711: April 1919 - June 1928 THRU Chief Executive: 895.001 - 895.0011/3",
+       "Political Affairs: 893.00/7511-7670: June - September 1926"
+      ]
+     },
+     "ia": {
+      "total": 34,
+      "hit": 0,
+      "of": 5,
+      "top": [
+       "VOA [Voice of America] Africa : August 22, 2018 01:00AM-02:00AM EDT (2018-08-22)",
+       "CIA Reading Room cia-rdp64-00014a000100220001-7: NATIONAL INTELLIGENCE ESTIMATE NUMBER 100 (1955-01-11)",
+       "CIA Reading Room 06928150: INTELLIGENCE REPORT LEADERS OF COMMUNIST CHINA II. LIN PIAO (1971-07-01)"
+      ]
+     }
+    },
+    "Kwangju student movement 1929": {
+     "pattern": "광주\\\\s?학생\\\\s?운동",
+     "nara": {
+      "total": 194,
+      "hit": 0,
+      "of": 5,
+      "top": [
+       "CIC 441: 1-002 (2 of 2)",
+       "World War II Operations Reports - Pacific Theater: 36-010 (2 of 2)",
+       "American Delegation, U.S.-U.S.S.R. Joint Commission on Korea: American Delegation Numbered Papers, A"
+      ]
+     },
+     "ia": {
+      "total": 4,
+      "hit": 0,
+      "of": 4,
+      "top": [
+       "CIA Reading Room cia-rdp80t00246a064800250001-5: THE KOREAN LABOR PARTY AND THE KIM IL-SON (1962-10-05)",
+       "CIA Reading Room cia-rdp88t01202r000200020005-4: THE TERRORISM CALENDAR, 1987 (1987-01-01)",
+       "CIA Reading Room 05632817: TERRORISM REVIEW (1985-10-07)"
+      ]
+     }
+    },
+    "Singanhoe Korea": {
+     "pattern": "신간회",
+     "nara": {
+      "total": 0,
+      "hit": 0,
+      "of": 0,
+      "top": []
+     },
+     "ia": {
+      "total": 0,
+      "hit": 0,
+      "of": 0,
+      "top": []
+     }
+    },
+    "Korean Language Society": {
+     "pattern": "조선어\\\\s?학회",
+     "nara": {
+      "total": 24272,
+      "hit": 5,
+      "of": 5,
+      "top": [
+       "[National Standards in Foreign Language Education]",
+       "Asia Society 11/12/91 [OA 8317] [3]",
+       "Human Rights - Language"
+      ]
+     },
+     "ia": {
+      "total": 2,
+      "hit": 1,
+      "of": 2,
+      "top": [
+       "Transactions of the Korea Branch of the Royal Asiatic Society: Volume 29 (Romanization of  (1939-01-01)",
+       "SPOKEN KOREAN: BOOK ONE. LUKOFF, FRED. AMERICAN COUNCIL OF LEARNED SOCIETIES, NEW YORK, N. (1974-09-10)"
+      ]
+     }
+    },
+    "Korean products promotion movement": {
+     "pattern": "물산\\\\s?장려",
+     "nara": {
+      "total": 13637,
+      "hit": 4,
+      "of": 5,
+      "top": [
+       "Livestock and Products: Status of FMD Outbreak in Korea - IX, 04/13/2000, Korea, Republic of, KS0038",
+       "Quarterly Planning and Accomplishment Report, 02/05/1999, Korea, Republic of, KS9010",
+       "Livestock and Products: Status of FMD Outbreak in Korea - XIV, 04/21/2000, Korea, Republic of, KS005"
+      ]
+     },
+     "ia": {
+      "total": 96,
+      "hit": 0,
+      "of": 5,
+      "top": [
+       "VOA [Voice of America] Africa : July 23, 2019 12:00PM-01:00PM EDT (2019-07-23)",
+       "VOA [Voice of America] Africa : September 08, 2017 02:00AM-03:00AM EDT (2017-09-08)",
+       "VOA [Voice of America] Africa : March 05, 2018 01:00AM-02:00AM EST (2018-03-05)"
+      ]
+     }
+    },
+    "Korean independence army Manchuria": {
+     "pattern": "독립군",
+     "nara": {
+      "total": 4439,
+      "hit": 3,
+      "of": 5,
+      "top": [
+       "Summation of U.S. Army Military Government Activities in Korea, 1946-1947",
+       "8th Army: 3-004 (2 of 2)",
+       "Memorandum, World Reaction to Korean Developments, Number CS 4.65 (1950-08-31)"
+      ]
+     },
+     "ia": {
+      "total": 84,
+      "hit": 0,
+      "of": 5,
+      "top": [
+       "VOA [Voice of America] Africa : July 31, 2018 03:00PM-04:00PM EDT (2018-07-31)",
+       "CIA Reading Room cia-rdp79-01090a000300010001-7: SUMMARIES OF TRENDS AND DEVELOPMENTS (1950-07-25)",
+       "CIA Reading Room cia-rdp79r01141a000900030002-6: SURVEY OF THE ECONOMIES OF THE SINO-SOVIE (1957-09-13)"
+      ]
+     }
+    },
+    "Battle of Qingshanli 1920": {
+     "pattern": "청산리",
+     "nara": {
+      "total": 0,
+      "hit": 0,
+      "of": 0,
+      "top": []
+     },
+     "ia": {
+      "total": 0,
+      "hit": 0,
+      "of": 0,
+      "top": []
+     }
+    },
+    "Battle of Fengwudong 1920": {
+     "pattern": "봉오동",
+     "nara": {
+      "total": 0,
+      "hit": 0,
+      "of": 0,
+      "top": []
+     },
+     "ia": {
+      "total": 1,
+      "hit": 1,
+      "of": 1,
+      "top": [
+       "The Battle: Roar To Victory (2019-01-01)"
+      ]
+     }
+    },
+    "Uiyoldan Korean righteous brotherhood": {
+     "pattern": "의열단",
+     "nara": {
+      "total": 0,
+      "hit": 0,
+      "of": 0,
+      "top": []
+     },
+     "ia": {
+      "total": 0,
+      "hit": 0,
+      "of": 0,
+      "top": []
+     }
+    },
+    "Yun Bong-gil Shanghai 1932": {
+     "pattern": "윤봉길",
+     "nara": {
+      "total": 656,
+      "hit": 0,
+      "of": 5,
+      "top": [
+       "Joint Army-Navy Intelligence Study of North China, (Hopeh and Shantuha Provinces) Regional Summary, ",
+       "World War II Operations Reports - Pacific Theater: 36-010 (2 of 2)",
+       "D-7538, 1936 (continued), thru D-7580, 1935-41"
+      ]
+     },
+     "ia": {
+      "total": 0,
+      "hit": 0,
+      "of": 0,
+      "top": []
+     }
+    },
+    "Lee Bong-chang 1932": {
+     "pattern": "이봉창",
+     "nara": {
+      "total": 8625,
+      "hit": 1,
+      "of": 5,
+      "top": [
+       "131/LEE,A-Y [1940 Reports of Births]",
+       "Hong Kong: 246G.1123 Byrne, C.J./3-2956 - British Borneo/Brunei/North Borneo/Sarawak: 246H.113/8-145",
+       "Seattle: 1931-1932"
+      ]
+     },
+     "ia": {
+      "total": 2,
+      "hit": 0,
+      "of": 2,
+      "top": [
+       "Transovarial Transmission of Orientia tsutsugamushi in Leptotrombidium palpale (Acari: Tro (2014-04-10)",
+       "Development of an HbA1c-Based Conversion Equation for Estimating Glycated Albumin in a Kor (2014-04-22)"
+      ]
+     }
+    },
+    "Yu Gwan-sun": {
+     "pattern": "유관순",
+     "nara": {
+      "total": 1238,
+      "hit": 0,
+      "of": 5,
+      "top": [
+       "Roll 2:  Volume 7:  October 3, 1889, to November 9, 1889",
+       "Roll 2:  Volume 5:  January 3, 1889, to June 29, 1889",
+       "Roll 2:  Volume 6:  July 8, 1889, to October 3, 1889"
+      ]
+     },
+     "ia": {
+      "total": 6,
+      "hit": 0,
+      "of": 5,
+      "top": [
+       "CIA Reading Room cia-rdp91-00929r000100240052-8: FR:UCHKOVSKIY V.G. TO:UDINTSEV G.V. (1983-12-31)",
+       "e_history_StreamRoot_DH_0203_19590303_01 (1959-03-03)",
+       "CIA Reading Room cia-rdp80-00809a000700260090-2: MONTHLY INFORMATION REPORT ON NORTH KOREA (1956-10-01)"
+      ]
+     }
+    },
+    "Sohn Kee-chung Kitei Son": {
+     "pattern": "손기정",
+     "nara": {
+      "total": 8,
+      "hit": 1,
+      "of": 5,
+      "top": [
+       "Personalities: Soames, Christopher – Starzel, Fran",
+       "Documents: 1784",
+       "Trademark Official Gazette, September 11, 2001"
+      ]
+     },
+     "ia": {
+      "total": 0,
+      "hit": 0,
+      "of": 0,
+      "top": []
+     }
+    },
+    "Berlin Olympics 1936": {
+     "pattern": "베를린\\\\s?올림픽",
+     "nara": {
+      "total": 1273,
+      "hit": 5,
+      "of": 5,
+      "top": [
+       "Nazi Officials at 1936 Olympics in Berlin (1936-01-01)",
+       "Nazi Officials at 1936 Olympics in Berlin (1936-01-01)",
+       "Olympics"
+      ]
+     },
+     "ia": {
+      "total": 55,
+      "hit": 5,
+      "of": 5,
+      "top": [
+       "Dora Ratjen’s Secret The Gender Hoax Of The 1936 Berlin Olympics ()",
+       "1936 Berlin Olympics - Defying the \"Master Race\" : CSPAN3 : September 5, 2021 6:09pm-6:55p (2021-09-05)",
+       "Highlights of the 1936 Olympics (Berlin) (1936-01-01)"
+      ]
+     }
+    },
+    "Korea liberation 1945": {
+     "pattern": "광복(?!군)|8[·.]15",
+     "nara": {
+      "total": 6713,
+      "hit": 0,
+      "of": 5,
+      "top": [
+       "Korea Bulletin (1950-08-15)",
+       "Korea Bulletin (1950-08-11)",
+       "Korea Bulletin (1950-07-21)"
+      ]
+     },
+     "ia": {
+      "total": 1,
+      "hit": 1,
+      "of": 1,
+      "top": [
+       "Liberation of Korea ｜ Rare footage from 1945 (1945-01-01)"
+      ]
+     }
+    },
+    "Committee for Preparation of Korean Independence": {
+     "pattern": "건국\\\\s?준비\\\\s?위원회|건준",
+     "nara": {
+      "total": 12704,
+      "hit": 0,
+      "of": 5,
+      "top": [
+       "Numerical List of International Prosecution Section (IPS) Documents Introduced as Court Exhibits THR",
+       "American Delegation, U.S.-U.S.S.R. Joint Commission on Korea: Statements THRU Records Relating to th",
+       "Summation of U.S. Army Military Government Activities in Korea, 1946-1947"
+      ]
+     },
+     "ia": {
+      "total": 226,
+      "hit": 0,
+      "of": 5,
+      "top": [
+       "CIA Reading Room cia-rdp79-00927a005200090001-7: WEEKLY SUMMARY (2016-12-21)",
+       "CIA Reading Room cia-rdp86t01017r000606150001-2: CHRONOLOGY: NORTH KOREA MAY 1986 (1986-06-20)",
+       "CIA Reading Room cia-rdp91-00403r000100970027-1: FR:UNKNOWN TO:UNKNOWN (2016-12-29)"
+      ]
+     }
+    },
+    "Moscow Conference 1945 Korea": {
+     "pattern": "모스크바\\\\s?3상\\\\s?회의|삼상\\\\s?회의",
+     "nara": {
+      "total": 8033,
+      "hit": 1,
+      "of": 5,
+      "top": [
+       "Department of State Report, Korea, 1945 to 1948 (1950-07-01)",
+       "American Delegation, U.S.-U.S.S.R. Joint Commission on Korea: Miscellaneous Papers THRU Incoming Mes",
+       "American Delegation, U.S.-U.S.S.R. Joint Commission on Korea: Miscellaneous Conferences, Conversatio"
+      ]
+     },
+     "ia": {
+      "total": 154,
+      "hit": 0,
+      "of": 5,
+      "top": [
+       "CIA Reading Room cia-rdp84b00049r000200290010-3: LAW OF THE SEA (2016-12-20)",
+       "VOA [Voice of America] Africa : December 11, 2017 02:00PM-03:00PM EST (2017-12-11)",
+       "VOA [Voice of America] Africa : November 08, 2018 02:00PM-03:00PM EST (2018-11-08)"
+      ]
+     }
+    },
+    "Left-Right Coalition Committee Korea 1946": {
+     "pattern": "좌우\\\\s?합작",
+     "nara": {
+      "total": 4613,
+      "hit": 0,
+      "of": 5,
+      "top": [
+       "American Delegation, U.S.-U.S.S.R. Joint Commission on Korea: South Korean Interim Government (SKIG)",
+       "American Delegation, U.S.-U.S.S.R. Joint Commission on Korea: The Economic Situation of South Korea ",
+       "American Delegation, U.S.-U.S.S.R. Joint Commission on Korea: American Delegation Numbered Papers, A"
+      ]
+     },
+     "ia": {
+      "total": 37,
+      "hit": 0,
+      "of": 5,
+      "top": [
+       "VOA [Voice of America] Global English : May 17, 2020 12:00AM-01:00AM EDT (2020-05-17)",
+       "CIA Reading Room 06749451: DAILY SUMMARY - 1948/07-1948/09 (2018-11-08)",
+       "CIA Reading Room cia-rdp78-01617a003700140001-5: COMMUNIST INFLUENCE IN BURMA (1950-01-11)"
+      ]
+     }
+    },
+    "Korea election May 1948": {
+     "pattern": "5[·.]10\\\\s?총?선거",
+     "nara": {
+      "total": 12922,
+      "hit": 2,
+      "of": 5,
+      "top": [
+       "LOCAL SCENES, INCHON, KOREA ; PUSAN MAY DAY, KOREA ; INAUGURATION OF KOREAN PRESIDENT, SEOUL, KOREA (1948-05-0",
+       "United Nations Temporary Commission on Korea (UNTCOK): Administration and Security THRU Elections",
+       "United Nations Temporary Commission on Korea (UNTCOK): Miscellaneous Materials: Memorandums/Daily Re"
+      ]
+     },
+     "ia": {
+      "total": 1,
+      "hit": 1,
+      "of": 1,
+      "top": [
+       "21 May 1948 Weekly Survey-Korea - Terror and coercion marked the so-called election ()"
+      ]
+     }
+    },
+    "establishment Republic of Korea 1948": {
+     "pattern": "정부\\\\s?수립",
+     "nara": {
+      "total": 11327,
+      "hit": 0,
+      "of": 5,
+      "top": [
+       "June 1, 1948 THRU December 29, 1948",
+       "Department of State Report, Korea, 1945 to 1948 (1950-07-01)",
+       "January 2, 1948 THRU May 28, 1948"
+      ]
+     },
+     "ia": {
+      "total": 182,
+      "hit": 0,
+      "of": 5,
+      "top": [
+       "South Korean Interim Government Activities, No. 29 (February 1948) (1948-02-01)",
+       "CIA Reading Room cia-rdp79-01090a000300010001-7: SUMMARIES OF TRENDS AND DEVELOPMENTS (1950-07-25)",
+       "27 07 2019 EXPLAIN DANIEL AND REVELATION UPDATE 50 WITH EXTRA EVIDENCE ()"
+      ]
+     }
+    },
+    "Constituent National Assembly Korea 1948": {
+     "pattern": "제헌\\\\s?국회",
+     "nara": {
+      "total": 3680,
+      "hit": 0,
+      "of": 5,
+      "top": [
+       "The Korean Open Letter, Volume 5, Number 6 (1948-06-01)",
+       "Synopsis D, Korea - Diplomatic-Political Developments, September-December 1950 (1953-01-01)",
+       "Telegram from Ambassador John Muccio to Secretary of State Dean Acheson (1950-10-11)"
+      ]
+     },
+     "ia": {
+      "total": 20,
+      "hit": 0,
+      "of": 5,
+      "top": [
+       "CIA Reading Room cia-rdp79r01012a002300020001-5: PROBABLE DEVELOPMENTS IN VENEZUELA (1952-07-31)",
+       "CIA Reading Room cia-rdp89m00699r002201800006-1: THE RADICALIZATION OF DISSENT IN SOUTH KO (1987-09-01)",
+       "VOA [Voice of America] Africa : February 12, 2018 02:00PM-03:00PM EST (2018-02-12)"
+      ]
+     }
+    },
+    "Special Committee anti-national activities Korea": {
+     "pattern": "반민\\\\s?특위|반민족\\\\s?행위",
+     "nara": {
+      "total": 27648,
+      "hit": 1,
+      "of": 5,
+      "top": [
+       "ORE 32-48, Communist Capabilities in South Korea, 02/21/49",
+       "United Nations Temporary Commission on Korea (UNTCOK): Miscellaneous Materials: Paik Jai Hong THRU S",
+       "Report, \"Weekly Review,\" from Policy Information Committee, Department of State (1950-07-26)"
+      ]
+     },
+     "ia": {
+      "total": 1147,
+      "hit": 0,
+      "of": 5,
+      "top": [
+       "CIA Reading Room cia-rdp79-00927a004500030001-1: WEEKLY SUMMARY (2016-12-21)",
+       "CIA Reading Room cia-rdp83b01027r000300080001-9: WARNING ASSESSMENT: EAST ASIA (2016-12-20)",
+       "CIA Reading Room cia-rdp79-00927a005200090001-7: WEEKLY SUMMARY (2016-12-21)"
+      ]
+     }
+    },
+    "land reform Korea": {
+     "pattern": "농지\\\\s?개혁",
+     "nara": {
+      "total": 24048,
+      "hit": 1,
+      "of": 5,
+      "top": [
+       "Korea [Folder 1] [8]",
+       "Land mines",
+       "Korea Bulletin (1950-07-22)"
+      ]
+     },
+     "ia": {
+      "total": 4,
+      "hit": 4,
+      "of": 4,
+      "top": [
+       "25 May 1950 Weekly Survey - Korea-Bonds, elections, land reform ()",
+       "18 May 1950 Weekly Survey - Korea-Southern elections and land reform ()",
+       "2 April 1948 Weekly Survey-Korea - Moscow continues to mark time, Land Reform ()"
+      ]
+     }
+    },
+    "April Revolution 1960 Korea": {
+     "pattern": "4[·.]19|4월\\\\s?혁명",
+     "nara": {
+      "total": 8850,
+      "hit": 2,
+      "of": 5,
+      "top": [
+       "Relations with Japan: 793.94/145-315: April 1910 - April 1915",
+       "Misc.  Quotes and Significant Dates/Events",
+       "1960 National Register of Scientific and Technical Personnel"
+      ]
+     },
+     "ia": {
+      "total": 235,
+      "hit": 0,
+      "of": 5,
+      "top": [
+       "VOA [Voice of America] Global English : June 18, 2019 03:00PM-04:00PM EDT (2019-06-18)",
+       "VOA [Voice of America] Global English : June 15, 2020 07:00PM-08:00PM EDT (2020-06-15)",
+       "VOA [Voice of America] Global English : June 13, 2019 02:00AM-03:00AM EDT (2019-06-13)"
+      ]
+     }
+    },
+    "May 16 coup 1961 Korea": {
+     "pattern": "5[·.]16",
+     "nara": {
+      "total": 7449,
+      "hit": 2,
+      "of": 5,
+      "top": [
+       "Chapters 10, 12-16",
+       "South Korea",
+       "Roll 52: May 26, 1961 - July 16, 1961 (2 of 2)"
+      ]
+     },
+     "ia": {
+      "total": 157,
+      "hit": 0,
+      "of": 5,
+      "top": [
+       "VOA [Voice of America] Africa : February 25, 2019 02:00PM-03:00PM EST (2019-02-25)",
+       "CIA Reading Room cia-rdp79-00927a003200050001-3: CURRENT INTELLIGENCE WEEKLY SUMMARY (2016-12-19)",
+       "CIA Reading Room cia-rdp88g01116r000500550021-4: HERE'S THE LATEST CONTRIBUTION RECEIVED F (1986-04-25)"
+      ]
+     }
+    },
+    "Korean immigrants Hawaii": {
+     "pattern": "하와이\\\\s?이민",
+     "nara": {
+      "total": 5339,
+      "hit": 3,
+      "of": 5,
+      "top": [
+       "Hawaii",
+       "Hawaii District Court: Ahn, Karen S.S. (D. HI)",
+       "[The President’s Initiative on Race and Asian Pacific Americans] [3]"
+      ]
+     },
+     "ia": {
+      "total": 129,
+      "hit": 0,
+      "of": 5,
+      "top": [
+       "Honolulu (2009-01-01)",
+       "VOA [Voice of America] Africa : September 26, 2018 01:00PM-02:00PM EDT (2018-09-26)",
+       "VOA [Voice of America] Africa : October 09, 2017 01:00PM-02:00PM EDT (2017-10-09)"
+      ]
+     }
+    },
+    "picture brides Korea": {
+     "pattern": "사진\\\\s?신부",
+     "nara": {
+      "total": 1507,
+      "hit": 0,
+      "of": 5,
+      "top": [
+       "Shelflist to U.S. Army Signal Corps Black-and-White Photographs: 111-SC-315000 to 111-SC-315999",
+       "An Ethnography of Koreans in Queens, New York and Elsewhere in the United States, Preliminary Report",
+       "Ethnographic Evaluation of the 1990 Decennial Census Report Series: Report #15 Ethnography of Altern"
+      ]
+     },
+     "ia": {
+      "total": 22,
+      "hit": 0,
+      "of": 5,
+      "top": [
+       "VOA [Voice of America] Global English : February 07, 2020 02:00PM-03:00PM EST (2020-02-07)",
+       "VOA [Voice of America] Africa : November 29, 2019 02:00PM-03:00PM EST (2019-11-29)",
+       "VOA [Voice of America] Africa : February 19, 2019 10:00PM-11:00PM EST (2019-02-20)"
+      ]
+     }
+    },
+    "Korean emigration": {
+     "pattern": "이민|移民",
+     "nara": {
+      "total": 6093,
+      "hit": 3,
+      "of": 5,
+      "top": [
+       "Russia - Emigration",
+       "861.56 - Emigration",
+       "Economic Matters: Immigration into Japan: 894.55 - 894.5593 THRU Economic Matters: Emigration: 894.5"
+      ]
+     },
+     "ia": {
+      "total": 184,
+      "hit": 0,
+      "of": 5,
+      "top": [
+       "CIA Reading Room cia-rdp86t00608r000300020035-0: WEEKLY SUMMARY (1975-08-08)",
+       "CIA Reading Room cia-rdp84t00301r000100010007-9: NATIONAL INTELLIGENCE DAILY (CABLE) 4 JAN (2016-12-20)",
+       "VOA [Voice of America] Africa : August 04, 2018 10:00PM-11:00PM EDT (2018-08-05)"
+      ]
+     }
+    },
+    "Koreans in Japan Zainichi": {
+     "pattern": "재일\\\\s?조선인|재일\\\\s?한국인|在日朝鮮人",
+     "nara": {
+      "total": 35,
+      "hit": 0,
+      "of": 5,
+      "top": [
+       "Records of the Liaison Department (HCRI-LN) - Roll 06-04 (1 of 3)",
+       "Records of the Liaison Department (HCRI-LN) - Roll 06-04 (3 of 3)",
+       "World War II Operations Reports - Pacific Theater: 18-002 (1 of 2)"
+      ]
+     },
+     "ia": {
+      "total": 20,
+      "hit": 1,
+      "of": 5,
+      "top": [
+       "Exploring Identity Dynamics in Min Jin Lee’s Pachinko through different Paradigms: Margina ()",
+       "Discrimination Against Zainichi Koreans in Japan (2023-05-16)",
+       "Multiculturalism in the new Japan : crossing the boundaries within (2008-01-01)"
+      ]
+     }
+    },
+    "Koryo-saram Soviet Koreans": {
+     "pattern": "고려인|카레이스키",
+     "nara": {
+      "total": 1,
+      "hit": 0,
+      "of": 1,
+      "top": [
+       "World War II Operations Reports - Pacific Theater: 6-009 (2 of 2)"
+      ]
+     },
+     "ia": {
+      "total": 1,
+      "hit": 1,
+      "of": 1,
+      "top": [
+       "Forgotten Koreans of Soviet Central Asia: Koryo Saram (2025-02-01)"
+      ]
+     }
+    },
+    "deportation Koreans Soviet 1937": {
+     "pattern": "강제\\\\s?이주",
+     "nara": {
+      "total": 758,
+      "hit": 1,
+      "of": 5,
+      "top": [
+       "SOVIET JUSTICE BY WALTER CHYLINSKI",
+       "761.94/950-1096",
+       "United Nations War Crimes Commission, Staffs of the German Concentration Camps THRU Kokuhonsha and J"
+      ]
+     },
+     "ia": {
+      "total": 3,
+      "hit": 1,
+      "of": 3,
+      "top": [
+       "E.N. Chernolutskaia- The [Soviet] Chinese Deportation From the Primore- Е.Н. Чернолуцская- ()",
+       "Koryo Saram- The \"Unreliable People\" (2007-01-01)",
+       "CIA Reading Room cia-rdp81-00706r000100190033-5: REPORT OF SCREENING ACTIVITIES AT HOOVER  (1947-06-13)"
+      ]
+     }
+    },
+    "Sakhalin Koreans": {
+     "pattern": "사할린",
+     "nara": {
+      "total": 1053,
+      "hit": 0,
+      "of": 5,
+      "top": [
+       "V part 1 of 2",
+       "O",
+       "K part 1 of 1"
+      ]
+     },
+     "ia": {
+      "total": 1,
+      "hit": 1,
+      "of": 1,
+      "top": [
+       "CIA Reading Room 0000102975: SOUTH KOREA: USSR WON'T DISCUSS SAKHALIN KOREANS WITH JAPAN (1983-05-01)"
+      ]
+     }
+    },
+    "Pusan 1951": {
+     "pattern": "피란\\\\s?수도|임시\\\\s?수도",
+     "nara": {
+      "total": 5167,
+      "hit": 5,
+      "of": 5,
+      "top": [
+       "Telegram from American Embassy, Pusan (1952-02-12)",
+       "Telegram from American Embassy, Pusan (1951-11-01)",
+       "ETHIOPIAN TROOPS, PUSAN, KOREA (1951-05-18)"
+      ]
+     },
+     "ia": {
+      "total": 1,
+      "hit": 1,
+      "of": 1,
+      "top": [
+       "1951 KOREAN WAR HOME MOVIE PUSAN WEST AIR BASE BURIAL DETAIL MARINE CORPS (SILENT) 24114 ()"
+      ]
+     }
+    },
+    "armistice negotiations Korea": {
+     "pattern": "휴전\\\\s?회담|정전\\\\s?회담|휴전\\\\s?협상|정전\\\\s?협상",
+     "nara": {
+      "total": 5271,
+      "hit": 4,
+      "of": 5,
+      "top": [
+       "UN & COMMUNIST ARMISTICE NEGOTIATIONS Panmunjom, Korea (1952-02-18)",
+       "List, Folder 42: Armistice Negotiations in Korea",
+       "List, Folder 43: Planning and Negotiations re Policy After the Armistice Talks"
+      ]
+     },
+     "ia": {
+      "total": 373,
+      "hit": 0,
+      "of": 5,
+      "top": [
+       "A Peace Treaty with North Korea? (R45169, v8, April 19, 2018) (2018-04-19)",
+       "CIA Reading Room cia-rdp79r00890a000100060035-2: KOREAN TRUCE: ORBIT PROPAGANDA (1953-07-29)",
+       "CIA Reading Room cia-rdp60-00321r000100090001-1: WORK OF THE FOREIGN RELATIONS COMMITTEE,  (1957-08-28)"
+      ]
+     }
+    },
+    "Seoul recapture 1950": {
+     "pattern": "서울\\\\s?수복|9[·.]28\\\\s?수복",
+     "nara": {
+      "total": 1015,
+      "hit": 0,
+      "of": 5,
+      "top": [
+       "Korean War Vets Memorial 5/1/90 [OA 4425]",
+       "Korean War Veterans Memorial Fundraising Dinner 4/26/90 [OA 4729]",
+       "Memorandum from William D. Hassett to Secretary of State Dean Acheson with Attachments and Related M (1951-01-"
+      ]
+     },
+     "ia": {
+      "total": 20,
+      "hit": 0,
+      "of": 5,
+      "top": [
+       "Big Picture: The United Nations Offensive ()",
+       "e_history_StreamRoot_DH_0463_19640411_01 (1964-04-11)",
+       "VOA [Voice of America] Global English : June 10, 2019 06:00PM-07:00PM EDT (2019-06-10)"
+      ]
+     }
+    },
+    "UN advance north Korea 1950": {
+     "pattern": "북진",
+     "nara": {
+      "total": 19341,
+      "hit": 2,
+      "of": 5,
+      "top": [
+       "North Korea/South Korea [2]",
+       "Korea Bulletin (1950-08-30)",
+       "Shelflist to U.S. Army Signal Corps Black-and-White Photographs: 111-SC-349000 to 111-SC-349999"
+      ]
+     },
+     "ia": {
+      "total": 257,
+      "hit": 1,
+      "of": 5,
+      "top": [
+       "VOA [Voice of America] Africa : June 06, 2017 01:00AM-02:00AM EDT (2017-06-06)",
+       "The “Unsettling Findings” Edition (2025-02-27)",
+       "VOA [Voice of America] Africa : June 16, 2018 12:00AM-01:00AM EDT (2018-06-16)"
+      ]
+     }
+    },
+    "bombing Korea": {
+     "pattern": "폭격|공습|爆擊|轰炸",
+     "nara": {
+      "total": 15930,
+      "hit": 1,
+      "of": 5,
+      "top": [
+       "Germany; Indochina; Korea (1954-02-08)",
+       "U.S. Strategic Bombing Survey THRU SCAP",
+       "Korea Bulletin (1950-08-24)"
+      ]
+     },
+     "ia": {
+      "total": 8,
+      "hit": 4,
+      "of": 5,
+      "top": [
+       "U. S. Warplanes Run Bombing Drills As Show Of Force Against North Korea ()",
+       "US Intelligence on China CI00668 - U.S. Policy toward Bombing Chinese Bases in China and M ()",
+       "CIA Reading Room 0000408060: SPECIAL ANALYSIS - NORTH KOREA - POLICY TOWARD SEOUL AFTER KA (1988-01-02)"
+      ]
+     }
+    },
+    "napalm Korea": {
+     "pattern": "네이팜",
+     "nara": {
+      "total": 2086,
+      "hit": 1,
+      "of": 5,
+      "top": [
+       "Army Engineers in Korea Test Napalm For Ground Defense",
+       "AUSTRALIAN F-21'S (PLANES) PUSAN, KOREA ; CRASHED F-51 PLANE, PUSAN, KOREA (1951-01-03)",
+       "Leathernecks Are Rough On Reds In Korea, North Korea"
+      ]
+     },
+     "ia": {
+      "total": 82,
+      "hit": 0,
+      "of": 5,
+      "top": [
+       "VIEWPOINTS ON VETERANS AFFAIRS AND RELATED ISSUES (1994-05-04)",
+       "e_history_StreamRoot_DH_0234_19591003_01 (1959-10-03)",
+       "The Three Wars of Lt. Gen. George E. Stratemeyer: his Korean war diary (1999-01-01)"
+      ]
+     }
+    },
+    "civilian massacre Korea": {
+     "pattern": "민간인\\\\s?학살|양민\\\\s?학살",
+     "nara": {
+      "total": 3978,
+      "hit": 1,
+      "of": 5,
+      "top": [
+       "Investigation 403.  General Bissell (Katyn Forest Massacre) (1954-05-25)",
+       "South Korea, 1996 [3]",
+       "Memorandum of Conversation with Attachment (1950-12-12)"
+      ]
+     },
+     "ia": {
+      "total": 228,
+      "hit": 0,
+      "of": 5,
+      "top": [
+       "VOA [Voice of America] Africa : April 23, 2019 01:00PM-02:00PM EDT (2019-04-23)",
+       "VOA [Voice of America] Africa : August 24, 2017 12:00AM-01:00AM EDT (2017-08-24)",
+       "VOA [Voice of America] Africa : October 19, 2017 12:00AM-01:00AM EDT (2017-10-19)"
+      ]
+     }
+    },
+    "Bodo League massacre": {
+     "pattern": "보도\\\\s?연맹",
+     "nara": {
+      "total": 251,
+      "hit": 0,
+      "of": 5,
+      "top": [
+       "1910-1929: Lord, J. A. THRU Loud, Edward R.",
+       "8110 THRU 8537 (3 of 3)",
+       "867.00B-867.4016"
+      ]
+     },
+     "ia": {
+      "total": 4,
+      "hit": 0,
+      "of": 4,
+      "top": [
+       "Crime of Korea, The (1950-01-01)",
+       "TIL Reddit Recap for Thursday, January 6th 2022 (2022-01-06)",
+       "THE TRUTH ABOUT NORTH KOREA A PEOPLES HISTORY OF THE DPRK (2023-07-24)"
+      ]
+     }
+    },
+    "Kochang incident": {
+     "pattern": "거창\\\\s?사건|거창\\\\s?양민",
+     "nara": {
+      "total": 108,
+      "hit": 0,
+      "of": 5,
+      "top": [
+       "Foreign Service Despatch from John Muccio to Department of State (1952-02-14)",
+       "Department of State Chronology of Principal Events Relating to the Korean Conflict, September 1950",
+       "Memorandum from Ambassador John Muccio (1951-05-12)"
+      ]
+     },
+     "ia": {
+      "total": 0,
+      "hit": 0,
+      "of": 0,
+      "top": []
+     }
+    },
+    "National Defense Corps Korea": {
+     "pattern": "국민\\\\s?방위군",
+     "nara": {
+      "total": 42778,
+      "hit": 3,
+      "of": 5,
+      "top": [
+       "Defense",
+       "Department of Defense [3]",
+       "North Korea/South Korea [1]"
+      ]
+     },
+     "ia": {
+      "total": 1431,
+      "hit": 0,
+      "of": 5,
+      "top": [
+       "Big Picture: The Reds Launch Their Expected Spring Offensive ()",
+       "e_history_StreamRoot_DH_0481_19640811_01 (1964-08-11)",
+       "Twilight Two #038 (2 CD Set) ()"
+      ]
+     }
+    },
+    "troop entertainment Korea": {
+     "pattern": "위문\\\\s?공연|위문",
+     "nara": {
+      "total": 7344,
+      "hit": 1,
+      "of": 5,
+      "top": [
+       "[POTUS] Troop Speech [1]",
+       "Betty Hutton Show",
+       "Shelflist to U.S. Army Signal Corps Color Photographs: 7700 to 7799"
+      ]
+     },
+     "ia": {
+      "total": 85,
+      "hit": 0,
+      "of": 5,
+      "top": [
+       "VOA [Voice of America] Global English : April 05, 2020 02:00AM-03:00AM EDT (2020-04-05)",
+       "VOA [Voice of America] Global English : May 12, 2019 07:00PM-08:00PM EDT (2019-05-12)",
+       "VOA [Voice of America] Africa : December 28, 2018 12:00AM-01:00AM EST (2018-12-28)"
+      ]
+     }
+    },
+    "war widows Korea": {
+     "pattern": "전쟁\\\\s?미망인",
+     "nara": {
+      "total": 5794,
+      "hit": 1,
+      "of": 5,
+      "top": [
+       "Korean War Memorial",
+       "August 1956",
+       "\"North Korea: A Case Study of a Soviet Satellite,\" Report of Department of State Research Mission to (1951-05-"
+      ]
+     },
+     "ia": {
+      "total": 63,
+      "hit": 0,
+      "of": 5,
+      "top": [
+       "VOA [Voice of America] Global English : November 19, 2018 11:00PM-12:00AM EST (2018-11-20)",
+       "e_history_StreamRoot_DH_0113_19570513_01 (1957-05-13)",
+       "VOA [Voice of America] Global English : May 12, 2019 07:00PM-08:00PM EDT (2019-05-12)"
+      ]
+     }
+    },
+    "disabled veterans Korea": {
+     "pattern": "상이\\\\s?군인|상이\\\\s?용사",
+     "nara": {
+      "total": 10638,
+      "hit": 5,
+      "of": 5,
+      "top": [
+       "7/28/96 Disabled American Veterans [4]",
+       "7/28/96 Disabled American Veterans [1]",
+       "D.A.V. [Disabled American Veterans] 7/28/96 [1]"
+      ]
+     },
+     "ia": {
+      "total": 2,
+      "hit": 2,
+      "of": 2,
+      "top": [
+       "FY 82 Legislative Recommendations of Veterans' Organizations: Hearings Before the Committe (1982-01-01)",
+       "FY 80 Legislative Recommendations of Veterans' Organizations: Hearings Before the Committe (1980-01-01)"
+      ]
+     }
+    },
+    "United Nations Memorial Cemetery Pusan": {
+     "pattern": "유엔\\\\s?기념\\\\s?공원|유엔\\\\s?묘지|UN\\\\s?묘지",
+     "nara": {
+      "total": 1123,
+      "hit": 3,
+      "of": 5,
+      "top": [
+       "United Nations Day Ceremony in Korea, Pusan, Korea",
+       "Greek War Memorial in Korea Unveiled, Pusan, Korea",
+       "Women in Military Service for America Memorial"
+      ]
+     },
+     "ia": {
+      "total": 1,
+      "hit": 0,
+      "of": 1,
+      "top": [
+       "Valour Remembered: Canadians In Korea (1982-01-01)"
+      ]
+     }
+    },
+    "ROK Army": {
+     "pattern": "국군|한국군|國軍",
+     "nara": {
+      "total": 31457,
+      "hit": 4,
+      "of": 5,
+      "top": [
+       "ROK ARMY ACTIVITIES",
+       "KOREAN ARMY (ROK) TIGER DIVISION (1969-09-01)",
+       "KOREAN ARMY (ROK) TIGER DIVISION (1969-09-01)"
+      ]
+     },
+     "ia": {
+      "total": 20,
+      "hit": 5,
+      "of": 5,
+      "top": [
+       "A relational database management system for a ROK Army Infantry Division with probabilisti (1987-01-01)",
+       "Tactical System Of TKDD. Seminar For ROK Army Special Forces 2017 ()",
+       "A relational database management system for a ROK Army Infantry Division with probabilisti (1987-01-01)"
+      ]
+     }
+    },
+    "North Korean Army": {
+     "pattern": "인민군|북한군|朝鮮人民軍",
+     "nara": {
+      "total": 131537,
+      "hit": 3,
+      "of": 5,
+      "top": [
+       "NORTH KOREAN PRISONER TELLS ALL (1951-01-14)",
+       "North Korean prisoners during Korean War (1950-09-18)",
+       "KOREAN WAR"
+      ]
+     },
+     "ia": {
+      "total": 243,
+      "hit": 5,
+      "of": 5,
+      "top": [
+       "CIA Reading Room cia-rdp80-00809a000600330238-1: FORMER KOREAN RED LEADER SAYS NORTH KOREA (1950-07-28)",
+       "CIA Reading Room cia-rdp80-00810a000300070007-4: ORDERS FROM NORTH KOREAN ARMY GENERAL HEA (1953-02-18)",
+       "CIA Reading Room cia-rdp80-00810a001900500010-5: NORTH KOREAN ARMY II,V, AND VII CORPS (1953-08-03)"
+      ]
+     }
+    },
+    "US Army Korea": {
+     "pattern": "미군(?!\\\\s?정)|美軍|美军",
+     "nara": {
+      "total": 60039,
+      "hit": 1,
+      "of": 5,
+      "top": [
+       "UN FORCES IN KOREA",
+       "UN FORCES IN KOREA",
+       "UN FORCES IN KOREA"
+      ]
+     },
+     "ia": {
+      "total": 19,
+      "hit": 5,
+      "of": 5,
+      "top": [
+       "To the People of the Whole World: On US Army Atrocities in South Korea (1961-04-15)",
+       "US Army Apache Helicopter LIVE FIRE Exercise To Send Final Warning To North Korea ()",
+       "US Army Prepares Forces In South Korea For WMD Attack ()"
+      ]
+     }
+    },
+    "Marines Korea": {
+     "pattern": "해병대|海兵隊",
+     "nara": {
+      "total": 19871,
+      "hit": 5,
+      "of": 5,
+      "top": [
+       "MARINES IN KOREA (1952-07-07)",
+       "With Marines in Korea",
+       "WITH MARINES IN KOREA (EAST COAST)"
+      ]
+     },
+     "ia": {
+      "total": 21,
+      "hit": 4,
+      "of": 5,
+      "top": [
+       "North Korea Claims America Is Preparing For Big Event, Highlight US Marines In Australia ()",
+       "The final crucible : U.S. Marines in Korea (2006-01-01)",
+       "Telephone interview with Sgt. James Sartorelli, former corporal with Weapons Company, 2nd  (2002-01-08)"
+      ]
+     }
+    },
+    "airborne Korea": {
+     "pattern": "공수\\\\s?작전|공수\\\\s?부대|낙하산",
+     "nara": {
+      "total": 13907,
+      "hit": 2,
+      "of": 5,
+      "top": [
+       "11th Airborne Division",
+       "U.S. Army's 2nd Brigade, 82nd Airborne, Airlifted to Korea For Focus Retina, Pope Air Force Base, No",
+       "U.S. Air Force C141 Jet Transports Airlift Army Troops to Korea for Exercise Focus Retina, Pope Air "
+      ]
+     },
+     "ia": {
+      "total": 4,
+      "hit": 4,
+      "of": 4,
+      "top": [
+       "Scan - Medal of Honor: Airborne (Xbox 360) (Korea) ()",
+       "CIA Reading Room 0000644096: COMMENTS ON DRAFT CONTINGENCY PLAN FOR AIRBORNE RECONNAISSANC (1968-01-01)",
+       "RECONNAISSANCE PATROL, KOREA ; 187TH AIRBORNE, MUNSON-NI (1951-01-01)"
+      ]
+     }
+    },
+    "landing craft Korea": {
+     "pattern": "상륙정|상륙함",
+     "nara": {
+      "total": 18624,
+      "hit": 5,
+      "of": 5,
+      "top": [
+       "LANDING WONSAN, N KOREA (1950-10-26)",
+       "LANDING AT WONSON, NORTH KOREA (1950-10-24)",
+       "General – Tanks, Landing Craft, Heavy Equipment, Composite"
+      ]
+     },
+     "ia": {
+      "total": 312,
+      "hit": 0,
+      "of": 5,
+      "top": [
+       "github.com-public-apis-public-apis_-_2023-06-30_19-41-33 (2023-06-30)",
+       "CIA Reading Room cia-rdp79r01141a002400090001-4: MILITARY ASSISTANCE BY THE SINO-SOVIET BL (1962-06-01)",
+       "CIA Reading Room cia-rdp79-00927a003200080001-9: CURRENT INTELLIGENCE WEEKLY SUMMARY (1999-10-19)"
+      ]
+     }
+    },
+    "field hospital Korea": {
+     "pattern": "야전\\\\s?병원|이동\\\\s?외과\\\\s?병원|병원선",
+     "nara": {
+      "total": 46489,
+      "hit": 2,
+      "of": 5,
+      "top": [
+       "Reel 59-54, 1954",
+       "Reel 57-54, 1954",
+       "Reel 56-54, 1954"
+      ]
+     },
+     "ia": {
+      "total": 3,
+      "hit": 3,
+      "of": 3,
+      "top": [
+       "Awards for members of Czechoslovak field hospital in Korea ()",
+       "CIA Reading Room cia-rdp82-00457r010800300003-0: PERSONNEL OF RUMANIAN FIELD HOSPITAL UNIT (1952-03-06)",
+       "DPR Korea - Field Hospital on Flood Disaster Recovery Battlefield (eng. sub.) (2020-09-21)"
+      ]
+     }
+    },
+    "Red Cross Korea": {
+     "pattern": "적십자|赤十字",
+     "nara": {
+      "total": 45315,
+      "hit": 5,
+      "of": 5,
+      "top": [
+       "Japanese Student Protest / Swedish Red Cross in Korea",
+       "AMERICAN RED CROSS FIELD SERVICES, KOREA",
+       "Danish Red Cross Ship Joins United Nations Forces"
+      ]
+     },
+     "ia": {
+      "total": 14,
+      "hit": 5,
+      "of": 5,
+      "top": [
+       "North-South Korea Red Cross Talks: July 11, 1972 (no. 2) (1972-07-11)",
+       "North-South Korea Red Cross Talks: November 26, 1972 (no. 10) (1972-11-26)",
+       "North-South Korea Red Cross Talks: September 15, 1972 (no. 8) (1972-09-15)"
+      ]
+     }
+    },
+    "relief Korea": {
+     "pattern": "구호\\\\s?물자|구호|원조",
+     "nara": {
+      "total": 37669,
+      "hit": 4,
+      "of": 5,
+      "top": [
+       "South Korea: Relief (1957-01-01)",
+       "North Korea: Relief (1957-01-01)",
+       "South Korea - Relief (1957-01-01)"
+      ]
+     },
+     "ia": {
+      "total": 11,
+      "hit": 5,
+      "of": 5,
+      "top": [
+       "THE TORTURE VICTIMS RELIEF ACT OF 2005; SUPPORTING THE GOALS AND IDEALS OF A NATIONAL WEEK (2005-06-23)",
+       "CIA Reading Room cia-rdp82-00457r000900020007-7: ECONOMIC INFORMATION: RELIEF IN NORTH KOR (1947-09-08)",
+       "Relief and reconstruction in Korea. (1953-01-01)"
+      ]
+     }
+    },
+    "separated families Korea": {
+     "pattern": "이산\\\\s?가족",
+     "nara": {
+      "total": 19182,
+      "hit": 1,
+      "of": 5,
+      "top": [
+       "[06/19/2000-12/26/2000]",
+       "Korea, January-June 1995 [2]",
+       "Korea"
+      ]
+     },
+     "ia": {
+      "total": 624,
+      "hit": 0,
+      "of": 5,
+      "top": [
+       "Can Todd Turn A Presbyterian Into A Baptist? + Are Seventh-day Adventists Christians? (2026-10-28)",
+       "VOA1 [Voice of America] - The Hits : July 07, 2018 08:00AM-09:00AM EDT (2018-07-07)",
+       "VOA [Voice of America] Africa : August 02, 2017 02:00AM-03:00AM EDT (2017-08-02)"
+      ]
+     }
+    },
+    "killed in action Korea": {
+     "pattern": "전사자|전몰자|戰死者",
+     "nara": {
+      "total": 26579,
+      "hit": 1,
+      "of": 5,
+      "top": [
+       "Korea-MIAs [Missing in Action]",
+       "North Korea/South Korea [2]",
+       "North Korea/South Korea [1]"
+      ]
+     },
+     "ia": {
+      "total": 1,
+      "hit": 0,
+      "of": 1,
+      "top": [
+       "TRIBUTES TO HON. ARLEN SPECTER Arlen Specter U.S. SENATOR FROM PENNSYLVANIA TRIBUTES IN TH (2010-12-21)"
+      ]
+     }
+    },
+    "remains recovery Korea": {
+     "pattern": "유해\\\\s?발굴|유해\\\\s?송환",
+     "nara": {
+      "total": 22426,
+      "hit": 0,
+      "of": 5,
+      "top": [
+       "Korea-MIAs [Missing in Action]",
+       "Korea - Miscellaneous, 1996 [1]",
+       "Korea, 1996 [2]"
+      ]
+     },
+     "ia": {
+      "total": 1126,
+      "hit": 0,
+      "of": 5,
+      "top": [
+       "VOA [Voice of America] Global English : October 27, 2018 08:00AM-09:00AM EDT (2018-10-27)",
+       "VOA [Voice of America] Africa : September 11, 2017 11:00PM-12:00AM EDT (2017-09-12)",
+       "VOA [Voice of America] Africa : September 12, 2017 11:00PM-12:00AM EDT (2017-09-13)"
+      ]
+     }
+    },
+    "decoration medal Korea": {
+     "pattern": "훈장|무공\\\\s?훈장|勳章",
+     "nara": {
+      "total": 6230,
+      "hit": 3,
+      "of": 5,
+      "top": [
+       "Air Force Award Cards [medals, badges, decorations]: Aldea, Robert - Zimmerman, Carroll",
+       "Medal of Honor Man Appeals For Blood, Various Locations",
+       "Air Force Award Cards [unit awards]: Air Attache Office (Korea) - 8th Weather Squadron"
+      ]
+     },
+     "ia": {
+      "total": 34,
+      "hit": 0,
+      "of": 5,
+      "top": [
+       "CIA Reading Room cia-rdp80s01540r003800080001-7: TRANSLATIONS OF NORTH KOREAN NEWSPAPERS (1953-11-24)",
+       "CIA Reading Room cia-rdp80s01540r003000070003-4: TRANSLATIONS OF NORTH KOREAN NEWSPAPERS (1953-10-06)",
+       "e_history_StreamRoot_DH_0055_19550420_01 (1955-04-20)"
+      ]
+     }
+    },
+    "war correspondents Korea": {
+     "pattern": "종군\\\\s?기자",
+     "nara": {
+      "total": 10441,
+      "hit": 4,
+      "of": 5,
+      "top": [
+       "Korean War Peace talks. Kaesong, Korea (1951-01-01)",
+       "Korean War Peace talks. Kaesong, Korea (1951-01-01)",
+       "United Nations correspondents at the armistice building, Panmunjom, Korea. (1953-07-23)"
+      ]
+     },
+     "ia": {
+      "total": 882,
+      "hit": 1,
+      "of": 5,
+      "top": [
+       "KPBS 89.5 FM/KQVO 97.7 FM : January 01, 2018 04:00AM-05:00AM PST (2018-01-01)",
+       "KPBS 89.5 FM/KQVO 97.7 FM : June 12, 2018 04:00PM-05:00PM PDT (2018-06-12)",
+       "Eating mud crabs in Kandahar : stories of food during wartime by the world's leading corre (2011-01-01)"
+      ]
+     }
+    },
+    "leaflets Korea": {
+     "pattern": "삐라|선전\\\\s?전단|전단",
+     "nara": {
+      "total": 8053,
+      "hit": 0,
+      "of": 5,
+      "top": [
+       "Korea Bulletin (1950-08-01)",
+       "War of Words Also Rages in Korea",
+       "Livestock and Products: Status of FMD Outbreak in Korea - IX, 04/13/2000, Korea, Republic of, KS0038"
+      ]
+     },
+     "ia": {
+      "total": 3,
+      "hit": 3,
+      "of": 3,
+      "top": [
+       "Reuters - North Korea warned South Korea over anti-Pyongyang leaflets, saying it may cance (2020-06-07)",
+       "BREAKING: South Korea again scattered Leaflets across the DPRK - Kim Yo Jong issues Warnin (2021-05-02)",
+       "12 Million DPRK Leaflets to be scattered across South Korea (2020-06-23)"
+      ]
+     }
+    },
+    "psychological warfare Korea": {
+     "pattern": "심리전",
+     "nara": {
+      "total": 8089,
+      "hit": 4,
+      "of": 5,
+      "top": [
+       "PSYCHOLOGICAL WARFARE (1951-08-18)",
+       "PSYCHOLOGICAL WARFARE (1951-10-22)",
+       "Psychological Warfare (1950-01-01)"
+      ]
+     },
+     "ia": {
+      "total": 9,
+      "hit": 3,
+      "of": 5,
+      "top": [
+       "SE-24: SIGNIFICANCE OF THE COMMUNIST PSYCHOLOGICAL WARFARE CAMPAIGN ALLEGING USE OF BIOLOG (1952-03-13)",
+       "CIA Reading Room cia-rdp79s01011a000600050029-8: SE-24: SIGNIFICANCE OF THE COMMUNIST PSYC (1952-03-13)",
+       "CIA Reading Room cia-rdp79s01011a000600050031-5: TERMS OF REFERENCE : SIE -4 : SIGNIFICANC (1952-03-11)"
+      ]
+     }
+    },
+    "radio broadcast Korea": {
+     "pattern": "방송|放送",
+     "nara": {
+      "total": 15670,
+      "hit": 0,
+      "of": 5,
+      "top": [
+       "Korea Bulletin (1950-07-24)",
+       "Korea Bulletin (1950-08-14)",
+       "Korea Bulletin (1950-07-21)"
+      ]
+     },
+     "ia": {
+      "total": 2,
+      "hit": 2,
+      "of": 2,
+      "top": [
+       "Echo Of Unification (North Korea/DPRK) - Radio Broadcast Clip (May 2013) [Korean] (2017-04-14)",
+       "Echo Of Unification (North Korea/DPRK) - Radio Broadcast - Opening Clip (May 2013) [Korean (2017-04-14)"
+      ]
+     }
+    },
+    "Inchon landing": {
+     "pattern": "인천\\\\s?상륙\\\\s?작전|인천\\\\s?상륙|仁川上陸|仁川登陆|Инчхонская десантная",
+     "nara": {
+      "total": 2954,
+      "hit": 5,
+      "of": 5,
+      "top": [
+       "KOREAN WAR. WOLMI-DO IS & INCHON ; MACARTHUR LANDING IN INCHON ; BOMBARDMENT, INCHON",
+       "AMPHIBIOUS FORCE LANDING, D-DAY, INCHON, KOREA (1950-09-15)",
+       "LANDING OF US XXIV CORPS, SUIZAN AIRDROME, INCHON, KOREA ; 7TH DIVISION LANDING AT KOREA (1945-09-08)"
+      ]
+     },
+     "ia": {
+      "total": 13,
+      "hit": 5,
+      "of": 5,
+      "top": [
+       "Inchon Landing MacArthur's Last Triumph (1979-01-01)",
+       "Twenty years after liberation/part 3 : the suffering of the nation : Battle of Inchon Land (1978-01-01)",
+       "The Inchon Landing, Korea, 1950 : an annotated bibliography (1994-01-01)"
+      ]
+     }
+    },
+    "Chosin Reservoir": {
+     "pattern": "장진호|長津湖|长津湖",
+     "nara": {
+      "total": 512,
+      "hit": 2,
+      "of": 5,
+      "top": [
+       "Fifth Marine Regiment Gets Into Hills and Cold Weather Around Chosin Reservoir (1950-11-02)",
+       "FICHE_156",
+       "B-26 BOMB MISSION, KOREA"
+      ]
+     },
+     "ia": {
+      "total": 38,
+      "hit": 4,
+      "of": 5,
+      "top": [
+       "DTIC ADA429076: The Relationship between Cohesion and Casualty Rates: The 1st Marine Divis (2004-06-18)",
+       "DTIC ADB006731: Changjin (Chosin) Reservoir, Korea 1950: A Case Study of United States Arm (1975-06-06)",
+       "Ben Wagner - The Battle of the Chosin Reservoir (2013-12-11)"
+      ]
+     }
+    },
+    "Hungnam evacuation": {
+     "pattern": "흥남\\\\s?철수|흥남|興南",
+     "nara": {
+      "total": 423,
+      "hit": 5,
+      "of": 5,
+      "top": [
+       "EVACUATION OF HUNGNAM, KOREA (1950-12-24)",
+       "EVACUATION OF HUNGNAM KOREA (1950-12-24)",
+       "EVACUATION, HUNGNAM, KOREA"
+      ]
+     },
+     "ia": {
+      "total": 14,
+      "hit": 5,
+      "of": 5,
+      "top": [
+       "SOUTH AFRICAN AIR FORCE (FLYING CHEETEA SQADRON) SUWON, KOREA ; EVACUATION OF HUNGNAM (UND (1950-01-01)",
+       "\"THAT WAR IN KOREA \" KOREAN WAR DOCUMENTARY 1950 INVASION TO HUNGNAM EVACUATION PART 1 634 ()",
+       "EVACUATION, HUNGNAM, KOREA (1950-01-01)"
+      ]
+     }
+    },
+    "White Horse Hill Korea": {
+     "pattern": "백마고지|白馬高地|白马高地",
+     "nara": {
+      "total": 18499,
+      "hit": 3,
+      "of": 5,
+      "top": [
+       "Shelflist to U.S. Army Signal Corps Black-and-White Photographs: 111-SC-418000 to 111-SC-418999",
+       "Shelflist to U.S. Army Signal Corps Color Photographs: 63100 to 63199",
+       "Shelflist to U.S. Army Signal Corps Black-and-White Photographs: 111-SC-522000 to 111-SC-522999"
+      ]
+     },
+     "ia": {
+      "total": 178,
+      "hit": 0,
+      "of": 5,
+      "top": [
+       "VOA [Voice of America] Global English : February 22, 2020 11:00PM-12:00AM EST (2020-02-23)",
+       "VOA [Voice of America] Global English : July 11, 2020 06:00PM-07:00PM EDT (2020-07-11)",
+       "VOA [Voice of America] Africa : June 18, 2017 12:00PM-01:00PM EDT (2017-06-18)"
+      ]
+     }
+    },
+    "Heartbreak Ridge": {
+     "pattern": "단장의\\\\s?능선",
+     "nara": {
+      "total": 641,
+      "hit": 1,
+      "of": 5,
+      "top": [
+       "Department of State Chronology of Principal Events Relating to the Korean Conflict, October 1951, Re",
+       "Top SoldierGeneral, Lyman Lemitzer, White House, Washington, D.C.",
+       "Hard Fighting on the Ridges in Korea"
+      ]
+     },
+     "ia": {
+      "total": 19,
+      "hit": 5,
+      "of": 5,
+      "top": [
+       "Heartbreak Ridge (1986) Trailer (1986-01-01)",
+       "Heartbreak ridge (1986-01-01)",
+       "1991 promo for Heartbreak Ridge (1991-01-01)"
+      ]
+     }
+    },
+    "Punchbowl Korea": {
+     "pattern": "펀치볼",
+     "nara": {
+      "total": 617,
+      "hit": 2,
+      "of": 5,
+      "top": [
+       "FICHE_1315",
+       "V.J. Day - Punchbowl - Sept. 2, 1995 [1]",
+       "V.J. Day - Punchbowl - Sept. 2, 1995 [2]"
+      ]
+     },
+     "ia": {
+      "total": 14,
+      "hit": 0,
+      "of": 5,
+      "top": [
+       "U. S. Marine Operations In Korea 1950–1953 Volume 4 The East-Central Front (2023-12-29)",
+       "2005 - Present : ALJAZ : January 1, 2018 9:00am-10:00am +03 (2018-01-01)",
+       "North Korean Infiltration Tunnel #4 (2016-12-17)"
+      ]
+     }
+    },
+    "Imjin River": {
+     "pattern": "임진강|臨津江|临津江",
+     "nara": {
+      "total": 651,
+      "hit": 5,
+      "of": 5,
+      "top": [
+       "CANADIANS IN KOREA, IMJIN RIVER (1951-09-20)",
+       "CANADIANS IN KOREA, IMJIN RIVER (1951-09-21)",
+       "Freedom Bridge Over Imjin River (1951-01-01)"
+      ]
+     },
+     "ia": {
+      "total": 9,
+      "hit": 5,
+      "of": 5,
+      "top": [
+       "The dandelion on the Imjin River : a novel (1990-01-01)",
+       "1ST ROK DIVISION, 24 MI N OF SEOUL ON MSR, KOREA ; IMJIN RIVER CROSSING, 1ST ROK DIVISION (1951-01-01)",
+       "CANADIANS IN KOREA, IMJIN RIVER (1951-01-01)"
+      ]
+     }
+    },
+    "Gloucestershire Regiment Korea": {
+     "pattern": "그로스터|글로스터",
+     "nara": {
+      "total": 229,
+      "hit": 0,
+      "of": 5,
+      "top": [
+       "General James van Fleet Cites British Fighters",
+       "Index to Personalities in the U.S. Army Signal Corps Photographic Files, 1940 - 1954: Riggs - Robbin",
+       "Index to Personalities in the U.S. Army Signal Corps Photographic Files, 1940 - 1954: Gross - Guion"
+      ]
+     },
+     "ia": {
+      "total": 5,
+      "hit": 0,
+      "of": 5,
+      "top": [
+       "The edge of the sword (1955-01-01)",
+       "Now thrive the armourers : a story of action with the Gloucesters in Korea, November 1950- (1989-01-01)",
+       "Cannibal tabletop figure (3762553) (2019-07-22)"
+      ]
+     }
+    },
+    "Koje Island": {
+     "pattern": "거제도|巨濟島|巨济岛",
+     "nara": {
+      "total": 2285,
+      "hit": 2,
+      "of": 5,
+      "top": [
+       "OPERATION \"BIG SWITCH\", KOJE-DO ISLAND, KOREA (1953-08-03)",
+       "OPERATION SWAP, KOJE-DO ISLAND AND CHEJU-DO, KOREA",
+       "Subject Sheets, January 1951-January 1953: Civilian Schools/Ukrainian Catholic Seminary THRU Foreign"
+      ]
+     },
+     "ia": {
+      "total": 3,
+      "hit": 3,
+      "of": 3,
+      "top": [
+       "OPERATION \"BIG SWITCH\", KOJE-DO ISLAND, KOREA (1953-08-03)",
+       "Operation \"Big Switch,\" Koje Do Island, Korea, 08/03/1953 (1953-08-03)",
+       "PW CONSTRUCTION ON KOJE-DO ISLAND, ABOUT 60 MILES SOUTH OF PUSAN, KOREA (1951-01-01)"
+      ]
+     }
+    },
+    "Panmunjom": {
+     "pattern": "판문점|板門店|板门店|Пханмунджом",
+     "nara": {
+      "total": 1666,
+      "hit": 5,
+      "of": 5,
+      "top": [
+       "PANMUNJOM (1968-07-01)",
+       "PANMUNJOM (1968-07-01)",
+       "PANMUNJOM STORY (1968-06-01)"
+      ]
+     },
+     "ia": {
+      "total": 41,
+      "hit": 4,
+      "of": 5,
+      "top": [
+       "Still the rice grows green; Asia in the aftermath of Geneva and Panmunjom (1955-01-01)",
+       "CIA Reading Room cia-rdp91-00772r000201190007-8: A FR: CAPITA SELECTA I TO: CHA-YU A KIL P (1983-12-31)",
+       "CIA Reading Room cia-rdp80r01443r000200090005-7: BLOODSHED MAY BE INEVITABLE AT PANMUNJOM (1954-01-08)"
+      ]
+     }
+    },
+    "38th parallel Korea": {
+     "pattern": "38\\\\s?선|삼팔선|三八線|三八线",
+     "nara": {
+      "total": 5333,
+      "hit": 5,
+      "of": 5,
+      "top": [
+       "REFUGEE CAMP, KAESONG, KOREA ; 38TH PARALLEL, KOREA (1947-05-24)",
+       "The 38th Parallel, Republic of Korea (1950-01-13)",
+       "The 38th Parallel, Republic of Korea (1950-01-13)"
+      ]
+     },
+     "ia": {
+      "total": 10,
+      "hit": 4,
+      "of": 5,
+      "top": [
+       "Korea 38th Parallel ()",
+       "RETREAT, UIJONGBU, KOREA ; COMBAT PHOTOGRAPHERS, 38TH PARALLEL ; COMBAT PHOTOGRAPHERS, UIJ (1951-01-01)",
+       "Korea: Land of the 38th Parallel (1969-01-01)"
+      ]
+     }
+    },
+    "Korea armistice": {
+     "pattern": "휴전\\\\s?협정|정전\\\\s?협정|휴전|정전|停戦|停战|休戰|перемирие|armisticio|Waffenstillstand",
+     "nara": {
+      "total": 7627,
+      "hit": 4,
+      "of": 5,
+      "top": [
+       "UN & COMMUNIST ARMISTICE NEGOTIATIONS Panmunjom, Korea (1952-02-18)",
+       "UN & COMMUNIST ARMISTICE NEGOTATIONS Panmunjom, Korea (1952-04-20)",
+       "List, Folder 42: Armistice Negotiations in Korea"
+      ]
+     },
+     "ia": {
+      "total": 24,
+      "hit": 1,
+      "of": 5,
+      "top": [
+       "SPOTLIGHT : Korea Armistice Anniversary : PRESSTV : July 30, 2023 1:02pm-1:31pm IRST (2023-07-30)",
+       "CIA Reading Room cia-rdp79s01011a001100010019-6: SE-48 CAPABILITIES AND PROBABLE COURSE OF (1953-09-29)",
+       "CIA Reading Room cia-rdp79s01011a001100010022-2: SE-48: CAPABILITIES AND PROBABLE COURSES  (1953-08-13)"
+      ]
+     }
+    },
+    "prisoners of war Korea": {
+     "pattern": "포로|捕虜|战俘|военнопленн\\\\w*",
+     "nara": {
+      "total": 23762,
+      "hit": 5,
+      "of": 5,
+      "top": [
+       "[Korean War Data File of American Prisoners of War], 1950 - 1953",
+       "Korea – Prisoners of War",
+       "Korea – Prisoners of War"
+      ]
+     },
+     "ia": {
+      "total": 22,
+      "hit": 4,
+      "of": 5,
+      "top": [
+       "Investigation of Communist propaganda among prisoners of war in Korea, (Save Our Sons Comm (1956-01-01)",
+       "The captives of Korea ; an unofficial white paper on the treatment of war prisoners: our t (1957-01-01)",
+       "CIA Reading Room cia-rdp80-00810a002500030006-8: TREATMENT OF RETURNED PRISONERS OF WAR IN (1953-09-25)"
+      ]
+     }
+    },
+    "captured Korea": {
+     "pattern": "노획",
+     "nara": {
+      "total": 22262,
+      "hit": 5,
+      "of": 5,
+      "top": [
+       "Korea – Captured Equipment",
+       "Korea – Captured Equipment",
+       "Korea – Captured Equipment"
+      ]
+     },
+     "ia": {
+      "total": 10,
+      "hit": 4,
+      "of": 5,
+      "top": [
+       "Prevalence of Swine Viral and Bacterial Pathogens in Rodents and Stray Cats Captured aroun (2013-07-26)",
+       "CIA Reading Room 0000126858: IDENTIFICATION OF U.S. AIRMEN CAPTURED IN KOREA (1952-05-03)",
+       "CIA Reading Room 0000124326: IDENTIFICATION OF U.S. AIRMEN CAPTURED IN KOREA (1952-05-03)"
+      ]
+     }
+    },
+    "French expedition Korea 1866": {
+     "pattern": "병인양요|丙寅洋擾|병인박해",
+     "nara": {
+      "total": 3406,
+      "hit": 0,
+      "of": 5,
+      "top": [
+       "June 1866: A324 - W587",
+       "Department of State Report, United States Policy Regarding Korea, 1834-1941, Research Project No. 29 (1947-05-",
+       "XXIV Corps: 2-002 (1 of 2)"
+      ]
+     },
+     "ia": {
+      "total": 3,
+      "hit": 0,
+      "of": 3,
+      "top": [
+       "List of principal characters in China, 1900-1949 (2024-01-01)",
+       "List of characters China 1900-1949 (2022-01-01)",
+       "List of characters China (2021-01-01)"
+      ]
+     }
+    },
+    "United States expedition Korea 1871": {
+     "pattern": "신미양요|辛未洋擾",
+     "nara": {
+      "total": 4080,
+      "hit": 3,
+      "of": 5,
+      "top": [
+       "Department of State Report, United States Policy Regarding Korea, 1834-1941, Research Project No. 29 (1947-05-",
+       "Memorandum, Powers of the President to Send the Armed Forces Outside the United States (B) (1951-02-16)",
+       "Memorandum, Powers of the President to Send the Armed Forces Outside the United States (A) (1951-02-16)"
+      ]
+     },
+     "ia": {
+      "total": 10,
+      "hit": 2,
+      "of": 5,
+      "top": [
+       "The Low-Rodgers Expedition: a study in the foundations of U.S. policy in Korea (1988-06-01)",
+       "List of principal characters in China, 1900-1949 (2024-01-01)",
+       "The Low-Rodgers Expedition: a study in the foundations of U.S. policy in Korea (1988-06-01)"
+      ]
+     }
+    },
+    "Kanghwa": {
+     "pattern": "강화도|江華島|江华岛|강화",
+     "nara": {
+      "total": 145,
+      "hit": 1,
+      "of": 5,
+      "top": [
+       "Kanghwa NE",
+       "1ST ROK DIV (FRIENDLY GUERRILLAS OPERATING IN AND AROUND KAESONG AREA) KOREA (1951-04-12)",
+       "The Korean Peninsula: Demilitarized Zone Area"
+      ]
+     },
+     "ia": {
+      "total": 3,
+      "hit": 3,
+      "of": 3,
+      "top": [
+       "Munjang kanghwa (1988-01-01)",
+       "Paek Sŏng-uk ŭi Kŭmganggyŏng kanghwa : Kŭmgang panya para milta simgyŏng (2012-01-01)",
+       "Maesŭk'om munjang kanghwa : kakchong kisamun, silyong munjang ŭi chindan kwa ch'obang (1972-01-01)"
+      ]
+     }
+    },
+    "Paris Foreign Missions Korea": {
+     "pattern": "파리\\\\s?외방전교회",
+     "nara": {
+      "total": 15286,
+      "hit": 3,
+      "of": 5,
+      "top": [
+       "Korea Bulletin (1950-08-21)",
+       "Memorandum of Ministerial Talks with Secretary of State Dean Acheson, Foreign Minister of Great Brit (1952-07-",
+       "Korea, January-June 1995 [2]"
+      ]
+     },
+     "ia": {
+      "total": 421,
+      "hit": 1,
+      "of": 5,
+      "top": [
+       "e_history_StreamRoot_DH_0195_19590105_01 (1959-01-05)",
+       "CIA Reading Room cia-rdp79-00927a005200090001-7: WEEKLY SUMMARY (2016-12-21)",
+       "CIA Reading Room cia-rdp90m00004r000300010003-1: LETTER TO VERNON A. WALTERS FROM DAVID D. (1987-06-22)"
+      ]
+     }
+    },
+    "missionaries Korea": {
+     "pattern": "선교사|宣教師|宣教师|传教士|missionnaires?|misioneros|Missionare|миссионер\\\\w*",
+     "nara": {
+      "total": 5471,
+      "hit": 0,
+      "of": 5,
+      "top": [
+       "Korea (7)",
+       "Japan And Korea [2 Of 3]",
+       "Operation Handclasp, Various Locations"
+      ]
+     },
+     "ia": {
+      "total": 5,
+      "hit": 5,
+      "of": 5,
+      "top": [
+       "Missionaries in Korea : directory, Jan. 1, 1949. (1949-01-01)",
+       "Challenged identities : North American missionaries in Korea, 1884-1934 (2003-01-01)",
+       "Truth and falsehood about Korea missionaries (1904-01-01)"
+      ]
+     }
+    },
+    "Catholic Korea martyrs": {
+     "pattern": "천주교|가톨릭|카톨릭|순교",
+     "nara": {
+      "total": 1106,
+      "hit": 0,
+      "of": 5,
+      "top": [
+       "[02/04/1997 – 08/01/1997]",
+       "Caption Information",
+       "Vatican - Taylor, Myron C., January-August 1944"
+      ]
+     },
+     "ia": {
+      "total": 45,
+      "hit": 1,
+      "of": 5,
+      "top": [
+       "CIA Reading Room cia-rdp90-00965r000807600023-9: BEIRUT BOMBING: MYSTERIOUS DEATH WARRIORS (1984-02-01)",
+       "e_history_StreamRoot_DH_0133_19570930_01 (1957-09-30)",
+       "Korean Martyrs 20 Sep 2013 (2013-09-20)"
+      ]
+     }
+    },
+    "Korean War": {
+     "pattern": "한국전쟁|6[·.]25|조선전쟁|朝鮮戦争|朝鲜战争|朝鮮戰爭|抗美援朝|Корейская война|Корей соғысы|Солонгосын дайн|Chiến tranh Triều Tiên|कोरियाई युद्ध|מלחמת קוריאה|الحرب الكورية|Koreakrieg|Guerra de Corea|Guerra da Coreia|Guerre de Corée",
+     "nara": {
+      "total": 232742,
+      "hit": 5,
+      "of": 5,
+      "top": [
+       "[Korean War Data File of American Prisoners of War], 1950 - 1953",
+       "Korean War Memorial",
+       "Repatriated Korean Conflict Prisoners of War, 7/5/1950 - 10/6/1954"
+      ]
+     },
+     "ia": {
+      "total": 1591,
+      "hit": 5,
+      "of": 5,
+      "top": [
+       "Dr. Phil of VR & Korean War Missing Bodies: VICE News Tonight Full Episode (2019-09-13)",
+       "Korean War Interrogation Rooms : CSPAN3 : February 3, 2021 8:27am-9:59am EST (2021-02-03)",
+       "Rossini or cruel and jatneunga who the problem is the war movie (Korean edition) (2007-01-01)"
+      ]
+     }
+    },
+    "Russo-Japanese War Korea": {
+     "pattern": "러일전쟁|日露戦争|日俄战争",
+     "nara": {
+      "total": 6718,
+      "hit": 1,
+      "of": 5,
+      "top": [
+       "War, 1937",
+       "Bering Sea; Argentina; Korea (1955-07-04)",
+       "Department of State Report, United States Policy Regarding Korea, 1834-1941, Research Project No. 29 (1947-05-"
+      ]
+     },
+     "ia": {
+      "total": 152,
+      "hit": 1,
+      "of": 5,
+      "top": [
+       "Hubris : the tragedy of war in the twentieth century (2015-01-01)",
+       "China Mail 1904-09-16 (1904-09-16)",
+       "China Mail 1907-07-30 (1907-07-30)"
+      ]
+     }
+    },
+    "Sino-Japanese War Korea 1894": {
+     "pattern": "청일전쟁|日清戦争|甲午战争",
+     "nara": {
+      "total": 3032,
+      "hit": 1,
+      "of": 5,
+      "top": [
+       "Department of State Report, United States Policy Regarding Korea, 1834-1941, Research Project No. 29 (1947-05-",
+       "D-8843, 1938, thru D-8984(C), 1940",
+       "General: Visits, 1950 - War, 1938"
+      ]
+     },
+     "ia": {
+      "total": 28,
+      "hit": 2,
+      "of": 5,
+      "top": [
+       "Civilizations 30: Korea's Dilemmas from Donghak Uprising to Sino-Japanese War 1894 (2021-03-12)",
+       "Japan's first modern war : Army and society in the conflict with China, 1894-95 (1994-01-01)",
+       "An American cruiser in the East; travels and studies in the Far East; the Aleutian Islands (1898-01-01)"
+      ]
+     }
+    },
+    "Chosen Japan colonial": {
+     "pattern": "일제\\\\s?강점기|조선총독부|朝鮮總督府|朝鮮総督府|植民地朝鮮",
+     "nara": {
+      "total": 16707,
+      "hit": 2,
+      "of": 5,
+      "top": [
+       "PHYSICAL GEOGRAPHY (Estonia) - PHYSICAL GEOGRAPHY (Japan Colonial)",
+       "Colonial - Comm",
+       "[Climate Change] Notes / Handouts 6/10-11"
+      ]
+     },
+     "ia": {
+      "total": 1,
+      "hit": 0,
+      "of": 1,
+      "top": [
+       "Present day impressions of Japan; the history, people, commerce, industries and resources  (1919-01-01)"
+      ]
+     }
+    },
+    "Korean Empire Corea": {
+     "pattern": "대한제국|大韓帝國|大韓帝国",
+     "nara": {
+      "total": 1039,
+      "hit": 0,
+      "of": 5,
+      "top": [
+       "World War II Operations Reports - Pacific Theater: 36-010 (2 of 2)",
+       "Department of State Report, United States Policy Regarding Korea, 1834-1941, Research Project No. 29 (1947-05-",
+       "Lists of Documents: 895.00/465 - 895.927/2 THRU Political Affairs: 895.00/465-536: January 22, 1910 "
+      ]
+     },
+     "ia": {
+      "total": 2,
+      "hit": 0,
+      "of": 2,
+      "top": [
+       "Hong Kong Telegraph 1911-02-10 (1911-02-10)",
+       "CIA Reading Room cia-rdp79-01082a000100030003-4: STAFF STUDY PROJECT #13: SOVIET ECONOMIC  (1949-11-23)"
+      ]
+     }
+    },
+    "MacArthur": {
+     "pattern": "맥아더|マッカーサー|麦克阿瑟|Макартур",
+     "nara": {
+      "total": 49425,
+      "hit": 5,
+      "of": 5,
+      "top": [
+       "Photograph of Douglas MacArthur (1918-08-01)",
+       "Photograph of Douglas MacArthur (1932-07-01)",
+       "MacArthur Foundation [2]"
+      ]
+     },
+     "ia": {
+      "total": 1966,
+      "hit": 5,
+      "of": 5,
+      "top": [
+       "MacArthur Reeves and Maggie L. Reeves ()",
+       "MacArthur Memorial: Order of Military Merit Medal Presentation (2024-01-26)",
+       "the riddle of macarthur (1951-01-01)"
+      ]
+     }
+    },
+    "Syngman Rhee": {
+     "pattern": "이승만|李承晩|李承晚",
+     "nara": {
+      "total": 1569,
+      "hit": 5,
+      "of": 5,
+      "top": [
+       "Dr. Syngman Rhee",
+       "Dr. Syngman Rhee",
+       "Dr. Syngman Rhee"
+      ]
+     },
+     "ia": {
+      "total": 17,
+      "hit": 5,
+      "of": 5,
+      "top": [
+       "Syngman Rhee, the founding president of the Republic of Korea : a record for the new gener (2015-01-01)",
+       "korea's syngman rhee: an unauthorized portrait (1960-01-01)",
+       "Report On Syngman Rhee, President Of The Korean Provisional Government In 1919 3756 - Shan ()"
+      ]
+     }
+    },
+    "Kim Il Sung": {
+     "pattern": "김일성|金日成",
+     "nara": {
+      "total": 39069,
+      "hit": 4,
+      "of": 5,
+      "top": [
+       "Andrei Gromyko and North Korean Premier Kim Il Song (1949-01-01)",
+       "Kawate, Kadzumi - Kitsuwa, Toyomi (2 of 4)",
+       "Translation of Leaflet 1261: Kim-Stalin (1952-12-29)"
+      ]
+     },
+     "ia": {
+      "total": 322,
+      "hit": 5,
+      "of": 5,
+      "top": [
+       "KIM IL SUNG 'On further developing the communist policies' Foreign Languages Publishing Ho ()",
+       "70th anniversary of Kim Il-sung (1982-04-15)",
+       "Kim Il Sung And His Mentor (2021-01-01)"
+      ]
+     }
+    },
+    "Yalu": {
+     "pattern": "압록강|鴨綠江|鸭绿江",
+     "nara": {
+      "total": 4247,
+      "hit": 4,
+      "of": 5,
+      "top": [
+       "YALU RIVER DAM STRIKES (1952-06-26)",
+       "On the March to the Yalu (1938-01-01)",
+       "Scroll of the Battle of Yalu by an Eye Witness (1895-09-27)"
+      ]
+     },
+     "ia": {
+      "total": 162,
+      "hit": 5,
+      "of": 5,
+      "top": [
+       "yalu ()",
+       "YALU 102 ()",
+       "Yalu 1 ()"
+      ]
+     }
+    },
+    "Naktong": {
+     "pattern": "낙동강|洛東江|洛东江",
+     "nara": {
+      "total": 897,
+      "hit": 5,
+      "of": 5,
+      "top": [
+       "KOREAN WAR, NAKTONG RIVER (1950-09-20)",
+       "Marines Dug in on the Third Objective, Overlooking Naktong river (1950-08-19)",
+       "ARMY 9TH REGT CP, NAKTONG RIVER, KOREA (1950-01-01)"
+      ]
+     },
+     "ia": {
+      "total": 13,
+      "hit": 5,
+      "of": 5,
+      "top": [
+       "MacArthur's War (Map - Naktong Bulge) (1988-01-01)",
+       "KOREAN WAR, 1ST BN., 5TH MARINE REGT., 1ST PROVISIONAL MARINE BRIGADE IN DRIVE TO NAKTONG  (1950-01-01)",
+       "DTIC ADA290790: The 24th Infantry Division's Naktong River Crossing in September 1950. (1964-05-18)"
+      ]
+     }
+    },
+    "Seoul": {
+     "pattern": "서울|한양|ソウル|首爾|首尔|漢城|汉城|Сеул|Seúl",
+     "nara": {
+      "total": 29362,
+      "hit": 5,
+      "of": 5,
+      "top": [
+       "RICE FOR SEOUL, SEOUL, KOREA (1951-03-19)",
+       "Korea – Seoul, September 1950",
+       "Korea – Seoul, September 1950"
+      ]
+     },
+     "ia": {
+      "total": 2840,
+      "hit": 5,
+      "of": 5,
+      "top": [
+       "SQ K-Pop-TWICE Summer Pop-Up Store 'Twaii's Shop' In Seoul Full Merchandise Haul (All Good ()",
+       "Walking around Gangna, Seoul ~~ windy day !koreanlife !hydrate (2020-09-19)",
+       "Pops in Seoul-BerryGood (Because of You) 베리굿 (요즘 너 때문에 난) ()"
+      ]
+     }
+    },
+    "Pusan": {
+     "pattern": "부산|釜山|Пусан",
+     "nara": {
+      "total": 13225,
+      "hit": 5,
+      "of": 5,
+      "top": [
+       "PUSAN CARNIVAL, PUSAN, KOREA",
+       "ACTIVITIES AT PUSAN, KOREA",
+       "ACTIVITIES AT PUSAN, KOREA"
+      ]
+     },
+     "ia": {
+      "total": 66,
+      "hit": 5,
+      "of": 5,
+      "top": [
+       "Pusan Coupling Corp v. United States ()",
+       "Kisaeng tourism : nation-wide survey report on conditions in four areas ; Seoul, Pusan, Ch (1984-01-01)",
+       "The Pusan Perimeter (1954-01-01)"
+      ]
+     }
+    },
+    "Pyongyang": {
+     "pattern": "평양|平壌|平壤|Пхеньян",
+     "nara": {
+      "total": 4199,
+      "hit": 5,
+      "of": 5,
+      "top": [
+       "Conditions in Pyongyang (1950-12-01)",
+       "Pyongyang, Korea City Map",
+       "First Films on Pyongyang Raid, Pyongyang, North Korea"
+      ]
+     },
+     "ia": {
+      "total": 1838,
+      "hit": 5,
+      "of": 5,
+      "top": [
+       "Seoul and Washington keep a tab on celebrations in Pyongyang (2023-07-26)",
+       "Pyongyang int'l sci-tech exhibition opens (2017-06-23)",
+       "KOREA NORTH R. Pyongyang 1991-04-27 (page 4) (1991-04-27)"
+      ]
+     }
+    },
+    "Inchon": {
+     "pattern": "인천|제물포|仁川",
+     "nara": {
+      "total": 6181,
+      "hit": 5,
+      "of": 5,
+      "top": [
+       "Inchon (Jinsen)",
+       "Inchon, Korea",
+       "OPERATIONS AT INCHON, KOREA (1950-09-17)"
+      ]
+     },
+     "ia": {
+      "total": 93,
+      "hit": 5,
+      "of": 5,
+      "top": [
+       "BANK v. INCHON LLC ()",
+       "Hell or high water; MacArthur's landing at Inchon (1968-01-01)",
+       "1951 U.S ARMY CONFIDENTIAL STAFF REPORT KOREAN WAR INCHON FACILITIES DESTROYED 98724 ()"
+      ]
+     }
+    },
+    "Cheju Quelpart": {
+     "pattern": "제주|濟州|济州|Чеджу",
+     "nara": {
+      "total": 97,
+      "hit": 0,
+      "of": 5,
+      "top": [
+       "Korea: Index of Selected Terrain Classification Maps (1951-06-01)",
+       "South Korea Terrain Regions (1956-01-01)",
+       "South Korea Soviet and Projects (1956-01-01)"
+      ]
+     },
+     "ia": {
+      "total": 4,
+      "hit": 0,
+      "of": 4,
+      "top": [
+       "CIA Reading Room cia-rdp79-01147a000300030002-1: INSTRUCTIONS FOR JANIS 75 (1944-12-28)",
+       "CIA Reading Room 03194444: CURRENT INTELLIGENCE BULLETIN - 1955/05/18 (1955-05-18)",
+       "CIA Reading Room 02905011: JANIS 75 CHAPTER XIII JOINT ARMY-NAVY INTELLIGENCE STUDY OF KOR (1945-04-01)"
+      ]
+     }
+    },
+    "film": {
+     "pattern": "영상|필름|映像|フィルム|视频|кинохроника",
+     "nara": {
+      "total": 1002824,
+      "hit": 4,
+      "of": 5,
+      "top": [
+       "Beacon Hill Study \"Flying Saucer talk\" with Edward J. Ruppelt",
+       "Zapruder Film (2002-02-26)",
+       "Zapruder Film"
+      ]
+     },
+     "ia": {
+      "total": 82617,
+      "hit": 5,
+      "of": 5,
+      "top": [
+       "Love Means Zero Red Carpet - 2018 Sarasota Film Festival (2018-05-23)",
+       "MNFF 2021: Available Light, How I Made My Film In Vermont Panel (2021-09-13)",
+       "CineManiax 101- Toronto International Film Festival (2024-10-18)"
+      ]
+     }
+    },
+    "photograph": {
+     "pattern": "사진|寫真|写真|照片|фотографи\\\\w*",
+     "nara": {
+      "total": 852621,
+      "hit": 2,
+      "of": 5,
+      "top": [
+       "Selected records from the student file. Jim Thorpe, Carlisle Indian Industrial School.",
+       "Annual Report, Civilian Conservation Corps Activities, 1938 Fiscal Year, National Park Service Regio (1939-01-",
+       "World War I Rosters of enlisted men - ORD ARMAMENT SCH-PHOTOGRAPHIC DET TECH SCH (1 of 2)"
+      ]
+     },
+     "ia": {
+      "total": 6263,
+      "hit": 5,
+      "of": 5,
+      "top": [
+       "mimiFish_This_is_a_contemporary_art_photograph_taken_with_a_Pen_61bfc6cc-845d-418a-ac59-90 ()",
+       "photograph_unknown_post_card_187 (1929-04-11)",
+       "Deer Photograph 2025-10-31 ()"
+      ]
+     }
+    },
+    "map": {
+     "pattern": "지도|地圖|地图|карт[аы]\\\\w*",
+     "nara": {
+      "total": 623956,
+      "hit": 3,
+      "of": 5,
+      "top": [
+       "Map of Four Flights and Timeline of Events on September 11, 2001 (2004-01-01)",
+       "Map of the Site of Capture of Steamer Bat by USS Montgomery (1864-11-15)",
+       "Interrogation Guide for Cuba (1962-02-01)"
+      ]
+     },
+     "ia": {
+      "total": 128735,
+      "hit": 5,
+      "of": 5,
+      "top": [
+       "Map 3 (2025-07-16)",
+       "Map of Monastic Britain south sheet (1950-01-01)",
+       "Yekaterinburg Metro Track Map (2015-12-01)"
+      ]
+     }
+    },
+    "newspaper": {
+     "pattern": "신문|新聞|新闻|газет\\\\w*",
+     "nara": {
+      "total": 427560,
+      "hit": 5,
+      "of": 5,
+      "top": [
+       "Newspaper Clipping",
+       "Newspaper Clipping (1928-12-05)",
+       "Newspaper Clipping"
+      ]
+     },
+     "ia": {
+      "total": 73839,
+      "hit": 5,
+      "of": 5,
+      "top": [
+       "I have lost my Death Certificate , A Funny Classified ad on Assam Newspaper for lose of De ()",
+       "No Laughing Newspaper Agency ()",
+       "Newspaper Designing (1947-01-01)"
+      ]
+     }
+    },
+    "battle": {
+     "pattern": "전투|戦闘|战斗|битва|сражение",
+     "nara": {
+      "total": 580158,
+      "hit": 5,
+      "of": 5,
+      "top": [
+       "Battle at Charlestown (1775-01-01)",
+       "Battle Commander's Battle Chart \"Wright\"",
+       "Team 8 Interview with Sharon Battle of the Federal Aviation Administration's Washington Operations C (2004-03-"
+      ]
+     },
+     "ia": {
+      "total": 46432,
+      "hit": 5,
+      "of": 5,
+      "top": [
+       "4 Po Dum The Battle 6 Jan 2018 ()",
+       "IRON GOLEM VS WATER DRAGON Minecraft Mob Battles Arena Battle Orespawn Mod (2013-08-24)",
+       "SECRET AGENT VS MUTANT ZOMBIE & ODDJOB Minecraft Mod Battle Mob Battles Mods (2014-04-28)"
+      ]
+     }
+    },
+    "Chipyong-ni": {
+     "pattern": "지평리|砥平里",
+     "nara": {
+      "total": 218,
+      "hit": 0,
+      "of": 5,
+      "top": [
+       "1st Cavalry Division",
+       "FICHE_628",
+       "23rd Regiment, 3rd Battalion Awarded Presidential Unit Citation"
+      ]
+     },
+     "ia": {
+      "total": 3,
+      "hit": 3,
+      "of": 3,
+      "top": [
+       "Crossroads in Korea; the historic siege of Chipyong-ni (1966-01-01)",
+       "Leadership in the crucible : the Korean War battles of Twin Tunnels & Chipyong-ni (2003-01-01)",
+       "13 de Fevereiro - T.1 Ep.98 - Chipyong-ni, a maior defesa regimental da história militar (2018-02-16)"
+      ]
+     }
+    },
+    "Kapyong": {
+     "pattern": "가평\\\\s?전투|加平",
+     "nara": {
+      "total": 804,
+      "hit": 1,
+      "of": 5,
+      "top": [
+       "TALISMAN SABER 2005",
+       "Memorandum of Conversation (1951-04-27)",
+       "Department of State Chronology of Principal Events Relating to the Korean Conflict, May 1951, Resear"
+      ]
+     },
+     "ia": {
+      "total": 3,
+      "hit": 3,
+      "of": 3,
+      "top": [
+       "Triumph at Kapyong : Canada's pivotal battle in Korea (2011-01-01)",
+       "AMC Press Release Kapyong December 14 2012 (2012-12-14)",
+       "The Battle of Kapyong (22nd - 25th April 1951, 2010) (2012-03-26)"
+      ]
+     }
+    },
+    "No Gun Ri": {
+     "pattern": "노근리|老斤里",
+     "nara": {
+      "total": 146320,
+      "hit": 5,
+      "of": 5,
+      "top": [
+       "No Gun Ri [Korea], 2000",
+       "No Gun Ri 2000 [Korea] [3]",
+       "No Gun Ri 2000 [Korea] [5]"
+      ]
+     },
+     "ia": {
+      "total": 5,
+      "hit": 5,
+      "of": 5,
+      "top": [
+       "Report of the No Gun Ri review ()",
+       "No Gun Ri : a military history of the Korean War incident (2002-01-01)",
+       "DTIC ADA416937: What Happened at No Gun Ri?: The Challenge of Civilians on the Battlefield (2003-01-01)"
+      ]
+     }
+    },
+    "Iron Triangle Korea": {
+     "pattern": "철의\\\\s?삼각지?대?",
+     "nara": {
+      "total": 5314,
+      "hit": 1,
+      "of": 5,
+      "top": [
+       "Marines Probe Enemy Lines in Korea",
+       "THE 19TH AND 21ST REGIMENTS OF THE 24TH DIVISION SPEARHEAD INTO IRON TRIANGLE, KOREA (1951-06-30)",
+       "Shelflist to U.S. Army Signal Corps Color Photographs: 44800 to 44899"
+      ]
+     },
+     "ia": {
+      "total": 1,
+      "hit": 1,
+      "of": 1,
+      "top": [
+       "THE 19TH AND 21ST REGIMENTS OF THE 24TH DIVISION SPEARHEAD INTO IRON TRIANGLE, KOREA (1951-01-01)"
+      ]
+     }
+    },
+    "Pork Chop Hill": {
+     "pattern": "폭찹\\\\s?힐|폭찹\\\\s?고지",
+     "nara": {
+      "total": 10081,
+      "hit": 2,
+      "of": 5,
+      "top": [
+       "Old Baldy & Pork Chop Hill, Korea, March 1953",
+       "Pork Barrel [OA 6902]",
+       "Veteran's Day Various Locations"
+      ]
+     },
+     "ia": {
+      "total": 8,
+      "hit": 5,
+      "of": 5,
+      "top": [
+       "Pork Chop Hill (1956-01-01)",
+       "Pork Chop Hill (1956-01-01)",
+       "Pork Chop Hill (1959-01-01)"
+      ]
+     }
+    },
+    "Bloody Ridge Korea": {
+     "pattern": "피의\\\\s?능선",
+     "nara": {
+      "total": 3265,
+      "hit": 0,
+      "of": 5,
+      "top": [
+       "Korean Veterans Memorial 6/14/92 [OA 7576]",
+       "Korean War Memorial 6/14/89 [OA 6264] [1]",
+       "Program, Army Day 1949 (1949-01-01)"
+      ]
+     },
+     "ia": {
+      "total": 37,
+      "hit": 0,
+      "of": 5,
+      "top": [
+       "VOA [Voice of America] Africa : May 21, 2019 03:00PM-04:00PM EDT (2019-05-21)",
+       "VOA [Voice of America] Africa : March 03, 2019 02:00PM-03:00PM EST (2019-03-03)",
+       "VOA [Voice of America] Africa : November 04, 2019 02:00PM-03:00PM EST (2019-11-04)"
+      ]
+     }
+    },
+    "Sniper Ridge Korea": {
+     "pattern": "저격\\\\s?능선|狙擊稜線|狙击岭",
+     "nara": {
+      "total": 2590,
+      "hit": 1,
+      "of": 5,
+      "top": [
+       "Sniper Ridge Area (1952-11-25)",
+       "KMAG, KOREA",
+       "General Scenes, Korean Conflict, No. XXIII, Various Locations"
+      ]
+     },
+     "ia": {
+      "total": 1,
+      "hit": 1,
+      "of": 1,
+      "top": [
+       "Sniper Ridge Area: Kumwha Sector, Korea ()"
+      ]
+     }
+    },
+    "Triangle Hill Korea": {
+     "pattern": "삼각\\\\s?고지|상감령|上甘嶺|上甘岭",
+     "nara": {
+      "total": 6383,
+      "hit": 0,
+      "of": 5,
+      "top": [
+       "Marines Probe Enemy Lines in Korea",
+       "FICHE_509",
+       "Shelflist to U.S. Army Signal Corps Color Photographs: 44800 to 44899"
+      ]
+     },
+     "ia": {
+      "total": 51,
+      "hit": 0,
+      "of": 5,
+      "top": [
+       "VOA [Voice of America] Africa : December 31, 2018 11:00PM-12:00AM EST (2019-01-01)",
+       "VOA [Voice of America] Global English : November 04, 2018 01:00AM-02:00AM EDT (2018-11-04)",
+       "CIA Reading Room cia-rdp78t04752a001600010006-4: OAK SUPPLEMENT PART 16 KH-9 MISSION 1207  (1974-04-01)"
+      ]
+     }
+    },
+    "Kumsong offensive 1953": {
+     "pattern": "금성\\\\s?전투|金城\\\\s?戰鬪|金城战役",
+     "nara": {
+      "total": 128,
+      "hit": 0,
+      "of": 5,
+      "top": [
+       "Department of State Chronology of Principal Events Relating to the Korean Conflict, October 1951, Re",
+       "Memorandum of Conversation (1952-11-04)",
+       "32nd Report of the United Nations Command Operations in Korea for the Period 16-31 October 1951 (1952-01-07)"
+      ]
+     },
+     "ia": {
+      "total": 0,
+      "hit": 0,
+      "of": 0,
+      "top": []
+     }
+    },
+    "Chongchon River": {
+     "pattern": "청천강|淸川江|清川江",
+     "nara": {
+      "total": 236,
+      "hit": 0,
+      "of": 5,
+      "top": [
+       "Memorandum of Conversation (1951-02-23)",
+       "FICHE_588",
+       "B-29 RAIDS OVER KOREA ; BRIEFING, KADENA AFB, OKINAWA, RYUKYU ISLANDS ; F-80 GUNS FIRING, NAHA AFB, "
+      ]
+     },
+     "ia": {
+      "total": 6,
+      "hit": 5,
+      "of": 5,
+      "top": [
+       "The river and the gauntlet; defeat of the Eighth Army by the Chinese Communist Forces, Nov (1962-01-01)",
+       "The river and the gauntlet ; defeat of the Eighth Army by the Chinese Communist forces, No (1953-01-01)",
+       "The river and the gauntlet;: Defeat of the Eighth Army by the Chinese Communist Forces, No (1962-01-01)"
+      ]
+     }
+    },
+    "Pusan Perimeter": {
+     "pattern": "부산\\\\s?교두보|워커\\\\s?라인",
+     "nara": {
+      "total": 1126,
+      "hit": 0,
+      "of": 5,
+      "top": [
+       "Synopsis C, Korea - Northwards to the Yalu, September-November, 1950 (1953-01-01)",
+       "Veteran's Day Various Locations",
+       "Korean War Vets Memorial 5/1/90 [OA 4425]"
+      ]
+     },
+     "ia": {
+      "total": 15,
+      "hit": 5,
+      "of": 5,
+      "top": [
+       "The Pusan Perimeter (1954-01-01)",
+       "U.S. Marine Operations In Korea, 1950-1953: Vol I The Pusan Perimeter (1954-01-01)",
+       "U. S. Marine Operations in Korea. 1950-1953. Vol. I. Pusan Perimeter. (1954-01-01)"
+      ]
+     }
+    },
+    "refugees Korea": {
+     "pattern": "피란민|피난민|난민|피란|피난|避難民|避难民|難民|难民|беженц\\\\w*",
+     "nara": {
+      "total": 13858,
+      "hit": 4,
+      "of": 5,
+      "top": [
+       "North Korea - Refugees [2]",
+       "North Korea - Refugees [1]",
+       "REFUGEE CAMP, KAESONG, KOREA ; 38TH PARALLEL, KOREA (1947-05-24)"
+      ]
+     },
+     "ia": {
+      "total": 15,
+      "hit": 3,
+      "of": 5,
+      "top": [
+       "EXAMINING THE PLIGHT OF REFUGEES: THE CASE OF NORTH KOREA (2002-06-21)",
+       "Teaching English to North Korean Refugees at Banseok School in South Korea: An Interview w (2016-01-01)",
+       "KOREAN WAR: NK PRISONERS TAKEN BY 8TH ROK DIV NEAR PUNGGI ; 3RD ROK VID, NORTH OF HANGNUNG (1950-01-01)"
+      ]
+     }
+    },
+    "Seoul evacuation January 1951": {
+     "pattern": "1[·.]4\\\\s?후퇴",
+     "nara": {
+      "total": 3246,
+      "hit": 1,
+      "of": 5,
+      "top": [
+       "Synopsis E, Korea - Retreat from the Yalu, December 1950-January 1951 (1953-01-01)",
+       "Shelflist to U.S. Army Signal Corps Black-and-White Photographs: 111-SC-355000 to 111-SC-355999",
+       "Shelflist to U.S. Army Signal Corps Black-and-White Photographs: 111-SC-354000 to 111-SC-354999"
+      ]
+     },
+     "ia": {
+      "total": 18,
+      "hit": 0,
+      "of": 5,
+      "top": [
+       "1951 U.S ARMY CONFIDENTIAL STAFF REPORT KOREAN WAR INCHON FACILITIES DESTROYED 98724 ()",
+       "CIA Reading Room cia-rdp98-00979r000400590001-3: SINO-SOVIET BLOC AIR DEFENSE CAPABILITIES (1957-07-16)",
+       "CIA Reading Room 03187388: CENTRAL INTELLIGENCE BULLETIN - 1959/03/14 (1959-03-14)"
+      ]
+     }
+    },
+    "war orphans Korea": {
+     "pattern": "전쟁\\\\s?고아|고아원|戰爭孤兒|战争孤儿",
+     "nara": {
+      "total": 4484,
+      "hit": 4,
+      "of": 5,
+      "top": [
+       "WAR ORPHANS, KOREA",
+       "War Orphans Taken Under Air Force Wing, South Korea",
+       "Bundles For Korea, Japan"
+      ]
+     },
+     "ia": {
+      "total": 2,
+      "hit": 2,
+      "of": 2,
+      "top": [
+       "WAR ORPHANS, KOREA (1953-01-01)",
+       "War Orphans, Korea, 09/18/1953 - 09/20/1953 (1953-09-18)"
+      ]
+     }
+    },
+    "United Nations forces Korea": {
+     "pattern": "유엔군|국제연합군|국련군|联合国军",
+     "nara": {
+      "total": 39973,
+      "hit": 5,
+      "of": 5,
+      "top": [
+       "United Nations Forces Counterattack",
+       "United Nations Day Ceremony in Korea, Pusan, Korea",
+       "United Nations-UNICEF [United Nations Children's Fund]"
+      ]
+     },
+     "ia": {
+      "total": 4,
+      "hit": 0,
+      "of": 4,
+      "top": [
+       "DRAFT OF ADMINISTRATIVE AGREEMENT BETWEEN THE REPUBLIC OF KOREA AND THE UNIFIED COMMAND RE ()",
+       "CIA Reading Room cia-rdp59-00882r000200060013-7: DRAFT OF ADMINISTRATIVE AGREEMENT BETWEEN (1955-05-06)",
+       "CIA Reading Room cia-rdp58-00453r000200170011-4: DRAFT OF ADMINISTRATIVE AGREEMENT BETWEEN (1955-05-06)"
+      ]
+     }
+    },
+    "Chinese forces Korea": {
+     "pattern": "중공군|인민지원군|志願軍|志愿军",
+     "nara": {
+      "total": 32825,
+      "hit": 1,
+      "of": 5,
+      "top": [
+       "Korea; Indochina (1954-01-18)",
+       "Korea; Indochina; U.S. (1955-01-10)",
+       "Korea"
+      ]
+     },
+     "ia": {
+      "total": 52,
+      "hit": 4,
+      "of": 5,
+      "top": [
+       "CIA Reading Room cia-rdp82-00457r007800880008-9: (SANITIZED)CHINESE COMMUNIST MILITARY INF (1951-06-01)",
+       "The river and the gauntlet;: Defeat of the Eighth Army by the Chinese Communist Forces, No (1962-01-01)",
+       "CIA Reading Room 0000874161: CONSEQUENCES OF THE EARLY EMPLOYMENT OF CHINESE NATIONALIST F (1950-11-03)"
+      ]
+     }
+    },
+    "Ridgway": {
+     "pattern": "리지웨이|リッジウェイ|李奇微",
+     "nara": {
+      "total": 30460,
+      "hit": 4,
+      "of": 5,
+      "top": [
+       "Approved Pension Application File for Maria Mcdonald Ridgway, Widow of George Ridgway, Company L, 1s",
+       "Approved Pension Application File for Hannah S Poinsett, Widow of Ridgway S Poinsett, Company G, 15t",
+       "Approved Pension Application File for Mary B Gaskill Ridgway, Widow of John L Ridgway, Company I, 4t"
+      ]
+     },
+     "ia": {
+      "total": 355,
+      "hit": 5,
+      "of": 5,
+      "top": [
+       "DEBOW v. RIDGWAY ROOF TRUSS COMPANY ()",
+       "Ridgway v. Social Security Administration ()",
+       "FLORAVIT v. METALDYNE SINTERED RIDGWAY, LLC ()"
+      ]
+     }
+    },
+    "Van Fleet": {
+     "pattern": "밴\\\\s?플리트|밴플리트",
+     "nara": {
+      "total": 127867,
+      "hit": 5,
+      "of": 5,
+      "top": [
+       "Approved Pension Application File for Anna Doremus Van Fleet, Widow of William S Van Fleet, Company ",
+       "Revolutionary War Pension and Bounty Land Warrant Application File W. 4527, Cornelius Van Fleet, New",
+       "Revolutionary War Pension and Bounty Land Warrant Application File R. 10,864, James Van Fleet, New Y"
+      ]
+     },
+     "ia": {
+      "total": 81,
+      "hit": 5,
+      "of": 5,
+      "top": [
+       "Gary Reed Van Fleet, Sr. ()",
+       "Jason Lloyd Van Fleet ()",
+       "Van Fleet v. Kit Carson Correctional Facility ()"
+      ]
+     }
+    },
+    "Wonsan": {
+     "pattern": "원산|元山|Вонсан",
+     "nara": {
+      "total": 2440,
+      "hit": 5,
+      "of": 5,
+      "top": [
+       "WONSAN, KOREA (1950-11-01)",
+       "EVACUATION OF WONSAN, KOREA (1950-12-05)",
+       "AT WONSAN BEACH, KOREA AND AT SEA ; APPROACHING WONSAN (1950-10-19)"
+      ]
+     },
+     "ia": {
+      "total": 139,
+      "hit": 5,
+      "of": 5,
+      "top": [
+       "Wonsan Baby Home And Orphanage [ DPRK Short ｜ English] 2 ()",
+       "《원산갈마해안관광지구》(2) Wonsan Kalma Coastal Tourist Area (2) (2026-01-07)",
+       "CIA Reading Room cia-rdp82-00457r004200660007-0: MILITARY INSTALLATIONS AT WONSAN (1950-02-08)"
+      ]
+     }
+    },
+    "Taegu": {
+     "pattern": "대구|大邱|Тэгу",
+     "nara": {
+      "total": 2801,
+      "hit": 5,
+      "of": 5,
+      "top": [
+       "Taegu Airstrip, Taegu, Korea",
+       "Taegu, Korea",
+       "Taegu, Korea City Map"
+      ]
+     },
+     "ia": {
+      "total": 21,
+      "hit": 3,
+      "of": 5,
+      "top": [
+       "KOREAN WAR: NK PRISONERS TAKEN BY 8TH ROK DIV NEAR PUNGGI ; 3RD ROK VID, NORTH OF HANGNUNG (1950-01-01)",
+       "KOREAN WAR. SOUTH KOREAN TRAINEES, TAEGU ; SOUTH KOREAN RECRUITS ; GENERAL COLLINS AT 35TH (1950-01-01)",
+       "KOREAN WAR. TAEGU ; MESS HALL, KOREA ; ROLL SLATED \"CARTER\" ; WAR ON MASAN FRONT ; GENERAL (1950-01-01)"
+      ]
+     }
+    },
+    "Taejon": {
+     "pattern": "대전\\\\s?전투|大田",
+     "nara": {
+      "total": 1293,
+      "hit": 5,
+      "of": 5,
+      "top": [
+       "KOREAN ATROCITIES, TAEJON (1950-11-02)",
+       "CATHOLIC CHURCH WHERE ATROCITIES WERE COMMMITTED, TAEJON ; TAEJON POLICE STATION, TAEJON (1950-11-01)",
+       "KOREAN ATROCITIES, TAEJON (1950-11-01)"
+      ]
+     },
+     "ia": {
+      "total": 124,
+      "hit": 5,
+      "of": 5,
+      "top": [
+       "MacArthur's War (Map - Taejon) (1988-01-01)",
+       "Sangsol komun chinbo taejon : chonjip kwon 1-12, hujip kwon 1-10 (1803-01-01)",
+       "Sangsol komun chinbo taejon : chonjip kwon 1-12, hujip kwon 1-10 (1803-01-01)"
+      ]
+     }
+    },
+    "Kaesong": {
+     "pattern": "개성|開城|开城|Кэсон",
+     "nara": {
+      "total": 1598,
+      "hit": 5,
+      "of": 5,
+      "top": [
+       "First Kaesong Meeting",
+       "KAESONG CONFERENCES Panmunjon, Korea (1951-09-24)",
+       "20th Meeting in Kaesong (1951-08-01)"
+      ]
+     },
+     "ia": {
+      "total": 91,
+      "hit": 4,
+      "of": 5,
+      "top": [
+       "Kaesong Corp. v. United National Specialty Insurance Company ()",
+       "Historic Sites Of Kaesong 3 ｜ New DPRK (2021-07-08)",
+       "CIA Reading Room cia-rdp80-00810a000200030003-3: NORTH KOREAN PLAN TO EVACUATE KAESONG INH (1953-02-10)"
+      ]
+     }
+    },
+    "Chorwon": {
+     "pattern": "철원|鐵原|铁原",
+     "nara": {
+      "total": 909,
+      "hit": 2,
+      "of": 5,
+      "top": [
+       "Chorwon, Korea, May 1952",
+       "JACK BENNY IN KOREA, CHORWON (1951-05-11)",
+       "FICHE_519"
+      ]
+     },
+     "ia": {
+      "total": 8,
+      "hit": 2,
+      "of": 5,
+      "top": [
+       "CIA Reading Room cia-rdp82-00457r007100690002-0: CHINESE COMMUNIST AND NORTH KOREAN TROOPS (1951-03-08)",
+       "CIA Reading Room cia-rdp82-00457r006700340011-3: CHINESE COMMUNIST TROOPS IN THE CHORWON A (1951-01-08)",
+       "CIA Reading Room cia-rdp78t05162a000300010050-3: NEW HARDENED DEFENSIVE POSITIONS, CHORWON (1973-09-01)"
+      ]
+     }
+    },
+    "Kumgang Diamond Mountains": {
+     "pattern": "금강산|金剛山|金刚山",
+     "nara": {
+      "total": 20,
+      "hit": 0,
+      "of": 5,
+      "top": [
+       "Joint Army-Navy Intelligence Study of North China, (Hopeh and Shantuha Provinces) Regional Summary, ",
+       "National Assembly of Korea 2/27/89 [OA 6343] [2]",
+       "No. 75, Korea (including Tsushima and Quelport): Volume 1 (Reports), Chapter I-VI, April 1945"
+      ]
+     },
+     "ia": {
+      "total": 0,
+      "hit": 0,
+      "of": 0,
+      "top": []
+     }
+    },
+    "Dokdo Takeshima Liancourt Rocks": {
+     "pattern": "독도|獨島|独岛|다케시마|竹島",
+     "nara": {
+      "total": 0,
+      "hit": 0,
+      "of": 0,
+      "top": []
+     },
+     "ia": {
+      "total": 1,
+      "hit": 1,
+      "of": 1,
+      "top": [
+       "独島は我が領土 - Dokdo is Our Land in Japanese (2025-04-01)"
+      ]
+     }
+    },
+    "Queen Min Korea": {
+     "pattern": "명성황후|명성왕후|민비|閔妃",
+     "nara": {
+      "total": 17879,
+      "hit": 2,
+      "of": 5,
+      "top": [
+       "Personalities: Masahito, Prince – Mary, Queen",
+       "VARIOUS SUBJECTS IN KOREA (1947-02-14)",
+       "General: Buildings, Foreign, Korea - Buildings, U.S., District of Columbia"
+      ]
+     },
+     "ia": {
+      "total": 51,
+      "hit": 1,
+      "of": 5,
+      "top": [
+       "CIA Reading Room cia-rdp86t00608r000300020015-2: WEEKLY SUMMARY (1975-04-04)",
+       "CIA Reading Room cia-rdp90-00998r000100140002-1: WEEKLY REPORT (1988-03-24)",
+       "VOA [Voice of America] Africa : June 03, 2019 03:00PM-04:00PM EDT (2019-06-03)"
+      ]
+     }
+    },
+    "Kojong": {
+     "pattern": "고종\\\\s?황제|고종|高宗",
+     "nara": {
+      "total": 22,
+      "hit": 0,
+      "of": 5,
+      "top": [
+       "Memorandum, Daily Korean Summary (1950-10-28)",
+       "POTUS [President of the United States] Speech Files - G-7 Trip - Korea, National Assembly Speech: Ko",
+       "Asia Society 11/12/91 [OA 8317] [3]"
+      ]
+     },
+     "ia": {
+      "total": 2,
+      "hit": 2,
+      "of": 2,
+      "top": [
+       "küreley kojong (2007-01-01)",
+       "Imiji wa kwŏllyŏk : Kojong ŭi ch'osang kwa imiji ŭi chŏngch'ihak (2015-01-01)"
+      ]
+     }
+    },
+    "An Jung-geun Ito Hirobumi": {
+     "pattern": "안중근|安重根",
+     "nara": {
+      "total": 3,
+      "hit": 0,
+      "of": 3,
+      "top": [
+       "World War II Operations Reports - Pacific Theater: 36-010 (2 of 2)",
+       "World War II Operations Reports - Pacific Theater: 36-010 (1 of 2)",
+       "April 25, 1957 - October 10, 1959 (1 of 2)"
+      ]
+     },
+     "ia": {
+      "total": 2,
+      "hit": 1,
+      "of": 2,
+      "top": [
+       "Hero Yeong-ung (2022) ()",
+       "An Jung Gun Shoots Ito Hirobumi (North Korean movieclip) (2018-01-28)"
+      ]
+     }
+    },
+    "Ito Hirobumi Korea": {
+     "pattern": "이토\\\\s?히로부미|伊藤博文",
+     "nara": {
+      "total": 282,
+      "hit": 0,
+      "of": 5,
+      "top": [
+       "Dec. 7, 1894-July 31, 1895",
+       "Volume 98: March 18 - June 28, 1895",
+       "American Embassy Staff--Tokyo, Japan 2/24/89 [OA 6343] [2]"
+      ]
+     },
+     "ia": {
+      "total": 11,
+      "hit": 2,
+      "of": 5,
+      "top": [
+       "North Korean film An Jung Gun Shoots Ito Hirobumi Parts 1 & 2 (ENG SUB) - 조선영화 안중근 이등박문을 쏘 (1979-01-01)",
+       "Episode 79 - The Bismarck of the East (2014-11-29)",
+       "Hero Yeong-ung (2022) ()"
+      ]
+     }
+    },
+    "Kim Koo": {
+     "pattern": "김구|金九",
+     "nara": {
+      "total": 12165,
+      "hit": 5,
+      "of": 5,
+      "top": [
+       "Mr. Koo Kim Sits at His Desk in Seoul, Korea (1945-01-01)",
+       "Mr. Koo Kim Addressing the Meeting of Representatives of the Democratic Council (1946-02-14)",
+       "Koo-Kooz - 22"
+      ]
+     },
+     "ia": {
+      "total": 4,
+      "hit": 4,
+      "of": 4,
+      "top": [
+       "Koo Kim ()",
+       "Yong Koo v. Jin Hyun Kim ()",
+       "Sang Koo Kim v. U S Bank ()"
+      ]
+     }
+    },
+    "Ahn Chang-ho": {
+     "pattern": "안창호|安昌浩",
+     "nara": {
+      "total": 9652,
+      "hit": 1,
+      "of": 5,
+      "top": [
+       "Ahn, Chang Ho - Case Number: 23880/001-06 - Ship of Arrival: Matsonia, 12/16/1924",
+       "Park, You Soon - Case Number: 27428/001-01 - Ship of Arrival: Manoa, 11/21/1928",
+       "King, Chang Sei - Case Number: 28782/006-01 - Ship of Arrival: PRESIDENT MADISON, 01/22/1930"
+      ]
+     },
+     "ia": {
+      "total": 1,
+      "hit": 1,
+      "of": 1,
+      "top": [
+       "Dosan Ahn Chang-Ho Memorial (2026-06-27)"
+      ]
+     }
+    },
+    "March First Movement Korea 1919": {
+     "pattern": "3[·.]1\\\\s?운동|삼일\\\\s?운동|三一運動|만세\\\\s?운동",
+     "nara": {
+      "total": 13859,
+      "hit": 2,
+      "of": 5,
+      "top": [
+       "Abangarez: January 12, 1919 through March 2, 1919",
+       "Political Affairs: 895.00/537-624: February 1911 - April 1919",
+       "America: March 2, 1919 through March 13, 1919 (2 of 2)"
+      ]
+     },
+     "ia": {
+      "total": 49,
+      "hit": 0,
+      "of": 5,
+      "top": [
+       "CIA Reading Room cia-rdp79-01194a000500120001-8: PROPAGANDA GUIDELINES (1969-04-01)",
+       "CIA Reading Room cia-rdp81-00706r000100190033-5: REPORT OF SCREENING ACTIVITIES AT HOOVER  (1947-06-13)",
+       "CIA Reading Room cia-rdp80-01445r000100140001-2: SPECULATIVE OBSERVATIONS ON THE XXI CONGR (1959-01-02)"
+      ]
+     }
+    },
+    "comfort women": {
+     "pattern": "위안부|慰安婦|慰安妇",
+     "nara": {
+      "total": 57103,
+      "hit": 5,
+      "of": 5,
+      "top": [
+       "Ohio Ladies Comfort Station: Withdrawn",
+       "Paulette Aniskoff Meeting with Brave Korean \"Comfort Women\" (2014-08-04)",
+       "Column - Women"
+      ]
+     },
+     "ia": {
+      "total": 65,
+      "hit": 4,
+      "of": 5,
+      "top": [
+       "TRIBUTES TO HON. TED STEVENS Ted Stevens LATE A SENATOR FROM ALASKA MEMORIAL ADDRESSES AND (2010-08-12)",
+       "PROTECTING THE HUMAN RIGHTS OF COMFORT WOMEN (2007-02-15)",
+       "Linen Shirts For Women The Perfect Blend Of Comfort ()"
+      ]
+     }
+    },
+    "Korean forced labor conscription": {
+     "pattern": "강제\\\\s?동원|강제\\\\s?징용|징용|徵用|征用",
+     "nara": {
+      "total": 3222,
+      "hit": 1,
+      "of": 5,
+      "top": [
+       "Binder: UN Optional Protocol on Children in Armed Conflict and Forced Labor [1]",
+       "\"North Korea: A Case Study of a Soviet Satellite,\" Report of Department of State Research Mission to (1951-05-",
+       "NIE 10-55, 12 Apr 55, Anti-Communist Resistance Potential in the Sino-Soviet Bloc"
+      ]
+     },
+     "ia": {
+      "total": 19,
+      "hit": 0,
+      "of": 5,
+      "top": [
+       "CIA Reading Room cia-rdp79t01146a000300270001-0: DAILY DIGEST (1951-07-27)",
+       "CIA Reading Room cia-rdp79r01012a011400020001-4: COMMUNIST CHINA (1958-05-13)",
+       "CIA Reading Room cia-rdp83-01034r000200230003-2: LECTURE BY WILLIAM J. DONOVAN ON PARTISAN (2016-12-19)"
+      ]
+     }
+    },
+    "Korean Liberation Army": {
+     "pattern": "광복군|光復軍|光复军",
+     "nara": {
+      "total": 7778,
+      "hit": 2,
+      "of": 5,
+      "top": [
+       "KOREAN LIBERATION DAY CELEBRATION, SEOUL, KOREA (1947-08-15)",
+       "LIBERATION, SEOUL, KOREA (1950-09-29)",
+       "Memorandum, World Reaction to Korean Developments, Number 48 (1950-08-14)"
+      ]
+     },
+     "ia": {
+      "total": 7,
+      "hit": 2,
+      "of": 5,
+      "top": [
+       "CIA Reading Room cia-rdp82-00457r001700040003-0: MILITARY INFORMATION: NORTHEAST KOREAN PE (1948-07-19)",
+       "CIA Reading Room cia-rdp82-00457r001600580006-9: MILITARY INFORMATION: RECRUITING OF TROOP (1948-06-30)",
+       "MILITARY INFORMATION: NORTHEAST KOREAN PEOPLE S LIBERATION ARMY (1948-07-19)"
+      ]
+     }
+    },
+    "Korean Provisional Government": {
+     "pattern": "임시\\\\s?정부|臨時政府|临时政府",
+     "nara": {
+      "total": 12100,
+      "hit": 2,
+      "of": 5,
+      "top": [
+       "Summation of U.S. Army Military Government Activities in Korea, 1946-1947",
+       "Korean Beef 301 [1]",
+       "Correspondence Between President Harry S. Truman and Major General William Donovan with Related Mate (1945-08-"
+      ]
+     },
+     "ia": {
+      "total": 4,
+      "hit": 3,
+      "of": 4,
+      "top": [
+       "CIA Reading Room cia-rdp82-00457r000300450004-9: POLITICAL INFORMATION: PERSONNEL OF KOREA (1946-10-01)",
+       "Report On Syngman Rhee, President Of The Korean Provisional Government In 1919 3756 - Shan ()",
+       "Memorandum On The Korean Provisional Government In Shanghai 2685 - Shanghai Municipal Poli ()"
+      ]
+     }
+    },
+    "Tonghak rebellion": {
+     "pattern": "동학|東學|东学|갑오\\\\s?농민",
+     "nara": {
+      "total": 8,
+      "hit": 0,
+      "of": 5,
+      "top": [
+       "May 2, 1904 - Dec. 30. 1904",
+       "Dec. 7, 1894-July 31, 1895",
+       "T149-363"
+      ]
+     },
+     "ia": {
+      "total": 5,
+      "hit": 0,
+      "of": 5,
+      "top": [
+       "The encyclopedia of political revolutions (1998-01-01)",
+       "A history of Korea (1969-01-01)",
+       "The politics of Korean nationalism (1963-01-01)"
+      ]
+     }
+    },
+    "Righteous Army Korea insurgents": {
+     "pattern": "의병|義兵|义兵",
+     "nara": {
+      "total": 509,
+      "hit": 0,
+      "of": 5,
+      "top": [
+       "Ed Derwinski Swearing-In Ceremony 3/15/89 [OA 6347]",
+       "Numerical File: 1155-1166/300",
+       "\"Order of Proof\" for the Defense THRU Japanese Personal Intelligence Report Volume I"
+      ]
+     },
+     "ia": {
+      "total": 7,
+      "hit": 0,
+      "of": 5,
+      "top": [
+       "VOA [Voice of America] Africa : November 05, 2018 11:00AM-12:00PM EST (2018-11-05)",
+       "VOA [Voice of America] Africa : August 14, 2018 03:00PM-04:00PM EDT (2018-08-14)",
+       "CIA Reading Room cia-rdp82-00039r000200010010-8: SOUTHEAST ASIA IN THE MIDST OF STRUGGLE (1952-04-16)"
+      ]
+     }
+    },
+    "Japan Korea protectorate treaty 1905": {
+     "pattern": "을사\\\\s?조약|을사\\\\s?늑약|乙巳條約",
+     "nara": {
+      "total": 2393,
+      "hit": 0,
+      "of": 5,
+      "top": [
+       "Department of State Report, United States Policy Regarding Korea, 1834-1941, Research Project No. 29 (1947-05-",
+       "Jan. 3, 1905 - Dec. 6, 1905",
+       "Sept. 5, 1905-Feb. 28, 1906; Annex Nov. 24, 1905"
+      ]
+     },
+     "ia": {
+      "total": 2,
+      "hit": 0,
+      "of": 2,
+      "top": [
+       "hpr2194 :: The low-down on what's up in the Taiwan Strait. (2016-12-29)",
+       "CIA Reading Room cia-rdp81-01043r002200110007-4: \"MINERAL RESOURCES: REPORTS OF THE FRENCH (1958-05-21)"
+      ]
+     }
+    },
+    "Kojong Russian legation 1896": {
+     "pattern": "아관\\\\s?파천|俄館播遷",
+     "nara": {
+      "total": 3,
+      "hit": 0,
+      "of": 3,
+      "top": [
+       "OSS-SSU-CIG-EARLY CIA DOCUMENTS VOL 4 JOB 76-00780R",
+       "Joint Army-Navy Intelligence Study of North China, (Hopeh and Shantuha Provinces) Regional Summary, ",
+       "Balkan States, Rumania: 768.70 - 768.1112 THRU Bulgaria: 768.74/5-83"
+      ]
+     },
+     "ia": {
+      "total": 0,
+      "hit": 0,
+      "of": 0,
+      "top": []
+     }
+    },
+    "Hague secret emissaries Korea 1907": {
+     "pattern": "헤이그\\\\s?특사|해아\\\\s?밀사",
+     "nara": {
+      "total": 556,
+      "hit": 0,
+      "of": 5,
+      "top": [
+       "Inquiry Documents No. 1-10",
+       "Weirauch, Peter",
+       "Gonzalez, Elian [2]"
+      ]
+     },
+     "ia": {
+      "total": 0,
+      "hit": 0,
+      "of": 0,
+      "top": []
+     }
+    },
+    "Yosu rebellion 1948": {
+     "pattern": "여순\\\\s?사건|여수.순천\\\\s?사건",
+     "nara": {
+      "total": 84,
+      "hit": 0,
+      "of": 5,
+      "top": [
+       "World War II Operations Reports - Pacific Theater: 36-008 (1 of 2)",
+       "World War II Operations Reports - Pacific Theater: 36-008 (2 of 2)",
+       "World War II Operations Reports - Pacific Theater: 36-014 (1 of 2)"
+      ]
+     },
+     "ia": {
+      "total": 1,
+      "hit": 1,
+      "of": 1,
+      "top": [
+       "CIA Reading Room cia-rdp82-00457r005800070001-4: 1. ACTIVITIES IN THE YOSU AREA 2. RUMORS  (1950-09-12)"
+      ]
+     }
+    },
+    "Korea trusteeship": {
+     "pattern": "신탁\\\\s?통치",
+     "nara": {
+      "total": 2783,
+      "hit": 0,
+      "of": 5,
+      "top": [
+       "Korea Bulletin (1950-08-30)",
+       "American Delegation, U.S.-U.S.S.R. Joint Commission on Korea: Miscellaneous Conferences, Conversatio",
+       "American Delegation, U.S.-U.S.S.R. Joint Commission on Korea: Minutes of Meetings"
+      ]
+     },
+     "ia": {
+      "total": 93,
+      "hit": 0,
+      "of": 5,
+      "top": [
+       "CIA Reading Room cia-rdp75-00149r000500020001-7: MICRONESIA: AN AMERICAN RESPONSIBILITY (1966-10-20)",
+       "CIA Reading Room cia-rdp78-01617a002100130001-3: WEEKLY SUMMARY NUMBER 34 (1949-01-14)",
+       "CIA Reading Room cia-rdp78-01617a002300270001-6: WEEKLY SUMMARY #87 (1950-01-27)"
+      ]
+     }
+    },
+    "USAMGIK military government Korea": {
+     "pattern": "미군정|미\\\\s?군정",
+     "nara": {
+      "total": 194,
+      "hit": 4,
+      "of": 5,
+      "top": [
+       "Summation of U.S. Army Military Government Activities in Korea, 1946-1947",
+       "Japan And Korea: Summation Of United States Army Military Government Activities In Korea",
+       "Summation of U.S. Army Military Government Activities in Korea, 1946-1947 / Summation of U.S. Army M"
+      ]
+     },
+     "ia": {
+      "total": 75,
+      "hit": 4,
+      "of": 5,
+      "top": [
+       "Summation of Non-Military Activities in Japan, No. 14 (November 1946) (1946-11-01)",
+       "CIA Reading Room cia-rdp81-00706r000100190033-5: REPORT OF SCREENING ACTIVITIES AT HOOVER  (1947-06-13)",
+       "Summation of Non-Military Activities in Japan, No. 11 (August 1946) (1946-08-01)"
+      ]
+     }
+    },
+    "Korea": {
+     "pattern": "조선|한국|고려|朝鮮|韓國|韩国|朝鲜|Корея|Коре[еию]|Corée|كوريا|קוריאה|कोरिया|Hàn Quốc|Triều Tiên|Солонгос|Корей",
+     "nara": {
+      "total": 187202,
+      "hit": 5,
+      "of": 5,
+      "top": [
+       "North Korea/South Korea [3]",
+       "North Korea/South Korea [2]",
+       "Korea"
+      ]
+     },
+     "ia": {
+      "total": 25411,
+      "hit": 5,
+      "of": 5,
+      "top": [
+       "KOREA (1989-01-01)",
+       "Legislative Process in Korea (1981-01-01)",
+       "Documents On The Struggle For Democracy In Korea (1975-01-01)"
+      ]
+     }
+    }
+   }
+  }
+ },
+ "latest": {
+  "day": "2026-11-24",
+  "terms": 169,
+  "weak": [
+   "Battle of Qingshanli 1920",
+   "Bloody Ridge Korea",
+   "Bodo League massacre",
+   "Cheju Quelpart",
+   "Committee for Preparation of Korean Independence",
+   "Constituent National Assembly Korea 1948",
+   "French expedition Korea 1866",
+   "Gloucestershire Regiment Korea",
+   "Hague secret emissaries Korea 1907",
+   "Imo incident 1882 Korea",
+   "Japan Korea protectorate treaty 1905",
+   "Kabo reform 1894 Korea",
+   "Kapsin coup 1884 Korea",
+   "Kochang incident",
+   "Kojong Russian legation 1896",
+   "Korea trusteeship",
+   "Korean Empire Corea",
+   "Kumgang Diamond Mountains",
+   "Kumsong offensive 1953",
+   "Kwangju student movement 1929",
+   "Left-Right Coalition Committee Korea 1946",
+   "Oriental Development Company Korea",
+   "Righteous Army Korea insurgents",
+   "Seoul recapture 1950",
+   "Shinto shrine worship Korea",
+   "Singanhoe Korea",
+   "The Independent newspaper Seoul 1896",
+   "Tonghak rebellion",
+   "Treaty of Kanghwa 1876",
+   "Triangle Hill Korea",
+   "Uiyoldan Korean righteous brotherhood",
+   "Yu Gwan-sun",
+   "Yun Bong-gil Shanghai 1932",
+   "assassination Queen Min 1895",
+   "establishment Republic of Korea 1948",
+   "land survey Chosen 1910s",
+   "name change policy Korea Japan",
+   "picture brides Korea",
+   "remains recovery Korea"
+  ]
+ }
+}
