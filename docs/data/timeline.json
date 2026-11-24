@@ -1,5 +1,5 @@
 {
-"updated": "2026-11-23T23:11:27Z",
+"updated": "2026-11-24T00:32:26Z",
 "note": "구간 = 연대(4자리 연도) → 세기 → 왕조·시대명. 근거 순서 date → 제목 → 메타(생산·시대·출판). 세기·시대 구간은 시간축 근사 정렬",
 "timeline": [
 {
@@ -21,12 +21,12 @@
 },
 {
 "decade": "고려시대",
-"records": 4,
+"records": 5,
 "by_source": {
-"nrich": 4
+"nrich": 5
 },
 "by_kind": {
-"graphic": 3,
+"graphic": 4,
 "document": 1
 },
 "samples": [
@@ -49,6 +49,11 @@
 "title": "[국외문화유산] 나전국당초문경함(螺鈿菊唐草文經函) — 영국 영국박물관",
 "url": "https://portal.nrich.go.kr/kor/overseasSearchView.do?menuIdx=840&mseq=67567",
 "iiif": "https://korea-archive-mcp.vercel.app/iiif/nrich/ov-67567/manifest.json"
+},
+{
+"title": "[초상화(국가지정)] 이제현 초상 (Portrait of Yi Je-hyeon)",
+"url": "https://portal.nrich.go.kr/kor/portraitNdUsrView.do?menuIdx=1258&portrait_idx=1",
+"iiif": "https://korea-archive-mcp.vercel.app/iiif/nrich/portrait-1/manifest.json"
 }
 ]
 },
@@ -397,15 +402,16 @@
 },
 {
 "decade": "1890년대",
-"records": 5,
+"records": 8,
 "by_source": {
 "kyudb": 2,
+"oldnews": 3,
 "heritage": 1,
 "tna": 1,
 "gallica": 1
 },
 "by_kind": {
-"document": 4,
+"document": 7,
 "graphic": 1
 },
 "samples": [
@@ -415,38 +421,39 @@
 "iiif": "https://korea-archive-mcp.vercel.app/iiif/rec/NZBfS8JgFMa_yst7tYFubov-7HN0J15YXhSSWJsXEcG0KRKhBUaEy2ZhrTK3XDTpJuijBO_m9r7SV-i06Or8Dg88z3POAdawmsfl_VppAxcyWMcqzpNRR1pdU5QCIsc2uX0i_ht5cYl1PfefI6eJIteI-hOUeAZrjGnXpGe9RcsGYOYMMbtNHx_QZ4BI835-0Y0vb7jQuoonEx5FgSPSxisbjFj_lGNDj5k2jxadGc7gEiRD6grgNuB_B1hrsG7pelVTRTEtKmiVmlDcFMp7oFZBZa0T8ERfxjtKAgsw8eppHYsDHz4VSHcaHzkphr2P0D-Ph4N0-3bqYc9Nce7fwX1gWgHTv59k8A4wjF0Y1LOS6RjRtsnsOoIbIAqk4u_X5Jy8nJWkrKys5xQ1J6nSEj78AQ/manifest.json"
 },
 {
+"title": "There is an agitation in Italy — 독립신문(영문) [1면 3단]",
+"url": "https://nl.go.kr/newspaper/detail.do?content_id=CNTS-00093090917",
+"iiif": "https://korea-archive-mcp.vercel.app/iiif/rec/q1YqVrKKVsrPSclLLS9WitVRKlGyUgrJSC1KVcgsVkjMU0hMzyxJLMnMz1PIzFPwLEnMqVR41DBF4XV_6-tle990L3i9ZofGmxmNQEpTIdrw9cotCsavu1fEKukopQBNMrSwNDM0MrAAcjOBXGe_kGBdAwMDS2MDSwNLQ3OgcClQOKOkpKDYSl8_L0cvPV8vu0gf5JiCxILUIv2U1JLEzBy9lHz75Py8ktS8kvjMFFssxhQAjYG4Bui8XVidB1SVB1QF86uOUi6QB6QKgdTrDXNebVqj8Lqj5c2CRoU3sye8mbcUKJUICg0jAyMzXUNDXSPjEANjK0NTKxMjpVoA/manifest.json"
+},
+{
+"title": "CRETAN AFFAIRS. — 독립신문(영문) [3면 2단]",
+"url": "https://nl.go.kr/newspaper/detail.do?content_id=CNTS-00093103731",
+"iiif": "https://korea-archive-mcp.vercel.app/iiif/rec/q1YqVrKKVsrPSclLLS9WitVRKlGyUnIOcg1x9FNwdHNz9AwK1lN41DBF4XV_6-tle990L3i9ZofGmxmNQEpTIdr49cotCkavu1fEKukopQC1GlpYWhgaGBoCuZkgk_xCgnUNDAwsjQ0NjM2NQcKlQOGMkpKCYit9_bwcvfR8vewifZDtBYkFqUX6KakliZk5ein59sn5eSWpeSXxmSm2WIwpABoDcQ3QebuwOg-oKg-oCuY5HaVcIA9IFQKp1xvmvNq0RuF1R8ubBY0Kb2ZPeDNvKVAqEeR9IwMjM11DQ10j4xADYytDUysTI6VaAA/manifest.json"
+},
+{
+"title": "THE FRENCH PRESS AND BRITISH WARLIKE ATTITUDE. — 독립신문(영문) [2면 3단]",
+"url": "https://nl.go.kr/newspaper/detail.do?content_id=CNTS-00093104183",
+"iiif": "https://korea-archive-mcp.vercel.app/iiif/rec/q1YqVrKKVsrPSclLLS9WitVRKlGyUgrxcFVwC3L1c_ZQCAhyDQ5WcPRzUXAK8gzxDPZQCHcM8vH0dlVwDAnxDAl1cdVTeNQwReF1f-vrZXvfdC94vWaHxpsZjUBKUyHa6PXKLQrGr7tXxCrpKKUATTa0sLQwNDQwBXIzgVxnv5BgXQMDA0tjQwMTQwtjoHApUDijpKSg2EpfPy9HLz1fL7tIH-S4gsSC1CL9lNSSxMwcvZR8--T8vJLUvJL4zBRbLMYUAI2BuAbovF1YnQdUlQdUBfO7jlIukAekCoHU6w1zXm1ao_C6o-XNgkaFN7MnvJm3FCiVCAodIwMjM11DQ10j4xADYytDUysTI6VaAA/manifest.json"
+},
+{
 "title": "지장사 감로도(地藏寺 甘露圖) [시도유형문화유산] — 서울 동작구",
 "url": "https://www.heritage.go.kr/heri/cul/culSelectDetail.do?ccbaCpno=2111101160000",
 "iiif": "https://korea-archive-mcp.vercel.app/iiif/heritage/21-0001160000000-11/manifest.json"
-},
-{
-"title": "'Report by Acting Vice-Consul Campbell of a journey in North Corea in September and October 1889. Printed for the use of",
-"url": "https://discovery.nationalarchives.gov.uk/details/r/5196f2bd-0974-4581-9cab-081973d5b925",
-"iiif": "https://korea-archive-mcp.vercel.app/iiif/tna/5196f2bd/manifest.json"
-},
-{
-"title": "Bernard-Louis Beaulieu, prêtre de la Société des missions étrangères, mort pour la foi en Corée le 8 mars 1866 : vie et ",
-"url": "https://gallica.bnf.fr/ark:/12148/bpt6k6350216v",
-"iiif": "https://korea-archive-mcp.vercel.app/iiif/rec/TZCxTsMwEIZf5eQ5beIkhNRjkWBhg63q4CZusZrY4ex0QUggMTCygxALEkUMiAmx5k0YaR-CK1CJ6b_z3Xf3-86YY2LEZrKqdCHZOGCeCTZUaCSWvUPbagdDJdtKqzaABrtnjwpKBZWEI1vobum7JeUOau2ctsYBPaE0s-4JlQugtuihsS1uiKnVoAzsWeyWNEJBDrVEBzzPMhCw0AqUh8IioY01pTQFTR4d_LqD9e3N6uV9zAJWkkmeD1IKNYUS5yLkMU_zsJgkUZIM4iiPqNhS8cT7xokw_Ptjf2Km_SmG_5hJ47N5luxEMc8WRDVEbXd-XnzA0Oz_aCn9FqcuQ13buwWspozklGT1evf19gKr66v1w-XG9Pr-kUpyc9k4irMe5704OeaJSCOR7rLzbw/manifest.json"
-},
-{
-"title": "[古4256-21] 各面紙價 節目 각면지가 절목 · 靈光郡(朝鮮) 編/영광군(조선) 편",
-"url": "https://kyudb.snu.ac.kr",
-"iiif": "https://korea-archive-mcp.vercel.app/iiif/rec/RZDNSsNQEIVfZbirBvLTm7ZB8xzuShfVLpRiqaZdiAgJjVJBbIUKSn9IxJ9UpA1JpepG8FGEJCa50ldwjAtX8805cM69c0g0opZJ_aBd2yQVnrSISspB77YolxRBphUI-mY8vokW10HnFaK5Hg1nkLhGOl2wBz1xdWBWN32cwscSVvd-cHwad-xcOBrHsxkH0dKR2JWRLC6SZzfHbJeZFgff5y-EJzVsomvrCuIO4n8nCm0UtlutpqZKUvY0UWu0xeqWWN9Ht4kuOzljkzv41N8g8a20ZzJzlMMMLpOCnhd3nAzDwXvoX8b2JNtWjhEO5hl-eTZ6GNfAuL__82QXGccejtQdJd4TpF2TWQawYR_70Kr-XkjOy4pAqSAXNmhBLebVEiVHPw/manifest.json"
 }
 ]
 },
 {
 "decade": "1900년대",
-"records": 3,
+"records": 7,
 "by_source": {
 "heritage": 1,
 "gallica": 1,
+"oldnews": 4,
 "nlna": 1
 },
 "by_kind": {
 "graphic": 1,
-"document": 2
+"document": 6
 },
 "samples": [
 {
@@ -460,23 +467,35 @@
 "iiif": "https://korea-archive-mcp.vercel.app/iiif/rec/TVCxTsMwFPyVJy8saeM4adp4pBJICDa2qoPTuK3b1A62y4KQQGJgZAchFoZKHSomxNo_YaT9CF6ASEx379073eldEUf4gExEWaqRIMOAeMLJ6YGxSmoPpVHaC6WBQ3-qtAygb-x2hXhm9MSUCtmJqIwOQC0qK51TRjuQHpxZXkqtrINCgtuuZmZp6z1OHqlyCwmD499Y2D8-7NbvQxKQAtOjjMZIFVJh5zyMWJT0wlEe04x2Ke2NUFyiOPW-cjwM_8q3cz1uj234z5NXPp13EpayrDNDV4WuJvPz5gMO9dEPFsI3drzSeNU8JCALnBAuEHabp6-3Nezu7_Yvt3Xp_fMrSqJ-GaMsbUVRi8XnUcwTypMuuf4G/manifest.json"
 },
 {
-"title": "Inventaris van de fotocollectie Elsevier: Collectie C: Buitenland [문서군]",
-"url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.24.05.03",
-"iiif": "https://korea-archive-mcp.vercel.app/iiif/rec/VZA_SwNBEMW_yrKVwv3Zu0sEt9NgIUgqu5BiuduQxXU23m3uQBGMRtDOMmCQNGJzRRBE0c6PYpnbD-FERLB6M7_3eDBzRgvKexQ0CNr3qKWc7kMpwYpcFaQUQDJJBsaa1GgtU6sk2dOFLJXMOen8sQ4nu2NlJWgBGek19Zubzlcvyz71aIad0TZjfswYw13hHgdxK2DtgCUIxgiG1o4KHoZVVQUgrDIghBZ5OlRyEIAODWQyPzXySEL4i8N_JSMs6e5sdA82ydfFO1l7xF3W7mn6-epmE3c1Ie6jbha37nqGccD4z9EePcYR5QSlWc5XzzVpbqZugfn7O_fwiJZYvyVm8ZYfRX6cHEYJbzHejuj5Nw/manifest.json"
+"title": "의병훈시 — 신한민보 [3면 6단]",
+"url": "https://nl.go.kr/newspaper/detail.do?content_id=CNTS-00048428711",
+"iiif": "https://korea-archive-mcp.vercel.app/iiif/rec/q1YqVrKKVsrPSclLLS9WitVRKlGyUnozd8brzRPfzu540z1H4VHDFIU33QveTp3zev2e15u3KEQbv165RcHsdfeKWCUdpRSgekNLA0sDEyNDIDcTyHX2CwnWNTAwMLEwMbIwNwQJlwKFM0pKCoqt9PXzcvTS8_Wyi_RBVhYkFqQW6aekliRm5uil5Nsn5-eVpOaVxGem2GIxpgDkuO4Fr9fsADprF4qzgLJ5QFmYT3SUcoE8IFUIpF5vmPNq0xqF1x0tbxY0KryZPeHNvKVAqUSQX40MjMx0DQ11jYxDDI2tTAysTCyUagE/manifest.json"
+},
+{
+"title": "졔쥬에 의병 — 신한민보 [1면 6단]",
+"url": "https://nl.go.kr/newspaper/detail.do?content_id=CNTS-00048433593",
+"iiif": "https://korea-archive-mcp.vercel.app/iiif/rec/q1YqVrKKVsrPSclLLS9WitVRKlGyUnqzcMqbpWveTJ-g8GbujNebJyo8apii8KZ7wdupc16v3_N68xaFaMPXK7comL3uXhGrpKOUAtRjaGlgaWBiaALkZgK5zn4hwboGBgYmFibGxqaWxkDhUqBwRklJQbGVvn5ejl56vl52kT7I2oLEgtQi_ZTUksTMHL2UfPvk_LyS1LyS-MwUWyzGFIAc2L3g9ZodQGftQnEWUDYPKAvzjY5SLpAHpAqB1OsNc15tWqPwuqPlzYJGhTezJ7yZtxQolQjyr5GBkZmuoaGukXGIobGViYGViYVSLQA/manifest.json"
+},
+{
+"title": "의병 창궐 — 공립신보 [1면 8단]",
+"url": "https://nl.go.kr/newspaper/detail.do?content_id=CNTS-00115099325",
+"iiif": "https://korea-archive-mcp.vercel.app/iiif/rec/q1YqVrKKVsrPSclLLS9WitVRKlGyUnozd8brzRMV3mzY-2rbBIVHDVMUXm3e-nrZ3jfdC15v3qIQbfh65RYFi9fdK2KVdJRSgBoMLQ0sDCyNDYDcTCDX2S8kWNfAwNDQ1MDS0tjIFChcChTOKCkpKLbS18_L0UvP18su0gfZWZBYkFqkn5JakpiZo5eSb5-cn1eSmlcSn5lii8WYApDrgK5YswPorF0ozgLK5gFlYV7RUcoF8oBUIZB6vWHOq01rFF53tLxZ0KjwZvaEN_OWAqUSQZ41MjAy0zU01DUyDjE0tjIxsDKxUKoFAA/manifest.json"
 }
 ]
 },
 {
 "decade": "1910년대",
-"records": 13,
+"records": 16,
 "by_source": {
 "ndl": 8,
+"indy": 2,
 "okchf": 3,
 "heritage": 1,
+"oldnews": 1,
 "i815": 1
 },
 "by_kind": {
-"document": 9,
+"document": 12,
 "graphic": 4
 },
 "samples": [
@@ -602,7 +621,7 @@
 },
 {
 "decade": "1950년대",
-"records": 93,
+"records": 96,
 "by_source": {
 "nara": 10,
 "europeana": 4,
@@ -616,6 +635,7 @@
 "koreanwar": 7,
 "ndl": 1,
 "nlk": 1,
+"oldnews": 3,
 "nlna": 3,
 "nzarch": 3,
 "i815": 1,
@@ -624,7 +644,7 @@
 "by_kind": {
 "motion_picture": 14,
 "graphic": 17,
-"document": 62
+"document": 65
 },
 "samples": [
 {
@@ -733,6 +753,28 @@
 "title": "한강 개발",
 "url": "https://www.ehistory.go.kr/view/movie?mediasrcgbn=KV&mediaid=12307&mediadtl=28799&mediagbn=MH",
 "iiif": "https://korea-archive-mcp.vercel.app/iiif/rec/q1YqVrKKVsouKVOK1VEqUbJSejt1zqsNUxVebZjzesMcJR2lFKCYoaWZBZCZCWQCqVIglVFSUlBspa9fXl6ul5qRWVySX1Spl56vl12kX5aZWq6fmw-k7HNTUzITi4uS05PybL3D1MDczBRbQyNjA3MIL6Ukx9bIwtzSEsIFKfT1ANpRALTjzYzGN82NCo8adim8XrPj7cwpQAEgCZTNA8qCnKyjlAtxUiGQAjr31aY1Cq87Wt4saFR4M3vCm3lLgVKJIE8ZGRiZ6Roa6hoZhxiYW5maWBkbK9UCAA/manifest.json"
+}
+]
+},
+{
+"decade": "광복 이후(1945~)",
+"records": 2,
+"by_source": {
+"much": 2
+},
+"by_kind": {
+"document": 2
+},
+"samples": [
+{
+"title": "판문점 미류나무 작전> 포스터",
+"url": "https://archive.much.go.kr/archive/nrms/view.do?idnbr=PS01002025001-003418-00000",
+"iiif": "https://korea-archive-mcp.vercel.app/iiif/much/PS01002025001-003418-00000/manifest.json"
+},
+{
+"title": "판문점의 비사",
+"url": "https://archive.much.go.kr/archive/nrms/view.do?idnbr=PS01002025001-021084-00000",
+"iiif": "https://korea-archive-mcp.vercel.app/iiif/much/PS01002025001-021084-00000/manifest.json"
 }
 ]
 },
@@ -888,12 +930,13 @@
 },
 {
 "decade": "2010년대",
-"records": 27,
+"records": 28,
 "by_source": {
 "ia": 5,
 "un": 5,
 "gonghun": 1,
 "archives": 2,
+"nlk": 1,
 "commons": 5,
 "ktv": 1,
 "okchf": 1,
@@ -902,7 +945,7 @@
 "ndl": 1
 },
 "by_kind": {
-"document": 16,
+"document": 17,
 "graphic": 11
 },
 "samples": [
@@ -979,22 +1022,18 @@
 },
 {
 "decade": "연대 미상",
-"records": 95,
+"records": 78,
 "by_source": {
 "nara": 10,
 "jacar": 9,
-"indy": 2,
 "nedb": 5,
 "i815": 8,
-"nlk": 1,
-"oldnews": 11,
 "earchive": 7,
 "seoul": 13,
 "europeana": 3,
 "un": 2,
 "okchf": 2,
-"nrich": 6,
-"much": 2,
+"nrich": 5,
 "jsg": 5,
 "kyudb": 1,
 "aks": 5,
@@ -1002,8 +1041,8 @@
 "ia": 2
 },
 "by_kind": {
-"document": 75,
-"graphic": 16,
+"document": 59,
+"graphic": 15,
 "motion_picture": 4
 },
 "samples": [
