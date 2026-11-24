@@ -913,7 +913,8 @@
     "records\\.ris",
     "provenance\\.json",
     "SHA256SUMS",
-    "해시 사슬"
+    "해시 사슬",
+    "q/<질의 지문>\\.json"
    ],
    "must_not": [
     "검색어·사용자 정보 없음"

@@ -479,6 +479,7 @@ def build_provenance(recs):
         if q.get("ak"):
             e = byak.setdefault(q["ak"], {"ak": q["ak"], "tool": q["tool"], "args": q["args"], "first": q["first"], "last": q["last"], "calls": 0, "versions": 0, "records": []})
             e["calls"] += q["seen"]; e["versions"] += 1; e["first"] = min(e["first"], q["first"]); e["last"] = max(e["last"], q["last"])
+            e.setdefault("responses", []).append({"h": q["h"], "first": q["first"], "last": q["last"], "seen": q["seen"], "bytes": q.get("n", 0), "month": q.get("month", "")})
     orphan = 0
     for o in recs:
         for ak in o.get("found_by") or []:
@@ -489,7 +490,52 @@ def build_provenance(recs):
     json.dump({"updated": dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"), "queries": len(out), "linked_records": sum(1 for o in recs if o.get("found_by")),
                "note": "ak=질의 지문(도구+인자). 회신 원문은 queries/<월>.jsonl.gz에서 같은 ak로(versions = 회신 판 수). args=None은 질의 축적(v2.26) 이전·병합 대기 분",
                "provenance": out}, open(os.path.join(D, "provenance.json"), "w", encoding="utf-8"), ensure_ascii=False)
+    build_query_records(out, {o["key"]: o for o in recs})
     return len(out), orphan
+
+def build_query_records(prov, bykey):
+    """v2.38 질의별 발굴 기록물 — 질의 하나를 현용기록물 한 건으로: docs/data/q/<ak>.json(IIIF Collection — 그 질의가 찾은 기록의 매니페스트,
+    메타데이터에 도구·인자·처음/마지막·호출 수·회신 판 지문) + q/index.html. 지우지 않는다(같은 ak면 갱신)."""
+    qd = os.path.join(D, "q"); os.makedirs(qd, exist_ok=True)
+    L1v = lambda k, v: {"label": {"ko": [k]}, "value": {"none": [str(v)]}}
+    rows = []
+    byref = {}
+    for k, o in bykey.items():  # 심층 판독 도구(상세 URL·식별자 질의)는 인자가 곧 기록 — URL·id로 연결
+        for r in (o.get("url"), o.get("id")):
+            if r and len(str(r)) >= 6: byref.setdefault(str(r).strip(), k)
+    for e in prov:
+        if not e.get("tool"): continue
+        refs = [byref[str(v).strip()] for v in (e.get("args") or {}).values() if isinstance(v, str) and str(v).strip() in byref]
+        for k in refs:
+            if k not in e["records"]: e["records"].append(k); e.setdefault("read_records", []).append(k)
+        items = []
+        for k in e["records"]:
+            o = bykey.get(k)
+            if not o: continue
+            mf = o.get("iiif") or o.get("iiif_built") or leaf_manifest(o)
+            items.append({"id": mf, "type": "Manifest", "label": {"none": [o["title"][:120] + (f" ({o['date']})" if o.get("date") else "")]}})
+        args = json.dumps(e["args"], ensure_ascii=False, sort_keys=True) if e.get("args") is not None else ""
+        resp = e.get("responses", [])
+        md = [L1v("도구", e["tool"]), L1v("질의 인자", args), L1v("질의 지문(ak)", e["ak"]), L1v("처음 질의", e["first"]), L1v("마지막 질의", e["last"]),
+              L1v("누적 호출", e["calls"]), L1v("회신 판 수", len(resp)), L1v("발견 기록 수", len(items))] + ([L1v("판독 대상 기록", ", ".join(e["read_records"][:5]))] if e.get("read_records") else [])
+        md += [L1v(f"회신 판 {i + 1}", f"지문 {r['h']} · {r['first'][:16]}~{r['last'][:16]} · {r['seen']}회 · {r['bytes']}B · 원문 queries/{r['month']}.jsonl.gz") for i, r in enumerate(resp[:20])]
+        col = {"@context": "http://iiif.io/api/presentation/3/context.json", "id": f"{PAGES}q/{e['ak']}.json", "type": "Collection",
+               "label": {"ko": [f"질의 발굴 기록 — {e['tool']} {args[:120]}"]},
+               "summary": {"ko": [f"KOREA ARCHIVE 통합검색 질의 한 건이 찾은 기록 {len(items)}건. 회신 원문은 질의·회신 축적(queries/)에서 같은 지문으로 확인 — 질의 → 회신 → 발견 기록의 증거 사슬."]},
+               "metadata": md, "requiredStatement": {"label": {"ko": ["출처"]}, "value": {"ko": ["각 기록의 권리는 원 기관 표기를 따름 — 게재 전 judge_rights"]}},
+               "seeAlso": [{"id": f"{PAGES}provenance.json", "type": "Dataset", "format": "application/json", "label": {"ko": ["발견 경로 전체"]}}], "items": items}
+        json.dump(col, open(os.path.join(qd, f"{e['ak']}.json"), "w", encoding="utf-8"), ensure_ascii=False)
+        rows.append((e, args, len(items), len(resp)))
+    E_ = html.escape; KV = "https://changgi.github.io/korea-archive-mcp/kv.html?manifest="
+    kvl = lambda ak: " · <a href='" + KV + E_(PAGES + "q/" + ak + ".json") + "'>KV</a>"
+    tr = "".join(f"<tr><td>{E_(e['last'][:16])}</td><td>{E_(e['tool'])}</td><td>{E_(a[:160])}</td><td>{n}</td><td>{v}</td><td>{e['calls']}</td>"
+                 f"<td><a href='{E_(e['ak'])}.json'>IIIF</a>{kvl(e['ak']) if n else ''}</td></tr>"
+                 for e, a, n, v in sorted(rows, key=lambda r: r[0]["last"], reverse=True))
+    open(os.path.join(qd, "index.html"), "w", encoding="utf-8").write(f"""<!DOCTYPE html><html lang="ko"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>질의별 발굴 기록 — KOREA ARCHIVE 통합검색</title><style>body{{font-family:system-ui,'Noto Sans KR',sans-serif;margin:0;background:#14161b;color:#e6e4dc}}main{{max-width:1100px;margin:auto;padding:16px}}a{{color:#e0b04a}}table{{border-collapse:collapse;width:100%;font-size:13px}}td,th{{border-bottom:1px solid #2a2d35;padding:6px;text-align:left;vertical-align:top}}</style>
+<main><h1>질의별 발굴 기록</h1><p>질의 한 건 = 기록물 한 건. 각 질의가 찾은 기록을 IIIF 컬렉션으로 묶고, 회신 판 지문(같은 질의의 응답이 바뀌면 새 판)을 메타데이터로 남깁니다. 회신 원문은 <a href="../queries/index.json">질의·회신 축적</a>, 경로 전체는 <a href="../provenance.json">provenance.json</a>. 지우지 않습니다.</p>
+<table><tr><th>마지막</th><th>도구</th><th>질의 인자</th><th>발견</th><th>회신 판</th><th>호출</th><th>열람</th></tr>{tr}</table></main></html>""")
+    return len(rows)
 
 PAGES = "https://changgi.github.io/korea-archive-mcp/data/"
 
@@ -886,7 +932,7 @@ details{{font-size:12px}}dl{{display:grid;grid-template-columns:auto 1fr;gap:2px
 table{{width:100%;border-collapse:collapse;font-size:14px}}td,th{{border-bottom:1px solid #2a2d35;padding:6px;text-align:left}}</style>
 <main><h1>발견 누적 원장</h1><p>KOREA ARCHIVE 통합검색 사용자가 도구로 발굴한 기록이 매일 이곳에 쌓입니다(검색어·사용자 정보 없음). 기록 <b>{st['records']:,}</b>건 · 마지막 갱신 {st['updated']} · 이번 갱신 신규 {new_recs}건 · 내용·메타정보 보강 {enr}건 · 썸네일 {thn}건</p>
 <p>{srcs}</p>
-<p><a class="b0" href="discovered.csv">CSV 내려받기</a><a class="b0" href="discovered.jsonl">JSONL</a><a class="b0" href="discovered.jsonld">RiC-O JSON-LD</a><a class="b0" href="../kv.html?manifest=https://changgi.github.io/korea-archive-mcp/data/collection.json">KV로 최근 300건 연속 보기</a><a class="b0" href="tree.html">계층구조도</a><a class="b0" href="queries/index.json">질의·회신 축적</a><a class="b0" href="classifications.json">분류 사전</a><a class="b0" href="provenance.json">발견 경로(질의↔기록)</a><a class="b0" href="fixity_changes.json">원문 변경 감시</a><a class="b0" href="feed.xml">새 발견 구독(Atom)</a><a class="b0" href="records.csl.json">인용 CSL-JSON(Zotero)</a><a class="b0" href="records.ris">인용 RIS(EndNote)</a><a class="b0" href="timeline.html">연대 타임라인</a><a class="b0" href="nrich/index.html">연구원 연구DB IIIF 계층</a><a class="b0" href="popular.csv">자주 활용 TOP 200</a><a class="b0" href="stats.json">집계</a></p>
+<p><a class="b0" href="discovered.csv">CSV 내려받기</a><a class="b0" href="discovered.jsonl">JSONL</a><a class="b0" href="discovered.jsonld">RiC-O JSON-LD</a><a class="b0" href="../kv.html?manifest=https://changgi.github.io/korea-archive-mcp/data/collection.json">KV로 최근 300건 연속 보기</a><a class="b0" href="tree.html">계층구조도</a><a class="b0" href="queries/index.json">질의·회신 축적</a><a class="b0" href="classifications.json">분류 사전</a><a class="b0" href="provenance.json">발견 경로(질의↔기록)</a><a class="b0" href="q/index.html">질의별 발굴 기록(IIIF)</a><a class="b0" href="fixity_changes.json">원문 변경 감시</a><a class="b0" href="feed.xml">새 발견 구독(Atom)</a><a class="b0" href="records.csl.json">인용 CSL-JSON(Zotero)</a><a class="b0" href="records.ris">인용 RIS(EndNote)</a><a class="b0" href="timeline.html">연대 타임라인</a><a class="b0" href="nrich/index.html">연구원 연구DB IIIF 계층</a><a class="b0" href="popular.csv">자주 활용 TOP 200</a><a class="b0" href="stats.json">집계</a></p>
 <p style="font-size:13px;color:#9b9a93">주요 내용·메타정보·썸네일은 기관 IIIF·우리 브리지 매니페스트를 하루 한 번 판독해 채웁니다(하루 상한·순차 요청). 썸네일은 재이용 가능 표시가 확인된 것만 싣고, 포로·사망자·묘지·수형자 관련 기록과 허가가 필요한 이미지는 링크만 둡니다. 권리는 원 기관 표기를 따릅니다 — 게재 전 judge_rights로 확인. 모든 변경은 저장소 git 이력(docs/data/)에 남습니다.</p>
 <h2>자주 활용되는 기록 TOP 30</h2><p style="font-size:13px">점수 = 최근 30일 발견×2 + 전체 발견 + 발견된 날 수×3 + 교차확인 기관 수 가중. 자동 검사 트래픽 제외.</p><div class="g">{prow}</div>
 <h2>일별 활용(최근 14일)</h2><table><tr><th>날짜</th><th>검색 묶음</th><th>발견 기록</th><th>신규 기록</th></tr>{urow}</table><p style="font-size:13px">형식별 누계: {E_(fmtv(usage['formats']))} · <a href="usage.json">usage.json</a></p>
