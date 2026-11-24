@@ -110,7 +110,7 @@ DEEP = {"i815": ("nedb_search", lambda o: o.get("url") and {"mode": "i815", "que
         "nrich": ("nedb_search", lambda o: {"mode": "nrich", "query": o["id"] if re.match(r"^(ksm|portrait|gwaebul|diary|mokgan|jcbib|jcphoto|dict|arch|koguryo|gaesong|design|pattern|oldbook|hyanggyo|stone|journal|iron|dolmen|assay|material):", str(o.get("id", ""))) else o.get("url")} if (o.get("id") or o.get("url")) else None)}
 DEEP["nedb"] = ("nedb_search", lambda o: re.match(r"^[a-z]{2,5}_[0-9a-z_]+$", o["key"].split(":", 1)[1]) and {"mode": "item", "query": o["key"].split(":", 1)[1]})  # v2.61 한국사DB 기록(levelId) — 시대별 경로 판독
 DEEP["kyudb"] = ("nedb_search", lambda o: re.match(r"^[^\x00-\x7f]{1,4}[0-9][0-9.\-]*$", str(o.get("id") or "")) and {"mode": "kyujanggak", "query": o["id"]})  # v2.55 규장각 해제(기관 해설문) — 같은 청구기호 행만 쓴다
-DEEP_V = {"seoul": 2, "aks": 2, "jsg": 2}  # v2.56 jsg 2 = 장서각 개체 태깅·인물 전거(UCI)  # v2.32 판독기 판 — 판이 오르면 이미 보강된 기록도 한 번 다시 판독(서울기록원: 기관 계층·생산자·보존이력 추가)
+DEEP_V = {"seoul": 2, "aks": 2, "jsg": 2, "nedb": 2}  # v2.61.1 nedb 2 = 표 없는 기록(삼국사기)·원문 이미지만(신문) 판독  # v2.56 jsg 2 = 장서각 개체 태깅·인물 전거(UCI)  # v2.32 판독기 판 — 판이 오르면 이미 보강된 기록도 한 번 다시 판독(서울기록원: 기관 계층·생산자·보존이력 추가)
 _sid = [None]
 
 def mcp_call(tool, args):
@@ -197,8 +197,9 @@ def enrich(o, budget):
                 if src0 == "nedb":  # v2.61 한국사DB 원문 — 기술 항목 줄(제목·연월일·출전…)은 메타로, 본문 앞부분은 요약으로(미공개·실패는 요약 비움)
                     L2 = txt.splitlines(); md = [[p.split(": ", 1)[0], p.split(": ", 1)[1]] for p in (L2[1].split(" · ") if len(L2) > 1 and ": " in L2[1] else []) if ": " in p]
                     bi = 2 if md else 1
-                    summ = f"[한국사DB 원문 앞부분] {L2[bi][:380]}" if len(L2) > bi and not re.search(r"공개되지 않았|조회 실패", txt[:400]) else ""
+                    summ = f"[한국사DB 원문 앞부분] {L2[bi][:380]}" if len(L2) > bi and not re.search(r"공개되지 않았|조회 실패|본문 텍스트 없음", txt[:1200]) else ""
                     if "공개되지 않았" in txt[:400]: md = [["본문 공개", "미공개 — 항목·URL은 유효, 기관 공개 범위(국사편찬위원회 문의 대상)"]]  # 부재가 아니라 비공개라는 증거
+                    if "본문 텍스트 없음" in txt[:1200]: summ = ""; md = md + [["본문 공개", "원문 이미지(지면)만 — 텍스트 없음(미공개 아님)"]]  # v2.61.1
                 if src0 == "kyudb":  # v2.55 규장각 — 같은 청구기호 행의 서지와 해제 원문만(다른 책의 해제·안내 문구 제외)
                     summ, md = kyu_own(txt, o["id"])
                 if src0 == "aks":  # v2.40.2 고문서 문서 판독은 면 목록 — 요약은 머리줄의 면 수·UCI만(파일명 나열 아님)
@@ -274,7 +275,7 @@ def tree_path(o):
     return [top] + (segs or ["(계열 미상)"])
 
 ERAS = ["광복이후", "광복 이후", "선사", "고조선", "삼국", "고구려", "백제", "신라", "가야", "통일신라", "발해", "남북국", "고려", "조선", "대한제국", "일제강점기", "대한민국"]
-DATE_KEYS = ("생산일", "생산연도", "생산", "연대", "날짜", "시대", "시대분류", "출판정보", "발행", "발행일", "제작연도", "제작시기", "국적/시대", "작성연대 / 간행시기", "생산기간", "발간연도", "date", "발행년도", "기간", "생산 기간", "생산시기", "Publication Date", "일자", "연월일", "발신일")  # v2.56 연구원 발행년도·TNA 기간·6·25 생산시기·NDL 발행일·서울 일자  # v2.50 생산기간(전자사료관)·발간연도(국외문화유산)·date(IA·Europeana) — 인수·등록·업로드일(보존이력·addeddate)은 넣지 않는다
+DATE_KEYS = ("생산일", "생산연도", "생산", "연대", "날짜", "시대", "시대분류", "출판정보", "발행", "발행일", "제작연도", "제작시기", "국적/시대", "작성연대 / 간행시기", "생산기간", "발간연도", "date", "발행년도", "기간", "생산 기간", "생산시기", "Publication Date", "일자", "연월일", "발신일", "발행년월일")  # v2.56 연구원 발행년도·TNA 기간·6·25 생산시기·NDL 발행일·서울 일자  # v2.50 생산기간(전자사료관)·발간연도(국외문화유산)·date(IA·Europeana) — 인수·등록·업로드일(보존이력·addeddate)은 넣지 않는다
 ERA_KEYS = ("시대", "시대분류", "제작시기", "국적/시대")
 
 def date_derived(o):
@@ -1031,11 +1032,11 @@ def write_quality(recs):
     json.dump(Qj, open(p, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
     return snap
 
-FACETS = [("주제", re.compile(r"^(주제|주제어|색인어.*|subject|키워드)$", re.I)), ("장소", re.compile(r"^(연관정보|장소|취급지명|place|지명\(장서각 태깅\))$", re.I)),
+FACETS = [("주제", re.compile(r"^(주제|주제어|색인어.*|subject|키워드|표제어)$", re.I)), ("장소", re.compile(r"^(연관정보|장소|취급지명|place|지명\(장서각 태깅\))$", re.I)),
           ("인물", re.compile(r"^인명\(장서각 태깅\)$")), ("기관", re.compile(r"^관청명\(장서각 태깅\)$")),  # v2.56 기관 개체 태깅
           ("형태", re.compile(r"^(문서유형|기록물형태|매체유형|사료구분|사료유형|기록유형|자료유형|format)$", re.I)), ("재질", re.compile(r"^재질$")),
           ("기술 수준", re.compile(r"^기술 수준$")),  # v2.59 기관의 자료 형태·재질·기술 단계(item·fileUnit·Piece) 분류
-          ("분류", re.compile(r"^(분류|사부분류|자료분류|보고서유형분류)$")), ("시대", re.compile(r"^(시대|시대분류|국적/시대)$")), ("매체", re.compile(r"^mediatype$", re.I))]
+          ("분류", re.compile(r"^(분류|사부분류|자료분류|보고서유형분류|주제분류)$")), ("시대", re.compile(r"^(시대|시대분류|국적/시대)$")), ("매체", re.compile(r"^mediatype$", re.I))]
 
 def facet_terms(k, v, fac):
     """(패싯, 용어) 목록. 서울기록원 연관정보는 코드 종류로 패싯을 가른다 — GEOL=장소 · TOPIC=주제 · FUNC=분류(기능)."""
@@ -1044,7 +1045,7 @@ def facet_terms(k, v, fac):
         cm = {"GEOL": "장소", "TOPIC": "주제", "FUNC": "분류"}
         return [(cm[m[1]], re.sub(r"\s*,\s*[\d~\s]*$", "", m[2]).strip()) for m in re.finditer(r"\[(GEOL|TOPIC|FUNC)-\d+\]\s*(?:\([^)]*\)\s*)?([^\[]+)", v)]
     if v.startswith("http"): return []
-    if fac == "재질":  # v2.59 '나무 > 기타' 같은 기관 재질 분류는 계층 그대로 한 용어로(쉼표로만 가른다)
+    if fac == "재질" or k == "주제분류":  # v2.59 · v2.61.1 한국사DB 주제분류('정치＞왕실＞국왕＞즉위·책봉')도 계층 그대로 '나무 > 기타' 같은 기관 재질 분류는 계층 그대로 한 용어로(쉼표로만 가른다)
         return [(fac, t.strip()) for t in re.split(r"[,，;]", v) if 1 < len(t.strip()) <= 40]
     return [(fac, t.strip()) for t in re.split(r"[;；,，·]|\s>\s|\s›\s", v) if 1 < len(t.strip()) <= 40]
 

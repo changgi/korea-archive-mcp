@@ -1328,7 +1328,8 @@ const jCite = (lid) => `${JDB}/id/${lid}`;
 const J_ERA = { kd: 'modern', ij: 'modern', npda: 'modern', dh: 'contemp', pn: 'contemp', sg: 'ancient' };
 const jEra = (lid) => J_ERA[String(lid).split('_')[0]] || 'joseon';
 const jItemUrl = (lid) => JDB + (lid.startsWith('jlaw') ? '/joseon/item/level.do?levelId=' : `/${jEra(lid)}/level.do?levelId=`) + lid;
-const J_LABELS = ['제목', '연월일', '출전', '발신자', '수신자', '발신일', '문서분류', '작성자', '날짜', '작성일'];
+const J_LABELS = ['제목', '연월일', '출전', '발신자', '수신자', '발신일', '문서분류', '작성자', '날짜', '작성일', '신문명', '기사제목', '발행년월일', '발행구분', '면수', '단수', '표제어'];
+const J_UI = /^(원문이미지|판본 전체|비교보기|.+본\(\d{4}년\))$/; // v2.61.1 본문 사이 화면 단추·판본 목록
 const J_SEARCH_BASE = { pageIndex: '1', pageSize: '1', orderColumn: 'levelId', orderDir: 'ASC',
   synonym: 'off', chinessChar: 'on', titleWord: '', titleConjunction: 'AND',
   contentsWord: '', contentsConjunction: 'AND', creatorWord: '', creatorConjunction: 'AND',
@@ -1368,7 +1369,23 @@ async function jItemRead(lid, maxChars) {
       const mv = meta.map(([kk, v]) => [kk, v.join(' ').slice(0, 200)]).filter(([, v]) => v);
       const body = rest.join(' ').slice(0, maxChars || 1200);
       if (body) return { lid, title: ttl, body, chars: body.length, status: 'ok', isLaw: false, era: jEra(lid), meta: mv };
+      if (lines.includes('원문이미지')) return { lid, title: ttl, status: 'image_only', meta: mv }; // v2.61.1 신문 지면 등 — 텍스트 없이 원문 이미지만(미공개 아님)
       return { lid, title: ttl, status: ttl ? 'not_published' : 'parse_failed', meta: mv };
+    }
+    // v2.61.1 기술 항목 표도 '◯'도 없는 기록(삼국사기 등) — 제목 반복 줄 뒤 '(날짜)'·본문(註 표시 포함)·주제분류 순
+    const j0 = t2 ? lines.indexOf(t2, hoi + 2) : -1;
+    if (j0 > 0) {
+      let i = j0 + 1; const mv = []; let dt = '';
+      if (lines[i] === '(') { const k2 = lines.indexOf(')', i); if (k2 > i && k2 - i < 8) { dt = lines.slice(i + 1, k2).join(' '); i = k2 + 1; } }
+      if (dt) mv.push(['연월일', dt]);
+      const cut = lines.findIndex((l, x) => x > i && (l.startsWith('註)') || l === '주제분류' || l.includes('개인정보취급방침')));
+      // 본문은 section-read에서 — 각주 팝업(註 NNN) 내용은 본문이 아니므로 걷어 낸다(실측 삼국사기)
+      const sr = (b.match(/<section class="section-read"[^>]*>([\s\S]*?)<\/section>/) || [])[1];
+      const srText = sr ? jClean(sr.replace(/<div class="popup-nd[\s\S]*?<div class="cont">[\s\S]*?<\/div><\/div>/g, ' ').replace(/<sup>[^<]*<\/sup>/g, '')) : '';
+      const seg = srText ? [srText] : lines.slice(i, cut > 0 ? cut : stop).filter((l) => !J_UI.test(l) && !/^註\s*\d+\)?$/.test(l));
+      const ci = lines.indexOf('주제분류', i); if (ci > 0) { const cls = lines.slice(ci + 1, stop).filter((l) => l.includes('＞')).slice(0, 6); if (cls.length) mv.push(['주제분류', cls.join('; ')]); }
+      const body = seg.join(' ').replace(/\s+/g, ' ').trim().slice(0, maxChars || 1200);
+      if (body.length > 20) return { lid, title: t2, body, chars: body.length, status: 'ok', isLaw: false, era: jEra(lid), meta: mv };
     }
     return { lid, title: title || t2, status: (title || t2) ? 'not_published' : 'parse_failed' };
   }
@@ -2753,6 +2770,7 @@ const JB_CROSS = `국내외 대조 절차 — 순서를 틀리면 헛수고한�
         if (mode === 'item') {
           const r = await jItemRead(q, 3000);
           if (r.status === 'ok') return text(`[${q}] ${r.title || ''}\n${(r.meta || []).length ? r.meta.map(([kk, v]) => `${kk}: ${v}`).join(' · ') + '\n' : ''}${r.body}\n(${r.chars}자) ${jCite(q)}\n※ ${r.isLaw ? '한문 원문 제공 — 인용 가능(표점 DB 형태)' : r.era && r.era !== 'joseon' ? `원문 수록(${r.era === 'contemp' ? '현대' : r.era === 'modern' ? '근대' : '고대'} 자료) — 출전을 병기해 인용` : (r.meta || []).length ? '원문 수록(등록류 장계 등) — 출전·발신일 병기 인용' : '국역만 제공 — 역구성 한문은 학술 인용 불가'}. 조문이면 mode=sibling으로 형제 조 확인.`);
+          if (r.status === 'image_only') return text(`[${q}] ${r.title}\n${(r.meta || []).map(([kk, v]) => `${kk}: ${v}`).join(' · ')}\n본문 텍스트 없음 — 원문 이미지(지면)로만 제공됩니다(미공개 아님). 원문 열람: ${jCite(q)}`);
           if (r.status === 'not_published') return text(`[${q}] ${r.title}\n본문이 공개되지 않았습니다 — 항목은 존재하고 URL도 유효하나 공개 범위 문제입니다. 재시도로 해결되지 않으며 국사편찬위원회 문의 대상. ${jCite(q)}`);
           return text(`[${q}] 조회 실패(${r.status}${r.note ? ': ' + r.note : ''}) — levelId와 경로(jlaw*=item/level.do)를 확인하십시오.`);
         }
