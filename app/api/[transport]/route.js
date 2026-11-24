@@ -1299,7 +1299,12 @@ async function jdbPost(url, params, headers = {}) {
         headers: { 'User-Agent': UA, 'Content-Type': 'application/x-www-form-urlencoded', ...JDB_HDR, ...(a ? { 'Accept-Encoding': 'identity' } : {}), ...headers },
         signal: AbortSignal.timeout(FETCH_TIMEOUT) });
       if (!r.ok) throw new Error(`HTTP ${r.status}`);
-      return await r.text();
+      // v2.39.1 본문이 선언 길이보다 일찍 끊기는 응답(UND_ERR_RES_CONTENT_LENGTH_MISMATCH — 기관 측) — 받은 만큼 보존해 판독(결과는 페이지 앞부분)
+      const reader = r.body.getReader(); const chunks = []; let got = 0;
+      try { for (;;) { const { done, value } = await reader.read(); if (done) break; chunks.push(value); got += value.length; } }
+      catch (e) { if (!got || !/terminated|CONTENT_LENGTH|other side closed|socket/i.test(errInfo(e))) throw e; }
+      const buf = new Uint8Array(got); let off = 0; for (const c of chunks) { buf.set(c, off); off += c.length; }
+      return new TextDecoder('utf-8').decode(buf);
     } catch (e) { lastErr = e; if (a < 2) await sleep(a ? 2500 : 800); }
   }
   throw new Error(errInfo(lastErr));
