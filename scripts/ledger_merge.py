@@ -873,7 +873,11 @@ def _ead_get(url):
     data = None
     for k in range(3):  # 큰 EAD(수 MB)는 응답이 중간에 끊기는 일이 있다(IncompleteRead 실측) — 3회까지 다시 받는다. 끊긴 본문은 쓰지 않는다
         try:
-            data = urllib.request.urlopen(urllib.request.Request(url, headers={"User-Agent": UA}), timeout=60).read(); break
+            rr = urllib.request.urlopen(urllib.request.Request(url, headers={"User-Agent": UA, "Accept-Encoding": "gzip"}), timeout=60)  # v2.62.1 압축 전송 — 수십 MB EAD가 비압축으로는 끊김(실측 19·25MB)
+            data = rr.read()
+            if rr.headers.get("Content-Encoding") == "gzip":
+                import gzip as _gz; data = _gz.decompress(data)
+            break
         except http.client.IncompleteRead:
             time.sleep(2 * (k + 1))
     if data is None: raise ValueError("EAD 응답 끊김(3회)")
