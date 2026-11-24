@@ -776,6 +776,11 @@ def fixity_text(o):
     """원 기관 응답(우리 판독기를 거친 정규형) — 심층 판독 도구 응답 또는 IIIF 매니페스트(변동 항목 제외)."""
     src = o["key"].split(":")[0]
     m = o.get("iiif") or ""
+    su, core = src_fix_url(o)
+    fx = o.get("fixity") or []
+    if su and (not fx or fx[-1].get("pv") == SRC_PARSER_V):  # v2.52.1 기관 메타데이터 API 우선(IA IIIF는 빈 응답이 잦음) — 이미 매니페스트로 지문을 뜬 기록은 같은 근거를 유지(근거 전환이 '변경'으로 보이지 않게)
+        c = core(get(su))
+        return json.dumps(c, ensure_ascii=False, sort_keys=True) if c else None
     if m:
         j = get(m)
         if j.get("checkResult") == "NG":  # v2.52 NDL — 매니페스트 주소는 있으나 기관이 공개하지 않음(관내 열람 한정 등). iiif는 지우지 않고 상태만 표시
@@ -787,10 +792,6 @@ def fixity_text(o):
         core = {"label": j.get("label"), "summary": j.get("summary"), "metadata": md, "rights": j.get("rights"), "requiredStatement": j.get("requiredStatement"),
                 "items": len(j.get("items") or (j.get("sequences") or [{}])[0].get("canvases") or [])}
         return json.dumps(core, ensure_ascii=False, sort_keys=True)
-    su, core = src_fix_url(o)
-    if su and not o.get("iiif"):
-        c = core(get(su))
-        return json.dumps(c, ensure_ascii=False, sort_keys=True) if c else None
     if src == "archives" and "showDetailPopup.do" in (o.get("url") or ""):  # v2.51 국가기록원 — 원장 상세 판독기(archives_fields)의 정규형
         f, titles = archives_fields(o["url"])
         if not f: return None
@@ -819,7 +820,7 @@ def fixity_pass(led, today, budget):
         used += 1; o["fixity_checked"] = today.isoformat()
         if not t: continue
         h = hashlib.sha256(t.encode()).hexdigest()[:16]; fx = o.setdefault("fixity", [])
-        opv = AR_PARSER_V if (o["key"].startswith("archives:") and not o.get("iiif")) else SRC_PARSER_V if (src_fix_url(o)[0] and not o.get("iiif")) else pv  # 판독기가 원장 스크립트 안에 있는 수집처는 그 판 번호로
+        opv = AR_PARSER_V if (o["key"].startswith("archives:") and not o.get("iiif")) else SRC_PARSER_V if (src_fix_url(o)[0] and (not fx or fx[-1].get("pv") == SRC_PARSER_V)) else pv  # 판독기가 원장 스크립트 안에 있는 수집처는 그 판 번호로
         if fx and fx[-1]["h"] == h: continue
         kind = "첫 지문" if not fx else ("판독기 변경 동반" if fx[-1].get("pv") != opv else "원문 변경 의심")
         fx.append({"at": today.isoformat(), "h": h, "pv": opv, "kind": kind}); changed += kind != "첫 지문"
