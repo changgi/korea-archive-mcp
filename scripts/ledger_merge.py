@@ -228,7 +228,9 @@ def enrich(o, budget):
                     summ = f"{hm[2]}면{' · UCI ' + hm[3] if hm[3] else ''} — 한국고문서자료관 원문 이미지(뷰어 열람)" if hm else ""
                     md = [["면 수", hm[2]]] + ([["UCI", hm[3]]] if hm and hm[3] else []) if hm else md
                 if summ or src0 not in ("kyudb", "nedb", "nlk"): o["summary"] = (summ + " " if summ else "") + f"(KOREA ARCHIVE 심층 판독 {tool})"  # 규장각 해제가 없으면 요약을 비워 둔다(서지는 메타·메타 합성으로)
-                if md or not o.get("meta"): o["meta"] = md  # v2.69.3 빈 판독 결과로 축적된 메타를 지우지 않는다
+                if md or not o.get("meta"):  # v2.69.3 빈 판독 결과로 축적된 메타를 지우지 않는다
+                    nk = {m[0] for m in md}
+                    o["meta"] = md + [m for m in (o.get("meta") or []) if m and m[0] not in nk]  # v2.79 기존에만 있던 항목 보존
                 o["deep_call"] = f"{tool}({json.dumps(args, ensure_ascii=False)})"; o["enrich_status"] = "ok"; o["deep_v"] = DEEP_V.get(src0, 1)
                 um = re.search(r"인물 전거\(한국역대인물 UCI\):\s*(.+)", txt)  # v2.56 기관이 붙인 인명 전거 — 이름=UCI
                 if um: o["authority"] = {"scheme": "한국역대인물 UCI(장서각 태깅)", "persons": dict(x.split("=", 1) for x in um[1].strip().split("; ") if "=" in x)}
@@ -257,7 +259,9 @@ def enrich(o, budget):
             for e in (j.get("metadata") or [])[:12]:
                 k, v = strip(L1(e.get("label"))), strip(L1(e.get("value")))
                 if k and v and k not in ("판독 시각", "변환", "발견 시각", "발견 경로") and len(md) < 8: md.append([k[:30], v[:140]])
-            if md or not o.get("meta"): o["meta"] = md  # v2.69.3 빈 매니페스트 메타로 축적된 메타를 지우지 않는다
+            if md or not o.get("meta"):  # v2.69.3 빈 매니페스트 메타로 축적된 메타를 지우지 않는다
+                nk = {m[0] for m in md}
+                o["meta"] = md + [m for m in (o.get("meta") or []) if m and m[0] not in nk]  # v2.79 새 메타 + 기존에만 있던 항목 보존(8개 상한으로 잘려 나가던 결함)
             # v2.76 권리 = rights·license(권리 URI·문구)만. requiredStatement·attribution은 '출처 표기'라 권리로 쓰지 않는다 —
             #   Europeana·국가유산청·역사박물관 매니페스트의 출처 문구(제목 - 링크)가 권리 칸에 들어가던 결함. 출처 표기는 attribution 필드에 따로.
             rq = strip(L1((j.get("requiredStatement") or {}).get("value"))) or strip(L1(j.get("attribution")))
@@ -636,6 +640,10 @@ def loss_guard(led, prev, today):
         for f in GUARD_FIELDS:
             if po.get(f) not in (None, "", [], {}) and cur.get(f) in (None, "", [], {}):
                 cur[f] = po[f]; ev.append({"key": cur["key"], "what": f"{f} 비워짐 → 이전 값 되살림"})
+        if po.get("meta") and cur.get("meta"):  # v2.79 메타 항목 단위 — 이전 판의 항목(라벨)이 사라지면 되살린다(교체로 인한 손실 방지)
+            ck = {m[0] for m in cur["meta"] if m}
+            miss = [m for m in po["meta"] if m and m[0] not in ck]
+            if miss: cur["meta"] = cur["meta"] + miss; ev.append({"key": cur["key"], "what": f"메타 항목 {len(miss)}개 사라짐 → 되살림({', '.join(str(m[0]) for m in miss[:5])})"})
         if len(po.get("fixity") or []) > len(cur.get("fixity") or []):
             cur["fixity"] = po["fixity"]; ev.append({"key": cur["key"], "what": "지문 이력 감소 → 이전 이력 되살림"})
     p = os.path.join(D, "loss_guard.json")
@@ -1647,7 +1655,7 @@ def main():
         o["iiif_built"] = "" if (o.get("iiif") and not o.get("iiif_status")) else leaf_manifest(o)  # v2.52 기관 매니페스트가 비공개 응답이면 브리지로 대체(기관 주소는 보존)
     with open(lp, "w", encoding="utf-8") as f:
         for o in recs: f.write(json.dumps(o, ensure_ascii=False, separators=(",", ":")) + "\n")
-    cols = ["key", "entry_type", "found_by_basis", "summary_composed", "rights_view", "rights_basis", "fixity", "defect_note", "link_note", "sources", "title", "date", "date_derived", "date_basis", "id", "url", "partOf", "partOf_derived", "media", "sameAs", "iiif", "iiif_status", "iiif_built", "iiif_kind", "found_by", "found_by_derived", "first_seen", "last_seen", "seen", "seen_7d", "seen_30d", "days_total", "formats", "tools", "max_cross", "trend", "rank", "score", "summary", "summary_basis", "rights", "attribution", "thumb", "meta", "meta_basis", "authority", "key_aliases", "merge_note", "recovered", "harvested"]
+    cols = ["key", "entry_type", "found_by_basis", "summary_composed", "rights_view", "rights_basis", "fixity", "defect_note", "link_note", "sources", "title", "date", "date_derived", "date_basis", "id", "url", "partOf", "partOf_derived", "media", "sameAs", "iiif", "iiif_status", "iiif_built", "iiif_kind", "found_by", "found_by_derived", "first_seen", "last_seen", "seen", "seen_7d", "seen_30d", "days_total", "formats", "tools", "max_cross", "trend", "rank", "score", "summary", "summary_basis", "rights", "attribution", "thumb", "meta", "meta_basis", "authority", "key_aliases", "merge_note", "recovered", "harvested", "meta_restored"]
     fmtv = lambda v: json.dumps(v, ensure_ascii=False, separators=(",", ":")) if isinstance(v, list) and v and isinstance(v[0], dict) else " | ".join(f"{a}: {b}" for a, b in v) if isinstance(v, list) and v and isinstance(v[0], list) else (" ".join(f"{k}:{n}" for k, n in sorted(v.items(), key=lambda kv: -kv[1])) if isinstance(v, dict) and all(isinstance(x, (int, float)) for x in v.values()) else json.dumps(v, ensure_ascii=False, separators=(",", ":")) if isinstance(v, dict) else ("+".join(v) if isinstance(v, list) else v))
     with open(os.path.join(D, "discovered.csv"), "w", encoding="utf-8-sig", newline="") as f:
         w = csv.writer(f); w.writerow(cols)
