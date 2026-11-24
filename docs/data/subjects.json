@@ -21,13 +21,18 @@
 "ia:lkfil-Ben_Wagner_-_The_Battle_of_the_Chosin_Reservoir",
 "ia:111-adc-8255",
 "ia:KCSMMHZ_20130221_073000_Korea_Today",
-"ia:mkts_asia_south_korea.cnnmoney_576x324_dl"
+"ia:mkts_asia_south_korea.cnnmoney_576x324_dl",
+"ia:111-adc-6600",
+"ia:111-adc-8297",
+"ia:111-adc-8305",
+"ia:111-adc-8389",
+"ia:111-adc-8582"
 ],
 "sources": [
 "ia"
 ],
 "first": "2026-11-23T03:00:40Z",
-"last": "2026-11-24T22:44:36Z",
+"last": "2026-11-24T22:47:17Z",
 "keys": [
 "mediatype"
 ]
@@ -39,13 +44,17 @@
 "ia:DTIC_ADA429076",
 "ia:DTIC_ADB006731",
 "ia:litvin-korea-physician-inchon-chosin",
-"ia:the-frozen-chosen-the-1st-u.-s.-marine-division-and-the-battle-of-the-chosin-reservoir"
+"ia:the-frozen-chosen-the-1st-u.-s.-marine-division-and-the-battle-of-the-chosin-reservoir",
+"ia:DTIC_ADA290790",
+"ia:2010-teaching-english-to-north-korean-refugees-in-south-korea",
+"ia:cia-readingroom-document-cia-rdp80-00809a000600280823-7",
+"ia:gov.gpo.fdsys.CHRG-107shrg86829"
 ],
 "sources": [
 "ia"
 ],
 "first": "2026-11-23T03:00:40Z",
-"last": "2026-11-24T22:40:43Z",
+"last": "2026-11-24T22:47:17Z",
 "keys": [
 "mediatype"
 ]
@@ -66,12 +75,14 @@
 "image": {
 "records": [
 "ia:korea-1_202508",
-"ia:korea-1_20250811"
+"ia:korea-1_20250811",
+"ia:PLAN-PIA03762",
+"ia:mac-arthurs-war-map-naktong-bulge"
 ],
 "sources": [
 "ia"
 ],
-"first": "2026-11-24T22:44:36Z",
+"first": "2026-11-24T22:44:35Z",
 "last": "2026-11-24T22:44:36Z",
 "keys": [
 "mediatype"
@@ -89,13 +100,18 @@
 "ia:428-npc-171",
 "ia:111-adc-8608",
 "ia:111-adc-8630",
-"ia:111-adc-8255"
+"ia:111-adc-8255",
+"ia:111-adc-6600",
+"ia:111-adc-8297",
+"ia:111-adc-8305",
+"ia:111-adc-8389",
+"ia:111-adc-8582"
 ],
 "sources": [
 "ia"
 ],
 "first": "2026-11-23T03:00:40Z",
-"last": "2026-11-24T22:40:42Z",
+"last": "2026-11-24T22:47:17Z",
 "keys": [
 "subject"
 ]
@@ -103,13 +119,14 @@
 "CIA Reading Room": {
 "records": [
 "ia:cia-readingroom-document-cia-rdp79-00927a004500030001-1",
-"ia:cia-readingroom-document-cia-rdp82-00457r007500490005-8"
+"ia:cia-readingroom-document-cia-rdp82-00457r007500490005-8",
+"ia:cia-readingroom-document-cia-rdp80-00809a000600280823-7"
 ],
 "sources": [
 "ia"
 ],
 "first": "2026-11-23T03:00:40Z",
-"last": "2026-11-23T13:50:11Z",
+"last": "2026-11-24T22:47:17Z",
 "keys": [
 "subject"
 ]
@@ -1291,13 +1308,14 @@
 "DTIC Archive": {
 "records": [
 "ia:DTIC_ADA429076",
-"ia:DTIC_ADB006731"
+"ia:DTIC_ADB006731",
+"ia:DTIC_ADA290790"
 ],
 "sources": [
 "ia"
 ],
 "first": "2026-11-24T22:40:43Z",
-"last": "2026-11-24T22:40:43Z",
+"last": "2026-11-24T22:44:35Z",
 "keys": [
 "subject"
 ]
@@ -1470,18 +1488,178 @@
 "keys": [
 "subject"
 ]
+},
+"Hurst": {
+"records": [
+"ia:DTIC_ADA290790"
+],
+"sources": [
+"ia"
+],
+"first": "2026-11-24T22:44:35Z",
+"last": "2026-11-24T22:44:35Z",
+"keys": [
+"subject"
+]
+},
+"John E.": {
+"records": [
+"ia:DTIC_ADA290790"
+],
+"sources": [
+"ia"
+],
+"first": "2026-11-24T22:44:35Z",
+"last": "2026-11-24T22:44:35Z",
+"keys": [
+"subject"
+]
+},
+"*AMPHIBIOUS OPERATIONS": {
+"records": [
+"ia:DTIC_ADA290790"
+],
+"sources": [
+"ia"
+],
+"first": "2026-11-24T22:44:35Z",
+"last": "2026-11-24T22:44:35Z",
+"keys": [
+"subject"
+]
+},
+"*ARMY OPERATIONS": {
+"records": [
+"ia:DTIC_ADA290790"
+],
+"sources": [
+"ia"
+],
+"first": "2026-11-24T22:44:35Z",
+"last": "2026-11-24T22:44:35Z",
+"keys": [
+"subject"
+]
+},
+"*NATIONAL D": {
+"records": [
+"ia:DTIC_ADA290790"
+],
+"sources": [
+"ia"
+],
+"first": "2026-11-24T22:44:35Z",
+"last": "2026-11-24T22:44:35Z",
+"keys": [
+"subject"
+]
+},
+"SSG": {
+"records": [
+"ia:mac-arthurs-war-map-naktong-bulge"
+],
+"sources": [
+"ia"
+],
+"first": "2026-11-24T22:44:35Z",
+"last": "2026-11-24T22:44:35Z",
+"keys": [
+"subject"
+]
+},
+"classroom management": {
+"records": [
+"ia:2010-teaching-english-to-north-korean-refugees-in-south-korea"
+],
+"sources": [
+"ia"
+],
+"first": "2026-11-24T22:47:17Z",
+"last": "2026-11-24T22:47:17Z",
+"keys": [
+"subject"
+]
+},
+"EFL": {
+"records": [
+"ia:2010-teaching-english-to-north-korean-refugees-in-south-korea"
+],
+"sources": [
+"ia"
+],
+"first": "2026-11-24T22:47:17Z",
+"last": "2026-11-24T22:47:17Z",
+"keys": [
+"subject"
+]
+},
+"English in South Korea": {
+"records": [
+"ia:2010-teaching-english-to-north-korean-refugees-in-south-korea"
+],
+"sources": [
+"ia"
+],
+"first": "2026-11-24T22:47:17Z",
+"last": "2026-11-24T22:47:17Z",
+"keys": [
+"subject"
+]
+},
+"North Korean English learners": {
+"records": [
+"ia:2010-teaching-english-to-north-korean-refugees-in-south-korea"
+],
+"sources": [
+"ia"
+],
+"first": "2026-11-24T22:47:17Z",
+"last": "2026-11-24T22:47:17Z",
+"keys": [
+"subject"
+]
+},
+"North Korean refugees": {
+"records": [
+"ia:2010-teaching-english-to-north-korean-refugees-in-south-korea"
+],
+"sources": [
+"ia"
+],
+"first": "2026-11-24T22:47:17Z",
+"last": "2026-11-24T22:47:17Z",
+"keys": [
+"subject"
+]
+},
+"TESOL": {
+"records": [
+"ia:2010-teaching-english-to-north-korean-refugees-in-south-korea"
+],
+"sources": [
+"ia"
+],
+"first": "2026-11-24T22:47:17Z",
+"last": "2026-11-24T22:47:17Z",
+"keys": [
+"subject"
+]
 }
 },
 "장소": {
 "Asia: Korea": {
 "records": [
-"awm:147844"
+"awm:147844",
+"awm:146922",
+"awm:146925",
+"awm:147450",
+"awm:146902"
 ],
 "sources": [
 "awm"
 ],
 "first": "2026-11-23T03:01:00Z",
-"last": "2026-11-23T13:40:50Z",
+"last": "2026-11-24T22:47:17Z",
 "keys": [
 "장소"
 ]
@@ -1679,13 +1857,16 @@
 "awm:HOBJ4316",
 "awm:ART40331",
 "awm:ART40333",
-"awm:ART90315"
+"awm:ART90315",
+"awm:P01813.438",
+"awm:ART40043",
+"awm:ART40393"
 ],
 "sources": [
 "awm"
 ],
 "first": "2026-11-23T07:26:10Z",
-"last": "2026-11-24T22:44:36Z",
+"last": "2026-11-24T22:47:17Z",
 "keys": [
 "장소"
 ]
@@ -2095,6 +2276,35 @@
 ],
 "first": "2026-11-24T22:44:36Z",
 "last": "2026-11-24T22:44:36Z",
+"keys": [
+"장소"
+]
+},
+"Taegu": {
+"records": [
+"awm:146922",
+"awm:146925",
+"awm:147450",
+"awm:146902"
+],
+"sources": [
+"awm"
+],
+"first": "2026-11-24T22:44:35Z",
+"last": "2026-11-24T22:47:17Z",
+"keys": [
+"장소"
+]
+},
+"Korea: Seoul": {
+"records": [
+"awm:ART40393"
+],
+"sources": [
+"awm"
+],
+"first": "2026-11-24T22:47:17Z",
+"last": "2026-11-24T22:47:17Z",
 "keys": [
 "장소"
 ]
@@ -4460,13 +4670,24 @@
 "nara:NAID 22142",
 "nara:NAID 79592",
 "nara:NAID 79609",
-"nara:NAID 87540"
+"nara:NAID 87540",
+"nara:NAID 22023",
+"nara:NAID 22062",
+"nara:NAID 22070",
+"nara:NAID 22154",
+"nara:NAID 22347",
+"nara:NAID 24032",
+"nara:NAID 24035",
+"nara:NAID 20315",
+"nara:NAID 20374",
+"nara:NAID 22804",
+"nara:NAID 350288017"
 ],
 "sources": [
 "nara"
 ],
 "first": "2026-11-23T03:00:15Z",
-"last": "2026-11-24T22:44:36Z",
+"last": "2026-11-24T22:47:17Z",
 "keys": [
 "기술 수준"
 ]
@@ -4484,13 +4705,15 @@
 "nara:NAID 400402185",
 "nara:NAID 271813600",
 "nara:NAID 42219672",
-"nara:NAID 42219675"
+"nara:NAID 42219675",
+"nara:NAID 42219744",
+"nara:NAID 42219745"
 ],
 "sources": [
 "nara"
 ],
 "first": "2026-11-23T03:00:15Z",
-"last": "2026-11-24T22:44:36Z",
+"last": "2026-11-24T22:47:17Z",
 "keys": [
 "기술 수준"
 ]
@@ -4925,13 +5148,20 @@
 "awm:MELJ1339",
 "awm:P00675.051",
 "awm:P03175.001",
-"awm:SWEJ0286"
+"awm:SWEJ0286",
+"awm:146922",
+"awm:146925",
+"awm:147450",
+"awm:P01813.438",
+"awm:146902",
+"awm:147378",
+"awm:147381"
 ],
 "sources": [
 "awm"
 ],
 "first": "2026-11-23T03:01:00Z",
-"last": "2026-11-24T22:44:36Z",
+"last": "2026-11-24T22:47:17Z",
 "keys": [
 "자료 유형"
 ]
@@ -4940,13 +5170,19 @@
 "records": [
 "awm:147844",
 "awm:044757",
-"awm:P03175.001"
+"awm:P03175.001",
+"awm:146922",
+"awm:146925",
+"awm:147450",
+"awm:146902",
+"awm:147378",
+"awm:147381"
 ],
 "sources": [
 "awm"
 ],
 "first": "2026-11-23T03:01:00Z",
-"last": "2026-11-24T22:44:36Z",
+"last": "2026-11-24T22:47:17Z",
 "keys": [
 "매체 형태"
 ]
@@ -4975,13 +5211,15 @@
 "awm:ART40331",
 "awm:ART40333",
 "awm:ART90301",
-"awm:ART90315"
+"awm:ART90315",
+"awm:ART40043",
+"awm:ART40393"
 ],
 "sources": [
 "awm"
 ],
 "first": "2026-11-23T13:40:50Z",
-"last": "2026-11-24T22:44:36Z",
+"last": "2026-11-24T22:47:17Z",
 "keys": [
 "자료 유형"
 ]
@@ -5096,13 +5334,15 @@
 "Work on paper": {
 "records": [
 "awm:ART90301",
-"awm:ART90315"
+"awm:ART90315",
+"awm:ART40043",
+"awm:ART40393"
 ],
 "sources": [
 "awm"
 ],
 "first": "2026-11-24T22:44:36Z",
-"last": "2026-11-24T22:44:36Z",
+"last": "2026-11-24T22:47:17Z",
 "keys": [
 "매체 형태"
 ]
@@ -5177,12 +5417,13 @@
 },
 "Black & white - Film copy negative": {
 "records": [
-"awm:P00675.051"
+"awm:P00675.051",
+"awm:P01813.438"
 ],
 "sources": [
 "awm"
 ],
-"first": "2026-11-24T22:44:36Z",
+"first": "2026-11-24T22:44:35Z",
 "last": "2026-11-24T22:44:36Z",
 "keys": [
 "매체 형태"
@@ -5199,6 +5440,19 @@
 "last": "2026-11-24T22:44:36Z",
 "keys": [
 "매체 형태"
+]
+},
+"application/pdf": {
+"records": [
+"europeana:/10001/5207913015F426D6F71EE6D6E703C3453356D859"
+],
+"sources": [
+"europeana"
+],
+"first": "2026-11-24T22:47:17Z",
+"last": "2026-11-24T22:47:17Z",
+"keys": [
+"format"
 ]
 }
 },
@@ -5483,17 +5737,17 @@
 }
 }
 },
-"updated": "2026-11-24T22:49:49Z",
+"updated": "2026-11-24T22:52:50Z",
 "totals": {
 "매체": 4,
-"주제": 103,
-"장소": 46,
+"주제": 115,
+"장소": 48,
 "분류": 93,
 "시대": 38,
 "인물": 27,
 "기관": 10,
 "기술 수준": 4,
-"형태": 40,
+"형태": 41,
 "재질": 18
 },
 "note": "원 기관 메타의 주제·지명·분류·시대·매체·인물·기관(장서각 태깅)·형태·재질·기술 수준 표기 그대로(번역·정규화 없음). records = 그 용어가 붙은 원장 기록 key. 지우지 않는다",

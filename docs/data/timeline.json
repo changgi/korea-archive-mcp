@@ -1,5 +1,5 @@
 {
-"updated": "2026-11-24T22:49:49Z",
+"updated": "2026-11-24T22:52:50Z",
 "note": "구간 = 연대(4자리 연도·8자리 날짜·연호 연도 明治·大正·昭和·光武·隆熙·檀紀 환산) → 세기 → 왕조·시대명. 근거 순서 date → 제목 → 메타(생산·시대·출판). 세기·시대 구간은 시간축 근사 정렬",
 "timeline": [
 {
@@ -971,15 +971,16 @@
 },
 {
 "decade": "1930년대",
-"records": 4,
+"records": 5,
 "by_source": {
 "okchf": 2,
 "earchive": 1,
-"ndl": 1
+"ndl": 1,
+"europeana": 1
 },
 "by_kind": {
 "graphic": 2,
-"document": 2
+"document": 3
 },
 "samples": [
 {
@@ -1001,23 +1002,29 @@
 "title": "アハノハイイロメイガの研究 . ムネアカコメツキモドキの研究 . ダイコンサルハムシの研究 [図書·紙] — 朝鮮総督府農事試験場,江口, 貢,中山, 昌之介,田端, 育男,正木, 十二郎,[江口貢著] . [中山昌之介, 田端育男著] .",
 "url": "https://ndlsearch.ndl.go.jp/books/R100000136-I1970586434809985193",
 "iiif": "https://korea-archive-mcp.vercel.app/iiif/rec/dZHLTsJAFIZfZTLrAVoKSLt2Y2JcGHeEhbeIV9DiyphAx4UGFI0kaqhaRY0GQQG1WBMXPorTG8JDeEoXxIWTyZw_Z_7zncmZLSxjKYHX5lZwkuAsljBTrhktMXrgncqNt2md0auBfmT5hqOVnYc3FESMaozue36lxpS256E7TAEzEPY88cecGxDA1mbKK6O1QReNKfrQlrAqbbvS-dKdl7Mk-s6Vka2edxsNRy8551XLUN3PlmkU3Ie77v2xpb0Qu3lplaoEua1rYnbqVrNJkH1aNN8L5keBOOVnp_YEt0rLKevErldt9Z4gaz9vGsUuPSAJvx6q3aOTJLwy4UOGCOQzfMK_Jp885P6pwgTPwVx5URBALoKEsAkhlc1mZCkUguHL89Mbs6kgqOBCOriUCc2k08tyaJLnvMULscAYL45w0XgsIkTinCjGo8ADTgY4E6PjMCsD-cOD5BokvR8leNXvtg6h96z-tB5Rb3enr-VRv3LYv7iFq2nvz8NcOBbg-UBYmOIFKcJJ0Tje_gU/manifest.json"
+},
+{
+"title": "Nr. 1939. Hilfe an Korea und neue Aktionen der Schweizer Europahilfe [cf. Antrag EPD (dodis.ch/9661) und Mitbericht EFZD",
+"url": "https://www.europeana.eu/item/10001/5207913015F426D6F71EE6D6E703C3453356D859",
+"iiif": "https://iiif.europeana.eu/presentation/10001/5207913015F426D6F71EE6D6E703C3453356D859/manifest"
 }
 ]
 },
 {
 "decade": "1940년대",
-"records": 9,
+"records": 12,
 "by_source": {
 "archives": 4,
 "ndl": 1,
 "nedb": 1,
 "i815": 1,
 "nlna": 1,
-"nara": 1
+"ia": 1,
+"nara": 3
 },
 "by_kind": {
-"document": 8,
-"motion_picture": 1
+"document": 9,
+"motion_picture": 3
 },
 "samples": [
 {
@@ -1049,14 +1056,14 @@
 },
 {
 "decade": "1950년대",
-"records": 196,
+"records": 213,
 "by_source": {
-"nara": 33,
-"europeana": 7,
-"ia": 18,
+"nara": 38,
+"europeana": 11,
+"ia": 21,
 "tna": 15,
 "gallery": 3,
-"awm": 24,
+"awm": 29,
 "archives": 24,
 "commons": 7,
 "gallica": 2,
@@ -1072,9 +1079,9 @@
 "dnz": 4
 },
 "by_kind": {
-"motion_picture": 30,
-"graphic": 50,
-"document": 116
+"motion_picture": 31,
+"graphic": 51,
+"document": 131
 },
 "samples": [
 {
@@ -1338,7 +1345,7 @@
 },
 {
 "decade": "2000년대",
-"records": 30,
+"records": 31,
 "by_source": {
 "archives": 4,
 "ktv": 5,
@@ -1348,10 +1355,10 @@
 "much": 1,
 "ndl": 1,
 "nlk": 1,
-"ia": 5
+"ia": 6
 },
 "by_kind": {
-"document": 11,
+"document": 12,
 "graphic": 19
 },
 "samples": [
@@ -1384,9 +1391,9 @@
 },
 {
 "decade": "2010년대",
-"records": 30,
+"records": 31,
 "by_source": {
-"ia": 5,
+"ia": 6,
 "un": 5,
 "gonghun": 1,
 "archives": 2,
@@ -1400,7 +1407,7 @@
 "koreanwar": 1
 },
 "by_kind": {
-"document": 19,
+"document": 20,
 "graphic": 11
 },
 "samples": [
@@ -1478,11 +1485,11 @@
 },
 {
 "decade": "연대 미상",
-"records": 76,
+"records": 78,
 "by_source": {
-"nara": 23,
+"nara": 24,
 "seoul": 12,
-"europeana": 3,
+"europeana": 4,
 "i815": 2,
 "jacar": 1,
 "nrich": 5,
@@ -1497,7 +1504,7 @@
 "koreanwar": 3
 },
 "by_kind": {
-"document": 49,
+"document": 51,
 "graphic": 22,
 "motion_picture": 5
 },
