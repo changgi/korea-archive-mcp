@@ -20,6 +20,8 @@ jobs:
           for f in lib/*.js; do cp "$f" "/tmp/chk_$(basename "$f" .js).mjs"; node --check "/tmp/chk_$(basename "$f" .js).mjs" || exit 1; done
       - name: 정적 검증 (도구 20종 · 설명 1024자 · TOPICS 컴파일 · 24KB 가드)
         run: node scripts/ci-verify.mjs
+      - name: 원장 읽기·쓰기 단위 시험(모의 Redis)
+        run: node scripts/ci-ledger-unit.mjs
       - name: GitHub Pages 무결성 (docs 링크·IIIF 이미지·매니페스트 수)
         run: python3 scripts/check-docs.py
       - name: IIIF 구조 검증(Presentation 3 — 정적 docs 전체)
