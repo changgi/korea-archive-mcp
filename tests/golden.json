@@ -1223,6 +1223,22 @@
    ],
    "level": "warn",
    "note": "v2.61.1 신문 지면 — '미공개'가 아니라 원문 이미지만"
+  },
+  {
+   "id": "commons-categories",
+   "tool": "nedb_search",
+   "args": {
+    "mode": "commons",
+    "query": "https://commons.wikimedia.org/wiki/File:Hungnam_evacuation_map.jpg"
+   },
+   "must": [
+    "범주\\(Commons\\): [^\\n]+"
+   ],
+   "must_not": [
+    "Category:"
+   ],
+   "level": "warn",
+   "note": "v2.65 Commons 범주(숨김 제외)를 판독 — 계층 맥락·분류 축적"
   }
  ]
 }
