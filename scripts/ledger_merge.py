@@ -111,7 +111,7 @@ DEEP = {"i815": ("nedb_search", lambda o: o.get("url") and {"mode": "i815", "que
 DEEP["nedb"] = ("nedb_search", lambda o: re.match(r"^[a-z]{2,5}_[0-9a-z_]+$", o["key"].split(":", 1)[1]) and {"mode": "item", "query": o["key"].split(":", 1)[1]})  # v2.61 한국사DB 기록(levelId) — 시대별 경로 판독
 DEEP["nlk"] = ("nlk_search", lambda o: o.get("id") and o.get("title") and {"query": re.sub(r"\s*[:;\[].*$", "", o["title"])[:60] or o["title"][:60], "max_results": 20})  # v2.72 국립중앙도서관 — 같은 기록 번호 줄만(nlk_own)
 DEEP["kyudb"] = ("nedb_search", lambda o: re.match(r"^[^\x00-\x7f]{1,4}[0-9][0-9.\-]*$", str(o.get("id") or "")) and {"mode": "kyujanggak", "query": o["id"]})  # v2.55 규장각 해제(기관 해설문) — 같은 청구기호 행만 쓴다
-IIIF_V = {"awm": 2, "commons": 2}  # commons 2 = 범주(Commons, 숨김 제외)  # v2.63 우리 IIIF 브리지 판 — awm 2 = 기관 상세 표 전부(자료 유형·매체 형태·제작자·제작지·분쟁)와 본문 설명
+IIIF_V = {"awm": 2, "commons": 3, "europeana": 2, "heritage": 2, "much": 2, "nrich": 2, "nara": 2, "tna": 2, "ia": 2, "ndl": 2, "gallery": 2}  # v2.76 권리/출처 표기 분리로 IIIF 기록 전부 재판독  # commons 2 = 범주(Commons, 숨김 제외)  # v2.63 우리 IIIF 브리지 판 — awm 2 = 기관 상세 표 전부(자료 유형·매체 형태·제작자·제작지·분쟁)와 본문 설명
 DEEP_V = {"seoul": 2, "aks": 2, "jsg": 2, "nedb": 5, "un": 2}  # nedb 5 = 실패 응답으로 비워진 메타 복구(v2.69.3)  # nedb 4 = 기술 항목 줄 판별 엄격화(v2.69.2)  # nedb 3 = 법전 조문 판독 교정(v2.69.1 — 검색창 문구 오인)  # un 2 = 기관 MARC XML(제목·문서기호·유형·날짜·의제)  # v2.61.1 nedb 2 = 표 없는 기록(삼국사기)·원문 이미지만(신문) 판독  # v2.56 jsg 2 = 장서각 개체 태깅·인물 전거(UCI)  # v2.32 판독기 판 — 판이 오르면 이미 보강된 기록도 한 번 다시 판독(서울기록원: 기관 계층·생산자·보존이력 추가)
 _sid = [None]
 
@@ -258,8 +258,14 @@ def enrich(o, budget):
                 k, v = strip(L1(e.get("label"))), strip(L1(e.get("value")))
                 if k and v and k not in ("판독 시각", "변환", "발견 시각", "발견 경로") and len(md) < 8: md.append([k[:30], v[:140]])
             if md or not o.get("meta"): o["meta"] = md  # v2.69.3 빈 매니페스트 메타로 축적된 메타를 지우지 않는다
-            rs = j.get("rights") or strip(L1((j.get("requiredStatement") or {}).get("value"))) or strip(L1(j.get("attribution"))) or strip(L1(j.get("license")))
-            o["rights"] = str(rs)[:200]
+            # v2.76 권리 = rights·license(권리 URI·문구)만. requiredStatement·attribution은 '출처 표기'라 권리로 쓰지 않는다 —
+            #   Europeana·국가유산청·역사박물관 매니페스트의 출처 문구(제목 - 링크)가 권리 칸에 들어가던 결함. 출처 표기는 attribution 필드에 따로.
+            rq = strip(L1((j.get("requiredStatement") or {}).get("value"))) or strip(L1(j.get("attribution")))
+            rl = strip(L1((j.get("requiredStatement") or {}).get("label")))
+            lic = j.get("rights") or strip(L1(j.get("license")))
+            if not lic and rq and (RIGHTS_KEY.search(rl) or OPEN_RIGHTS.search(rq) or NO_DERIV.search(rq) or re.search(r"rightsstatements|creativecommons|저작권|공공누리|rights reserved", rq, re.I)): lic = rq
+            if rq: o["attribution"] = rq[:300]
+            o["rights"] = str(lic or "")[:200]  # 출처 문구가 권리로 들어가 있던 값은 attribution으로 옮겨 보존된다(지우는 것이 아니라 제자리로)
             th = j.get("thumbnail"); th = (th[0] if isinstance(th, list) and th else th) or {}
             tu = th.get("id") or th.get("@id") if isinstance(th, dict) else (th if isinstance(th, str) else "")
             if not tu:
@@ -1577,7 +1583,7 @@ def main():
         o["iiif_built"] = "" if (o.get("iiif") and not o.get("iiif_status")) else leaf_manifest(o)  # v2.52 기관 매니페스트가 비공개 응답이면 브리지로 대체(기관 주소는 보존)
     with open(lp, "w", encoding="utf-8") as f:
         for o in recs: f.write(json.dumps(o, ensure_ascii=False, separators=(",", ":")) + "\n")
-    cols = ["key", "entry_type", "found_by_basis", "summary_composed", "rights_view", "rights_basis", "fixity", "defect_note", "link_note", "sources", "title", "date", "date_derived", "date_basis", "id", "url", "partOf", "partOf_derived", "media", "sameAs", "iiif", "iiif_status", "iiif_built", "iiif_kind", "found_by", "found_by_derived", "first_seen", "last_seen", "seen", "seen_7d", "seen_30d", "days_total", "formats", "tools", "max_cross", "trend", "rank", "score", "summary", "summary_basis", "rights", "thumb", "meta", "meta_basis", "authority", "key_aliases", "merge_note", "recovered", "harvested"]
+    cols = ["key", "entry_type", "found_by_basis", "summary_composed", "rights_view", "rights_basis", "fixity", "defect_note", "link_note", "sources", "title", "date", "date_derived", "date_basis", "id", "url", "partOf", "partOf_derived", "media", "sameAs", "iiif", "iiif_status", "iiif_built", "iiif_kind", "found_by", "found_by_derived", "first_seen", "last_seen", "seen", "seen_7d", "seen_30d", "days_total", "formats", "tools", "max_cross", "trend", "rank", "score", "summary", "summary_basis", "rights", "attribution", "thumb", "meta", "meta_basis", "authority", "key_aliases", "merge_note", "recovered", "harvested"]
     fmtv = lambda v: json.dumps(v, ensure_ascii=False, separators=(",", ":")) if isinstance(v, list) and v and isinstance(v[0], dict) else " | ".join(f"{a}: {b}" for a, b in v) if isinstance(v, list) and v and isinstance(v[0], list) else (" ".join(f"{k}:{n}" for k, n in sorted(v.items(), key=lambda kv: -kv[1])) if isinstance(v, dict) and all(isinstance(x, (int, float)) for x in v.values()) else json.dumps(v, ensure_ascii=False, separators=(",", ":")) if isinstance(v, dict) else ("+".join(v) if isinstance(v, list) else v))
     with open(os.path.join(D, "discovered.csv"), "w", encoding="utf-8-sig", newline="") as f:
         w = csv.writer(f); w.writerow(cols)
