@@ -1289,7 +1289,8 @@
    },
    "must": [
     "※ 같은 기록 \\d곳 소장\\(",
-    "날짜 교차 일치"
+    "날짜 교차 일치",
+    "Withdrawal of 1st Marine, Hamhung"
    ],
    "must_not": [
     "같은 기록 1곳",
