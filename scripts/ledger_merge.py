@@ -110,6 +110,7 @@ DEEP = {"i815": ("nedb_search", lambda o: o.get("url") and {"mode": "i815", "que
         "nrich": ("nedb_search", lambda o: {"mode": "nrich", "query": o["id"] if re.match(r"^(ksm|portrait|gwaebul|diary|mokgan|jcbib|jcphoto|dict|arch|koguryo|gaesong|design|pattern|oldbook|hyanggyo|stone|journal|iron|dolmen|assay|material):", str(o.get("id", ""))) else o.get("url")} if (o.get("id") or o.get("url")) else None)}
 DEEP["nedb"] = ("nedb_search", lambda o: re.match(r"^[a-z]{2,5}_[0-9a-z_]+$", o["key"].split(":", 1)[1]) and {"mode": "item", "query": o["key"].split(":", 1)[1]})  # v2.61 한국사DB 기록(levelId) — 시대별 경로 판독
 DEEP["kyudb"] = ("nedb_search", lambda o: re.match(r"^[^\x00-\x7f]{1,4}[0-9][0-9.\-]*$", str(o.get("id") or "")) and {"mode": "kyujanggak", "query": o["id"]})  # v2.55 규장각 해제(기관 해설문) — 같은 청구기호 행만 쓴다
+IIIF_V = {"awm": 2}  # v2.63 우리 IIIF 브리지 판 — awm 2 = 기관 상세 표 전부(자료 유형·매체 형태·제작자·제작지·분쟁)와 본문 설명
 DEEP_V = {"seoul": 2, "aks": 2, "jsg": 2, "nedb": 2}  # v2.61.1 nedb 2 = 표 없는 기록(삼국사기)·원문 이미지만(신문) 판독  # v2.56 jsg 2 = 장서각 개체 태깅·인물 전거(UCI)  # v2.32 판독기 판 — 판이 오르면 이미 보강된 기록도 한 번 다시 판독(서울기록원: 기관 계층·생산자·보존이력 추가)
 _sid = [None]
 
@@ -216,7 +217,8 @@ def enrich(o, budget):
                 o["enrich_status"] = "fail"
             o["enriched"] = today; o["thumb_ok"] = False
             return 1
-    if o.get("enriched") and (o.get("enrich_status") != "fail" or o["enriched"] > (dt.date.today() - dt.timedelta(days=1)).isoformat()):
+    rebridge = bool(m) and src0 in IIIF_V and o.get("enrich_status") == "ok" and o.get("iiif_v", 1) < IIIF_V[src0] and budget > 0  # v2.63 브리지 판이 오르면 한 번 다시 판독
+    if o.get("enriched") and not rebridge and (o.get("enrich_status") != "fail" or o["enriched"] > (dt.date.today() - dt.timedelta(days=1)).isoformat()):
         th = o.get("thumb") or ""  # 이미 보강된 기록도 썸네일 게재 규칙은 매번 다시 적용(규칙 변경 소급)
         o["thumb_ok"] = bool(th) and not re.search(r"card\.svg|image/svg", th) and not SENSITIVE.search(f"{o.get('title', '')} {o.get('summary', '')}") and (
             o["key"].split(":")[0] in ("nara", "gallery") or (bool(OPEN_RIGHTS.search(o.get("rights") or "")) and not NO_DERIV.search(o.get("rights") or "")))
@@ -250,7 +252,7 @@ def enrich(o, budget):
                 except Exception:
                     tu = ""
             o["thumb"] = tu
-            o["enrich_status"] = "ok"
+            o["enrich_status"] = "ok"; o["iiif_v"] = IIIF_V.get(src0, 1)
         except Exception:
             o["enrich_status"] = "fail"
     if not o.get("thumb") and re.search(r"\.(jpe?g|png|gif)(\?|$)|thumb|image", o.get("media") or "", re.I):
@@ -1076,7 +1078,7 @@ def write_quality(recs):
 
 FACETS = [("주제", re.compile(r"^(주제|주제어|색인어.*|subject|키워드|표제어)$", re.I)), ("장소", re.compile(r"^(연관정보|장소|취급지명|place|지명\(장서각 태깅\))$", re.I)),
           ("인물", re.compile(r"^인명\(장서각 태깅\)$")), ("기관", re.compile(r"^관청명\(장서각 태깅\)$")),  # v2.56 기관 개체 태깅
-          ("형태", re.compile(r"^(문서유형|기록물형태|매체유형|사료구분|사료유형|기록유형|자료유형|format)$", re.I)), ("재질", re.compile(r"^재질$")),
+          ("형태", re.compile(r"^(문서유형|기록물형태|매체유형|사료구분|사료유형|기록유형|자료유형|자료 유형|매체 형태|format)$", re.I)), ("재질", re.compile(r"^재질$")),
           ("기술 수준", re.compile(r"^기술 수준$")),  # v2.59 기관의 자료 형태·재질·기술 단계(item·fileUnit·Piece) 분류
           ("분류", re.compile(r"^(분류|사부분류|자료분류|보고서유형분류|주제분류)$")), ("시대", re.compile(r"^(시대|시대분류|국적/시대)$")), ("매체", re.compile(r"^mediatype$", re.I))]
 
