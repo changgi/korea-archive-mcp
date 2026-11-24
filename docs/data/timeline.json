@@ -1,5 +1,5 @@
 {
-"updated": "2026-11-24T10:52:17Z",
+"updated": "2026-11-24T11:14:22Z",
 "note": "구간 = 연대(4자리 연도·8자리 날짜·연호 연도 明治·大正·昭和·光武·隆熙·檀紀 환산) → 세기 → 왕조·시대명. 근거 순서 date → 제목 → 메타(생산·시대·출판). 세기·시대 구간은 시간축 근사 정렬",
 "timeline": [
 {
@@ -829,7 +829,7 @@
 },
 {
 "decade": "1950년대",
-"records": 97,
+"records": 101,
 "by_source": {
 "nara": 10,
 "europeana": 4,
@@ -844,6 +844,7 @@
 "ndl": 1,
 "nlk": 1,
 "oldnews": 3,
+"earchive": 4,
 "nlna": 3,
 "nzarch": 3,
 "jacar": 1,
@@ -853,7 +854,7 @@
 "by_kind": {
 "motion_picture": 14,
 "graphic": 17,
-"document": 66
+"document": 70
 },
 "samples": [
 {
@@ -989,19 +990,25 @@
 },
 {
 "decade": "1970년대",
-"records": 2,
+"records": 3,
 "by_source": {
 "nzarch": 1,
+"earchive": 1,
 "ia": 1
 },
 "by_kind": {
-"document": 2
+"document": 3
 },
 "samples": [
 {
 "title": "International Liaison - Asia - East - Korea [Open] ·주간인덱스",
 "url": "https://collections.archives.govt.nz/web/arena/search#/entity/aims-archive/R23022272",
 "iiif": "https://korea-archive-mcp.vercel.app/iiif/rec/TY8_SwNBEMW_yjK2d7e3G7gz26WwEAVB7EKK8VzMwmXvvF0jRiyEFCII9v5BUDuLaKNFKj9Obj-Ec5jC6se8N7yZdwEO1BDsDJtiDKMIPCjYtl43Fr2pLJZs16BxlWUxGziDhC10nrBTNRrZcK_WdsR-vsLLcrWYh8fv9vYj3LxCBEcUJfp5Rruiv5mTYkjZl71USplLmk9pHntfO8V5UZWlLrqbLumeMVPtkuNq6hM742f6kGOjLXKnO3ODa-uNP-doJi5er_P_0TVFEyxhXS6CyZ92QmgXD6vPd9Zez8PzFQv3d-HpjSzs6stUZrEQsewdpLmSmRIpXP4C/manifest.json"
+},
+{
+"title": "[제주도정중요시책]",
+"url": "https://archive.history.go.kr/record/catalog/catalogView.do?systemId=000001273580",
+"iiif": "https://korea-archive-mcp.vercel.app/iiif/rec/q1YqVrKKVkpNLErOyCxLVYrVUSpRslKKfrNgzpvFe173t7xZMPXNkolvZk150z3nzcbWWCUdpRSgAiCVCaRcnJ0MTA3iDY3iDQycDQ1NzYDipUDxjJKSgmIrfX2osXoZmcUl-UWVeun5etlF-kWpyflFKfrJiSWJOfnpMDosM7VcLyXfvriyuCQ11zPF1gAEDI3MjU0tDIDmFgDNfdMx483yiW82zVB41LBL4c22la-3NYKZr7aufdO05m3fjjcb1ryZ0_Jm9oS3s3qAmvKAmuCe01HKhTi9EEi93jDn1aY1Cq87gF5sVABqeDNvKVAqEeR9IwMjM11DQ10j4xBDYysTAysTM6VaAA/manifest.json"
 },
 {
 "title": "Documents On The Struggle For Democracy In Korea",
@@ -1012,15 +1019,16 @@
 },
 {
 "decade": "1980년대",
-"records": 5,
+"records": 6,
 "by_source": {
 "ktv": 1,
 "nzarch": 1,
+"europeana": 1,
 "gallica": 1,
 "ia": 2
 },
 "by_kind": {
-"document": 5
+"document": 6
 },
 "samples": [
 {
@@ -1034,6 +1042,11 @@
 "iiif": "https://korea-archive-mcp.vercel.app/iiif/rec/TVA9SwNBEP0rw9reZe8umIvXiTYipjB2IcXmMuQWLrtxdzaSiIWQQgTB3g8EtbOINlpY-XOS-xHuYQqrN--94c3HObMs6zE1FyYvWD9gxDLWceMBGoiaSQC7buQsQbzTbkIIXe2oCDvaUAH7UpR65BCkgkNtUHj_QBEaJUhqJUrYcyU544uuziVC70jMYIBg0JKROeGwDz-f1fP3armoHr7WN-_V9QsL2NCvsJlXg1ekV47jNI3T1nbbc-d5QTSxGee5LkvM64m2UR8hp2gbIz2lhprzMxxwYVAJbrE2tzgqkjTjQo5tuGnn_6MnPtqD8rB5SsDGf9qph_XyfvXxBuurRfV0CdXdbfX46i1Rvy2JklYYx2HSPInSLGllccQufgE/manifest.json"
 },
 {
+"title": "Korea : korean music",
+"url": "https://www.europeana.eu/item/2059218/data_sounds_IT_DDS0000069047000000",
+"iiif": "https://iiif.europeana.eu/presentation/2059218/data_sounds_IT_DDS0000069047000000/manifest"
+},
+{
 "title": "La Corée et l'Occident : diffusion de la culture française en Corée [Gallica 원문]",
 "url": "https://gallica.bnf.fr/ark:/12148/bpt6k3387193p",
 "iiif": "https://korea-archive-mcp.vercel.app/iiif/rec/TZA9S8RAEIb_yjCNTe72NhsuyZYK2gg2dscVmy9dbt2Lm00lgoKFpb0iNiLCFWIl194_sTT5Ec6pAat3hnee-brABuUMT5QxOlc4D9CjxEMFe0u3eS2h9GB2jvJcF6X1IKHQVdU2emmhKMEoyFvjW1dC5ZTdvCjdEGIHeHbw2xb6-7tu9THHAAvqztMkplBTqNxCMh7yKGF5JqI0FmnIBZktmafe141k7G-5cWarceXYPyar_XQhRBLzVNRE1UQNMz-v1rBr93-0UH7AqcpS1XBwgGeUkZyTdG8PX-8r6G5v-qfr7dL94zNZavuScBJOR5yPQnHMhYwmMorx8hs/manifest.json"
@@ -1042,11 +1055,6 @@
 "title": "KOREA",
 "url": "https://archive.org/details/bwb_S0-BIQ-409",
 "iiif": "https://iiif.archive.org/iiif/3/bwb_S0-BIQ-409/manifest.json"
-},
-{
-"title": "Legislative Process in Korea",
-"url": "https://archive.org/details/bwb_W9-DGF-274",
-"iiif": "https://iiif.archive.org/iiif/3/bwb_W9-DGF-274/manifest.json"
 }
 ]
 },
@@ -1187,19 +1195,19 @@
 },
 {
 "decade": "2020년대",
-"records": 15,
+"records": 17,
 "by_source": {
 "ia": 2,
 "commons": 4,
 "dnz": 2,
 "un": 1,
-"okchf": 1,
+"okchf": 3,
 "nrich": 4,
 "ndl": 1
 },
 "by_kind": {
 "document": 6,
-"graphic": 9
+"graphic": 11
 },
 "samples": [
 {
@@ -1231,18 +1239,17 @@
 },
 {
 "decade": "연대 미상",
-"records": 64,
+"records": 56,
 "by_source": {
 "nara": 10,
-"earchive": 7,
 "seoul": 12,
-"europeana": 3,
+"europeana": 2,
 "i815": 2,
 "jacar": 1,
 "un": 2,
-"okchf": 2,
 "nrich": 5,
 "nedb": 3,
+"earchive": 2,
 "jsg": 5,
 "kyudb": 1,
 "ndl": 1,
@@ -1250,8 +1257,8 @@
 "aks": 8
 },
 "by_kind": {
-"document": 45,
-"graphic": 16,
+"document": 39,
+"graphic": 14,
 "motion_picture": 3
 },
 "samples": [
@@ -1276,9 +1283,9 @@
 "iiif": "https://korea-archive-mcp.vercel.app/iiif/nara/22397/manifest.json"
 },
 {
-"title": "Korean Refugees Are Passed into Service as Laborers to Move Ammo to Waiting Ships during the Evacuation of Hun",
-"url": "https://archive.history.go.kr/record/catalog/catalogView.do?systemId=000000903157",
-"iiif": "https://korea-archive-mcp.vercel.app/iiif/rec/PZDPSsNAEMZfZdhzm2xSGzEg0oOgqCBW60GkrMk2WTTZurupFBEq9NCj3gpW0YP10mIpCkXwZTwmeQi39c9cfjP7zTe7O5dIIvcIUSK8kLUoOi4ghVy0xQUlMezRRhJQKqEiKOwSKakPLFYcqlS0mEeBSNgmJ7pZSNDHO7xFoRJFfF4cEqZYHEA1ZE0JfiLmhQoprLeIlxDFeAy8ARtJjArI15dqMI3KQRXjch07dWzXsI66s-JoLdFaqFRTuqb5-1wjZFJx0TYCbpwKU1CPC9_0iCJnPPhjjdELw-drsi0VjTb9VbyIFVyyyst6blPPzXv9_OU2n_bhq_MB2essfR8vUs1s-JmNZnl3kM4m2dN9-tbJhqN8OtbWWFv_V1dA0c8nzjWyySCdjiDrdfPHa8jvbvKHZy2R-XJtbDtFyyrapX1ccq2yu2Sjq28/manifest.json"
+"title": "[기록건·사진] 여의도공원운영위원회소위원회개최",
+"url": "https://archives.seoul.go.kr/item/1107943",
+"iiif": "https://korea-archive-mcp.vercel.app/iiif/rec/hVDLTsJAFP2VyaxLnwRCv8MdYUG0kUaRR4sbYwJkNCSQwM6mTgkmCJtZVB6xuvRTXHau_-Bta3Tp6pz7Ovfce0M9atep53QGl7ShUJ_atJ4msXyK0pfDxyuMBWxZg8CDgCiQc5buj_C4gPAAwQg4Q_4VzuB-9svTmMORU4WeoRSCi2AYerVWtjAaYNTy_a5na1qzf9pyrx1Pzber5x31oq-5vtPW_vq72A-MQ5gUpnAH-Ry-E5hyuRGwmZDCkLx7g-2QAFune0ZkPM_zY0GKsXzmR2G3-u-a5UKKJCNRANM1urhCF8WLFNouzuohyJinO0HkhMFqRDKh5TOWmtkTTd2slAyjZFonesW2ana5Sm-_AQ/manifest.json"
 }
 ]
 }
