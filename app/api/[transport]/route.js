@@ -1301,12 +1301,21 @@ async function jdbPost(url, params, headers = {}) {
       if (!r.ok) throw new Error(`HTTP ${r.status}`);
       // v2.39.1 본문이 선언 길이보다 일찍 끊기는 응답(UND_ERR_RES_CONTENT_LENGTH_MISMATCH — 기관 측) — 받은 만큼 보존해 판독(결과는 페이지 앞부분)
       const reader = r.body.getReader(); const chunks = []; let got = 0;
+      let cut = null;
       try { for (;;) { const { done, value } = await reader.read(); if (done) break; chunks.push(value); got += value.length; } }
-      catch (e) { if (!got || !/terminated|CONTENT_LENGTH|other side closed|socket/i.test(errInfo(e))) throw e; }
+      catch (e) { if (!got || !/terminated|CONTENT_LENGTH|other side closed|socket/i.test(errInfo(e))) throw e; cut = e; }
       const buf = new Uint8Array(got); let off = 0; for (const c of chunks) { buf.set(c, off); off += c.length; }
-      return new TextDecoder('utf-8').decode(buf);
+      const txt = new TextDecoder('utf-8').decode(buf);
+      // v2.46.1 끊긴 본문은 결과 건수(총 N건)가 들어 있을 때만 채택 — 빈 앞부분을 '0건'으로 오인하면 '법전에 없음' 같은 거짓 결론이 나온다(실측)
+      if (cut && !/총[\s\S]{0,40}?[\d,]+[\s\S]{0,20}?건/.test(txt)) throw cut;
+      return txt;
     } catch (e) { lastErr = e; if (a < 2) await sleep(a ? 2500 : 800); }
   }
+  // v2.46.1 POST가 끝내 끊기면 같은 인자의 GET(검색 결과 동일 — 2026-11-24 실측, 옛 'GET 재현 불가' 기록은 현재 사이트와 다름)
+  try {
+    const r = await fetch(url + (url.includes('?') ? '&' : '?') + body, { headers: { 'User-Agent': UA, ...JDB_HDR, 'Accept-Encoding': 'identity', ...headers }, signal: AbortSignal.timeout(FETCH_TIMEOUT) });
+    if (r.ok) { const t = await r.text(); if (/총[\s\S]{0,40}?[\d,]+[\s\S]{0,20}?건/.test(t)) return t; }
+  } catch (e) { lastErr = e; }
   throw new Error(errInfo(lastErr));
 }
 const jNoScript = (s) => String(s || '').replace(/<script[\s\S]*?<\/script>/g, ' ').replace(/<style[\s\S]*?<\/style>/g, ' ');
@@ -2778,7 +2787,7 @@ item_cd 5종(자료 성격별): ART 도설·회화 / ETC 두루마리·축 / DRR
 ★반드시 첫 장 URL을 실제로 받아 패턴 확정 후 순회 — 추정 순회는 전부 실패한다(200 OK·0바이트 함정 포함). 게재는 소장기관 허가 확인(02-880-5316).`;
           return text(out);
         }
-      } catch (e) { return text(`조선 심층 판독(${mode}) 실패: ${e.message} — 한국사DB 계열은 전부 POST이며 GET 재현이 불가합니다. 잠시 후 재시도.`); }
+      } catch (e) { return text(`조선 심층 판독(${mode}) 실패: ${e.message} — 한국사DB 응답이 끊겨 결과 건수를 확인하지 못했습니다(POST·GET 모두 시도 — 0건으로 단정하지 않음). 잠시 후 재시도.`); }
       // mode=total — 기존 통합검색
       const browse = 'https://db.history.go.kr/search/searchResultList.do?searchKeywordType=BI&searchKeyword=' + encodeURIComponent(query);
       const idx = await loadNedbIndex();
