@@ -57,9 +57,11 @@ OPEN_RIGHTS = re.compile(r"publicdomain|creativecommons\.org/licenses|rightsstat
 
 AR_KEEP = ["생산기관", "관리번호", "생산연도", "문서유형", "기록물형태", "매체유형", "보존기간", "공개구분", "서고정보", "페이지정보", "발간번호", "서비스권자", "기록물계열"]
 
-def enrich_archives(o):
-    """국가기록원 상세(공개 페이지) 1회 판독 — 매니페스트가 없는 기록의 메타정보·실제 계층(기록물계열 › 상위 철) 구축."""
-    r = urllib.request.urlopen(urllib.request.Request(o["url"], headers={"User-Agent": UA}), timeout=25)
+AR_PARSER_V = "ar1"  # v2.51 국가기록원 상세 판독기 판 — 아래 archives_fields를 고치면 올린다(지문 변경을 '판독기 변경 동반'으로 구분)
+
+def archives_fields(url):
+    """국가기록원 상세(공개 페이지) 표 판독 — (기술 항목 dict, 제목 목록[건, 상위 철…]). 상세 표가 없으면 ValueError."""
+    r = urllib.request.urlopen(urllib.request.Request(url, headers={"User-Agent": UA}), timeout=25)
     s = r.read().decode("utf-8", "replace")
     s = re.sub(r"<script.*?</script>|<style.*?</style>", " ", s, flags=re.S)
     i = s.find("제목</th>")
@@ -70,6 +72,11 @@ def enrich_archives(o):
         if "개인정보" in k: break
         if k.endswith("제목"): titles.append(v); continue
         if k in AR_KEEP and v and k not in f: f[k] = v.split("※")[0].strip()[:140]
+    return f, titles
+
+def enrich_archives(o):
+    """국가기록원 상세(공개 페이지) 1회 판독 — 매니페스트가 없는 기록의 메타정보·실제 계층(기록물계열 › 상위 철) 구축."""
+    f, titles = archives_fields(o["url"])
     parent = titles[1] if len(titles) > 1 else ""
     if parent and strip(parent) == strip(titles[0] if titles else o.get("title", "")): parent = ""  # 간행물 등 철=건 동일 — 계층 아님
     md = [[k, f[k]] for k in AR_KEEP if f.get(k)]
@@ -754,6 +761,10 @@ def fixity_text(o):
         core = {"label": j.get("label"), "summary": j.get("summary"), "metadata": md, "rights": j.get("rights"), "requiredStatement": j.get("requiredStatement"),
                 "items": len(j.get("items") or (j.get("sequences") or [{}])[0].get("canvases") or [])}
         return json.dumps(core, ensure_ascii=False, sort_keys=True)
+    if src == "archives" and "showDetailPopup.do" in (o.get("url") or ""):  # v2.51 국가기록원 — 원장 상세 판독기(archives_fields)의 정규형
+        f, titles = archives_fields(o["url"])
+        if not f: return None
+        return json.dumps({"titles": titles, "fields": f}, ensure_ascii=False, sort_keys=True)
     if src in DEEP:
         tool, af = DEEP[src]; args = af(o)
         if args:
@@ -767,7 +778,7 @@ def fixity_pass(led, today, budget):
     첫 지문 / 판독기 변경 동반(우리 route.js·lib가 바뀜 — 원문 변경 아닐 수 있음) / 원문 변경 의심(판독기 그대로인데 응답이 바뀜)."""
     import hashlib
     pv = parser_version(); used = changed = 0
-    cand = [o for o in led.values() if o.get("entry_type", "기록") == "기록" and (o.get("iiif") or o["key"].split(":")[0] in DEEP)]
+    cand = [o for o in led.values() if o.get("entry_type", "기록") == "기록" and (o.get("iiif") or o["key"].split(":")[0] in DEEP or "showDetailPopup.do" in (o.get("url") or ""))]
     for o in sorted(cand, key=lambda o: o.get("fixity_checked", "")):
         if used >= budget: break
         if o.get("fixity_checked", "") >= today.isoformat(): continue
@@ -778,9 +789,10 @@ def fixity_pass(led, today, budget):
         used += 1; o["fixity_checked"] = today.isoformat()
         if not t: continue
         h = hashlib.sha256(t.encode()).hexdigest()[:16]; fx = o.setdefault("fixity", [])
+        opv = AR_PARSER_V if (o["key"].startswith("archives:") and not o.get("iiif")) else pv  # 판독기가 원장 스크립트 안에 있는 수집처는 그 판 번호로
         if fx and fx[-1]["h"] == h: continue
-        kind = "첫 지문" if not fx else ("판독기 변경 동반" if fx[-1].get("pv") != pv else "원문 변경 의심")
-        fx.append({"at": today.isoformat(), "h": h, "pv": pv, "kind": kind}); changed += kind != "첫 지문"
+        kind = "첫 지문" if not fx else ("판독기 변경 동반" if fx[-1].get("pv") != opv else "원문 변경 의심")
+        fx.append({"at": today.isoformat(), "h": h, "pv": opv, "kind": kind}); changed += kind != "첫 지문"
         time.sleep(0.6)
     return used, changed, pv
 
