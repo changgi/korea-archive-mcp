@@ -581,6 +581,7 @@ def build_media(recs_all):
         elif yr(o): it["issued"] = {"date-parts": [[int(yr(o))]]}
         elif o.get("date"): it["issued"] = {"literal": o["date"]}
         if o.get("summary"): it["abstract"] = o["summary"][:1000]
+        if o.get("rights_view"): it["license"] = o["rights_view"]; it["note"] += f" · 권리 근거: {o.get('rights_basis', '')}"
         csl.append(it)
     json.dump(csl, open(os.path.join(D, "records.csl.json"), "w", encoding="utf-8"), ensure_ascii=False)
     # 3) RIS — EndNote·RefWorks·Zotero
@@ -741,6 +742,58 @@ def write_fixity(recs):
                "changes": sorted(ch, key=lambda c: c["history"][-1]["at"], reverse=True)}, open(os.path.join(D, "fixity_changes.json"), "w", encoding="utf-8"), ensure_ascii=False, indent=0)
     return len(ch), len(sus)
 
+_POL = None
+def rights_policies():
+    """수집처별 권리 정책 원문 — route.js QUICK_PROFILES(4번째 항목)·lib/profile_*.js rights_access를 그대로 읽는다(사본 표 없음 — 프로파일이 원본)."""
+    global _POL
+    if _POL is not None: return _POL
+    _POL = {}
+    try:
+        t = open(os.path.join(ROOT, "app", "api", "[transport]", "route.js"), encoding="utf-8").read()
+        m = re.search(r"const QUICK_PROFILES = (\{.*?\});", t, re.S)
+        for k, v in json.loads(m.group(1)).items():
+            if isinstance(v, list) and len(v) > 3: _POL[k] = v[3]
+    except Exception: pass
+    import glob
+    for f in glob.glob(os.path.join(ROOT, "lib", "profile_*.js")):
+        k = os.path.basename(f)[8:-3]
+        m = re.search(r'"rights_access":\s*"((?:[^"\\]|\\.)*)"', open(f, encoding="utf-8").read())
+        if m and k not in _POL: _POL[k] = json.loads('"' + m.group(1) + '"')
+    return _POL
+
+RIGHTS_KEY = re.compile(r"권리|이용조건|이용 ?제한|이용유형|라이선스|license|저작권|공공누리|KOGL|rights|usage|copyright|열람조건", re.I)
+
+def rights_view(o):
+    """v2.39 권리 표시(판정 아님 — 발굴 우선 원칙: 표시 대상). 근거 순서: 기관 IIIF 매니페스트 → 기록 메타 → 수집처 규칙(NARA RG) → 수집처 정책 원문."""
+    und = re.search(r"vocab/UND|undetermined|미정|불명", o.get("rights") or "", re.I)
+    if o.get("rights") and not (und and o["key"].startswith("nara:")): return o["rights"], "IIIF 매니페스트(기관 표기)"
+    for k, v in (o.get("meta") or []):
+        if RIGHTS_KEY.search(str(k)) and v and not str(v).startswith("http"): return f"{k}: {v}"[:220], "기록 메타(원 기관 판독)"
+    src = o["key"].split(":")[0]
+    if src == "nara":
+        m = re.search(r"\bRG\s?(\d{1,3})\b", (o.get("partOf") or "") + " " + " ".join(str(v) for k, v in (o.get("meta") or [])))
+        if m:
+            if m.group(1) == "242": return "RG 242 노획 외국문서·필름 — 미 정부 직무물 아님(17 U.S.C. §105 비적용), 권리 지위 불명 — 열람·인용만", "규칙(NARA 프로파일 rights_rule · RG)"
+            return f"RG {m.group(1)} 미 연방정부 생산 기록 — 17 U.S.C. §105 퍼블릭도메인 추정(초판정 B, judge_rights로 확인)", "규칙(NARA 프로파일 rights_rule · RG)"
+    pol = rights_policies().get(src)
+    if pol:
+        pol = " · ".join(x for x in re.split(r"\s+·\s+|(?<=\.)\s+", pol) if not re.search(r"요청|429|robots|정직 UA|캐시|접근:|WAF|차단", x)) or pol  # 운영 메모(요청 예절·차단)는 권리가 아님
+        return pol[:220], "수집처 정책(source_profile 원문)"
+    return "", ""
+
+def write_quality(recs):
+    """v2.39 데이터 품질 시계열 — 기록 항목별 채움률을 날마다 쌓는다(지우지 않음, 같은 날은 갱신). 떨어지면 수집기·판독기 이상 신호."""
+    R = [o for o in recs if o.get("entry_type", "기록") == "기록"]
+    F = {"요약": lambda o: o.get("summary"), "연대": lambda o: decade(o), "기관 계층": lambda o: o.get("partOf"), "계층(파생 포함)": lambda o: o.get("partOf") or o.get("partOf_derived"),
+         "기관 IIIF": lambda o: o.get("iiif"), "IIIF(브리지 포함)": lambda o: o.get("iiif") or o.get("iiif_built"), "썸네일": lambda o: o.get("thumb_ok"), "권리 표시": lambda o: o.get("rights_view"),
+         "메타": lambda o: o.get("meta"), "원문 지문": lambda o: o.get("fixity"), "발견 경로": lambda o: o.get("found_by")}
+    day = dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%d")
+    snap = {"records": len(R), **{k: round(100 * sum(1 for o in R if f(o)) / max(1, len(R)), 1) for k, f in F.items()}}
+    p = os.path.join(D, "quality.json"); Qj = json.load(open(p, encoding="utf-8")) if os.path.exists(p) else {"note": "기록 항목별 채움률(%) 일별 시계열 — 지우지 않는다", "daily": {}}
+    Qj["daily"][day] = snap; Qj["daily"] = dict(sorted(Qj["daily"].items())); Qj["latest"] = {"day": day, **snap}
+    json.dump(Qj, open(p, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+    return snap
+
 def merge_classes(recs):
     """v2.26 기준·분류 정보 축적 — 발견된 모든 계층 경로(기관 › 계열 › …)의 각 단계를 분류 사전으로. 지우지 않고 갱신만(사라진 경로도 보존)."""
     p = os.path.join(D, "classifications.json")
@@ -849,6 +902,8 @@ def main():
     # v2.27 계층·IIIF가 없는 기록은 만들어 구축 — 원 기관 정보와 구분되는 필드에(partOf_derived · iiif_built)
     for o in recs:
         o["entry_type"] = entry_type(o)
+        rv_, rb_ = rights_view(o)
+        if rv_: o["rights_view"], o["rights_basis"] = rv_, rb_
         if o["entry_type"] == "결함 출력": o["defect_note"] = "옛 파서 오류 출력(한국사DB 메뉴 오인 v2.23 수정 · IA 웹 크롤링 묶음 v2.24 수정) — 기록 아님, 증거로 보존"
         else: o.pop("defect_note", None)
         lq_ = link_quality(o)
@@ -863,7 +918,7 @@ def main():
         o["iiif_built"] = "" if o.get("iiif") else leaf_manifest(o)
     with open(lp, "w", encoding="utf-8") as f:
         for o in recs: f.write(json.dumps(o, ensure_ascii=False, separators=(",", ":")) + "\n")
-    cols = ["key", "entry_type", "fixity", "defect_note", "link_note", "sources", "title", "date", "date_derived", "date_basis", "id", "url", "partOf", "partOf_derived", "media", "sameAs", "iiif", "iiif_built", "iiif_kind", "found_by", "first_seen", "last_seen", "seen", "seen_7d", "seen_30d", "days_total", "formats", "tools", "max_cross", "trend", "rank", "score", "summary", "rights", "thumb", "meta"]
+    cols = ["key", "entry_type", "rights_view", "rights_basis", "fixity", "defect_note", "link_note", "sources", "title", "date", "date_derived", "date_basis", "id", "url", "partOf", "partOf_derived", "media", "sameAs", "iiif", "iiif_built", "iiif_kind", "found_by", "first_seen", "last_seen", "seen", "seen_7d", "seen_30d", "days_total", "formats", "tools", "max_cross", "trend", "rank", "score", "summary", "rights", "thumb", "meta"]
     fmtv = lambda v: json.dumps(v, ensure_ascii=False, separators=(",", ":")) if isinstance(v, list) and v and isinstance(v[0], dict) else " | ".join(f"{a}: {b}" for a, b in v) if isinstance(v, list) and v and isinstance(v[0], list) else (" ".join(f"{k}:{n}" for k, n in sorted(v.items(), key=lambda kv: -kv[1])) if isinstance(v, dict) else ("+".join(v) if isinstance(v, list) else v))
     with open(os.path.join(D, "discovered.csv"), "w", encoding="utf-8-sig", newline="") as f:
         w = csv.writer(f); w.writerow(cols)
@@ -919,7 +974,7 @@ def main():
         use = f"발견 {o['seen']}회 · 7일 {o['seen_7d']} · 30일 {o['seen_30d']} · {o.get('days_total', 1)}일 · {E_(o['trend'])} · 활용 {o['rank']}위 · 형식 {E_(fmtv(o.get('formats', {})))}"
         return (f"<article class='c'>{th}<div class='b'><div class='s'>{E_('+'.join(o['sources']))}</div><h3><a href='{E_(o.get('url') or '#')}'>{E_(o['title'][:140])}</a></h3>"
                 f"<div class='ch'>{chips}</div>" + (f"<p class='sm'>{E_(o['summary'][:260])}</p>" if o.get("summary") and big else "")
-                + (f"<details><summary>메타정보 {len(o.get('meta') or [])}항목{' · 권리 ' + E_(o['rights'][:60]) if o.get('rights') else ''}</summary><dl>{md}</dl></details>" if md or o.get("rights") else "")
+                + (f"<details><summary>메타정보 {len(o.get('meta') or [])}항목{' · 권리 ' + E_(o['rights_view'][:60]) + ' (' + E_(o.get('rights_basis', '')) + ')' if o.get('rights_view') else ''}</summary><dl>{md}</dl></details>" if md or o.get("rights_view") else "")
                 + f"<div class='u'>{use}</div><div class='l'>{links}</div></div></article>")
     prow = "".join(card(o) for o in pop[:30])
     rows = "".join(card(o, False) for o in recent[:100])
@@ -938,15 +993,15 @@ details{{font-size:12px}}dl{{display:grid;grid-template-columns:auto 1fr;gap:2px
 table{{width:100%;border-collapse:collapse;font-size:14px}}td,th{{border-bottom:1px solid #2a2d35;padding:6px;text-align:left}}</style>
 <main><h1>발견 누적 원장</h1><p>KOREA ARCHIVE 통합검색 사용자가 도구로 발굴한 기록이 매일 이곳에 쌓입니다(검색어·사용자 정보 없음). 기록 <b>{st['records']:,}</b>건 · 마지막 갱신 {st['updated']} · 이번 갱신 신규 {new_recs}건 · 내용·메타정보 보강 {enr}건 · 썸네일 {thn}건</p>
 <p>{srcs}</p>
-<p><a class="b0" href="discovered.csv">CSV 내려받기</a><a class="b0" href="discovered.jsonl">JSONL</a><a class="b0" href="discovered.jsonld">RiC-O JSON-LD</a><a class="b0" href="../kv.html?manifest=https://changgi.github.io/korea-archive-mcp/data/collection.json">KV로 최근 300건 연속 보기</a><a class="b0" href="tree.html">계층구조도</a><a class="b0" href="queries/index.json">질의·회신 축적</a><a class="b0" href="classifications.json">분류 사전</a><a class="b0" href="provenance.json">발견 경로(질의↔기록)</a><a class="b0" href="q/index.html">질의별 발굴 기록(IIIF)</a><a class="b0" href="fixity_changes.json">원문 변경 감시</a><a class="b0" href="feed.xml">새 발견 구독(Atom)</a><a class="b0" href="records.csl.json">인용 CSL-JSON(Zotero)</a><a class="b0" href="records.ris">인용 RIS(EndNote)</a><a class="b0" href="timeline.html">연대 타임라인</a><a class="b0" href="nrich/index.html">연구원 연구DB IIIF 계층</a><a class="b0" href="popular.csv">자주 활용 TOP 200</a><a class="b0" href="stats.json">집계</a></p>
+<p><a class="b0" href="discovered.csv">CSV 내려받기</a><a class="b0" href="discovered.jsonl">JSONL</a><a class="b0" href="discovered.jsonld">RiC-O JSON-LD</a><a class="b0" href="../kv.html?manifest=https://changgi.github.io/korea-archive-mcp/data/collection.json">KV로 최근 300건 연속 보기</a><a class="b0" href="tree.html">계층구조도</a><a class="b0" href="queries/index.json">질의·회신 축적</a><a class="b0" href="classifications.json">분류 사전</a><a class="b0" href="provenance.json">발견 경로(질의↔기록)</a><a class="b0" href="q/index.html">질의별 발굴 기록(IIIF)</a><a class="b0" href="quality.json">데이터 품질 추이</a><a class="b0" href="fixity_changes.json">원문 변경 감시</a><a class="b0" href="feed.xml">새 발견 구독(Atom)</a><a class="b0" href="records.csl.json">인용 CSL-JSON(Zotero)</a><a class="b0" href="records.ris">인용 RIS(EndNote)</a><a class="b0" href="timeline.html">연대 타임라인</a><a class="b0" href="nrich/index.html">연구원 연구DB IIIF 계층</a><a class="b0" href="popular.csv">자주 활용 TOP 200</a><a class="b0" href="stats.json">집계</a></p>
 <p style="font-size:13px;color:#9b9a93">주요 내용·메타정보·썸네일은 기관 IIIF·우리 브리지 매니페스트를 하루 한 번 판독해 채웁니다(하루 상한·순차 요청). 썸네일은 재이용 가능 표시가 확인된 것만 싣고, 포로·사망자·묘지·수형자 관련 기록과 허가가 필요한 이미지는 링크만 둡니다. 권리는 원 기관 표기를 따릅니다 — 게재 전 judge_rights로 확인. 모든 변경은 저장소 git 이력(docs/data/)에 남습니다.</p>
 <h2>자주 활용되는 기록 TOP 30</h2><p style="font-size:13px">점수 = 최근 30일 발견×2 + 전체 발견 + 발견된 날 수×3 + 교차확인 기관 수 가중. 자동 검사 트래픽 제외.</p><div class="g">{prow}</div>
 <h2>일별 활용(최근 14일)</h2><table><tr><th>날짜</th><th>검색 묶음</th><th>발견 기록</th><th>신규 기록</th></tr>{urow}</table><p style="font-size:13px">형식별 누계: {E_(fmtv(usage['formats']))} · <a href="usage.json">usage.json</a></p>
 <h2>질의·회신 축적</h2><p style="font-size:13px">모든 도구 호출의 질의와 회신 본문을 원문 그대로(가공·삭제 없이) 영구 보존합니다. 같은 질의·같은 회신은 한 번만 두고 횟수만 셉니다. 회신이 달라지면 새 판으로 남겨 기관 응답 변화의 증거로 씁니다. 고유 질의 {nq['total']}건 · 누적 호출 {nq['calls']}회 · 도구별 {E_(fmtv(nq['by_tool']))} · <a href="queries/index.json">queries/index.json</a> (월별 회신 원문 queries/YYYY-MM.jsonl.gz)</p><table><tr><th>최근</th><th>도구</th><th>질의</th><th>횟수</th></tr>{qrow}</table>
 <h2>최근 발견 100건</h2><div class="g">{rows}</div></main></html>""")
-    build_tree(recs); ncls = merge_classes(recs); nprov, _orph = build_provenance(recs); nfx = write_fixity(recs); nmed = build_media(recs)
+    build_tree(recs); ncls = merge_classes(recs); nprov, _orph = build_provenance(recs); nfx = write_fixity(recs); nql = write_quality(recs); nmed = build_media(recs)
     print(f"원장 {len(recs)}건 (신규 {new_recs}, 묶음 {new_batches})")
-    print(f"질의 고유 {nq['total']}건(신규 {nq['added']}) · 분류 경로 {ncls}개 · 발견 경로 질의 {nprov}종 · 다매체(피드 {nmed[0]}·인용 {nmed[1]}·연대 {nmed[2]})")
+    print(f"질의 고유 {nq['total']}건(신규 {nq['added']}) · 분류 경로 {ncls}개 · 발견 경로 질의 {nprov}종 · 다매체(피드 {nmed[0]}·인용 {nmed[1]}·연대 {nmed[2]}) · 품질 권리 {nql['권리 표시']}% 요약 {nql['요약']}% 연대 {nql['연대']}%")
 
 if __name__ == "__main__":
     main()
