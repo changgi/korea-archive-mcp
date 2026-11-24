@@ -2327,6 +2327,31 @@ const JB_CROSS = `국내외 대조 절차 — 순서를 틀리면 헛수고한�
           const rm = q.match(/digitallibrary\.un\.org\/record\/(\d+)/) || q.match(/^(\d{4,9})$/);
           if (rm) {
             const recid = rm[1];
+            // v2.66 공개 MARC XML 내보내기(/export/xm)가 1순위 — 기록 HTML은 봇 확인(202·빈 본문), recjson은 제목·날짜가 비어 판독이 공란이던 결함(실측 4132698)
+            try {
+              const x = await cachedText('unX:' + recid, 24 * 3600e3, () => gtext(`https://digitallibrary.un.org/record/${recid}/export/xm`, UAH), '<record');
+              const df = (tag) => [...x.matchAll(new RegExp(`<datafield tag="${tag}"[^>]*>([\\s\\S]*?)<\\/datafield>`, 'g'))].map((m) => Object.fromEntries([...m[1].matchAll(/<subfield code="(.)">([\s\S]*?)<\/subfield>/g)].map((z) => [z[1], dclean(z[2])])));
+              const t245 = df('245')[0] || {};
+              const title = [t245.a, t245.b, t245.c].filter(Boolean).join(' ').replace(/\s*[:/]\s*$/, '').replace(/\s+([:/])/g, ' $1');
+              if (title) {
+                const sym = (df('191')[0] || {}).a || (df('791')[0] || {}).a || '';
+                const date = (df('269')[0] || {}).a || (df('992')[0] || {}).a || (df('260')[0] || {}).c || '';
+                const typ = { VOT: '표결 기록', RES: '결의', DOC: '문서', MTG: '회의록', SPE: '발언' }[(df('930')[0] || {}).a] || (df('930')[0] || {}).a || '';
+                const agenda = df('991').map((z) => [z.a, z.c].filter(Boolean).join(' ')).filter(Boolean).slice(0, 3).join('; ');
+                const rel = df('993').map((z) => z.a).filter(Boolean).slice(0, 6).join(', ');
+                const subs = df('650').map((z) => z.a).filter(Boolean).slice(0, 8).join('; ');
+                const abs = df('520').map((z) => z.a).filter(Boolean).join(' ');
+                const files = df('856').map((z) => z.u).filter((u) => /^https?:/.test(u || ''));
+                const en = files.find((u) => /-EN\.pdf$/i.test(u)) || '';
+                return text(`UN 디지털도서관 판독 — ${title}\n`
+                  + [sym && `문서기호: ${sym}`, typ && `유형: ${typ}`, date && `날짜: ${date}`].filter(Boolean).join(' · ') + '\n'
+                  + (agenda ? `의제: ${agenda}\n` : '') + (rel ? `관련 문서: ${rel}\n` : '') + (subs ? `주제: ${subs}\n` : '')
+                  + (abs ? `【요약】\n${abs.slice(0, 1500)}\n` : '')
+                  + (en ? `영문 PDF: ${en}\n` : '') + (files.length > 1 ? `파일 ${files.length}종\n` : '')
+                  + `레코드: https://digitallibrary.un.org/record/${recid}\n`
+                  + '※ UN 공식문서 — 출처 표기 하에 인용 가능(문서기호 병기). 원 데이터: 기관 MARC XML(export/xm).');
+              }
+            } catch { /* MARC 실패 — recjson으로 */ }
             const d = JSON.parse(await cachedText('unD:' + recid, 24 * 3600e3,
               async () => JSON.stringify(await jget(`https://digitallibrary.un.org/search?p=recid%3A${recid}&of=recjson&rg=1`, UAH)), 'recid'));
             const r = Array.isArray(d) ? d[0] : null;

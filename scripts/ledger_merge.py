@@ -111,7 +111,7 @@ DEEP = {"i815": ("nedb_search", lambda o: o.get("url") and {"mode": "i815", "que
 DEEP["nedb"] = ("nedb_search", lambda o: re.match(r"^[a-z]{2,5}_[0-9a-z_]+$", o["key"].split(":", 1)[1]) and {"mode": "item", "query": o["key"].split(":", 1)[1]})  # v2.61 한국사DB 기록(levelId) — 시대별 경로 판독
 DEEP["kyudb"] = ("nedb_search", lambda o: re.match(r"^[^\x00-\x7f]{1,4}[0-9][0-9.\-]*$", str(o.get("id") or "")) and {"mode": "kyujanggak", "query": o["id"]})  # v2.55 규장각 해제(기관 해설문) — 같은 청구기호 행만 쓴다
 IIIF_V = {"awm": 2, "commons": 2}  # commons 2 = 범주(Commons, 숨김 제외)  # v2.63 우리 IIIF 브리지 판 — awm 2 = 기관 상세 표 전부(자료 유형·매체 형태·제작자·제작지·분쟁)와 본문 설명
-DEEP_V = {"seoul": 2, "aks": 2, "jsg": 2, "nedb": 2}  # v2.61.1 nedb 2 = 표 없는 기록(삼국사기)·원문 이미지만(신문) 판독  # v2.56 jsg 2 = 장서각 개체 태깅·인물 전거(UCI)  # v2.32 판독기 판 — 판이 오르면 이미 보강된 기록도 한 번 다시 판독(서울기록원: 기관 계층·생산자·보존이력 추가)
+DEEP_V = {"seoul": 2, "aks": 2, "jsg": 2, "nedb": 2, "un": 2}  # un 2 = 기관 MARC XML(제목·문서기호·유형·날짜·의제)  # v2.61.1 nedb 2 = 표 없는 기록(삼국사기)·원문 이미지만(신문) 판독  # v2.56 jsg 2 = 장서각 개체 태깅·인물 전거(UCI)  # v2.32 판독기 판 — 판이 오르면 이미 보강된 기록도 한 번 다시 판독(서울기록원: 기관 계층·생산자·보존이력 추가)
 _sid = [None]
 
 def mcp_call(tool, args):
@@ -1298,6 +1298,10 @@ def main():
         dd_, db_ = date_derived(o)
         if dd_: o["date_derived"], o["date_basis"] = dd_, db_
         else: o.pop("date_derived", None); o.pop("date_basis", None)
+        if o["key"].startswith("un:") and not o.get("partOf"):  # v2.66 UN — 기관 MARC의 유형·의제로 계층
+            mu = {k: str(v) for k, v in (o.get("meta") or [])}
+            if mu.get("유형") or mu.get("의제"):
+                o["partOf"] = " › ".join(x for x in ["UN 디지털도서관", mu.get("유형", ""), ("의제 " + mu["의제"].split(" ")[0]) if mu.get("의제") else ""] if x); o["partOf_src"] = "기관 MARC XML(930 유형·991 의제)"
         cm_ = next((str(v) for k, v in (o.get("meta") or []) if k == "범주(Commons)"), "") if o["key"].startswith("commons:") else ""
         if cm_ and not o.get("partOf"): o["partOf"] = "Commons › " + cm_.split("; ")[0][:120]; o["partOf_src"] = "Commons 범주(기관 분류 체계 — 숨김 범주 제외, 첫 범주)"  # v2.65
         if not o.get("partOf"): o["partOf_derived"] = derive_path(o)

@@ -1239,6 +1239,24 @@
    ],
    "level": "warn",
    "note": "v2.65 Commons 범주(숨김 제외)를 판독 — 계층 맥락·분류 축적"
+  },
+  {
+   "id": "un-marc-detail",
+   "tool": "nedb_search",
+   "args": {
+    "mode": "un",
+    "query": "https://digitallibrary.un.org/record/4132698"
+   },
+   "must": [
+    "문서기호: A/RES/81/11",
+    "유형: 표결 기록",
+    "의제: A/81/251"
+   ],
+   "must_not": [
+    "판독 — recid 4132698\\n\\n"
+   ],
+   "level": "warn",
+   "note": "v2.66 UN 판독은 기관 MARC XML(export/xm) — recjson·HTML(봇 확인)로 제목·날짜가 비던 결함"
   }
  ]
 }
