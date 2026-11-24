@@ -1,13 +1,13 @@
 {
 "week": "2026-W48",
-"records": 757,
+"records": 802,
 "by_source": {
-"미국 국립기록관리청 NARA": 120,
+"미국 국립기록관리청 NARA": 148,
 "일본 국립국회도서관": 16,
 "일본 아시아역사자료센터": 9,
 "Europeana": 23,
-"인터넷 아카이브": 79,
-"영국 국립기록관 TNA": 26,
+"인터넷 아카이브": 86,
+"영국 국립기록관 TNA": 36,
 "UN 디지털도서관": 8,
 "KOREA ARCHIVE IIIF 갤러리": 3,
 "호주 전쟁기념관": 48,
@@ -5334,6 +5334,321 @@
 "first_seen": "2026-11-24T23:44:08Z",
 "page": "r/c6567745cd0c.html",
 "url": "https://catalog.archives.gov/id/75442202"
+},
+{
+"key": "ia:Directorychronicle1894",
+"title": "The Chronicle and Directory of China, Corea, Japan, The Philippines, etc. ... for the year 1894",
+"first_seen": "2026-11-24T23:50:32Z",
+"page": "r/1ecbc14f156c.html",
+"url": "https://archive.org/details/Directorychronicle1894"
+},
+{
+"key": "ia:NPCM18760112",
+"title": "China Mail 1876-01-12",
+"first_seen": "2026-11-24T23:50:32Z",
+"page": "r/197a45c36571.html",
+"url": "https://archive.org/details/NPCM18760112"
+},
+{
+"key": "ia:NPCM18760205",
+"title": "China Mail 1876-02-05",
+"first_seen": "2026-11-24T23:50:32Z",
+"page": "r/4526c2edbcfd.html",
+"url": "https://archive.org/details/NPCM18760205"
+},
+{
+"key": "ia:NPDP18760321",
+"title": "Hong Kong Daily Press 1876-03-21",
+"first_seen": "2026-11-24T23:50:32Z",
+"page": "r/91688b6d86cf.html",
+"url": "https://archive.org/details/NPDP18760321"
+},
+{
+"key": "ia:cinesaurio-2025-08-14-carteleara",
+"title": "CINESAURIO 2025 08 14: CARTELERA DE ESTRENOS",
+"first_seen": "2026-11-24T23:50:32Z",
+"page": "r/804660a1201c.html",
+"url": "https://archive.org/details/cinesaurio-2025-08-14-carteleara"
+},
+{
+"key": "ia:concisehistoryof0002seth",
+"title": "A concise history of Korea : from antiquity to the present",
+"first_seen": "2026-11-24T23:50:32Z",
+"page": "r/217b5653c2fc.html",
+"url": "https://archive.org/details/concisehistoryof0002seth"
+},
+{
+"key": "ia:mhm_maritimeheritagemn_1516",
+"title": "Log Book of the USS Essex, June 10, 1883 - December 16, 1883 (#15-16)",
+"first_seen": "2026-11-24T23:50:32Z",
+"page": "r/e7ee230fce52.html",
+"url": "https://archive.org/details/mhm_maritimeheritagemn_1516"
+},
+{
+"key": "nara:NAID 119573130",
+"title": "Case Numbers 670C-800C: Yee Jack - Mark Wing",
+"first_seen": "2026-11-24T23:50:32Z",
+"page": "r/32a0a421aa36.html",
+"url": "https://catalog.archives.gov/id/119573130"
+},
+{
+"key": "nara:NAID 188375885",
+"title": "Feb. 8, 1876 - Aug. 22, 1876",
+"first_seen": "2026-11-24T23:50:32Z",
+"page": "r/6db3cc4ffcd8.html",
+"url": "https://catalog.archives.gov/id/188375885"
+},
+{
+"key": "nara:NAID 188376417",
+"title": "Sept. 4, 1876 - Mar. 6, 1877",
+"first_seen": "2026-11-24T23:50:32Z",
+"page": "r/d2a0d68a4849.html",
+"url": "https://catalog.archives.gov/id/188376417"
+},
+{
+"key": "nara:NAID 188393124",
+"title": "July 3, 1894-Nov. 29, 1894",
+"first_seen": "2026-11-24T23:50:32Z",
+"page": "r/5ab54ed6b875.html",
+"url": "https://catalog.archives.gov/id/188393124"
+},
+{
+"key": "nara:NAID 188395125",
+"title": "Oct. 1, 1896-Nov. 30, 1897",
+"first_seen": "2026-11-24T23:50:32Z",
+"page": "r/b36d170c7f8f.html",
+"url": "https://catalog.archives.gov/id/188395125"
+},
+{
+"key": "nara:NAID 188408828",
+"title": "May 1, 1893 - May 31, 1894",
+"first_seen": "2026-11-24T23:50:32Z",
+"page": "r/25a8191b2e0c.html",
+"url": "https://catalog.archives.gov/id/188408828"
+},
+{
+"key": "nara:NAID 189039683",
+"title": "Volume 40: January 7 - May 12, 1876",
+"first_seen": "2026-11-24T23:50:32Z",
+"page": "r/c25bd21d0966.html",
+"url": "https://catalog.archives.gov/id/189039683"
+},
+{
+"key": "nara:NAID 189067251",
+"title": "Volume 95: May 3 - August 31, 1894",
+"first_seen": "2026-11-24T23:50:32Z",
+"page": "r/134ab195e423.html",
+"url": "https://catalog.archives.gov/id/189067251"
+},
+{
+"key": "nara:NAID 19219213",
+"title": "Numerical File: 1155-1166/300",
+"first_seen": "2026-11-24T23:50:32Z",
+"page": "r/969180be635e.html",
+"url": "https://catalog.archives.gov/id/19219213"
+},
+{
+"key": "nara:NAID 19800957",
+"title": "Numerical File: 7357/486-7357/622",
+"first_seen": "2026-11-24T23:50:32Z",
+"page": "r/7e17130ecdb6.html",
+"url": "https://catalog.archives.gov/id/19800957"
+},
+{
+"key": "nara:NAID 19802454",
+"title": "Numerical File: 7357/486-7357/622",
+"first_seen": "2026-11-24T23:50:32Z",
+"page": "r/327f6d41d87c.html",
+"url": "https://catalog.archives.gov/id/19802454"
+},
+{
+"key": "nara:NAID 248344967",
+"title": "Japan and Korea: Economic Conditions - MID 2655-H-333 THRU 2655-H-420 / Korea: General Conditions - MID 2592-1 THRU 2592-8",
+"first_seen": "2026-11-24T23:50:32Z",
+"page": "r/6b0cc7090f36.html",
+"url": "https://catalog.archives.gov/id/248344967"
+},
+{
+"key": "nara:NAID 311431759",
+"title": "2/1876-8/1870, Letters to Flag Officers No. 6",
+"first_seen": "2026-11-24T23:50:32Z",
+"page": "r/1037c9b3bcee.html",
+"url": "https://catalog.archives.gov/id/311431759"
+},
+{
+"key": "nara:NAID 337079670",
+"title": "Number 1362",
+"first_seen": "2026-11-24T23:50:32Z",
+"page": "r/e71bf462bae7.html",
+"url": "https://catalog.archives.gov/id/337079670"
+},
+{
+"key": "nara:NAID 369740317",
+"title": "34,671 THRU 35,313 (3 of 3)",
+"first_seen": "2026-11-24T23:50:32Z",
+"page": "r/fb250e46497c.html",
+"url": "https://catalog.archives.gov/id/369740317"
+},
+{
+"key": "nara:NAID 369775967",
+"title": "40,290 THRU 41,760 (3 of 3)",
+"first_seen": "2026-11-24T23:50:32Z",
+"page": "r/6e6580cac49c.html",
+"url": "https://catalog.archives.gov/id/369775967"
+},
+{
+"key": "nara:NAID 402472080",
+"title": "World War II Operations Reports - Pacific Theater: 18-006 (1 of 2)",
+"first_seen": "2026-11-24T23:50:32Z",
+"page": "r/2f00990ddec8.html",
+"url": "https://catalog.archives.gov/id/402472080"
+},
+{
+"key": "nara:NAID 402473081",
+"title": "World War II Operations Reports - Pacific Theater: 18-006 (2 of 2)",
+"first_seen": "2026-11-24T23:50:32Z",
+"page": "r/423d4b8d67ff.html",
+"url": "https://catalog.archives.gov/id/402473081"
+},
+{
+"key": "nara:NAID 402766766",
+"title": "6th Army: 6-003 (2 of 2)",
+"first_seen": "2026-11-24T23:50:32Z",
+"page": "r/3d603f8f7582.html",
+"url": "https://catalog.archives.gov/id/402766766"
+},
+{
+"key": "nara:NAID 406606473",
+"title": "Intelligence Library Documents, 1932-47: XIIa. 55-61 (2 of 2)",
+"first_seen": "2026-11-24T23:50:32Z",
+"page": "r/31bddedc1519.html",
+"url": "https://catalog.archives.gov/id/406606473"
+},
+{
+"key": "nara:NAID 406675771",
+"title": "Intelligence Library Documents, 1932-47: XXXVIIa. 38-40",
+"first_seen": "2026-11-24T23:50:32Z",
+"page": "r/449e5d0322c5.html",
+"url": "https://catalog.archives.gov/id/406675771"
+},
+{
+"key": "nara:NAID 517625130",
+"title": "September 26, 1876 - December 30, 1876",
+"first_seen": "2026-11-24T23:50:32Z",
+"page": "r/945255a1ff98.html",
+"url": "https://catalog.archives.gov/id/517625130"
+},
+{
+"key": "nara:NAID 521334449",
+"title": "Decisions: February 12, 1894 - February 19, 1894",
+"first_seen": "2026-11-24T23:50:32Z",
+"page": "r/b228d13e2a45.html",
+"url": "https://catalog.archives.gov/id/521334449"
+},
+{
+"key": "nara:NAID 605163366",
+"title": "740.0011PW/1-145 - 3-1545: January-March 1945",
+"first_seen": "2026-11-24T23:50:32Z",
+"page": "r/55596d548037.html",
+"url": "https://catalog.archives.gov/id/605163366"
+},
+{
+"key": "nara:NAID 640001165",
+"title": "Joint Army-Navy-Intelligence Study of Korea (including Tsushima and Quelpart) Regional Summary, JANIS 75-1, April 1945: Plans (Maps) 1-52 THRU Joint Army-Navy Intelligence Study of China, East Coast, ",
+"first_seen": "2026-11-24T23:50:32Z",
+"page": "r/7bf8d3de174d.html",
+"url": "https://catalog.archives.gov/id/640001165"
+},
+{
+"key": "nara:NAID 641479607",
+"title": "Numerical List of International Prosecution Section (IPS) Documents Introduced as Court Exhibits THRU Defense Witnesses Who Have Testified Through June 19, 1947",
+"first_seen": "2026-11-24T23:50:32Z",
+"page": "r/4b3797b66443.html",
+"url": "https://catalog.archives.gov/id/641479607"
+},
+{
+"key": "nara:NAID 673526619",
+"title": "New Series of Packages: Package 65, AGO 460511, Enclosure 83 THRU Package 67, AGO 460392, Enclosure 15",
+"first_seen": "2026-11-24T23:50:32Z",
+"page": "r/7be815ae97a8.html",
+"url": "https://catalog.archives.gov/id/673526619"
+},
+{
+"key": "nara:NAID 73017851",
+"title": "COREA, Josephine - Born: 1894, Naturalized: 1953",
+"first_seen": "2026-11-24T23:50:32Z",
+"page": "r/3a5557579630.html",
+"url": "https://catalog.archives.gov/id/73017851"
+},
+{
+"key": "tna:BT 110/669/163",
+"title": "Ship Corea , official number: 73628. When built: 1875. Registry closed: 1894.",
+"first_seen": "2026-11-24T23:50:32Z",
+"page": "r/08d6b7509c8b.html",
+"url": "https://discovery.nationalarchives.gov.uk/details/r/C10697035"
+},
+{
+"key": "tna:BT 400/3415/12B",
+"title": "Ship: Albatross; Official number: 89541. Crew listing continued from BT 400/3415/12A. Frank Hartigan; rank/rating, Assistant...",
+"first_seen": "2026-11-24T23:50:32Z",
+"page": "r/1effcdc2c0b3.html",
+"url": "https://discovery.nationalarchives.gov.uk/details/r/C14609356"
+},
+{
+"key": "tna:FO 405/334",
+"title": "China: correspondence relating to Corea (Korea) and the war between China and Japan, parts 1-2,...",
+"first_seen": "2026-11-24T23:50:32Z",
+"page": "r/b8cb29d848a2.html",
+"url": "https://discovery.nationalarchives.gov.uk/details/r/C16384644"
+},
+{
+"key": "tna:FO 405/411",
+"title": "China: Corea (Korea), Japan and China; conventions, agreements, assurances, etc; 1894-1908",
+"first_seen": "2026-11-24T23:50:32Z",
+"page": "r/bedc0e68b316.html",
+"url": "https://discovery.nationalarchives.gov.uk/details/r/C16384590"
+},
+{
+"key": "tna:FO 483/11",
+"title": "Corea (Korea): treaty with Japan; Russia and Corea; Orders in Council; Mr Spence's, Colonel Vebel's...",
+"first_seen": "2026-11-24T23:50:32Z",
+"page": "r/9fca4c1d2294.html",
+"url": "https://discovery.nationalarchives.gov.uk/details/r/C16357099"
+},
+{
+"key": "tna:FO 881/6508X",
+"title": "GENERAL and CHINA and JAPAN and COREA and TURKEY and PERSIA and SIAM and ZANZIBAR...",
+"first_seen": "2026-11-24T23:50:32Z",
+"page": "r/4aea0f8b1d8d.html",
+"url": "https://discovery.nationalarchives.gov.uk/details/r/C3656218"
+},
+{
+"key": "tna:IOR/L/PS/20/138",
+"title": "A short general report upon Corea. By Cpt E F H McSwiney, Deputy Assistant Quarter Master General Simla: Intelligence Branch, Quarter Master General's Dept, 1894",
+"first_seen": "2026-11-24T23:50:32Z",
+"page": "r/1f8fe1f02f9d.html",
+"url": "https://discovery.nationalarchives.gov.uk/details/r/ffd0cc5e-85bb-4c50-9871-f875f6272cd0"
+},
+{
+"key": "tna:OBF 1/1",
+"title": "Digest of Journal",
+"first_seen": "2026-11-24T23:50:32Z",
+"page": "r/ddb80d9d6782.html",
+"url": "https://discovery.nationalarchives.gov.uk/details/r/e9933f4b-2c8a-40ba-b0f6-186cf9e5bdd0"
+},
+{
+"key": "tna:YHL/PO/JO/10/9/1139",
+"title": "Main Papers",
+"first_seen": "2026-11-24T23:50:32Z",
+"page": "r/435d677921e4.html",
+"url": "https://discovery.nationalarchives.gov.uk/details/r/82085148-3168-4399-a5c8-9453f7f5cb93"
+},
+{
+"key": "tna:YHL/PO/JO/10/9/1233",
+"title": "Main Papers",
+"first_seen": "2026-11-24T23:50:32Z",
+"page": "r/71c31363d533.html",
+"url": "https://discovery.nationalarchives.gov.uk/details/r/257acb07-bdf5-453b-bc6f-e6482489d928"
 }
 ]
 }

@@ -33,13 +33,14 @@
 "ia:youtube-asdl9Czb698",
 "ia:111-adc-7115",
 "ia:24114-kobe-japan-world-war-2-mos-vwr",
-"ia:111-adc-8372"
+"ia:111-adc-8372",
+"ia:cinesaurio-2025-08-14-carteleara"
 ],
 "sources": [
 "ia"
 ],
 "first": "2026-11-23T03:00:40Z",
-"last": "2026-11-24T23:15:56Z",
+"last": "2026-11-24T23:50:32Z",
 "keys": [
 "mediatype"
 ]
@@ -65,13 +66,18 @@
 "ia:child-of-conflict",
 "ia:cia-readingroom-document-03194444",
 "ia:cia-readingroom-document-cia-rdp80t00246a018200250001-2",
-"ia:BattleOfTheBarricades"
+"ia:BattleOfTheBarricades",
+"ia:Directorychronicle1894",
+"ia:NPCM18760112",
+"ia:NPCM18760205",
+"ia:NPDP18760321",
+"ia:mhm_maritimeheritagemn_1516"
 ],
 "sources": [
 "ia"
 ],
 "first": "2026-11-23T03:00:40Z",
-"last": "2026-11-24T23:44:08Z",
+"last": "2026-11-24T23:50:32Z",
 "keys": [
 "mediatype"
 ]
@@ -1060,15 +1066,18 @@
 },
 "China": {
 "records": [
-"dnz:42631548"
+"dnz:42631548",
+"ia:Directorychronicle1894"
 ],
 "sources": [
-"dnz"
+"dnz",
+"ia"
 ],
 "first": "2026-11-23T13:40:50Z",
-"last": "2026-11-23T13:40:50Z",
+"last": "2026-11-24T23:50:32Z",
 "keys": [
-"주제"
+"주제",
+"subject"
 ]
 },
 "Soviet Union": {
@@ -1860,6 +1869,59 @@
 ],
 "first": "2026-11-24T23:10:19Z",
 "last": "2026-11-24T23:10:19Z",
+"keys": [
+"subject"
+]
+},
+"德臣西報": {
+"records": [
+"ia:NPCM18760112",
+"ia:NPCM18760205"
+],
+"sources": [
+"ia"
+],
+"first": "2026-11-24T23:50:32Z",
+"last": "2026-11-24T23:50:32Z",
+"keys": [
+"subject"
+]
+},
+"孖剌西報": {
+"records": [
+"ia:NPDP18760321"
+],
+"sources": [
+"ia"
+],
+"first": "2026-11-24T23:50:32Z",
+"last": "2026-11-24T23:50:32Z",
+"keys": [
+"subject"
+]
+},
+"Andrés Bermea": {
+"records": [
+"ia:cinesaurio-2025-08-14-carteleara"
+],
+"sources": [
+"ia"
+],
+"first": "2026-11-24T23:50:32Z",
+"last": "2026-11-24T23:50:32Z",
+"keys": [
+"subject"
+]
+},
+"American Ships": {
+"records": [
+"ia:mhm_maritimeheritagemn_1516"
+],
+"sources": [
+"ia"
+],
+"first": "2026-11-24T23:50:32Z",
+"last": "2026-11-24T23:50:32Z",
 "keys": [
 "subject"
 ]
@@ -4996,13 +5058,20 @@
 "nara:NAID 519786908",
 "nara:NAID 117578528",
 "nara:NAID 22137",
-"nara:NAID 321495973"
+"nara:NAID 321495973",
+"nara:NAID 188375885",
+"nara:NAID 188376417",
+"nara:NAID 188393124",
+"nara:NAID 188395125",
+"nara:NAID 188408828",
+"nara:NAID 189039683",
+"nara:NAID 189067251"
 ],
 "sources": [
 "nara"
 ],
 "first": "2026-11-23T03:00:15Z",
-"last": "2026-11-24T23:44:08Z",
+"last": "2026-11-24T23:50:32Z",
 "keys": [
 "기술 수준"
 ]
@@ -5047,13 +5116,34 @@
 "nara:NAID 608019489",
 "nara:NAID 639185665",
 "nara:NAID 644107738",
-"nara:NAID 75442202"
+"nara:NAID 75442202",
+"nara:NAID 119573130",
+"nara:NAID 19219213",
+"nara:NAID 19800957",
+"nara:NAID 19802454",
+"nara:NAID 248344967",
+"nara:NAID 311431759",
+"nara:NAID 337079670",
+"nara:NAID 369740317",
+"nara:NAID 369775967",
+"nara:NAID 402472080",
+"nara:NAID 402473081",
+"nara:NAID 402766766",
+"nara:NAID 406606473",
+"nara:NAID 406675771",
+"nara:NAID 517625130",
+"nara:NAID 521334449",
+"nara:NAID 605163366",
+"nara:NAID 640001165",
+"nara:NAID 641479607",
+"nara:NAID 673526619",
+"nara:NAID 73017851"
 ],
 "sources": [
 "nara"
 ],
 "first": "2026-11-23T03:00:15Z",
-"last": "2026-11-24T23:44:08Z",
+"last": "2026-11-24T23:50:32Z",
 "keys": [
 "기술 수준"
 ]
@@ -5073,13 +5163,17 @@
 "tna:DEFE 11/195",
 "tna:DEFE 11/204",
 "tna:WO 291/2428",
-"tna:PREM 11/406"
+"tna:PREM 11/406",
+"tna:FO 405/334",
+"tna:FO 405/411",
+"tna:FO 483/11",
+"tna:FO 881/6508X"
 ],
 "sources": [
 "tna"
 ],
 "first": "2026-11-23T03:00:46Z",
-"last": "2026-11-24T22:56:56Z",
+"last": "2026-11-24T23:50:32Z",
 "keys": [
 "기술 수준"
 ]
@@ -5091,13 +5185,15 @@
 "tna:FO 371/105488/1071/182G",
 "tna:FO 371/105494/1071/317",
 "tna:FO 371/105500/1071/453",
-"tna:FO 371/105502/1071/486"
+"tna:FO 371/105502/1071/486",
+"tna:BT 110/669/163",
+"tna:BT 400/3415/12B"
 ],
 "sources": [
 "tna"
 ],
 "first": "2026-11-23T03:32:36Z",
-"last": "2026-11-24T22:56:56Z",
+"last": "2026-11-24T23:50:32Z",
 "keys": [
 "기술 수준"
 ]
@@ -6203,10 +6299,10 @@
 }
 }
 },
-"updated": "2026-11-24T23:46:54Z",
+"updated": "2026-11-24T23:57:18Z",
 "totals": {
 "매체": 4,
-"주제": 128,
+"주제": 132,
 "장소": 52,
 "분류": 93,
 "시대": 38,
