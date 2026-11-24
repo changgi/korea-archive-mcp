@@ -953,7 +953,7 @@ DISTS = [("discovered.csv", "text/csv", "발견 기록 표(CSV)"), ("discovered.
          ("records.oai_dc.xml", "application/xml", "OAI-PMH Dublin Core"), ("records.csl.json", "application/vnd.citationstyles.csl+json", "인용 CSL-JSON"),
          ("records.ris", "application/x-research-info-systems", "인용 RIS"), ("records.bib", "application/x-bibtex", "인용 BibTeX"),
          ("feed.xml", "application/atom+xml", "새 발견 Atom 피드"), ("timeline.json", "application/json", "연대 타임라인"), ("tree.json", "application/json", "계층구조"),
-         ("classifications.json", "application/json", "분류 사전"), ("provenance.json", "application/json", "발견 경로(질의↔기록)"), ("relations.json", "application/json", "기록↔기록 맥락 연결(근거 포함)"), ("quality.json", "application/json", "데이터 품질 시계열"),
+         ("classifications.json", "application/json", "분류 사전"), ("provenance.json", "application/json", "발견 경로(질의↔기록)"), ("relations.json", "application/json", "기록↔기록 맥락 연결(근거 포함)"), ("relations.html", "text/html", "맥락 연결 묶음(읽기용)"), ("quality.json", "application/json", "데이터 품질 시계열"),
          ("fixity_changes.json", "application/json", "원문 고정성 변경 이력"), ("loss_guard.json", "application/json", "불삭제 검사 — 되살린 값 기록"), ("queries/index.json", "application/json", "질의·회신 축적 색인"),
          ("queries/probe/index.json", "application/json", "자동 점검 질의·회신 색인"), ("records/index.json", "application/json", "일일 기록물 등록부 해시 사슬")]
 
@@ -1062,6 +1062,36 @@ def build_relations(recs_all):
               open(os.path.join(D, "relations.json"), "w", encoding="utf-8"), ensure_ascii=False, separators=(",", ":"))
     return cnt
 
+def relations_page(R):
+    """v2.86 relations.html — 같은 기록 묶음(기관을 넘는 연결 요소)·같은 날 묶음을 읽기용으로. 묶음마다 기관·날짜·근거, 기록 페이지로 연결"""
+    E_ = html.escape; by = {o["key"]: o for o in R}
+    def comps(t):
+        seen = set(); out = []
+        for k in sorted(REL):
+            if k in seen or not any(x[0] == t for x in REL[k]): continue
+            st = [k]; c = []
+            while st:
+                a = st.pop()
+                if a in seen: continue
+                seen.add(a); c.append(a); st += [b for tt, b, _ in REL.get(a, []) if tt == t and b not in seen]
+            out.append(sorted(c, key=lambda x: (by[x].get("date") or by[x].get("date_derived") or "", x)))
+        return out
+    def li(k):
+        o = by[k]; inst = SRC_NAME.get(k.split(":")[0], k.split(":")[0]); d = o.get("date") or (("[파생] " + o["date_derived"]) if o.get("date_derived") else "")
+        dc = (o.get("date_cross") or {}).get("verdict", "")
+        return f"<li><a href='r/{rec_slug(k)}.html'>{E_(o['title'][:110])}</a> <small>{E_(inst)} · {E_(d)}{' · 날짜 교차 ' + E_(dc) if dc else ''}</small></li>"
+    def basis(c, t):
+        return " · ".join(sorted({bs for a in c for tt, b, bs in REL.get(a, []) if tt == t and b in c}))[:400]
+    same = comps("같은 기록(다른 소장처)"); day = comps("같은 날(다른 기관)")
+    sec = lambda title, note, cs, t: f"<h2>{title} <small>{len(cs)}묶음</small></h2><p><small>{note}</small></p>" + "".join(f"<div class='c'><ul>{''.join(li(k) for k in c)}</ul><p><small>근거: {E_(basis(c, t))}</small></p></div>" for c in cs)
+    open(os.path.join(D, "relations.html"), "w", encoding="utf-8").write(f"""<!DOCTYPE html><html lang="ko"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>기록↔기록 맥락 연결 — KOREA ARCHIVE 발견 원장</title>
+<style>body{{font-family:system-ui,'Noto Sans KR',sans-serif;margin:0;background:#14161b;color:#e6e4dc}}main{{max-width:900px;margin:auto;padding:16px}}a{{color:#e0b04a}}small{{color:#9b9a93}}.c{{border:1px solid #333;border-radius:8px;padding:4px 12px;margin:8px 0}}</style>
+<main><p><small>KOREA ARCHIVE 통합검색 · <a href="index.html">원장</a> · <a href="relations.json">relations.json</a> · <a href="tree.html">계층</a> · <a href="subjects.html">주제</a></small></p>
+<h1>기록↔기록 맥락 연결</h1><p>원장에 있는 기관 표기(sameAs·식별자·입수처 링크·날짜)만으로 이은 묶음입니다. 지어낸 연결은 없고, 묶음마다 근거를 적었습니다. 같은 계열(기관 계층) 연결은 각 기록 페이지의 '관련 기록'에 있습니다.</p>
+{sec("같은 기록 — 여러 소장처", "한 기록이 여러 기관에 있는 경우. 날짜 교차 확인은 기관들이 적은 날짜의 일치 여부", same, "같은 기록(다른 소장처)")}
+{sec("같은 날 — 다른 기관 기록", "기관이 적은 날짜가 같은 다른 기관 기록 — 교차 대조 단서(같은 사건이라는 뜻은 아님)", day, "같은 날(다른 기관)")}
+</main></html>""")
+
 def cite_of(o, inst, pu):
     """v2.85 기록별 인용문 — 기관 표기 그대로(소장 기관, 제목, 계층, 식별자, 날짜) + 원 기관 주소 + 확인일(원장 최근 발견) + 원장 영구 페이지.
     파생 날짜는 [파생]으로 밝힌다. 한국어 학술 각주형 · Chicago 형 두 가지."""
@@ -1121,7 +1151,7 @@ def build_record_pages(recs_all):
 <h2>인용</h2><p style="font-size:14px">{E_(cko)}</p><p style="font-size:13px;color:#9b9a93">{E_(cen)}</p><p><small><a href="{sl}.json">이 기록 JSON(기계 판독 — 원장 항목·관계·인용)</a></small></p>
 <p><small>원장 key <code>{E_(o['key'])}</code> · 원 기관 표기 그대로, 파생 정보는 [파생]·근거 표시 · 축적 정보는 지우지 않는다</small></p></main></html>""")
     json.dump({"updated": dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"), "pages": idx}, open(os.path.join(rd, "index.json"), "w", encoding="utf-8"), ensure_ascii=False)
-    sm = "".join(f"<url><loc>{u}</loc>{f'<lastmod>{d}</lastmod>' if d else ''}</url>" for u, d in [(PAGES, ""), (PAGES + "subjects.html", ""), (PAGES + "tree.html", ""), (PAGES + "timeline.html", "")] + urls)
+    sm = "".join(f"<url><loc>{u}</loc>{f'<lastmod>{d}</lastmod>' if d else ''}</url>" for u, d in [(PAGES, ""), (PAGES + "subjects.html", ""), (PAGES + "tree.html", ""), (PAGES + "timeline.html", ""), (PAGES + "relations.html", "")] + urls)
     open(os.path.join(D, "sitemap.xml"), "w", encoding="utf-8").write(f'<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">{sm}</urlset>')
     return len(idx)
 
@@ -1871,6 +1901,7 @@ def main():
     nrel = build_relations(recs)  # v2.82 기록↔기록 맥락 연결(RiC-O·기록 페이지·품질이 함께 씀)
     ndp = date_from_same(recs)  # v2.84 날짜 없는 기록 ← 같은 기록의 다른 소장처 날짜([파생]·근거)
     if ndp: print(f"같은 기록의 다른 소장처 날짜로 연대 파생 {ndp}건")
+    relations_page([o for o in recs if o.get("entry_type", "기록") == "기록"])  # v2.86 날짜 파생·교차 확인 뒤에
     with open(lp, "w", encoding="utf-8") as f:
         for o in recs: f.write(json.dumps(o, ensure_ascii=False, separators=(",", ":")) + "\n")
     cols = ["key", "entry_type", "found_by_basis", "summary_composed", "rights_view", "rights_basis", "fixity", "defect_note", "link_note", "sources", "title", "date", "date_derived", "date_basis", "id", "url", "partOf", "partOf_derived", "media", "sameAs", "iiif", "iiif_status", "iiif_built", "iiif_kind", "found_by", "found_by_derived", "first_seen", "last_seen", "seen", "seen_7d", "seen_30d", "days_total", "formats", "tools", "max_cross", "trend", "rank", "score", "summary", "summary_basis", "rights", "attribution", "thumb", "meta", "meta_basis", "authority", "key_aliases", "merge_note", "recovered", "harvested", "meta_restored", "found_via", "drilled_from", "date_cross"]
@@ -1950,7 +1981,7 @@ details{{font-size:12px}}dl{{display:grid;grid-template-columns:auto 1fr;gap:2px
 table{{width:100%;border-collapse:collapse;font-size:14px}}td,th{{border-bottom:1px solid #2a2d35;padding:6px;text-align:left}}</style>
 <main><h1>발견 누적 원장</h1><p>KOREA ARCHIVE 통합검색 사용자가 도구로 발굴한 기록이 매일 이곳에 쌓입니다(검색어·사용자 정보 없음). 기록 <b>{st['records']:,}</b>건 · 마지막 갱신 {st['updated']} · 이번 갱신 신규 {new_recs}건 · 내용·메타정보 보강 {enr}건 · 썸네일 {thn}건</p>
 <p>{srcs}</p>
-<p><a class="b0" href="discovered.csv">CSV 내려받기</a><a class="b0" href="discovered.jsonl">JSONL</a><a class="b0" href="discovered.jsonld">RiC-O JSON-LD</a><a class="b0" href="../kv.html?manifest=https://changgi.github.io/korea-archive-mcp/data/collection.json">KV로 최근 300건 연속 보기</a><a class="b0" href="tree.html">계층구조도</a><a class="b0" href="queries/index.json">질의·회신 축적</a><a class="b0" href="classifications.json">분류 사전</a><a class="b0" href="provenance.json">발견 경로(질의↔기록)</a><a class="b0" href="relations.json">기록↔기록 맥락 연결</a><a class="b0" href="q/index.html">질의별 발굴 기록(IIIF)</a><a class="b0" href="quality.json">데이터 품질 추이</a><a class="b0" href="subjects.html">주제 색인</a><a class="b0" href="subjects.jsonld">주제 SKOS</a><a class="b0" href="fixity_changes.json">원문 변경 감시</a><a class="b0" href="feed.xml">새 발견 구독(Atom)</a><a class="b0" href="records.csl.json">인용 CSL-JSON(Zotero)</a><a class="b0" href="records.ris">인용 RIS(EndNote)</a><a class="b0" href="records.bib">인용 BibTeX(LaTeX)</a><a class="b0" href="catalog.jsonld">데이터 목록(DCAT)</a><a class="b0" href="r/index.json">기록별 영구 페이지</a><a class="b0" href="digest/index.html">주간 발견 소식</a><a class="b0" href="sitemap.xml">사이트맵</a><a class="b0" href="records.oai_dc.xml">OAI-PMH Dublin Core(하베스터)</a><a class="b0" href="timeline.html">연대 타임라인</a><a class="b0" href="nrich/index.html">연구원 연구DB IIIF 계층</a><a class="b0" href="popular.csv">자주 활용 TOP 200</a><a class="b0" href="stats.json">집계</a></p>
+<p><a class="b0" href="discovered.csv">CSV 내려받기</a><a class="b0" href="discovered.jsonl">JSONL</a><a class="b0" href="discovered.jsonld">RiC-O JSON-LD</a><a class="b0" href="../kv.html?manifest=https://changgi.github.io/korea-archive-mcp/data/collection.json">KV로 최근 300건 연속 보기</a><a class="b0" href="tree.html">계층구조도</a><a class="b0" href="queries/index.json">질의·회신 축적</a><a class="b0" href="classifications.json">분류 사전</a><a class="b0" href="provenance.json">발견 경로(질의↔기록)</a><a class="b0" href="relations.html">기록↔기록 맥락 연결</a><a class="b0" href="q/index.html">질의별 발굴 기록(IIIF)</a><a class="b0" href="quality.json">데이터 품질 추이</a><a class="b0" href="subjects.html">주제 색인</a><a class="b0" href="subjects.jsonld">주제 SKOS</a><a class="b0" href="fixity_changes.json">원문 변경 감시</a><a class="b0" href="feed.xml">새 발견 구독(Atom)</a><a class="b0" href="records.csl.json">인용 CSL-JSON(Zotero)</a><a class="b0" href="records.ris">인용 RIS(EndNote)</a><a class="b0" href="records.bib">인용 BibTeX(LaTeX)</a><a class="b0" href="catalog.jsonld">데이터 목록(DCAT)</a><a class="b0" href="r/index.json">기록별 영구 페이지</a><a class="b0" href="digest/index.html">주간 발견 소식</a><a class="b0" href="sitemap.xml">사이트맵</a><a class="b0" href="records.oai_dc.xml">OAI-PMH Dublin Core(하베스터)</a><a class="b0" href="timeline.html">연대 타임라인</a><a class="b0" href="nrich/index.html">연구원 연구DB IIIF 계층</a><a class="b0" href="popular.csv">자주 활용 TOP 200</a><a class="b0" href="stats.json">집계</a></p>
 <p style="font-size:13px;color:#9b9a93">주요 내용·메타정보·썸네일은 기관 IIIF·우리 브리지 매니페스트를 하루 한 번 판독해 채웁니다(하루 상한·순차 요청). 썸네일은 재이용 가능 표시가 확인된 것만 싣고, 포로·사망자·묘지·수형자 관련 기록과 허가가 필요한 이미지는 링크만 둡니다. 권리는 원 기관 표기를 따릅니다 — 게재 전 judge_rights로 확인. 모든 변경은 저장소 git 이력(docs/data/)에 남습니다.</p>
 <h2>자주 활용되는 기록 TOP 30</h2><p style="font-size:13px">점수 = 최근 30일 발견×2 + 전체 발견 + 발견된 날 수×3 + 교차확인 기관 수 가중. 자동 검사 트래픽 제외.</p><div class="g">{prow}</div>
 <h2>일별 활용(최근 14일)</h2><table><tr><th>날짜</th><th>검색 묶음</th><th>발견 기록</th><th>신규 기록</th></tr>{urow}</table><p style="font-size:13px">형식별 누계: {E_(fmtv(usage['formats']))} · <a href="usage.json">usage.json</a></p>
