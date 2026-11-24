@@ -312,6 +312,8 @@ ERAS = ["광복이후", "광복 이후", "선사", "고조선", "삼국", "고�
 DATE_KEYS = ("생산일", "생산연도", "생산", "연대", "날짜", "시대", "시대분류", "출판정보", "발행", "발행일", "제작연도", "제작시기", "국적/시대", "작성연대 / 간행시기", "생산기간", "발간연도", "date", "발행년도", "기간", "생산 기간", "생산시기", "Publication Date", "일자", "연월일", "발신일", "발행년월일")  # v2.56 연구원 발행년도·TNA 기간·6·25 생산시기·NDL 발행일·서울 일자  # v2.50 생산기간(전자사료관)·발간연도(국외문화유산)·date(IA·Europeana) — 인수·등록·업로드일(보존이력·addeddate)은 넣지 않는다
 ERA_KEYS = ("시대", "시대분류", "제작시기", "국적/시대")
 
+MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+
 def date_derived(o):
     """v2.32 심층 판독 응답의 '라벨 붙은' 자기 날짜만 — 신문 발행일(제호 · YYYYMMDD · 발행)·판결일(판결 YYYYMMDD). 본문 속 연도는 쓰지 않는다."""
     if o.get("date"): return "", ""
@@ -330,6 +332,8 @@ def date_derived(o):
     if m: return "-".join(x for x in m.groups() if x), "기관 메타 — 생산기간(시작)"
     m = re.match(r"^\s*(1[0-9]\d\d|20\d\d)\s*년?\s*$", md.get("발간연도", ""))
     if m: return m[1], "기관 메타 — 발간연도"
+    m = re.match(r"^\s*(January|February|March|April|May|June|July|August|September|October|November|December) (\d{1,2}), (1[89]\d\d|20\d\d)\b", md.get("date", ""))  # v2.84 IA 영문 날짜 'October 24, 1950–…'(첫 날짜)
+    if m: return f"{m[3]}-{MONTHS.index(m[1]) + 1:02d}-{int(m[2]):02d}", "기관 메타 — date(영문 표기, 범위면 첫 날짜)"
     return "", ""
 
 ERA_BASE = {"明治": 1867, "메이지": 1867, "大正": 1911, "다이쇼": 1911, "昭和": 1925, "쇼와": 1925, "平成": 1988, "令和": 2018,
@@ -973,6 +977,37 @@ def _loc_ids(o):
     if o["key"].startswith("nara:NAID "): out.add("naid " + o["key"].split(" ", 1)[1].lower())
     return {x for x in out if x}
 
+ISO_D = re.compile(r"^(1[0-9]\d\d|20\d\d)(-(0[1-9]|1[0-2]))?(-([0-3]\d))?$")
+
+def _norm_d(o, allow_derived=True):
+    """비교·차용용 기관 날짜 — ISO 날짜, IA의 'YYYY-01-01T00:00:00Z'(연도만 아는 값의 정규화)는 연도로. 파생은 기관 메타 근거만(같은 기록 차용은 사슬 금지)"""
+    d = (o.get("date") or "").strip()
+    if re.match(r"^\d{4}-\d{2}-\d{2}T00:00:00Z$", d): d = d[:10]
+    if ISO_D.match(d): return (d[:4] if d.endswith("-01-01") else d), "기관 날짜"
+    dd = o.get("date_derived") or ""; bs = o.get("date_basis") or ""
+    if allow_derived and ISO_D.match(dd) and not bs.startswith("같은 기록"): return dd, "기관 파생 — " + bs
+    return "", ""
+
+def date_from_same(recs):
+    """v2.84 같은 기록(다른 소장처)끼리 날짜 — ① 교차 확인: 소장처마다 적은 날짜를 나란히 두고 일치·불일치를 기록(date_cross — 증거)
+    ② 날짜도 파생 날짜도 없는 기록은 상대 소장처 날짜를 [파생]으로(소장처들이 서로 어긋나면 쓰지 않음). 원 기관 date 필드는 건드리지 않는다."""
+    by = {o["key"]: o for o in recs}; n = 0
+    for o in recs:
+        if (o.get("date_basis") or "").startswith("같은 기록"): o.pop("date_derived", None); o.pop("date_basis", None)
+        ps = [(by[b], bs) for t, b, bs in REL.get(o["key"], []) if t == "같은 기록(다른 소장처)" and b in by]
+        if not ps: o.pop("date_cross", None); continue
+        mine, mb = _norm_d(o)
+        cross = [{"key": p["key"], "inst": SRC_NAME.get(p["key"].split(":")[0], p["key"].split(":")[0]), "date": d, "basis": db} for p, _ in ps for d, db in [_norm_d(p)] if d]
+        if mine and cross:
+            for c in cross: c["agree"] = c["date"].startswith(mine) or mine.startswith(c["date"])
+            o["date_cross"] = {"mine": mine, "mine_basis": mb, "others": cross, "verdict": "일치" if all(c["agree"] for c in cross) else "불일치(소장처 표기 다름 — 단정 금지)"}
+        else: o.pop("date_cross", None)
+        if o.get("date") or o.get("date_derived") or not cross: continue
+        best = max(cross, key=lambda c: len(c["date"]))
+        if any(not best["date"].startswith(c["date"]) for c in cross): continue  # 소장처 날짜가 서로 다르면 단정하지 않음
+        o["date_derived"], o["date_basis"] = best["date"], f"같은 기록의 다른 소장처 표기 — {best['inst']} {best['key']}({best['basis']})"; n += 1
+    return n
+
 def build_relations(recs_all):
     """v2.82 맥락 연결 — 기록과 기록을 원장에 이미 있는 기관 표기만으로 잇는다(지어내지 않음). 관계마다 근거를 단다.
     ① 같은 기록(다른 소장처): 기관이 준 sameAs·로컬 식별자 일치(IA 111-adc-N ↔ NARA 로컬 식별자 111-ADC-N 등)
@@ -1049,6 +1084,8 @@ def build_record_pages(recs_all):
               **({"isPartOf": part or pder} if (part or pder) else {}), **({"description": (o.get("summary") or o.get("summary_composed") or "")[:500]} if (o.get("summary") or o.get("summary_composed")) else {}),
               **({"usageInfo": o["rights_view"][:300]} if o.get("rights_view") else {}), **({"associatedMedia": {"@type": "MediaObject", "contentUrl": mf, "encodingFormat": "application/ld+json;profile=iiif"}} if mf else {}), **({"isRelatedTo": [f"{PAGES}r/{rec_slug(b_)}.html" for t_, b_, _ in REL.get(o["key"], [])[:20]]} if REL.get(o["key"]) else {})}
         js = json.dumps(ld, ensure_ascii=False).replace("</", "<\\/")
+        dc = o.get("date_cross") or {}
+        dch = (E_(dc["verdict"]) + " — 이 기록 " + E_(dc["mine"]) + "".join(" · <a href='" + E_(rec_slug(c["key"])) + ".html'>" + E_(c["inst"]) + "</a> " + E_(c["date"]) + ("" if c.get("agree") else " ✕") for c in dc["others"])) if dc else ""
         open(os.path.join(rd, f"{sl}.html"), "w", encoding="utf-8").write(f"""<!DOCTYPE html><html lang="ko"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>{E_(o['title'][:120])} — KOREA ARCHIVE 발견 원장</title><link rel="canonical" href="{pu}"><script type="application/ld+json">{js}</script>
 <style>body{{font-family:system-ui,'Noto Sans KR',sans-serif;margin:0;background:#14161b;color:#e6e4dc}}main{{max-width:860px;margin:auto;padding:16px}}a{{color:#e0b04a}}th{{text-align:left;color:#9b9a93;font-weight:400;padding:3px 10px 3px 0;vertical-align:top;white-space:nowrap}}td{{padding:3px 0}}small{{color:#9b9a93}}</style>
@@ -1057,7 +1094,7 @@ def build_record_pages(recs_all):
 <h1>{E_(o['title'][:300])}</h1><table>
 {row('소장 기관', E_(inst))}{row('원 기관 링크', f"<a href='{E_(o.get('url') or '')}'>{E_((o.get('url') or '')[:100])}</a>" if o.get('url') else '')}{row('식별자', E_(o.get('id') or ''))}
 {row('계층', E_(part) + (f" <small>(근거: {E_(o.get('partOf_src', ''))})</small>" if o.get('partOf_src') else '') if part else (E_(pder) + ' <small>[파생]</small>' if pder else ''))}
-{row('날짜', E_(date) if date else (E_(dd) + f" <small>[파생 — {E_(o.get('date_basis', ''))}]</small>" if dd else ''))}{row('연대', E_(decade(o)))}
+{row('날짜', E_(date) if date else (E_(dd) + f" <small>[파생 — {E_(o.get('date_basis', ''))}]</small>" if dd else ''))}{row('연대', E_(decade(o)))}{row('날짜 교차 확인', dch)}
 {row('요약', E_(o.get('summary') or '') or (E_(o.get('summary_composed') or '')))}{row('권리', E_(o.get('rights_view') or '') + (f" <small>({E_(o.get('rights_basis', ''))})</small>" if o.get('rights_basis') else ''))}
 {row('IIIF', f"<a href='{KV}{E_(mf)}'>KV 뷰어로 보기</a> · <a href='{E_(mf)}'>매니페스트</a> <small>({E_(o.get('iiif_kind', ''))})</small>" if mf else '')}
 {row('발견', f"처음 {E_(o.get('first_seen', '')[:10])} · 최근 {E_(o.get('last_seen', '')[:10])} · {o.get('seen', 1)}회 · 출처 {E_('+'.join(o.get('sources') or []))}")}
@@ -1557,14 +1594,15 @@ def write_quality(recs):
          "기관 IIIF": lambda o: o.get("iiif") and not o.get("iiif_status"), "IIIF(원 기관 제공)": lambda o: iiif_kind(o).startswith("원 기관 제공"), "IIIF(원 기관 이미지로 구축)": lambda o: iiif_kind(o).startswith("원 기관 이미지"),
          "IIIF(실물 이미지 — 제공+구축)": lambda o: not iiif_kind(o).startswith("기록 봉투"), "IIIF(브리지 포함)": lambda o: o.get("iiif") or o.get("iiif_built"), "썸네일": lambda o: o.get("thumb_ok"), "권리 표시": lambda o: o.get("rights_view"),
          "메타": lambda o: o.get("meta"), "원문 지문": lambda o: o.get("fixity"), "발견 경로": lambda o: o.get("found_by"), "발견 경로(파생 포함)": lambda o: o.get("found_by") or (o.get("found_by_derived") or {}).get("tools"),
-         "관련 기록 연결": lambda o: REL.get(o["key"]), "같은 기록(다른 소장처) 연결": lambda o: any(t == "같은 기록(다른 소장처)" for t, _, _ in REL.get(o["key"], []))}
+         "관련 기록 연결": lambda o: REL.get(o["key"]), "같은 기록(다른 소장처) 연결": lambda o: any(t == "같은 기록(다른 소장처)" for t, _, _ in REL.get(o["key"], [])),
+         "날짜 교차 확인(일치)": lambda o: (o.get("date_cross") or {}).get("verdict") == "일치"}
     day = dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%d")
     snap = {"records": len(R), **{k: round(100 * sum(1 for o in R if f(o)) / max(1, len(R)), 1) for k, f in F.items()}}
     p = os.path.join(D, "quality.json"); Qj = json.load(open(p, encoding="utf-8")) if os.path.exists(p) else {"note": "기록 항목별 채움률(%) 일별 시계열 — 지우지 않는다", "daily": {}}
     Qj["definitions"] = {"기관 IIIF": "iiif 필드가 있는 기록 — 원 기관 제공과 우리 브리지(원 기관 이미지로 구축)를 함께 센다(v2.75 이전부터의 시계열이라 이름 유지)",
                          "IIIF(원 기관 제공)": "원 기관이 직접 공개한 IIIF 매니페스트", "IIIF(원 기관 이미지로 구축)": "KOREA ARCHIVE 브리지가 원 기관 이미지·메타로 만든 매니페스트",
                          "IIIF(실물 이미지 — 제공+구축)": "위 둘의 합 — 나머지는 이미지 없는 기록 봉투", "IIIF(브리지 포함)": "기록 봉투까지 포함 — 모든 기록이 IIIF로 열림",
-                         "관련 기록 연결": "relations.json에서 다른 기록과 하나 이상 이어진 기록(같은 기록·같은 날·같은 계열, v2.82)", "같은 기록(다른 소장처) 연결": "기관 sameAs·식별자 일치로 다른 소장처의 같은 기록과 이어진 기록"}  # v2.75
+                         "관련 기록 연결": "relations.json에서 다른 기록과 하나 이상 이어진 기록(같은 기록·같은 날·같은 계열, v2.82)", "같은 기록(다른 소장처) 연결": "기관 sameAs·식별자 일치로 다른 소장처의 같은 기록과 이어진 기록", "날짜 교차 확인(일치)": "같은 기록의 다른 소장처가 적은 날짜와 이 기록의 날짜가 일치(v2.84 date_cross — 두 기관 이상이 증언)"}  # v2.75
     Qj["daily"][day] = snap; Qj["daily"] = dict(sorted(Qj["daily"].items())); Qj["latest"] = {"day": day, **snap}
     json.dump(Qj, open(p, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
     return snap
@@ -1813,9 +1851,12 @@ def main():
         else: o.pop("found_by_derived", None)
         o["iiif_kind"] = iiif_kind(o)  # v2.75 원 기관 제공 · 원 기관 이미지로 구축 · 기록 봉투 — 우리 브리지를 '기관'으로 부르던 표기 교정
         o["iiif_built"] = "" if (o.get("iiif") and not o.get("iiif_status")) else leaf_manifest(o)  # v2.52 기관 매니페스트가 비공개 응답이면 브리지로 대체(기관 주소는 보존)
+    nrel = build_relations(recs)  # v2.82 기록↔기록 맥락 연결(RiC-O·기록 페이지·품질이 함께 씀)
+    ndp = date_from_same(recs)  # v2.84 날짜 없는 기록 ← 같은 기록의 다른 소장처 날짜([파생]·근거)
+    if ndp: print(f"같은 기록의 다른 소장처 날짜로 연대 파생 {ndp}건")
     with open(lp, "w", encoding="utf-8") as f:
         for o in recs: f.write(json.dumps(o, ensure_ascii=False, separators=(",", ":")) + "\n")
-    cols = ["key", "entry_type", "found_by_basis", "summary_composed", "rights_view", "rights_basis", "fixity", "defect_note", "link_note", "sources", "title", "date", "date_derived", "date_basis", "id", "url", "partOf", "partOf_derived", "media", "sameAs", "iiif", "iiif_status", "iiif_built", "iiif_kind", "found_by", "found_by_derived", "first_seen", "last_seen", "seen", "seen_7d", "seen_30d", "days_total", "formats", "tools", "max_cross", "trend", "rank", "score", "summary", "summary_basis", "rights", "attribution", "thumb", "meta", "meta_basis", "authority", "key_aliases", "merge_note", "recovered", "harvested", "meta_restored", "found_via", "drilled_from"]
+    cols = ["key", "entry_type", "found_by_basis", "summary_composed", "rights_view", "rights_basis", "fixity", "defect_note", "link_note", "sources", "title", "date", "date_derived", "date_basis", "id", "url", "partOf", "partOf_derived", "media", "sameAs", "iiif", "iiif_status", "iiif_built", "iiif_kind", "found_by", "found_by_derived", "first_seen", "last_seen", "seen", "seen_7d", "seen_30d", "days_total", "formats", "tools", "max_cross", "trend", "rank", "score", "summary", "summary_basis", "rights", "attribution", "thumb", "meta", "meta_basis", "authority", "key_aliases", "merge_note", "recovered", "harvested", "meta_restored", "found_via", "drilled_from", "date_cross"]
     fmtv = lambda v: json.dumps(v, ensure_ascii=False, separators=(",", ":")) if isinstance(v, list) and v and isinstance(v[0], dict) else " | ".join(f"{a}: {b}" for a, b in v) if isinstance(v, list) and v and isinstance(v[0], list) else (" ".join(f"{k}:{n}" for k, n in sorted(v.items(), key=lambda kv: -kv[1])) if isinstance(v, dict) and all(isinstance(x, (int, float)) for x in v.values()) else json.dumps(v, ensure_ascii=False, separators=(",", ":")) if isinstance(v, dict) else ("+".join(v) if isinstance(v, list) else v))
     with open(os.path.join(D, "discovered.csv"), "w", encoding="utf-8-sig", newline="") as f:
         w = csv.writer(f); w.writerow(cols)
@@ -1826,7 +1867,6 @@ def main():
         for o in pop[:200]: w.writerow([fmtv(o.get(c, "")) for c in pc])
     usage["daily"] = dict(sorted(usage["daily"].items()))  # v2.26 일별 활용 전체 보존(이전 400일 제한 해제)
     json.dump(usage, open(up, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
-    nrel = build_relations(recs)  # v2.82 기록↔기록 맥락 연결(RiC-O·기록 페이지·품질이 함께 씀)
     sets = {}
     graph = []
     for o in recs:
