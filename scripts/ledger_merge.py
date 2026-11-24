@@ -459,12 +459,13 @@ def tok(env):
     c = zlib.compressobj(9, zlib.DEFLATED, -15)
     return base64.urlsafe_b64encode(c.compress(json.dumps(env, ensure_ascii=False, separators=(",", ":")).encode()) + c.flush()).decode().rstrip("=")
 
-def merge_queries(state, today):
+def merge_queries(state, today, kind="q"):
     """v2.26 모든 질의·회신 영구 축적 — 날짜 함 ka:q → docs/data/queries/YYYY-MM.jsonl.gz.
     같은 도구·같은 인자·같은 회신 지문(h)이면 중복(seen·last만 갱신), 회신이 바뀌면 새 판으로 보존(증거성 — 응답 변화 이력). 절대 삭제하지 않는다."""
     import gzip, hashlib
-    qdir = os.path.join(D, "queries"); os.makedirs(qdir, exist_ok=True)
-    qs = state.setdefault("qdays", {}); added = 0; books = {}
+    # v2.58 kind="qp" — 자동 점검(골든·헬스·원장 보강) 질의·회신을 queries/probe/에 따로(활용 집계·발견 경로와 섞지 않음, 지우지 않음)
+    qdir = os.path.join(D, "queries", "probe") if kind == "qp" else os.path.join(D, "queries"); os.makedirs(qdir, exist_ok=True)
+    qs = state.setdefault("qpdays" if kind == "qp" else "qdays", {}); added = 0; books = {}
     def book(month):
         if month not in books:
             f = os.path.join(qdir, f"{month}.jsonl.gz"); rows = {}
@@ -476,19 +477,20 @@ def merge_queries(state, today):
     for back in (2, 1, 0):
         d = (today - dt.timedelta(days=back)).isoformat(); pos = qs.get(d, 0)
         while True:
-            try: j = get(f"{API}{d}?kind=q&start={pos}&n=500")
+            try: j = get(f"{API}{d}?kind={kind}&start={pos}&n=500")
             except Exception as e: print(f"질의 {d}: 읽기 실패 {e}"); break
             items = j.get("items") or []
             for r in items:
+                if not r.get("tool") or "h" not in r: continue  # 질의·회신 형식이 아닌 항목(옛 배포가 kind를 모르면 발견 함을 돌려줌) — 받지 않는다
                 at = r.get("at") or d; args = r.get("args") or {}
                 k = hashlib.sha256((r.get("tool", "") + json.dumps(args, ensure_ascii=False, sort_keys=True) + r.get("h", "")).encode()).hexdigest()[:20]
                 B = book(at[:7]); o = B.get(k)
                 if o: o["seen"] += 1; o["last"] = max(o["last"], at); continue
-                B[k] = {"k": k, "ak": r.get("ak", ""), "tool": r.get("tool", ""), "args": args, "first": at, "last": at, "seen": 1, "h": r.get("h", ""), "n": r.get("n", 0), "z": r.get("z", "")}; added += 1
+                B[k] = {"k": k, "ak": r.get("ak", ""), "tool": r.get("tool", ""), "args": args, "first": at, "last": at, "seen": 1, "h": r.get("h", ""), "n": r.get("n", 0), "z": r.get("z", ""), **({"probe": r["probe"]} if r.get("probe") else {})}; added += 1
             pos += len(items)
             if len(items) < 500: break
         qs[d] = pos
-    keep = (today - dt.timedelta(days=10)).isoformat(); state["qdays"] = {k: v for k, v in qs.items() if k >= keep}
+    keep = (today - dt.timedelta(days=10)).isoformat(); state["qpdays" if kind == "qp" else "qdays"] = {k: v for k, v in qs.items() if k >= keep}
     for month, rows in books.items():
         with gzip.open(os.path.join(qdir, f"{month}.jsonl.gz"), "wt", encoding="utf-8") as fo:
             for o in sorted(rows.values(), key=lambda o: (o["first"], o["k"])): fo.write(json.dumps(o, ensure_ascii=False, separators=(",", ":")) + "\n")
@@ -498,9 +500,9 @@ def merge_queries(state, today):
         if f.endswith(".jsonl.gz"):
             for ln in gzip.open(os.path.join(qdir, f), "rt", encoding="utf-8"):
                 if ln.strip():
-                    o = json.loads(ln); idx.append({k: o[k] for k in ("k", "tool", "args", "first", "last", "seen", "h", "n")} | {"ak": o.get("ak", ""), "month": f[:7]})
+                    o = json.loads(ln); idx.append({k: o[k] for k in ("k", "tool", "args", "first", "last", "seen", "h", "n")} | {"ak": o.get("ak", ""), "month": f[:7]} | ({"probe": o["probe"]} if o.get("probe") else {}))
     json.dump({"updated": dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"), "total": len(idx), "queries": idx}, open(os.path.join(qdir, "index.json"), "w", encoding="utf-8"), ensure_ascii=False)
-    print(f"질의 축적: 신규 {added} · 누적 {len(idx)}")
+    print(f"{'점검 ' if kind == 'qp' else ''}질의 축적: 신규 {added} · 누적 {len(idx)}")
     bt = {}
     for o in idx: bt[o["tool"]] = bt.get(o["tool"], 0) + o["seen"]
     recent = sorted(idx, key=lambda o: o["last"], reverse=True)[:20]
@@ -1141,6 +1143,8 @@ def main():
     keep = (today - dt.timedelta(days=10)).isoformat()
     state["days"] = {k: v for k, v in state["days"].items() if k >= keep}  # 처리 위치(작업 상태)일 뿐 축적 정보 아님
     nq = merge_queries(state, today)
+    try: npq = merge_queries(state, today, "qp")  # v2.58 자동 점검 질의·회신(별도 축적)
+    except Exception as e: npq = {"total": 0, "added": 0}; print(f"점검 질의 축적 실패 {e}")
     for o in led.values(): o["entry_type"] = entry_type(o)
     rl_used, rl_fixed = resolve_links(led, today, int(os.environ.get("RESOLVE_MAX", "20")))
     ad_used, ad_added = aks_drill(led, today, int(os.environ.get("AKS_DRILL_MAX", "30")))
@@ -1273,7 +1277,7 @@ table{{width:100%;border-collapse:collapse;font-size:14px}}td,th{{border-bottom:
 <p style="font-size:13px;color:#9b9a93">주요 내용·메타정보·썸네일은 기관 IIIF·우리 브리지 매니페스트를 하루 한 번 판독해 채웁니다(하루 상한·순차 요청). 썸네일은 재이용 가능 표시가 확인된 것만 싣고, 포로·사망자·묘지·수형자 관련 기록과 허가가 필요한 이미지는 링크만 둡니다. 권리는 원 기관 표기를 따릅니다 — 게재 전 judge_rights로 확인. 모든 변경은 저장소 git 이력(docs/data/)에 남습니다.</p>
 <h2>자주 활용되는 기록 TOP 30</h2><p style="font-size:13px">점수 = 최근 30일 발견×2 + 전체 발견 + 발견된 날 수×3 + 교차확인 기관 수 가중. 자동 검사 트래픽 제외.</p><div class="g">{prow}</div>
 <h2>일별 활용(최근 14일)</h2><table><tr><th>날짜</th><th>검색 묶음</th><th>발견 기록</th><th>신규 기록</th></tr>{urow}</table><p style="font-size:13px">형식별 누계: {E_(fmtv(usage['formats']))} · <a href="usage.json">usage.json</a></p>
-<h2>질의·회신 축적</h2><p style="font-size:13px">모든 도구 호출의 질의와 회신 본문을 원문 그대로(가공·삭제 없이) 영구 보존합니다. 같은 질의·같은 회신은 한 번만 두고 횟수만 셉니다. 회신이 달라지면 새 판으로 남겨 기관 응답 변화의 증거로 씁니다. 고유 질의 {nq['total']}건 · 누적 호출 {nq['calls']}회 · 도구별 {E_(fmtv(nq['by_tool']))} · <a href="queries/index.json">queries/index.json</a> (월별 회신 원문 queries/YYYY-MM.jsonl.gz)</p><table><tr><th>최근</th><th>도구</th><th>질의</th><th>횟수</th></tr>{qrow}</table>
+<h2>질의·회신 축적</h2><p style="font-size:13px">모든 도구 호출의 질의와 회신 본문을 원문 그대로(가공·삭제 없이) 영구 보존합니다. 같은 질의·같은 회신은 한 번만 두고 횟수만 셉니다. 회신이 달라지면 새 판으로 남겨 기관 응답 변화의 증거로 씁니다. 고유 질의 {nq['total']}건 · 누적 호출 {nq['calls']}회 · 도구별 {E_(fmtv(nq['by_tool']))} · <a href="queries/index.json">queries/index.json</a> (월별 회신 원문 queries/YYYY-MM.jsonl.gz) · 자동 점검(골든·헬스·원장 보강) 질의·회신은 활용 집계와 분리해 <a href="queries/probe/index.json">queries/probe/</a>에 따로 축적(고유 {npq['total']}건 — 기관 응답 변화·장애의 증거)</p><table><tr><th>최근</th><th>도구</th><th>질의</th><th>횟수</th></tr>{qrow}</table>
 <h2>최근 발견 100건</h2><div class="g">{rows}</div></main></html>""")
     build_tree(recs); ncls = merge_classes(recs); nprov, _orph = build_provenance(recs); nfx = write_fixity(recs); nql = write_quality(recs); nsub = merge_subjects(recs); nmed = build_media(recs)
     print(f"원장 {len(recs)}건 (신규 {new_recs}, 묶음 {new_batches})")
