@@ -1,5 +1,5 @@
 {
-"updated": "2026-11-24T01:20:22Z",
+"updated": "2026-11-24T02:25:34Z",
 "note": "구간 = 연대(4자리 연도·8자리 날짜·연호 연도 明治·大正·昭和·光武·隆熙·檀紀 환산) → 세기 → 왕조·시대명. 근거 순서 date → 제목 → 메타(생산·시대·출판). 세기·시대 구간은 시간축 근사 정렬",
 "timeline": [
 {
@@ -126,6 +126,23 @@
 ]
 },
 {
+"decade": "1450년대",
+"records": 1,
+"by_source": {
+"aks": 1
+},
+"by_kind": {
+"document": 1
+},
+"samples": [
+{
+"title": "1456년 오공신회맹축(五功臣會盟軸)－1",
+"url": "https://archive.aks.ac.kr/link.do?dataUCI=G002+AKS+KSM-XD.1456.1100-20250415.F13301-02-W000001",
+"iiif": "https://korea-archive-mcp.vercel.app/iiif/rec/nVFdSwJBFP0rwzwVuuvM-vGwUBFFEdKTRUH0sGigWGa69RKB4faBGhgohK66oFEPBuJqqPlrog_ZuUt_oVmFfkDDhTP33LnnzNw5x2ks72Elnsb7bqxiGVOfP8CuNAQPLcvsQ96wKwX2NITX8tzHqPSZa0xuml969rvamLwN5n_GdxS7cYQ3cohxWCdEci0HQ65gaFPYXRUdPZFSQgSJSH7io35xjXq9hApEEnaIsxyFU94aVdVkWvZ4lFQ4Gjs7EPmtRCUsxlOew1giLkaOlyKKqmyvbCz80yTJTeyybvVfLNNg7QFoOtSLrFmwehn0nhmhP3qaOdvW_aJzqjKwc0NmapCflWYcAkOD5hhqPSg9I6g_QpeLdxAnmNmDbA3ZVQ2ui1Ynw90T3N0ZtBsfzcZ1woF1dKvbRuxWA-MSQbXIVXhJcb6CvyUgUCpIvi1C5Gngi18/manifest.json"
+}
+]
+},
+{
 "decade": "조선시대",
 "records": 5,
 "by_source": {
@@ -164,6 +181,23 @@
 ]
 },
 {
+"decade": "1600년대",
+"records": 1,
+"by_source": {
+"aks": 1
+},
+"by_kind": {
+"document": 1
+},
+"samples": [
+{
+"title": "1604년 김응남(金應南) 호성공신교서(扈聖功臣敎書)",
+"url": "https://archive.aks.ac.kr/link.do?dataUCI=G002+AKS+KSM-XA.1604.1147-20250415.F13801-01-W000001",
+"iiif": "https://korea-archive-mcp.vercel.app/iiif/rec/q1YqVrKKVkrMLlaK1VEqUbJSMjQzMHnd2qLwamfDm7kTXzet0HjZPvFZe-fT3umaCm9n7HjTsvHV5q1vuhe82jrhTcscjWedHS8apz3tmv-iffGzqX3PZu_QVNJRSgGaBKQygZS7gYGRtqN3sLZ3sK9uhKMeyAI9Q0MTc10jAyNTAxNDUz03Q2MLA0NdIAo3AAFDoNZSoNaMkpKCYit9_cSi5IzMslQ9oDP1EpP1sov0czLzsvVS8u1TEksSQ509bcm0pABoydupc15tXftq84LXa4Cem_Nm3oTXi3tebWlQeNSwSwEuDOaBmEsm2oFUzdrxtmvn680tb7ohUhAxhTezJ7xZvAcUdlNWKLyeOOHN1CmIkFR4s6j11YYGoL15QHtBYa6jlAsJqEIg9XrDnFeb1ii87mh5s6ARbNK8pUCpRFCsAH1hpmtoqGtkEmJgYAVGSrUA/manifest.json"
+}
+]
+},
+{
 "decade": "17세기",
 "records": 4,
 "by_source": {
@@ -196,6 +230,23 @@
 ]
 },
 {
+"decade": "1650년대",
+"records": 1,
+"by_source": {
+"aks": 1
+},
+"by_kind": {
+"document": 1
+},
+"samples": [
+{
+"title": "1657년 정유식년사마방목(丁酉式年司馬榜目)",
+"url": "https://archive.aks.ac.kr/link.do?dataUCI=G002+AKS+KSM-WI.1657.1144-20250417.B070a_111_00509_YYY",
+"iiif": "https://korea-archive-mcp.vercel.app/iiif/rec/nVHdSgJBGH2VZa4K3XVmWZUWKqqLEOnKIiRCFg0Uy0y3biIwWcFS0CAhcpOlH9PYYkmDNXqayMKd8R36VqEHCAbO93e-M3PmGOWRvIWUdB5te5GKZEQC_iAtaRwzGkw3WOUGElY06WOZWl361J35sk9HpbPhR2046A9r9qhtfrf1n-bLLPKiBCwASAGsYix6lsIRTziyxm-GBHevQIgk8SIW_VgiQWEZB7ESI4TEMPbjuVg0GgXyIZCTqprNyz6fkosnU0c7AtxPUOJCOufbTWXSQmJ_MaGoysZKaP7fMlmQGTd05-3Z6RnUtJmms1ad3lWdfoH7LLxzf-VJ5ob3Fwvu1LU9Ph_QnsYq09a0xoFD45rJUeuKFjvUarDLDkerBXZbAiIIZkDQ9dmL9qYuHQBQS3degVTWmHHKsWadtR6gpbg_AQ8I8ITworSOsTw56OQX/manifest.json"
+}
+]
+},
+{
 "decade": "1670년대",
 "records": 2,
 "by_source": {
@@ -214,6 +265,99 @@
 "title": "Relation du naufrage d'un vaisseau holandois sur la coste de l'isle de Quelpaerts, avec la description du royaume de Cor",
 "url": "https://gallica.bnf.fr/ark:/12148/bpt6k8705034n",
 "iiif": "https://korea-archive-mcp.vercel.app/iiif/rec/TZC9TgJBFIVf5WYamoX9ZRe21ERoNXaE4rI7wIbZmXV-SIgx0cTC0l5jbCxMLIylLW9iKTyEF5TE6pzJ-c7NnXvJDMtHbIZCVAWysccsy9kZF2grJaF0INFNNc44lC0nYYmVMRwdzJVAWarKgHEaBEKhjCWIg2hVRuzdqeOiQa6t8QCXvNhhJTeFrprDdK1W6Oo9faz0-pXDaP1KAI1qUMOQS72CIdZceDtmoHTh6rEHzGMlLRqmWUC2Iot6kfthFCY9v5jEQTeLwn7ap9BROLe2Mbnv__2zM5HTzlT7_zqTxqaLXhZ0gziR1GqoNfil4ev6E47kyV5LtIc6UZKow-08VtOL5IJk8_74_fEGm7vb7fMNbB_ut08vFOHuulEQpe0wbEfxeRjnSZAnGbv6AQ/manifest.json"
+}
+]
+},
+{
+"decade": "1700년대",
+"records": 1,
+"by_source": {
+"aks": 1
+},
+"by_kind": {
+"document": 1
+},
+"samples": [
+{
+"title": "1702년 임오식년사마방목(壬午式年司馬榜目)",
+"url": "https://archive.aks.ac.kr/link.do?dataUCI=G002+AKS+KSM-WI.1702.1144-20250417.B070a_111_00510_YYY",
+"iiif": "https://korea-archive-mcp.vercel.app/iiif/rec/nVHdSgJBGH2VZa4K3XFmWRMWKqqLEOnKIiRCFg0Uy0y3biIwWUHK0CBBchNJM40tljTQ6GmCLdoZ36FvFXqAYOB8f-c7M2dOUQ4pO0hN5dCuF2lIQTRAJFbUBd7Ueb3DL-8g4QWTPZaY1WdP_Tm7bdpXJfujYo-HdmX00zW_usZ342UeeVEcFgAkAdYJkTwrobAnFN4Qt4PY3YsplWVRIpKfyDSAV0mAqFFKaZQQPyXRSCQC5GMgJzQtk1N8PjUbSyRP9jDcD6sxnMr69pPpFI4fLsdVTd1aCy7-WyYDMpOa4bw9O4MWM0dcN3izytplZ5gXPvPvwl95mrlh53rJnbodTS7GbKDzy1lrVhPAoUnFFJhVZ4Ues2r8piewcp7fF4EIgmkQdH32ooOZS0cAzDKcVyCVdN46F3ijypsP0FLdn4AHLIiUipK8SYgyPejsFw/manifest.json"
+}
+]
+},
+{
+"decade": "1710년대",
+"records": 7,
+"by_source": {
+"aks": 7
+},
+"by_kind": {
+"document": 7
+},
+"samples": [
+{
+"title": "1714년 이장경(李長庚) 영정(影幀)",
+"url": "https://archive.aks.ac.kr/link.do?dataUCI=G002+AKS+KSM-XZ.1714.1144-20250415.F11301-01-W000001",
+"iiif": "https://korea-archive-mcp.vercel.app/iiif/rec/q1YqVrKKVkrMLlaK1VEqUbJSMjQ3NHnd2qLwZu6WN_OWvtq0V-PZ3L6XU7c_3TVLU-HNjMY3C6ZqPN278enOBk0lHaUUoA4glQmk3A0MjLQdvYO1vYN9dSOi9EAG6RkampjoGhkYmRqYGJrquRkaGhsY6gJRuAEIGAK1lgK1ZpSUFBRb6esnFiVnZJal6gGdo5eYrJddpJ-TmZetl5Jvn5JYkhjq7GlLpiUFQEveTp3zauvaV5sXvF6z403LnDfzJrxe3PNqS4PCo4ZdCnBhMA_EXDLRDqRq1o63XTtfb2550w2RgogpvF7e8bZ_DZC38c3iPaCgmrJC4XVPw5tFrW9n9QAtzANaCApUHaVcSAgVAqnXG-a82rRG4XVHy5sFjQpvZk8ABjBQKhEU7EDnm-kaGuoamYQYGFiBkVItAA/manifest.json"
+},
+{
+"title": "1714년 이조년(李兆年) 영정(影幀)",
+"url": "https://archive.aks.ac.kr/link.do?dataUCI=G002+AKS+KSM-XZ.1714.1144-20250415.F11301-01-W000002",
+"iiif": "https://korea-archive-mcp.vercel.app/iiif/rec/q1YqVrKKVkrMLlaK1VEqUbJSMjQ3NHnd2qLwZu6WNws3AFkaz-b2PW1te7pzi6bCmxmNbxZM1Xi6d-PTnQ2aSjpKKUAdQCoTSLkbGBhpO3oHa3sH--pGROmBDNIzNDQx0TUyMDI1MDE01XMzNDQ2MNQFonADEDACai0Fas0oKSkottLXTyxKzsgsS9UDOkcvMVkvu0g_JzMvWy8l3z4lsSQx1NnTlkxLCoCWvJ0659XWta82L3i9Zsebljlv5k14vbjn1ZYGhUcNuxTgwmAeiLlkoh1I1awdb7t2vt7c8qYbIgURU3i9vONt_xogb-ObxXtAQTVlhcLrnoY3i1rfzuoBWpgHtBAUqDpKuZAQKgRSrzfMebVpjcLrjpY3CxoV3sye8GbeUqBUIijYgc430zU01DUyCTEwsAIjpVoA/manifest.json"
+},
+{
+"title": "1714년 이승경(李承慶) 영정(影幀)",
+"url": "https://archive.aks.ac.kr/link.do?dataUCI=G002+AKS+KSM-XZ.1714.1144-20250415.F11301-01-W000003",
+"iiif": "https://korea-archive-mcp.vercel.app/iiif/rec/q1YqVrKKVkrMLlaK1VEqUbJSMjQ3NHnd2qLwZu6WN107X23aq_Fsbt-zzv3PWrdpKryZ0fhmwVSNp3s3Pt3ZoKmko5QC1AGkMoGUu4GBkbajd7C2d7CvbkSUHsggPUNDExNdIwMjUwMTQ1M9N0NDYwNDXSAKNwABY6DWUqDWjJKSgmIrff3EouSMzLJUPaBz9BKT9bKL9HMy87L1UvLtUxJLEkOdPW3JtKQAaMnbqXNebV37avOC12t2vGmZ82behNeLe15taVB41LBLAS4M5oGYSybagVTN2vG2a-frzS1vuiFSEDGF18s73vavAfI2vlm8BxRUU1YovO5peLOo9e2sHqCFeUALQYGqo5QLCaFCIPV6w5xXm9YovO5oebOgUeHN7Alv5i0FSiWCgh3ofDNdQ0NdI5MQAwMrMFKqBQA/manifest.json"
+},
+{
+"title": "1714년 이포(李褒) 영정(影幀)",
+"url": "https://archive.aks.ac.kr/link.do?dataUCI=G002+AKS+KSM-XZ.1714.1144-20250415.F11301-01-W000005",
+"iiif": "https://korea-archive-mcp.vercel.app/iiif/rec/q1YqVrKKVkrMLlaK1VEqUbJSMjQ3NHnd2qLwZu6Wt_1rNJ7N7XuxZJKmwpsZjW8WTNV4unfj050Nmko6SilAtUAqE0i5GxgYaTt6B2t7B_vqRkTpgYzQMzQ0MdE1MjAyNTAxNNVzMzQ0NjDUBaJwAxAwBWotBWrNKCkpKLbS108sSs7ILEvVAzpELzFZL7tIPyczL1svJd8-JbEkMdTZ05ZMSwqAlrydOufV1rWvNi94vWbHm5Y5b-ZNeL2459WWBoVHDbsU4MJgHoi5ZKIdSNWsHW-7dr7e3PKmGyIFEVN4vbwDGC5A3sY3i_cAA-nNlBUKr3sa3ixqfTurB2hhHtBCUHDqKOVCQqgQSL3eMOfVpjUKrzta3ixoVHgze8KbeUuBUomgAAc630zX0FDXyCTEwMAKjJRqAQ/manifest.json"
+},
+{
+"title": "1714년 이원구(李元具) 영정(影幀)",
+"url": "https://archive.aks.ac.kr/link.do?dataUCI=G002+AKS+KSM-XZ.1714.1144-20250415.F11301-01-W000006",
+"iiif": "https://korea-archive-mcp.vercel.app/iiif/rec/q1YqVrKKVkrMLlaK1VEqUbJSMjQ3NHnd2qLwZu6WN7MnvNq6RuPZ3L6nrc1PW7drKryZ0fhmwVSNp3s3Pt3ZoKmko5QC1AGkMoGUu4GBkbajd7C2d7CvbkSUHsggPUNDExNdIwMjUwMTQ1M9N0NDYwNDXSAKNwABM6DWUqDWjJKSgmIrff3EouSMzLJUPaBz9BKT9bKL9HMy87L1UvLtUxJLEkOdPW3JtKQAaMnbqXNebV37avOC12t2vGmZ82behNeLe15taVB41LBLAS4M5oGYSybagVTN2vG2a-frzS1vuiFSEDGF18s73vavAfI2vlm8BxRUU1YovO5peLOo9e2sHqCFeUALQYGqo5QLCaFCIPV6w5xXm9YovO5oebOgUQEYum_mLQVKJYKCHeh8M11DQ10jkxADAyswUqoFAA/manifest.json"
+}
+]
+},
+{
+"decade": "1730년대",
+"records": 1,
+"by_source": {
+"aks": 1
+},
+"by_kind": {
+"document": 1
+},
+"samples": [
+{
+"title": "1735년 이제(李濟) 영정(影幀)",
+"url": "https://archive.aks.ac.kr/link.do?dataUCI=G002+AKS+KSM-XZ.1735.1144-20250415.F11301-01-W000008",
+"iiif": "https://korea-archive-mcp.vercel.app/iiif/rec/q1YqVrKKVkrMLlaK1VEqUbJSMjQ3Nn3d2qLwZu6WNwvmaDyb2_ds_3xNhTczGt8smKrxdO_GpzsbNJV0lFKAaoFUJpByNzAw0nb0Dtb2DvbVjYjSAxmhZ2hoYqJrZGBkamBiaKrnZmhobGCoC0ThBiBgAdRaCtSaUVJSUGylr59YlJyRWZaqB3SIXmKyXnaRfk5mXrZeSr59SmJJYqizpy2ZlhQALXk7dc6rrWtfbV7wes2ONy1z3syb8Hpxz6stDQqPGnYpwIXBPBBzyUQ7kKpZO9527Xy9ueVNN0QKIqbwennH2_41QN7GN4v3gAJpygqF1z0Nbxa1vp3VA7QwD2ghKDh1lHIhIVQIpF5vmPNq0xqF1x0tbxY0KryZPeHNvKVAqURQgAOdb6ZraKhrZBJiYGAFRkq1AA/manifest.json"
+}
+]
+},
+{
+"decade": "1740년대",
+"records": 2,
+"by_source": {
+"aks": 2
+},
+"by_kind": {
+"document": 2
+},
+"samples": [
+{
+"title": "1746년 이승경(李承慶) 영정(影幀)",
+"url": "https://archive.aks.ac.kr/link.do?dataUCI=G002+AKS+KSM-XZ.1746.1144-20250415.F11301-01-W000004",
+"iiif": "https://korea-archive-mcp.vercel.app/iiif/rec/q1YqVrKKVkrMLlaK1VEqUbJSMjQ3MXvd2qLwZu6WN107X23aq_Fsbt-zzv3PWrdpKryZ0fhmwVSNp3s3Pt3ZoKmko5QC1AGkMoGUu4GBkbajd7C2d7CvbkSUHsggPUNDExNdIwMjUwMTQ1M9N0NDYwNDXSAKNwABE6DWUqDWjJKSgmIrff3EouSMzLJUPaBz9BKT9bKL9HMy87L1UvLtUxJLEkOdPW3JtKQAaMnbqXNebV37avOC12t2vGmZ82behNeLe15taVB41LBLAS4M5oGYSybagVTN2vG2a-frzS1vuiFSEDGF18s73vavAfI2vlm8BxRUU1YovO5peLOo9e2sHqCFeUALQYGqo5QLCaFCIPV6w5xXm9YovO5oebOgUeHN7Alv5i0FSiWCgh3ofDNdQ0NdI5MQAwMrMFKqBQA/manifest.json"
+},
+{
+"title": "1746년 이욱(李稶) 영정(影幀)",
+"url": "https://archive.aks.ac.kr/link.do?dataUCI=G002+AKS+KSM-XZ.1746.1144-20250415.F11301-01-W000012",
+"iiif": "https://korea-archive-mcp.vercel.app/iiif/rec/q1YqVrKKVkrMLlaK1VEqUbJSMjQ3MXvd2qLwZu6WN7M2ajyb2_d8xTZNhTczGt8smKrxdO_GpzsbNJV0lFKAaoFUJpByNzAw0nb0Dtb2DvbVjYjSAxmhZ2hoYqJrZGBkamBiaKrnZmhobGCoC0ThBkBgaATUWgrUmlFSUlBspa-fWJSckVmWqgd0iF5isl52kX5OZl62Xkq-fUpiSWKos6ctmZYUAC15O3XOq61rX21e8HrNjjctc97Mm_B6cc-rLQ0Kjxp2KcCFwTwQc8lEO5CqWTvedu18vbnlTTdECiKm8Hp5x9v-NUDexjeL94ACacoKhdc9DW8Wtb6d1QO0MA9oISg4dZRyISFUCKReb5jzatMahdcdLW8WNCq8mT3hzbylQKlEUIADnW-ma2ioa2QSYmBgBUZKtQA/manifest.json"
 }
 ]
 },
@@ -238,6 +382,28 @@
 "title": "[국외문화유산] 나전모란문흑칠접시(螺鈿牧丹文黑漆接匙) — 영국 영국박물관",
 "url": "https://portal.nrich.go.kr/kor/overseasSearchView.do?menuIdx=840&mseq=67574",
 "iiif": "https://korea-archive-mcp.vercel.app/iiif/nrich/ov-67574/manifest.json"
+}
+]
+},
+{
+"decade": "1750년대",
+"records": 2,
+"by_source": {
+"aks": 2
+},
+"by_kind": {
+"document": 2
+},
+"samples": [
+{
+"title": "1750년 숭정3경오식년사마방목(崇禎三庚午式年司馬榜目)",
+"url": "https://archive.aks.ac.kr/link.do?dataUCI=G002+AKS+KSM-WI.1750.1144-20250417.B070a_111_00511_YYY",
+"iiif": "https://korea-archive-mcp.vercel.app/iiif/rec/nVHRSgJBFP2VZZ4K3XVm04SFiuohRHqyCImQRQPFMtOtlwhMjLa0NEgQ3UTKTEND1EClfibapJ3xH7qr0AcEw5yZc--ZM3PmBMWRtI3kcBztWJGCJEScDkzPUxxTW6ySnzM6H6xQZel74FiySZ9V2m7Ql8aM3rsY1W6--pf6sKhfq_p7Vh_09Gz_p9b8rmmj0usssqIAHAgQAljDWLQsuz0Wt2ed33IJpo9AiN3Oi1h0YDtxCivYiWUfIcSHsQNmr9cL4iMQBxUlGpdsNjnmD4aOdwW4ryD7hXDMtheKhIXAwVJAVuTNVdfCv22iYDPOa8Zby-hWaLPPUhor5-hjxugluM_EkPujJztzWb1dNLuK_fHVgHZTLD0tTTkOohpnmxxtF2iyTtt5dlfnaCbBHs5BCIYRMDRzt6L9aUqHALStGR0QqSlWOeNYKcfKT1CSzZ-BB8zzhPCifQNjaTLQ6S8/manifest.json"
+},
+{
+"title": "1753년 김응남(金應南) 시호교지(諡號敎旨)",
+"url": "https://archive.aks.ac.kr/link.do?dataUCI=G002+AKS+KSM-XA.1753.1147-20250415.F13801-01-W000010",
+"iiif": "https://korea-archive-mcp.vercel.app/iiif/rec/q1YqVrKKVkrMLlaK1VEqUbJSMjQ3NX7d2qLwamfDm7kTXzet0HjZPvFZe-fT3umaCm-657ydsePV1glvljdovFi98MXM-c-m9j2bvkJTSUcpBagbSGUCKXcDAyNtR-9gbe9gX90IRz2QoXqGhibmukYGRqYGJoamem6GxhYGhrpAFG4ABIYGQK2lQK0ZJSUFxVb6-olFyRmZZal6QKfpJSbrZRfp52TmZeul5NunJJYkhjp72pJpSQHQkrdT57zauvbV5gWv1-x40zLnzbwJrxf3vNrSoPCoYZcCXBjMAzGXTLQDqZq1423XztebW4ChAJaCiCm8mT3hzeI9oPCaskLh9cQJb6ZOQYSewptFra82NADtzQPaCwpnHaVcSEAVAqnXG-a82rRG4XVHy5sFjWCT5i0FSiWCYgLoCzNdQ0NdI5MQAwMrMFKqBQA/manifest.json"
 }
 ]
 },
@@ -277,18 +443,41 @@
 },
 {
 "decade": "1790년대",
-"records": 1,
+"records": 2,
 "by_source": {
-"tna": 1
+"tna": 1,
+"aks": 1
 },
 "by_kind": {
-"document": 1
+"document": 2
 },
 "samples": [
 {
 "title": "Book A: Survey",
 "url": "https://discovery.nationalarchives.gov.uk/details/r/e3d69a1a-3178-4388-b4fa-435679974471",
 "iiif": "https://korea-archive-mcp.vercel.app/iiif/tna/e3d69a1a/manifest.json"
+},
+{
+"title": "1798년 이제(李濟) 영정(影幀)",
+"url": "https://archive.aks.ac.kr/link.do?dataUCI=G002+AKS+KSM-XZ.1798.1144-20250415.F11301-01-W000009",
+"iiif": "https://korea-archive-mcp.vercel.app/iiif/rec/q1YqVrKKVkrMLlaK1VEqUbJSMjS3tHjd2qLwZu6WNwvmaDyb2_ds_3xNhTczGt8smKrxdO_GpzsbNJV0lFKAaoFUJpByNzAw0nb0Dtb2DvbVjYjSAxmhZ2hoYqJrZGBkamBiaKrnZmhobGCoC0ThBiBgCdRaCtSaUVJSUGylr59YlJyRWZaqB3SIXmKyXnaRfk5mXrZeSr59SmJJYqizpy2ZlhQALXk7dc6rrWtfbV7wes2ONy1z3syb8Hpxz6stDQqPGnYpwIXBPBBzyUQ7kKpZO9527Xy9ueVNN0QKIqbwennH2_41QN7GN4v3gAJpygqF1z0Nbxa1vp3VA7QwD2ghKDh1lHIhIVQIpF5vmPNq0xqF1x0tbxY0KryZPeHNvKVAqURQgAOdb6ZraKhrZBJiYGAFRkq1AA/manifest.json"
+}
+]
+},
+{
+"decade": "1820년대",
+"records": 1,
+"by_source": {
+"aks": 1
+},
+"by_kind": {
+"document": 1
+},
+"samples": [
+{
+"title": "1825년 이사후(李師厚) 영정(影幀)",
+"url": "https://archive.aks.ac.kr/link.do?dataUCI=G002+AKS+KSM-XZ.1825.1144-20250415.F11301-01-W000011",
+"iiif": "https://korea-archive-mcp.vercel.app/iiif/rec/q1YqVrKKVkrMLlaK1VEqUbJSMrQwMn3d2qLwZu6WN01r3s5u0Xg2t-_pjtVP-2ZpKryZ0fhmwVSNp3s3Pt3ZoKmko5QC1AGkMoGUu4GBkbajd7C2d7CvbkSUHsggPUNDExNdIwMjUwMTQ1M9N0NDYwNDXSAKNwACQ0Og1lKg1oySkoJiK339xKLkjMyyVD2gc_QSk_Wyi_RzMvOy9VLy7VMSSxJDnT1tybSkAGjJ26lzXm1d-2rzgtdrdrxpmfNm3oTXi3tebWlQeNSwSwEuDOaBmEsm2oFUzdrxtmvn680tb7ohUhAxhdfLO972rwHyNr5ZvAcUVFNWKLzuaXizqPXtrB6ghXlAC0GBqqOUCwmhQiD1esOcV5vWKLzuaHmzoFHhzewJb-YtBUolgoId6HwzXUNDXSOTEAMDKzBSqgUA/manifest.json"
 }
 ]
 },
@@ -349,6 +538,23 @@
 ]
 },
 {
+"decade": "1860년대",
+"records": 1,
+"by_source": {
+"aks": 1
+},
+"by_kind": {
+"document": 1
+},
+"samples": [
+{
+"title": "1865년 이숭인(李崇仁) 영정(影幀)",
+"url": "https://archive.aks.ac.kr/link.do?dataUCI=G002+AKS+KSM-XZ.1865.1144-20250415.F11301-01-W000013",
+"iiif": "https://korea-archive-mcp.vercel.app/iiif/rec/q1YqVrKKVkrMLlaK1VEqUbJSMrQwM33d2qLwZu6WNx1r38zdofFsbt_TLe1PdjdqKryZ0fhmwVSNp3s3Pt3ZoKmko5QC1AGkMoGUu4GBkbajd7C2d7CvbkSUHsggPUNDExNdIwMjUwMTQ1M9N0NDYwNDXSAKNwACQ2Og1lKg1oySkoJiK339xKLkjMyyVD2gc_QSk_Wyi_RzMvOy9VLy7VMSSxJDnT1tybSkAGjJ26lzXm1d-2rzgtdrdrxpmfNm3oTXi3tebWlQeNSwSwEuDOaBmEsm2oFUzdrxtmvn680tb7ohUhAxhdfLO972rwHyNr5ZvAcUVFNWKLzuaXizqPXtrB6ghXlAC0GBqqOUCwmhQiD1esOcV5vWKLzuaHmzoFHhzewJb-YtBUolgoId6HwzXUNDXSOTEAMDKzBSqgUA/manifest.json"
+}
+]
+},
+{
 "decade": "1870년대",
 "records": 2,
 "by_source": {
@@ -360,13 +566,13 @@
 "samples": [
 {
 "title": "[奎19338] 各宮房免稅情米釐正 節目 각궁방면세정미이정 절목 · [編者未詳]/[편자미상]",
-"url": "https://kyudb.snu.ac.kr",
-"iiif": "https://korea-archive-mcp.vercel.app/iiif/rec/NZDNSsNAFIVfZZiVQn_yI1rzHO5CFtUulGJpbbIQERKaaBfaZtGuGkNEKknRtDbFBjcFH0XIpM2M-AreRlzd73CGc8_cK9zGkozrl1rtGCsFrGIJy8m4xx-KYkVBiW0mYUi6q8S6T32LdKz0Ldrc2uT1CaVTPR2FKJsZ2btBZwENFsyMmTek05g9LAAQ87p0EqDPJZLTpb_WLeJM1kGklOXvXsxce_uyYyi4gGuwl68cCIBngP8NQGogT1W12ZbK5bxmqd3QStWTUv0C3Ca47OaOuWP0pX-gbOkAQiXaN5np7EDObm4k_fmm4-dIBisSDTePbq5-fIMMpjmuo2f4I4Q2IPTvIgV8DgyjBYPOnGz-gmjXZJ6B2MiGVWBVtzcTOGG_yPNFQTziRInjJX4PX_8C/manifest.json"
+"url": "https://kyudb.snu.ac.kr/book/view.do?book_cd=GK19338_00",
+"iiif": "https://korea-archive-mcp.vercel.app/iiif/rec/NZBfS8JgFMa_yst7VaD7G2WD6LKLbrsbQ9QFiaSWWkQEDrfyonQXduUSI4xNSs1JSjdCHyXYpnvf6Ct0XHR1fg_nPOc5nEtcwpKMcxcVNY2VGC5jCcter8Fvi2JCQZ6pe4OBX597xl1gG37NCN7c5Y3pvz6hYFgN2gMUjrTwXSMjhzgTqs9o954MZ_RhAoBot076DvqcIjmY2ouq4Vv9heMqrPzdmNGOuZqsaQqOYRVy-cSWAJgF_L8AZAXkUblcLEksG53JlPIVJpVhcqdsulDIsWfZw3NGLeyuRDKj7uztR9Ykx4G7CG56fUs7PfRV_UDh1AKEk0lTp7q1BjnrUcNrjpc1O0K_Nffd--VjJ1I_tua3hhEu3Gf4ASzNw9K_j8XwMTCUEyhkZIXjF0TqOu1qiLZNiIJWavVTgRM24zwfF8QDTpQ4XuI38NUv/manifest.json"
 },
 {
 "title": "[奎19604] 加士島屯土賭稅 節目 가사도둔토도세 절목 · 內藏院(朝鮮) 編/내장원(조선) 편",
-"url": "https://kyudb.snu.ac.kr",
-"iiif": "https://korea-archive-mcp.vercel.app/iiif/rec/NZDdSgJRFIVf5XCuHBidH0VrnqM78cLyopDE0rmICNRGkQgtMCKcbDSsqWxmciKlm6BHCc78nSO9QruJrva3WLD22vsQ17CSx-UDtbSJCzyuYwXnybQnrWfFTAGRE4PcPhH3jbzYRL8J3GffbCPfbvhDC0VOg7VmtK_R88GqYwAwbYmY0aWPD-hzgUj7Prjsh1eThKdfh5bFIX9hCrT1ykZTNjxLsLHDNINDq94S87gEm6W1XA5wB_C_A0gV5Ha9Xq0pghAXTdUqaqq4lSrvg1sFl3VOIRN9Nd5RtNABI6cZ19ETkMPFBunPw2MzRm_w4bkX4XgUq2-z6Q3sGAP3Du6D0AqE_v2Ex7vAMPZgUEeP5jNEuxozmghugFVgFX-_JotyNilJSTm9IaYVUVKkDD76AQ/manifest.json"
+"url": "https://kyudb.snu.ac.kr/book/view.do?book_cd=GK19604_00",
+"iiif": "https://korea-archive-mcp.vercel.app/iiif/rec/NZBfS8JgFMa_yst7paD7o6I1iC676LY7EVEXJJJaahERqE2RCC0wIlw2C2uV6XKR0k3QRwnezW2v9BU6Lro6v4fDOc9zziEuYCGKMwclMYljPlzEAo6SfpNfDnOhGCInCrl7Jvo7eR0R-Wamv5hqDZmjstkZIlsr0-rAaUnOeXteVwCoNEVUaThPj-hrgkjtYXbZsq5uPYZ8bQ2HXmROVNapvtFun3bOPLSnUUnxonlzin1YBGd-KRIBTAP-ZwBZArlVLOYLAsu6QZlCtsQkUkxml03mchl2L725z4i51YWIp8SVtXV3NM5xMJ2HaVo_BU_0Xf5A9kQGtLWKG1f2gI_XbZDW2DpWXTTan4Z-YfW6rvpRK0Z75OJMv4f7YWkWlv79zIe3gaHsQHE02R4PkNOQqFJBcCNYQSux-GqAC4T9PO8PBDe4oMDxAh_CR78/manifest.json"
 }
 ]
 },
@@ -417,8 +623,8 @@
 "samples": [
 {
 "title": "[奎18933] 加士島屯土賭稅 節目 가사도둔토도세 절목 · 內藏院(朝鮮) 編/내장원(조선) 편",
-"url": "https://kyudb.snu.ac.kr",
-"iiif": "https://korea-archive-mcp.vercel.app/iiif/rec/NZBfS8JgFMa_yst7tYFubov-7HN0J15YXhSSWJsXEcG0KRKhBUaEy2ZhrTK3XDTpJuijBO_m9r7SV-i06Or8Dg88z3POAdawmsfl_VppAxcyWMcqzpNRR1pdU5QCIsc2uX0i_ht5cYl1PfefI6eJIteI-hOUeAZrjGnXpGe9RcsGYOYMMbtNHx_QZ4BI835-0Y0vb7jQuoonEx5FgSPSxisbjFj_lGNDj5k2jxadGc7gEiRD6grgNuB_B1hrsG7pelVTRTEtKmiVmlDcFMp7oFZBZa0T8ERfxjtKAgsw8eppHYsDHz4VSHcaHzkphr2P0D-Ph4N0-3bqYc9Nce7fwX1gWgHTv59k8A4wjF0Y1LOS6RjRtsnsOoIbIAqk4u_X5Jy8nJWkrKys5xQ1J6nSEj78AQ/manifest.json"
+"url": "https://kyudb.snu.ac.kr/book/view.do?book_cd=GK18933_00",
+"iiif": "https://korea-archive-mcp.vercel.app/iiif/rec/NZBfS8JgFMa_yst7paD746I_g-iyi267ExF1QSKppRYRgdoUidACJcJls7BWmS4XKd0EfZTg3dz2Sl-h46Kr83s4nPM85xzhHBbDOHVYkOI4EsB5LOIw6dX55RVBiCByqpK7Z2K8k9chUW6mxoulVZA1LFrtAXL0Ii333YbsXjRnVRWAyhNE1Zr79Ii-xohUHqaXDfvq1mcq1_Zg4EfWWGPd8hvt9Gj73Ee7OpVVP5rVJziAJXAG1yXAJOB_BpAFkNv5fDYnsqwXlMmlC0wswaT22Hgmk2L3k1sHjJRZm4toQlpd3_BGoxwH01mYptUz8ETfxQ_kjBVARy95cRUf-Pi9BmmM7BPNQ7P5aRotu9vx1I9WMptDD6fGPdwPS9Ow9O9nAbwDDGUXiqsrzqiP3JpM1RKCG8EKWrH5V0NcaDHI88GQsMkJIseL_AI-_gU/manifest.json"
 },
 {
 "title": "There is an agitation in Italy — 독립신문(영문) [1면 3단]",
@@ -570,8 +776,8 @@
 },
 {
 "title": "제주도지사 공문 및 재오사카오조청년회 공문",
-"url": "https://archive.history.go.kr",
-"iiif": "https://korea-archive-mcp.vercel.app/iiif/rec/TZBPS8NAEMW_yjLnNJ1NQqF7VS-evYmUosUE0dYkCiJKLVF6qFRvQWtp8U8vK8RYQcVP47E7fgcntIinN2_f8PjNHkMEah0a9XDTDw4bsGFBDApoNKD7L9NPaNKmjhaz1zej34XJ-oKGmtIHfqSPaTGMM8qfzXnyc9NbrIEFW9whq64nTtkEbJZXVxDdGlZriEuIKFkdzg448-O4FalyecFg-0EUN8Mje7tp74S80yqAuilNrilPxXf7U8zx_o-UvFAno7tLMWcyT5oRjZ7SRY8r9rji70YLdtmy7LOYbDDLtTDdhEZngm6vaPjIUb34BQedSknKkuOuSVd5qLwKnPwC/manifest.json"
+"url": "https://archive.history.go.kr/record/catalog/catalogView.do?systemId=000000291552",
+"iiif": "https://korea-archive-mcp.vercel.app/iiif/rec/TVDLSsNQEP2Vy12nyc2jhQTEhbrQtbgRKSEJTdCamkSliFJLlC4q1V3QWio-uokQYwUVv8Zl7_gPTmwVZ3PmzBkOc-aAhtRYp44ZWK6359ANgUbUoDDsw-0H78UwakE7JZPnF56-Ep71CAxSSO5wCG_jornJIH_kJ_HXZXe2RgVqo4esqxo5QuIhWVxZYkytMr3K2AJjTEZUUNtFzY2iRmhI0uwG0fXCyA-aYs0XNwMpcCw_sCXLjMwtv_aLa56zL9r-fNgMI6e-bM-xn1J0uVwufBtFiE4CowvIE_LZeifTSP9biJ-gncH1GZnm4A8pxuLpGE67aLGNFn9_EWgdKcIOAs_6kzwlvBPD8JjA1TkM7lEyi88pTKmUZLmkqKuyamjM0Cr08Bs/manifest.json"
 },
 {
 "title": "アハノハイイロメイガの研究 . ムネアカコメツキモドキの研究 . ダイコンサルハムシの研究 [図書·紙] — 朝鮮総督府農事試験場,江口, 貢,中山, 昌之介,田端, 育男,正木, 十二郎,[江口貢著] . [中山昌之介, 田端育男著] .",
@@ -1025,7 +1231,7 @@
 },
 {
 "decade": "연대 미상",
-"records": 61,
+"records": 64,
 "by_source": {
 "nara": 10,
 "earchive": 7,
@@ -1039,13 +1245,13 @@
 "nedb": 3,
 "jsg": 5,
 "kyudb": 1,
-"aks": 5,
 "ndl": 1,
-"ia": 2
+"ia": 2,
+"aks": 8
 },
 "by_kind": {
-"document": 43,
-"graphic": 15,
+"document": 45,
+"graphic": 16,
 "motion_picture": 3
 },
 "samples": [
@@ -1071,8 +1277,8 @@
 },
 {
 "title": "Korean Refugees Are Passed into Service as Laborers to Move Ammo to Waiting Ships during the Evacuation of Hun",
-"url": "https://archive.history.go.kr",
-"iiif": "https://korea-archive-mcp.vercel.app/iiif/rec/PVA9SwNBEP0rw9b52FzMgdelEAQVxPhRiIQ12dwtktu4u3cgIkRIkVK7gFG0MDYJhqBwCP4Zy9v9Ec6pOM2bN-89ZphLoklwTDhTnUiknJyUiCEB2ZKKsxj2eC8JOdfQVBx2mda8CyI2ElpcpaLDgWnYZqdoVhpwvCNTDs1-XxbkiAkj4hBakRho6CaqICbisJGyTsKMkDHIHmwmMSmRLi5FEAjNgxaljTb129Q7pFhtf91HLUEtMmagg2r179xKJLSR6qISysqZQs8APW48cS-3bjWBr-EH2Ncsf1_8tIh29mnnmRtN82xpn-7zt6Gdzd1qgdEYo_9vKJH-70HnCHY5zVdzsOORe7wGd3fjHp5RYsWjPOr55Vqt7NX3aT2oNYI1j1x9Aw/manifest.json"
+"url": "https://archive.history.go.kr/record/catalog/catalogView.do?systemId=000000903157",
+"iiif": "https://korea-archive-mcp.vercel.app/iiif/rec/PZDPSsNAEMZfZdhzm2xSGzEg0oOgqCBW60GkrMk2WTTZurupFBEq9NCj3gpW0YP10mIpCkXwZTwmeQi39c9cfjP7zTe7O5dIIvcIUSK8kLUoOi4ghVy0xQUlMezRRhJQKqEiKOwSKakPLFYcqlS0mEeBSNgmJ7pZSNDHO7xFoRJFfF4cEqZYHEA1ZE0JfiLmhQoprLeIlxDFeAy8ARtJjArI15dqMI3KQRXjch07dWzXsI66s-JoLdFaqFRTuqb5-1wjZFJx0TYCbpwKU1CPC9_0iCJnPPhjjdELw-drsi0VjTb9VbyIFVyyyst6blPPzXv9_OU2n_bhq_MB2essfR8vUs1s-JmNZnl3kM4m2dN9-tbJhqN8OtbWWFv_V1dA0c8nzjWyySCdjiDrdfPHa8jvbvKHZy2R-XJtbDtFyyrapX1ccq2yu2Sjq28/manifest.json"
 }
 ]
 }

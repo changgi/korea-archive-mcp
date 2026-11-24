@@ -4,11 +4,16 @@
    "batches": 94,
    "records": 581,
    "new": 265
+  },
+  "2026-11-24": {
+   "batches": 3,
+   "records": 4,
+   "new": 0
   }
  },
  "formats": {
   "text": 47,
-  "csv": 44,
+  "csv": 47,
   "iiif": 3
  }
 }

@@ -1,12 +1,13 @@
 {
- "updated": "2026-11-24T01:20:22Z",
- "records": 376,
+ "updated": "2026-11-24T02:25:34Z",
+ "records": 403,
  "new_records": 0,
- "new_batches": 0,
+ "new_batches": 3,
  "by_source": {
   "nrich": 43,
   "archives": 40,
   "okchf": 35,
+  "aks": 32,
   "ia": 23,
   "commons": 21,
   "nara": 20,
@@ -30,7 +31,6 @@
   "nlna": 5,
   "nzarch": 5,
   "jsg": 5,
-  "aks": 5,
   "much": 4,
   "gallery": 3,
   "nlk": 3,
@@ -40,27 +40,28 @@
  "first": "2026-11-23T03:00:15Z",
  "formats": {
   "text": 47,
-  "csv": 44,
+  "csv": 47,
   "iiif": 3
  },
  "queries": {
-  "added": 0,
-  "total": 16,
-  "calls": 20,
+  "added": 9,
+  "total": 25,
+  "calls": 33,
   "by_tool": {
-   "cross_search": 10,
+   "cross_search": 14,
+   "nedb_search": 12,
    "source_profile": 5,
-   "nedb_search": 4,
-   "seoul_archives_search": 1
+   "seoul_archives_search": 2
   }
  },
  "repeat_records": 125,
  "entry_types": {
-  "기록": 362,
+  "기록": 384,
+  "소장처(컬렉션)": 5,
   "검색 안내": 7,
   "결함 출력": 7
  },
- "site_root_links": 18,
+ "site_root_links": 5,
  "top10": [
   {
    "rank": 1,
@@ -113,24 +114,24 @@
   },
   {
    "rank": 8,
+   "seen": 7,
+   "days": 2,
+   "title": "[奎18933] 加士島屯土賭稅 節目 가사도둔토도세 절목 · 內藏院(朝鮮) 編/내장원(조선) 편",
+   "url": "https://kyudb.snu.ac.kr/book/view.do?book_cd=GK18933_00"
+  },
+  {
+   "rank": 9,
    "seen": 8,
    "days": 1,
    "title": "EVACUATION, HUNGNAM, KOREA",
    "url": "https://catalog.archives.gov/id/22397"
   },
   {
-   "rank": 11,
-   "seen": 6,
-   "days": 1,
-   "title": "[국외문화유산] 감지금자『대방광불화엄경』제78권 — 미국 클리블랜드미술관",
-   "url": "https://www.overseaschf.or.kr/archive/search/category.do?mode=view&srSearchTy=relic&id=46493&iDivCd=1"
-  },
-  {
    "rank": 12,
-   "seen": 6,
-   "days": 1,
-   "title": "Korea: provision of occupation forces in Korea in the event of an armistice",
-   "url": "https://discovery.nationalarchives.gov.uk/details/r/C4711969"
+   "seen": 5,
+   "days": 2,
+   "title": "[奎19604] 加士島屯土賭稅 節目 가사도둔토도세 절목 · 內藏院(朝鮮) 編/내장원(조선) 편",
+   "url": "https://kyudb.snu.ac.kr/book/view.do?book_cd=GK19604_00"
   }
  ]
 }
