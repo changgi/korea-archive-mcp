@@ -29,6 +29,10 @@ jobs:
           git config user.email 10678518+changgi@users.noreply.github.com
           git commit -m "chore(ledger): 발견 누적 원장 $(date -u +%F)"
           git pull --rebase -q origin main && git push
+      - name: 연결 데이터 검증(rdflib — RiC-O·SKOS 파싱·끊긴 링크, 커밋 뒤 — 원장 저장은 막지 않음)
+        run: |
+          pip install -q rdflib
+          python3 scripts/rdf_check.py
       - name: 실패 → 이슈 / 정상 → 이슈 닫기
         if: always()
         env:
@@ -40,7 +44,7 @@ jobs:
           if [ "${{ job.status }}" != "success" ]; then
             body="발견 누적 원장 병합 또는 일일 기록물 등록부 검증이 실패했습니다(등록부 사슬 끊김·산출물 소실 포함). 보관함(Redis 날짜 함)은 3일 보관 — 그 안에 고치면 유실 없음.
 
-          실행: $run · 점검: /api/ledger/{날짜} 응답, scripts/ledger_merge.py, python3 scripts/records_register.py --verify, MAINTAINING.md(영구 축적 원칙)"
+          실행: $run · 점검: /api/ledger/{날짜} 응답, scripts/ledger_merge.py, python3 scripts/records_register.py --verify, pip install rdflib && python3 scripts/rdf_check.py(연결 데이터), MAINTAINING.md(영구 축적 원칙)"
             if [ -n "$num" ]; then gh issue comment "$num" --body "$body"; else gh issue create --title "발견 원장 병합 실패 — 3일 안에 조치" --label auto-health --body "$body"; fi
           elif [ -n "$num" ]; then
             gh issue close "$num" --comment "발견 원장 병합 정상 — 자동 종료 ($run)"
