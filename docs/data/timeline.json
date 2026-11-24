@@ -1,5 +1,5 @@
 {
-"updated": "2026-11-24T13:53:52Z",
+"updated": "2026-11-24T14:12:54Z",
 "note": "구간 = 연대(4자리 연도·8자리 날짜·연호 연도 明治·大正·昭和·光武·隆熙·檀紀 환산) → 세기 → 왕조·시대명. 근거 순서 date → 제목 → 메타(생산·시대·출판). 세기·시대 구간은 시간축 근사 정렬",
 "timeline": [
 {
@@ -426,18 +426,25 @@
 },
 {
 "decade": "1780년대",
-"records": 1,
+"records": 2,
 "by_source": {
-"nrich": 1
+"nrich": 1,
+"nedb": 1
 },
 "by_kind": {
-"graphic": 1
+"graphic": 1,
+"document": 1
 },
 "samples": [
 {
 "title": "[국외문화유산] 채제공 초상(蔡濟恭 肖像) — 영국 영국박물관",
 "url": "https://portal.nrich.go.kr/kor/overseasSearchView.do?menuIdx=840&mseq=67588",
 "iiif": "https://korea-archive-mcp.vercel.app/iiif/nrich/ov-67588/manifest.json"
+},
+{
+"title": "癸卯十月二十七日",
+"url": "https://db.history.go.kr/id/ks_001_0020_0090",
+"iiif": "https://korea-archive-mcp.vercel.app/iiif/rec/q1YqVrKKVspLTUlSitVRKlGyUno-c8fT3vVPexufzel4sqsHyHiyo_nZ9KVKOkopQGkglQmksovjDQwMgdjIAEhYGgCFS4HCGSUlBcVW-vopSXoZmcUl-UWVeun5etlF-pkp-li0FAC1vJ0659XWtW-a1rg4KTxq2KXwZuGGNy0LwMxXGxqB4q8nb3y9cC5QdR5QNdilOkq5EJcUAqnXG-a82rRG4XVHy5sFjQpvZk94Mw_k1kSQX4wMjMx0DQ11jYxDDI2tTAysTEyVagE/manifest.json"
 }
 ]
 },
@@ -1239,7 +1246,7 @@
 },
 {
 "decade": "연대 미상",
-"records": 56,
+"records": 55,
 "by_source": {
 "nara": 10,
 "seoul": 12,
@@ -1248,7 +1255,7 @@
 "jacar": 1,
 "un": 2,
 "nrich": 5,
-"nedb": 3,
+"nedb": 2,
 "earchive": 2,
 "jsg": 5,
 "kyudb": 1,
@@ -1257,7 +1264,7 @@
 "aks": 8
 },
 "by_kind": {
-"document": 39,
+"document": 38,
 "graphic": 14,
 "motion_picture": 3
 },
