@@ -109,6 +109,7 @@ DEEP = {"i815": ("nedb_search", lambda o: o.get("url") and {"mode": "i815", "que
         "okchf": ("nedb_search", lambda o: o.get("url") and {"mode": "okchf", "query": o["url"]}),
         "nrich": ("nedb_search", lambda o: {"mode": "nrich", "query": o["id"] if re.match(r"^(ksm|portrait|gwaebul|diary|mokgan|jcbib|jcphoto|dict|arch|koguryo|gaesong|design|pattern|oldbook|hyanggyo|stone|journal|iron|dolmen|assay|material):", str(o.get("id", ""))) else o.get("url")} if (o.get("id") or o.get("url")) else None)}
 DEEP["nedb"] = ("nedb_search", lambda o: re.match(r"^[a-z]{2,5}_[0-9a-z_]+$", o["key"].split(":", 1)[1]) and {"mode": "item", "query": o["key"].split(":", 1)[1]})  # v2.61 한국사DB 기록(levelId) — 시대별 경로 판독
+DEEP["nlk"] = ("nlk_search", lambda o: o.get("id") and o.get("title") and {"query": re.sub(r"\s*[:;\[].*$", "", o["title"])[:60] or o["title"][:60], "max_results": 20})  # v2.72 국립중앙도서관 — 같은 기록 번호 줄만(nlk_own)
 DEEP["kyudb"] = ("nedb_search", lambda o: re.match(r"^[^\x00-\x7f]{1,4}[0-9][0-9.\-]*$", str(o.get("id") or "")) and {"mode": "kyujanggak", "query": o["id"]})  # v2.55 규장각 해제(기관 해설문) — 같은 청구기호 행만 쓴다
 IIIF_V = {"awm": 2, "commons": 2}  # commons 2 = 범주(Commons, 숨김 제외)  # v2.63 우리 IIIF 브리지 판 — awm 2 = 기관 상세 표 전부(자료 유형·매체 형태·제작자·제작지·분쟁)와 본문 설명
 DEEP_V = {"seoul": 2, "aks": 2, "jsg": 2, "nedb": 5, "un": 2}  # nedb 5 = 실패 응답으로 비워진 메타 복구(v2.69.3)  # nedb 4 = 기술 항목 줄 판별 엄격화(v2.69.2)  # nedb 3 = 법전 조문 판독 교정(v2.69.1 — 검색창 문구 오인)  # un 2 = 기관 MARC XML(제목·문서기호·유형·날짜·의제)  # v2.61.1 nedb 2 = 표 없는 기록(삼국사기)·원문 이미지만(신문) 판독  # v2.56 jsg 2 = 장서각 개체 태깅·인물 전거(UCI)  # v2.32 판독기 판 — 판이 오르면 이미 보강된 기록도 한 번 다시 판독(서울기록원: 기관 계층·생산자·보존이력 추가)
@@ -133,6 +134,18 @@ def mcp_call(tool, args):
     txt = "".join(c.get("text", "") for c in (j.get("result") or {}).get("content", []))
     if not txt or txt.startswith("MCP error") or (j.get("result") or {}).get("isError"): raise ValueError(txt[:80])
     return txt
+
+def nlk_own(txt, vid):
+    """nlk_search 응답에서 이 기록 번호(viewKey·cno)의 줄만 — '- 제목 [자료유형] · 발행처 (날짜) 링크'. (요약 없음, 메타)."""
+    for ln in txt.splitlines():
+        if not ln.startswith("- ") or not re.search(rf"(?:viewKey|cno)={re.escape(vid)}(?:[&\s]|$)", ln): continue
+        m = re.match(r"^- (.+?) \[([^\]]+)\](?: · (.+?))?(?: \(([^()]{2,20})\))? (https?://\S+)$", ln.strip())
+        if not m: continue
+        md = [["자료유형", m[2]]] + ([["발행처", m[3].strip(" ,")]] if m[3] else []) + ([["발행", m[4]]] if m[4] else [])
+        md.append(["원문 열람", "원문 이미지 뷰어(디지털화 원문 공개)" if "viewer.nl.go.kr" in m[5] else "소장 정보(원문 열람은 기관 확인)"])
+        if "viewer.nl.go.kr" in m[5]: md.append(["원문 뷰어", m[5]])
+        return "", md
+    return "", []
 
 def kyu_own(txt, cid):
     """규장각 판독 응답에서 이 청구기호([奎NNNN]) 행의 서지와 해제 원문만. (요약, 메타)."""
@@ -205,13 +218,16 @@ def enrich(o, budget):
                     summ = f"[한국사DB 원문 앞부분] {L2[bi][:380]}" if len(L2) > bi and not re.search(r"공개되지 않았|조회 실패|본문 텍스트 없음", txt[:1200]) else ""
                     if "공개되지 않았" in txt[:400]: md = [["본문 공개", "미공개 — 항목·URL은 유효, 기관 공개 범위(국사편찬위원회 문의 대상)"]]  # 부재가 아니라 비공개라는 증거
                     if "본문 텍스트 없음" in txt[:1200]: summ = ""; md = md + [["본문 공개", "원문 이미지(지면)만 — 텍스트 없음(미공개 아님)"]]  # v2.61.1
+                if src0 == "nlk":  # v2.72 같은 기록 번호 줄만(검색 순위·다른 기록은 섞지 않음)
+                    summ, md = nlk_own(txt, o["id"])
+                    if not md: raise ValueError("검색 응답에 이 기록 줄이 없음 — 보강하지 않음")
                 if src0 == "kyudb":  # v2.55 규장각 — 같은 청구기호 행의 서지와 해제 원문만(다른 책의 해제·안내 문구 제외)
                     summ, md = kyu_own(txt, o["id"])
                 if src0 == "aks":  # v2.40.2 고문서 문서 판독은 면 목록 — 요약은 머리줄의 면 수·UCI만(파일명 나열 아님)
                     hm = re.search(r"문서 '(.+?)' — (\d+)면(?: · UCI (\S+))?", txt)
                     summ = f"{hm[2]}면{' · UCI ' + hm[3] if hm[3] else ''} — 한국고문서자료관 원문 이미지(뷰어 열람)" if hm else ""
                     md = [["면 수", hm[2]]] + ([["UCI", hm[3]]] if hm and hm[3] else []) if hm else md
-                if summ or src0 not in ("kyudb", "nedb"): o["summary"] = (summ + " " if summ else "") + f"(KOREA ARCHIVE 심층 판독 {tool})"  # 규장각 해제가 없으면 요약을 비워 둔다(서지는 메타·메타 합성으로)
+                if summ or src0 not in ("kyudb", "nedb", "nlk"): o["summary"] = (summ + " " if summ else "") + f"(KOREA ARCHIVE 심층 판독 {tool})"  # 규장각 해제가 없으면 요약을 비워 둔다(서지는 메타·메타 합성으로)
                 if md or not o.get("meta"): o["meta"] = md  # v2.69.3 빈 판독 결과로 축적된 메타를 지우지 않는다
                 o["deep_call"] = f"{tool}({json.dumps(args, ensure_ascii=False)})"; o["enrich_status"] = "ok"; o["deep_v"] = DEEP_V.get(src0, 1)
                 um = re.search(r"인물 전거\(한국역대인물 UCI\):\s*(.+)", txt)  # v2.56 기관이 붙인 인명 전거 — 이름=UCI
@@ -1166,6 +1182,9 @@ def fixity_text(o):
         tool, af = DEEP[src]; args = af(o)
         if args:
             t = mcp_call(tool, args)
+            if src == "nlk":  # v2.72 이 기록 줄만 지문
+                sm, md = nlk_own(t, o["id"])
+                return json.dumps(md, ensure_ascii=False) if md else None
             if src == "kyudb":  # v2.55 이 책 행만 지문(검색 건수·다른 책 행 변화가 '원문 변경'으로 보이지 않게)
                 sm, md = kyu_own(t, o["id"])
                 return json.dumps(md, ensure_ascii=False) if md else None
