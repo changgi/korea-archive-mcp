@@ -903,6 +903,7 @@ def _ead_core(j):
 # v2.52 원 기관 공개 메타데이터 API로 지문 — 매니페스트·심층 판독 경로가 없는 수집처. (URL 정규식, API 주소, 정규형)
 SRC_FIX = {"ia": (r"archive\.org/details/([^/?#]+)", lambda m: f"https://archive.org/metadata/{m[1]}", _ia_core),
            "tna": (r"discovery\.nationalarchives\.gov\.uk/details/r/([0-9a-fA-F-]{36}|[A-Z]\d+)", lambda m: f"https://discovery.nationalarchives.gov.uk/API/records/v1/details/{m[1]}", _tna_core),
+           "dnz": (r"^dnz:(\d+)$", lambda m: f"https://api.digitalnz.org/v3/records/{m[1]}.json", lambda j: _dnz_core(j)),  # v2.64 원장 key로(기록 URL은 원 기사)
            "nlna": (r"nationaalarchief\.nl/onderzoeken/archief/([0-9][0-9A-Za-z.]*[0-9A-Za-z])", lambda m: f"https://www.nationaalarchief.nl/onderzoeken/archief/{m[1]}/download/xml", _ead_core)}  # v2.62 EAD
 
 def _tna_val(v):
@@ -916,6 +917,15 @@ TNA_META = [("citableReference", "참조번호"), ("coveringDates", "생산 기�
 def src_enrich(o, j):
     """v2.54 지문용으로 받은 기관 메타데이터 API 응답에서 비어 있는 칸만 채운다(덮어쓰지 않음 · 원문 그대로 · 근거 표시)."""
     src = o["key"].split(":")[0]
+    if src == "dnz":  # v2.64 DigitalNZ 기록 API — description→요약, 제공처·범주·날짜·저작권·이용·주제→메타
+        r = j.get("record") or {}
+        J = lambda v: "; ".join(str(x) for x in v if x) if isinstance(v, list) else str(v or "")
+        if r.get("description") and not o.get("summary"): o["summary"] = strip(r["description"])[:600]; o["summary_basis"] = "기관 API(DigitalNZ records · description 원문)"
+        if not o.get("meta"):
+            md = [[lbl, J(r.get(k))[:200]] for k, lbl in (("display_content_partner", "콘텐츠 제공처"), ("category", "범주"), ("display_date", "날짜"), ("creator", "생산자"), ("publisher", "발행처"),
+                                                         ("copyright", "저작권(원문)"), ("usage", "이용 조건(원문)"), ("subject", "주제")) if J(r.get(k))]
+            if md: o["meta"] = md; o["meta_basis"] = "기관 API(DigitalNZ records)"
+        return
     if src == "nlna":  # v2.62 네덜란드 국립문서관 EAD — 기록의 역사(bioghist)→요약, 기간·분량·생산자·언어·시리즈·이용 제한·인용→메타
         if j.get("bioghist") and not o.get("summary"): o["summary"] = j["bioghist"][:600]; o["summary_basis"] = "기관 EAD(Nationaal Archief · bioghist 원문, 네덜란드어)"
         if not o.get("meta"):
@@ -943,9 +953,13 @@ def src_enrich(o, j):
             md = [[lbl, _tna_val(j.get(k))[:160]] for k, lbl in TNA_META if _tna_val(j.get(k))]
             if md: o["meta"] = md; o["meta_basis"] = "기관 메타데이터 API(TNA Discovery records/v1/details)"
 
+def _dnz_core(j):
+    r = j.get("record") or {}
+    return {k: r.get(k) for k in ("title", "description", "display_date", "category", "copyright", "usage", "subject", "display_content_partner", "landing_url", "creator", "publisher")} if r.get("id") else None
+
 def src_fix_url(o):
     sf = SRC_FIX.get(o["key"].split(":")[0])
-    m = sf and re.search(sf[0], o.get("url") or "")
+    m = sf and re.search(sf[0], o["key"] if sf[0].startswith("^") else (o.get("url") or ""))  # '^'로 시작하는 규칙은 원장 key에 적용
     return (m and sf[1](m), sf[2]) if m else (None, None)
 
 def fixity_text(o):
