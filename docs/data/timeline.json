@@ -1,5 +1,5 @@
 {
-"updated": "2026-11-24T22:44:00Z",
+"updated": "2026-11-24T22:49:49Z",
 "note": "구간 = 연대(4자리 연도·8자리 날짜·연호 연도 明治·大正·昭和·光武·隆熙·檀紀 환산) → 세기 → 왕조·시대명. 근거 순서 date → 제목 → 메타(생산·시대·출판). 세기·시대 구간은 시간축 근사 정렬",
 "timeline": [
 {
@@ -736,18 +736,24 @@
 },
 {
 "decade": "1860년대",
-"records": 1,
+"records": 2,
 "by_source": {
-"aks": 1
+"aks": 1,
+"tna": 1
 },
 "by_kind": {
-"document": 1
+"document": 2
 },
 "samples": [
 {
 "title": "1865년 이숭인(李崇仁) 영정(影幀)",
 "url": "https://archive.aks.ac.kr/link.do?dataUCI=G002+AKS+KSM-XZ.1865.1144-20250415.F11301-01-W000013",
 "iiif": "https://korea-archive-mcp.vercel.app/iiif/rec/q1YqVrKKVkrMLlaK1VEqUbJSMrQwM33d2qLwZu6WNx1r38zdofFsbt_TLe1PdjdqKryZ0fhmwVSNp3s3Pt3ZoKmko5QC1AGkMoGUu4GBkbajd7C2d7CvbkSUHsggPUNDExNdIwMjUwMTQ1M9N0NDYwNDXSAKNwACQ2Og1lKg1oySkoJiK339xKLkjMyyVD2gc_QSk_Wyi_RzMvOy9VLy7VMSSxJDnT1tybSkAGjJ26lzXm1d-2rzgtdrdrxpmfNm3oTXi3tebWlQeNSwSwEuDOaBmEsm2oFUzdrxtmvn680tb7ohUhAxhdfLO972rwHyNr5ZvAcUVFNWKLzuaXizqPXtrB6ghXlAC0GBqqOUCwmhQiD1esOcV5vWKLzuaHmzoFHhzewJb-YtBUolgoId6HwzXUNDXSOTEAMDKzBSqgUA/manifest.json"
+},
+{
+"title": "Yellow Sea (Huang Hai): Korea, W Coast: Inchon to Mok'po; four items on one sheet:...",
+"url": "https://discovery.nationalarchives.gov.uk/details/r/C11440842",
+"iiif": "https://korea-archive-mcp.vercel.app/iiif/tna/C11440842/manifest.json"
 }
 ]
 },
@@ -896,7 +902,7 @@
 },
 {
 "decade": "1910년대",
-"records": 20,
+"records": 21,
 "by_source": {
 "ndl": 8,
 "indy": 2,
@@ -905,10 +911,11 @@
 "jacar": 2,
 "oldnews": 1,
 "i815": 1,
-"jsg": 2
+"jsg": 2,
+"tna": 1
 },
 "by_kind": {
-"document": 14,
+"document": 15,
 "graphic": 6
 },
 "samples": [
@@ -941,18 +948,24 @@
 },
 {
 "decade": "1920년대",
-"records": 1,
+"records": 2,
 "by_source": {
-"nedb": 1
+"nedb": 1,
+"tna": 1
 },
 "by_kind": {
-"document": 1
+"document": 2
 },
 "samples": [
 {
 "title": "本月漢江水質試驗",
 "url": "https://db.history.go.kr/id/npda_1920_04_30_v0002_1100",
 "iiif": "https://korea-archive-mcp.vercel.app/iiif/rec/q1YqVrKKVspLTUlSitVRKlGyUno2Z82zOR3P9ix6tnH-sw1bXmxe9WLlspcrpyvpKKUApQ0tjQx0DUx0jQ2AAplAgbyClMR4kGi8gUm8sUF8mYGBgVG8oaEBSEEpUEFGSUlBsZW-fkqSXkZmcUl-UaVeer5edpF-Zoo-Xs0FQM1vp855tXXtm6Y1Lk4Kjxp2Kbzavud1TwOY-bp_5pupLW_m7nm9eQtQdR7ILSB_6CjlAplAqhBIvd4w59WmNQqvO1reLGhUeDN7wpt5S4FSiSCfGhkYmekaGuoaGYcYGluZGFiZmCrVAgA/manifest.json"
+},
+{
+"title": "Admiral Sir William Andrewes KBE CBE CB DSO",
+"url": "https://discovery.nationalarchives.gov.uk/details/r/eb5ccae1-179a-4b98-ba6d-ba3ea033b00a",
+"iiif": "https://korea-archive-mcp.vercel.app/iiif/tna/eb5ccae1/manifest.json"
 }
 ]
 },
@@ -993,16 +1006,18 @@
 },
 {
 "decade": "1940년대",
-"records": 8,
+"records": 9,
 "by_source": {
 "archives": 4,
 "ndl": 1,
 "nedb": 1,
 "i815": 1,
-"nlna": 1
+"nlna": 1,
+"nara": 1
 },
 "by_kind": {
-"document": 8
+"document": 8,
+"motion_picture": 1
 },
 "samples": [
 {
@@ -1034,18 +1049,18 @@
 },
 {
 "decade": "1950년대",
-"records": 132,
+"records": 196,
 "by_source": {
-"nara": 20,
-"europeana": 4,
-"ia": 14,
-"tna": 8,
+"nara": 33,
+"europeana": 7,
+"ia": 18,
+"tna": 15,
 "gallery": 3,
-"awm": 8,
+"awm": 24,
 "archives": 24,
 "commons": 7,
 "gallica": 2,
-"koreanwar": 21,
+"koreanwar": 42,
 "ndl": 1,
 "nlk": 1,
 "oldnews": 3,
@@ -1057,9 +1072,9 @@
 "dnz": 4
 },
 "by_kind": {
-"motion_picture": 25,
-"graphic": 24,
-"document": 83
+"motion_picture": 30,
+"graphic": 50,
+"document": 116
 },
 "samples": [
 {
@@ -1130,9 +1145,9 @@
 },
 {
 "decade": "1960년대",
-"records": 9,
+"records": 14,
 "by_source": {
-"ia": 2,
+"ia": 7,
 "i815": 2,
 "commons": 1,
 "ktv": 2,
@@ -1140,7 +1155,7 @@
 "much": 1
 },
 "by_kind": {
-"document": 8,
+"document": 13,
 "graphic": 1
 },
 "samples": [
@@ -1195,15 +1210,15 @@
 },
 {
 "decade": "1970년대",
-"records": 5,
+"records": 9,
 "by_source": {
 "nzarch": 1,
 "earchive": 1,
-"ia": 2,
+"ia": 6,
 "ktv": 1
 },
 "by_kind": {
-"document": 5
+"document": 9
 },
 "samples": [
 {
@@ -1235,18 +1250,19 @@
 },
 {
 "decade": "1980년대",
-"records": 12,
+"records": 13,
 "by_source": {
 "ktv": 6,
 "nzarch": 1,
 "europeana": 1,
 "gallica": 1,
-"ia": 2,
+"ia": 3,
 "nlk": 1
 },
 "by_kind": {
 "document": 11,
-"motion_picture": 1
+"motion_picture": 1,
+"map": 1
 },
 "samples": [
 {
@@ -1278,17 +1294,17 @@
 },
 {
 "decade": "1990년대",
-"records": 25,
+"records": 27,
 "by_source": {
 "archives": 6,
 "commons": 1,
 "ndl": 1,
 "nlk": 3,
 "ktv": 13,
-"ia": 1
+"ia": 3
 },
 "by_kind": {
-"document": 17,
+"document": 19,
 "graphic": 4,
 "motion_picture": 4
 },
@@ -1322,7 +1338,7 @@
 },
 {
 "decade": "2000년대",
-"records": 28,
+"records": 30,
 "by_source": {
 "archives": 4,
 "ktv": 5,
@@ -1332,10 +1348,10 @@
 "much": 1,
 "ndl": 1,
 "nlk": 1,
-"ia": 3
+"ia": 5
 },
 "by_kind": {
-"document": 9,
+"document": 11,
 "graphic": 19
 },
 "samples": [
@@ -1368,9 +1384,9 @@
 },
 {
 "decade": "2010년대",
-"records": 29,
+"records": 30,
 "by_source": {
-"ia": 4,
+"ia": 5,
 "un": 5,
 "gonghun": 1,
 "archives": 2,
@@ -1384,7 +1400,7 @@
 "koreanwar": 1
 },
 "by_kind": {
-"document": 18,
+"document": 19,
 "graphic": 11
 },
 "samples": [
@@ -1417,7 +1433,7 @@
 },
 {
 "decade": "2020년대",
-"records": 19,
+"records": 20,
 "by_source": {
 "ia": 2,
 "commons": 4,
@@ -1425,10 +1441,11 @@
 "un": 3,
 "okchf": 3,
 "nrich": 4,
-"ndl": 1
+"ndl": 1,
+"awm": 1
 },
 "by_kind": {
-"document": 8,
+"document": 9,
 "graphic": 11
 },
 "samples": [
@@ -1461,11 +1478,11 @@
 },
 {
 "decade": "연대 미상",
-"records": 60,
+"records": 76,
 "by_source": {
-"nara": 13,
+"nara": 23,
 "seoul": 12,
-"europeana": 2,
+"europeana": 3,
 "i815": 2,
 "jacar": 1,
 "nrich": 5,
@@ -1473,15 +1490,16 @@
 "jsg": 1,
 "kyudb": 1,
 "ndl": 1,
-"ia": 3,
+"ia": 5,
 "aks": 8,
 "commons": 6,
-"nlk": 3
+"nlk": 3,
+"koreanwar": 3
 },
 "by_kind": {
-"document": 40,
-"graphic": 16,
-"motion_picture": 4
+"document": 49,
+"graphic": 22,
+"motion_picture": 5
 },
 "samples": [
 {
