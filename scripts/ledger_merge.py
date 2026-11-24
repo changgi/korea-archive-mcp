@@ -1280,6 +1280,38 @@ def fixity_text(o):
             return "\n".join(l for l in t.splitlines() if not VOLATILE.search(l))
     return None
 
+def ndl_pass(led, today, budget=15):
+    """v2.78 NDL 서지 보강 — NDL Search OpenSearch(공개 API)를 제목으로 불러 **같은 기록 주소(link) 또는 같은 PID**의 항목만 골라 빈 메타를 채운다.
+    하루 상한·요청 간격·429(동시 접속 한도)면 그날 중단(우회 없음). 근거 meta_basis. 반환: (요청 수, 보강 수)."""
+    import urllib.error
+    used = got = 0
+    for o in sorted((o for o in led.values() if o["key"].startswith("ndl:") and o.get("entry_type", "기록") == "기록" and not o.get("meta")),
+                    key=lambda o: o.get("ndl_checked", "")):
+        if used >= budget or o.get("ndl_checked", "") >= today.isoformat(): break
+        t = re.sub(r"\s*\[[^\]]*\].*$|\s+—.*$", "", o.get("title") or "").replace("：", ":").strip()
+        t = re.split(r"\s*[:;]\s*", t)[0][:40]
+        if not t: continue
+        u = "https://ndlsearch.ndl.go.jp/api/opensearch?cnt=20&title=" + urllib.parse.quote(t)
+        try:
+            xml = urllib.request.urlopen(urllib.request.Request(u, headers={"User-Agent": UA}), timeout=30).read().decode("utf-8", "replace")
+        except urllib.error.HTTPError as e:
+            if e.code == 429: print("NDL 429(동시 접속 한도) — 오늘 NDL 보강 중단"); break
+            used += 1; o["ndl_checked"] = today.isoformat(); continue
+        except Exception:
+            used += 1; o["ndl_checked"] = today.isoformat(); continue
+        used += 1; o["ndl_checked"] = today.isoformat()
+        if "<code>429</code>" in xml[:300]: print("NDL 429 — 오늘 NDL 보강 중단"); break
+        pid = (re.search(r"/pid/(\d+)", o.get("url") or "") or [None, None])[1]
+        for it in re.findall(r"<item>(.*?)</item>", xml, re.S):
+            link = (re.search(r"<link>(.*?)</link>", it) or [None, ""])[1].strip()
+            if not (link == (o.get("url") or "").strip() or (pid and re.search(rf"(?:/pid/|ndljp/pid/){pid}(?!\d)", it))): continue
+            T = lambda tag: "; ".join(dict.fromkeys(html.unescape(re.sub(r"<[^>]+>", "", x)).strip() for x in re.findall(rf"<{tag}[^>]*>(.*?)</{tag}>", it, re.S) if x.strip()))
+            md = [[lbl, T(tag)[:200]] for tag, lbl in (("dc:creator", "생산자"), ("dc:publisher", "발행처"), ("dc:date", "발행일"), ("dc:subject", "분류(NDC 등)"), ("category", "자료 형태"), ("dc:extent", "형태 사항")) if T(tag)]
+            if md: o["meta"] = md; o["meta_basis"] = "기관 API(NDL Search OpenSearch — 같은 기록 주소/PID 항목)"; got += 1
+            break
+        time.sleep(1.5)
+    return used, got
+
 def fixity_pass(led, today, budget):
     """v2.35 원문 고정성(fixity) 감시 — 기록의 원 기관 응답 지문을 순환 재확인. 바뀌면 지우지 않고 이력에 추가:
     첫 지문 / 판독기 변경 동반(우리 route.js·lib가 바뀜 — 원문 변경 아닐 수 있음) / 원문 변경 의심(판독기 그대로인데 응답이 바뀜)."""
@@ -1378,9 +1410,9 @@ def write_quality(recs):
 
 FACETS = [("주제", re.compile(r"^(주제|주제어|색인어.*|subject|키워드|표제어)$", re.I)), ("장소", re.compile(r"^(연관정보|장소|취급지명|place|지명\(장서각 태깅\))$", re.I)),
           ("인물", re.compile(r"^인명\(장서각 태깅\)$")), ("기관", re.compile(r"^관청명\(장서각 태깅\)$")),  # v2.56 기관 개체 태깅
-          ("형태", re.compile(r"^(문서유형|기록물형태|매체유형|사료구분|사료유형|기록유형|자료유형|자료 유형|매체 형태|format)$", re.I)), ("재질", re.compile(r"^재질$")),
+          ("형태", re.compile(r"^(문서유형|기록물형태|매체유형|사료구분|사료유형|기록유형|자료유형|자료 유형|매체 형태|자료 형태|format)$", re.I)), ("재질", re.compile(r"^재질$")),
           ("기술 수준", re.compile(r"^기술 수준$")),  # v2.59 기관의 자료 형태·재질·기술 단계(item·fileUnit·Piece) 분류
-          ("분류", re.compile(r"^(분류|사부분류|자료분류|보고서유형분류|주제분류|범주\(Commons\))$")), ("시대", re.compile(r"^(시대|시대분류|국적/시대)$")), ("매체", re.compile(r"^mediatype$", re.I))]
+          ("분류", re.compile(r"^(분류|사부분류|자료분류|보고서유형분류|주제분류|범주\(Commons\)|분류\(NDC 등\))$")), ("시대", re.compile(r"^(시대|시대분류|국적/시대)$")), ("매체", re.compile(r"^mediatype$", re.I))]
 
 def facet_terms(k, v, fac):
     """(패싯, 용어) 목록. 서울기록원 연관정보는 코드 종류로 패싯을 가른다 — GEOL=장소 · TOPIC=주제 · FUNC=분류(기능)."""
@@ -1565,6 +1597,8 @@ def main():
     for o in led.values(): o["entry_type"] = entry_type(o)
     for o in led.values(): o["entry_type"] = entry_type(o)
     nbf = backfill_found_by(led); print(f"발견 경로 소급(회신 본문 대조) {nbf}건")
+    try: nd_used, nd_got = ndl_pass(led, today, int(os.environ.get("NDL_MAX", "15"))); print(f"NDL 서지 보강 {nd_got}건(요청 {nd_used})")
+    except Exception as e: print(f"NDL 서지 보강 실패 {e}")
     fx_used, fx_changed, fx_pv = fixity_pass(led, today, int(os.environ.get("FIXITY_MAX", "30")))  # v2.35 하루 30건 순환(기관 서버 예의)
     print(f"고정성 재확인 {fx_used}건 · 지문 변경 {fx_changed}건 · 판독기 {fx_pv}")
     def win(o, a, b):  # a~b일 전 사이 발견 횟수
