@@ -199,10 +199,14 @@
   {
    "register": "2026-11-24-49.json",
    "sha256": "08f229fb8db527db8ad7a79a50e5f391a10ad7e8b233055eadaca1b3c5c7490b"
+  },
+  {
+   "register": "2026-11-24-50.json",
+   "sha256": "78fdba1eb6fdc953809aa6acb9a34cff404cafefdf516d5bdd45a98d7e7f682e"
   }
  ],
  "head": {
-  "register": "2026-11-24-49.json",
-  "sha256": "08f229fb8db527db8ad7a79a50e5f391a10ad7e8b233055eadaca1b3c5c7490b"
+  "register": "2026-11-24-50.json",
+  "sha256": "78fdba1eb6fdc953809aa6acb9a34cff404cafefdf516d5bdd45a98d7e7f682e"
  }
 }
