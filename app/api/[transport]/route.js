@@ -1318,6 +1318,7 @@ async function jdbPost(url, params, headers = {}) {
   } catch (e) { lastErr = e; }
   throw new Error(errInfo(lastErr));
 }
+const jCnt = (n) => (n < 0 ? '건수 확인 불가' : `${n}건`); // v2.47 -1 = 확인 불가
 const jNoScript = (s) => String(s || '').replace(/<script[\s\S]*?<\/script>/g, ' ').replace(/<style[\s\S]*?<\/style>/g, ' ');
 const jClean = (s) => String(s || '').replace(/<[^>]+>/g, '').replace(/&gt;/g, '>').replace(/&lt;/g, '<').replace(/&amp;/g, '&').replace(/&#39;/g, "'").replace(/&quot;/g, '"').replace(/&nbsp;/g, ' ').replace(/\s+/g, ' ').trim();
 const jStrip = (s) => jClean(jNoScript(s));
@@ -1332,7 +1333,8 @@ const J_SEARCH_BASE = { pageIndex: '1', pageSize: '1', orderColumn: 'levelId', o
 async function jLawSearch(query, n) {
   const b = await jdbPost(JDB + '/search/law/searchResultList.do',
     { ...J_SEARCH_BASE, searchItemId: 'jlaw', searchTarget: 'jlaw', pageUnit: String(Math.min(n, 200)), totalWord: query });
-  const total = parseInt(((jStrip(b).match(/총\s*([\d,]+)건/) || [])[1] || '0').replace(/,/g, ''), 10);
+  const tm = jStrip(b).match(/총\s*([\d,]+)\s*건/); // v2.47 건수 표기가 없으면 0이 아니라 '확인 불가'(-1) — 부재 단정 금지
+  const total = tm ? parseInt(tm[1].replace(/,/g, ''), 10) : -1;
   const results = [];
   const re = /fnGoItemView\('([^']+)',\s*'\d+'\)[\s\S]*?<ul class="tit">([\s\S]*?)<\/ul>\s*<p class="tx">([\s\S]*?)<\/p>/g;
   let m;
@@ -1386,7 +1388,7 @@ const nedbDate = (id) => { const m = String(id).match(/_(1[5-9]\d\d|20\d\d)_(\d\
 async function nedbLive(q, per = 3) {
   const one = async ([site, iid, name, era]) => {
     const b = await cachedText(`nedbL:${iid}:${per}:${q}`, 6 * 3600e3, () => jdbPost(`${JDB}/${site}/search/searchResultList.do`, { ...J_SEARCH_BASE, searchItemId: iid, pageUnit: String(per), totalWord: q }), '총');
-    const total = parseInt(((jStrip(b).match(/총\s*([\d,]+)\s*건/) || [])[1] || '0').replace(/,/g, ''), 10);
+    const tm0 = jStrip(b).match(/총\s*([\d,]+)\s*건/); const total = tm0 ? parseInt(tm0[1].replace(/,/g, ''), 10) : -1; // v2.47 표기 없음 = 확인 불가(-1)
     const seen = new Set(); const rows = []; const re = /fnGoItemLevel\('[^']*',\s*'(\w+)'[^)]*\);[^>]*>([\s\S]*?)<\/a>/g; let m;
     while ((m = re.exec(b)) && rows.length < per) { const t = jStrip(m[2]).replace(/\s+/g, ' ').trim(); if (t && !seen.has(m[1])) { seen.add(m[1]); rows.push({ id: m[1], title: t }); } }
     return { site, iid, name, era, total, rows };
@@ -1397,7 +1399,7 @@ async function nedbLive(q, per = 3) {
 async function jRecordSearch(query, n) {
   const b = await jdbPost(JDB + '/joseon/search/searchResultList.do',
     { ...J_SEARCH_BASE, searchItemId: 'bb', searchTarget: 'bb', pageUnit: String(Math.min(n, 200)), totalWord: query });
-  const total = parseInt(((jStrip(b).match(/총\s*([\d,]+)건/) || [])[1] || '0').replace(/,/g, ''), 10);
+  const tm0 = jStrip(b).match(/총\s*([\d,]+)\s*건/); const total = tm0 ? parseInt(tm0[1].replace(/,/g, ''), 10) : -1; // v2.47 표기 없음 = 확인 불가(-1)
   const seen = new Set(); const rows = [];
   const re = /fnGoItemLevel\('[^']*',\s*'(\w+)'[^)]*\);[^>]*>([\s\S]*?)<\/a>/g;
   let m;
@@ -1415,7 +1417,7 @@ async function jSjw(query) {
     { searchTerm: query, searchTermImages: '', topSearchWord: query, topSearchWord_ime: query,
       pageUnit: '50', pageIndex: '1', searchType: 'a' });
   const t = jStrip(b);
-  const total = parseInt((((t.match(/검색결과\s*([\d,]+)\s*건/) || t.match(/총\s*([\d,]+)\s*건/)) || [])[1] || '0').replace(/,/g, ''), 10);
+  const tm1 = t.match(/검색결과\s*([\d,]+)\s*건/) || t.match(/총\s*([\d,]+)\s*건/); const total = tm1 ? parseInt(tm1[1].replace(/,/g, ''), 10) : -1; // v2.47
   const REIGNS = ['태조', '정종', '태종', '세종', '문종', '단종', '세조', '예종', '성종', '연산군', '중종', '인종', '명종', '선조', '광해군', '인조', '효종', '현종', '숙종', '경종', '영조', '정조', '순조', '헌종', '철종', '고종', '순종'];
   const dist = {};
   for (const r of REIGNS) { const mm = t.match(new RegExp(r + '\\s*\\((\\d+)\\)')); if (mm) dist[r] = parseInt(mm[1], 10); }
@@ -2701,15 +2703,16 @@ const JB_CROSS = `국내외 대조 절차 — 순서를 틀리면 헛수고한�
         if (mode === 'law') {
           const r = await jLawSearch(q, max_results);
           const lines = r.results.slice(0, max_results).map((x) => `- [${x.id}] ${x.source}${x.section ? ' ' + x.section : ''}\n  ${x.excerpt.slice(0, 150)}\n  ${jCite(x.id)}`);
-          let out = `법전·편람 '${q}' — 총 ${r.total}건:\n` + (lines.join('\n') || '(0건)');
-          if (r.total === 0) out += `\n★ '${q}'는 법전에 수록되어 있지 않습니다. 법전 밖 관행일 가능성 — mode=record·sjw로 등록류·일기를 조회하십시오.`;
+          let out = `법전·편람 '${q}' — 총 ${jCnt(r.total)}:\n` + (lines.join('\n') || '(0건)');
+          if (r.total < 0) out += `\n※ 결과 건수를 확인하지 못했습니다(응답 구조 변경 또는 끊김) — 부재로 단정하지 마십시오. 공식 검색: ${JDB}/search/law/searchResultList.do`;
+          if (r.total === 0) out += `\n★ '${q}'는 법전에 수록되어 있지 않습니다(한국사DB '총 0건' 응답 — 확정 0). 법전 밖 관행일 가능성 — mode=record·sjw로 등록류·일기를 조회하십시오.`;
           else out += '\n※ 법전·편람은 한문 원문 제공 — 인용 가능(표점은 DB 형태·교감본 미대조). 조문을 열었으면 mode=sibling으로 형제 조를 반드시 확인.';
           return text(out);
         }
         if (mode === 'record') {
           const r = await jRecordSearch(q, Math.max(max_results, 50));
           const lines = r.real.slice(0, max_results).map((x) => `- [${x.id}] ${x.title.slice(0, 90)}\n  ${jCite(x.id)}`);
-          let out = `등록류(비변사등록) '${q}' — 보고 총계 ${r.total}건 · 페이지 내 ${r.rows.length}건 중 座目 ${r.jwamok.length}건 제외 → 실질 ${r.real.length}건:\n` + (lines.join('\n') || '(실질 기사 0건)');
+          let out = `등록류(비변사등록) '${q}' — 보고 총계 ${jCnt(r.total)} · 페이지 내 ${r.rows.length}건 중 座目 ${r.jwamok.length}건 제외 → 실질 ${r.real.length}건:\n` + (lines.join('\n') || '(실질 기사 0건)');
           if (r.jwamok.length) out += `\n★ ${Math.round(r.jwamok.length / Math.max(r.rows.length, 1) * 100)}%가 座目(회의 참석 명단)입니다. 검색 건수를 주제 중요도 지표로 쓰지 마십시오.`;
           out += '\n※ 등록류는 국역만 노출 — 한문 역구성은 학술 인용 불가.';
           return text(out);
@@ -2742,8 +2745,10 @@ const JB_CROSS = `국내외 대조 절차 — 순서를 틀리면 헛수고한�
             if (i + 3 < terms.length) await sleep(150);
           }
           rows.sort((a, b) => b.total - a.total);
-          const absent = rows.filter((r) => r.total === 0 || !r.inCode);
-          let out = '법전 수록 대조표:\n' + rows.map((r) => `- ${r.t}: ${r.total}건${r.earliest ? ' (' + r.earliest + (r.inCode ? '' : ' — 법전 아님') + ')' : ''}${r.total === 0 ? ' — 법전 미수록' : ''}`).join('\n');
+          const absent = rows.filter((r) => r.total === 0 || (r.total > 0 && !r.inCode)); // v2.47 확인 불가(-1)는 부재가 아님
+          const unknown = rows.filter((r) => r.total < 0);
+          let out = '법전 수록 대조표:\n' + rows.map((r) => `- ${r.t}: ${jCnt(r.total)}${r.earliest ? ' (' + r.earliest + (r.inCode ? '' : ' — 법전 아님') + ')' : ''}${r.total === 0 ? ' — 법전 미수록' : r.total < 0 ? ' — 확인 불가(조회 실패)' : ''}`).join('\n');
+          if (unknown.length) out += `\n※ ${unknown.map((r) => r.t).join('·')}: 결과 건수 확인 불가(조회 실패) — 부재로 단정하지 않습니다. 잠시 후 다시.`;
           if (absent.length) out += `\n★ ${absent.map((r) => r.t).join('·')}는 법전에 오르지 못했습니다. 제도사를 법전으로만 재구성하면 이 요소는 존재하지 않습니다 — 등록류·일기류를 함께 읽으십시오.`;
           return text(out);
         }
@@ -2757,14 +2762,14 @@ const JB_CROSS = `국내외 대조 절차 — 순서를 틀리면 헛수고한�
             for (const [dom, hints] of Object.entries(J_DOMAINS)) if (hints.some((h) => blob.includes(h))) domains[dom] = (domains[dom] || 0) + 1;
           }
           const sorted = Object.entries(domains).sort((a, b) => b[1] - a[1]);
-          let out = `어휘 연원 '${term}' — 법전 ${r.total}건 · 영역 분포: ` + (sorted.map(([d, c]) => `${d} ${c}`).join(' · ') || '(판별 불가)');
+          let out = `어휘 연원 '${term}' — 법전 ${jCnt(r.total)} · 영역 분포: ` + (sorted.map(([d, c]) => `${d} ${c}`).join(' · ') || '(판별 불가)');
           out += '\n대표 용례:\n' + r.results.slice(0, 4).map((x) => `- ${x.source} ${x.section} | ${x.excerpt.slice(0, 110)}`).join('\n');
           if (domain && !domains[domain]) out += `\n★ '${domain}' 영역 용례가 0건 — 이 용어는 주로 '${(sorted[0] || ['?'])[0]}' 영역에서 쓰였고 '${domain}'으로 전용된 것으로 보입니다. 전용 시점을 등록류·일기에서 확인하십시오.`;
           return text(out);
         }
         if (mode === 'sjw') {
           const r = await jSjw(q);
-          let out = `승정원일기 '${q}' — 총 ${r.total}건`;
+          let out = `승정원일기 '${q}' — 총 ${jCnt(r.total)}`;
           const dist = Object.entries(r.dist);
           if (dist.length) out += '\n왕대 분포: ' + dist.map(([k, v]) => `${k} ${v}`).join(' · ');
           if (r.earliest) out += `\n★ 최초 용례 ${r.earliest.year}년(${r.earliest.reign}) — 관련 기구·제도의 성립 연대와 대조하십시오. 용어가 기구보다 앞서면 그 기구는 제도를 만든 것이 아니라 인수한 것입니다.`;
@@ -2803,7 +2808,11 @@ item_cd 5종(자료 성격별): ART 도설·회화 / ETC 두루마리·축 / DRR
           + hit.map((d) => `■ [${d.era}] ${d.name} — ${d.total.toLocaleString()}건\n` + d.rows.map((r) => `  - ${r.title.slice(0, 90)}${nedbDate(r.id) ? ' (' + nedbDate(r.id) + ')' : ''} → ${JDB}/id/${r.id}`).join('\n')).join('\n')
           + (dbs.some((d) => d.total < 0) ? `\n(조회 실패: ${dbs.filter((d) => d.total < 0).map((d) => d.name).join('·')})` : '')
           + `\n※ 인용은 db.history.go.kr/id/<levelId>(고정 URL). 비변사등록 座目 제외·형제 조: mode=record·sibling. 그 밖의 DB(실록·승정원일기 등 100여 종): 통합검색(브라우저) ${browse}`);
-        return text(agentBrowse('한국사DB', query, browse, '주요 DB에서 0건 — 한자 원표기·다른 표기로 재시도'));
+        const failed = dbs.filter((d) => d.total < 0), zero = dbs.filter((d) => d.total === 0);
+        // v2.47 '0건'은 확정 0 DB만. 조회 실패가 섞이면 부재로 단정하지 않고 실패 DB를 밝힌다
+        return text(agentBrowse('한국사DB', query, browse, failed.length
+          ? `주요 DB 확정 0건 ${zero.length}종 · 조회 실패 ${failed.length}종(${failed.map((d) => d.name).join('·')}) — 부재로 단정하지 마십시오(응답 끊김·지연). 잠시 후 재시도`
+          : '주요 DB 모두 확정 0건 — 한자 원표기·다른 표기로 재시도'));
       } catch (e) { return text(agentBrowse('한국사DB', query, browse, `자동조회 실패(${e.message})`)); }
     });
 
