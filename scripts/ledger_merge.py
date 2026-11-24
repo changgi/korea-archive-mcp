@@ -108,6 +108,7 @@ DEEP = {"i815": ("nedb_search", lambda o: o.get("url") and {"mode": "i815", "que
         "earchive": ("nedb_search", lambda o: "catalogView.do?systemId=" in (o.get("url") or "") and {"mode": "earchive", "query": o["url"]}),
         "okchf": ("nedb_search", lambda o: o.get("url") and {"mode": "okchf", "query": o["url"]}),
         "nrich": ("nedb_search", lambda o: {"mode": "nrich", "query": o["id"] if re.match(r"^(ksm|portrait|gwaebul|diary|mokgan|jcbib|jcphoto|dict|arch|koguryo|gaesong|design|pattern|oldbook|hyanggyo|stone|journal|iron|dolmen|assay|material):", str(o.get("id", ""))) else o.get("url")} if (o.get("id") or o.get("url")) else None)}
+DEEP["nedb"] = ("nedb_search", lambda o: re.match(r"^[a-z]{2,5}_[0-9a-z_]+$", o["key"].split(":", 1)[1]) and {"mode": "item", "query": o["key"].split(":", 1)[1]})  # v2.61 한국사DB 기록(levelId) — 시대별 경로 판독
 DEEP["kyudb"] = ("nedb_search", lambda o: re.match(r"^[^\x00-\x7f]{1,4}[0-9][0-9.\-]*$", str(o.get("id") or "")) and {"mode": "kyujanggak", "query": o["id"]})  # v2.55 규장각 해제(기관 해설문) — 같은 청구기호 행만 쓴다
 DEEP_V = {"seoul": 2, "aks": 2, "jsg": 2}  # v2.56 jsg 2 = 장서각 개체 태깅·인물 전거(UCI)  # v2.32 판독기 판 — 판이 오르면 이미 보강된 기록도 한 번 다시 판독(서울기록원: 기관 계층·생산자·보존이력 추가)
 _sid = [None]
@@ -193,13 +194,18 @@ def enrich(o, budget):
         if args:
             try:
                 txt = mcp_call(tool, args); summ, md = parse_deep(txt)
+                if src0 == "nedb":  # v2.61 한국사DB 원문 — 기술 항목 줄(제목·연월일·출전…)은 메타로, 본문 앞부분은 요약으로(미공개·실패는 요약 비움)
+                    L2 = txt.splitlines(); md = [[p.split(": ", 1)[0], p.split(": ", 1)[1]] for p in (L2[1].split(" · ") if len(L2) > 1 and ": " in L2[1] else []) if ": " in p]
+                    bi = 2 if md else 1
+                    summ = f"[한국사DB 원문 앞부분] {L2[bi][:380]}" if len(L2) > bi and not re.search(r"공개되지 않았|조회 실패", txt[:400]) else ""
+                    if "공개되지 않았" in txt[:400]: md = [["본문 공개", "미공개 — 항목·URL은 유효, 기관 공개 범위(국사편찬위원회 문의 대상)"]]  # 부재가 아니라 비공개라는 증거
                 if src0 == "kyudb":  # v2.55 규장각 — 같은 청구기호 행의 서지와 해제 원문만(다른 책의 해제·안내 문구 제외)
                     summ, md = kyu_own(txt, o["id"])
                 if src0 == "aks":  # v2.40.2 고문서 문서 판독은 면 목록 — 요약은 머리줄의 면 수·UCI만(파일명 나열 아님)
                     hm = re.search(r"문서 '(.+?)' — (\d+)면(?: · UCI (\S+))?", txt)
                     summ = f"{hm[2]}면{' · UCI ' + hm[3] if hm[3] else ''} — 한국고문서자료관 원문 이미지(뷰어 열람)" if hm else ""
                     md = [["면 수", hm[2]]] + ([["UCI", hm[3]]] if hm and hm[3] else []) if hm else md
-                if summ or src0 != "kyudb": o["summary"] = (summ + " " if summ else "") + f"(KOREA ARCHIVE 심층 판독 {tool})"  # 규장각 해제가 없으면 요약을 비워 둔다(서지는 메타·메타 합성으로)
+                if summ or src0 not in ("kyudb", "nedb"): o["summary"] = (summ + " " if summ else "") + f"(KOREA ARCHIVE 심층 판독 {tool})"  # 규장각 해제가 없으면 요약을 비워 둔다(서지는 메타·메타 합성으로)
                 o["meta"] = md; o["deep_call"] = f"{tool}({json.dumps(args, ensure_ascii=False)})"; o["enrich_status"] = "ok"; o["deep_v"] = DEEP_V.get(src0, 1)
                 um = re.search(r"인물 전거\(한국역대인물 UCI\):\s*(.+)", txt)  # v2.56 기관이 붙인 인명 전거 — 이름=UCI
                 if um: o["authority"] = {"scheme": "한국역대인물 UCI(장서각 태깅)", "persons": dict(x.split("=", 1) for x in um[1].strip().split("; ") if "=" in x)}
@@ -268,7 +274,7 @@ def tree_path(o):
     return [top] + (segs or ["(계열 미상)"])
 
 ERAS = ["광복이후", "광복 이후", "선사", "고조선", "삼국", "고구려", "백제", "신라", "가야", "통일신라", "발해", "남북국", "고려", "조선", "대한제국", "일제강점기", "대한민국"]
-DATE_KEYS = ("생산일", "생산연도", "생산", "연대", "날짜", "시대", "시대분류", "출판정보", "발행", "발행일", "제작연도", "제작시기", "국적/시대", "작성연대 / 간행시기", "생산기간", "발간연도", "date", "발행년도", "기간", "생산 기간", "생산시기", "Publication Date", "일자")  # v2.56 연구원 발행년도·TNA 기간·6·25 생산시기·NDL 발행일·서울 일자  # v2.50 생산기간(전자사료관)·발간연도(국외문화유산)·date(IA·Europeana) — 인수·등록·업로드일(보존이력·addeddate)은 넣지 않는다
+DATE_KEYS = ("생산일", "생산연도", "생산", "연대", "날짜", "시대", "시대분류", "출판정보", "발행", "발행일", "제작연도", "제작시기", "국적/시대", "작성연대 / 간행시기", "생산기간", "발간연도", "date", "발행년도", "기간", "생산 기간", "생산시기", "Publication Date", "일자", "연월일", "발신일")  # v2.56 연구원 발행년도·TNA 기간·6·25 생산시기·NDL 발행일·서울 일자  # v2.50 생산기간(전자사료관)·발간연도(국외문화유산)·date(IA·Europeana) — 인수·등록·업로드일(보존이력·addeddate)은 넣지 않는다
 ERA_KEYS = ("시대", "시대분류", "제작시기", "국적/시대")
 
 def date_derived(o):
