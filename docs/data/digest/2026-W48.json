@@ -1,12 +1,12 @@
 {
 "week": "2026-W48",
-"records": 688,
+"records": 702,
 "by_source": {
-"미국 국립기록관리청 NARA": 89,
+"미국 국립기록관리청 NARA": 97,
 "일본 국립국회도서관": 16,
 "일본 아시아역사자료센터": 9,
 "Europeana": 23,
-"인터넷 아카이브": 72,
+"인터넷 아카이브": 76,
 "영국 국립기록관 TNA": 26,
 "UN 디지털도서관": 8,
 "KOREA ARCHIVE IIIF 갤러리": 3,
@@ -18,7 +18,7 @@
 "국가기록원": 40,
 "위키미디어 공용": 31,
 "Gallica(BnF)": 8,
-"6·25전쟁 아카이브센터": 64,
+"6·25전쟁 아카이브센터": 66,
 "국립중앙도서관": 11,
 "대한민국신문아카이브": 11,
 "국편 전자사료관": 8,
@@ -2732,6 +2732,13 @@
 "url": "https://archive.org/details/111-adc-6600"
 },
 {
+"key": "ia:111-adc-7115",
+"title": "MAY DAY IN KOREA, CHEJU-DO",
+"first_seen": "2026-11-24T00:00:00Z",
+"page": "r/1570403f9e34.html",
+"url": "https://archive.org/details/111-adc-7115"
+},
+{
 "key": "ia:111-adc-8255",
 "title": "ARMY 9TH REGT CP, NAKTONG RIVER, KOREA",
 "first_seen": "2026-11-24T00:00:00Z",
@@ -2793,6 +2800,13 @@
 "first_seen": "2026-11-24T00:00:00Z",
 "page": "r/a07744707337.html",
 "url": "https://www.koreanwar.or.kr:8443/searchDetail.do?archRfcd=2022-US-02-AV-D-00329"
+},
+{
+"key": "nara:NAID 16845104",
+"title": "Aircraft Summaries, 1951",
+"first_seen": "2026-11-24T00:00:00Z",
+"page": "r/e26814c4389d.html",
+"url": "https://catalog.archives.gov/id/16845104"
 },
 {
 "key": "nara:NAID 22023",
@@ -4851,6 +4865,90 @@
 "first_seen": "2026-11-24T23:04:33Z",
 "page": "r/d6a5764dca2c.html",
 "url": "https://catalog.archives.gov/id/644119250"
+},
+{
+"key": "ia:child-of-conflict",
+"title": "Child Of Conflict",
+"first_seen": "2026-11-24T23:10:19Z",
+"page": "r/50cf8ee66cab.html",
+"url": "https://archive.org/details/child-of-conflict"
+},
+{
+"key": "ia:cia-readingroom-document-03194444",
+"title": "CIA Reading Room 03194444: CURRENT INTELLIGENCE BULLETIN - 1955/05/18",
+"first_seen": "2026-11-24T23:10:19Z",
+"page": "r/aa3169cae6ce.html",
+"url": "https://archive.org/details/cia-readingroom-document-03194444"
+},
+{
+"key": "ia:cia-readingroom-document-cia-rdp80t00246a018200250001-2",
+"title": "CIA Reading Room cia-rdp80t00246a018200250001-2: (SANITIZED)UNCLASSIFIED ENGLISH-LANGUAGE PAPERS ON NORTH KOREA(SANITIZED)",
+"first_seen": "2026-11-24T23:10:19Z",
+"page": "r/410545c9c7bc.html",
+"url": "https://archive.org/details/cia-readingroom-document-cia-rdp80t00246a018200250001-2"
+},
+{
+"key": "koreanwar:1993-KR-05-BP-A-00011",
+"title": "국군 38선 돌파 보도기사(1950.10.4)",
+"first_seen": "2026-11-24T23:10:19Z",
+"page": "r/a928c3b2bb2f.html",
+"url": "https://www.koreanwar.or.kr:8443/searchDetail.do?archRfcd=1993-KR-05-BP-A-00011"
+},
+{
+"key": "koreanwar:2024-SE-02-DC-D-00034",
+"title": "스웨덴 적십자병원 보고서 34호 부록 (4)",
+"first_seen": "2026-11-24T23:10:19Z",
+"page": "r/8fc33a7ee06f.html",
+"url": "https://www.koreanwar.or.kr:8443/searchDetail.do?archRfcd=2024-SE-02-DC-D-00034"
+},
+{
+"key": "nara:NAID 20886",
+"title": "MAY DAY IN KOREA, CHEJU-DO",
+"first_seen": "2026-11-24T23:10:19Z",
+"page": "r/e9b107e20927.html",
+"url": "https://catalog.archives.gov/id/20886"
+},
+{
+"key": "nara:NAID 20887",
+"title": "MAY DAY IN KOREA, CHEJU-DO",
+"first_seen": "2026-11-24T23:10:19Z",
+"page": "r/842b9c648287.html",
+"url": "https://catalog.archives.gov/id/20887"
+},
+{
+"key": "nara:NAID 209278974",
+"title": "Korea; Argentina; U.S.",
+"first_seen": "2026-11-24T23:10:19Z",
+"page": "r/1c9b08a6fe0b.html",
+"url": "https://catalog.archives.gov/id/209278974"
+},
+{
+"key": "nara:NAID 404791030",
+"title": "Aerial of Burned Homes in the Korean Village on the island of Jeju",
+"first_seen": "2026-11-24T23:10:19Z",
+"page": "r/e26fb21c94be.html",
+"url": "https://catalog.archives.gov/id/404791030"
+},
+{
+"key": "nara:NAID 404791033",
+"title": "Korean Villagers of Jeju-Do File Back to Their Deserted homes",
+"first_seen": "2026-11-24T23:10:19Z",
+"page": "r/b9e6b7130f9f.html",
+"url": "https://catalog.archives.gov/id/404791033"
+},
+{
+"key": "nara:NAID 505634321",
+"title": "Mounted Members of the Korean Constabulary in Jeju-Do, Korea",
+"first_seen": "2026-11-24T23:10:19Z",
+"page": "r/8796567b7eb2.html",
+"url": "https://catalog.archives.gov/id/505634321"
+},
+{
+"key": "nara:NAID 505634339",
+"title": "Members of the Korean Constabulary March to Song in Jeju-Do, Korea",
+"first_seen": "2026-11-24T23:10:19Z",
+"page": "r/0d9a2d2f4dbd.html",
+"url": "https://catalog.archives.gov/id/505634339"
 }
 ]
 }

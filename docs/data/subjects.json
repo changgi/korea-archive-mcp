@@ -30,7 +30,8 @@
 "ia:111-lc-30456",
 "ia:cZz2ZbGZRdyX5VnyHAZQ3Dusjnccz4",
 "ia:youtube-J9Ljj6N_y8Q",
-"ia:youtube-asdl9Czb698"
+"ia:youtube-asdl9Czb698",
+"ia:111-adc-7115"
 ],
 "sources": [
 "ia"
@@ -58,13 +59,16 @@
 "ia:cia-readingroom-document-03159060",
 "ia:cia-readingroom-document-cia-rdp86t00608r000300020047-7",
 "ia:cia-readingroom-document-cia-rdp88g01117r000802600002-3",
-"ia:cia-readingroom-document-cia-rdp79r01012a018200010001-0"
+"ia:cia-readingroom-document-cia-rdp79r01012a018200010001-0",
+"ia:child-of-conflict",
+"ia:cia-readingroom-document-03194444",
+"ia:cia-readingroom-document-cia-rdp80t00246a018200250001-2"
 ],
 "sources": [
 "ia"
 ],
 "first": "2026-11-23T03:00:40Z",
-"last": "2026-11-24T23:04:29Z",
+"last": "2026-11-24T23:10:19Z",
 "keys": [
 "mediatype"
 ]
@@ -117,7 +121,8 @@
 "ia:111-adc-8305",
 "ia:111-adc-8389",
 "ia:111-adc-8582",
-"ia:111-lc-30456"
+"ia:111-lc-30456",
+"ia:111-adc-7115"
 ],
 "sources": [
 "ia"
@@ -138,13 +143,15 @@
 "ia:cia-readingroom-document-03159060",
 "ia:cia-readingroom-document-cia-rdp86t00608r000300020047-7",
 "ia:cia-readingroom-document-cia-rdp88g01117r000802600002-3",
-"ia:cia-readingroom-document-cia-rdp79r01012a018200010001-0"
+"ia:cia-readingroom-document-cia-rdp79r01012a018200010001-0",
+"ia:cia-readingroom-document-03194444",
+"ia:cia-readingroom-document-cia-rdp80t00246a018200250001-2"
 ],
 "sources": [
 "ia"
 ],
 "first": "2026-11-23T03:00:40Z",
-"last": "2026-11-24T23:04:29Z",
+"last": "2026-11-24T23:10:19Z",
 "keys": [
 "subject"
 ]
@@ -1835,6 +1842,19 @@
 ],
 "first": "2026-11-24T23:04:33Z",
 "last": "2026-11-24T23:04:33Z",
+"keys": [
+"subject"
+]
+},
+"Foreign relations": {
+"records": [
+"ia:child-of-conflict"
+],
+"sources": [
+"ia"
+],
+"first": "2026-11-24T23:10:19Z",
+"last": "2026-11-24T23:10:19Z",
 "keys": [
 "subject"
 ]
@@ -4905,13 +4925,20 @@
 "nara:NAID 102047453",
 "nara:NAID 102048217",
 "nara:NAID 25585",
-"nara:NAID 74247857"
+"nara:NAID 74247857",
+"nara:NAID 20886",
+"nara:NAID 20887",
+"nara:NAID 209278974",
+"nara:NAID 404791030",
+"nara:NAID 404791033",
+"nara:NAID 505634321",
+"nara:NAID 505634339"
 ],
 "sources": [
 "nara"
 ],
 "first": "2026-11-23T03:00:15Z",
-"last": "2026-11-24T22:56:57Z",
+"last": "2026-11-24T23:10:19Z",
 "keys": [
 "기술 수준"
 ]
@@ -4946,13 +4973,14 @@
 "nara:NAID 640035642",
 "nara:NAID 643349627",
 "nara:NAID 644035378",
-"nara:NAID 644119250"
+"nara:NAID 644119250",
+"nara:NAID 16845104"
 ],
 "sources": [
 "nara"
 ],
 "first": "2026-11-23T03:00:15Z",
-"last": "2026-11-24T23:04:33Z",
+"last": "2026-11-24T23:10:19Z",
 "keys": [
 "기술 수준"
 ]
@@ -6063,10 +6091,10 @@
 }
 }
 },
-"updated": "2026-11-24T23:06:28Z",
+"updated": "2026-11-24T23:12:05Z",
 "totals": {
 "매체": 4,
-"주제": 127,
+"주제": 128,
 "장소": 49,
 "분류": 93,
 "시대": 38,
