@@ -987,12 +987,11 @@ def build_relations(recs_all):
     def add(a, b, t, basis):
         if a == b or a not in rel or b not in rel: return
         rel[a].setdefault((t, b), basis); rel[b].setdefault((t, a), basis)
-    for o in R:  # ① 기관 sameAs
-        sa = (o.get("sameAs") or "").strip()
-        if sa:
-            c = sa.lower(); cands = [c, c.replace("nara ", ""), c.split(":", 1)[-1]]
-            for x in cands:
-                for k in by_id.get(x, ()): add(o["key"], k, "같은 기록(다른 소장처)", f"기관 sameAs 표기 '{sa}'")
+    for o in R:  # ① 기관이 같은 기록이라고 적은 상대(sameAs·입수처 링크·IA 기술 속 NARA 링크, v2.83)
+        for kind, v, basis in same_targets(o):
+            for x in target_ids(kind, v):
+                for k in by_id.get(x, ()):
+                    if k.startswith(TARGET_INST[kind]): add(o["key"], k, "같은 기록(다른 소장처)", basis)
         if o["key"].startswith("ia:"):  # IA 업로드가 NARA 로컬 식별자를 그대로 쓰는 경우
             for k in by_id.get(o["key"][3:].lower(), ()):
                 if not k.startswith("ia:"): add(o["key"], k, "같은 기록(다른 소장처)", f"식별자 일치 '{o['key'][3:]}'(IA 식별자 = 기관 로컬 식별자)")
@@ -1062,7 +1061,7 @@ def build_record_pages(recs_all):
 {row('요약', E_(o.get('summary') or '') or (E_(o.get('summary_composed') or '')))}{row('권리', E_(o.get('rights_view') or '') + (f" <small>({E_(o.get('rights_basis', ''))})</small>" if o.get('rights_basis') else ''))}
 {row('IIIF', f"<a href='{KV}{E_(mf)}'>KV 뷰어로 보기</a> · <a href='{E_(mf)}'>매니페스트</a> <small>({E_(o.get('iiif_kind', ''))})</small>" if mf else '')}
 {row('발견', f"처음 {E_(o.get('first_seen', '')[:10])} · 최근 {E_(o.get('last_seen', '')[:10])} · {o.get('seen', 1)}회 · 출처 {E_('+'.join(o.get('sources') or []))}")}
-{row('같은 기록(기관 표기)', E_(o.get('sameAs') or '') + ('' if any(t_ == '같은 기록(다른 소장처)' for t_, _, _ in REL.get(o['key'], [])) else ' <small>(원장에 아직 없는 기록 — 기관 sameAs 표기 그대로)</small>') if o.get('sameAs') else '')}{row('옛 key', E_(', '.join(o.get('key_aliases') or [])))}{row('비고', E_(o.get('merge_note') or o.get('recovered') or o.get('harvested') or ''))}
+{row('같은 기록(기관 표기)', E_(o.get('sameAs') or '') + ('' if any(t_ == '같은 기록(다른 소장처)' for t_, _, _ in REL.get(o['key'], [])) else ' <small>(원장에 아직 없는 기록 — 기관 sameAs 표기 그대로)</small>') if o.get('sameAs') else '')}{row('옛 key', E_(', '.join(o.get('key_aliases') or [])))}{row('비고', E_(o.get('merge_note') or o.get('recovered') or o.get('harvested') or ''))}{row('발굴 경위', E_(o.get('found_via') or '') + (f" <small>(출발 기록 <a href='{E_(rec_slug(o['drilled_from']))}.html'>{E_(o['drilled_from'])}</a>)</small>" if o.get('drilled_from') else '') if o.get('found_via') else '')}
 </table>{('<h2>주제·분류 (기관 표기)</h2><p>' + ' · '.join(f"<a href='../subjects.html#{E_(subj_anchor(f_, t_))}'>{E_(f_)}: {E_(t_)}</a>" for f_, t_ in record_concepts(o)[:30]) + '</p>') if record_concepts(o) else ''}
 {('<h2>관련 기록 (맥락 연결)</h2><ul>' + ''.join(f"<li>{E_(t_)} · <a href='{E_(rec_slug(b_))}.html'>{E_(TITLES.get(b_, b_)[:120])}</a> <small>({E_(bs_)})</small></li>" for t_, b_, bs_ in REL.get(o['key'], [])[:20]) + '</ul>') if REL.get(o['key']) else ''}
 {('<h2>기관 메타</h2><table>' + meta + '</table>') if meta else ''}{('<h2>원문 지문 이력</h2><ul>' + fx + '</ul>') if fx else ''}{('<h2>발견 경로</h2><ul>' + fb + '</ul>') if fb else ''}
@@ -1168,6 +1167,91 @@ def resolve_links(led, today, budget):
             if o.get("enrich_status") in ("ok", "none", "fail"): o["enrich_status"] = ""; o.pop("enriched", None)  # 새 상세로 다시 판독
         time.sleep(0.6)
     return used, fixed
+
+NARA_LINK = re.compile(r"catalog\.archives\.gov/id/(\d+)")
+
+def same_targets(o):
+    """v2.83 기관이 '같은 기록'이라고 적은 상대 — (종류, 값, 근거). sameAs 필드, 입수처 링크(6·25전쟁 아카이브센터), IA 기술 속 NARA 카탈로그 링크"""
+    out = []; sa = (o.get("sameAs") or "").strip()
+    m = re.match(r"^(?:koreanwar:)?(\d{4}-[A-Z]{2}-\d{2}-[A-Z]{2}-[A-Z]-\d+)$", sa)
+    if m: out.append(("kw", m[1], f"기관 sameAs 표기 '{sa}'"))
+    m = re.match(r"^NARA (\S+)$", sa)
+    if m: out.append(("nara_local", m[1], f"기관 sameAs 표기 '{sa}'"))
+    m = re.match(r"^(?:nara:)?NAID (\d+)$", sa)
+    if m: out.append(("naid", m[1], f"기관 sameAs 표기 '{sa}'"))
+    m = re.match(r"^ia:(\S+)$", sa)
+    if m: out.append(("ia", m[1], f"기관 sameAs 표기 '{sa}'"))
+    if not o["key"].startswith("nara:"):
+        for k, v in (o.get("meta") or []):
+            mm = NARA_LINK.search(str(v)) if k in ("입수처 링크", "source", "description") else None
+            if mm: out.append(("naid", mm[1], f"기관 메타 '{k}'의 NARA 카탈로그 링크"))
+        mm = NARA_LINK.search(o.get("summary") or "") if o["key"].startswith("ia:") else None
+        if mm: out.append(("naid", mm[1], "IA 기술(description)의 NARA 카탈로그 링크"))
+    seen = set(); return [t for t in out if not (t[:2] in seen or seen.add(t[:2]))]
+
+TARGET_INST = {"kw": "koreanwar:", "nara_local": "nara:", "naid": "nara:", "ia": "ia:"}  # 상대 기록의 소장처 — IA 식별자가 NARA 로컬 식별자와 같아 자기 자신에 걸리지 않게
+
+def target_ids(kind, v):
+    return {"kw": {f"koreanwar:{v}".lower(), v.lower()}, "nara_local": {v.lower()}, "naid": {f"naid {v}", f"nara:naid {v}"}, "ia": {f"ia:{v}".lower()}}[kind]
+
+def sameas_pass(led, today, budget=10):
+    """v2.83 같은 기록 추적 — 기관이 같은 기록이라고 적은 상대가 원장에 없으면 그 기관에서 직접 찾아 원장 기록으로 들인다(발굴).
+    정확히 같은 식별자만(NAID·로컬 식별자·참조코드·IA 식별자) — 비슷한 제목은 받지 않는다. 실패는 7일 뒤 재시도, 원래 기록에 sameas_tried."""
+    ids = {}
+    for o in led.values():
+        for i in _loc_ids(o): ids.setdefault(i, set()).add(o["key"])
+    found = lambda kind, v: any(k.startswith(TARGET_INST[kind]) for i in target_ids(kind, v) for k in ids.get(i, ()))
+    used = added = 0; now = today.isoformat() + "T00:00:00Z"
+    for o in sorted(led.values(), key=lambda x: x["key"]):
+        if used >= budget: break
+        if o.get("entry_type", "기록") != "기록": continue
+        tried = o.get("sameas_tried") or {}
+        for kind, v, basis in same_targets(o):
+            if used >= budget: break
+            if found(kind, v): continue
+            tk = f"{kind}:{v}"
+            if tried.get(tk, "") > (today - dt.timedelta(days=7)).isoformat(): continue
+            used += 1; tried[tk] = today.isoformat(); rec = None
+            try:
+                if kind == "kw":
+                    t = mcp_call("koreanwar_item", {"ref_code": v})
+                    if f"[{v}]" in t.split("\n")[0]:
+                        f_ = dict(re.findall(r"^· ([^:\n]+): (.+)$", t, re.M)); ti = (re.search(r"^제목: (.+)$", t, re.M) or [None, ""])[1]
+                        d_ = (re.match(r"(\d{4}-\d{2}(?:-\d{2})?)", f_.get("생산시기", "")) or [None, ""])[1].replace("-00", "")
+                        rec = {"key": f"koreanwar:{v}", "sources": ["koreanwar"], "title": ti, "date": d_, "id": v, "url": f"https://www.koreanwar.or.kr:8443/searchDetail.do?archRfcd={v}",
+                               "partOf": "", "meta": [["제목", ti]] + [[k, x] for k, x in f_.items()], "summary": ""}
+                        n_ = NARA_LINK.search(f_.get("입수처 링크", ""))
+                        if n_: rec["sameAs"] = f"NAID {n_[1]}"
+                elif kind in ("nara_local", "naid"):
+                    t = mcp_call("nara_search", {"query": "", "naid": int(v), "radius": 0}) if kind == "naid" else mcp_call("nara_search", {"query": v, "max_results": 5})
+                    for m in re.finditer(r"\[NAID (\d+)\] (.+?) \| ([^|·\n]*?) (?:·[^|\n]*)?\|(?: ([^|\n]+?) \|)? (https://catalog\.archives\.gov/id/\d+)(?:\n\s+계보: (.+))?", t):
+                        if (kind == "naid" and m[1] == v) or (kind == "nara_local" and m[3].strip().lower() == v.lower()):
+                            gp = (m[4] or m[6] or "").strip(); ti = m[2].strip(); dm = re.search(r" \((\d{4})(-\d{2}-\d{2})?\)$", ti)
+                            if dm: ti = ti[:dm.start()]  # 도구가 제목 끝에 붙인 NARA 생산일 — 연초(01-01)는 연도만 표기된 값이라 연도로
+                            nd = (dm[1] + (dm[2] if dm[2] and dm[2] != "-01-01" else "")) if dm else ""
+                            rec = {"key": f"nara:NAID {m[1]}", "sources": ["nara"], "title": ti, "date": nd, "id": f"NAID {m[1]}", "url": m[5], "partOf": ("NARA › " + gp) if gp else "",
+                                   "meta": [["NAID", m[1]]] + ([["로컬 식별자", m[3].strip()]] if m[3].strip() else []), "summary": ""}
+                            if gp: rec["partOf_src"] = "nara_search 계보(기관 API)"
+                            break
+                elif kind == "ia":
+                    j = json.loads(urllib.request.urlopen(urllib.request.Request(f"https://archive.org/metadata/{urllib.parse.quote(v)}", headers={"User-Agent": UA}), timeout=40).read())
+                    md = j.get("metadata") or {}
+                    if md.get("identifier") == v:
+                        vv = lambda x: "; ".join(x) if isinstance(x, list) else str(x or "")
+                        rec = {"key": f"ia:{v}", "sources": ["ia"], "title": vv(md.get("title"))[:300], "date": vv(md.get("date"))[:10] if re.match(r"^\d{4}(-\d{2}){0,2}$", vv(md.get("date"))[:10]) else "", "id": v, "url": f"https://archive.org/details/{v}",
+                               "partOf": ("IA Collection › " + vv(md.get("collection")).split(";")[0]) if md.get("collection") else "", "summary": re.sub(r"<[^>]+>", " ", vv(md.get("description")))[:1500],
+                               "meta": [[k, vv(md[k])[:300]] for k in ("identifier", "collection", "creator", "date", "mediatype", "subject", "title") if md.get(k)]}
+            except Exception as ex:
+                tried.pop(tk, None); print(f"같은 기록 추적 실패 {tk}: {str(ex)[:60]}"); time.sleep(0.6); continue  # 조회 실패는 다음 날 다시(7일 대기는 '응답은 왔으나 없음'만)
+            time.sleep(0.6)
+            if not rec or not rec["title"] or rec["key"] in led: continue
+            rec.update({"media": "", "first_seen": now, "last_seen": now, "seen": 0, "tools": [{"kw": "koreanwar_item", "ia": "archive.org metadata API"}.get(kind, "nara_search")],
+                        "days": {}, "formats": {}, "days_total": 0, "max_cross": 1, "drilled_from": o["key"], "found_via": f"같은 기록 추적(v2.83) — {basis}", "enriched": today.isoformat()})
+            rec.setdefault("sameAs", ""); led[rec["key"]] = rec; added += 1
+            for i in _loc_ids(rec): ids.setdefault(i, set()).add(rec["key"])
+        if tried: o["sameas_tried"] = tried
+        if used >= budget: break
+    return used, added
 
 def aks_drill(led, today, budget):
     """v2.35 고문서자료관 소장처(컬렉션) 항목 → 안의 실제 문서를 원장 기록으로 발굴. nedb_search(mode='aks')로 분류 → 문서까지 내려가
@@ -1671,6 +1755,8 @@ def main():
     for o in led.values(): o["entry_type"] = entry_type(o)
     rl_used, rl_fixed = resolve_links(led, today, int(os.environ.get("RESOLVE_MAX", "20")))
     ad_used, ad_added = aks_drill(led, today, int(os.environ.get("AKS_DRILL_MAX", "30")))
+    sa_used, sa_added = sameas_pass(led, today, int(os.environ.get("SAMEAS_MAX", "12")))  # v2.83 같은 기록 추적 발굴
+    print(f"같은 기록 추적 {sa_added}건 발굴(요청 {sa_used})")
     print(f"첫 화면 링크 해소 {rl_fixed}/{rl_used} · 고문서 소장처 하위 문서 발굴 {ad_added}건({ad_used}회 호출)")
     budget = int(os.environ.get("ENRICH_MAX", "80"))  # 하루 매니페스트 판독 상한(기관 서버 예의 — 순차·간격)
     for o in sorted(led.values(), key=lambda o: o.get("last_seen", ""), reverse=True):
@@ -1729,7 +1815,7 @@ def main():
         o["iiif_built"] = "" if (o.get("iiif") and not o.get("iiif_status")) else leaf_manifest(o)  # v2.52 기관 매니페스트가 비공개 응답이면 브리지로 대체(기관 주소는 보존)
     with open(lp, "w", encoding="utf-8") as f:
         for o in recs: f.write(json.dumps(o, ensure_ascii=False, separators=(",", ":")) + "\n")
-    cols = ["key", "entry_type", "found_by_basis", "summary_composed", "rights_view", "rights_basis", "fixity", "defect_note", "link_note", "sources", "title", "date", "date_derived", "date_basis", "id", "url", "partOf", "partOf_derived", "media", "sameAs", "iiif", "iiif_status", "iiif_built", "iiif_kind", "found_by", "found_by_derived", "first_seen", "last_seen", "seen", "seen_7d", "seen_30d", "days_total", "formats", "tools", "max_cross", "trend", "rank", "score", "summary", "summary_basis", "rights", "attribution", "thumb", "meta", "meta_basis", "authority", "key_aliases", "merge_note", "recovered", "harvested", "meta_restored"]
+    cols = ["key", "entry_type", "found_by_basis", "summary_composed", "rights_view", "rights_basis", "fixity", "defect_note", "link_note", "sources", "title", "date", "date_derived", "date_basis", "id", "url", "partOf", "partOf_derived", "media", "sameAs", "iiif", "iiif_status", "iiif_built", "iiif_kind", "found_by", "found_by_derived", "first_seen", "last_seen", "seen", "seen_7d", "seen_30d", "days_total", "formats", "tools", "max_cross", "trend", "rank", "score", "summary", "summary_basis", "rights", "attribution", "thumb", "meta", "meta_basis", "authority", "key_aliases", "merge_note", "recovered", "harvested", "meta_restored", "found_via", "drilled_from"]
     fmtv = lambda v: json.dumps(v, ensure_ascii=False, separators=(",", ":")) if isinstance(v, list) and v and isinstance(v[0], dict) else " | ".join(f"{a}: {b}" for a, b in v) if isinstance(v, list) and v and isinstance(v[0], list) else (" ".join(f"{k}:{n}" for k, n in sorted(v.items(), key=lambda kv: -kv[1])) if isinstance(v, dict) and all(isinstance(x, (int, float)) for x in v.values()) else json.dumps(v, ensure_ascii=False, separators=(",", ":")) if isinstance(v, dict) else ("+".join(v) if isinstance(v, list) else v))
     with open(os.path.join(D, "discovered.csv"), "w", encoding="utf-8-sig", newline="") as f:
         w = csv.writer(f); w.writerow(cols)
