@@ -3,8 +3,8 @@
 "미국 국립기록관리청 NARA": {
 "depth": 1,
 "first": "2026-11-23T03:00:15Z",
-"last": "2026-11-24T22:56:57Z",
-"records": 77,
+"last": "2026-11-24T23:04:33Z",
+"records": 89,
 "sources": [
 "nara",
 "koreanwar",
@@ -54,8 +54,8 @@
 "미국 국립기록관리청 NARA › RG 64": {
 "depth": 2,
 "first": "2026-11-23T03:00:15Z",
-"last": "2026-11-24T22:40:43Z",
-"records": 4,
+"last": "2026-11-24T23:04:33Z",
+"records": 9,
 "sources": [
 "nara"
 ]
@@ -153,8 +153,8 @@
 "인터넷 아카이브": {
 "depth": 1,
 "first": "2026-11-23T03:00:40Z",
-"last": "2026-11-24T22:56:57Z",
-"records": 73,
+"last": "2026-11-24T23:04:33Z",
+"records": 77,
 "sources": [
 "ia"
 ]
@@ -162,8 +162,8 @@
 "인터넷 아카이브 › IA Collection": {
 "depth": 2,
 "first": "2026-11-23T03:00:40Z",
-"last": "2026-11-24T22:56:57Z",
-"records": 73,
+"last": "2026-11-24T23:04:33Z",
+"records": 77,
 "sources": [
 "ia"
 ]
@@ -180,8 +180,8 @@
 "인터넷 아카이브 › IA Collection › ciareadingroom": {
 "depth": 3,
 "first": "2026-11-23T03:00:40Z",
-"last": "2026-11-24T22:56:56Z",
-"records": 10,
+"last": "2026-11-24T23:04:29Z",
+"records": 11,
 "sources": [
 "ia"
 ]
@@ -821,8 +821,8 @@
 "6·25전쟁 아카이브센터": {
 "depth": 1,
 "first": "2026-11-23T03:01:45Z",
-"last": "2026-11-24T22:56:57Z",
-"records": 58,
+"last": "2026-11-24T23:04:29Z",
+"records": 64,
 "sources": [
 "koreanwar"
 ]
@@ -830,8 +830,8 @@
 "6·25전쟁 아카이브센터 › 협약": {
 "depth": 2,
 "first": "2026-11-23T03:01:45Z",
-"last": "2026-11-24T22:56:57Z",
-"records": 58,
+"last": "2026-11-24T23:04:29Z",
+"records": 64,
 "sources": [
 "koreanwar"
 ]
@@ -2225,8 +2225,8 @@
 "6·25전쟁 아카이브센터 › 협약 › 수집 > 러시아 > 이스트뷰(East View Information Services) > Krokodil Digital Archive": {
 "depth": 3,
 "first": "2026-11-23T15:23:38Z",
-"last": "2026-11-23T15:34:10Z",
-"records": 1,
+"last": "2026-11-24T23:04:29Z",
+"records": 2,
 "sources": [
 "koreanwar"
 ]
@@ -2990,8 +2990,8 @@
 "인터넷 아카이브 › IA Collection › opensource_image": {
 "depth": 3,
 "first": "2026-11-24T22:44:35Z",
-"last": "2026-11-24T22:44:36Z",
-"records": 3,
+"last": "2026-11-24T23:04:29Z",
+"records": 4,
 "sources": [
 "ia"
 ]
@@ -3296,8 +3296,8 @@
 "6·25전쟁 아카이브센터 › 협약 › 기증 > 대한민국 > 김종면 > 김종면 컬렉션": {
 "depth": 3,
 "first": "2026-11-24T22:56:56Z",
-"last": "2026-11-24T22:56:56Z",
-"records": 2,
+"last": "2026-11-24T23:04:29Z",
+"records": 3,
 "sources": [
 "koreanwar"
 ]
@@ -3392,8 +3392,134 @@
 "sources": [
 "tna"
 ]
+},
+"6·25전쟁 아카이브센터 › 협약 › 기타 > 전문자료실 서가 자료 > 전문도서": {
+"depth": 3,
+"first": "2026-11-24T23:04:29Z",
+"last": "2026-11-24T23:04:29Z",
+"records": 2,
+"sources": [
+"koreanwar"
+]
+},
+"6·25전쟁 아카이브센터 › 협약 › 기증 > 대한민국 > 단일 기증 > 장기희": {
+"depth": 3,
+"first": "2026-11-24T23:04:29Z",
+"last": "2026-11-24T23:04:29Z",
+"records": 1,
+"sources": [
+"koreanwar"
+]
+},
+"6·25전쟁 아카이브센터 › 협약 › 수집 > 미국 > 국립문서기록관리청(NARA) > Record Group 342: Records of U.S. Air Force Commands": {
+"depth": 3,
+"first": "2026-11-24T23:04:29Z",
+"last": "2026-11-24T23:04:29Z",
+"records": 1,
+"sources": [
+"koreanwar"
+]
+},
+"미국 국립기록관리청 NARA › Speech Backup Chronological Files": {
+"depth": 2,
+"first": "2026-11-24T23:04:29Z",
+"last": "2026-11-24T23:04:29Z",
+"records": 2,
+"sources": [
+"nara"
+]
+},
+"미국 국립기록관리청 NARA › RG 407": {
+"depth": 2,
+"first": "2026-11-24T23:04:29Z",
+"last": "2026-11-24T23:04:33Z",
+"records": 4,
+"sources": [
+"nara"
+]
+},
+"미국 국립기록관리청 NARA › RG 407 › World War II Operations Reports": {
+"depth": 3,
+"first": "2026-11-24T23:04:29Z",
+"last": "2026-11-24T23:04:33Z",
+"records": 4,
+"sources": [
+"nara"
+]
+},
+"미국 국립기록관리청 NARA › RG 64 › Records of the American Delegation, U.S.-U.S.S.R. Joint Commission on Ko": {
+"depth": 3,
+"first": "2026-11-24T23:04:29Z",
+"last": "2026-11-24T23:04:29Z",
+"records": 1,
+"sources": [
+"nara"
+]
+},
+"인터넷 아카이브 › IA Collection › mirrortube": {
+"depth": 3,
+"first": "2026-11-24T23:04:33Z",
+"last": "2026-11-24T23:04:33Z",
+"records": 2,
+"sources": [
+"ia"
+]
+},
+"미국 국립기록관리청 NARA › RG 59": {
+"depth": 2,
+"first": "2026-11-24T23:04:33Z",
+"last": "2026-11-24T23:04:33Z",
+"records": 1,
+"sources": [
+"nara"
+]
+},
+"미국 국립기록관리청 NARA › RG 59 › Select Documents Released Under the Nazi War Crimes and Japanese Imperia": {
+"depth": 3,
+"first": "2026-11-24T23:04:33Z",
+"last": "2026-11-24T23:04:33Z",
+"records": 1,
+"sources": [
+"nara"
+]
+},
+"미국 국립기록관리청 NARA › RG 64 › Studies, Reports, and Other Reference Documents of the Allied Operationa": {
+"depth": 3,
+"first": "2026-11-24T23:04:33Z",
+"last": "2026-11-24T23:04:33Z",
+"records": 1,
+"sources": [
+"nara"
+]
+},
+"미국 국립기록관리청 NARA › RG 64 › International Prosecution Section Records Relating to Witnesses for the": {
+"depth": 3,
+"first": "2026-11-24T23:04:33Z",
+"last": "2026-11-24T23:04:33Z",
+"records": 1,
+"sources": [
+"nara"
+]
+},
+"미국 국립기록관리청 NARA › RG 64 › Miscellaneous Records of the Allied Operational and Occupation Headquart": {
+"depth": 3,
+"first": "2026-11-24T23:04:33Z",
+"last": "2026-11-24T23:04:33Z",
+"records": 1,
+"sources": [
+"nara"
+]
+},
+"미국 국립기록관리청 NARA › RG 64 › Records Pertaining to Rules and Procedures Governing the Conduct of Japa": {
+"depth": 3,
+"first": "2026-11-24T23:04:33Z",
+"last": "2026-11-24T23:04:33Z",
+"records": 1,
+"sources": [
+"nara"
+]
 }
 },
-"updated": "2026-11-24T23:00:25Z",
-"total": 376
+"updated": "2026-11-24T23:06:28Z",
+"total": 390
 }

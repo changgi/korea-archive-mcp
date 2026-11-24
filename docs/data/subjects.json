@@ -28,13 +28,15 @@
 "ia:111-adc-8389",
 "ia:111-adc-8582",
 "ia:111-lc-30456",
-"ia:cZz2ZbGZRdyX5VnyHAZQ3Dusjnccz4"
+"ia:cZz2ZbGZRdyX5VnyHAZQ3Dusjnccz4",
+"ia:youtube-J9Ljj6N_y8Q",
+"ia:youtube-asdl9Czb698"
 ],
 "sources": [
 "ia"
 ],
 "first": "2026-11-23T03:00:40Z",
-"last": "2026-11-24T22:56:56Z",
+"last": "2026-11-24T23:04:33Z",
 "keys": [
 "mediatype"
 ]
@@ -55,13 +57,14 @@
 "ia:cia-readingroom-document-03004633",
 "ia:cia-readingroom-document-03159060",
 "ia:cia-readingroom-document-cia-rdp86t00608r000300020047-7",
-"ia:cia-readingroom-document-cia-rdp88g01117r000802600002-3"
+"ia:cia-readingroom-document-cia-rdp88g01117r000802600002-3",
+"ia:cia-readingroom-document-cia-rdp79r01012a018200010001-0"
 ],
 "sources": [
 "ia"
 ],
 "first": "2026-11-23T03:00:40Z",
-"last": "2026-11-24T22:56:56Z",
+"last": "2026-11-24T23:04:29Z",
 "keys": [
 "mediatype"
 ]
@@ -84,13 +87,14 @@
 "ia:korea-1_202508",
 "ia:korea-1_20250811",
 "ia:PLAN-PIA03762",
-"ia:mac-arthurs-war-map-naktong-bulge"
+"ia:mac-arthurs-war-map-naktong-bulge",
+"ia:9780812248456"
 ],
 "sources": [
 "ia"
 ],
 "first": "2026-11-24T22:44:35Z",
-"last": "2026-11-24T22:44:36Z",
+"last": "2026-11-24T23:04:29Z",
 "keys": [
 "mediatype"
 ]
@@ -133,13 +137,14 @@
 "ia:cia-readingroom-document-03004633",
 "ia:cia-readingroom-document-03159060",
 "ia:cia-readingroom-document-cia-rdp86t00608r000300020047-7",
-"ia:cia-readingroom-document-cia-rdp88g01117r000802600002-3"
+"ia:cia-readingroom-document-cia-rdp88g01117r000802600002-3",
+"ia:cia-readingroom-document-cia-rdp79r01012a018200010001-0"
 ],
 "sources": [
 "ia"
 ],
 "first": "2026-11-23T03:00:40Z",
-"last": "2026-11-24T22:56:56Z",
+"last": "2026-11-24T23:04:29Z",
 "keys": [
 "subject"
 ]
@@ -655,15 +660,18 @@
 "dnz:22867986",
 "dnz:22898683",
 "dnz:23044160",
-"dnz:23044233"
+"dnz:23044233",
+"ia:9780812248456"
 ],
 "sources": [
-"dnz"
+"dnz",
+"ia"
 ],
 "first": "2026-11-23T13:40:50Z",
-"last": "2026-11-23T13:40:50Z",
+"last": "2026-11-24T23:04:29Z",
 "keys": [
-"주제"
+"주제",
+"subject"
 ]
 },
 "Korean War": {
@@ -946,15 +954,19 @@
 },
 "North Korea": {
 "records": [
-"dnz:42631548"
+"dnz:42631548",
+"ia:youtube-J9Ljj6N_y8Q",
+"ia:youtube-asdl9Czb698"
 ],
 "sources": [
-"dnz"
+"dnz",
+"ia"
 ],
 "first": "2026-11-23T13:40:50Z",
-"last": "2026-11-23T13:40:50Z",
+"last": "2026-11-24T23:04:33Z",
 "keys": [
-"주제"
+"주제",
+"subject"
 ]
 },
 "history": {
@@ -1655,6 +1667,174 @@
 ],
 "first": "2026-11-24T22:47:17Z",
 "last": "2026-11-24T22:47:17Z",
+"keys": [
+"subject"
+]
+},
+"Youtube": {
+"records": [
+"ia:youtube-J9Ljj6N_y8Q",
+"ia:youtube-asdl9Czb698"
+],
+"sources": [
+"ia"
+],
+"first": "2026-11-24T23:04:33Z",
+"last": "2026-11-24T23:04:33Z",
+"keys": [
+"subject"
+]
+},
+"video": {
+"records": [
+"ia:youtube-J9Ljj6N_y8Q",
+"ia:youtube-asdl9Czb698"
+],
+"sources": [
+"ia"
+],
+"first": "2026-11-24T23:04:33Z",
+"last": "2026-11-24T23:04:33Z",
+"keys": [
+"subject"
+]
+},
+"News & Politics": {
+"records": [
+"ia:youtube-J9Ljj6N_y8Q",
+"ia:youtube-asdl9Czb698"
+],
+"sources": [
+"ia"
+],
+"first": "2026-11-24T23:04:33Z",
+"last": "2026-11-24T23:04:33Z",
+"keys": [
+"subject"
+]
+},
+"DPRK": {
+"records": [
+"ia:youtube-J9Ljj6N_y8Q",
+"ia:youtube-asdl9Czb698"
+],
+"sources": [
+"ia"
+],
+"first": "2026-11-24T23:04:33Z",
+"last": "2026-11-24T23:04:33Z",
+"keys": [
+"subject"
+]
+},
+"KIm Jong Un": {
+"records": [
+"ia:youtube-J9Ljj6N_y8Q",
+"ia:youtube-asdl9Czb698"
+],
+"sources": [
+"ia"
+],
+"first": "2026-11-24T23:04:33Z",
+"last": "2026-11-24T23:04:33Z",
+"keys": [
+"subject"
+]
+},
+"Kim Jong Il": {
+"records": [
+"ia:youtube-J9Ljj6N_y8Q",
+"ia:youtube-asdl9Czb698"
+],
+"sources": [
+"ia"
+],
+"first": "2026-11-24T23:04:33Z",
+"last": "2026-11-24T23:04:33Z",
+"keys": [
+"subject"
+]
+},
+"Kim Il Sung": {
+"records": [
+"ia:youtube-J9Ljj6N_y8Q",
+"ia:youtube-asdl9Czb698"
+],
+"sources": [
+"ia"
+],
+"first": "2026-11-24T23:04:33Z",
+"last": "2026-11-24T23:04:33Z",
+"keys": [
+"subject"
+]
+},
+"Juche": {
+"records": [
+"ia:youtube-J9Ljj6N_y8Q",
+"ia:youtube-asdl9Czb698"
+],
+"sources": [
+"ia"
+],
+"first": "2026-11-24T23:04:33Z",
+"last": "2026-11-24T23:04:33Z",
+"keys": [
+"subject"
+]
+},
+"Paektu": {
+"records": [
+"ia:youtube-J9Ljj6N_y8Q",
+"ia:youtube-asdl9Czb698"
+],
+"sources": [
+"ia"
+],
+"first": "2026-11-24T23:04:33Z",
+"last": "2026-11-24T23:04:33Z",
+"keys": [
+"subject"
+]
+},
+"Reunification": {
+"records": [
+"ia:youtube-J9Ljj6N_y8Q",
+"ia:youtube-asdl9Czb698"
+],
+"sources": [
+"ia"
+],
+"first": "2026-11-24T23:04:33Z",
+"last": "2026-11-24T23:04:33Z",
+"keys": [
+"subject"
+]
+},
+"Pyongyang": {
+"records": [
+"ia:youtube-J9Ljj6N_y8Q",
+"ia:youtube-asdl9Czb698"
+],
+"sources": [
+"ia"
+],
+"first": "2026-11-24T23:04:33Z",
+"last": "2026-11-24T23:04:33Z",
+"keys": [
+"subject"
+]
+},
+"Workers' Party of Ko": {
+"records": [
+"ia:youtube-J9Ljj6N_y8Q",
+"ia:youtube-asdl9Czb698"
+],
+"sources": [
+"ia"
+],
+"first": "2026-11-24T23:04:33Z",
+"last": "2026-11-24T23:04:33Z",
 "keys": [
 "subject"
 ]
@@ -4754,13 +4934,25 @@
 "nara:NAID 42219745",
 "nara:NAID 1555828",
 "nara:NAID 24465887",
-"nara:NAID 42219636"
+"nara:NAID 42219636",
+"nara:NAID 323152357",
+"nara:NAID 323153774",
+"nara:NAID 402692471",
+"nara:NAID 402694655",
+"nara:NAID 402699988",
+"nara:NAID 684014604",
+"nara:NAID 20887080",
+"nara:NAID 402467227",
+"nara:NAID 640035642",
+"nara:NAID 643349627",
+"nara:NAID 644035378",
+"nara:NAID 644119250"
 ],
 "sources": [
 "nara"
 ],
 "first": "2026-11-23T03:00:15Z",
-"last": "2026-11-24T22:56:57Z",
+"last": "2026-11-24T23:04:33Z",
 "keys": [
 "기술 수준"
 ]
@@ -5871,10 +6063,10 @@
 }
 }
 },
-"updated": "2026-11-24T23:00:25Z",
+"updated": "2026-11-24T23:06:28Z",
 "totals": {
 "매체": 4,
-"주제": 115,
+"주제": 127,
 "장소": 49,
 "분류": 93,
 "시대": 38,
