@@ -97,6 +97,7 @@ DEEP = {"i815": ("nedb_search", lambda o: o.get("url") and {"mode": "i815", "que
         "ktv": ("nedb_search", lambda o: o.get("url") and {"mode": "ktv", "query": o["url"]}),
         "koreanwar": ("koreanwar_item", lambda o: o.get("id") and not str(o["id"]).startswith("book:") and {"ref_code": o["id"]}),
         "seoul": ("seoul_archives_search", lambda o: o.get("url") and {"query": o["url"]}),
+        "aks": ("nedb_search", lambda o: o.get("aks_cat") and o.get("id") and {"mode": "aks", "query": f"{o['aks_cat']}/{o['id']}"}),
         "earchive": ("nedb_search", lambda o: "catalogView.do?systemId=" in (o.get("url") or "") and {"mode": "earchive", "query": o["url"]}),
         "okchf": ("nedb_search", lambda o: o.get("url") and {"mode": "okchf", "query": o["url"]}),
         "nrich": ("nedb_search", lambda o: {"mode": "nrich", "query": o["id"] if re.match(r"^(ksm|portrait|gwaebul|diary|mokgan|jcbib|jcphoto|dict|arch|koguryo|gaesong|design|pattern|oldbook|hyanggyo|stone|journal|iron|dolmen|assay|material):", str(o.get("id", ""))) else o.get("url")} if (o.get("id") or o.get("url")) else None)}
@@ -580,7 +581,7 @@ def build_media(recs_all):
         if ymd: it["issued"] = {"date-parts": [[int(ymd[1]), int(ymd[2]), int(ymd[3])]]}  # YYYYMMDD·YYYY-MM-DD는 일 단위까지
         elif yr(o): it["issued"] = {"date-parts": [[int(yr(o))]]}
         elif o.get("date"): it["issued"] = {"literal": o["date"]}
-        if o.get("summary"): it["abstract"] = o["summary"][:1000]
+        if o.get("summary") or o.get("summary_composed"): it["abstract"] = (o.get("summary") or o["summary_composed"])[:1000]
         if o.get("rights_view"): it["license"] = o["rights_view"]; it["note"] += f" · 권리 근거: {o.get('rights_basis', '')}"
         csl.append(it)
     json.dump(csl, open(os.path.join(D, "records.csl.json"), "w", encoding="utf-8"), ensure_ascii=False)
@@ -660,24 +661,25 @@ def aks_drill(led, today, budget):
     used = added = 0
     for o in [x for x in led.values() if x["key"].startswith("aks:") and x.get("entry_type") != "결함 출력"]:
         if used >= budget: break
-        if o.get("drilled", "") >= today.isoformat() or o.get("children"): continue
+        if o.get("drilled", "") >= today.isoformat() or (o.get("children") and all(c.get("cat") for c in o["children"])): continue  # v2.40 분류(cat) 없는 옛 발굴은 한 번 다시
         cid = str(o.get("id") or ""); queue = [cid] if re.match(r"^L\d{6}", cid) else []; docs = []
         while queue and used < budget and len(docs) < 40:
             q = queue.pop(0); used += 1
             try: t = mcp_call("nedb_search", {"mode": "aks", "query": q})
             except Exception: break
             queue += re.findall(r"\[분류 (L\d{6}F[0-9A-Z]*)\]", t)
-            for m in re.finditer(r"- \[문서\] (.+)\n\s+원문 고정 링크\(UCI\): (https://archive\.aks\.ac\.kr/link\.do\?dataUCI=\S+)", t): docs.append((m[1].strip(), m[2].strip()))
+            for m in re.finditer(r"- \[문서\] (.+)\n\s+원문 고정 링크\(UCI\): (https://archive\.aks\.ac\.kr/link\.do\?dataUCI=\S+)", t): docs.append((m[1].strip(), m[2].strip(), q))
             time.sleep(0.6)
         o["drilled"] = today.isoformat()
         if not docs: continue
-        coll = re.sub(r"\s*\([^()]*\)$", "", re.sub(r"^\[고문서 소장처\]\s*", "", o["title"])); o["children"] = [{"title": d, "url": u} for d, u in docs]
-        for d, u in docs:
+        coll = re.sub(r"\s*\([^()]*\)$", "", re.sub(r"^\[고문서 소장처\]\s*", "", o["title"])); o["children"] = [{"title": d, "url": u, "cat": c} for d, u, c in docs]
+        for d, u, c in docs:
             k = "aks:" + u.split("dataUCI=")[1]
-            if k in led: continue
+            if k in led:
+                led[k].setdefault("aks_cat", c); continue
             led[k] = {"key": k, "sources": ["aks"], "title": d, "date": "", "id": u.split("dataUCI=")[1], "url": u, "partOf": f"한국고문서자료관 › {o.get('partOf') or ''} › {coll}".replace(" ›  › ", " › "),
                       "media": "", "sameAs": "", "first_seen": today.isoformat() + "T00:00:00Z", "last_seen": today.isoformat() + "T00:00:00Z", "seen": 0, "tools": ["nedb_search"],
-                      "days": {}, "formats": {}, "days_total": 0, "max_cross": 1, "drilled_from": o["key"], "found_via": "소장처 하위 문서 발굴(nedb_search mode=aks)"}
+                      "days": {}, "formats": {}, "days_total": 0, "max_cross": 1, "drilled_from": o["key"], "found_via": "소장처 하위 문서 발굴(nedb_search mode=aks)", "aks_cat": c}
             added += 1
     return used, added
 
@@ -763,6 +765,14 @@ def rights_policies():
 
 RIGHTS_KEY = re.compile(r"권리|이용조건|이용 ?제한|이용유형|라이선스|license|저작권|공공누리|KOGL|rights|usage|copyright|열람조건", re.I)
 
+SKIP_META = re.compile(r"URL|url|링크|뷰어|원문$|지문|계보|계층|주의|이미지 총수|archiveit|^collection$|식별자|NAID|ID|번호|권리|이용|접근|라이선스|license|rights|판독 시각|변환|디지털 객체|이미지 크기|Persistent", re.I)
+
+def summary_composed(o):
+    """v2.40 요약이 없는 기록 — 원 기관 메타 값만 이어 붙인 합성 요약(문장 생성·추정 없음, '[메타 합성]' 표시). 기관이 쓴 요약(summary)과 분리."""
+    if o.get("summary"): return ""
+    parts = [f"{k} {str(v).strip()}" for k, v in (o.get("meta") or []) if v and not SKIP_META.search(str(k)) and not str(v).startswith("http") and str(v).strip() not in (o.get("title") or "")]
+    return ("[메타 합성] " + " · ".join(parts))[:300] if parts else ""
+
 def rights_view(o):
     """v2.39 권리 표시(판정 아님 — 발굴 우선 원칙: 표시 대상). 근거 순서: 기관 IIIF 매니페스트 → 기록 메타 → 수집처 규칙(NARA RG) → 수집처 정책 원문."""
     und = re.search(r"vocab/UND|undetermined|미정|불명", o.get("rights") or "", re.I)
@@ -784,7 +794,7 @@ def rights_view(o):
 def write_quality(recs):
     """v2.39 데이터 품질 시계열 — 기록 항목별 채움률을 날마다 쌓는다(지우지 않음, 같은 날은 갱신). 떨어지면 수집기·판독기 이상 신호."""
     R = [o for o in recs if o.get("entry_type", "기록") == "기록"]
-    F = {"요약": lambda o: o.get("summary"), "연대": lambda o: decade(o), "기관 계층": lambda o: o.get("partOf"), "계층(파생 포함)": lambda o: o.get("partOf") or o.get("partOf_derived"),
+    F = {"요약": lambda o: o.get("summary"), "요약(메타 합성 포함)": lambda o: o.get("summary") or o.get("summary_composed"), "연대": lambda o: decade(o), "기관 계층": lambda o: o.get("partOf"), "계층(파생 포함)": lambda o: o.get("partOf") or o.get("partOf_derived"),
          "기관 IIIF": lambda o: o.get("iiif"), "IIIF(브리지 포함)": lambda o: o.get("iiif") or o.get("iiif_built"), "썸네일": lambda o: o.get("thumb_ok"), "권리 표시": lambda o: o.get("rights_view"),
          "메타": lambda o: o.get("meta"), "원문 지문": lambda o: o.get("fixity"), "발견 경로": lambda o: o.get("found_by")}
     day = dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%d")
@@ -902,6 +912,9 @@ def main():
     # v2.27 계층·IIIF가 없는 기록은 만들어 구축 — 원 기관 정보와 구분되는 필드에(partOf_derived · iiif_built)
     for o in recs:
         o["entry_type"] = entry_type(o)
+        sc_ = summary_composed(o)
+        if sc_: o["summary_composed"] = sc_
+        else: o.pop("summary_composed", None)
         rv_, rb_ = rights_view(o)
         if rv_: o["rights_view"], o["rights_basis"] = rv_, rb_
         if o["entry_type"] == "결함 출력": o["defect_note"] = "옛 파서 오류 출력(한국사DB 메뉴 오인 v2.23 수정 · IA 웹 크롤링 묶음 v2.24 수정) — 기록 아님, 증거로 보존"
@@ -918,7 +931,7 @@ def main():
         o["iiif_built"] = "" if o.get("iiif") else leaf_manifest(o)
     with open(lp, "w", encoding="utf-8") as f:
         for o in recs: f.write(json.dumps(o, ensure_ascii=False, separators=(",", ":")) + "\n")
-    cols = ["key", "entry_type", "rights_view", "rights_basis", "fixity", "defect_note", "link_note", "sources", "title", "date", "date_derived", "date_basis", "id", "url", "partOf", "partOf_derived", "media", "sameAs", "iiif", "iiif_built", "iiif_kind", "found_by", "first_seen", "last_seen", "seen", "seen_7d", "seen_30d", "days_total", "formats", "tools", "max_cross", "trend", "rank", "score", "summary", "rights", "thumb", "meta"]
+    cols = ["key", "entry_type", "summary_composed", "rights_view", "rights_basis", "fixity", "defect_note", "link_note", "sources", "title", "date", "date_derived", "date_basis", "id", "url", "partOf", "partOf_derived", "media", "sameAs", "iiif", "iiif_built", "iiif_kind", "found_by", "first_seen", "last_seen", "seen", "seen_7d", "seen_30d", "days_total", "formats", "tools", "max_cross", "trend", "rank", "score", "summary", "rights", "thumb", "meta"]
     fmtv = lambda v: json.dumps(v, ensure_ascii=False, separators=(",", ":")) if isinstance(v, list) and v and isinstance(v[0], dict) else " | ".join(f"{a}: {b}" for a, b in v) if isinstance(v, list) and v and isinstance(v[0], list) else (" ".join(f"{k}:{n}" for k, n in sorted(v.items(), key=lambda kv: -kv[1])) if isinstance(v, dict) else ("+".join(v) if isinstance(v, list) else v))
     with open(os.path.join(D, "discovered.csv"), "w", encoding="utf-8-sig", newline="") as f:
         w = csv.writer(f); w.writerow(cols)
