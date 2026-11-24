@@ -16,6 +16,11 @@ g["get"] = lambda u: {"day": "x", "len": 0, "start": 0, "items": []} if "/api/le
 g["mcp_call"] = lambda t, a: (_ for _ in ()).throw(OSError("offline"))
 def _no(*a, **k): raise OSError("offline")
 urllib.request.urlopen = _no
+# v2.83 같은 기록 추적 — IA 식별자 = NARA 로컬 식별자인 기록이 자기 자신을 '이미 있음'으로 보지 않는지(실측 결함)
+_ia = {"key": "ia:111-adc-1", "id": "111-adc-1", "sameAs": "NARA 111-ADC-1", "meta": [["identifier", "111-adc-1"]], "summary": "https://catalog.archives.gov/id/99"}
+_t = g["same_targets"](_ia)
+assert ("nara_local", "111-ADC-1") in [x[:2] for x in _t] and ("naid", "99") in [x[:2] for x in _t], _t
+assert not any(k.startswith(g["TARGET_INST"]["nara_local"]) for k in [_ia["key"]]), "자기 자신 오인"
 g["main"]()
 after = sum(1 for l in open(os.path.join(data, "discovered.jsonl"), encoding="utf-8") if l.strip())
 bad = []
