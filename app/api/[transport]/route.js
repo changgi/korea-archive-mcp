@@ -455,7 +455,7 @@ async function collectMerged(collectors) {
         if (!raw || !norm(raw.title)) continue;
         const k = dedupKey({ ...raw });
         if (map.has(k)) { const e = map.get(k); if (!e.sources.includes(name)) { e.sources.push(name); if (!e.url && raw.url) e.url = raw.url; } }
-        else map.set(k, { title: norm(raw.title), date: raw.date || '', id: raw.id || '', url: raw.url || '', ...(raw.series ? { series: String(raw.series).slice(0, 80) } : {}), ...(raw.media ? { media: String(raw.media).slice(0, 600) } : {}), ...(raw.sameAs ? { sameAs: String(raw.sameAs) } : {}), ...(raw.lid ? { lid: String(raw.lid) } : {}), sources: [name] });
+        else map.set(k, { title: norm(raw.title), date: raw.date || '', id: raw.id || '', url: raw.url || '', ...(raw.series ? { series: String(raw.series).slice(0, 80) } : {}), ...(raw.media ? { media: String(raw.media).slice(0, 600) } : {}), ...(raw.sameAs ? { sameAs: String(raw.sameAs) } : {}), ...(raw.lid ? { lid: String(raw.lid) } : {}), ...(raw.note ? { note: String(raw.note).slice(0, 300) } : {}), sources: [name] });
       }
     } else stats.push(`${name}:—${UA_REFUSED[name] ? '⛔정직UA거부' : ''}`);
   });
@@ -1272,9 +1272,10 @@ const COLLECT = {
       if (o.entry_type === '결함 출력') continue; // v2.34 옛 파서 오류 출력 — 원장에는 증거로 보존, 검색 결과에선 제외
       const h = `${o.title} ${o.partOf || o.partOf_derived || ''} ${o.id || ''} ${(o.sources || []).join(' ')} ${o.date || ''} ${(o.meta || []).map((m) => String(m[1] || '')).filter((v) => !/^https?:/.test(v)).join(' ')} ${o.summary || o.summary_composed || ''}`.toLowerCase(); // v2.42 기관 주제어·지명·요약까지 검색
       if (!(toks.every((t) => h.includes(t)) || (en.length && en.every((t) => h.includes(t))))) continue;
-      out.push({ title: `[${(o.sources || []).join('+')} · 발견 ${o.seen}회 · 7일 ${o.seen_7d || 0} · ${o.days_total || 1}일 · 첫 ${String(o.first_seen).slice(0, 10)}${o.rank ? ` · 활용 ${o.rank}위` : ''}${(o.found_by || []).length ? ` · 경로 질의 ${o.found_by.length}` : (o.found_by_derived ? ' · 경로 원장(파생)' : '')}${(o.same_keys || []).length ? ` · 같은 기록 ${o.same_keys.length + 1}곳 소장(${o.same_keys.map((k) => k.split(':')[0]).join('·')})` : ''}${o.date_cross ? ` · 날짜 교차 ${String(o.date_cross.verdict || '').split('(')[0]}` : ''}] ${o.entry_type === '검색 안내' ? '[검색 안내] ' : ''}${o.title}${o.link_note ? ` (${o.link_note})` : ''}`.slice(0, 220), date: o.date || (o.date_derived ? `${o.date_derived} [파생]` : ''), id: o.id || o.key, // v2.50 기관 메타(생산기간·발간연도)·심층 판독에서 세운 날짜는 [파생] 표시
+      out.push({ title: `[${(o.sources || []).join('+')} · 발견 ${o.seen}회 · 7일 ${o.seen_7d || 0} · ${o.days_total || 1}일 · 첫 ${String(o.first_seen).slice(0, 10)}${o.rank ? ` · 활용 ${o.rank}위` : ''}${(o.found_by || []).length ? ` · 경로 질의 ${o.found_by.length}` : (o.found_by_derived ? ' · 경로 원장(파생)' : '')}] ${o.entry_type === '검색 안내' ? '[검색 안내] ' : ''}${o.title}${o.link_note ? ` (${o.link_note})` : ''}`.slice(0, 220), date: o.date || (o.date_derived ? `${o.date_derived} [파생]` : ''), id: o.id || o.key, // v2.50 기관 메타(생산기간·발간연도)·심층 판독에서 세운 날짜는 [파생] 표시
         series: o.partOf || o.partOf_derived || '', url: o.url || '', // v2.27 원 기관 계층이 없으면 파생 계층([파생] 표시)
-        media: o.media || '', ...(o.sameAs ? { sameAs: o.sameAs } : {}), seen: o.seen || 1, rank: o.rank || 1e9 });
+        media: o.media || '', ...(o.sameAs ? { sameAs: o.sameAs } : {}), seen: o.seen || 1, rank: o.rank || 1e9,
+        ...(((o.same_keys || []).length || o.date_cross) ? { note: [(o.same_keys || []).length ? `같은 기록 ${o.same_keys.length + 1}곳 소장(${o.same_keys.join(', ')})` : '', o.date_cross ? `날짜 교차 ${String(o.date_cross.verdict || '').split('(')[0]}` : ''].filter(Boolean).join(' · ') } : {}) }); // v2.92.1 맥락·증거 — 제목 앞 꼬리표가 길어 제목이 잘리지 않게 별도 줄
     }
     return out.sort((a, b) => a.rank - b.rank || b.seen - a.seen).slice(0, n); // v2.7: 활용 순위(최근·지속·교차확인 가중)
   },
@@ -3370,7 +3371,7 @@ item_cd 5종(자료 성격별): ART 도설·회화 / ETC 두루마리·축 / DRR
         const fits = dl.length <= 12000 && Buffer.byteLength(head + csvBody + tail + dl, 'utf8') + 300 <= 24000;
         return text(head + csvBody + tail + keptNote + (fits ? `\n📥 CSV 파일 내려받기(엑셀 한글 BOM 포함): ${dl}` : '\n📥 파일 링크 생략(크기 상한) — 위 본문을 .csv로 저장하거나 max_per_source를 줄여 다시 실행'));
       }
-      const lines = items.slice(0, 45).map((it) => `- [${it.sources.join('+')}] ${it.title.slice(0, 95)}${it.date ? ` (${it.date})` : ''}${it.url ? ' ' + it.url : ''}${it.altTitle ? `\n  ↔ 동일 기록: ${it.altTitle.slice(0, 80)} (${it.sameAs})` : (it.sameAs ? `\n  ↔ ${it.sources.length > 1 ? '함께 묶인 기록' : '원본'}: ${it.sameAs}` : '')}`);
+      const lines = items.slice(0, 45).map((it) => `- [${it.sources.join('+')}] ${it.title.slice(0, 95)}${it.date ? ` (${it.date})` : ''}${it.url ? ' ' + it.url : ''}${it.altTitle ? `\n  ↔ 동일 기록: ${it.altTitle.slice(0, 80)} (${it.sameAs})` : (it.sameAs ? `\n  ↔ ${it.sources.length > 1 ? '함께 묶인 기록' : '원본'}: ${it.sameAs}` : '')}${it.note ? `\n  ※ ${it.note}` : ''}`);
       return text(`교차수집 '${query}' — 채널별 [${stats.join(' · ')}] → 병합 ${items.length}건 (복수출처 우선 정렬):\n` + (lines.join('\n') || '(0)')
         + '\n※ [출처] 복수 표기 = 교차확인된 record. 국내(nara·archives·nlk)는 서버 키, nedb는 NEDB_INDEX_URL(공식 개방파일) 설정 시 포함. open.go.kr 본체(브라우저 전용)는 foia_search 전용 도구로.\n※ 발굴 우선 — 권리는 표시: 게재 전 judge_rights(참조코드·KOGL·naid)로 초판정. variants=true로 당대 표기(Corea·Chosen·Keijo…) 자동 팬아웃.'
         + keptNote + '\n※ 심층 판독 이어가기: [i815]→nedb_search(mode=i815, 상세URL) · [gonghun]→mode=gonghun(mngNo) · [ktv]→mode=ktv(view URL) · [earchive]→mode=earchive(\'키워드|순번\') · [jacar]→mode=jacar(레퍼런스코드) · [seoul]→seoul_archives_search(상세URL) · [koreanwar]→koreanwar_item(ref_code) · [okchf]→mode=okchf(상세URL·\'보고서:\') · [nrich]→mode=nrich(ov:·rep:·\'보고서:\') · [nara]→judge_rights(naid).');
