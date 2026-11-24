@@ -1,6 +1,6 @@
 {
- "updated": "2026-11-24T15:36:04Z",
- "records": 465,
+ "updated": "2026-11-24T15:40:11Z",
+ "records": 464,
  "new_records": 0,
  "new_batches": 0,
  "by_source": {
@@ -10,7 +10,7 @@
   "okchf": 35,
   "aks": 32,
   "commons": 31,
-  "ktv": 29,
+  "ktv": 28,
   "ia": 23,
   "nara": 20,
   "ndl": 16,
@@ -54,9 +54,9 @@
    "seoul_archives_search": 3
   }
  },
- "repeat_records": 127,
+ "repeat_records": 128,
  "entry_types": {
-  "기록": 446,
+  "기록": 445,
   "소장처(컬렉션)": 5,
   "검색 안내": 7,
   "결함 출력": 7
