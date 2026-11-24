@@ -557,7 +557,10 @@
 },
 "Kapyong": {
 "records": [
-"awm:147844"
+"awm:147844",
+"awm:HOBJ3143",
+"awm:HOBJ3144",
+"awm:HOBJ3145"
 ],
 "sources": [
 "awm"
@@ -706,6 +709,62 @@
 "last": "2026-11-23T13:40:50Z",
 "keys": [
 "지명(장서각 태깅)"
+]
+},
+"Korea: 38th Parallel": {
+"records": [
+"awm:HOBJ3143",
+"awm:HOBJ3144",
+"awm:HOBJ3145"
+],
+"sources": [
+"awm"
+],
+"first": "2026-11-23T03:01:00Z",
+"last": "2026-11-23T13:40:50Z",
+"keys": [
+"장소"
+]
+},
+"Korea": {
+"records": [
+"awm:HOBJ4308",
+"awm:HOBJ4310",
+"awm:HOBJ4316"
+],
+"sources": [
+"awm"
+],
+"first": "2026-11-23T07:26:10Z",
+"last": "2026-11-23T07:26:10Z",
+"keys": [
+"장소"
+]
+},
+"Australia: South Australia": {
+"records": [
+"awm:ART40313"
+],
+"sources": [
+"awm"
+],
+"first": "2026-11-23T13:40:50Z",
+"last": "2026-11-23T13:40:50Z",
+"keys": [
+"장소"
+]
+},
+"Aldinga": {
+"records": [
+"awm:ART40313"
+],
+"sources": [
+"awm"
+],
+"first": "2026-11-23T13:40:50Z",
+"last": "2026-11-23T13:40:50Z",
+"keys": [
+"장소"
 ]
 }
 },
@@ -2543,6 +2602,82 @@
 "keys": [
 "사료유형"
 ]
+},
+"Photograph": {
+"records": [
+"awm:147844",
+"awm:HOBJ3143",
+"awm:HOBJ3144",
+"awm:HOBJ4308",
+"awm:HOBJ4310",
+"awm:HOBJ4316",
+"awm:HOBJ3145"
+],
+"sources": [
+"awm"
+],
+"first": "2026-11-23T03:01:00Z",
+"last": "2026-11-23T13:40:50Z",
+"keys": [
+"자료 유형"
+]
+},
+"Black & white": {
+"records": [
+"awm:147844"
+],
+"sources": [
+"awm"
+],
+"first": "2026-11-23T03:01:00Z",
+"last": "2026-11-23T13:40:50Z",
+"keys": [
+"매체 형태"
+]
+},
+"Negative": {
+"records": [
+"awm:HOBJ3143",
+"awm:HOBJ3144",
+"awm:HOBJ4308",
+"awm:HOBJ4310",
+"awm:HOBJ4316",
+"awm:HOBJ3145"
+],
+"sources": [
+"awm"
+],
+"first": "2026-11-23T03:01:00Z",
+"last": "2026-11-23T13:40:50Z",
+"keys": [
+"매체 형태"
+]
+},
+"Art": {
+"records": [
+"awm:ART40313"
+],
+"sources": [
+"awm"
+],
+"first": "2026-11-23T13:40:50Z",
+"last": "2026-11-23T13:40:50Z",
+"keys": [
+"자료 유형"
+]
+},
+"Painting": {
+"records": [
+"awm:ART40313"
+],
+"sources": [
+"awm"
+],
+"first": "2026-11-23T13:40:50Z",
+"last": "2026-11-23T13:40:50Z",
+"keys": [
+"매체 형태"
+]
 }
 },
 "재질": {
@@ -2826,17 +2961,17 @@
 }
 }
 },
-"updated": "2026-11-24T14:30:42Z",
+"updated": "2026-11-24T14:43:19Z",
 "totals": {
 "매체": 3,
 "주제": 36,
-"장소": 13,
+"장소": 17,
 "분류": 25,
 "시대": 38,
 "인물": 27,
 "기관": 8,
 "기술 수준": 4,
-"형태": 21,
+"형태": 26,
 "재질": 18
 },
 "note": "원 기관 메타의 주제·지명·분류·시대·매체·인물·기관(장서각 태깅)·형태·재질·기술 수준 표기 그대로(번역·정규화 없음). records = 그 용어가 붙은 원장 기록 key. 지우지 않는다",
