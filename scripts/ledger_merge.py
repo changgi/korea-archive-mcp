@@ -1062,6 +1062,17 @@ def build_relations(recs_all):
               open(os.path.join(D, "relations.json"), "w", encoding="utf-8"), ensure_ascii=False, separators=(",", ":"))
     return cnt
 
+def cite_of(o, inst, pu):
+    """v2.85 기록별 인용문 — 기관 표기 그대로(소장 기관, 제목, 계층, 식별자, 날짜) + 원 기관 주소 + 확인일(원장 최근 발견) + 원장 영구 페이지.
+    파생 날짜는 [파생]으로 밝힌다. 한국어 학술 각주형 · Chicago 형 두 가지."""
+    d = o.get("date") or ""; dd = o.get("date_derived") or ""
+    dtxt = d or (f"[파생] {dd}" if dd else "날짜 미상")
+    seen = (o.get("last_seen") or o.get("first_seen") or "")[:10]
+    part = o.get("partOf") or ""; ident = o.get("id") or o["key"]; url = o.get("url") or ""
+    ko = f"{inst}, 「{o['title'][:200]}」" + (f", {part}" if part else "") + f", {ident}, {dtxt}" + (f", {url}" if url else "") + f" (확인 {seen}; KOREA ARCHIVE 발견 원장 {pu})."
+    en = f"\u201c{o['title'][:200]}.\u201d {dtxt}. " + (f"{part}. " if part else "") + f"{ident}. {inst}." + (f" {url}" if url else "") + f" Accessed {seen}. Ledger page: {pu}."
+    return ko, en
+
 def build_record_pages(recs_all):
     """v2.73 기록마다 영구 공개 페이지(docs/data/r/<slug>.html) — 맥락(소장·계층·날짜와 근거)·증거(지문 이력·발견 경로·옛 key)·IIIF·권리를 한 장에,
     schema.org ArchiveComponent JSON-LD로 검색엔진이 읽게. r/index.json(key→페이지)·sitemap.xml. 결함 출력·검색 안내도 만들되 상단에 고지(v2.74 — 다른 산출물 링크가 끊기지 않게)."""
@@ -1083,11 +1094,16 @@ def build_record_pages(recs_all):
               "identifier": o.get("id") or o["key"], "holdingArchive": {"@type": "ArchiveOrganization", "name": inst}, **({"dateCreated": date or dd} if (date or dd) else {}),
               **({"isPartOf": part or pder} if (part or pder) else {}), **({"description": (o.get("summary") or o.get("summary_composed") or "")[:500]} if (o.get("summary") or o.get("summary_composed")) else {}),
               **({"usageInfo": o["rights_view"][:300]} if o.get("rights_view") else {}), **({"associatedMedia": {"@type": "MediaObject", "contentUrl": mf, "encodingFormat": "application/ld+json;profile=iiif"}} if mf else {}), **({"isRelatedTo": [f"{PAGES}r/{rec_slug(b_)}.html" for t_, b_, _ in REL.get(o["key"], [])[:20]]} if REL.get(o["key"]) else {})}
+        ld["citation"] = cite_of(o, inst, pu)[0]
         js = json.dumps(ld, ensure_ascii=False).replace("</", "<\\/")
+        cko, cen = cite_of(o, inst, pu)
+        rj = {k: v for k, v in o.items() if k not in ("days",)}  # v2.85 기록별 기계 판독 JSON — 원장 항목 그대로 + 관계·인용
+        rj.update({"page": pu, "related": [{"type": t_, "key": b_, "page": f"{PAGES}r/{rec_slug(b_)}.html", "basis": bs_} for t_, b_, bs_ in REL.get(o["key"], [])], "cite": {"ko": cko, "chicago": cen}})
+        json.dump(rj, open(os.path.join(rd, f"{sl}.json"), "w", encoding="utf-8"), ensure_ascii=False, separators=(",", ":"))
         dc = o.get("date_cross") or {}
         dch = (E_(dc["verdict"]) + " — 이 기록 " + E_(dc["mine"]) + "".join(" · <a href='" + E_(rec_slug(c["key"])) + ".html'>" + E_(c["inst"]) + "</a> " + E_(c["date"]) + ("" if c.get("agree") else " ✕") for c in dc["others"])) if dc else ""
         open(os.path.join(rd, f"{sl}.html"), "w", encoding="utf-8").write(f"""<!DOCTYPE html><html lang="ko"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>{E_(o['title'][:120])} — KOREA ARCHIVE 발견 원장</title><link rel="canonical" href="{pu}"><script type="application/ld+json">{js}</script>
+<title>{E_(o['title'][:120])} — KOREA ARCHIVE 발견 원장</title><link rel="canonical" href="{pu}"><link rel="alternate" type="application/json" href="{sl}.json"><script type="application/ld+json">{js}</script>
 <style>body{{font-family:system-ui,'Noto Sans KR',sans-serif;margin:0;background:#14161b;color:#e6e4dc}}main{{max-width:860px;margin:auto;padding:16px}}a{{color:#e0b04a}}th{{text-align:left;color:#9b9a93;font-weight:400;padding:3px 10px 3px 0;vertical-align:top;white-space:nowrap}}td{{padding:3px 0}}small{{color:#9b9a93}}</style>
 <main><p><small>KOREA ARCHIVE 통합검색 · 발견 원장 기록 · <a href="../index.html">원장</a> · <a href="../tree.html">계층</a> · <a href="../subjects.html">주제</a></small></p>
 {f"<p style='border:1px solid #c66;padding:8px'>⚠ {E_(o.get('entry_type', ''))} — {E_(o.get('defect_note') or '옛 판독기 오류 출력. 원장에는 증거로 보존하나 인용·피드·타임라인에서는 제외')}</p>" if o.get('entry_type', '기록') != '기록' else ''}
@@ -1102,6 +1118,7 @@ def build_record_pages(recs_all):
 </table>{('<h2>주제·분류 (기관 표기)</h2><p>' + ' · '.join(f"<a href='../subjects.html#{E_(subj_anchor(f_, t_))}'>{E_(f_)}: {E_(t_)}</a>" for f_, t_ in record_concepts(o)[:30]) + '</p>') if record_concepts(o) else ''}
 {('<h2>관련 기록 (맥락 연결)</h2><ul>' + ''.join(f"<li>{E_(t_)} · <a href='{E_(rec_slug(b_))}.html'>{E_(TITLES.get(b_, b_)[:120])}</a> <small>({E_(bs_)})</small></li>" for t_, b_, bs_ in REL.get(o['key'], [])[:20]) + '</ul>') if REL.get(o['key']) else ''}
 {('<h2>기관 메타</h2><table>' + meta + '</table>') if meta else ''}{('<h2>원문 지문 이력</h2><ul>' + fx + '</ul>') if fx else ''}{('<h2>발견 경로</h2><ul>' + fb + '</ul>') if fb else ''}
+<h2>인용</h2><p style="font-size:14px">{E_(cko)}</p><p style="font-size:13px;color:#9b9a93">{E_(cen)}</p><p><small><a href="{sl}.json">이 기록 JSON(기계 판독 — 원장 항목·관계·인용)</a></small></p>
 <p><small>원장 key <code>{E_(o['key'])}</code> · 원 기관 표기 그대로, 파생 정보는 [파생]·근거 표시 · 축적 정보는 지우지 않는다</small></p></main></html>""")
     json.dump({"updated": dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"), "pages": idx}, open(os.path.join(rd, "index.json"), "w", encoding="utf-8"), ensure_ascii=False)
     sm = "".join(f"<url><loc>{u}</loc>{f'<lastmod>{d}</lastmod>' if d else ''}</url>" for u, d in [(PAGES, ""), (PAGES + "subjects.html", ""), (PAGES + "tree.html", ""), (PAGES + "timeline.html", "")] + urls)
