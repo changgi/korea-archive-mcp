@@ -86,6 +86,7 @@
 
 ### 알려진 접근 제약 (2026-11 실측)
 - **정직 UA 일원화(v2.36)**: 모든 요청은 `KoreaArchiveMCP/2.36 (+저장소 URL; archival discovery; non-commercial research)` — Node `UA`·Python `_UA_KO`·harvester·kla·joseon_tools·selfcheck·스킬 참조 스크립트까지. 브라우저 UA 문자열을 다시 넣지 않는다. 프록시 경유 폴백(`FETCH_PROXY_PREFIX`·allorigins·jina)은 제거했다 — 차단은 그대로 오류로 보고하고 health·source_profile에 표시, 브라우저·웹 검색 경로를 안내한다. 정직 UA 전환 전후 관련성 감사 비교는 CHANGELOG v2.36.0.
+  - **정직 UA 거부 기관(2026-11-24 실측)**: 규장각(kyudb — HTTP 403), KTV e영상역사관(결과 0건). `UA_REFUSED`(route.js)·`_UA_REFUSED`(server.py) 표에 두고, 응답·cross_search 채널 표시(`kyudb:0⛔정직UA거부`)·health '접근 제한' 절에 브라우저 경로·문의처를 낸다. 기관이 허용하면 결과가 다시 나오고 golden이 원래 패턴으로 통과 — 그때 표에서 뺀다. 새로 거부가 확인되면 같은 표에 추가(위장으로 돌아가지 않는다).
 - 정보공개포털(open.go.kr) 원문정보 — 기관 점검 중(2026.11.12~). foia는 청구 경로 안내로 대체.
 - Gallica — 서버 IP 자동 조회 403, BnF 카탈로그(catalogue.bnf.fr)도 연결 불가(2026-11-23) → **data.bnf.fr 공식 SPARQL**(`bnfSparql`, 제목 전문검색 bif:contains + Gallica 원문 링크)을 우선, 0건일 때만 카탈로그. IIIF는 브라우저 뷰어에서 열림.
 - 한국사DB — 통합검색(`searchTotalResult.do`)은 GET·POST 모두 결과를 스크립트로 그려 HTML에 없음(메뉴만). **시대별 하위 DB POST**(`/{joseon|modern|contemp|ancient}/search/searchResultList.do`, `searchItemId`)가 건수·기록(fnGoItemLevel levelId)을 돌려준다 — `nedbLive`가 주요 8개 DB 병렬(6h 캐시). DB 코드 111종은 사이트 메뉴 `/{시대}/level.do?itemId=`에서 확인.
