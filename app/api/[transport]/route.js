@@ -203,7 +203,7 @@ const TOPICS = [
   { p: '강제\\s?이주', en: 'deportation Koreans Soviet 1937' },
   { p: '사할린', en: 'Sakhalin Koreans' },
   // ── v2.95 증보: 6·25 핵심 용어(실측 44개 중 39개 미변환 → 해외 채널이 'Korea'만 검색). 구체 표기(피란수도·휴전회담)는 일반 패턴보다 먼저 ──
-  { p: '피란\\s?수도|임시\\s?수도', en: 'wartime capital Pusan' },
+  { p: '피란\\s?수도|임시\\s?수도', en: 'Pusan 1951' },
   { p: '휴전\\s?회담|정전\\s?회담|휴전\\s?협상|정전\\s?협상', en: 'armistice negotiations Korea' },
   { p: '서울\\s?수복|9[·.]28\\s?수복', en: 'Seoul recapture 1950' },
   { p: '북진', en: 'UN advance north Korea 1950' },
@@ -211,7 +211,7 @@ const TOPICS = [
   { p: '네이팜', en: 'napalm Korea' },
   { p: '민간인\\s?학살|양민\\s?학살', en: 'civilian massacre Korea' },
   { p: '보도\\s?연맹', en: 'Bodo League massacre' },
-  { p: '거창\\s?사건|거창\\s?양민', en: 'Geochang massacre' },
+  { p: '거창\\s?사건|거창\\s?양민', en: 'Kochang incident' },
   { p: '국민\\s?방위군', en: 'National Defense Corps Korea' },
   { p: '위문\\s?공연|위문', en: 'troop entertainment Korea' },
   { p: '전쟁\\s?미망인', en: 'war widows Korea' },
