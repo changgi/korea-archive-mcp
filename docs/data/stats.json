@@ -1,8 +1,8 @@
 {
- "updated": "2026-11-24T09:39:08Z",
+ "updated": "2026-11-24T10:52:17Z",
  "records": 408,
  "new_records": 0,
- "new_batches": 0,
+ "new_batches": 3,
  "by_source": {
   "nrich": 43,
   "archives": 40,
@@ -39,17 +39,17 @@
  },
  "first": "2026-11-23T03:00:15Z",
  "formats": {
-  "text": 47,
+  "text": 50,
   "csv": 49,
   "iiif": 3
  },
  "queries": {
-  "added": 0,
-  "total": 40,
-  "calls": 49,
+  "added": 6,
+  "total": 46,
+  "calls": 61,
   "by_tool": {
-   "nedb_search": 22,
-   "cross_search": 17,
+   "nedb_search": 31,
+   "cross_search": 20,
    "source_profile": 8,
    "seoul_archives_search": 2
   }
