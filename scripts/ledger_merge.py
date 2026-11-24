@@ -998,7 +998,8 @@ def build_record_pages(recs_all):
 {row('IIIF', f"<a href='{KV}{E_(mf)}'>KV 뷰어로 보기</a> · <a href='{E_(mf)}'>매니페스트</a> <small>({E_(o.get('iiif_kind', ''))})</small>" if mf else '')}
 {row('발견', f"처음 {E_(o.get('first_seen', '')[:10])} · 최근 {E_(o.get('last_seen', '')[:10])} · {o.get('seen', 1)}회 · 출처 {E_('+'.join(o.get('sources') or []))}")}
 {row('옛 key', E_(', '.join(o.get('key_aliases') or [])))}{row('비고', E_(o.get('merge_note') or o.get('recovered') or o.get('harvested') or ''))}
-</table>{('<h2>기관 메타</h2><table>' + meta + '</table>') if meta else ''}{('<h2>원문 지문 이력</h2><ul>' + fx + '</ul>') if fx else ''}{('<h2>발견 경로</h2><ul>' + fb + '</ul>') if fb else ''}
+</table>{('<h2>주제·분류 (기관 표기)</h2><p>' + ' · '.join(f"<a href='../subjects.html#{E_(subj_anchor(f_, t_))}'>{E_(f_)}: {E_(t_)}</a>" for f_, t_ in record_concepts(o)[:30]) + '</p>') if record_concepts(o) else ''}
+{('<h2>기관 메타</h2><table>' + meta + '</table>') if meta else ''}{('<h2>원문 지문 이력</h2><ul>' + fx + '</ul>') if fx else ''}{('<h2>발견 경로</h2><ul>' + fb + '</ul>') if fb else ''}
 <p><small>원장 key <code>{E_(o['key'])}</code> · 원 기관 표기 그대로, 파생 정보는 [파생]·근거 표시 · 축적 정보는 지우지 않는다</small></p></main></html>""")
     json.dump({"updated": dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"), "pages": idx}, open(os.path.join(rd, "index.json"), "w", encoding="utf-8"), ensure_ascii=False)
     sm = "".join(f"<url><loc>{u}</loc>{f'<lastmod>{d}</lastmod>' if d else ''}</url>" for u, d in [(PAGES, ""), (PAGES + "subjects.html", ""), (PAGES + "tree.html", ""), (PAGES + "timeline.html", "")] + urls)
@@ -1438,6 +1439,11 @@ FACET_SLUG = {"주제": "subject", "장소": "place", "분류": "class", "시대
 def concept_id(fac, term):
     return f"{PAGES}subjects.jsonld#{FACET_SLUG.get(fac, 'x')}/" + urllib.parse.quote(term, safe="")
 
+def subj_anchor(fac, term):
+    """v2.80 주제 색인 항목 앵커 — 기록 페이지에서 subjects.html#<앵커>로 바로 간다(패싯 slug + 용어 지문)."""
+    import hashlib
+    return f"{FACET_SLUG.get(fac, 'x')}-{hashlib.sha1(term.encode('utf-8')).hexdigest()[:10]}"
+
 def record_concepts(o):
     """기록 → (패싯, 용어) 목록 — merge_subjects와 같은 규칙(기관 표기 그대로)."""
     out = []
@@ -1491,7 +1497,7 @@ def merge_subjects(recs):
     sec = []
     for f, terms in S["facets"].items():
         items = sorted(terms.items(), key=lambda kv: (-len(kv[1]["records"]), kv[0]))
-        li = "".join(f"<details><summary>{E_(t)} <small>{len(e['records'])}건 · {E_(', '.join(e['sources']))}</small></summary><ul>"
+        li = "".join(f"<details id='{E_(subj_anchor(f, t))}'><summary>{E_(t)} <small>{len(e['records'])}건 · {E_(', '.join(e['sources']))}</small></summary><ul>"
                      + "".join(f"<li><a href='{E_((by.get(k) or {}).get('url') or '#')}'>{E_(((by.get(k) or {}).get('title') or k)[:100])}</a> <a href='r/{rec_slug(k)}.html'>기록</a></li>" for k in e["records"][:30]) + "</ul></details>"
                      for t, e in items)
         sec.append(f"<h2>{E_(f)} <small>{len(terms)}개 용어</small></h2>{li}")
