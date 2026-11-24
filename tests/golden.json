@@ -1297,6 +1297,21 @@
     "경로 질의 \\d+ · 같은 기록"
    ],
    "level": "warn"
+  },
+  {
+   "id": "topics-refugees",
+   "tool": "nara_search",
+   "args": {
+    "query": "피란민",
+    "max_results": 5
+   },
+   "must": [
+    "영문 자동 변환 'refugees"
+   ],
+   "must_not": [
+    "NARA '피란민' — total"
+   ],
+   "level": "warn"
   }
  ]
 }

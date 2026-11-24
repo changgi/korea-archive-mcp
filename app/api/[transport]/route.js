@@ -201,6 +201,9 @@ const TOPICS = [
   { p: '금성\\s?전투|金城\\s?戰鬪|金城战役', en: 'Kumsong offensive 1953' },
   { p: '청천강|淸川江|清川江', en: 'Chongchon River' },
   { p: '부산\\s?교두보|워커\\s?라인', en: 'Pusan Perimeter' },
+  { p: '피란민|피난민|피란|피난|避難民|避难民|難民|难民|беженц\\w*', en: 'refugees Korea', fr: 'réfugiés Corée' }, // v2.94 실측: '피란민'이 변환되지 않아 해외 채널이 일반 'Korea'만 검색
+  { p: '1[·.]4\\s?후퇴', en: 'Seoul evacuation January 1951' },
+  { p: '전쟁\\s?고아|고아원|戰爭孤兒|战争孤儿', en: 'war orphans Korea', fr: 'orphelins Corée' },
   { p: '유엔군|국제연합군|국련군|联合国军', en: 'United Nations forces Korea', fr: 'forces ONU Corée' },
   { p: '중공군|인민지원군|志願軍|志愿军', en: 'Chinese forces Korea' },
   { p: '리지웨이|リッジウェイ|李奇微', en: 'Ridgway' },
