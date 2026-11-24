@@ -1,5 +1,5 @@
 {
-"updated": "2026-11-24T02:25:34Z",
+"updated": "2026-11-24T05:49:38Z",
 "note": "구간 = 연대(4자리 연도·8자리 날짜·연호 연도 明治·大正·昭和·光武·隆熙·檀紀 환산) → 세기 → 왕조·시대명. 근거 순서 date → 제목 → 메타(생산·시대·출판). 세기·시대 구간은 시간축 근사 정렬",
 "timeline": [
 {
@@ -1052,18 +1052,18 @@
 },
 {
 "decade": "1990년대",
-"records": 18,
+"records": 21,
 "by_source": {
 "archives": 6,
 "commons": 1,
 "ndl": 1,
 "nlk": 1,
-"ktv": 9
+"ktv": 12
 },
 "by_kind": {
 "document": 14,
-"graphic": 1,
-"motion_picture": 3
+"graphic": 3,
+"motion_picture": 4
 },
 "samples": [
 {
@@ -1095,10 +1095,10 @@
 },
 {
 "decade": "2000년대",
-"records": 22,
+"records": 24,
 "by_source": {
 "archives": 4,
-"ktv": 3,
+"ktv": 5,
 "okchf": 5,
 "commons": 3,
 "nrich": 5,
@@ -1107,7 +1107,7 @@
 },
 "by_kind": {
 "document": 6,
-"graphic": 16
+"graphic": 18
 },
 "samples": [
 {

@@ -1,8 +1,8 @@
 {
- "updated": "2026-11-24T02:25:34Z",
- "records": 403,
- "new_records": 0,
- "new_batches": 3,
+ "updated": "2026-11-24T05:49:38Z",
+ "records": 408,
+ "new_records": 5,
+ "new_batches": 2,
  "by_source": {
   "nrich": 43,
   "archives": 40,
@@ -10,9 +10,9 @@
   "aks": 32,
   "ia": 23,
   "commons": 21,
+  "ktv": 21,
   "nara": 20,
   "ndl": 16,
-  "ktv": 16,
   "i815": 13,
   "seoul": 13,
   "oldnews": 11,
@@ -40,23 +40,23 @@
  "first": "2026-11-23T03:00:15Z",
  "formats": {
   "text": 47,
-  "csv": 47,
+  "csv": 49,
   "iiif": 3
  },
  "queries": {
   "added": 9,
-  "total": 25,
-  "calls": 33,
+  "total": 34,
+  "calls": 42,
   "by_tool": {
-   "cross_search": 14,
-   "nedb_search": 12,
-   "source_profile": 5,
+   "cross_search": 16,
+   "nedb_search": 16,
+   "source_profile": 8,
    "seoul_archives_search": 2
   }
  },
- "repeat_records": 125,
+ "repeat_records": 126,
  "entry_types": {
-  "기록": 384,
+  "기록": 389,
   "소장처(컬렉션)": 5,
   "검색 안내": 7,
   "결함 출력": 7
@@ -86,38 +86,38 @@
   },
   {
    "rank": 4,
+   "seen": 8,
+   "days": 2,
+   "title": "[奎18933] 加士島屯土賭稅 節目 가사도둔토도세 절목 · 內藏院(朝鮮) 編/내장원(조선) 편",
+   "url": "https://kyudb.snu.ac.kr/book/view.do?book_cd=GK18933_00"
+  },
+  {
+   "rank": 5,
    "seen": 9,
    "days": 1,
    "title": "EVACUATION OF HUNGNAM KOREA",
    "url": "https://catalog.archives.gov/id/75393"
   },
   {
-   "rank": 5,
+   "rank": 6,
    "seen": 8,
    "days": 1,
    "title": "01 · 미국 국립기록관리청 NARA — 1950.12.24 흥남 — 필름 원본까지 — North Korean refugees use anything that will float ",
    "url": "https://changgi.github.io/korea-archive-mcp/iiif.html#s01/1"
   },
   {
-   "rank": 6,
+   "rank": 7,
    "seen": 8,
    "days": 1,
    "title": "12 · 위키미디어 공용 Commons — 업로더 말 대신 원 소장처에 묻는다 — Korean natives prepare to board a tank landing ship du",
    "url": "https://changgi.github.io/korea-archive-mcp/iiif.html#s12/2"
   },
   {
-   "rank": 7,
+   "rank": 8,
    "seen": 8,
    "days": 1,
    "title": "29 · 인터넷 아카이브 archive.org — 인터넷 사본과 NARA 원본, 한 줄로 — EVACUATION OF HUNGNAM, KOREA (+4장)",
    "url": "https://changgi.github.io/korea-archive-mcp/iiif.html#s29/1"
-  },
-  {
-   "rank": 8,
-   "seen": 7,
-   "days": 2,
-   "title": "[奎18933] 加士島屯土賭稅 節目 가사도둔토도세 절목 · 內藏院(朝鮮) 編/내장원(조선) 편",
-   "url": "https://kyudb.snu.ac.kr/book/view.do?book_cd=GK18933_00"
   },
   {
    "rank": 9,
@@ -127,8 +127,8 @@
    "url": "https://catalog.archives.gov/id/22397"
   },
   {
-   "rank": 12,
-   "seen": 5,
+   "rank": 10,
+   "seen": 6,
    "days": 2,
    "title": "[奎19604] 加士島屯土賭稅 節目 가사도둔토도세 절목 · 內藏院(朝鮮) 編/내장원(조선) 편",
    "url": "https://kyudb.snu.ac.kr/book/view.do?book_cd=GK19604_00"
