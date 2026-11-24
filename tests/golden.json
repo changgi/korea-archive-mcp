@@ -1357,6 +1357,22 @@
     "Korea 어학회"
    ],
    "level": "warn"
+  },
+  {
+   "id": "topics-probe-corrected",
+   "tool": "nara_search",
+   "args": {
+    "query": "서울 수복",
+    "max_results": 5
+   },
+   "must": [
+    "영문 자동 변환 'recapture of Seoul'",
+    "(?i)RECAPTURE OF SEOUL"
+   ],
+   "must_not": [
+    "변환 'Seoul recapture 1950'"
+   ],
+   "level": "warn"
   }
  ]
 }
