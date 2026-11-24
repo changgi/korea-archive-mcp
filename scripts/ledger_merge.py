@@ -1946,6 +1946,10 @@ def main():
         o["iiif_kind"] = iiif_kind(o)  # v2.75 원 기관 제공 · 원 기관 이미지로 구축 · 기록 봉투 — 우리 브리지를 '기관'으로 부르던 표기 교정
         o["iiif_built"] = "" if (o.get("iiif") and not o.get("iiif_status")) else leaf_manifest(o)  # v2.52 기관 매니페스트가 비공개 응답이면 브리지로 대체(기관 주소는 보존)
     nrel = build_relations(recs)  # v2.82 기록↔기록 맥락 연결(RiC-O·기록 페이지·품질이 함께 씀)
+    for o in recs:  # v2.92 같은 기록(다른 소장처) key — 원장 본체에도(도구 응답·외부 소비자가 relations.json 없이 읽게). 매 실행 재계산
+        sk_ = [b for t, b, _ in REL.get(o["key"], []) if t == "같은 기록(다른 소장처)"]
+        if sk_: o["same_keys"] = sk_
+        else: o.pop("same_keys", None)
     ndp = date_from_same(recs)  # v2.84 날짜 없는 기록 ← 같은 기록의 다른 소장처 날짜([파생]·근거)
     if ndp: print(f"같은 기록의 다른 소장처 날짜로 연대 파생 {ndp}건")
     relations_page([o for o in recs if o.get("entry_type", "기록") == "기록"])  # v2.86 날짜 파생·교차 확인 뒤에
