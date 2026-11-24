@@ -2400,8 +2400,8 @@ const JB_CROSS = `국내외 대조 절차 — 순서를 틀리면 헛수고한�
           const fm = qd.match(/^https?:\/\/commons\.wikimedia\.org\/wiki\/(File:.+)$/i) || qd.match(/^(File:.+)$/i);
           if (fm) {
             const title = decodeURIComponent(fm[1]).replace(/_/g, ' ');
-            const d = JSON.parse(await cachedText('commonsD:' + title, 24 * 3600e3,
-              async () => JSON.stringify(await jget('https://commons.wikimedia.org/w/api.php?action=query&prop=imageinfo&iiprop=url%7Cextmetadata%7Csize&format=json&titles=' + encodeURIComponent(title), UAH)), 'imageinfo'));
+            const d = JSON.parse(await cachedText('commonsD2:' + title, 24 * 3600e3, // v2.65 범주(숨김 제외)도 — Commons의 분류 체계 = 기록의 계층 맥락
+              async () => JSON.stringify(await jget('https://commons.wikimedia.org/w/api.php?action=query&prop=imageinfo%7Ccategories&clshow=!hidden&cllimit=20&iiprop=url%7Cextmetadata%7Csize&format=json&titles=' + encodeURIComponent(title), UAH)), 'imageinfo'));
             const page = Object.values((d.query || {}).pages || {})[0] || {};
             const ii = (page.imageinfo || [{}])[0] || {};
             const em = ii.extmetadata || {};
@@ -2433,6 +2433,7 @@ const JB_CROSS = `국내외 대조 절차 — 순서를 틀리면 헛수고한�
               + [g('DateTimeOriginal') && `촬영/제작: ${g('DateTimeOriginal').slice(0, 40)}`, g('Artist') && `작가: ${g('Artist').slice(0, 70)}`, ii.width && `원본 ${ii.width}×${ii.height}`].filter(Boolean).join(' · ') + '\n'
               + `라이선스: ${lic || '(미표기)'} → 권리 초판정 ${rights}\n`
               + (g('Credit') ? `출처(원 소장처): ${g('Credit').slice(0, 160)}\n` : '')
+              + ((page.categories || []).length ? `범주(Commons): ${page.categories.map((c) => String(c.title || '').replace(/^Category:/, '')).slice(0, 12).join('; ')}\n` : '')
               + (g('ImageDescription') ? `【설명】\n${g('ImageDescription').slice(0, 1200)}\n` : '')
               + nline
               + (ii.url ? `원본 이미지: ${String(ii.url).split('?')[0]}\n` : '') + `파일 페이지: https://commons.wikimedia.org/wiki/${encodeURIComponent(title.replace(/ /g, '_'))}\n`
