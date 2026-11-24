@@ -919,7 +919,8 @@
     "records\\.oai_dc\\.xml",
     "catalog\\.jsonld",
     "sitemap\\.xml",
-    "relations\\.json"
+    "relations\\.json",
+    "r/<slug>\\.json"
    ],
    "must_not": [
     "검색어·사용자 정보 없음"

@@ -31,8 +31,14 @@ try:  # v2.82 맥락 연결 — 관계마다 근거·양끝이 원장에 있는 
     rj = json.load(open(os.path.join(data, "relations.json"), encoding="utf-8")); keys = {json.loads(l)["key"] for l in open(os.path.join(data, "discovered.jsonl"), encoding="utf-8") if l.strip()}
     if any(not e.get("basis") or e["from"] not in keys or e["to"] not in keys for e in rj["edges"]): bad.append("맥락 연결 간선에 근거 없음·원장 밖 key")
 except Exception as ex: bad.append(f"relations.json 판독 실패 {ex}")
+_rd = os.path.join(data, "r"); _h = {f[:-5] for f in os.listdir(_rd) if f.endswith(".html")}; _j = {f[:-5] for f in os.listdir(_rd) if f.endswith(".json") and f != "index.json"}
+if _h - _j: bad.append(f"기록 JSON 없음 {len(_h - _j)}건")  # v2.85 기록별 JSON·인용
+else:
+    _s = json.load(open(os.path.join(_rd, sorted(_j)[0] + ".json"), encoding="utf-8"))
+    if not (_s.get("cite", {}).get("ko") and _s.get("page") and "related" in _s): bad.append("기록 JSON에 인용·페이지·관계 없음")
 reg = subprocess.run([sys.executable, os.path.join(tmp, "scripts", "records_register.py"), "--verify"], capture_output=True, text=True)
 if reg.returncode not in (0,): bad.append("등록부 검증 실패: " + (reg.stdout + reg.stderr)[-200:])
-shutil.rmtree(tmp, ignore_errors=True)
+if os.environ.get("KEEP"): print("사본:", tmp)
+else: shutil.rmtree(tmp, ignore_errors=True)
 print(f"원장 오프라인 시험: 항목 {before}→{after}" + ("" if not bad else " · " + " · ".join(bad)))
 sys.exit(1 if bad else 0)
