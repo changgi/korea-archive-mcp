@@ -1391,8 +1391,9 @@ async function jKyu(query) {
       out[label] = [...new Set([...b.matchAll(/(奎[\d軸]+)/g)].map((x) => x[1]))].slice(0, 30);
       // v1.96.7: 번호만 나오던 결함 — 결과 행 'N. 서명 청구기호 : 奎… 편저자 : … 간행년대 : … 사부분류 : … [본문 : …] 상세정보'(실측) 구조 판독
       out[label + '항목'] = kyuRows(mclean(b));
+      // 청구기호는 태그 제거 후 읽는다 — 청구기호 검색 시 강조 태그(<font><b>奎…</b></font>)가 끊던 것(골든 kyudb-bookcd-link 실측)
       // v2.35 행별 book_cd(fn_totalSearchResultView 4번째 인자) ↔ 청구기호 — /book/view.do?book_cd= GET 고정 상세(2026-11-24 실측)
-      out[label + '코드'] = Object.fromEntries(b.split('class="schli"').slice(1).map((seg) => [norm((seg.match(/청구기호\s*:\s*([^<\n]{2,30})/) || [])[1] || ''), (seg.match(/fn_totalSearchResultView\([^)]*?'([A-Z]{1,4}\d[\w-]*_\d\d)'/) || [])[1] || '']).filter(([c, k]) => c && k).reverse()); // reverse → 같은 청구기호면 앞 행(원본 GK…)이 이김 — 뒤의 마이크로필름 사본(TM…)이 덮어쓰던 것
+      out[label + '코드'] = Object.fromEntries(b.split('class="schli"').slice(1).map((seg) => [norm((seg.replace(/<[^>]+>/g, '').match(/청구기호\s*:\s*([^\n\t]{2,30})/) || [])[1] || ''), (seg.match(/fn_totalSearchResultView\([^)]*?'([A-Z]{1,4}\d[\w-]*_\d\d)'/) || [])[1] || '']).filter(([c, k]) => c && k).reverse()); // reverse → 같은 청구기호면 앞 행(원본 GK…)이 이김 — 뒤의 마이크로필름 사본(TM…)이 덮어쓰던 것
     } catch (e) { out[label] = { error: e.message }; }
   }));
   // 정상 형태(양쪽 배열)이고 결과가 있을 때만 캐시 — 차단·오류 응답 오염 방지
