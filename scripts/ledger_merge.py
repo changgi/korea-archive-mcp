@@ -1703,7 +1703,9 @@ FACETS = [("주제", re.compile(r"^(주제|주제어|색인어.*|subject|키워�
           ("인물", re.compile(r"^인명\(장서각 태깅\)$")), ("기관", re.compile(r"^관청명\(장서각 태깅\)$")),  # v2.56 기관 개체 태깅
           ("형태", re.compile(r"^(문서유형|기록물형태|매체유형|사료구분|사료유형|기록유형|자료유형|자료 유형|매체 형태|자료 형태|format)$", re.I)), ("재질", re.compile(r"^재질$")),
           ("기술 수준", re.compile(r"^기술 수준$")),  # v2.59 기관의 자료 형태·재질·기술 단계(item·fileUnit·Piece) 분류
-          ("죄명", re.compile(r"^죄명$")), ("훈격", re.compile(r"^포상$")), ("신문", re.compile(r"^신문명$")),  # v2.99.7 기관의 법적 분류(독립운동 판결문 죄명)·포상 훈격(공훈록)·수록 신문명
+          ("죄명", re.compile(r"^죄명$")), ("훈격", re.compile(r"^포상$")), ("신문", re.compile(r"^신문명$")),
+          ("생산자", re.compile(r"^(생산처/생산자|생산기관|생산자|제작자|creator|작가)$", re.I)), ("소장처", re.compile(r"^(소장단위\(열람·복제 청구\)|소장처|소장국가|서고정보)$")),
+          ("분쟁", re.compile(r"^분쟁$")), ("공개 상태", re.compile(r"^(공개 상태|공개구분|접근 제한\(원문\)|법적 지위|보존기간)$")),  # v2.99.8 출처(생산자)·소장·분쟁·공개 상태 — 기관 표기 그대로  # v2.99.7 기관의 법적 분류(독립운동 판결문 죄명)·포상 훈격(공훈록)·수록 신문명
           ("분류", re.compile(r"^(분류|사부분류|자료분류|보고서유형분류|주제분류|범주\(Commons\)|분류\(NDC 등\))$")), ("시대", re.compile(r"^(시대|시대분류|국적/시대)$")), ("매체", re.compile(r"^mediatype$", re.I))]
 
 def facet_terms(k, v, fac):
@@ -1713,6 +1715,13 @@ def facet_terms(k, v, fac):
         cm = {"GEOL": "장소", "TOPIC": "주제", "FUNC": "분류"}
         return [(cm[m[1]], re.sub(r"\s*,\s*[\d~\s]*$", "", m[2]).strip()) for m in re.finditer(r"\[(GEOL|TOPIC|FUNC)-\d+\]\s*(?:\([^)]*\)\s*)?([^\[]+)", v)]
     if v.startswith("http"): return []
+    if fac in ("생산자", "소장처", "분쟁"):  # v2.99.8 인명·기관명엔 쉼표가 들어간다('Holzheimer, Claude Rudolph') — 세미콜론으로만 가르고, 끝의 존속기간·(Most Recent) 괄호를 뗀다
+        out = []
+        for t in re.split(r"[;；]", v):
+            t = re.sub(r"\s*\((?:Most Recent|[^()]*\d{4}[^()]*)\)\s*$", "", t.strip()).strip(" .")
+            t = re.sub(r"\s*\((?:Most Recent|[^()]*\d{4}[^()]*)\)\s*$", "", t).strip(" .")
+            if 1 < len(t) <= 120: out.append((fac, t))
+        return out
     if fac == "훈격":  # v2.99.7 '1962 대한민국장' → '대한민국장'(포상 연도는 기록 날짜이지 분류가 아니다)
         t = re.sub(r"^\s*(1[89]|20)\d\d\s*", "", v).strip()
         return [(fac, t)] if 1 < len(t) <= 40 else []
@@ -1720,7 +1729,7 @@ def facet_terms(k, v, fac):
         return [(fac, t.strip()) for t in re.split(r"[,，;]", v) if 1 < len(t.strip()) <= 40]
     return [(fac, t.strip()) for t in re.split(r"[;；,，·]|\s>\s|\s›\s", v) if 1 < len(t.strip()) <= 40]
 
-FACET_SLUG = {"주제": "subject", "장소": "place", "분류": "class", "시대": "period", "매체": "medium", "인물": "person", "기관": "agency", "형태": "form", "재질": "material", "기술 수준": "level", "죄명": "charge", "훈격": "honor", "신문": "newspaper"}
+FACET_SLUG = {"주제": "subject", "장소": "place", "분류": "class", "시대": "period", "매체": "medium", "인물": "person", "기관": "agency", "형태": "form", "재질": "material", "기술 수준": "level", "죄명": "charge", "훈격": "honor", "신문": "newspaper", "생산자": "creator", "소장처": "holder", "분쟁": "conflict", "공개 상태": "access"}
 
 def concept_id(fac, term):
     return f"{PAGES}subjects.jsonld#{FACET_SLUG.get(fac, 'x')}/" + urllib.parse.quote(term, safe="")
