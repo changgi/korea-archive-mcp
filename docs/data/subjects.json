@@ -34,7 +34,10 @@
 "ia:111-adc-7115",
 "ia:24114-kobe-japan-world-war-2-mos-vwr",
 "ia:111-adc-8372",
-"ia:cinesaurio-2025-08-14-carteleara"
+"ia:cinesaurio-2025-08-14-carteleara",
+"ia:111-adc-10380",
+"ia:111-adc-8257",
+"ia:LC-30456"
 ],
 "sources": [
 "ia"
@@ -71,7 +74,10 @@
 "ia:NPCM18760112",
 "ia:NPCM18760205",
 "ia:NPDP18760321",
-"ia:mhm_maritimeheritagemn_1516"
+"ia:mhm_maritimeheritagemn_1516",
+"ia:cia-readingroom-document-cia-rdp79t00909a000500010020-9",
+"ia:cia-readingroom-document-cia-rdp80t00246a050600910001-9",
+"ia:DTIC_ADA242405"
 ],
 "sources": [
 "ia"
@@ -132,7 +138,9 @@
 "ia:111-adc-8582",
 "ia:111-lc-30456",
 "ia:111-adc-7115",
-"ia:111-adc-8372"
+"ia:111-adc-8372",
+"ia:111-adc-10380",
+"ia:111-adc-8257"
 ],
 "sources": [
 "ia"
@@ -155,7 +163,9 @@
 "ia:cia-readingroom-document-cia-rdp88g01117r000802600002-3",
 "ia:cia-readingroom-document-cia-rdp79r01012a018200010001-0",
 "ia:cia-readingroom-document-03194444",
-"ia:cia-readingroom-document-cia-rdp80t00246a018200250001-2"
+"ia:cia-readingroom-document-cia-rdp80t00246a018200250001-2",
+"ia:cia-readingroom-document-cia-rdp79t00909a000500010020-9",
+"ia:cia-readingroom-document-cia-rdp80t00246a050600910001-9"
 ],
 "sources": [
 "ia"
@@ -1356,12 +1366,13 @@
 "records": [
 "ia:DTIC_ADA429076",
 "ia:DTIC_ADB006731",
-"ia:DTIC_ADA290790"
+"ia:DTIC_ADA290790",
+"ia:DTIC_ADA242405"
 ],
 "sources": [
 "ia"
 ],
-"first": "2026-11-24T22:40:43Z",
+"first": "2026-11-24T22:40:42Z",
 "last": "2026-11-24T22:44:35Z",
 "keys": [
 "subject"
@@ -1922,6 +1933,110 @@
 ],
 "first": "2026-11-24T23:50:32Z",
 "last": "2026-11-24T23:50:32Z",
+"keys": [
+"subject"
+]
+},
+"Vargesko": {
+"records": [
+"ia:DTIC_ADA242405"
+],
+"sources": [
+"ia"
+],
+"first": "2026-11-24T22:40:42Z",
+"last": "2026-11-24T22:40:42Z",
+"keys": [
+"subject"
+]
+},
+"Albert M": {
+"records": [
+"ia:DTIC_ADA242405"
+],
+"sources": [
+"ia"
+],
+"first": "2026-11-24T22:40:42Z",
+"last": "2026-11-24T22:40:42Z",
+"keys": [
+"subject"
+]
+},
+"*CLOSE SUPPORT": {
+"records": [
+"ia:DTIC_ADA242405"
+],
+"sources": [
+"ia"
+],
+"first": "2026-11-24T22:40:42Z",
+"last": "2026-11-24T22:40:42Z",
+"keys": [
+"subject"
+]
+},
+"NAVY": {
+"records": [
+"ia:DTIC_ADA242405"
+],
+"sources": [
+"ia"
+],
+"first": "2026-11-24T22:40:42Z",
+"last": "2026-11-24T22:40:42Z",
+"keys": [
+"subject"
+]
+},
+"AIRBORNE": {
+"records": [
+"ia:DTIC_ADA242405"
+],
+"sources": [
+"ia"
+],
+"first": "2026-11-24T22:40:42Z",
+"last": "2026-11-24T22:40:42Z",
+"keys": [
+"subject"
+]
+},
+"ATTACK": {
+"records": [
+"ia:DTIC_ADA242405"
+],
+"sources": [
+"ia"
+],
+"first": "2026-11-24T22:40:42Z",
+"last": "2026-11-24T22:40:42Z",
+"keys": [
+"subject"
+]
+},
+"TACTICAL": {
+"records": [
+"ia:DTIC_ADA242405"
+],
+"sources": [
+"ia"
+],
+"first": "2026-11-24T22:40:42Z",
+"last": "2026-11-24T22:40:42Z",
+"keys": [
+"subject"
+]
+},
+"Korea (South)": {
+"records": [
+"ia:LC-30456"
+],
+"sources": [
+"ia"
+],
+"first": "2026-11-24T22:56:57Z",
+"last": "2026-11-24T22:56:57Z",
 "keys": [
 "subject"
 ]
@@ -6299,10 +6414,10 @@
 }
 }
 },
-"updated": "2026-11-24T23:57:18Z",
+"updated": "2026-11-25T00:07:30Z",
 "totals": {
 "매체": 4,
-"주제": 132,
+"주제": 140,
 "장소": 52,
 "분류": 93,
 "시대": 38,
