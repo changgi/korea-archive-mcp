@@ -1943,6 +1943,21 @@
    ],
    "level": "warn",
    "note": "v3.45 국가유산포털 0건은 OpenAPI totalCnt 0 명시일 때만 — 운영 icn1에서 v3.45 배포(READY 14:40Z) 후 무의미 질의 3/3 heritage:0으로 표지 실측 확정(이 작업망은 차단)"
+  },
+  {
+   "id": "ledger-nara-sheets-year",
+   "tool": "cross_search",
+   "args": {
+    "query": "Ships Unload Ammunition",
+    "sources": "ledger",
+    "max_per_source": 5,
+    "format": "csv"
+   },
+   "must": [
+    "1951"
+   ],
+   "level": "warn",
+   "note": "v3.46 NARA 디지털 객체 경로 연도 폴더(Sheets/1951) = 로컬 식별자 111-DD-230-51 끝자리 일치 → 파생 날짜(원장 병합 후)"
   }
  ]
 }
