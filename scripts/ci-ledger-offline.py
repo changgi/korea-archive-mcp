@@ -33,6 +33,9 @@ _cases = [(_md("1910-03-15"), "1910-03-15"), (_md("c 23 March 1956")[0], "1956-0
           (_td("Sept. 4, 1876 - Mar. 6, 1877")[0], "1876~1877"), (_td("서울역 피난열차에 오르는 피란민들 사진(1950.12.24.)")[0], "1950-12-24")]
 _bad_dt = [(i, got, want) for i, (got, want) in enumerate(_cases) if (got[0] if isinstance(got, tuple) else got) != want]
 assert not _bad_dt, f"날짜 해석기 회귀 {_bad_dt}"
+_io = g["iiif_origin"]  # v3.9 Gallica 원 기관 IIIF — 디지털 원문 ark만(카탈로그 cb ark 아님), 수집 경로 iiif가 있으면 두지 않음
+assert _io({"url": "http://gallica.bnf.fr/ark:/12148/btv1b2700138b"})["manifest"] == "https://gallica.bnf.fr/iiif/ark:/12148/btv1b2700138b/manifest.json"
+assert _io({"url": "https://gallica.bnf.fr/ark:/12148/cb384972039"}) is None and _io({"url": "https://gallica.bnf.fr/ark:/12148/bpt6k1", "iiif": "x"}) is None
 g["main"]()
 after = sum(1 for l in open(os.path.join(data, "discovered.jsonl"), encoding="utf-8") if l.strip())
 bad = []
@@ -61,6 +64,10 @@ try:  # v3.0.1 날짜 칸 의미 검사 — 날짜에 숫자가 없는 값(분�
     _ks = {o["key"] for o in _L}  # v3.1 같은 기록 실물 이미지 — 상대가 원장에 있고 근거가 있어야
     _is = [o["key"] for o in _L if o.get("iiif_same") and (o["iiif_same"].get("key") not in _ks or not o["iiif_same"].get("basis") or not o["iiif_same"].get("manifest"))]
     if _is: bad.append(f"iiif_same 상대·근거 없음 {len(_is)}건")
+    _go = [o["key"] for o in _L if o["key"].startswith("gallica:") and "/ark:/12148/cb" not in str(o.get("url")) and not (o.get("iiif") or o.get("iiif_origin"))]  # v3.9
+    if _go: bad.append(f"Gallica 디지털 원문인데 원 기관 IIIF 주소 없음 {len(_go)}건")
+    _gb = [o["key"] for o in _L if o.get("iiif_origin") and not (o.get("iiif_built") or o.get("iiif"))]
+    if _gb: bad.append(f"iiif_origin 기록의 봉투 매니페스트 소실 {len(_gb)}건(지우지 않는다)")
     _tg = [o["key"] for o in _L if any(m and (str(m[0]).startswith("➤") or m[0] == "공식 검색") for m in o.get("meta") or [])]  # v3.5.3 도구 안내 문구가 기관 메타로
     if _tg: bad.append(f"메타에 도구 안내 문구 {len(_tg)}건(tool_notes로 — v3.5.3)")
     _nb = [o["key"] for o in _L if o.get("date_derived") and not o.get("date_basis")]
