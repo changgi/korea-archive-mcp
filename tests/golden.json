@@ -1973,6 +1973,23 @@
    ],
    "level": "warn",
    "note": "v3.47 사본(IA 111-adc-8582)의 기관 sameAs(NARA 로컬 식별자) = 원장 NARA 기록의 계층을 원 소장처로 — 원장 병합 후"
+  },
+  {
+   "id": "fail-note-no-false-history",
+   "tool": "cross_search",
+   "args": {
+    "query": "zqxjvwkpq",
+    "sources": "foia",
+    "max_per_source": 2
+   },
+   "must": [
+    "채널별 \\["
+   ],
+   "must_not": [
+    "과거 관측\\(조회 범위 등록부\\): foia"
+   ],
+   "level": "warn",
+   "note": "v3.52 실패 채널의 과거 관측은 등록부에 결과(hit)가 있을 때만 — 결과가 한 번도 없던 질의·기관에 근거를 지어 붙이지 않는다"
   }
  ]
 }
