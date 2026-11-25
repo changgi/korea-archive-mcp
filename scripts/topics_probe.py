@@ -80,8 +80,10 @@ def main():
     day = dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%d")
     p = os.path.join(ROOT, "docs", "data", "topics_probe.json")
     J = json.load(open(p, encoding="utf-8")) if os.path.exists(p) else {"note": "다국어 변환어 기관 색인 실측 — 날짜별 축적, 지우지 않는다. hit = 상위 5건 제목에 변환어 핵심 낱말이 든 수", "runs": {}}
-    J["runs"][day] = {"terms": len(res), "weak": weak, "results": res}
-    J["latest"] = {"day": day, "terms": len(res), "weak": weak}
+    key = dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%MZ")  # v3.8.3 실행마다 시각 키 — 같은 날 재실행이 이전 판을 덮어쓰던 결함(축적 원칙)
+    while key in J["runs"]: key += "+"
+    J["runs"][key] = {"terms": len(res), "weak": weak, "results": res}
+    J["latest"] = {"day": key, "terms": len(res), "weak": weak}
     json.dump(J, open(p, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
     md = f"## 변환어 실측 {day}\n- 변환어 {len(res)}개 · 약함(두 기관 상위 5건에 핵심 낱말 0) {len(weak)}개\n" + "".join(f"- {w}\n" for w in weak) + "\n교정 원칙: 학술 명칭이 아니라 기관이 실제 쓴 표기로(MAINTAINING.md v2.96.1)."
     print(md)
