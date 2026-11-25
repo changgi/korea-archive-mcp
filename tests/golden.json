@@ -1551,6 +1551,24 @@
    ],
    "level": "warn",
    "note": "v3.2 IIIF Change Discovery 1.0 활동 스트림 안내(웹·모바일 동등성)"
+  },
+  {
+   "id": "ktv-iiif-bridge",
+   "tool": "cross_search",
+   "args": {
+    "query": "온수수영장",
+    "sources": "ktv",
+    "max_per_source": 3,
+    "format": "manifest"
+   },
+   "must": [
+    "/iiif/ktv/(?:photo|movie)~"
+   ],
+   "must_not": [
+    "\"iiif\":\"https://korea-archive-mcp\\.vercel\\.app/iiif/rec/"
+   ],
+   "level": "warn",
+   "note": "v3.5 KTV e영상역사관 IIIF 브리지 — 옛 결함: 이미지 있는 기록도 기록 봉투(rec)로만"
   }
  ]
 }
