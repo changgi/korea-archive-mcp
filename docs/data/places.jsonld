@@ -1547,6 +1547,308 @@
 }
 ],
 "ka:records": 21
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/places.jsonld#38%EC%84%A0",
+"@type": [
+"skos:Concept",
+"rico:Place"
+],
+"skos:inScheme": {
+"@id": "https://changgi.github.io/korea-archive-mcp/data/places.jsonld"
+},
+"skos:prefLabel": {
+"@value": "38선",
+"@language": "ko"
+},
+"skos:altLabel": [
+"38th Parallel",
+"三十八度線"
+],
+"rdfs:seeAlso": [
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/f2ddf24991b4.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/12e1e81aa349.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/42286c48fe16.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/6b9da0f06e06.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/27a75c1f6b0d.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/29346c0f37a9.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/72594d2f947e.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/f96d243da082.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/2deb139bb95c.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/a1f7cce03468.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/683d8e4af998.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/7133af8a1880.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/a928c3b2bb2f.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/80659e0e6f29.html"
+}
+],
+"ka:records": 14
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/places.jsonld#%EC%A7%84%EC%A3%BC",
+"@type": [
+"skos:Concept",
+"rico:Place"
+],
+"skos:inScheme": {
+"@id": "https://changgi.github.io/korea-archive-mcp/data/places.jsonld"
+},
+"skos:prefLabel": {
+"@value": "진주",
+"@language": "ko"
+},
+"skos:altLabel": [
+"晉州",
+"晋州",
+"Chinju",
+"Jinju"
+],
+"rdfs:seeAlso": [
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/d4b009445d43.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/433354382f7b.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/5853c49f4323.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/73313cf81934.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/6e77f11fad76.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/32d4a7d0d866.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/5fe03c47ec8a.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/d6bf948b9ab6.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/351c83276126.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/11084a12ad64.html"
+}
+],
+"ka:records": 10
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/places.jsonld#%EA%B2%BD%EC%A3%BC",
+"@type": [
+"skos:Concept",
+"rico:Place"
+],
+"skos:inScheme": {
+"@id": "https://changgi.github.io/korea-archive-mcp/data/places.jsonld"
+},
+"skos:prefLabel": {
+"@value": "경주",
+"@language": "ko"
+},
+"skos:altLabel": [
+"慶州",
+"Kyongju",
+"Gyeongju"
+],
+"rdfs:seeAlso": [
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/75302021d83c.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/0920d8abcbb2.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/401fd813b1ce.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/f5c248a8f2f0.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/67d4f3ddd3d7.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/88f24faa6a5f.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/16809ac18d90.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/120d3a00ded1.html"
+}
+],
+"ka:records": 8
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/places.jsonld#%EC%9D%98%EC%A0%95%EB%B6%80",
+"@type": [
+"skos:Concept",
+"rico:Place"
+],
+"skos:inScheme": {
+"@id": "https://changgi.github.io/korea-archive-mcp/data/places.jsonld"
+},
+"skos:prefLabel": {
+"@value": "의정부",
+"@language": "ko"
+},
+"skos:altLabel": [
+"議政府",
+"Uijongbu",
+"Uijeongbu"
+],
+"rdfs:seeAlso": [
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/5f10aa448fb4.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/8d4fa3d58689.html"
+}
+],
+"ka:records": 2
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/places.jsonld#%EA%B0%95%ED%99%94",
+"@type": [
+"skos:Concept",
+"rico:Place"
+],
+"skos:inScheme": {
+"@id": "https://changgi.github.io/korea-archive-mcp/data/places.jsonld"
+},
+"skos:prefLabel": {
+"@value": "강화",
+"@language": "ko"
+},
+"skos:altLabel": [
+"강화도",
+"강화군",
+"江華",
+"Kanghwa",
+"Ganghwa"
+],
+"rdfs:seeAlso": [
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/c7047bf0b81b.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/70f394a61a87.html"
+}
+],
+"ka:records": 2
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/places.jsonld#%EB%AC%B8%EC%82%B0",
+"@type": [
+"skos:Concept",
+"rico:Place"
+],
+"skos:inScheme": {
+"@id": "https://changgi.github.io/korea-archive-mcp/data/places.jsonld"
+},
+"skos:prefLabel": {
+"@value": "문산",
+"@language": "ko"
+},
+"skos:altLabel": [
+"汶山",
+"Munsan"
+],
+"rdfs:seeAlso": [
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/32301c80c4c2.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/416e290818a4.html"
+}
+],
+"ka:records": 2
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/places.jsonld#%EC%9A%A9%ED%8F%89",
+"@type": [
+"skos:Concept",
+"rico:Place"
+],
+"skos:inScheme": {
+"@id": "https://changgi.github.io/korea-archive-mcp/data/places.jsonld"
+},
+"skos:prefLabel": {
+"@value": "용평",
+"@language": "ko"
+},
+"skos:altLabel": [
+"Yongpyang",
+"Yongp'yang"
+],
+"rdfs:seeAlso": [
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/32301c80c4c2.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/416e290818a4.html"
+}
+],
+"ka:records": 2
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/places.jsonld#%EA%B4%91%EC%A3%BC",
+"@type": [
+"skos:Concept",
+"rico:Place"
+],
+"skos:inScheme": {
+"@id": "https://changgi.github.io/korea-archive-mcp/data/places.jsonld"
+},
+"skos:prefLabel": {
+"@value": "광주",
+"@language": "ko"
+},
+"skos:altLabel": [
+"光州",
+"Kwangju",
+"Gwangju"
+],
+"rdfs:seeAlso": [
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/cfb0ab6ca5c6.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/5033db3f7f68.html"
+}
+],
+"ka:records": 2
 }
 ]
 }

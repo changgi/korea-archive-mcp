@@ -1,6 +1,6 @@
 {
  "note": "KOREA ARCHIVE 지명 사전 — 다국어 변환표(TOPICS) 지명 대응 + 기관 로마자 변형을 표준명으로. 표제·기관 장소 칸에서만 매칭(요약 본문 제외). 기관 표기 장소는 subjects.json 그대로 — 이 사전은 그 위의 연결 층. 지우지 않음.",
- "updated": "2026-11-25T09:33:58Z",
+ "updated": "2026-11-25T09:39:16Z",
  "places": {
   "흥남": {
    "labels": [
@@ -696,6 +696,158 @@
     "ktv",
     "nedb",
     "seoul"
+   ]
+  },
+  "38선": {
+   "labels": [
+    "38선",
+    "38th Parallel",
+    "三十八度線"
+   ],
+   "records": [
+    "awm:147378",
+    "awm:147381",
+    "awm:147844",
+    "awm:F03606",
+    "awm:HOBJ3143",
+    "awm:HOBJ3144",
+    "awm:HOBJ3145",
+    "awm:MELJ1339",
+    "awm:P02956.002",
+    "awm:P07797.002",
+    "awm:P07797.003",
+    "europeana:/9200111/BibliographicResource_1000085970856",
+    "koreanwar:1993-KR-05-BP-A-00011",
+    "nara:NAID 20315"
+   ],
+   "sources": [
+    "awm",
+    "europeana",
+    "koreanwar",
+    "nara"
+   ]
+  },
+  "진주": {
+   "labels": [
+    "진주",
+    "晉州",
+    "晋州",
+    "Chinju",
+    "Jinju"
+   ],
+   "records": [
+    "archives:201205069333-1",
+    "archives:201205069333-11",
+    "archives:201205069333-12",
+    "archives:201205069333-13",
+    "archives:201205069333-2",
+    "archives:201205069333-4",
+    "archives:201205069333-5",
+    "archives:201205069333-7",
+    "archives:201205069333-8",
+    "archives:201205069333-9"
+   ],
+   "sources": [
+    "archives"
+   ]
+  },
+  "경주": {
+   "labels": [
+    "경주",
+    "慶州",
+    "Kyongju",
+    "Gyeongju"
+   ],
+   "records": [
+    "jsg:K2-4542",
+    "nlk:179178908",
+    "nlk:825280808",
+    "nlk:944678",
+    "nlk:CNTS-00130289509",
+    "nlk:CNTS-00130289739",
+    "nlk:CNTS-00130290637",
+    "nlk:CNTS-00132076027"
+   ],
+   "sources": [
+    "jsg",
+    "nlk"
+   ]
+  },
+  "의정부": {
+   "labels": [
+    "의정부",
+    "議政府",
+    "Uijongbu",
+    "Uijeongbu"
+   ],
+   "records": [
+    "ia:111-adc-8634",
+    "nara:NAID 22399"
+   ],
+   "sources": [
+    "ia",
+    "nara"
+   ]
+  },
+  "강화": {
+   "labels": [
+    "강화도",
+    "강화군",
+    "江華",
+    "Kanghwa",
+    "Ganghwa"
+   ],
+   "records": [
+    "heritage:21-0000550000000-23",
+    "jsg:K2-2841"
+   ],
+   "sources": [
+    "heritage",
+    "jsg"
+   ]
+  },
+  "문산": {
+   "labels": [
+    "문산",
+    "汶山",
+    "Munsan"
+   ],
+   "records": [
+    "ia:111-adc-8630",
+    "nara:NAID 22395"
+   ],
+   "sources": [
+    "ia",
+    "nara"
+   ]
+  },
+  "용평": {
+   "labels": [
+    "Yongpyang",
+    "Yongp'yang"
+   ],
+   "records": [
+    "ia:111-adc-8630",
+    "nara:NAID 22395"
+   ],
+   "sources": [
+    "ia",
+    "nara"
+   ]
+  },
+  "광주": {
+   "labels": [
+    "광주",
+    "光州",
+    "Kwangju",
+    "Gwangju"
+   ],
+   "records": [
+    "indy:https://theme.archives.go.kr/next/indy/viewIndyDetail.do?IMSI_ARCHIVE_ID=0001352421&FK_ARCHIVE_EVNT_ID=0034992188&evntdowngbn=N&indpnId=0000023188&actionType=det&flag=1&search_region=",
+    "indy:https://theme.archives.go.kr/next/indy/viewIndyDetail.do?IMSI_ARCHIVE_ID=0001352438&FK_ARCHIVE_EVNT_ID=0034992398&evntdowngbn=N&indpnId=0000023390&actionType=det&flag=1&search_region="
+   ],
+   "sources": [
+    "indy"
    ]
   }
  }
