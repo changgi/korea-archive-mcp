@@ -384,6 +384,7 @@ const iiifFor = (u, id) => { u = String(u || ''); let x;
   if (/heritage\.go\.kr/.test(u) && /^\d{2}-[0-9A-Za-z]+-\d{2}$/.test(String(id || ''))) return bridgeUrl('heritage', id);
   if ((x = u.match(/much\.go\.kr\/.*idnbr=([A-Z]{2}[\w-]+)/))) return bridgeUrl('much', x[1]);
   if ((x = u.match(/awm\.gov\.au\/collection\/(C\d+)/))) return bridgeUrl('awm', x[1]);
+  if ((x = u.match(/archives\.seoul\.go\.kr\/item\/(\d{1,9})(?:[?#]|$)/))) return bridgeUrl('seoul', x[1]); // v3.10 서울기록원 브리지(기록건 상세 이미지 뷰어·기술 항목·상위 시리즈)
   if ((x = u.match(/koreanwar\.or\.kr(?::8443)?\/searchDetail\.do\?archRfcd=(\d{4}-[A-Z]{2}-\d{2}-[A-Z]{2}-[A-Z]-\d+)/))) return bridgeUrl('kw', x[1]); // v3.5.2 6·25전쟁 아카이브센터 브리지(협약기관 — 원본 우선·열람 및 이용조건 원문)
   if (/ehistory\.go\.kr\/view\/(photo|movie)\?/.test(u) && (x = ktvId(u))) return bridgeUrl('ktv', x); // v3.5 KTV e영상역사관 브리지(이 기록 제목의 공개 이미지·공공누리 표시)
   if ((x = u.match(/portal\.nrich\.go\.kr\/kor\/(overseasSearchView|ksmUsrView|portraitNdUsrView|buddhaNdUsrView)\.do\S*?(?:mseq|ksm_idx|portrait_idx|buddha_idx)=(\d+)/))) // v2.17 국립문화유산연구원 IIIF 브리지
