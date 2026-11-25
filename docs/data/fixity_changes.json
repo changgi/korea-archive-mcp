@@ -1,7 +1,7 @@
 {
-"updated": "2026-11-25T02:17:49Z",
-"watched": 844,
-"changed_records": 25,
+"updated": "2026-11-25T02:31:02Z",
+"watched": 846,
+"changed_records": 31,
 "suspected_source_changes": 0,
 "note": "지문 = 원 기관 응답(우리 판독기 정규형, 판독 시각 등 변동 항목 제외)의 SHA-256-16. pv = 판독기(route.js·lib) 지문. 이력은 지우지 않는다.",
 "changes": [
@@ -476,6 +476,120 @@
 "at": "2026-11-25",
 "h": "4a94b5c455244b51",
 "pv": "628ea0c06128",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "nara:NAID 42219673",
+"title": "North Korea/South Korea [2]",
+"url": "https://catalog.archives.gov/id/42219673",
+"history": [
+{
+"at": "2026-11-24",
+"h": "4b8845715f083cc4",
+"pv": "51fd8293ed29",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "ff36cccf5f384594",
+"pv": "fa6703da94c0",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "nara:NAID 42219674",
+"title": "North Korea/South Korea [3]",
+"url": "https://catalog.archives.gov/id/42219674",
+"history": [
+{
+"at": "2026-11-24",
+"h": "a508393b9ffb7ae1",
+"pv": "51fd8293ed29",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "bd05f6b8c8e2ea6b",
+"pv": "fa6703da94c0",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "nara:NAID 492062159",
+"title": "Korea",
+"url": "https://catalog.archives.gov/id/492062159",
+"history": [
+{
+"at": "2026-11-24",
+"h": "0c33e40a42b2aed0",
+"pv": "51fd8293ed29",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "53658976dde5796c",
+"pv": "fa6703da94c0",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "un:4132698",
+"title": "Cooperation between the United Nations and the Organization of Islamic Cooperation : resolution",
+"url": "https://digitallibrary.un.org/record/4132698",
+"history": [
+{
+"at": "2026-11-24",
+"h": "7b2d017c8869dcc5",
+"pv": "d4726c38e7cc",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "ef8e0a2027c1c454",
+"pv": "fa6703da94c0",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "un:4132699",
+"title": "Cooperation between the United Nations and the Commonwealth of Independent States : resolution",
+"url": "https://digitallibrary.un.org/record/4132699",
+"history": [
+{
+"at": "2026-11-24",
+"h": "bcbcd2449f5288d5",
+"pv": "d4726c38e7cc",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "b07ce15b0876ae8d",
+"pv": "fa6703da94c0",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "un:A/C.6/81/L.5",
+"title": "[A/C.6/81/L.5] Report of the United Nations Commission on International Trade Law on the work of its 59th sess",
+"url": "https://digitallibrary.un.org/record/4133334",
+"history": [
+{
+"at": "2026-11-24",
+"h": "1ea5c544c1c90a9a",
+"pv": "d4726c38e7cc",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "f1f3100a2392dde2",
+"pv": "fa6703da94c0",
 "kind": "판독기 변경 동반"
 }
 ]
