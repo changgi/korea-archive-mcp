@@ -1040,7 +1040,7 @@ ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..")
 DISTS = [("discovered.csv", "text/csv", "발견 기록 표(CSV)"), ("discovered.jsonl", "application/jsonl", "발견 기록(JSONL)"),
          ("discovered.jsonld", "application/ld+json", "RiC-O·PROV 연결 데이터(JSON-LD)"), ("collection.json", "application/ld+json", "IIIF Presentation 3 컬렉션(최근 300건)"),
          ("hierarchy.json", "application/ld+json", "IIIF 계층 컬렉션"), ("subjects.jsonld", "application/ld+json", "주제·인물·장소·형태 SKOS 개념 체계"),
-         ("records.oai_dc.xml", "application/xml", "OAI-PMH Dublin Core"), ("activity/collection.json", "application/ld+json", "IIIF Change Discovery 1.0 활동 스트림(매니페스트 생성·갱신)"), ("day/index.json", "application/ld+json", "IIIF 컬렉션 — 같은 날 다른 기관 기록 묶음(날짜순)"), ("places.json", "application/json", "지명 사전 — 표준명·표기 변이·기록(v3.14)"), ("places.jsonld", "application/ld+json", "지명 사전 SKOS·rico:Place"), ("events.json", "application/json", "사건 사전 — 시기·원장 판정 분포(v3.26)"), ("dict.html", "text/html", "기준 사전 — 지명·인물·사건·전거(읽기용, v3.25)"), ("persons.json", "application/json", "인물 사전 — 표준 인명·전거·기록(v3.24)"), ("persons.jsonld", "application/ld+json", "인물 사전 SKOS·rico:Person·owl:sameAs"), ("authorities.json", "application/json", "기관 전거(KSH·KAC) — 국립중앙도서관 LOD·외부 전거 연결(v3.23)"), ("place/index.json", "application/ld+json", "IIIF 컬렉션 — 지명별 기록(연대순, v3.16)"), ("records.csl.json", "application/vnd.citationstyles.csl+json", "인용 CSL-JSON"),
+         ("records.oai_dc.xml", "application/xml", "OAI-PMH Dublin Core"), ("activity/collection.json", "application/ld+json", "IIIF Change Discovery 1.0 활동 스트림(매니페스트 생성·갱신)"), ("day/index.json", "application/ld+json", "IIIF 컬렉션 — 같은 날 다른 기관 기록 묶음(날짜순)"), ("places.json", "application/json", "지명 사전 — 표준명·표기 변이·기록(v3.14)"), ("places.jsonld", "application/ld+json", "지명 사전 SKOS·rico:Place"), ("dict_candidates.json", "application/json", "기준 사전 후보(지명) — 사전 밖 값·원장 2건 이상(v3.28)"), ("events.json", "application/json", "사건 사전 — 시기·원장 판정 분포(v3.26)"), ("dict.html", "text/html", "기준 사전 — 지명·인물·사건·전거(읽기용, v3.25)"), ("persons.json", "application/json", "인물 사전 — 표준 인명·전거·기록(v3.24)"), ("persons.jsonld", "application/ld+json", "인물 사전 SKOS·rico:Person·owl:sameAs"), ("authorities.json", "application/json", "기관 전거(KSH·KAC) — 국립중앙도서관 LOD·외부 전거 연결(v3.23)"), ("place/index.json", "application/ld+json", "IIIF 컬렉션 — 지명별 기록(연대순, v3.16)"), ("records.csl.json", "application/vnd.citationstyles.csl+json", "인용 CSL-JSON"),
          ("records.ris", "application/x-research-info-systems", "인용 RIS"), ("records.bib", "application/x-bibtex", "인용 BibTeX"),
          ("feed.xml", "application/atom+xml", "새 발견 Atom 피드"), ("timeline.json", "application/json", "연대 타임라인"), ("tree.json", "application/json", "계층구조"),
          ("classifications.json", "application/json", "분류 사전"), ("provenance.json", "application/json", "발견 경로(질의↔기록)"), ("relations.json", "application/json", "기록↔기록 맥락 연결(근거 포함)"), ("relations.html", "text/html", "맥락 연결 묶음(읽기용)"), ("quality.json", "application/json", "데이터 품질 시계열"),
@@ -1203,6 +1203,36 @@ def build_persons(recs):
               open(os.path.join(D, "persons.jsonld"), "w", encoding="utf-8"), ensure_ascii=False, indent=0)
     return sum(1 for e in out.values() if e["records"])
 
+CAND_STOP = re.compile(r"^(KOREA|COREA|NORTH|SOUTH|KOREAN WAR|WAR|ASIA|JAPAN|CHINA|UNITED STATES|USA|U\.S\.|STATE|WAR ORPHANS|SQUADRON|PRINCIPAL|Asia: Korea|Korea|한국|대한민국|조선|미국|일본|중국)$", re.I)
+
+def dict_candidates(recs):
+    """v3.28 기준 사전 후보 — 사전(PLACES)에 매칭되지 않는 지명 후보를 원장에서 찾아 쌓는다(자동 추가 아님 — 오탐 검토 후 사람이 PLACES에).
+    근거: ① 기관 장소 칸(장소·취급지명·연관정보 GEOL·Place made·장소(기관 전거)) 값 ② NARA식 표제 'X, KOREA'. 기록 2건 이상만. dict_candidates.json 누적(처음 본 날 유지)."""
+    p = os.path.join(D, "dict_candidates.json")
+    C0 = json.load(open(p, encoding="utf-8")) if os.path.exists(p) else {"note": "기준 사전 후보(지명) — 사전에 없는 값, 원장 2건 이상. 자동 추가 아님: 오탐(일반어·국가명·부대명) 검토 뒤 PLACES에 넣고 오프라인 시험 사례 추가. 누적.", "places": {}}
+    cnt = {}
+    for o in recs:
+        if o.get("entry_type", "기록") != "기록": continue
+        vals = []
+        for k, v in ((m[0], m[1]) for m in (o.get("meta") or []) if m and len(m) > 1):
+            if PLACE_META.match(str(k)) or k == "연관정보":
+                vals += [x for f, x in facet_terms(str(k), v, "장소") if f == "장소"] if k == "연관정보" else [t.split("=")[0].strip() for t in re.split(r"\s·\s|;|,(?=\s*[A-Z가-힣])", str(v))]
+        vals += [m[1].strip() for m in re.finditer(r"\b([A-Z][A-Za-z'\-]{2,}(?:[ -][A-Z][A-Za-z'\-]+)?),\s*(?:NORTH |SOUTH )?KOREA\b", str(o.get("title") or ""))]
+        for v in {re.sub(r"\s+", " ", v).strip(" .") for v in vals}:
+            if not (2 <= len(v) <= 40) or CAND_STOP.match(v) or re.match(r"^\d", v) or "(국명)" in v or re.match(r"^(WOUNDED|REFUGEES?|PRISONERS?|ORPHANS?|TROOPS?|MARINES?|ARMY|NAVY)$", v, re.I): continue  # 국가명(KSH '(국명)')·일반어
+            if any(rx.search(v) for rx in _PL.values()): continue  # 이미 사전에 있음
+            cnt.setdefault(v.upper() if re.match(r"^[A-Za-z]", v) else v, set()).add(o["key"])
+    today = dt.date.today().isoformat()
+    for v, ks in cnt.items():
+        if len(ks) < 2: continue
+        e = C0["places"].setdefault(v, {"first_seen": today, "records": []})
+        e["records"] = sorted(set(e["records"]) | ks); e["sources"] = sorted({k.split(":")[0] for k in e["records"]}); e["last_seen"] = today
+    for v, e in C0["places"].items():  # 이후 사전에 들어간 후보는 지우지 않고 표시
+        if any(rx.search(v) for rx in _PL.values()) and not e.get("adopted"): e["adopted"] = today
+    C0["updated"] = dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+    json.dump(C0, open(p, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+    return {v: e for v, e in C0["places"].items() if not e.get("adopted")}
+
 def build_dict_page(recs):
     """v3.25 기준 사전 안내 페이지(dict.html) — 지명·인물·사건·기관 전거를 사람이 읽게. 각 항목 → KV 컬렉션·외부 전거·근거. JSON 사전이 정본, 이 페이지는 그 보기."""
     E_ = html.escape; KVp = "../kv.html?manifest="
@@ -1221,6 +1251,8 @@ def build_dict_page(recs):
                  + " ".join(f"<a href='{E_(x)}'>{E_(host(x))}</a>" for x in e.get("sameAs", [])) + "</td></tr>" for n, e in PS.items() if e["records"])
     evr = "".join(f"<tr><td><b>{E_(n)}</b></td><td>{E_(a if a == b else a + '~' + b)}</td><td>" + " · ".join(f"{E_(k)} {v}" for k, v in sorted((ev.get(n) or {}).items())) + "</td></tr>" for n, _, a, b in EVENTS)
     au = "".join(f"<tr><td>{E_(a.get('label_lod') or a['term'])}</td><td><a href='{E_(a['page'])}'>{E_(i)}</a></td><td>{len(a['records'])}</td><td>" + " ".join(f"<a href='{E_(x)}'>{E_(host(x))}</a>" for x in a.get("sameAs", [])) + "</td></tr>" for i, a in sorted(AUTH.items()))
+    cand = dict_candidates(recs)  # v3.28
+    cr = "".join(f"<tr><td>{E_(v)}</td><td>{len(e['records'])}</td><td><small>{E_(', '.join(e.get('sources', [])))}</small></td><td><small>처음 {E_(e['first_seen'])}</small></td></tr>" for v, e in sorted(cand.items(), key=lambda x: -len(x[1]["records"]))[:40])
     T = lambda h, rows, cap: f"<table><tr>{''.join(f'<th>{x}</th>' for x in h)}</tr>{rows or '<tr><td colspan=4>(없음)</td></tr>'}</table><p><small>{cap}</small></p>"
     open(os.path.join(D, "dict.html"), "w", encoding="utf-8").write(f"""<!DOCTYPE html><html lang="ko"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>기준 사전 — 지명·인물·사건·전거 — KOREA ARCHIVE 발견 원장</title>
 <style>body{{font-family:system-ui,'Noto Sans KR',sans-serif;margin:0;background:#14161b;color:#e6e4dc}}main{{max-width:980px;margin:auto;padding:16px}}a{{color:#e0b04a}}small{{color:#9b9a93}}table{{border-collapse:collapse;width:100%;font-size:14px}}td,th{{border-bottom:1px solid #333;padding:6px;text-align:left;vertical-align:top}}</style>
@@ -1229,6 +1261,7 @@ def build_dict_page(recs):
 <h2>지명</h2>{T(['표준명 · 표기 변이', '기록', '수집처', '보기'], pl, '표제·기관 장소 칸 매칭(요약 본문 제외) — 같은 장소라는 단서(같은 사건 단정 아님)')}
 <h2>인물</h2>{T(['표준명 · 표기 변이', '기록', '수집처', '보기 · 국제 전거'], pe, '표제·기관 인물/주제/색인어 칸 매칭 — 등장·언급 단서. 국제 전거 = 국립중앙도서관 LOD의 owl:sameAs')}
 <h2>사건(사건-날짜 대조)</h2>{T(['사건', '시기', '원장 판정'], evr, "표제의 사건명 ↔ 기록 날짜. '사건 이전 연도'만 표기 확인 필요, 직전·이후는 오류 단정 아님. 기관 값은 고치지 않는다")}
+<h2>지명 후보(사전 밖, 원장 2건 이상)</h2>{T(['후보 값', '기록', '수집처', '발견'], cr, '자동 추가 아님 — 일반어·국가명·부대명 오탐을 검토한 뒤 사전(PLACES)에 넣는다. 정본: <a href="dict_candidates.json">dict_candidates.json</a>(누적)')}
 <h2>기관 전거(국립중앙도서관 LOD)</h2>{T(['LOD 표제', '전거 번호', '기록', '외부 전거(owl:sameAs)'], au, '신문아카이브 기사의 장소·인물·단체 전거(KSH 주제명표목·KAC 인명/단체)')}
 </main></html>""")
     return len(P), len(PS), len(EVENTS), len(AUTH)
