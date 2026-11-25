@@ -1,7 +1,7 @@
 {
-"updated": "2026-11-25T05:53:06Z",
+"updated": "2026-11-25T06:06:12Z",
 "watched": 861,
-"changed_records": 134,
+"changed_records": 139,
 "suspected_source_changes": 0,
 "note": "지문 = 원 기관 응답(우리 판독기 정규형, 판독 시각 등 변동 항목 제외)의 SHA-256-16. pv = 판독기(route.js·lib) 지문. 이력은 지우지 않는다.",
 "changes": [
@@ -2546,6 +2546,101 @@
 {
 "at": "2026-11-25",
 "h": "54faff5654a58636",
+"pv": "4021b086f020",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "nara:NAID 42219744",
+"title": "North Korea - Refugees [1]",
+"url": "https://catalog.archives.gov/id/42219744",
+"history": [
+{
+"at": "2026-11-24",
+"h": "f24be0ea13b280e4",
+"pv": "cdac8033f9b5",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "376cecbd36dfa75f",
+"pv": "4021b086f020",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "nara:NAID 42219745",
+"title": "North Korea - Refugees [2]",
+"url": "https://catalog.archives.gov/id/42219745",
+"history": [
+{
+"at": "2026-11-24",
+"h": "e9d7d9a91d953df1",
+"pv": "cdac8033f9b5",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "dc7719fe4a35a427",
+"pv": "4021b086f020",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "koreanwar:1989-KR-01-PF-A-00034",
+"title": "휴전 회담에 참석한 한국과 UN측 대표들 사진 2(1951)",
+"url": "https://www.koreanwar.or.kr:8443/searchDetail.do?archRfcd=1989-KR-01-PF-A-00034",
+"history": [
+{
+"at": "2026-11-24",
+"h": "bfd8caece47bf1d1",
+"pv": "cdac8033f9b5",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "9f29377e806510b8",
+"pv": "4021b086f020",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "koreanwar:1989-KR-01-PF-A-00058",
+"title": "휴전 회담 당시 한국 측 대표 사진 2(1951)",
+"url": "https://www.koreanwar.or.kr:8443/searchDetail.do?archRfcd=1989-KR-01-PF-A-00058",
+"history": [
+{
+"at": "2026-11-24",
+"h": "2ea792f13825c626",
+"pv": "cdac8033f9b5",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "76ac225747a93fa7",
+"pv": "4021b086f020",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "koreanwar:2012-IN-01-PF-A-00022",
+"title": "1950년대 판문점 휴전 회담장에서 걸어오는 인도군",
+"url": "https://www.koreanwar.or.kr:8443/searchDetail.do?archRfcd=2012-IN-01-PF-A-00022",
+"history": [
+{
+"at": "2026-11-24",
+"h": "aef32ddf3c84fe23",
+"pv": "cdac8033f9b5",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "42473de8cd6fe26d",
 "pv": "4021b086f020",
 "kind": "판독기 변경 동반"
 }
