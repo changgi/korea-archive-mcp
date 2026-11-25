@@ -46,6 +46,9 @@ try:  # v3.0.1 날짜 칸 의미 검사 — 날짜에 숫자가 없는 값(분�
     _L = [json.loads(l) for l in open(os.path.join(data, "discovered.jsonl"), encoding="utf-8") if l.strip()]
     _nd = [o["key"] for o in _L if o["key"].startswith("awm:") and o.get("date") and not _re.match(r"^\s*(?:c\.?\s*)?\d", o["date"])]
     if _nd: bad.append(f"AWM 날짜 칸에 분쟁명 등 비날짜 {len(_nd)}건(v3.0.1 — Date made만)")
+    _ks = {o["key"] for o in _L}  # v3.1 같은 기록 실물 이미지 — 상대가 원장에 있고 근거가 있어야
+    _is = [o["key"] for o in _L if o.get("iiif_same") and (o["iiif_same"].get("key") not in _ks or not o["iiif_same"].get("basis") or not o["iiif_same"].get("manifest"))]
+    if _is: bad.append(f"iiif_same 상대·근거 없음 {len(_is)}건")
     _nb = [o["key"] for o in _L if o.get("date_derived") and not o.get("date_basis")]
     if _nb: bad.append(f"근거 없는 파생 날짜 {len(_nb)}건")
 except Exception as ex: bad.append(f"날짜 검사 실패 {ex}")
