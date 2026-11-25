@@ -44,6 +44,10 @@ assert _pl({"title": "EVACUATION OF HUNGNAM, KOREA"}) == {"흥남"} == _pl({"tit
 assert not _pl({"title": "Seoulite 세계대전 원산지 개성적 수원지"}) and _pl({"title": "x", "meta": [["취급지명", "Hungnam[흥남]"]]}) == {"흥남"} and not _pl({"title": "x", "summary": "Hungnam"})
 assert _pl({"title": "[국외문화유산] 진주선 — 미국"}) == set() and _pl({"title": "增修崇慶州志 卷一"}) == set() and _pl({"title": "경주지형도(慶州地形圖)"}) == {"경주"}  # v3.15 오탐 규칙
 assert _pl({"title": "REFUGEES RESTING NEAR THE 38TH PARALLEL"}) == {"38선"} and _pl({"title": "한국전쟁 초기 진주시의 60퍼센트"}) == {"진주"} and _pl({"title": "한미 협력 강화 방안"}) == set() and _pl({"title": "강화 청련사 — 인천 강화군"}) == {"강화", "인천"}
+_ec = g["event_date_check"]  # v3.17 사건-날짜 정합 — 연도가 앞설 때만 모순, 같은 해 직전·연도만 표기는 단정 안 함
+assert _ec({"title": "흥남 철수, 한국", "date": "1945"})["verdict"].startswith("사건 이전 연도") and _ec({"title": "EVACUATION OF HUNGNAM, KOREA", "date": "1950-12-24"})["verdict"] == "일치"
+assert _ec({"title": "인천상륙작전 전 함포 사격 사진 1", "date": "1950-09-13"})["verdict"].startswith("사건 직전") and _ec({"title": "x ; EVACUATION, HUNGNAM", "date": "1950-01-01T00:00:00Z"})["verdict"] == "일치"
+assert _ec({"title": "Hell or high water; MacArthur's landing at Inchon", "date": "1968"})["verdict"].startswith("사건 이후") and _ec({"title": "CHOSIN RESERVOIR AREA", "date": "1950-11-01"}) is None
 _io = g["iiif_origin"]  # v3.9 Gallica 원 기관 IIIF — 디지털 원문 ark만(카탈로그 cb ark 아님), 수집 경로 iiif가 있으면 두지 않음
 assert _io({"url": "http://gallica.bnf.fr/ark:/12148/btv1b2700138b"})["manifest"] == "https://gallica.bnf.fr/iiif/ark:/12148/btv1b2700138b/manifest.json"
 assert _io({"url": "https://gallica.bnf.fr/ark:/12148/cb384972039"}) is None and _io({"url": "https://gallica.bnf.fr/ark:/12148/bpt6k1", "iiif": "x"}) is None

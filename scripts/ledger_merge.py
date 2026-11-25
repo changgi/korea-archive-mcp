@@ -1103,6 +1103,34 @@ def places(o):
     t = " ".join([str(o.get("title") or "")] + [str(v) for k, v in ((m[0], m[1]) for m in (o.get("meta") or []) if m and len(m) > 1) if PLACE_META.match(str(k))])
     return {k for k, rx in _PL.items() if rx.search(t)}
 
+# v3.17 사건-날짜 정합 — 표제에 알려진 사건이 있으면 기록 날짜를 사건 시기와 대조(기관 값은 고치지 않고 판정만 둔다).
+#   사건 이전 날짜 = 모순(그 사건의 기록이 먼저 생산될 수 없음 — 표기 확인 필요), 사건 이후 = 사후 기록 가능(오류 단정 아님).
+EVENTS = [("흥남 철수", r"흥남\s?철수|Hungnam evacuation|EVACUATION[^;]{0,30}HUNGNAM|HUNGNAM[^;]{0,20}EVACUATION", "1950-12-09", "1950-12-24"),
+          ("인천상륙작전", r"인천\s?상륙|Inchon landing|LANDING[^;]{0,30}INCHON|INCHON[^;]{0,20}LANDING|仁川上陸", "1950-09-15", "1950-09-19"),
+          ("서울 수복", r"서울\s?수복|9[·.]28\s?수복|recapture of Seoul|RECAPTURE OF SEOUL|Liberation of Seoul", "1950-09-20", "1950-09-29"),
+          ("장진호 전투", r"장진호\s?전투|Battle of (?:the )?Chosin", "1950-11-27", "1950-12-13"),  # 'Chosin Reservoir'는 지역명 — 사건 아님
+          ("가평 전투", r"가평\s?전투|Battle of Kapyong", "1951-04-22", "1951-04-25"),
+          ("정전협정 조인", r"정전\s?협정\s?조인|휴전\s?협정\s?조인|signing of the (?:Korean )?armistice", "1953-07-27", "1953-07-27")]
+_EV = [(n, re.compile(rx, re.I), a, b) for n, rx, a, b in EVENTS]
+
+def event_date_check(o):
+    d = str(o.get("date") or o.get("date_derived") or "")
+    d = re.sub(r"-01-01T00:00:00Z$", "", d)  # IA 등 '연도만'을 1월 1일 0시로 적은 표기
+    m = re.match(r"^(\d{4})(?:-(\d{2}))?(?:-(\d{2}))?", d)
+    if not m: return None
+    lo = f"{m[1]}-{m[2] or '01'}-{m[3] or '01'}"; hi = f"{m[1]}-{m[2] or '12'}-{m[3] or '31'}"  # 기록 날짜의 가능한 범위(연·월 단위 표기면 넓게)
+    rng = re.search(r"~(\d{4})", d)
+    if rng: hi = f"{rng[1]}-12-31"
+    for n, rx, a, b in _EV:
+        if not rx.search(str(o.get("title") or "")): continue
+        src = "기관 날짜 칸" if o.get("date") else f"파생 날짜({o.get('date_basis', '')})"
+        if hi[:4] < a[:4]: v = "사건 이전 연도 — 표기 확인 필요(그 사건의 기록이 그해보다 먼저 생산될 수 없음)"
+        elif hi < a: v = "사건 직전 — 준비·이동 단계 기록이거나 날짜 정밀도 차이(오류 단정 아님)"
+        elif lo > b: v = "사건 이후 — 사후 기록(보고·편집·재제작)일 수 있음"
+        else: v = "일치"
+        return {"event": n, "event_period": a if a == b else f"{a}~{b}", "recorded": d, "date_source": src, "verdict": v, "basis": f"표제의 사건명 '{n}' ↔ 기록 날짜 {d}"}
+    return None
+
 def place_id(n): return f"{PAGES}places.jsonld#" + urllib.parse.quote(n, safe="")
 
 def place_slug(n):
@@ -1433,7 +1461,7 @@ def build_record_pages(recs_all):
 {row('계층', E_(part) + (f" <small>(근거: {E_(o.get('partOf_src', ''))})</small>" if o.get('partOf_src') else '') if part else (E_(pder) + ' <small>[파생]</small>' if pder else ''))}
 {row('날짜', E_(date) if date else (E_(dd) + f" <small>[파생 — {E_(o.get('date_basis', ''))}]</small>" if dd else ''))}{row('연대', E_(decade(o)))}{row('날짜 교차 확인', dch)}
 {row('요약', E_(o.get('summary') or '') or (E_(o.get('summary_composed') or '')))}{row('권리', E_(o.get('rights_view') or '') + (f" <small>({E_(o.get('rights_basis', ''))})</small>" if o.get('rights_basis') else ''))}
-{row('IIIF', f"<a href='{KV}{E_(mf)}'>KV 뷰어로 보기</a> · <a href='{E_(mf)}'>매니페스트</a> <small>({E_(o.get('iiif_kind', ''))})</small>" if mf else '')}{row('같은 날 다른 기관 기록', f"{E_(o['same_day']['date'])} — {o['same_day']['institutions']}개 기관 {o['same_day']['records']}건 · <a href='{KV}{E_(o['same_day']['collection'])}'>KV로 기관별 이어 보기</a> · <a href='{E_(o['same_day']['collection'])}'>IIIF 컬렉션</a> <small>(같은 사건 교차 대조 단서 — 같은 장면이라는 단정 아님)</small>" if o.get('same_day') else '')}{row('원 소장처(사본의 원본)', f"{E_(o['origin_holder']['institution'])}{' · ' + E_(o['origin_holder']['record_group']) if o['origin_holder'].get('record_group') else ''}{' · ' + E_(o['origin_holder']['local_id']) if o['origin_holder'].get('local_id') else ''}{' · 목록 단위 <a href=' + chr(39) + E_(o['origin_holder']['finding_aid']['search']) + chr(39) + '>' + E_(o['origin_holder']['finding_aid']['label']) + '</a>' if o['origin_holder'].get('finding_aid') else ''} <small>({E_(o['origin_holder']['basis'])})</small>" if o.get('origin_holder') else '')}{row('지명(표준)', ' · '.join(f"<a href='{KV}{PAGES}place/{place_slug(n)}.json'>{E_(n)}</a>" for n in o['places_std']) + " <small>(지명 사전 — 표제·기관 장소 칸 매칭)</small>" if o.get('places_std') else '')}{row('이미지 없는 사유', f"{E_(o['envelope_basis']['type'])} — {E_(o['envelope_basis']['why'])}" if o.get('envelope_basis') else '')}{row('원 기관 IIIF(브라우저 열람)', f"<a href='{KV}{E_(o['iiif_origin']['manifest'])}'>KV 뷰어로 보기</a> · <a href='{E_(o['iiif_origin']['manifest'])}'>매니페스트</a> · <a href='{E_(o['iiif_origin']['viewer'])}'>기관 뷰어</a> <small>({E_(o['iiif_origin']['basis'])})</small>" if o.get('iiif_origin') else '')}{row('같은 기록 실물 이미지', f"<a href='{KV}{E_(o['iiif_same']['manifest'])}'>KV 뷰어로 보기</a> · <a href='{E_(o['iiif_same']['manifest'])}'>매니페스트</a> <small>({E_(o['iiif_same']['basis'])})</small>" if o.get('iiif_same') else '')}
+{row('IIIF', f"<a href='{KV}{E_(mf)}'>KV 뷰어로 보기</a> · <a href='{E_(mf)}'>매니페스트</a> <small>({E_(o.get('iiif_kind', ''))})</small>" if mf else '')}{row('같은 날 다른 기관 기록', f"{E_(o['same_day']['date'])} — {o['same_day']['institutions']}개 기관 {o['same_day']['records']}건 · <a href='{KV}{E_(o['same_day']['collection'])}'>KV로 기관별 이어 보기</a> · <a href='{E_(o['same_day']['collection'])}'>IIIF 컬렉션</a> <small>(같은 사건 교차 대조 단서 — 같은 장면이라는 단정 아님)</small>" if o.get('same_day') else '')}{row('원 소장처(사본의 원본)', f"{E_(o['origin_holder']['institution'])}{' · ' + E_(o['origin_holder']['record_group']) if o['origin_holder'].get('record_group') else ''}{' · ' + E_(o['origin_holder']['local_id']) if o['origin_holder'].get('local_id') else ''}{' · 목록 단위 <a href=' + chr(39) + E_(o['origin_holder']['finding_aid']['search']) + chr(39) + '>' + E_(o['origin_holder']['finding_aid']['label']) + '</a>' if o['origin_holder'].get('finding_aid') else ''} <small>({E_(o['origin_holder']['basis'])})</small>" if o.get('origin_holder') else '')}{row('사건-날짜 대조', f"{E_(o['event_date_check']['event'])}({E_(o['event_date_check']['event_period'])}) ↔ 기록 {E_(o['event_date_check']['recorded'])} [{E_(o['event_date_check']['date_source'])}] — <b>{E_(o['event_date_check']['verdict'])}</b>" if o.get('event_date_check') else '')}{row('지명(표준)', ' · '.join(f"<a href='{KV}{PAGES}place/{place_slug(n)}.json'>{E_(n)}</a>" for n in o['places_std']) + " <small>(지명 사전 — 표제·기관 장소 칸 매칭)</small>" if o.get('places_std') else '')}{row('이미지 없는 사유', f"{E_(o['envelope_basis']['type'])} — {E_(o['envelope_basis']['why'])}" if o.get('envelope_basis') else '')}{row('원 기관 IIIF(브라우저 열람)', f"<a href='{KV}{E_(o['iiif_origin']['manifest'])}'>KV 뷰어로 보기</a> · <a href='{E_(o['iiif_origin']['manifest'])}'>매니페스트</a> · <a href='{E_(o['iiif_origin']['viewer'])}'>기관 뷰어</a> <small>({E_(o['iiif_origin']['basis'])})</small>" if o.get('iiif_origin') else '')}{row('같은 기록 실물 이미지', f"<a href='{KV}{E_(o['iiif_same']['manifest'])}'>KV 뷰어로 보기</a> · <a href='{E_(o['iiif_same']['manifest'])}'>매니페스트</a> <small>({E_(o['iiif_same']['basis'])})</small>" if o.get('iiif_same') else '')}
 {row('발견', f"처음 {E_(o.get('first_seen', '')[:10])} · 최근 {E_(o.get('last_seen', '')[:10])} · {o.get('seen', 1)}회 · 출처 {E_('+'.join(o.get('sources') or []))}")}
 {row('같은 기록(기관 표기)', E_(o.get('sameAs') or '') + ('' if any(t_ == '같은 기록(다른 소장처)' for t_, _, _ in REL.get(o['key'], [])) else ' <small>(원장에 아직 없는 기록 — 기관 sameAs 표기 그대로)</small>') if o.get('sameAs') else '')}{row('옛 key', E_(', '.join(o.get('key_aliases') or [])))}{row('비고', E_(o.get('merge_note') or o.get('recovered') or o.get('harvested') or ''))}{row('발굴 경위', E_(o.get('found_via') or '') + (f" <small>(출발 기록 <a href='{E_(rec_slug(o['drilled_from']))}.html'>{E_(o['drilled_from'])}</a>)</small>" if o.get('drilled_from') else '') if o.get('found_via') else '')}
 </table>{('<h2>주제·분류 (기관 표기)</h2><p>' + ' · '.join(f"<a href='../subjects.html#{E_(subj_anchor(f_, t_))}'>{E_(f_)}: {E_(t_)}</a>" for f_, t_ in record_concepts(o)[:30]) + '</p>') if record_concepts(o) else ''}
@@ -2044,6 +2072,7 @@ def write_quality(recs):
          "관련 기록 연결": lambda o: REL.get(o["key"]), "같은 기록(다른 소장처) 연결": lambda o: any(t == "같은 기록(다른 소장처)" for t, _, _ in REL.get(o["key"], [])),
          "날짜 교차 확인(일치)": lambda o: (o.get("date_cross") or {}).get("verdict") == "일치",
          "기록 봉투 사유 확정": lambda o: (o.get("envelope_basis") or {}).get("type") not in (None, "미구축") if iiif_kind(o).startswith("기록 봉투") else True,  # v3.12 이미지 없는 이유까지 아는 기록(봉투가 아니면 해당 없음=충족)
+         "사건-날짜 대조(일치)": lambda o: (o.get("event_date_check") or {}).get("verdict") == "일치",  # v3.17
          "같은 날·같은 지명 연결": lambda o: any(t == "같은 날(다른 기관)" and "같은 지명" in bs for t, _, bs in REL.get(o["key"], [])),  # v3.13
          "원 소장처 계층(사본)": lambda o: o.get("origin_holder"), "원 기관 IIIF(브라우저 열람)": lambda o: o.get("iiif_origin")}
     day = dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%d")
@@ -2052,12 +2081,17 @@ def write_quality(recs):
     for o in R:
         t_ = (o.get("envelope_basis") or {}).get("type")
         if t_: eb[t_] = eb.get(t_, 0) + 1
-    snap["기록 봉투 사유(건)"] = dict(sorted(eb.items()))  # v3.12 사유 분류 축적(권리·기술·매체·원 기관 이미지 없음·미구축) — 기준 정보의 시계열
+    snap["기록 봉투 사유(건)"] = dict(sorted(eb.items()))
+    ev = {}
+    for o in R:
+        v_ = (o.get("event_date_check") or {}).get("verdict", "")
+        if v_: ev[v_.split(" — ")[0]] = ev.get(v_.split(" — ")[0], 0) + 1
+    snap["사건-날짜 대조(건)"] = dict(sorted(ev.items()))  # v3.17  # v3.12 사유 분류 축적(권리·기술·매체·원 기관 이미지 없음·미구축) — 기준 정보의 시계열
     p = os.path.join(D, "quality.json"); Qj = json.load(open(p, encoding="utf-8")) if os.path.exists(p) else {"note": "기록 항목별 채움률(%) 일별 시계열 — 지우지 않는다", "daily": {}}
     Qj["definitions"] = {"기관 IIIF": "iiif 필드가 있는 기록 — 원 기관 제공과 우리 브리지(원 기관 이미지로 구축)를 함께 센다(v2.75 이전부터의 시계열이라 이름 유지)",
                          "IIIF(원 기관 제공)": "원 기관이 직접 공개한 IIIF 매니페스트", "IIIF(원 기관 이미지로 구축)": "KOREA ARCHIVE 브리지가 원 기관 이미지·메타로 만든 매니페스트",
                          "IIIF(실물 이미지 — 제공+구축)": "위 둘의 합 — 나머지는 이미지 없는 기록 봉투", "IIIF(브리지 포함)": "기록 봉투까지 포함 — 모든 기록이 IIIF로 열림",
-                         "관련 기록 연결": "relations.json에서 다른 기록과 하나 이상 이어진 기록(같은 기록·같은 날·같은 계열, v2.82)", "같은 기록(다른 소장처) 연결": "기관 sameAs·식별자 일치로 다른 소장처의 같은 기록과 이어진 기록", "날짜 교차 확인(일치)": "같은 기록의 다른 소장처가 적은 날짜와 이 기록의 날짜가 일치(v2.84 date_cross — 두 기관 이상이 증언)", "기록 봉투 사유 확정": "이미지 없는 기록 봉투 중 사유(권리·기술·매체·원 기관 이미지 없음)가 실측 근거로 확정된 비율 — 봉투가 아닌 기록은 충족으로 센다(v3.12)", "기록 봉투 사유(건)": "envelope_basis 유형별 건수(v3.9.2~)", "같은 날·같은 지명 연결": "같은 날 다른 기관 기록 중 표제·기관 장소 칸의 지명(지명 사전 PLACES — 다국어 표기 한 표준명)까지 같은 기록이 있는 비율(v3.13) — 같은 사건의 더 강한 단서", "원 소장처 계층(사본)": "사본 기록의 원 소장처·Record Group·식별자(origin_holder, v3.11)", "원 기관 IIIF(브라우저 열람)": "서버 확인 불가 기관의 공식 IIIF 규칙 주소(iiif_origin, v3.9)"}  # v2.75
+                         "관련 기록 연결": "relations.json에서 다른 기록과 하나 이상 이어진 기록(같은 기록·같은 날·같은 계열, v2.82)", "같은 기록(다른 소장처) 연결": "기관 sameAs·식별자 일치로 다른 소장처의 같은 기록과 이어진 기록", "날짜 교차 확인(일치)": "같은 기록의 다른 소장처가 적은 날짜와 이 기록의 날짜가 일치(v2.84 date_cross — 두 기관 이상이 증언)", "기록 봉투 사유 확정": "이미지 없는 기록 봉투 중 사유(권리·기술·매체·원 기관 이미지 없음)가 실측 근거로 확정된 비율 — 봉투가 아닌 기록은 충족으로 센다(v3.12)", "기록 봉투 사유(건)": "envelope_basis 유형별 건수(v3.9.2~)", "사건-날짜 대조(일치)": "표제에 알려진 사건(EVENTS)이 있는 기록 중 기록 날짜가 사건 시기 안 — 비율은 전체 기록 기준(v3.17). 사건 이전 날짜는 표기 확인 필요로 따로 센다", "같은 날·같은 지명 연결": "같은 날 다른 기관 기록 중 표제·기관 장소 칸의 지명(지명 사전 PLACES — 다국어 표기 한 표준명)까지 같은 기록이 있는 비율(v3.13) — 같은 사건의 더 강한 단서", "원 소장처 계층(사본)": "사본 기록의 원 소장처·Record Group·식별자(origin_holder, v3.11)", "원 기관 IIIF(브라우저 열람)": "서버 확인 불가 기관의 공식 IIIF 규칙 주소(iiif_origin, v3.9)"}  # v2.75
     Qj["daily"][day] = snap; Qj["daily"] = dict(sorted(Qj["daily"].items())); Qj["latest"] = {"day": day, **snap}
     runs = Qj.setdefault("runs", [])  # v3.8.4 실행마다 측정 축적 — daily[날짜]는 그날 마지막 값이라 같은 날 여러 실행의 중간 측정이 덮어써지던 결함. 바로 앞과 같으면 중복이라 쌓지 않는다
     if not runs or {k: v for k, v in runs[-1].items() if k != "at"} != snap: runs.append({"at": dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"), **snap})
@@ -2366,6 +2400,9 @@ def main():
                                      "first_seen": o.get("first_seen", ""), "last_seen": o.get("last_seen", ""), "days_total": o.get("days_total", 0), "seen": o.get("seen", 0)}
         else: o.pop("found_by_derived", None)
         o["iiif_kind"] = iiif_kind(o)  # v2.75 원 기관 제공 · 원 기관 이미지로 구축 · 기록 봉투 — 우리 브리지를 '기관'으로 부르던 표기 교정
+        ec_ = event_date_check(o)  # v3.17 사건-날짜 정합(기관 값은 그대로)
+        if ec_: o["event_date_check"] = ec_
+        else: o.pop("event_date_check", None)
         ps_ = sorted(places(o))  # v3.14 표준 지명(지명 사전 — 표제·기관 장소 칸)
         if ps_: o["places_std"] = ps_
         else: o.pop("places_std", None)
