@@ -1,7 +1,7 @@
 {
-"updated": "2026-11-25T06:06:12Z",
+"updated": "2026-11-25T06:24:53Z",
 "watched": 861,
-"changed_records": 139,
+"changed_records": 156,
 "suspected_source_changes": 0,
 "note": "지문 = 원 기관 응답(우리 판독기 정규형, 판독 시각 등 변동 항목 제외)의 SHA-256-16. pv = 판독기(route.js·lib) 지문. 이력은 지우지 않는다.",
 "changes": [
@@ -2642,6 +2642,329 @@
 "at": "2026-11-25",
 "h": "42473de8cd6fe26d",
 "pv": "4021b086f020",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "koreanwar:2012-IN-01-PF-A-00033",
+"title": "1950년대 북한군 지역에서 촬영한 인도군과 휴전회담장 모습",
+"url": "https://www.koreanwar.or.kr:8443/searchDetail.do?archRfcd=2012-IN-01-PF-A-00033",
+"history": [
+{
+"at": "2026-11-24",
+"h": "669bf24e3e055d34",
+"pv": "cdac8033f9b5",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "69b0a71c41d6cdec",
+"pv": "d935b612f32e",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "koreanwar:2012-IN-01-PF-A-00034",
+"title": "북한군 지역에서 촬영한 개선문과 휴전회담장 사진(1953)",
+"url": "https://www.koreanwar.or.kr:8443/searchDetail.do?archRfcd=2012-IN-01-PF-A-00034",
+"history": [
+{
+"at": "2026-11-24",
+"h": "e057ca2210b6f06d",
+"pv": "6acdd5764c47",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "d1eedfcd3261db59",
+"pv": "d935b612f32e",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "koreanwar:2012-IN-01-PF-A-00036",
+"title": "1950년대 북한군 지역에서 바라본 판문점 휴전회담장",
+"url": "https://www.koreanwar.or.kr:8443/searchDetail.do?archRfcd=2012-IN-01-PF-A-00036",
+"history": [
+{
+"at": "2026-11-24",
+"h": "3906f3748d7dcd74",
+"pv": "6acdd5764c47",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "f6fd44e7080cb8c5",
+"pv": "d935b612f32e",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "nara:NAID 1555828",
+"title": "Korea - President Park (2)",
+"url": "https://catalog.archives.gov/id/1555828",
+"history": [
+{
+"at": "2026-11-24",
+"h": "9bbefddf22bb57c4",
+"pv": "6acdd5764c47",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "7eb47de2622e84ac",
+"pv": "d935b612f32e",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "nara:NAID 24465887",
+"title": "Korea (5)",
+"url": "https://catalog.archives.gov/id/24465887",
+"history": [
+{
+"at": "2026-11-24",
+"h": "772cf687b63a0a7a",
+"pv": "6acdd5764c47",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "91613e99606442ff",
+"pv": "d935b612f32e",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "nara:NAID 354632758",
+"title": "List, Folder 42: Armistice Negotiations in Korea",
+"url": "https://catalog.archives.gov/id/354632758",
+"history": [
+{
+"at": "2026-11-24",
+"h": "f4c5151a5495fe0d",
+"pv": "6acdd5764c47",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "330bac6bbdef47a8",
+"pv": "d935b612f32e",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "nara:NAID 354632765",
+"title": "List, Folder 43: Planning and Negotiations re Policy After the Armistice Talks",
+"url": "https://catalog.archives.gov/id/354632765",
+"history": [
+{
+"at": "2026-11-24",
+"h": "03030a978ae1f16c",
+"pv": "6acdd5764c47",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "41f7b83f485a9bc6",
+"pv": "d935b612f32e",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "koreanwar:1990-AU-01-PF-A-00029",
+"title": "호주 제77전투비행대대 밥 뉴튼(Bob Newton)과 한국 전쟁 고아들 사진(1953)",
+"url": "https://www.koreanwar.or.kr:8443/searchDetail.do?archRfcd=1990-AU-01-PF-A-00029",
+"history": [
+{
+"at": "2026-11-24",
+"h": "bfbae90699a125ab",
+"pv": "6acdd5764c47",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "1a394cb59b1c6b0e",
+"pv": "d935b612f32e",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "koreanwar:2022-KR-02-PF-D-00256",
+"title": "전쟁고아와 양부모 결연식 사진(1956)",
+"url": "https://www.koreanwar.or.kr:8443/searchDetail.do?archRfcd=2022-KR-02-PF-D-00256",
+"history": [
+{
+"at": "2026-11-24",
+"h": "80b97bddca1c6efc",
+"pv": "6acdd5764c47",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "c0685a1083044cd2",
+"pv": "d935b612f32e",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "koreanwar:2022-KR-02-PF-D-00305",
+"title": "6·25전쟁 고아1 사진(1953)",
+"url": "https://www.koreanwar.or.kr:8443/searchDetail.do?archRfcd=2022-KR-02-PF-D-00305",
+"history": [
+{
+"at": "2026-11-24",
+"h": "c7580253c5f60125",
+"pv": "6acdd5764c47",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "3e30b852eb8abebd",
+"pv": "d935b612f32e",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "koreanwar:2022-KR-02-PF-D-00306",
+"title": "6·25전쟁 고아5 사진(1953)",
+"url": "https://www.koreanwar.or.kr:8443/searchDetail.do?archRfcd=2022-KR-02-PF-D-00306",
+"history": [
+{
+"at": "2026-11-24",
+"h": "5771a59986a74d88",
+"pv": "6acdd5764c47",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "a4f82c30fef9286a",
+"pv": "d935b612f32e",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "koreanwar:2022-KR-02-PF-D-00307",
+"title": "6·25전쟁 고아6 사진(1953)",
+"url": "https://www.koreanwar.or.kr:8443/searchDetail.do?archRfcd=2022-KR-02-PF-D-00307",
+"history": [
+{
+"at": "2026-11-24",
+"h": "27b2a9ff231a463c",
+"pv": "6acdd5764c47",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "d2c2b1e148cbd0b7",
+"pv": "d935b612f32e",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "koreanwar:2022-US-02-AV-D-00366",
+"title": "한국에서의 전쟁 고아 기록영상",
+"url": "https://www.koreanwar.or.kr:8443/searchDetail.do?archRfcd=2022-US-02-AV-D-00366",
+"history": [
+{
+"at": "2026-11-24",
+"h": "c1f5aeac1b5db709",
+"pv": "6acdd5764c47",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "0c38b24b5f8c4f37",
+"pv": "d935b612f32e",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "nara:NAID 102043858",
+"title": "Bundles For Korea, Japan",
+"url": "https://catalog.archives.gov/id/102043858",
+"history": [
+{
+"at": "2026-11-24",
+"h": "affcdea574af9913",
+"pv": "6acdd5764c47",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "9eff6edfb12805a1",
+"pv": "d935b612f32e",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "nara:NAID 102047453",
+"title": "U.S. Soldiers Give War Waifs Real Thanksgiving, South Korea",
+"url": "https://catalog.archives.gov/id/102047453",
+"history": [
+{
+"at": "2026-11-24",
+"h": "d625351b9bcaaab8",
+"pv": "6acdd5764c47",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "c57fe66987564c7d",
+"pv": "d935b612f32e",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "nara:NAID 102048217",
+"title": "War Orphans Taken Under Air Force Wing, South Korea",
+"url": "https://catalog.archives.gov/id/102048217",
+"history": [
+{
+"at": "2026-11-24",
+"h": "09733625116ab926",
+"pv": "6acdd5764c47",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "10083c9c2ded96ac",
+"pv": "d935b612f32e",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "nara:NAID 25585",
+"title": "WAR ORPHANS, KOREA",
+"url": "https://catalog.archives.gov/id/25585",
+"history": [
+{
+"at": "2026-11-24",
+"h": "2010126bf075df65",
+"pv": "43a1e8e3db94",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "03e00c23082fe795",
+"pv": "d935b612f32e",
 "kind": "판독기 변경 동반"
 }
 ]
