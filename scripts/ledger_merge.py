@@ -338,7 +338,38 @@ def date_derived(o):
     if m and int(m[3] or m[2]) - int(m[2]) <= 10: return m[1], f"상위 계층 포괄 기간({m[4]}) — 이 기록 자체 날짜 아님, 범위 10년 이하만"
     m = re.match(r"^\s*(January|February|March|April|May|June|July|August|September|October|November|December) (\d{1,2}), (1[89]\d\d|20\d\d)\b", md.get("date", ""))  # v2.84 IA 영문 날짜 'October 24, 1950–…'(첫 날짜)
     if m: return f"{m[3]}-{MONTHS.index(m[1]) + 1:02d}-{int(m[2]):02d}", "기관 메타 — date(영문 표기, 범위면 첫 날짜)"
+    for k_ in ("생산일", "발행일", "발신일", "발행년월일", "제작연도", "생산연도", "발행년도", "일자", "Publication Date", "시대"):  # v3.0.2 라벨 붙은 기관 날짜 칸(생산일 Date made·발행일·발신일) — 읽지 않던 공백
+        dv_, q_ = meta_date(md.get(k_, ""), era=(k_ == "시대"))
+        if dv_: return dv_, f"기관 메타 — {k_}" + (f"({q_})" if q_ else "") + (" · 위키미디어 공용 업로더 기재(2차 정보)" if o["key"].startswith("commons:") else "")
     return title_date(o.get("title") or "")
+
+
+def meta_date(v, era=False):
+    """v3.0.2 기관 날짜 칸 값 → 정규 날짜. 반환 (날짜, 한정어). 세기·왕조·기원전·불명은 날짜로 쓰지 않는다(연대 decade가 맡음).
+    era=True(시대 칸)는 단일 서기 연도만('1911' · '1887년(고종24)' · '조선 태조 7년(1398)')."""
+    v = str(v or "").strip(); Y = r"(1[0-9]\d\d|20[0-2]\d)"
+    if not v or re.search(r"기원전|BC|不明|불명|미상", v): return "", ""
+    if era:
+        m = re.match(r"^" + Y + r"년?(?:\s*\([^)]*\))?$", v) or re.search(r"\d+년\s*\(" + Y + r"\)$", v)
+        return (m[1], "") if m else ("", "")
+    q = []
+    m = re.search(r"\(" + Y + r"년\s*(\d{1,2})월(?:\s*(\d{1,2})일)?\s*(\(음\))?\s*\)", v)  # 한국사DB 발신일 '癸卯十月二十七日 (1783년 10월 27일 (음))' — 기관 환산 서기
+    if m:
+        return "-".join([m[1], m[2].zfill(2)] + ([m[3].zfill(2)] if m[3] else [])), "기관 서기 환산" + (" · 음력" if m[4] else "")
+    if re.match(r"^c\.?\s", v): q.append("c — 대략"); v = re.sub(r"^c\.?\s*", "", v)
+    if "Exif" in v: q.append("Exif 촬영 정보")
+    v = re.sub(r"^Taken on\s+", "", re.sub(r"\s*\(according to Exif data\)?", "", v)).strip()
+    ys = sorted({int(y) for y in re.findall(r"(?<!\d)" + Y + r"(?!\d)", v)})
+    if len(ys) > 1 and re.search(r"[-–~;]", v): return f"{ys[0]}~{ys[-1]}", " · ".join(q + ["범위"])
+    m = re.match(r"^" + Y + r"-(0[1-9]|1[0-2])-([0-3]\d)(?:[ T][\d:]+)?$", v)
+    if m: return f"{m[1]}-{m[2]}-{m[3]}", " · ".join(q)
+    m = re.match(r"^([0-3]?\d) (" + "|".join(MONTHS) + r") " + Y + r"$", v)
+    if m: return f"{m[3]}-{MONTHS.index(m[2]) + 1:02d}-{int(m[1]):02d}", " · ".join(q)
+    m = re.match(r"^(" + "|".join(MONTHS) + r") " + Y + r"$", v)
+    if m: return f"{m[2]}-{MONTHS.index(m[1]) + 1:02d}", " · ".join(q)
+    m = re.match(r"^" + Y + r"(?:[.-](0?[1-9]|1[0-2]))?(?:[.-]([0-3]?\d))?\.?$", v)
+    if m: return "-".join([m[1]] + [x.zfill(2) for x in (m[2], m[3]) if x]), " · ".join(q)
+    return "", ""
 
 
 _MON = "|".join(MONTHS)
