@@ -1045,7 +1045,7 @@ DISTS = [("discovered.csv", "text/csv", "발견 기록 표(CSV)"), ("discovered.
          ("feed.xml", "application/atom+xml", "새 발견 Atom 피드"), ("timeline.json", "application/json", "연대 타임라인"), ("tree.json", "application/json", "계층구조"),
          ("classifications.json", "application/json", "분류 사전"), ("provenance.json", "application/json", "발견 경로(질의↔기록)"), ("relations.json", "application/json", "기록↔기록 맥락 연결(근거 포함)"), ("relations.html", "text/html", "맥락 연결 묶음(읽기용)"), ("quality.json", "application/json", "데이터 품질 시계열"),
          ("fixity_changes.json", "application/json", "원문 고정성 변경 이력"), ("loss_guard.json", "application/json", "불삭제 검사 — 되살린 값 기록"), ("queries/index.json", "application/json", "질의·회신 축적 색인"),
-         ("queries/probe/index.json", "application/json", "자동 점검 질의·회신 색인"), ("records/index.json", "application/json", "일일 기록물 등록부 해시 사슬"), ("coverage.json", "application/json", "조회 범위 등록부(질의×기관 — 결과·확정 0·조회 실패)")]
+         ("queries/probe/index.json", "application/json", "자동 점검 질의·회신 색인"), ("records/index.json", "application/json", "일일 기록물 등록부 해시 사슬"), ("coverage.json", "application/json", "조회 범위 등록부(질의×기관 — 결과·확정 0·조회 실패)"), ("coverage.csv", "text/csv", "조회 범위 등록부 표(CSV)")]
 
 def iiif_kind(o):
     m = (o.get("iiif") or "") if not o.get("iiif_status") else ""
@@ -2340,6 +2340,31 @@ def build_coverage():
                    "근거 원문은 queries/<월>.jsonl.gz(cross_search 회신). 부재를 주장하려면 zero ≥ 1이고 그 뒤 hit가 없어야 하며, fail은 '기록이 없다'는 뜻이 아니다.",
            "replies": nrep, "total_queries": len(Q), "by_source": dict(sorted(by.items())), "queries": dict(sorted(Q.items()))}
     json.dump(out, open(os.path.join(D, "coverage.json"), "w", encoding="utf-8"), ensure_ascii=False, separators=(",", ":"))
+    # v3.44 다매체 — 같은 등록부를 표(CSV)와 사람이 읽는 페이지(HTML)로. 정본은 coverage.json, 두 보기는 매번 그로부터 재생성
+    import csv
+    with open(os.path.join(D, "coverage.csv"), "w", encoding="utf-8-sig", newline="") as fo:
+        w = csv.writer(fo); w.writerow(["query", "source", "hit", "max", "zero_confirmed", "zero_unconfirmed", "fail", "first", "last", "last_status", "strict_since"])
+        for q, S in out["queries"].items():
+            for src, e in sorted(S.items()):
+                w.writerow([q, src, e["hit"], e["max"], e["zero"], e["zero_legacy"], e["fail"], e["first"], e["last"], e.get("last_status", ""), COVERAGE_STRICT.get(src, "")])
+    E_ = html.escape
+    st = lambda e: ("<b style='color:#e06a5a'>조회 실패</b>" if e.get("last_status") == "fail" else
+                    ("<b style='color:#7fbf7f'>확정 0</b>" if e["zero"] and e.get("last_zero", "") >= e.get("last_hit", "") else "0(미확정)") if e.get("last_status") == "zero"
+                    else f"결과 {E_(str(e.get('last_status', '')).replace('hit:', ''))}건")
+    bsr = "".join(f"<tr><td><b>{E_(k)}</b></td><td>{b['queries']}</td><td>{b['hit']}</td><td>{b['zero']}</td><td>{b['zero_legacy']}</td><td>{b['fail']}</td><td><small>{E_(COVERAGE_STRICT.get(k, '미감사'))}</small></td></tr>"
+                  for k, b in sorted(out["by_source"].items(), key=lambda x: -x[1]["queries"]))
+    qr = "".join(f"<details><summary><b>{E_(q)}</b> — 기관 {len(S)}곳 · 결과 {sum(1 for e in S.values() if e['hit'])}곳 · 확정 0 {sum(1 for e in S.values() if e['zero'] and not e['hit'])}곳 · 실패 {sum(1 for e in S.values() if e['fail'])}곳</summary><table><tr><th>기관</th><th>결과(최대)</th><th>확정 0</th><th>미확정 0</th><th>실패</th><th>마지막</th></tr>"
+                 + "".join(f"<tr><td>{E_(src)}</td><td>{e['hit']}({e['max']})</td><td>{e['zero']}</td><td>{e['zero_legacy']}</td><td>{e['fail']}</td><td>{st(e)} <small>{E_(e['last'][:16])}</small></td></tr>" for src, e in sorted(S.items()))
+                 + "</table></details>" for q, S in sorted(out["queries"].items(), key=lambda x: -len(x[1])))
+    open(os.path.join(D, "coverage.html"), "w", encoding="utf-8").write(f"""<!DOCTYPE html><html lang="ko"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>조회 범위 등록부 — KOREA ARCHIVE 발견 원장</title>
+<style>body{{font-family:system-ui,'Noto Sans KR',sans-serif;margin:0;background:#14161b;color:#e6e4dc}}main{{max-width:980px;margin:auto;padding:16px}}a{{color:#e0b04a}}small{{color:#9b9a93}}table{{border-collapse:collapse;width:100%;font-size:14px;margin:6px 0 12px}}td,th{{border-bottom:1px solid #333;padding:6px;text-align:left;vertical-align:top}}details{{border-bottom:1px solid #2a2c33;padding:6px 0}}summary{{cursor:pointer}}</style>
+<main><p><small>KOREA ARCHIVE 통합검색 · <a href="index.html">원장</a> · <a href="dict.html">기준 사전</a> · <a href="relations.html">맥락 연결</a></small></p>
+<h1>조회 범위 등록부</h1><p>질의마다 어느 기관을 언제 조회했고 <b>결과가 있었나 · 0건이 확정됐나 · 조회에 실패했나</b>. 부재를 말하려면 '확정 0'이 있고 그 뒤 결과가 없어야 하며, '조회 실패'는 기록이 없다는 뜻이 아니다.
+'미확정 0'은 그 기관의 확정 0 판별 시행(아래 시행 시각) 이전이거나 아직 감사하지 않은 기관의 0 — 오류가 0으로 보고됐을 수 있다.
+근거 원문: 축적된 cross_search 회신 {nrep}건(<a href="queries/index.json">queries/</a>, 지우지 않음) · 정본 <a href="coverage.json">coverage.json</a> · 표 <a href="coverage.csv">coverage.csv</a> · 갱신 {E_(out['updated'])}</p>
+<h2>기관별</h2><table><tr><th>기관</th><th>질의</th><th>결과</th><th>확정 0</th><th>미확정 0</th><th>실패</th><th>확정 0 시행(UTC)</th></tr>{bsr}</table>
+<h2>질의별 ({len(out['queries'])})</h2>{qr}
+<p><small>웹·모바일: query_bank(topic="coverage:&lt;질의&gt;")</small></p></main></html>""")
     return len(Q), nrep
 
 
@@ -2828,7 +2853,7 @@ details{{font-size:12px}}dl{{display:grid;grid-template-columns:auto 1fr;gap:2px
 table{{width:100%;border-collapse:collapse;font-size:14px}}td,th{{border-bottom:1px solid #2a2d35;padding:6px;text-align:left}}</style>
 <main><h1>발견 누적 원장</h1><p>KOREA ARCHIVE 통합검색 사용자가 도구로 발굴한 기록이 매일 이곳에 쌓입니다(검색어·사용자 정보 없음). 기록 <b>{st['records']:,}</b>건 · 마지막 갱신 {st['updated']} · 이번 갱신 신규 {new_recs}건 · 내용·메타정보 보강 {enr}건 · 썸네일 {thn}건</p>
 <p>{srcs}</p>
-<p><a class="b0" href="discovered.csv">CSV 내려받기</a><a class="b0" href="discovered.jsonl">JSONL</a><a class="b0" href="discovered.jsonld">RiC-O JSON-LD</a><a class="b0" href="../kv.html?manifest=https://changgi.github.io/korea-archive-mcp/data/collection.json">KV로 최근 300건 연속 보기</a><a class="b0" href="tree.html">계층구조도</a><a class="b0" href="queries/index.json">질의·회신 축적</a><a class="b0" href="classifications.json">분류 사전</a><a class="b0" href="provenance.json">발견 경로(질의↔기록)</a><a class="b0" href="dict.html">기준 사전(지명·인물·사건·전거)</a><a class="b0" href="relations.html">기록↔기록 맥락 연결</a><a class="b0" href="q/index.html">질의별 발굴 기록(IIIF)</a><a class="b0" href="quality.json">데이터 품질 추이</a><a class="b0" href="subjects.html">주제 색인</a><a class="b0" href="subjects.jsonld">주제 SKOS</a><a class="b0" href="fixity_changes.json">원문 변경 감시</a><a class="b0" href="feed.xml">새 발견 구독(Atom)</a><a class="b0" href="records.csl.json">인용 CSL-JSON(Zotero)</a><a class="b0" href="records.ris">인용 RIS(EndNote)</a><a class="b0" href="records.bib">인용 BibTeX(LaTeX)</a><a class="b0" href="catalog.jsonld">데이터 목록(DCAT)</a><a class="b0" href="r/index.json">기록별 영구 페이지</a><a class="b0" href="digest/index.html">주간 발견 소식</a><a class="b0" href="sitemap.xml">사이트맵</a><a class="b0" href="records.oai_dc.xml">OAI-PMH Dublin Core(하베스터)</a><a class="b0" href="activity/collection.json">IIIF 변경 발견(Change Discovery)</a><a class="b0" href="../kv.html?manifest=https://changgi.github.io/korea-archive-mcp/data/day/index.json">같은 날 기관별 기록(KV)</a><a class="b0" href="timeline.html">연대 타임라인</a><a class="b0" href="nrich/index.html">연구원 연구DB IIIF 계층</a><a class="b0" href="popular.csv">자주 활용 TOP 200</a><a class="b0" href="stats.json">집계</a></p>
+<p><a class="b0" href="discovered.csv">CSV 내려받기</a><a class="b0" href="discovered.jsonl">JSONL</a><a class="b0" href="discovered.jsonld">RiC-O JSON-LD</a><a class="b0" href="../kv.html?manifest=https://changgi.github.io/korea-archive-mcp/data/collection.json">KV로 최근 300건 연속 보기</a><a class="b0" href="tree.html">계층구조도</a><a class="b0" href="queries/index.json">질의·회신 축적</a><a class="b0" href="classifications.json">분류 사전</a><a class="b0" href="provenance.json">발견 경로(질의↔기록)</a><a class="b0" href="dict.html">기준 사전(지명·인물·사건·전거)</a><a class="b0" href="coverage.html">조회 범위 등록부(확정 0·조회 실패)</a><a class="b0" href="relations.html">기록↔기록 맥락 연결</a><a class="b0" href="q/index.html">질의별 발굴 기록(IIIF)</a><a class="b0" href="quality.json">데이터 품질 추이</a><a class="b0" href="subjects.html">주제 색인</a><a class="b0" href="subjects.jsonld">주제 SKOS</a><a class="b0" href="fixity_changes.json">원문 변경 감시</a><a class="b0" href="feed.xml">새 발견 구독(Atom)</a><a class="b0" href="records.csl.json">인용 CSL-JSON(Zotero)</a><a class="b0" href="records.ris">인용 RIS(EndNote)</a><a class="b0" href="records.bib">인용 BibTeX(LaTeX)</a><a class="b0" href="catalog.jsonld">데이터 목록(DCAT)</a><a class="b0" href="r/index.json">기록별 영구 페이지</a><a class="b0" href="digest/index.html">주간 발견 소식</a><a class="b0" href="sitemap.xml">사이트맵</a><a class="b0" href="records.oai_dc.xml">OAI-PMH Dublin Core(하베스터)</a><a class="b0" href="activity/collection.json">IIIF 변경 발견(Change Discovery)</a><a class="b0" href="../kv.html?manifest=https://changgi.github.io/korea-archive-mcp/data/day/index.json">같은 날 기관별 기록(KV)</a><a class="b0" href="timeline.html">연대 타임라인</a><a class="b0" href="nrich/index.html">연구원 연구DB IIIF 계층</a><a class="b0" href="popular.csv">자주 활용 TOP 200</a><a class="b0" href="stats.json">집계</a></p>
 <p style="font-size:13px;color:#9b9a93">주요 내용·메타정보·썸네일은 기관 IIIF·우리 브리지 매니페스트를 하루 한 번 판독해 채웁니다(하루 상한·순차 요청). 썸네일은 재이용 가능 표시가 확인된 것만 싣고, 포로·사망자·묘지·수형자 관련 기록과 허가가 필요한 이미지는 링크만 둡니다. 권리는 원 기관 표기를 따릅니다 — 게재 전 judge_rights로 확인. 모든 변경은 저장소 git 이력(docs/data/)에 남습니다.</p>
 <h2>자주 활용되는 기록 TOP 30</h2><p style="font-size:13px">점수 = 최근 30일 발견×2 + 전체 발견 + 발견된 날 수×3 + 교차확인 기관 수 가중. 자동 검사 트래픽 제외.</p><div class="g">{prow}</div>
 <h2>일별 활용(최근 14일)</h2><table><tr><th>날짜</th><th>검색 묶음</th><th>발견 기록</th><th>신규 기록</th></tr>{urow}</table><p style="font-size:13px">형식별 누계: {E_(fmtv(usage['formats']))} · <a href="usage.json">usage.json</a></p>
