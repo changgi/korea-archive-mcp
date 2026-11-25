@@ -1,13 +1,13 @@
 {
- "updated": "2026-11-25T00:10:54Z",
- "records": 843,
- "new_records": 20,
- "new_batches": 3,
+ "updated": "2026-11-25T00:16:36Z",
+ "records": 861,
+ "new_records": 18,
+ "new_batches": 2,
  "by_source": {
   "nara": 148,
-  "ia": 91,
+  "ia": 105,
   "koreanwar": 83,
-  "tna": 56,
+  "tna": 60,
   "awm": 48,
   "nrich": 43,
   "archives": 40,
@@ -39,17 +39,17 @@
  },
  "first": "2026-11-23T03:00:15Z",
  "formats": {
-  "text": 71,
+  "text": 73,
   "csv": 49,
   "iiif": 3
  },
  "queries": {
-  "added": 3,
-  "total": 104,
-  "calls": 122,
+  "added": 2,
+  "total": 106,
+  "calls": 124,
   "by_tool": {
    "nedb_search": 58,
-   "cross_search": 46,
+   "cross_search": 48,
    "source_profile": 9,
    "seoul_archives_search": 3,
    "nara_search": 2,
@@ -58,9 +58,9 @@
    "koreanwar_item": 1
   }
  },
- "repeat_records": 151,
+ "repeat_records": 153,
  "entry_types": {
-  "기록": 822,
+  "기록": 840,
   "소장처(컬렉션)": 5,
   "검색 안내": 9,
   "결함 출력": 7

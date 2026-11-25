@@ -1,5 +1,5 @@
 {
-"updated": "2026-11-25T00:10:54Z",
+"updated": "2026-11-25T00:16:36Z",
 "note": "구간 = 연대(4자리 연도·8자리 날짜·연호 연도 明治·大正·昭和·光武·隆熙·檀紀 환산) → 세기 → 왕조·시대명. 근거 순서 date → 제목 → 메타(생산·시대·출판). 세기·시대 구간은 시간축 근사 정렬",
 "timeline": [
 {
@@ -839,15 +839,15 @@
 },
 {
 "decade": "1870년대",
-"records": 14,
+"records": 21,
 "by_source": {
 "kyudb": 2,
-"ia": 3,
+"ia": 10,
 "nara": 5,
 "tna": 4
 },
 "by_kind": {
-"document": 9,
+"document": 16,
 "graphic": 5
 },
 "samples": [
@@ -922,19 +922,19 @@
 },
 {
 "decade": "1890년대",
-"records": 26,
+"records": 36,
 "by_source": {
 "kyudb": 2,
 "oldnews": 3,
 "heritage": 1,
-"tna": 11,
+"tna": 15,
 "gallica": 1,
 "commons": 1,
-"ia": 1,
+"ia": 7,
 "nara": 6
 },
 "by_kind": {
-"document": 19,
+"document": 29,
 "graphic": 6,
 "motion_picture": 1
 },
@@ -1556,9 +1556,9 @@
 },
 {
 "decade": "2020년대",
-"records": 23,
+"records": 24,
 "by_source": {
-"ia": 5,
+"ia": 6,
 "commons": 4,
 "dnz": 2,
 "un": 3,
@@ -1568,7 +1568,7 @@
 "awm": 1
 },
 "by_kind": {
-"document": 12,
+"document": 13,
 "graphic": 11
 },
 "samples": [

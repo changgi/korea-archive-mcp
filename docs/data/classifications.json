@@ -153,8 +153,8 @@
 "인터넷 아카이브": {
 "depth": 1,
 "first": "2026-11-23T03:00:40Z",
-"last": "2026-11-24T23:50:32Z",
-"records": 91,
+"last": "2026-11-25T00:14:37Z",
+"records": 105,
 "sources": [
 "ia"
 ]
@@ -162,8 +162,8 @@
 "인터넷 아카이브 › IA Collection": {
 "depth": 2,
 "first": "2026-11-23T03:00:40Z",
-"last": "2026-11-24T23:50:32Z",
-"records": 91,
+"last": "2026-11-25T00:14:37Z",
+"records": 105,
 "sources": [
 "ia"
 ]
@@ -198,8 +198,8 @@
 "영국 국립기록관 TNA": {
 "depth": 1,
 "first": "2026-11-23T03:00:46Z",
-"last": "2026-11-25T00:07:52Z",
-"records": 56,
+"last": "2026-11-25T00:14:37Z",
+"records": 60,
 "sources": [
 "tna"
 ]
@@ -3756,8 +3756,8 @@
 "인터넷 아카이브 › IA Collection › china-mail": {
 "depth": 3,
 "first": "2026-11-24T23:50:32Z",
-"last": "2026-11-24T23:50:32Z",
-"records": 3,
+"last": "2026-11-25T00:14:37Z",
+"records": 13,
 "sources": [
 "ia"
 ]
@@ -3963,7 +3963,7 @@
 "영국 국립기록관 TNA › FO 483": {
 "depth": 2,
 "first": "2026-11-24T23:50:32Z",
-"last": "2026-11-25T00:07:52Z",
+"last": "2026-11-25T00:14:37Z",
 "records": 3,
 "sources": [
 "tna"
@@ -3972,8 +3972,8 @@
 "영국 국립기록관 TNA › FO 881": {
 "depth": 2,
 "first": "2026-11-24T23:50:32Z",
-"last": "2026-11-25T00:07:52Z",
-"records": 10,
+"last": "2026-11-25T00:14:37Z",
+"records": 14,
 "sources": [
 "tna"
 ]
@@ -4008,7 +4008,7 @@
 "영국 국립기록관 TNA › FO 198": {
 "depth": 2,
 "first": "2026-11-25T00:07:52Z",
-"last": "2026-11-25T00:07:52Z",
+"last": "2026-11-25T00:14:37Z",
 "records": 1,
 "sources": [
 "tna"
@@ -4067,8 +4067,35 @@
 "sources": [
 "tna"
 ]
+},
+"인터넷 아카이브 › IA Collection › university_of_alberta_libraries_microfilm": {
+"depth": 3,
+"first": "2026-11-25T00:14:37Z",
+"last": "2026-11-25T00:14:37Z",
+"records": 1,
+"sources": [
+"ia"
+]
+},
+"인터넷 아카이브 › IA Collection › americana": {
+"depth": 3,
+"first": "2026-11-25T00:14:37Z",
+"last": "2026-11-25T00:14:37Z",
+"records": 2,
+"sources": [
+"ia"
+]
+},
+"인터넷 아카이브 › IA Collection › librivoxaudio": {
+"depth": 3,
+"first": "2026-11-25T00:14:37Z",
+"last": "2026-11-25T00:14:37Z",
+"records": 1,
+"sources": [
+"ia"
+]
 }
 },
-"updated": "2026-11-25T00:10:54Z",
-"total": 451
+"updated": "2026-11-25T00:16:36Z",
+"total": 454
 }

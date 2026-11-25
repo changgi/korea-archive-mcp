@@ -77,26 +77,39 @@
 "ia:mhm_maritimeheritagemn_1516",
 "ia:cia-readingroom-document-cia-rdp79t00909a000500010020-9",
 "ia:cia-readingroom-document-cia-rdp80t00246a050600910001-9",
-"ia:DTIC_ADA242405"
+"ia:DTIC_ADA242405",
+"ia:NPCM18760404",
+"ia:NPCM18760405",
+"ia:NPCM18950807",
+"ia:NPCM18951024",
+"ia:NPCM18951028",
+"ia:NPDP18760120",
+"ia:NPDP18760316",
+"ia:NPDP18760331",
+"ia:NPDP18760405",
+"ia:NPDP18760413",
+"ia:coreaorchosenla01landgoog",
+"ia:landsrisingsuna00barbgoog"
 ],
 "sources": [
 "ia"
 ],
 "first": "2026-11-23T03:00:40Z",
-"last": "2026-11-24T23:50:32Z",
+"last": "2026-11-25T00:14:37Z",
 "keys": [
 "mediatype"
 ]
 },
 "audio": {
 "records": [
-"ia:VOA_Africa_20180731_190000"
+"ia:VOA_Africa_20180731_190000",
+"ia:korea_and_her_neighbors_2106_librivox"
 ],
 "sources": [
 "ia"
 ],
 "first": "2026-11-23T03:14:21Z",
-"last": "2026-11-23T03:20:49Z",
+"last": "2026-11-25T00:14:37Z",
 "keys": [
 "mediatype"
 ]
@@ -998,15 +1011,18 @@
 },
 "history": {
 "records": [
-"dnz:42631548"
+"dnz:42631548",
+"ia:korea_and_her_neighbors_2106_librivox"
 ],
 "sources": [
-"dnz"
+"dnz",
+"ia"
 ],
 "first": "2026-11-23T13:40:50Z",
-"last": "2026-11-23T13:40:50Z",
+"last": "2026-11-25T00:14:37Z",
 "keys": [
-"주제"
+"주제",
+"subject"
 ]
 },
 "continuity and change": {
@@ -1887,26 +1903,36 @@
 "德臣西報": {
 "records": [
 "ia:NPCM18760112",
-"ia:NPCM18760205"
+"ia:NPCM18760205",
+"ia:NPCM18760404",
+"ia:NPCM18760405",
+"ia:NPCM18950807",
+"ia:NPCM18951024",
+"ia:NPCM18951028"
 ],
 "sources": [
 "ia"
 ],
 "first": "2026-11-24T23:50:32Z",
-"last": "2026-11-24T23:50:32Z",
+"last": "2026-11-25T00:14:37Z",
 "keys": [
 "subject"
 ]
 },
 "孖剌西報": {
 "records": [
-"ia:NPDP18760321"
+"ia:NPDP18760321",
+"ia:NPDP18760120",
+"ia:NPDP18760316",
+"ia:NPDP18760331",
+"ia:NPDP18760405",
+"ia:NPDP18760413"
 ],
 "sources": [
 "ia"
 ],
 "first": "2026-11-24T23:50:32Z",
-"last": "2026-11-24T23:50:32Z",
+"last": "2026-11-25T00:14:37Z",
 "keys": [
 "subject"
 ]
@@ -2037,6 +2063,175 @@
 ],
 "first": "2026-11-24T22:56:57Z",
 "last": "2026-11-24T22:56:57Z",
+"keys": [
+"subject"
+]
+},
+"Sino-Japanese War": {
+"records": [
+"ia:cihm_40409"
+],
+"sources": [
+"ia"
+],
+"first": "2026-11-25T00:14:37Z",
+"last": "2026-11-25T00:14:37Z",
+"keys": [
+"subject"
+]
+},
+"1894-1895": {
+"records": [
+"ia:cihm_40409"
+],
+"sources": [
+"ia"
+],
+"first": "2026-11-25T00:14:37Z",
+"last": "2026-11-25T00:14:37Z",
+"keys": [
+"subject"
+]
+},
+"librivox": {
+"records": [
+"ia:korea_and_her_neighbors_2106_librivox"
+],
+"sources": [
+"ia"
+],
+"first": "2026-11-25T00:14:37Z",
+"last": "2026-11-25T00:14:37Z",
+"keys": [
+"subject"
+]
+},
+"audiobooks": {
+"records": [
+"ia:korea_and_her_neighbors_2106_librivox"
+],
+"sources": [
+"ia"
+],
+"first": "2026-11-25T00:14:37Z",
+"last": "2026-11-25T00:14:37Z",
+"keys": [
+"subject"
+]
+},
+"travel": {
+"records": [
+"ia:korea_and_her_neighbors_2106_librivox"
+],
+"sources": [
+"ia"
+],
+"first": "2026-11-25T00:14:37Z",
+"last": "2026-11-25T00:14:37Z",
+"keys": [
+"subject"
+]
+},
+"nonfiction": {
+"records": [
+"ia:korea_and_her_neighbors_2106_librivox"
+],
+"sources": [
+"ia"
+],
+"first": "2026-11-25T00:14:37Z",
+"last": "2026-11-25T00:14:37Z",
+"keys": [
+"subject"
+]
+},
+"memoir": {
+"records": [
+"ia:korea_and_her_neighbors_2106_librivox"
+],
+"sources": [
+"ia"
+],
+"first": "2026-11-25T00:14:37Z",
+"last": "2026-11-25T00:14:37Z",
+"keys": [
+"subject"
+]
+},
+"Asia": {
+"records": [
+"ia:korea_and_her_neighbors_2106_librivox"
+],
+"sources": [
+"ia"
+],
+"first": "2026-11-25T00:14:37Z",
+"last": "2026-11-25T00:14:37Z",
+"keys": [
+"subject"
+]
+},
+"Russia": {
+"records": [
+"ia:korea_and_her_neighbors_2106_librivox"
+],
+"sources": [
+"ia"
+],
+"first": "2026-11-25T00:14:37Z",
+"last": "2026-11-25T00:14:37Z",
+"keys": [
+"subject"
+]
+},
+"voyage": {
+"records": [
+"ia:korea_and_her_neighbors_2106_librivox"
+],
+"sources": [
+"ia"
+],
+"first": "2026-11-25T00:14:37Z",
+"last": "2026-11-25T00:14:37Z",
+"keys": [
+"subject"
+]
+},
+"korea": {
+"records": [
+"ia:korea_and_her_neighbors_2106_librivox"
+],
+"sources": [
+"ia"
+],
+"first": "2026-11-25T00:14:37Z",
+"last": "2026-11-25T00:14:37Z",
+"keys": [
+"subject"
+]
+},
+"sino-japanese war": {
+"records": [
+"ia:korea_and_her_neighbors_2106_librivox"
+],
+"sources": [
+"ia"
+],
+"first": "2026-11-25T00:14:37Z",
+"last": "2026-11-25T00:14:37Z",
+"keys": [
+"subject"
+]
+},
+"manchuria": {
+"records": [
+"ia:korea_and_her_neighbors_2106_librivox"
+],
+"sources": [
+"ia"
+],
+"first": "2026-11-25T00:14:37Z",
+"last": "2026-11-25T00:14:37Z",
 "keys": [
 "subject"
 ]
@@ -5299,13 +5494,17 @@
 "tna:FO 881/8701",
 "tna:FO 881/8702",
 "tna:FO 881/8703",
-"tna:FO 881/9419X"
+"tna:FO 881/9419X",
+"tna:FO 881/6665",
+"tna:FO 881/6706",
+"tna:FO 881/6763",
+"tna:FO 881/6764"
 ],
 "sources": [
 "tna"
 ],
 "first": "2026-11-23T03:00:46Z",
-"last": "2026-11-25T00:07:52Z",
+"last": "2026-11-25T00:14:37Z",
 "keys": [
 "기술 수준"
 ]
@@ -6444,10 +6643,10 @@
 }
 }
 },
-"updated": "2026-11-25T00:10:54Z",
+"updated": "2026-11-25T00:16:36Z",
 "totals": {
 "매체": 4,
-"주제": 140,
+"주제": 153,
 "장소": 52,
 "분류": 93,
 "시대": 38,
