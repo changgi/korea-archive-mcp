@@ -403,9 +403,9 @@ def title_date(t):
     if m: return "-".join([m[1]] + [x.zfill(2) for x in (m[2], m[3]) if x]), B
     m = re.search(r"(?<![\d-])" + Y + r"-(0[1-9]|1[0-2])-([0-3]\d)(?![\d-])", t)  # AWM 'Kapyong Valley, Korea. 1952-04-16.'
     if m: return f"{m[1]}-{m[2]}-{m[3]}", B
-    m = re.search(r"(?:^|(?<![Nn]o)(?<!Nr)(?<!Vol)\.\s)(" + _MON + r") " + Y + r"\.(?:\s|$)", t)  # AWM 캡션 날짜 칸 'Kapyong, South Korea. June 1952. …'
+    m = re.search(r"(?:^|(?<![Nn]o)(?<!Nr)(?<!Vol)[.,]\s)(" + _MON + r") " + Y + r"\.(?:\s|$)", t)  # AWM 캡션 날짜 칸 'Kapyong, South Korea. June 1952. …'
     if m: return f"{m[2]}-{MONTHS.index(m[1]) + 1:02d}", B
-    m = re.search(r"(?:^|(?<![Nn]o)(?<!Nr)(?<!Vol)\.\s)" + Y + r"-(0[1-9]|1[0-2])\.(?:\s|$)", t)  # 'Taegu, Korea. 1951-04. …'
+    m = re.search(r"(?:^|(?<![Nn]o)(?<!Nr)(?<!Vol)[.,]\s)" + Y + r"-(0[1-9]|1[0-2])\.(?:\s|$)", t)  # 'Taegu, Korea. 1951-04. …'
     if m: return f"{m[1]}-{m[2]}", B
     m = re.search(r"\b([0-3]?\d) (" + _MON + r") " + Y + r"\b", t)
     if m: return f"{m[3]}-{MONTHS.index(m[2]) + 1:02d}-{int(m[1]):02d}", B
