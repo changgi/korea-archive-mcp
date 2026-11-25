@@ -77,6 +77,12 @@ try:  # v3.0.1 날짜 칸 의미 검사 — 날짜에 숫자가 없는 값(분�
     if _go: bad.append(f"Gallica 디지털 원문인데 원 기관 IIIF 주소 없음 {len(_go)}건")
     _gb = [o["key"] for o in _L if o.get("iiif_origin") and not (o.get("iiif_built") or o.get("iiif"))]
     if _gb: bad.append(f"iiif_origin 기록의 봉투 매니페스트 소실 {len(_gb)}건(지우지 않는다)")
+    _P = json.load(open(os.path.join(data, "places.json"), encoding="utf-8"))["places"]  # v3.14 지명 사전 — 기록의 표준 지명이 사전에, 사전 기록이 원장에
+    _pm = [o["key"] for o in _L for n in o.get("places_std") or [] if o["key"] not in (_P.get(n) or {}).get("records", [])]
+    if _pm: bad.append(f"지명 사전에 없는 기록 지명 {len(_pm)}건")
+    _pg = [k for e in _P.values() for k in e["records"] if k not in _ks]
+    if _pg: bad.append(f"지명 사전의 원장 밖 기록 {len(_pg)}건")
+    if "흥남" not in json.dumps(_P["흥남"]["labels"], ensure_ascii=False) or "Hungnam" not in _P["흥남"]["labels"] or any("(?" in x for e in _P.values() for x in e["labels"]): bad.append("지명 표기 변이 결함")
     _eb = [o["key"] for o in _L if str(o.get("iiif_kind", "")).startswith("기록 봉투") and not (o.get("envelope_basis") or {}).get("why")]  # v3.9.2
     if _eb: bad.append(f"사유 없는 기록 봉투 {len(_eb)}건")
     _ex = [o["key"] for o in _L if o.get("envelope_basis") and not str(o.get("iiif_kind", "")).startswith("기록 봉투")]
