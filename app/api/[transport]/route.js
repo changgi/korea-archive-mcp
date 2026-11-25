@@ -128,7 +128,14 @@ async function robustFetch(url, headers = {}) {
 }
 
 const jget = async (url, headers = {}) => (await robustFetch(url, { Accept: 'application/json', ...headers })).json();
-const gtext = async (url, headers = {}) => (await robustFetch(url, headers)).text();
+// v3.39 본문 읽기까지 재시도 — robustFetch는 헤더 수신까지만 재시도해 본문 전송 중 끊김(undici 'terminated'·CONTENT_LENGTH_MISMATCH)이 곧장 실패였다
+// (운영 icn1에서 한국사DB 조문 상세 3/3 'terminated', 2026-11-25 실측). 재시도는 비압축(identity) 요청 — jdbPost(v1.96.2)와 같은 처방. HTTP 오류는 재시도하지 않음.
+const gtext = async (url, headers = {}) => { let e0;
+  for (let k = 0; k < 3; k++) {
+    try { return await (await robustFetch(url, k ? { ...headers, 'Accept-Encoding': 'identity' } : headers)).text(); }
+    catch (e) { e0 = e; const m = `${e && e.message} ${e && e.cause && (e.cause.code || e.cause.message)}`; if (!/terminated|other side closed|ECONNRESET|UND_ERR_SOCKET|CONTENT_LENGTH_MISMATCH|premature close/i.test(m)) break; await sleep(400 * (k + 1)); } // 타임아웃·HTTP 오류는 재시도 안 함(지연 폭증 방지)
+  }
+  throw e0; };
 // v1.96.6: 장서각은 병렬 호출 시 간헐 403 — 백오프 3회(0.9s·1.8s) 후 실패 보고(우회 아님: 같은 요청을 늦춰 재시도)
 const jsgText = async (url) => { let e0; for (let k = 0; k < 3; k++) { try { return await gtext(url); } catch (e) { e0 = e; if (!/HTTP (403|429|5\d\d)/.test(String(e && e.message))) break; await sleep(900 * (k + 1)); } } throw e0; };
 const CHELIPED_INSTALL = 'cheliped-skills 설치(https://github.com/tykimos/cheliped-skills): git clone https://github.com/tykimos/cheliped-skills && cd cheliped-skills/browser/scripts && npm install && npm run build';
