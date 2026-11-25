@@ -88,6 +88,7 @@ const iaRank = (docs) => docs.map((x, i) => [x, /^gov\./.test(x.identifier || ''
 async function iaSearch(q, rows, fl, page = 1) { let last = null;
   for (const qq of iaQueries(q)) { const d = await jget(`https://archive.org/advancedsearch.php?q=${encodeURIComponent(qq)}&${fl}&rows=${Math.min(100, rows * 2)}&page=${page}&output=json`); last = { d, qq };
     if (((d.response || {}).numFound || 0) > 0) break; }
+  if (!last.d || typeof (last.d.response || {}).numFound !== 'number') throw new Error('IA 결과 판독 불가(numFound 없음 — 오류 응답·개편 가능)'); // v3.38 오류 본문을 0건으로 보고하던 결함
   const r = (last.d.response || {}); return { numFound: r.numFound || 0, docs: iaRank(r.docs || []).slice(0, rows), q: last.qq }; }
 const nrField = (f) => String(f || '').split(/\s*-\s*/).filter(Boolean).join(' › ');
 // v2.14 국외 소재 교차확인 — 재단(okchf)·연구원(nrich) 두 DB에서 '명칭(괄호·한자·기호 제거)+소장처'가 같은 기록을 한 건으로 묶는다(출처 둘 다, sameAs=다른 쪽 URL)
@@ -869,12 +870,14 @@ const PART_OF = {
 };
 // v3.36 확정 0 판별 — 결과가 비었으면 기관 0건 표지(실제 0건 페이지로 실측한 정규식)가 있을 때만 0건, 없으면 조회 실패(throw)
 const zeroOr = (out, body, rx, name, raw = false) => { if (!out.length && !rx.test(raw ? String(body) : String(body).replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' '))) throw new Error(`${name} 결과 판독 불가(0건 표지 없음 — 차단·개편 가능)`); return out; };
+// v3.38 JSON API 확정 0 — 결과가 비면 기관이 돌려준 건수 필드가 명시적 0일 때만 0건(오류 본문·키 누락·개편은 조회 실패). 0건 필드는 2026-11-25 무의미 질의 실측.
+const countZero = (out, ok, name) => { if (!out.length && !ok) throw new Error(`${name} 결과 판독 불가(0건 수치 없음 — 오류 응답·개편 가능)`); return out; };
 const COLLECT = {
   tna: async (q, n, yr) => { // v2.99.1 yr = 생산연도 필터(sps.dateFrom/To) — 당대 국호 질의를 연도 문자열 대신 필터로
     q = koToEn(q) || q;
     const query = /^[A-Z]+ \d+\/\d+$/.test(q.trim()) ? `"${q.trim()}"` : q;
     const d = await tnaFetch(query, n, 1, yr, yr);
-    return (d.records || []).map((r) => { const ref = String(r.reference || ''); return { title: r.title || r.description, date: r.coveringDates || '', id: ref, ...(ref.includes('/') ? { series: ref.split('/')[0] } : {}), url: `https://discovery.nationalarchives.gov.uk/details/r/${r.id}` }; });
+    return countZero((d.records || []).map((r) => { const ref = String(r.reference || ''); return { title: r.title || r.description, date: r.coveringDates || '', id: ref, ...(ref.includes('/') ? { series: ref.split('/')[0] } : {}), url: `https://discovery.nationalarchives.gov.uk/details/r/${r.id}` }; }), d.count === 0, 'TNA');
   },
   ia: async (q, n) => {
     q = koToEn(q) || q;
@@ -897,7 +900,7 @@ const COLLECT = {
     q = koToEn(q) || q;
     const key = process.env.EUROPEANA_API_KEY || 'api2demo';
     const d = await jget(`https://api.europeana.eu/record/v2/search.json?wskey=${key}&query=${encodeURIComponent(q)}&rows=${n}&profile=standard`);
-    return (d.items || []).map((it) => ({ title: (it.title || ['?'])[0], date: (it.year || [''])[0], id: it.id || '', ...(((it.dataProvider || [])[0]) ? { series: (it.dataProvider || [])[0] } : {}), ...(euMedia(it) ? { media: euMedia(it) } : {}), url: String(it.guid || '').split('?')[0] }));
+    return countZero((d.items || []).map((it) => ({ title: (it.title || ['?'])[0], date: (it.year || [''])[0], id: it.id || '', ...(((it.dataProvider || [])[0]) ? { series: (it.dataProvider || [])[0] } : {}), ...(euMedia(it) ? { media: euMedia(it) } : {}), url: String(it.guid || '').split('?')[0] })), d.success === true && d.totalResults === 0, 'Europeana');
   },
   nara: async (q, n) => {
     q = koToEn(q) || q;
@@ -1056,10 +1059,10 @@ const COLLECT = {
       if (w) { const r2 = await fetch('https://nl.go.kr/newspaper/search_newspaper.do', { method: 'POST', headers: { 'User-Agent': UA, 'Content-Type': 'application/json', Referer: 'https://nl.go.kr/newspaper/keyword_search.do' }, body: JSON.stringify({ search_keyword: w, page_size: Math.min(n, 10), page_no: 1 }), signal: AbortSignal.timeout(FETCH_TIMEOUT) }); if (r2.ok) d = await r2.json(); }
     }
     const first = (v) => (Array.isArray(v) ? v[0] : v) || '';
-    return (d.hits || []).slice(0, n).map((h) => ({
+    return countZero((d.hits || []).slice(0, n).map((h) => ({
       title: `${first(h.label)} — ${first(h.newspaperKorName)}${first(h.newsposition) ? ` [${first(h.newsposition)}]` : ''}`.slice(0, 110), // v1.85: 지면 위치(n면 n단) — 신문 인용 좌표
       date: String(h.issued_date || ''), id: first(h.uri), ...(first(h.newspaperKorName) ? { series: first(h.newspaperKorName) } : {}),
-      url: first(h.uri) ? `https://nl.go.kr/newspaper/detail.do?content_id=${first(h.uri)}` : 'https://nl.go.kr/newspaper/' }));
+      url: first(h.uri) ? `https://nl.go.kr/newspaper/detail.do?content_id=${first(h.uri)}` : 'https://nl.go.kr/newspaper/' })), d.total_count === 0, '신문아카이브');
   },
   commons: async (q, n) => { // 위키미디어 공용 — 키 불요 검색 API(PD 사진·NARA/해군 재수집본 다수 — 원 소장처 역추적 창구). 공유 IP 429 시 채널 실패로 표시
     // commons는 한국어 네이티브 검색 가능 — TOPICS 미등재어(인명 등)가 'Korea' 단독으로 뭉개지면 원질의 유지(v1.62 실측 교정: '유관순'→일제감시대상인물카드 직결)
@@ -1067,14 +1070,15 @@ const COLLECT = {
     // v1.81: list=search → generator=search + prop=categories 1콜 전환 — 파일의 소속 카테고리(큐레이션 계층)를 목록 레벨에서 확보
     const d = await jget('https://commons.wikimedia.org/w/api.php?action=query&generator=search&gsrnamespace=6&format=json&gsrlimit=' + Math.min(n, 10) + '&gsrsearch=' + encodeURIComponent(en) + '&prop=categories%7Cimageinfo&clshow=!hidden&cllimit=3&iiprop=url',
       { 'User-Agent': 'KoreaArchiveMCP/1.0 (https://github.com/changgi/korea-archive-mcp; archival discovery)' });
-    return Object.values((d.query || {}).pages || {}).sort((a, b) => (a.index || 0) - (b.index || 0)).map((it) => {
+    if (d.error) throw new Error(`Commons API 오류: ${String(d.error.code || d.error.info || d.error).slice(0, 60)}`); // v3.38 0건 = query 키 없이 batchcomplete만(실측)
+    return countZero(Object.values((d.query || {}).pages || {}).sort((a, b) => (a.index || 0) - (b.index || 0)).map((it) => {
       const t2 = String(it.title || '');
       const cat = String((((it.categories || [])[0] || {}).title || '')).replace(/^Category:/, '');
       const iiu = String((((it.imageinfo || [])[0] || {}).url || '')).split('?')[0]; // v1.84: 원본 파일 직링크(utm 추적 파라미터 제거 — 절단 없는 영속 URL)
       // v1.88: NARA 기증본 파일명 규칙 — '… - NARA - <NAID>.tif'(520782 실측 일치) · 'NARA <고유번호> …'(127-N-A4501형)
       const cn = (t2.match(/[-_ ]NARA[-_ ]+(\d{5,10})\.\w+$/i) || [])[1]; const cl = !cn && (t2.match(/^File:NARA[ _]+(\d{2,3}[A-Z]?-[A-Z0-9]+-[A-Z0-9-]+?)[ _]/i) || [])[1];
       return { title: t2.replace(/^File:/, '').slice(0, 110), date: '', id: '', ...(cat ? { series: cat.slice(0, 80) } : {}), ...(iiu ? { media: iiu } : {}), ...(cn ? { sameAs: `NAID ${cn}` } : cl ? { sameAs: `NARA ${cl.toUpperCase()}` } : {}), url: 'https://commons.wikimedia.org/wiki/' + encodeURIComponent(t2.replace(/ /g, '_')) };
-    });
+    }), !!d.query || 'batchcomplete' in d, 'Commons');
   },
 
   nlna: async (q, n) => { // 네덜란드 국립문서보관소 — 공개 JSON API 실측(2026-11-20, Playwright 역추적). 주한 대사관 문서군 등
@@ -1082,7 +1086,7 @@ const COLLECT = {
     const d = await jget(`https://zvt.nationaalarchief.nl/api/search/eads?page=1&rows=${Math.min(n, 10)}&q=${encodeURIComponent(en)}&sortBy=_score`);
     // v1.81: 토이강(toegang) 번호 첫 두 세그먼트 = 형성기관 클러스터(2.05 외무부 등 — 2.05.202 'Zuid-Korea 대사관' 실측)
     const NLNA_CL = { '2.04': '내무부(Binnenlandse Zaken)', '2.05': '외무부(Buitenlandse Zaken)', '2.09': '법무부(Justitie)', '2.10': '식민성(Koloniën)', '2.12': '해군(Marine)', '2.13': '국방부(Defensie)', '2.19': '민간단체 문서', '2.21': '개인·가문 문서', '2.24': '사진·영상 컬렉션' };
-    return ((d && d.results) || []).slice(0, n).map((r) => {
+    return countZero(((d && d.results) || []).slice(0, n).map((r) => {
       const cl = String(r.id || '').split('.').slice(0, 2).join('.');
       const ser = NLNA_CL[cl] ? `${cl} ${NLNA_CL[cl]}` : (cl.includes('.') ? `토이강 ${cl}` : '');
       return {
@@ -1090,7 +1094,7 @@ const COLLECT = {
         date: String(r.period || ''), id: String(r.id || ''), ...(ser ? { series: ser } : {}),
         url: 'https://www.nationaalarchief.nl/onderzoeken/archief/' + encodeURIComponent(String(r.id || '')),
       };
-    });
+    }), !!d && d.total_hits === 0, 'NL-NA');
   },
   nzarch: async (q, n) => { // Archives NZ Collections(Te Rua Mahara) — 연합검색 공개 API(SSE 프레임 JSON, 무키 평문 GET 실측).
     // v1.58: 사용자 요청 → GH 러너(유일한 Incapsula 통과 환경) 역공학 10차로 완결. accessStatus=권리 표시(발굴 우선).
@@ -1129,11 +1133,11 @@ const COLLECT = {
       d = await jget('https://api.digitalnz.org/v3/records.json?per_page=' + Math.min(n, 20)
         + '&fields=id,title,display_date,landing_url,content_partner,primary_collection&text=' + encodeURIComponent(en), dk ? { 'Authentication-Token': dk } : {});
     } catch (e) { if (/403/.test(String(e))) throw new Error(`HTTP 403 — 서버 IP 익명 호출 차단${dk ? '(키 거부 — DNZ_API_KEY 확인)' : '(DNZ_API_KEY 미설정 — 등록 시 복구)'} · 대체: digitalnz.org/records?text=${encodeURIComponent(en)} 웹 검색`); throw e; }
-    return (((d || {}).search || {}).results || []).map((r) => ({
+    return countZero((((d || {}).search || {}).results || []).map((r) => ({
       title: `${norm(String(r.title || '(무제)'))} — ${((r.content_partner || [])[0] || '')}${(r.primary_collection || [])[0] ? '·' + (r.primary_collection || [])[0] : ''}`.slice(0, 115),
       date: String(r.display_date || ''), id: String(r.id || ''),
       ...(((r.content_partner || [])[0]) ? { series: `${(r.content_partner || [])[0]}${(r.primary_collection || [])[0] ? ' › ' + (r.primary_collection || [])[0] : ''}` } : {}),
-      url: String(r.landing_url || '') }));
+      url: String(r.landing_url || '') })), ((d || {}).search || {}).result_count === 0, 'DigitalNZ');
   },
   awm: async (q, n) => { // 호주 전쟁기념관(AWM) — 검색 모자이크(SSR C-id) → 상세 병렬로 제목·수장번호 (2026-11-20 실측: 가평 파노라마 HOBJ3144 등)
     const en = koToEn(q) || q;

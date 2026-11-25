@@ -1819,6 +1819,46 @@
    ],
    "level": "warn",
    "note": "v3.33 부재는 확정 0일 때만 — 키 미설정·API 오류·전 DB 응답 이상을 '0건'으로 보고하던 결함(조회 실패 '—'로)"
+  },
+  {
+   "id": "no-false-zero-json-apis",
+   "tool": "cross_search",
+   "args": {
+    "query": "Korean War",
+    "sources": "tna,ia,europeana,commons,nlna",
+    "max_per_source": 2
+   },
+   "must": [
+    "채널별 \\["
+   ],
+   "must_not": [
+    "tna:0[\\],]",
+    "ia:0[\\],]",
+    "europeana:0[\\],]",
+    "commons:0[\\],]",
+    "nlna:0[\\],]"
+   ],
+   "level": "warn",
+   "note": "v3.38 JSON API 확정 0 — 건수 필드(count·numFound·totalResults·batchcomplete·total_hits)가 명시적 0일 때만 0건, 오류 본문·키 누락은 조회 실패 '—'"
+  },
+  {
+   "id": "json-api-true-zero",
+   "tool": "cross_search",
+   "args": {
+    "query": "zqxjvwkpq",
+    "sources": "tna,europeana,nlna",
+    "max_per_source": 2
+   },
+   "must": [
+    "tna:0",
+    "europeana:0",
+    "nlna:0"
+   ],
+   "must_not": [
+    "판독 불가"
+   ],
+   "level": "warn",
+   "note": "v3.38 가드가 진짜 0건(무의미 질의)까지 실패로 만들지 않는지 — 0건 수치 필드 실측(2026-11-25)"
   }
  ]
 }
