@@ -1355,6 +1355,9 @@ def build_relations(recs_all):
         d = o.get("date") or ""
         if not d and (o.get("date_basis") or "").startswith("기관 메타"):  # v3.3 기관 메타 날짜 칸(생산일·발행일·발신일·포괄 기간)에서 온 일 단위 파생 날짜도 — 표제·상위 계층·다른 소장처 파생은 쓰지 않는다
             d = o.get("date_derived") or ""; dsrc[o["key"]] = o.get("date_basis", "")
+        nv = (o.get("date_norm") or {}).get("value", "")
+        if not re.match(r"^\d{4}-\d{2}-\d{2}$", d) and re.match(r"^\d{4}-\d{2}-\d{2}$", nv):  # v3.21 기관 날짜 칸의 일 단위 정규화(원 표기 근거 포함)도
+            d = nv; dsrc[o["key"]] = "기관 날짜 칸 정규화 — " + o["date_norm"]["basis"]
         if re.match(r"^\d{4}-\d{2}-\d{2}$", d): day.setdefault(d, []).append(o)
     for d, L in day.items():  # ③ 같은 날 다른 기관
         for a in L:
