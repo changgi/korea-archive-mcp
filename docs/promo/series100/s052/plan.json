@@ -1,0 +1,96 @@
+{
+ "n": 52,
+ "part": [
+  "Ⅸ",
+  "참전국의 기억"
+ ],
+ "inst": "네덜란드 국립문서보관소 Nationaal Archief",
+ "flag": "🇳🇱",
+ "say": "한국전쟁 네덜란드 귀환 사진 찾아줘",
+ "head": "1951–1954 귀환 — 스히폴과 덴헬더",
+ "big": "1954.12.10",
+ "facts": [
+  [
+   "사진",
+   "Fotocollectie Anefo (J.D. Noske·Harry Pot 촬영)"
+  ],
+  [
+   "마지막 귀환",
+   "1954-12-10 '마지막 항공 귀환 분견대' 906-8868·8869"
+  ],
+  [
+   "문서",
+   "NDVN 기록 2.13.56 inv.38 철수 문서(1954-08-30~10-14)"
+  ],
+  [
+   "권리",
+   "Nationaal Archief, CC0"
+  ]
+ ],
+ "tool": "cross_search(sources=nlna,'terugkeer Korea') + Europeana 1417",
+ "link": "http://hdl.handle.net/10648/a92df6e8-d0b4-102d-bcf8-003048976d84",
+ "checked": "2026-11-22",
+ "tags": "#네덜란드 #NDVN #귀환",
+ "hero": {
+  "file": "src/hero_schiphol_family_934-5479.jpg",
+  "pos": "center 30%",
+  "credit": "사진: 네덜란드 국립문서보관소 Anefo 934-5479 (J.D. Noske, 1953-05-07 스히폴, CC0)"
+ },
+ "hook": "1951~1954,<br>한국에서 <span class=\"g\">돌아온 날</span>",
+ "mosaic": [
+  {
+   "file": "src/schiphol_customs_904-7318.jpg",
+   "label": "스히폴, 귀환 50명 · 1951-08-21"
+  },
+  {
+   "file": "src/denhelder_evertsen_904-5973.jpg",
+   "label": "덴헬더, Evertsen 귀항 · 1951-06-02"
+  },
+  {
+   "file": "src/pietHein_return_905-5785.jpg",
+   "label": "덴헬더, Piet Hein 귀항 · 1953-03-03"
+  },
+  {
+   "file": "src/raaymakers_welcome_906-8869.jpg",
+   "label": "마지막 분견대 지휘관 영접 · 1954-12-10"
+  }
+ ],
+ "mosaic_title": "배로, 비행기로 — <span class=\"g\">네 번의 귀환</span>",
+ "mosaic_credit": "네덜란드 국립문서보관소 Anefo 904-7318·904-5973·905-5785·906-8869 (모두 CC0)",
+ "ann": {
+  "file": "src/klm_stairs_906-8868.jpg",
+  "crop_y": 0.12,
+  "boxes": [
+   {
+    "x": 12,
+    "y": 35,
+    "w": 40,
+    "h": 14,
+    "t": "기체 옆면 글자 'THE FLYING DUTCH…'"
+   },
+   {
+    "x": 65,
+    "y": 63,
+    "w": 12,
+    "h": 25,
+    "t": "계단의 원형 표지 'KLM ROYAL DUTCH AIRLINES'"
+   },
+   {
+    "x": 1,
+    "y": 18,
+    "w": 10,
+    "h": 25,
+    "t": "필름 번호 스탬프 '8868' — 기록번호 906-8868과 같다"
+   },
+   {
+    "x": 52,
+    "y": 20,
+    "w": 21,
+    "h": 32,
+    "t": "외투를 팔에 걸치고 내려오는 군인 — 기관 기술: 지휘관 J. Raaymakers 중령"
+   }
+  ],
+  "credit": "Anefo 906-8868 (J.D. Noske, 1954-12-10, CC0) — 표시는 사진에서 직접 읽은 것"
+ },
+ "cta_img": "src/eekhout_cross_904-8879.jpg"
+}

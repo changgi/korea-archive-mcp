@@ -1,0 +1,111 @@
+{
+ "n": 76,
+ "src": "nlk",
+ "record": {
+  "id": "국립중앙도서관 KOL000013612",
+  "title": "官報. 光武3年4月-6月, 光武5年7月∼9月",
+  "date": "1899–1901",
+  "inst": "국립중앙도서관",
+  "url": "https://viewer.nl.go.kr/nlmivs/viewWonmun_js.jsp?cno=KOL000013612"
+ },
+ "images": [
+  {
+   "file": "src/gwanbo_1899_v2.jpg",
+   "role": "hero",
+   "record_id": "KOL000013612",
+   "title": "관보 제1224호 (뷰어 2면)",
+   "date": "1899 (광무3)",
+   "url": "https://viewer.nl.go.kr/nlmivs/viewWonmun_js.jsp?cno=KOL000013612",
+   "rights": "NLK 원문뷰어 서지 정보 '저작권유형: 이용 제한이 없습니다.' · 1899년 대한제국 정부 간행물(보호기간 만료) — 출처: 국립중앙도서관",
+   "rights_evidence": "viewer.nl.go.kr 서지 정보: 서명 官報 / 저자 의정부총무국관보과(조선) / 발행일 1899---- / 저작권유형 이용 제한이 없습니다.",
+   "w": 1146,
+   "h": 1800,
+   "visible": [
+    "제호 '官報', '第一千二百二十四號', '光武三年四月一日'",
+    "'議政府總務局官報課'",
+    "'宮廷錄事'·'敍任及辭令'"
+   ],
+   "nocrop": false
+  },
+  {
+   "file": "src/gwanbo_1899_v3.jpg",
+   "role": "extra",
+   "record_id": "KOL000013612",
+   "title": "뷰어 3면",
+   "date": "1899 (광무3)",
+   "url": "https://viewer.nl.go.kr/nlmivs/viewWonmun_js.jsp?cno=KOL000013612",
+   "rights": "NLK 원문뷰어 서지 정보 '저작권유형: 이용 제한이 없습니다.' · 1899년 대한제국 정부 간행물(보호기간 만료) — 출처: 국립중앙도서관",
+   "rights_evidence": "viewer.nl.go.kr 서지 정보: 서명 官報 / 저자 의정부총무국관보과(조선) / 발행일 1899---- / 저작권유형 이용 제한이 없습니다.",
+   "w": 1146,
+   "h": 1800,
+   "visible": [
+    "'官報' 제호, '宮廷錄事','敍任及辭令','彙報'"
+   ],
+   "nocrop": false
+  },
+  {
+   "file": "src/gwanbo_1899_v4.jpg",
+   "role": "extra",
+   "record_id": "KOL000013612",
+   "title": "뷰어 4면",
+   "date": "1899 (광무3)",
+   "url": "https://viewer.nl.go.kr/nlmivs/viewWonmun_js.jsp?cno=KOL000013612",
+   "rights": "NLK 원문뷰어 서지 정보 '저작권유형: 이용 제한이 없습니다.' · 1899년 대한제국 정부 간행물(보호기간 만료) — 출처: 국립중앙도서관",
+   "rights_evidence": "viewer.nl.go.kr 서지 정보: 서명 官報 / 저자 의정부총무국관보과(조선) / 발행일 1899---- / 저작권유형 이용 제한이 없습니다.",
+   "w": 1146,
+   "h": 1800,
+   "visible": [
+    "'廣告', '官報定價表'"
+   ],
+   "nocrop": false
+  },
+  {
+   "file": "src/gwanbo_1899_v6.jpg",
+   "role": "extra",
+   "record_id": "KOL000013612",
+   "title": "뷰어 6면",
+   "date": "1899 (광무3)",
+   "url": "https://viewer.nl.go.kr/nlmivs/viewWonmun_js.jsp?cno=KOL000013612",
+   "rights": "NLK 원문뷰어 서지 정보 '저작권유형: 이용 제한이 없습니다.' · 1899년 대한제국 정부 간행물(보호기간 만료) — 출처: 국립중앙도서관",
+   "rights_evidence": "viewer.nl.go.kr 서지 정보: 서명 官報 / 저자 의정부총무국관보과(조선) / 발행일 1899---- / 저작권유형 이용 제한이 없습니다.",
+   "w": 1146,
+   "h": 1800,
+   "visible": [
+    "'光武三年四月五日', '議政府總務局官報課'"
+   ],
+   "nocrop": false
+  },
+  {
+   "file": "src/crop_gwanbo_head.jpg",
+   "role": "extra",
+   "record_id": "KOL000013612",
+   "title": "제1224호 오른쪽 위 확대(뷰어 2면에서 잘라냄)",
+   "date": "1899 (광무3)",
+   "url": "https://viewer.nl.go.kr/nlmivs/viewWonmun_js.jsp?cno=KOL000013612",
+   "rights": "NLK 원문뷰어 서지 정보 '저작권유형: 이용 제한이 없습니다.' · 1899년 대한제국 정부 간행물(보호기간 만료) — 출처: 국립중앙도서관",
+   "rights_evidence": "viewer.nl.go.kr 서지 정보: 서명 官報 / 저자 의정부총무국관보과(조선) / 발행일 1899---- / 저작권유형 이용 제한이 없습니다.",
+   "w": 900,
+   "h": 720,
+   "visible": [
+    "'官報'",
+    "'第一千二百二十四號'",
+    "'宮廷錄事'",
+    "'光武三年三月三十日'",
+    "'明憲太后氣候一樣'"
+   ],
+   "nocrop": false
+  }
+ ],
+ "points": [
+  "NLK 소장 『官報』 광무3년 4~6월·광무5년 7~9월 합본, 의정부총무국관보과, 뷰어 246면",
+  "1899.4.1 제1224호 첫머리 '宮廷錄事' — 3월 30일 詔, 3월 31일 太醫院 문안"
+ ],
+ "video": {
+  "url": "",
+  "length_s": 0,
+  "rights": "",
+  "note": "영상 없음"
+ },
+ "status": "ok",
+ "notes": "뷰어 이미지 1500×2355(면당). getBookInfo 원문은 뷰어 패널 텍스트로 확인. 1896 건양 원년 관보(KOL000013610)는 이번 시리즈에 미사용."
+}

@@ -1,0 +1,124 @@
+{
+ "@context": "http://iiif.io/api/presentation/3/context.json",
+ "id": "https://changgi.github.io/korea-archive-mcp/iiif/c/s30-03.json",
+ "type": "Collection",
+ "label": {
+  "ko": [
+   "30곳 탐방 · Ⅲ 독립운동"
+  ]
+ },
+ "summary": {
+  "ko": [
+   "30곳 탐방 · Ⅲ 독립운동 — 시리즈 6개"
+  ]
+ },
+ "partOf": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/hierarchy.json",
+   "type": "Collection"
+  }
+ ],
+ "items": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s13.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "13 · 국가기록원 독립운동판결문 — 1919. 6. 30 경성복심법원"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s13/hero_yugwansun_judgment_p1.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "navDate": "1919-06-30T00:00:00Z"
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s14.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "14 · 공훈전자사료관 (국가보훈부) — 1932. 4. 29 상해 홍구공원"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s14/hero_ybg_oath_19320426.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "navDate": "1932-01-01T00:00:00Z"
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s15.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "15 · 독립기념관 — 1932년 미국 신문이 쓴 안창호 체포"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s15/hero_ahn_arrest_clipping_1932.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "navDate": "1932-01-01T00:00:00Z"
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s16.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "16 · 일본 아시아역사자료센터 JACAR — 일본 육군이 쓴 '조선 소요' 개요"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s16/p01_cover.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s17.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "17 · 국사편찬위원회 전자사료관 — 미군이 읽은 1940년대 편지들"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s17/hero_summation_no6_cover_1946-03.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "navDate": "1946-03-01T00:00:00Z"
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s18.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "18 · 일본 국립국회도서관 NDL — 경성 엽서와 육지측량부 지도"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s18/hero_keijo_panorama_1930.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "navDate": "1930-01-01T00:00:00Z"
+  }
+ ]
+}

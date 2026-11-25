@@ -1,0 +1,1293 @@
+{
+ "@context": "http://iiif.io/api/presentation/3/context.json",
+ "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s054.json",
+ "type": "Manifest",
+ "label": {
+  "ko": [
+   "054 · 호주 전쟁기념관 AWM — 1950.11 박천 — 3RAR의 북진과 철수"
+  ]
+ },
+ "summary": {
+  "ko": [
+   "100선 · Ⅸ 참전국의 기억 · 원 기록: Pakchon, Korea. 1950-11-04. Troops from C Company, 3RAR, marching over a river crossing during the withdrawal to Pakchon. (1950-11-04) · Australian War Memorial — 촬영 Holzheimer, Claude Rudolph"
+  ]
+ },
+ "metadata": [
+  {
+   "label": {
+    "ko": [
+     "원 기록"
+    ]
+   },
+   "value": {
+    "ko": [
+     "AWM C274531 Pakchon, Korea. 1950-11-04. Troops from C Company, 3RAR, marching over a river crossing during the withdrawal to Pakchon."
+    ]
+   }
+  },
+  {
+   "label": {
+    "ko": [
+     "소장"
+    ]
+   },
+   "value": {
+    "ko": [
+     "Australian War Memorial — 촬영 Holzheimer, Claude Rudolph"
+    ]
+   }
+  },
+  {
+   "label": {
+    "ko": [
+     "계층"
+    ]
+   },
+   "value": {
+    "ko": [
+     "KOREA ARCHIVE 통합검색 › 100선 · Ⅸ 참전국의 기억 › s054"
+    ]
+   }
+  },
+  {
+   "label": {
+    "ko": [
+     "수집 경로"
+    ]
+   },
+   "value": {
+    "ko": [
+     "cross_search(sources=awm,'3RAR Pakchon 1950') → awm.gov.au"
+    ]
+   }
+  },
+  {
+   "label": {
+    "ko": [
+     "확인일"
+    ]
+   },
+   "value": {
+    "ko": [
+     "2026-11-22"
+    ]
+   }
+  },
+  {
+   "label": {
+    "ko": [
+     "게재 이미지"
+    ]
+   },
+   "value": {
+    "ko": [
+     "7장 · 링크 전용 0건"
+    ]
+   }
+  }
+ ],
+ "partOf": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/c/s100-09.json",
+   "type": "Collection",
+   "label": {
+    "ko": [
+     "100선 · Ⅸ 참전국의 기억"
+    ]
+   }
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/hierarchy.json",
+   "type": "Collection",
+   "label": {
+    "ko": [
+     "KOREA ARCHIVE 통합검색 — 기록 계층"
+    ]
+   }
+  }
+ ],
+ "seeAlso": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s054/ledger.json",
+   "type": "Dataset",
+   "label": {
+    "ko": [
+     "출처 대장(ledger)"
+    ]
+   },
+   "format": "application/json"
+  }
+ ],
+ "requiredStatement": {
+  "label": {
+   "ko": [
+    "출처"
+   ]
+  },
+  "value": {
+   "ko": [
+    "Australian War Memorial — 촬영 Holzheimer, Claude Rudolph — 이미지별 권리 표시 참조. 협약기관(KOREAN WAR ARCHIVES 6·25전쟁 아카이브센터) 기록은 출처 표기 필수."
+   ]
+  }
+ },
+ "provider": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/",
+   "type": "Agent",
+   "label": {
+    "ko": [
+     "KOREA ARCHIVE 통합검색"
+    ]
+   }
+  }
+ ],
+ "items": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s054/canvas/1",
+   "type": "Canvas",
+   "label": {
+    "ko": [
+     "Pakchon, Korea. 1950-11-04. Troops from C Company, 3RAR, marching over a river crossing during the withdrawal to Pakchon."
+    ]
+   },
+   "width": 1280,
+   "height": 1280,
+   "metadata": [
+    {
+     "label": {
+      "ko": [
+       "식별자"
+      ]
+     },
+     "value": {
+      "ko": [
+       "AWM C274531"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "연대"
+      ]
+     },
+     "value": {
+      "ko": [
+       "1950-11-04"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "소장"
+      ]
+     },
+     "value": {
+      "ko": [
+       "Australian War Memorial — 촬영 Holzheimer, Claude Rudolph"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리"
+      ]
+     },
+     "value": {
+      "ko": [
+       "Copyright expired - public domain (AWM)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "보이는 것"
+      ]
+     },
+     "value": {
+      "ko": [
+       "둑길을 걸어오는 병사들 — 챙 넓은 모자·담요 · 하단 'AUSTRALIAN WAR MEMORIAL' · '146946'"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "3e5bf13f37d52e96 — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "AWM 항목 페이지 'Item copyright: Copyright expired - public domain' / 'This item is in the Public Domain'"
+      ]
+     }
+    }
+   ],
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s054/hero_awm_C274531.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "items": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s054/canvas/1/page",
+     "type": "AnnotationPage",
+     "items": [
+      {
+       "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s054/canvas/1/page/a",
+       "type": "Annotation",
+       "motivation": "painting",
+       "target": "https://changgi.github.io/korea-archive-mcp/iiif/m/s054/canvas/1",
+       "body": {
+        "id": "https://changgi.github.io/korea-archive-mcp/iiif/img/s054/hero_awm_C274531.jpg",
+        "type": "Image",
+        "format": "image/jpeg",
+        "width": 1280,
+        "height": 1280
+       }
+      }
+     ]
+    }
+   ],
+   "homepage": [
+    {
+     "id": "https://www.awm.gov.au/collection/C274531",
+     "type": "Text",
+     "label": {
+      "ko": [
+       "원 기관 기록"
+      ]
+     },
+     "format": "text/html"
+    }
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s054/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    },
+    {
+     "id": "https://korea-archive-mcp.vercel.app/iiif/awm/C274531/manifest.json",
+     "type": "Manifest",
+     "label": {
+      "ko": [
+       "원 기관 원본(IIIF 브리지)"
+      ]
+     },
+     "format": "application/ld+json"
+    }
+   ],
+   "navDate": "1950-11-04T00:00:00Z",
+   "rights": "http://creativecommons.org/publicdomain/mark/1.0/"
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s054/canvas/2",
+   "type": "Canvas",
+   "label": {
+    "ko": [
+     "Pakchon, North Korea. 29 October 1950. Troops of 3RAR walk along a ruined road, through war-torn Pakchon."
+    ]
+   },
+   "width": 1280,
+   "height": 834,
+   "metadata": [
+    {
+     "label": {
+      "ko": [
+       "식별자"
+      ]
+     },
+     "value": {
+      "ko": [
+       "AWM C360835 (HOBJ1635)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "연대"
+      ]
+     },
+     "value": {
+      "ko": [
+       "1950-10-29"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "소장"
+      ]
+     },
+     "value": {
+      "ko": [
+       "Australian War Memorial — 촬영 Holzheimer, Claude Rudolph"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리"
+      ]
+     },
+     "value": {
+      "ko": [
+       "Copyright expired - public domain (AWM)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "보이는 것"
+      ]
+     },
+     "value": {
+      "ko": [
+       "무너진 집들 사이 길을 걷는 병사들 · 필름 가장자리 구멍"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "831b8499f1cc0510 — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "AWM 항목 페이지 'Item copyright: Copyright expired - public domain' / 'This item is in the Public Domain'"
+      ]
+     }
+    }
+   ],
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s054/awm_C360835.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "items": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s054/canvas/2/page",
+     "type": "AnnotationPage",
+     "items": [
+      {
+       "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s054/canvas/2/page/a",
+       "type": "Annotation",
+       "motivation": "painting",
+       "target": "https://changgi.github.io/korea-archive-mcp/iiif/m/s054/canvas/2",
+       "body": {
+        "id": "https://changgi.github.io/korea-archive-mcp/iiif/img/s054/awm_C360835.jpg",
+        "type": "Image",
+        "format": "image/jpeg",
+        "width": 1280,
+        "height": 834
+       }
+      }
+     ]
+    }
+   ],
+   "homepage": [
+    {
+     "id": "https://www.awm.gov.au/collection/C360835",
+     "type": "Text",
+     "label": {
+      "ko": [
+       "원 기관 기록"
+      ]
+     },
+     "format": "text/html"
+    }
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s054/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    },
+    {
+     "id": "https://korea-archive-mcp.vercel.app/iiif/awm/C360835/manifest.json",
+     "type": "Manifest",
+     "label": {
+      "ko": [
+       "원 기관 원본(IIIF 브리지)"
+      ]
+     },
+     "format": "application/ld+json"
+    }
+   ],
+   "navDate": "1950-10-29T00:00:00Z",
+   "rights": "http://creativecommons.org/publicdomain/mark/1.0/"
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s054/canvas/3",
+   "type": "Canvas",
+   "label": {
+    "ko": [
+     "Pakchon, North Korea. 29 October 1950. Troops of 3RAR, on an American tank, halt by the wayside after the capture of Pakchon."
+    ]
+   },
+   "width": 1278,
+   "height": 836,
+   "metadata": [
+    {
+     "label": {
+      "ko": [
+       "식별자"
+      ]
+     },
+     "value": {
+      "ko": [
+       "AWM C360826 (HOBJ1627)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "연대"
+      ]
+     },
+     "value": {
+      "ko": [
+       "1950-10-29"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "소장"
+      ]
+     },
+     "value": {
+      "ko": [
+       "Australian War Memorial — 촬영 Holzheimer, Claude Rudolph"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리"
+      ]
+     },
+     "value": {
+      "ko": [
+       "Copyright expired - public domain (AWM)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "보이는 것"
+      ]
+     },
+     "value": {
+      "ko": [
+       "전차 위에 올라탄 병사 여럿"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "6ed7263f135cf4fc — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "AWM 항목 페이지 'Item copyright: Copyright expired - public domain' / 'This item is in the Public Domain'"
+      ]
+     }
+    }
+   ],
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s054/awm_C360826.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "items": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s054/canvas/3/page",
+     "type": "AnnotationPage",
+     "items": [
+      {
+       "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s054/canvas/3/page/a",
+       "type": "Annotation",
+       "motivation": "painting",
+       "target": "https://changgi.github.io/korea-archive-mcp/iiif/m/s054/canvas/3",
+       "body": {
+        "id": "https://changgi.github.io/korea-archive-mcp/iiif/img/s054/awm_C360826.jpg",
+        "type": "Image",
+        "format": "image/jpeg",
+        "width": 1278,
+        "height": 836
+       }
+      }
+     ]
+    }
+   ],
+   "homepage": [
+    {
+     "id": "https://www.awm.gov.au/collection/C360826",
+     "type": "Text",
+     "label": {
+      "ko": [
+       "원 기관 기록"
+      ]
+     },
+     "format": "text/html"
+    }
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s054/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    },
+    {
+     "id": "https://korea-archive-mcp.vercel.app/iiif/awm/C360826/manifest.json",
+     "type": "Manifest",
+     "label": {
+      "ko": [
+       "원 기관 원본(IIIF 브리지)"
+      ]
+     },
+     "format": "application/ld+json"
+    }
+   ],
+   "navDate": "1950-10-29T00:00:00Z",
+   "rights": "http://creativecommons.org/publicdomain/mark/1.0/"
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s054/canvas/4",
+   "type": "Canvas",
+   "label": {
+    "ko": [
+     "Pakchon, Korea. 1950-11-04. Troops file over a river crossing during the withdrawal to Pakchon of 3RAR."
+    ]
+   },
+   "width": 1280,
+   "height": 960,
+   "metadata": [
+    {
+     "label": {
+      "ko": [
+       "식별자"
+      ]
+     },
+     "value": {
+      "ko": [
+       "AWM C274349 (146941)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "연대"
+      ]
+     },
+     "value": {
+      "ko": [
+       "1950-11-04"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "소장"
+      ]
+     },
+     "value": {
+      "ko": [
+       "Australian War Memorial — 촬영 Holzheimer, Claude Rudolph"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리"
+      ]
+     },
+     "value": {
+      "ko": [
+       "Copyright expired - public domain (AWM)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "보이는 것"
+      ]
+     },
+     "value": {
+      "ko": [
+       "얕은 강을 가로지르는 병사 행렬"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "c9c7eb8e73eb4f4e — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "AWM 항목 페이지 'Item copyright: Copyright expired - public domain' / 'This item is in the Public Domain'"
+      ]
+     }
+    }
+   ],
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s054/awm_C274349.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "items": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s054/canvas/4/page",
+     "type": "AnnotationPage",
+     "items": [
+      {
+       "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s054/canvas/4/page/a",
+       "type": "Annotation",
+       "motivation": "painting",
+       "target": "https://changgi.github.io/korea-archive-mcp/iiif/m/s054/canvas/4",
+       "body": {
+        "id": "https://changgi.github.io/korea-archive-mcp/iiif/img/s054/awm_C274349.jpg",
+        "type": "Image",
+        "format": "image/jpeg",
+        "width": 1280,
+        "height": 960
+       }
+      }
+     ]
+    }
+   ],
+   "homepage": [
+    {
+     "id": "https://www.awm.gov.au/collection/C274349",
+     "type": "Text",
+     "label": {
+      "ko": [
+       "원 기관 기록"
+      ]
+     },
+     "format": "text/html"
+    }
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s054/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    },
+    {
+     "id": "https://korea-archive-mcp.vercel.app/iiif/awm/C274349/manifest.json",
+     "type": "Manifest",
+     "label": {
+      "ko": [
+       "원 기관 원본(IIIF 브리지)"
+      ]
+     },
+     "format": "application/ld+json"
+    }
+   ],
+   "navDate": "1950-11-04T00:00:00Z",
+   "rights": "http://creativecommons.org/publicdomain/mark/1.0/"
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s054/canvas/5",
+   "type": "Canvas",
+   "label": {
+    "ko": [
+     "Unidentified members of 3RAR lay down timber planks on a damaged rail bridge ... (AWM: possibly Chongchon River)"
+    ]
+   },
+   "width": 1280,
+   "height": 834,
+   "metadata": [
+    {
+     "label": {
+      "ko": [
+       "식별자"
+      ]
+     },
+     "value": {
+      "ko": [
+       "AWM C360800 (HOBJ1597)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "연대"
+      ]
+     },
+     "value": {
+      "ko": [
+       "1950-11-04"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "소장"
+      ]
+     },
+     "value": {
+      "ko": [
+       "Australian War Memorial — 촬영 Holzheimer, Claude Rudolph"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리"
+      ]
+     },
+     "value": {
+      "ko": [
+       "Copyright expired - public domain (AWM)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "보이는 것"
+      ]
+     },
+     "value": {
+      "ko": [
+       "철교 위 판자를 까는 병사들 · 필름 가장자리 '501475' 류 손글씨"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "a50447735cbd78fa — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "AWM 항목 페이지 'Item copyright: Copyright expired - public domain' / 'This item is in the Public Domain'"
+      ]
+     }
+    }
+   ],
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s054/awm_C360800.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "items": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s054/canvas/5/page",
+     "type": "AnnotationPage",
+     "items": [
+      {
+       "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s054/canvas/5/page/a",
+       "type": "Annotation",
+       "motivation": "painting",
+       "target": "https://changgi.github.io/korea-archive-mcp/iiif/m/s054/canvas/5",
+       "body": {
+        "id": "https://changgi.github.io/korea-archive-mcp/iiif/img/s054/awm_C360800.jpg",
+        "type": "Image",
+        "format": "image/jpeg",
+        "width": 1280,
+        "height": 834
+       }
+      }
+     ]
+    }
+   ],
+   "homepage": [
+    {
+     "id": "https://www.awm.gov.au/collection/C360800",
+     "type": "Text",
+     "label": {
+      "ko": [
+       "원 기관 기록"
+      ]
+     },
+     "format": "text/html"
+    }
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s054/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    },
+    {
+     "id": "https://korea-archive-mcp.vercel.app/iiif/awm/C360800/manifest.json",
+     "type": "Manifest",
+     "label": {
+      "ko": [
+       "원 기관 원본(IIIF 브리지)"
+      ]
+     },
+     "format": "application/ld+json"
+    }
+   ],
+   "navDate": "1950-11-04T00:00:00Z",
+   "rights": "http://creativecommons.org/publicdomain/mark/1.0/"
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s054/canvas/6",
+   "type": "Canvas",
+   "label": {
+    "ko": [
+     "Pakchon, Korea. 1950-11-04. Troops file over a river crossing during the withdrawal of 3RAR to Pakchon."
+    ]
+   },
+   "width": 1280,
+   "height": 988,
+   "metadata": [
+    {
+     "label": {
+      "ko": [
+       "식별자"
+      ]
+     },
+     "value": {
+      "ko": [
+       "AWM C274529 (146944)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "연대"
+      ]
+     },
+     "value": {
+      "ko": [
+       "1950-11-04"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "소장"
+      ]
+     },
+     "value": {
+      "ko": [
+       "Australian War Memorial — 촬영 Holzheimer, Claude Rudolph"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리"
+      ]
+     },
+     "value": {
+      "ko": [
+       "Copyright expired - public domain (AWM)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "보이는 것"
+      ]
+     },
+     "value": {
+      "ko": [
+       "표지판 'TRACK VEHICLE…' · 모래주머니 둑 · 소총 멘 병사들"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "8aa450fcde7ea82f — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "AWM 항목 페이지 'Item copyright: Copyright expired - public domain' / 'This item is in the Public Domain'"
+      ]
+     }
+    }
+   ],
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s054/awm_C274529.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "items": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s054/canvas/6/page",
+     "type": "AnnotationPage",
+     "items": [
+      {
+       "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s054/canvas/6/page/a",
+       "type": "Annotation",
+       "motivation": "painting",
+       "target": "https://changgi.github.io/korea-archive-mcp/iiif/m/s054/canvas/6",
+       "body": {
+        "id": "https://changgi.github.io/korea-archive-mcp/iiif/img/s054/awm_C274529.jpg",
+        "type": "Image",
+        "format": "image/jpeg",
+        "width": 1280,
+        "height": 988
+       }
+      }
+     ]
+    }
+   ],
+   "homepage": [
+    {
+     "id": "https://www.awm.gov.au/collection/C274529",
+     "type": "Text",
+     "label": {
+      "ko": [
+       "원 기관 기록"
+      ]
+     },
+     "format": "text/html"
+    }
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s054/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    },
+    {
+     "id": "https://korea-archive-mcp.vercel.app/iiif/awm/C274529/manifest.json",
+     "type": "Manifest",
+     "label": {
+      "ko": [
+       "원 기관 원본(IIIF 브리지)"
+      ]
+     },
+     "format": "application/ld+json"
+    }
+   ],
+   "navDate": "1950-11-04T00:00:00Z",
+   "rights": "http://creativecommons.org/publicdomain/mark/1.0/"
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s054/canvas/7",
+   "type": "Canvas",
+   "label": {
+    "ko": [
+     "Pakchon, Korea. 1950-11-07. Troops of 3RAR marching through a small village to take up new positions south west of Pakchon."
+    ]
+   },
+   "width": 1280,
+   "height": 960,
+   "metadata": [
+    {
+     "label": {
+      "ko": [
+       "식별자"
+      ]
+     },
+     "value": {
+      "ko": [
+       "AWM C274553 (146968)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "연대"
+      ]
+     },
+     "value": {
+      "ko": [
+       "1950-11-07"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "소장"
+      ]
+     },
+     "value": {
+      "ko": [
+       "Australian War Memorial — 촬영 Holzheimer, Claude Rudolph"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리"
+      ]
+     },
+     "value": {
+      "ko": [
+       "Copyright expired - public domain (AWM)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "보이는 것"
+      ]
+     },
+     "value": {
+      "ko": [
+       "초가 마을 길을 걷는 병사들"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "0953b27b1f43ccb6 — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "AWM 항목 페이지 'Item copyright: Copyright expired - public domain' / 'This item is in the Public Domain'"
+      ]
+     }
+    }
+   ],
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s054/awm_C274553.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "items": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s054/canvas/7/page",
+     "type": "AnnotationPage",
+     "items": [
+      {
+       "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s054/canvas/7/page/a",
+       "type": "Annotation",
+       "motivation": "painting",
+       "target": "https://changgi.github.io/korea-archive-mcp/iiif/m/s054/canvas/7",
+       "body": {
+        "id": "https://changgi.github.io/korea-archive-mcp/iiif/img/s054/awm_C274553.jpg",
+        "type": "Image",
+        "format": "image/jpeg",
+        "width": 1280,
+        "height": 960
+       }
+      }
+     ]
+    }
+   ],
+   "homepage": [
+    {
+     "id": "https://www.awm.gov.au/collection/C274553",
+     "type": "Text",
+     "label": {
+      "ko": [
+       "원 기관 기록"
+      ]
+     },
+     "format": "text/html"
+    }
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s054/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    },
+    {
+     "id": "https://korea-archive-mcp.vercel.app/iiif/awm/C274553/manifest.json",
+     "type": "Manifest",
+     "label": {
+      "ko": [
+       "원 기관 원본(IIIF 브리지)"
+      ]
+     },
+     "format": "application/ld+json"
+    }
+   ],
+   "navDate": "1950-11-07T00:00:00Z",
+   "rights": "http://creativecommons.org/publicdomain/mark/1.0/"
+  }
+ ],
+ "homepage": [
+  {
+   "id": "https://www.awm.gov.au/collection/C274531",
+   "type": "Text",
+   "label": {
+    "ko": [
+     "원 기관 기록"
+    ]
+   },
+   "format": "text/html"
+  }
+ ],
+ "thumbnail": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s054/hero_awm_C274531.jpg",
+   "type": "Image",
+   "format": "image/jpeg"
+  }
+ ],
+ "navDate": "1950-11-04T00:00:00Z"
+}

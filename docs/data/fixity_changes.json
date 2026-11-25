@@ -1,0 +1,1016 @@
+{
+"updated": "2026-11-25T03:51:11Z",
+"watched": 856,
+"changed_records": 53,
+"suspected_source_changes": 0,
+"note": "지문 = 원 기관 응답(우리 판독기 정규형, 판독 시각 등 변동 항목 제외)의 SHA-256-16. pv = 판독기(route.js·lib) 지문. 이력은 지우지 않는다.",
+"changes": [
+{
+"key": "un:A/HRC/28/NGO/9",
+"title": "[A/HRC/28/NGO/9] Human rights situations that require the Council's attention : written statement",
+"url": "https://digitallibrary.un.org/record/1312645",
+"history": [
+{
+"at": "2026-11-24",
+"h": "271e3a351a942f56",
+"pv": "5a97e7d08483",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "089cf3172fc33f92",
+"pv": "469ca1a54c52",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "un:S/2013/162",
+"title": "[S/2013/162] Letter dated 15 March 2013 from the Permanent Representative of the Democratic People's Republic",
+"url": "https://digitallibrary.un.org/record/745866",
+"history": [
+{
+"at": "2026-11-24",
+"h": "6489e960cd08f4e0",
+"pv": "5a97e7d08483",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "66080e43e38bde55",
+"pv": "469ca1a54c52",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "un:S/2015/799",
+"title": "[S/2015/799] Letter dated 19 October 2015 from the Permanent Representative of the Democratic People's Republi",
+"url": "https://digitallibrary.un.org/record/808136",
+"history": [
+{
+"at": "2026-11-24",
+"h": "d0472641630128fb",
+"pv": "5a97e7d08483",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "0818519b693a4064",
+"pv": "469ca1a54c52",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "awm:147844",
+"title": "Kapyong Valley, Korea. 1952-04-16. An elevated view of the Kapyong Valley and surrounding hills ... · 권리:PD(저작권 만료)",
+"url": "https://www.awm.gov.au/collection/C276864",
+"history": [
+{
+"at": "2026-11-24",
+"h": "074fcc0e298eac10",
+"pv": "1033444958fe",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "08268805f312b4b1",
+"pv": "469ca1a54c52",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "awm:HOBJ3143",
+"title": "Kapyong, South Korea. June 1952. A panoramic view from the left of A Company's, 1st Battalion, ... · 권리:PD(저작권 만료)",
+"url": "https://www.awm.gov.au/collection/C332290",
+"history": [
+{
+"at": "2026-11-24",
+"h": "83076e694d3cf5e4",
+"pv": "1033444958fe",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "6c5a036b5bc9b583",
+"pv": "469ca1a54c52",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "awm:HOBJ3144",
+"title": "Kapyong, South Korea. June 1952. A panoramic view from the left of A Company's, 1st Battalion, ... · 권리:PD(저작권 만료)",
+"url": "https://www.awm.gov.au/collection/C332291",
+"history": [
+{
+"at": "2026-11-24",
+"h": "435dcceb589873c7",
+"pv": "1033444958fe",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "0bd401cd8972351e",
+"pv": "469ca1a54c52",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "commons:https://commons.wikimedia.org/wiki/File%3AHungnam_evacuation_map.jpg",
+"title": "Hungnam evacuation map.jpg",
+"url": "https://commons.wikimedia.org/wiki/File%3AHungnam_evacuation_map.jpg",
+"history": [
+{
+"at": "2026-11-24",
+"h": "475accca21eba930",
+"pv": "1033444958fe",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "b0df727c0eaa8beb",
+"pv": "628ea0c06128",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "commons:https://commons.wikimedia.org/wiki/File%3AUSS_Begor_(APD-127)_off_Hungnam_on_24_December_1950_(80-G-K-11769).jpg",
+"title": "USS Begor (APD-127) off Hungnam on 24 December 1950 (80-G-K-11769).jpg",
+"url": "https://commons.wikimedia.org/wiki/File%3AUSS_Begor_(APD-127)_off_Hungnam_on_24_December_1950_(80-G-K-11769).jpg",
+"history": [
+{
+"at": "2026-11-24",
+"h": "9d8d7296f726b965",
+"pv": "1033444958fe",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "276f8351d4bde3cc",
+"pv": "628ea0c06128",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "commons:https://commons.wikimedia.org/wiki/File%3AUSS_Begor_(APD-127)_off_Hungnam_on_24_December_1950_(80-G-K-11771).jpg",
+"title": "USS Begor (APD-127) off Hungnam on 24 December 1950 (80-G-K-11771).jpg",
+"url": "https://commons.wikimedia.org/wiki/File%3AUSS_Begor_(APD-127)_off_Hungnam_on_24_December_1950_(80-G-K-11771).jpg",
+"history": [
+{
+"at": "2026-11-24",
+"h": "b75231d0d702bb7c",
+"pv": "1033444958fe",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "04af3719ec8e836b",
+"pv": "628ea0c06128",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "commons:https://commons.wikimedia.org/wiki/File%3A%EB%8B%B9%EC%82%B0%EC%B2%A0%EA%B5%90%EC%97%90%EC%84%9C_%EC%B4%AC%EC%98%81%ED%95%9C_%EC%97%AC%EC%9D%98%EB%8F%84.jpg",
+"title": "당산철교에서 촬영한 여의도.jpg",
+"url": "https://commons.wikimedia.org/wiki/File%3A%EB%8B%B9%EC%82%B0%EC%B2%A0%EA%B5%90%EC%97%90%EC%84%9C_%EC%B4%AC%EC%98%81%ED%95%9C_%EC%97%AC%EC%9D%98%EB%8F%84.jpg",
+"history": [
+{
+"at": "2026-11-24",
+"h": "f2df44e6eeb56ee1",
+"pv": "1033444958fe",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "08ca2b2294c7330d",
+"pv": "628ea0c06128",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "commons:https://commons.wikimedia.org/wiki/File%3A%EB%8F%99%EC%9E%91%EB%8C%80%EA%B5%90%EC%97%90%EC%84%9C_%EB%B3%B8_%EC%97%AC%EC%9D%98%EB%8F%84%EC%9D%98_%EB%A7%88%EC%B2%9C%EB%A3%A8%EB%93%A4.jpg",
+"title": "동작대교에서 본 여의도의 마천루들.jpg",
+"url": "https://commons.wikimedia.org/wiki/File%3A%EB%8F%99%EC%9E%91%EB%8C%80%EA%B5%90%EC%97%90%EC%84%9C_%EB%B3%B8_%EC%97%AC%EC%9D%98%EB%8F%84%EC%9D%98_%EB%A7%88%EC%B2%9C%EB%A3%A8%EB%93%A4.jpg",
+"history": [
+{
+"at": "2026-11-24",
+"h": "8613b5cdaa3d88ac",
+"pv": "1033444958fe",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "04fa506558cca617",
+"pv": "628ea0c06128",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "commons:https://commons.wikimedia.org/wiki/File%3A%EC%84%9C%EC%9A%B8%2C_%ED%95%9C%EA%B0%95%2C_%EC%97%AC%EC%9D%98%EB%8F%84-1969%EB%85%84.jpg",
+"title": "서울, 한강, 여의도-1969년.jpg",
+"url": "https://commons.wikimedia.org/wiki/File%3A%EC%84%9C%EC%9A%B8%2C_%ED%95%9C%EA%B0%95%2C_%EC%97%AC%EC%9D%98%EB%8F%84-1969%EB%85%84.jpg",
+"history": [
+{
+"at": "2026-11-24",
+"h": "750f514c820342f8",
+"pv": "1033444958fe",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "39bd8969d7370295",
+"pv": "628ea0c06128",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "commons:https://commons.wikimedia.org/wiki/File%3ACherry_Blossom_in_Yeouido_Festival.jpg",
+"title": "Cherry Blossom in Yeouido Festival.jpg",
+"url": "https://commons.wikimedia.org/wiki/File%3ACherry_Blossom_in_Yeouido_Festival.jpg",
+"history": [
+{
+"at": "2026-11-24",
+"h": "38653c9354fd17a8",
+"pv": "1033444958fe",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "410fcd2fa68e09fb",
+"pv": "628ea0c06128",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "commons:https://commons.wikimedia.org/wiki/File%3AJ-Hope_at_a_fansign_in_Yeouido%2C_in_December_2015_05.jpg",
+"title": "J-Hope at a fansign in Yeouido, in December 2015 05.jpg",
+"url": "https://commons.wikimedia.org/wiki/File%3AJ-Hope_at_a_fansign_in_Yeouido%2C_in_December_2015_05.jpg",
+"history": [
+{
+"at": "2026-11-24",
+"h": "f2ad34ba99127bff",
+"pv": "1033444958fe",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "01836c837e662810",
+"pv": "628ea0c06128",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "commons:https://commons.wikimedia.org/wiki/File%3AYeouido%2C_Seoul.jpg",
+"title": "Yeouido, Seoul.jpg",
+"url": "https://commons.wikimedia.org/wiki/File%3AYeouido%2C_Seoul.jpg",
+"history": [
+{
+"at": "2026-11-24",
+"h": "c2ebcb8e84b26c33",
+"pv": "1033444958fe",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "262757134b8768b8",
+"pv": "628ea0c06128",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "commons:https://commons.wikimedia.org/wiki/File%3AYeouido_Han_River.jpg",
+"title": "Yeouido Han River.jpg",
+"url": "https://commons.wikimedia.org/wiki/File%3AYeouido_Han_River.jpg",
+"history": [
+{
+"at": "2026-11-24",
+"h": "007ec1ff4be995b4",
+"pv": "1033444958fe",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "f02448079499deb0",
+"pv": "628ea0c06128",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "commons:https://commons.wikimedia.org/wiki/File%3AYeouido_SeMA_Bunker.jpg",
+"title": "Yeouido SeMA Bunker.jpg",
+"url": "https://commons.wikimedia.org/wiki/File%3AYeouido_SeMA_Bunker.jpg",
+"history": [
+{
+"at": "2026-11-24",
+"h": "1bdd610f787ad360",
+"pv": "1033444958fe",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "cb94d1b95667ba22",
+"pv": "628ea0c06128",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "commons:https://commons.wikimedia.org/wiki/File%3AYeouido_Spring_Flower_Festival.jpg",
+"title": "Yeouido Spring Flower Festival.jpg",
+"url": "https://commons.wikimedia.org/wiki/File%3AYeouido_Spring_Flower_Festival.jpg",
+"history": [
+{
+"at": "2026-11-24",
+"h": "d5f8b3c714439366",
+"pv": "1033444958fe",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "c6a6dd2693946a8b",
+"pv": "628ea0c06128",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "commons:https://commons.wikimedia.org/wiki/File%3AYeouido_Spring_Flower_Festival_2013.jpg",
+"title": "Yeouido Spring Flower Festival 2013.jpg",
+"url": "https://commons.wikimedia.org/wiki/File%3AYeouido_Spring_Flower_Festival_2013.jpg",
+"history": [
+{
+"at": "2026-11-24",
+"h": "a8843aca9846ceb7",
+"pv": "1033444958fe",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "09054191c49e3d55",
+"pv": "628ea0c06128",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "awm:HOBJ4308",
+"title": "Korea. 2 June 1953. A general view of the Coronation Parade of the Commonwealth Division in Korea. · 권리:PD(저작권 만료)",
+"url": "https://www.awm.gov.au/collection/C328864",
+"history": [
+{
+"at": "2026-11-24",
+"h": "f0d937de14a6ff64",
+"pv": "51fd8293ed29",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "abfd35f3fa9ee5e5",
+"pv": "628ea0c06128",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "awm:HOBJ4310",
+"title": "Korea. 2 June 1953. A general view of the Coronation Parade of the Commonwealth Division in Korea. · 권리:PD(저작권 만료)",
+"url": "https://www.awm.gov.au/collection/C328866",
+"history": [
+{
+"at": "2026-11-24",
+"h": "55e507ca5ce7da0d",
+"pv": "51fd8293ed29",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "915f5ac3b52b9e2b",
+"pv": "628ea0c06128",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "awm:HOBJ4316",
+"title": "Korea. 2 June 1953. A general view of the Coronation Parade of the Commonwealth Division in Korea. · 권리:PD(저작권 만료)",
+"url": "https://www.awm.gov.au/collection/C328870",
+"history": [
+{
+"at": "2026-11-24",
+"h": "51984577ab1c3428",
+"pv": "51fd8293ed29",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "c825a2a3d42b3c32",
+"pv": "628ea0c06128",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "commons:https://commons.wikimedia.org/wiki/File%3A%EC%84%9C%EC%9A%B8_%EB%B4%89%EC%9D%80%EC%82%AC_%EA%B0%90%EB%A1%9C%EB%8F%84.jpg",
+"title": "서울 봉은사 감로도.jpg",
+"url": "https://commons.wikimedia.org/wiki/File%3A%EC%84%9C%EC%9A%B8_%EB%B4%89%EC%9D%80%EC%82%AC_%EA%B0%90%EB%A1%9C%EB%8F%84.jpg",
+"history": [
+{
+"at": "2026-11-24",
+"h": "db75f186762b9b1e",
+"pv": "51fd8293ed29",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "28af6c2cc564b2b4",
+"pv": "628ea0c06128",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "commons:https://commons.wikimedia.org/wiki/File%3A%EC%84%9C%EC%9A%B8_%EC%95%88%EC%96%91%EC%95%94_%EA%B0%90%EB%A1%9C%EB%8F%84.jpg",
+"title": "서울 안양암 감로도.jpg",
+"url": "https://commons.wikimedia.org/wiki/File%3A%EC%84%9C%EC%9A%B8_%EC%95%88%EC%96%91%EC%95%94_%EA%B0%90%EB%A1%9C%EB%8F%84.jpg",
+"history": [
+{
+"at": "2026-11-24",
+"h": "e8ed52aeaecc8d2d",
+"pv": "51fd8293ed29",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "cfaca8a1216267ce",
+"pv": "628ea0c06128",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "commons:https://commons.wikimedia.org/wiki/File%3A%EC%9D%98%EB%A0%B9_%EC%88%98%EB%8F%84%EC%82%AC_%EA%B0%90%EB%A1%9C%EB%8F%84.jpg",
+"title": "의령 수도사 감로도.jpg",
+"url": "https://commons.wikimedia.org/wiki/File%3A%EC%9D%98%EB%A0%B9_%EC%88%98%EB%8F%84%EC%82%AC_%EA%B0%90%EB%A1%9C%EB%8F%84.jpg",
+"history": [
+{
+"at": "2026-11-24",
+"h": "caff63eaef97b27f",
+"pv": "51fd8293ed29",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "4a94b5c455244b51",
+"pv": "628ea0c06128",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "nara:NAID 42219673",
+"title": "North Korea/South Korea [2]",
+"url": "https://catalog.archives.gov/id/42219673",
+"history": [
+{
+"at": "2026-11-24",
+"h": "4b8845715f083cc4",
+"pv": "51fd8293ed29",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "ff36cccf5f384594",
+"pv": "fa6703da94c0",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "nara:NAID 42219674",
+"title": "North Korea/South Korea [3]",
+"url": "https://catalog.archives.gov/id/42219674",
+"history": [
+{
+"at": "2026-11-24",
+"h": "a508393b9ffb7ae1",
+"pv": "51fd8293ed29",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "bd05f6b8c8e2ea6b",
+"pv": "fa6703da94c0",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "nara:NAID 492062159",
+"title": "Korea",
+"url": "https://catalog.archives.gov/id/492062159",
+"history": [
+{
+"at": "2026-11-24",
+"h": "0c33e40a42b2aed0",
+"pv": "51fd8293ed29",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "53658976dde5796c",
+"pv": "fa6703da94c0",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "un:4132698",
+"title": "Cooperation between the United Nations and the Organization of Islamic Cooperation : resolution",
+"url": "https://digitallibrary.un.org/record/4132698",
+"history": [
+{
+"at": "2026-11-24",
+"h": "7b2d017c8869dcc5",
+"pv": "d4726c38e7cc",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "ef8e0a2027c1c454",
+"pv": "fa6703da94c0",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "un:4132699",
+"title": "Cooperation between the United Nations and the Commonwealth of Independent States : resolution",
+"url": "https://digitallibrary.un.org/record/4132699",
+"history": [
+{
+"at": "2026-11-24",
+"h": "bcbcd2449f5288d5",
+"pv": "d4726c38e7cc",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "b07ce15b0876ae8d",
+"pv": "fa6703da94c0",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "un:A/C.6/81/L.5",
+"title": "[A/C.6/81/L.5] Report of the United Nations Commission on International Trade Law on the work of its 59th sess",
+"url": "https://digitallibrary.un.org/record/4133334",
+"history": [
+{
+"at": "2026-11-24",
+"h": "1ea5c544c1c90a9a",
+"pv": "d4726c38e7cc",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "f1f3100a2392dde2",
+"pv": "fa6703da94c0",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "nrich:ov:14331",
+"title": "[국외문화유산] 대방광불화엄경보현행원품소(大方廣佛華嚴經普賢行願品疏) — 일본 오사카부립 나카노시마도서관",
+"url": "https://portal.nrich.go.kr/kor/overseasSearchView.do?menuIdx=840&mseq=14331",
+"history": [
+{
+"at": "2026-11-24",
+"h": "3b7d79814860c255",
+"pv": "d4726c38e7cc",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "0660dc0c17bfeef4",
+"pv": "fa6703da94c0",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "nedb:ks_001_0020_0090",
+"title": "癸卯十月二十七日",
+"url": "https://db.history.go.kr/id/ks_001_0020_0090",
+"history": [
+{
+"at": "2026-11-24",
+"h": "6399f11ca219b82d",
+"pv": "f0b888915bda",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "63ede5dfd329780f",
+"pv": "fa6703da94c0",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "nedb:npda_1920_04_30_v0002_1100",
+"title": "本月漢江水質試驗",
+"url": "https://db.history.go.kr/id/npda_1920_04_30_v0002_1100",
+"history": [
+{
+"at": "2026-11-24",
+"h": "7c492b6ca20916a3",
+"pv": "f0b888915bda",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "2380c21ba56e249e",
+"pv": "fa6703da94c0",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "nedb:sg_001r_0020_0010",
+"title": "시조 혁거세가 즉위하다",
+"url": "https://db.history.go.kr/id/sg_001r_0020_0010",
+"history": [
+{
+"at": "2026-11-24",
+"h": "97f5a8df46939a7a",
+"pv": "f0b888915bda",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "8bf3fc48b5290d1b",
+"pv": "fa6703da94c0",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "nara:NAID 42219676",
+"title": "Korea",
+"url": "https://catalog.archives.gov/id/42219676",
+"history": [
+{
+"at": "2026-11-24",
+"h": "b5c11a49ad30de44",
+"pv": "d4726c38e7cc",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "00622d62d7256690",
+"pv": "fa6703da94c0",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "nara:NAID 492062268",
+"title": "Korea",
+"url": "https://catalog.archives.gov/id/492062268",
+"history": [
+{
+"at": "2026-11-24",
+"h": "0027720beea8744c",
+"pv": "d4726c38e7cc",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "f6e1a33ef8ccb200",
+"pv": "fa6703da94c0",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "much:PS01002025008-005391-00000",
+"title": "판문점 1969년 7월 15일호",
+"url": "https://archive.much.go.kr/archive/nrms/view.do?idnbr=PS01002025008-005391-00000",
+"history": [
+{
+"at": "2026-11-24",
+"h": "ae2dc3131c448e5d",
+"pv": "d4726c38e7cc",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "0d5ccd0e1d1ac86a",
+"pv": "fa6703da94c0",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "awm:ART40313",
+"title": "Kapyong landscape · 권리:PD(저작권 만료)",
+"url": "https://www.awm.gov.au/collection/C176001",
+"history": [
+{
+"at": "2026-11-24",
+"h": "66dc8fd6a24dbca5",
+"pv": "d4726c38e7cc",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "1417c148cf094fc8",
+"pv": "fa6703da94c0",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "awm:HOBJ3145",
+"title": "Kapyong, South Korea. June 1952. A panoramic view from the left of A Company's, 1st Battalion, ... · 권리:PD(저작권 만료)",
+"url": "https://www.awm.gov.au/collection/C372613",
+"history": [
+{
+"at": "2026-11-24",
+"h": "95cf2f6e0bd4c8cd",
+"pv": "d4726c38e7cc",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "0acb1cf6a52b22fa",
+"pv": "fa6703da94c0",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "jsg:K2-2751",
+"title": "흥왕책봉의궤(興王冊封儀軌)",
+"url": "https://jsg.aks.ac.kr/dir/view?dataId=JSG_K2-2751",
+"history": [
+{
+"at": "2026-11-24",
+"h": "a39db5bd91932c3e",
+"pv": "d4726c38e7cc",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "93d7250ce0807213",
+"pv": "fa6703da94c0",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "jsg:K2-2841",
+"title": "존숭도감의궤(尊崇都監儀軌)",
+"url": "https://jsg.aks.ac.kr/dir/view?dataId=JSG_K2-2841",
+"history": [
+{
+"at": "2026-11-24",
+"h": "166e2e8779387180",
+"pv": "d4726c38e7cc",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "fdeaf95e727ad221",
+"pv": "fa6703da94c0",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "jsg:K2-2859",
+"title": "진작의궤(進爵儀軌)",
+"url": "https://jsg.aks.ac.kr/dir/view?dataId=JSG_K2-2859",
+"history": [
+{
+"at": "2026-11-24",
+"h": "2cc4aafa1390ce83",
+"pv": "d4726c38e7cc",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "828319d845bd1a53",
+"pv": "fa6703da94c0",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "jsg:K2-3556",
+"title": "개건도감의궤(改建都監儀軌)",
+"url": "https://jsg.aks.ac.kr/dir/view?dataId=JSG_K2-3556",
+"history": [
+{
+"at": "2026-11-24",
+"h": "b422ff889dcb0e9c",
+"pv": "d4726c38e7cc",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "b64a29ab5c69d7ec",
+"pv": "fa6703da94c0",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "jsg:K2-5210",
+"title": "종묘의궤(宗廟儀軌)",
+"url": "https://jsg.aks.ac.kr/dir/view?dataId=JSG_K2-5210",
+"history": [
+{
+"at": "2026-11-24",
+"h": "8b38a8b4ff49d1e7",
+"pv": "d4726c38e7cc",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "a693bef1c1e2677f",
+"pv": "fa6703da94c0",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "commons:https://commons.wikimedia.org/wiki/File%3AM26_Pershing_Seoul_1950.jpg",
+"title": "M26 Pershing Seoul 1950.jpg",
+"url": "https://commons.wikimedia.org/wiki/File%3AM26_Pershing_Seoul_1950.jpg",
+"history": [
+{
+"at": "2026-11-24",
+"h": "c803a0f2eca314cc",
+"pv": "d4726c38e7cc",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "a34c93abd9d21b6e",
+"pv": "fa6703da94c0",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "commons:https://commons.wikimedia.org/wiki/File%3ANH_96379_Liberation_of_Seoul%2C_Korea%2C_September_1950.jpg",
+"title": "NH 96379 Liberation of Seoul, Korea, September 1950.jpg",
+"url": "https://commons.wikimedia.org/wiki/File%3ANH_96379_Liberation_of_Seoul%2C_Korea%2C_September_1950.jpg",
+"history": [
+{
+"at": "2026-11-24",
+"h": "fa471c9e79f10911",
+"pv": "d4726c38e7cc",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "fa484efc92cc7f4d",
+"pv": "fa6703da94c0",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "commons:https://commons.wikimedia.org/wiki/File%3ASeoul_1950_1.gif",
+"title": "Seoul 1950 1.gif",
+"url": "https://commons.wikimedia.org/wiki/File%3ASeoul_1950_1.gif",
+"history": [
+{
+"at": "2026-11-24",
+"h": "b4f86d76651a2a8a",
+"pv": "d4726c38e7cc",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "e88c2a14ef3319f6",
+"pv": "fa6703da94c0",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "commons:https://commons.wikimedia.org/wiki/File%3AUN_forces_during_the_Second_Battle_of_Seoul%2C_1950.webm",
+"title": "UN forces during the Second Battle of Seoul, 1950.webm",
+"url": "https://commons.wikimedia.org/wiki/File%3AUN_forces_during_the_Second_Battle_of_Seoul%2C_1950.webm",
+"history": [
+{
+"at": "2026-11-24",
+"h": "42f59147269821a1",
+"pv": "d4726c38e7cc",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "d41df2431aaf757b",
+"pv": "fa6703da94c0",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "commons:https://commons.wikimedia.org/wiki/File%3AWomen_parade_and_celebrate_in_front_of_Namdaemun_after_the_North_Korean_capture_of_Seoul%2C_1950.jpg",
+"title": "Women parade and celebrate in front of Namdaemun after the North Korean capture of Seoul, 1950.jpg",
+"url": "https://commons.wikimedia.org/wiki/File%3AWomen_parade_and_celebrate_in_front_of_Namdaemun_after_the_North_Korean_capture_of_Seoul%2C_1950.jpg",
+"history": [
+{
+"at": "2026-11-24",
+"h": "0ca56d766b2c9ebb",
+"pv": "d4726c38e7cc",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "8f0f8871b1faacc1",
+"pv": "fa6703da94c0",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "un:S/2010/358",
+"title": "[S/2010/358] Letter dated 6 July 2010 from the Permanent Representative of the Democratic People's Republic of",
+"url": "https://digitallibrary.un.org/record/685600",
+"history": [
+{
+"at": "2026-11-24",
+"h": "5634a6b71f4d306d",
+"pv": "d4726c38e7cc",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "ad3dbabb1ca31e86",
+"pv": "fa6703da94c0",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "un:S/PRST/2010/13",
+"title": "[S/PRST/2010/13] Statement",
+"url": "https://digitallibrary.un.org/record/685900",
+"history": [
+{
+"at": "2026-11-24",
+"h": "72906330650282b3",
+"pv": "d4726c38e7cc",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "cfcd47492dbb7f25",
+"pv": "fa6703da94c0",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "nara:NAID 75408",
+"title": "ACTIVITIES IN HUNGNAM HARBOR",
+"url": "https://catalog.archives.gov/id/75408",
+"history": [
+{
+"at": "2026-11-24",
+"h": "4b52fcd97ab88385",
+"pv": "d4726c38e7cc",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "5e6304a2a7647504",
+"pv": "c4b099c69283",
+"kind": "판독기 변경 동반"
+}
+]
+}
+]
+}

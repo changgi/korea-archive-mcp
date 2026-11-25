@@ -1,0 +1,1251 @@
+{
+ "@context": "http://iiif.io/api/presentation/3/context.json",
+ "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s035.json",
+ "type": "Manifest",
+ "label": {
+  "ko": [
+   "035 · 미국 국립기록관리청 NARA — 1950.8 ~ 1951.1 — 남쪽으로 가는 길"
+  ]
+ },
+ "summary": {
+  "ko": [
+   "100선 · Ⅶ 전쟁의 기록 2 · 원 기록: 1950.8 ~ 1951.1 — 남쪽으로 가는 길 () · 미국 국립기록관리청 NARA"
+  ]
+ },
+ "metadata": [
+  {
+   "label": {
+    "ko": [
+     "원 기록"
+    ]
+   },
+   "value": {
+    "ko": [
+     "111-SC-355572 1950.8 ~ 1951.1 — 남쪽으로 가는 길"
+    ]
+   }
+  },
+  {
+   "label": {
+    "ko": [
+     "소장"
+    ]
+   },
+   "value": {
+    "ko": [
+     "미국 국립기록관리청 NARA"
+    ]
+   }
+  },
+  {
+   "label": {
+    "ko": [
+     "계층"
+    ]
+   },
+   "value": {
+    "ko": [
+     "KOREA ARCHIVE 통합검색 › 100선 · Ⅶ 전쟁의 기록 2 › s035"
+    ]
+   }
+  },
+  {
+   "label": {
+    "ko": [
+     "수집 경로"
+    ]
+   },
+   "value": {
+    "ko": [
+     "nara_search(Korean refugees) → judge_rights(naid=175539219·175539217)"
+    ]
+   }
+  },
+  {
+   "label": {
+    "ko": [
+     "확인일"
+    ]
+   },
+   "value": {
+    "ko": [
+     "2026-11-22"
+    ]
+   }
+  },
+  {
+   "label": {
+    "ko": [
+     "게재 이미지"
+    ]
+   },
+   "value": {
+    "ko": [
+     "6장 · 링크 전용 0건"
+    ]
+   }
+  }
+ ],
+ "partOf": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/c/s100-07.json",
+   "type": "Collection",
+   "label": {
+    "ko": [
+     "100선 · Ⅶ 전쟁의 기록 2"
+    ]
+   }
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/hierarchy.json",
+   "type": "Collection",
+   "label": {
+    "ko": [
+     "KOREA ARCHIVE 통합검색 — 기록 계층"
+    ]
+   }
+  }
+ ],
+ "seeAlso": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s035/ledger.json",
+   "type": "Dataset",
+   "label": {
+    "ko": [
+     "출처 대장(ledger)"
+    ]
+   },
+   "format": "application/json"
+  }
+ ],
+ "requiredStatement": {
+  "label": {
+   "ko": [
+    "출처"
+   ]
+  },
+  "value": {
+   "ko": [
+    "미국 국립기록관리청 NARA — 이미지별 권리 표시 참조. 협약기관(KOREAN WAR ARCHIVES 6·25전쟁 아카이브센터) 기록은 출처 표기 필수."
+   ]
+  }
+ },
+ "provider": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/",
+   "type": "Agent",
+   "label": {
+    "ko": [
+     "KOREA ARCHIVE 통합검색"
+    ]
+   }
+  }
+ ],
+ "items": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s035/canvas/1",
+   "type": "Canvas",
+   "label": {
+    "ko": [
+     "Photograph of North Korean Refugees Fleeing to the South"
+    ]
+   },
+   "width": 1600,
+   "height": 1334,
+   "metadata": [
+    {
+     "label": {
+      "ko": [
+       "식별자"
+      ]
+     },
+     "value": {
+      "ko": [
+       "NAID 175539219 (111-SC-355573)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "연대"
+      ]
+     },
+     "value": {
+      "ko": [
+       "1951-01-05"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "소장"
+      ]
+     },
+     "value": {
+      "ko": [
+       "미국 국립기록관리청 NARA"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리"
+      ]
+     },
+     "value": {
+      "ko": [
+       "A — Unrestricted"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "7429a29f64a3952a — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "원 기관 계보"
+      ]
+     },
+     "value": {
+      "ko": [
+       "NARA › RG 111 Records of the Office of the Chief Signal Officer › Photographs of American Military Activities"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "NARA catalog proxy API useRestriction.status='Unrestricted' (2026-11-22 실측)"
+      ]
+     }
+    }
+   ],
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s035/p_175539219.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "items": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s035/canvas/1/page",
+     "type": "AnnotationPage",
+     "items": [
+      {
+       "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s035/canvas/1/page/a",
+       "type": "Annotation",
+       "motivation": "painting",
+       "target": "https://changgi.github.io/korea-archive-mcp/iiif/m/s035/canvas/1",
+       "body": {
+        "id": "https://changgi.github.io/korea-archive-mcp/iiif/img/s035/p_175539219.jpg",
+        "type": "Image",
+        "format": "image/jpeg",
+        "width": 1600,
+        "height": 1334
+       }
+      }
+     ]
+    }
+   ],
+   "homepage": [
+    {
+     "id": "https://catalog.archives.gov/id/175539219",
+     "type": "Text",
+     "label": {
+      "ko": [
+       "원 기관 기록"
+      ]
+     },
+     "format": "text/html"
+    }
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s035/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    },
+    {
+     "id": "https://korea-archive-mcp.vercel.app/iiif/nara/175539219/manifest.json",
+     "type": "Manifest",
+     "label": {
+      "ko": [
+       "NARA 원본 전체(IIIF 브리지)"
+      ]
+     },
+     "format": "application/ld+json"
+    },
+    {
+     "id": "https://korea-archive-mcp.vercel.app/iiif/nara/175539219/record.jsonld",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "NARA 계층 기술(RiC-O)"
+      ]
+     },
+     "format": "application/ld+json"
+    }
+   ],
+   "navDate": "1951-01-05T00:00:00Z",
+   "rights": "http://rightsstatements.org/vocab/NoC-US/1.0/"
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s035/canvas/2",
+   "type": "Canvas",
+   "label": {
+    "ko": [
+     "Refugees in Korea"
+    ]
+   },
+   "width": 800,
+   "height": 621,
+   "metadata": [
+    {
+     "label": {
+      "ko": [
+       "식별자"
+      ]
+     },
+     "value": {
+      "ko": [
+       "NAID 350288017 (67-7417)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "연대"
+      ]
+     },
+     "value": {
+      "ko": [
+       "1950-08-12"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "소장"
+      ]
+     },
+     "value": {
+      "ko": [
+       "미국 국립기록관리청 NARA"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리"
+      ]
+     },
+     "value": {
+      "ko": [
+       "A — Unrestricted"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "보이는 것"
+      ]
+     },
+     "value": {
+      "ko": [
+       "1950-08-12 남쪽으로 · NAID 350288017"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "3d9779b4d82199ff — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "원 기관 계보"
+      ]
+     },
+     "value": {
+      "ko": [
+       "NARA › Photograph Collection › Photographs Relating to the Administration, Family, and Personal Life of Harry S. Truman"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "NARA catalog proxy API useRestriction.status='Unrestricted' (2026-11-22 실측)"
+      ]
+     }
+    }
+   ],
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s035/p_350288017.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "items": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s035/canvas/2/page",
+     "type": "AnnotationPage",
+     "items": [
+      {
+       "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s035/canvas/2/page/a",
+       "type": "Annotation",
+       "motivation": "painting",
+       "target": "https://changgi.github.io/korea-archive-mcp/iiif/m/s035/canvas/2",
+       "body": {
+        "id": "https://changgi.github.io/korea-archive-mcp/iiif/img/s035/p_350288017.jpg",
+        "type": "Image",
+        "format": "image/jpeg",
+        "width": 800,
+        "height": 621
+       }
+      }
+     ]
+    }
+   ],
+   "homepage": [
+    {
+     "id": "https://catalog.archives.gov/id/350288017",
+     "type": "Text",
+     "label": {
+      "ko": [
+       "원 기관 기록"
+      ]
+     },
+     "format": "text/html"
+    }
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s035/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    },
+    {
+     "id": "https://korea-archive-mcp.vercel.app/iiif/nara/350288017/manifest.json",
+     "type": "Manifest",
+     "label": {
+      "ko": [
+       "NARA 원본 전체(IIIF 브리지)"
+      ]
+     },
+     "format": "application/ld+json"
+    },
+    {
+     "id": "https://korea-archive-mcp.vercel.app/iiif/nara/350288017/record.jsonld",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "NARA 계층 기술(RiC-O)"
+      ]
+     },
+     "format": "application/ld+json"
+    }
+   ],
+   "navDate": "1950-08-12T00:00:00Z",
+   "rights": "http://rightsstatements.org/vocab/NoC-US/1.0/"
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s035/canvas/3",
+   "type": "Canvas",
+   "label": {
+    "ko": [
+     "UN Troops Pass Korean Refugees"
+    ]
+   },
+   "width": 800,
+   "height": 579,
+   "metadata": [
+    {
+     "label": {
+      "ko": [
+       "식별자"
+      ]
+     },
+     "value": {
+      "ko": [
+       "NAID 350489859 (2017-108)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "연대"
+      ]
+     },
+     "value": {
+      "ko": [
+       "1950-12-01"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "소장"
+      ]
+     },
+     "value": {
+      "ko": [
+       "미국 국립기록관리청 NARA"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리"
+      ]
+     },
+     "value": {
+      "ko": [
+       "A — Unrestricted"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "보이는 것"
+      ]
+     },
+     "value": {
+      "ko": [
+       "1950-12-01 차량 옆 피란민 · NAID 350489859"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "c75199ad842e7696 — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "원 기관 계보"
+      ]
+     },
+     "value": {
+      "ko": [
+       "NARA › Photograph Collection › Photographs Relating to the Administration, Family, and Personal Life of Harry S. Truman"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "NARA catalog proxy API useRestriction.status='Unrestricted' (2026-11-22 실측)"
+      ]
+     }
+    }
+   ],
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s035/p_350489859.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "items": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s035/canvas/3/page",
+     "type": "AnnotationPage",
+     "items": [
+      {
+       "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s035/canvas/3/page/a",
+       "type": "Annotation",
+       "motivation": "painting",
+       "target": "https://changgi.github.io/korea-archive-mcp/iiif/m/s035/canvas/3",
+       "body": {
+        "id": "https://changgi.github.io/korea-archive-mcp/iiif/img/s035/p_350489859.jpg",
+        "type": "Image",
+        "format": "image/jpeg",
+        "width": 800,
+        "height": 579
+       }
+      }
+     ]
+    }
+   ],
+   "homepage": [
+    {
+     "id": "https://catalog.archives.gov/id/350489859",
+     "type": "Text",
+     "label": {
+      "ko": [
+       "원 기관 기록"
+      ]
+     },
+     "format": "text/html"
+    }
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s035/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    },
+    {
+     "id": "https://korea-archive-mcp.vercel.app/iiif/nara/350489859/manifest.json",
+     "type": "Manifest",
+     "label": {
+      "ko": [
+       "NARA 원본 전체(IIIF 브리지)"
+      ]
+     },
+     "format": "application/ld+json"
+    },
+    {
+     "id": "https://korea-archive-mcp.vercel.app/iiif/nara/350489859/record.jsonld",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "NARA 계층 기술(RiC-O)"
+      ]
+     },
+     "format": "application/ld+json"
+    }
+   ],
+   "navDate": "1950-12-01T00:00:00Z",
+   "rights": "http://rightsstatements.org/vocab/NoC-US/1.0/"
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s035/canvas/4",
+   "type": "Canvas",
+   "label": {
+    "ko": [
+     "Photograph of North Korean Refugees Fleeing to the South"
+    ]
+   },
+   "width": 1600,
+   "height": 1323,
+   "metadata": [
+    {
+     "label": {
+      "ko": [
+       "식별자"
+      ]
+     },
+     "value": {
+      "ko": [
+       "NAID 175539221 (111-SC-355576)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "연대"
+      ]
+     },
+     "value": {
+      "ko": [
+       "1951-01-05"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "소장"
+      ]
+     },
+     "value": {
+      "ko": [
+       "미국 국립기록관리청 NARA"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리"
+      ]
+     },
+     "value": {
+      "ko": [
+       "A — Unrestricted"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "보이는 것"
+      ]
+     },
+     "value": {
+      "ko": [
+       "1951-01-05 논길 행렬 · NAID 175539221"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "cf88d391a0c2dc16 — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "원 기관 계보"
+      ]
+     },
+     "value": {
+      "ko": [
+       "NARA › RG 111 Records of the Office of the Chief Signal Officer › Photographs of American Military Activities"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "NARA catalog proxy API useRestriction.status='Unrestricted' (2026-11-22 실측)"
+      ]
+     }
+    }
+   ],
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s035/p_175539221.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "items": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s035/canvas/4/page",
+     "type": "AnnotationPage",
+     "items": [
+      {
+       "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s035/canvas/4/page/a",
+       "type": "Annotation",
+       "motivation": "painting",
+       "target": "https://changgi.github.io/korea-archive-mcp/iiif/m/s035/canvas/4",
+       "body": {
+        "id": "https://changgi.github.io/korea-archive-mcp/iiif/img/s035/p_175539221.jpg",
+        "type": "Image",
+        "format": "image/jpeg",
+        "width": 1600,
+        "height": 1323
+       }
+      }
+     ]
+    }
+   ],
+   "homepage": [
+    {
+     "id": "https://catalog.archives.gov/id/175539221",
+     "type": "Text",
+     "label": {
+      "ko": [
+       "원 기관 기록"
+      ]
+     },
+     "format": "text/html"
+    }
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s035/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    },
+    {
+     "id": "https://korea-archive-mcp.vercel.app/iiif/nara/175539221/manifest.json",
+     "type": "Manifest",
+     "label": {
+      "ko": [
+       "NARA 원본 전체(IIIF 브리지)"
+      ]
+     },
+     "format": "application/ld+json"
+    },
+    {
+     "id": "https://korea-archive-mcp.vercel.app/iiif/nara/175539221/record.jsonld",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "NARA 계층 기술(RiC-O)"
+      ]
+     },
+     "format": "application/ld+json"
+    }
+   ],
+   "navDate": "1951-01-05T00:00:00Z",
+   "rights": "http://rightsstatements.org/vocab/NoC-US/1.0/"
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s035/canvas/5",
+   "type": "Canvas",
+   "label": {
+    "ko": [
+     "Long trek southward: Seemingly endless file of Korean refugees slogs through snow outside of Kangnung, blocking withdrawal of Republic of Korea I Corps."
+    ]
+   },
+   "width": 1600,
+   "height": 1343,
+   "metadata": [
+    {
+     "label": {
+      "ko": [
+       "식별자"
+      ]
+     },
+     "value": {
+      "ko": [
+       "NAID 531397 (111-SC-356475)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "연대"
+      ]
+     },
+     "value": {
+      "ko": [
+       "1951-01-08"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "소장"
+      ]
+     },
+     "value": {
+      "ko": [
+       "미국 국립기록관리청 NARA"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리"
+      ]
+     },
+     "value": {
+      "ko": [
+       "A — Unrestricted"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "보이는 것"
+      ]
+     },
+     "value": {
+      "ko": [
+       "1951-01-08 강릉 눈길 · NAID 531397"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "f453d9a8ddc7e8b9 — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "원 기관 계보"
+      ]
+     },
+     "value": {
+      "ko": [
+       "NARA › RG 111 Records of the Office of the Chief Signal Officer › Photographs of American Military Activities"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "NARA catalog proxy API useRestriction.status='Unrestricted' (2026-11-22 실측)"
+      ]
+     }
+    }
+   ],
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s035/p_531397.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "items": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s035/canvas/5/page",
+     "type": "AnnotationPage",
+     "items": [
+      {
+       "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s035/canvas/5/page/a",
+       "type": "Annotation",
+       "motivation": "painting",
+       "target": "https://changgi.github.io/korea-archive-mcp/iiif/m/s035/canvas/5",
+       "body": {
+        "id": "https://changgi.github.io/korea-archive-mcp/iiif/img/s035/p_531397.jpg",
+        "type": "Image",
+        "format": "image/jpeg",
+        "width": 1600,
+        "height": 1343
+       }
+      }
+     ]
+    }
+   ],
+   "homepage": [
+    {
+     "id": "https://catalog.archives.gov/id/531397",
+     "type": "Text",
+     "label": {
+      "ko": [
+       "원 기관 기록"
+      ]
+     },
+     "format": "text/html"
+    }
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s035/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    },
+    {
+     "id": "https://korea-archive-mcp.vercel.app/iiif/nara/531397/manifest.json",
+     "type": "Manifest",
+     "label": {
+      "ko": [
+       "NARA 원본 전체(IIIF 브리지)"
+      ]
+     },
+     "format": "application/ld+json"
+    },
+    {
+     "id": "https://korea-archive-mcp.vercel.app/iiif/nara/531397/record.jsonld",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "NARA 계층 기술(RiC-O)"
+      ]
+     },
+     "format": "application/ld+json"
+    }
+   ],
+   "navDate": "1951-01-08T00:00:00Z",
+   "rights": "http://rightsstatements.org/vocab/NoC-US/1.0/"
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s035/canvas/6",
+   "type": "Canvas",
+   "label": {
+    "ko": [
+     "Photograph of North Korean Refugees Fleeing to the South"
+    ]
+   },
+   "width": 1600,
+   "height": 1333,
+   "metadata": [
+    {
+     "label": {
+      "ko": [
+       "식별자"
+      ]
+     },
+     "value": {
+      "ko": [
+       "NAID 175539217 (111-SC-355572)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "연대"
+      ]
+     },
+     "value": {
+      "ko": [
+       "1951-01-05"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "소장"
+      ]
+     },
+     "value": {
+      "ko": [
+       "미국 국립기록관리청 NARA"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리"
+      ]
+     },
+     "value": {
+      "ko": [
+       "A — Unrestricted"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "보이는 것"
+      ]
+     },
+     "value": {
+      "ko": [
+       "지프 지붕 위에 서서 영화 카메라를 든 사람 — 원 설명 'Sgt. Lester Marks' · 지프 옆면 번호 '20730615' · 보닛 표기 'USA' · 지프 옆에 모여든 두건 쓴 아이들"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "b8ea93a85584e9e9 — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "원 기관 계보"
+      ]
+     },
+     "value": {
+      "ko": [
+       "NARA › RG 111 Records of the Office of the Chief Signal Officer › Photographs of American Military Activities"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "NARA catalog proxy API useRestriction.status='Unrestricted' (2026-11-22 실측)"
+      ]
+     }
+    }
+   ],
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s035/p_175539217.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "items": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s035/canvas/6/page",
+     "type": "AnnotationPage",
+     "items": [
+      {
+       "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s035/canvas/6/page/a",
+       "type": "Annotation",
+       "motivation": "painting",
+       "target": "https://changgi.github.io/korea-archive-mcp/iiif/m/s035/canvas/6",
+       "body": {
+        "id": "https://changgi.github.io/korea-archive-mcp/iiif/img/s035/p_175539217.jpg",
+        "type": "Image",
+        "format": "image/jpeg",
+        "width": 1600,
+        "height": 1333
+       }
+      }
+     ]
+    }
+   ],
+   "homepage": [
+    {
+     "id": "https://catalog.archives.gov/id/175539217",
+     "type": "Text",
+     "label": {
+      "ko": [
+       "원 기관 기록"
+      ]
+     },
+     "format": "text/html"
+    }
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s035/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    },
+    {
+     "id": "https://korea-archive-mcp.vercel.app/iiif/nara/175539217/manifest.json",
+     "type": "Manifest",
+     "label": {
+      "ko": [
+       "NARA 원본 전체(IIIF 브리지)"
+      ]
+     },
+     "format": "application/ld+json"
+    },
+    {
+     "id": "https://korea-archive-mcp.vercel.app/iiif/nara/175539217/record.jsonld",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "NARA 계층 기술(RiC-O)"
+      ]
+     },
+     "format": "application/ld+json"
+    }
+   ],
+   "navDate": "1951-01-05T00:00:00Z",
+   "rights": "http://rightsstatements.org/vocab/NoC-US/1.0/"
+  }
+ ],
+ "homepage": [
+  {
+   "id": "https://catalog.archives.gov/id/175539219",
+   "type": "Text",
+   "label": {
+    "ko": [
+     "원 기관 기록"
+    ]
+   },
+   "format": "text/html"
+  }
+ ],
+ "thumbnail": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s035/p_175539219.jpg",
+   "type": "Image",
+   "format": "image/jpeg"
+  }
+ ]
+}

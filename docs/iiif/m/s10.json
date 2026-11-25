@@ -1,0 +1,1223 @@
+{
+ "@context": "http://iiif.io/api/presentation/3/context.json",
+ "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s10.json",
+ "type": "Manifest",
+ "label": {
+  "ko": [
+   "10 · 대한민국신문아카이브 (국립중앙도서관) — 1908년, 학생들의 단지동맹"
+  ]
+ },
+ "summary": {
+  "ko": [
+   "30곳 탐방 · Ⅱ 개항과 대한제국 · 원 기록: 학도의단지동맹 (대한매일신보 1908.5.6 2면) (1908-05-06) · 국립중앙도서관 대한민국신문아카이브"
+  ]
+ },
+ "metadata": [
+  {
+   "label": {
+    "ko": [
+     "원 기록"
+    ]
+   },
+   "value": {
+    "ko": [
+     "CNTS-00095686434 학도의단지동맹 (대한매일신보 1908.5.6 2면)"
+    ]
+   }
+  },
+  {
+   "label": {
+    "ko": [
+     "소장"
+    ]
+   },
+   "value": {
+    "ko": [
+     "국립중앙도서관 대한민국신문아카이브"
+    ]
+   }
+  },
+  {
+   "label": {
+    "ko": [
+     "계층"
+    ]
+   },
+   "value": {
+    "ko": [
+     "KOREA ARCHIVE 통합검색 › 30곳 탐방 · Ⅱ 개항과 대한제국 › s10"
+    ]
+   }
+  },
+  {
+   "label": {
+    "ko": [
+     "수집 경로"
+    ]
+   },
+   "value": {
+    "ko": [
+     "cross_search(sources=oldnews) → nedb_search(mode=oldnews)"
+    ]
+   }
+  },
+  {
+   "label": {
+    "ko": [
+     "확인일"
+    ]
+   },
+   "value": {
+    "ko": [
+     "2026-11-22"
+    ]
+   }
+  },
+  {
+   "label": {
+    "ko": [
+     "게재 이미지"
+    ]
+   },
+   "value": {
+    "ko": [
+     "7장 · 링크 전용 0건"
+    ]
+   }
+  }
+ ],
+ "partOf": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/c/s30-02.json",
+   "type": "Collection",
+   "label": {
+    "ko": [
+     "30곳 탐방 · Ⅱ 개항과 대한제국"
+    ]
+   }
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/hierarchy.json",
+   "type": "Collection",
+   "label": {
+    "ko": [
+     "KOREA ARCHIVE 통합검색 — 기록 계층"
+    ]
+   }
+  }
+ ],
+ "seeAlso": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/promo/series30v2/img/10/ledger.json",
+   "type": "Dataset",
+   "label": {
+    "ko": [
+     "출처 대장(ledger)"
+    ]
+   },
+   "format": "application/json"
+  }
+ ],
+ "requiredStatement": {
+  "label": {
+   "ko": [
+    "출처"
+   ]
+  },
+  "value": {
+   "ko": [
+    "국립중앙도서관 대한민국신문아카이브 — 이미지별 권리 표시 참조. 협약기관(KOREAN WAR ARCHIVES 6·25전쟁 아카이브센터) 기록은 출처 표기 필수."
+   ]
+  }
+ },
+ "provider": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/",
+   "type": "Agent",
+   "label": {
+    "ko": [
+     "KOREA ARCHIVE 통합검색"
+    ]
+   }
+  }
+ ],
+ "items": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s10/canvas/1",
+   "type": "Canvas",
+   "label": {
+    "ko": [
+     "대한매일신보 1908.5.6 2면 (「학도의단지동맹」 수록면)"
+    ]
+   },
+   "width": 1088,
+   "height": 1600,
+   "metadata": [
+    {
+     "label": {
+      "ko": [
+       "식별자"
+      ]
+     },
+     "value": {
+      "ko": [
+       "CNTS-00095686434"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "연대"
+      ]
+     },
+     "value": {
+      "ko": [
+       "1908-05-06"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "소장"
+      ]
+     },
+     "value": {
+      "ko": [
+       "국립중앙도서관 대한민국신문아카이브"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리"
+      ]
+     },
+     "value": {
+      "ko": [
+       "공표 후 보호기간 만료(1908~1909 대한제국기 신문, 저작권 만료) — 국립중앙도서관 대한민국신문아카이브 출처 표기"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "보이는 것"
+      ]
+     },
+     "value": {
+      "ko": [
+       "상단 제호 '大韓每日申報', 면 표시 '(二)', 날짜 '隆熙二年五月六日' · 우측 상단 '잡보' 란 표제 · 3단 중앙부에 '●학도의단지동맹' 표제 · 하단 '1908. 5. 6 ②'·'980' 표기"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "45496254a2c18728 — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "nlk_search 도구 노트: '1883–1960 고신문 108종. 저작권 만료 — 출처표기 시 자유이용.' / 발행 1908·1909년(저작자 사후 70년 및 공표 후 70년 모두 경과)"
+      ]
+     }
+    }
+   ],
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s10/hero_daehan_19080506_p2.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "items": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s10/canvas/1/page",
+     "type": "AnnotationPage",
+     "items": [
+      {
+       "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s10/canvas/1/page/a",
+       "type": "Annotation",
+       "motivation": "painting",
+       "target": "https://changgi.github.io/korea-archive-mcp/iiif/m/s10/canvas/1",
+       "body": {
+        "id": "https://changgi.github.io/korea-archive-mcp/iiif/img/s10/hero_daehan_19080506_p2.jpg",
+        "type": "Image",
+        "format": "image/jpeg",
+        "width": 1088,
+        "height": 1600
+       }
+      }
+     ]
+    }
+   ],
+   "homepage": [
+    {
+     "id": "https://nl.go.kr/newspaper/detail.do?content_id=CNTS-00095686434",
+     "type": "Text",
+     "label": {
+      "ko": [
+       "원 기관 기록"
+      ]
+     },
+     "format": "text/html"
+    }
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series30v2/img/10/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    }
+   ],
+   "navDate": "1908-05-06T00:00:00Z",
+   "rights": "http://creativecommons.org/publicdomain/mark/1.0/"
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s10/canvas/2",
+   "type": "Canvas",
+   "label": {
+    "ko": [
+     "「학도의단지동맹」 기사 부분 (hero 지면에서 잘라냄)"
+    ]
+   },
+   "width": 796,
+   "height": 1147,
+   "metadata": [
+    {
+     "label": {
+      "ko": [
+       "식별자"
+      ]
+     },
+     "value": {
+      "ko": [
+       "CNTS-00095686434"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "연대"
+      ]
+     },
+     "value": {
+      "ko": [
+       "1908-05-06"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "소장"
+      ]
+     },
+     "value": {
+      "ko": [
+       "국립중앙도서관 대한민국신문아카이브"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리"
+      ]
+     },
+     "value": {
+      "ko": [
+       "공표 후 보호기간 만료(1908~1909 대한제국기 신문, 저작권 만료) — 국립중앙도서관 대한민국신문아카이브 출처 표기"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "보이는 것"
+      ]
+     },
+     "value": {
+      "ko": [
+       "'●학도의단지동맹 함남 관찰ᄉ 한남규씨가 홍원군슈 정면진씨의 보고를 인ᄒ야 학부에 보고ᄒ엿ᄂᆫᄃ' 문구 · '공립보통학교 학도' 및 학도 이름(최승식·강병관·지영슈·김지·한윤덕·손덕현·최도샹) 나열 · 위 칸에 '●법재학도시취' 기사"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "dd065aafdd16fbcc — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "nlk_search 도구 노트: '1883–1960 고신문 108종. 저작권 만료 — 출처표기 시 자유이용.' / 발행 1908·1909년(저작자 사후 70년 및 공표 후 70년 모두 경과)"
+      ]
+     }
+    }
+   ],
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s10/crop_19080506_dangjidongmaeng.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "items": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s10/canvas/2/page",
+     "type": "AnnotationPage",
+     "items": [
+      {
+       "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s10/canvas/2/page/a",
+       "type": "Annotation",
+       "motivation": "painting",
+       "target": "https://changgi.github.io/korea-archive-mcp/iiif/m/s10/canvas/2",
+       "body": {
+        "id": "https://changgi.github.io/korea-archive-mcp/iiif/img/s10/crop_19080506_dangjidongmaeng.jpg",
+        "type": "Image",
+        "format": "image/jpeg",
+        "width": 796,
+        "height": 1147
+       }
+      }
+     ]
+    }
+   ],
+   "homepage": [
+    {
+     "id": "https://nl.go.kr/newspaper/detail.do?content_id=CNTS-00095686434",
+     "type": "Text",
+     "label": {
+      "ko": [
+       "원 기관 기록"
+      ]
+     },
+     "format": "text/html"
+    }
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series30v2/img/10/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    }
+   ],
+   "navDate": "1908-05-06T00:00:00Z",
+   "rights": "http://creativecommons.org/publicdomain/mark/1.0/"
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s10/canvas/3",
+   "type": "Canvas",
+   "label": {
+    "ko": [
+     "대한매일신보(국한문) 1909.3.10 2면 (「斷指同盟」 수록면)"
+    ]
+   },
+   "width": 1100,
+   "height": 1600,
+   "metadata": [
+    {
+     "label": {
+      "ko": [
+       "식별자"
+      ]
+     },
+     "value": {
+      "ko": [
+       "CNTS-00093174431"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "연대"
+      ]
+     },
+     "value": {
+      "ko": [
+       "1909-03-10"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "소장"
+      ]
+     },
+     "value": {
+      "ko": [
+       "국립중앙도서관 대한민국신문아카이브"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리"
+      ]
+     },
+     "value": {
+      "ko": [
+       "공표 후 보호기간 만료(1908~1909 대한제국기 신문, 저작권 만료) — 국립중앙도서관 대한민국신문아카이브 출처 표기"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "보이는 것"
+      ]
+     },
+     "value": {
+      "ko": [
+       "국한문판 지면, 우측 상단 '雜報' 란 · 중단 '學界' 표제 상자 · 하단 중앙 '警告綠林' 표제 · 뷰어 제공 해상도 1191×1733(다른 면보다 낮음)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "418c3616da1fb3b8 — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "nlk_search 도구 노트: '1883–1960 고신문 108종. 저작권 만료 — 출처표기 시 자유이용.' / 발행 1908·1909년(저작자 사후 70년 및 공표 후 70년 모두 경과)"
+      ]
+     }
+    }
+   ],
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s10/daehan_kh_19090310_p2.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "items": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s10/canvas/3/page",
+     "type": "AnnotationPage",
+     "items": [
+      {
+       "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s10/canvas/3/page/a",
+       "type": "Annotation",
+       "motivation": "painting",
+       "target": "https://changgi.github.io/korea-archive-mcp/iiif/m/s10/canvas/3",
+       "body": {
+        "id": "https://changgi.github.io/korea-archive-mcp/iiif/img/s10/daehan_kh_19090310_p2.jpg",
+        "type": "Image",
+        "format": "image/jpeg",
+        "width": 1100,
+        "height": 1600
+       }
+      }
+     ]
+    }
+   ],
+   "homepage": [
+    {
+     "id": "https://nl.go.kr/newspaper/detail.do?content_id=CNTS-00093174431",
+     "type": "Text",
+     "label": {
+      "ko": [
+       "원 기관 기록"
+      ]
+     },
+     "format": "text/html"
+    }
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series30v2/img/10/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    }
+   ],
+   "navDate": "1909-03-10T00:00:00Z",
+   "rights": "http://creativecommons.org/publicdomain/mark/1.0/"
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s10/canvas/4",
+   "type": "Canvas",
+   "label": {
+    "ko": [
+     "대한매일신보 1909.4.28 2면 (「단지회죄오」 수록면)"
+    ]
+   },
+   "width": 1118,
+   "height": 1600,
+   "metadata": [
+    {
+     "label": {
+      "ko": [
+       "식별자"
+      ]
+     },
+     "value": {
+      "ko": [
+       "CNTS-00095706346"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "연대"
+      ]
+     },
+     "value": {
+      "ko": [
+       "1909-04-28"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "소장"
+      ]
+     },
+     "value": {
+      "ko": [
+       "국립중앙도서관 대한민국신문아카이브"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리"
+      ]
+     },
+     "value": {
+      "ko": [
+       "공표 후 보호기간 만료(1908~1909 대한제국기 신문, 저작권 만료) — 국립중앙도서관 대한민국신문아카이브 출처 표기"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "보이는 것"
+      ]
+     },
+     "value": {
+      "ko": [
+       "제호 '大韓每日申報', '隆熙三年四月廿八日', '(二)' · 우측 '잡보' 란 표제 · 하단 '1909. 4. 28 ②'·'2108'"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "31a7e70c473c523c — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "nlk_search 도구 노트: '1883–1960 고신문 108종. 저작권 만료 — 출처표기 시 자유이용.' / 발행 1908·1909년(저작자 사후 70년 및 공표 후 70년 모두 경과)"
+      ]
+     }
+    }
+   ],
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s10/daehan_19090428_p2.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "items": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s10/canvas/4/page",
+     "type": "AnnotationPage",
+     "items": [
+      {
+       "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s10/canvas/4/page/a",
+       "type": "Annotation",
+       "motivation": "painting",
+       "target": "https://changgi.github.io/korea-archive-mcp/iiif/m/s10/canvas/4",
+       "body": {
+        "id": "https://changgi.github.io/korea-archive-mcp/iiif/img/s10/daehan_19090428_p2.jpg",
+        "type": "Image",
+        "format": "image/jpeg",
+        "width": 1118,
+        "height": 1600
+       }
+      }
+     ]
+    }
+   ],
+   "homepage": [
+    {
+     "id": "https://nl.go.kr/newspaper/detail.do?content_id=CNTS-00095706346",
+     "type": "Text",
+     "label": {
+      "ko": [
+       "원 기관 기록"
+      ]
+     },
+     "format": "text/html"
+    }
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series30v2/img/10/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    }
+   ],
+   "navDate": "1909-04-28T00:00:00Z",
+   "rights": "http://creativecommons.org/publicdomain/mark/1.0/"
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s10/canvas/5",
+   "type": "Canvas",
+   "label": {
+    "ko": [
+     "대한매일신보 1909.11.9 3면 (「단지동맹」 — 안중근 보도)"
+    ]
+   },
+   "width": 1142,
+   "height": 1600,
+   "metadata": [
+    {
+     "label": {
+      "ko": [
+       "식별자"
+      ]
+     },
+     "value": {
+      "ko": [
+       "CNTS-00095720903"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "연대"
+      ]
+     },
+     "value": {
+      "ko": [
+       "1909-11-09"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "소장"
+      ]
+     },
+     "value": {
+      "ko": [
+       "국립중앙도서관 대한민국신문아카이브"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리"
+      ]
+     },
+     "value": {
+      "ko": [
+       "공표 후 보호기간 만료(1908~1909 대한제국기 신문, 저작권 만료) — 국립중앙도서관 대한민국신문아카이브 출처 표기"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "보이는 것"
+      ]
+     },
+     "value": {
+      "ko": [
+       "'(三)', '第七百十四號', 제호 '大韓每日申報' · '외보'·'잡보'·'광고' 란 표제 · 하단 '1909. 11. 9 ③'·'2729'"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "49066c73ddc91c45 — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "nlk_search 도구 노트: '1883–1960 고신문 108종. 저작권 만료 — 출처표기 시 자유이용.' / 발행 1908·1909년(저작자 사후 70년 및 공표 후 70년 모두 경과)"
+      ]
+     }
+    }
+   ],
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s10/daehan_19091109_p3.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "items": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s10/canvas/5/page",
+     "type": "AnnotationPage",
+     "items": [
+      {
+       "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s10/canvas/5/page/a",
+       "type": "Annotation",
+       "motivation": "painting",
+       "target": "https://changgi.github.io/korea-archive-mcp/iiif/m/s10/canvas/5",
+       "body": {
+        "id": "https://changgi.github.io/korea-archive-mcp/iiif/img/s10/daehan_19091109_p3.jpg",
+        "type": "Image",
+        "format": "image/jpeg",
+        "width": 1142,
+        "height": 1600
+       }
+      }
+     ]
+    }
+   ],
+   "homepage": [
+    {
+     "id": "https://nl.go.kr/newspaper/detail.do?content_id=CNTS-00095720903",
+     "type": "Text",
+     "label": {
+      "ko": [
+       "원 기관 기록"
+      ]
+     },
+     "format": "text/html"
+    }
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series30v2/img/10/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    }
+   ],
+   "navDate": "1909-11-09T00:00:00Z",
+   "rights": "http://creativecommons.org/publicdomain/mark/1.0/"
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s10/canvas/6",
+   "type": "Canvas",
+   "label": {
+    "ko": [
+     "「단지동맹」 기사 부분 (1909.11.9 3면에서 잘라냄)"
+    ]
+   },
+   "width": 1032,
+   "height": 590,
+   "metadata": [
+    {
+     "label": {
+      "ko": [
+       "식별자"
+      ]
+     },
+     "value": {
+      "ko": [
+       "CNTS-00095720903"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "연대"
+      ]
+     },
+     "value": {
+      "ko": [
+       "1909-11-09"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "소장"
+      ]
+     },
+     "value": {
+      "ko": [
+       "국립중앙도서관 대한민국신문아카이브"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리"
+      ]
+     },
+     "value": {
+      "ko": [
+       "공표 후 보호기간 만료(1908~1909 대한제국기 신문, 저작권 만료) — 국립중앙도서관 대한민국신문아카이브 출처 표기"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "보이는 것"
+      ]
+     },
+     "value": {
+      "ko": [
+       "'▲단지동맹 이등공을 포살ᄒ던 안즁근은' 으로 시작 · '작년봄에 한국사ᄅᆷ 십ᄉ명이 죽기로 결단ᄒ고' 문구 · '좌편손 무명지를 ᄭᅳᆫ헛ᄂᆫᄃ 안즁근도 그즁에 ᄒᆫ사ᄅᆷ이라' 문구"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "3305f5e1f2cee7c2 — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "nlk_search 도구 노트: '1883–1960 고신문 108종. 저작권 만료 — 출처표기 시 자유이용.' / 발행 1908·1909년(저작자 사후 70년 및 공표 후 70년 모두 경과)"
+      ]
+     }
+    }
+   ],
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s10/crop_19091109_dangjidongmaeng.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "items": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s10/canvas/6/page",
+     "type": "AnnotationPage",
+     "items": [
+      {
+       "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s10/canvas/6/page/a",
+       "type": "Annotation",
+       "motivation": "painting",
+       "target": "https://changgi.github.io/korea-archive-mcp/iiif/m/s10/canvas/6",
+       "body": {
+        "id": "https://changgi.github.io/korea-archive-mcp/iiif/img/s10/crop_19091109_dangjidongmaeng.jpg",
+        "type": "Image",
+        "format": "image/jpeg",
+        "width": 1032,
+        "height": 590
+       }
+      }
+     ]
+    }
+   ],
+   "homepage": [
+    {
+     "id": "https://nl.go.kr/newspaper/detail.do?content_id=CNTS-00095720903",
+     "type": "Text",
+     "label": {
+      "ko": [
+       "원 기관 기록"
+      ]
+     },
+     "format": "text/html"
+    }
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series30v2/img/10/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    }
+   ],
+   "navDate": "1909-11-09T00:00:00Z",
+   "rights": "http://creativecommons.org/publicdomain/mark/1.0/"
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s10/canvas/7",
+   "type": "Canvas",
+   "label": {
+    "ko": [
+     "대한매일신보(국한문) 1909.12.11 2면 (「辯士旅順着」 수록면)"
+    ]
+   },
+   "width": 1090,
+   "height": 1600,
+   "metadata": [
+    {
+     "label": {
+      "ko": [
+       "식별자"
+      ]
+     },
+     "value": {
+      "ko": [
+       "CNTS-00093191720"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "연대"
+      ]
+     },
+     "value": {
+      "ko": [
+       "1909-12-11"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "소장"
+      ]
+     },
+     "value": {
+      "ko": [
+       "국립중앙도서관 대한민국신문아카이브"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리"
+      ]
+     },
+     "value": {
+      "ko": [
+       "공표 후 보호기간 만료(1908~1909 대한제국기 신문, 저작권 만료) — 국립중앙도서관 대한민국신문아카이브 출처 표기"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "보이는 것"
+      ]
+     },
+     "value": {
+      "ko": [
+       "'隆熙三年十二月十一日', 제호 '大韓每日申報' · 좌중단 '辯士旅順着' 표제 · '電報'·'雜報'·'國民會上內閣書'·'社會燈' 표제 · 하단 '6068'"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "db91a60522ece431 — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "nlk_search 도구 노트: '1883–1960 고신문 108종. 저작권 만료 — 출처표기 시 자유이용.' / 발행 1908·1909년(저작자 사후 70년 및 공표 후 70년 모두 경과)"
+      ]
+     }
+    }
+   ],
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s10/daehan_kh_19091211_p2.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "items": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s10/canvas/7/page",
+     "type": "AnnotationPage",
+     "items": [
+      {
+       "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s10/canvas/7/page/a",
+       "type": "Annotation",
+       "motivation": "painting",
+       "target": "https://changgi.github.io/korea-archive-mcp/iiif/m/s10/canvas/7",
+       "body": {
+        "id": "https://changgi.github.io/korea-archive-mcp/iiif/img/s10/daehan_kh_19091211_p2.jpg",
+        "type": "Image",
+        "format": "image/jpeg",
+        "width": 1090,
+        "height": 1600
+       }
+      }
+     ]
+    }
+   ],
+   "homepage": [
+    {
+     "id": "https://nl.go.kr/newspaper/detail.do?content_id=CNTS-00093191720",
+     "type": "Text",
+     "label": {
+      "ko": [
+       "원 기관 기록"
+      ]
+     },
+     "format": "text/html"
+    }
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series30v2/img/10/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    }
+   ],
+   "navDate": "1909-12-11T00:00:00Z",
+   "rights": "http://creativecommons.org/publicdomain/mark/1.0/"
+  }
+ ],
+ "homepage": [
+  {
+   "id": "https://nl.go.kr/newspaper/detail.do?content_id=CNTS-00095686434",
+   "type": "Text",
+   "label": {
+    "ko": [
+     "원 기관 기록"
+    ]
+   },
+   "format": "text/html"
+  }
+ ],
+ "thumbnail": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s10/hero_daehan_19080506_p2.jpg",
+   "type": "Image",
+   "format": "image/jpeg"
+  }
+ ],
+ "navDate": "1908-05-06T00:00:00Z"
+}

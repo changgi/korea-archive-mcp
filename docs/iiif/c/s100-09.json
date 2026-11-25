@@ -1,0 +1,192 @@
+{
+ "@context": "http://iiif.io/api/presentation/3/context.json",
+ "id": "https://changgi.github.io/korea-archive-mcp/iiif/c/s100-09.json",
+ "type": "Collection",
+ "label": {
+  "ko": [
+   "100선 · Ⅸ 참전국의 기억"
+  ]
+ },
+ "summary": {
+  "ko": [
+   "100선 · Ⅸ 참전국의 기억 — 시리즈 10개"
+  ]
+ },
+ "partOf": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/hierarchy.json",
+   "type": "Collection"
+  }
+ ],
+ "items": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s051.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "051 · 네덜란드 국립문서보관소 Nationaal Archief — 1951 한국 해역 — 구축함 Evertsen"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s051/hero_evertsen_heli_904-5649.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "navDate": "1951-05-11T00:00:00Z"
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s052.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "052 · 네덜란드 국립문서보관소 Nationaal Archief — 1951–1954 귀환 — 스히폴과 덴헬더"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s052/hero_schiphol_family_934-5479.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "navDate": "1954-12-10T00:00:00Z"
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s053.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "053 · 네덜란드 국립문서보관소 Nationaal Archief — 1951.2.12 도장과 횡성의 밤"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s053/hero_four_men_050-0728.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "navDate": "1950-01-01T00:00:00Z"
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s054.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "054 · 호주 전쟁기념관 AWM — 1950.11 박천 — 3RAR의 북진과 철수"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s054/hero_awm_C274531.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "navDate": "1950-11-04T00:00:00Z"
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s055.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "055 · 호주 전쟁기념관 AWM — 1951 마량산 — 코만도 작전"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s055/hero_awm_C14395.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "navDate": "1951-09-01T00:00:00Z"
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s056.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "056 · 호주 전쟁기념관 AWM — 1953.7.27 휴전 — 후크 고지"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s056/hero_awm_C280419.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "navDate": "1953-07-27T00:00:00Z"
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s057.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "057 · 호주 전쟁기념관 AWM — 바다와 하늘 — HMAS·77대대"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s057/hero_awm_C232942.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s058.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "058 · 뉴질랜드 기록원 Archives NZ — Archives NZ — 파일 목록과 필름 두 편"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s058/hero_slv_206572.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "navDate": "1952-01-01T00:00:00Z"
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s059.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "059 · 디지털NZ DigitalNZ — DigitalNZ — 네 병사와 한 수병의 유품"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s059/hero_kura_footprints06441.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "navDate": "1950-01-01T00:00:00Z"
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s060.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "060 · 디지털NZ DigitalNZ — SAFE CONDUCT PASS — 삐라와 훈장"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s060/hero_board_64995.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "navDate": "1950-01-01T00:00:00Z"
+  }
+ ]
+}

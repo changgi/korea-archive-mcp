@@ -1,0 +1,1015 @@
+{
+ "@context": "http://iiif.io/api/presentation/3/context.json",
+ "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s079.json",
+ "type": "Manifest",
+ "label": {
+  "ko": [
+   "079 · 독립기념관 한국독립운동정보시스템 — 대한민국임시정부 — 1919 헌법 논의, 1945 서울의 김구"
+  ]
+ },
+ "summary": {
+  "ko": [
+   "100선 · Ⅺ 신문과 독립운동 · 원 기록: 憲法草案再讀 (독립신문 1919-09-06 제6호) (1919-09-06) · 독립기념관 한국독립운동정보시스템"
+  ]
+ },
+ "metadata": [
+  {
+   "label": {
+    "ko": [
+     "원 기록"
+    ]
+   },
+   "value": {
+    "ko": [
+     "DR191909060203 憲法草案再讀 (독립신문 1919-09-06 제6호)"
+    ]
+   }
+  },
+  {
+   "label": {
+    "ko": [
+     "소장"
+    ]
+   },
+   "value": {
+    "ko": [
+     "독립기념관 한국독립운동정보시스템"
+    ]
+   }
+  },
+  {
+   "label": {
+    "ko": [
+     "계층"
+    ]
+   },
+   "value": {
+    "ko": [
+     "KOREA ARCHIVE 통합검색 › 100선 · Ⅺ 신문과 독립운동 › s079"
+    ]
+   }
+  },
+  {
+   "label": {
+    "ko": [
+     "수집 경로"
+    ]
+   },
+   "value": {
+    "ko": [
+     "nedb_search(mode=i815, query='임시헌장') → DR191909060203 · judge_rights(naid=404793111)"
+    ]
+   }
+  },
+  {
+   "label": {
+    "ko": [
+     "확인일"
+    ]
+   },
+   "value": {
+    "ko": [
+     "2026-11-22"
+    ]
+   }
+  },
+  {
+   "label": {
+    "ko": [
+     "게재 이미지"
+    ]
+   },
+   "value": {
+    "ko": [
+     "5장 · 링크 전용 2건"
+    ]
+   }
+  }
+ ],
+ "partOf": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/c/s100-11.json",
+   "type": "Collection",
+   "label": {
+    "ko": [
+     "100선 · Ⅺ 신문과 독립운동"
+    ]
+   }
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/hierarchy.json",
+   "type": "Collection",
+   "label": {
+    "ko": [
+     "KOREA ARCHIVE 통합검색 — 기록 계층"
+    ]
+   }
+  }
+ ],
+ "seeAlso": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s079/ledger.json",
+   "type": "Dataset",
+   "label": {
+    "ko": [
+     "출처 대장(ledger)"
+    ]
+   },
+   "format": "application/json"
+  }
+ ],
+ "requiredStatement": {
+  "label": {
+   "ko": [
+    "출처"
+   ]
+  },
+  "value": {
+   "ko": [
+    "독립기념관 한국독립운동정보시스템 — 이미지별 권리 표시 참조. 협약기관(KOREAN WAR ARCHIVES 6·25전쟁 아카이브센터) 기록은 출처 표기 필수."
+   ]
+  }
+ },
+ "provider": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/",
+   "type": "Agent",
+   "label": {
+    "ko": [
+     "KOREA ARCHIVE 통합검색"
+    ]
+   }
+  }
+ ],
+ "items": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s079/canvas/1",
+   "type": "Canvas",
+   "label": {
+    "ko": [
+     "Mr. Koo Kim Sits at His Desk in Seoul, Korea"
+    ]
+   },
+   "width": 1186,
+   "height": 1600,
+   "metadata": [
+    {
+     "label": {
+      "ko": [
+       "식별자"
+      ]
+     },
+     "value": {
+      "ko": [
+       "NAID 404793111"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "연대"
+      ]
+     },
+     "value": {
+      "ko": [
+       "1945"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "소장"
+      ]
+     },
+     "value": {
+      "ko": [
+       "독립기념관 한국독립운동정보시스템"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리"
+      ]
+     },
+     "value": {
+      "ko": [
+       "A — NARA Use Restriction 'Unrestricted' (judge_rights 실확인)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "보이는 것"
+      ]
+     },
+     "value": {
+      "ko": [
+       "사진 카드 'SC-223975' 설명문 · 둥근 안경, 양복 차림 인물이 책상 앞에 앉음"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "6d22a65715cc05ad — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "원 기관 계보"
+      ]
+     },
+     "value": {
+      "ko": [
+       "NARA › RG 319 Records of the Army Staff › Photographs of U.S. and Foreign Military Personnel, Defense Department and Other Government Officials, Royalty, and Heads of State › Kim Koo"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "judge_rights: 'Class: A · Basis: NARA 카탈로그 Use Restriction Unrestricted 실확인'"
+      ]
+     }
+    }
+   ],
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s079/nara_SC223975.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "items": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s079/canvas/1/page",
+     "type": "AnnotationPage",
+     "items": [
+      {
+       "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s079/canvas/1/page/a",
+       "type": "Annotation",
+       "motivation": "painting",
+       "target": "https://changgi.github.io/korea-archive-mcp/iiif/m/s079/canvas/1",
+       "body": {
+        "id": "https://changgi.github.io/korea-archive-mcp/iiif/img/s079/nara_SC223975.jpg",
+        "type": "Image",
+        "format": "image/jpeg",
+        "width": 1186,
+        "height": 1600
+       }
+      }
+     ]
+    }
+   ],
+   "homepage": [
+    {
+     "id": "https://catalog.archives.gov/id/404793111",
+     "type": "Text",
+     "label": {
+      "ko": [
+       "원 기관 기록"
+      ]
+     },
+     "format": "text/html"
+    }
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s079/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    },
+    {
+     "id": "https://korea-archive-mcp.vercel.app/iiif/nara/404793111/manifest.json",
+     "type": "Manifest",
+     "label": {
+      "ko": [
+       "NARA 원본 전체(IIIF 브리지)"
+      ]
+     },
+     "format": "application/ld+json"
+    },
+    {
+     "id": "https://korea-archive-mcp.vercel.app/iiif/nara/404793111/record.jsonld",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "NARA 계층 기술(RiC-O)"
+      ]
+     },
+     "format": "application/ld+json"
+    }
+   ],
+   "navDate": "1945-01-01T00:00:00Z",
+   "rights": "http://rightsstatements.org/vocab/NoC-US/1.0/"
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s079/canvas/2",
+   "type": "Canvas",
+   "label": {
+    "ko": [
+     "같은 사진 윗부분(카드+얼굴)"
+    ]
+   },
+   "width": 1334,
+   "height": 1080,
+   "metadata": [
+    {
+     "label": {
+      "ko": [
+       "식별자"
+      ]
+     },
+     "value": {
+      "ko": [
+       "NAID 404793111"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "연대"
+      ]
+     },
+     "value": {
+      "ko": [
+       "1945"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "소장"
+      ]
+     },
+     "value": {
+      "ko": [
+       "독립기념관 한국독립운동정보시스템"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리"
+      ]
+     },
+     "value": {
+      "ko": [
+       "A — NARA Use Restriction 'Unrestricted' (judge_rights 실확인)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "보이는 것"
+      ]
+     },
+     "value": {
+      "ko": [
+       "'Mr. Koo Kim, President, Provincial Korean Government in exile…' · '1945'"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "a63608bdac3f6855 — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "원 기관 계보"
+      ]
+     },
+     "value": {
+      "ko": [
+       "NARA › RG 319 Records of the Army Staff › Photographs of U.S. and Foreign Military Personnel, Defense Department and Other Government Officials, Royalty, and Heads of State › Kim Koo"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "위와 동일"
+      ]
+     }
+    }
+   ],
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s079/crop_nara_SC223975_top.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "items": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s079/canvas/2/page",
+     "type": "AnnotationPage",
+     "items": [
+      {
+       "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s079/canvas/2/page/a",
+       "type": "Annotation",
+       "motivation": "painting",
+       "target": "https://changgi.github.io/korea-archive-mcp/iiif/m/s079/canvas/2",
+       "body": {
+        "id": "https://changgi.github.io/korea-archive-mcp/iiif/img/s079/crop_nara_SC223975_top.jpg",
+        "type": "Image",
+        "format": "image/jpeg",
+        "width": 1334,
+        "height": 1080
+       }
+      }
+     ]
+    }
+   ],
+   "homepage": [
+    {
+     "id": "https://catalog.archives.gov/id/404793111",
+     "type": "Text",
+     "label": {
+      "ko": [
+       "원 기관 기록"
+      ]
+     },
+     "format": "text/html"
+    }
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s079/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    },
+    {
+     "id": "https://korea-archive-mcp.vercel.app/iiif/nara/404793111/manifest.json",
+     "type": "Manifest",
+     "label": {
+      "ko": [
+       "NARA 원본 전체(IIIF 브리지)"
+      ]
+     },
+     "format": "application/ld+json"
+    },
+    {
+     "id": "https://korea-archive-mcp.vercel.app/iiif/nara/404793111/record.jsonld",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "NARA 계층 기술(RiC-O)"
+      ]
+     },
+     "format": "application/ld+json"
+    }
+   ],
+   "navDate": "1945-01-01T00:00:00Z",
+   "rights": "http://rightsstatements.org/vocab/NoC-US/1.0/"
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s079/canvas/3",
+   "type": "Canvas",
+   "label": {
+    "ko": [
+     "Mr. Kim Koo Addresses the First Meeting of the Council at the Capitol Building"
+    ]
+   },
+   "width": 1240,
+   "height": 1600,
+   "metadata": [
+    {
+     "label": {
+      "ko": [
+       "식별자"
+      ]
+     },
+     "value": {
+      "ko": [
+       "NAID 404793113"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "연대"
+      ]
+     },
+     "value": {
+      "ko": [
+       "1946-02-14"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "소장"
+      ]
+     },
+     "value": {
+      "ko": [
+       "독립기념관 한국독립운동정보시스템"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리"
+      ]
+     },
+     "value": {
+      "ko": [
+       "A — NARA Use Restriction 'Unrestricted' (judge_rights 실확인)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "보이는 것"
+      ]
+     },
+     "value": {
+      "ko": [
+       "카드 'SC-233751', '2/14/46' · 마이크 앞에서 종이를 들고 선 인물"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "08122ef3dfd9c91e — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "원 기관 계보"
+      ]
+     },
+     "value": {
+      "ko": [
+       "NARA › RG 319 Records of the Army Staff › Photographs of U.S. and Foreign Military Personnel, Defense Department and Other Government Officials, Royalty, and Heads of State › Kim Koo"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "judge_rights: Class A · Unrestricted"
+      ]
+     }
+    }
+   ],
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s079/nara_SC233751.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "items": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s079/canvas/3/page",
+     "type": "AnnotationPage",
+     "items": [
+      {
+       "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s079/canvas/3/page/a",
+       "type": "Annotation",
+       "motivation": "painting",
+       "target": "https://changgi.github.io/korea-archive-mcp/iiif/m/s079/canvas/3",
+       "body": {
+        "id": "https://changgi.github.io/korea-archive-mcp/iiif/img/s079/nara_SC233751.jpg",
+        "type": "Image",
+        "format": "image/jpeg",
+        "width": 1240,
+        "height": 1600
+       }
+      }
+     ]
+    }
+   ],
+   "homepage": [
+    {
+     "id": "https://catalog.archives.gov/id/404793113",
+     "type": "Text",
+     "label": {
+      "ko": [
+       "원 기관 기록"
+      ]
+     },
+     "format": "text/html"
+    }
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s079/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    },
+    {
+     "id": "https://korea-archive-mcp.vercel.app/iiif/nara/404793113/manifest.json",
+     "type": "Manifest",
+     "label": {
+      "ko": [
+       "NARA 원본 전체(IIIF 브리지)"
+      ]
+     },
+     "format": "application/ld+json"
+    },
+    {
+     "id": "https://korea-archive-mcp.vercel.app/iiif/nara/404793113/record.jsonld",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "NARA 계층 기술(RiC-O)"
+      ]
+     },
+     "format": "application/ld+json"
+    }
+   ],
+   "navDate": "1946-02-14T00:00:00Z",
+   "rights": "http://rightsstatements.org/vocab/NoC-US/1.0/"
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s079/canvas/4",
+   "type": "Canvas",
+   "label": {
+    "ko": [
+     "신한민보 1921.3.3 2면 「대한민국림시정부공보」(잘라냄)"
+    ]
+   },
+   "width": 1600,
+   "height": 1185,
+   "metadata": [
+    {
+     "label": {
+      "ko": [
+       "식별자"
+      ]
+     },
+     "value": {
+      "ko": [
+       "CNTS-00048105296"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "연대"
+      ]
+     },
+     "value": {
+      "ko": [
+       "1921-03-03"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "소장"
+      ]
+     },
+     "value": {
+      "ko": [
+       "독립기념관 한국독립운동정보시스템"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리"
+      ]
+     },
+     "value": {
+      "ko": [
+       "신문아카이브 원문뷰어 서지정보 '저작권유형: 이용 제한이 없습니다.' — 출처: 국립중앙도서관 대한민국신문아카이브(영인본 이미지)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "보이는 것"
+      ]
+     },
+     "value": {
+      "ko": [
+       "'대한민국림시정부공보' 표제"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "b6ceb71bdc530cf1 — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "viewer.nl.go.kr 서지 정보 '저작권유형 이용 제한이 없습니다.'"
+      ]
+     }
+    }
+   ],
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s079/crop_shinhan_19210303_gongbo.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "items": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s079/canvas/4/page",
+     "type": "AnnotationPage",
+     "items": [
+      {
+       "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s079/canvas/4/page/a",
+       "type": "Annotation",
+       "motivation": "painting",
+       "target": "https://changgi.github.io/korea-archive-mcp/iiif/m/s079/canvas/4",
+       "body": {
+        "id": "https://changgi.github.io/korea-archive-mcp/iiif/img/s079/crop_shinhan_19210303_gongbo.jpg",
+        "type": "Image",
+        "format": "image/jpeg",
+        "width": 1600,
+        "height": 1185
+       }
+      }
+     ]
+    }
+   ],
+   "homepage": [
+    {
+     "id": "https://nl.go.kr/newspaper/detail.do?content_id=CNTS-00048105296",
+     "type": "Text",
+     "label": {
+      "ko": [
+       "원 기관 기록"
+      ]
+     },
+     "format": "text/html"
+    }
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s079/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    }
+   ],
+   "navDate": "1921-03-03T00:00:00Z"
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s079/canvas/5",
+   "type": "Canvas",
+   "label": {
+    "ko": [
+     "신한민보 1920.2.10 4면 「대한민국림시정부공보」(잘라냄)"
+    ]
+   },
+   "width": 1600,
+   "height": 843,
+   "metadata": [
+    {
+     "label": {
+      "ko": [
+       "식별자"
+      ]
+     },
+     "value": {
+      "ko": [
+       "CNTS-00048272419"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "연대"
+      ]
+     },
+     "value": {
+      "ko": [
+       "1920-02-10"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "소장"
+      ]
+     },
+     "value": {
+      "ko": [
+       "독립기념관 한국독립운동정보시스템"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리"
+      ]
+     },
+     "value": {
+      "ko": [
+       "신문아카이브 원문뷰어 서지정보 '저작권유형: 이용 제한이 없습니다.' — 출처: 국립중앙도서관 대한민국신문아카이브(영인본 이미지)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "보이는 것"
+      ]
+     },
+     "value": {
+      "ko": [
+       "'대한민국림시정부공보' 표제"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "40b69def2d79da3e — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "viewer.nl.go.kr 서지 정보 '저작권유형 이용 제한이 없습니다.'"
+      ]
+     }
+    }
+   ],
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s079/crop_shinhan_19200210_gongbo.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "items": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s079/canvas/5/page",
+     "type": "AnnotationPage",
+     "items": [
+      {
+       "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s079/canvas/5/page/a",
+       "type": "Annotation",
+       "motivation": "painting",
+       "target": "https://changgi.github.io/korea-archive-mcp/iiif/m/s079/canvas/5",
+       "body": {
+        "id": "https://changgi.github.io/korea-archive-mcp/iiif/img/s079/crop_shinhan_19200210_gongbo.jpg",
+        "type": "Image",
+        "format": "image/jpeg",
+        "width": 1600,
+        "height": 843
+       }
+      }
+     ]
+    }
+   ],
+   "homepage": [
+    {
+     "id": "https://nl.go.kr/newspaper/detail.do?content_id=CNTS-00048272419",
+     "type": "Text",
+     "label": {
+      "ko": [
+       "원 기관 기록"
+      ]
+     },
+     "format": "text/html"
+    }
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s079/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    }
+   ],
+   "navDate": "1920-02-10T00:00:00Z"
+  }
+ ],
+ "homepage": [
+  {
+   "id": "https://search.i815.or.kr/contents/newsPaper/detail.do?newsPaperId=DR191909060203&sortNo=8",
+   "type": "Text",
+   "label": {
+    "ko": [
+     "원 기관 기록"
+    ]
+   },
+   "format": "text/html"
+  }
+ ],
+ "thumbnail": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s079/nara_SC223975.jpg",
+   "type": "Image",
+   "format": "image/jpeg"
+  }
+ ],
+ "navDate": "1919-09-06T00:00:00Z"
+}

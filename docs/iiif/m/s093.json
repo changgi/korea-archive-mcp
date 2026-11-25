@@ -1,0 +1,761 @@
+{
+ "@context": "http://iiif.io/api/presentation/3/context.json",
+ "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s093.json",
+ "type": "Manifest",
+ "label": {
+  "ko": [
+   "093 · 한국학중앙연구원 장서각 — 장서각 '언간' 10건 · '한글 편지' 6건"
+  ]
+ },
+ "summary": {
+  "ko": [
+   "100선 · XIII 조선의 기록문화 2 · 원 기록: 이조어필언간집(李朝御筆諺簡集) + 장서각 언간·한글 편지 목록 () · 한국학중앙연구원 장서각"
+  ]
+ },
+ "metadata": [
+  {
+   "label": {
+    "ko": [
+     "원 기록"
+    ]
+   },
+   "value": {
+    "ko": [
+     "장서각 K4-6988 (MF35-6735) 이조어필언간집(李朝御筆諺簡集) + 장서각 언간·한글 편지 목록"
+    ]
+   }
+  },
+  {
+   "label": {
+    "ko": [
+     "소장"
+    ]
+   },
+   "value": {
+    "ko": [
+     "한국학중앙연구원 장서각"
+    ]
+   }
+  },
+  {
+   "label": {
+    "ko": [
+     "계층"
+    ]
+   },
+   "value": {
+    "ko": [
+     "KOREA ARCHIVE 통합검색 › 100선 · XIII 조선의 기록문화 2 › s093"
+    ]
+   }
+  },
+  {
+   "label": {
+    "ko": [
+     "수집 경로"
+    ]
+   },
+   "value": {
+    "ko": [
+     "nedb_search(mode=jsg, query='어필 언간') → query='K4-6988' + nlk_search(query='諺簡')"
+    ]
+   }
+  },
+  {
+   "label": {
+    "ko": [
+     "확인일"
+    ]
+   },
+   "value": {
+    "ko": [
+     "2026-11-22"
+    ]
+   }
+  },
+  {
+   "label": {
+    "ko": [
+     "게재 이미지"
+    ]
+   },
+   "value": {
+    "ko": [
+     "4장 · 링크 전용 0건"
+    ]
+   }
+  }
+ ],
+ "partOf": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/c/s100-13.json",
+   "type": "Collection",
+   "label": {
+    "ko": [
+     "100선 · XIII 조선의 기록문화 2"
+    ]
+   }
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/hierarchy.json",
+   "type": "Collection",
+   "label": {
+    "ko": [
+     "KOREA ARCHIVE 통합검색 — 기록 계층"
+    ]
+   }
+  }
+ ],
+ "seeAlso": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s093/ledger.json",
+   "type": "Dataset",
+   "label": {
+    "ko": [
+     "출처 대장(ledger)"
+    ]
+   },
+   "format": "application/json"
+  }
+ ],
+ "requiredStatement": {
+  "label": {
+   "ko": [
+    "출처"
+   ]
+  },
+  "value": {
+   "ko": [
+    "한국학중앙연구원 장서각 — 이미지별 권리 표시 참조. 협약기관(KOREAN WAR ARCHIVES 6·25전쟁 아카이브센터) 기록은 출처 표기 필수."
+   ]
+  }
+ },
+ "provider": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/",
+   "type": "Agent",
+   "label": {
+    "ko": [
+     "KOREA ARCHIVE 통합검색"
+    ]
+   }
+  }
+ ],
+ "items": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s093/canvas/1",
+   "type": "Canvas",
+   "label": {
+    "ko": [
+     "諺簡 (1861) 1면"
+    ]
+   },
+   "width": 1600,
+   "height": 1364,
+   "metadata": [
+    {
+     "label": {
+      "ko": [
+       "식별자"
+      ]
+     },
+     "value": {
+      "ko": [
+       "NLK KOL202100958 p1"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "연대"
+      ]
+     },
+     "value": {
+      "ko": [
+       ""
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "소장"
+      ]
+     },
+     "value": {
+      "ko": [
+       "한국학중앙연구원 장서각"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리"
+      ]
+     },
+     "value": {
+      "ko": [
+       "NLK 저작권유형 '이용 제한이 없습니다' — 출처: 국립중앙도서관"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "보이는 것"
+      ]
+     },
+     "value": {
+      "ko": [
+       "첫 줄 「아바님젼」 — 받는 사람 · 본문 가운데에도 「아바님」 · 맨 왼쪽 줄 「오월」로 시작 · 오른쪽 위 붉은 인장 · 왼쪽 아래 소장 관리 표지"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "f4160cb21a2a2e36 — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "NLK 통합뷰어 서지정보: 「서명 諺簡 저자 아바님 수취 발행일 1861---- 발행자 朴瑄壽 發給 저작권유형 이용 제한이 없습니다.」"
+      ]
+     }
+    }
+   ],
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s093/eongan1861_p1.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "items": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s093/canvas/1/page",
+     "type": "AnnotationPage",
+     "items": [
+      {
+       "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s093/canvas/1/page/a",
+       "type": "Annotation",
+       "motivation": "painting",
+       "target": "https://changgi.github.io/korea-archive-mcp/iiif/m/s093/canvas/1",
+       "body": {
+        "id": "https://changgi.github.io/korea-archive-mcp/iiif/img/s093/eongan1861_p1.jpg",
+        "type": "Image",
+        "format": "image/jpeg",
+        "width": 1600,
+        "height": 1364
+       }
+      }
+     ]
+    }
+   ],
+   "homepage": [
+    {
+     "id": "https://viewer.nl.go.kr/nlmivs/viewWonmun_js.jsp?cno=KOL202100958",
+     "type": "Text",
+     "label": {
+      "ko": [
+       "원 기관 기록"
+      ]
+     },
+     "format": "text/html"
+    }
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s093/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s093/canvas/2",
+   "type": "Canvas",
+   "label": {
+    "ko": [
+     "諺簡 (1861) 2면"
+    ]
+   },
+   "width": 1600,
+   "height": 1364,
+   "metadata": [
+    {
+     "label": {
+      "ko": [
+       "식별자"
+      ]
+     },
+     "value": {
+      "ko": [
+       "NLK KOL202100958 p2"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "연대"
+      ]
+     },
+     "value": {
+      "ko": [
+       ""
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "소장"
+      ]
+     },
+     "value": {
+      "ko": [
+       "한국학중앙연구원 장서각"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리"
+      ]
+     },
+     "value": {
+      "ko": [
+       "NLK 저작권유형 '이용 제한이 없습니다' — 출처: 국립중앙도서관"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "보이는 것"
+      ]
+     },
+     "value": {
+      "ko": [
+       "같은 자료 2면"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "71ee09db7656702f — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "NLK 통합뷰어 서지정보: 「서명 諺簡 저자 아바님 수취 발행일 1861---- 발행자 朴瑄壽 發給 저작권유형 이용 제한이 없습니다.」"
+      ]
+     }
+    }
+   ],
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s093/eongan1861_p2.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "items": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s093/canvas/2/page",
+     "type": "AnnotationPage",
+     "items": [
+      {
+       "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s093/canvas/2/page/a",
+       "type": "Annotation",
+       "motivation": "painting",
+       "target": "https://changgi.github.io/korea-archive-mcp/iiif/m/s093/canvas/2",
+       "body": {
+        "id": "https://changgi.github.io/korea-archive-mcp/iiif/img/s093/eongan1861_p2.jpg",
+        "type": "Image",
+        "format": "image/jpeg",
+        "width": 1600,
+        "height": 1364
+       }
+      }
+     ]
+    }
+   ],
+   "homepage": [
+    {
+     "id": "https://viewer.nl.go.kr/nlmivs/viewWonmun_js.jsp?cno=KOL202100958",
+     "type": "Text",
+     "label": {
+      "ko": [
+       "원 기관 기록"
+      ]
+     },
+     "format": "text/html"
+    }
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s093/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s093/canvas/3",
+   "type": "Canvas",
+   "label": {
+    "ko": [
+     "諺簡 (1861) 3면"
+    ]
+   },
+   "width": 1600,
+   "height": 992,
+   "metadata": [
+    {
+     "label": {
+      "ko": [
+       "식별자"
+      ]
+     },
+     "value": {
+      "ko": [
+       "NLK KOL202100958 p3"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "연대"
+      ]
+     },
+     "value": {
+      "ko": [
+       ""
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "소장"
+      ]
+     },
+     "value": {
+      "ko": [
+       "한국학중앙연구원 장서각"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리"
+      ]
+     },
+     "value": {
+      "ko": [
+       "NLK 저작권유형 '이용 제한이 없습니다' — 출처: 국립중앙도서관"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "보이는 것"
+      ]
+     },
+     "value": {
+      "ko": [
+       "같은 자료 3면"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "fb5124c7a8d5ae53 — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "NLK 통합뷰어 서지정보: 「서명 諺簡 저자 아바님 수취 발행일 1861---- 발행자 朴瑄壽 發給 저작권유형 이용 제한이 없습니다.」"
+      ]
+     }
+    }
+   ],
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s093/eongan1861_p3.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "items": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s093/canvas/3/page",
+     "type": "AnnotationPage",
+     "items": [
+      {
+       "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s093/canvas/3/page/a",
+       "type": "Annotation",
+       "motivation": "painting",
+       "target": "https://changgi.github.io/korea-archive-mcp/iiif/m/s093/canvas/3",
+       "body": {
+        "id": "https://changgi.github.io/korea-archive-mcp/iiif/img/s093/eongan1861_p3.jpg",
+        "type": "Image",
+        "format": "image/jpeg",
+        "width": 1600,
+        "height": 992
+       }
+      }
+     ]
+    }
+   ],
+   "homepage": [
+    {
+     "id": "https://viewer.nl.go.kr/nlmivs/viewWonmun_js.jsp?cno=KOL202100958",
+     "type": "Text",
+     "label": {
+      "ko": [
+       "원 기관 기록"
+      ]
+     },
+     "format": "text/html"
+    }
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s093/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s093/canvas/4",
+   "type": "Canvas",
+   "label": {
+    "ko": [
+     "諺簡 (1861) 4면"
+    ]
+   },
+   "width": 1600,
+   "height": 992,
+   "metadata": [
+    {
+     "label": {
+      "ko": [
+       "식별자"
+      ]
+     },
+     "value": {
+      "ko": [
+       "NLK KOL202100958 p4"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "연대"
+      ]
+     },
+     "value": {
+      "ko": [
+       ""
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "소장"
+      ]
+     },
+     "value": {
+      "ko": [
+       "한국학중앙연구원 장서각"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리"
+      ]
+     },
+     "value": {
+      "ko": [
+       "NLK 저작권유형 '이용 제한이 없습니다' — 출처: 국립중앙도서관"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "보이는 것"
+      ]
+     },
+     "value": {
+      "ko": [
+       "같은 자료 4면"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "c60772b223f5c244 — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "NLK 통합뷰어 서지정보: 「서명 諺簡 저자 아바님 수취 발행일 1861---- 발행자 朴瑄壽 發給 저작권유형 이용 제한이 없습니다.」"
+      ]
+     }
+    }
+   ],
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s093/eongan1861_p4.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "items": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s093/canvas/4/page",
+     "type": "AnnotationPage",
+     "items": [
+      {
+       "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s093/canvas/4/page/a",
+       "type": "Annotation",
+       "motivation": "painting",
+       "target": "https://changgi.github.io/korea-archive-mcp/iiif/m/s093/canvas/4",
+       "body": {
+        "id": "https://changgi.github.io/korea-archive-mcp/iiif/img/s093/eongan1861_p4.jpg",
+        "type": "Image",
+        "format": "image/jpeg",
+        "width": 1600,
+        "height": 992
+       }
+      }
+     ]
+    }
+   ],
+   "homepage": [
+    {
+     "id": "https://viewer.nl.go.kr/nlmivs/viewWonmun_js.jsp?cno=KOL202100958",
+     "type": "Text",
+     "label": {
+      "ko": [
+       "원 기관 기록"
+      ]
+     },
+     "format": "text/html"
+    }
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s093/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    }
+   ]
+  }
+ ],
+ "homepage": [
+  {
+   "id": "https://jsg.aks.ac.kr/dir/view?dataId=JSG_K4-6988",
+   "type": "Text",
+   "label": {
+    "ko": [
+     "원 기관 기록"
+    ]
+   },
+   "format": "text/html"
+  }
+ ],
+ "thumbnail": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s093/eongan1861_p1.jpg",
+   "type": "Image",
+   "format": "image/jpeg"
+  }
+ ]
+}

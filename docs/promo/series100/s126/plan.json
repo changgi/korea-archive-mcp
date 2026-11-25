@@ -1,0 +1,156 @@
+{
+ "n": 126,
+ "part": [
+  "XVI",
+  "영상으로 읽는 기록"
+ ],
+ "inst": "미국 국립기록관리청 NARA",
+ "flag": "🇺🇸",
+ "say": "1952년 대통령 취임식 컬러 영상 찾아줘",
+ "head": "1952.8.15 대통령 취임식 — 컬러 필름",
+ "big": "1952.8.15",
+ "facts": [
+  [
+   "계보",
+   "RG 428 해군부 › 군사활동 영상 시리즈"
+  ],
+  [
+   "생산",
+   "1952-08-15"
+  ],
+  [
+   "원본",
+   "MP4 428-NPC-20235 (2분 31초·컬러)"
+  ],
+  [
+   "권리",
+   "Use Restriction 'Undetermined' → B"
+  ]
+ ],
+ "tool": "nara_search('Seoul', record_group=428, moving_images_only=true) → judge_rights(naid=81519) → keyscenes",
+ "link": "https://catalog.archives.gov/id/81519",
+ "checked": "2026-11-22",
+ "tags": "#NARA #대통령취임식 #컬러필름",
+ "hero": {
+  "file": "video/scene_03_027.jpg",
+  "credit": "필름 00:27 장면 · 미국 국립기록관리청 NAID 81519 (428-NPC-20235, 1952-08-15, 연방 저작물, Use Restriction Undetermined → B 명기)"
+ },
+ "hook": "1952년 8월 15일,<br><span class=\"g\">컬러</span>로 남은 취임식",
+ "mosaic": [
+  {
+   "file": "video/scene_05_107.jpg",
+   "label": "필름 1:07 — 마이크 앞의 군 장성"
+  },
+  {
+   "file": "video/scene_07_134.jpg",
+   "label": "필름 1:34 — 깃발 든 학생 대열"
+  },
+  {
+   "file": "video/scene_11_211.jpg",
+   "label": "필름 2:11 — 떠나는 승용차"
+  },
+  {
+   "file": "video/scene_02_010.jpg",
+   "label": "필름 0:10 — 꽃 장식 단상"
+  }
+ ],
+ "mosaic_title": "단상·학생·승용차 — <span class=\"g\">컬러</span> 필름의 장면들",
+ "mosaic_credit": "모두 같은 필름의 장면 · 미국 국립기록관리청 NAID 81519 (428-NPC-20235, 1952-08-15, 연방 저작물, Use Restriction Undetermined → B 명기)",
+ "ann": {
+  "file": "video/scene_04_043.jpg",
+  "boxes": [
+   {
+    "x": 37,
+    "y": 39,
+    "w": 36,
+    "h": 6,
+    "t": "현수막 '大統領就任日光復節紀念式場'"
+   },
+   {
+    "x": 37,
+    "y": 56,
+    "w": 4,
+    "h": 12,
+    "t": "팻말 '麻浦'"
+   },
+   {
+    "x": 51,
+    "y": 56,
+    "w": 6,
+    "h": 5,
+    "t": "태극기"
+   },
+   {
+    "x": 40,
+    "y": 0,
+    "w": 26,
+    "h": 16,
+    "t": "탑 부분을 둘러싼 비계"
+   },
+   {
+    "x": 0,
+    "y": 68,
+    "w": 100,
+    "h": 32,
+    "t": "광장을 메운 사람들"
+   }
+  ],
+  "credit": "필름 00:43 장면(1050×700 프레임) — 표시한 5곳은 화면에서 직접 읽은 것",
+  "crop_y": 0.0
+ },
+ "scenes": [
+  {
+   "title": "NAID 81519 「INAUGURATION OF PRESIDENT SYNGMAN RHEE Seoul, Korea」 (1952-08-15, 2분 31초·컬러)",
+   "credit": "미국 국립기록관리청 NAID 81519 · 장면은 keyscenes 자동 추출(전환 27곳→9장면) · 해설은 화면에서 보이는 것만",
+   "frames": [
+    {
+     "file": "video/scene_02_010.jpg",
+     "tc": "00:10",
+     "cap": "꽃 장식 단상에서 원고를 읽는 흰 양복 차림 인물, 양산을 받쳐 든 사람"
+    },
+    {
+     "file": "video/scene_03_027.jpg",
+     "tc": "00:27",
+     "cap": "흰 옷 차림 사람들이 빼곡히 앉은 식장"
+    },
+    {
+     "file": "video/scene_05_107.jpg",
+     "tc": "01:07",
+     "cap": "마이크 앞의 군 장성 — 표지 '…OF AMERICA'"
+    },
+    {
+     "file": "video/scene_07_134.jpg",
+     "tc": "01:34",
+     "cap": "깃발을 든 흰 옷 차림 학생 대열"
+    }
+   ]
+  },
+  {
+   "title": "같은 필름 후반부",
+   "credit": "미국 국립기록관리청 NAID 81519 (428-NPC-20235, 1952-08-15, 연방 저작물, Use Restriction Undetermined → B 명기)",
+   "frames": [
+    {
+     "file": "video/scene_08_141.jpg",
+     "tc": "01:41",
+     "cap": "단상 앞의 군인·민간인들과 흰 의자"
+    },
+    {
+     "file": "video/scene_09_151.jpg",
+     "tc": "01:51",
+     "cap": "악수하는 군복·양복 차림 사람들"
+    },
+    {
+     "file": "video/scene_10_206.jpg",
+     "tc": "02:06",
+     "cap": "승용차 문 앞에 모인 사람들"
+    },
+    {
+     "file": "video/scene_11_211.jpg",
+     "tc": "02:11",
+     "cap": "떠나는 짙은 색 승용차"
+    }
+   ]
+  }
+ ],
+ "cta_img": "video/scene_05_107.jpg"
+}

@@ -1,0 +1,97 @@
+{
+ "n": 51,
+ "part": [
+  "Ⅸ",
+  "참전국의 기억"
+ ],
+ "inst": "네덜란드 국립문서보관소 Nationaal Archief",
+ "flag": "🇳🇱",
+ "say": "네덜란드 해군 한국전쟁 사진 찾아줘",
+ "head": "1951 한국 해역 — 구축함 Evertsen",
+ "big": "904-5649",
+ "facts": [
+  [
+   "사진",
+   "Fotocollectie Anefo · 해군 공보대(Marvo) 촬영"
+  ],
+  [
+   "기록",
+   "1951-05-11 'Helicopter boven Hr. Ms. \"Evertsen\" in Korea'"
+  ],
+  [
+   "문서",
+   "해군부 인벤토리 2.12.56 (cross_search nlna)"
+  ],
+  [
+   "권리",
+   "Publiek Domein · CC0 (기관 표기)"
+  ]
+ ],
+ "tool": "cross_search(sources=nlna) + Europeana 1417 → 사진 페이지",
+ "link": "http://hdl.handle.net/10648/a8ea058c-d0b4-102d-bcf8-003048976d84",
+ "checked": "2026-11-22",
+ "tags": "#네덜란드 #Evertsen #한국전쟁",
+ "hero": {
+  "file": "src/hero_evertsen_heli_904-5649.jpg",
+  "pos": "center 48%",
+  "credit": "사진: 네덜란드 국립문서보관소 Anefo 904-5649 (Marvo, 1951-05-11, Publiek Domein)"
+ },
+ "hook": "1951년 한국 바다,<br><span class=\"g\">Evertsen</span> 위 헬리콥터",
+ "mosaic": [
+  {
+   "file": "src/wonsan_gun_904-5397.jpg",
+   "label": "원산 앞 '작전 중' · 904-5397",
+   "pos": "center 35%"
+  },
+  {
+   "file": "src/tanker_waveLaird_904-4351.jpg",
+   "label": "영국 급유선 Wave Laird 옆 · 904-4351"
+  },
+  {
+   "file": "src/bridge_winter_071-0736.jpg",
+   "label": "방한복 차림 함교 · 071-0736"
+  },
+  {
+   "file": "src/pietHein_air_905-3350.jpg",
+   "label": "HMS Ocean 헬기에서 본 Piet Hein · 905-3350"
+  }
+ ],
+ "mosaic_title": "한국 해역의 네덜란드 구축함 — <span class=\"g\">사진 4장</span>",
+ "mosaic_credit": "네덜란드 국립문서보관소 Anefo 904-5397(CC0)·904-4351(PD)·905-3350(PD) · Elsevier 071-0736(CC0)",
+ "ann": {
+  "file": "src/hero_evertsen_heli_904-5649.jpg",
+  "crop_y": 0.36,
+  "boxes": [
+   {
+    "x": 60,
+    "y": 46,
+    "w": 20,
+    "h": 11,
+    "t": "헬리콥터 — 꼬리 쪽에 흰 글자·표식"
+   },
+   {
+    "x": 69,
+    "y": 59,
+    "w": 8,
+    "h": 5,
+    "t": "돛대에 걸린 줄무늬 깃발"
+   },
+   {
+    "x": 44,
+    "y": 70,
+    "w": 46,
+    "h": 10,
+    "t": "갑판 위 방한모·외투 차림 승조원들"
+   },
+   {
+    "x": 91,
+    "y": 65,
+    "w": 5,
+    "h": 4,
+    "t": "수평선 위 또 한 척의 배"
+   }
+  ],
+  "credit": "Anefo 904-5649 원본(2503×3298, 복사 네거티브) — 표시는 사진에서 직접 읽은 것"
+ },
+ "cta_img": "src/crew_homeward_071-0738.jpg"
+}

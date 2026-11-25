@@ -1,0 +1,151 @@
+{
+ "n": 31,
+ "part": [
+  "Ⅶ",
+  "전쟁의 기록 2"
+ ],
+ "inst": "미국 국립기록관리청 NARA",
+ "flag": "🇺🇸",
+ "say": "인천상륙작전 원본 사진이랑 영상 찾아줘",
+ "head": "1950.9.15 인천 — 사다리로 넘은 방파제",
+ "big": "NAID 5891320",
+ "facts": [
+  [
+   "사진",
+   "127-N-A3190 · 해병대 사진 파일(RG 127) · 1950-09-15"
+  ],
+  [
+   "원 설명",
+   "\"Leathernecks use scaling ladders to storm ashore at Inchon\" — By SSgt. W. Frank"
+  ],
+  [
+   "영상",
+   "NAID 79592 「OPERATIONS AT INCHON, KOREA」 428-NPC-13480 · 1950-09-17 · 5분 29초"
+  ],
+  [
+   "권리",
+   "사진 Unrestricted(A) · 영상 연방 저작물 Undetermined(B)"
+  ]
+ ],
+ "tool": "nara_search(Inchon) → judge_rights(naid=5891320·532403·520772) · 영상 NAID 79592",
+ "link": "https://catalog.archives.gov/id/5891320",
+ "checked": "2026-11-22",
+ "tags": "#NARA #인천상륙작전",
+ "hero": {
+  "file": "src/i_5891320.jpg",
+  "pos": "center 45%",
+  "credit": "사진: 미국 국립기록관리청 NAID 5891320 (127-N-A3190, 1950-09-15 인천, SSgt. W. Frank, Use Restriction Unrestricted)"
+ },
+ "hook": "1950년 9월 15일,<br><span class=\"g\">방파제</span>에 걸린 사다리",
+ "mosaic": [
+  {
+   "file": "src/i_532403.jpg",
+   "label": "사다리 싣고 방파제로 · NAID 532403"
+  },
+  {
+   "file": "src/i_532399.jpg",
+   "label": "연기 오르는 해안으로 · NAID 532399"
+  },
+  {
+   "file": "src/i_348337521.jpg",
+   "label": "함포 사격의 연기 · NAID 348337521"
+  },
+  {
+   "file": "video/scene_09_312.jpg",
+   "label": "필름 3:12 — 섬 기슭의 폭발 · NAID 79592"
+  }
+ ],
+ "mosaic_title": "사진 3장 + 필름 1편 — 같은 날 <span class=\"g\">인천 앞바다</span>",
+ "mosaic_credit": "NARA NAID 532403·532399·348337521(Credit U.S. Army) — Unrestricted · 영상 NAID 79592(Undetermined → B)",
+ "ann": {
+  "file": "src/i_520772.jpg",
+  "crop_y": 0.24,
+  "title": "NAID 520772 — 보이는 것만 읽었습니다",
+  "boxes": [
+   {
+    "x": 30,
+    "y": 27,
+    "w": 38,
+    "h": 14,
+    "t": "해변에 뱃머리를 댄 LST들 — 원 설명 'Four LST's unload men and equipment on beach'"
+   },
+   {
+    "x": 53,
+    "y": 36.5,
+    "w": 5.5,
+    "h": 5,
+    "t": "선체 흰 글씨 '715' — 원 설명의 LST-715"
+   },
+   {
+    "x": 63,
+    "y": 61,
+    "w": 28,
+    "h": 11,
+    "t": "해안 뒤편으로 이어진 철길"
+   },
+   {
+    "x": 15,
+    "y": 59,
+    "w": 45,
+    "h": 21,
+    "t": "지붕이 부서진 단층 건물과 잔해 더미"
+   }
+  ],
+  "credit": "NAID 520772 원본(3000×2402, 80-G-420027, 1950-09-15) — 표시한 4곳은 사진에서 직접 읽은 것"
+ },
+ "scenes": [
+  {
+   "title": "NAID 79592 「OPERATIONS AT INCHON」 1950-09-17",
+   "credit": "미국 국립기록관리청 NAID 79592 · 428-NPC-13480 · keyscenes 자동 추출(전환 64곳→9장면) · 해설은 화면에서 보이는 것만",
+   "frames": [
+    {
+     "file": "video/scene_01_017.jpg",
+     "tc": "00:17",
+     "cap": "연기가 오르는 항구 시가지, 앞바다의 작은 섬"
+    },
+    {
+     "file": "video/scene_02_046.jpg",
+     "tc": "00:46",
+     "cap": "부두를 따라 여러 곳에서 치솟는 흰 연기"
+    },
+    {
+     "file": "video/scene_03_114.jpg",
+     "tc": "01:14",
+     "cap": "바다 쪽으로 길게 뻗은 둑과 그 위 시설물"
+    },
+    {
+     "file": "video/scene_05_133.jpg",
+     "tc": "01:33",
+     "cap": "물막이 둑으로 나뉜 수면 옆 철길과 지붕들"
+    }
+   ]
+  },
+  {
+   "title": "같은 필름 후반부",
+   "credit": "미국 국립기록관리청 NAID 79592 (연방 저작물, Use Restriction Undetermined → B 명기)",
+   "frames": [
+    {
+     "file": "video/scene_07_228.jpg",
+     "tc": "02:28",
+     "cap": "가느다란 둑길로 육지와 이어진 숲 덮인 섬"
+    },
+    {
+     "file": "video/scene_08_251.jpg",
+     "tc": "02:51",
+     "cap": "섬 언덕 기슭에서 피어오르는 연기"
+    },
+    {
+     "file": "video/scene_09_312.jpg",
+     "tc": "03:12",
+     "cap": "섬 기슭에서 솟는 검은 폭발 연기"
+    },
+    {
+     "file": "video/scene_11_417.jpg",
+     "tc": "04:17",
+     "cap": "큰 함정 앞 수면에 줄지어 나아가는 작은 배들"
+    }
+   ]
+  }
+ ],
+ "cta_img": "src/i_532399.jpg"
+}

@@ -1,0 +1,129 @@
+{
+ "n": 34,
+ "part": [
+  "Ⅶ",
+  "전쟁의 기록 2"
+ ],
+ "inst": "미국 국립기록관리청 NARA",
+ "flag": "🇺🇸",
+ "say": "1945년 9월 서울 일장기 내리는 사진 찾아줘",
+ "head": "1945.9.9 서울 — 내려간 깃발, 오른 깃발",
+ "big": "98-2441",
+ "facts": [
+  [
+   "사진",
+   "트루먼 도서관 98-2439~2441 · 1945-09-09 서울"
+  ],
+  [
+   "출처",
+   "미 태평양육군 총사령부가 1946년 Hannegan 체신장관에게 준 스크랩북"
+  ],
+  [
+   "영상",
+   "NAID 79854 428-NPC-14723 · 2분 54초(카탈로그 날짜 1945-08-08)"
+  ],
+  [
+   "권리",
+   "Undetermined — 미 육군·해군 생산 연방 기록 → B"
+  ]
+ ],
+ "tool": "nara_search(Seoul 1945) → judge_rights(naid=350291339) · 영상 NAID 79854",
+ "link": "https://catalog.archives.gov/id/350291339",
+ "checked": "2026-11-22",
+ "tags": "#NARA #해방 #1945",
+ "hero": {
+  "file": "src/p_350291339.jpg",
+  "pos": "center 35%",
+  "credit": "사진: 미국 국립기록관리청 NAID 350291339 (트루먼 도서관 98-2441, 1945-09-09 서울, 원본 672×800, Use Restriction Undetermined → B)"
+ },
+ "hook": "1945년 9월 9일,<br>서울의 <span class=\"g\">일장기</span>가 내려가다",
+ "mosaic": [
+  {
+   "file": "src/p_350291337.jpg",
+   "label": "성조기 게양 · 98-2440"
+  },
+  {
+   "file": "video/scene_03_033.jpg",
+   "label": "필름 0:33 — 바다를 달리는 상륙정 · NAID 79854"
+  },
+  {
+   "file": "video/scene_07_107.jpg",
+   "label": "필름 1:07 — 성조기 단 배 위 병사들 · NAID 79854"
+  }
+ ],
+ "mosaic_title": "같은 날의 사진 + <span class=\"g\">인천(Jinsen)</span> 상륙 필름",
+ "mosaic_credit": "미국 국립기록관리청 NAID 350291337(98-2440, Undetermined) · 영상 NAID 79854(428-NPC-14723, 연방 저작물 Undetermined → B)",
+ "ann": {
+  "file": "src/p_350291341.jpg",
+  "crop_y": 0.05,
+  "title": "NAID 350291341 (98-2439) — 보이는 것만 읽었습니다",
+  "boxes": [
+   {
+    "x": 45,
+    "y": 26,
+    "w": 31,
+    "h": 14,
+    "t": "현수막 'WELCOME THE U.S.…ARMY!' / 'УРА! СОЮЗНЫЕ АР…'(만세! 연합군)"
+   },
+   {
+    "x": 43,
+    "y": 13,
+    "w": 19,
+    "h": 17,
+    "t": "나란히 걸린 성조기·청천백일기·태극기"
+   },
+   {
+    "x": 62,
+    "y": 11,
+    "w": 7,
+    "h": 14,
+    "t": "그 오른쪽 영국 유니언잭"
+   },
+   {
+    "x": 15,
+    "y": 34,
+    "w": 26,
+    "h": 9,
+    "t": "옥상 난간에서 두 팔을 든 사람들"
+   },
+   {
+    "x": 5,
+    "y": 72,
+    "w": 94,
+    "h": 14,
+    "t": "건물 앞 길가를 따라 늘어선 흰옷 차림 군중"
+   }
+  ],
+  "credit": "NAID 350291341 원본(800×609) — 원 설명 'Korea turned out to witness the formal surrender…'"
+ },
+ "scenes": [
+  {
+   "title": "NAID 79854 「LANDINGS AT JINSEN, KOREA」",
+   "credit": "미국 국립기록관리청 NAID 79854 · 428-NPC-14723 · 연방 저작물 Undetermined → B · 해설은 보이는 것만",
+   "frames": [
+    {
+     "file": "video/scene_03_033.jpg",
+     "tc": "00:33",
+     "cap": "흰 물살을 일으키며 달리는 상륙정들, 멀리 큰 배들"
+    },
+    {
+     "file": "video/scene_06_059.jpg",
+     "tc": "00:59",
+     "cap": "부두 너머 언덕 위 건물들과 다가가는 소형정"
+    },
+    {
+     "file": "video/scene_07_107.jpg",
+     "tc": "01:07",
+     "cap": "성조기를 단 배 위에 모여 선 병사들, 뒤로 숲 언덕"
+    },
+    {
+     "file": "video/scene_139.jpg",
+     "tc": "01:39",
+     "cap": "어두운 실내, 탁자 둘레에 앉은 사람들"
+    }
+   ]
+  }
+ ],
+ "cta_img": "src/p_350291337.jpg",
+ "mosaic_layout": "rows"
+}

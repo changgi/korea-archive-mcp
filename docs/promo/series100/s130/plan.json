@@ -1,0 +1,161 @@
+{
+ "n": 130,
+ "part": [
+  "XVI",
+  "영상으로 읽는 기록"
+ ],
+ "inst": "미국 국립기록관리청 NARA",
+ "flag": "🇺🇸",
+ "say": "1951년 대한민국 해군사관학교 영상 찾아줘",
+ "head": "1951.3.15 대한민국 해군사관학교",
+ "big": "428-NPC-398",
+ "facts": [
+  [
+   "계보",
+   "RG 428 해군부 › 군사활동 영상 시리즈"
+  ],
+  [
+   "생산",
+   "1951-03-15"
+  ],
+  [
+   "원본",
+   "MP4 428-NPC-398 (11분 3초)"
+  ],
+  [
+   "같은 날 묶음",
+   "428-NPC-400 등 'Chinhae, Korea' 표기"
+  ],
+  [
+   "권리",
+   "Use Restriction 'Undetermined' → B"
+  ]
+ ],
+ "tool": "nara_search('Republic of Korea', record_group=428, moving_images_only=true) → judge_rights(naid=75499) → keyscenes",
+ "link": "https://catalog.archives.gov/id/75499",
+ "checked": "2026-11-22",
+ "tags": "#NARA #해군사관학교 #영상기록",
+ "hero": {
+  "file": "video/scene_08_517.jpg",
+  "credit": "필름 05:17 장면 · 미국 국립기록관리청 NAID 75499 (428-NPC-398, 1951-03-15, 연방 저작물, Use Restriction Undetermined → B 명기)"
+ },
+ "hook": "전쟁 중에도 이어진<br><span class=\"g\">해군사관학교</span> 수업",
+ "mosaic": [
+  {
+   "file": "video/scene_05_247.jpg",
+   "label": "필름 2:47 — 나팔을 부는 생도들"
+  },
+  {
+   "file": "video/scene_10_752.jpg",
+   "label": "필름 7:52 — 칠판 앞 역기"
+  },
+  {
+   "file": "video/scene_11_1007.jpg",
+   "label": "필름 10:07 — 언덕에서 본 바다"
+  },
+  {
+   "file": "video/scene_06_320.jpg",
+   "label": "필름 3:20 — 엔진 수업"
+  }
+ ],
+ "mosaic_title": "나팔·역기·바다 — <span class=\"g\">사관학교</span>의 하루",
+ "mosaic_credit": "모두 같은 필름의 장면 · 미국 국립기록관리청 NAID 75499 (428-NPC-398, 1951-03-15, 연방 저작물, Use Restriction Undetermined → B 명기)",
+ "ann": {
+  "file": "video/scene_09_626.jpg",
+  "boxes": [
+   {
+    "x": 13,
+    "y": 33,
+    "w": 5,
+    "h": 16,
+    "t": "패널 세로 글자 '二行程式'"
+   },
+   {
+    "x": 51,
+    "y": 34,
+    "w": 5,
+    "h": 16,
+    "t": "패널 세로 글자 '四行程式'"
+   },
+   {
+    "x": 56,
+    "y": 5,
+    "w": 23,
+    "h": 40,
+    "t": "패널에 붙은 엔진 단면 모형"
+   },
+   {
+    "x": 19,
+    "y": 46,
+    "w": 22,
+    "h": 40,
+    "t": "모형 엔진을 가리키는 정모 차림 교관"
+   },
+   {
+    "x": 0,
+    "y": 86,
+    "w": 90,
+    "h": 14,
+    "t": "책상 위 엔진의 줄지은 부품"
+   }
+  ],
+  "credit": "필름 06:26 장면(1050×700 프레임) — 표시한 5곳은 화면에서 직접 읽은 것",
+  "crop_y": 0.03
+ },
+ "scenes": [
+  {
+   "title": "NAID 75499 「REPUBLIC OF KOREA NAVAL ACADEMY」 (1951-03-15, 11분 3초)",
+   "credit": "미국 국립기록관리청 NAID 75499 · 장면은 keyscenes 자동 추출(전환 25곳→10장면) · 해설은 화면에서 보이는 것만",
+   "frames": [
+    {
+     "file": "video/scene_02_013.jpg",
+     "tc": "00:13",
+     "cap": "빈 연병장에 선 정모 차림 2명, 뒤로 큰 건물"
+    },
+    {
+     "file": "video/scene_03_039.jpg",
+     "tc": "00:39",
+     "cap": "흰 모자 쓴 생도 3명이 장교들 앞에 섰다"
+    },
+    {
+     "file": "video/scene_04_117.jpg",
+     "tc": "01:17",
+     "cap": "총을 메고 행진하는 생도들"
+    },
+    {
+     "file": "video/scene_06_320.jpg",
+     "tc": "03:20",
+     "cap": "엔진 표찰 '舶用三…成汽機'(넷째 글자 흐림) 앞의 교관과 생도들"
+    }
+   ]
+  },
+  {
+   "title": "같은 필름 후반부",
+   "credit": "미국 국립기록관리청 NAID 75499 (428-NPC-398, 1951-03-15, 연방 저작물, Use Restriction Undetermined → B 명기)",
+   "frames": [
+    {
+     "file": "video/scene_07_354.jpg",
+     "tc": "03:54",
+     "cap": "기계 장치를 공구로 다루는 작업복 차림 3명"
+    },
+    {
+     "file": "video/scene_08_517.jpg",
+     "tc": "05:17",
+     "cap": "엔진 단면 모형 패널 앞에서 설명을 듣는 생도들"
+    },
+    {
+     "file": "video/scene_10_752.jpg",
+     "tc": "07:52",
+     "cap": "칠판 앞에서 역기를 머리 위로 든 사람"
+    },
+    {
+     "file": "video/scene_11_1007.jpg",
+     "tc": "10:07",
+     "cap": "언덕 위에서 본 바다와 섬, 해안의 건물들"
+    }
+   ]
+  }
+ ],
+ "cta_img": "video/scene_05_247.jpg",
+ "meta_top": 430
+}

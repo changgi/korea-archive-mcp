@@ -1,0 +1,1223 @@
+{
+ "@context": "http://iiif.io/api/presentation/3/context.json",
+ "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s046.json",
+ "type": "Manifest",
+ "label": {
+  "ko": [
+   "046 · 프랑스 국립도서관 BnF · Gallica — Souvenir de Séoul, Corée (1900)"
+  ]
+ },
+ "summary": {
+  "ko": [
+   "100선 · Ⅷ 유럽이 본 한국 · 원 기록: Souvenir de Séoul, Corée : 1900 / [par M. Courant] (1900) · Bibliothèque nationale de France"
+  ]
+ },
+ "metadata": [
+  {
+   "label": {
+    "ko": [
+     "원 기록"
+    ]
+   },
+   "value": {
+    "ko": [
+     "Gallica ark:/12148/bpt6k54937409 · BnF cb30279374q (사진첩판 cb405896077) Souvenir de Séoul, Corée : 1900 / [par M. Courant]"
+    ]
+   }
+  },
+  {
+   "label": {
+    "ko": [
+     "소장"
+    ]
+   },
+   "value": {
+    "ko": [
+     "Bibliothèque nationale de France"
+    ]
+   }
+  },
+  {
+   "label": {
+    "ko": [
+     "계층"
+    ]
+   },
+   "value": {
+    "ko": [
+     "KOREA ARCHIVE 통합검색 › 100선 · Ⅷ 유럽이 본 한국 › s046"
+    ]
+   }
+  },
+  {
+   "label": {
+    "ko": [
+     "수집 경로"
+    ]
+   },
+   "value": {
+    "ko": [
+     "gallica_search('Pavillon de la Corée exposition') → BnF 카탈로그 폴백 → Gallica ark"
+    ]
+   }
+  },
+  {
+   "label": {
+    "ko": [
+     "확인일"
+    ]
+   },
+   "value": {
+    "ko": [
+     "2026-11-22"
+    ]
+   }
+  },
+  {
+   "label": {
+    "ko": [
+     "게재 이미지"
+    ]
+   },
+   "value": {
+    "ko": [
+     "7장 · 링크 전용 0건"
+    ]
+   }
+  }
+ ],
+ "partOf": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/c/s100-08.json",
+   "type": "Collection",
+   "label": {
+    "ko": [
+     "100선 · Ⅷ 유럽이 본 한국"
+    ]
+   }
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/hierarchy.json",
+   "type": "Collection",
+   "label": {
+    "ko": [
+     "KOREA ARCHIVE 통합검색 — 기록 계층"
+    ]
+   }
+  }
+ ],
+ "seeAlso": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s046/ledger.json",
+   "type": "Dataset",
+   "label": {
+    "ko": [
+     "출처 대장(ledger)"
+    ]
+   },
+   "format": "application/json"
+  }
+ ],
+ "requiredStatement": {
+  "label": {
+   "ko": [
+    "출처"
+   ]
+  },
+  "value": {
+   "ko": [
+    "Bibliothèque nationale de France — 이미지별 권리 표시 참조. 협약기관(KOREAN WAR ARCHIVES 6·25전쟁 아카이브센터) 기록은 출처 표기 필수."
+   ]
+  }
+ },
+ "provider": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/",
+   "type": "Agent",
+   "label": {
+    "ko": [
+     "KOREA ARCHIVE 통합검색"
+    ]
+   }
+  }
+ ],
+ "items": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s046/canvas/1",
+   "type": "Canvas",
+   "label": {
+    "ko": [
+     "Salle du Trône. Vieux Palais de Séoul."
+    ]
+   },
+   "width": 1600,
+   "height": 1141,
+   "metadata": [
+    {
+     "label": {
+      "ko": [
+       "식별자"
+      ]
+     },
+     "value": {
+      "ko": [
+       "Gallica ark:/12148/bpt6k54937409 f.28 (IA bpt6k54937409 n27)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "연대"
+      ]
+     },
+     "value": {
+      "ko": [
+       "1900"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "소장"
+      ]
+     },
+     "value": {
+      "ko": [
+       "Bibliothèque nationale de France"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리"
+      ]
+     },
+     "value": {
+      "ko": [
+       "PD — 1900 공표, 글 Maurice Courant(1935 사망) · Gallica 재이용 조건: 비상업 재이용 자유·출처 'Source gallica.bnf.fr / BnF' 표기 · IA 사본 licenseurl PDM"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "보이는 것"
+      ]
+     },
+     "value": {
+      "ko": [
+       "2층 지붕의 전각과 넓은 돌 기단·계단"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "b1a0deab62c45590 — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "Gallica 문서 첫 면 이용조건: 'La réutilisation non commerciale de ces contenus est libre et gratuite ... maintien de la mention de source' · archive.org/metadata/bpt6k54937409 licenseurl publicdomain/mark"
+      ]
+     }
+    }
+   ],
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s046/souv_n27_photo.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "items": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s046/canvas/1/page",
+     "type": "AnnotationPage",
+     "items": [
+      {
+       "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s046/canvas/1/page/a",
+       "type": "Annotation",
+       "motivation": "painting",
+       "target": "https://changgi.github.io/korea-archive-mcp/iiif/m/s046/canvas/1",
+       "body": {
+        "id": "https://changgi.github.io/korea-archive-mcp/iiif/img/s046/souv_n27_photo.jpg",
+        "type": "Image",
+        "format": "image/jpeg",
+        "width": 1600,
+        "height": 1141
+       }
+      }
+     ]
+    }
+   ],
+   "homepage": [
+    {
+     "id": "https://gallica.bnf.fr/ark:/12148/bpt6k54937409",
+     "type": "Text",
+     "label": {
+      "ko": [
+       "원 기관 기록"
+      ]
+     },
+     "format": "text/html"
+    }
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s046/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    }
+   ],
+   "navDate": "1900-01-01T00:00:00Z",
+   "rights": "http://creativecommons.org/publicdomain/mark/1.0/"
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s046/canvas/2",
+   "type": "Canvas",
+   "label": {
+    "ko": [
+     "표지"
+    ]
+   },
+   "width": 1600,
+   "height": 1227,
+   "metadata": [
+    {
+     "label": {
+      "ko": [
+       "식별자"
+      ]
+     },
+     "value": {
+      "ko": [
+       "Gallica ark:/12148/bpt6k54937409 f.4 (IA bpt6k54937409 n3)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "연대"
+      ]
+     },
+     "value": {
+      "ko": [
+       "1900"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "소장"
+      ]
+     },
+     "value": {
+      "ko": [
+       "Bibliothèque nationale de France"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리"
+      ]
+     },
+     "value": {
+      "ko": [
+       "PD — 1900 공표, 글 Maurice Courant(1935 사망) · Gallica 재이용 조건: 비상업 재이용 자유·출처 'Source gallica.bnf.fr / BnF' 표기 · IA 사본 licenseurl PDM"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "보이는 것"
+      ]
+     },
+     "value": {
+      "ko": [
+       "'1 Grand prix · 2 Médailles d'or · 10 Médailles d'argent · 5 Médailles de bronze · 3 Mentions honorables' · 'Souvenir de Séoul'·'Corée' · 손글씨 '2342' · 원형 장서인 'IMPRIMÉS'"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "b6d1abe2bc38f9ac — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "Gallica 문서 첫 면 이용조건: 'La réutilisation non commerciale de ces contenus est libre et gratuite ... maintien de la mention de source' · archive.org/metadata/bpt6k54937409 licenseurl publicdomain/mark"
+      ]
+     }
+    }
+   ],
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s046/souv_n3_top.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "items": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s046/canvas/2/page",
+     "type": "AnnotationPage",
+     "items": [
+      {
+       "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s046/canvas/2/page/a",
+       "type": "Annotation",
+       "motivation": "painting",
+       "target": "https://changgi.github.io/korea-archive-mcp/iiif/m/s046/canvas/2",
+       "body": {
+        "id": "https://changgi.github.io/korea-archive-mcp/iiif/img/s046/souv_n3_top.jpg",
+        "type": "Image",
+        "format": "image/jpeg",
+        "width": 1600,
+        "height": 1227
+       }
+      }
+     ]
+    }
+   ],
+   "homepage": [
+    {
+     "id": "https://gallica.bnf.fr/ark:/12148/bpt6k54937409",
+     "type": "Text",
+     "label": {
+      "ko": [
+       "원 기관 기록"
+      ]
+     },
+     "format": "text/html"
+    }
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s046/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    }
+   ],
+   "navDate": "1900-01-01T00:00:00Z",
+   "rights": "http://creativecommons.org/publicdomain/mark/1.0/"
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s046/canvas/3",
+   "type": "Canvas",
+   "label": {
+    "ko": [
+     "Le Pavillon Coréen au Champ-de-Mars (Courant)"
+    ]
+   },
+   "width": 1600,
+   "height": 689,
+   "metadata": [
+    {
+     "label": {
+      "ko": [
+       "식별자"
+      ]
+     },
+     "value": {
+      "ko": [
+       "Gallica ark:/12148/bpt6k54937409 f.8 (IA bpt6k54937409 n7)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "연대"
+      ]
+     },
+     "value": {
+      "ko": [
+       "1900"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "소장"
+      ]
+     },
+     "value": {
+      "ko": [
+       "Bibliothèque nationale de France"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리"
+      ]
+     },
+     "value": {
+      "ko": [
+       "PD — 1900 공표, 글 Maurice Courant(1935 사망) · Gallica 재이용 조건: 비상업 재이용 자유·출처 'Source gallica.bnf.fr / BnF' 표기 · IA 사본 licenseurl PDM"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "보이는 것"
+      ]
+     },
+     "value": {
+      "ko": [
+       "제목과 첫 문단 'Perdu sur les frontières ultimes du Champ-de-Mars, adossé à l'avenue de Suffren'"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "4999d4f6d2394822 — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "Gallica 문서 첫 면 이용조건: 'La réutilisation non commerciale de ces contenus est libre et gratuite ... maintien de la mention de source' · archive.org/metadata/bpt6k54937409 licenseurl publicdomain/mark"
+      ]
+     }
+    }
+   ],
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s046/souv_n7_para.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "items": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s046/canvas/3/page",
+     "type": "AnnotationPage",
+     "items": [
+      {
+       "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s046/canvas/3/page/a",
+       "type": "Annotation",
+       "motivation": "painting",
+       "target": "https://changgi.github.io/korea-archive-mcp/iiif/m/s046/canvas/3",
+       "body": {
+        "id": "https://changgi.github.io/korea-archive-mcp/iiif/img/s046/souv_n7_para.jpg",
+        "type": "Image",
+        "format": "image/jpeg",
+        "width": 1600,
+        "height": 689
+       }
+      }
+     ]
+    }
+   ],
+   "homepage": [
+    {
+     "id": "https://gallica.bnf.fr/ark:/12148/bpt6k54937409",
+     "type": "Text",
+     "label": {
+      "ko": [
+       "원 기관 기록"
+      ]
+     },
+     "format": "text/html"
+    }
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s046/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    }
+   ],
+   "navDate": "1900-01-01T00:00:00Z",
+   "rights": "http://creativecommons.org/publicdomain/mark/1.0/"
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s046/canvas/4",
+   "type": "Canvas",
+   "label": {
+    "ko": [
+     "Trône de Sa Majesté l'Empereur de Corée."
+    ]
+   },
+   "width": 1450,
+   "height": 1600,
+   "metadata": [
+    {
+     "label": {
+      "ko": [
+       "식별자"
+      ]
+     },
+     "value": {
+      "ko": [
+       "Gallica ark:/12148/bpt6k54937409 f.30 (IA bpt6k54937409 n29)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "연대"
+      ]
+     },
+     "value": {
+      "ko": [
+       "1900"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "소장"
+      ]
+     },
+     "value": {
+      "ko": [
+       "Bibliothèque nationale de France"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리"
+      ]
+     },
+     "value": {
+      "ko": [
+       "PD — 1900 공표, 글 Maurice Courant(1935 사망) · Gallica 재이용 조건: 비상업 재이용 자유·출처 'Source gallica.bnf.fr / BnF' 표기 · IA 사본 licenseurl PDM"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "보이는 것"
+      ]
+     },
+     "value": {
+      "ko": [
+       "어좌와 뒤 장식"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "94290aa24d817413 — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "Gallica 문서 첫 면 이용조건: 'La réutilisation non commerciale de ces contenus est libre et gratuite ... maintien de la mention de source' · archive.org/metadata/bpt6k54937409 licenseurl publicdomain/mark"
+      ]
+     }
+    }
+   ],
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s046/souv_n29_photo.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "items": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s046/canvas/4/page",
+     "type": "AnnotationPage",
+     "items": [
+      {
+       "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s046/canvas/4/page/a",
+       "type": "Annotation",
+       "motivation": "painting",
+       "target": "https://changgi.github.io/korea-archive-mcp/iiif/m/s046/canvas/4",
+       "body": {
+        "id": "https://changgi.github.io/korea-archive-mcp/iiif/img/s046/souv_n29_photo.jpg",
+        "type": "Image",
+        "format": "image/jpeg",
+        "width": 1450,
+        "height": 1600
+       }
+      }
+     ]
+    }
+   ],
+   "homepage": [
+    {
+     "id": "https://gallica.bnf.fr/ark:/12148/bpt6k54937409",
+     "type": "Text",
+     "label": {
+      "ko": [
+       "원 기관 기록"
+      ]
+     },
+     "format": "text/html"
+    }
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s046/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    }
+   ],
+   "navDate": "1900-01-01T00:00:00Z",
+   "rights": "http://creativecommons.org/publicdomain/mark/1.0/"
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s046/canvas/5",
+   "type": "Canvas",
+   "label": {
+    "ko": [
+     "M. Collin de Plancy ... Promoteur de l'Exposition Coréenne à Paris / S. E. Prince Ming-Young-Tchang, Président d'honneur de la Commission Coréenne"
+    ]
+   },
+   "width": 1600,
+   "height": 1027,
+   "metadata": [
+    {
+     "label": {
+      "ko": [
+       "식별자"
+      ]
+     },
+     "value": {
+      "ko": [
+       "Gallica ark:/12148/bpt6k54937409 f.18 (IA bpt6k54937409 n17)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "연대"
+      ]
+     },
+     "value": {
+      "ko": [
+       "1900"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "소장"
+      ]
+     },
+     "value": {
+      "ko": [
+       "Bibliothèque nationale de France"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리"
+      ]
+     },
+     "value": {
+      "ko": [
+       "PD — 1900 공표, 글 Maurice Courant(1935 사망) · Gallica 재이용 조건: 비상업 재이용 자유·출처 'Source gallica.bnf.fr / BnF' 표기 · IA 사본 licenseurl PDM"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "보이는 것"
+      ]
+     },
+     "value": {
+      "ko": [
+       "양복 차림 두 인물 초상과 캡션"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "c5fe96233e851193 — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "Gallica 문서 첫 면 이용조건: 'La réutilisation non commerciale de ces contenus est libre et gratuite ... maintien de la mention de source' · archive.org/metadata/bpt6k54937409 licenseurl publicdomain/mark"
+      ]
+     }
+    }
+   ],
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s046/souv_n17_top.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "items": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s046/canvas/5/page",
+     "type": "AnnotationPage",
+     "items": [
+      {
+       "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s046/canvas/5/page/a",
+       "type": "Annotation",
+       "motivation": "painting",
+       "target": "https://changgi.github.io/korea-archive-mcp/iiif/m/s046/canvas/5",
+       "body": {
+        "id": "https://changgi.github.io/korea-archive-mcp/iiif/img/s046/souv_n17_top.jpg",
+        "type": "Image",
+        "format": "image/jpeg",
+        "width": 1600,
+        "height": 1027
+       }
+      }
+     ]
+    }
+   ],
+   "homepage": [
+    {
+     "id": "https://gallica.bnf.fr/ark:/12148/bpt6k54937409",
+     "type": "Text",
+     "label": {
+      "ko": [
+       "원 기관 기록"
+      ]
+     },
+     "format": "text/html"
+    }
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s046/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    }
+   ],
+   "navDate": "1900-01-01T00:00:00Z",
+   "rights": "http://creativecommons.org/publicdomain/mark/1.0/"
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s046/canvas/6",
+   "type": "Canvas",
+   "label": {
+    "ko": [
+     "Tireurs à l'arc dans le vieux Palais des Mûriers à Séoul."
+    ]
+   },
+   "width": 1600,
+   "height": 1324,
+   "metadata": [
+    {
+     "label": {
+      "ko": [
+       "식별자"
+      ]
+     },
+     "value": {
+      "ko": [
+       "Gallica ark:/12148/bpt6k54937409 f.46 (IA bpt6k54937409 n45)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "연대"
+      ]
+     },
+     "value": {
+      "ko": [
+       "1900"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "소장"
+      ]
+     },
+     "value": {
+      "ko": [
+       "Bibliothèque nationale de France"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리"
+      ]
+     },
+     "value": {
+      "ko": [
+       "PD — 1900 공표, 글 Maurice Courant(1935 사망) · Gallica 재이용 조건: 비상업 재이용 자유·출처 'Source gallica.bnf.fr / BnF' 표기 · IA 사본 licenseurl PDM"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "보이는 것"
+      ]
+     },
+     "value": {
+      "ko": [
+       "전각 앞 활을 든 사람들"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "91217ea59e2bbea0 — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "Gallica 문서 첫 면 이용조건: 'La réutilisation non commerciale de ces contenus est libre et gratuite ... maintien de la mention de source' · archive.org/metadata/bpt6k54937409 licenseurl publicdomain/mark"
+      ]
+     }
+    }
+   ],
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s046/souv_n45_photo.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "items": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s046/canvas/6/page",
+     "type": "AnnotationPage",
+     "items": [
+      {
+       "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s046/canvas/6/page/a",
+       "type": "Annotation",
+       "motivation": "painting",
+       "target": "https://changgi.github.io/korea-archive-mcp/iiif/m/s046/canvas/6",
+       "body": {
+        "id": "https://changgi.github.io/korea-archive-mcp/iiif/img/s046/souv_n45_photo.jpg",
+        "type": "Image",
+        "format": "image/jpeg",
+        "width": 1600,
+        "height": 1324
+       }
+      }
+     ]
+    }
+   ],
+   "homepage": [
+    {
+     "id": "https://gallica.bnf.fr/ark:/12148/bpt6k54937409",
+     "type": "Text",
+     "label": {
+      "ko": [
+       "원 기관 기록"
+      ]
+     },
+     "format": "text/html"
+    }
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s046/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    }
+   ],
+   "navDate": "1900-01-01T00:00:00Z",
+   "rights": "http://creativecommons.org/publicdomain/mark/1.0/"
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s046/canvas/7",
+   "type": "Canvas",
+   "label": {
+    "ko": [
+     "Porte du Vieux Palais de Séoul."
+    ]
+   },
+   "width": 1600,
+   "height": 1007,
+   "metadata": [
+    {
+     "label": {
+      "ko": [
+       "식별자"
+      ]
+     },
+     "value": {
+      "ko": [
+       "Gallica ark:/12148/bpt6k54937409 f.40 (IA bpt6k54937409 n39)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "연대"
+      ]
+     },
+     "value": {
+      "ko": [
+       "1900"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "소장"
+      ]
+     },
+     "value": {
+      "ko": [
+       "Bibliothèque nationale de France"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리"
+      ]
+     },
+     "value": {
+      "ko": [
+       "PD — 1900 공표, 글 Maurice Courant(1935 사망) · Gallica 재이용 조건: 비상업 재이용 자유·출처 'Source gallica.bnf.fr / BnF' 표기 · IA 사본 licenseurl PDM"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "보이는 것"
+      ]
+     },
+     "value": {
+      "ko": [
+       "궁문과 뒤의 산"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "83e3f362e58fc404 — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "Gallica 문서 첫 면 이용조건: 'La réutilisation non commerciale de ces contenus est libre et gratuite ... maintien de la mention de source' · archive.org/metadata/bpt6k54937409 licenseurl publicdomain/mark"
+      ]
+     }
+    }
+   ],
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s046/souv_n39_photo.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "items": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s046/canvas/7/page",
+     "type": "AnnotationPage",
+     "items": [
+      {
+       "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s046/canvas/7/page/a",
+       "type": "Annotation",
+       "motivation": "painting",
+       "target": "https://changgi.github.io/korea-archive-mcp/iiif/m/s046/canvas/7",
+       "body": {
+        "id": "https://changgi.github.io/korea-archive-mcp/iiif/img/s046/souv_n39_photo.jpg",
+        "type": "Image",
+        "format": "image/jpeg",
+        "width": 1600,
+        "height": 1007
+       }
+      }
+     ]
+    }
+   ],
+   "homepage": [
+    {
+     "id": "https://gallica.bnf.fr/ark:/12148/bpt6k54937409",
+     "type": "Text",
+     "label": {
+      "ko": [
+       "원 기관 기록"
+      ]
+     },
+     "format": "text/html"
+    }
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series100/s046/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    }
+   ],
+   "navDate": "1900-01-01T00:00:00Z",
+   "rights": "http://creativecommons.org/publicdomain/mark/1.0/"
+  }
+ ],
+ "homepage": [
+  {
+   "id": "https://gallica.bnf.fr/ark:/12148/bpt6k54937409",
+   "type": "Text",
+   "label": {
+    "ko": [
+     "원 기관 기록"
+    ]
+   },
+   "format": "text/html"
+  }
+ ],
+ "thumbnail": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s046/souv_n27_photo.jpg",
+   "type": "Image",
+   "format": "image/jpeg"
+  }
+ ],
+ "navDate": "1900-01-01T00:00:00Z"
+}

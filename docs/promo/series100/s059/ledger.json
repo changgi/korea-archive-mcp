@@ -1,0 +1,110 @@
+{
+ "n": 59,
+ "src": "dnz",
+ "record": {
+  "id": "Auckland Libraries Footprints 06441 (DigitalNZ 41712628)",
+  "title": "Four soldiers, Pukekohe, 1950",
+  "date": "1950-01 (기관 기록)",
+  "inst": "Auckland Libraries Heritage Collections",
+  "url": "https://kura.aucklandlibraries.govt.nz/digital/collection/photos/id/37780"
+ },
+ "images": [
+  {
+   "file": "hero_kura_footprints06441.jpg",
+   "role": "hero",
+   "record_id": "Footprints 06441",
+   "title": "Four soldiers, Pukekohe, 1950 — studio portrait of four soldiers from Waiuku and vicinity ... shortly before they were to depart for service in Korea",
+   "date": "1950-01 (기관 기록)",
+   "url": "https://kura.aucklandlibraries.govt.nz/digital/collection/photos/id/37780",
+   "rights": "No known copyright restrictions (Auckland Libraries)",
+   "rights_evidence": "Kura 항목 'Usage Rights: No known copyright restrictions' · 'Attribution: Please acknowledge Auckland Libraries Heritage Collections Footprints 06441' · 'Acknowledgement: courtesy of Waiuku Museum Society'",
+   "w": 1800,
+   "h": 1338,
+   "visible": [
+    "군복 차림 네 사람이 커튼 앞에 앉아 있다",
+    "어깨 휘장 'NEW ZEALAND'",
+    "오른쪽 두 사람 가슴의 약장"
+   ],
+   "nocrop": false
+  },
+  {
+   "file": "am_pennant_646021.jpg",
+   "role": "extra",
+   "record_id": "Auckland Museum 646021",
+   "title": "HMNZS Kiwi pennant; belonged to NZ112509 Seaman Ronald D Williams, RNZN, served Korean War (1950-1951)",
+   "date": "1945-1950",
+   "url": "https://www.aucklandmuseum.com/discover/collections/record/646021",
+   "rights": "CC BY 4.0 — © Auckland Museum",
+   "rights_evidence": "DigitalNZ rights '© Auckland Museum CC BY 4.0' (usage Share·Modify·Use commercially)",
+   "w": 1200,
+   "h": 615,
+   "visible": [
+    "'H·M·N·Z·S KIWI' 글자",
+    "'AKE AKE KIA KAHA' 띠"
+   ],
+   "nocrop": false
+  },
+  {
+   "file": "am_anchor_646012.jpg",
+   "role": "extra",
+   "record_id": "Auckland Museum 646012",
+   "title": "RNZN Leading Hand cloth badge [anchor]; belonged to NZ112509 Seaman Ronald D Williams",
+   "date": "",
+   "url": "https://www.aucklandmuseum.com/discover/collections/record/646012",
+   "rights": "CC BY 4.0 — © Auckland Museum",
+   "rights_evidence": "DigitalNZ rights '© Auckland Museum CC BY 4.0' (usage Share·Modify·Use commercially)",
+   "w": 957,
+   "h": 1200,
+   "visible": [
+    "남색 천 위 금사 닻"
+   ],
+   "nocrop": false
+  },
+  {
+   "file": "am_chevron_646018.jpg",
+   "role": "extra",
+   "record_id": "Auckland Museum 646018",
+   "title": "RNZN naval rank single stripe chevron cloth badge; belonged to NZ112509 Seaman Ronald D Williams",
+   "date": "",
+   "url": "https://www.aucklandmuseum.com/discover/collections/record/646018",
+   "rights": "CC BY 4.0 — © Auckland Museum",
+   "rights_evidence": "DigitalNZ rights '© Auckland Museum CC BY 4.0' (usage Share·Modify·Use commercially)",
+   "w": 1200,
+   "h": 453,
+   "visible": [
+    "금사 갈매기 한 줄"
+   ],
+   "nocrop": false
+  },
+  {
+   "file": "am_anchor_chevron_646011.jpg",
+   "role": "extra",
+   "record_id": "Auckland Museum 646011",
+   "title": "RNZN Naval Anchor badge : Leading Hand – 4 year’s good conduct [anchor & chevron]; belonged to NZ112509 Seaman Ronald D Williams",
+   "date": "",
+   "url": "https://www.aucklandmuseum.com/discover/collections/record/646011",
+   "rights": "CC BY 4.0 — © Auckland Museum",
+   "rights_evidence": "DigitalNZ rights '© Auckland Museum CC BY 4.0' (usage Share·Modify·Use commercially)",
+   "w": 1200,
+   "h": 894,
+   "visible": [
+    "닻과 갈매기"
+   ],
+   "nocrop": false
+  }
+ ],
+ "points": [
+  "Footprints 06441 기술: Waiuku 일대 네 병사, '한국 복무로 떠나기 직전' 스튜디오 사진 — 이름 Russell Shepherd·Max Eisenhut·Lloyd Wells·Alf Furniss",
+  "Footprints 06441 'Date of Image 1950-01' — 기관 기록 그대로(전쟁 발발 1950-06 이전 날짜라 카드엔 날짜 미표기)",
+  "Auckland Museum 646011~646021: NZ112509 수병 Ronald D Williams 유품(1950-1951 한국전쟁 복무)",
+  "DigitalNZ usage/rights 필드로 재사용 가능 여부 1차 확인 → 소장처 기록에서 재확인"
+ ],
+ "video": {
+  "url": "",
+  "length_s": 0,
+  "rights": "",
+  "note": "영상 기록 없음/미사용"
+ },
+ "status": "ok",
+ "notes": "막힘: Wellington City Council Archives(archivesonline.wcc.govt.nz) — Cassells 1952 사진(CC BY 3.0 NZ, DigitalNZ 50969698/50969701) 페이지·이미지 모두 CloudFront 403 'Request blocked' → 미수집. Auckland Museum 웹(aucklandmuseum.com/discover/...) 403 'Access denied', collection-api는 medium(400px)만 200, large/original 403. Palmerston North 'Kayforce Linton' 사진들은 CC BY-NC → 규칙상 미사용. Te Ara 사진은 ATL 허가 필요 문구로 미사용."
+}

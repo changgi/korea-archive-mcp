@@ -1,0 +1,93 @@
+{
+ "n": 42,
+ "part": [
+  "Ⅷ",
+  "유럽이 본 한국"
+ ],
+ "inst": "영국 국립기록관 TNA",
+ "flag": "🇬🇧",
+ "say": "영연방사단 한국 기록 찾아줘",
+ "head": "1영연방사단 — 1953년 대관식 날",
+ "big": "WO 281/702",
+ "facts": [
+  [
+   "TNA 기록",
+   "WO 281/702 Commonwealth Division G Branch — 1영연방사단 사진 12매 포함 (1954 Jan.-June)"
+  ],
+  [
+   "함께 찾은 기록",
+   "WO 373/119/67 Cassels 소장 서훈 추천서 · MW/2 West 장군 'Korea, Talks' (1952-1953)"
+  ],
+  [
+   "이미지",
+   "TNA 사진 미공개 → AWM 사진(Copyright expired)"
+  ]
+ ],
+ "tool": "tna_search('1st Commonwealth Division Korea') → WO 281/702 · AWM 검색('Coronation Parade Korea 1953')",
+ "link": "https://discovery.nationalarchives.gov.uk/details/r/C1818326",
+ "checked": "2026-11-22",
+ "tags": "#TNA #영연방사단 #1953",
+ "hero": {
+  "file": "src/awm_C280168.jpg",
+  "pos": "center 60%",
+  "credit": "사진: 호주전쟁기념관 AWM 157626(C280168) · 1953-06-02 Majon'ni, 1영연방사단 대관식 퍼레이드 · 촬영 Luff, G. M. · Copyright expired - public domain"
+ },
+ "hook": "1953년 6월 2일,<br>한국 땅의 <span class=\"g\">대관식 퍼레이드</span>",
+ "mosaic": [
+  {
+   "file": "src/awm_C40078.jpg",
+   "label": "퍼레이드에 온 한복 차림 주민들 · 044754"
+  },
+  {
+   "file": "src/awm_C328874.jpg",
+   "label": "지켜보는 한국 아이들 · HOBJ4322"
+  },
+  {
+   "file": "src/awm_C328876.jpg",
+   "label": "영연방 항공기 축하 비행 · HOBJ4325"
+  },
+  {
+   "file": "src/awm_C332300.jpg",
+   "label": "클라크 장군을 맞는 캐슬스 소장 · 1952-05"
+  }
+ ],
+ "mosaic_title": "같은 날, <span class=\"g\">구경 온 사람들</span>",
+ "mosaic_credit": "호주전쟁기념관 AWM C40078·C328874·C328876(1953-06-02)·C332300(c.1952-05) — 모두 'Copyright expired - public domain'",
+ "ann": {
+  "file": "src/awm_C280168.jpg",
+  "boxes": [
+   {
+    "x": 0,
+    "y": 14,
+    "w": 42,
+    "h": 17,
+    "t": "깃대 위 깃발들 — AWM 기술 'Flags of the United Nations fly'"
+   },
+   {
+    "x": 0,
+    "y": 72,
+    "w": 23,
+    "h": 21,
+    "t": "전차 옆면 흰 글씨 'Minden'·'XII', 아래 번호 '3456'"
+   },
+   {
+    "x": 26,
+    "y": 57,
+    "w": 62,
+    "h": 33,
+    "t": "접이식 의자에 줄지어 앉은 관중"
+   },
+   {
+    "x": 92,
+    "y": 62,
+    "w": 8,
+    "h": 16,
+    "t": "오른쪽 끝, 관중석 앞에 앉은 한 사람"
+   }
+  ],
+  "credit": "AWM C280168 원본(공개본 640px) — 표시한 4곳은 사진에서 직접 읽은 것 · 따옴표 문구는 AWM 기술 원문",
+  "crop_y": 0.136
+ },
+ "cta_img": "src/awm_C40078.jpg",
+ "meta_top": 500
+}

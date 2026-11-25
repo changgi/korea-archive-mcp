@@ -1,0 +1,97 @@
+{
+ "n": 56,
+ "part": [
+  "Ⅸ",
+  "참전국의 기억"
+ ],
+ "inst": "호주 전쟁기념관 AWM",
+ "flag": "🇦🇺",
+ "say": "1953년 휴전 때 호주군 사진 찾아줘",
+ "head": "1953.7.27 휴전 — 후크 고지",
+ "big": "1953.7.27",
+ "facts": [
+  [
+   "장소",
+   "Majon'ni · The Hook (1 Commonwealth Division 전선)"
+  ],
+  [
+   "기록",
+   "C280419 'Aerial view of The Hook defences' 1953-07-27"
+  ],
+  [
+   "원본",
+   "AWM 공개본 640px"
+  ],
+  [
+   "권리",
+   "Copyright expired - public domain"
+  ]
+ ],
+ "tool": "cross_search(sources=awm,'Korea armistice 1953') → awm.gov.au",
+ "link": "https://www.awm.gov.au/collection/C280419",
+ "checked": "2026-11-22",
+ "tags": "#정전협정 #후크고지 #AWM",
+ "hero": {
+  "file": "src/hero_awm_C280419.jpg",
+  "pos": "center 45%",
+  "credit": "사진: 호주 전쟁기념관 C280419 (Majon'ni, 1953-07-27, Copyright expired - public domain)"
+ },
+ "hook": "1953년 7월 27일,<br><span class=\"g\">후크 고지</span>의 참호선",
+ "mosaic": [
+  {
+   "file": "src/awm_C280423.jpg",
+   "label": "후크 앞 무인지대 골짜기 · 1953-07-27"
+  },
+  {
+   "file": "src/awm_C280409.jpg",
+   "label": "DMZ로 물러나기 전 휴식 · 1953-07-30"
+  },
+  {
+   "file": "src/awm_C329114.jpg",
+   "label": "휴전 다음 날, 땅굴 폭파 준비 · C329114"
+  },
+  {
+   "file": "src/awm_C383251.jpg",
+   "label": "'Peace Camp' 전경 · 1953 · C383251"
+  }
+ ],
+ "mosaic_title": "총성이 멎은 뒤 — <span class=\"g\">사진 4장</span>",
+ "mosaic_credit": "호주 전쟁기념관 C280423·C280409·C329114·C383251 (모두 Copyright expired - public domain)",
+ "ann": {
+  "file": "src/awm_C329133.jpg",
+  "crop_y": 0.1,
+  "title": "휴전 사흘 뒤의 3RAR — 기관 기술: DMZ 철조망 앞 이동 대기",
+  "boxes": [
+   {
+    "x": 93,
+    "y": 10,
+    "w": 7,
+    "h": 40,
+    "t": "필름 가장자리 손글씨 'HOBJ 4537' — 기록번호와 같다"
+   },
+   {
+    "x": 76,
+    "y": 35,
+    "w": 14,
+    "h": 11,
+    "t": "말뚝 위 흰 안내판"
+   },
+   {
+    "x": 23,
+    "y": 34,
+    "w": 56,
+    "h": 37,
+    "t": "소총·배낭을 멘 병사들이 길 위에 모여 있다"
+   },
+   {
+    "x": 6,
+    "y": 15,
+    "w": 86,
+    "h": 13,
+    "t": "뒤편 낮은 산 능선"
+   }
+  ],
+  "credit": "AWM C329133 (Hobson, 1953-07-30 38선) — 표시는 사진에서 직접 읽은 것"
+ },
+ "cta_img": "src/awm_C280418.jpg"
+}

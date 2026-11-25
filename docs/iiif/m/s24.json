@@ -1,0 +1,1066 @@
+{
+ "@context": "http://iiif.io/api/presentation/3/context.json",
+ "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s24.json",
+ "type": "Manifest",
+ "label": {
+  "ko": [
+   "24 · 국가기록원 — 1972년 대통령 현지 시찰 영상까지"
+  ]
+ },
+ "summary": {
+  "ko": [
+   "30곳 탐방 · Ⅴ 현대 한국 · 원 기록: 박정희대통령 새마을운동 현지 시찰 및 농어촌 새마을운동 현황 (1972) · 국가기록원 (생산기관 국립영화제작소 · 철: 고국소식 4집 · 기록물군 국립영상제작소 · 매체 영화필름 · 공개)"
+  ]
+ },
+ "metadata": [
+  {
+   "label": {
+    "ko": [
+     "원 기록"
+    ]
+   },
+   "value": {
+    "ko": [
+     "CEN0004672 (rc_rfile_no 200400012935) 박정희대통령 새마을운동 현지 시찰 및 농어촌 새마을운동 현황"
+    ]
+   }
+  },
+  {
+   "label": {
+    "ko": [
+     "소장"
+    ]
+   },
+   "value": {
+    "ko": [
+     "국가기록원 (생산기관 국립영화제작소 · 철: 고국소식 4집 · 기록물군 국립영상제작소 · 매체 영화필름 · 공개)"
+    ]
+   }
+  },
+  {
+   "label": {
+    "ko": [
+     "계층"
+    ]
+   },
+   "value": {
+    "ko": [
+     "KOREA ARCHIVE 통합검색 › 30곳 탐방 · Ⅴ 현대 한국 › s24"
+    ]
+   }
+  },
+  {
+   "label": {
+    "ko": [
+     "수집 경로"
+    ]
+   },
+   "value": {
+    "ko": [
+     "archives_search('새마을운동')"
+    ]
+   }
+  },
+  {
+   "label": {
+    "ko": [
+     "확인일"
+    ]
+   },
+   "value": {
+    "ko": [
+     "2026-11-22"
+    ]
+   }
+  },
+  {
+   "label": {
+    "ko": [
+     "게재 이미지"
+    ]
+   },
+   "value": {
+    "ko": [
+     "6장 · 링크 전용 0건"
+    ]
+   }
+  }
+ ],
+ "partOf": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/c/s30-05.json",
+   "type": "Collection",
+   "label": {
+    "ko": [
+     "30곳 탐방 · Ⅴ 현대 한국"
+    ]
+   }
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/hierarchy.json",
+   "type": "Collection",
+   "label": {
+    "ko": [
+     "KOREA ARCHIVE 통합검색 — 기록 계층"
+    ]
+   }
+  }
+ ],
+ "seeAlso": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/promo/series30v2/img/24/ledger.json",
+   "type": "Dataset",
+   "label": {
+    "ko": [
+     "출처 대장(ledger)"
+    ]
+   },
+   "format": "application/json"
+  }
+ ],
+ "requiredStatement": {
+  "label": {
+   "ko": [
+    "출처"
+   ]
+  },
+  "value": {
+   "ko": [
+    "국가기록원 (생산기관 국립영화제작소 · 철: 고국소식 4집 · 기록물군 국립영상제작소 · 매체 영화필름 · 공개) — 이미지별 권리 표시 참조. 협약기관(KOREAN WAR ARCHIVES 6·25전쟁 아카이브센터) 기록은 출처 표기 필수."
+   ]
+  }
+ },
+ "provider": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/",
+   "type": "Agent",
+   "label": {
+    "ko": [
+     "KOREA ARCHIVE 통합검색"
+    ]
+   }
+  }
+ ],
+ "items": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s24/canvas/1",
+   "type": "Canvas",
+   "label": {
+    "ko": [
+     "농촌 새마을 운동 지붕 개량 작업"
+    ]
+   },
+   "width": 2000,
+   "height": 1367,
+   "metadata": [
+    {
+     "label": {
+      "ko": [
+       "식별자"
+      ]
+     },
+     "value": {
+      "ko": [
+       "e영상역사관 정부기록사진집 BK 18/3219"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "연대"
+      ]
+     },
+     "value": {
+      "ko": [
+       "1973.07.26 (촬영일)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "소장"
+      ]
+     },
+     "value": {
+      "ko": [
+       "국가기록원 (생산기관 국립영화제작소 · 철: 고국소식 4집 · 기록물군 국립영상제작소 · 매체 영화필름 · 공개)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리"
+      ]
+     },
+     "value": {
+      "ko": [
+       "공공누리 제4유형 (출처표시+상업적 이용금지+변경금지) — 자르지 말고 원형 사용 · 원본 무변경 게재"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "보이는 것"
+      ]
+     },
+     "value": {
+      "ko": [
+       "기와지붕 위에 남성 4명(2명 서 있고 2명 허리 숙여 기와를 다룸) · 지붕 오른쪽 부분은 기와가 걷혀 흙이 드러나고 기와가 쌓여 있음 · 배경에 계단식 논과 산 · 왼쪽 위로 전선 여러 가닥"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "2a0fbaaea22ef128 — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "페이지 문구: \"농촌 새마을 운동 지붕 개량 작업\" 저작물은 \"공공누리 제4유형 [출처표시+상업적 이용금지+변경금지]\" 조건에 따라 이용 할 수 있습니다."
+      ]
+     }
+    }
+   ],
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s24/hero_roof_1973_nocrop.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "items": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s24/canvas/1/page",
+     "type": "AnnotationPage",
+     "items": [
+      {
+       "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s24/canvas/1/page/a",
+       "type": "Annotation",
+       "motivation": "painting",
+       "target": "https://changgi.github.io/korea-archive-mcp/iiif/m/s24/canvas/1",
+       "body": {
+        "id": "https://changgi.github.io/korea-archive-mcp/iiif/img/s24/hero_roof_1973_nocrop.jpg",
+        "type": "Image",
+        "format": "image/jpeg",
+        "width": 2000,
+        "height": 1367
+       }
+      }
+     ]
+    }
+   ],
+   "homepage": [
+    {
+     "id": "https://www.ehistory.go.kr/view/photo?mediasrcgbn=BK&mediagbn=&mediaid=18&mediadtl=3219",
+     "type": "Text",
+     "label": {
+      "ko": [
+       "원 기관 기록"
+      ]
+     },
+     "format": "text/html"
+    }
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series30v2/img/24/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    }
+   ],
+   "navDate": "1973-07-26T00:00:00Z"
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s24/canvas/2",
+   "type": "Canvas",
+   "label": {
+    "ko": [
+     "박정희 대통령 경북 영천군 관정2동 새마을 시찰(3)"
+    ]
+   },
+   "width": 600,
+   "height": 498,
+   "metadata": [
+    {
+     "label": {
+      "ko": [
+       "식별자"
+      ]
+     },
+     "value": {
+      "ko": [
+       "BK 17/2985"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "연대"
+      ]
+     },
+     "value": {
+      "ko": [
+       "1972.03.24"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "소장"
+      ]
+     },
+     "value": {
+      "ko": [
+       "국가기록원 (생산기관 국립영화제작소 · 철: 고국소식 4집 · 기록물군 국립영상제작소 · 매체 영화필름 · 공개)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리"
+      ]
+     },
+     "value": {
+      "ko": [
+       "공공누리 제4유형 — 원형 사용 · 원본 무변경 게재"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "보이는 것"
+      ]
+     },
+     "value": {
+      "ko": [
+       "검은 승용차 창문 안에 웃는 남성 2명 · 창밖으로 내민 손을 아이가 잡음 · 앞쪽에 아이 2명 뒷모습/옆모습"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "77e9874cad0a5a70 — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "페이지 공공누리 제4유형 문구(동일 형식)"
+      ]
+     }
+    }
+   ],
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s24/yeongcheon_car_1972_nocrop.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "items": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s24/canvas/2/page",
+     "type": "AnnotationPage",
+     "items": [
+      {
+       "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s24/canvas/2/page/a",
+       "type": "Annotation",
+       "motivation": "painting",
+       "target": "https://changgi.github.io/korea-archive-mcp/iiif/m/s24/canvas/2",
+       "body": {
+        "id": "https://changgi.github.io/korea-archive-mcp/iiif/img/s24/yeongcheon_car_1972_nocrop.jpg",
+        "type": "Image",
+        "format": "image/jpeg",
+        "width": 600,
+        "height": 498
+       }
+      }
+     ]
+    }
+   ],
+   "homepage": [
+    {
+     "id": "https://www.ehistory.go.kr/view/photo?mediasrcgbn=BK&mediagbn=&mediaid=17&mediadtl=2985",
+     "type": "Text",
+     "label": {
+      "ko": [
+       "원 기관 기록"
+      ]
+     },
+     "format": "text/html"
+    }
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series30v2/img/24/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    }
+   ],
+   "navDate": "1972-03-24T00:00:00Z"
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s24/canvas/3",
+   "type": "Canvas",
+   "label": {
+    "ko": [
+     "박정희 대통령 경북 영천군 관정2동 새마을 시찰(2)"
+    ]
+   },
+   "width": 600,
+   "height": 498,
+   "metadata": [
+    {
+     "label": {
+      "ko": [
+       "식별자"
+      ]
+     },
+     "value": {
+      "ko": [
+       "BK 17/2986"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "연대"
+      ]
+     },
+     "value": {
+      "ko": [
+       "1972.03.24"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "소장"
+      ]
+     },
+     "value": {
+      "ko": [
+       "국가기록원 (생산기관 국립영화제작소 · 철: 고국소식 4집 · 기록물군 국립영상제작소 · 매체 영화필름 · 공개)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리"
+      ]
+     },
+     "value": {
+      "ko": [
+       "공공누리 제4유형 — 원형 사용 · 원본 무변경 게재"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "보이는 것"
+      ]
+     },
+     "value": {
+      "ko": [
+       "양복 차림 남성이 골목을 걸음, 뒤로 수행원 여러 명 · 오른쪽 문간에 여성 2명과 아이 1명 · 작업복·모자 차림 남성이 서류를 듦 · 상단 간판에 큰 한글 글자 일부"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "ffb6031023c07ee2 — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "페이지 공공누리 제4유형 문구"
+      ]
+     }
+    }
+   ],
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s24/yeongcheon_street_1972_nocrop.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "items": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s24/canvas/3/page",
+     "type": "AnnotationPage",
+     "items": [
+      {
+       "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s24/canvas/3/page/a",
+       "type": "Annotation",
+       "motivation": "painting",
+       "target": "https://changgi.github.io/korea-archive-mcp/iiif/m/s24/canvas/3",
+       "body": {
+        "id": "https://changgi.github.io/korea-archive-mcp/iiif/img/s24/yeongcheon_street_1972_nocrop.jpg",
+        "type": "Image",
+        "format": "image/jpeg",
+        "width": 600,
+        "height": 498
+       }
+      }
+     ]
+    }
+   ],
+   "homepage": [
+    {
+     "id": "https://www.ehistory.go.kr/view/photo?mediasrcgbn=BK&mediagbn=&mediaid=17&mediadtl=2986",
+     "type": "Text",
+     "label": {
+      "ko": [
+       "원 기관 기록"
+      ]
+     },
+     "format": "text/html"
+    }
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series30v2/img/24/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    }
+   ],
+   "navDate": "1972-03-24T00:00:00Z"
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s24/canvas/4",
+   "type": "Canvas",
+   "label": {
+    "ko": [
+     "박정희 대통령 경북 영천군 관정2동 새마을 시찰(1)"
+    ]
+   },
+   "width": 395,
+   "height": 812,
+   "metadata": [
+    {
+     "label": {
+      "ko": [
+       "식별자"
+      ]
+     },
+     "value": {
+      "ko": [
+       "BK 17/2987"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "연대"
+      ]
+     },
+     "value": {
+      "ko": [
+       "1972.03.24"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "소장"
+      ]
+     },
+     "value": {
+      "ko": [
+       "국가기록원 (생산기관 국립영화제작소 · 철: 고국소식 4집 · 기록물군 국립영상제작소 · 매체 영화필름 · 공개)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리"
+      ]
+     },
+     "value": {
+      "ko": [
+       "공공누리 제4유형 — 원형 사용 · 원본 무변경 게재"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "보이는 것"
+      ]
+     },
+     "value": {
+      "ko": [
+       "사진 2장이 위아래로 붙은 한 파일 · 위: 양복 남성이 수도꼭지 아래 양동이 앞에서 몸을 숙임, 한복 여성 1명 등 4명 · 아래: 남성이 부엌 바닥의 항아리에 손을 댐, 오른쪽에 솥뚜껑"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "f6cdc878cba5adb6 — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "페이지 공공누리 제4유형 문구"
+      ]
+     }
+    }
+   ],
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s24/yeongcheon_kitchen_1972_nocrop.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "items": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s24/canvas/4/page",
+     "type": "AnnotationPage",
+     "items": [
+      {
+       "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s24/canvas/4/page/a",
+       "type": "Annotation",
+       "motivation": "painting",
+       "target": "https://changgi.github.io/korea-archive-mcp/iiif/m/s24/canvas/4",
+       "body": {
+        "id": "https://changgi.github.io/korea-archive-mcp/iiif/img/s24/yeongcheon_kitchen_1972_nocrop.jpg",
+        "type": "Image",
+        "format": "image/jpeg",
+        "width": 395,
+        "height": 812
+       }
+      }
+     ]
+    }
+   ],
+   "homepage": [
+    {
+     "id": "https://www.ehistory.go.kr/view/photo?mediasrcgbn=BK&mediagbn=&mediaid=17&mediadtl=2987",
+     "type": "Text",
+     "label": {
+      "ko": [
+       "원 기관 기록"
+      ]
+     },
+     "format": "text/html"
+    }
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series30v2/img/24/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    }
+   ],
+   "navDate": "1972-03-24T00:00:00Z"
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s24/canvas/5",
+   "type": "Canvas",
+   "label": {
+    "ko": [
+     "경북 청도군 새마을 사업장"
+    ]
+   },
+   "width": 600,
+   "height": 760,
+   "metadata": [
+    {
+     "label": {
+      "ko": [
+       "식별자"
+      ]
+     },
+     "value": {
+      "ko": [
+       "BK 17/2988"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "연대"
+      ]
+     },
+     "value": {
+      "ko": [
+       "1972.03.24"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "소장"
+      ]
+     },
+     "value": {
+      "ko": [
+       "국가기록원 (생산기관 국립영화제작소 · 철: 고국소식 4집 · 기록물군 국립영상제작소 · 매체 영화필름 · 공개)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리"
+      ]
+     },
+     "value": {
+      "ko": [
+       "공공누리 제4유형 — 원형 사용 · 원본 무변경 게재"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "보이는 것"
+      ]
+     },
+     "value": {
+      "ko": [
+       "주민 20여 명이 머리 위에 블록을 이고 길을 줄지어 걸음 · 가운데 초가지붕 집 · 앞쪽 밭이랑과 돌 축대 · 배경에 바위산"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "5d5159823c315e44 — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "페이지 공공누리 제4유형 문구"
+      ]
+     }
+    }
+   ],
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s24/cheongdo_blocks_1972_nocrop.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "items": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s24/canvas/5/page",
+     "type": "AnnotationPage",
+     "items": [
+      {
+       "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s24/canvas/5/page/a",
+       "type": "Annotation",
+       "motivation": "painting",
+       "target": "https://changgi.github.io/korea-archive-mcp/iiif/m/s24/canvas/5",
+       "body": {
+        "id": "https://changgi.github.io/korea-archive-mcp/iiif/img/s24/cheongdo_blocks_1972_nocrop.jpg",
+        "type": "Image",
+        "format": "image/jpeg",
+        "width": 600,
+        "height": 760
+       }
+      }
+     ]
+    }
+   ],
+   "homepage": [
+    {
+     "id": "https://www.ehistory.go.kr/view/photo?mediasrcgbn=BK&mediagbn=&mediaid=17&mediadtl=2988",
+     "type": "Text",
+     "label": {
+      "ko": [
+       "원 기관 기록"
+      ]
+     },
+     "format": "text/html"
+    }
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series30v2/img/24/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    }
+   ],
+   "navDate": "1972-03-24T00:00:00Z"
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s24/canvas/6",
+   "type": "Canvas",
+   "label": {
+    "ko": [
+     "경남 거창군 부녀회원 새마을사업장"
+    ]
+   },
+   "width": 600,
+   "height": 760,
+   "metadata": [
+    {
+     "label": {
+      "ko": [
+       "식별자"
+      ]
+     },
+     "value": {
+      "ko": [
+       "BK 17/2989"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "연대"
+      ]
+     },
+     "value": {
+      "ko": [
+       "1972.03.27"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "소장"
+      ]
+     },
+     "value": {
+      "ko": [
+       "국가기록원 (생산기관 국립영화제작소 · 철: 고국소식 4집 · 기록물군 국립영상제작소 · 매체 영화필름 · 공개)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리"
+      ]
+     },
+     "value": {
+      "ko": [
+       "공공누리 제4유형 — 원형 사용 · 원본 무변경 게재"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "보이는 것"
+      ]
+     },
+     "value": {
+      "ko": [
+       "강변 공터에 시멘트 블록 수천 개가 줄지어 건조 중 · 블록을 실은 손수레 3대 · 머릿수건 쓴 여성들이 무리 지어 작업"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "08acb4d1e71c5e8c — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "페이지 공공누리 제4유형 문구"
+      ]
+     }
+    }
+   ],
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s24/geochang_blockyard_1972_nocrop.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "items": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s24/canvas/6/page",
+     "type": "AnnotationPage",
+     "items": [
+      {
+       "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s24/canvas/6/page/a",
+       "type": "Annotation",
+       "motivation": "painting",
+       "target": "https://changgi.github.io/korea-archive-mcp/iiif/m/s24/canvas/6",
+       "body": {
+        "id": "https://changgi.github.io/korea-archive-mcp/iiif/img/s24/geochang_blockyard_1972_nocrop.jpg",
+        "type": "Image",
+        "format": "image/jpeg",
+        "width": 600,
+        "height": 760
+       }
+      }
+     ]
+    }
+   ],
+   "homepage": [
+    {
+     "id": "https://www.ehistory.go.kr/view/photo?mediasrcgbn=BK&mediagbn=&mediaid=17&mediadtl=2989",
+     "type": "Text",
+     "label": {
+      "ko": [
+       "원 기관 기록"
+      ]
+     },
+     "format": "text/html"
+    }
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series30v2/img/24/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    }
+   ],
+   "navDate": "1972-03-27T00:00:00Z"
+  }
+ ],
+ "homepage": [
+  {
+   "id": "https://www.archives.go.kr/next/newsearch/showDetailPopup.do?rc_code=1310377&rc_rfile_no=200400012935&rc_ritem_no=000000000001",
+   "type": "Text",
+   "label": {
+    "ko": [
+     "원 기관 기록"
+    ]
+   },
+   "format": "text/html"
+  }
+ ],
+ "thumbnail": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s24/hero_roof_1973_nocrop.jpg",
+   "type": "Image",
+   "format": "image/jpeg"
+  }
+ ],
+ "navDate": "1972-01-01T00:00:00Z"
+}

@@ -1,0 +1,1072 @@
+{
+ "@context": "http://iiif.io/api/presentation/3/context.json",
+ "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s09.json",
+ "type": "Manifest",
+ "label": {
+  "ko": [
+   "09 · 유로피아나 Europeana — 독일·영국 기관의 서울 — 권리도 함께"
+  ]
+ },
+ "summary": {
+  "ko": [
+   "30곳 탐방 · Ⅱ 개항과 대한제국 · 원 기록: A line of shops beside a dusty street, with telegraph poles overhead, in Korea. Photograph, ca.1900. (ca.1900) · Europeana (data provider: Wellcome Collection)"
+  ]
+ },
+ "metadata": [
+  {
+   "label": {
+    "ko": [
+     "원 기록"
+    ]
+   },
+   "value": {
+    "ko": [
+     "Europeana /9200579/j874r7jf A line of shops beside a dusty street, with telegraph poles overhead, in Korea. Photograph, ca.1900."
+    ]
+   }
+  },
+  {
+   "label": {
+    "ko": [
+     "소장"
+    ]
+   },
+   "value": {
+    "ko": [
+     "Europeana (data provider: Wellcome Collection)"
+    ]
+   }
+  },
+  {
+   "label": {
+    "ko": [
+     "계층"
+    ]
+   },
+   "value": {
+    "ko": [
+     "KOREA ARCHIVE 통합검색 › 30곳 탐방 · Ⅱ 개항과 대한제국 › s09"
+    ]
+   }
+  },
+  {
+   "label": {
+    "ko": [
+     "수집 경로"
+    ]
+   },
+   "value": {
+    "ko": [
+     "europeana_search('Korea Seoul')"
+    ]
+   }
+  },
+  {
+   "label": {
+    "ko": [
+     "확인일"
+    ]
+   },
+   "value": {
+    "ko": [
+     "2026-11-22"
+    ]
+   }
+  },
+  {
+   "label": {
+    "ko": [
+     "게재 이미지"
+    ]
+   },
+   "value": {
+    "ko": [
+     "6장 · 링크 전용 0건"
+    ]
+   }
+  }
+ ],
+ "partOf": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/c/s30-02.json",
+   "type": "Collection",
+   "label": {
+    "ko": [
+     "30곳 탐방 · Ⅱ 개항과 대한제국"
+    ]
+   }
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/hierarchy.json",
+   "type": "Collection",
+   "label": {
+    "ko": [
+     "KOREA ARCHIVE 통합검색 — 기록 계층"
+    ]
+   }
+  }
+ ],
+ "seeAlso": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/promo/series30v2/img/09/ledger.json",
+   "type": "Dataset",
+   "label": {
+    "ko": [
+     "출처 대장(ledger)"
+    ]
+   },
+   "format": "application/json"
+  }
+ ],
+ "requiredStatement": {
+  "label": {
+   "ko": [
+    "출처"
+   ]
+  },
+  "value": {
+   "ko": [
+    "Europeana (data provider: Wellcome Collection) — 이미지별 권리 표시 참조. 협약기관(KOREAN WAR ARCHIVES 6·25전쟁 아카이브센터) 기록은 출처 표기 필수."
+   ]
+  }
+ },
+ "provider": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/",
+   "type": "Agent",
+   "label": {
+    "ko": [
+     "KOREA ARCHIVE 통합검색"
+    ]
+   }
+  }
+ ],
+ "items": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s09/canvas/1",
+   "type": "Canvas",
+   "label": {
+    "ko": [
+     "A line of shops beside a dusty street, with telegraph poles overhead, in Korea. Photograph, ca.1900."
+    ]
+   },
+   "width": 1600,
+   "height": 1178,
+   "metadata": [
+    {
+     "label": {
+      "ko": [
+       "식별자"
+      ]
+     },
+     "value": {
+      "ko": [
+       "Wellcome Collection V0048608 (work fqwx2phm / j874r7jf; Europeana /9200579/j874r7jf)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "연대"
+      ]
+     },
+     "value": {
+      "ko": [
+       "approximately 1900"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "소장"
+      ]
+     },
+     "value": {
+      "ko": [
+       "Europeana (data provider: Wellcome Collection)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리"
+      ]
+     },
+     "value": {
+      "ko": [
+       "Public Domain Mark (Wellcome 현행) / Europeana edmRights CC BY 4.0 — 'Credit: Wellcome Collection' 표기"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "보이는 것"
+      ]
+     },
+     "value": {
+      "ko": [
+       "기와지붕 상점이 길 오른쪽으로 길게 늘어서 있다 · 전봇대와 머리 위 전선 · 흰 옷 차림 인물이 흙길 가운데를 걷고 있다 · 상점 앞 바구니·항아리·옷가지 진열 · 우하단 흰 숫자 '94' · 길 끝 멀리 문루(門樓)형 건물"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "bfa7c3903473f91e — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "Wellcome catalogue API v2 works/fqwx2phm: license id 'pdm' label 'Public Domain Mark', credit 'Wellcome Collection'; Europeana record edmRights http://creativecommons.org/licenses/by/4.0/, dcRights 'Credit: Wellcome Collection'"
+      ]
+     }
+    }
+   ],
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s09/hero_wellcome_korea_street_ca1900.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "items": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s09/canvas/1/page",
+     "type": "AnnotationPage",
+     "items": [
+      {
+       "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s09/canvas/1/page/a",
+       "type": "Annotation",
+       "motivation": "painting",
+       "target": "https://changgi.github.io/korea-archive-mcp/iiif/m/s09/canvas/1",
+       "body": {
+        "id": "https://changgi.github.io/korea-archive-mcp/iiif/img/s09/hero_wellcome_korea_street_ca1900.jpg",
+        "type": "Image",
+        "format": "image/jpeg",
+        "width": 1600,
+        "height": 1178
+       }
+      }
+     ]
+    }
+   ],
+   "homepage": [
+    {
+     "id": "https://wellcomecollection.org/works/j874r7jf",
+     "type": "Text",
+     "label": {
+      "ko": [
+       "원 기관 기록"
+      ]
+     },
+     "format": "text/html"
+    }
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series30v2/img/09/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    }
+   ],
+   "navDate": "1900-01-01T00:00:00Z",
+   "rights": "http://creativecommons.org/licenses/by/4.0/"
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s09/canvas/2",
+   "type": "Canvas",
+   "label": {
+    "ko": [
+     "A Regimental Band at Seoul, korea"
+    ]
+   },
+   "width": 1600,
+   "height": 827,
+   "metadata": [
+    {
+     "label": {
+      "ko": [
+       "식별자"
+      ]
+     },
+     "value": {
+      "ko": [
+       "Rijksmuseum RP-F-F13137"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "연대"
+      ]
+     },
+     "value": {
+      "ko": [
+       "1904"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "소장"
+      ]
+     },
+     "value": {
+      "ko": [
+       "Europeana (data provider: Wellcome Collection)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리"
+      ]
+     },
+     "value": {
+      "ko": [
+       "Public Domain Mark 1.0"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "보이는 것"
+      ]
+     },
+     "value": {
+      "ko": [
+       "입체사진(스테레오그래프) 카드 — 같은 장면 2컷 나란히 · 카드 하단 인쇄 '28. A Regimental Band at Seoul, Korea.' / 'Copyright 1904, by George W. Griffith.' · 카드 좌우 세로 인쇄 'Sold only by Griffith & Griffith' · 전각 건물 앞에 군복 차림 악대가 대열로 서 있고 큰북이 보인다"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "d9c918f1eee3e6f4 — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "Europeana edmRights http://creativecommons.org/publicdomain/mark/1.0/; Rijksmuseum dcRights 'Public Domain / Publiek Domein'"
+      ]
+     }
+    }
+   ],
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s09/rijks_regimental_band_seoul_1904_stereo.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "items": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s09/canvas/2/page",
+     "type": "AnnotationPage",
+     "items": [
+      {
+       "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s09/canvas/2/page/a",
+       "type": "Annotation",
+       "motivation": "painting",
+       "target": "https://changgi.github.io/korea-archive-mcp/iiif/m/s09/canvas/2",
+       "body": {
+        "id": "https://changgi.github.io/korea-archive-mcp/iiif/img/s09/rijks_regimental_band_seoul_1904_stereo.jpg",
+        "type": "Image",
+        "format": "image/jpeg",
+        "width": 1600,
+        "height": 827
+       }
+      }
+     ]
+    }
+   ],
+   "homepage": [
+    {
+     "id": "http://hdl.handle.net/10934/RM0001.COLLECT.278712",
+     "type": "Text",
+     "label": {
+      "ko": [
+       "원 기관 기록"
+      ]
+     },
+     "format": "text/html"
+    }
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series30v2/img/09/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    }
+   ],
+   "navDate": "1904-01-01T00:00:00Z",
+   "rights": "http://creativecommons.org/publicdomain/mark/1.0/"
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s09/canvas/3",
+   "type": "Canvas",
+   "label": {
+    "ko": [
+     "Zum Aufbruch fertig in Tschemulpo [Incheon, Chemulpo]. Posierende Expeditionsteilnehmer (Bruno Knochenhauer und Richard Zimmermann), einheimische Begleiter und Lastpferde. Aufnahme vor der japanischen"
+    ]
+   },
+   "width": 1600,
+   "height": 1203,
+   "metadata": [
+    {
+     "label": {
+      "ko": [
+       "식별자"
+      ]
+     },
+     "value": {
+      "ko": [
+       "Deutsche Fotothek df_hauptkatalog_0508010 (Dokument 90029022)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "연대"
+      ]
+     },
+     "value": {
+      "ko": [
+       "1898-03-20"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "소장"
+      ]
+     },
+     "value": {
+      "ko": [
+       "Europeana (data provider: Wellcome Collection)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리"
+      ]
+     },
+     "value": {
+      "ko": [
+       "Public Domain Mark 1.0"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "보이는 것"
+      ]
+     },
+     "value": {
+      "ko": [
+       "갓·흰 두루마기 차림 남성 여러 명과 양복·모자 차림 남성 · 짐을 실은 말 여러 필 · 뒤편 2층 목조 건물과 돌담 · 흙 마당"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "d0316fcc31d875e4 — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "Europeana edmRights http://creativecommons.org/publicdomain/mark/1.0/ (사진가 Bruno Knochenhauer, 1898 촬영)"
+      ]
+     }
+    }
+   ],
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s09/fotothek_chemulpo_1898.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "items": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s09/canvas/3/page",
+     "type": "AnnotationPage",
+     "items": [
+      {
+       "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s09/canvas/3/page/a",
+       "type": "Annotation",
+       "motivation": "painting",
+       "target": "https://changgi.github.io/korea-archive-mcp/iiif/m/s09/canvas/3",
+       "body": {
+        "id": "https://changgi.github.io/korea-archive-mcp/iiif/img/s09/fotothek_chemulpo_1898.jpg",
+        "type": "Image",
+        "format": "image/jpeg",
+        "width": 1600,
+        "height": 1203
+       }
+      }
+     ]
+    }
+   ],
+   "homepage": [
+    {
+     "id": "http://www.deutschefotothek.de/documents/obj/90029022",
+     "type": "Text",
+     "label": {
+      "ko": [
+       "원 기관 기록"
+      ]
+     },
+     "format": "text/html"
+    }
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series30v2/img/09/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    }
+   ],
+   "navDate": "1898-03-20T00:00:00Z",
+   "rights": "http://creativecommons.org/publicdomain/mark/1.0/"
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s09/canvas/4",
+   "type": "Canvas",
+   "label": {
+    "ko": [
+     "stadsport, Seoul, spårväg, fotografi, photograph"
+    ]
+   },
+   "width": 1000,
+   "height": 574,
+   "metadata": [
+    {
+     "label": {
+      "ko": [
+       "식별자"
+      ]
+     },
+     "value": {
+      "ko": [
+       "Etnografiska museet (SMVK-EM) fotografi 2730906, 0249.k.0021"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "연대"
+      ]
+     },
+     "value": {
+      "ko": [
+       "1902"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "소장"
+      ]
+     },
+     "value": {
+      "ko": [
+       "Europeana (data provider: Wellcome Collection)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리"
+      ]
+     },
+     "value": {
+      "ko": [
+       "CC0 1.0"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "보이는 것"
+      ]
+     },
+     "value": {
+      "ko": [
+       "2층 문루가 있는 성문 · 길 위 전차 선로(레일) · 긴 장대 묶음을 지고 가는 사람들 · 전봇대 · 우하단 번호 '0249.k.0021'"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "611f7aa2c568dac7 — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "Europeana edmRights http://creativecommons.org/publicdomain/zero/1.0/; 사진가 Didrik Bildt, 'Didrik Bildts resa till Asien (1902)'"
+      ]
+     }
+    }
+   ],
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s09/smvk_seoul_gate_tram_1902.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "items": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s09/canvas/4/page",
+     "type": "AnnotationPage",
+     "items": [
+      {
+       "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s09/canvas/4/page/a",
+       "type": "Annotation",
+       "motivation": "painting",
+       "target": "https://changgi.github.io/korea-archive-mcp/iiif/m/s09/canvas/4",
+       "body": {
+        "id": "https://changgi.github.io/korea-archive-mcp/iiif/img/s09/smvk_seoul_gate_tram_1902.jpg",
+        "type": "Image",
+        "format": "image/jpeg",
+        "width": 1000,
+        "height": 574
+       }
+      }
+     ]
+    }
+   ],
+   "homepage": [
+    {
+     "id": "https://collections.smvk.se/carlotta-em/web/object/2730906",
+     "type": "Text",
+     "label": {
+      "ko": [
+       "원 기관 기록"
+      ]
+     },
+     "format": "text/html"
+    }
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series30v2/img/09/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    }
+   ],
+   "navDate": "1902-01-01T00:00:00Z",
+   "rights": "http://creativecommons.org/publicdomain/zero/1.0/"
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s09/canvas/5",
+   "type": "Canvas",
+   "label": {
+    "ko": [
+     "Seoul, stadsport, fotografi, photograph"
+    ]
+   },
+   "width": 1000,
+   "height": 577,
+   "metadata": [
+    {
+     "label": {
+      "ko": [
+       "식별자"
+      ]
+     },
+     "value": {
+      "ko": [
+       "Etnografiska museet (SMVK-EM) fotografi 2730896, 0249.k.0019"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "연대"
+      ]
+     },
+     "value": {
+      "ko": [
+       "1902"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "소장"
+      ]
+     },
+     "value": {
+      "ko": [
+       "Europeana (data provider: Wellcome Collection)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리"
+      ]
+     },
+     "value": {
+      "ko": [
+       "CC0 1.0"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "보이는 것"
+      ]
+     },
+     "value": {
+      "ko": [
+       "밭과 초가·기와 지붕 마을 너머 멀리 문루 · 흐린 하늘 · 우하단 번호 '0249.k.0019'"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "a6a21cd00e8ef94d — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "Europeana edmRights http://creativecommons.org/publicdomain/zero/1.0/; 기술 'Stadsport, Söul, Koreas hufvudstad, som hade elektronisk spårvåg före Stockholm (från Generalkatalog)'"
+      ]
+     }
+    }
+   ],
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s09/smvk_seoul_gate_view_1902.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "items": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s09/canvas/5/page",
+     "type": "AnnotationPage",
+     "items": [
+      {
+       "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s09/canvas/5/page/a",
+       "type": "Annotation",
+       "motivation": "painting",
+       "target": "https://changgi.github.io/korea-archive-mcp/iiif/m/s09/canvas/5",
+       "body": {
+        "id": "https://changgi.github.io/korea-archive-mcp/iiif/img/s09/smvk_seoul_gate_view_1902.jpg",
+        "type": "Image",
+        "format": "image/jpeg",
+        "width": 1000,
+        "height": 577
+       }
+      }
+     ]
+    }
+   ],
+   "homepage": [
+    {
+     "id": "https://collections.smvk.se/carlotta-em/web/object/2730896",
+     "type": "Text",
+     "label": {
+      "ko": [
+       "원 기관 기록"
+      ]
+     },
+     "format": "text/html"
+    }
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series30v2/img/09/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    }
+   ],
+   "navDate": "1902-01-01T00:00:00Z",
+   "rights": "http://creativecommons.org/publicdomain/zero/1.0/"
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s09/canvas/6",
+   "type": "Canvas",
+   "label": {
+    "ko": [
+     "Het kleine gevecht in Seoul, Korea (Chôsen Keijô no shôsen)"
+    ]
+   },
+   "width": 1600,
+   "height": 857,
+   "metadata": [
+    {
+     "label": {
+      "ko": [
+       "식별자"
+      ]
+     },
+     "value": {
+      "ko": [
+       "Rijksmuseum RP-P-2010-310-1"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "연대"
+      ]
+     },
+     "value": {
+      "ko": [
+       "1894"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "소장"
+      ]
+     },
+     "value": {
+      "ko": [
+       "Europeana (data provider: Wellcome Collection)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리"
+      ]
+     },
+     "value": {
+      "ko": [
+       "Public Domain Mark 1.0"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "보이는 것"
+      ]
+     },
+     "value": {
+      "ko": [
+       "3폭 연결 다색 목판화(니시키에) · 붉은 제목 칸 '朝鮮京城之小戰' · 오른쪽 붉은 문루의 성문 · 흰 군복 병사 대열과 검은 마차, 연기 · 기마 인물"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "4b276ffb55973187 — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "Europeana edmRights http://creativecommons.org/publicdomain/mark/1.0/; dcRights 'Public Domain'"
+      ]
+     }
+    }
+   ],
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s09/rijks_seoul_skirmish_1894_print.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "items": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s09/canvas/6/page",
+     "type": "AnnotationPage",
+     "items": [
+      {
+       "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s09/canvas/6/page/a",
+       "type": "Annotation",
+       "motivation": "painting",
+       "target": "https://changgi.github.io/korea-archive-mcp/iiif/m/s09/canvas/6",
+       "body": {
+        "id": "https://changgi.github.io/korea-archive-mcp/iiif/img/s09/rijks_seoul_skirmish_1894_print.jpg",
+        "type": "Image",
+        "format": "image/jpeg",
+        "width": 1600,
+        "height": 857
+       }
+      }
+     ]
+    }
+   ],
+   "homepage": [
+    {
+     "id": "http://hdl.handle.net/10934/RM0001.COLLECT.489426",
+     "type": "Text",
+     "label": {
+      "ko": [
+       "원 기관 기록"
+      ]
+     },
+     "format": "text/html"
+    }
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series30v2/img/09/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    }
+   ],
+   "navDate": "1894-01-01T00:00:00Z",
+   "rights": "http://creativecommons.org/publicdomain/mark/1.0/"
+  }
+ ],
+ "homepage": [
+  {
+   "id": "https://www.europeana.eu/item/9200579/j874r7jf",
+   "type": "Text",
+   "label": {
+    "ko": [
+     "원 기관 기록"
+    ]
+   },
+   "format": "text/html"
+  }
+ ],
+ "thumbnail": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s09/hero_wellcome_korea_street_ca1900.jpg",
+   "type": "Image",
+   "format": "image/jpeg"
+  }
+ ],
+ "navDate": "1900-01-01T00:00:00Z"
+}

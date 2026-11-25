@@ -1,0 +1,150 @@
+{
+ "hero": {
+  "file": "src/hero_520782.jpg",
+  "pos": "center 40%",
+  "credit": "사진: 미국 국립기록관리청 NAID 520782 (80-G-424513, 1950-12-19 흥남, Use Restriction Unrestricted)"
+ },
+ "hook": "1950년 12월,<br><span class=\"g\">흥남 부두</span>의 하루",
+ "mosaic": [
+  {
+   "file": "src/hungnam_520781.jpg",
+   "label": "LST 승선을 기다리는 피란민 · NAID 520781"
+  },
+  {
+   "file": "src/missouri_hungnam_520788.jpg",
+   "label": "흥남 앞바다 미주리함 포격 · NAID 520788"
+  },
+  {
+   "file": "src/lvt_hungnam_A5693.jpg",
+   "label": "상륙장갑차에 오르는 해병 · A-5693"
+  },
+  {
+   "file": "video/scene_07_444.jpg",
+   "label": "필름 4:44 — 해안의 폭발 구름 · NAID 75392"
+  }
+ ],
+ "mosaic_title": "사진 3장 + 필름 1편 — 같은 날의 <span class=\"g\">다른 시선</span>",
+ "mosaic_credit": "미국 국립기록관리청 NAID 520781·520788(Unrestricted) · A-5693 · 영상 NAID 75392(연방 저작물, Undetermined → B)",
+ "ann": {
+  "file": "src/hero_520782.jpg",
+  "crop_y": 0.0,
+  "boxes": [
+   {
+    "x": 0,
+    "y": 0,
+    "w": 13,
+    "h": 3.5,
+    "t": "좌상단 인쇄 표기 'PRNC-NPC-48'"
+   },
+   {
+    "x": 43,
+    "y": 11,
+    "w": 11,
+    "h": 5,
+    "t": "큰 배 선체의 흰 글자 'CITY OF TA…'(뒷부분 가려짐)"
+   },
+   {
+    "x": 39,
+    "y": 25.5,
+    "w": 5.5,
+    "h": 5,
+    "t": "작은 배 돛대 위 태극기"
+   },
+   {
+    "x": 2,
+    "y": 29,
+    "w": 28,
+    "h": 30,
+    "t": "배와 부두를 빈틈없이 메운 사람들 — 보따리를 인 사람도 보인다"
+   }
+  ],
+  "credit": "NAID 520782 원본(3000×2465) — 표시한 4곳은 사진에서 직접 읽은 것"
+ },
+ "scenes": [
+  {
+   "title": "NAID 75392 「EVACUATION OF HUNGNAM, KOREA」 (1950-12-24, 10분 3초)",
+   "credit": "미국 국립기록관리청 NAID 75392 · 장면은 keyscenes 자동 추출(전환 89곳→13장면) · 해설은 화면에서 보이는 것만",
+   "frames": [
+    {
+     "file": "video/scene_01_058.jpg",
+     "tc": "00:58",
+     "cap": "모래주머니 더미 옆 철모 쓴 병사들, 뒤로 단층 건물과 산"
+    },
+    {
+     "file": "video/scene_02_124.jpg",
+     "tc": "01:24",
+     "cap": "해안에 뱃머리를 댄 상륙함들 — 선체 번호 '799'"
+    },
+    {
+     "file": "video/scene_03_206.jpg",
+     "tc": "02:06",
+     "cap": "짐을 진 병사들이 원통형 탑 옆 길을 걷는다"
+    },
+    {
+     "file": "video/scene_04_241.jpg",
+     "tc": "02:41",
+     "cap": "함정 옆면 사다리로 오르는 병사들"
+    }
+   ]
+  },
+  {
+   "title": "같은 필름 후반부",
+   "credit": "미국 국립기록관리청 NAID 75392 (연방 저작물, Use Restriction Undetermined → B 명기)",
+   "frames": [
+    {
+     "file": "video/scene_06_350.jpg",
+     "tc": "03:50",
+     "cap": "바다 위 흰 배, 해안 곳곳에서 검은 연기 기둥"
+    },
+    {
+     "file": "video/scene_07_444.jpg",
+     "tc": "04:44",
+     "cap": "해안선을 덮는 거대한 폭발 구름과 앞바다의 함정"
+    },
+    {
+     "file": "video/scene_09_530.jpg",
+     "tc": "05:30",
+     "cap": "흰 별 표식 전차 — 포탑 위 기관총, 침낭·장비 적재"
+    },
+    {
+     "file": "video/scene_11_614.jpg",
+     "tc": "06:14",
+     "cap": "함정 램프 안으로 들어가는 전차와 지켜보는 사람"
+    }
+   ]
+  }
+ ],
+ "cta_img": "src/missouri_hungnam_520788.jpg",
+ "n": 0,
+ "inst": "미국 국립기록관리청 NARA",
+ "flag": "🇺🇸",
+ "say": "흥남 철수 영상 찾아줘",
+ "head": "1950.12.24 흥남 — 필름 원본까지",
+ "big": "NAID 75392",
+ "facts": [
+  [
+   "계보",
+   "RG 428 해군부 › 군사활동 영상 시리즈"
+  ],
+  [
+   "생산",
+   "1950-12-24"
+  ],
+  [
+   "원본",
+   "MP4 428-npc-170 (College Park 영상과)"
+  ],
+  [
+   "권리",
+   "Use Restriction 'Undetermined' → B"
+  ]
+ ],
+ "tool": "cross_search(sources=nara) → judge_rights(naid=75392)",
+ "link": "https://catalog.archives.gov/id/75392",
+ "part": [
+  "예시",
+  "킷 시험"
+ ],
+ "checked": "2026-11-22",
+ "tags": "#NARA #흥남철수"
+}

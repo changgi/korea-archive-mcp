@@ -1,0 +1,85 @@
+{
+ "n": 45,
+ "part": [
+  "Ⅷ",
+  "유럽이 본 한국"
+ ],
+ "inst": "프랑스 국립도서관 BnF · Gallica",
+ "flag": "🇫🇷",
+ "say": "병인양요 프랑스 기록 찾아줘",
+ "head": "1866 병인양요 — 해군 군의관의 논문",
+ "big": "Kang-Hoa 1866",
+ "facts": [
+  [
+   "BnF 기록",
+   "Cheval 『Relation médicale d'une campagne au Japon, en Chine et en Corée』 1868 — ark:/12148/cb36866203v"
+  ],
+  [
+   "함께 찾은 기록",
+   "H. Jouan 『L'expédition de Corée en 1866』 — ark:/12148/cb459968007"
+  ],
+  [
+   "사본",
+   "Gallica 디지털본 없음 → BIU Santé 디지털본(IA BIUSante_TMON1868x46)"
+  ],
+  [
+   "권리",
+   "1868 공표 PD · BIU Santé 표기 Licence Ouverte"
+  ]
+ ],
+ "tool": "gallica_search('Relation médicale Corée') → BnF 카탈로그 폴백 · catalogue.bnf.fr SRU",
+ "link": "https://catalogue.bnf.fr/ark:/12148/cb36866203v",
+ "checked": "2026-11-22",
+ "tags": "#Gallica #병인양요 #강화도",
+ "hero": {
+  "file": "src/cheval_n56.jpg",
+  "pos": "center 35%",
+  "credit": "지도: Cheval 1868 수록 'Carte de Corée' — 강화에서 입수한 조선 지도를 Zuber 소위가 축소(지도 하단 Nota) · BIU Santé 디지털본, Licence Ouverte · PD"
+ },
+ "hook": "1866 강화도의 지도,<br><span class=\"g\">프랑스 해군</span>이 옮겨 그리다",
+ "mosaic": [
+  {
+   "file": "src/cheval_title_top.jpg",
+   "label": "표지 — 'Relation médicale … au Japon, en Chine et en Corée' · Thèse",
+   "pos": "center 40%"
+  },
+  {
+   "file": "src/cheval_n53_para.jpg",
+   "label": "p.54 'Expédition de Corée' — 'l'amiral Roze à pénétrer en Corée'",
+   "pos": "center 45%"
+  }
+ ],
+ "mosaic_title": "지도가 실린 <span class=\"g\">학위논문</span>",
+ "mosaic_credit": "Cheval 1868 (BnF cb36866203v) · BIU Santé 디지털본 · Internet Archive BIUSante_TMON1868x46 · Licence Ouverte · PD",
+ "ann": {
+  "file": "src/cheval_n56_lower.jpg",
+  "boxes": [
+   {
+    "x": 49,
+    "y": 2.5,
+    "w": 7,
+    "h": 5.5,
+    "t": "'Seoul' — 바로 아래 'Han R.'"
+   },
+   {
+    "x": 34,
+    "y": 6,
+    "w": 14,
+    "h": 24,
+    "t": "강화 앞바다 — 'I. Ferrières'·'I. Clifford'·'I. Guérin' 등 서양식 섬 이름"
+   },
+   {
+    "x": 11,
+    "y": 90,
+    "w": 86,
+    "h": 9,
+    "t": "Nota: 'Cette carte est une copie d'une carte Coréenne trouvée à Kang-Hoa le jour de la prise de la ville' — 축소 M. Zuber"
+   }
+  ],
+  "credit": "Cheval 1868 'Carte de Corée' 아래쪽 절반(원본 2600×3624) — 표시한 3곳은 지도에서 직접 읽은 것",
+  "max_h": 760
+ },
+ "cta_img": "src/cheval_n56.jpg",
+ "meta_top": 470,
+ "mosaic_layout": "rows"
+}

@@ -1,0 +1,47 @@
+name: golden
+# 골든 회귀 — 프로덕션 도구 출력의 '모양'(제목·해제·변형·IIIF·24KB)을 검사한다. tests/golden.json.
+# ① main 반영 직후(Vercel 배포 대기 후) ② 매주 수 ③ 수동. error 실패 시 'auto-health' 이슈를 열거나 갱신하고,
+# 다음 실행에서 모두 통과하면 그 이슈를 닫는다 — 사람이 매일 보지 않아도 고장이 기록으로 남는다.
+on:
+  push:
+    branches: [main]
+    paths: ['app/**', 'lib/**', 'tests/golden.json', 'scripts/golden.py']
+  schedule:
+    - cron: '17 22 * * 2'   # 매주 수 07:17 KST
+  workflow_dispatch: {}
+permissions:
+  contents: read
+  issues: write
+concurrency: { group: golden, cancel-in-progress: true }
+jobs:
+  golden:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v6
+      - name: 배포 대기(push 때만)
+        if: github.event_name == 'push'
+        run: sleep 150
+      - name: 골든 회귀 실행
+        id: run
+        run: |
+          set +e
+          python3 scripts/golden.py --md /tmp/golden.md
+          echo "rc=$?" >> "$GITHUB_OUTPUT"
+          cat /tmp/golden.md >> "$GITHUB_STEP_SUMMARY"
+      - name: 실패 → 이슈 열기·갱신 / 통과 → 이슈 닫기
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh label create auto-health --color B60205 --description "자동 감시가 발견한 장애" 2>/dev/null || true
+          num=$(gh issue list --label auto-health --state open --search "골든 회귀" --json number -q '.[0].number')
+          if [ "${{ steps.run.outputs.rc }}" != "0" ]; then
+            body="$(cat /tmp/golden.md)
+
+          실행: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          조치: MAINTAINING.md '사이트가 바뀌었을 때' 절차 — 해당 수집기(route.js COLLECT·server.py _c_*) 파서 점검 → 양쪽 수정 → golden 재실행."
+            if [ -n "$num" ]; then gh issue comment "$num" --body "$body"; else gh issue create --title "골든 회귀 실패 — 도구 출력 구조 변경 감지" --label auto-health --body "$body"; fi
+            exit 1
+          elif [ -n "$num" ]; then
+            gh issue close "$num" --comment "골든 회귀 전부 통과 — 자동 종료 (${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})"
+          fi

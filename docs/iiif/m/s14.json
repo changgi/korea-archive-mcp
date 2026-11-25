@@ -1,0 +1,1131 @@
+{
+ "@context": "http://iiif.io/api/presentation/3/context.json",
+ "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s14.json",
+ "type": "Manifest",
+ "label": {
+  "ko": [
+   "14 · 공훈전자사료관 (국가보훈부) — 1932. 4. 29 상해 홍구공원"
+  ]
+ },
+ "summary": {
+  "ko": [
+   "30곳 탐방 · Ⅲ 독립운동 · 원 기록: 윤봉길(尹奉吉) 독립유공자 공적정보 (1932) · 국가보훈부 공훈전자사료관"
+  ]
+ },
+ "metadata": [
+  {
+   "label": {
+    "ko": [
+     "원 기록"
+    ]
+   },
+   "value": {
+    "ko": [
+     "mngNo 3732 윤봉길(尹奉吉) 독립유공자 공적정보"
+    ]
+   }
+  },
+  {
+   "label": {
+    "ko": [
+     "소장"
+    ]
+   },
+   "value": {
+    "ko": [
+     "국가보훈부 공훈전자사료관"
+    ]
+   }
+  },
+  {
+   "label": {
+    "ko": [
+     "계층"
+    ]
+   },
+   "value": {
+    "ko": [
+     "KOREA ARCHIVE 통합검색 › 30곳 탐방 · Ⅲ 독립운동 › s14"
+    ]
+   }
+  },
+  {
+   "label": {
+    "ko": [
+     "수집 경로"
+    ]
+   },
+   "value": {
+    "ko": [
+     "cross_search(sources=gonghun) → nedb_search(mode=gonghun)"
+    ]
+   }
+  },
+  {
+   "label": {
+    "ko": [
+     "확인일"
+    ]
+   },
+   "value": {
+    "ko": [
+     "2026-11-22"
+    ]
+   }
+  },
+  {
+   "label": {
+    "ko": [
+     "게재 이미지"
+    ]
+   },
+   "value": {
+    "ko": [
+     "6장 · 링크 전용 1건"
+    ]
+   }
+  }
+ ],
+ "partOf": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/c/s30-03.json",
+   "type": "Collection",
+   "label": {
+    "ko": [
+     "30곳 탐방 · Ⅲ 독립운동"
+    ]
+   }
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/hierarchy.json",
+   "type": "Collection",
+   "label": {
+    "ko": [
+     "KOREA ARCHIVE 통합검색 — 기록 계층"
+    ]
+   }
+  }
+ ],
+ "seeAlso": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/promo/series30v2/img/14/ledger.json",
+   "type": "Dataset",
+   "label": {
+    "ko": [
+     "출처 대장(ledger)"
+    ]
+   },
+   "format": "application/json"
+  }
+ ],
+ "requiredStatement": {
+  "label": {
+   "ko": [
+    "출처"
+   ]
+  },
+  "value": {
+   "ko": [
+    "국가보훈부 공훈전자사료관 — 이미지별 권리 표시 참조. 협약기관(KOREAN WAR ARCHIVES 6·25전쟁 아카이브센터) 기록은 출처 표기 필수."
+   ]
+  }
+ },
+ "provider": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/",
+   "type": "Agent",
+   "label": {
+    "ko": [
+     "KOREA ARCHIVE 통합검색"
+    ]
+   }
+  }
+ ],
+ "items": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s14/canvas/1",
+   "type": "Canvas",
+   "label": {
+    "ko": [
+     "윤봉길 한인애국단 선서 사진"
+    ]
+   },
+   "width": 1166,
+   "height": 1600,
+   "metadata": [
+    {
+     "label": {
+      "ko": [
+       "식별자"
+      ]
+     },
+     "value": {
+      "ko": [
+       "Commons File:사진1(윤봉길 선서장면).jpg"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "연대"
+      ]
+     },
+     "value": {
+      "ko": [
+       "1932-04-26"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "소장"
+      ]
+     },
+     "value": {
+      "ko": [
+       "국가보훈부 공훈전자사료관"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리"
+      ]
+     },
+     "value": {
+      "ko": [
+       "Public Domain (1932 촬영, 보호기간 만료) — Wikimedia Commons"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "보이는 것"
+      ]
+     },
+     "value": {
+      "ko": [
+       "태극기를 배경으로 양복·넥타이 차림의 남성 1명 · 화면 왼쪽 손에 권총, 화면 오른쪽 손에 수류탄 형태의 물체 · 가슴 앞에 세로쓰기 한자 선서문 1장 — 좌측 끝 '韓人愛國團' 판독 가능 · 세피아 톤 인화 사진"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "c71ef1207c242ca0 — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "Commons extmetadata: LicenseShortName 'Public domain', Credit 'The Archives of Korean History', DateTimeOriginal '1932-04-26', Artist '한인애국단 본부(안공근 집) 상하이시 황푸구 황푸난루 863에서'. 원본 2623×3600 → thumb.php w=1280"
+      ]
+     }
+    }
+   ],
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s14/hero_ybg_oath_19320426.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "items": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s14/canvas/1/page",
+     "type": "AnnotationPage",
+     "items": [
+      {
+       "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s14/canvas/1/page/a",
+       "type": "Annotation",
+       "motivation": "painting",
+       "target": "https://changgi.github.io/korea-archive-mcp/iiif/m/s14/canvas/1",
+       "body": {
+        "id": "https://changgi.github.io/korea-archive-mcp/iiif/img/s14/hero_ybg_oath_19320426.jpg",
+        "type": "Image",
+        "format": "image/jpeg",
+        "width": 1166,
+        "height": 1600
+       }
+      }
+     ]
+    }
+   ],
+   "homepage": [
+    {
+     "id": "https://commons.wikimedia.org/wiki/File:%EC%82%AC%EC%A7%841(%EC%9C%A4%EB%B4%89%EA%B8%B8_%EC%84%A0%EC%84%9C%EC%9E%A5%EB%A9%B4).jpg",
+     "type": "Text",
+     "label": {
+      "ko": [
+       "원 기관 기록"
+      ]
+     },
+     "format": "text/html"
+    }
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series30v2/img/14/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    },
+    {
+     "id": "https://korea-archive-mcp.vercel.app/iiif/commons/File%3A%EC%82%AC%EC%A7%841%28%EC%9C%A4%EB%B4%89%EA%B8%B8%20%EC%84%A0%EC%84%9C%EC%9E%A5%EB%A9%B4%29.jpg/manifest.json",
+     "type": "Manifest",
+     "label": {
+      "ko": [
+       "원 기관 원본(IIIF 브리지)"
+      ]
+     },
+     "format": "application/ld+json"
+    }
+   ],
+   "navDate": "1932-04-26T00:00:00Z",
+   "rights": "http://creativecommons.org/publicdomain/mark/1.0/"
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s14/canvas/2",
+   "type": "Canvas",
+   "label": {
+    "ko": [
+     "김구와 윤봉길"
+    ]
+   },
+   "width": 1036,
+   "height": 1500,
+   "metadata": [
+    {
+     "label": {
+      "ko": [
+       "식별자"
+      ]
+     },
+     "value": {
+      "ko": [
+       "Commons File:사진2(김구선생과 윤봉길).jpg"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "연대"
+      ]
+     },
+     "value": {
+      "ko": [
+       "1932-04-27"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "소장"
+      ]
+     },
+     "value": {
+      "ko": [
+       "국가보훈부 공훈전자사료관"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리"
+      ]
+     },
+     "value": {
+      "ko": [
+       "CC BY-SA 4.0 (Commons 표기, 저작자 표기 필요) — 1932 촬영물"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "보이는 것"
+      ]
+     },
+     "value": {
+      "ko": [
+       "태극기 앞 남성 2명 — 좌측 1명 앉음, 우측 1명 섬 · 두 사람 모두 양복·넥타이 차림 · 흑백 인쇄 망점 보이는 복제본"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "3dcd5066c4f7110e — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "Commons extmetadata: LicenseShortName 'CC BY-SA 4.0', Artist/Credit '한인애국단 본부(안공근 집) 상하이시 황푸구 황푸난루 863', DateTimeOriginal '1932-04-27'"
+      ]
+     }
+    }
+   ],
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s14/ybg_kimgu_19320427.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "items": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s14/canvas/2/page",
+     "type": "AnnotationPage",
+     "items": [
+      {
+       "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s14/canvas/2/page/a",
+       "type": "Annotation",
+       "motivation": "painting",
+       "target": "https://changgi.github.io/korea-archive-mcp/iiif/m/s14/canvas/2",
+       "body": {
+        "id": "https://changgi.github.io/korea-archive-mcp/iiif/img/s14/ybg_kimgu_19320427.jpg",
+        "type": "Image",
+        "format": "image/jpeg",
+        "width": 1036,
+        "height": 1500
+       }
+      }
+     ]
+    }
+   ],
+   "homepage": [
+    {
+     "id": "https://commons.wikimedia.org/wiki/File:%EC%82%AC%EC%A7%842(%EA%B9%80%EA%B5%AC%EC%84%A0%EC%83%9D%EA%B3%BC_%EC%9C%A4%EB%B4%89%EA%B8%B8).jpg",
+     "type": "Text",
+     "label": {
+      "ko": [
+       "원 기관 기록"
+      ]
+     },
+     "format": "text/html"
+    }
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series30v2/img/14/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    },
+    {
+     "id": "https://korea-archive-mcp.vercel.app/iiif/commons/File%3A%EC%82%AC%EC%A7%842%28%EA%B9%80%EA%B5%AC%EC%84%A0%EC%83%9D%EA%B3%BC%20%EC%9C%A4%EB%B4%89%EA%B8%B8%29.jpg/manifest.json",
+     "type": "Manifest",
+     "label": {
+      "ko": [
+       "원 기관 원본(IIIF 브리지)"
+      ]
+     },
+     "format": "application/ld+json"
+    }
+   ],
+   "navDate": "1932-04-27T00:00:00Z"
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s14/canvas/3",
+   "type": "Canvas",
+   "label": {
+    "ko": [
+     "칭다오 시절 윤봉길"
+    ]
+   },
+   "width": 1083,
+   "height": 1600,
+   "metadata": [
+    {
+     "label": {
+      "ko": [
+       "식별자"
+      ]
+     },
+     "value": {
+      "ko": [
+       "Commons File:YunBongGilQingdao.png (NAK CET0046121)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "연대"
+      ]
+     },
+     "value": {
+      "ko": [
+       "1932년 이전"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "소장"
+      ]
+     },
+     "value": {
+      "ko": [
+       "국가보훈부 공훈전자사료관"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리"
+      ]
+     },
+     "value": {
+      "ko": [
+       "Public Domain — Commons (국가기록원 소장, 관리번호 CET0046121)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "보이는 것"
+      ]
+     },
+     "value": {
+      "ko": [
+       "사진관 배경 앞 전신 남성 1명 · 헌팅캡·양복·넥타이, 오른팔에 외투를 걸침 · 흰 장갑 착용"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "c7a07ccba01af580 — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "Commons extmetadata: 'Public domain'; Credit 'National Archives of Korea Maintenance no. CET0046121 UCI G500:1310377-00000000614056'; Artist 'Provided by South Korean Bureau of Public Information(공보처 홍보국 사진담당관); original photographer unknown'; Date 'Before 1932. Photo archived by NAK in 1973'"
+      ]
+     }
+    }
+   ],
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s14/ybg_qingdao_pre1932.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "items": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s14/canvas/3/page",
+     "type": "AnnotationPage",
+     "items": [
+      {
+       "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s14/canvas/3/page/a",
+       "type": "Annotation",
+       "motivation": "painting",
+       "target": "https://changgi.github.io/korea-archive-mcp/iiif/m/s14/canvas/3",
+       "body": {
+        "id": "https://changgi.github.io/korea-archive-mcp/iiif/img/s14/ybg_qingdao_pre1932.jpg",
+        "type": "Image",
+        "format": "image/jpeg",
+        "width": 1083,
+        "height": 1600
+       }
+      }
+     ]
+    }
+   ],
+   "homepage": [
+    {
+     "id": "https://commons.wikimedia.org/wiki/File:YunBongGilQingdao.png",
+     "type": "Text",
+     "label": {
+      "ko": [
+       "원 기관 기록"
+      ]
+     },
+     "format": "text/html"
+    }
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series30v2/img/14/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    },
+    {
+     "id": "https://korea-archive-mcp.vercel.app/iiif/commons/File%3AYunBongGilQingdao.png/manifest.json",
+     "type": "Manifest",
+     "label": {
+      "ko": [
+       "원 기관 원본(IIIF 브리지)"
+      ]
+     },
+     "format": "application/ld+json"
+    }
+   ],
+   "navDate": "1932-01-01T00:00:00Z",
+   "rights": "http://creativecommons.org/publicdomain/mark/1.0/"
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s14/canvas/4",
+   "type": "Canvas",
+   "label": {
+    "ko": [
+     "윤봉길 유서(보물 568-2 일부)"
+    ]
+   },
+   "width": 1083,
+   "height": 1034,
+   "metadata": [
+    {
+     "label": {
+      "ko": [
+       "식별자"
+      ]
+     },
+     "value": {
+      "ko": [
+       "Commons File:Will of Yun Bong-gil.webp"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "연대"
+      ]
+     },
+     "value": {
+      "ko": [
+       "1932-04-27 이후"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "소장"
+      ]
+     },
+     "value": {
+      "ko": [
+       "국가보훈부 공훈전자사료관"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리"
+      ]
+     },
+     "value": {
+      "ko": [
+       "Public Domain — 저자 윤봉길(1932 사망), 보호기간 만료"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "보이는 것"
+      ]
+     },
+     "value": {
+      "ko": [
+       "세로쓰기 국한문 필사 1면 · '朝鮮을 爲하야'·'勇敢한 鬪士'로 읽히는 구절 · '太極'·'旗발' 글자 · '東西洋 歷史上'·'東洋으로' 구절 · 우측 상단 제목부 '…에게' 형태 필기"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "5d87fda797beb4b5 — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "Commons extmetadata: 'Public domain', Artist 'Yun Bong-gil', Description 'Will of Yun Bong-gil. Part of \"Relics Related to Yun Bong-gil\", Treasures of South Korea No. 568-2'"
+      ]
+     }
+    }
+   ],
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s14/ybg_will_1932.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "items": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s14/canvas/4/page",
+     "type": "AnnotationPage",
+     "items": [
+      {
+       "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s14/canvas/4/page/a",
+       "type": "Annotation",
+       "motivation": "painting",
+       "target": "https://changgi.github.io/korea-archive-mcp/iiif/m/s14/canvas/4",
+       "body": {
+        "id": "https://changgi.github.io/korea-archive-mcp/iiif/img/s14/ybg_will_1932.jpg",
+        "type": "Image",
+        "format": "image/jpeg",
+        "width": 1083,
+        "height": 1034
+       }
+      }
+     ]
+    }
+   ],
+   "homepage": [
+    {
+     "id": "https://commons.wikimedia.org/wiki/File:Will_of_Yun_Bong-gil.webp",
+     "type": "Text",
+     "label": {
+      "ko": [
+       "원 기관 기록"
+      ]
+     },
+     "format": "text/html"
+    }
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series30v2/img/14/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    },
+    {
+     "id": "https://korea-archive-mcp.vercel.app/iiif/commons/File%3AWill%20of%20Yun%20Bong-gil.webp/manifest.json",
+     "type": "Manifest",
+     "label": {
+      "ko": [
+       "원 기관 원본(IIIF 브리지)"
+      ]
+     },
+     "format": "application/ld+json"
+    }
+   ],
+   "navDate": "1932-04-27T00:00:00Z",
+   "rights": "http://creativecommons.org/publicdomain/mark/1.0/"
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s14/canvas/5",
+   "type": "Canvas",
+   "label": {
+    "ko": [
+     "홍구공원 폭탄 투척 직후 현장"
+    ]
+   },
+   "width": 674,
+   "height": 451,
+   "metadata": [
+    {
+     "label": {
+      "ko": [
+       "식별자"
+      ]
+     },
+     "value": {
+      "ko": [
+       "Commons File:虹口公园爆炸后现场.jpg"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "연대"
+      ]
+     },
+     "value": {
+      "ko": [
+       "1932"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "소장"
+      ]
+     },
+     "value": {
+      "ko": [
+       "국가보훈부 공훈전자사료관"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리"
+      ]
+     },
+     "value": {
+      "ko": [
+       "Public Domain (Commons 표기, 1932 촬영·작자 미상) — 출전 서적 재복제본"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "보이는 것"
+      ]
+     },
+     "value": {
+      "ko": [
+       "줄무늬 천을 두른 단상과 단상 위 깃발 2개 · 단상 뒤편으로 연기 · 단상 주변을 둘러싼 군중 · 674×451 저해상 — 모자이크용"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "a711194ad74f2280 — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "Commons extmetadata: 'Public domain', Artist 'Unknown author', Credit '（韩）金学俊…《4·29上海义举英雄——梅轩尹奉吉》. 上海社会科学院出版社. 2008', Date '1932'"
+      ]
+     }
+    }
+   ],
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s14/hongkou_park_19320429_after.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "items": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s14/canvas/5/page",
+     "type": "AnnotationPage",
+     "items": [
+      {
+       "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s14/canvas/5/page/a",
+       "type": "Annotation",
+       "motivation": "painting",
+       "target": "https://changgi.github.io/korea-archive-mcp/iiif/m/s14/canvas/5",
+       "body": {
+        "id": "https://changgi.github.io/korea-archive-mcp/iiif/img/s14/hongkou_park_19320429_after.jpg",
+        "type": "Image",
+        "format": "image/jpeg",
+        "width": 674,
+        "height": 451
+       }
+      }
+     ]
+    }
+   ],
+   "homepage": [
+    {
+     "id": "https://commons.wikimedia.org/wiki/File:%E8%99%B9%E5%8F%A3%E5%85%AC%E5%9B%AD%E7%88%86%E7%82%B8%E5%90%8E%E7%8E%B0%E5%9C%BA.jpg",
+     "type": "Text",
+     "label": {
+      "ko": [
+       "원 기관 기록"
+      ]
+     },
+     "format": "text/html"
+    }
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series30v2/img/14/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    },
+    {
+     "id": "https://korea-archive-mcp.vercel.app/iiif/commons/File%3A%E8%99%B9%E5%8F%A3%E5%85%AC%E5%9B%AD%E7%88%86%E7%82%B8%E5%90%8E%E7%8E%B0%E5%9C%BA.jpg/manifest.json",
+     "type": "Manifest",
+     "label": {
+      "ko": [
+       "원 기관 원본(IIIF 브리지)"
+      ]
+     },
+     "format": "application/ld+json"
+    }
+   ],
+   "navDate": "1932-01-01T00:00:00Z",
+   "rights": "http://creativecommons.org/publicdomain/mark/1.0/"
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s14/canvas/6",
+   "type": "Canvas",
+   "label": {
+    "ko": [
+     "홍구공원 엽서(HONGKEW PARK, SHANGHAI)"
+    ]
+   },
+   "width": 1109,
+   "height": 706,
+   "metadata": [
+    {
+     "label": {
+      "ko": [
+       "식별자"
+      ]
+     },
+     "value": {
+      "ko": [
+       "Commons File:Hongkew Park Shanghai.jpg"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "연대"
+      ]
+     },
+     "value": {
+      "ko": [
+       "1905~1932 사이"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "소장"
+      ]
+     },
+     "value": {
+      "ko": [
+       "국가보훈부 공훈전자사료관"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리"
+      ]
+     },
+     "value": {
+      "ko": [
+       "Public Domain (Commons 표기, 작자 미상 엽서)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "보이는 것"
+      ]
+     },
+     "value": {
+      "ko": [
+       "하단 인쇄 'HONGKEW PARK, SHANGHAI'·'上海新公園' · 채색 엽서 — 갈림길 산책로, 나무, 벤치 · 산책하는 사람 6명 내외"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "고정성(sha256)"
+      ]
+     },
+     "value": {
+      "ko": [
+       "967ff6ea0d811a71 — 게재 이미지 파일 지문(불일치=파일 변경)"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "권리 근거"
+      ]
+     },
+     "value": {
+      "ko": [
+       "Commons extmetadata: 'Public domain', Date 'between 1905 and 1932', Description 'Photo of Shanghai's Hongkou Park (now Lu Xun Park) during International Settlement era, labeled \"HONGKEW PARK, SHANGHAI\"'"
+      ]
+     }
+    }
+   ],
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s14/hongkew_park_postcard.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "items": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s14/canvas/6/page",
+     "type": "AnnotationPage",
+     "items": [
+      {
+       "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s14/canvas/6/page/a",
+       "type": "Annotation",
+       "motivation": "painting",
+       "target": "https://changgi.github.io/korea-archive-mcp/iiif/m/s14/canvas/6",
+       "body": {
+        "id": "https://changgi.github.io/korea-archive-mcp/iiif/img/s14/hongkew_park_postcard.jpg",
+        "type": "Image",
+        "format": "image/jpeg",
+        "width": 1109,
+        "height": 706
+       }
+      }
+     ]
+    }
+   ],
+   "homepage": [
+    {
+     "id": "https://commons.wikimedia.org/wiki/File:Hongkew_Park_Shanghai.jpg",
+     "type": "Text",
+     "label": {
+      "ko": [
+       "원 기관 기록"
+      ]
+     },
+     "format": "text/html"
+    }
+   ],
+   "seeAlso": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/promo/series30v2/img/14/ledger.json",
+     "type": "Dataset",
+     "label": {
+      "ko": [
+       "출처 대장(ledger) — 권리 근거·판독 내용"
+      ]
+     },
+     "format": "application/json"
+    },
+    {
+     "id": "https://korea-archive-mcp.vercel.app/iiif/commons/File%3AHongkew%20Park%20Shanghai.jpg/manifest.json",
+     "type": "Manifest",
+     "label": {
+      "ko": [
+       "원 기관 원본(IIIF 브리지)"
+      ]
+     },
+     "format": "application/ld+json"
+    }
+   ],
+   "navDate": "1905-01-01T00:00:00Z",
+   "rights": "http://creativecommons.org/publicdomain/mark/1.0/"
+  }
+ ],
+ "homepage": [
+  {
+   "id": "https://e-gonghun.mpva.go.kr/user/ContribuReportDetail.do?goTocode=20001&mngNo=3732&pageTitle=Report",
+   "type": "Text",
+   "label": {
+    "ko": [
+     "원 기관 기록"
+    ]
+   },
+   "format": "text/html"
+  }
+ ],
+ "thumbnail": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s14/hero_ybg_oath_19320426.jpg",
+   "type": "Image",
+   "format": "image/jpeg"
+  }
+ ],
+ "navDate": "1932-01-01T00:00:00Z"
+}

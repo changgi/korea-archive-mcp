@@ -1,0 +1,131 @@
+{
+ "n": 89,
+ "src": "nedb",
+ "record": {
+  "id": "승정원일기·비변사등록 '均役廳' / NLK KOL000025808",
+  "title": "균역법(均役法) — 한국사DB 텍스트 기록 + 「均役廳事目」 원본",
+  "date": "1750~1752",
+  "inst": "국사편찬위원회 한국사데이터베이스",
+  "url": "https://db.history.go.kr"
+ },
+ "images": [
+  {
+   "file": "src/gyunyeok_p001.jpg",
+   "role": "hero",
+   "record_id": "KOL000025808",
+   "title": "1면 御製均役廳綸音",
+   "date": "1752",
+   "url": "https://viewer.nl.go.kr/nlmivs/viewWonmun_js.jsp?cno=KOL000025808",
+   "rights": "PD — 국립중앙도서관 '이용 제한이 없습니다', 출처 표기",
+   "rights_evidence": "국립중앙도서관 원문 뷰어 서지정보: '서명 均役廳事目 저자 홍계희 발행일 1752 … 저작권유형 이용 제한이 없습니다.' (실확인) · 1752년 간행 고문헌(보호기간 만료)",
+   "w": 1272,
+   "h": 1800,
+   "visible": [
+    "'御製均役廳綸音'",
+    "'減布而後已'",
+    "좌상단 장서인"
+   ],
+   "nocrop": false
+  },
+  {
+   "file": "src/gyunyeok_p008.jpg",
+   "role": "extra",
+   "record_id": "KOL000025808",
+   "title": "8면 윤음 끝",
+   "date": "1752",
+   "url": "https://viewer.nl.go.kr/nlmivs/viewWonmun_js.jsp?cno=KOL000025808",
+   "rights": "PD — 국립중앙도서관 '이용 제한이 없습니다', 출처 표기",
+   "rights_evidence": "국립중앙도서관 원문 뷰어 서지정보: '서명 均役廳事目 저자 홍계희 발행일 1752 … 저작권유형 이용 제한이 없습니다.' (실확인) · 1752년 간행 고문헌(보호기간 만료)",
+   "w": 1272,
+   "h": 1800,
+   "visible": [
+    "'歲壬申季夏初七日題'",
+    "'資憲大夫知中樞府事兼'"
+   ],
+   "nocrop": false
+  },
+  {
+   "file": "src/gyunyeok_p009.jpg",
+   "role": "extra",
+   "record_id": "KOL000025808",
+   "title": "9면 敎書",
+   "date": "1752",
+   "url": "https://viewer.nl.go.kr/nlmivs/viewWonmun_js.jsp?cno=KOL000025808",
+   "rights": "PD — 국립중앙도서관 '이용 제한이 없습니다', 출처 표기",
+   "rights_evidence": "국립중앙도서관 원문 뷰어 서지정보: '서명 均役廳事目 저자 홍계희 발행일 1752 … 저작권유형 이용 제한이 없습니다.' (실확인) · 1752년 간행 고문헌(보호기간 만료)",
+   "w": 1272,
+   "h": 1800,
+   "visible": [
+    "'敎書'",
+    "'知義禁府事同知經筵事臣洪啓禧奉'"
+   ],
+   "nocrop": false
+  },
+  {
+   "file": "src/gyunyeok_p011.jpg",
+   "role": "extra",
+   "record_id": "KOL000025808",
+   "title": "11면 均役廳事目 권두",
+   "date": "1752",
+   "url": "https://viewer.nl.go.kr/nlmivs/viewWonmun_js.jsp?cno=KOL000025808",
+   "rights": "PD — 국립중앙도서관 '이용 제한이 없습니다', 출처 표기",
+   "rights_evidence": "국립중앙도서관 원문 뷰어 서지정보: '서명 均役廳事目 저자 홍계희 발행일 1752 … 저작권유형 이용 제한이 없습니다.' (실확인) · 1752년 간행 고문헌(보호기간 만료)",
+   "w": 1272,
+   "h": 1800,
+   "visible": [
+    "'均役廳事目'",
+    "'一依宣惠廳事目例'",
+    "'設廳第一'",
+    "'一國內良軍之收布二疋者自辛未條爲始特令減半'"
+   ],
+   "nocrop": false
+  },
+  {
+   "file": "src/gyunyeok_p011_ann.jpg",
+   "role": "page",
+   "record_id": "KOL000025808",
+   "title": "11면 상단 크롭(어노테이션용)",
+   "date": "1752",
+   "url": "https://viewer.nl.go.kr/nlmivs/viewWonmun_js.jsp?cno=KOL000025808",
+   "rights": "PD — 국립중앙도서관 '이용 제한이 없습니다', 출처 표기",
+   "rights_evidence": "국립중앙도서관 원문 뷰어 서지정보: '서명 均役廳事目 저자 홍계희 발행일 1752 … 저작권유형 이용 제한이 없습니다.' (실확인) · 1752년 간행 고문헌(보호기간 만료)",
+   "w": 1500,
+   "h": 1061,
+   "visible": [
+    "위와 동일(상단부)"
+   ],
+   "nocrop": false
+  },
+  {
+   "file": "src/gyunyeok_p012.jpg",
+   "role": "extra",
+   "record_id": "KOL000025808",
+   "title": "12면 사목 조항",
+   "date": "1752",
+   "url": "https://viewer.nl.go.kr/nlmivs/viewWonmun_js.jsp?cno=KOL000025808",
+   "rights": "PD — 국립중앙도서관 '이용 제한이 없습니다', 출처 표기",
+   "rights_evidence": "국립중앙도서관 원문 뷰어 서지정보: '서명 均役廳事目 저자 홍계희 발행일 1752 … 저작권유형 이용 제한이 없습니다.' (실확인) · 1752년 간행 고문헌(보호기간 만료)",
+   "w": 1272,
+   "h": 1800,
+   "visible": [
+    "'一都提調三公例兼'",
+    "'提調印信及郎廳印信各一顆'"
+   ],
+   "nocrop": false
+  }
+ ],
+ "points": [
+  "sjw '均役' 1357건(영조 868) · '均役廳' 468건(영조 323·정조 62·순조 38·헌종 11·철종 18·고종 15)",
+  "record(비변사등록) '均役廳' 보고 총계 279건, 座目 0건 — 예: bb_122r_001_01_0350 '均役廳 郞廳은 時·原任大臣에게 가서 묻고 … 均役의 일을 소상히 講定하라는 傳敎'",
+  "origin '均役' 법전 545건 — 大典通編 吏典 宣惠廳: '英宗朝庚午, 設均役廳, 增置郞官一員'",
+  "NLK 「均役廳事目」 1752 · 132면 · 저자 홍계희 — 9면 '臣洪啓禧奉', 비변사등록 '兵曹判書 洪啓禧 등이 입시하여…' 다수"
+ ],
+ "video": {
+  "url": "",
+  "length_s": 0,
+  "rights": "",
+  "note": ""
+ },
+ "status": "ok",
+ "notes": "db.history.go.kr 차단(이 환경) — 프로덕션 MCP nedb_search로만 조회. 첫 호출에서 mode=record·law·total이 'TypeError: terminated (UND_ERR_RES_CONTENT_LENGTH_MISMATCH)'로 실패 → 1~2분 뒤 재시도 시 record·origin 성공(law·total은 미재시도/실패). mode=item(bb_056r_001_06_0220 등)은 '본문이 공개되지 않았습니다' 반환. 원본 이미지는 NLK 뷰어(Playwright, 같은 세션 fetch) 1500×2123."
+}

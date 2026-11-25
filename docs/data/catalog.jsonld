@@ -1,0 +1,446 @@
+{
+ "@context": {
+  "dcat": "http://www.w3.org/ns/dcat#",
+  "dct": "http://purl.org/dc/terms/",
+  "foaf": "http://xmlns.com/foaf/0.1/",
+  "spdx": "http://spdx.org/rdf/terms#",
+  "ka": "https://changgi.github.io/korea-archive-mcp/data/catalog.jsonld#"
+ },
+ "@graph": [
+  {
+   "@id": "https://changgi.github.io/korea-archive-mcp/data/catalog.jsonld",
+   "@type": "dcat:Catalog",
+   "dct:title": "KOREA ARCHIVE 통합검색 데이터 목록",
+   "dcat:dataset": {
+    "@id": "https://changgi.github.io/korea-archive-mcp/data/catalog.jsonld#dataset"
+   }
+  },
+  {
+   "@id": "https://changgi.github.io/korea-archive-mcp/data/catalog.jsonld#dataset",
+   "@type": "dcat:Dataset",
+   "dct:title": "KOREA ARCHIVE 통합검색 — 발견 누적 원장",
+   "dct:description": "사용자들이 KOREA ARCHIVE 통합검색 도구로 국내외 아카이브에서 발굴한 한국 관련 기록 916건의 재기술·계층·IIIF·권리 표시·발견 경로·질의 축적. 원 기관 표기 그대로, 파생 정보는 [파생] 표시, 축적 정보는 지우지 않는다.",
+   "dct:modified": "2026-11-25T03:51:12Z",
+   "dct:publisher": {
+    "@type": "foaf:Agent",
+    "foaf:name": "KOREA ARCHIVE 통합검색"
+   },
+   "dcat:landingPage": {
+    "@id": "https://changgi.github.io/korea-archive-mcp/data/"
+   },
+   "dcat:keyword": [
+    "한국",
+    "Korea",
+    "아카이브",
+    "기록물",
+    "IIIF",
+    "RiC-O",
+    "한국전쟁",
+    "조선"
+   ],
+   "dct:language": [
+    "ko",
+    "en"
+   ],
+   "dct:source": [
+    "6·25전쟁 아카이브센터",
+    "DigitalNZ",
+    "Europeana",
+    "Gallica(BnF)",
+    "KOREA ARCHIVE IIIF 갤러리",
+    "KTV",
+    "UN 디지털도서관",
+    "공훈전자사료관",
+    "국가기록원",
+    "국가유산청",
+    "국립문화유산연구원",
+    "국립중앙도서관",
+    "국외소재문화유산재단",
+    "국편 전자사료관",
+    "규장각",
+    "네덜란드 국립기록관",
+    "뉴질랜드 기록원",
+    "대한민국신문아카이브",
+    "대한민국역사박물관",
+    "독립기념관",
+    "독립운동판결문",
+    "미국 국립기록관리청 NARA",
+    "서울기록원",
+    "영국 국립기록관 TNA",
+    "위키미디어 공용",
+    "인터넷 아카이브",
+    "일본 국립국회도서관",
+    "일본 아시아역사자료센터",
+    "장서각",
+    "한국고문서자료관",
+    "한국사DB",
+    "호주 전쟁기념관"
+   ],
+   "dct:accrualPeriodicity": {
+    "@id": "http://purl.org/cld/freq/daily"
+   },
+   "dct:rights": "기록마다 원 기관 권리 표기(rights_view) — 재이용은 원 기관 이용조건을 따른다. 원장 메타데이터 집성은 출처 표기 하에 자유 이용.",
+   "dcat:distribution": [
+    {
+     "@type": "dcat:Distribution",
+     "dct:title": "발견 기록 표(CSV)",
+     "dcat:downloadURL": {
+      "@id": "https://changgi.github.io/korea-archive-mcp/data/discovered.csv"
+     },
+     "dcat:mediaType": "text/csv",
+     "dcat:byteSize": 1887190,
+     "spdx:checksum": {
+      "@type": "spdx:Checksum",
+      "spdx:algorithm": "spdx:checksumAlgorithm_sha256",
+      "spdx:checksumValue": "98b3375d584044bff005ad4d37740140e195534e90644b1832ab55df1d55fd8e"
+     }
+    },
+    {
+     "@type": "dcat:Distribution",
+     "dct:title": "발견 기록(JSONL)",
+     "dcat:downloadURL": {
+      "@id": "https://changgi.github.io/korea-archive-mcp/data/discovered.jsonl"
+     },
+     "dcat:mediaType": "application/jsonl",
+     "dcat:byteSize": 2390977,
+     "spdx:checksum": {
+      "@type": "spdx:Checksum",
+      "spdx:algorithm": "spdx:checksumAlgorithm_sha256",
+      "spdx:checksumValue": "6dcebadc3f2484fc0d0a5c75847b746be9da41b4d20063a41b5a0b2f7c352f7b"
+     }
+    },
+    {
+     "@type": "dcat:Distribution",
+     "dct:title": "RiC-O·PROV 연결 데이터(JSON-LD)",
+     "dcat:downloadURL": {
+      "@id": "https://changgi.github.io/korea-archive-mcp/data/discovered.jsonld"
+     },
+     "dcat:mediaType": "application/ld+json",
+     "dcat:byteSize": 2507126,
+     "spdx:checksum": {
+      "@type": "spdx:Checksum",
+      "spdx:algorithm": "spdx:checksumAlgorithm_sha256",
+      "spdx:checksumValue": "6ff3b4bb6de02ae3b8c594e6592cb8990058bfb384fc1de2893cc2b615e94836"
+     }
+    },
+    {
+     "@type": "dcat:Distribution",
+     "dct:title": "IIIF Presentation 3 컬렉션(최근 300건)",
+     "dcat:downloadURL": {
+      "@id": "https://changgi.github.io/korea-archive-mcp/data/collection.json"
+     },
+     "dcat:mediaType": "application/ld+json",
+     "dcat:byteSize": 95089,
+     "spdx:checksum": {
+      "@type": "spdx:Checksum",
+      "spdx:algorithm": "spdx:checksumAlgorithm_sha256",
+      "spdx:checksumValue": "4e36c70bd6422bd7ec33065c12e1715bbda4719f53837645a6a0a760287bccdf"
+     }
+    },
+    {
+     "@type": "dcat:Distribution",
+     "dct:title": "IIIF 계층 컬렉션",
+     "dcat:downloadURL": {
+      "@id": "https://changgi.github.io/korea-archive-mcp/data/hierarchy.json"
+     },
+     "dcat:mediaType": "application/ld+json",
+     "dcat:byteSize": 5012,
+     "spdx:checksum": {
+      "@type": "spdx:Checksum",
+      "spdx:algorithm": "spdx:checksumAlgorithm_sha256",
+      "spdx:checksumValue": "93195a2186855d48e4b08092a020ba7ffb417b842886a691bcfbe3bc5856e2d2"
+     }
+    },
+    {
+     "@type": "dcat:Distribution",
+     "dct:title": "주제·인물·장소·형태 SKOS 개념 체계",
+     "dcat:downloadURL": {
+      "@id": "https://changgi.github.io/korea-archive-mcp/data/subjects.jsonld"
+     },
+     "dcat:mediaType": "application/ld+json",
+     "dcat:byteSize": 301430,
+     "spdx:checksum": {
+      "@type": "spdx:Checksum",
+      "spdx:algorithm": "spdx:checksumAlgorithm_sha256",
+      "spdx:checksumValue": "b98548247f14247cc4393cfd30295073e5db4103b01bb3d4cf0ae47ff3b19cd9"
+     }
+    },
+    {
+     "@type": "dcat:Distribution",
+     "dct:title": "OAI-PMH Dublin Core",
+     "dcat:downloadURL": {
+      "@id": "https://changgi.github.io/korea-archive-mcp/data/records.oai_dc.xml"
+     },
+     "dcat:mediaType": "application/xml",
+     "dcat:byteSize": 1598946,
+     "spdx:checksum": {
+      "@type": "spdx:Checksum",
+      "spdx:algorithm": "spdx:checksumAlgorithm_sha256",
+      "spdx:checksumValue": "6398cdb5735654194d891c41846f56f74660f233c922f0a5b18f2a3fe125979e"
+     }
+    },
+    {
+     "@type": "dcat:Distribution",
+     "dct:title": "IIIF Change Discovery 1.0 활동 스트림(매니페스트 생성·갱신)",
+     "dcat:downloadURL": {
+      "@id": "https://changgi.github.io/korea-archive-mcp/data/activity/collection.json"
+     },
+     "dcat:mediaType": "application/ld+json",
+     "dcat:byteSize": 645,
+     "spdx:checksum": {
+      "@type": "spdx:Checksum",
+      "spdx:algorithm": "spdx:checksumAlgorithm_sha256",
+      "spdx:checksumValue": "3ddd326dfaff85d32961ee624b2eae04a4948e94bdc2b97e13c968b0f553e7e9"
+     }
+    },
+    {
+     "@type": "dcat:Distribution",
+     "dct:title": "인용 CSL-JSON",
+     "dcat:downloadURL": {
+      "@id": "https://changgi.github.io/korea-archive-mcp/data/records.csl.json"
+     },
+     "dcat:mediaType": "application/vnd.citationstyles.csl+json",
+     "dcat:byteSize": 969808,
+     "spdx:checksum": {
+      "@type": "spdx:Checksum",
+      "spdx:algorithm": "spdx:checksumAlgorithm_sha256",
+      "spdx:checksumValue": "3778ef93b2cab261e4235f140356871a2dd6fb03c51b6f494d1cb170442911b8"
+     }
+    },
+    {
+     "@type": "dcat:Distribution",
+     "dct:title": "인용 RIS",
+     "dcat:downloadURL": {
+      "@id": "https://changgi.github.io/korea-archive-mcp/data/records.ris"
+     },
+     "dcat:mediaType": "application/x-research-info-systems",
+     "dcat:byteSize": 594074,
+     "spdx:checksum": {
+      "@type": "spdx:Checksum",
+      "spdx:algorithm": "spdx:checksumAlgorithm_sha256",
+      "spdx:checksumValue": "654ff59b5314d5964a7765a297a7026cce434470243bb38f7125b73d41987f8f"
+     }
+    },
+    {
+     "@type": "dcat:Distribution",
+     "dct:title": "인용 BibTeX",
+     "dcat:downloadURL": {
+      "@id": "https://changgi.github.io/korea-archive-mcp/data/records.bib"
+     },
+     "dcat:mediaType": "application/x-bibtex",
+     "dcat:byteSize": 561735,
+     "spdx:checksum": {
+      "@type": "spdx:Checksum",
+      "spdx:algorithm": "spdx:checksumAlgorithm_sha256",
+      "spdx:checksumValue": "5a0f5f5517e19e1c3824dcc2c0e6b68e43e9efc3bda26c196ae4b49a7d85adb2"
+     }
+    },
+    {
+     "@type": "dcat:Distribution",
+     "dct:title": "새 발견 Atom 피드",
+     "dcat:downloadURL": {
+      "@id": "https://changgi.github.io/korea-archive-mcp/data/feed.xml"
+     },
+     "dcat:mediaType": "application/atom+xml",
+     "dcat:byteSize": 81206,
+     "spdx:checksum": {
+      "@type": "spdx:Checksum",
+      "spdx:algorithm": "spdx:checksumAlgorithm_sha256",
+      "spdx:checksumValue": "3afbe169ea9a15e120d0d4a6420c00d8a7847d9cd0f1b308e81176d0ba5af7c8"
+     }
+    },
+    {
+     "@type": "dcat:Distribution",
+     "dct:title": "연대 타임라인",
+     "dcat:downloadURL": {
+      "@id": "https://changgi.github.io/korea-archive-mcp/data/timeline.json"
+     },
+     "dcat:mediaType": "application/json",
+     "dcat:byteSize": 93802,
+     "spdx:checksum": {
+      "@type": "spdx:Checksum",
+      "spdx:algorithm": "spdx:checksumAlgorithm_sha256",
+      "spdx:checksumValue": "fff48fa238a665f4f6ff9cb4b9599c7dae3a7f3d7912897ddba2c86bffb5f359"
+     }
+    },
+    {
+     "@type": "dcat:Distribution",
+     "dct:title": "계층구조",
+     "dcat:downloadURL": {
+      "@id": "https://changgi.github.io/korea-archive-mcp/data/tree.json"
+     },
+     "dcat:mediaType": "application/json",
+     "dcat:byteSize": 250600,
+     "spdx:checksum": {
+      "@type": "spdx:Checksum",
+      "spdx:algorithm": "spdx:checksumAlgorithm_sha256",
+      "spdx:checksumValue": "7d3014e8e23e85b577b1ba31eb4abb218c8f22c45549b33d562036306c186b5f"
+     }
+    },
+    {
+     "@type": "dcat:Distribution",
+     "dct:title": "분류 사전",
+     "dcat:downloadURL": {
+      "@id": "https://changgi.github.io/korea-archive-mcp/data/classifications.json"
+     },
+     "dcat:mediaType": "application/json",
+     "dcat:byteSize": 89236,
+     "spdx:checksum": {
+      "@type": "spdx:Checksum",
+      "spdx:algorithm": "spdx:checksumAlgorithm_sha256",
+      "spdx:checksumValue": "af5010e3dd6223040bd3119ec789df6f516d687999857233f9e379d81800bf5a"
+     }
+    },
+    {
+     "@type": "dcat:Distribution",
+     "dct:title": "발견 경로(질의↔기록)",
+     "dcat:downloadURL": {
+      "@id": "https://changgi.github.io/korea-archive-mcp/data/provenance.json"
+     },
+     "dcat:mediaType": "application/json",
+     "dcat:byteSize": 63448,
+     "spdx:checksum": {
+      "@type": "spdx:Checksum",
+      "spdx:algorithm": "spdx:checksumAlgorithm_sha256",
+      "spdx:checksumValue": "2820528dbc990f4d51745853eb8ff71325b5f71de3d998cd27bb5194f888a3d8"
+     }
+    },
+    {
+     "@type": "dcat:Distribution",
+     "dct:title": "기록↔기록 맥락 연결(근거 포함)",
+     "dcat:downloadURL": {
+      "@id": "https://changgi.github.io/korea-archive-mcp/data/relations.json"
+     },
+     "dcat:mediaType": "application/json",
+     "dcat:byteSize": 446675,
+     "spdx:checksum": {
+      "@type": "spdx:Checksum",
+      "spdx:algorithm": "spdx:checksumAlgorithm_sha256",
+      "spdx:checksumValue": "f03f853622002dda2ae5ccb83dcebfa593381b5c455ddd58e77b8115e066a0e9"
+     }
+    },
+    {
+     "@type": "dcat:Distribution",
+     "dct:title": "맥락 연결 묶음(읽기용)",
+     "dcat:downloadURL": {
+      "@id": "https://changgi.github.io/korea-archive-mcp/data/relations.html"
+     },
+     "dcat:mediaType": "text/html",
+     "dcat:byteSize": 29138,
+     "spdx:checksum": {
+      "@type": "spdx:Checksum",
+      "spdx:algorithm": "spdx:checksumAlgorithm_sha256",
+      "spdx:checksumValue": "af319c0df57a9de116181635da6c23df46b0c34395257bf69ad66406213b6662"
+     }
+    },
+    {
+     "@type": "dcat:Distribution",
+     "dct:title": "데이터 품질 시계열",
+     "dcat:downloadURL": {
+      "@id": "https://changgi.github.io/korea-archive-mcp/data/quality.json"
+     },
+     "dcat:mediaType": "application/json",
+     "dcat:byteSize": 3328,
+     "spdx:checksum": {
+      "@type": "spdx:Checksum",
+      "spdx:algorithm": "spdx:checksumAlgorithm_sha256",
+      "spdx:checksumValue": "43aea3e33dc5a687d7ce42c5bb54f4b402e333fbca60d6c93e4dd3de928b562f"
+     }
+    },
+    {
+     "@type": "dcat:Distribution",
+     "dct:title": "원문 고정성 변경 이력",
+     "dcat:downloadURL": {
+      "@id": "https://changgi.github.io/korea-archive-mcp/data/fixity_changes.json"
+     },
+     "dcat:mediaType": "application/json",
+     "dcat:byteSize": 23159,
+     "spdx:checksum": {
+      "@type": "spdx:Checksum",
+      "spdx:algorithm": "spdx:checksumAlgorithm_sha256",
+      "spdx:checksumValue": "13221026cf5d7ed3c7935fd633b821fe9c6b918894a982eabd2e482071169ebe"
+     }
+    },
+    {
+     "@type": "dcat:Distribution",
+     "dct:title": "불삭제 검사 — 되살린 값 기록",
+     "dcat:downloadURL": {
+      "@id": "https://changgi.github.io/korea-archive-mcp/data/loss_guard.json"
+     },
+     "dcat:mediaType": "application/json",
+     "dcat:byteSize": 184,
+     "spdx:checksum": {
+      "@type": "spdx:Checksum",
+      "spdx:algorithm": "spdx:checksumAlgorithm_sha256",
+      "spdx:checksumValue": "341f4128eb283e4553e7c2341e5f827b6fee50677c4cf57ec4f464a8c15fe351"
+     }
+    },
+    {
+     "@type": "dcat:Distribution",
+     "dct:title": "질의·회신 축적 색인",
+     "dcat:downloadURL": {
+      "@id": "https://changgi.github.io/korea-archive-mcp/data/queries/index.json"
+     },
+     "dcat:mediaType": "application/json",
+     "dcat:byteSize": 36950,
+     "spdx:checksum": {
+      "@type": "spdx:Checksum",
+      "spdx:algorithm": "spdx:checksumAlgorithm_sha256",
+      "spdx:checksumValue": "1c6fd5e9da379c799952eb7233ed117100f2fe16d95f1e6cb3622d1aae599772"
+     }
+    },
+    {
+     "@type": "dcat:Distribution",
+     "dct:title": "자동 점검 질의·회신 색인",
+     "dcat:downloadURL": {
+      "@id": "https://changgi.github.io/korea-archive-mcp/data/queries/probe/index.json"
+     },
+     "dcat:mediaType": "application/json",
+     "dcat:byteSize": 805685,
+     "spdx:checksum": {
+      "@type": "spdx:Checksum",
+      "spdx:algorithm": "spdx:checksumAlgorithm_sha256",
+      "spdx:checksumValue": "684f93b89203faa36c81ff044198ce2267ebd102093128c9920e6e25bd309833"
+     }
+    },
+    {
+     "@type": "dcat:Distribution",
+     "dct:title": "일일 기록물 등록부 해시 사슬",
+     "dcat:downloadURL": {
+      "@id": "https://changgi.github.io/korea-archive-mcp/data/records/index.json"
+     },
+     "dcat:mediaType": "application/json",
+     "dcat:byteSize": 11588,
+     "spdx:checksum": {
+      "@type": "spdx:Checksum",
+      "spdx:algorithm": "spdx:checksumAlgorithm_sha256",
+      "spdx:checksumValue": "a195a23704962d1a5926af2a46ea0d1f5a807fc7200016cc5429b4036a0f21b0"
+     }
+    }
+   ],
+   "ka:quality": {
+    "records": 893,
+    "요약": 75.9,
+    "요약(메타 합성 포함)": 97.9,
+    "연대": 91.2,
+    "기관 계층": 99.2,
+    "계층(파생 포함)": 100.0,
+    "기관 IIIF": 55.4,
+    "IIIF(원 기관 제공)": 14.2,
+    "IIIF(원 기관 이미지로 구축)": 39.9,
+    "IIIF(실물 이미지 — 같은 기록 다른 소장처 포함)": 55.3,
+    "IIIF(실물 이미지 — 제공+구축)": 54.1,
+    "IIIF(브리지 포함)": 100.0,
+    "썸네일": 13.4,
+    "권리 표시": 100.0,
+    "메타": 95.6,
+    "원문 지문": 95.9,
+    "발견 경로": 62.3,
+    "발견 경로(파생 포함)": 100.0,
+    "관련 기록 연결": 82.1,
+    "같은 기록(다른 소장처) 연결": 6.8,
+    "날짜 교차 확인(일치)": 3.4
+   }
+  }
+ ]
+}

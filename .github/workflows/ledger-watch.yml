@@ -1,0 +1,32 @@
+name: ledger-watch
+# v2.81 원장 신선도 감시 — 6시간마다 마지막 원장 커밋 시각을 본다. 26시간 넘게 갱신이 없으면 ledger를 직접 실행하고(정기 실행 누락 대비),
+# 48시간이 넘으면 auto-health 이슈를 연다. 서버 날짜 함은 3일 보관 — 그 안에 병합하면 유실 없음.
+on:
+  schedule:
+    - cron: '41 */6 * * *'
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: write
+  issues: write
+jobs:
+  watch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with: { fetch-depth: 200 }
+      - name: 원장 신선도 확인
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          last=$(git log -1 --format=%ct --grep='chore(ledger)' || echo 0)
+          now=$(date +%s); age=$(( (now - ${last:-0}) / 3600 ))
+          echo "마지막 원장 커밋: ${age}시간 전"
+          if [ "$age" -ge 26 ]; then
+            gh workflow run ledger.yml --ref main && echo "ledger 실행 요청(정기 실행 누락 대비)"
+          fi
+          if [ "$age" -ge 48 ]; then
+            body="발견 누적 원장이 ${age}시간째 갱신되지 않았습니다. 서버 날짜 함(Redis)은 3일 보관 — 72시간 안에 ledger 워크플로를 성공시키면 유실 없음. Actions › ledger 실행 기록과 로그를 확인하십시오."
+            num=$(gh issue list --label auto-health --state open --search "원장 갱신 중단" --json number -q '.[0].number')
+            if [ -n "$num" ]; then gh issue comment "$num" --body "$body"; else gh issue create --title "원장 갱신 중단 — ledger 정기 실행 누락" --label auto-health --body "$body"; fi
+          fi

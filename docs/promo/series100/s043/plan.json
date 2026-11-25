@@ -1,0 +1,98 @@
+{
+ "n": 43,
+ "part": [
+  "Ⅷ",
+  "유럽이 본 한국"
+ ],
+ "inst": "영국 국립기록관 TNA",
+ "flag": "🇬🇧",
+ "say": "서울 영국 영사관 기록 찾아줘",
+ "head": "서울 영국 총영사관 — 사진·도면·문서철",
+ "big": "WORK 55/18/40",
+ "facts": [
+  [
+   "TNA 사진",
+   "WORK 55/18/40 — 서울 영국 총영사 관저 남쪽 입면 사진 (1911 Feb)"
+  ],
+  [
+   "도면",
+   "WORK 40/330 — 서울 영국 총영사관 1·2층 평면도 (1907 May)"
+  ],
+  [
+   "문서철",
+   "FO 523 'Consulate, Seoul, Korea: General Correspondence' (1891-1909)"
+  ],
+  [
+   "이미지",
+   "TNA 사진 미공개 → Carles 『Life in Corea』(1888) 도판"
+  ]
+ ],
+ "tool": "tna_search('Seoul consulate general Korea') → WORK 55/18/40 · WORK 40/330 · FO 523",
+ "link": "https://discovery.nationalarchives.gov.uk/details/r/C21089485",
+ "checked": "2026-11-22",
+ "tags": "#TNA #영국영사관 #서울",
+ "hero": {
+  "file": "src/carles_consulate_photo.jpg",
+  "pos": "center 45%",
+  "credit": "도판: W. R. Carles, Life in Corea (London: Macmillan, 1888) 'Photo of Consulate-General, Soul' · 1888 공표, 저자 1929 사망 → 보호기간 만료(PD) · 사본 Internet Archive lifeincorea00carl"
+ },
+ "hook": "1880년대 서울,<br><span class=\"g\">한옥</span>이었던 영국 총영사관",
+ "mosaic": [
+  {
+   "file": "src/carles_p103_para.jpg",
+   "label": "p.103 — 'the Corean houses, which formed the Consulate-General'",
+   "pos": "center 55%"
+  },
+  {
+   "file": "src/carles_p104_para.jpg",
+   "label": "p.104 — 영사관으로 들어가는 좁은 골목",
+   "pos": "center 40%"
+  }
+ ],
+ "mosaic_title": "그 집에 <span class=\"g\">살았던 사람</span>의 기록",
+ "mosaic_credit": "W. R. Carles, Life in Corea (London: Macmillan, 1888) pp.103-104 · PD · Internet Archive lifeincorea00carl",
+ "ann": {
+  "file": "src/carles_consulate_photo.jpg",
+  "boxes": [
+   {
+    "x": 22,
+    "y": 18,
+    "w": 67,
+    "h": 22,
+    "t": "처마 끝이 들린 기와지붕"
+   },
+   {
+    "x": 40,
+    "y": 41,
+    "w": 26,
+    "h": 20,
+    "t": "창살 문짝이 늘어선 정면"
+   },
+   {
+    "x": 67,
+    "y": 53,
+    "w": 18,
+    "h": 13,
+    "t": "오른쪽 난간과 벽돌 기단"
+   },
+   {
+    "x": 39,
+    "y": 64,
+    "w": 43,
+    "h": 11,
+    "t": "기단 앞에 줄지어 놓인 화분"
+   },
+   {
+    "x": 40,
+    "y": 78,
+    "w": 30,
+    "h": 21,
+    "t": "잔디 사이로 난 정원 길"
+   }
+  ],
+  "credit": "Carles 1888 도판(원 지면 90° 회전 수록 → 바로 세움) — 표시한 5곳은 도판에서 직접 읽은 것 · 본문 p.103: 'crab-trees, paulownias, hawthorn, and lilac bushes'"
+ },
+ "cta_img": "src/carles_consulate_plate_full.jpg",
+ "mosaic_layout": "rows",
+ "meta_top": 470
+}

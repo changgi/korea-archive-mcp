@@ -1,0 +1,149 @@
+{
+ "n": 122,
+ "part": [
+  "XVI",
+  "영상으로 읽는 기록"
+ ],
+ "inst": "미국 국립기록관리청 NARA",
+ "flag": "🇺🇸",
+ "say": "인천상륙 직후 인천 시가지 영상 찾아줘",
+ "head": "1950.9.17 상륙 이틀 뒤의 인천",
+ "big": "428-NPC-13516",
+ "facts": [
+  [
+   "계보",
+   "RG 428 해군부 › 군사활동 영상 시리즈"
+  ],
+  [
+   "생산",
+   "1950-09-17"
+  ],
+  [
+   "원본",
+   "MP4 428-NPC-13516 (6분 1초)"
+  ],
+  [
+   "권리",
+   "Use Restriction 'Undetermined' → B"
+  ]
+ ],
+ "tool": "nara_search('Korean', record_group=428, moving_images_only=true) → judge_rights(naid=79605) → keyscenes",
+ "link": "https://catalog.archives.gov/id/79605",
+ "checked": "2026-11-22",
+ "tags": "#NARA #인천상륙작전 #영상기록",
+ "hero": {
+  "file": "video/scene_06_307.jpg",
+  "credit": "필름 03:07 장면 · 미국 국립기록관리청 NAID 79605 (428-NPC-13516, 1950-09-17, 연방 저작물, Use Restriction Undetermined → B 명기)"
+ },
+ "hook": "상륙 이틀 뒤,<br><span class=\"g\">인천 시가지</span>",
+ "mosaic": [
+  {
+   "file": "video/scene_01_055.jpg",
+   "label": "필름 0:55 — 높은 곳에서 본 시가지와 항구"
+  },
+  {
+   "file": "video/scene_02_112.jpg",
+   "label": "필름 1:12 — 뾰족탑 서양식 건물"
+  },
+  {
+   "file": "video/scene_09_454.jpg",
+   "label": "필름 4:54 — 거리의 전차"
+  },
+  {
+   "file": "video/scene_08_341.jpg",
+   "label": "필름 3:41 — 트럭 위 병사들"
+  }
+ ],
+ "mosaic_title": "시가지·건물·전차 — 필름 한 편의 <span class=\"g\">네 장면</span>",
+ "mosaic_credit": "모두 같은 필름의 장면 · 미국 국립기록관리청 NAID 79605 (428-NPC-13516, 1950-09-17, 연방 저작물, Use Restriction Undetermined → B 명기)",
+ "ann": {
+  "file": "video/scene_08_341.jpg",
+  "boxes": [
+   {
+    "x": 46,
+    "y": 35,
+    "w": 30,
+    "h": 22,
+    "t": "트럭 짐칸에 앉은 철모 쓴 병사들"
+   },
+   {
+    "x": 0,
+    "y": 63,
+    "w": 62,
+    "h": 37,
+    "t": "앞을 지나는 지프와 탑승자들"
+   },
+   {
+    "x": 0,
+    "y": 2,
+    "w": 56,
+    "h": 28,
+    "t": "기와지붕을 얹은 2층 건물"
+   },
+   {
+    "x": 45,
+    "y": 0,
+    "w": 3,
+    "h": 52,
+    "t": "길가의 전봇대"
+   }
+  ],
+  "credit": "필름 03:41 장면(1050×700 프레임) — 표시한 4곳은 화면에서 직접 읽은 것",
+  "crop_y": 0.0
+ },
+ "scenes": [
+  {
+   "title": "NAID 79605 「INCHON, KOREAN - AFTER INVASION」 (1950-09-17, 6분 1초)",
+   "credit": "미국 국립기록관리청 NAID 79605 · 장면은 keyscenes 자동 추출(전환 92곳→12장면) · 해설은 화면에서 보이는 것만",
+   "frames": [
+    {
+     "file": "video/scene_01_055.jpg",
+     "tc": "00:55",
+     "cap": "높은 곳에서 본 시가지 — 기와지붕 너머 항구와 바다"
+    },
+    {
+     "file": "video/scene_02_112.jpg",
+     "tc": "01:12",
+     "cap": "뾰족탑이 있는 서양식 건물 — 벽면 일부가 부서졌다"
+    },
+    {
+     "file": "video/scene_03_141.jpg",
+     "tc": "01:41",
+     "cap": "모래주머니 진지 안 대포 곁의 사람, 뒤로 긴 창고 지붕들"
+    },
+    {
+     "file": "video/scene_05_232.jpg",
+     "tc": "02:32",
+     "cap": "무너진 건물 잔해 너머 굴뚝과 집들"
+    }
+   ]
+  },
+  {
+   "title": "같은 필름 후반부",
+   "credit": "미국 국립기록관리청 NAID 79605 (428-NPC-13516, 1950-09-17, 연방 저작물, Use Restriction Undetermined → B 명기)",
+   "frames": [
+    {
+     "file": "video/scene_06_307.jpg",
+     "tc": "03:07",
+     "cap": "잔해 더미 뒤로 굴뚝 달린 벽돌 건물"
+    },
+    {
+     "file": "video/scene_07_326.jpg",
+     "tc": "03:26",
+     "cap": "흰 옷 입은 남자가 폐허 사이를 걸어 나온다"
+    },
+    {
+     "file": "video/scene_09_454.jpg",
+     "tc": "04:54",
+     "cap": "거리 위의 전차 2대와 포탑 위 사람들"
+    },
+    {
+     "file": "video/scene_10_504.jpg",
+     "tc": "05:04",
+     "cap": "해안 둑 아래 바다, 섬 앞의 소형 선박들"
+    }
+   ]
+  }
+ ],
+ "cta_img": "video/scene_01_055.jpg"
+}

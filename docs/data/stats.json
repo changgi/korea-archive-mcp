@@ -1,0 +1,141 @@
+{
+ "updated": "2026-11-25T03:51:11Z",
+ "records": 916,
+ "new_records": 0,
+ "new_batches": 0,
+ "by_source": {
+  "nara": 156,
+  "ia": 105,
+  "koreanwar": 83,
+  "tna": 63,
+  "awm": 48,
+  "nedb": 46,
+  "nrich": 43,
+  "archives": 40,
+  "okchf": 35,
+  "aks": 32,
+  "commons": 31,
+  "ktv": 28,
+  "europeana": 23,
+  "i815": 23,
+  "oldnews": 21,
+  "ndl": 16,
+  "jacar": 14,
+  "seoul": 13,
+  "indy": 12,
+  "nlk": 11,
+  "un": 8,
+  "gallica": 8,
+  "earchive": 8,
+  "dnz": 8,
+  "much": 8,
+  "jsg": 7,
+  "kyudb": 5,
+  "heritage": 5,
+  "nlna": 5,
+  "nzarch": 5,
+  "gallery": 3,
+  "gonghun": 3
+ },
+ "first": "2026-11-23T03:00:15Z",
+ "formats": {
+  "text": 77,
+  "csv": 49,
+  "iiif": 3
+ },
+ "queries": {
+  "added": 0,
+  "total": 116,
+  "calls": 134,
+  "by_tool": {
+   "nedb_search": 60,
+   "cross_search": 52,
+   "source_profile": 11,
+   "seoul_archives_search": 3,
+   "nara_search": 3,
+   "koreanwar_item": 2,
+   "koreanwar_search": 2,
+   "nlk_search": 1
+  }
+ },
+ "repeat_records": 164,
+ "entry_types": {
+  "기록": 893,
+  "소장처(컬렉션)": 5,
+  "검색 안내": 11,
+  "결함 출력": 7
+ },
+ "site_root_links": 5,
+ "top10": [
+  {
+   "rank": 1,
+   "seen": 13,
+   "days": 1,
+   "title": "[판결문] 유관순(柳寬順) — 경성복심법원 · 원판결 중 피고관련 부분 취소, 징역 3년",
+   "url": "https://theme.archives.go.kr/next/indy/viewIndyDetail.do?IMSI_ARCHIVE_ID=0001352062&FK_ARCHIVE_EVNT_ID=0034971420&evntdowngbn=N&indpnId=0000003833&actionType=det&flag=1&search_region="
+  },
+  {
+   "rank": 2,
+   "seen": 13,
+   "days": 1,
+   "title": "[판결문] 유관순(柳寬順) — 불상 · 상고 기각",
+   "url": "https://theme.archives.go.kr/next/indy/viewIndyDetail.do?IMSI_ARCHIVE_ID=0001352062&FK_ARCHIVE_EVNT_ID=0034971431&evntdowngbn=N&indpnId=0000003844&actionType=det&flag=1&search_region="
+  },
+  {
+   "rank": 3,
+   "seen": 10,
+   "days": 2,
+   "title": "EVACUATION OF HUNGNAM, KOREA",
+   "url": "https://catalog.archives.gov/id/75392"
+  },
+  {
+   "rank": 4,
+   "seen": 10,
+   "days": 2,
+   "title": "EVACUATION OF HUNGNAM KOREA",
+   "url": "https://catalog.archives.gov/id/75393"
+  },
+  {
+   "rank": 5,
+   "seen": 9,
+   "days": 2,
+   "title": "EVACUATION, HUNGNAM, KOREA",
+   "url": "https://catalog.archives.gov/id/22397"
+  },
+  {
+   "rank": 6,
+   "seen": 8,
+   "days": 2,
+   "title": "[奎18933] 加士島屯土賭稅 節目 가사도둔토도세 절목 · 內藏院(朝鮮) 編/내장원(조선) 편",
+   "url": "https://kyudb.snu.ac.kr/book/view.do?book_cd=GK18933_00"
+  },
+  {
+   "rank": 7,
+   "seen": 8,
+   "days": 1,
+   "title": "01 · 미국 국립기록관리청 NARA — 1950.12.24 흥남 — 필름 원본까지 — North Korean refugees use anything that will float ",
+   "url": "https://changgi.github.io/korea-archive-mcp/iiif.html#s01/1"
+  },
+  {
+   "rank": 8,
+   "seen": 8,
+   "days": 1,
+   "title": "12 · 위키미디어 공용 Commons — 업로더 말 대신 원 소장처에 묻는다 — Korean natives prepare to board a tank landing ship du",
+   "url": "https://changgi.github.io/korea-archive-mcp/iiif.html#s12/2"
+  },
+  {
+   "rank": 9,
+   "seen": 8,
+   "days": 1,
+   "title": "29 · 인터넷 아카이브 archive.org — 인터넷 사본과 NARA 원본, 한 줄로 — EVACUATION OF HUNGNAM, KOREA (+4장)",
+   "url": "https://changgi.github.io/korea-archive-mcp/iiif.html#s29/1"
+  },
+  {
+   "rank": 10,
+   "seen": 7,
+   "days": 2,
+   "title": "Korea: armistice negotiations",
+   "url": "https://discovery.nationalarchives.gov.uk/details/r/C3640680"
+  }
+ ]
+}

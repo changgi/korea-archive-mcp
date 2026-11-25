@@ -1,0 +1,78 @@
+{
+ "n": 70,
+ "src": "ndl",
+ "record": {
+  "id": "NDL PID 1122465",
+  "title": "京城案内 : 近郊、温泉 (京城観光協会 編)",
+  "date": "昭和10(1935)",
+  "inst": "国立国会図書館デジタルコレクション",
+  "url": "https://dl.ndl.go.jp/pid/1122465"
+ },
+ "images": [
+  {
+   "file": "ndl_1122465_01_cover.jpg",
+   "record_id": "NDL PID 1122465 R0000001",
+   "url": "https://dl.ndl.go.jp/pid/1122465",
+   "rights": "PD — NDL 'pdm'",
+   "rights_evidence": "dl.ndl.go.jp/api/item/search/info:ndljp/pid/1122465 응답: permission.rule 'internet', rights.code 'pdm'"
+  },
+  {
+   "file": "ndl_1122465_02_map.jpg",
+   "record_id": "NDL PID 1122465 R0000002",
+   "url": "https://dl.ndl.go.jp/pid/1122465",
+   "rights": "PD — NDL 'pdm'",
+   "rights_evidence": "dl.ndl.go.jp/api/item/search/info:ndljp/pid/1122465 응답: permission.rule 'internet', rights.code 'pdm'"
+  },
+  {
+   "file": "ndl_1122465_02_kumgang.jpg",
+   "record_id": "NDL PID 1122465 R0000002",
+   "url": "https://dl.ndl.go.jp/pid/1122465",
+   "rights": "PD — NDL 'pdm'",
+   "rights_evidence": "dl.ndl.go.jp/api/item/search/info:ndljp/pid/1122465 응답: permission.rule 'internet', rights.code 'pdm'"
+  },
+  {
+   "file": "ndl_1122465_12_keijo.jpg",
+   "record_id": "NDL PID 1122465 R0000012",
+   "url": "https://dl.ndl.go.jp/pid/1122465",
+   "rights": "PD — NDL 'pdm'",
+   "rights_evidence": "dl.ndl.go.jp/api/item/search/info:ndljp/pid/1122465 응답: permission.rule 'internet', rights.code 'pdm'"
+  },
+  {
+   "file": "ndl_1122465_21_meisan.jpg",
+   "record_id": "NDL PID 1122465 R0000021",
+   "url": "https://dl.ndl.go.jp/pid/1122465",
+   "rights": "PD — NDL 'pdm'",
+   "rights_evidence": "dl.ndl.go.jp/api/item/search/info:ndljp/pid/1122465 응답: permission.rule 'internet', rights.code 'pdm'"
+  },
+  {
+   "file": "ndl_1122465_21_colophon.jpg",
+   "record_id": "NDL PID 1122465 R0000021",
+   "url": "https://dl.ndl.go.jp/pid/1122465",
+   "rights": "PD — NDL 'pdm'",
+   "rights_evidence": "dl.ndl.go.jp/api/item/search/info:ndljp/pid/1122465 응답: permission.rule 'internet', rights.code 'pdm'"
+  },
+  {
+   "file": "ndl_1122465_22_back.jpg",
+   "record_id": "NDL PID 1122465 R0000022",
+   "url": "https://dl.ndl.go.jp/pid/1122465",
+   "rights": "PD — NDL 'pdm'",
+   "rights_evidence": "dl.ndl.go.jp/api/item/search/info:ndljp/pid/1122465 응답: permission.rule 'internet', rights.code 'pdm'"
+  },
+  {
+   "file": "ndl_1122465_21_colophon_p.jpg",
+   "record_id": "NDL PID 1122465 R0000021 판권 (좌우 여백 덧댐)",
+   "url": "https://dl.ndl.go.jp/pid/1122465",
+   "rights": "PD — NDL 'pdm'",
+   "rights_evidence": "dl.ndl.go.jp/api/item/search/info:ndljp/pid/1122465 응답: permission.rule 'internet', rights.code 'pdm'"
+  }
+ ],
+ "points": [],
+ "video": {
+  "url": "",
+  "length_s": 0,
+  "rights": "",
+  "note": "영상 없음"
+ },
+ "status": "done",
+ "notes": "[3차 시도 2026-11-22, 메인 세션] 쿨다운 후 NDL 요청 7회(item API 1·IIIF manifest 1·이미지 5, 4초 간격) — 429 없음. 이전 2회 시도는 429로 중단(우회 없음). 판독 문구는 지면 확대로 직접 확인. 판권 두 번째 줄(발행일)은 판독 불확실하여 미기재."
+}

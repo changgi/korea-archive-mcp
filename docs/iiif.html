@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>전체 기록 IIIF 갤러리 — KOREA ARCHIVE 통합검색</title>
+<meta name="description" content="30곳 탐방·100선에 쓰인 실물 기록 이미지 전체를 연속 스크롤·격자·확대(딥줌)로 보는 IIIF 갤러리. 시리즈별 IIIF Presentation 3.0 매니페스트 제공.">
+<link rel="alternate" type="application/ld+json" href="iiif/collection.json" title="IIIF Collection">
+<style>
+:root{--bg:#0e0f12;--panel:#16181d;--line:#2a2d35;--ink:#eceae4;--muted:#9a9890;--gold:#e0b04a;--red:#c0392b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:"Pretendard","Apple SD Gothic Neo","Noto Sans KR",system-ui,sans-serif;line-height:1.55}
+a{color:var(--gold)}
+header{position:sticky;top:0;z-index:50;background:rgba(14,15,18,.96);backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
+.top{display:flex;align-items:center;gap:14px;padding:10px 18px;flex-wrap:wrap}
+.logo{font-weight:900;color:var(--ink);text-decoration:none;font-size:1.02rem}.logo em{color:var(--gold);font-style:normal}
+.nav a{color:var(--muted);text-decoration:none;margin-right:12px;font-size:.9rem}.nav a:hover{color:var(--ink)}
+.tools{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-left:auto}
+.tools input,.tools select{background:#1d2027;border:1px solid var(--line);color:var(--ink);border-radius:8px;padding:7px 10px;font:inherit;font-size:.9rem}
+.tools input{width:220px}
+.seg{display:flex;border:1px solid var(--line);border-radius:8px;overflow:hidden}.seg button{background:#1d2027;color:var(--muted);border:0;padding:7px 12px;font:inherit;font-size:.88rem;cursor:pointer}.seg button.on{background:var(--gold);color:#111;font-weight:800}
+.intro{padding:22px 18px 6px;max-width:1200px;margin:0 auto}
+.intro h1{font-size:1.6rem}.intro h1 em{color:var(--gold);font-style:normal}
+.intro p{color:var(--muted);font-size:.92rem;margin-top:6px;max-width:900px}
+.stat{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}.stat span{background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:4px 12px;font-size:.82rem;color:#ccc}
+.stat b{color:var(--gold)}
+.wrap{display:grid;grid-template-columns:280px 1fr;gap:0;max-width:1500px;margin:0 auto}
+aside{position:sticky;top:58px;height:calc(100vh - 58px);overflow:auto;border-right:1px solid var(--line);padding:10px 8px 40px}
+aside h4{color:var(--gold);font-size:.78rem;letter-spacing:.06em;margin:14px 8px 6px}
+aside a{display:flex;gap:8px;align-items:center;padding:5px 8px;border-radius:8px;color:#d6d4cc;text-decoration:none;font-size:.82rem;line-height:1.35}
+aside a:hover,aside a.on{background:#20232b}
+aside a img{width:38px;height:38px;object-fit:cover;border-radius:4px;flex:none;background:#222}
+aside a i{font-style:normal;color:var(--muted);font-size:.74rem;margin-left:auto;flex:none}
+main{padding:6px 18px 80px;min-width:0}
+.sec{padding:22px 0 8px;border-bottom:1px solid var(--line)}
+.sh{display:flex;gap:12px;align-items:flex-start;flex-wrap:wrap}
+.sh h2{font-size:1.12rem;line-height:1.4;flex:1;min-width:260px}.sh h2 small{display:block;color:var(--gold);font-size:.76rem;font-weight:800;margin-bottom:2px}
+.sh .rec{color:var(--muted);font-size:.84rem;margin-top:4px;font-weight:400}
+.acts{display:flex;gap:6px;flex-wrap:wrap}.acts a{background:#1d2027;border:1px solid var(--line);border-radius:7px;padding:5px 9px;font-size:.78rem;text-decoration:none;color:#ddd;white-space:nowrap}.acts a:hover{border-color:var(--gold)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:8px;margin-top:12px}
+.grid figure{position:relative;cursor:zoom-in;background:#1a1c22;border-radius:6px;overflow:hidden;aspect-ratio:1/1}
+.grid img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .2s}
+.grid figure:hover img{transform:scale(1.04)}
+.grid figcaption{position:absolute;left:0;right:0;bottom:0;padding:16px 7px 5px;font-size:.72rem;line-height:1.3;background:linear-gradient(transparent,rgba(0,0,0,.85));color:#eee;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.grid .k4{position:absolute;top:5px;left:5px;background:#174a7c;color:#fff;font-size:.64rem;padding:1px 5px;border-radius:4px;font-weight:800}
+.flow{margin-top:12px;display:flex;flex-direction:column;gap:26px;align-items:center}
+.flow figure{max-width:980px;width:100%;cursor:zoom-in}
+.flow img{width:100%;height:auto;display:block;border-radius:4px;background:#1a1c22}
+.flow figcaption{font-size:.86rem;color:#ddd;margin-top:8px}.flow figcaption span{display:block;color:var(--muted);font-size:.78rem;margin-top:2px}
+.lnk{margin-top:10px;display:flex;flex-wrap:wrap;gap:6px}.lnk a{font-size:.76rem;background:#22252d;border:1px dashed #444;border-radius:6px;padding:3px 8px;color:#ccc;text-decoration:none}
+.lnk b{font-size:.76rem;color:var(--muted);margin-right:4px}
+/* 확대 보기 */
+#zv{position:fixed;inset:0;z-index:100;background:#08090b;display:none;grid-template-columns:minmax(0,1fr) 340px;grid-template-rows:auto 1fr auto}
+#zv.on{display:grid}
+#zv .zt{grid-column:1/3;display:flex;align-items:center;gap:12px;padding:10px 14px;border-bottom:1px solid var(--line)}
+#zv .zt b{flex:1;font-size:.95rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#zv .zt span{color:var(--muted);font-variant-numeric:tabular-nums;font-size:.88rem}
+#zv .zx{background:none;border:0;color:#fff;font-size:28px;cursor:pointer;padding:0 8px}
+#osd{position:relative;min-height:0;background:#000}
+#zv .nav2{position:absolute;top:50%;transform:translateY(-50%);z-index:5;width:48px;height:48px;border-radius:50%;border:0;background:rgba(255,255,255,.88);font-size:24px;font-weight:900;cursor:pointer}
+#zprev{left:10px}#znext{right:10px}
+#zinfo{overflow:auto;padding:14px 16px;border-left:1px solid var(--line);background:var(--panel);font-size:.86rem}
+#zinfo h3{font-size:.98rem;line-height:1.45;margin-bottom:8px;overflow-wrap:anywhere}
+#zinfo dl{display:grid;grid-template-columns:auto 1fr;gap:5px 10px;margin:10px 0}#zinfo dt{color:#e0907f;font-weight:800;white-space:nowrap}#zinfo dd{color:#ddd;overflow-wrap:anywhere}
+#zinfo .acts{margin-top:10px}
+#zstrip{grid-column:1/3;display:flex;gap:6px;overflow-x:auto;padding:8px 12px;border-top:1px solid var(--line)}
+#zstrip img{height:58px;width:58px;object-fit:cover;border-radius:4px;opacity:.45;cursor:pointer;flex:none;border:2px solid transparent}
+#zstrip img.on{opacity:1;border-color:var(--gold)}
+#zstrip .sep{flex:none;align-self:stretch;width:2px;background:#3a3d46;margin:0 3px;position:relative}
+#zstrip .sep b{position:absolute;top:-2px;left:4px;font-size:.62rem;color:var(--gold);white-space:nowrap;font-weight:800}
+.play{background:var(--gold);color:#111;border:0;border-radius:8px;padding:7px 14px;font:inherit;font-weight:800;font-size:.9rem;cursor:pointer;white-space:nowrap}
+.zb{background:#1d2027;border:1px solid var(--line);color:#eee;border-radius:7px;padding:5px 10px;font:inherit;font-size:.82rem;cursor:pointer}
+.zb.on{background:var(--gold);color:#111;border-color:var(--gold);font-weight:800}
+#zv select{background:#1d2027;border:1px solid var(--line);color:#eee;border-radius:7px;padding:4px 6px;font:inherit;font-size:.8rem}
+#zbar{position:absolute;left:0;bottom:0;height:3px;background:var(--gold);width:0;z-index:6}
+.foot{color:var(--muted);font-size:.8rem;padding:30px 0;max-width:900px}
+@media (max-width:900px){.wrap{grid-template-columns:1fr}aside{display:none}.tools input{width:150px}#zv{grid-template-columns:minmax(0,1fr);grid-template-rows:auto 1fr auto auto}#zv .zt{grid-column:1;flex-wrap:wrap;gap:6px 8px;padding:8px 10px}#zv .zt b{flex:1 1 100%;font-size:.88rem;order:-1}#zv .zt span{font-size:.78rem;margin-right:auto}#zv .zx{position:absolute;top:2px;right:4px}#zv .zt b{padding-right:30px}#zinfo{max-height:30vh;border-left:0;border-top:1px solid var(--line)}#zstrip{grid-column:1}.grid{grid-template-columns:repeat(auto-fill,minmax(120px,1fr))}}
+</style></head><body>
+<header><div class="top">
+<a class="logo" href="index.html">KOREA ARCHIVE <em>통합검색</em></a>
+<nav class="nav"><a href="index.html">소개</a><a href="series.html">30곳 탐방</a><a href="series100.html">100선</a><a href="iiif.html" style="color:var(--ink)">IIIF 갤러리</a><a href="kv.html">KV</a></nav>
+<div class="tools">
+<input id="q" type="search" placeholder="기관·기록·연대 검색 (예: NARA, 1950, 의궤)">
+<select id="pf"><option value="">전체 부</option></select>
+<button class="play" id="playall" title="첫 장부터 전체 기록을 자동으로 넘겨 봅니다">▶ 전체 연속 보기</button>
+<div class="seg" id="mode"><button data-m="grid" class="on">격자</button><button data-m="flow">연속</button></div>
+</div></div></header>
+<div class="intro">
+<h1>전체 기록 <em>IIIF 갤러리</em></h1>
+<p>30곳 탐방·100선 캐러셀에 쓰인 실물 기록 이미지를 한곳에 모았습니다. <b>격자</b>로 훑고, <b>연속</b>으로 한 장씩 크게 내려 읽고, 이미지를 누르면 <b>확대(딥줌)</b>로 세부까지 봅니다. 확대 화면에서 ← →로 다음 기록까지 이어 넘어갑니다. 모든 시리즈는 국제 표준 <a href="https://iiif.io/api/presentation/3.0/" target="_blank" rel="noopener">IIIF Presentation 3.0</a> 매니페스트로도 제공되어 Mirador·Universal Viewer 등 어떤 IIIF 뷰어에서도 열립니다(<a href="iiif/collection.json">컬렉션 JSON</a> · 전체 한 묶음 <a href="iiif/all.json">all.json</a> · 계층 <a href="iiif/hierarchy.json">hierarchy.json</a>(부 › 시리즈 › 이미지)).
+<br><b>데이터로 받기</b>: <a href="iiif/records.csv">records.csv</a>(표·통계 — 장마다 식별자·연대·권리·계보·sha256 고정성·원 기관) · <a href="iiif/records.jsonld">records.jsonld</a>(RiC-O 기록 온톨로지 — 계층·출처·디지털 사본, 지식그래프·기록관리 등재용).
+<br><b>NARA 기록은 무엇이든 IIIF로</b>: <code>https://korea-archive-mcp.vercel.app/iiif/nara/&lt;NAID&gt;/manifest.json</code> — 계보·생산일·권리·판독 지문·원본 매체를 담은 매니페스트, <code>/collection.json</code>=시리즈의 하위 기록, <code>/record.jsonld</code>=RiC-O. 예: <a href="kv.html?manifest=https%3A%2F%2Fkorea-archive-mcp.vercel.app%2Fiiif%2Fnara%2F532396%2Fcollection.json">미 해병대 사진 시리즈를 KV로</a>. 전체를 다른 뷰어로: <a href="kv.html"><b>KV (Korea Archive Viewer)</b></a> — 800장 전체 연속 · <a id="mirall" target="_blank" rel="noopener">Mirador</a> · <a id="uvall" target="_blank" rel="noopener">Universal Viewer</a>.</p>
+<div class="stat" id="stat"></div>
+</div>
+<div class="wrap"><aside id="side"></aside><main id="main"><p style="color:var(--muted);padding:30px 0">불러오는 중…</p></main></div>
+<div id="zv"><div class="zt"><b id="zt"></b><span id="zc"></span>
+<button class="zb" id="zplay" title="자동 넘김 (스페이스)">▶ 자동 넘김</button>
+<select id="zspd" title="넘김 간격"><option value="3000">3초</option><option value="5000" selected>5초</option><option value="8000">8초</option><option value="12000">12초</option></select>
+<button class="zb" id="zfs" title="전체 화면 (F)">⛶ 전체 화면</button>
+<button class="zx" id="zx" aria-label="닫기">×</button></div>
+<div id="osd"><button class="nav2" id="zprev" aria-label="이전">‹</button><button class="nav2" id="znext" aria-label="다음">›</button><div id="zbar"></div></div>
+<div id="zinfo"></div><div id="zstrip"></div></div>
+<script src="https://cdn.jsdelivr.net/npm/openseadragon@4.1.1/build/openseadragon/openseadragon.min.js"></script>
+<script>
+(async function () {
+  const BASE = 'iiif/'; const ABS = new URL(BASE, location.href).href;
+  const D = await (await fetch(BASE + 'index.json')).json();
+  const S = D.series; const st = D.stats;
+  const esc = (t) => String(t ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  const nImg = S.reduce((a, s) => a + s.c.length, 0);
+  document.getElementById('stat').innerHTML = `<span>시리즈 <b>${S.length}</b></span><span>기록 이미지 <b>${nImg}</b>장</span><span>공공누리 제4유형 <b>${st.kogl4}</b>장 — 원본 무변경</span><span>원 기관 링크만 <b>${st.link}</b>건(웹 캡처·이용 허가 필요)</span>`;
+  const parts = [...new Set(S.map((s) => s.part))];
+  document.getElementById('pf').innerHTML += parts.map((p) => `<option>${esc(p)}</option>`).join('');
+  const mir = (k) => 'https://projectmirador.org/embed/?iiif-content=' + encodeURIComponent(ABS + 'm/' + k + '.json');
+  const uv = (k) => 'https://uv-v4.netlify.app/#?manifest=' + encodeURIComponent(ABS + 'm/' + k + '.json');
+  document.getElementById('mirall').href = 'https://projectmirador.org/embed/?iiif-content=' + encodeURIComponent(ABS + 'collection.json');
+  document.getElementById('uvall').href = 'https://uv-v4.netlify.app/#?manifest=' + encodeURIComponent(ABS + 'collection.json');
+  const kv = (k, n) => 'kv.html?collection=' + encodeURIComponent(ABS + 'hierarchy.json') + '&manifest=' + encodeURIComponent(ABS + 'm/' + k + '.json') + (n ? '&canvas=' + n : '');
+  let mode = 'grid', flat = [], vis = S, stripFor = null;
+
+  function render() {
+    const q = document.getElementById('q').value.trim().toLowerCase(); const pf = document.getElementById('pf').value;
+    vis = S.filter((s) => (!pf || s.part === pf) && (!q || (s.label + ' ' + JSON.stringify(s.rec) + ' ' + s.c.map((c) => c.t + ' ' + Object.values(c.md).join(' ')).join(' ')).toLowerCase().includes(q)));
+    flat = []; vis.forEach((s, si) => s.c.forEach((c, ci) => flat.push({ s, si, ci, c })));
+    let side = '', cur = '';
+    for (const s of vis) {
+      if (s.part !== cur) { cur = s.part; side += `<h4>${esc(cur)}</h4>`; }
+      side += `<a href="#${s.key}" data-k="${s.key}">${s.c[0] ? `<img loading="lazy" src="${BASE + s.c[0].th}" alt="">` : '<img alt="">'}<span>${esc(s.label)}</span><i>${s.c.length}</i></a>`;
+    }
+    document.getElementById('side').innerHTML = side || '<p style="color:var(--muted);padding:10px">일치하는 기록이 없습니다.</p>';
+    let h = '', gi = 0;
+    for (const s of vis) {
+      const r = s.rec;
+      h += `<section class="sec" id="${s.key}"><div class="sh"><h2><small>${esc(s.part)}</small>${esc(s.flag)} ${esc(s.label)}<div class="rec">원 기록: ${esc(r.id)} ${esc(r.title)} ${r.date ? '(' + esc(r.date) + ')' : ''} · ${esc(r.inst)}</div></h2>
+<div class="acts">${r.url ? `<a href="${esc(r.url)}" target="_blank" rel="noopener">원 기관 기록 ↗</a>` : ''}<a href="${esc(s.page)}">캐러셀 보기</a><a href="${kv(s.key)}"><b>KV로 열기</b></a><a href="${BASE}m/${s.key}.json" target="_blank">IIIF 매니페스트</a><a href="${mir(s.key)}" target="_blank" rel="noopener">Mirador로 열기</a><a href="${uv(s.key)}" target="_blank" rel="noopener">UV로 열기</a></div></div>`;
+      if (mode === 'grid') h += '<div class="grid">' + s.c.map((c) => `<figure data-g="${gi++}">${/4유형/.test(c.md['권리'] || '') ? '<span class="k4">공공누리 4유형 · 원본</span>' : ''}<img loading="lazy" src="${BASE + c.th}" alt="${esc(c.t)}"><figcaption>${esc(c.t)}</figcaption></figure>`).join('') + '</div>';
+      else h += '<div class="flow">' + s.c.map((c) => `<figure data-g="${gi++}"><img loading="lazy" src="${BASE + c.img}" width="${c.w}" height="${c.h}" alt="${esc(c.t)}"><figcaption>${esc(c.t)}<span>${esc(c.md['식별자'] || '')} · ${esc(c.md['연대'] || '')} · ${esc(c.md['권리'] || '')}</span></figcaption></figure>`).join('') + '</div>';
+      if (s.links.length) h += `<div class="lnk"><b>원 기관에서 열람:</b>${s.links.map((l) => `<a href="${esc(l.url)}" target="_blank" rel="noopener" title="${esc(l.rights)}">${esc(l.title.slice(0, 50))} ↗</a>`).join('')}</div>`;
+      h += '</section>';
+    }
+    h += `<p class="foot">권리 원칙 — 재이용 가능 이미지는 긴 변 1600px로 게재하고, 공공누리 제4유형은 원본 파일을 크기·화질 변경 없이 그대로 싣습니다. 웹페이지 캡처와 '이용 허가 필요' 자료(장서각·규장각·한국고문서자료관 등)는 이미지를 싣지 않고 원 기관 링크만 둡니다. 이미지마다 원 기관·식별자·권리를 표시하며, 협약기관(KOREAN WAR ARCHIVES 6·25전쟁 아카이브센터) 기록은 출처 표기를 지켜 주십시오. 포로·묘지·수형자 사진은 싣지 않았습니다.</p>`;
+    document.getElementById('main').innerHTML = h || '<p style="color:var(--muted);padding:30px 0">일치하는 기록이 없습니다.</p>';
+  }
+  render();
+  let tq; document.getElementById('q').addEventListener('input', () => { clearTimeout(tq); tq = setTimeout(render, 250); });
+  document.getElementById('pf').addEventListener('change', render);
+  document.getElementById('mode').addEventListener('click', (e) => { const m = e.target.dataset.m; if (!m || m === mode) return; mode = m; [...e.currentTarget.children].forEach((b) => b.classList.toggle('on', b.dataset.m === m)); render(); });
+  document.getElementById('main').addEventListener('click', (e) => { const f = e.target.closest('figure[data-g]'); if (f) openZ(+f.dataset.g); });
+
+  // ── 확대(딥줌) 보기 — OpenSeadragon 단일 이미지 소스, 전체 기록을 가로질러 이어 넘김
+  const zv = document.getElementById('zv'); let viewer = null, zi = 0;
+  function ensureViewer() {
+    if (viewer) return viewer;
+    viewer = OpenSeadragon({ element: document.getElementById('osd'), prefixUrl: 'https://cdn.jsdelivr.net/npm/openseadragon@4.1.1/build/openseadragon/images/',
+      showNavigator: true, navigatorPosition: 'BOTTOM_LEFT', maxZoomPixelRatio: 3, visibilityRatio: .6, gestureSettingsTouch: { pinchRotate: false }, crossOriginPolicy: 'Anonymous' });
+    return viewer;
+  }
+  function openZ(g) {
+    if (!flat[g]) return; zi = g; zv.classList.add('on'); document.body.style.overflow = 'hidden';
+    const { s, ci, c } = flat[g]; const v = ensureViewer();
+    v.open({ type: 'image', url: BASE + c.img, buildPyramid: false });
+    document.getElementById('zt').textContent = s.label;
+    document.getElementById('zc').textContent = `${ci + 1} / ${s.c.length} · 전체 ${g + 1} / ${flat.length}`;
+    const md = Object.entries(c.md).filter(([, v2]) => v2).map(([k, v2]) => `<dt>${esc(k)}</dt><dd>${esc(v2)}</dd>`).join('');
+    document.getElementById('zinfo').innerHTML = `<h3>${esc(c.t)}</h3><dl>${md}</dl><div class="acts">${c.u ? `<a href="${esc(c.u)}" target="_blank" rel="noopener">원 기관 기록 ↗</a>` : ''}<a href="${BASE + c.img}" target="_blank">이미지 파일</a><a href="${BASE}m/${s.key}.json" target="_blank">IIIF 매니페스트</a><a href="${kv(s.key, ci + 1)}">KV</a><a href="${mir(s.key)}" target="_blank" rel="noopener">Mirador</a><a href="${esc(s.page)}">캐러셀</a></div>`;
+    const zs = document.getElementById('zstrip');
+    if (stripFor !== flat) { // 전체 기록 띠 — 시리즈 경계 표시, 800장 지연 로딩
+      stripFor = flat; let prev = null;
+      zs.innerHTML = flat.map((x, j) => { const sep = x.s !== prev ? `<span class="sep"><b>${esc(x.s.label.split(' · ')[0])}</b></span>` : ''; prev = x.s; return sep + `<img loading="lazy" src="${BASE + x.c.th}" data-g="${j}" alt="" title="${esc(x.s.label.split(' — ')[0])} · ${esc(x.c.t.slice(0, 60))}">`; }).join('');
+    }
+    zs.querySelectorAll('img.on').forEach((x) => x.classList.remove('on'));
+    const cur = zs.querySelector(`img[data-g="${g}"]`); if (cur) { cur.classList.add('on'); cur.scrollIntoView({ inline: 'center', block: 'nearest' }); }
+    if (playing) kick();
+    document.getElementById('zprev').disabled = g === 0; document.getElementById('znext').disabled = g === flat.length - 1;
+    history.replaceState(null, '', `#${s.key}/${ci + 1}`);
+    [g - 1, g + 1].forEach((j) => { if (flat[j]) new Image().src = BASE + flat[j].c.img; });
+  }
+  // 자동 넘김 — 전체 기록을 처음부터 끝까지 이어서. 진행 막대로 다음 장까지 남은 시간 표시
+  let playing = false, timer = null, t0 = 0;
+  const spd = () => +document.getElementById('zspd').value;
+  const bar = document.getElementById('zbar');
+  function kick() { clearTimeout(timer); t0 = performance.now(); timer = setTimeout(() => { if (zi < flat.length - 1) openZ(zi + 1); else setPlay(false); }, spd()); }
+  (function tick() { if (playing) bar.style.width = Math.min(100, (performance.now() - t0) / spd() * 100) + '%'; else bar.style.width = '0'; requestAnimationFrame(tick); })();
+  function setPlay(on) { playing = on; const b = document.getElementById('zplay'); b.classList.toggle('on', on); b.textContent = on ? '❚❚ 멈춤' : '▶ 자동 넘김'; if (on) kick(); else clearTimeout(timer); }
+  document.getElementById('zplay').onclick = () => setPlay(!playing);
+  document.getElementById('zspd').onchange = () => { if (playing) kick(); };
+  document.getElementById('zfs').onclick = () => { if (document.fullscreenElement) document.exitFullscreen(); else zv.requestFullscreen?.(); };
+  document.getElementById('playall').onclick = () => { if (!flat.length) return; openZ(0); setPlay(true); };
+  function closeZ() { setPlay(false); if (document.fullscreenElement) document.exitFullscreen(); zv.classList.remove('on'); document.body.style.overflow = ''; history.replaceState(null, '', location.pathname + '#' + (flat[zi] ? flat[zi].s.key : '')); }
+  document.getElementById('zprev').onclick = () => openZ(zi - 1); document.getElementById('znext').onclick = () => openZ(zi + 1);
+  document.getElementById('zx').onclick = closeZ;
+  document.getElementById('zstrip').addEventListener('click', (e) => { if (e.target.dataset.g) openZ(+e.target.dataset.g); });
+  document.addEventListener('keydown', (e) => { if (!zv.classList.contains('on')) return; if (e.key === 'ArrowLeft') openZ(zi - 1); else if (e.key === 'ArrowRight') openZ(zi + 1); else if (e.key === 'Escape') closeZ(); else if (e.key === ' ') { e.preventDefault(); setPlay(!playing); } else if (e.key === 'f' || e.key === 'F') document.getElementById('zfs').click(); });
+  // 주소 #s031 → 그 시리즈로, #s031/3 → 그 장을 확대 보기로
+  const m = location.hash.match(/^#(s\d+)(?:\/(\d+))?/);
+  if (m) { const g = flat.findIndex((x) => x.s.key === m[1] && x.ci === (m[2] ? +m[2] - 1 : 0)); if (m[2] && g >= 0) openZ(g); else document.getElementById(m[1])?.scrollIntoView(); }
+})();
+</script>
+</body></html>

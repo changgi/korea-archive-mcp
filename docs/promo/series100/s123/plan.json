@@ -1,0 +1,161 @@
+{
+ "n": 123,
+ "part": [
+  "XVI",
+  "영상으로 읽는 기록"
+ ],
+ "inst": "미국 국립기록관리청 NARA",
+ "flag": "🇺🇸",
+ "say": "정전협정 조인 당일 판문점 영상 찾아줘",
+ "head": "1953.7.27 정전협정 조인일의 필름",
+ "big": "1953.7.27",
+ "facts": [
+  [
+   "계보",
+   "RG 428 해군부 › 군사활동 영상 시리즈"
+  ],
+  [
+   "생산",
+   "1953-07-27"
+  ],
+  [
+   "원본",
+   "MP4 428-NPC-2841 (2분 31초)"
+  ],
+  [
+   "같은 날 필름",
+   "SIGNING OF THE ARMISTICE (NAID 76586) — 디지털 사본 미공개"
+  ],
+  [
+   "권리",
+   "Use Restriction 'Undetermined' → B"
+  ]
+ ],
+ "tool": "nara_search('Panmunjom', record_group=428, moving_images_only=true) → judge_rights(naid=76557) → keyscenes",
+ "link": "https://catalog.archives.gov/id/76557",
+ "checked": "2026-11-22",
+ "tags": "#NARA #정전협정 #판문점",
+ "hero": {
+  "file": "video/scene_04_055.jpg",
+  "credit": "필름 00:55 장면 · 미국 국립기록관리청 NAID 76557 (428-NPC-2841, 1953-07-27, 연방 저작물, Use Restriction Undetermined → B 명기)"
+ },
+ "hook": "1953년 7월 27일,<br><span class=\"g\">판문점</span>에 모인 사람들",
+ "mosaic": [
+  {
+   "file": "video/scene_05_114.jpg",
+   "label": "필름 1:14 — 어깨 패치 CANADA"
+  },
+  {
+   "file": "video/scene_07_135.jpg",
+   "label": "필름 1:35 — MP 철모"
+  },
+  {
+   "file": "video/scene_11_215.jpg",
+   "label": "필름 2:15 — 그리스 국기 문양 패치"
+  },
+  {
+   "file": "video/scene_02_017.jpg",
+   "label": "필름 0:17 — 헬리콥터에서 내린 장교들"
+  }
+ ],
+ "mosaic_title": "어깨 패치가 말하는 <span class=\"g\">여러 나라</span>",
+ "mosaic_credit": "모두 같은 필름의 장면 · 미국 국립기록관리청 NAID 76557 (428-NPC-2841, 1953-07-27, 연방 저작물, Use Restriction Undetermined → B 명기)",
+ "ann": {
+  "file": "video/scene_02_017.jpg",
+  "boxes": [
+   {
+    "x": 29,
+    "y": 1,
+    "w": 8,
+    "h": 8,
+    "t": "기체의 흰 별 표식"
+   },
+   {
+    "x": 12,
+    "y": 20,
+    "w": 14,
+    "h": 9,
+    "t": "기체 옆면 글자 'RES…'(뒷부분 가려짐)"
+   },
+   {
+    "x": 74,
+    "y": 2,
+    "w": 10,
+    "h": 5,
+    "t": "기체 번호 '13854'"
+   },
+   {
+    "x": 42,
+    "y": 16,
+    "w": 34,
+    "h": 52,
+    "t": "판자 길을 따라 걷는 정모 차림 장교들"
+   },
+   {
+    "x": 25,
+    "y": 58,
+    "w": 16,
+    "h": 41,
+    "t": "바닥에 깐 판자 길"
+   }
+  ],
+  "credit": "필름 00:17 장면(1050×700 프레임) — 표시한 5곳은 화면에서 직접 읽은 것",
+  "crop_y": 0.0
+ },
+ "scenes": [
+  {
+   "title": "NAID 76557 「TRUCE TALKS」 (1953-07-27, 2분 31초)",
+   "credit": "미국 국립기록관리청 NAID 76557 · 장면은 keyscenes 자동 추출(전환 32곳→11장면) · 해설은 화면에서 보이는 것만",
+   "frames": [
+    {
+     "file": "video/scene_03_046.jpg",
+     "tc": "00:46",
+     "cap": "철모·선글라스 차림 병사, 뒤로 주차된 승용차들"
+    },
+    {
+     "file": "video/scene_04_055.jpg",
+     "tc": "00:55",
+     "cap": "카메라를 멘 장교와 함께 걷는 정모 차림 일행"
+    },
+    {
+     "file": "video/scene_05_114.jpg",
+     "tc": "01:14",
+     "cap": "어깨 패치 'CANADA'와 단풍잎 문양"
+    },
+    {
+     "file": "video/scene_06_125.jpg",
+     "tc": "01:25",
+     "cap": "베레모 쓴 군인 — 가슴에 날개 모양 휘장, 뒤로 흰 철모들"
+    }
+   ]
+  },
+  {
+   "title": "같은 필름 후반부",
+   "credit": "미국 국립기록관리청 NAID 76557 (428-NPC-2841, 1953-07-27, 연방 저작물, Use Restriction Undetermined → B 명기)",
+   "frames": [
+    {
+     "file": "video/scene_07_135.jpg",
+     "tc": "01:35",
+     "cap": "철모에 'MP' 글자를 쓴 헌병들"
+    },
+    {
+     "file": "video/scene_08_153.jpg",
+     "tc": "01:53",
+     "cap": "줄무늬 흰 철모를 쓴 군인 3명"
+    },
+    {
+     "file": "video/scene_10_209.jpg",
+     "tc": "02:09",
+     "cap": "웃는 군인 둘 — 'P' 글자 철모"
+    },
+    {
+     "file": "video/scene_11_215.jpg",
+     "tc": "02:15",
+     "cap": "그리스 국기 문양 패치, 뒤로 초승달·별 패치와 'P' 완장"
+    }
+   ]
+  }
+ ],
+ "cta_img": "video/scene_05_114.jpg",
+ "meta_top": 430
+}

@@ -1,0 +1,96 @@
+{
+ "n": 43,
+ "src": "tna",
+ "record": {
+  "id": "TNA WORK 55/18/40 · WORK 40/330 · FO 523",
+  "title": "Photograph of H.M.B. Consulate: Consul General's residence, south elevation, Seoul / British Consulate General plans / Consulate, Seoul: General Correspondence",
+  "date": "1911 Feb / 1907 May / 1891-1909",
+  "inst": "The National Archives (UK) — 이미지: W. R. Carles, Life in Corea (1888)",
+  "url": "https://discovery.nationalarchives.gov.uk/details/r/C21089485"
+ },
+ "images": [
+  {
+   "file": "carles_consulate_photo.jpg",
+   "role": "hero",
+   "record_id": "IA lifeincorea00carl n21",
+   "title": "Photo of Consulate-General, Soul (To face page 1)",
+   "date": "1888",
+   "url": "https://archive.org/details/lifeincorea00carl/page/n21",
+   "rights": "PD — W. R. Carles, Life in Corea, London: Macmillan, 1888 공표; 저자 William Richard Carles 1929 사망 → 사후 70년 경과",
+   "rights_evidence": "Internet Archive lifeincorea00carl (Princeton Theological Seminary Library 스캔) · 1888 공표 저작물",
+   "visible": [
+    "처마가 들린 기와지붕 한옥",
+    "창살 문짝 정면",
+    "난간·벽돌 기단",
+    "기단 앞 화분 줄",
+    "정원 길"
+   ],
+   "w": 1800,
+   "h": 1085,
+   "nocrop": false
+  },
+  {
+   "file": "carles_consulate_plate_full.jpg",
+   "role": "extra",
+   "record_id": "IA lifeincorea00carl n21",
+   "title": "Photo of Consulate-General, Soul — 캡션 포함 도판 전체",
+   "date": "1888",
+   "url": "https://archive.org/details/lifeincorea00carl/page/n21",
+   "rights": "PD — W. R. Carles, Life in Corea, London: Macmillan, 1888 공표; 저자 William Richard Carles 1929 사망 → 사후 70년 경과",
+   "rights_evidence": "Internet Archive lifeincorea00carl (Princeton Theological Seminary Library 스캔) · 1888 공표 저작물",
+   "visible": [
+    "캡션 'PHOTO OF CONSULATE-GENERAL, SOUL.'"
+   ],
+   "w": 1800,
+   "h": 1068,
+   "nocrop": false
+  },
+  {
+   "file": "carles_p103_para.jpg",
+   "role": "page",
+   "record_id": "IA lifeincorea00carl n126",
+   "title": "p.103 문단",
+   "date": "1888",
+   "url": "https://archive.org/details/lifeincorea00carl/page/n126",
+   "rights": "PD — W. R. Carles, Life in Corea, London: Macmillan, 1888 공표; 저자 William Richard Carles 1929 사망 → 사후 70년 경과",
+   "rights_evidence": "Internet Archive lifeincorea00carl (Princeton Theological Seminary Library 스캔) · 1888 공표 저작물",
+   "visible": [
+    "'Mrs. Aston had succeeded in placing the Corean houses, which formed the Consulate-General, in a condition of almost European civilisation'"
+   ],
+   "w": 1800,
+   "h": 862,
+   "nocrop": false
+  },
+  {
+   "file": "carles_p104_para.jpg",
+   "role": "page",
+   "record_id": "IA lifeincorea00carl n127",
+   "title": "p.104 문단",
+   "date": "1888",
+   "url": "https://archive.org/details/lifeincorea00carl/page/n127",
+   "rights": "PD — W. R. Carles, Life in Corea, London: Macmillan, 1888 공표; 저자 William Richard Carles 1929 사망 → 사후 70년 경과",
+   "rights_evidence": "Internet Archive lifeincorea00carl (Princeton Theological Seminary Library 스캔) · 1888 공표 저작물",
+   "visible": [
+    "'Another great drawback lay in the approach to the Consulate, which was by a lane at right angles to one of the chief arteries'"
+   ],
+   "w": 1800,
+   "h": 862,
+   "nocrop": false
+  }
+ ],
+ "points": [
+  "WORK 55/18/40 (1911 Feb) 총영사 관저 남쪽 입면 사진",
+  "WORK 40/330 (1907 May) 1·2층 평면도",
+  "FO 523 (1891-1909) 서울 영사관 일반 문서철",
+  "Carles p.103: 총영사관은 'the Corean houses' — 'crab-trees, paulownias, hawthorn, and lilac bushes'"
+ ],
+ "video": {
+  "url": "",
+  "length_s": 0,
+  "rights": "",
+  "note": ""
+ },
+ "status": "ok",
+ "notes": "TNA WORK 시리즈 사진·도면 온라인 미공개. 도판은 원 지면에서 90° 회전 수록 → 바로 세움.",
+ "checked": "2026-11-22"
+}

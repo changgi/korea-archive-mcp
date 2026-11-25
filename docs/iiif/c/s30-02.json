@@ -1,0 +1,108 @@
+{
+ "@context": "http://iiif.io/api/presentation/3/context.json",
+ "id": "https://changgi.github.io/korea-archive-mcp/iiif/c/s30-02.json",
+ "type": "Collection",
+ "label": {
+  "ko": [
+   "30곳 탐방 · Ⅱ 개항과 대한제국"
+  ]
+ },
+ "summary": {
+  "ko": [
+   "30곳 탐방 · Ⅱ 개항과 대한제국 — 시리즈 5개"
+  ]
+ },
+ "partOf": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/hierarchy.json",
+   "type": "Collection"
+  }
+ ],
+ "items": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s07.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "07 · 영국 국립기록관 TNA — 영국 해군이 거문도를 점령한 2년"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s07/hero_iln_1886-04-03_trip_to_corea.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "navDate": "1885-04-15T00:00:00Z"
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s08.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "08 · 프랑스 국립도서관 Gallica — 막힌 Gallica, BnF 카탈로그로 다시 연다"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s08/varat_portfolio_1889-90_btv1b84515919_eu400.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "navDate": "1880-01-01T00:00:00Z"
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s09.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "09 · 유로피아나 Europeana — 독일·영국 기관의 서울 — 권리도 함께"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s09/hero_wellcome_korea_street_ca1900.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "navDate": "1900-01-01T00:00:00Z"
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s10.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "10 · 대한민국신문아카이브 (국립중앙도서관) — 1908년, 학생들의 단지동맹"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s10/hero_daehan_19080506_p2.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "navDate": "1908-05-06T00:00:00Z"
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s12.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "12 · 위키미디어 공용 Commons — 업로더 말 대신 원 소장처에 묻는다"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s12/hero_hungnam_520782.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "navDate": "1950-12-19T00:00:00Z"
+  }
+ ]
+}

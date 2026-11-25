@@ -1,0 +1,129 @@
+{
+ "n": 50,
+ "src": "europeana",
+ "record": {
+  "id": "Europeana /298/item_3181739",
+  "title": "Royaume de Corée (d'Anville; Delahaye Fils Sculpsit) — Du Halde, Description de l'empire de la Chine, Tome IV p.422",
+  "date": "1735",
+  "inst": "Leiden University Libraries (via Europeana)",
+  "url": "http://hdl.handle.net/1887.1/item:3181739"
+ },
+ "images": [
+  {
+   "file": "leiden_3181739_dhalde1735.jpg",
+   "role": "hero",
+   "record_id": "Europeana /298/item_3181739 · hdl 1887.1/item:3181739",
+   "title": "Royaume de Corée",
+   "date": "1735",
+   "url": "http://hdl.handle.net/1887.1/item:3181739",
+   "rights": "Public Domain Mark 1.0",
+   "rights_evidence": "Europeana edmRights http://creativecommons.org/publicdomain/mark/1.0/ · Leiden IIIF full 2400px",
+   "visible": [
+    "한반도 전체와 카르투슈 'ROYAUME DE CORÉE'",
+    "왼쪽 위 'Tome IV. page 422.'"
+   ],
+   "w": 1222,
+   "h": 1800,
+   "nocrop": false
+  },
+  {
+   "file": "leiden_3181739_cartouche.jpg",
+   "role": "extra",
+   "record_id": "Europeana /298/item_3181739 · hdl 1887.1/item:3181739",
+   "title": "Royaume de Corée — 카르투슈 부분",
+   "date": "1735",
+   "url": "http://hdl.handle.net/1887.1/item:3181739",
+   "rights": "Public Domain Mark 1.0",
+   "rights_evidence": "Europeana edmRights http://creativecommons.org/publicdomain/mark/1.0/ · Leiden IIIF full 2400px",
+   "visible": [
+    "표제",
+    "축척 'Lis ou Stades Chinois'·'Lieues Françoises'",
+    "앉은 인물",
+    "섬 'Mo tao'·'Kou tao'",
+    "위도 40·39"
+   ],
+   "w": 1440,
+   "h": 1246,
+   "nocrop": false
+  },
+  {
+   "file": "leiden_3181738_1737.jpg",
+   "role": "extra",
+   "record_id": "Europeana /298/item_3181738 · hdl 1887.1/item:3181738",
+   "title": "Royaume de Corée (d'Anville, Nouvel Atlas de la Chine, La Haye 1737, pl.31; 'C. Kondet scrip.')",
+   "date": "1737",
+   "url": "http://hdl.handle.net/1887.1/item:3181738",
+   "rights": "Public Domain Mark 1.0",
+   "rights_evidence": "Europeana edmRights http://creativecommons.org/publicdomain/mark/1.0/ · Leiden IIIF full 2400px",
+   "visible": [
+    "같은 도안의 헤이그판"
+   ],
+   "w": 1247,
+   "h": 1800,
+   "nocrop": false
+  },
+  {
+   "file": "leiden_3181740_bellin.jpg",
+   "role": "extra",
+   "record_id": "Europeana /298/item_3181740 · hdl 1887.1/item:3181740",
+   "title": "Carte de la Province de Quan-Tong ou Lyau-Tong et du Royaume de Kau-Li ou Corée (Bellin; Prévost 1749)",
+   "date": "1749",
+   "url": "http://hdl.handle.net/1887.1/item:3181740",
+   "rights": "Public Domain Mark 1.0",
+   "rights_evidence": "Europeana edmRights http://creativecommons.org/publicdomain/mark/1.0/ · Leiden IIIF full 2400px",
+   "visible": [
+    "요동·조선 지도, 'KAART VAN ... KAU-LI of KOREA'"
+   ],
+   "w": 1433,
+   "h": 1800,
+   "nocrop": false
+  },
+  {
+   "file": "leiden_3181736_hall.jpg",
+   "role": "extra",
+   "record_id": "Europeana /298/item_3181736 · hdl 1887.1/item:3181736",
+   "title": "Western Coast of the Peninsula of Corea (Basil Hall)",
+   "date": "1819 (Europeana year)",
+   "url": "http://hdl.handle.net/1887.1/item:3181736",
+   "rights": "Public Domain Mark 1.0",
+   "rights_evidence": "Europeana edmRights http://creativecommons.org/publicdomain/mark/1.0/ · Leiden IIIF full 2400px",
+   "visible": [
+    "서해안 섬들과 항로선"
+   ],
+   "w": 1369,
+   "h": 1800,
+   "nocrop": false
+  },
+  {
+   "file": "leiden_3181783.jpg",
+   "role": "extra",
+   "record_id": "Europeana /298/item_3181783 · hdl 1887.1/item:3181783",
+   "title": "La Chine, Corée, Japon",
+   "date": "미상",
+   "url": "http://hdl.handle.net/1887.1/item:3181783",
+   "rights": "Public Domain Mark 1.0",
+   "rights_evidence": "Europeana edmRights http://creativecommons.org/publicdomain/mark/1.0/ · Leiden IIIF full 2400px",
+   "visible": [
+    "동아시아 전도, 채색 윤곽"
+   ],
+   "w": 1800,
+   "h": 1185,
+   "nocrop": false
+  }
+ ],
+ "points": [
+  "Leiden 기술: 'd'Anville used maps prepared by Jesuit missionaries'",
+  "Du Halde 1735 Tome IV p.422 · 'Delahaye Fils Sculpsit'",
+  "1737 헤이그판 pl.31",
+  "같은 검색에서 BnF판(btv1b53027431f 등)은 NoC-OKLR → 미사용"
+ ],
+ "video": {
+  "url": "",
+  "length_s": 0,
+  "rights": "",
+  "note": ""
+ },
+ "status": "ok",
+ "notes": "Basil Hall 지도 연대는 Europeana year 1819(레코드 dcDate 없음) — 카드에 연대 표기 안 함.",
+ "checked": "2026-11-22"
+}

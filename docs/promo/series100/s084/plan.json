@@ -1,0 +1,93 @@
+{
+ "n": 84,
+ "part": [
+  "Ⅻ",
+  "판결문과 공훈 기록"
+ ],
+ "inst": "국가보훈부 공훈전자사료관 × 미국 NARA",
+ "flag": "🇰🇷",
+ "say": "김구 공적조서랑 사진 같이 찾아줘",
+ "head": "공적조서 관리번호 318 — 김구(金九)",
+ "big": "mngNo 318",
+ "facts": [
+  [
+   "생몰",
+   "1876-08-29 ~ 1949-06-26 · 이명 金龜, 金昌洙"
+  ],
+  [
+   "포상",
+   "1962 대한민국장 (공훈전자사료관)"
+  ],
+  [
+   "공적조서 1항",
+   "'18세에 동학당에 가입하여 해주 동학군의 선봉'"
+  ],
+  [
+   "사진",
+   "NARA RG 319 파일 'Kim Koo' NAID 171044971 · Unrestricted"
+  ]
+ ],
+ "tool": "nedb_search(mode=gonghun, '김구'→'318') · nara_search('Kim Koo') → judge_rights",
+ "link": "https://e-gonghun.mpva.go.kr/user/ContribuReportDetail.do?goTocode=20001&mngNo=318&pageTitle=Report",
+ "checked": "2026-11-22",
+ "tags": "#공훈전자사료관 #NARA #김구",
+ "hero": {
+  "file": "src/hero_SC223975_photo.jpg",
+  "pos": "center 30%",
+  "credit": "사진: 미국 국립기록관리청 NARA NAID 404793111 (319-AP-12715-SC223975, 1945, Use Restriction Unrestricted) · 공적조서: 국가보훈부 공훈전자사료관 mngNo 318"
+ },
+ "hook": "공적조서 318번의 주인,<br><span class=\"g\">1945년 서울의 김구</span>",
+ "mosaic": [
+  {
+   "file": "src/photo_SC233942.jpg",
+   "label": "Capitol 도착 · 1946.2.14",
+   "pos": "35% center"
+  },
+  {
+   "file": "src/photo_SC233751.jpg",
+   "label": "첫 회의 연설 · SC-233751"
+  },
+  {
+   "file": "src/photo_SC240648.jpg",
+   "label": "대표 회의 연설 · SC-240648"
+  }
+ ],
+ "mosaic_title": "미 육군 통신대가 남긴 <span class=\"g\">1946.2.14</span>",
+ "mosaic_credit": "미국 국립기록관리청 RG 319 NAID 404793115·404793113·404793117 (1946-02-14, Use Restriction Unrestricted → A)",
+ "ann": {
+  "file": "src/nara_SC223975.jpg",
+  "crop_y": 0,
+  "boxes": [
+   {
+    "x": 6,
+    "y": 1.2,
+    "w": 81,
+    "h": 5.4,
+    "t": "원 캡션 'SC-223975 Mr. Koo Kim, President, Provincial Korean Government in exile…'(철자 원문대로)"
+   },
+   {
+    "x": 55.5,
+    "y": 9.8,
+    "w": 6.5,
+    "h": 2.5,
+    "t": "촬영 연도 '1945'"
+   },
+   {
+    "x": 4,
+    "y": 19.3,
+    "w": 56,
+    "h": 2.6,
+    "t": "색인 카드 숫자열 '2 5 2 = 0 0 3 4 6'"
+   },
+   {
+    "x": 36,
+    "y": 35.5,
+    "w": 24,
+    "h": 7,
+    "t": "둥근 테 안경"
+   }
+  ],
+  "credit": "NAID 404793111 원본(2436×3288) 상단 — 사진에 붙은 통신대 색인 카드째 공개된 원본"
+ },
+ "cta_img": "src/photo_SC233942.jpg"
+}

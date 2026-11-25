@@ -1,0 +1,102 @@
+{
+ "n": 36,
+ "part": [
+  "Ⅶ",
+  "전쟁의 기록 2"
+ ],
+ "inst": "6·25전쟁 아카이브센터 (협약기관)",
+ "flag": "🇰🇷",
+ "say": "6·25전쟁 아카이브센터에서 낙동강 방어선 기록 찾아줘",
+ "head": "1950.8 낙동강 — 강을 내려다본 진지",
+ "big": "347건",
+ "facts": [
+  [
+   "협약기관",
+   "KOREAN WAR ARCHIVES 6·25전쟁 아카이브센터 '낙동강 방어선' 검색 347건"
+  ],
+  [
+   "대표 기록",
+   "2024-US-02-PF-D-00106 파괴된 왜관철교(1950-08-10) · 2025-US-02-PF-D-00237 낙동강 진지(1950-08-28) — 입수처 NARA"
+  ],
+  [
+   "원본",
+   "같은 전선 NARA 원본: 127-N-A1402(1950-08-19)·111-SC-347856(1950-09-03) 등"
+  ],
+  [
+   "권리",
+   "카드 이미지는 NARA Unrestricted(A) 원본만 사용"
+  ]
+ ],
+ "meta_top": 470,
+ "tool": "koreanwar_search(낙동강 방어선) → koreanwar_item → nara_search(Naktong) → judge_rights",
+ "link": "https://catalog.archives.gov/id/280956792",
+ "checked": "2026-11-22",
+ "tags": "#6·25전쟁아카이브센터 #낙동강방어선",
+ "hero": {
+  "file": "src/p_280956792.jpg",
+  "pos": "center 30%",
+  "credit": "사진: 미국 국립기록관리청 NAID 280956792 (127-N-A1402, 1950-08-19, Sgt. Frank C. Kerr, Unrestricted) · 발굴: KOREAN WAR ARCHIVES 6·25전쟁 아카이브센터"
+ },
+ "hook": "1950년 8월 19일,<br><span class=\"g\">낙동강</span>을 내려다본 능선",
+ "mosaic": [
+  {
+   "file": "src/p_74246095.jpg",
+   "label": "낙동강 지역 박격포 진지 · A1313",
+   "pos": "center 45%"
+  },
+  {
+   "file": "src/p_348337779.jpg",
+   "label": "왜관 부교 가설 1950-09-22 · NAID 348337779"
+  },
+  {
+   "file": "src/p_348338119.jpg",
+   "label": "왜관 베일리교 1950-10-05 · NAID 348338119"
+  }
+ ],
+ "mosaic_title": "방어선에서 다리까지 — <span class=\"g\">왜관</span>의 두 달",
+ "mosaic_credit": "미국 국립기록관리청 NAID 74246095(127-GR)·348337779·348338119(Credit U.S. Army) — Unrestricted · 발굴 경로 KOREAN WAR ARCHIVES 6·25전쟁 아카이브센터",
+ "ann": {
+  "file": "src/p_531372.jpg",
+  "crop_y": 0.2,
+  "title": "NAID 531372 (111-SC-347856) — 보이는 것만 읽었습니다",
+  "boxes": [
+   {
+    "x": 18,
+    "y": 44,
+    "w": 18,
+    "h": 8,
+    "t": "앞으로 길게 뻗은 전차 포신"
+   },
+   {
+    "x": 45,
+    "y": 48,
+    "w": 7,
+    "h": 6,
+    "t": "포탑 옆면 흰 별 표식"
+   },
+   {
+    "x": 50,
+    "y": 46,
+    "w": 23,
+    "h": 20,
+    "t": "전차 위에 빼곡히 올라앉은 철모 쓴 병사들"
+   },
+   {
+    "x": 78,
+    "y": 57,
+    "w": 21,
+    "h": 19,
+    "t": "오른쪽 뒤 또 하나의 포신과 걸어오는 병사들"
+   },
+   {
+    "x": 0,
+    "y": 48,
+    "w": 9,
+    "h": 40,
+    "t": "왼쪽 앞에 서 있는 병사"
+   }
+  ],
+  "credit": "NAID 531372 원본(3000×2529, 1950-09-03) — 원 설명 'Men of the 9th Infantry Regiment man an M-26 tank…'"
+ },
+ "cta_img": "src/p_348338119.jpg"
+}

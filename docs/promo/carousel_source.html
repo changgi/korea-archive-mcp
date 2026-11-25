@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>예제 5선 캐러셀 v2</title>
+<style>
+  :root{
+    --bg:#0a0c10; --panel:#14171d; --crimson:#e03540; --gold:#e8b45a; --cream:#faf3e3;
+    --sub:#8d94a2; --green:#5fd07f; --amber:#e8b45a;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{background:#000; font-family:'Noto Sans KR','Apple SD Gothic Neo','Malgun Gothic',sans-serif; padding:40px; color:var(--cream);}
+  .card{width:1080px; height:1080px; margin:0 auto 56px; position:relative; overflow:hidden;
+        background:var(--bg); box-shadow:0 10px 60px rgba(0,0,0,.7);}
+  /* 콘텐츠 컬럼 — 하단 안전영역 150px (brand/pageno와 절대 안 겹침) */
+  .col{position:relative; z-index:4; height:100%; display:flex; flex-direction:column; padding:70px 86px 150px;}
+  /* 장식 */
+  .grain{position:absolute; inset:0; pointer-events:none; opacity:.45; mix-blend-mode:overlay;
+    background-image:repeating-linear-gradient(0deg, rgba(255,255,255,.03) 0 1px, transparent 1px 3px);}
+  .frame{position:absolute; inset:24px; border:2px solid rgba(232,180,90,.55); pointer-events:none;}
+  .corner{position:absolute; width:34px; height:34px; border:4px solid var(--gold);}
+  .c-tl{top:16px; left:16px; border-right:none; border-bottom:none;}
+  .c-tr{top:16px; right:16px; border-left:none; border-bottom:none;}
+  .c-bl{bottom:16px; left:16px; border-right:none; border-top:none;}
+  .c-br{bottom:16px; right:16px; border-left:none; border-top:none;}
+  /* 타이포 */
+  .kicker{display:inline-block; background:var(--crimson); color:#fff; font-weight:900;
+          letter-spacing:.28em; font-size:24px; padding:13px 30px 13px 36px;}
+  h1{font-size:80px; line-height:1.24; font-weight:900; word-break:keep-all; color:#fff;}
+  h2{font-size:54px; line-height:1.27; font-weight:900; word-break:keep-all; color:#fff;}
+  .gold{color:var(--gold);} .red{color:var(--crimson);}
+  .lead{font-size:31px; line-height:1.6; word-break:keep-all; color:#e5ddc9;}
+  .lead b{color:var(--gold);}
+  .credit{font-size:19px; color:var(--sub); line-height:1.5;}
+  .divider{height:6px; width:150px; background:linear-gradient(90deg,var(--gold),var(--crimson)); margin:24px 0;}
+  .years{font-size:26px; color:var(--gold); font-weight:700; letter-spacing:.05em; margin:4px 0 12px; word-break:keep-all;}
+  /* 하단 고정 표기 */
+  .pageno{position:absolute; bottom:46px; right:76px; font-size:23px; color:var(--sub); letter-spacing:.12em; z-index:9;}
+  .brand{position:absolute; bottom:46px; left:76px; font-size:23px; color:var(--sub); z-index:9;}
+  .stamp{position:absolute; border:5px solid var(--crimson); color:var(--crimson); border-radius:10px;
+         padding:10px 22px; font-weight:900; font-size:28px; letter-spacing:.1em;
+         transform:rotate(-8deg); background:rgba(224,53,64,.08); z-index:6;}
+  /* 사진 프레임 */
+  .polaroid{background:#fbf8f1; padding:14px 14px 0; box-shadow:0 14px 34px rgba(0,0,0,.55);}
+  .polaroid img{display:block; width:100%;}
+  .polaroid .cap{font-size:20px; color:#3a3f49; padding:10px 4px 12px; font-weight:700; text-align:center; word-break:keep-all;}
+  .tape{position:absolute; width:140px; height:38px; background:rgba(232,180,90,.75); box-shadow:0 2px 8px rgba(0,0,0,.3); z-index:3;}
+  .shot{background:#fff; padding:10px; box-shadow:0 18px 44px rgba(0,0,0,.7);}
+  .shot img{display:block; width:100%;}
+  .shot .cap{font-size:20px; color:#3a3f49; padding:10px 4px 4px; font-weight:700; text-align:center; word-break:keep-all;}
+  /* 파노라마 필름스트립 */
+  .pano{border-top:16px solid #000; border-bottom:16px solid #000; background:#000; position:relative;
+        box-shadow:0 14px 40px rgba(0,0,0,.6);}
+  .pano:before,.pano:after{content:''; position:absolute; left:0; right:0; height:14px;
+    background-image:repeating-linear-gradient(90deg, #fff 0 22px, transparent 22px 44px); opacity:.9;}
+  .pano:before{top:-15px;} .pano:after{bottom:-15px;}
+  .pano .row{display:flex; gap:6px;}
+  .pano img{flex:1; height:300px; object-fit:cover; display:block; filter:contrast(1.15) brightness(1.05);}
+  /* 시리즈 스트립 */
+  .strip{display:flex; gap:10px;}
+  .strip img{flex:1; height:130px; object-fit:cover; border:2px solid #3a4152;}
+  /* 목록·상태 */
+  .reel{background:var(--panel); border:1px solid #262b35; border-left:10px solid var(--gold); padding:16px 24px; margin:11px 0;}
+  .reel .no{font-size:24px; font-weight:900; color:var(--gold); letter-spacing:.06em; font-family:Consolas,Menlo,monospace;}
+  .reel .t{font-size:26px; font-weight:700; margin-top:4px; word-break:keep-all; line-height:1.4; color:#f2ecdb;}
+  .reel .d{font-size:20px; color:var(--sub); margin-top:4px; word-break:keep-all;}
+  .reel.locked{border-left-color:var(--crimson);}
+  .badge{display:inline-block; border-radius:30px; padding:4px 16px; font-size:19px; font-weight:900; margin-left:8px; vertical-align:middle;}
+  .b-lock{background:#38151a; color:#ff7a83; border:1px solid #ff7a83;}
+  .b-half{background:#3a2c12; color:var(--amber); border:1px solid var(--amber);}
+  .b-open{background:#153019; color:var(--green); border:1px solid var(--green);}
+  .org{background:var(--panel); border:1px solid #262b35; border-left:8px solid var(--gold);
+       padding:13px 22px; margin:10px 0; display:flex; justify-content:space-between; align-items:center; gap:16px;}
+  .org .name{font-size:28px; font-weight:900; word-break:keep-all;}
+  .org .name small{display:block; font-size:19px; color:var(--sub); font-weight:400; margin-top:2px;}
+  .org .hits{font-size:26px; font-weight:900; white-space:nowrap;}
+  .hit-y{color:var(--green);} .hit-w{color:var(--amber);} .hit-n{color:#ff7a83;}
+  /* 3단계 분류 */
+  .tier{flex:1; background:var(--panel); border:1px solid #262b35; border-top:10px solid; padding:24px;}
+  .tier .icon{font-size:52px;}
+  .tier .t{font-size:29px; font-weight:900; margin-top:10px; word-break:keep-all;}
+  .tier .d{font-size:21px; color:var(--sub); margin-top:6px; line-height:1.5; word-break:keep-all;}
+  /* 타임라인 */
+  .tl{border-left:5px solid var(--gold); margin:20px 0 0 24px; padding-left:36px;}
+  .tl .ev{margin:0 0 24px; position:relative;}
+  .tl .ev:before{content:''; position:absolute; left:-47px; top:8px; width:18px; height:18px; border-radius:50%;
+    background:var(--crimson); border:4px solid var(--bg); box-shadow:0 0 0 3px var(--gold);}
+  .tl .yr{font-size:29px; font-weight:900; color:var(--gold); letter-spacing:.04em;}
+  .tl .tx{font-size:27px; line-height:1.5; color:#e5ddc9; word-break:keep-all; margin-top:2px;}
+  /* 인용 */
+  .quote{border-left:6px solid var(--gold); padding:14px 22px; margin-top:20px;
+         font-size:29px; line-height:1.55; color:#f2ecdb; font-style:italic; word-break:keep-all; background:rgba(232,180,90,.07);}
+  .docquote{border-left:6px solid var(--gold); padding:16px 24px; margin-top:18px;
+            font-size:30px; line-height:1.6; color:#f2ecdb; word-break:keep-all; background:rgba(232,180,90,.07);}
+  .docquote small{display:block; font-size:21px; color:var(--sub); margin-top:8px; font-style:normal;}
+  /* 빅넘버 */
+  .bignum{font-size:190px; font-weight:900; color:var(--gold); line-height:1; letter-spacing:-.02em;}
+  /* 번호 리스트 */
+  .li{display:flex; gap:22px; align-items:flex-start; margin:22px 0; font-size:31px; line-height:1.5; word-break:keep-all; color:#eee6d2;}
+  .li .n{flex:0 0 54px; height:54px; border-radius:50%; background:var(--crimson); color:#fff;
+         font-weight:900; font-size:27px; display:flex; align-items:center; justify-content:center;}
+  .li b{color:var(--gold);}
+  /* 부채꼴 스택 — 제목 아래에만 배치할 것 */
+  .fanwrap{position:relative; height:480px;}
+  .fcard{position:absolute; width:600px; background:#f5efdf; color:#20242c; padding:22px 26px;
+         box-shadow:0 18px 40px rgba(0,0,0,.65); border:1px solid #d8d0bc;}
+  .fcard .no{font-family:Consolas,Menlo,monospace; font-weight:900; font-size:25px; color:#b3262f;}
+  .fcard .t{font-size:25px; font-weight:900; margin-top:4px; line-height:1.35; word-break:keep-all;}
+  .fcard .d{font-size:19px; color:#5a6070; margin-top:4px;}
+
+  .bleed{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; filter:contrast(1.12) brightness(.95);}
+  .shade{position:absolute; inset:0; background:linear-gradient(180deg, rgba(0,0,0,.05) 35%, rgba(0,0,0,.88) 78%);}
+  .shade-top{position:absolute; inset:0; background:linear-gradient(180deg, rgba(0,0,0,.82) 0%, rgba(0,0,0,0) 32%, rgba(0,0,0,0) 55%, rgba(0,0,0,.9) 85%);}
+  .mosaic{position:absolute; inset:0; display:grid; gap:4px; background:#000;}
+  .mosaic img{width:100%; height:100%; object-fit:cover; display:block; filter:contrast(1.1);}
+  .m22{grid-template-columns:1fr 1fr; grid-template-rows:1fr 1fr;}
+  .m33{grid-template-columns:repeat(3,1fr); grid-template-rows:repeat(3,1fr);}
+  .m3c{grid-template-columns:repeat(3,1fr);}
+  .m2c{grid-template-columns:1fr 1fr;}
+  .bottom{position:absolute; left:0; right:0; bottom:0; z-index:6; padding:0 76px 168px !important;}
+  .foot{position:absolute; left:0; right:0; bottom:0; height:230px; z-index:5; background:linear-gradient(180deg, rgba(0,0,0,0), rgba(0,0,0,.93) 55%);}
+  .topz{position:absolute; left:0; right:0; top:0; z-index:5; padding:64px 76px 0;}
+  .hl{font-size:76px; line-height:1.18; font-weight:900; color:#fff; word-break:keep-all; text-shadow:0 4px 24px rgba(0,0,0,.8);}
+  .hl .g{color:var(--gold);}
+  .chip{display:inline-block; background:rgba(10,12,16,.82); border:2px solid var(--gold); color:#fff; font-weight:900; font-size:30px; padding:10px 22px; border-radius:999px; margin:16px 10px 0 0;}
+  .chip.red{border-color:var(--crimson);}
+  .say2{display:inline-block; background:rgba(29,42,68,.92); color:#cfe0ff; font-weight:800; font-size:28px; padding:12px 24px; border-radius:20px 20px 20px 6px;}
+  .cr{position:absolute; left:76px; right:76px; bottom:84px; z-index:7; font-size:17px; color:#c9cfda; text-shadow:0 2px 8px #000; line-height:1.4;}
+  .lab{position:absolute; z-index:6; background:rgba(0,0,0,.72); color:#fff; font-weight:800; font-size:24px; padding:6px 14px;}
+  .ok{position:absolute; z-index:6; right:8px; bottom:8px; background:#1f7a3d; color:#fff; font-weight:900; font-size:18px; padding:3px 10px; border-radius:6px;}
+  .giant{font-size:330px; font-weight:900; line-height:.9; color:var(--gold); text-shadow:0 10px 40px rgba(0,0,0,.9);}
+  .band{position:absolute; left:0; right:0; z-index:5; background:rgba(8,9,12,.9); padding:30px 76px; border-top:4px solid var(--gold); border-bottom:4px solid var(--gold);}
+</style>
+</head>
+<body>
+
+<div class="card">
+  <div class="mosaic m33">
+    <img src="{{img:img2/hungnam_520782.jpg|maxdim=600|q=80}}"><img src="{{img:img2/chosin_542210_hi.jpg|maxdim=600|q=80}}"><img src="{{img:img2/inchon_532399.jpg|maxdim=600|q=80}}">
+    <img src="{{img:img2/keijo_honmachi.jpg|maxdim=600|q=80}}"><img src="{{img:img2/anjunggeun.jpg|maxdim=600|q=80}}"><img src="{{img:img2/gyeongbok_1906.jpg|maxdim=600|q=80}}">
+    <img src="{{img:img2/awm_C276864.jpg|maxdim=600|q=80}}"><img src="{{img:img2/uigwe_hwaseong23.jpg|maxdim=600|q=80}}"><img src="{{img:img2/panmun_520995.jpg|maxdim=600|q=80}}">
+  </div>
+  <div class="foot"></div><div class="frame" style="z-index:7;"></div>
+  <div class="band" style="top:330px;">
+    <div class="hl" style="font-size:66px;">흩어진 한국의 기록,<br><span class="g">한국어 한 문장으로</span></div>
+    <div style="font-size:28px; color:#e5ddc9; margin-top:12px;">9개국 30곳 문서고 · 예제 5선 →</div>
+  </div>
+  <div class="cr">사진 9장 모두 실물 원본 — NARA·호주 전쟁기념관·국립중앙박물관 등 (출처는 각 장에)</div>
+  <div class="brand" style="z-index:9; text-shadow:0 2px 8px #000;">KOREA ARCHIVE 통합검색</div><div class="pageno" style="z-index:9; color:#e5ddc9; text-shadow:0 2px 8px #000;">1 / 10</div>
+</div>
+
+<div class="card">
+  <img class="bleed" src="{{img:img2/keijo_honmachi.jpg|maxdim=1200|q=80}}" style="object-position:center 30%;">
+  <div class="shade"></div><div class="foot"></div><div class="frame" style="z-index:7;"></div>
+  <div class="bottom">
+    <div class="hl">사진 위 글자를<br>보세요 — <span class="g">"KEIJO"</span></div>
+    <span class="chip red" style="text-decoration:line-through;">Seoul</span><span class="chip">Keijo</span><span class="chip">Chosen</span>
+  </div>
+  <div class="cr">1930년대 경성 혼마치(현 퇴계로) 엽서 — "VIEW OF THE HONMACHI, KEIJO" · 퍼블릭 도메인(공유마당 경유)</div>
+  <div class="brand" style="z-index:9; text-shadow:0 2px 8px #000;">KOREA ARCHIVE 통합검색</div><div class="pageno" style="z-index:9; color:#e5ddc9; text-shadow:0 2px 8px #000;">2 / 10</div>
+</div>
+
+<div class="card">
+  <div class="mosaic m22">
+    <img src="{{img:img2/chosin_532409.jpg|maxdim=700|q=80}}"><img src="{{img:img2/chosin_542210_hi.jpg|maxdim=700|q=80}}" style="object-position:center 25%;">
+    <img src="{{img:img2/chosin_127-N-A4560.jpg|maxdim=700|q=80}}"><img src="{{img:img2/chosin_542213.jpg|maxdim=700|q=80}}" style="object-position:center 25%;">
+  </div>
+  <div class="foot"></div><div class="frame" style="z-index:7;"></div>
+  <div class="band" style="bottom:240px;">
+    <div style="font-size:24px; color:var(--gold); font-weight:900; letter-spacing:.2em;">예제 ① 같은 기록은 하나로</div>
+    <div class="hl" style="font-size:54px; margin-top:6px;">한국 재수집본 = 미국 원본</div>
+    <div style="font-size:28px; color:#e5ddc9; margin-top:8px;">"장진호" 9건 중 <b style="color:var(--gold);">5건</b>이 두 기관에서 확인</div>
+  </div>
+  <div class="cr">장진호 1950 — 미국 국립기록관리청 NAID 532409·542210·276537577·542213 (모두 이용 제한 없음)</div>
+  <div class="brand" style="z-index:9; text-shadow:0 2px 8px #000;">KOREA ARCHIVE 통합검색</div><div class="pageno" style="z-index:9; color:#e5ddc9; text-shadow:0 2px 8px #000;">3 / 10</div>
+</div>
+
+<div class="card">
+  <img class="bleed" src="{{img:img2/chosin_127-N-A4560.jpg|maxdim=1300|q=80}}">
+  <div class="shade-top"></div><div class="foot"></div><div class="frame" style="z-index:7;"></div>
+  <div class="topz"><span class="say2">"이 사진, 써도 돼?"</span></div>
+  <div class="bottom" style="display:flex; align-items:flex-end; gap:30px;">
+    <div class="giant">A</div>
+    <div style="padding-bottom:30px;"><div class="hl" style="font-size:52px;">이용 제한 없음</div>
+    <div style="font-size:28px; color:#e5ddc9; margin-top:8px;">미국 목록 직접 조회 · 1950.11.2 장진호</div></div>
+  </div>
+  <div class="cr">미국 국립기록관리청 NAID 276537577 (127-N-A4560, Unrestricted)</div>
+  <div class="brand" style="z-index:9; text-shadow:0 2px 8px #000;">KOREA ARCHIVE 통합검색</div><div class="pageno" style="z-index:9; color:#e5ddc9; text-shadow:0 2px 8px #000;">4 / 10</div>
+</div>
+
+<div class="card">
+  <img class="bleed" src="{{img:img2/hungnam_520782.jpg|maxdim=1300|q=80}}">
+  <div class="shade"></div><div class="foot"></div><div class="frame" style="z-index:7;"></div>
+  <div style="position:absolute; right:70px; top:70px; width:330px; z-index:6; border:6px solid #fff; box-shadow:0 14px 40px rgba(0,0,0,.7);"><img src="{{img:img2/hungnam_520781.jpg|maxdim=600|q=80}}" style="width:100%; display:block;"></div>
+  <div class="bottom">
+    <div class="hl">떠도는 사진,<br><span class="g">원본은 미국에</span></div>
+    <span class="chip">1950.12.19 흥남</span><span class="chip">NAID 520782</span><span class="chip">A등급</span>
+  </div>
+  <div class="cr">미국 국립기록관리청 NAID 520782·520781 (미 해군 RG 80, 이용 제한 없음)</div>
+  <div class="brand" style="z-index:9; text-shadow:0 2px 8px #000;">KOREA ARCHIVE 통합검색</div><div class="pageno" style="z-index:9; color:#e5ddc9; text-shadow:0 2px 8px #000;">5 / 10</div>
+</div>
+
+<div class="card">
+  <div class="mosaic m22">
+    <img src="{{img:img2/inchon_532399.jpg|maxdim=700|q=80}}"><img src="{{img:img2/inchon_532403.jpg|maxdim=700|q=80}}">
+    <img src="{{img:img2/inchon_520772.jpg|maxdim=700|q=80}}"><img src="{{img:img2/inchon_531403.jpg|maxdim=700|q=80}}">
+  </div>
+  <div class="foot"></div><div class="frame" style="z-index:7;"></div>
+  <div class="band" style="top:390px;">
+    <div style="font-size:24px; color:var(--gold); font-weight:900; letter-spacing:.2em;">예제 ④ 하나 찾으면 옆 번호도</div>
+    <div class="hl" style="font-size:60px; margin-top:6px;">1편 찾으면 → <span class="g">5편</span></div>
+  </div>
+  <div class="cr">1950.9.15~18 인천 — NARA NAID 532399·532403·520772·531403 (이용 제한 없음) · 연속 필름 5편(NAID 22013~22017)은 장면 미사용</div>
+  <div class="brand" style="z-index:9; text-shadow:0 2px 8px #000;">KOREA ARCHIVE 통합검색</div><div class="pageno" style="z-index:9; color:#e5ddc9; text-shadow:0 2px 8px #000;">6 / 10</div>
+</div>
+
+<div class="card" style="background:#14110c;">
+  <div class="foot"></div><div class="frame" style="z-index:7;"></div>
+  <div style="position:absolute; inset:60px 60px 300px; display:flex; gap:26px; justify-content:center; align-items:center;">
+    <div style="position:relative; transform:rotate(-3deg);"><img src="{{img:img2/daehan_19091109_p3.jpg|maxdim=800|q=88}}" style="height:560px; display:block; box-shadow:0 18px 50px rgba(0,0,0,.8); border:6px solid #f3ead4;"><span class="lab" style="left:10px; top:10px;">1909.11.9 · 3면</span></div>
+    <div style="position:relative; transform:rotate(3deg);"><img src="{{img:img2/daehan_19091211_p2.jpg|maxdim=800|q=88}}" style="height:560px; display:block; box-shadow:0 18px 50px rgba(0,0,0,.8); border:6px solid #f3ead4;"><span class="lab" style="left:10px; top:10px;">1909.12.11 · 2면</span></div>
+  </div>
+  <div class="bottom" style="padding-bottom:118px;">
+    <div class="hl" style="font-size:58px;">안중근 의거 그날의 신문,<br><span class="g">몇 면 몇 단까지</span></div>
+  </div>
+  <div class="cr">대한매일신보 — 국립중앙도서관 대한민국신문아카이브 지면 이미지 (1909, 저작권 만료)</div>
+  <div class="brand" style="z-index:9; text-shadow:0 2px 8px #000;">KOREA ARCHIVE 통합검색</div><div class="pageno" style="z-index:9; color:#e5ddc9; text-shadow:0 2px 8px #000;">7 / 10</div>
+</div>
+
+<div class="card">
+  <div style="position:absolute; inset:0; display:grid; grid-template-columns:repeat(4,1fr); grid-template-rows:repeat(3,1fr); gap:4px; background:#000;"><div style="position:relative; overflow:hidden;"><img src="{{img:img2/hungnam_520782.jpg|maxdim=400|q=72}}" style="width:100%; height:100%; object-fit:cover; display:block;"><span class="ok">A ✓</span></div><div style="position:relative; overflow:hidden;"><img src="{{img:img2/hungnam_520781.jpg|maxdim=400|q=72}}" style="width:100%; height:100%; object-fit:cover; display:block;"><span class="ok">A ✓</span></div><div style="position:relative; overflow:hidden;"><img src="{{img:img2/chosin_127-N-A4560.jpg|maxdim=400|q=72}}" style="width:100%; height:100%; object-fit:cover; display:block;"><span class="ok">A ✓</span></div><div style="position:relative; overflow:hidden;"><img src="{{img:img2/chosin_542210_hi.jpg|maxdim=400|q=72}}" style="width:100%; height:100%; object-fit:cover; display:block;"><span class="ok">A ✓</span></div><div style="position:relative; overflow:hidden;"><img src="{{img:img2/chosin_532409.jpg|maxdim=400|q=72}}" style="width:100%; height:100%; object-fit:cover; display:block;"><span class="ok">A ✓</span></div><div style="position:relative; overflow:hidden;"><img src="{{img:img2/chosin_542213.jpg|maxdim=400|q=72}}" style="width:100%; height:100%; object-fit:cover; display:block;"><span class="ok">A ✓</span></div><div style="position:relative; overflow:hidden;"><img src="{{img:img2/inchon_532399.jpg|maxdim=400|q=72}}" style="width:100%; height:100%; object-fit:cover; display:block;"><span class="ok">A ✓</span></div><div style="position:relative; overflow:hidden;"><img src="{{img:img2/inchon_532403.jpg|maxdim=400|q=72}}" style="width:100%; height:100%; object-fit:cover; display:block;"><span class="ok">A ✓</span></div><div style="position:relative; overflow:hidden;"><img src="{{img:img2/inchon_520772.jpg|maxdim=400|q=72}}" style="width:100%; height:100%; object-fit:cover; display:block;"><span class="ok">A ✓</span></div><div style="position:relative; overflow:hidden;"><img src="{{img:img2/inchon_531403.jpg|maxdim=400|q=72}}" style="width:100%; height:100%; object-fit:cover; display:block;"><span class="ok">A ✓</span></div><div style="position:relative; overflow:hidden;"><img src="{{img:img2/panmun_520995.jpg|maxdim=400|q=72}}" style="width:100%; height:100%; object-fit:cover; display:block;"><span class="ok">A ✓</span></div><div style="position:relative; overflow:hidden;"><img src="{{img:img2/panmun_520996.jpg|maxdim=400|q=72}}" style="width:100%; height:100%; object-fit:cover; display:block;"><span class="ok">A ✓</span></div></div>
+  <div class="foot"></div><div class="frame" style="z-index:7;"></div>
+  <div class="band" style="top:360px;">
+    <div style="font-size:24px; color:var(--gold); font-weight:900; letter-spacing:.2em;">이 카드는 이렇게 만들었습니다</div>
+    <div class="hl" style="font-size:52px; margin-top:6px;">찾고 → 원본 확인 → <span class="g">권리 확인한 것만</span></div>
+  </div>
+  <div class="cr">위 12장 모두 미국 국립기록관리청 목록에서 "이용 제한 없음"(A) 직접 확인 · 제한 표기 영상은 장면 미사용</div>
+  <div class="brand" style="z-index:9; text-shadow:0 2px 8px #000;">KOREA ARCHIVE 통합검색</div><div class="pageno" style="z-index:9; color:#e5ddc9; text-shadow:0 2px 8px #000;">8 / 10</div>
+</div>
+
+<div class="card">
+  <div style="position:absolute; inset:0; display:grid; grid-template-columns:1fr 1fr; grid-template-rows:1fr 1fr; gap:4px; background:#000;"><div style="position:relative; overflow:hidden;"><img src="{{img:img2/uigwe_hwaseong23.jpg|maxdim=700|q=80}}" style="width:100%; height:100%; object-fit:cover; display:block;"><span class="lab" style="left:0; top:0; font-size:28px; padding:10px 18px;">📚 연구자 — 사료·각주</span></div><div style="position:relative; overflow:hidden;"><img src="{{img:img2/gyeongbok_1906.jpg|maxdim=700|q=80}}" style="width:100%; height:100%; object-fit:cover; display:block;"><span class="lab" style="left:0; top:0; font-size:28px; padding:10px 18px;">🏛️ 기록관·박물관 — 원본·권리</span></div><div style="position:relative; overflow:hidden;"><img src="{{img:img2/inchon_531403.jpg|maxdim=700|q=80}}" style="width:100%; height:100%; object-fit:cover; display:block;"><span class="lab" style="left:0; top:0; font-size:28px; padding:10px 18px;">🏫 선생님 — 수업 자료</span></div><div style="position:relative; overflow:hidden;"><img src="{{img:img2/hungnam_520782.jpg|maxdim=700|q=80}}" style="width:100%; height:100%; object-fit:cover; display:block;"><span class="lab" style="left:0; top:0; font-size:28px; padding:10px 18px;">✍️ 기자·작가 — 원본 출처</span></div></div>
+  <div class="foot"></div><div class="frame" style="z-index:7;"></div>
+  <div class="band" style="top:440px; padding:20px 76px;">
+    <div class="hl" style="font-size:52px; text-align:center;">누구에게, <span class="g">무엇이 되나</span></div>
+  </div>
+  <div class="cr" style="bottom:20px;"></div>
+  <div class="brand" style="z-index:9; text-shadow:0 2px 8px #000;">KOREA ARCHIVE 통합검색</div><div class="pageno" style="z-index:9; color:#e5ddc9; text-shadow:0 2px 8px #000;">9 / 10</div>
+</div>
+
+<div class="card">
+  <img class="bleed" src="{{img:img2/panmun_520995.jpg|maxdim=1100|q=80}}">
+  <div class="shade"></div><div class="foot"></div><div class="frame" style="z-index:7;"></div>
+  <div class="bottom">
+    <div class="hl" style="font-size:64px;">설치 없이,<br><span class="g">주소 하나면 됩니다</span></div>
+    <div style="margin-top:18px; font-size:30px; color:#fff; font-family:Consolas,monospace; background:rgba(0,0,0,.7); display:inline-block; padding:10px 18px;">korea-archive-mcp.vercel.app/api/mcp</div>
+    <div style="margin-top:14px; font-size:28px; color:#e5ddc9;">"창기창기 도와줘" · 예제 15선은 프로필 링크</div>
+  </div>
+  <div class="cr">1953.7 판문점 정전협정 조인 — 미국 국립기록관리청 NAID 520995 (이용 제한 없음)</div>
+  <div class="brand" style="z-index:9; text-shadow:0 2px 8px #000;">KOREA ARCHIVE 통합검색</div><div class="pageno" style="z-index:9; color:#e5ddc9; text-shadow:0 2px 8px #000;">10 / 10</div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,192 @@
+{
+ "@context": "http://iiif.io/api/presentation/3/context.json",
+ "id": "https://changgi.github.io/korea-archive-mcp/iiif/c/s100-15.json",
+ "type": "Collection",
+ "label": {
+  "ko": [
+   "100선 · XV 현대 한국의 기록"
+  ]
+ },
+ "summary": {
+  "ko": [
+   "100선 · XV 현대 한국의 기록 — 시리즈 10개"
+  ]
+ },
+ "partOf": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/hierarchy.json",
+   "type": "Collection"
+  }
+ ],
+ "items": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s111.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "111 · 국가기록원 — 1970.7.7 경부고속도로 개통식 — 관리번호 CET0021268"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s111/aerial_3246.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "navDate": "1970-07-07T00:00:00Z"
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s112.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "112 · 국가기록원 — 1973.7.3 포항종합제철 준공식 — CET0025021"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s112/ceremony_3208.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "navDate": "1973-07-03T00:00:00Z"
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s113.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "113 · 국가기록원 — 1988.9.17 제24회 서울올림픽 개회식"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s113/bk13_041.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "navDate": "1988-01-01T00:00:00Z"
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s114.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "114 · 국가기록원 — 1965.6.22 한일협정 조인 — CET0037758"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s114/bk6_170.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s115.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "115 · KTV e영상역사관 — 대한뉴스 제913호 「순조로운 지하철 공사」"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s115/opening_3255.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "navDate": "1973-01-06T00:00:00Z"
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s116.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "116 · KTV e영상역사관 — 문화영화 「한강」(1969) × 소양강 다목적댐 사진"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s116/ceremony_3229.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "navDate": "1969-01-01T00:00:00Z"
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s117.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "117 · KTV e영상역사관 — 정부기록사진집 11 「고리 원자력발전소 전경」 1978.07.20"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s117/kori_3492.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "navDate": "1978-07-20T00:00:00Z"
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s118.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "118 · 정보공개포털 open.go.kr — 포털 점검 중 — 국가기록원 공개 기록으로 우회"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s118/view_3230.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "navDate": "2026-11-22T00:00:00Z"
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s119.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "119 · 위키미디어 공용 Commons — Commons 파일 → NARA 원본·목록카드 대조"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s119/hero_531381.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "navDate": "1950-09-20T00:00:00Z"
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s120.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "120 · 위키미디어 공용 Commons — Commons 「…NARA - 520784.tif」 → NARA 원본 대조"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s120/inchon_depot_520784.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "navDate": "1951-01-03T00:00:00Z"
+  }
+ ]
+}

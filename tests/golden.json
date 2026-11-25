@@ -1,0 +1,1574 @@
+{
+ "note": "골든 회귀 — 각 도구가 '모양'을 지키는지 본다(건수·순서가 아니라 구조). 외부 사이트 개편으로 파서가 깨지면 여기서 먼저 걸린다. 파서를 고칠 때마다 케이스를 추가할 것. level: error=실패 처리, warn=경고만(외부 쿼터·차단이 잦은 채널).",
+ "max_bytes": 24576,
+ "cases": [
+  {
+   "id": "tna-variants",
+   "tool": "tna_search",
+   "args": {
+    "query": "Korean War prisoners",
+    "max_results": 8
+   },
+   "must": [
+    "\\[[A-Z]+ \\d+/\\d+\\]",
+    "표기 변형 병행"
+   ],
+   "level": "error"
+  },
+  {
+   "id": "tna-ref-quote",
+   "tool": "tna_search",
+   "args": {
+    "query": "FO 371/84053"
+   },
+   "must": [
+    "FO 371/84053"
+   ],
+   "level": "error"
+  },
+  {
+   "id": "nara-naid",
+   "tool": "judge_rights",
+   "args": {
+    "naid": 520782
+   },
+   "must": [
+    "Unrestricted"
+   ],
+   "level": "warn"
+  },
+  {
+   "id": "koreanwar-pair",
+   "tool": "cross_search",
+   "args": {
+    "query": "장진호",
+    "sources": "nara,koreanwar",
+    "max_per_source": 5
+   },
+   "must": [
+    "koreanwar"
+   ],
+   "level": "warn"
+  },
+  {
+   "id": "ktv-full-title",
+   "tool": "nedb_search",
+   "args": {
+    "mode": "ktv",
+    "query": "대한뉴스 서울"
+   },
+   "must": [
+    "- \\[대한뉴스\\] \\S+",
+    "ehistory\\.go\\.kr/view/movie"
+   ],
+   "must_not": [
+    "\\[대한뉴스\\] \\[대한뉴스\\]",
+    "\\] \\[\\d+호\\]\\n",
+    "접근 제한"
+   ],
+   "level": "error",
+   "note": "v2.37 e영상역사관 자체 목록 검색(ehistory.go.kr) — '대한뉴스 서울'은 대한뉴스 분류에서 '서울'로"
+  },
+  {
+   "id": "ktv-detail",
+   "tool": "nedb_search",
+   "args": {
+    "mode": "ktv",
+    "query": "https://www.ehistory.go.kr/view/movie?mediasrcgbn=KV&mediaid=11191&mediadtl=24992&mediagbn=DH"
+   },
+   "must": [
+    "【해설】",
+    "상영시간"
+   ],
+   "level": "error"
+  },
+  {
+   "id": "seoul-item-titles",
+   "tool": "seoul_archives_search",
+   "args": {
+    "query": "한강"
+   },
+   "must": [
+    "\\[기록건·사진\\] [^\\n—]{2,}\\n"
+   ],
+   "must_not": [
+    "제목·이용조건은 상세 URL 판독[\\s\\S]*제목·이용조건은 상세 URL 판독[\\s\\S]*제목·이용조건은 상세 URL 판독"
+   ],
+   "level": "error"
+  },
+  {
+   "id": "kyu-rows",
+   "tool": "nedb_search",
+   "args": {
+    "mode": "kyujanggak",
+    "query": "절목"
+   },
+   "must": [
+    "(?:- \\[(奎|古)[^\\]]+\\] \\S+.* · .* · )|접근 제한\\(정직 UA 거부\\)",
+    "(?:해제: )|접근 제한\\(정직 UA 거부\\)"
+   ],
+   "level": "error",
+   "note": "v2.36 정직 UA 거부 기관 — 기관이 허용하면 원래 패턴, 거부 중이면 명시 표시가 나와야 통과(조용한 0건은 실패)"
+  },
+  {
+   "id": "jsg-ancient-doc",
+   "tool": "nedb_search",
+   "args": {
+    "mode": "jsg",
+    "query": "https://jsg.aks.ac.kr/dir/view?dataId=ANC_G002%2BAKS%2BKSM-XF.0000.0000-20101008.B034a_053_00084_XXX"
+   },
+   "must": [
+    "청구기호 B034A0530084",
+    "소장: "
+   ],
+   "must_not": [
+    "한국역대인물(?!정보)"
+   ],
+   "level": "error"
+  },
+  {
+   "id": "jsg-uigwe-haeje",
+   "tool": "nedb_search",
+   "args": {
+    "mode": "jsg",
+    "query": "https://jsg.aks.ac.kr/dir/view?dataId=ARC_kh2_je_a_vsu_22189_000"
+   },
+   "must": [
+    "【해제】",
+    "간행: ",
+    "판본: "
+   ],
+   "level": "error"
+  },
+  {
+   "id": "nlk-old-books",
+   "tool": "nlk_search",
+   "args": {
+    "query": "오륜행실도",
+    "max_results": 5
+   },
+   "must": [
+    "고문헌\\(원본\\) 자동 병행",
+    "\\[고문헌\\]"
+   ],
+   "level": "error"
+  },
+  {
+   "id": "ndl-pid",
+   "tool": "cross_search",
+   "args": {
+    "query": "朝鮮写真帖",
+    "sources": "ndl",
+    "max_per_source": 8
+   },
+   "must": [
+    "디지털 PID \\d+"
+   ],
+   "level": "warn"
+  },
+  {
+   "id": "jacar-ja",
+   "tool": "cross_search",
+   "args": {
+    "query": "日韓協約",
+    "sources": "jacar",
+    "max_per_source": 3
+   },
+   "must": [
+    "\\[jacar\\]"
+   ],
+   "level": "warn"
+  },
+  {
+   "id": "iiif-format",
+   "tool": "cross_search",
+   "args": {
+    "query": "Seoul 1950",
+    "sources": "ia,europeana",
+    "max_per_source": 3,
+    "format": "iiif"
+   },
+   "must": [
+    "\"type\":\"Collection\"",
+    "iiif\\.(archive\\.org|europeana\\.eu)"
+   ],
+   "level": "error"
+  },
+  {
+   "id": "iiif-guide",
+   "tool": "report_template",
+   "args": {
+    "kind": "iiif"
+   },
+   "must": [
+    "IIIF 갤러리 규칙",
+    "openseadragon",
+    "kv\\.html",
+    "iiif/nara/<NAID>",
+    "hierarchy\\.json"
+   ],
+   "level": "error"
+  },
+  {
+   "id": "help-guide",
+   "tool": "report_template",
+   "args": {
+    "kind": "help"
+   },
+   "must": [
+    "창기창기",
+    "iiif.html"
+   ],
+   "level": "error"
+  },
+  {
+   "id": "csv-format",
+   "tool": "cross_search",
+   "args": {
+    "query": "Korea armistice",
+    "sources": "tna,un",
+    "max_per_source": 3,
+    "format": "csv"
+   },
+   "must": [
+    "^교차수집 .+ CSV",
+    "\\nnode,sources,title,date,id,url"
+   ],
+   "level": "error"
+  },
+  {
+   "id": "ia-item",
+   "tool": "ia_search",
+   "args": {
+    "identifier": "BattleOfTheBarricades"
+   },
+   "must": [
+    "BattleOfTheBarricades|Barricades"
+   ],
+   "level": "warn"
+  },
+  {
+   "id": "gallery-source",
+   "tool": "cross_search",
+   "args": {
+    "query": "흥남",
+    "sources": "gallery",
+    "max_per_source": 3
+   },
+   "must": [
+    "\\[gallery\\]",
+    "iiif\\.html#s\\d+/\\d+"
+   ],
+   "level": "error"
+  },
+  {
+   "id": "gallery-iiif",
+   "tool": "cross_search",
+   "args": {
+    "query": "흥남",
+    "sources": "gallery",
+    "max_per_source": 3,
+    "format": "iiif"
+   },
+   "must": [
+    "iiif/m/s\\d+\\.json"
+   ],
+   "level": "error"
+  },
+  {
+   "id": "nara-iiif",
+   "tool": "nara_search",
+   "args": {
+    "query": "",
+    "naid": 520782,
+    "output": "iiif"
+   },
+   "must": [
+    "공개 매니페스트",
+    "\"type\":\"Manifest\"",
+    "\"partOf\"",
+    "navDate"
+   ],
+   "level": "warn"
+  },
+  {
+   "id": "manifest-iiif-field",
+   "tool": "cross_search",
+   "args": {
+    "query": "Hungnam evacuation",
+    "sources": "nara",
+    "max_per_source": 3,
+    "format": "manifest"
+   },
+   "must": [
+    "\"iiif\":\"https://korea-archive-mcp\\.vercel\\.app/iiif/nara/\\d+/manifest\\.json\""
+   ],
+   "level": "warn"
+  },
+  {
+   "id": "bridge2-manifest",
+   "tool": "cross_search",
+   "args": {
+    "query": "Kapyong",
+    "sources": "awm",
+    "max_per_source": 3,
+    "format": "manifest"
+   },
+   "must": [
+    "\"iiif\":\"https://korea-archive-mcp\\.vercel\\.app/iiif/awm/C\\d+/manifest\\.json\""
+   ],
+   "level": "warn"
+  },
+  {
+   "id": "bridge2-heritage",
+   "tool": "nedb_search",
+   "args": {
+    "mode": "heritage",
+    "query": "11-0000010000000-11"
+   },
+   "must": [
+    "iiif/heritage/11-0000010000000-11/manifest\\.json"
+   ],
+   "level": "warn"
+  },
+  {
+   "id": "rec-envelope",
+   "tool": "cross_search",
+   "args": {
+    "query": "유관순",
+    "sources": "indy",
+    "max_per_source": 3,
+    "format": "iiif"
+   },
+   "must": [
+    "기록 봉투",
+    "kv\\.html#c=[\\w-]{40,}",
+    "/iiif/rec/[\\w-]{40,}/manifest\\.json"
+   ],
+   "must_not": [
+    "IIIF 미제공\\(원 기관 링크로 열람"
+   ],
+   "level": "error"
+  },
+  {
+   "id": "tna-hierarchy",
+   "tool": "tna_search",
+   "args": {
+    "query": "Korea armistice",
+    "max_results": 3
+   },
+   "must": [
+    "/iiif/tna/C\\w+/manifest\\.json",
+    "/collection\\.json"
+   ],
+   "level": "error"
+  },
+  {
+   "id": "tna-iiif-format",
+   "tool": "cross_search",
+   "args": {
+    "query": "Korea armistice",
+    "sources": "tna",
+    "max_per_source": 3,
+    "format": "iiif"
+   },
+   "must": [
+    "/iiif/tna/C\\w+/manifest\\.json"
+   ],
+   "level": "error"
+  },
+  {
+   "id": "grouped-iiif",
+   "tool": "cross_search",
+   "args": {
+    "query": "유관순",
+    "sources": "indy,i815,gonghun",
+    "max_per_source": 2,
+    "format": "iiif"
+   },
+   "must": [
+    "계열 [2-9]개",
+    "#g1"
+   ],
+   "level": "error"
+  },
+  {
+   "id": "kyu-class-hierarchy",
+   "tool": "cross_search",
+   "args": {
+    "query": "절목",
+    "sources": "kyudb",
+    "max_per_source": 3,
+    "format": "csv"
+   },
+   "must": [
+    "(?:(史部|經部|子部|集部) › )|접근 제한\\(정직 UA 거부\\)"
+   ],
+   "level": "error",
+   "note": "v2.36 정직 UA 거부 기관 — 기관이 허용하면 원래 패턴, 거부 중이면 명시 표시가 나와야 통과(조용한 0건은 실패)"
+  },
+  {
+   "id": "archives-partof",
+   "tool": "cross_search",
+   "args": {
+    "query": "한국전쟁",
+    "sources": "archives",
+    "max_per_source": 10,
+    "format": "csv"
+   },
+   "must": [
+    "(생산기관|국가기록원) › "
+   ],
+   "level": "warn",
+   "must_not": [
+    "&amp;rc_",
+    "http://www\\.archives\\.go\\.kr/next"
+   ]
+  },
+  {
+   "id": "nedb-partof",
+   "tool": "cross_search",
+   "args": {
+    "query": "안중근",
+    "sources": "nedb",
+    "max_per_source": 5,
+    "format": "csv"
+   },
+   "must": [
+    "한국사DB › "
+   ],
+   "level": "warn",
+   "must_not": [
+    "한국사DB › 한국사DB"
+   ]
+  },
+  {
+   "id": "csv-download",
+   "tool": "cross_search",
+   "args": {
+    "query": "유관순",
+    "sources": "indy",
+    "max_per_source": 5,
+    "format": "csv"
+   },
+   "must": [
+    "korea-archive-mcp\\.vercel\\.app/export/csv/[A-Za-z0-9_-]+\\.csv"
+   ],
+   "level": "error"
+  },
+  {
+   "id": "ledger-kept",
+   "tool": "cross_search",
+   "args": {
+    "query": "유관순",
+    "sources": "indy",
+    "max_per_source": 3
+   },
+   "must": [
+    "원장에 영구 축적됩니다.{0,80}https://changgi\\.github\\.io/korea-archive-mcp/data/"
+   ],
+   "must_not": [
+    "검색어 포함"
+   ],
+   "level": "warn",
+   "note": "v2.26 안내 문구 변경('공개 누적 원장에 쌓입니다' → '원장에 영구 축적됩니다(가공·삭제 없음 …)') 반영"
+  },
+  {
+   "id": "ledger-source",
+   "tool": "cross_search",
+   "args": {
+    "query": "Korea",
+    "sources": "ledger",
+    "max_per_source": 5
+   },
+   "must": [
+    "\\[ledger:[1-9]",
+    "발견 [0-9]+회 · 7일 [0-9]+ · [0-9]+일 · 첫 20[0-9][0-9]-"
+   ],
+   "level": "warn",
+   "must_not": [
+    "첫 20[0-9]{0,2}\\s*\\("
+   ]
+  },
+  {
+   "id": "deep-read-koreanwar-arg",
+   "tool": "cross_search",
+   "args": {
+    "query": "흥남",
+    "sources": "koreanwar",
+    "max_per_source": 2,
+    "format": "manifest"
+   },
+   "must": [
+    "koreanwar_item\\(ref_code="
+   ],
+   "must_not": [
+    "koreanwar_item\\(archRfcd="
+   ],
+   "level": "warn"
+  },
+  {
+   "id": "okchf-collect",
+   "tool": "cross_search",
+   "args": {
+    "query": "불화",
+    "sources": "okchf",
+    "max_per_source": 5,
+    "format": "csv"
+   },
+   "must": [
+    "\\[okchf:[1-9]",
+    "국외소재문화유산재단 › (국외문화유산|사진아카이브) › "
+   ],
+   "must_not": [
+    "jsessionid"
+   ],
+   "level": "error"
+  },
+  {
+   "id": "okchf-detail",
+   "tool": "nedb_search",
+   "args": {
+    "mode": "okchf",
+    "query": "https://www.overseaschf.or.kr/archive/search/category.do?mode=view&srSearchTy=relic&id=46493&iDivCd=1"
+   },
+   "must": [
+    "소장처: 클리블랜드미술관",
+    "소장처 관리번호: 1994\\.25",
+    "【설명】",
+    "본문 지문\\(sha256-16\\): [0-9a-f]{16}"
+   ],
+   "must_not": [
+    "&nbsp;",
+    "&amp;"
+   ],
+   "level": "error"
+  },
+  {
+   "id": "okchf-photo-detail",
+   "tool": "nedb_search",
+   "args": {
+    "mode": "okchf",
+    "query": "relic_gls:94034"
+   },
+   "must": [
+    "작가: 노르베르트 베버",
+    "소장처 관리번호: BUDH_0048"
+   ],
+   "must_not": [
+    "· ·",
+    "더보기\\n"
+   ],
+   "level": "error"
+  },
+  {
+   "id": "okchf-reports",
+   "tool": "nedb_search",
+   "args": {
+    "mode": "okchf",
+    "query": "보고서:미국"
+   },
+   "must": [
+    "조사보고서 '미국'\\(제목\\+목차\\) — 전체 [1-9]",
+    "US_DF_PD\\.do\\?mode=view&articleNo=\\d+"
+   ],
+   "level": "error"
+  },
+  {
+   "id": "okchf-report-toc",
+   "tool": "nedb_search",
+   "args": {
+    "mode": "okchf",
+    "query": "pub:7043"
+   },
+   "must": [
+    "사노시향토박물관",
+    "【목차】",
+    "목차 지문\\(sha256-16\\): [0-9a-f]{16}"
+   ],
+   "must_not": [
+    "\\u200b",
+    "&nbsp;"
+   ],
+   "level": "error"
+  },
+  {
+   "id": "nrich-collect",
+   "tool": "cross_search",
+   "args": {
+    "query": "미륵사",
+    "sources": "nrich",
+    "max_per_source": 4,
+    "format": "csv"
+   },
+   "must": [
+    "\\[nrich:[1-9]",
+    "국립문화유산연구원 › 발간자료 › "
+   ],
+   "level": "error"
+  },
+  {
+   "id": "nrich-overseas-detail",
+   "tool": "nedb_search",
+   "args": {
+    "mode": "nrich",
+    "query": "ov:68018"
+   },
+   "must": [
+    "벼루 · 硯 · Inkstone",
+    "소장처명: 영국/영국박물관",
+    "제 4유형"
+   ],
+   "must_not": [
+    "&nbsp;"
+   ],
+   "level": "error"
+  },
+  {
+   "id": "nrich-report-detail",
+   "tool": "nedb_search",
+   "args": {
+    "mode": "nrich",
+    "query": "rep:9081"
+   },
+   "must": [
+    "익산 미륵사지 출토 부재 보존 및 활용 방안",
+    "【초록】",
+    "【목차】",
+    "본문 지문\\(sha256-16\\): [0-9a-f]{16}"
+   ],
+   "level": "error"
+  },
+  {
+   "id": "deep-hint-footer",
+   "tool": "cross_search",
+   "args": {
+    "query": "유관순",
+    "sources": "indy",
+    "max_per_source": 2
+   },
+   "must": [
+    "koreanwar_item\\(ref_code\\)",
+    "\\[okchf\\]→mode=okchf",
+    "\\[nrich\\]→mode=nrich"
+   ],
+   "must_not": [
+    "koreanwar_item\\(archRfcd\\)"
+   ],
+   "level": "error"
+  },
+  {
+   "id": "nrich-db-search",
+   "tool": "nedb_search",
+   "args": {
+    "mode": "nrich",
+    "query": "신도비",
+    "max_results": 5
+   },
+   "must": [
+    "연구DB [1-9][0-9]*건",
+    "\\[금석문\\]",
+    "→ ksm:\\d+"
+   ],
+   "level": "error"
+  },
+  {
+   "id": "nrich-db-detail",
+   "tool": "nedb_search",
+   "args": {
+    "mode": "nrich",
+    "query": "ksm:3"
+   },
+   "must": [
+    "이계신도비",
+    "서체: 해서",
+    "원문 뷰어\\(전문·이미지\\): http"
+   ],
+   "level": "error"
+  },
+  {
+   "id": "nrich-db-portrait",
+   "tool": "nedb_search",
+   "args": {
+    "mode": "nrich",
+    "query": "이제현"
+   },
+   "must": [
+    "\\[초상화\\(국가지정\\)\\] 이제현 초상"
+   ],
+   "level": "warn"
+  },
+  {
+   "id": "nrich-db-in-cross",
+   "tool": "cross_search",
+   "args": {
+    "query": "광개토",
+    "sources": "nrich",
+    "max_per_source": 6,
+    "format": "csv"
+   },
+   "must": [
+    "국립문화유산연구원 › 연구DB › "
+   ],
+   "level": "warn",
+   "note": "배포 직후 첫 호출은 색인 적재 중일 수 있음(3.5s 대기) — warn"
+  },
+  {
+   "id": "nrich-db-scoped",
+   "tool": "nedb_search",
+   "args": {
+    "mode": "nrich",
+    "query": "ksm:광개토",
+    "max_results": 5
+   },
+   "must": [
+    "연구DB \\[ksm\\] '광개토' — [1-9]",
+    "\\[금석문\\] 광개토"
+   ],
+   "must_not": [
+    "\\[한국고고학사전\\]"
+   ],
+   "level": "error"
+  },
+  {
+   "id": "nrich-db-material",
+   "tool": "nedb_search",
+   "args": {
+    "mode": "nrich",
+    "query": "material:미암일기",
+    "max_results": 3
+   },
+   "must": [
+    "\\[문화유산 전통재료\\(문헌 용례\\)\\]",
+    "미암일기"
+   ],
+   "level": "warn"
+  },
+  {
+   "id": "nrich-iiif-bridge",
+   "tool": "cross_search",
+   "args": {
+    "query": "벼루",
+    "sources": "nrich",
+    "max_per_source": 4,
+    "format": "manifest"
+   },
+   "must": [
+    "iiif/nrich/ov-\\d+/manifest\\.json"
+   ],
+   "level": "error"
+  },
+  {
+   "id": "nrich-iiif-stone",
+   "tool": "cross_search",
+   "args": {
+    "query": "다보탑",
+    "sources": "nrich",
+    "max_per_source": 5,
+    "format": "manifest"
+   },
+   "must": [
+    "iiif/nrich/stone-\\d+/manifest\\.json"
+   ],
+   "level": "warn"
+  },
+  {
+   "id": "nrich-people",
+   "tool": "nedb_search",
+   "args": {
+    "mode": "nrich",
+    "query": "인물:의겸"
+   },
+   "must": [
+    "의겸\\(義謙\\) — [1-9]\\d*건",
+    "화승\\(畫僧\\)",
+    "→ gwaebul:\\d+"
+   ],
+   "level": "error"
+  },
+  {
+   "id": "person-4ch",
+   "tool": "nedb_search",
+   "args": {
+    "mode": "gonghun",
+    "query": "종합:송시열"
+   },
+   "must": [
+    "4채널 병렬",
+    "【국립문화유산연구원 연구DB 인물",
+    "송시열\\(宋時烈\\) — \\d+건"
+   ],
+   "level": "error"
+  },
+  {
+   "id": "health-freshness",
+   "tool": "source_profile",
+   "args": {
+    "institution": "health"
+   },
+   "must": [
+    "자동 파이프라인 신선도",
+    "연구원 연구DB 색인",
+    "발견 누적 원장"
+   ],
+   "must_not": [
+    "🔴 연구원 연구DB 색인",
+    "🔴 발견 누적 원장"
+   ],
+   "level": "warn"
+  },
+  {
+   "id": "nedb-live-subdb",
+   "tool": "nedb_search",
+   "args": {
+    "query": "한강",
+    "max_results": 3
+   },
+   "must": [
+    "주요 8개 DB 직접 검색",
+    "비변사등록 — [1-9]",
+    "db\\.history\\.go\\.kr/id/bb_"
+   ],
+   "must_not": [
+    "헌정사 자료 DB\\n- 포로신문보고서",
+    "검색어가 등장하는 DB 2종"
+   ],
+   "level": "error"
+  },
+  {
+   "id": "gallica-databnf",
+   "tool": "cross_search",
+   "args": {
+    "query": "Corée",
+    "sources": "gallica",
+    "max_per_source": 3
+   },
+   "must": [
+    "\\[gallica:[1-9]",
+    "gallica\\.bnf\\.fr/ark:/12148/"
+   ],
+   "level": "warn"
+  },
+  {
+   "id": "ia-relevance",
+   "tool": "cross_search",
+   "args": {
+    "query": "Hungnam",
+    "sources": "ia",
+    "max_per_source": 5,
+    "format": "csv"
+   },
+   "must": [
+    "(?i)hungnam"
+   ],
+   "must_not": [
+    "Archive-It Crawl Data"
+   ],
+   "level": "error"
+  },
+  {
+   "id": "ledger-query-notice",
+   "tool": "cross_search",
+   "args": {
+    "query": "장진호",
+    "sources": "koreanwar",
+    "max_per_source": 3,
+    "format": "csv"
+   },
+   "must": [
+    "영구 축적",
+    "원문 그대로"
+   ],
+   "must_not": [
+    "검색어·사용자 정보 없음",
+    "개인정보 패턴 자동 제거"
+   ],
+   "level": "warn"
+  },
+  {
+   "id": "ledger-derived-hierarchy",
+   "tool": "cross_search",
+   "args": {
+    "query": "Hungnam evacuation map",
+    "sources": "ledger",
+    "max_per_source": 3,
+    "format": "csv"
+   },
+   "must": [
+    "Commons › Evacuation of Hungnam"
+   ],
+   "must_not": [
+    "\\(계열 미상\\)"
+   ],
+   "level": "warn",
+   "note": "v2.65부터 Commons 기록은 기관 범주로 계층(partOf_src) — 옛 기대 '[파생] 이미지'보다 나은 원 기관 계층"
+  },
+  {
+   "id": "ledger-media-formats",
+   "tool": "source_profile",
+   "args": {
+    "institution": "ledger"
+   },
+   "must": [
+    "feed\\.xml",
+    "records\\.csl\\.json",
+    "records\\.ris",
+    "provenance\\.json",
+    "SHA256SUMS",
+    "해시 사슬",
+    "q/<질의 지문>\\.json",
+    "records\\.bib",
+    "records\\.oai_dc\\.xml",
+    "catalog\\.jsonld",
+    "sitemap\\.xml",
+    "relations\\.json",
+    "r/<slug>\\.json"
+   ],
+   "must_not": [
+    "검색어·사용자 정보 없음"
+   ],
+   "level": "error"
+  },
+  {
+   "id": "seoul-detail-hierarchy",
+   "tool": "seoul_archives_search",
+   "args": {
+    "query": "https://archives.seoul.go.kr/item/1107943"
+   },
+   "must": [
+    "계층: 서울기록원 › 시리즈 ",
+    "IT1107943",
+    "생산자: ",
+    "보존이력: "
+   ],
+   "must_not": [
+    "IT11 ·"
+   ],
+   "level": "error"
+  },
+  {
+   "id": "ledger-no-defect",
+   "tool": "cross_search",
+   "args": {
+    "query": "안중근",
+    "sources": "ledger",
+    "max_per_source": 20,
+    "format": "csv"
+   },
+   "must": [
+    "안중근"
+   ],
+   "must_not": [
+    "헌정사 자료 DB — '안중근' 수록",
+    "포로신문보고서 — '안중근' 수록"
+   ],
+   "level": "warn"
+  },
+  {
+   "id": "earchive-direct-detail",
+   "tool": "nedb_search",
+   "args": {
+    "mode": "earchive",
+    "query": "https://archive.history.go.kr/record/catalog/catalogView.do?systemId=000000903162"
+   },
+   "must": [
+    "계층: 국사편찬위원회 전자사료관 › 사료군 AUS005",
+    "생산기간: 1950\\.12\\.11",
+    "systemId 000000903162"
+   ],
+   "must_not": [
+    "상세 파싱 실패"
+   ],
+   "level": "error"
+  },
+  {
+   "id": "earchive-systemid-link",
+   "tool": "cross_search",
+   "args": {
+    "query": "AUS005_06_02V0000_696",
+    "sources": "earchive",
+    "max_per_source": 3,
+    "format": "csv"
+   },
+   "must": [
+    "catalogView\\.do\\?systemId=\\d{6,}"
+   ],
+   "must_not": [
+    "\"https://archive\\.history\\.go\\.kr\",\""
+   ],
+   "level": "error"
+  },
+  {
+   "id": "kyudb-bookcd-link",
+   "tool": "cross_search",
+   "args": {
+    "query": "奎18933",
+    "sources": "kyudb",
+    "max_per_source": 3,
+    "format": "csv"
+   },
+   "must": [
+    "(?:book/view\\.do\\?book_cd=GK18933_00)|접근 제한\\(정직 UA 거부\\)"
+   ],
+   "must_not": [
+    "\"https://kyudb\\.snu\\.ac\\.kr\",\"소장"
+   ],
+   "level": "error",
+   "note": "v2.36 정직 UA 거부 기관 — 기관이 허용하면 원래 패턴, 거부 중이면 명시 표시가 나와야 통과(조용한 0건은 실패)"
+  },
+  {
+   "id": "aks-uci-permalink",
+   "tool": "nedb_search",
+   "args": {
+    "mode": "aks",
+    "query": "L011143F0210"
+   },
+   "must": [
+    "원문 고정 링크\\(UCI\\): https://archive\\.aks\\.ac\\.kr/link\\.do\\?dataUCI=G002\\+AKS\\+"
+   ],
+   "level": "error"
+  },
+  {
+   "id": "ktv-ehistory-search",
+   "tool": "cross_search",
+   "args": {
+    "query": "판문점",
+    "sources": "ktv",
+    "max_per_source": 5,
+    "format": "csv"
+   },
+   "must": [
+    "판문점",
+    "https://www\\.ehistory\\.go\\.kr/view/(movie|photo)\\?"
+   ],
+   "must_not": [
+    "⛔정직UA거부"
+   ],
+   "level": "error"
+  },
+  {
+   "id": "kyudb-get-search",
+   "tool": "nedb_search",
+   "args": {
+    "mode": "kyujanggak",
+    "query": "절목"
+   },
+   "must": [
+    "- \\[(奎|古)[^\\]]+\\] \\S+"
+   ],
+   "must_not": [
+    "CSRF",
+    "HTTP 403"
+   ],
+   "level": "error"
+  },
+  {
+   "id": "ledger-subject-search",
+   "tool": "cross_search",
+   "args": {
+    "query": "USIS 한국전쟁",
+    "sources": "ledger",
+    "max_per_source": 5,
+    "format": "csv"
+   },
+   "must": [
+    "rec:ledger:AUS001_41_00V0000_00[89]"
+   ],
+   "level": "warn",
+   "note": "v2.42 원장 검색이 기관 주제어까지 본다 — '한국전쟁'은 제목에 없고 전자사료관 주제어에만 있다(USIS in Cheju Do). 옛 기대(earchive 중공군개입 기록)는 원장에 존재한 적 없음(git 이력 확인)"
+  },
+  {
+   "id": "nedb-law-no-false-absence",
+   "tool": "nedb_search",
+   "args": {
+    "mode": "law",
+    "query": "조운"
+   },
+   "must": [
+    "(?:經國大典|총 [1-9][\\d,]*건)|응답이 끊겨"
+   ],
+   "must_not": [
+    "법전에 수록되어 있지 않습니다"
+   ],
+   "level": "error",
+   "note": "v2.46.1 끊긴 응답을 0건으로 오인해 '법전에 없음'이라는 거짓 결론을 내던 것 — 조운은 경국대전 호전·漕轉에 있다"
+  },
+  {
+   "id": "cross-failed-channel-note",
+   "tool": "cross_search",
+   "args": {
+    "query": "회의",
+    "sources": "foia",
+    "max_per_source": 3,
+    "format": "csv"
+   },
+   "must": [
+    "(?:조회 실패 채널 1곳\\(foia\\)|foia:[0-9])"
+   ],
+   "level": "error",
+   "note": "v2.48 조회 실패 채널은 '없음'과 구분해 명시돼야 한다 — foia가 복구되면 건수 표기로 통과"
+  },
+  {
+   "id": "ledger-found-path",
+   "tool": "cross_search",
+   "args": {
+    "query": "Korea",
+    "sources": "ledger",
+    "max_per_source": 5,
+    "format": "csv"
+   },
+   "must": [
+    "경로 (?:질의 [0-9]+|원장\\(파생\\))"
+   ],
+   "level": "warn",
+   "note": "v2.49 원장 기록마다 발견 경로(질의 지문 또는 원장 적재 파생)가 보여야 — 원장 병합 후"
+  },
+  {
+   "id": "ledger-derived-date",
+   "tool": "cross_search",
+   "args": {
+    "query": "Hungnam Beach Evacuation",
+    "sources": "ledger",
+    "max_per_source": 5,
+    "format": "csv"
+   },
+   "must": [
+    "1950-12-1[0-9]"
+   ],
+   "level": "warn",
+   "note": "v2.50 전자사료관 '생산기간'에서 세운 날짜(date_derived)가 원장 검색에 [파생]으로 보여야 — 원장 병합 후"
+  },
+  {
+   "id": "jsg-entity-authority",
+   "tool": "nedb_search",
+   "args": {
+    "mode": "jsg",
+    "query": "K2-2751"
+   },
+   "must": [
+    "인명\\(장서각 태깅\\): [^\\n]*이재면",
+    "인물 전거\\(한국역대인물 UCI\\): [^\\n]*고종=G002\\+AKS-KHF_"
+   ],
+   "must_not": [
+    "한국역대인물\\s*한국역대인물"
+   ],
+   "level": "warn",
+   "note": "v2.56 장서각 해제의 기관 개체 태깅·인명 전거(UCI)가 판독 결과에 보여야"
+  },
+  {
+   "id": "nedb-item-era-path",
+   "tool": "nedb_search",
+   "args": {
+    "mode": "item",
+    "query": "dh_001_1945_10_15_0040"
+   },
+   "must": [
+    "연월일: 1945년 10월 15일",
+    "출전: 자유신문",
+    "조선주둔미군"
+   ],
+   "must_not": [
+    "HTTP 404",
+    "조회 실패"
+   ],
+   "level": "warn",
+   "note": "v2.61 현대·근대·고대 DB 기록은 시대별 경로로 판독(조선 경로 404 결함) · 기술 항목 뒤 본문"
+  },
+  {
+   "id": "nedb-item-label-body",
+   "tool": "nedb_search",
+   "args": {
+    "mode": "item",
+    "query": "ks_001_0020_0090"
+   },
+   "must": [
+    "발신자: 沈頤之",
+    "문서분류: 狀啓",
+    "承政院開坼"
+   ],
+   "must_not": [
+    "본문이 공개되지 않았습니다"
+   ],
+   "level": "warn",
+   "note": "v2.61 '◯' 표시 없는 각사등록 장계 — 본문이 있는데 '미공개'로 오판하던 결함"
+  },
+  {
+   "id": "nedb-item-tableless",
+   "tool": "nedb_search",
+   "args": {
+    "mode": "item",
+    "query": "sg_001r_0020_0010"
+   },
+   "must": [
+    "연월일: 기원전 57년",
+    "시조의 성은 박",
+    "주제분류: 정치＞왕실"
+   ],
+   "must_not": [
+    "본문이 공개되지 않았습니다",
+    "註\\)\\s*\\d+"
+   ],
+   "level": "warn",
+   "note": "v2.61.1 기술 항목 표 없는 기록(삼국사기) — section-read 본문, 각주 팝업 제외"
+  },
+  {
+   "id": "nedb-item-image-only",
+   "tool": "nedb_search",
+   "args": {
+    "mode": "item",
+    "query": "npda_1920_04_30_v0002_1100"
+   },
+   "must": [
+    "원문 이미지\\(지면\\)로만",
+    "신문명: 동아일보",
+    "발행년월일: 1920년 04월 30일"
+   ],
+   "must_not": [
+    "본문이 공개되지 않았습니다"
+   ],
+   "level": "warn",
+   "note": "v2.61.1 신문 지면 — '미공개'가 아니라 원문 이미지만"
+  },
+  {
+   "id": "commons-categories",
+   "tool": "nedb_search",
+   "args": {
+    "mode": "commons",
+    "query": "https://commons.wikimedia.org/wiki/File:Hungnam_evacuation_map.jpg"
+   },
+   "must": [
+    "범주\\(Commons\\): [^\\n]+"
+   ],
+   "must_not": [
+    "Category:"
+   ],
+   "level": "warn",
+   "note": "v2.65 Commons 범주(숨김 제외)를 판독 — 계층 맥락·분류 축적"
+  },
+  {
+   "id": "un-marc-detail",
+   "tool": "nedb_search",
+   "args": {
+    "mode": "un",
+    "query": "https://digitallibrary.un.org/record/4132698"
+   },
+   "must": [
+    "문서기호: A/RES/81/11",
+    "유형: 표결 기록",
+    "의제: A/81/251"
+   ],
+   "must_not": [
+    "판독 — recid 4132698\\n\\n"
+   ],
+   "level": "warn",
+   "note": "v2.66 UN 판독은 기관 MARC XML(export/xm) — recjson·HTML(봇 확인)로 제목·날짜가 비던 결함"
+  },
+  {
+   "id": "nedb-item-law",
+   "tool": "nedb_search",
+   "args": {
+    "mode": "item",
+    "query": "jlawa_102_0210_0010"
+   },
+   "must": [
+    "經國大典 戶典 漕轉",
+    "諸道漕稅倉 京畿諸邑"
+   ],
+   "must_not": [
+    "문자입력기",
+    "受敎謄錄, 고종"
+   ],
+   "level": "warn",
+   "note": "v2.69.1 법전 조문 — 자료인용방법 다음 제목·상위목록 다음 본문(검색창 라벨을 기술 항목으로 오인하던 결함)"
+  },
+  {
+   "id": "ledger-same-record",
+   "tool": "cross_search",
+   "args": {
+    "query": "Hamhung",
+    "sources": "ledger",
+    "max_per_source": 10
+   },
+   "must": [
+    "※ 같은 기록 \\d곳 소장\\(",
+    "날짜 교차 일치",
+    "Withdrawal of 1st Marine, Hamhung"
+   ],
+   "must_not": [
+    "같은 기록 1곳",
+    "경로 질의 \\d+ · 같은 기록"
+   ],
+   "level": "warn"
+  },
+  {
+   "id": "topics-refugees",
+   "tool": "nara_search",
+   "args": {
+    "query": "피란민",
+    "max_results": 5
+   },
+   "must": [
+    "영문 자동 변환 'refugees"
+   ],
+   "must_not": [
+    "NARA '피란민' — total"
+   ],
+   "level": "warn"
+  },
+  {
+   "id": "topics-korean-war-terms",
+   "tool": "nara_search",
+   "args": {
+    "query": "휴전회담",
+    "max_results": 3
+   },
+   "must": [
+    "영문 자동 변환 'armistice negotiations Korea'"
+   ],
+   "must_not": [
+    "변환 'Korea armistice 회담'"
+   ],
+   "level": "warn"
+  },
+  {
+   "id": "topics-modern-terms",
+   "tool": "nara_search",
+   "args": {
+    "query": "제주 4·3",
+    "max_results": 3
+   },
+   "must": [
+    "영문 자동 변환 '(Korea )?Cheju-do 1948'"
+   ],
+   "must_not": [
+    "Quelpart 4"
+   ],
+   "level": "warn"
+  },
+  {
+   "id": "topics-colonial-terms",
+   "tool": "tna_search",
+   "args": {
+    "query": "조선어학회",
+    "max_results": 3
+   },
+   "must": [
+    "Korean Language Society"
+   ],
+   "must_not": [
+    "Korea 어학회"
+   ],
+   "level": "warn"
+  },
+  {
+   "id": "topics-probe-corrected",
+   "tool": "nara_search",
+   "args": {
+    "query": "서울 수복",
+    "max_results": 5
+   },
+   "must": [
+    "영문 자동 변환 'recapture of Seoul'",
+    "(?i)RECAPTURE OF SEOUL"
+   ],
+   "must_not": [
+    "변환 'Seoul recapture 1950'"
+   ],
+   "level": "warn"
+  },
+  {
+   "id": "variants-era-year",
+   "tool": "cross_search",
+   "args": {
+    "query": "갑오개혁",
+    "sources": "tna",
+    "variants": true,
+    "max_per_source": 5
+   },
+   "must": [
+    "tna·Corea 1894:[1-9]"
+   ],
+   "must_not": [
+    "tna·Corea 1894:0"
+   ],
+   "level": "warn"
+  },
+  {
+   "id": "default-era-year-tna",
+   "tool": "cross_search",
+   "args": {
+    "query": "강화도조약",
+    "sources": "tna",
+    "max_per_source": 5
+   },
+   "must": [
+    "tna·Corea 1876:[1-9]"
+   ],
+   "must_not": [
+    "tna·Corea 1876:0"
+   ],
+   "level": "warn"
+  },
+  {
+   "id": "default-era-year-ia",
+   "tool": "cross_search",
+   "args": {
+    "query": "강화도조약",
+    "sources": "ia",
+    "max_per_source": 5
+   },
+   "must": [
+    "ia·Corea 1876:[1-9]",
+    "1876"
+   ],
+   "must_not": [
+    "ia·Corea 1876:0"
+   ],
+   "level": "warn"
+  },
+  {
+   "id": "profile-tna-era-rule",
+   "tool": "source_profile",
+   "args": {
+    "institution": "tna"
+   },
+   "must": [
+    "생산연도 필터",
+    "FO 881/2892"
+   ],
+   "must_not": [],
+   "level": "warn"
+  },
+  {
+   "id": "profile-ia-era-rule",
+   "tool": "source_profile",
+   "args": {
+    "institution": "ia"
+   },
+   "must": [
+    "Corea AND year:"
+   ],
+   "must_not": [],
+   "level": "warn"
+  },
+  {
+   "id": "nedb-numeric-event",
+   "tool": "cross_search",
+   "args": {
+    "query": "3·1운동",
+    "sources": "nedb",
+    "max_per_source": 3
+   },
+   "must": [
+    "nedb:[1-9]"
+   ],
+   "must_not": [
+    "nedb:0"
+   ],
+   "level": "warn",
+   "note": "v2.99.6 한국사DB는 '3·1운동' 0건·'3·1 운동' 결과 — 숫자 사건명 뒤 띄움"
+  },
+  {
+   "id": "topics-march-first",
+   "tool": "tna_search",
+   "args": {
+    "query": "3·1운동",
+    "max_results": 3
+   },
+   "must": [
+    "Korean independence movement 1919",
+    "FO 608/211/19"
+   ],
+   "must_not": [
+    "March First Movement Korea 1919"
+   ],
+   "level": "warn"
+  },
+  {
+   "id": "nara-coverage-own",
+   "tool": "nara_search",
+   "args": {
+    "query": "",
+    "naid": 373960610,
+    "output": "iiif"
+   },
+   "must": [
+    "포괄 기간\\(이 기록\\)",
+    "1940~1957"
+   ],
+   "must_not": [
+    "포괄 기간\\(상위 계층\\)"
+   ],
+   "level": "warn",
+   "note": "v3.0 productionDates 없는 파일단위 — 기관 coverage 기간을 메타로(옛 결함: 날짜 칸 공란)"
+  },
+  {
+   "id": "nara-coverage-ancestor",
+   "tool": "nara_search",
+   "args": {
+    "query": "",
+    "naid": 22348,
+    "output": "iiif"
+   },
+   "must": [
+    "포괄 기간\\(상위 계층\\)",
+    "1947~1964",
+    "series NAID 13807",
+    "이 기록 자체 날짜 아님"
+   ],
+   "must_not": [
+    "1860~1985"
+   ],
+   "level": "warn",
+   "note": "v3.0 가장 가까운 상위 계층(series) 범위 — RG 범위(1860~1985)를 쓰지 않는다"
+  },
+  {
+   "id": "awm-date-made",
+   "tool": "cross_search",
+   "args": {
+    "query": "Kapyong",
+    "sources": "awm",
+    "max_per_source": 5
+   },
+   "must": [
+    "Kapyong"
+   ],
+   "must_not": [
+    "Korea, 1950-1953"
+   ],
+   "level": "warn",
+   "note": "v3.0.1 AWM 날짜 = Date made — 옛 결함: 분쟁명(Conflict)이 날짜 칸에"
+  },
+  {
+   "id": "ledger-change-discovery",
+   "tool": "source_profile",
+   "args": {
+    "institution": "ledger"
+   },
+   "must": [
+    "activity/collection\\.json",
+    "Change Discovery"
+   ],
+   "level": "warn",
+   "note": "v3.2 IIIF Change Discovery 1.0 활동 스트림 안내(웹·모바일 동등성)"
+  },
+  {
+   "id": "ktv-iiif-bridge",
+   "tool": "cross_search",
+   "args": {
+    "query": "온수수영장",
+    "sources": "ktv",
+    "max_per_source": 3,
+    "format": "manifest"
+   },
+   "must": [
+    "/iiif/ktv/(?:photo|movie)~"
+   ],
+   "must_not": [
+    "\"iiif\":\"https://korea-archive-mcp\\.vercel\\.app/iiif/rec/"
+   ],
+   "level": "warn",
+   "note": "v3.5 KTV e영상역사관 IIIF 브리지 — 옛 결함: 이미지 있는 기록도 기록 봉투(rec)로만"
+  }
+ ]
+}

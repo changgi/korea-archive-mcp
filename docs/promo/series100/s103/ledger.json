@@ -1,0 +1,101 @@
+{
+ "n": 103,
+ "src": "heritage",
+ "record": {
+  "id": "수원 화성 [사적] · 13-0000030000000-31",
+  "title": "사적 수원 화성 — 1910·1921·1927 사진첩",
+  "inst": "국가유산청 국가유산포털",
+  "url": "https://www.heritage.go.kr/heri/cul/culSelectDetail.do?ccbaCpno=1333100030000"
+ },
+ "images": [
+  {
+   "file": "src/hwahongmun_1927_1688584.jpg",
+   "role": "hero",
+   "w": 1800,
+   "h": 1242,
+   "visible": [
+    "사진: 국립국회도서관(NDL) 「朝鮮之風光」(1927, 朝鮮総督府鉄道局 編) info:ndljp/pid/1688584 코마 17 · NDL デジタルコレクション PDM(パブリックドメイン) — 「一一 水原華虹門附近」"
+   ],
+   "record_id": "info:ndljp/pid/1688584",
+   "title": "朝鮮之風光",
+   "date": "1927",
+   "url": "https://dl.ndl.go.jp/pid/1688584",
+   "rights": "PDM — NDL Access Restrictions 'PDM'",
+   "rights_evidence": "IIIF manifest https://dl.ndl.go.jp/api/iiif/1688584/manifest.json metadata 'Access Restrictions: PDM' · 朝鮮総督府鉄道局 編"
+  },
+  {
+   "file": "src/suwon_sumun_1910_766880.jpg",
+   "role": "extra",
+   "w": 1339,
+   "h": 912,
+   "visible": [
+    "1910 「水原水門」 · NDL 766880"
+   ],
+   "record_id": "info:ndljp/pid/766880",
+   "title": "大日本帝国朝鮮写真帖 : 日韓併合紀念",
+   "date": "1910",
+   "url": "https://dl.ndl.go.jp/pid/766880",
+   "rights": "PDM — NDL Access Restrictions 'PDM'",
+   "rights_evidence": "IIIF manifest https://dl.ndl.go.jp/api/iiif/766880/manifest.json metadata 'Access Restrictions: PDM' · 統監府 編"
+  },
+  {
+   "file": "src/hwahongmun_1921_967741.jpg",
+   "role": "extra",
+   "w": 1260,
+   "h": 866,
+   "visible": [
+    "1921 「華虹門」 · NDL 967741"
+   ],
+   "record_id": "info:ndljp/pid/967741",
+   "title": "朝鮮 : 写真帖",
+   "date": "1921",
+   "url": "https://dl.ndl.go.jp/pid/967741",
+   "rights": "PDM — NDL Access Restrictions 'PDM'",
+   "rights_evidence": "IIIF manifest https://dl.ndl.go.jp/api/iiif/967741/manifest.json metadata 'Access Restrictions: PDM' · 朝鮮総督府 編"
+  },
+  {
+   "file": "src/suwon_view_1910_766880.jpg",
+   "role": "extra",
+   "w": 1227,
+   "h": 1800,
+   "visible": [
+    "1910 「水原ノ景」 · NDL 766880"
+   ],
+   "record_id": "info:ndljp/pid/766880",
+   "title": "大日本帝国朝鮮写真帖 : 日韓併合紀念",
+   "date": "1910",
+   "url": "https://dl.ndl.go.jp/pid/766880",
+   "rights": "PDM — NDL Access Restrictions 'PDM'",
+   "rights_evidence": "IIIF manifest https://dl.ndl.go.jp/api/iiif/766880/manifest.json metadata 'Access Restrictions: PDM' · 統監府 編"
+  },
+  {
+   "file": "src/suwon_gate_1910_766880.jpg",
+   "role": "extra",
+   "w": 1339,
+   "h": 912,
+   "visible": [
+    "1910 「水原郡衙ノ門」 · NDL 766880"
+   ],
+   "record_id": "info:ndljp/pid/766880",
+   "title": "大日本帝国朝鮮写真帖 : 日韓併合紀念",
+   "date": "1910",
+   "url": "https://dl.ndl.go.jp/pid/766880",
+   "rights": "PDM — NDL Access Restrictions 'PDM'",
+   "rights_evidence": "IIIF manifest https://dl.ndl.go.jp/api/iiif/766880/manifest.json metadata 'Access Restrictions: PDM' · 統監府 編"
+  }
+ ],
+ "points": [
+  "물 위 무지개 모양 홍예(아치) 4개",
+  "다리 위 담장에 뚫린 네모난 구멍들",
+  "오른쪽 위 기와지붕 누각",
+  "오른쪽 끝 성벽의 아치형 문"
+ ],
+ "video": {
+  "url": "",
+  "length_s": 0,
+  "rights": "",
+  "note": "영상 없음"
+ },
+ "status": "partial",
+ "notes": "국가유산포털 원본 이미지(http://www.khs.go.kr/unisearch/images/...) — http 302 → https://www.khs.go.kr/... TLS 핸드셰이크 중 Connection reset(코드 000). 우회 안 함. 대체: NDL 디지털컬렉션 PDM 사진첩(IIIF, 순차 요청)."
+}

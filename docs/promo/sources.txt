@@ -1,0 +1,58 @@
+출처 대장 — KOREA ARCHIVE 통합검색 예제 카드뉴스 (2026-11-22 확인)
+※ v2(사진으로 가득 찬 카드) 이미지 26장의 전체 대장은 sources_images.txt
+
+[이미지]
+1. 흥남 철수 — 피란민과 선박 (카드 1, 5)
+   출처: 미국 국립기록관리청(U.S. National Archives and Records Administration), NAID 520782
+   고유번호: 80-G-424513 · 기록군: RG 80 General Records of the Department of the Navy › General Photographic Files
+   촬영일: 1950-12-19
+   권리: Use Restriction "Unrestricted" — NARA 카탈로그 실조회, A등급(이용 제한 없음, 출처 표기 권장)
+   파일: Wikimedia Commons의 NARA 기증본 TIFF에서 1280px 썸네일
+         (File:North Korean refugees use anything that will float to evacuate Hungnam. Here they jam the decks of a South Korean... - NARA - 520782.tif)
+   원본: https://catalog.archives.gov/id/520782
+
+2. 장진호 부근 제5해병연대 지휘소 (카드 4)
+   출처: 미국 국립기록관리청, NAID 276537577
+   고유번호: 127-N-A4560 · 기록군: RG 127 Records of the U.S. Marine Corps › General Photograph File of the U.S. Marine Corps
+   촬영일: 1950-11-02 (원 설명: "1st Mar Div Korea 2 Nov 50 Photog: Sgt Kerr … These are 2nd Battalion men setting up command post.")
+   권리: Use Restriction "Unrestricted" — NARA 카탈로그 실조회, A등급
+   파일: https://catalog.archives.gov/medialz/stillpix/111-c/Batch0006/127-N-A4560_001.jpg
+   원본: https://catalog.archives.gov/id/276537577
+
+[인용한 기록 — 이미지 미사용]
+3. 장진호 퇴각 영상 (카드 3)
+   - 6·25전쟁 아카이브센터(KOREAN WAR ARCHIVES, 협약기관) 2022-US-02-AV-D-00329
+     「장진호 전투에서 퇴각하는 미 제1해병사단 기록영상」
+   - 미국 국립기록관리청 NAID 24033 "MARINE RETREAT IN KOREA" (1950-12)
+   - 권리: NARA "Restricted - Possibly · Copyright"(C등급) → 영상 장면 미사용, 제목만 인용
+4. 인천상륙작전 D-DAY 필름 (카드 6) — 미국 국립기록관리청 NAID 22013~22017 (111-ADC-8247~8251)
+   - 22015 권리: "Restricted - Possibly · Copyright"(C등급) → 장면 미사용, 제목만 인용
+5. 안중근 의거 보도 (카드 7) — 국립중앙도서관 대한민국신문아카이브 목록 조회
+   - 대한매일신보 1909.11.9 3면 3단 「안중근소식」 (CNTS-00095720904)
+   - 대한매일신보 1909.12.11 2면 2단 「안중근소식」 (CNTS-00095723299)
+   - 대한매일신보 1909.12.11 2면 2단 「안중근변호」 (CNTS-00095723323)
+
+[수치]
+- "장진호 9건 중 5건이 두 기관에서 확인": cross_search("장진호", sources="nara,koreanwar", max_per_source=5) 2026-11-22 실측
+- "30곳·9개국": 연합 검색 대상 문서고 수
+
+────────────────────────────────────────
+[예제 6~15 단독 게시물 — 2026-11-22 확인]
+이미지
+6. 227고지 공습 (예제 10) — Australian War Memorial, 044757
+   "AN AIRSTRIKE ON HILL 227, KOREA DURING 1952." · Korea, Jamestown Line Area, Hill 227
+   권리: Copyright expired - public domain (AWM 상세 페이지 표기) · 파일: AWM screen 이미지에서 기념관 액자 테두리 잘라냄
+   원본: https://www.awm.gov.au/collection/C40081
+   ※ "가평" 검색 결과에 함께 나온 기록이며, 가평 전투 사진은 아님
+
+인용(이미지 미사용)
+- 예제 6: 공훈전자사료관 mngNo 3150 안중근(1962 대한민국장) · 한국독립운동인명사전 676 · 독립운동판결문 검색
+- 예제 7: 국가기록원 독립운동판결문 — 유관순 경성복심법원 1919.6.30 징역 3년 / 1919.9.11 상고 기각
+- 예제 8: 국립중앙도서관 대한민국신문아카이브 OCR '단지동맹' 1907~1910 — 65건(1907:54·1908:5·1909:5·1910:1),
+          황성신문 1907.2.5~8 淸州郡普成中學校校友會 광고(CNTS-00093798259 등)
+- 예제 9: 영국 국립기록관 Discovery — C4411074(1942.11)·C2454962(1943)·C171246(1945.8)
+- 예제 11: Archives New Zealand — R25538753·R22438362·R25987088
+- 예제 12: 한국학중앙연구원 장서각 K2-3556 개건도감의궤 해제 (지문 a46e5177b8b153bd)
+- 예제 13: 국가유산청 국가유산포털 경복궁 근정전 [국보] 해설 (지문 4adc8e6c9556179e)
+- 예제 14: UN Digital Library record 808136 (S/2015/799)
+- 예제 15: 공개 지문 장부 https://korea-archive-mcp.vercel.app/fixity-ledger.json (jsg:K2-3556·heritage:근정전 값과 당일 재판독 값 일치)

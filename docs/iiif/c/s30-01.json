@@ -1,0 +1,124 @@
+{
+ "@context": "http://iiif.io/api/presentation/3/context.json",
+ "id": "https://changgi.github.io/korea-archive-mcp/iiif/c/s30-01.json",
+ "type": "Collection",
+ "label": {
+  "ko": [
+   "30곳 탐방 · Ⅰ 전쟁의 기록"
+  ]
+ },
+ "summary": {
+  "ko": [
+   "30곳 탐방 · Ⅰ 전쟁의 기록 — 시리즈 6개"
+  ]
+ },
+ "partOf": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/hierarchy.json",
+   "type": "Collection"
+  }
+ ],
+ "items": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s01.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "01 · 미국 국립기록관리청 NARA — 1950.12.24 흥남 — 필름 원본까지"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s01/hero_520782.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "navDate": "1950-12-24T00:00:00Z"
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s02.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "02 · 6·25전쟁 아카이브센터 (협약기관) — 한국어 기록 ↔ 미국 원본, 자동으로 한 쌍"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s02/hero_kotori_march_276537585.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "navDate": "1950-12-10T00:00:00Z"
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s03.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "03 · 호주 전쟁기념관 AWM — 1952년 4월, 가평 계곡"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s03/hero_awm_C58219.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "navDate": "1952-04-16T00:00:00Z"
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s04.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "04 · 뉴질랜드 기록원 Archives NZ — 뉴질랜드가 계산한 한국전쟁의 비용"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s04/hero_nzapo_cover_1951.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s05.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "05 · 네덜란드 국립문서보관소 — 참전 대대·대사관·적십자 — 문서군 3개"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s05/hero_busan_arrival_1950.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "navDate": "1950-12-07T00:00:00Z"
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s06.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "06 · UN 디지털도서관 — 2015년, 정전협정을 둘러싼 서한"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s06/hero_s_res_82_1950_p4.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "navDate": "1950-06-25T00:00:00Z"
+  }
+ ]
+}

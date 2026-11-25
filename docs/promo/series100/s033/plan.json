@@ -1,0 +1,153 @@
+{
+ "n": 33,
+ "part": [
+  "Ⅶ",
+  "전쟁의 기록 2"
+ ],
+ "inst": "미국 국립기록관리청 NARA",
+ "flag": "🇺🇸",
+ "say": "정전협정 원본이랑 조인식 사진 찾아줘",
+ "head": "1953.7.27 판문점 — 서명 다섯 개",
+ "big": "NAID 7062611",
+ "facts": [
+  [
+   "문서",
+   "Armistice Agreement Volume 1, Text of Agreement [English] · 28면"
+  ],
+  [
+   "계보",
+   "RG 218 합동참모본부 › Korean Armistice Agreement"
+  ],
+  [
+   "제63항",
+   "\"Done at Panmunjom, Korea, at 1000 hours on the 27th day of July, 1953\""
+  ],
+  [
+   "권리",
+   "문서·사진 Unrestricted(A) · 영상 NAID 76555 Undetermined(B)"
+  ]
+ ],
+ "tool": "nara_search(Panmunjom) → judge_rights(naid=520995) · NAID 7062611 · 영상 NAID 76555",
+ "link": "https://catalog.archives.gov/id/7062611",
+ "checked": "2026-11-22",
+ "tags": "#NARA #정전협정",
+ "hero": {
+  "file": "src/p_520995.jpg",
+  "pos": "center 50%",
+  "credit": "사진: 미국 국립기록관리청 NAID 520995 (80-G, 카탈로그 생산일 1953-07-23 표기, 'Harrison, left table, and Nam Il, right table', Unrestricted)"
+ },
+ "hook": "판문점의 세 탁자,<br><span class=\"g\">서명</span>으로 멈춘 전쟁",
+ "mosaic": [
+  {
+   "file": "src/doc_0.jpg",
+   "label": "협정문 제1권 표지 · NAID 7062611",
+   "pos": "center 18%"
+  },
+  {
+   "file": "src/doc_27.jpg",
+   "label": "끈과 봉랍 · 같은 권 마지막 면",
+   "pos": "center 60%"
+  },
+  {
+   "file": "src/p_520996.jpg",
+   "label": "조인장 앞 기자단 · NAID 520996"
+  },
+  {
+   "file": "src/p_531418.jpg",
+   "label": "판문점 회담장 천막 1951 · NAID 531418"
+  }
+ ],
+ "mosaic_title": "협정문 원본과 그날의 사진 — <span class=\"g\">같은 장소</span>",
+ "mosaic_credit": "미국 국립기록관리청 NAID 7062611(RG 218)·520996(80-G, 1953-07-23)·531418(111-SC, 1951-11-01) — 모두 Unrestricted",
+ "ann": {
+  "file": "src/doc_19.jpg",
+  "crop_y": 0.19,
+  "title": "NAID 7062611 제20면 — 보이는 것만 읽었습니다",
+  "boxes": [
+   {
+    "x": 22,
+    "y": 22.5,
+    "w": 49,
+    "h": 8.5,
+    "t": "제63항 — 손글씨로 채운 '2200 hours on 27 July 1953'(발효)와 '1000 hours … 27th day of July'"
+   },
+   {
+    "x": 21,
+    "y": 42,
+    "w": 20,
+    "h": 9,
+    "t": "한글 서명 — 활자 'KIM IL SUNG'"
+   },
+   {
+    "x": 40,
+    "y": 42,
+    "w": 15,
+    "h": 9,
+    "t": "한자 서명 — 활자 'PENG TEH-HUAI'"
+   },
+   {
+    "x": 55,
+    "y": 42,
+    "w": 25,
+    "h": 13,
+    "t": "영문 서명 — 'MARK W. CLARK, Commander-in-Chief, United Nations Command'"
+   }
+  ],
+  "credit": "NAID 7062611 제20면(2266×3150) — 같은 면 'PRESENT' 아래 NAM IL·W. K. HARRISON 서명"
+ },
+ "scenes": [
+  {
+   "title": "NAID 76555 「TRUCE TALKS」 1953-07-22",
+   "credit": "미국 국립기록관리청 NAID 76555 · 428-NPC-2839 · 10분 55초 · keyscenes 자동 추출(전환 38곳→12장면) · 해설은 보이는 것만",
+   "frames": [
+    {
+     "file": "video/scene_01_022.jpg",
+     "tc": "00:22",
+     "cap": "개울 위 나무다리, 흙을 나르는 병사들"
+    },
+    {
+     "file": "video/scene_02_050.jpg",
+     "tc": "00:50",
+     "cap": "나무 난간에 기대 아래를 보는 군인들"
+    },
+    {
+     "file": "video/scene_03_300.jpg",
+     "tc": "03:00",
+     "cap": "격자 창살 건물 앞에서 일하는 인부들"
+    },
+    {
+     "file": "video/scene_04_350.jpg",
+     "tc": "03:50",
+     "cap": "처마 밑 격자문 입구에서 작업하는 사람들"
+    }
+   ]
+  },
+  {
+   "title": "같은 필름 후반부",
+   "credit": "미국 국립기록관리청 NAID 76555 (연방 저작물, Use Restriction Undetermined → B 명기)",
+   "frames": [
+    {
+     "file": "video/scene_05_511.jpg",
+     "tc": "05:11",
+     "cap": "작은 초소 건물들 앞에서 삽질하는 병사들"
+    },
+    {
+     "file": "video/scene_07_718.jpg",
+     "tc": "07:18",
+     "cap": "트럭 옆에 모여 쭈그려 앉은 병사들"
+    },
+    {
+     "file": "video/scene_10_857.jpg",
+     "tc": "08:57",
+     "cap": "경례하는 헌병 대열 사이로 들어오는 승용차"
+    },
+    {
+     "file": "video/scene_11_936.jpg",
+     "tc": "09:36",
+     "cap": "정모를 쓴 장교들이 나란히 서 있다"
+    }
+   ]
+  }
+ ],
+ "cta_img": "src/doc_27.jpg"
+}

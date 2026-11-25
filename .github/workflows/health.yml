@@ -1,0 +1,93 @@
+name: health
+# 주간 소스 헬스체크 — 프로덕션 30채널 골든 질의 실측(source_profile health, 채널별 ms 포함)
+# + 같은 기록 묶기 회귀(v1.86~89: 협약기관·IA 사본 ↔ NARA 원본 병합이 실제로 일어나는지).
+# 🔴(차단·타임아웃)가 3채널 이상이면 실패 → 알림. 기지(旣知) 🔴: gallica(BnF 차단)·foia(opengov 타임아웃).
+# 기지 채널이 복구되거나 새로 죽으면 이 임계값을 조정할 것.
+on:
+  schedule:
+    - cron: '23 21 * * 1'   # 매주 월 06:23 KST
+  workflow_dispatch: {}
+permissions:
+  contents: read
+  issues: write
+jobs:
+  health:
+    runs-on: ubuntu-latest
+    steps:
+      - name: production 헬스체크 호출
+        run: |
+          PV="https://korea-archive-mcp.vercel.app/api/mcp"
+          H1='Content-Type: application/json'
+          H2='Accept: application/json, text/event-stream'
+          curl -sS -m 30 -D /tmp/h.txt -H "$H1" -H "$H2" -H "X-KA-Probe: health" -X POST "$PV" \
+            -d '{"jsonrpc":"2.0","id":1,"method":"initialize","params":{"protocolVersion":"2025-03-26","capabilities":{},"clientInfo":{"name":"ci-health","version":"1.0"}}}' -o /dev/null
+          SID=$(grep -i '^mcp-session-id:' /tmp/h.txt | tr -d '\r' | awk '{print $2}')
+          curl -sS -m 30 -H "$H1" -H "$H2" -H "X-KA-Probe: health" -H "Mcp-Session-Id: $SID" -X POST "$PV" \
+            -d '{"jsonrpc":"2.0","method":"notifications/initialized"}' -o /dev/null
+          curl -sS -m 150 -H "$H1" -H "$H2" -H "X-KA-Probe: health" -H "Mcp-Session-Id: $SID" -X POST "$PV" \
+            -d '{"jsonrpc":"2.0","id":2,"method":"tools/call","params":{"name":"source_profile","arguments":{"institution":"health"}}}' \
+            -o /tmp/health.raw
+          sed 's/^data: //' /tmp/health.raw | grep -m1 '^{' > /tmp/health.json
+          python3 - <<'EOF'
+          import json, os, sys
+          d = json.load(open('/tmp/health.json'))
+          text = d['result']['content'][0]['text']
+          print(text)
+          with open(os.environ['GITHUB_STEP_SUMMARY'], 'a') as f:
+              f.write('## 주간 소스 헬스체크\n```\n' + text + '\n```\n')
+          red = sum(1 for ln in text.splitlines() if ln.startswith('🔴'))  # 범례의 🔴 제외
+          if red >= 3:
+              print(f'::error::🔴 {red}채널 — 기지 2채널(gallica·foia) 초과. 신규 장애 점검 필요.')
+              sys.exit(1)
+          EOF
+      - name: 같은 기록 묶기 회귀 검사
+        run: |
+          PV="https://korea-archive-mcp.vercel.app/api/mcp"
+          H1='Content-Type: application/json'
+          H2='Accept: application/json, text/event-stream'
+          curl -sS -m 30 -D /tmp/h2.txt -H "$H1" -H "$H2" -H "X-KA-Probe: health" -X POST "$PV" \
+            -d '{"jsonrpc":"2.0","id":1,"method":"initialize","params":{"protocolVersion":"2025-03-26","capabilities":{},"clientInfo":{"name":"ci-sameas","version":"1.0"}}}' -o /dev/null
+          SID=$(grep -i '^mcp-session-id:' /tmp/h2.txt | tr -d '\r' | awk '{print $2}')
+          curl -sS -m 30 -H "$H1" -H "$H2" -H "X-KA-Probe: health" -H "Mcp-Session-Id: $SID" -X POST "$PV" \
+            -d '{"jsonrpc":"2.0","method":"notifications/initialized"}' -o /dev/null
+          call() { curl -sS -m 90 -H "$H1" -H "$H2" -H "X-KA-Probe: health" -H "Mcp-Session-Id: $SID" -X POST "$PV" -d "$1" | sed 's/^data: //' | grep -m1 '^{' > "$2"; }
+          call '{"jsonrpc":"2.0","id":2,"method":"tools/call","params":{"name":"cross_search","arguments":{"query":"장진호","sources":"nara,koreanwar","max_per_source":5,"format":"csv"}}}' /tmp/kw.json
+          call '{"jsonrpc":"2.0","id":3,"method":"tools/call","params":{"name":"cross_search","arguments":{"query":"\"MISCELLANEOUS SCENES KOREAN SOLDIERS\"","sources":"nara,ia","max_per_source":5,"format":"csv"}}}' /tmp/ia.json
+          python3 - <<'EOF'
+          import json, os, re, sys
+          def rows(path):
+              t = json.load(open(path))['result']['content'][0]['text']
+              head = t.splitlines()[0]
+              return t, head
+          fail, out = [], []
+          for path, a, b, label in [('/tmp/kw.json', 'nara', 'koreanwar', '장진호 — NARA×협약기관'),
+                                    ('/tmp/ia.json', 'nara', 'ia', 'NAID 44175 — NARA×인터넷 아카이브')]:
+              t, head = rows(path)
+              # 채널이 결과를 못 냈으면(외부 장애·키 부재) 회귀 판정 불가 → 경고만
+              dead = [c for c in (a, b) if re.search(rf'\b{c}:(0|—)', head)]
+              merged = [ln for ln in t.splitlines() if re.search(rf'"{a}[^"]*\+{b}|"{b}[^"]*\+{a}|"{a}·원본확인\+{b}', ln)]
+              if dead:
+                  out.append(f'⚠️ {label}: 채널 {dead} 결과 없음 — 판정 보류 ({head})')
+                  print(f'::warning::{label} 판정 보류 — {dead} 결과 없음')
+              elif merged:
+                  out.append(f'✅ {label}: 묶인 기록 {len(merged)}건')
+              else:
+                  out.append(f'❌ {label}: 두 채널 모두 결과가 있는데 묶인 기록 0건 ({head})')
+                  fail.append(label)
+          print('\n'.join(out))
+          with open(os.environ['GITHUB_STEP_SUMMARY'], 'a') as f:
+              f.write('## 같은 기록 묶기 회귀\n' + '\n'.join(f'- {x}' for x in out) + '\n')
+          if fail:
+              print('::error::같은 기록 묶기 회귀 실패 — ' + ', '.join(fail) + ' (원 사이트 상세 구조·NARA 응답 형식 변경 의심)')
+              sys.exit(1)
+          EOF
+      - name: 실패 → 'auto-health' 이슈 기록
+        if: failure()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh label create auto-health --color B60205 --description "자동 감시가 발견한 장애" 2>/dev/null || true
+          url="${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          num=$(gh issue list --repo "${{ github.repository }}" --label auto-health --state open --search "헬스체크" --json number -q '.[0].number')
+          msg="주간 헬스체크 실패 — 채널 장애 또는 같은 기록 묶기 회귀. 실행 요약: $url · 조치: MAINTAINING.md '사이트가 바뀌었을 때'."
+          if [ -n "$num" ]; then gh issue comment "$num" --repo "${{ github.repository }}" --body "$msg"; else gh issue create --repo "${{ github.repository }}" --title "주간 헬스체크 실패" --label auto-health --body "$msg"; fi

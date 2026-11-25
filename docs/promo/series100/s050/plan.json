@@ -1,0 +1,108 @@
+{
+ "n": 50,
+ "part": [
+  "Ⅷ",
+  "유럽이 본 한국"
+ ],
+ "inst": "유로피아나 Europeana",
+ "flag": "🇪🇺",
+ "say": "18세기 서양의 한국 지도 찾아줘",
+ "head": "d'Anville 「Royaume de Corée」(1735)",
+ "big": "Tome IV p.422",
+ "facts": [
+  [
+   "Europeana",
+   "/298/item_3181739 'Royaume de Corée' — 제공 Leiden University Libraries"
+  ],
+  [
+   "출전",
+   "Du Halde, Description de l'empire de la Chine… Paris: Le Mercier, 1735, Tome IV p.422 · 'Delahaye Fils Sculpsit'"
+  ],
+  [
+   "제작",
+   "d'Anville(1697-1782) — 기록: 'd'Anville used maps prepared by Jesuit missionaries'"
+  ],
+  [
+   "권리",
+   "Public Domain Mark 1.0"
+  ]
+ ],
+ "tool": "europeana_search('Royaume de Corée') → Leiden IIIF 원본",
+ "link": "http://hdl.handle.net/1887.1/item:3181739",
+ "checked": "2026-11-22",
+ "tags": "#Europeana #고지도 #Corée",
+ "hero": {
+  "file": "src/leiden_3181739_dhalde1735.jpg",
+  "pos": "center 55%",
+  "credit": "지도: d'Anville 'Royaume de Corée', Du Halde 1735 Tome IV p.422 · Leiden University Libraries (hdl 1887.1/item:3181739) · Public Domain Mark"
+ },
+ "hook": "1735년 파리에서 펴낸<br>'<span class=\"g\">Royaume de Corée</span>'",
+ "mosaic": [
+  {
+   "file": "src/leiden_3181738_1737.jpg",
+   "label": "1737 헤이그판 Nouvel Atlas pl.31",
+   "nocrop": true
+  },
+  {
+   "file": "src/leiden_3181740_bellin.jpg",
+   "label": "Bellin 1749 'Royaume de Kau-Li ou Corée'",
+   "nocrop": true
+  },
+  {
+   "file": "src/leiden_3181736_hall.jpg",
+   "label": "Basil Hall 'Western Coast of … Corea'",
+   "nocrop": true
+  },
+  {
+   "file": "src/leiden_3181783.jpg",
+   "label": "'La Chine, Corée, Japon'",
+   "nocrop": true
+  }
+ ],
+ "mosaic_title": "레이던에 모인 <span class=\"g\">서양의 조선 지도</span>",
+ "mosaic_credit": "Leiden University Libraries item 3181738·3181740·3181736·3181783 — Public Domain Mark 1.0 (Europeana)",
+ "ann": {
+  "file": "src/leiden_3181739_cartouche.jpg",
+  "crop_y": 0.24,
+  "boxes": [
+   {
+    "x": 46,
+    "y": 27,
+    "w": 31,
+    "h": 19,
+    "t": "표제 'ROYAUME DE CORÉE'"
+   },
+   {
+    "x": 49,
+    "y": 52,
+    "w": 25,
+    "h": 13,
+    "t": "축척 막대 'Lis ou Stades Chinois'·'Lieues Françoises'"
+   },
+   {
+    "x": 53,
+    "y": 64,
+    "w": 19,
+    "h": 29,
+    "t": "높은 모자를 쓰고 새 모양을 손에 든 앉은 인물"
+   },
+   {
+    "x": 16,
+    "y": 36,
+    "w": 16,
+    "h": 14,
+    "t": "해안의 섬 이름 'Mo tao'·'Kou tao'"
+   },
+   {
+    "x": 91,
+    "y": 32,
+    "w": 6,
+    "h": 36,
+    "t": "오른쪽 테두리 위도 눈금 40·39"
+   }
+  ],
+  "credit": "Leiden item 3181739 카르투슈 부분 확대 — 표시한 5곳은 지도에서 직접 읽은 것 · PDM"
+ },
+ "cta_img": "src/leiden_3181739_cartouche.jpg",
+ "meta_top": 470
+}

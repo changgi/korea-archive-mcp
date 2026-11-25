@@ -1,0 +1,95 @@
+{
+ "n": 55,
+ "part": [
+  "Ⅸ",
+  "참전국의 기억"
+ ],
+ "inst": "호주 전쟁기념관 AWM",
+ "flag": "🇦🇺",
+ "say": "마량산 전투 호주군 사진 찾아줘",
+ "head": "1951 마량산 — 코만도 작전",
+ "big": "Hill 317",
+ "facts": [
+  [
+   "기록",
+   "C14395 'HILL 317 (MARYANG SAN) CAPTURED BY 3RAR'"
+  ],
+  [
+   "작전",
+   "OPERATION COMMANDO (AWM 기술, 1951-09)"
+  ],
+  [
+   "원본",
+   "AWM 공개본 640px"
+  ],
+  [
+   "권리",
+   "Copyright expired - public domain"
+  ]
+ ],
+ "tool": "cross_search(sources=awm,'Maryang San') → awm.gov.au",
+ "link": "https://www.awm.gov.au/collection/C14395",
+ "checked": "2026-11-22",
+ "tags": "#마량산 #3RAR #AWM",
+ "hero": {
+  "file": "src/hero_awm_C14395.jpg",
+  "pos": "center 40%",
+  "credit": "사진: 호주 전쟁기념관 C14395 ('KOREA, 1951-09. HILL 317 (MARYANG SAN)', Copyright expired - public domain)"
+ },
+ "hook": "317고지 <span class=\"g\">마량산</span> —<br>3RAR이 차지한 능선",
+ "mosaic": [
+  {
+   "file": "src/awm_C364388.jpg",
+   "label": "고지 위 식사 · c. 1951-10 · C364388"
+  },
+  {
+   "file": "src/awm_C363390.jpg",
+   "label": "필리핀 20대대와 교대 · C363390"
+  },
+  {
+   "file": "src/awm_C14461.jpg",
+   "label": "코만도 작전의 355고지 · C14461"
+  },
+  {
+   "file": "src/awm_C1094375.jpg",
+   "label": "참호와 엄체가 파인 능선 · C1094375"
+  }
+ ],
+ "mosaic_title": "마량산 전후 — <span class=\"g\">3RAR</span>의 가을",
+ "mosaic_credit": "호주 전쟁기념관 C364388·C363390·C14461·C1094375 (모두 Copyright expired - public domain)",
+ "ann": {
+  "file": "src/awm_C364388.jpg",
+  "boxes": [
+   {
+    "x": 68,
+    "y": 54,
+    "w": 11,
+    "h": 24,
+    "t": "상자 글자 'RATION INDIVIDUAL COMBAT' · 'C-7'"
+   },
+   {
+    "x": 60,
+    "y": 55,
+    "w": 8,
+    "h": 17,
+    "t": "옆 상자의 마름모 표시"
+   },
+   {
+    "x": 70,
+    "y": 10,
+    "w": 20,
+    "h": 42,
+    "t": "챙 넓은 모자를 쓰고 빵을 써는 사람"
+   },
+   {
+    "x": 34,
+    "y": 40,
+    "w": 26,
+    "h": 28,
+    "t": "모래주머니 위 상자들 — 기관 기술: C레이션 상자가 임시 지붕"
+   }
+  ],
+  "credit": "AWM C364388 (c. 1951-10, 3RAR) — 표시는 사진에서 직접 읽은 것"
+ },
+ "cta_img": "src/awm_C14396.jpg"
+}

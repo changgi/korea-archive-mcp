@@ -1,0 +1,54 @@
+name: ledger
+# 발견 누적 원장 — 매일 00:17·12:47 KST, 서버 날짜 함(3일 보관)을 꺼내 docs/data/에 병합·커밋 → Pages 공개
+on:
+  schedule:
+    - cron: '17 15 * * *'
+    - cron: '47 3 * * *'   # v2.81 이중 일정 — GitHub 정기 실행은 혼잡 시 건너뛰기도 한다(날짜 함 3일 보관 — 연속 누락은 유실). 처리 위치(_state.json)로 중복 없음
+  workflow_dispatch:
+permissions:
+  contents: write
+  issues: write
+concurrency: ledger
+jobs:
+  merge:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v7
+        with: { python-version: '3.12' }
+      - name: 병합
+        run: python3 scripts/ledger_merge.py
+      - name: 일일 기록물 등록(해시 사슬) · 검증
+        run: |
+          python3 scripts/records_register.py
+          python3 scripts/records_register.py --verify
+      - name: 커밋
+        run: |
+          git add docs/data
+          if git diff --cached --quiet; then echo "원장 변경 없음"; exit 0; fi
+          git config user.name changgi
+          git config user.email 10678518+changgi@users.noreply.github.com
+          git commit -m "chore(ledger): 발견 누적 원장 $(date -u +%F)"
+          git pull --rebase -q origin main && git push
+      - name: 연결 데이터 검증(rdflib — RiC-O·SKOS 파싱·끊긴 링크, 커밋 뒤 — 원장 저장은 막지 않음)
+        run: |
+          pip install -q rdflib
+          python3 scripts/rdf_check.py
+      - name: IIIF 구조 검증(정적 + 브리지 매니페스트 표본 20, 커밋 뒤)
+        run: python3 scripts/iiif_check.py --remote 20
+      - name: 실패 → 이슈 / 정상 → 이슈 닫기
+        if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh label create auto-health --color B60205 --description "자동 감시가 발견한 장애" 2>/dev/null || true
+          num=$(gh issue list --label auto-health --state open --search "발견 원장 병합" --json number -q '.[0].number')
+          run="${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          if [ "${{ job.status }}" != "success" ]; then
+            body="발견 누적 원장 병합 또는 일일 기록물 등록부 검증이 실패했습니다(등록부 사슬 끊김·산출물 소실 포함). 보관함(Redis 날짜 함)은 3일 보관 — 그 안에 고치면 유실 없음.
+
+          실행: $run · 점검: /api/ledger/{날짜} 응답, scripts/ledger_merge.py, python3 scripts/records_register.py --verify, pip install rdflib && python3 scripts/rdf_check.py(연결 데이터), python3 scripts/iiif_check.py --remote 20(IIIF 구조), MAINTAINING.md(영구 축적 원칙)"
+            if [ -n "$num" ]; then gh issue comment "$num" --body "$body"; else gh issue create --title "발견 원장 병합 실패 — 3일 안에 조치" --label auto-health --body "$body"; fi
+          elif [ -n "$num" ]; then
+            gh issue close "$num" --comment "발견 원장 병합 정상 — 자동 종료 ($run)"
+          fi

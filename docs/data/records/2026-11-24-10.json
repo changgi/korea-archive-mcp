@@ -1,0 +1,1618 @@
+{
+ "register": "KOREA ARCHIVE 통합검색 — 발견 원장 일일 기록물 등록부",
+ "id": "2026-11-24-10",
+ "created": "2026-11-24T06:47:07Z",
+ "producer": "GitHub Actions ledger 워크플로",
+ "commit": "1755608dfdd7af64414a29d98975d4b017a30db8",
+ "run": "45342511228",
+ "counts": {
+  "records": 408,
+  "new_records": 0,
+  "queries": 39,
+  "classifications": 291,
+  "provenance_queries": 24
+ },
+ "prev": {
+  "register": "2026-11-24-9.json",
+  "sha256": "bfa85a7b8ba1d91eb8a15be281a9b6758a1007b6f52c9b4caca8c458e0046dec"
+ },
+ "changed": {
+  "classifications.json": "변경",
+  "discovered.csv": "변경",
+  "discovered.jsonl": "변경",
+  "discovered.jsonld": "변경",
+  "feed.xml": "변경",
+  "fixity_changes.json": "변경",
+  "index.html": "변경",
+  "provenance.json": "변경",
+  "quality.json": "변경",
+  "records.csl.json": "변경",
+  "records.ris": "변경",
+  "stats.json": "변경",
+  "timeline.json": "변경",
+  "queries/index.json": "변경"
+ },
+ "files": {
+  "classifications.json": {
+   "sha256": "6639a2e8cbc76bb11a2d4952b793db6a912e69ad6d78316945d296aff8783720",
+   "bytes": 53010
+  },
+  "collection.json": {
+   "sha256": "36d048d72255a3dcd2a2b9ef4101dd0492272de581112f6d501b5f387ea44c11",
+   "bytes": 146079
+  },
+  "discovered.csv": {
+   "sha256": "f82f4f27de0e8c6fbb0755f8d9af7fb962f4488d4f60db761aefc1f24184ce90",
+   "bytes": 661336
+  },
+  "discovered.jsonl": {
+   "sha256": "aa123981818d4e1411f5cd73e39ca5ee51910aa40ca903dbb898b3bc56b44e50",
+   "bytes": 878847
+  },
+  "discovered.jsonld": {
+   "sha256": "58c48ccea9582f1a4a4b57f1f8b87f621b5ae3cd2e33a4cf6d6321e7eeaf87a8",
+   "bytes": 564889
+  },
+  "feed.xml": {
+   "sha256": "a21e60926582b450f07e1359d1e155a525f2a8958226289545fc3b758a6b3f01",
+   "bytes": 72158
+  },
+  "fixity_changes.json": {
+   "sha256": "8ea1d1d587978ea857caa09030c056dddb87e4b4b44be2efc2b548c1025c33b6",
+   "bytes": 311
+  },
+  "hierarchy.json": {
+   "sha256": "26314941e48620134ed1e3dcbaf5001164a5c24349dc201a8ef958595a3ebf8e",
+   "bytes": 5003
+  },
+  "index.html": {
+   "sha256": "187050f888b8b467224821139fa625aef7eb3b80f2c4821785cd6a0fad4beac3",
+   "bytes": 182626
+  },
+  "nrich_db.jsonl": {
+   "sha256": "f7d9473fe908cdb3d3b226db136dd661d9853f8c727caf9e7a9ec1607b131a57",
+   "bytes": 16843816
+  },
+  "nrich_db_meta.json": {
+   "sha256": "329f40f0977f98adb7512996d4168941cc35319e8506fe6a46126a9364f90e9a",
+   "bytes": 1980
+  },
+  "overseas_holders.csv": {
+   "sha256": "8b1ab0b95a8369d36637a0bd97b695f3a80fee9a1a902e3e48671e678d76fc59",
+   "bytes": 539
+  },
+  "popular.csv": {
+   "sha256": "443510fdb1ecca41a8bff2219b117475f32c618e9c359a8715485c1e2815b368",
+   "bytes": 171999
+  },
+  "provenance.json": {
+   "sha256": "a5f45e6e7a413aea4b459400258a9043b2c3325cdf9e5aa0c2de86136d1f4734",
+   "bytes": 11190
+  },
+  "quality.json": {
+   "sha256": "3909d9a693202794f07ddd75975543da17de435f4e71bb15f5c7dfb9fa4897be",
+   "bytes": 822
+  },
+  "records.csl.json": {
+   "sha256": "f95acf360e098d6aba24bfbabbe058f258352f1957b85b57450e015d7aad6e52",
+   "bytes": 400183
+  },
+  "records.ris": {
+   "sha256": "c58c6c1bd74e3a961dce258231bf3dc97861ee7a0511174f74d0fd325f72b606",
+   "bytes": 259696
+  },
+  "stats.json": {
+   "sha256": "39f0aaa2e3dd4b21cb9c52a9fc94f8c7b22333d3c65a2193fc1f9da3fb50bbf2",
+   "bytes": 3484
+  },
+  "timeline.html": {
+   "sha256": "0c75b5078a4e70e8f22d44eb25b8df7bb3df69f692eede654b65115464c3c1f6",
+   "bytes": 85503
+  },
+  "timeline.json": {
+   "sha256": "6eeadf665c10ca1abee3a7f18266949b520e4f876a90da32df42a21bce4ccca2",
+   "bytes": 71216
+  },
+  "tree.html": {
+   "sha256": "11607aefcb00472f3ebfc9779e4fcb970fa710eab1b7b986d45cdc80c10ff668",
+   "bytes": 300599
+  },
+  "tree.json": {
+   "sha256": "8e282e8031963612a4762d52dd007e8276e0fee4ec50131a3f80b584412a4d31",
+   "bytes": 124674
+  },
+  "usage.json": {
+   "sha256": "c20fbb0e2ee1057927aef82712bc6ed0e562356eb9d8ea9f624baad2f34a122b",
+   "bytes": 218
+  },
+  "h/aks.json": {
+   "sha256": "df204e2da00bfe73a6cddde368bbcbf79a3304426a49d564503f130bea07c47a",
+   "bytes": 20197
+  },
+  "h/archives.json": {
+   "sha256": "400637e30deb705c8c1e82bc3776e44570f14b6128097a3267ed0c7dd3be5c5f",
+   "bytes": 31487
+  },
+  "h/awm.json": {
+   "sha256": "53706fa1f9fd0c46e0e31d5bc37ab40f708a12954512601ba84b995af3a6d322",
+   "bytes": 2734
+  },
+  "h/commons.json": {
+   "sha256": "ba6d6195410f4d376ece59bd7c5c6720822768c63180c4caf392dfebf89faa16",
+   "bytes": 7679
+  },
+  "h/dnz.json": {
+   "sha256": "ab783af75f76a9e44ae9b6676c90c788e5800689a853c317f4c764155ff954a2",
+   "bytes": 5601
+  },
+  "h/earchive.json": {
+   "sha256": "12b52673e80b83a05e1b2ce6a64b6c1a92e5d3befd54e2d25158de6baac62dc0",
+   "bytes": 6177
+  },
+  "h/europeana.json": {
+   "sha256": "fe10e0df0a149b2071223aeaf1cf80e11c1e4735ed16373eaacd44f5492e5e31",
+   "bytes": 2307
+  },
+  "h/gallery.json": {
+   "sha256": "5a50bc45859c494392e877d3e724eabb2fbfca70b9e11077e585f1481d38e4e7",
+   "bytes": 1560
+  },
+  "h/gallica.json": {
+   "sha256": "822a24164bdce46318463f829b8c9e65f9e32ff6c62fcb1a06306cfd58d90846",
+   "bytes": 5506
+  },
+  "h/gonghun.json": {
+   "sha256": "dd7af29e19eb4434dfb7a19ebc9db2a31055179730aaa2f8578ea25c1d522f5f",
+   "bytes": 1844
+  },
+  "h/heritage.json": {
+   "sha256": "0d9788757a5a9c4a884aac0ee861f9edb2dd74e3eb3e4133601ec8ee52da9b45",
+   "bytes": 1897
+  },
+  "h/i815.json": {
+   "sha256": "74a5a6fb07f33e77557f56dd99013b6b23ac8da6a48413cf2ee2624ee7da1216",
+   "bytes": 7508
+  },
+  "h/ia.json": {
+   "sha256": "c47fddf6598722d24a02a8d98655debf085749b1834f3bc47b5a824f595c3037",
+   "bytes": 6996
+  },
+  "h/indy.json": {
+   "sha256": "af8fa45e297abf9c4e206a05ef4e66d0c97b294b036b739841c5ccf259257b8e",
+   "bytes": 2042
+  },
+  "h/jacar.json": {
+   "sha256": "ae483dcd399a7d32ad25ee1e851c28140e6ca067181ce1db14b1d9c0a3690f23",
+   "bytes": 5611
+  },
+  "h/jsg.json": {
+   "sha256": "97112d95958896c31209a14d566ba8cb8e5fd57ff937b58aada6026cb2108a38",
+   "bytes": 2614
+  },
+  "h/koreanwar.json": {
+   "sha256": "c42b9f5efd35b338ac4345522f5de9234c8c086ebe546024b43b31376efbce6f",
+   "bytes": 5929
+  },
+  "h/ktv.json": {
+   "sha256": "2b7cc980e18a22b9d715c21f6347274cf2ef2f4c5c22ebb026cf5330ef065021",
+   "bytes": 12091
+  },
+  "h/kyudb.json": {
+   "sha256": "6e3e55924269bdd662ef569d1967480a4806807d1f053b90b029651d164bc5ca",
+   "bytes": 5321
+  },
+  "h/much.json": {
+   "sha256": "bb67a6154624bb8c58e580e179f148cc9345d85e91a6e0429595f09fe968fc1f",
+   "bytes": 1103
+  },
+  "h/nara.json": {
+   "sha256": "daa1e6e64aad7038216b05c16522a15fc7eecde7d8bb4fa2f336c6bdebb066b1",
+   "bytes": 5323
+  },
+  "h/ndl.json": {
+   "sha256": "a2f6488958d7e5df0a5b5ee54203fb967bfafa001f0e3761beaa8bc0d5ec79cc",
+   "bytes": 9187
+  },
+  "h/nedb.json": {
+   "sha256": "0ee3f45cc921243f2774f45604242cebed2a69e55789f9d00554fa1961d245b2",
+   "bytes": 5151
+  },
+  "h/nlk.json": {
+   "sha256": "873330554df7e0e58379fd518e49ceee68c693f769881fac1221255e1ec1f2a1",
+   "bytes": 2226
+  },
+  "h/nlna.json": {
+   "sha256": "4f4bde4dd259d860a7d61f02c86bf5192f495f54134ea8a3d1c2a8ae689a3e0c",
+   "bytes": 3939
+  },
+  "h/nrich.json": {
+   "sha256": "44849565ad06289f9612c0595f9a52ba7962e3165110047acc8400a1b1c61b29",
+   "bytes": 21143
+  },
+  "h/nzarch.json": {
+   "sha256": "b6616b49e3d6d7643ce17d5062560118a9a61b4df43a148db8d8248a2bbcaf3e",
+   "bytes": 4587
+  },
+  "h/okchf.json": {
+   "sha256": "c05044f534ac0556a57052efaa03f869e3b57995feafdb87a9b186885a96cf3a",
+   "bytes": 26030
+  },
+  "h/oldnews.json": {
+   "sha256": "f746e92031817510a184427143864545e533bf536b9577fe9857c62c9aa7b7ca",
+   "bytes": 6778
+  },
+  "h/seoul.json": {
+   "sha256": "10119aa7cb599ce0be354ca5070fbab42e898adef205934dc0b4d6ea82724e91",
+   "bytes": 9282
+  },
+  "h/tna.json": {
+   "sha256": "7eeee0ae9ad12a52b7f4d1deebb49cd46abc1c2c2c630685686e9efca532c8a0",
+   "bytes": 2859
+  },
+  "h/un.json": {
+   "sha256": "07988de5ecb2b95d10c2949f86b3f52d194407f9e1230be339d5634b1fe4b552",
+   "bytes": 5548
+  },
+  "nrich/arch.jsonl": {
+   "sha256": "1da0505d77d8808f356913587b05034bc27e6e3c0c945eb1cd3f1eea78898871",
+   "bytes": 416637
+  },
+  "nrich/assay.jsonl": {
+   "sha256": "de4d0cead4f84f14817d4d79c99f146c12ebc8b2695b4bb0de6bd825019811db",
+   "bytes": 10653
+  },
+  "nrich/design.jsonl": {
+   "sha256": "5f2ac939c5905bcc942281d658b9ecb961650e200242e3b02dca8db887468288",
+   "bytes": 9220
+  },
+  "nrich/diary.jsonl": {
+   "sha256": "eee7f1bc6961eee57490c498f0c2437df793328fbb1ae2c717785558d065cfe7",
+   "bytes": 934091
+  },
+  "nrich/dict.jsonl": {
+   "sha256": "c0bd4b3741f14e96f12de191317d0fb0ad0ddde967556defaadefb1c7d5e58fa",
+   "bytes": 4177439
+  },
+  "nrich/dolmen.jsonl": {
+   "sha256": "39f0b5aa2da95876d87448e2076ce4a2a5315849df466a2c604b0d1d3d30a1a9",
+   "bytes": 1540937
+  },
+  "nrich/gaesong.jsonl": {
+   "sha256": "d96f54c7e5556aa826f82d91ee47bb79595f41a34a835139ca924b9ceadd006b",
+   "bytes": 10847
+  },
+  "nrich/gwaebul.jsonl": {
+   "sha256": "4afcf6483538b9acf5357eff79f3bd49c574c06c097494a476f89d2d759df8af",
+   "bytes": 71763
+  },
+  "nrich/hyanggyo.jsonl": {
+   "sha256": "17c108eb390dacac84eadb6b1ad507f3bfd84484a9e0f45fff4f3326ebeb74f1",
+   "bytes": 92146
+  },
+  "nrich/index.html": {
+   "sha256": "a1ca8cbe95c9861b0dfb4b92fccb2d61e2a3282b4d30abd3b7626e0b36047a69",
+   "bytes": 58594
+  },
+  "nrich/iron.jsonl": {
+   "sha256": "1cbfb5098fed1254ced00cd8566d3c0b0b13320dbbbffd6fed4e13f0ef377e19",
+   "bytes": 42678
+  },
+  "nrich/jcbib.jsonl": {
+   "sha256": "bafbd7d76ec1a4600dcecc922e2a682674c8f4db92dca3b3ebd404082ba1affd",
+   "bytes": 483998
+  },
+  "nrich/jcphoto.jsonl": {
+   "sha256": "f191cf265f8968f08f2c09a7838d62313cef57c1ba003cf0077bb9386f9c5a43",
+   "bytes": 4161
+  },
+  "nrich/journal.jsonl": {
+   "sha256": "f5c6366c82c8558d8b9e5b8239fcc8a2dcc483cf6105e2c83c5589b571909f4d",
+   "bytes": 6899
+  },
+  "nrich/koguryo.jsonl": {
+   "sha256": "efb84e4510f6986ebd715bc62f8f7fbdfbf902421efa50c663de7a435ac0c8d1",
+   "bytes": 43344
+  },
+  "nrich/ksm.jsonl": {
+   "sha256": "b879cd40590048d6eaccf3461875df5bd68d924cd23ddf7ffe3da44f29ee6f3c",
+   "bytes": 5188065
+  },
+  "nrich/material.jsonl": {
+   "sha256": "8cddb02bff4186f7c6898a9c8a519af68a527002b102f0d4e7482a7e166dda74",
+   "bytes": 2177502
+  },
+  "nrich/mokgan.jsonl": {
+   "sha256": "f82fabc53547c8425c8f92f863a0c324cb0ae36ef4647573e7bc42eabe6b45ca",
+   "bytes": 321600
+  },
+  "nrich/oldbook.jsonl": {
+   "sha256": "0ec41603089f7360a9806e360a03e9310fc98c6b4bd617acc27640bb42a27115",
+   "bytes": 512981
+  },
+  "nrich/pattern.jsonl": {
+   "sha256": "873be50943e83185cfc13e4eac385dc805b101f9a50fe4c19c322495d3c479c0",
+   "bytes": 466769
+  },
+  "nrich/people.json": {
+   "sha256": "a54e55fc7ce325b7d5b51552cda4f4bd979bd2661e680f478de433b7bac76378",
+   "bytes": 718714
+  },
+  "nrich/portrait.jsonl": {
+   "sha256": "b28f5f5dfbf13fba87917cea28dbd9c72c5fd2eff355803b8348cda4ab07f8b7",
+   "bytes": 98018
+  },
+  "nrich/stone.jsonl": {
+   "sha256": "326f510b71f62e5c5e069773ca95d560e8d35bb092110117a1a9f44fad164310",
+   "bytes": 234068
+  },
+  "nrich/export/arch.csv": {
+   "sha256": "1322e5407082949de4e1f3890dde7de4b2fb877d475a39b32e45417840a5610d",
+   "bytes": 381398
+  },
+  "nrich/export/assay.csv": {
+   "sha256": "5467d68de82c25690ce45892a7526d03d2216a37b7b342fc0f3f960846c33912",
+   "bytes": 10252
+  },
+  "nrich/export/design.csv": {
+   "sha256": "cc9b690afedb5e31d2f6f0d3582ebf41cb3b51895d2e4b5e2fd682eadcc9cd8e",
+   "bytes": 8814
+  },
+  "nrich/export/diary.csv": {
+   "sha256": "f875c87b93749bbd737b9e9d8f54c41dcc97a80c6cd281372703c2e1f6426ab0",
+   "bytes": 830906
+  },
+  "nrich/export/diary.jsonld": {
+   "sha256": "4c39d8252f6b60dc3adc3be7d2e8f7b92659a76fba2514d64e91f5d8df8c30aa",
+   "bytes": 879393
+  },
+  "nrich/export/dict.csv": {
+   "sha256": "2b5e2b3f1c83ef969bf899cc383d3c6c11e04812b8ad6192e91ce5f70c1287f1",
+   "bytes": 3379995
+  },
+  "nrich/export/dolmen.csv": {
+   "sha256": "0428019b23a32c44d2dcc9fabad96bdbecfdaa85c8e94628c220a4b58b74421b",
+   "bytes": 1306291
+  },
+  "nrich/export/gaesong.csv": {
+   "sha256": "326791c71bb37c1a18738c412960a6c08723392bc1c0ffa6b771cf2d8040d619",
+   "bytes": 10931
+  },
+  "nrich/export/gwaebul.csv": {
+   "sha256": "75e774b64b5800863d7ad352a1dc77fb45342e173900f55796fbf7b773779b6a",
+   "bytes": 68694
+  },
+  "nrich/export/gwaebul.jsonld": {
+   "sha256": "7a0ac6608eb6d4f9de07de42d23b5b108803afdfce03a68832acfc22419186ad",
+   "bytes": 119284
+  },
+  "nrich/export/hyanggyo.csv": {
+   "sha256": "315ec10c96e8c08d207c9fab176b3a7853ec50f80866057d49e68d44dbcac6d0",
+   "bytes": 87205
+  },
+  "nrich/export/iron.csv": {
+   "sha256": "03e5de9724503aeb2580f129ab61bb3b2029fe407d7e916f899e8d032f10efba",
+   "bytes": 36860
+  },
+  "nrich/export/jcbib.csv": {
+   "sha256": "22312047c0a4f75b8ff728f3ed7ee4bd83c48f128d5faa67e890edbd8f951577",
+   "bytes": 397643
+  },
+  "nrich/export/jcphoto.csv": {
+   "sha256": "c2832429d168a6ca9682888ca3b6f13f37bec2dbf879e522b992e73c628aa7d0",
+   "bytes": 4075
+  },
+  "nrich/export/journal.csv": {
+   "sha256": "24a66204640ececd5999c99fdc3d6a91461486e86ec7512ae2e3d2aac81f5b67",
+   "bytes": 5670
+  },
+  "nrich/export/koguryo.csv": {
+   "sha256": "a00fba2459c1c170bcfb85376201df50d979ea85c67b214237c7fa605b0c0fe1",
+   "bytes": 38787
+  },
+  "nrich/export/ksm.csv": {
+   "sha256": "bc144120526caf0edde6b1556ba15ee88dd5d9c149f0789f88e2b6129984a922",
+   "bytes": 4710182
+  },
+  "nrich/export/ksm.jsonld": {
+   "sha256": "07980a7185b03e9f565d90760caf5f25c0ee8347488af399e6de7ef951147196",
+   "bytes": 4024654
+  },
+  "nrich/export/material.csv": {
+   "sha256": "0c844fcb8c3498820f246ad57573b81587e8f3f8822c7666be75f68b2f87adee",
+   "bytes": 1917526
+  },
+  "nrich/export/mokgan.csv": {
+   "sha256": "6ad7fb9ac2cdb1c984b93e97535ca247abc3b29aa157c2a123d4103330de82b1",
+   "bytes": 271834
+  },
+  "nrich/export/oldbook.csv": {
+   "sha256": "80fb27413d4df68455f20a5cdd9911dd6a5fb2952ea7ae887d0c9071cf2a2979",
+   "bytes": 495734
+  },
+  "nrich/export/pattern.csv": {
+   "sha256": "4e3e07e23e783ae65944f23542d4363594b819ecae03689b9732144cb2dfe631",
+   "bytes": 422618
+  },
+  "nrich/export/portrait.csv": {
+   "sha256": "2d3e3fb0712729610811f04b5d7505b7d80a1b1f5198eee79bd8fcf5486c26de",
+   "bytes": 88969
+  },
+  "nrich/export/portrait.jsonld": {
+   "sha256": "9d3fcea24e01aa5771365e892cbcd539ad4096d9e524a026089c6d06a6da2109",
+   "bytes": 60177
+  },
+  "nrich/export/stone.csv": {
+   "sha256": "d977f965f992aae7667f5eed317c539bc25108ed36007fc928a8f60112b31b33",
+   "bytes": 197173
+  },
+  "nrich/iiif/arch.json": {
+   "sha256": "d79eeb4994adddf44901a33b2e7acd3eaa35e0d3ec1a8feaf3047593eed2c008",
+   "bytes": 3568
+  },
+  "nrich/iiif/assay.json": {
+   "sha256": "17d4a0b3e52f5e2440fae2147b9e8530a06f53cd696f2962163008c47d6c22e5",
+   "bytes": 1407
+  },
+  "nrich/iiif/design.json": {
+   "sha256": "45bd7866353074ead8366edcecc42b2086217b1b84a6b6d4bfe7b081d5d3f1d6",
+   "bytes": 1014
+  },
+  "nrich/iiif/diary.json": {
+   "sha256": "38b8e011166bfde83ecb0d75197fee466dd0446558cf68d3c4cfaba1a4788c6c",
+   "bytes": 7728
+  },
+  "nrich/iiif/gaesong.json": {
+   "sha256": "013974c2010e5f596644f5656b8cd8da11ad28dfb9062d9c582fff9b94864a65",
+   "bytes": 692
+  },
+  "nrich/iiif/gwaebul.json": {
+   "sha256": "4f93ac238b63feec915e69a775d6cbeaf619832961639ad74f4f18da8effd8cf",
+   "bytes": 2006
+  },
+  "nrich/iiif/hyanggyo.json": {
+   "sha256": "90bc31e982513afd1cb29bab5c5102df2000b5e7958a3a800c0f02c604255996",
+   "bytes": 1649
+  },
+  "nrich/iiif/index.json": {
+   "sha256": "78f06066556bfb3e4af89f01a3c60c824871e1849ca30d1afdfb9d20f6b90776",
+   "bytes": 2444
+  },
+  "nrich/iiif/jcphoto.json": {
+   "sha256": "547dbef522fd315a2e806b1604be3865bcba85973e7a83f6e4b09d747333ec04",
+   "bytes": 674
+  },
+  "nrich/iiif/ksm.json": {
+   "sha256": "ac21e829c359730e7f5e1d8a02bde28d2f8c24720631bb08c2ff2f4f72a0b3c8",
+   "bytes": 7518
+  },
+  "nrich/iiif/mokgan.json": {
+   "sha256": "cb46731e15412d1d880114dd7236b2f8d64d3cdc7751c2562a13c4ae3272f908",
+   "bytes": 1816
+  },
+  "nrich/iiif/oldbook.json": {
+   "sha256": "15de06b23a2c7f5dd6736c82a8914a03435bac3e9253cf123bc3278a91b5f02f",
+   "bytes": 5514
+  },
+  "nrich/iiif/pattern.json": {
+   "sha256": "28e69943b57ecfd45d6572de8447dd82c27ebc381dd72ee29517e9d271e49d77",
+   "bytes": 11480
+  },
+  "nrich/iiif/portrait.json": {
+   "sha256": "d130b55d6bb6131f05063e8d7eb86d1a99d523bce903743ef5bd3b586997fbba",
+   "bytes": 2245
+  },
+  "nrich/iiif/stone.json": {
+   "sha256": "fefa9d36b291f35af1c401a74cd9922b3978e7eb3812e3b89343d36acd6b11af",
+   "bytes": 2476
+  },
+  "nrich/iiif/arch/강원특별자치도.json": {
+   "sha256": "f3ffb30bac22be31d946fa1171a6252e9efb2bf6c1e4c3ad3dee14ccc254fe0b",
+   "bytes": 7266
+  },
+  "nrich/iiif/arch/경기도.json": {
+   "sha256": "95aae7f215fe2de9ff4c6b6e1556fc4101a31c749f4e33bdcfa68279c4564369",
+   "bytes": 12129
+  },
+  "nrich/iiif/arch/경상남도.json": {
+   "sha256": "a9f8b8c57d9d99390202dec45d55c55918828119f8eb11c3fcd0007645203638",
+   "bytes": 11472
+  },
+  "nrich/iiif/arch/경상북도.json": {
+   "sha256": "af5a30bc168dc837ee07f377c030c8ee5c01d8f26c0b896417c04d5ef1a4817f",
+   "bytes": 11470
+  },
+  "nrich/iiif/arch/광주광역시.json": {
+   "sha256": "266360fb37cde8ec701683ab04117f166b6e1a3ae5f4ece9404e196ebedb66fc",
+   "bytes": 1273
+  },
+  "nrich/iiif/arch/기타.json": {
+   "sha256": "9a345176622284a2a956714de687d916f6f00b4c30437b6174a733dae27ed837",
+   "bytes": 2335
+  },
+  "nrich/iiif/arch/대구광역시.json": {
+   "sha256": "6447192423ee60122a4c4bc7c205a016d37cb687bdebe488562a0ff3596de527",
+   "bytes": 2719
+  },
+  "nrich/iiif/arch/대전광역시.json": {
+   "sha256": "b4304164458793a90cf94fc78ef845026ca46bc14101d0e98876e529d6c04cce",
+   "bytes": 1116
+  },
+  "nrich/iiif/arch/러시아.json": {
+   "sha256": "550f17df37a14895b3e792d4d073aafb3ed431041d6242e68a7c6eb5a361eb69",
+   "bytes": 2271
+  },
+  "nrich/iiif/arch/몽골.json": {
+   "sha256": "1fe59a8233a4edd535dc48c2e61098d4bfae973dc37131517a11a8135ff983a4",
+   "bytes": 1297
+  },
+  "nrich/iiif/arch/부산광역시.json": {
+   "sha256": "17819817a572bf738d71eedec61ebd871a43076acd063bc6e64ec0552868c92c",
+   "bytes": 1588
+  },
+  "nrich/iiif/arch/서울특별시.json": {
+   "sha256": "65b9ea97d910dd76d0d7c8083a78a9c254073f50fbeeacc1c466d7850ac65b7a",
+   "bytes": 5189
+  },
+  "nrich/iiif/arch/울산광역시.json": {
+   "sha256": "b8d46704028da72d94d0a6b075317f92202e147e261a143bedf7ee2c77582803",
+   "bytes": 2274
+  },
+  "nrich/iiif/arch/인천광역시.json": {
+   "sha256": "f640a9fd10a390326a49b3bf06799be275c91f068acacd677ddd4f3ca9e659f6",
+   "bytes": 2010
+  },
+  "nrich/iiif/arch/전라남도.json": {
+   "sha256": "eb30c7564f91066e041d58beea5e4ed34ab3f72e0beb4542657741b7d8a04f88",
+   "bytes": 7267
+  },
+  "nrich/iiif/arch/전북특별자치도.json": {
+   "sha256": "26bbbcabf35cc03fb446ad3e5c4cda252079107049c3a0123bfc7b10b3d6c6fb",
+   "bytes": 7118
+  },
+  "nrich/iiif/arch/제주특별자치도.json": {
+   "sha256": "f1ea56f56f71bb0f6a6ed5353f879e55acf20c7b4c5864b84d7de8dcc63e4050",
+   "bytes": 2299
+  },
+  "nrich/iiif/arch/충청남도.json": {
+   "sha256": "b12a0485110a297b2da41c97f20c3e8e11893370ff4f054459599fa0b36933de",
+   "bytes": 10998
+  },
+  "nrich/iiif/arch/충청북도.json": {
+   "sha256": "f37316335b2193b2c618d1c2bf3670813ae6f404c1bf573cd09a936cb26cd220",
+   "bytes": 5122
+  },
+  "nrich/iiif/assay/국보.json": {
+   "sha256": "87cf6e11ac4712398931ede2112ee968fa62eb4c25009072e339e857a6e808ff",
+   "bytes": 2009
+  },
+  "nrich/iiif/assay/기타.json": {
+   "sha256": "da39f5cd75776aadd47c052ea07dd770c72e670702101ad12b9ef3733052b8b4",
+   "bytes": 1335
+  },
+  "nrich/iiif/assay/미상.json": {
+   "sha256": "ab26f4648860822fe88032f7228fb20dae670ab2bb2118c30f88ef45f697d0ea",
+   "bytes": 1193
+  },
+  "nrich/iiif/assay/보물.json": {
+   "sha256": "4adee8ce3f1e3a7d1516e715d6b5c33edccc2abe5973c9264b69aad2999a7a31",
+   "bytes": 1379
+  },
+  "nrich/iiif/assay/사적.json": {
+   "sha256": "e7a8617ad396a9a0b9ba6716a53d2b1a3a50849f54178fa48bf698414906715d",
+   "bytes": 985
+  },
+  "nrich/iiif/assay/유물.json": {
+   "sha256": "533be012b9edf32312af5369cd90e9edeee2a693d92129aeef267e769edfe193",
+   "bytes": 929
+  },
+  "nrich/iiif/design/국립중앙박물관.json": {
+   "sha256": "6a59dcdc0fe5c0fb4a353faf436f8502ec50af44439188a4ce6fb2ea5806c074",
+   "bytes": 2036
+  },
+  "nrich/iiif/design/국립청주박물관.json": {
+   "sha256": "a861c83a3ee71bc57f8ff3f5f06c53ebe46ae611263d0a8b05441a23a01ff1cd",
+   "bytes": 1232
+  },
+  "nrich/iiif/design/기타.json": {
+   "sha256": "9513b0c44f7de59bbc07aa24f508bb033cd788da0b455531b1ab206c6b59f1d7",
+   "bytes": 2985
+  },
+  "nrich/iiif/diary/개인.json": {
+   "sha256": "3a63b86407b61a942aa0347617826c955d167206a6ae3c3fceaa8f75db9a1a20",
+   "bytes": 13520
+  },
+  "nrich/iiif/diary/경기도박물관.json": {
+   "sha256": "a384c4e1d70d5246c7dd87625b505f91ae93134a0cc79e849b925e2edcc38393",
+   "bytes": 1017
+  },
+  "nrich/iiif/diary/경북대학교.json": {
+   "sha256": "be26c539109f9302a1abe1634e9dfe27aaa28d2f28d56488f07e5259ea06c6cd",
+   "bytes": 2131
+  },
+  "nrich/iiif/diary/경상대학교.json": {
+   "sha256": "11bf54f3bea3d37e9482deda49c50ae7704739bfce0a0d9617abf884609f1db8",
+   "bytes": 2006
+  },
+  "nrich/iiif/diary/계명대학교.json": {
+   "sha256": "4e5d6f21111bf0b35f3e14306d6e4312af6597f05d6158e3aa5edae0e974dc34",
+   "bytes": 8840
+  },
+  "nrich/iiif/diary/고려대학교.json": {
+   "sha256": "7e01d59e64d8eccf21883b59fbc098b2900a9e9bc40628db4169f3b750bc302f",
+   "bytes": 13158
+  },
+  "nrich/iiif/diary/국립민속박물관.json": {
+   "sha256": "7b1169a4dd2bccb2e0f0259b288f0180625d9c50edb3d59c8044a861bda8f5f2",
+   "bytes": 5137
+  },
+  "nrich/iiif/diary/국립제주박물관.json": {
+   "sha256": "695ce8afa3636831799bb6b793ef6b858d272815d3e84b2fdb807e51316b18ba",
+   "bytes": 1021
+  },
+  "nrich/iiif/diary/국립중앙도서관.json": {
+   "sha256": "f3df6447f02b0134e76ded56e4e728398774d935060a7b235c5668427d191ac1",
+   "bytes": 24434
+  },
+  "nrich/iiif/diary/국립중앙박물관.json": {
+   "sha256": "c56ae72234d9c3c12bc51c1a1cd5da06ac2a58766364da15d4232b3ba3485287",
+   "bytes": 887
+  },
+  "nrich/iiif/diary/국립해양박물관.json": {
+   "sha256": "a5efcbc3e6631d266b73746aa3c9f2a85ffa7d54e932005f2c9ee9a9a333cab0",
+   "bytes": 2246
+  },
+  "nrich/iiif/diary/국사편찬위원회.json": {
+   "sha256": "1f92bdce1f80f2b158365df7d6f7ccb3b8200cf148eb77d5f890237e0d1a2dc1",
+   "bytes": 13538
+  },
+  "nrich/iiif/diary/국회도서관.json": {
+   "sha256": "82cd97c981ac804272531a2846631d15451686392e025534500d7f63ad00ed49",
+   "bytes": 1813
+  },
+  "nrich/iiif/diary/규장각_한국학연구원.json": {
+   "sha256": "1e880b9f8b8b702b6f3a29669fda434729e80ac6e9520c7029e69b3150182be4",
+   "bytes": 28880
+  },
+  "nrich/iiif/diary/기타.json": {
+   "sha256": "2e56d4e66adb0971cf2cf9a882821939df2f43bf4533eca4bf07fd828a615a8c",
+   "bytes": 6903
+  },
+  "nrich/iiif/diary/단국대학교석주선기념박물관.json": {
+   "sha256": "c1cdfc4c52dc628b5b4d6cdd89190d9b5eda185db7ffdcbb92ab27bd0646f651",
+   "bytes": 2486
+  },
+  "nrich/iiif/diary/단국대학교율곡기념도서관.json": {
+   "sha256": "f258beca907841e15fa7f7a76ddcbbf5f3d17420d303959ce5ffe88d7fcd0919",
+   "bytes": 2630
+  },
+  "nrich/iiif/diary/단국대학교퇴계기념도서관.json": {
+   "sha256": "f5c2aab9bb601a6383909572f99c9361cc404d947416cdbac458c772a932afd1",
+   "bytes": 1369
+  },
+  "nrich/iiif/diary/동국대학교.json": {
+   "sha256": "c36a3a9d847e3857245489ec021642f570e6d76f3ba2e484c5a74fa58175af9c",
+   "bytes": 3474
+  },
+  "nrich/iiif/diary/만해기념관.json": {
+   "sha256": "a0cd63292e0d4af7baecc07a7608be00140f594ee6cbc38a7a78e4eccc8bfabe",
+   "bytes": 2096
+  },
+  "nrich/iiif/diary/모덕사.json": {
+   "sha256": "d89634182b5894746adcf3b089ce1cc233f4f7130bf9fa55ae0ca53a4805e54f",
+   "bytes": 4052
+  },
+  "nrich/iiif/diary/문충사.json": {
+   "sha256": "d5c6c7bad756a72144ffa77805c0931af0a7dcce5a3cbcb49c7e03bd1e3a713e",
+   "bytes": 1441
+  },
+  "nrich/iiif/diary/부산대학교.json": {
+   "sha256": "7f193da73f475c4ae8a50d0e6057d7ef35fe75f132b9e7a06de4042d1beff3f2",
+   "bytes": 3194
+  },
+  "nrich/iiif/diary/부산시립박물관.json": {
+   "sha256": "dad3b424c115a4efcf57f7dd444ed5204d1b42dd8ee379614490bb1c9b2409fa",
+   "bytes": 859
+  },
+  "nrich/iiif/diary/상주박물관.json": {
+   "sha256": "bc03ea8c198ffb03384468879bab60ac5e0eb5f7c8349ef60c5d9b8f35c5fe2d",
+   "bytes": 1142
+  },
+  "nrich/iiif/diary/서강대학교.json": {
+   "sha256": "a1b9c31c0656781b66904fa552f138409ffcc03f9d661365d0a5047e0785ab19",
+   "bytes": 1935
+  },
+  "nrich/iiif/diary/서울대학교규장각한국학연구원.json": {
+   "sha256": "afcc5efa57d60938cc10a8849270470ca91c7b1f084bf6d0d07200248d15e1a8",
+   "bytes": 3914
+  },
+  "nrich/iiif/diary/서울역사박물관.json": {
+   "sha256": "5950b557d923928985c1b3395e448849dfd503473857681d21ac825697e4c986",
+   "bytes": 4907
+  },
+  "nrich/iiif/diary/성균관대학교.json": {
+   "sha256": "3dc545914aa57228b6a7b5975ab62dcd517030ff9f283d22fb6b7fcd481cffe5",
+   "bytes": 10285
+  },
+  "nrich/iiif/diary/소수박물관.json": {
+   "sha256": "67f95fe987c288b0b60db066ad88f845ce251eaa649cb111347b17fe7c7e60ff",
+   "bytes": 1411
+  },
+  "nrich/iiif/diary/숙명여자대학교.json": {
+   "sha256": "5d4dc82b35cd48053796d8d4646b88940bcc48782e5f745bf57f2838c7eecd21",
+   "bytes": 1006
+  },
+  "nrich/iiif/diary/숭실대학교.json": {
+   "sha256": "2a001bf53fab774570ee25c9f30df17e78144d723ae94191159a05b0ca5718e8",
+   "bytes": 3051
+  },
+  "nrich/iiif/diary/연세대학교.json": {
+   "sha256": "95045f0701059e7b1be7a22b917eb8b9b094bd4a9ecd4e23a01252c1ca36d5f7",
+   "bytes": 18455
+  },
+  "nrich/iiif/diary/영남대학교.json": {
+   "sha256": "da9f91ff71687edee839c6e2a469423fd1b5a0260bd9ff2d4747261bdf9bdd62",
+   "bytes": 5103
+  },
+  "nrich/iiif/diary/이화여자대학교.json": {
+   "sha256": "6eeda1c6512e11727cb44ee82f0cd4918d182fa74b0882cc778729fb5b8a7c8f",
+   "bytes": 1125
+  },
+  "nrich/iiif/diary/전남대학교도서관.json": {
+   "sha256": "b92691240c158877961624ca8d5a0d45d4fe47531350daf0a686c140e73f0bcd",
+   "bytes": 2570
+  },
+  "nrich/iiif/diary/중앙대학교.json": {
+   "sha256": "5a2eb7d2868e96148a6044fe0dfa53692143f24f59416552daec47a33be49ce9",
+   "bytes": 1167
+  },
+  "nrich/iiif/diary/충남대학교.json": {
+   "sha256": "a6a1596e42d6e230dbcdf826b4aa428d7d937c713da1dd593752f6b031e7cca5",
+   "bytes": 2006
+  },
+  "nrich/iiif/diary/충재박물관.json": {
+   "sha256": "c16232688a19e377d15257e9da0dcf398a2cddb0ef2f870c73e92be0bb893bad",
+   "bytes": 1041
+  },
+  "nrich/iiif/diary/한국국학진흥원.json": {
+   "sha256": "dd3442d7b589fe6303e728902e87603f79e960d674c71e97868e844c6778d128",
+   "bytes": 19209
+  },
+  "nrich/iiif/diary/한국은행.json": {
+   "sha256": "c63739cf3201ed38d828a9525a08f474e188f2cd7ec7af1e587964133df2644e",
+   "bytes": 1612
+  },
+  "nrich/iiif/diary/한국학중앙연구원_장서각.json": {
+   "sha256": "cf3268cb6dd26689799906d259751f428949bae53ee5cdbcc1335b3e539927aa",
+   "bytes": 15781
+  },
+  "nrich/iiif/gaesong/전체.json": {
+   "sha256": "4d7611c3892b799fe3332acb07897dafad5c1e21d1beedbe9f50dbb6e91ee0a8",
+   "bytes": 2816
+  },
+  "nrich/iiif/gwaebul/경기도.json": {
+   "sha256": "88b5e1a061bed62ea2b1a7b817f4b18cb27c1aedee648c81a3fa41d5389f5a48",
+   "bytes": 1167
+  },
+  "nrich/iiif/gwaebul/경상남도.json": {
+   "sha256": "1297545502bd1098866a5349346d3b702c8c8e401c98a8c41129b3b37df59477",
+   "bytes": 2051
+  },
+  "nrich/iiif/gwaebul/경상북도.json": {
+   "sha256": "51be8632973768f9936ab6d56a12c23a7d05c0d91239402c1ed716aa97434819",
+   "bytes": 3262
+  },
+  "nrich/iiif/gwaebul/기타.json": {
+   "sha256": "0ccea3ae89b4304092f8fd763ce1d18026fc10c0a90faccc67b04b1917f7bfbc",
+   "bytes": 755
+  },
+  "nrich/iiif/gwaebul/서울특별시.json": {
+   "sha256": "ba46bcd7a5716d34630ccc9d63a6552f46129a410d4a7c072b3b38cd83e58b10",
+   "bytes": 1011
+  },
+  "nrich/iiif/gwaebul/전남광주통합특별시.json": {
+   "sha256": "23453b7530049038389a78222c5b7db954c1c559d50d576f1643c301cee83efc",
+   "bytes": 2404
+  },
+  "nrich/iiif/gwaebul/전북특별자치도.json": {
+   "sha256": "0b0f6c918c7b1dd325f63d25bea358f642d6579f0c0392c28428846d832e9b36",
+   "bytes": 1341
+  },
+  "nrich/iiif/gwaebul/충청남도.json": {
+   "sha256": "3d651c59ffb9ac38555f709b5907a8e9c77a8b4e06b98c912ee9c6f69e1e09cb",
+   "bytes": 2498
+  },
+  "nrich/iiif/gwaebul/충청북도.json": {
+   "sha256": "3abb09015def7feb9e6dd5d361d708d18c3842ce869260ac71974b77dc9517bc",
+   "bytes": 1130
+  },
+  "nrich/iiif/hyanggyo/강원특별자치도.json": {
+   "sha256": "0f5c6afa2f124cae92f0b401126f7423478091fbe1eb155278724ef56ce2f36d",
+   "bytes": 2232
+  },
+  "nrich/iiif/hyanggyo/경기도.json": {
+   "sha256": "f806fb112f158e3aa2ac21ad1330cbdc71822b1fddc1a01f23455f21c0803b60",
+   "bytes": 3336
+  },
+  "nrich/iiif/hyanggyo/경상남도.json": {
+   "sha256": "d149a6e19bc7fa05293a30bb8d8fce87f224a162216860ed1268e6131df2ac10",
+   "bytes": 4069
+  },
+  "nrich/iiif/hyanggyo/경상북도.json": {
+   "sha256": "49f7e937bc34fcc642c0cd7c36b95d17c042dbf3c738479ef67135a1cab1b00e",
+   "bytes": 5480
+  },
+  "nrich/iiif/hyanggyo/기타.json": {
+   "sha256": "8ba57db10b32471ced0ee89ecb4b626754df18aa70ac2178572de7b09a57fcbe",
+   "bytes": 1064
+  },
+  "nrich/iiif/hyanggyo/대구광역시.json": {
+   "sha256": "7c43ada8b69e5f3206f2126d9f4167a95777ce44455d69783d00f00650352eab",
+   "bytes": 799
+  },
+  "nrich/iiif/hyanggyo/인천광역시.json": {
+   "sha256": "176f63881e835645d1f264bc4b5d8db854b51a639f86d43aada6e271bd469d79",
+   "bytes": 941
+  },
+  "nrich/iiif/jcphoto/전체.json": {
+   "sha256": "6c7d21423f38f499fa128221d02474de0b807efa34aee93937c28ae172e76863",
+   "bytes": 2981
+  },
+  "nrich/iiif/ksm/강원특별자치도.json": {
+   "sha256": "0013dd9fd887b63307f6b48b5f62b4e4018fb453d32c053a5eafda9dbd3bcaeb",
+   "bytes": 35666
+  },
+  "nrich/iiif/ksm/개인소장.json": {
+   "sha256": "d8c0c027f20498c1f38871f25e3e6d9697c42da95a6bc05db7ccc736f291c28e",
+   "bytes": 1721
+  },
+  "nrich/iiif/ksm/경기도.json": {
+   "sha256": "c4b502e7db6c77200054501b38caf2d3ad99e60d35934d8ffd29a968665aa9ad",
+   "bytes": 167145
+  },
+  "nrich/iiif/ksm/경도.json": {
+   "sha256": "28fb0caa5db3b9f5fcd9279660f9519c32d73851c32c3348ee834f5112105630",
+   "bytes": 5406
+  },
+  "nrich/iiif/ksm/경도고려미술관.json": {
+   "sha256": "b0cf6f5232fcd5b67afeeca38f60a8fc9e90f05ef61c0e0254f6f184876039c7",
+   "bytes": 1387
+  },
+  "nrich/iiif/ksm/경도대학.json": {
+   "sha256": "ed3567765a4a1e9021fc5a2612a3dbd83248d6716f7bb6c75491355ea0d85d38",
+   "bytes": 9468
+  },
+  "nrich/iiif/ksm/경상남도.json": {
+   "sha256": "241b5d81976330587b3b7689a1f10e1dd38d0e2807dca6ba5201bbb641be3742",
+   "bytes": 41879
+  },
+  "nrich/iiif/ksm/경상북도.json": {
+   "sha256": "9caa3ec369ecdea8977df8d31a485e991acc64f4ef23012295737e744346aa6d",
+   "bytes": 386417
+  },
+  "nrich/iiif/ksm/관서대학박물관.json": {
+   "sha256": "47258a9cb27f31b63ed8a7a461bcf54a8caef8fe88b4d8c13cdb67f9c4f516e1",
+   "bytes": 851
+  },
+  "nrich/iiif/ksm/구주대학.json": {
+   "sha256": "b352097c82e3b1c229d01d7474707b5ddb63d9998bd496a8fd5c76bfdd588819",
+   "bytes": 895
+  },
+  "nrich/iiif/ksm/국립역사민속박물관.json": {
+   "sha256": "e3838d9b788ff1fed607ffec15de3dea70ce7c766235b56e556157eda7127ba4",
+   "bytes": 927
+  },
+  "nrich/iiif/ksm/기타.json": {
+   "sha256": "d361a10679e46f11a3d411c9f35ce128268b0a35bb063388b180686926b4bbe5",
+   "bytes": 14065
+  },
+  "nrich/iiif/ksm/대구광역시.json": {
+   "sha256": "08967e39cb5d193b70360ef0d78d5c62077752a9d4d45431fa4e774c9f48ca48",
+   "bytes": 52935
+  },
+  "nrich/iiif/ksm/대전광역시.json": {
+   "sha256": "d1aefaa3963b32a8f4626b6cc3aec52334e38f51f9b7a0cd76ccae2c4bfbffb7",
+   "bytes": 2929
+  },
+  "nrich/iiif/ksm/대판시립동양도자미술관.json": {
+   "sha256": "0de76676bea27db265cdb11cc3bb339cc4ec3ffd6d59a9feafc4f7d5816e5a66",
+   "bytes": 17286
+  },
+  "nrich/iiif/ksm/대판시립미술관.json": {
+   "sha256": "14186d9611d47cd852ee092a59a800eb7896e38ef30464882231b28443687bfc",
+   "bytes": 907
+  },
+  "nrich/iiif/ksm/덕천미술관.json": {
+   "sha256": "df8d112f3f25b1ff9862a3de92133942e54c40d07463a494fc007b242bfd9990",
+   "bytes": 959
+  },
+  "nrich/iiif/ksm/동경.json": {
+   "sha256": "24a282aefb71d99f373c8c0afd69f56173632a2eaefec11b7b426a9fc57a98a0",
+   "bytes": 21031
+  },
+  "nrich/iiif/ksm/동경국립박물관.json": {
+   "sha256": "809e5ae82a753ee52b72a54904e898442d810e5eead319443f59a2c518f3e285",
+   "bytes": 3770
+  },
+  "nrich/iiif/ksm/동경대학.json": {
+   "sha256": "0fb1434e6b670014205404c1d1ca738751662f29750828612215536bfcf1379c",
+   "bytes": 1545
+  },
+  "nrich/iiif/ksm/동경대학교.json": {
+   "sha256": "b0413099a7e841aec657d698370b61b9d856c263245fd9ecb55206d85d3f6b67",
+   "bytes": 1197
+  },
+  "nrich/iiif/ksm/미상.json": {
+   "sha256": "a15627fbb2c194dbd9946999b1e593428efb33f59eb24e755774cb7e122fb8d2",
+   "bytes": 2272
+  },
+  "nrich/iiif/ksm/부산광역시.json": {
+   "sha256": "32ab1a8b28f8017bd51471290c9518337cd6fdd9814ddbb9405e8e5e0c94bf5e",
+   "bytes": 7194
+  },
+  "nrich/iiif/ksm/북한.json": {
+   "sha256": "7ab5a19dedbe8094ee746618789d6146b184d0c4721d18d4253ebe8904d8db35",
+   "bytes": 4658
+  },
+  "nrich/iiif/ksm/서울특별시.json": {
+   "sha256": "cb59281b0d894c65183562a2ca97a0b94eae4c5607f8ce90c9c203093c5c028d",
+   "bytes": 130568
+  },
+  "nrich/iiif/ksm/세종특별자치시.json": {
+   "sha256": "8b2c5ace2b8a4f55e38e2722d4e4be4246d75ab9aacec74a08f2e9a0a17f2197",
+   "bytes": 1302
+  },
+  "nrich/iiif/ksm/울산광역시.json": {
+   "sha256": "8aac23d386ca594008c95d7b46dc101b64819178fa5bccba5e4d12bad4b0a69b",
+   "bytes": 2909
+  },
+  "nrich/iiif/ksm/인천광역시.json": {
+   "sha256": "b82f2a484bca7eef4f2061dcbc8da006b5ac52a4018ed4ad013674913096313b",
+   "bytes": 7792
+  },
+  "nrich/iiif/ksm/일본.json": {
+   "sha256": "23d781004483d079cae07eaa8579774cafb3cdbd933290699f9c36fb2e80d841",
+   "bytes": 25340
+  },
+  "nrich/iiif/ksm/전남광주통합특별시.json": {
+   "sha256": "e16d5a1abf5ed387bfd48011af270befc763b20b214f268236e7f64bbb40dcaa",
+   "bytes": 28001
+  },
+  "nrich/iiif/ksm/전북특별자치도.json": {
+   "sha256": "213f2a186f1337e9b389230f48f4e65354e12555a3dcbfc8aa7439805ebe03d7",
+   "bytes": 16542
+  },
+  "nrich/iiif/ksm/제주특별자치도.json": {
+   "sha256": "9270d399ee5bf3b1a5cd8dd08837ce110ad65f53cae97eb5b30140b3cf9b6d99",
+   "bytes": 1867
+  },
+  "nrich/iiif/ksm/중국.json": {
+   "sha256": "670da348ed858df2b67b536d877480f1cca6fe10761322c631e92f110cefd18f",
+   "bytes": 2546
+  },
+  "nrich/iiif/ksm/집안시박물관.json": {
+   "sha256": "4392cbf69073642a88d8bcc87ed0a2e3ef5a629c7f016ca58ea7ee209adf3fec",
+   "bytes": 851
+  },
+  "nrich/iiif/ksm/천리대학.json": {
+   "sha256": "7f255b24ae0f855de294bfebe940ce6c3123f9a27494ad3c87046dd5d2f3c992",
+   "bytes": 1615
+  },
+  "nrich/iiif/ksm/충청남도.json": {
+   "sha256": "300fbd182475be0710ff68c26e49fb13ce160dbe78c9acc26c87eb02199ad36b",
+   "bytes": 26183
+  },
+  "nrich/iiif/ksm/충청북도.json": {
+   "sha256": "c0d9d5de188fe8024302f0c72a0b90e701b81c89aca3f06c978bcb7092a9b4af",
+   "bytes": 28604
+  },
+  "nrich/iiif/ksm/평안남도.json": {
+   "sha256": "4f2e45110055a5ebc6b4132c25f66466c5309752b8ce744da4cb049a068be5b3",
+   "bytes": 1393
+  },
+  "nrich/iiif/ksm/평안북도.json": {
+   "sha256": "233bf9528841dd55dcc9be2331d3fcbe3c68f449a7215eb0513519d6df585f19",
+   "bytes": 1095
+  },
+  "nrich/iiif/ksm/평양시.json": {
+   "sha256": "33bbdef648b188fcba16e9aeb77d27b32101e7b7c00bc162122611f5ab1ac32d",
+   "bytes": 877
+  },
+  "nrich/iiif/ksm/포항시.json": {
+   "sha256": "72909e81408929432b0b8ec72913eb0773cdb9bde1642932dd42d64fbed43ad2",
+   "bytes": 1672
+  },
+  "nrich/iiif/ksm/황해남도.json": {
+   "sha256": "023ac7989e16af29426921904b3c23c8ea96bc429a29ae820d7b64dba3523f98",
+   "bytes": 1275
+  },
+  "nrich/iiif/ksm/황해북도.json": {
+   "sha256": "0997545bc629307766e716621d4a7d2b58e6aa5b32853d3f293676785013e639",
+   "bytes": 1247
+  },
+  "nrich/iiif/mokgan/경상남도.json": {
+   "sha256": "56b73bde6579d81a348c426b3342a060ddc9ae0a28bb331aded0d54e551a1d8f",
+   "bytes": 40268
+  },
+  "nrich/iiif/mokgan/경상북도.json": {
+   "sha256": "f890d54e69c897b2305a57ff9a5ffbca4e7d62f42f32d120a068bafc49e17bab",
+   "bytes": 15050
+  },
+  "nrich/iiif/mokgan/울산광역시.json": {
+   "sha256": "9359edcc3c3e9d924480461b07e8f9a65301afd2dc50435fb3a342c8372e1866",
+   "bytes": 529
+  },
+  "nrich/iiif/mokgan/인천광역시.json": {
+   "sha256": "c64fb49c535137ee5269f8634f3e361762755b503da3d15bd8668936f9aff9f4",
+   "bytes": 710
+  },
+  "nrich/iiif/mokgan/전라남도.json": {
+   "sha256": "c11aed344dea1b470bad5d222f92b09283840e5fcffd5330dc1e9aa4c88bfeb2",
+   "bytes": 6637
+  },
+  "nrich/iiif/mokgan/전북특별자치도.json": {
+   "sha256": "155c8038219273e05e2eb705de4576029e654c618e8af0abcb789fa7136e8479",
+   "bytes": 742
+  },
+  "nrich/iiif/mokgan/충청남도.json": {
+   "sha256": "a95782e6f2f1f74e981bce5d2b8f59a802008371e27a346b608f6ce885899b09",
+   "bytes": 20139
+  },
+  "nrich/iiif/mokgan/하남.json": {
+   "sha256": "4f2aea82f457c8aee73a102e065db2c85365f1ef5f7d416f547381f9e04d8f72",
+   "bytes": 1594
+  },
+  "nrich/iiif/oldbook/x.json": {
+   "sha256": "4dadb3c27353f7089e19753aebc496bfa356e6ac3f388dc32c83c062716ba67b",
+   "bytes": 837
+  },
+  "nrich/iiif/oldbook/금속활자본.json": {
+   "sha256": "18e0c67f91cf9ead348c0326c97f822e2e1070df8f044e867bced506535f1c7f",
+   "bytes": 852
+  },
+  "nrich/iiif/oldbook/금속활자본_갑진자.json": {
+   "sha256": "82701eaa8a1499a74ab23ba993f11ec44af93f0462adeda7c536dad8e7434c06",
+   "bytes": 959
+  },
+  "nrich/iiif/oldbook/금속활자본_전사자.json": {
+   "sha256": "5e1ca94dc110c8f5763385d727130a96c03fbda82bb7cc4f5f1f83453e57f89d",
+   "bytes": 893
+  },
+  "nrich/iiif/oldbook/기타.json": {
+   "sha256": "9c8cba60b9ca322bc87a4711b0841013d53a26a496ccdb21dce8dfe5b5cf835a",
+   "bytes": 8168
+  },
+  "nrich/iiif/oldbook/목판본.json": {
+   "sha256": "638d47e5ae5f23f2bbe9bd938dd8492719bc3a9d2aa488a465eb05f83c093143",
+   "bytes": 1527
+  },
+  "nrich/iiif/oldbook/목판본_일본본.json": {
+   "sha256": "1550a365befb0277a8d580fbe3f8647716686868030961c4799a5ce6680e49d0",
+   "bytes": 1513
+  },
+  "nrich/iiif/oldbook/목판본_중국본.json": {
+   "sha256": "764d03d91620662b6420d38b833971d980a9a098afb2885284bb48f9d4fc89e6",
+   "bytes": 1583
+  },
+  "nrich/iiif/oldbook/목활자본.json": {
+   "sha256": "d743870bc98b5188e62db1b3ad9846630253d5b258012446c60726a34cb329ea",
+   "bytes": 1977
+  },
+  "nrich/iiif/oldbook/미상.json": {
+   "sha256": "d8f558284e17eb87a0095cde4f04c46caf7b0b518b66789e9dba57059792674f",
+   "bytes": 2235
+  },
+  "nrich/iiif/oldbook/석인본.json": {
+   "sha256": "4a6a5f11911012459ebab8eaecf846d86202c5238308f39dcbd46f7821f0afd9",
+   "bytes": 1131
+  },
+  "nrich/iiif/oldbook/석판본.json": {
+   "sha256": "e3df61527065aa10f5299c58caa586c907b7bbce74e981530d11cf8ed3899b24",
+   "bytes": 2169
+  },
+  "nrich/iiif/oldbook/신식인쇄본.json": {
+   "sha256": "11990b3212371f3ad6187a1bb1415fc74cf94af47fdadbba65d7989dd2941af5",
+   "bytes": 2288
+  },
+  "nrich/iiif/oldbook/신식인쇄본_일본본.json": {
+   "sha256": "78e1434810f01c107f25749f6852fc69a593815bc8f757613237c32f7f0cadc4",
+   "bytes": 4512
+  },
+  "nrich/iiif/oldbook/신연활자본.json": {
+   "sha256": "6bdfadf88a94004c29d823ab71145a4fbb2bea508e2b643a692f12ab13cd5b7e",
+   "bytes": 1821
+  },
+  "nrich/iiif/oldbook/영인본.json": {
+   "sha256": "f0e5b10c628ab39586828ce87ff4673526a413e62ea5055220f2ec7eec32fef2",
+   "bytes": 2621
+  },
+  "nrich/iiif/oldbook/영인본_일본본.json": {
+   "sha256": "67363a8b4f507b71567104fb4e28c4ffbe5ec3e9cb80d567327ec16f534b8ae0",
+   "bytes": 4116
+  },
+  "nrich/iiif/oldbook/인쇄본.json": {
+   "sha256": "a600d5f6ca150ff57f6ec74f5c254caaee203ed8b9f632656eaa6e59679bcd35",
+   "bytes": 1295
+  },
+  "nrich/iiif/oldbook/중국본.json": {
+   "sha256": "ed1f8454a96efa54bf60d4db1669640016444dea106a2e5dd4df93228440f962",
+   "bytes": 964
+  },
+  "nrich/iiif/oldbook/청사진.json": {
+   "sha256": "9d9f61646d9e2135213b496e225f7a761b75cce0c333fa732e41c1f8901d9ab1",
+   "bytes": 964
+  },
+  "nrich/iiif/oldbook/청사진_트레이싱.json": {
+   "sha256": "2dee07d58f0a5913e2ff2e80560099cecce25e8dd3ac4e63cca37d4641155630",
+   "bytes": 983
+  },
+  "nrich/iiif/oldbook/탁본.json": {
+   "sha256": "97ae9755312a985caef2dd4f6dfd91d0946c35d269678ee496ffddb810bdb616",
+   "bytes": 5633
+  },
+  "nrich/iiif/oldbook/탁인본.json": {
+   "sha256": "db2a94a2fe04cff0a79e50e240e35f4d68f83f344bcc4ee2133aba6e38132877",
+   "bytes": 1610
+  },
+  "nrich/iiif/oldbook/필사본.json": {
+   "sha256": "7df13a98210d18d2e61080d8aea3d3110d4b057c58a14e5b075732746632b014",
+   "bytes": 32744
+  },
+  "nrich/iiif/oldbook/필사본_일본본.json": {
+   "sha256": "6b9fdeb8dadb6908f7f42891ed004b5b450d3fa4c88d442f38237a75af3517cc",
+   "bytes": 881
+  },
+  "nrich/iiif/oldbook/필사본_일본본_채색.json": {
+   "sha256": "d35eb4e5a9de37edeac78796ca8366805b7892d4f12c1694f1be9c8e7a3fcb0e",
+   "bytes": 914
+  },
+  "nrich/iiif/oldbook/필사본_채색.json": {
+   "sha256": "3d084f646c138a2b5f8748ee2ed8669a01b448d5701557561d2aea35c5a41df2",
+   "bytes": 2582
+  },
+  "nrich/iiif/pattern/개인_소장.json": {
+   "sha256": "5f18e3642dd79d8f50f5daffdb7e6ee51001199ec4bafe4d6404eb772fe5733c",
+   "bytes": 2579
+  },
+  "nrich/iiif/pattern/건릉.json": {
+   "sha256": "5a03bd42ff271159873d7e37d4c08bb142587e0d199a3c6d5a189b860f558998",
+   "bytes": 1977
+  },
+  "nrich/iiif/pattern/경기도박물관.json": {
+   "sha256": "ebb18f81d87ddf0408919fcb0b3abde53f1574ea5dde268e969964e2f43f74a1",
+   "bytes": 5163
+  },
+  "nrich/iiif/pattern/경복궁.json": {
+   "sha256": "a535174cafedc990a58cbeb23b4d7905a4af09de30339efa75739b95ebaaffc6",
+   "bytes": 17825
+  },
+  "nrich/iiif/pattern/경북대학교_박물관.json": {
+   "sha256": "40a78aa02844a34321ceb8ac7acc67069b104061147fddc48b9309206d158384",
+   "bytes": 2606
+  },
+  "nrich/iiif/pattern/경북대학교박물관.json": {
+   "sha256": "3d79ff52bfccecf5e08c27c7c2531b2398c5c0a097d363d0adbe48898d42e91a",
+   "bytes": 1242
+  },
+  "nrich/iiif/pattern/경운박물관.json": {
+   "sha256": "439f383fe001a529647fc0aa120b6068004cfabffff1465332c2de810d0bf14c",
+   "bytes": 851
+  },
+  "nrich/iiif/pattern/경희대학교_중앙박물관.json": {
+   "sha256": "c7fcb56c07e5c536e8bf6a118554aab7bc5c74b69f11805f15992856c0bfd43d",
+   "bytes": 5339
+  },
+  "nrich/iiif/pattern/계명대학교_행소박물관.json": {
+   "sha256": "56b5063d5a551ae0f6c24225cde6d230a6f233cb59765e8db29c10e1cda7ccae",
+   "bytes": 1138
+  },
+  "nrich/iiif/pattern/고려대학교_박물관.json": {
+   "sha256": "112493083bf898464fde386fc43c4d64e47012e9c21e3618f0f951386f59734c",
+   "bytes": 2604
+  },
+  "nrich/iiif/pattern/고려대학교박물관.json": {
+   "sha256": "ac631445cb7e12c012c9f10dc5a0e2f5522eff0c8d0e0c30317dcd5de1bd87ca",
+   "bytes": 908
+  },
+  "nrich/iiif/pattern/국립경주문화유산연구소.json": {
+   "sha256": "8a02c1e62c1f413dd0bad36f556f6074efdb57a48c36d2a75f47fce67790dd0d",
+   "bytes": 3208
+  },
+  "nrich/iiif/pattern/국립경주박물관.json": {
+   "sha256": "bff23792714cffb8e03a0427c7a4cc52634f6213bf7999427bb85398275e00ef",
+   "bytes": 6667
+  },
+  "nrich/iiif/pattern/국립고궁박물관.json": {
+   "sha256": "9ede0308227fd4b3769fef914373f617ca7e3ac9ab0474f6f1f65aacaca8b875",
+   "bytes": 13321
+  },
+  "nrich/iiif/pattern/국립공주박물관.json": {
+   "sha256": "a40e7da1464a96d0cdc49634247adbc15bf77cea6ee69e8529bce047595b1cb8",
+   "bytes": 4821
+  },
+  "nrich/iiif/pattern/국립광주박물관.json": {
+   "sha256": "ad60a999618f687aff5fd33509eecf19a26a679bb218f7bb1615bcefe213e92a",
+   "bytes": 2701
+  },
+  "nrich/iiif/pattern/국립대구박물관.json": {
+   "sha256": "f48797091384219052c0018ef9264683c5ec603fe91616c1394f902f07cfdf07",
+   "bytes": 1079
+  },
+  "nrich/iiif/pattern/국립문화유산연구원.json": {
+   "sha256": "1767863e79b4ea12b017d9f93c4ac50531b60aaec14393da468ee42db18da3bf",
+   "bytes": 1904
+  },
+  "nrich/iiif/pattern/국립민속박물관.json": {
+   "sha256": "a441b5cc4ea41a928da665553e03ef470f380d9ff09f10ac4c789ab9b91ab274",
+   "bytes": 4027
+  },
+  "nrich/iiif/pattern/국립부여문화유산연구소.json": {
+   "sha256": "9251bb8cfbeb89e0b178fec586bee9ac4d5b369674ae127ff9a0f04d14e66250",
+   "bytes": 1412
+  },
+  "nrich/iiif/pattern/국립부여박물관.json": {
+   "sha256": "0a412e76fe47009db3329d9e2891998b2ebcdd3866a58c69fcda1dfe5759948f",
+   "bytes": 3485
+  },
+  "nrich/iiif/pattern/국립전주박물관.json": {
+   "sha256": "a3008f742d73244e9ca18ad7c778f5b85a3466aeb03e0afc2061f1cb787d4ebe",
+   "bytes": 2583
+  },
+  "nrich/iiif/pattern/국립중앙박물관.json": {
+   "sha256": "e9e04fc65fb6154262e404716af59d80bfa9186bcea7239f893c8320a9c6467e",
+   "bytes": 25075
+  },
+  "nrich/iiif/pattern/국립춘천박물관.json": {
+   "sha256": "6e992cbb0757d1106e3a6451dfffcb2837464019ef497a0e75536be3e68821c8",
+   "bytes": 1060
+  },
+  "nrich/iiif/pattern/국민대학교_박물관.json": {
+   "sha256": "3a1a39f88b470c7659d8fe195fab138be351d4d7d0ea47d7968ffc90c1e188c5",
+   "bytes": 1894
+  },
+  "nrich/iiif/pattern/기타.json": {
+   "sha256": "59178c22b27c379010cf6938e6c8532121ea300c6d09b46b09d15de6e52b0834",
+   "bytes": 8495
+  },
+  "nrich/iiif/pattern/낙산사.json": {
+   "sha256": "e53b19106a0f19bef890c34abfcd093230b5d338989ecedd0e47947bcef3d868",
+   "bytes": 954
+  },
+  "nrich/iiif/pattern/단국대학교_석주선기념박물관.json": {
+   "sha256": "215741f06040ccd52a7adbb9e87a886613f7274ab9945df59e17eb1e57f1095f",
+   "bytes": 3854
+  },
+  "nrich/iiif/pattern/덕성여자대학교_박물관.json": {
+   "sha256": "c80894ad04869b430a5b29569be06b86011a5ab885782ae4457a5b203a15c8b3",
+   "bytes": 3609
+  },
+  "nrich/iiif/pattern/덕수궁.json": {
+   "sha256": "7b1b878494fdff52e248652963ba70e9adda8582af7d8b1fbd9825c5e5e9525c",
+   "bytes": 5572
+  },
+  "nrich/iiif/pattern/동아대학교_박물관.json": {
+   "sha256": "32d9fe41773e44dcdc7d664ef6a990b9dc6d6f43e2f95da8db48d8d5e4350d33",
+   "bytes": 1059
+  },
+  "nrich/iiif/pattern/디아모레뮤지엄.json": {
+   "sha256": "8d177a9e974d6019665c520b7d5ae4c552b221dfe844d4c50d1d25b2c625f2a9",
+   "bytes": 923
+  },
+  "nrich/iiif/pattern/디아모레뮤지움.json": {
+   "sha256": "16c525033efe663f5ae8a63613df7ea93e821b002a6930d9fc20469913220995",
+   "bytes": 1088
+  },
+  "nrich/iiif/pattern/부산박물관.json": {
+   "sha256": "84f98b43a95403c2dd0bc07a4e51c102434a606a8dc924a695164313be91da41",
+   "bytes": 1045
+  },
+  "nrich/iiif/pattern/삼성미술관_리움.json": {
+   "sha256": "082b4a414a2124130f5735e8debbc376feaa8623a20767f9026543510236d8e5",
+   "bytes": 7659
+  },
+  "nrich/iiif/pattern/서울역사박물관.json": {
+   "sha256": "5ad1610669cb4e0abe0c8850d21e794f3cdc15ef6d3e2abc7c50541ffda5b30b",
+   "bytes": 5013
+  },
+  "nrich/iiif/pattern/선문대학교박물관.json": {
+   "sha256": "33c00f34b160b716a4496bf7f800be8dd70fd318aa339c50a29140b60a74e256",
+   "bytes": 5690
+  },
+  "nrich/iiif/pattern/수덕사.json": {
+   "sha256": "d25667846bbc03ce7124ba3f61c0853c77784a35d1acd0fd5b29d837a2618304",
+   "bytes": 2094
+  },
+  "nrich/iiif/pattern/숙명여대박물관.json": {
+   "sha256": "e887f4ee108590db018f9d470f3d5ea858298d9074bf7cb22cc01c1c3ae65af2",
+   "bytes": 872
+  },
+  "nrich/iiif/pattern/숙명여자대학교_박물관.json": {
+   "sha256": "a4da172565d1db21723e21b98ce3a4fa21ecd93feaad8a9995d4d20d2406137e",
+   "bytes": 1601
+  },
+  "nrich/iiif/pattern/숙명여자대학교박물관.json": {
+   "sha256": "7c44e4b0640bf188f91c29302314f3d1dc38b6b1e0c32aa61a0dcb7a84ff3bd5",
+   "bytes": 926
+  },
+  "nrich/iiif/pattern/안동대학교_박물관.json": {
+   "sha256": "b82fbf6bdbbaf3cc59a72c9db77177e295c06f074ace92568373de4b90048782",
+   "bytes": 2473
+  },
+  "nrich/iiif/pattern/양양_낙산사.json": {
+   "sha256": "c45fc4d3aa7c432fb48681ed3c6ce418cb4b45f058fc68ca04dd74d3c114a401",
+   "bytes": 1378
+  },
+  "nrich/iiif/pattern/연세대학교_박물관.json": {
+   "sha256": "e52bf482c526590f8e4b155f7b47c532d285df271301e8e85b16c9ad733b37ed",
+   "bytes": 2240
+  },
+  "nrich/iiif/pattern/영남대학교_박물관.json": {
+   "sha256": "dc0b010ec717bc7953170f1ed77662b632a6ebb437fa004b1e49452cd2a4366e",
+   "bytes": 3155
+  },
+  "nrich/iiif/pattern/온양민속박물관.json": {
+   "sha256": "9df8ed71b80de9e0ca4571acf0ef6ef741ff78173b652b0156c1a30cad310166",
+   "bytes": 4008
+  },
+  "nrich/iiif/pattern/용인대학교_박물관.json": {
+   "sha256": "8a2a0d5db1cac5763e8668220816e0b3568e36887b197236d1c642380de3c638",
+   "bytes": 1412
+  },
+  "nrich/iiif/pattern/원릉.json": {
+   "sha256": "48d26b7098f77f37d151fe07d0cc4de8b8cda1856df047d081fc5d1549d31239",
+   "bytes": 841
+  },
+  "nrich/iiif/pattern/일본_고려미술관.json": {
+   "sha256": "b5e3a1353f096c2eb7ecf5aa3d1e333a69361beaa3a115b5bd22a8f269a604b1",
+   "bytes": 2443
+  },
+  "nrich/iiif/pattern/일본_도쿄국립박물관.json": {
+   "sha256": "8d4ff2a482d7be371ee118582955a9aec81e5b91e503d95bc08adfe9a591d257",
+   "bytes": 1629
+  },
+  "nrich/iiif/pattern/일본_야마토문화관.json": {
+   "sha256": "6e358af038a36450736f0c86126f0b3f597d54bf67997a326a1f840196d876eb",
+   "bytes": 1583
+  },
+  "nrich/iiif/pattern/일암관.json": {
+   "sha256": "c69f061998ef4657d310da4c206eb67429558e955332b4480fc26c16088b8727",
+   "bytes": 6897
+  },
+  "nrich/iiif/pattern/전라북도_미륵사지유물전시관.json": {
+   "sha256": "fa79d4ea7526f7fb14e52789f3bc1c936fe3b8320b7626cf2ba9d2767ecaa4f8",
+   "bytes": 1575
+  },
+  "nrich/iiif/pattern/정릉.json": {
+   "sha256": "addc15e39ff33db8ac778bdb22b4d4adfa78794148939a6f678e3cb84da80b3b",
+   "bytes": 1650
+  },
+  "nrich/iiif/pattern/조선중앙역사박물관.json": {
+   "sha256": "a29c0419d022019ba347e040e638bb6e792b6f5e215912fe366334822e6ade2f",
+   "bytes": 1716
+  },
+  "nrich/iiif/pattern/창경궁.json": {
+   "sha256": "f1858ad08ca58f1a64e7e7206736b92c4025d6fa112194382d9105126ebbb8c9",
+   "bytes": 4352
+  },
+  "nrich/iiif/pattern/창덕궁.json": {
+   "sha256": "3571e49f95f6405dd2c9b2c7500fd887d0fabec8c7e94af8638b0bacf42258c8",
+   "bytes": 18331
+  },
+  "nrich/iiif/pattern/충북대학교_박물관.json": {
+   "sha256": "fbdfb8b8ef0ee482705127b8b0505d2dce9e4e8ec095f93bbbaf3a16349913b8",
+   "bytes": 1163
+  },
+  "nrich/iiif/pattern/통도사_성보박물관.json": {
+   "sha256": "46b3c3e4aa99a808b6b2de27a4ce4b3541889810068016a72b5e240d7950bf3e",
+   "bytes": 1934
+  },
+  "nrich/iiif/pattern/호림박물관.json": {
+   "sha256": "b909f9a5b9c0694ef640c6e2ce15830e286465d2086cb30fcaff714ef0b6eaa4",
+   "bytes": 21187
+  },
+  "nrich/iiif/pattern/회암사지박물관.json": {
+   "sha256": "a1c4ec00d845796e44b7f71cfeb8f6ab9e730114de9aba7e605b69b63b5e2551",
+   "bytes": 2182
+  },
+  "nrich/iiif/pattern/흑석사.json": {
+   "sha256": "2a71dfda24b5655ac02e67cfa0bdce77b4bba422ecad57f5aca9ada8897909d9",
+   "bytes": 1181
+  },
+  "nrich/iiif/portrait/개인.json": {
+   "sha256": "cea92d938167447ea3be21e9abb89340762e3a81f57ba0996c91e6c5edb0f4f2",
+   "bytes": 3134
+  },
+  "nrich/iiif/portrait/경기도박물관.json": {
+   "sha256": "77cb6b5828945a94409591929d64f4d8b66ed3220d7b0517190817235d77ae19",
+   "bytes": 2792
+  },
+  "nrich/iiif/portrait/국립고궁박물관.json": {
+   "sha256": "1314e74effd9f831f69d206cf9d86225fb91a2682fb6cc7c32ef571f919376fa",
+   "bytes": 1252
+  },
+  "nrich/iiif/portrait/국립중앙박물관.json": {
+   "sha256": "38b447d0c67d21337729ee1ca061aa9b729f61b87fd5ea570b9034616308bbc3",
+   "bytes": 3884
+  },
+  "nrich/iiif/portrait/기타.json": {
+   "sha256": "cef91c3dd560a53d8573ebe6a0443d4559612fe1eeb4011e28164ab9980b5377",
+   "bytes": 7038
+  },
+  "nrich/iiif/portrait/서울역사박물관.json": {
+   "sha256": "6c3c067afd1e0630089d27aba442439a75932b6a37ea0cfa1dc453f63c9211d7",
+   "bytes": 1522
+  },
+  "nrich/iiif/portrait/송광사.json": {
+   "sha256": "844c234e97759f23f31ff9412b1470dc08afd92385ff8f222bdecd880c15d686",
+   "bytes": 1152
+  },
+  "nrich/iiif/portrait/수원화성박물관.json": {
+   "sha256": "0842896920b05a78e69dcd1d6f41c95d2f1b52e62f5120464a65c4a7a01c804e",
+   "bytes": 1652
+  },
+  "nrich/iiif/portrait/한국유교문화진흥원.json": {
+   "sha256": "2991943ddfa3e1221b93376f5295acefd1e7133890497f6ce6c71ef72224c636",
+   "bytes": 1579
+  },
+  "nrich/iiif/portrait/한국학중앙연구원.json": {
+   "sha256": "9d58e4c2179141b700ecb945d844c012eead984e3bfe1e18e27fc349028fd52c",
+   "bytes": 1139
+  },
+  "nrich/iiif/stone/강원특별자치도.json": {
+   "sha256": "04c89f0d1488e67d5ee80440a2aa66fbf401716a640bbd70cddb5cb1a9a52c0e",
+   "bytes": 6959
+  },
+  "nrich/iiif/stone/경기도.json": {
+   "sha256": "abe628b2afd91eb7064fc1002cc21a94e22ecc4f1fc33fa14c643aacf351cb76",
+   "bytes": 5582
+  },
+  "nrich/iiif/stone/경상남도.json": {
+   "sha256": "e1560bc9c0316919188520a1cecefdef722f2871a92a343e220d92484a8a1e20",
+   "bytes": 9726
+  },
+  "nrich/iiif/stone/경상북도.json": {
+   "sha256": "14cb7bf3d3a20d93bc1652bafbfec05d2238eed05af991f1bf5bf52678ef813a",
+   "bytes": 22881
+  },
+  "nrich/iiif/stone/기타.json": {
+   "sha256": "3b57b6e6e16fb0aa06665a592a497d7733094b142a0b2e63c2599eb2a8720c13",
+   "bytes": 988
+  },
+  "nrich/iiif/stone/대구광역시.json": {
+   "sha256": "a33a7e7351715dbcd1f37b4990ac3b22f341d5a0200c61481786e1844aca2329",
+   "bytes": 2490
+  },
+  "nrich/iiif/stone/서울특별시.json": {
+   "sha256": "22a05a550d4ebaa763855cfb218f2edad4a6f3aa5a95621865953740287eff23",
+   "bytes": 4457
+  },
+  "nrich/iiif/stone/울산광역시.json": {
+   "sha256": "efe1a7e447450db92aaf83e4aa84c133c5aecdaddac5b59f999489268e2f0039",
+   "bytes": 1488
+  },
+  "nrich/iiif/stone/전남광주통합특별시.json": {
+   "sha256": "2a445b8deb822da43028c35f267eecd630117365a2459c56b3a1a4d85166cbd3",
+   "bytes": 12540
+  },
+  "nrich/iiif/stone/전북특별자치도.json": {
+   "sha256": "ae03ed829703c85914bab86d3c568d5344819339768a5ad03d319ccd525c71b1",
+   "bytes": 6147
+  },
+  "nrich/iiif/stone/충청남도.json": {
+   "sha256": "e47e84a13ad18f82378eec4e42eccacbeeaa214f72b80afa8aebb93fa5cae272",
+   "bytes": 7724
+  },
+  "nrich/iiif/stone/충청북도.json": {
+   "sha256": "cfdaa2ad78d51a61994221461788635b0bec91046e91a3950a200ca60a0ccbf2",
+   "bytes": 6825
+  },
+  "q/12257a734fe1faad.json": {
+   "sha256": "ef54b486791b02e2102eaa5debba2e7accc75f186e5f56e5f01785d0d77c2f58",
+   "bytes": 1862
+  },
+  "q/14a0e1116fdbcf67.json": {
+   "sha256": "e1fb3c834dff2ac0cc6f90bd7a7838fc1e4843250d84d5ee62de367716f97649",
+   "bytes": 2520
+  },
+  "q/1530d15bf27a173a.json": {
+   "sha256": "bbaf6b297810a0b692d6ebdee1b5049b8af82732ba428854fb3e73e10acb6fda",
+   "bytes": 1695
+  },
+  "q/24e0ee48a9207e77.json": {
+   "sha256": "e5839513c35ad5e1745231bfd96ead4c5017813a4283192ea2b94731f1496f35",
+   "bytes": 2412
+  },
+  "q/2be11890b4763b33.json": {
+   "sha256": "b4731d80c8f921edb1170c554a6c63a87e9b167935ade4a0fba0f4dd549f9ba3",
+   "bytes": 1696
+  },
+  "q/3ddba5d9bee019bb.json": {
+   "sha256": "f2fe1115802283a17e90107a538ef0f339078e765fcf60ba661fea9918a2500f",
+   "bytes": 1709
+  },
+  "q/51c4c74bd9791d68.json": {
+   "sha256": "72a6c517e41c5c774f1db85903c27e06dc8049a7a8ae2e053e09d66968dd931d",
+   "bytes": 2328
+  },
+  "q/73859adcc95ecd2a.json": {
+   "sha256": "fd85123e0000651bb545372985221a47b55711f3cdcc41f9e418b9735edadfe4",
+   "bytes": 1697
+  },
+  "q/77bbfd26e4df631f.json": {
+   "sha256": "583bd04c2b988c08655531d84fa0694f644fc2f4ab8f0f9fa0d13288a7b11a27",
+   "bytes": 4437
+  },
+  "q/7826fc8bc01ae1b5.json": {
+   "sha256": "5c1d65edf8a032c58b4bce550026eb4099351ffa41a4872fbdd92f6bf166fa53",
+   "bytes": 1856
+  },
+  "q/a5cdbec7cd03dccf.json": {
+   "sha256": "76dde74b756e059dda8ed458be2aed6e72d39dc3215a0b8f74c0247dd4987173",
+   "bytes": 2342
+  },
+  "q/a9dc39d5f31b486e.json": {
+   "sha256": "b27d37b116e65a7a48c2d3f3880bb235a49783b685e48dcc93a260d842321a7f",
+   "bytes": 1685
+  },
+  "q/afd4cc96b5d2d08b.json": {
+   "sha256": "d79e0aeffae14090f6da93ba9ad988c937976afbc3d7b807568d151b43d83827",
+   "bytes": 2374
+  },
+  "q/b1769d004958b1f0.json": {
+   "sha256": "f661c875a3c41ddf7833ed9f8e66f1bda961dc129238895303be104f060d3e39",
+   "bytes": 4126
+  },
+  "q/b402f351253e49c1.json": {
+   "sha256": "2a2220de7dab7019c229b14f84d53961ed6bb1bd151e46ec02aeeaeb2deee98f",
+   "bytes": 1733
+  },
+  "q/b86ce93ad1e6b575.json": {
+   "sha256": "81fb16a78b26fcf8e290b560386397bff6c5688fb41ec347d7f122114a398bc3",
+   "bytes": 4669
+  },
+  "q/bf2d23d0c6529ef3.json": {
+   "sha256": "4ac5b7c37171c60e78b342984d0e1292577ee59e87de843310975f999d730f1f",
+   "bytes": 2201
+  },
+  "q/cc315fbc00857dc3.json": {
+   "sha256": "82a26576f02e90178f32e703e8aa4e8eaf54ec3662bba86d1c83c7b834a0b628",
+   "bytes": 1742
+  },
+  "q/d305336e105edc09.json": {
+   "sha256": "915953f4cbfcf6ced09dd8113e5cd160c0a5888751b1f032db609fa28c10265c",
+   "bytes": 1708
+  },
+  "q/e50caae434cbbf55.json": {
+   "sha256": "9d41309f25ab252ea45424178817df6ff80d572f4a6cb43872d264ff73a93c89",
+   "bytes": 1965
+  },
+  "q/ec3e5d9ed4dfcaf6.json": {
+   "sha256": "bd1d9c017a477e2e3979fbf8e3467b64baca102a0720375ad1adb139724d67d6",
+   "bytes": 2273
+  },
+  "q/eddf3c383dab7172.json": {
+   "sha256": "1003c67861883b4752c00b317b4f4e501a6faa24f207e03f09f6630228e99772",
+   "bytes": 2412
+  },
+  "q/f1243a17261452da.json": {
+   "sha256": "d42bde25e1af99e111b2e1ce75ea68c92219d062a80a7760bb5af07e1bf10a30",
+   "bytes": 1690
+  },
+  "q/f1fe16889c4a3538.json": {
+   "sha256": "d3c06116be3a54448ee23c5443d32ebfc9224e5dd98ce00f35fe6fb373a944ad",
+   "bytes": 3114
+  },
+  "q/index.html": {
+   "sha256": "15cdbd17380e0f38bcf93799c48fbda590cce367dfdff904d5181d0812fcc057",
+   "bytes": 7520
+  },
+  "queries/2026-11.jsonl.gz": {
+   "sha256": "39acec91a8f647c69b5847713ba527ff097fe3d098cef35d58a83495f2cefc85",
+   "bytes": 46914
+  },
+  "queries/index.json": {
+   "sha256": "ff829d19c47c3b1b292464f8a0e88070db3e58460f88663e74478e01ed67e03c",
+   "bytes": 11982
+  }
+ },
+ "note": "files = docs/data 산출물 SHA-256·바이트(작업 상태 _state.json 제외). prev = 직전 등록부 파일 해시(사슬). 검증: python3 scripts/records_register.py --verify · sha256sum -c SHA256SUMS"
+}

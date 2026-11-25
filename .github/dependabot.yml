@@ -1,0 +1,15 @@
+# 의존성 자동 갱신 — 보안 패치가 사람의 기억에 기대지 않도록(월 1회 PR). 병합 전 verify·golden이 자동 검증한다.
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule: { interval: monthly }
+    open-pull-requests-limit: 3
+    groups:
+      runtime: { patterns: ["next", "react", "react-dom", "mcp-handler", "zod"] }
+    ignore:   # 메이저 업그레이드(next 16·zod 4·mcp-handler 2 등)는 API가 바뀌므로 자동 PR 제외 — 사람이 계획해 올린다(MAINTAINING.md)
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
+  - package-ecosystem: github-actions
+    directory: /
+    schedule: { interval: monthly }

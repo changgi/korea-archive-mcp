@@ -1,0 +1,50 @@
+name: verify
+on:
+  push:
+    branches: [main, main-ua9jn9]
+  pull_request:
+    branches: [main]
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24
+      - name: 구문 검사 (route.js · lib)
+        run: |
+          cp "app/api/[transport]/route.js" /tmp/route_check.mjs
+          node --check /tmp/route_check.mjs
+          # v2.34 lib 전 파일(목록 누락으로 lib/ledger.js 구문 오류가 빌드에서야 드러난 사례)
+          for f in lib/*.js; do cp "$f" "/tmp/chk_$(basename "$f" .js).mjs"; node --check "/tmp/chk_$(basename "$f" .js).mjs" || exit 1; done
+      - name: 정적 검증 (도구 20종 · 설명 1024자 · TOPICS 컴파일 · 24KB 가드)
+        run: node scripts/ci-verify.mjs
+      - name: 원장 읽기·쓰기 단위 시험(모의 Redis)
+        run: node scripts/ci-ledger-unit.mjs
+      - name: 원장 병합 오프라인 전 과정 시험(네트워크 차단)
+        run: python3 scripts/ci-ledger-offline.py
+      - name: GitHub Pages 무결성 (docs 링크·IIIF 이미지·매니페스트 수)
+        run: python3 scripts/check-docs.py
+      - name: IIIF 구조 검증(Presentation 3 — 정적 docs 전체)
+        run: python3 scripts/iiif_check.py
+      - name: 골든 케이스 파일 형식
+        run: python3 -c "import json,re;g=json.load(open('tests/golden.json'));[re.compile(r) for c in g['cases'] for r in c.get('must',[])+c.get('must_not',[])];print('golden',len(g['cases']),'cases OK')"
+      - name: marketplace 패리티 (3사본 도구명 diff · 본문 사본 일치 + py_compile)
+        run: |
+          git clone --depth 1 https://github.com/changgi/korea-archive-marketplace /tmp/mkt
+          node scripts/ci-parity.mjs /tmp/mkt
+          python3 -m py_compile /tmp/mkt/plugins/korea-archive/servers/server.py /tmp/mkt/mcp/server.py \
+            /tmp/mkt/plugins/korea-archive/servers/kla/ledger.py /tmp/mkt/collector/kla/ledger.py
+  build:
+    # 실제 빌드 — 의존성 갱신(Dependabot)·코드 변경이 Vercel 배포를 깨지 않는지 병합 전에 확인
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npx next build

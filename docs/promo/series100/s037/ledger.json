@@ -1,0 +1,112 @@
+{
+ "n": 37,
+ "src": "koreanwar",
+ "record": {
+  "id": "622건",
+  "title": "1950.10 평양 — 입성, 그리고 철수",
+  "inst": "6·25전쟁 아카이브센터 (협약기관)",
+  "url": "https://catalog.archives.gov/id/542285"
+ },
+ "images": [
+  {
+   "file": "src/p_542285.jpg",
+   "role": "hero",
+   "w": 1800,
+   "h": 1437,
+   "visible": [],
+   "nocrop": false,
+   "record_id": "NAID 542285 (342-AF-87164AC)",
+   "title": "This photograph, taken in Pyongyang, N.W. marshalling yards, Korea, illustrates the aftermath of a bombing raid by B-29s of the Far East Air Force. Wrecked locomotive, twisted trackage, and shattered roundhouse attest to the effectiveness of interdiction.",
+   "date": "1950-10-25",
+   "url": "https://catalog.archives.gov/id/542285",
+   "orig_size": [
+    3000,
+    2395
+   ],
+   "object": "https://catalog.archives.gov/medialz/stillpix/342-af/342-AF-087164AC_34-3855M.TIF",
+   "rights": "A — Unrestricted",
+   "rights_evidence": "NARA catalog proxy API useRestriction.status='Unrestricted' (2026-11-22 실측)"
+  },
+  {
+   "file": "src/p_348337867.jpg",
+   "role": "extra",
+   "w": 800,
+   "h": 633,
+   "visible": [
+    "평양 차량용 다리 1950-10-25 · NAID 348337867"
+   ],
+   "nocrop": false,
+   "record_id": "NAID 348337867 (2007-536)",
+   "title": "Bridge at Pyongyang, Korea",
+   "date": "1950-10-25",
+   "url": "https://catalog.archives.gov/id/348337867",
+   "orig_size": [
+    800,
+    633
+   ],
+   "object": "https://catalog.archives.gov/medialz/presidential-libraries/truman/photographs/2007/2007-536.jpg",
+   "rights": "A — Unrestricted",
+   "rights_evidence": "NARA catalog proxy API useRestriction.status='Unrestricted' (2026-11-22 실측)"
+  },
+  {
+   "file": "src/p_542206.jpg",
+   "role": "extra",
+   "w": 1800,
+   "h": 1411,
+   "visible": [
+    "순천 상공 C-119 공수 1950-10-20 · NAID 542206"
+   ],
+   "nocrop": false,
+   "record_id": "NAID 542206 (342-AF-77984AC)",
+   "title": "This dramatic picture was made Friday, October 20, over the area of Sunchon, about 23 miles northeast of Pyongyang",
+   "date": "1950-10-20",
+   "url": "https://catalog.archives.gov/id/542206",
+   "orig_size": [
+    3178,
+    2492
+   ],
+   "object": "https://catalog.archives.gov/medialz/stillpix/342-af/Batch0002/342-AF-77984AC_002.tif",
+   "rights": "B — Undetermined (연방 기록)",
+   "rights_evidence": "NARA catalog proxy API useRestriction.status='Undetermined' (2026-11-22 실측)"
+  },
+  {
+   "file": "src/p_541822.jpg",
+   "role": "extra",
+   "w": 1800,
+   "h": 1419,
+   "visible": [
+    "표지판 윗줄 'YOU ARE NOW CROSSING'",
+    "큰 글씨 '38TH PARALLEL'",
+    "원형 'US' 표지와 'C.O.B 728MP', 오른쪽 원형 휘장",
+    "다리를 건너는 트럭, 뒤로 먼지 속 차량들",
+    "평양에서 철수, 38선을 다시 넘다 · NAID 541822"
+   ],
+   "nocrop": false,
+   "record_id": "NAID 541822 (306-FS-259(21))",
+   "title": "Crossing the 38th parallel. United Nations forces withdraw from Pyongyang, the North Korean capital. They recrossed the 38th parallel.",
+   "date": "1950-01-01",
+   "url": "https://catalog.archives.gov/id/541822",
+   "orig_size": [
+    3000,
+    2365
+   ],
+   "object": "https://catalog.archives.gov/medialz/stillpix/306-fs/306-FS-259-21_28-1565M.TIF",
+   "rights": "A — Unrestricted",
+   "rights_evidence": "NARA catalog proxy API useRestriction.status='Unrestricted' (2026-11-22 실측)"
+  }
+ ],
+ "points": [
+  "표지판 윗줄 'YOU ARE NOW CROSSING'",
+  "큰 글씨 '38TH PARALLEL'",
+  "원형 'US' 표지와 'C.O.B 728MP', 오른쪽 원형 휘장",
+  "다리를 건너는 트럭, 뒤로 먼지 속 차량들"
+ ],
+ "video": {
+  "url": "",
+  "length_s": 0,
+  "rights": "",
+  "note": "영상 없음"
+ },
+ "status": "ok",
+ "notes": "koreanwar 평양 기록 이미지 직접 수집 불가(위와 동일). NARA 66-44xx(트루먼 도서관, Undetermined·Credit 미표기)는 연방 근거 불충분으로 제외. 541822는 시리즈(306-FS)가 'Restricted - Possibly'이나 품목 Use Restriction 'Unrestricted' — 품목 표기를 따름. 2022-US-02-AV-D-00173→NAID 22359는 C로 미사용."
+}

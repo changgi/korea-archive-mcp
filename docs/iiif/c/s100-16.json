@@ -1,0 +1,192 @@
+{
+ "@context": "http://iiif.io/api/presentation/3/context.json",
+ "id": "https://changgi.github.io/korea-archive-mcp/iiif/c/s100-16.json",
+ "type": "Collection",
+ "label": {
+  "ko": [
+   "100선 · XVI 영상으로 읽는 기록"
+  ]
+ },
+ "summary": {
+  "ko": [
+   "100선 · XVI 영상으로 읽는 기록 — 시리즈 10개"
+  ]
+ },
+ "partOf": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/hierarchy.json",
+   "type": "Collection"
+  }
+ ],
+ "items": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s121.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "121 · 미국 국립기록관리청 NARA — 1950.9.15 인천 — 함상에서 본 D-데이"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s121/scene_08_340.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "navDate": "1950-09-15T00:00:00Z"
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s122.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "122 · 미국 국립기록관리청 NARA — 1950.9.17 상륙 이틀 뒤의 인천"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s122/scene_06_307.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "navDate": "1950-09-17T00:00:00Z"
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s123.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "123 · 미국 국립기록관리청 NARA — 1953.7.27 정전협정 조인일의 필름"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s123/scene_04_055.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "navDate": "1953-07-27T00:00:00Z"
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s124.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "124 · 미국 국립기록관리청 NARA — 1952.2.18 판문점 정전회담 필름"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s124/scene_05_129.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "navDate": "1952-02-18T00:00:00Z"
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s125.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "125 · 미국 국립기록관리청 NARA — 1945.9 「한국 점령 준비」 필름"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s125/scene_03_115.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "navDate": "1945-09-01T00:00:00Z"
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s126.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "126 · 미국 국립기록관리청 NARA — 1952.8.15 대통령 취임식 — 컬러 필름"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s126/scene_03_027.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "navDate": "1952-08-15T00:00:00Z"
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s127.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "127 · 미국 국립기록관리청 NARA — 1950.8 함재기에서 본 북한 지역"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s127/scene_06_801.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "navDate": "1950-08-01T00:00:00Z"
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s128.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "128 · 미국 국립기록관리청 NARA — 「MUSTANGA IN KOREA」 공군 필름"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s128/scene_11_759.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s129.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "129 · 미국 국립기록관리청 NARA — 1951.1.4 인천 철수 필름"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s129/scene_07_252.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "navDate": "1951-01-04T00:00:00Z"
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s130.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "130 · 미국 국립기록관리청 NARA — 1951.3.15 대한민국 해군사관학교"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s130/scene_08_517.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ],
+   "navDate": "1951-03-15T00:00:00Z"
+  }
+ ]
+}

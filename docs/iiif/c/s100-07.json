@@ -1,0 +1,183 @@
+{
+ "@context": "http://iiif.io/api/presentation/3/context.json",
+ "id": "https://changgi.github.io/korea-archive-mcp/iiif/c/s100-07.json",
+ "type": "Collection",
+ "label": {
+  "ko": [
+   "100선 · Ⅶ 전쟁의 기록 2"
+  ]
+ },
+ "summary": {
+  "ko": [
+   "100선 · Ⅶ 전쟁의 기록 2 — 시리즈 10개"
+  ]
+ },
+ "partOf": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/hierarchy.json",
+   "type": "Collection"
+  }
+ ],
+ "items": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s031.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "031 · 미국 국립기록관리청 NARA — 1950.9.15 인천 — 사다리로 넘은 방파제"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s031/i_5891320.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s032.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "032 · 미국 국립기록관리청 NARA — 1950.9 서울 — 다시 오른 깃발"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s032/s_74248965.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s033.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "033 · 미국 국립기록관리청 NARA — 1953.7.27 판문점 — 서명 다섯 개"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s033/p_520995.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s034.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "034 · 미국 국립기록관리청 NARA — 1945.9.9 서울 — 내려간 깃발, 오른 깃발"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s034/p_350291339.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s035.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "035 · 미국 국립기록관리청 NARA — 1950.8 ~ 1951.1 — 남쪽으로 가는 길"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s035/p_175539219.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s036.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "036 · 6·25전쟁 아카이브센터 (협약기관) — 1950.8 낙동강 — 강을 내려다본 진지"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s036/p_280956792.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s037.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "037 · 6·25전쟁 아카이브센터 (협약기관) — 1950.10 평양 — 입성, 그리고 철수"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s037/p_542285.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s038.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "038 · 6·25전쟁 아카이브센터 (협약기관) — 1951.1.4 서울 — 철수의 필름"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s038/p_531379.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s039.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "039 · 인터넷 아카이브 — Combat Bulletin No.103 — 1950 가을"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s039/scene_12_1434.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s040.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "040 · 인터넷 아카이브 — Combat Bulletin No.113 — 1951 여름"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s040/scene_10_1225.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  }
+ ]
+}

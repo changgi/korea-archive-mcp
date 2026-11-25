@@ -1,0 +1,24 @@
+{
+ "daily": {
+  "2026-11-23": {
+   "batches": 94,
+   "records": 581,
+   "new": 265
+  },
+  "2026-11-24": {
+   "batches": 26,
+   "records": 421,
+   "new": 352
+  },
+  "2026-11-25": {
+   "batches": 9,
+   "records": 111,
+   "new": 92
+  }
+ },
+ "formats": {
+  "text": 77,
+  "csv": 49,
+  "iiif": 3
+ }
+}

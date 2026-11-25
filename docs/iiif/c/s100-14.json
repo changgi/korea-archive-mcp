@@ -1,0 +1,183 @@
+{
+ "@context": "http://iiif.io/api/presentation/3/context.json",
+ "id": "https://changgi.github.io/korea-archive-mcp/iiif/c/s100-14.json",
+ "type": "Collection",
+ "label": {
+  "ko": [
+   "100선 · XIV 유산과 도시"
+  ]
+ },
+ "summary": {
+  "ko": [
+   "100선 · XIV 유산과 도시 — 시리즈 10개"
+  ]
+ },
+ "partOf": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/hierarchy.json",
+   "type": "Collection"
+  }
+ ],
+ "items": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s101.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "101 · 국가유산청 국가유산포털 — 국보 숭례문 — 1906~1930 사진첩 5권"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s101/namdaemun_1910_766880.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s102.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "102 · 국가유산청 국가유산포털 — 국보 석굴암 석굴 — 1910~1927 사진첩 속 석굴암·불국사"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s102/seokguram_1921_967741.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s103.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "103 · 국가유산청 국가유산포털 — 사적 수원 화성 — 1910·1921·1927 사진첩"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s103/hwahongmun_1927_1688584.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s104.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "104 · 국가유산청 국가유산포털 — 국보 첨성대 — 1910 사진첩 · 1917 관측소 보고서"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s104/cheomseongdae_1910_766880.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s105.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "105 · 대한민국역사박물관 — 한박15024 「공산간첩을 잡아내어 조국을 지키자」"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s105/bk19_3489_gancheopseon_nocrop.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s106.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "106 · 대한민국역사박물관 — 한박941 「88서울올림픽 포스터」 — 공익광고협의회"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s106/bk21_4216_1988_opening_nocrop.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s107.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "107 · 대한민국역사박물관 — 한박3320 60년대 가족계획 홍보 포스터 — 보건사회부"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s107/bk18_3399_1977_familyplan_nocrop.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s108.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "108 · 서울기록원 — 1967 세운상가 아파트 C동 기공식"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s108/item686_02.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s109.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "109 · 서울기록원 — 1968 여의도 — 밤섬 폭파·윤중제 공사"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s109/item7896_02.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  },
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s110.json",
+   "type": "Manifest",
+   "label": {
+    "ko": [
+     "110 · 서울기록원 — 1974.8.15 서울 지하철 개통식"
+    ]
+   },
+   "thumbnail": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/th/s110/item1883_01.jpg",
+     "type": "Image",
+     "format": "image/jpeg"
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,110 @@
+{
+ "n": 42,
+ "src": "tna",
+ "record": {
+  "id": "TNA WO 281/702",
+  "title": "Commonwealth Division G Branch. Includes 12 photographs depicting: Korea: 1st Commonwealth Division; clothing",
+  "date": "1954 Jan.-June",
+  "inst": "The National Archives (UK) — 이미지: Australian War Memorial",
+  "url": "https://discovery.nationalarchives.gov.uk/details/r/C1818326"
+ },
+ "images": [
+  {
+   "file": "awm_C280168.jpg",
+   "role": "hero",
+   "record_id": "AWM C280168 (157626)",
+   "title": "Majon'ni, Korea. Flags of the United Nations fly as spectators watch the Coronation Parade by troops of 1 Commonwealth Division.",
+   "date": "1953-06-02",
+   "url": "https://www.awm.gov.au/collection/C280168",
+   "rights": "Copyright expired - public domain",
+   "rights_evidence": "AWM 항목 페이지 'Item copyright: Copyright expired - public domain' · Maker Luff, George MacAfee 'Max' · 공개 이미지 screen 640px",
+   "visible": [
+    "깃대 위 깃발들",
+    "전차 옆면 'Minden'·'XII', 번호 '3456'",
+    "의자에 줄지어 앉은 관중"
+   ],
+   "w": 630,
+   "h": 455,
+   "nocrop": false
+  },
+  {
+   "file": "awm_C40078.jpg",
+   "role": "extra",
+   "record_id": "AWM C40078 (044754)",
+   "title": "Korean peasants in traditional dress attending the 1st Commonwealth Division Coronation Parade 1953.",
+   "date": "1953",
+   "url": "https://www.awm.gov.au/collection/C40078",
+   "rights": "Copyright expired - public domain",
+   "rights_evidence": "AWM 항목 페이지 'Item copyright: Copyright expired - public domain' · Maker  · 공개 이미지 screen 640px",
+   "visible": [
+    "갓·흰 두루마기 차림 남성들과 아이들"
+   ],
+   "w": 632,
+   "h": 415,
+   "nocrop": false
+  },
+  {
+   "file": "awm_C328874.jpg",
+   "role": "extra",
+   "record_id": "AWM C328874 (HOBJ4322)",
+   "title": "Korean children watch the British Commonwealth Division Coronation Day Parade.",
+   "date": "1953-06-02",
+   "url": "https://www.awm.gov.au/collection/C328874",
+   "rights": "Copyright expired - public domain",
+   "rights_evidence": "AWM 항목 페이지 'Item copyright: Copyright expired - public domain' · Maker Hobson, Phillip Oliver · 공개 이미지 screen 640px",
+   "visible": [
+    "흰 저고리 차림 아이들이 줄 뒤에 서 있다"
+   ],
+   "w": 381,
+   "h": 398,
+   "nocrop": false
+  },
+  {
+   "file": "awm_C328876.jpg",
+   "role": "extra",
+   "record_id": "AWM C328876 (HOBJ4325)",
+   "title": "A fly-past of Commonwealth aircraft at the Coronation Day parade for the Commonwealth Division.",
+   "date": "1953-06-02",
+   "url": "https://www.awm.gov.au/collection/C328876",
+   "rights": "Copyright expired - public domain",
+   "rights_evidence": "AWM 항목 페이지 'Item copyright: Copyright expired - public domain' · Maker Hobson, Phillip Oliver · 공개 이미지 screen 640px",
+   "visible": [
+    "하늘의 항공기 편대, 오른쪽 전차, 멀리 대열"
+   ],
+   "w": 355,
+   "h": 397,
+   "nocrop": false
+  },
+  {
+   "file": "awm_C332300.jpg",
+   "role": "extra",
+   "record_id": "AWM C332300 (HOBJ3173)",
+   "title": "General Mark W. Clark ... greeted at the Commonwealth Division airstrip by Major General Jim H. Cassels (left), 1st Commonwealth Division Commander.",
+   "date": "c. 1952-05",
+   "url": "https://www.awm.gov.au/collection/C332300",
+   "rights": "Copyright expired - public domain",
+   "rights_evidence": "AWM 항목 페이지 'Item copyright: Copyright expired - public domain' · Maker Hobson, Phillip Oliver · 공개 이미지 screen 640px",
+   "visible": [
+    "베레모와 전투모를 쓴 두 장교, 뒤에 항공기"
+   ],
+   "w": 631,
+   "h": 632,
+   "nocrop": false
+  }
+ ],
+ "points": [
+  "WO 281/702: 1st Commonwealth Division 사진 12매 포함 (1954)",
+  "WO 373/119/67: Cassels, A J H, Major General, 1st Commonwealth Division 서훈 추천",
+  "MW/2: General West 'Korea, Talks' (1952-1953)",
+  "AWM: 1953-06-02 Majon'ni 1영연방사단 대관식 퍼레이드"
+ ],
+ "video": {
+  "url": "",
+  "length_s": 0,
+  "rights": "",
+  "note": "NARA 111-DD-281-51 'Commonwealth Troops in Korea'(NAID 102044048) judge_rights Class C → 미사용"
+ },
+ "status": "ok",
+ "notes": "AWM 640px 한계. HOBJ 필름 테두리는 자동 크롭으로 제거.",
+ "checked": "2026-11-22"
+}

@@ -1,0 +1,100 @@
+{
+ "n": 59,
+ "part": [
+  "Ⅸ",
+  "참전국의 기억"
+ ],
+ "inst": "디지털NZ DigitalNZ",
+ "flag": "🇳🇿",
+ "say": "디지털NZ에서 케이포스 자료 찾아줘",
+ "head": "DigitalNZ — 네 병사와 한 수병의 유품",
+ "big": "06441",
+ "facts": [
+  [
+   "사진",
+   "Auckland Libraries Footprints 06441 · Thorpe Studio, Pukekohe"
+  ],
+  [
+   "유품",
+   "Auckland Museum 646011~646021 — 수병 NZ112509 R. D. Williams"
+  ],
+  [
+   "검색",
+   "DigitalNZ API (usage=Share 필터) → 소장처 기록"
+  ],
+  [
+   "권리",
+   "No known copyright restrictions · CC BY 4.0"
+  ]
+ ],
+ "tool": "cross_search(sources=dnz,'Kayforce') → DigitalNZ API",
+ "link": "https://kura.aucklandlibraries.govt.nz/digital/collection/photos/id/37780",
+ "checked": "2026-11-22",
+ "tags": "#DigitalNZ #KForce #뉴질랜드",
+ "hero": {
+  "file": "src/hero_kura_footprints06441.jpg",
+  "pos": "center 40%",
+  "credit": "사진: Auckland Libraries Footprints 06441 (Thorpe Studio, No known copyright restrictions)"
+ },
+ "hook": "한국으로 떠나기 전,<br><span class=\"g\">네 병사</span>의 스튜디오 사진",
+ "mosaic": [
+  {
+   "file": "src/am_pennant_646021.jpg",
+   "label": "HMNZS Kiwi 페넌트 · 646021",
+   "nocrop": true
+  },
+  {
+   "file": "src/am_anchor_646012.jpg",
+   "label": "Leading Hand 닻 휘장 · 646012",
+   "nocrop": true
+  },
+  {
+   "file": "src/am_chevron_646018.jpg",
+   "label": "계급 갈매기 휘장 · 646018",
+   "nocrop": true
+  },
+  {
+   "file": "src/am_anchor_chevron_646011.jpg",
+   "label": "닻+갈매기 휘장 · 646011",
+   "nocrop": true
+  }
+ ],
+ "mosaic_title": "수병 R. D. Williams의 <span class=\"g\">유품 4점</span>",
+ "mosaic_credit": "© Auckland Museum CC BY 4.0 — 646021·646012·646018·646011 (DigitalNZ 경유 공개 이미지 400px)",
+ "ann": {
+  "file": "src/hero_kura_footprints06441.jpg",
+  "title": "기관 기술: Waiuku 일대 출신 — Shepherd·Eisenhut·Wells·Furniss",
+  "boxes": [
+   {
+    "x": 6,
+    "y": 45,
+    "w": 8,
+    "h": 5,
+    "t": "왼쪽 사람 어깨 휘장 'NEW ZEALAND'"
+   },
+   {
+    "x": 30,
+    "y": 40,
+    "w": 6,
+    "h": 5,
+    "t": "둘째 사람 어깨 휘장 '…ZEALAND'"
+   },
+   {
+    "x": 80,
+    "y": 53,
+    "w": 10,
+    "h": 5,
+    "t": "오른쪽 사람 가슴의 약장 줄"
+   },
+   {
+    "x": 91,
+    "y": 48,
+    "w": 5,
+    "h": 5,
+    "t": "오른쪽 사람 어깨 휘장"
+   }
+  ],
+  "credit": "Auckland Libraries Footprints 06441 (Waiuku Museum Society 제공) — 표시는 사진에서 직접 읽은 것"
+ },
+ "cta_img": "src/hero_kura_footprints06441.jpg"
+}

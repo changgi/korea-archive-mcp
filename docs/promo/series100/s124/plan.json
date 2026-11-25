@@ -1,0 +1,149 @@
+{
+ "n": 124,
+ "part": [
+  "XVI",
+  "영상으로 읽는 기록"
+ ],
+ "inst": "미국 국립기록관리청 NARA",
+ "flag": "🇺🇸",
+ "say": "판문점 정전회담 영상 찾아줘",
+ "head": "1952.2.18 판문점 정전회담 필름",
+ "big": "428-NPC-2416",
+ "facts": [
+  [
+   "계보",
+   "RG 428 해군부 › 군사활동 영상 시리즈"
+  ],
+  [
+   "생산",
+   "1952-02-18"
+  ],
+  [
+   "원본",
+   "MP4 428-NPC-2416 (3분 35초)"
+  ],
+  [
+   "권리",
+   "Use Restriction 'Undetermined' → B"
+  ]
+ ],
+ "tool": "nara_search('Panmunjom armistice', moving_images_only=true) → judge_rights(naid=76430) → keyscenes",
+ "link": "https://catalog.archives.gov/id/76430",
+ "checked": "2026-11-22",
+ "tags": "#NARA #정전회담 #판문점",
+ "hero": {
+  "file": "video/scene_05_129.jpg",
+  "credit": "필름 01:29 장면 · 미국 국립기록관리청 NAID 76430 (428-NPC-2416, 1952-02-18, 연방 저작물, Use Restriction Undetermined → B 명기)"
+ },
+ "hook": "1952년 2월, 판문점 하늘의<br><span class=\"g\">흰 기구</span>",
+ "mosaic": [
+  {
+   "file": "video/scene_01_029.jpg",
+   "label": "필름 0:29 — 천막으로 들어가는 사람"
+  },
+  {
+   "file": "video/scene_03_046.jpg",
+   "label": "필름 0:46 — 긴 외투 차림 군인들"
+  },
+  {
+   "file": "video/scene_10_224.jpg",
+   "label": "필름 2:24 — 들판에 선 사람들"
+  },
+  {
+   "file": "video/scene_06_140.jpg",
+   "label": "필름 1:40 — 내려앉는 기구"
+  }
+ ],
+ "mosaic_title": "천막·외투·들판 — 회담장 <span class=\"g\">바깥</span>의 장면",
+ "mosaic_credit": "모두 같은 필름의 장면 · 미국 국립기록관리청 NAID 76430 (428-NPC-2416, 1952-02-18, 연방 저작물, Use Restriction Undetermined → B 명기)",
+ "ann": {
+  "file": "video/scene_05_129.jpg",
+  "boxes": [
+   {
+    "x": 32,
+    "y": 18,
+    "w": 39,
+    "h": 56,
+    "t": "줄에 매달린 큰 흰 기구"
+   },
+   {
+    "x": 40,
+    "y": 0,
+    "w": 3,
+    "h": 17,
+    "t": "기구를 붙든 줄"
+   },
+   {
+    "x": 33,
+    "y": 70,
+    "w": 33,
+    "h": 29,
+    "t": "기구 아래 모인 10명 넘는 사람들"
+   },
+   {
+    "x": 0,
+    "y": 52,
+    "w": 30,
+    "h": 18,
+    "t": "멀리 낮은 산과 논밭"
+   }
+  ],
+  "credit": "필름 01:29 장면(1050×700 프레임) — 표시한 4곳은 화면에서 직접 읽은 것",
+  "crop_y": 0.06
+ },
+ "scenes": [
+  {
+   "title": "NAID 76430 「UN & COMMUNIST ARMISTICE NEGOTIATIONS Panmunjom, Korea」 (1952-02-18, 3분 35초)",
+   "credit": "미국 국립기록관리청 NAID 76430 · 장면은 keyscenes 자동 추출(전환 56곳→12장면) · 해설은 화면에서 보이는 것만",
+   "frames": [
+    {
+     "file": "video/scene_01_029.jpg",
+     "tc": "00:29",
+     "cap": "천막 문으로 들어가는 서류 가방 든 사람"
+    },
+    {
+     "file": "video/scene_02_039.jpg",
+     "tc": "00:39",
+     "cap": "정모 차림 해군 장교와 주변 사람들"
+    },
+    {
+     "file": "video/scene_03_046.jpg",
+     "tc": "00:46",
+     "cap": "긴 외투 차림 군인 4명, 뒤로 큰 천막"
+    },
+    {
+     "file": "video/scene_04_118.jpg",
+     "tc": "01:18",
+     "cap": "서류철을 든 장교들이 천막 앞을 걷는다"
+    }
+   ]
+  },
+  {
+   "title": "같은 필름 후반부",
+   "credit": "미국 국립기록관리청 NAID 76430 (428-NPC-2416, 1952-02-18, 연방 저작물, Use Restriction Undetermined → B 명기)",
+   "frames": [
+    {
+     "file": "video/scene_06_140.jpg",
+     "tc": "01:40",
+     "cap": "언덕 위로 내려앉는 기구와 흰 옷 차림 사람들"
+    },
+    {
+     "file": "video/scene_09_206.jpg",
+     "tc": "02:06",
+     "cap": "기구 줄을 감는 장치를 살피는 사람"
+    },
+    {
+     "file": "video/scene_08_153.jpg",
+     "tc": "01:53",
+     "cap": "빈 공터 둘레에 선 사람들"
+    },
+    {
+     "file": "video/scene_11_305.jpg",
+     "tc": "03:05",
+     "cap": "작은 막사들 앞에 모인 사람들과 전봇대"
+    }
+   ]
+  }
+ ],
+ "cta_img": "video/scene_01_029.jpg"
+}

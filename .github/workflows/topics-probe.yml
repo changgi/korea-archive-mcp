@@ -1,0 +1,29 @@
+name: topics-probe
+# 변환어 실측(v2.97) — 다국어 변환표(TOPICS) 영문 변환어를 NARA·IA에 던져 결과 수·상위 제목·관련 신호를
+# docs/data/topics_probe.json에 날짜별로 쌓는다(지우지 않음). '약함' 목록 = 기관 색인에 맞춘 교정 후보.
+# 관찰 기록이라 실패로 보지 않는다(0건은 기관에 기록이 없다는 뜻일 수도 있다). 매월 3일 + 수동.
+on:
+  schedule:
+    - cron: '41 19 3 * *'   # 매월 4일 04:41 KST
+  workflow_dispatch: {}
+permissions:
+  contents: write
+concurrency: { group: topics-probe, cancel-in-progress: false }
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v6
+      - name: 실측
+        run: |
+          python3 scripts/topics_probe.py --md /tmp/tp.md
+          cat /tmp/tp.md >> "$GITHUB_STEP_SUMMARY"
+      - name: 축적 커밋
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/data/topics_probe.json
+          git diff --cached --quiet && exit 0
+          git commit -m "chore(topics): 변환어 실측 $(date -u +%F)"
+          git pull --rebase -q origin main && git push

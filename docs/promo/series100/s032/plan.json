@@ -1,0 +1,93 @@
+{
+ "n": 32,
+ "part": [
+  "Ⅶ",
+  "전쟁의 기록 2"
+ ],
+ "inst": "미국 국립기록관리청 NARA",
+ "flag": "🇺🇸",
+ "say": "1950년 9월 서울 수복 사진 원본 찾아줘",
+ "head": "1950.9 서울 — 다시 오른 깃발",
+ "big": "127-GR-192",
+ "facts": [
+  [
+   "계보",
+   "RG 127 해병대 › 127-GR 'Korea – Seoul, September 1950' 파일"
+  ],
+  [
+   "건수",
+   "같은 제목 인화 사진 10건(NAID 74248959~74248986) · 건마다 디지털 객체 2점(_001·_002)"
+  ],
+  [
+   "원본",
+   "인화지 앞면 하단에 번호(A 3376 등)와 영문 설명 인쇄"
+  ],
+  [
+   "권리",
+   "전 건 Use Restriction 'Unrestricted' → A"
+  ]
+ ],
+ "tool": "nara_search(Seoul September 1950) → judge_rights(naid=74248962)",
+ "link": "https://catalog.archives.gov/id/74248962",
+ "checked": "2026-11-22",
+ "tags": "#NARA #서울수복",
+ "hero": {
+  "file": "src/s_74248965.jpg",
+  "pos": "center 30%",
+  "credit": "사진: 미국 국립기록관리청 NAID 74248965 (127-GR-192-A3386, 'Korea – Seoul, September 1950', Use Restriction Unrestricted)"
+ },
+ "hook": "1950년 9월 서울,<br>기와지붕 위의 <span class=\"g\">성조기</span>",
+ "mosaic": [
+  {
+   "file": "src/s_74248974.jpg",
+   "label": "'Government of Seoul being restored…' · A 3759"
+  },
+  {
+   "file": "src/s_74248971.jpg",
+   "label": "'Discussion between commanders' · A 3395"
+  },
+  {
+   "file": "src/s_74248968.jpg",
+   "label": "'…after capture of Seoul' · A 3394"
+  }
+ ],
+ "mosaic_title": "같은 파일 속 인화 사진 — <span class=\"g\">인쇄된 설명</span>까지 원본",
+ "mosaic_credit": "미국 국립기록관리청 NAID 74248974·74248971·74248968 (RG 127, 127-GR-192, Unrestricted) — 라벨은 인화지 하단 인쇄 문구",
+ "ann": {
+  "file": "src/s_74248962.jpg",
+  "crop_y": 0.18,
+  "title": "NAID 74248962 — 보이는 것만 읽었습니다",
+  "boxes": [
+   {
+    "x": 70,
+    "y": 19,
+    "w": 19,
+    "h": 20,
+    "t": "건물 오른쪽 깃대에 걸린 성조기"
+   },
+   {
+    "x": 5,
+    "y": 20,
+    "w": 58,
+    "h": 30,
+    "t": "창마다 위쪽 벽면으로 번진 검은 그을음"
+   },
+   {
+    "x": 18,
+    "y": 56,
+    "w": 55,
+    "h": 22,
+    "t": "깃대 아래 모여 선 철모 쓴 병사들"
+   },
+   {
+    "x": 56,
+    "y": 93,
+    "w": 24,
+    "h": 3.5,
+    "t": "인화지 하단 인쇄 설명 \"Up goes the American flag!\" — 좌하단 번호 'A 3376'"
+   }
+  ],
+  "credit": "NAID 74248962 원본(앞면 스캔 6399×5022) — 4곳은 사진·인화지에서 직접 읽은 것"
+ },
+ "cta_img": "src/s_74248974.jpg"
+}

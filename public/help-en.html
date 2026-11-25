@@ -79,7 +79,7 @@
   <div class="in">
     <div class="mast sans"><b>KOREA ARCHIVE</b> Integrated Search — User Guide · <a href="/help.html" style="color:#e8b45a">한국어 →</a></div>
     <h1>Changgi-Changgi, <span class="g">Help Me</span></h1>
-    <p>We discover, verify, and publish Korea-related records (1860–1960) across 15 archives at home and abroad —
+    <p>We discover, verify, and publish Korea-related records (1860–1960) across 30 archives at home and abroad (incl. Japan's JACAR, the Australian War Memorial, the Dutch Nationaal Archief and the AKS old-documents archive) —
     from magazine-grade reports to card news and lecture decks. One sentence in Korean or English is enough.</p>
     <div class="magic sans">Whenever you need this guide — say “창기창기 도와줘 (Changgi-changgi, help me)”</div>
   </div>
@@ -104,12 +104,12 @@
 <div class="ask">"Find film records of the Chosin Reservoir campaign" <small>NARA·archive.org·Korean War Archives triple-custody proof — Vol.2</small></div>
 <div class="ask">"Reconstruct the ferry administration of the Joseon-era Han River" <small>statute reading → sibling-clause sweep → date verification</small></div>
 <div class="ask">"Find French records of the 1866 campaign (Byeong-in yang-yo)" <small>Gallica searched with the period spelling Corée, automatically</small></div>
-<div class="ask">"Mine the shelf around this reference code" <small>adjacent-number mining ±N surfaces unlisted series-mates</small></div>
+<div class="ask">"Mine the shelf around this reference code" <small>adjacent-number mining ±N at TNA·NARA·archive.org·KOREAN WAR ARCHIVES surfaces unlisted series-mates</small></div>
 
 <h2>4. How far, and how — coverage & methodology</h2>
 <div class="grid sans">
-  <div class="cell"><b>🌍 15 archives</b>🇺🇸 NARA · 🇬🇧 TNA · 🌐 Internet Archive · 🇫🇷 Gallica(BnF) · 🇪🇺 Europeana ·
-  🇰🇷 National Archives of Korea, National Library, Korean History DB, Kyujanggak, Seoul Archives, FOIA portal, KOREAN WAR ARCHIVES (MOU partner), MPVA</div>
+  <div class="cell"><b>🌍 30 archives</b>🇺🇸 NARA · 🇬🇧 TNA · 🌐 Internet Archive · 🇫🇷 Gallica(BnF) · 🇪🇺 Europeana · 🇯🇵 JACAR · 🇦🇺 Australian War Memorial · 🇳🇱 Nationaal Archief · 🇳🇿 DigitalNZ (incl. Papers Past) · 🇳🇿 Archives New Zealand · 🌐 Wikimedia Commons · 🇺🇳 UN Digital Library · 🇯🇵 NDL Search ·
+  🇰🇷 National Archives of Korea, National Library (+Newspaper Archive 1883–1960), Korean History DB, NIKH e-Archive, Independence Hall, MPVA Merit Archive, Independence Verdicts (NAK), KTV e-History, MUCH Modern History Archive, Kyujanggak, Jangseogak, AKS old documents, Korea Heritage Portal, Seoul Archives, FOIA portal, KOREAN WAR ARCHIVES (MOU partner)</div>
   <div class="cell"><b>🗣 Multilingual queries</b>Ask in Korean or English — queries auto-convert to each index language (Corée for Gallica), and period spellings (Corea·Chosen·長津湖) are preserved, not "corrected".</div>
 </div>
 <div class="grid sans">
@@ -282,6 +282,16 @@
   <div><b>Corrections published</b>when we're wrong, the fix is on the page</div>
 </div>
 <p>Only outputs that pass all four receive the verification seal.</p>
+
+<h2>7&#189;. Discovery becomes a record — the records-continuum chain</h2>
+<div class="four sans">
+  <div><b>Produce</b>Each discovery is issued as a collection manifest (JSON-LD) — query, sources, timestamp and a reproduce call = evidentiality; holding archives, persistent identifiers and parent hierarchy (partOf, 28 channels — record groups, series, collections) = context</div>
+  <div><b>Datafy</b>Standards-oriented (ISAD(G)/RiC-O) serialization + a knowledge graph (nodes/edges) sharing the same keys — CSV, graph and manifest all carry the lineage (partOf) and verified direct media links (NARA, Commons originals)</div>
+  <div><b>Disseminate</b>Whatever medium the discovery is turned into (report, card news), the manifest travels with it (appendix + sources.txt) — images are sourced from the same media links, so data and page share one lineage; recipients can always return to the original discovery</div>
+  <div><b>Sustain</b>sha256 fixity (detects tampering and upstream revisions), persistent-identifier-first citation, weekly automated channel monitoring — the record outlives the link</div>
+</div>
+<p><b>The same record is merged into one.</b> Re-collected copies at the Korean War Archives and re-uploads on the Internet Archive and Wikimedia Commons often originate at the U.S. National Archives (NARA). The tool reads the original identifier written on each copy and merges it with the NARA original; if the original is not among the results, it looks the record up in the NARA catalog to confirm it exists. Results show every institution that confirmed the record, such as <b>[nara·원본확인+koreanwar]</b> (NARA original confirmed + Korean War Archives copy), and keep both the Korean and the original English titles (e.g. 5 of 9 results for "Chosin Reservoir" were confirmed by two institutions).</p>
+<p class="small">Ask: "give me the manifest" (format=manifest) &middot; "as a graph" (karda) &middot; "as CSV" (csv). Full packages ship as preservation packages with manifest.json enclosed.</p>
 
 <h2>8. FAQ</h2>
 <details><summary>I got zero hits.</summary><p>Zero is not absence. Try period spellings (Corea·Chosen), adjacent mining,

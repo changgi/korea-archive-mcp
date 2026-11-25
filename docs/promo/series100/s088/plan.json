@@ -1,0 +1,95 @@
+{
+ "n": 88,
+ "part": [
+  "Ⅻ",
+  "판결문과 공훈 기록"
+ ],
+ "inst": "국사편찬위원회 전자사료관 × 미국 NARA",
+ "flag": "🇰🇷",
+ "say": "제헌국회 사료를 국편 전자사료관이랑 NARA에서 같이 찾아줘",
+ "head": "1948.5.31~7.20 제헌국회 — 국편 사료 목록 × NARA 원본",
+ "big": "180 / 196",
+ "facts": [
+  [
+   "국편 사료건",
+   "AUS005_06_03V0000_921 (IM0000112982)"
+  ],
+  [
+   "국편 캡션",
+   "'…First President by an Overwhelming Majority of 180 of 196 Ballots'"
+  ],
+  [
+   "NARA 원문",
+   "5.31 첫 소집 · 7.12 헌법 채택 · 7.17 공포 · 7.20 대통령 선출"
+  ],
+  [
+   "NARA 원본",
+   "국무부 Publication 3305 · NAID 502727772 · Unrestricted"
+  ]
+ ],
+ "tool": "nedb_search(mode=earchive, '제헌국회|7') · judge_rights(naid=502727772)",
+ "link": "https://catalog.archives.gov/id/502727772",
+ "checked": "2026-11-22",
+ "tags": "#국사편찬위원회 #NARA #제헌국회",
+ "hero": {
+  "file": "src/p012_right.jpg",
+  "pos": "center",
+  "credit": "미국 국립기록관리청 NAID 502727772 「Korea, 1945 to 1948」 17쪽(국무부, 1948-10, Unrestricted) — 국편 전자사료관 이미지 아님"
+ },
+ "hook": "1948년 7월 17일,<br><span class=\"g\">헌법 공포</span>를 적은 쪽",
+ "mosaic": [
+  {
+   "file": "src/p012_left.jpg",
+   "label": "16쪽 'The National Assembly'",
+   "pos": "center 15%"
+  },
+  {
+   "file": "src/p013_left.jpg",
+   "label": "18쪽 'July 20 elected Syngman Rhee President'",
+   "pos": "center 85%"
+  },
+  {
+   "file": "src/p066_chron1948.jpg",
+   "label": "연표 123쪽 'May 31 · July 12'",
+   "pos": "center 75%"
+  }
+ ],
+ "mosaic_title": "국편 사진 캡션의 날짜를 <span class=\"g\">NARA 원문</span>으로 맞춰 보기",
+ "mosaic_credit": "미국 국립기록관리청 NAID 502727772 (Harry S. Truman Library · PSF Intelligence Files, Unrestricted → A) · 16·18·123쪽",
+ "ann": {
+  "file": "src/state_korea1948_p012.jpg",
+  "crop_y": 0.065,
+  "boxes": [
+   {
+    "x": 11.5,
+    "y": 13.8,
+    "w": 20,
+    "h": 3,
+    "t": "절 제목 'The National Assembly'"
+   },
+   {
+    "x": 11.5,
+    "y": 18.8,
+    "w": 38.5,
+    "h": 4,
+    "t": "'…for the first time on May 31, 1948, and elected as chairman Syngman Rhee'"
+   },
+   {
+    "x": 55,
+    "y": 13.8,
+    "w": 37,
+    "h": 5,
+    "t": "절 제목 'The Constitution of the Democratic Republic of Korea'"
+   },
+   {
+    "x": 55,
+    "y": 21.4,
+    "w": 38.5,
+    "h": 4,
+    "t": "'…on July 12' 채택 · 'signed and promulgated on July 17'"
+   }
+  ],
+  "credit": "NAID 502727772 원본 16~17쪽 — 표시한 4곳은 원문에서 직접 읽은 것"
+ },
+ "cta_img": "src/p066_chron1948.jpg"
+}

@@ -1,0 +1,92 @@
+{
+ "n": 87,
+ "part": [
+  "Ⅻ",
+  "판결문과 공훈 기록"
+ ],
+ "inst": "국사편찬위원회 전자사료관 × 미국 NARA",
+ "flag": "🇰🇷",
+ "say": "5·10 총선거 기록을 국편 전자사료관이랑 NARA에서 같이 찾아줘",
+ "head": "1948.5.10 총선거 — 국편 사료 목록 × NARA 원본",
+ "big": "92.5 percent",
+ "facts": [
+  [
+   "국편 사료건",
+   "AUS005_06_06V0000_012~015 (등록번호 IM0000141285~88)"
+  ],
+  [
+   "국편 이용조건",
+   "제한적 이용 가능 — 원 소장처 권리 확인 필수"
+  ],
+  [
+   "NARA 원본",
+   "국무부 Publication 3305 (1948.10) · NAID 502727772"
+  ],
+  [
+   "보고서 원문",
+   "등록 'almost 80 percent' · 투표 '92.5 percent'"
+  ]
+ ],
+ "tool": "nedb_search(mode=earchive, '5·10 선거|6') · nara_search → judge_rights(502727772)",
+ "link": "https://catalog.archives.gov/id/502727772",
+ "checked": "2026-11-22",
+ "tags": "#국사편찬위원회 #NARA #510총선거",
+ "hero": {
+  "file": "src/state_korea1948_p001.jpg",
+  "pos": "center 0%",
+  "credit": "미국 국립기록관리청 NAID 502727772 「Korea, 1945 to 1948」(국무부, 1948-10, 트루먼 도서관, Use Restriction Unrestricted) — 국편 전자사료관 이미지 아님"
+ },
+ "hook": "1948년 5월 10일,<br><span class=\"g\">첫 총선거</span>를 적은 보고서",
+ "mosaic": [
+  {
+   "file": "src/p002_title.jpg",
+   "label": "속표지 'KOREA 1945 to 1948'",
+   "pos": "center 30%"
+  },
+  {
+   "file": "src/p003_contents.jpg",
+   "label": "목차 'The Korean Elections of May 10, 1948 … 14'",
+   "pos": "center 25%"
+  },
+  {
+   "file": "src/p003_colophon.jpg",
+   "label": "'Publication 3305 · Released October 1948'",
+   "pos": "center 20%"
+  },
+  {
+   "file": "src/state_korea1948_p024.jpg",
+   "label": "접이식 지도 'KOREA' — 38선 표시"
+  }
+ ],
+ "mosaic_title": "국편 목록은 메타만 — 원본은 <span class=\"g\">NARA</span>에서",
+ "mosaic_credit": "미국 국립기록관리청 NAID 502727772 (Harry S. Truman Library · PSF Intelligence Files, Unrestricted → A) · 원본 TIFF 2479×3872",
+ "ann": {
+  "file": "src/state_korea1948_p011.jpg",
+  "crop_y": 0.065,
+  "boxes": [
+   {
+    "x": 11,
+    "y": 7,
+    "w": 32,
+    "h": 3,
+    "t": "절 제목 'The Korean Elections of May 10, 1948'"
+   },
+   {
+    "x": 55,
+    "y": 43.8,
+    "w": 39.5,
+    "h": 5.2,
+    "t": "'almost 80 percent … registered' · '92.5 percent … went to the polls'"
+   },
+   {
+    "x": 55,
+    "y": 75.8,
+    "w": 39.5,
+    "h": 4.5,
+    "t": "각주 17 — 5월 9일 일식(eclipse)이 흉조라는 믿음 때문"
+   }
+  ],
+  "credit": "NAID 502727772 원본 14~15쪽 — 표시한 3곳은 원문에서 직접 읽은 것"
+ },
+ "cta_img": "src/state_korea1948_p024.jpg"
+}
