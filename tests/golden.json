@@ -1749,6 +1749,23 @@
    "must_not": [
     "\"accessUrl\\\\?\":\\\\?\"https://archives\\.seoul\\.go\\.kr/item/\\d+\\\\?\"[^}]*\"iiif\\\\?\":\\\\?\"https://korea-archive-mcp\\.vercel\\.app/iiif/rec/"
    ]
+  },
+  {
+   "id": "oldnews-authority",
+   "tool": "nedb_search",
+   "args": {
+    "mode": "oldnews",
+    "query": "CNTS-00133841567"
+   },
+   "must": [
+    "장소\\(기관 전거\\): 흥남\\[興南\\]=KSH2000026697",
+    "인물\\(기관 전거\\): MacArthur, Douglas=KAC\\d+"
+   ],
+   "must_not": [
+    "장소\\(기관 전거\\): [^\\n]*\\|"
+   ],
+   "level": "warn",
+   "note": "v3.22 국립중앙도서관 전거(KSH·KAC) 번호 보존 — 옛 결함: '주제'로만 내고 전거 번호를 버림"
   }
  ]
 }

@@ -2333,6 +2333,8 @@ const JB_CROSS = `국내외 대조 절차 — 순서를 틀리면 헛수고한�
               + `${f1(d.newspaperKorName)}${f1(d.newspaperForeignName) ? `(${f1(d.newspaperForeignName)})` : ''} · ${f1(d.issued)} · 발행 ${f1(d.publisher)}\n`
               + ((d.keyword || []).length ? `색인어(기사 내용 재구성): ${(d.keyword || []).join(', ').slice(0, 800)}\n` : '')
               + (subj ? `주제: ${subj}\n` : '')
+              + [['장소(기관 전거)', d.subjectPlace], ['인물(기관 전거)', d.subjectPeople], ['단체(기관 전거)', d.subjectOrganization]].filter(([, v]) => (v || []).length)  // v3.22 국립중앙도서관 전거(KSH·KAC) 번호 그대로 — 이름=전거번호
+                .map(([k, v]) => `${k}: ${v.slice(0, 6).map((x) => String(x).split('|').filter(Boolean).join('=')).join(' · ')}\n`).join('')
               + (rel ? `관련기사 연쇄(→ CNTS를 mode=oldnews로 재투입):\n${rel}\n` : '')
               + ((d.description || []).length ? `원소장처: ${(d.description || []).join(' / ').slice(0, 200)}\n` : '')
               + `원문 이미지(뷰어): https://nl.go.kr/newspaper/detail.do?content_id=${cid}\n`
