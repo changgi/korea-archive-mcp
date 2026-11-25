@@ -1,5 +1,5 @@
 {
-"updated": "2026-11-25T07:52:38Z",
+"updated": "2026-11-25T08:05:03Z",
 "note": "구간 = 연대(4자리 연도·8자리 날짜·연호 연도 明治·大正·昭和·光武·隆熙·檀紀 환산) → 세기 → 왕조·시대명. 근거 순서 date → 제목 → 메타(생산·시대·출판). 세기·시대 구간은 시간축 근사 정렬",
 "timeline": [
 {
@@ -89,7 +89,8 @@
 "url": "https://www.overseaschf.or.kr/archive/search/category.do?mode=view&srSearchTy=relic&id=40243&iDivCd=1",
 "iiif": "https://korea-archive-mcp.vercel.app/iiif/rec/hZHNSsNAEMdfJeyhKNRsvtrSQPGgb2BvpciaxCb2IzVJG4oIbSlSULBiFYuhxIPioWLRFoKP47G7fQenqQdB0L3M7H-Y_c1_9gS5SC0gu6yZh6iYRB5SUWExf2GjiE6i5WjIgpB1p0WOdu-WNwG97G2wMFDSCsd60eJ9zm6v2MOMjQeb3Gd7yNHXCJq5ZWdGnyY0GtJxQK8DUFk_XMzaKIl0AECwIDhGxdJURZAUGZQGKKbn1V0VY9_3ebtpOK5BXBiMtx2-7GDiaKbVNDCokGGNeEbJdlq8bm9Xbd3INS3DT7jOXlzOt3Lx-wlLz8WIhLVrNXf0nAisOrDWJtnZBRtPflpdXc-fwc0H93sPsfxtcpX-YbQGjPVak6j6rzfTrhpYJx7BxPMIuFMEODieHHtmo3pQI1YFy3JmXxIkSRCltKiksrIkCin-qF4CyDFA6DRYvE042u-xsMOx-wEbP0KJrL4V-tJborglyXkho4pZVc6i0y8/manifest.json"
 }
-]
+],
+"derived": 1
 },
 {
 "decade": "13세기",
@@ -157,7 +158,8 @@
 "url": "https://www.heritage.go.kr/heri/cul/culSelectDetail.do?ccbaCpno=1111100010000",
 "iiif": "https://korea-archive-mcp.vercel.app/iiif/heritage/11-0000010000000-11/manifest.json"
 }
-]
+],
+"derived": 1
 },
 {
 "decade": "1450년대",
@@ -230,7 +232,8 @@
 "url": "https://archive.aks.ac.kr/link.do?dataUCI=G002+AKS+KSM-XA.1604.1147-20250415.F13801-01-W000001",
 "iiif": "https://korea-archive-mcp.vercel.app/iiif/rec/q1YqVrKKVkrMLlaK1VEqUbJSMjQzMHnd2qLwamfDm7kTXzet0HjZPvFZe-fT3umaCm9n7HjTsvHV5q1vuhe82jrhTcscjWedHS8apz3tmv-iffGzqX3PZu_QVNJRSgGaBKQygZS7gYGRtqN3sLZ3sK9uhKMeyAI9Q0MTc10jAyNTAxNDUz03Q2MLA0NdIAo3AAFDoNZSoNaMkpKCYit9_cSi5IzMslQ9oDP1EpP1sov0czLzsvVS8u1TEksSQ509bcm0pABoydupc15tXftq84LXa4Cem_Nm3oTXi3tebWlQeNSwSwEuDOaBmEsm2oFUzdrxtmvn680tb7ohUhAxhTezJ7xZvAcUdlNWKLyeOOHN1CmIkFR4s6j11YYGoL15QHtBYa6jlAsJqEIg9XrDnFeb1ii87mh5s6ARbNK8pUCpRFCsAH1hpmtoqGtkEmJgYAVGSrUA/manifest.json"
 }
-]
+],
+"derived": 1
 },
 {
 "decade": "1610년대",
@@ -257,7 +260,8 @@
 "url": "https://db.history.go.kr/id/bb_001r_007_21_0110",
 "iiif": "https://korea-archive-mcp.vercel.app/iiif/rec/bZDPTsJAEMZfZbNnoH8ikPRofARvxhCbGiFGQKgHY0yq2YSiQTFSLdEKGLhRUywaKvgyhpamu30Hp3j1Mt9MfvNtvp0zXMfSDi7vKzLeTWEVSzhwpv5Nbzmzw3mLWRrymy1fH_pvJgo_u0GjuZxpzJqildFdzuexYUZuP4WCxWsw6THLRL4-WjV6iZH1CXtso_VEECND5pnxg05bJopcN3IXKDYNRmaRk-xe0GsvNp4TlKyHthN2DXie3hI6sJB_950MVx0UNL2V3cEprEBYkBKILBd4XqhByRdEocALAg_kBEhRVat1ieMUOVMs1dVK7TRzUMkc1riSwv3vqoILgkQfNrscb22iH-0LsYHDSH_dUo9QVwNE7ycQDAxlMKwPmMJHf5GOQajzHL2PEdUJ_A2xpzZ7GQHaS04s8mIuLQhpcWObz0lCXspm8fkv/manifest.json"
 }
-]
+],
+"derived": 3
 },
 {
 "decade": "1630년대",
@@ -274,7 +278,8 @@
 "url": "https://db.history.go.kr/id/bb_005r_001_07_0140",
 "iiif": "https://korea-archive-mcp.vercel.app/iiif/rec/bZBfS8JgFMa_yst7Pbd34hR2GX2E7iJGY5EjUnPrIiJYsoulQgsdKm3lhLpaMLNohZ8mmpLv6Tt0tNtuznM4D7_z75xaVN2ltQNDp3sCtalKv7KrZT9dZPFycrO8n0H0QmDkgjvl_hAGHoRz3vHI4i3Lww4MfAJBlz8mvN0nEM3XBd51foKQ5K3Rd6udX2cQDUke9KhADWyPYqLousaY0sQga6yiMbnE0DlFp2rbDUuVJEMXq6Zl15tn4mFdPGpKpiH9TzWQwomr1ydoJdtb5NP5IBCn4I43KX93-cxBi_emPI4QqCGwOVmgx38rnaDwNFw9J4R7LowvCdz6cPeA1v76KUVWLBdkuVAs7bCyKldURaEXvw/manifest.json"
 }
-]
+],
+"derived": 1
 },
 {
 "decade": "1640년대",
@@ -311,7 +316,8 @@
 "url": "https://db.history.go.kr/id/bb_009r_001_10_0170",
 "iiif": "https://korea-archive-mcp.vercel.app/iiif/rec/bZBfS8JQGIe_ysu5VncmqbTL6CN0FyGNRUqUpusiIliyC7FAwYZam7lIKDLRtFixTxNu0M7rd-idddnN-R3Ow3PeP2esypRtdrSnqWwnwXSmsGA8Dsbv2DNg4TWCpgeiPUVnDqF_H07vQs9deH10uoDmQEysaOZDOB8GD89i6IMYzcXlI9q-cG0gCW-ellZXNK5h2WzFxDEBO2bk1f-e0fGx0wJxZSwtG4Ja77sW14z_D6w2SzCNOqIoUqhqnvP1Ch1yXuZ5Luc4kRMiBV0vVxVJ0tRUoVjVS5XT1H4pdVCRipr0v1UmiypGby9YG21uwJfxCehOaKbVVXyYYmYQotmF65BwRMJqSwl2-NvSMYWY2NHrCETdxMEF4G0L-0NCu_Ee0zydTcpyMr22xbOKnFMyGXb-Aw/manifest.json"
 }
-]
+],
+"derived": 7
 },
 {
 "decade": "17세기",
@@ -376,7 +382,8 @@
 "url": "https://db.history.go.kr/id/bb_019r_001_06_0210",
 "iiif": "https://korea-archive-mcp.vercel.app/iiif/rec/bZDBSsNAEIZfZdhzm-wGGzFH8RG8iQRDxAaxrUk8iAhpyaFI0YKGBmykBSOIEWJakUqeRmiR3e07OK0ePf3_8PH_zMwF8YixRxqHtkX2K8QnBllGQ55HwD9KWcQyiYHnbVhM0-_uDER-s7LzxxeRliAHIS-el1HMix7waSCeMhzE1R3IpJSDPohegG0w70wW0TWpEBvrURwUyzIp23JNSplJdZNqjCI5Q1L3_ZZnqKptKXXH85vuuXLUVI5d1bHV_1Otv63fX2Un29mGr-AT5DiX4WhtxSwUkwCRuH0T4wQDDQysT66Qk9-VTlFEPuRFBqIbylEb5H1fPqSIDlZP0aimVxmrahu7VDfYplGrkcsf/manifest.json"
 }
-]
+],
+"derived": 4
 },
 {
 "decade": "1660년대",
@@ -393,7 +400,8 @@
 "url": "https://db.history.go.kr/id/bb_021r_001_02_0410",
 "iiif": "https://korea-archive-mcp.vercel.app/iiif/rec/bVDLSsNQEP2Vy123yU1oK2QpfoI7kWCI2CK2NYkLESGWKKEIVmporI0ki_oiQrQKVgv-ixBocyf_4KRuXZ2ZOZw5Z-aImlTZoM1tXaObJWpRhaanj_PxNwQ-ySYRj2cQOASGbzzxcy8kc3e6GH4VM_70APeXuefDIF42UcLvYgKuD2cRjnn3ikAwg0GP8HM790Yk7VwvOt304qNYnnp9WqI6GiI0EDRNZbJkqIxJWKisIjFkDpCpW1bbVERR14R6w7RaxqGw0xJ2DbGhi_-r2qhCx-z9GTrx2ir5sT8J5gMnXJZ86vCJjRTvv_AoQEETBcsnlOjeX6R9BJ6Mslc8znUgPCFw04PbMVJbxZtkJtfKklSWK-uspkgrSrVKj38B/manifest.json"
 }
-]
+],
+"derived": 1
 },
 {
 "decade": "1670년대",
@@ -421,7 +429,8 @@
 "url": "https://commons.wikimedia.org/wiki/File%3ANLC403-312001065582-112446_%E4%B8%89%E6%B0%B4%E7%B8%A3%E8%AA%8C_%E6%B8%85%E5%BA%B7%E7%86%9916%E5%B9%B4(1677)_%E5%8D%B7%E4%B8%80.pdf",
 "iiif": "https://korea-archive-mcp.vercel.app/iiif/commons/File%3ANLC403-312001065582-112446%20%E4%B8%89%E6%B0%B4%E7%B8%A3%E8%AA%8C%20%E6%B8%85%E5%BA%B7%E7%86%9916%E5%B9%B4%281677%29%20%E5%8D%B7%E4%B8%80.pdf/manifest.json"
 }
-]
+],
+"derived": 1
 },
 {
 "decade": "1700년대",
@@ -444,7 +453,8 @@
 "url": "https://discovery.nationalarchives.gov.uk/details/r/c8e387ee-6864-480e-a39f-5713b2d71cbc",
 "iiif": "https://korea-archive-mcp.vercel.app/iiif/tna/c8e387ee/manifest.json"
 }
-]
+],
+"derived": 1
 },
 {
 "decade": "1710년대",
@@ -481,7 +491,8 @@
 "url": "https://archive.aks.ac.kr/link.do?dataUCI=G002+AKS+KSM-XZ.1714.1144-20250415.F11301-01-W000006",
 "iiif": "https://korea-archive-mcp.vercel.app/iiif/rec/q1YqVrKKVkrMLlaK1VEqUbJSMjQ3NHnd2qLwZu6WN7MnvNq6RuPZ3L6nrc1PW7drKryZ0fhmwVSNp3s3Pt3ZoKmko5QC1AGkMoGUu4GBkbajd7C2d7CvbkSUHsggPUNDExNdIwMjUwMTQ1M9N0NDYwNDXSAKNwABM6DWUqDWjJKSgmIrff3EouSMzLJUPaBz9BKT9bKL9HMy87L1UvLtUxJLEkOdPW3JtKQAaMnbqXNebV37avOC12t2vGmZ82behNeLe15taVB41LBLAS4M5oGYSybagVTN2vG2a-frzS1vuiFSEDGF18s73vavAfI2vlm8BxRUU1YovO5peLOo9e2sHqCFeUALQYGqo5QLCaFCIPV6w5xXm9YovO5oebOgUQEYum_mLQVKJYKCHeh8M11DQ10jkxADAyswUqoFAA/manifest.json"
 }
-]
+],
+"derived": 7
 },
 {
 "decade": "1730년대",
@@ -498,7 +509,8 @@
 "url": "https://archive.aks.ac.kr/link.do?dataUCI=G002+AKS+KSM-XZ.1735.1144-20250415.F11301-01-W000008",
 "iiif": "https://korea-archive-mcp.vercel.app/iiif/rec/q1YqVrKKVkrMLlaK1VEqUbJSMjQ3Nn3d2qLwZu6WNwvmaDyb2_ds_3xNhTczGt8smKrxdO_GpzsbNJV0lFKAaoFUJpByNzAw0nb0Dtb2DvbVjYjSAxmhZ2hoYqJrZGBkamBiaKrnZmhobGCoC0ThBiBgAdRaCtSaUVJSUGylr59YlJyRWZaqB3SIXmKyXnaRfk5mXrZeSr59SmJJYqizpy2ZlhQALXk7dc6rrWtfbV7wes2ONy1z3syb8Hpxz6stDQqPGnYpwIXBPBBzyUQ7kKpZO9527Xy9ueVNN0QKIqbwennH2_41QN7GN4v3gAJpygqF1z0Nbxa1vp3VA7QwD2ghKDh1lHIhIVQIpF5vmPNq0xqF1x0tbxY0KryZPeHNvKVAqURQgAOdb6ZraKhrZBJiYGAFRkq1AA/manifest.json"
 }
-]
+],
+"derived": 1
 },
 {
 "decade": "1740년대",
@@ -520,7 +532,8 @@
 "url": "https://archive.aks.ac.kr/link.do?dataUCI=G002+AKS+KSM-XZ.1746.1144-20250415.F11301-01-W000012",
 "iiif": "https://korea-archive-mcp.vercel.app/iiif/rec/q1YqVrKKVkrMLlaK1VEqUbJSMjQ3MXvd2qLwZu6WN7M2ajyb2_d8xTZNhTczGt8smKrxdO_GpzsbNJV0lFKAaoFUJpByNzAw0nb0Dtb2DvbVjYjSAxmhZ2hoYqJrZGBkamBiaKrnZmhobGCoC0ThBkBgaATUWgrUmlFSUlBspa-fWJSckVmWqgd0iF5isl52kX5OZl62Xkq-fUpiSWKos6ctmZYUAC15O3XOq61rX21e8HrNjjctc97Mm_B6cc-rLQ0Kjxp2KcCFwTwQc8lEO5CqWTvedu18vbnlTTdECiKm8Hp5x9v-NUDexjeL94ACacoKhdc9DW8Wtb6d1QO0MA9oISg4dZRyISFUCKReb5jzatMahdcdLW8WNCq8mT3hzbylQKlEUIADnW-ma2ioa2QSYmBgBUZKtQA/manifest.json"
 }
-]
+],
+"derived": 2
 },
 {
 "decade": "18세기",
@@ -572,7 +585,8 @@
 "url": "https://archive.aks.ac.kr/link.do?dataUCI=G002+AKS+KSM-XA.1753.1147-20250415.F13801-01-W000010",
 "iiif": "https://korea-archive-mcp.vercel.app/iiif/rec/q1YqVrKKVkrMLlaK1VEqUbJSMjQ3NX7d2qLwamfDm7kTXzet0HjZPvFZe-fT3umaCm-657ydsePV1glvljdovFi98MXM-c-m9j2bvkJTSUcpBagbSGUCKXcDAyNtR-9gbe9gX90IRz2QoXqGhibmukYGRqYGJoamem6GxhYGhrpAFG4ABIYGQK2lQK0ZJSUFxVb6-olFyRmZZal6QKfpJSbrZRfp52TmZeul5NunJJYkhjp72pJpSQHQkrdT57zauvbV5gWv1-x40zLnzbwJrxf3vNrSoPCoYZcCXBjMAzGXTLQDqZq1423XztebW4ChAJaCiCm8mT3hzeI9oPCaskLh9cQJb6ZOQYSewptFra82NADtzQPaCwpnHaVcSEAVAqnXG-a82rRG4XVHy5sFjWCT5i0FSiWCYgLoCzNdQ0NdI5MQAwMrMFKqBQA/manifest.json"
 }
-]
+],
+"derived": 3
 },
 {
 "decade": "1760년대",
@@ -606,7 +620,8 @@
 "url": "https://jsg.aks.ac.kr/dir/view?dataId=JSG_K2-3556",
 "iiif": "https://korea-archive-mcp.vercel.app/iiif/rec/q1YqVrKKVsoqTleK1VEqUbJSerVhzquNW173t7zaMOHN3Bmvti3ReDZl59Pdu142730-e_HTloYXu3s0lXSUUoCKgVQmkPI20jU2NTUD8kqBvIySkoJiK319oKF6idnFeonJetlF-imZRfplmanl9imJJYmeKbZewe7xCH0FQH1PZ89-2bxC4VHDLoWn_ZuATA1vI5BFeUA5kAN1lHIhVhYCqddAZ25ao_C6o-XNgkaFN7MnvJm3FCiVCPKCkYGRma6hoa6RcYihsZWJgZWpgVItAA/manifest.json"
 }
-]
+],
+"derived": 1
 },
 {
 "decade": "1780년대",
@@ -630,7 +645,8 @@
 "url": "https://db.history.go.kr/id/ks_001_0020_0090",
 "iiif": "https://korea-archive-mcp.vercel.app/iiif/rec/q1YqVrKKVspLTUlSitVRKlGyUno-c8fT3vVPexufzel4sqsHyHiyo_nZ9KVKOkopQGkglQmksovjDQwMgdjIAEhYGgCFS4HCGSUlBcVW-vopSXoZmcUl-UWVeun5etlF-pkp-li0FAC1vJ0659XWtW-a1rg4KTxq2KXwZuGGNy0LwMxXGxqB4q8nb3y9cC5QdR5QNdilOkq5EJcUAqnXG-a82rRG4XVHy5sFjQpvZk94Mw_k1kSQX4wMjMx0DQ11jYxDDI2tTAysTEyVagE/manifest.json"
 }
-]
+],
+"derived": 1
 },
 {
 "decade": "1790년대",
@@ -664,7 +680,8 @@
 "url": "https://discovery.nationalarchives.gov.uk/details/r/C16545",
 "iiif": "https://korea-archive-mcp.vercel.app/iiif/tna/C16545/manifest.json"
 }
-]
+],
+"derived": 2
 },
 {
 "decade": "1800년대",
@@ -681,7 +698,8 @@
 "url": "https://commons.wikimedia.org/wiki/File%3ANLC403-312001082374-109538_%E6%B1%B6%E5%BF%97%E7%B4%80%E7%95%A5_%E6%B8%85%E5%98%89%E6%85%B610%E5%B9%B4(1805)_%E5%8D%B7%E4%BA%8C.pdf",
 "iiif": "https://korea-archive-mcp.vercel.app/iiif/commons/File%3ANLC403-312001082374-109538%20%E6%B1%B6%E5%BF%97%E7%B4%80%E7%95%A5%20%E6%B8%85%E5%98%89%E6%85%B610%E5%B9%B4%281805%29%20%E5%8D%B7%E4%BA%8C.pdf/manifest.json"
 }
-]
+],
+"derived": 1
 },
 {
 "decade": "1820년대",
@@ -704,7 +722,8 @@
 "url": "https://archive.aks.ac.kr/link.do?dataUCI=G002+AKS+KSM-XZ.1825.1144-20250415.F11301-01-W000011",
 "iiif": "https://korea-archive-mcp.vercel.app/iiif/rec/q1YqVrKKVkrMLlaK1VEqUbJSMrQwMn3d2qLwZu6WN01r3s5u0Xg2t-_pjtVP-2ZpKryZ0fhmwVSNp3s3Pt3ZoKmko5QC1AGkMoGUu4GBkbajd7C2d7CvbkSUHsggPUNDExNdIwMjUwMTQ1M9N0NDYwNDXSAKNwACQ0Og1lKg1oySkoJiK339xKLkjMyyVD2gc_QSk_Wyi_RzMvOy9VLy7VMSSxJDnT1tybSkAGjJ26lzXm1d-2rzgtdrdrxpmfNm3oTXi3tebWlQeNSwSwEuDOaBmEsm2oFUzdrxtmvn680tb7ohUhAxhdfLO972rwHyNr5ZvAcUVFNWKLzuaXizqPXtrB6ghXlAC0GBqqOUCwmhQiD1esOcV5vWKLzuaHmzoFHhzewJb-YtBUolgoId6HwzXUNDXSOTEAMDKzBSqgUA/manifest.json"
 }
-]
+],
+"derived": 2
 },
 {
 "decade": "1840년대",
@@ -807,7 +826,8 @@
 "url": "https://discovery.nationalarchives.gov.uk/details/r/C11440842",
 "iiif": "https://korea-archive-mcp.vercel.app/iiif/tna/C11440842/manifest.json"
 }
-]
+],
+"derived": 1
 },
 {
 "decade": "1870년대",
@@ -848,7 +868,8 @@
 "url": "https://archive.org/details/NPDP18760321",
 "iiif": "https://iiif.archive.org/iiif/3/NPDP18760321/manifest.json"
 }
-]
+],
+"derived": 4
 },
 {
 "decade": "1880년대",
@@ -890,7 +911,8 @@
 "url": "https://discovery.nationalarchives.gov.uk/details/r/82085148-3168-4399-a5c8-9453f7f5cb93",
 "iiif": "https://korea-archive-mcp.vercel.app/iiif/tna/82085148/manifest.json"
 }
-]
+],
+"derived": 2
 },
 {
 "decade": "1890년대",
@@ -936,7 +958,8 @@
 "url": "https://www.heritage.go.kr/heri/cul/culSelectDetail.do?ccbaCpno=2111101160000",
 "iiif": "https://korea-archive-mcp.vercel.app/iiif/heritage/21-0001160000000-11/manifest.json"
 }
-]
+],
+"derived": 6
 },
 {
 "decade": "1900년대",
@@ -982,7 +1005,8 @@
 "url": "https://gallica.bnf.fr/ark:/12148/bpt6k5426295j",
 "iiif": "https://korea-archive-mcp.vercel.app/iiif/rec/TVCxTsMwFPyVJy8saeM4adp4pBJICDa2qoPTuK3b1A62y4KQQGJgZAchFoZKHSomxNo_YaT9CF6ASEx379073eldEUf4gExEWaqRIMOAeMLJ6YGxSmoPpVHaC6WBQ3-qtAygb-x2hXhm9MSUCtmJqIwOQC0qK51TRjuQHpxZXkqtrINCgtuuZmZp6z1OHqlyCwmD499Y2D8-7NbvQxKQAtOjjMZIFVJh5zyMWJT0wlEe04x2Ke2NUFyiOPW-cjwM_8q3cz1uj234z5NXPp13EpayrDNDV4WuJvPz5gMO9dEPFsI3drzSeNU8JCALnBAuEHabp6-3Nezu7_Yvt3Xp_fMrSqJ-GaMsbUVRi8XnUcwTypMuuf4G/manifest.json"
 }
-]
+],
+"derived": 6
 },
 {
 "decade": "근대",
@@ -1056,7 +1080,8 @@
 "url": "https://ndlsearch.ndl.go.jp/books/R100000001-I2712B10649449",
 "iiif": "https://korea-archive-mcp.vercel.app/iiif/rec/q1YqVrKKVspLyVGK1VEqUbJSejZ96cv5k59O6Hiyd-vzLQ1P9299umQ5UPDZnDVPd8x9OnvvszlzX65b97Rt5vM585_umKYQ_XT25mezdxza_nzLzFiFRw1TFJ5v3fh89uKnu-boPG1thnMedSx9vn2Fko5SCtAWQ0tDAyAzE8gEUqVAKqOkpKDYSl8f6JTi1MSi5Aw9IEsvPV8vq0A_KT8_u1g_yNAAAgx1PY3MDY2cDA3MTCxNTCyBJhQATfBz8QFav0sB4h6gYB5QEOQzHaVciD2FQOr1hjmvNq1ReN3R8mZBo8Kb2RPezFsKlEoE-d3IwMhM19BQ18g4xMDYysDAythUqRYA/manifest.json"
 }
-]
+],
+"derived": 10
 },
 {
 "decade": "1920년대",
@@ -1138,7 +1163,8 @@
 "url": "https://www.europeana.eu/item/10001/5207913015F426D6F71EE6D6E703C3453356D859",
 "iiif": "https://iiif.europeana.eu/presentation/10001/5207913015F426D6F71EE6D6E703C3453356D859/manifest"
 }
-]
+],
+"derived": 3
 },
 {
 "decade": "1940년대",
@@ -1186,7 +1212,8 @@
 "url": "https://www.archives.go.kr/next/newsearch/showDetailPopup.do?rc_code=1310377&rc_rfile_no=202311400037&rc_ritem_no=000000000044",
 "iiif": "https://korea-archive-mcp.vercel.app/iiif/rec/VVBNS8NAEP0ryx5EIV_bpB9JKSIIPYgg4k2klDbaYNvEJjWCCKmKFCrYi2Bp1PRg6aFiUAvFn-Mxu_0PTlosuoedmfdm5s3MObaxto-LjVLFONVtfMBhB2t4du9Hk1cWXLPnFofo2xRlokmYRf9xgNjlOPoI6HhKO6PVre2N_BrmcBk6EFVJgmuAm5ASMiGKJElymlcUQJuAVhzHsjVRdF1X-JUXjkzhuCHW9TMHPtfWY0K0K6a7qTtFo7pjWk1LKJvrjVKhZJb1HJEJNE2vQNw4NKp6oW7m_srNCcPRazEhLd98CAuGgGWi0IumIR08sn4XfXtfaDdPCIl3Zv4ANpzdTFgnoLceWqQBxCGSSak8UTPJbJwYZ_V8eteLPj0ajBB47KHFrlqIdXw6HLNhG0pUJQ0lqVi6DtLLk3O4BiGYEzA09KP3MaLtaxZAeb_Lnl6AKjqLO6Z4QviEvCfJmkQ0ksQXPw/manifest.json"
 }
-]
+],
+"derived": 22
 },
 {
 "decade": "1950년대",
@@ -1244,7 +1271,8 @@
 "url": "https://catalog.archives.gov/id/24033",
 "iiif": "https://korea-archive-mcp.vercel.app/iiif/nara/24033/manifest.json"
 }
-]
+],
+"derived": 91
 },
 {
 "decade": "20세기",
@@ -1328,7 +1356,8 @@
 "url": "https://www.ehistory.go.kr/view/movie?mediasrcgbn=KV&mediaid=766&mediadtl=4390&mediagbn=DH",
 "iiif": "https://korea-archive-mcp.vercel.app/iiif/ktv/movie~KV~766~4390~DH/manifest.json"
 }
-]
+],
+"derived": 6
 },
 {
 "decade": "광복 이후(1945~)",
@@ -1407,7 +1436,8 @@
 "url": "https://archive.org/details/DTIC_ADB006731",
 "iiif": "https://iiif.archive.org/iiif/3/DTIC_ADB006731/manifest.json"
 }
-]
+],
+"derived": 7
 },
 {
 "decade": "1980년대",
@@ -1454,7 +1484,8 @@
 "url": "https://gallica.bnf.fr/ark:/12148/bpt6k3387193p",
 "iiif": "https://korea-archive-mcp.vercel.app/iiif/rec/TZA9S8RAEIb_yjCNTe72NhsuyZYK2gg2dscVmy9dbt2Lm00lgoKFpb0iNiLCFWIl194_sTT5Ec6pAat3hnee-brABuUMT5QxOlc4D9CjxEMFe0u3eS2h9GB2jvJcF6X1IKHQVdU2emmhKMEoyFvjW1dC5ZTdvCjdEGIHeHbw2xb6-7tu9THHAAvqztMkplBTqNxCMh7yKGF5JqI0FmnIBZktmafe141k7G-5cWarceXYPyar_XQhRBLzVNRE1UQNMz-v1rBr93-0UH7AqcpS1XBwgGeUkZyTdG8PX-8r6G5v-qfr7dL94zNZavuScBJOR5yPQnHMhYwmMorx8hs/manifest.json"
 }
-]
+],
+"derived": 10
 },
 {
 "decade": "1990년대",
@@ -1500,7 +1531,8 @@
 "url": "https://www.archives.go.kr/next/newsearch/showDetailPopup.do?rc_code=1310377&rc_rfile_no=202010401379&rc_ritem_no=000000000067",
 "iiif": "https://korea-archive-mcp.vercel.app/iiif/rec/TVDBTsJAEP2VzR48QbvbIg1NiBc_wIM3YwiBKo1Aa7tYE2MChBhuciHBSLUeiJBg0lQJxHjiUzzubv_BASNxDjsz783Om5kb7GPzBJe9Ss2-snx8msEMmzgNJ6I7lUkk-yMkkkhMPvh7lI5WMhyhdDhN7-dIduc8meEMrsIHWihQCG0INaIRSnKE6kYhmzcAbQFaY8z1TVUNgkD5U1POHeXCU5vWNYMn8K0Nofo1Jzi0WNmuHzluy1WqzoFXKVWcqlWkOiW6YexB7p3ZdavUdIr_5baEzazGhiA72w7hwhB88cbjNl_F4iWUjwP03f5E8mHFF4P1Mr1byPBrvYQaEc9gOfna2xakwzFgMurJ5w7SoFMTOu0OlsENSMFdghPxmCdzJPo9GXUQKMinCVBl9nuWfJbSrKYfE90k1Mzt49sf/manifest.json"
 }
-]
+],
+"derived": 18
 },
 {
 "decade": "2000년대",
@@ -1549,7 +1581,8 @@
 "url": "https://www.ehistory.go.kr/view/photo?mediasrcgbn=BK&mediaid=23&mediadtl=5241",
 "iiif": "https://korea-archive-mcp.vercel.app/iiif/ktv/photo~BK~23~5241/manifest.json"
 }
-]
+],
+"derived": 7
 },
 {
 "decade": "2010년대",
@@ -1598,7 +1631,8 @@
 "url": "https://e-gonghun.mpva.go.kr/user/ContribuReportDetail.do?goTocode=20001&mngNo=3536&pageTitle=Report",
 "iiif": "https://korea-archive-mcp.vercel.app/iiif/rec/q1YqVrKKVkrPz0vPKM1TitVRKlGyUnozZ8GrLQ1vOuZovF_e-XT9mpcL2jQVDC0NjBTqgJSRgcKh7QrGeoZvZm153T8TxDEyMLTUN7Q0M1J43dPwduqc1-v3vNq69s28pfqv-1tfL9sLZCnpKKUAjYarBPIzgXxjU2MzILMUyMwoKSkottLXT9WFOkcvt6AsUS89Xy-7SL-0OLVI3zk_r6QoM6k0KLUgv6jEJbUkMTNHLyXfPj0_JD85PyXV1sjAwMBQLTcv3S_fFmSyWkFiempIZklOqi1ED9CqApAHwS5_tbnlzfQtCo8adiF8A1SQB1QACxAdpVwgD0gVAqnXG-a82rRG4XVHy5sFjQpvZk-AeCuxBOwvIzNdQ0NdI-MQA2MrA0MrQyOlWgA/manifest.json"
 }
-]
+],
+"derived": 7
 },
 {
 "decade": "2020년대",
@@ -1643,7 +1677,8 @@
 "url": "https://commons.wikimedia.org/wiki/File%3AYeouido%2C_Seoul.jpg",
 "iiif": "https://korea-archive-mcp.vercel.app/iiif/commons/File%3AYeouido%2C%20Seoul.jpg/manifest.json"
 }
-]
+],
+"derived": 9
 },
 {
 "decade": "연대 미상",
