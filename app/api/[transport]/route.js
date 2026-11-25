@@ -936,7 +936,9 @@ const COLLECT = {
     return out;
   },
   koreanwar: async (q, n) => {
-    const cards = (await kwSearch({ keyword: q, viewType: 'archive' })).cards.slice(0, n);
+    const ks = await kwSearch({ keyword: q, viewType: 'archive' }); // v3.34 카드 0이면 기관 totalCount가 '0'일 때만 0건 — 그 밖(표기 없음·차단·개편)은 조회 실패
+    if (!ks.cards.length && String(ks.total).replace(/,/g, '') !== '0') throw new Error(`6·25전쟁 아카이브센터 결과 판독 불가(totalCount ${ks.total})`);
+    const cards = ks.cards.slice(0, n);
     // v1.86: 상위 5건 상세 병렬 조회(24h 캐시·6s 상한) — 원본 NAID(sameAs)·생산시기 확보 → NARA 원본과 동일 기록 병합
     const det = await Promise.race([Promise.all(cards.slice(0, 5).map((c) => kwDetail(c.id).catch(() => null))), sleep(6000).then(() => [])]);
     return cards.map((c, i) => { const d = det[i] || {}; return { title: c.title, date: d.date || '', id: c.id, ...(c.hierarchy ? { series: c.hierarchy } : {}), ...(d.naid ? { sameAs: `NAID ${d.naid}` } : {}), url: c.url }; }); // v1.84: 상위계층 실값 승격
@@ -1143,6 +1145,7 @@ const COLLECT = {
         return { title: (h1 ? norm(h1[1]) : cid) + (pd ? ' · 권리:PD(저작권 만료)' : ''), date: conf ? norm(conf[1]) : '', id: acc ? acc[1] : cid, ...(ot ? { series: norm(ot[1]) } : {}), url: 'https://www.awm.gov.au/collection/' + cid };
       } catch { return null; }
     }));
+    if (ids.length && !out.some(Boolean)) throw new Error(`AWM 상세 ${ids.length}건 모두 조회 실패`); // v3.34 상세 전부 실패를 0건으로 보고하던 결함
     return out.filter(Boolean);
   },
   jsg: async (q, n) => { // AKS 장서각 — ★검색 파라미터는 q=query|<어> (플레인 q는 무시되고 전체 열람 반환 — Playwright 실브라우저 재역공학으로 확정, 2026-11-20)
@@ -1354,7 +1357,9 @@ const COLLECT = {
     return out;
   },
   nrich: async (q, n) => { // v2.13 국립문화유산연구원 — 국외문화유산 DB(명칭) + 발간자료(보고서·초록·목차). 계층=국외문화유산 › 국가 › 소장처 / 발간자료 › 연구분야
-    const [ov, rp, db] = await Promise.all([nrOvList(q).catch(() => []), nrRepApi(q, Math.max(2, Math.ceil(n / 2))).catch(() => []), nrDbQuick(q, n)]);
+    let nfail = 0; const soft = (p) => p.catch(() => { nfail++; return []; }); // v3.34 원격 2곳(국외문화유산 목록·발간자료 API)이 모두 실패하면 확정 0이 아니라 조회 실패
+    const [ov, rp, db] = await Promise.all([soft(nrOvList(q)), soft(nrRepApi(q, Math.max(2, Math.ceil(n / 2)))), nrDbQuick(q, n)]);
+    if (nfail === 2 && !db.length) throw new Error('국립문화유산연구원 국외문화유산·발간자료 조회 모두 실패');
     const a = ov.slice(0, n).map((r) => ({ title: `[국외문화유산] ${r.title} — ${[r.nation, r.holder].filter(Boolean).join(' ')}`.slice(0, 160), date: r.era, id: `ov:${r.mseq}`, series: ['국외문화유산', r.nation, r.holder].filter(Boolean).join(' › '), url: r.url }));
     const b = rp.slice(0, Math.max(2, Math.ceil(n / 2))).map((r) => ({ title: `[발간자료] ${r.title}`.slice(0, 160), date: r.year, id: `rep:${r.idx}`, series: ['발간자료', nrField(r.field)].filter(Boolean).join(' › '), url: r.url, ...(r.img ? { media: r.img } : {}) }));
     const c = db.map(nrDbItem);
@@ -1363,8 +1368,10 @@ const COLLECT = {
   okchf: async (q, n) => { // v2.11 국외소재문화유산재단 대국민 아카이브 — 통합검색(국외문화유산·사진아카이브). 계층=유형 › 소장국가 › 소장처
     const [b, pub] = await Promise.all([cachedText(`okL:${n}:${q}`, 6 * 3600e3, () => gtext(`${OK_B}/archive/total-search.do?srSearchVal=${encodeURIComponent(q)}&pagerLimit=${n <= 10 ? 10 : n <= 20 ? 20 : 50}`, OK_UA), 'data-result'),
       okPubSearch(q).catch(() => ({ items: [] }))]); // 조사보고서(목차) — 소장처 단위 맥락
+    const ol = okList(b); // v3.34 목록·보고서 모두 비었으면 기관 '전체 N'이 0일 때만 0건
+    if (!ol.out.length && !pub.items.length && ol.total !== '0') throw new Error(`국외소재문화유산재단 결과 판독 불가(전체 ${ol.total || '표기 없음'})`);
     const reps = pub.items.slice(0, Math.min(3, Math.max(1, Math.floor(n / 3)))).map((r) => ({ title: `[조사보고서] ${r.title}`.slice(0, 160), date: '', id: `pub:${r.no}`, series: '발간자료 › 조사보고서', url: r.url, ...(r.img ? { media: r.img } : {}) }));
-    return reps.concat(okList(b).out.slice(0, n).map((r) => ({ title: `[${r.type}] ${r.title} — ${[r.country, r.holder].filter(Boolean).join(' ')}`.slice(0, 160), date: '', id: r.id,
+    return reps.concat(ol.out.slice(0, n).map((r) => ({ title: `[${r.type}] ${r.title} — ${[r.country, r.holder].filter(Boolean).join(' ')}`.slice(0, 160), date: '', id: r.id,
       series: [r.type, r.country, r.holder].filter(Boolean).join(' › '), url: r.url, ...(r.img ? { media: r.img } : {}) }))).slice(0, n + reps.length);
   },
   ledger: async (q, n) => { // v2.6: 발견 누적 원장 — 사용자들이 이미 발굴한 기록(검색어 없음)을 다시 검색. docs/data/discovered.jsonl 1h 캐시. 'all'에는 넣지 않는다(원 기관 결과와 중복·교차확인 오인 방지) — sources='ledger'로 명시
