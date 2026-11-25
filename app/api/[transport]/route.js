@@ -866,6 +866,8 @@ const PART_OF = {
   earchive: (it) => it.series && `수집처 › ${it.series}`,
   commons: (it) => it.series && `Commons › ${it.series}`,
 };
+// v3.36 확정 0 판별 — 결과가 비었으면 기관 0건 표지(실제 0건 페이지로 실측한 정규식)가 있을 때만 0건, 없으면 조회 실패(throw)
+const zeroOr = (out, body, rx, name, raw = false) => { if (!out.length && !rx.test(raw ? String(body) : String(body).replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' '))) throw new Error(`${name} 결과 판독 불가(0건 표지 없음 — 차단·개편 가능)`); return out; };
 const COLLECT = {
   tna: async (q, n, yr) => { // v2.99.1 yr = 생산연도 필터(sps.dateFrom/To) — 당대 국호 질의를 연도 문자열 대신 필터로
     q = koToEn(q) || q;
@@ -995,6 +997,7 @@ const COLLECT = {
       out.push({ title: `${sym ? `[${sym}] ` : ''}${title}`.slice(0, 110), date: sf(seg, '269', 'a') || sf(seg, '260', 'c'), id: sym || recid, ...(sym && sym.includes('/') ? { series: sym.split('/').slice(0, 2).join('/') } : {}), url: 'https://digitallibrary.un.org/record/' + recid });
       if (out.length >= (sym ? 50 : n)) break;
     }
+    zeroOr(out, b, /<collection[\s>](?![\s\S]*<record)/, 'UN 디지털도서관', true); // 레코드 없는 빈 collection만 0건
     if (sym) { out.sort((x, y) => (String(y.title).startsWith(`[${sym}]`) ? 1 : 0) - (String(x.title).startsWith(`[${sym}]`) ? 1 : 0)); return out.slice(0, n); } // 기호 정확 일치 우선(191 필드는 접두 일치 — 실측)
     return out;
   },
@@ -1020,7 +1023,7 @@ const COLLECT = {
       out.push({ title: `[판결문] ${norm(m[2])} — ${norm(m[3])} · ${norm(m[5]).slice(0, 40)}`.slice(0, 115), date: m[4], id: '', ...(norm(m[3]) ? { series: norm(m[3]) } : {}), url: 'https://theme.archives.go.kr' + m[1].replace(/&amp;/g, '&') });
       if (out.length >= n) break;
     }
-    return out;
+    return zeroOr(out, b, /총\s*0\s*건|검색결과가 없습니다/, '독립운동 판결문');
   },
   much: async (q, n) => { // 대한민국역사박물관 근현대사아카이브 — POST 검색 역공학(2026-11-21). 소장품·포스터·간행물(근현대 실물)
     const r = await fetch('https://archive.much.go.kr/search.do', { method: 'POST',
@@ -1161,7 +1164,7 @@ const COLLECT = {
       out.push({ title: t.slice(0, 95), date: '', id: jid, ...(sb ? { series: sb } : {}), url: 'https://jsg.aks.ac.kr/dir/view?dataId=' + encodeURIComponent(m[1]) });
       if (out.length >= n) break;
     }
-    return out;
+    return zeroOr(out, b, /총\s*0\s*건/, '장서각');
   },
   kyudb: async (q, n) => { // 서울대 규장각 — 기존 jKyu(목록+해제 POST) 코어 재사용
     const r = await jKyu(q);
@@ -1224,7 +1227,7 @@ const COLLECT = {
         url: `https://e-gonghun.mpva.go.kr/user/ContribuReportDetail.do?goTocode=20001&mngNo=${mn[1]}&pageTitle=Report` });
       if (out.length >= n) break;
     }
-    return out;
+    return zeroOr(out, b, /TOTAL\s*0\s*건|조회된 정보가 없습니다/, '공훈전자사료관');
   },
   ktv: async (q, n) => { // v2.37 e영상역사관 자체 목록 검색 우선(ehistory.go.kr — 정직 UA 정상 응답, 2026-11-24 실측). ktv.go.kr 통합검색은 쿠키 확인 리다이렉트(303 → /)로 자동 요청을 받지 않음 → 보조
     const eh = await ehistorySearch(q, n).catch(() => []);
@@ -1292,7 +1295,7 @@ const COLLECT = {
       if (c && t) out.push({ title: norm(t[1]), date: dt, id: c[1], url: `https://www.jacar.archives.go.jp/das/meta${useJa ? '' : '-en'}/` + c[1] });
       if (out.length >= n) break;
     }
-    return out;
+    return zeroOr(out, b, /There are no documents matching|該当する文書が見つかりませんでした/, 'JACAR');
   },
   seoul: async (q, n) => { // 서울기록원 — v1.36 기록 단위 실체화: /catalog/result 서버 렌더 파싱 + fnDetail 딥링크(/item·/aggregation GET 실측)
     const base = 'https://archives.seoul.go.kr';
@@ -1326,7 +1329,7 @@ const COLLECT = {
         if (t) it.title = `[기록건·${it.url.includes('/item/') ? '사진' : '기록'}] ${norm(t)}`.slice(0, 110);
       } catch { /* 제목 보강 실패 시 안내 문구 유지 */ }
     }));
-    return out;
+    return zeroOr(out, b, /검색 결과가 없습니다/, '서울기록원');
   },
   foia: async (q, n) => { // 정보공개 원문 라이브 채널: 서울정보소통광장 결재문서 — 전용 도구(foia_search)와 동일 경로
     // 기지 차단(연결 리셋 ~11s×2회 재시도=21s 소모 실측) — 단발 6s fail-fast로 health·연합 탐침 시간 보호. 복구 시 자동 정상화
