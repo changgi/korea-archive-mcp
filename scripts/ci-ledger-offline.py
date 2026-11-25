@@ -105,6 +105,9 @@ try:  # v3.0.1 날짜 칸 의미 검사 — 날짜에 숫자가 없는 값(분�
     if "흥남" not in json.dumps(_P["흥남"]["labels"], ensure_ascii=False) or "Hungnam" not in _P["흥남"]["labels"] or any("(?" in x for e in _P.values() for x in e["labels"]): bad.append("지명 표기 변이 결함")
     _dn = [o["key"] for o in _L if o.get("date_note") and str(o.get("date") or "")[:4] != o["date_note"]["year"]]  # v3.18 철 단위 연도 단서 정합
     if _dn: bad.append(f"date_note 연도 불일치 {len(_dn)}건")
+    _A = json.load(open(os.path.join(data, "authorities.json"), encoding="utf-8"))["authorities"]  # v3.23 기관 전거 — 기록의 전거 번호가 모두 authorities.json에
+    _am = [i for o in _L for i in ((o.get("authority_ids") or {}).get("terms") or {}).values() if i not in _A or not _A[i]["uri"].startswith("http://lod.nl.go.kr/resource/")]
+    if _am: bad.append(f"authorities.json에 없는 전거 {len(_am)}건")
     _eb = [o["key"] for o in _L if str(o.get("iiif_kind", "")).startswith("기록 봉투") and not (o.get("envelope_basis") or {}).get("why")]  # v3.9.2
     if _eb: bad.append(f"사유 없는 기록 봉투 {len(_eb)}건")
     _ex = [o["key"] for o in _L if o.get("envelope_basis") and not str(o.get("iiif_kind", "")).startswith("기록 봉투")]
