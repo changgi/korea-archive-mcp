@@ -1122,6 +1122,10 @@ def build_relations(recs_all):
             for x in target_ids(kind, v):
                 for k in by_id.get(x, ()):
                     if k.startswith(TARGET_INST[kind]): add(o["key"], k, "같은 기록(다른 소장처)", basis)
+        for kind, v in gallery_targets(o):  # v3.7.4 갤러리 재게시(원본 포함) — 같은 기록 아님
+            for x in target_ids(kind, v):
+                for k in by_id.get(x, ()):
+                    if k.startswith(TARGET_INST[kind]): add(o["key"], k, "갤러리 재게시(원본 포함)", "갤러리 카드 '원 기록' 표기 — KOREA ARCHIVE 갤러리 이야기 카드가 이 원본을 포함(같은 기록 아님 — 카드는 여러 기록을 엮음)")
         if o["key"].startswith("ia:"):  # IA 업로드가 NARA 로컬 식별자를 그대로 쓰는 경우
             for k in by_id.get(o["key"][3:].lower(), ()):
                 if not k.startswith("ia:"): add(o["key"], k, "같은 기록(다른 소장처)", f"식별자 일치 '{o['key'][3:]}'(IA 식별자 = 기관 로컬 식별자)")
@@ -1147,7 +1151,7 @@ def build_relations(recs_all):
                 if a["key"].split(":")[0] != b["key"].split(":")[0]:
                     bs = [f"{x['key']} {dsrc[x['key']]}" for x in (a, b) if x["key"] in dsrc]
                     rel[a["key"]].setdefault(("같은 날(다른 기관)", b["key"]), f"기관 표기 날짜 {d}" + (f" (파생 날짜 포함 — {'; '.join(bs)})" if bs else ""))
-    order = {"같은 기록(다른 소장처)": 0, "같은 날(다른 기관)": 1, "같은 계열": 2}
+    order = {"같은 기록(다른 소장처)": 0, "같은 날(다른 기관)": 1, "갤러리 재게시(원본 포함)": 2, "같은 계열": 3}
     REL.clear()
     for k, m in rel.items():
         if m: REL[k] = sorted(((t, b, basis) for (t, b), basis in m.items()), key=lambda x: (order[x[0]], x[1]))
@@ -1434,14 +1438,19 @@ def same_targets(o):
             if mm: out.append(("naid", mm[1], f"기관 메타 '{k}'의 NARA 카탈로그 링크"))
         mm = NARA_LINK.search(o.get("summary") or "") if o["key"].startswith("ia:") else None
         if mm: out.append(("naid", mm[1], "IA 기술(description)의 NARA 카탈로그 링크"))
-    if o["key"].startswith("gallery:"):  # v3.2.1 우리 갤러리 카드의 '원 기록' 표기 — 재게시본 ↔ 원 기관 원본(NAID·archive.org 식별자)
-        for k, v in (o.get("meta") or []):
-            if k != "원 기록": continue
-            for n in re.findall(r"NAID (\d+)", str(v)): out.append(("naid", n, "갤러리 카드 '원 기록' 표기 — KOREA ARCHIVE 갤러리 재게시본의 원본"))
-            for i in re.findall(r"archive\.org (\S+?)(?=\s|\(|$)", str(v)): out.append(("ia", i, "갤러리 카드 '원 기록' 표기 — KOREA ARCHIVE 갤러리 재게시본의 원본"))
     seen = set(); return [t for t in out if not (t[:2] in seen or seen.add(t[:2]))]
 
 TARGET_INST = {"kw": "koreanwar:", "nara_local": "nara:", "naid": "nara:", "ia": "ia:"}  # 상대 기록의 소장처 — IA 식별자가 NARA 로컬 식별자와 같아 자기 자신에 걸리지 않게
+
+def gallery_targets(o):
+    """v3.7.4 갤러리 카드의 '원 기록' 표기(NAID·archive.org 식별자) — 카드는 여러 기록을 엮은 이야기 카드라 '같은 기록'이 아니라 '갤러리 재게시(원본 포함)'
+    (v3.2.1이 같은 기록으로 이어 날짜 교차가 '불일치'로 드러난 과장 교정)."""
+    out = []
+    if not o["key"].startswith("gallery:"): return out
+    for k, v in (o.get("meta") or []):
+        if k != "원 기록": continue
+        out += [("naid", n) for n in re.findall(r"NAID (\d+)", str(v))] + [("ia", i) for i in re.findall(r"archive\.org (\S+?)(?=\s|\(|$)", str(v))]
+    return out
 
 def target_ids(kind, v):
     return {"kw": {f"koreanwar:{v}".lower(), v.lower()}, "nara_local": {v.lower()}, "naid": {f"naid {v}", f"nara:naid {v}"}, "ia": {f"ia:{v}".lower()}}[kind]
