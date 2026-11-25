@@ -2834,6 +2834,13 @@ def main():
         ps_ = sorted(places(o))  # v3.14 표준 지명(지명 사전 — 표제·기관 장소 칸)
         if ps_: o["places_std"] = ps_
         else: o.pop("places_std", None)
+        if o.get("meta"):  # v3.58 메타의 완전 중복(같은 항목·같은 값) 제거 — 첫 항목 유지, 값이 다르면 모두 보존(중복만 지운다)
+            _seen = set(); _md = []
+            for _m in o["meta"]:
+                _k = tuple(str(x) for x in _m[:2]) if isinstance(_m, (list, tuple)) else (str(_m),)
+                if _k in _seen: continue
+                _seen.add(_k); _md.append(_m)
+            if len(_md) != len(o["meta"]): o["meta"] = _md
         oh_ = origin_holder(o)  # v3.11 사본의 원 소장처 계층
         if oh_: o["origin_holder"] = oh_
         else: o.pop("origin_holder", None)
