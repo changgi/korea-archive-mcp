@@ -68,6 +68,10 @@ try:  # v3.0.1 날짜 칸 의미 검사 — 날짜에 숫자가 없는 값(분�
     if _go: bad.append(f"Gallica 디지털 원문인데 원 기관 IIIF 주소 없음 {len(_go)}건")
     _gb = [o["key"] for o in _L if o.get("iiif_origin") and not (o.get("iiif_built") or o.get("iiif"))]
     if _gb: bad.append(f"iiif_origin 기록의 봉투 매니페스트 소실 {len(_gb)}건(지우지 않는다)")
+    _eb = [o["key"] for o in _L if str(o.get("iiif_kind", "")).startswith("기록 봉투") and not (o.get("envelope_basis") or {}).get("why")]  # v3.9.2
+    if _eb: bad.append(f"사유 없는 기록 봉투 {len(_eb)}건")
+    _ex = [o["key"] for o in _L if o.get("envelope_basis") and not str(o.get("iiif_kind", "")).startswith("기록 봉투")]
+    if _ex: bad.append(f"봉투가 아닌데 봉투 사유 {len(_ex)}건")
     _tg = [o["key"] for o in _L if any(m and (str(m[0]).startswith("➤") or m[0] == "공식 검색") for m in o.get("meta") or [])]  # v3.5.3 도구 안내 문구가 기관 메타로
     if _tg: bad.append(f"메타에 도구 안내 문구 {len(_tg)}건(tool_notes로 — v3.5.3)")
     _nb = [o["key"] for o in _L if o.get("date_derived") and not o.get("date_basis")]

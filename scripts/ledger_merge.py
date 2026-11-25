@@ -1052,6 +1052,37 @@ def iiif_kind(o):
     if re.search(r"korea-archive-mcp\.vercel\.app/iiif/|changgi\.github\.io/korea-archive-mcp/", m): return "원 기관 이미지로 구축(KOREA ARCHIVE 브리지)"
     return "원 기관 제공 매니페스트"
 
+# v3.9.2 기록 봉투 사유 — '이미지 없음'이 왜인지(권리·기술·매체·미구축)를 기준 정보로 축적. 근거는 source_profile 간이 프로파일·MAINTAINING 실측.
+#   '미구축'은 다음 개선 대상(기관 IIIF·공개 이미지 경로를 아직 확인하지 못함) — 부재 단정이 아니다.
+ENVELOPE_WHY = {
+    "okchf": ("권리", "재단·소장처 이용조건 — 허가 전 링크만(이미지 게재 협의 대상)"),
+    "i815": ("권리", "공공누리 표시 없는 원문 이미지는 독립기념관 사전 협의 대상"),
+    "jsg": ("권리", "장서각 이미지 게재는 공문 신청·허가 대상"),
+    "kyudb": ("권리", "규장각 원문 이미지 게재는 기관 허가 대상"),
+    "aks": ("기술", "원문 이미지가 DZI 타일 뷰어(IIIF 아님) · 재이용 조건 미표기 — 게재 전 기관 확인"),
+    "oldnews": ("기술", "지면 이미지 엔드포인트가 자동 조회에 404 — 기관 뷰어에서 열람"),
+    "nzarch": ("기술", "본 사이트 봇 차단(Incapsula) — 우회하지 않음, 기관 페이지에서 열람"),
+    "gallica": ("기술", "서버 자동 조회 403 — 원 기관 IIIF는 iiif_origin(브라우저 열람)"),
+    "archives": ("기술", "국가기록원 IIIF 미제공 — 원문은 기관 뷰어"),
+    "indy": ("기술", "판결문 원문은 국가기록원 뷰어 — IIIF 미제공"),
+    "jacar": ("기술", "원본 이미지는 国立公文書館 뷰어(PDF) — IIIF 미제공"),
+    "nedb": ("매체", "한국사DB 텍스트 원문 — 이미지 대상 아님(지면 이미지 자료는 기관 뷰어)"),
+    "gonghun": ("매체", "공적조서·공훈록 텍스트"),
+    "un": ("매체", "UN 공식문서 PDF(6개 언어) — IIIF 미제공, 원 기관 PDF로 열람"),
+    "ndl": ("매체", "서지 레코드 — 디지털화 자료(dl.ndl.go.jp PID) 미연결(2026-11-25 SRU 표본: 타 도서관 소장 서지)"),
+    "dnz": ("기술", "집계 서비스 — 이미지는 각 제공기관 페이지(usage·rights 확인)"),
+    "nlna": ("매체", "문서군(inventaris) 기술 — 사진은 Europeana dataset 경로"),
+    "nrich": ("미구축", "브리지 대상 유형(국외문화유산·금석문·초상화·괘불·연구DB 이미지) 밖의 기록(발간자료 등)"),
+}
+
+def envelope_basis(o):
+    k = o.get("iiif_kind") or ""
+    if not k.startswith("기록 봉투"): return None
+    src = o["key"].split(":")[0]
+    if "원 기관 페이지에 이 기록의 공개 이미지 없음" in k: t, w = "원 기관 이미지 없음", "브리지가 원 기관 페이지를 판독했으나 이 기록의 공개 이미지 없음"
+    else: t, w = ENVELOPE_WHY.get(src, ("미구축", "원 기관 IIIF·공개 이미지 경로 미확인 — 다음 개선 대상(부재 단정 아님)"))
+    return {"type": t, "why": w, **({"see": "iiif_same"} if o.get("iiif_same") else {}), **({"see_origin": "iiif_origin"} if o.get("iiif_origin") else {})}
+
 def iiif_origin(o):
     """v3.9 Node iiifFor의 Gallica 규칙 패리티 — Gallica는 서버 IP 자동 조회가 403(2026-11-23 실측)이라 원장이 매니페스트를 받아 확인할 수 없다.
     그래서 iiif(원장이 판독·수집하는 경로)에 넣지 않고, 디지털 원문 ark(btv1b·bpt6k 등 — 카탈로그 cb ark 아님)로 만든 기관 공식 IIIF 주소를
@@ -1297,7 +1328,7 @@ def build_record_pages(recs_all):
 {row('계층', E_(part) + (f" <small>(근거: {E_(o.get('partOf_src', ''))})</small>" if o.get('partOf_src') else '') if part else (E_(pder) + ' <small>[파생]</small>' if pder else ''))}
 {row('날짜', E_(date) if date else (E_(dd) + f" <small>[파생 — {E_(o.get('date_basis', ''))}]</small>" if dd else ''))}{row('연대', E_(decade(o)))}{row('날짜 교차 확인', dch)}
 {row('요약', E_(o.get('summary') or '') or (E_(o.get('summary_composed') or '')))}{row('권리', E_(o.get('rights_view') or '') + (f" <small>({E_(o.get('rights_basis', ''))})</small>" if o.get('rights_basis') else ''))}
-{row('IIIF', f"<a href='{KV}{E_(mf)}'>KV 뷰어로 보기</a> · <a href='{E_(mf)}'>매니페스트</a> <small>({E_(o.get('iiif_kind', ''))})</small>" if mf else '')}{row('같은 날 다른 기관 기록', f"{E_(o['same_day']['date'])} — {o['same_day']['institutions']}개 기관 {o['same_day']['records']}건 · <a href='{KV}{E_(o['same_day']['collection'])}'>KV로 기관별 이어 보기</a> · <a href='{E_(o['same_day']['collection'])}'>IIIF 컬렉션</a> <small>(같은 사건 교차 대조 단서 — 같은 장면이라는 단정 아님)</small>" if o.get('same_day') else '')}{row('원 기관 IIIF(브라우저 열람)', f"<a href='{KV}{E_(o['iiif_origin']['manifest'])}'>KV 뷰어로 보기</a> · <a href='{E_(o['iiif_origin']['manifest'])}'>매니페스트</a> · <a href='{E_(o['iiif_origin']['viewer'])}'>기관 뷰어</a> <small>({E_(o['iiif_origin']['basis'])})</small>" if o.get('iiif_origin') else '')}{row('같은 기록 실물 이미지', f"<a href='{KV}{E_(o['iiif_same']['manifest'])}'>KV 뷰어로 보기</a> · <a href='{E_(o['iiif_same']['manifest'])}'>매니페스트</a> <small>({E_(o['iiif_same']['basis'])})</small>" if o.get('iiif_same') else '')}
+{row('IIIF', f"<a href='{KV}{E_(mf)}'>KV 뷰어로 보기</a> · <a href='{E_(mf)}'>매니페스트</a> <small>({E_(o.get('iiif_kind', ''))})</small>" if mf else '')}{row('같은 날 다른 기관 기록', f"{E_(o['same_day']['date'])} — {o['same_day']['institutions']}개 기관 {o['same_day']['records']}건 · <a href='{KV}{E_(o['same_day']['collection'])}'>KV로 기관별 이어 보기</a> · <a href='{E_(o['same_day']['collection'])}'>IIIF 컬렉션</a> <small>(같은 사건 교차 대조 단서 — 같은 장면이라는 단정 아님)</small>" if o.get('same_day') else '')}{row('이미지 없는 사유', f"{E_(o['envelope_basis']['type'])} — {E_(o['envelope_basis']['why'])}" if o.get('envelope_basis') else '')}{row('원 기관 IIIF(브라우저 열람)', f"<a href='{KV}{E_(o['iiif_origin']['manifest'])}'>KV 뷰어로 보기</a> · <a href='{E_(o['iiif_origin']['manifest'])}'>매니페스트</a> · <a href='{E_(o['iiif_origin']['viewer'])}'>기관 뷰어</a> <small>({E_(o['iiif_origin']['basis'])})</small>" if o.get('iiif_origin') else '')}{row('같은 기록 실물 이미지', f"<a href='{KV}{E_(o['iiif_same']['manifest'])}'>KV 뷰어로 보기</a> · <a href='{E_(o['iiif_same']['manifest'])}'>매니페스트</a> <small>({E_(o['iiif_same']['basis'])})</small>" if o.get('iiif_same') else '')}
 {row('발견', f"처음 {E_(o.get('first_seen', '')[:10])} · 최근 {E_(o.get('last_seen', '')[:10])} · {o.get('seen', 1)}회 · 출처 {E_('+'.join(o.get('sources') or []))}")}
 {row('같은 기록(기관 표기)', E_(o.get('sameAs') or '') + ('' if any(t_ == '같은 기록(다른 소장처)' for t_, _, _ in REL.get(o['key'], [])) else ' <small>(원장에 아직 없는 기록 — 기관 sameAs 표기 그대로)</small>') if o.get('sameAs') else '')}{row('옛 key', E_(', '.join(o.get('key_aliases') or [])))}{row('비고', E_(o.get('merge_note') or o.get('recovered') or o.get('harvested') or ''))}{row('발굴 경위', E_(o.get('found_via') or '') + (f" <small>(출발 기록 <a href='{E_(rec_slug(o['drilled_from']))}.html'>{E_(o['drilled_from'])}</a>)</small>" if o.get('drilled_from') else '') if o.get('found_via') else '')}
 </table>{('<h2>주제·분류 (기관 표기)</h2><p>' + ' · '.join(f"<a href='../subjects.html#{E_(subj_anchor(f_, t_))}'>{E_(f_)}: {E_(t_)}</a>" for f_, t_ in record_concepts(o)[:30]) + '</p>') if record_concepts(o) else ''}
@@ -2237,6 +2268,12 @@ def main():
             o["iiif_same"] = {"manifest": mf_[0], "key": mf_[1]["key"], "kind": mf_[1].get("iiif_kind", ""), "basis": f"같은 기록(다른 소장처) — {SRC_NAME.get(mf_[1]['key'].split(':')[0], mf_[1]['key'].split(':')[0])} {mf_[1]['key']}의 실물 이미지(이 기록 소장처의 이미지 아님)"}; nis += 1
         else: o.pop("iiif_same", None)
     if nis: print(f"기록 봉투 {nis}건 ← 같은 기록 다른 소장처의 실물 이미지 연결(iiif_same)")
+    eb_ = __import__("collections").Counter()
+    for o in recs:  # v3.9.2 봉투 사유(iiif_same·iiif_origin 판정 뒤에)
+        e_ = envelope_basis(o)
+        if e_: o["envelope_basis"] = e_; eb_[e_["type"]] += 1
+        else: o.pop("envelope_basis", None)
+    print(f"기록 봉투 사유 {dict(eb_)}")
     ndp = date_from_same(recs)  # v2.84 날짜 없는 기록 ← 같은 기록의 다른 소장처 날짜([파생]·근거)
     if ndp: print(f"같은 기록의 다른 소장처 날짜로 연대 파생 {ndp}건")
     relations_page([o for o in recs if o.get("entry_type", "기록") == "기록"])  # v2.86 날짜 파생·교차 확인 뒤에
