@@ -1859,6 +1859,22 @@
    ],
    "level": "warn",
    "note": "v3.38 가드가 진짜 0건(무의미 질의)까지 실패로 만들지 않는지 — 0건 수치 필드 실측(2026-11-25)"
+  },
+  {
+   "id": "nedb-item-body-retry",
+   "tool": "nedb_search",
+   "args": {
+    "mode": "item",
+    "query": "jlawa_102_0210_0010"
+   },
+   "must": [
+    "漕轉"
+   ],
+   "must_not": [
+    "not_found: terminated"
+   ],
+   "level": "warn",
+   "note": "v3.39 본문 전송 중 끊김(undici terminated)을 비압축 재요청으로 3회 재시도 — 운영 icn1에서 조문 상세 3/3 'terminated'였던 결함(2026-11-25)"
   }
  ]
 }
