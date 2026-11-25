@@ -26,6 +26,14 @@ def clean_url(u):  # v2.7.1: 원 기관 API가 &amp;로 내려준 링크(국가�
     u = html.unescape(str(u or "")).strip()
     return re.sub(r"^http://www\.archives\.go\.kr", "https://www.archives.go.kr", u)
 
+def ktv_id(u):
+    """v3.5 lib/ka_iiif.js ktvId 패리티 — e영상역사관 상세 URL → '{photo|movie}~mediasrcgbn~mediaid~mediadtl[~mediagbn]'."""
+    m = re.search(r"ehistory\.go\.kr/view/(photo|movie)\?(\S+)", str(u or ""))
+    if not m: return ""
+    q = dict(urllib.parse.parse_qsl(m[2].replace("&amp;", "&")))
+    v = [q.get(k, "") for k in ("mediasrcgbn", "mediaid", "mediadtl")]
+    return "~".join([m[1], *v] + ([q["mediagbn"]] if q.get("mediagbn") else [])) if all(v) else ""
+
 def iiif_for(u, i=""):  # Node iiifFor 패리티 — 원 기관 IIIF·우리 브리지 주소
     u = str(u or ""); O = ORIGIN
     rules = [(r"catalog\.archives\.gov/id/(\d+)", lambda m: f"{O}/iiif/nara/{m[1]}/manifest.json"),
@@ -39,6 +47,8 @@ def iiif_for(u, i=""):  # Node iiifFor 패리티 — 원 기관 IIIF·우리 브
              (r"archive\.org/details/([^/?#]+)", lambda m: f"https://iiif.archive.org/iiif/3/{m[1]}/manifest.json"),
              (r"europeana\.eu/(?:[a-z]{2}/)?item/([^/]+)/([^/?#]+)", lambda m: f"https://iiif.europeana.eu/presentation/{m[1]}/{m[2]}/manifest"),
              (r"dl\.ndl\.go\.jp/pid/(\d+)", lambda m: f"https://dl.ndl.go.jp/api/iiif/{m[1]}/manifest.json")]
+    kt = ktv_id(u)
+    if kt: return f"{O}/iiif/ktv/{urllib.parse.quote(kt, safe='')}/manifest.json"  # v3.5 KTV e영상역사관 브리지(Node ktvId 패리티)
     mi = re.match(r"^(ksm|portrait|gwaebul|diary|mokgan|jcphoto|arch|design|pattern|oldbook|hyanggyo|stone|gaesong|assay):(\d+)$", str(i or ""))
     if mi: return f"{O}/iiif/nrich/{mi.group(1)}-{mi.group(2)}/manifest.json"  # v2.18 연구DB 이미지 데이터셋
     if "heritage.go.kr" in u and re.match(r"^\d{2}-[0-9A-Za-z]+-\d{2}$", str(i or "")):
@@ -111,7 +121,7 @@ DEEP = {"i815": ("nedb_search", lambda o: o.get("url") and {"mode": "i815", "que
 DEEP["nedb"] = ("nedb_search", lambda o: re.match(r"^[a-z]{2,5}_[0-9a-z_]+$", o["key"].split(":", 1)[1]) and {"mode": "item", "query": o["key"].split(":", 1)[1]})  # v2.61 한국사DB 기록(levelId) — 시대별 경로 판독
 DEEP["nlk"] = ("nlk_search", lambda o: o.get("id") and o.get("title") and {"query": re.sub(r"\s*[:;\[].*$", "", o["title"])[:60] or o["title"][:60], "max_results": 20})  # v2.72 국립중앙도서관 — 같은 기록 번호 줄만(nlk_own)
 DEEP["kyudb"] = ("nedb_search", lambda o: re.match(r"^[^\x00-\x7f]{1,4}[0-9][0-9.\-]*$", str(o.get("id") or "")) and {"mode": "kyujanggak", "query": o["id"]})  # v2.55 규장각 해제(기관 해설문) — 같은 청구기호 행만 쓴다
-IIIF_V = {"awm": 2, "commons": 3, "europeana": 2, "heritage": 2, "much": 2, "nrich": 2, "nara": 3, "tna": 2, "ia": 2, "ndl": 2, "gallery": 2}  # v2.76 권리/출처 표기 분리로 IIIF 기록 전부 재판독  # commons 2 = 범주(Commons, 숨김 제외)  # v2.63 우리 IIIF 브리지 판 — awm 2 = 기관 상세 표 전부(자료 유형·매체 형태·제작자·제작지·분쟁)와 본문 설명
+IIIF_V = {"ktv": 2, "awm": 2, "commons": 3, "europeana": 2, "heritage": 2, "much": 2, "nrich": 2, "nara": 3, "tna": 2, "ia": 2, "ndl": 2, "gallery": 2}  # v2.76 권리/출처 표기 분리로 IIIF 기록 전부 재판독  # commons 2 = 범주(Commons, 숨김 제외)  # v2.63 우리 IIIF 브리지 판 — awm 2 = 기관 상세 표 전부(자료 유형·매체 형태·제작자·제작지·분쟁)와 본문 설명
 DEEP_V = {"seoul": 2, "aks": 2, "jsg": 2, "nedb": 5, "un": 2}  # nedb 5 = 실패 응답으로 비워진 메타 복구(v2.69.3)  # nedb 4 = 기술 항목 줄 판별 엄격화(v2.69.2)  # nedb 3 = 법전 조문 판독 교정(v2.69.1 — 검색창 문구 오인)  # un 2 = 기관 MARC XML(제목·문서기호·유형·날짜·의제)  # v2.61.1 nedb 2 = 표 없는 기록(삼국사기)·원문 이미지만(신문) 판독  # v2.56 jsg 2 = 장서각 개체 태깅·인물 전거(UCI)  # v2.32 판독기 판 — 판이 오르면 이미 보강된 기록도 한 번 다시 판독(서울기록원: 기관 계층·생산자·보존이력 추가)
 _sid = [None]
 
@@ -1025,6 +1035,7 @@ DISTS = [("discovered.csv", "text/csv", "발견 기록 표(CSV)"), ("discovered.
 def iiif_kind(o):
     m = (o.get("iiif") or "") if not o.get("iiif_status") else ""
     if not m: return "기록 봉투(이미지 없음 — 기록 정보만 담은 브리지)"
+    if "/iiif/ktv/" in m and o.get("enrich_status") == "ok" and not o.get("thumb"): return "기록 봉투(브리지 — 원 기관 페이지에 이 기록 제목의 공개 이미지 없음)"  # v3.5 이미지 없는 KTV 브리지는 봉투로
     if re.search(r"korea-archive-mcp\.vercel\.app/iiif/|changgi\.github\.io/korea-archive-mcp/", m): return "원 기관 이미지로 구축(KOREA ARCHIVE 브리지)"
     return "원 기관 제공 매니페스트"
 

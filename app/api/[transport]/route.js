@@ -6,7 +6,7 @@ import { judgeRights } from '../../../lib/rights.js';
 import { PROFILES } from '../../../lib/profiles.js';
 import { DOMESTIC } from '../../../lib/domestic_keywords.js';
 import { buildNaraManifest, naraUrls } from '../../../lib/nara_iiif.js';
-import { bridgeUrl, kvUrl } from '../../../lib/ka_iiif.js';
+import { bridgeUrl, kvUrl, ktvId } from '../../../lib/ka_iiif.js';
 import { envelopeOf, encodeEnv, recUrls } from '../../../lib/rec_iiif.js';
 import { deflateRawSync } from 'node:zlib';
 import { tnaUrls } from '../../../lib/tna_iiif.js';
@@ -382,6 +382,7 @@ const iiifFor = (u, id) => { u = String(u || ''); let x;
   if (/heritage\.go\.kr/.test(u) && /^\d{2}-[0-9A-Za-z]+-\d{2}$/.test(String(id || ''))) return bridgeUrl('heritage', id);
   if ((x = u.match(/much\.go\.kr\/.*idnbr=([A-Z]{2}[\w-]+)/))) return bridgeUrl('much', x[1]);
   if ((x = u.match(/awm\.gov\.au\/collection\/(C\d+)/))) return bridgeUrl('awm', x[1]);
+  if (/ehistory\.go\.kr\/view\/(photo|movie)\?/.test(u) && (x = ktvId(u))) return bridgeUrl('ktv', x); // v3.5 KTV e영상역사관 브리지(이 기록 제목의 공개 이미지·공공누리 표시)
   if ((x = u.match(/portal\.nrich\.go\.kr\/kor\/(overseasSearchView|ksmUsrView|portraitNdUsrView|buddhaNdUsrView)\.do\S*?(?:mseq|ksm_idx|portrait_idx|buddha_idx)=(\d+)/))) // v2.17 국립문화유산연구원 IIIF 브리지
     return bridgeUrl('nrich', `${{ overseasSearchView: 'ov', ksmUsrView: 'ksm', portraitNdUsrView: 'portrait', buddhaNdUsrView: 'gwaebul' }[x[1]]}-${x[2]}`);
   if ((x = u.match(/commons\.wikimedia\.org\/wiki\/(File(?:%3A|:)[^?#]+)/i))) return bridgeUrl('commons', decodeURIComponent(x[1]).replace(/_/g, ' '));
