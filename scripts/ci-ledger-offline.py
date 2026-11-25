@@ -75,6 +75,12 @@ try:  # v3.7.1 인용 형식 — 파생 날짜를 쓴 항목엔 '파생' 표시(
     _cs = json.load(open(os.path.join(data, "records.csl.json"), encoding="utf-8"))
     if _nd and sum("파생(원 기관" in x.get("note", "") for x in _cs) < _nd * 0.95: bad.append("CSL에 파생 날짜 표시 누락")
 except Exception as ex: bad.append(f"인용 형식 검사 실패 {ex}")
+try:  # v3.7.5 같은 기록 간선의 NARA 상대가 낱장(item)인지 — 파일·시리즈면 '원본이 속한 NARA 단위(포함)'이어야
+    _LK = {o["key"]: o for o in _L}
+    _lv = lambda k: next((str(m[1]).lower() for m in (_LK.get(k, {}).get("meta") or []) if m and m[0] == "기술 수준"), "item")
+    _over = [e for e in rj["edges"] if e["type"].startswith("같은 기록") and (lambda a, b: (b.startswith("nara:") and not a.startswith("nara:") and _lv(b) in ("fileunit", "series", "collection", "recordgroup")))(e["from"], e["to"])]
+    if _over: bad.append(f"같은 기록 간선이 NARA 파일·시리즈를 가리킴 {len(_over)}건(v3.7.5)")
+except Exception as ex: bad.append(f"같은 기록 단위 검사 실패 {ex}")
 reg = subprocess.run([sys.executable, os.path.join(tmp, "scripts", "records_register.py"), "--verify"], capture_output=True, text=True)
 if reg.returncode not in (0,): bad.append("등록부 검증 실패: " + (reg.stdout + reg.stderr)[-200:])
 if os.environ.get("KEEP"): print("사본:", tmp)
