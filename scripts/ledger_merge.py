@@ -1112,14 +1112,18 @@ def build_relations(recs_all):
         for i, o in enumerate(L):
             for j in sorted(range(len(L)), key=lambda j: (abs(j - i), j))[1:9]:
                 rel[o["key"]].setdefault(("같은 계열", L[j]["key"]), f"같은 기관 계층 '{part[:80]}'")
-    day = {}
+    day = {}; dsrc = {}
     for o in R:
         d = o.get("date") or ""
+        if not d and (o.get("date_basis") or "").startswith("기관 메타"):  # v3.3 기관 메타 날짜 칸(생산일·발행일·발신일·포괄 기간)에서 온 일 단위 파생 날짜도 — 표제·상위 계층·다른 소장처 파생은 쓰지 않는다
+            d = o.get("date_derived") or ""; dsrc[o["key"]] = o.get("date_basis", "")
         if re.match(r"^\d{4}-\d{2}-\d{2}$", d): day.setdefault(d, []).append(o)
     for d, L in day.items():  # ③ 같은 날 다른 기관
         for a in L:
             for b in L:
-                if a["key"].split(":")[0] != b["key"].split(":")[0]: rel[a["key"]].setdefault(("같은 날(다른 기관)", b["key"]), f"기관 표기 날짜 {d}")
+                if a["key"].split(":")[0] != b["key"].split(":")[0]:
+                    bs = [f"{x['key']} {dsrc[x['key']]}" for x in (a, b) if x["key"] in dsrc]
+                    rel[a["key"]].setdefault(("같은 날(다른 기관)", b["key"]), f"기관 표기 날짜 {d}" + (f" (파생 날짜 포함 — {'; '.join(bs)})" if bs else ""))
     order = {"같은 기록(다른 소장처)": 0, "같은 날(다른 기관)": 1, "같은 계열": 2}
     REL.clear()
     for k, m in rel.items():
