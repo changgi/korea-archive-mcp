@@ -21,6 +21,18 @@ _ia = {"key": "ia:111-adc-1", "id": "111-adc-1", "sameAs": "NARA 111-ADC-1", "me
 _t = g["same_targets"](_ia)
 assert ("nara_local", "111-ADC-1") in [x[:2] for x in _t] and ("naid", "99") in [x[:2] for x in _t], _t
 assert not any(k.startswith(g["TARGET_INST"]["nara_local"]) for k in [_ia["key"]]), "자기 자신 오인"
+# v3.8.9 날짜 해석기 회귀 사례(v3.0.1~v3.6.2에서 고친 결함 포함) — 기대값과 다르면 main 전에 실패
+_md, _td = g["meta_date"], g["title_date"]
+_cases = [(_md("1910-03-15"), "1910-03-15"), (_md("c 23 March 1956")[0], "1956-03-23"), (_md("September 1950-October 1950; 1953")[0], "1950~1953"),
+          (_md("癸卯十月二十七日 (1783년 10월 27일 (음))")[0], "1783-10-27"), (_md("기원전 57년 04월 15일")[0], ""), (_md("14세기 중반", era=True)[0], ""),
+          (_md("조선 태조 7년(1398)", era=True)[0], "1398"), (_md("1950-09-00 ~ 1950-09-00")[0], "1950-09"), (_md("0000-00-00 ~ 0000-00-00")[0], ""),
+          (_md("1950-00-00 ~ 1959-00-00")[0], "1950~1959"),
+          (_td("Kapyong, South Korea. June 1952. A view")[0], "1952-06"), (_td("INCHON, KOREA, 1950-09. US TANK")[0], "1950-09"),
+          (_td("Report no. 1950-12. x")[0], ""), (_td("Nr. 1939. Hilfe an Korea")[0], ""), (_td("1950년대 판문점 휴전 회담장")[0], ""),
+          (_td("USS Begor (APD-127) off Hungnam on 24 December 1950 (80-G-K-11769).jpg")[0], "1950-12-24"),
+          (_td("Sept. 4, 1876 - Mar. 6, 1877")[0], "1876~1877"), (_td("서울역 피난열차에 오르는 피란민들 사진(1950.12.24.)")[0], "1950-12-24")]
+_bad_dt = [(i, got, want) for i, (got, want) in enumerate(_cases) if (got[0] if isinstance(got, tuple) else got) != want]
+assert not _bad_dt, f"날짜 해석기 회귀 {_bad_dt}"
 g["main"]()
 after = sum(1 for l in open(os.path.join(data, "discovered.jsonl"), encoding="utf-8") if l.strip())
 bad = []
