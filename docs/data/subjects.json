@@ -7684,9 +7684,183 @@
 "재질"
 ]
 }
+},
+"죄명": {
+"소요": {
+"records": [
+"indy:https://theme.archives.go.kr/next/indy/viewIndyDetail.do?IMSI_ARCHIVE_ID=0001352062&FK_ARCHIVE_EVNT_ID=0034971420&evntdowngbn=N&indpnId=0000003833&actionType=det&flag=1&search_region="
+],
+"sources": [
+"indy"
+],
+"first": "2026-11-23T03:01:04Z",
+"last": "2026-11-23T13:40:48Z",
+"keys": [
+"죄명"
+]
+},
+"보안법위반": {
+"records": [
+"indy:https://theme.archives.go.kr/next/indy/viewIndyDetail.do?IMSI_ARCHIVE_ID=0001352062&FK_ARCHIVE_EVNT_ID=0034971420&evntdowngbn=N&indpnId=0000003833&actionType=det&flag=1&search_region=",
+"indy:https://theme.archives.go.kr/next/indy/viewIndyDetail.do?IMSI_ARCHIVE_ID=0001352109&FK_ARCHIVE_EVNT_ID=0034986760&evntdowngbn=N&indpnId=0000018129&actionType=det&flag=1&search_region=",
+"indy:https://theme.archives.go.kr/next/indy/viewIndyDetail.do?IMSI_ARCHIVE_ID=0001352025&FK_ARCHIVE_EVNT_ID=0034970706&evntdowngbn=N&indpnId=0000003150&actionType=det&flag=1&search_region="
+],
+"sources": [
+"indy"
+],
+"first": "2026-11-23T03:01:04Z",
+"last": "2026-11-25T00:53:19Z",
+"keys": [
+"죄명"
+]
+},
+"대정8년 제령 제7호 위반": {
+"records": [
+"indy:https://theme.archives.go.kr/next/indy/viewIndyDetail.do?IMSI_ARCHIVE_ID=0001351918&FK_ARCHIVE_EVNT_ID=0034974469&evntdowngbn=N&indpnId=0000006665&actionType=det&flag=1&search_region=",
+"indy:https://theme.archives.go.kr/next/indy/viewIndyDetail.do?IMSI_ARCHIVE_ID=0001351918&FK_ARCHIVE_EVNT_ID=0034974470&evntdowngbn=N&indpnId=0000006666&actionType=det&flag=1&search_region="
+],
+"sources": [
+"indy"
+],
+"first": "2026-11-25T00:53:18Z",
+"last": "2026-11-25T00:53:18Z",
+"keys": [
+"죄명"
+]
+},
+"출판법위반": {
+"records": [
+"indy:https://theme.archives.go.kr/next/indy/viewIndyDetail.do?IMSI_ARCHIVE_ID=0001352020&FK_ARCHIVE_EVNT_ID=0034970573&evntdowngbn=N&indpnId=0000003023&actionType=det&flag=1&search_region=",
+"indy:https://theme.archives.go.kr/next/indy/viewIndyDetail.do?IMSI_ARCHIVE_ID=0001351630&FK_ARCHIVE_EVNT_ID=0034982881&evntdowngbn=N&indpnId=0000014498&actionType=det&flag=1&search_region="
+],
+"sources": [
+"indy"
+],
+"first": "2026-11-25T00:53:18Z",
+"last": "2026-11-25T00:53:19Z",
+"keys": [
+"죄명"
+]
+},
+"모살": {
+"records": [
+"indy:https://theme.archives.go.kr/next/indy/viewIndyDetail.do?IMSI_ARCHIVE_ID=0001352438&FK_ARCHIVE_EVNT_ID=0034992398&evntdowngbn=N&indpnId=0000023390&actionType=det&flag=1&search_region="
+],
+"sources": [
+"indy"
+],
+"first": "2026-11-25T00:53:18Z",
+"last": "2026-11-25T00:53:18Z",
+"keys": [
+"죄명"
+]
+},
+"치안유지법위반": {
+"records": [
+"indy:https://theme.archives.go.kr/next/indy/viewIndyDetail.do?IMSI_ARCHIVE_ID=0001351630&FK_ARCHIVE_EVNT_ID=0034982881&evntdowngbn=N&indpnId=0000014498&actionType=det&flag=1&search_region=",
+"indy:https://theme.archives.go.kr/next/indy/viewIndyDetail.do?IMSI_ARCHIVE_ID=0001351751&FK_ARCHIVE_EVNT_ID=0034982164&evntdowngbn=N&indpnId=0000013804&actionType=det&flag=1&search_region=",
+"indy:https://theme.archives.go.kr/next/indy/viewIndyDetail.do?IMSI_ARCHIVE_ID=0001352421&FK_ARCHIVE_EVNT_ID=0034992188&evntdowngbn=N&indpnId=0000023188&actionType=det&flag=1&search_region="
+],
+"sources": [
+"indy"
+],
+"first": "2026-11-25T00:53:19Z",
+"last": "2026-11-25T00:53:19Z",
+"keys": [
+"죄명"
+]
+},
+"사기": {
+"records": [
+"indy:https://theme.archives.go.kr/next/indy/viewIndyDetail.do?IMSI_ARCHIVE_ID=0001351847&FK_ARCHIVE_EVNT_ID=0034980308&evntdowngbn=N&indpnId=0000012089&actionType=det&flag=1&search_region="
+],
+"sources": [
+"indy"
+],
+"first": "2026-11-25T00:53:19Z",
+"last": "2026-11-25T00:53:19Z",
+"keys": [
+"죄명"
+]
+},
+"정치범 처벌령위반": {
+"records": [
+"indy:https://theme.archives.go.kr/next/indy/viewIndyDetail.do?IMSI_ARCHIVE_ID=0001351847&FK_ARCHIVE_EVNT_ID=0034980308&evntdowngbn=N&indpnId=0000012089&actionType=det&flag=1&search_region="
+],
+"sources": [
+"indy"
+],
+"first": "2026-11-25T00:53:19Z",
+"last": "2026-11-25T00:53:19Z",
+"keys": [
+"죄명"
+]
 }
 },
-"updated": "2026-11-25T01:01:33Z",
+"신문": {
+"국민보": {
+"records": [
+"i815:GM1960061503-03",
+"i815:GM1963112702-10",
+"i815:GM1948061604-01",
+"i815:GM1952041604-01"
+],
+"sources": [
+"i815"
+],
+"first": "2026-11-23T03:01:12Z",
+"last": "2026-11-25T00:53:18Z",
+"keys": [
+"신문명"
+]
+},
+"동아일보": {
+"records": [
+"nedb:npda_1920_04_30_v0002_1100",
+"nedb:npda_1922_05_10_v0003_0360",
+"nedb:npda_1959_03_01_x0001_0430"
+],
+"sources": [
+"nedb"
+],
+"first": "2026-11-23T13:40:45Z",
+"last": "2026-11-25T00:56:51Z",
+"keys": [
+"신문명"
+]
+},
+"신한국보": {
+"records": [
+"i815:SH1910031504-04"
+],
+"sources": [
+"i815"
+],
+"first": "2026-11-23T13:40:49Z",
+"last": "2026-11-25T00:53:18Z",
+"keys": [
+"신문명"
+]
+}
+},
+"훈격": {
+"대한민국장": {
+"records": [
+"gonghun:3150",
+"gonghun:3732"
+],
+"sources": [
+"gonghun"
+],
+"first": "2026-11-23T13:40:47Z",
+"last": "2026-11-25T00:53:18Z",
+"keys": [
+"포상"
+]
+}
+}
+},
+"updated": "2026-11-25T01:09:31Z",
 "totals": {
 "매체": 4,
 "주제": 228,
@@ -7697,7 +7871,10 @@
 "기관": 10,
 "기술 수준": 5,
 "형태": 48,
-"재질": 18
+"재질": 18,
+"죄명": 8,
+"신문": 3,
+"훈격": 1
 },
 "note": "원 기관 메타의 주제·지명·분류·시대·매체·인물·기관(장서각 태깅)·형태·재질·기술 수준 표기 그대로(번역·정규화 없음). records = 그 용어가 붙은 원장 기록 key. 지우지 않는다",
 "authority_groups": {
