@@ -1569,6 +1569,22 @@
    ],
    "level": "warn",
    "note": "v3.5 KTV e영상역사관 IIIF 브리지 — 옛 결함: 이미지 있는 기록도 기록 봉투(rec)로만"
+  },
+  {
+   "id": "koreanwar-item-images",
+   "tool": "koreanwar_item",
+   "args": {
+    "ref_code": "1990-US-01-PF-A-00046"
+   },
+   "must": [
+    "공개 이미지\\(상세 페이지\\)"
+   ],
+   "must_not": [
+    "/resources/",
+    "no_img"
+   ],
+   "level": "warn",
+   "note": "v3.5.1 상세 페이지 기록 이미지 표시(사이트 공통 이미지 제외) — IIIF 브리지 이전 단계"
   }
  ]
 }

@@ -1631,6 +1631,10 @@ function kwParseCards(html) {
   }
   return cards;
 }
+// v3.5.1 상세 페이지의 기록 이미지(사이트 공통 아이콘·로고·버튼 제외) — img src·data-* 속성, 절대 주소로. IIIF 브리지 이전 단계(실측)
+const kwImages = (b) => [...new Set([...String(b).matchAll(/<img\b[^>]*?(?:data-[\w-]+|src)="([^"]+\.(?:jpe?g|png|gif|tiff?))(?:\?[^"]*)?"/gi)].map((m) => m[1])
+  .filter((u) => !/\/(?:resources|static|common|layout|btn|icon|ico|logo|images?\/(?:main|sub|common|btn|icon|layout))\b|loding|loading|no_img|blank/i.test(u))
+  .map((u) => (/^https?:/.test(u) ? u : KW_BASE + (u.startsWith('/') ? '' : '/') + u)))].slice(0, 30);
 // v1.86: 협약기관 상세 → 원본 연결 메타(입수처 NARA NAID·생산시기). 같은 원본의 국내 재수집본↔해외 원본 동일성 확정용
 async function kwDetail(ref) {
   if (!ref || ref.startsWith('book:')) return null;
@@ -3251,6 +3255,7 @@ item_cd 5종(자료 성격별): ART 도설·회화 / ETC 두루마리·축 / DRR
         return text(`6·25전쟁 아카이브센터 [${ref0}]\n제목: ${title || '?'}\n` + rows.map(([k, v]) => `· ${k}: ${v.slice(0, 200)}`).join('\n')
           + (naid ? `\n↔ NARA 원본 NAID ${naid} (입수처 링크 직결) — https://catalog.archives.gov/id/${naid} 에서 고해상 원본·상세 기술 확인` + lvlNote : (rows.length ? '\n↔ 입수처 NARA 링크 없음 — 제목·생산시기로 nara_search 대조 필요' : ''))
           + (rg ? `\n↔ NARA RG ${rg} — nara_search(record_group=${rg})로 시리즈 확장 검색` : '')
+          + ((im) => (im.length ? `\n· 공개 이미지(상세 페이지): ${im.length}개 — ${im.slice(0, 3).join(' · ')}${im.length > 3 ? ' …' : ''} (게재 전 '열람 및 이용조건' 확인 · 출처 표기)` : '\n· 공개 이미지(상세 페이지): 없음'))(kwImages(b))
           + `\n${url}\n※ '열람 및 이용조건' 행을 judge_rights에 투입해 권리 초판 판정. 협약기관 — 출처 표기 필수.`);
       } catch (e) { return text(agentBrowse('6·25전쟁 아카이브센터', ref0, url, `자동조회 실패(${e.message})`)); }
     });
