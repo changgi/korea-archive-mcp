@@ -1483,6 +1483,44 @@
     "March First Movement Korea 1919"
    ],
    "level": "warn"
+  },
+  {
+   "id": "nara-coverage-own",
+   "tool": "nara_search",
+   "args": {
+    "query": "",
+    "naid": 373960610,
+    "output": "iiif"
+   },
+   "must": [
+    "포괄 기간(이 기록)",
+    "1940~1957"
+   ],
+   "must_not": [
+    "포괄 기간(상위 계층)"
+   ],
+   "level": "warn",
+   "note": "v3.0 productionDates 없는 파일단위 — 기관 coverage 기간을 메타로(옛 결함: 날짜 칸 공란)"
+  },
+  {
+   "id": "nara-coverage-ancestor",
+   "tool": "nara_search",
+   "args": {
+    "query": "",
+    "naid": 22348,
+    "output": "iiif"
+   },
+   "must": [
+    "포괄 기간(상위 계층)",
+    "1947~1964",
+    "series NAID 13807",
+    "이 기록 자체 날짜 아님"
+   ],
+   "must_not": [
+    "1860~1985"
+   ],
+   "level": "warn",
+   "note": "v3.0 가장 가까운 상위 계층(series) 범위 — RG 범위(1860~1985)를 쓰지 않는다"
   }
  ]
 }
