@@ -1652,6 +1652,23 @@
    ],
    "level": "warn",
    "note": "v3.7.3 원장 검색 응답에 같은 날 다른 기관 기록 묶음(day 컬렉션)"
+  },
+  {
+   "id": "query-bank-ledger",
+   "tool": "query_bank",
+   "args": {
+    "topic": "ledger"
+   },
+   "must": [
+    "원장 실측 질의",
+    "→ 기록 \\d+건 · 기관 \\d+곳",
+    "provenance\\.json"
+   ],
+   "must_not": [
+    "조회 실패"
+   ],
+   "level": "warn",
+   "note": "v3.8 축적된 실제 질의를 발굴 성과순으로 — 질의 축적을 다시 발굴로"
   }
  ]
 }

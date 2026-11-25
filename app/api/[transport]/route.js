@@ -2024,10 +2024,25 @@ const JB_CROSS = `국내외 대조 절차 — 순서를 틀리면 헛수고한�
     { topic: z.string().default('list') },
     async ({ topic }) => {
       const t = topic.trim();
+      if (/^(ledger|원장|used|실측)$/i.test(t)) { // v3.8 축적된 실제 질의 — 기록을 발굴한 질의를 성과(발굴 기록 수)순으로(발견 경로 provenance.json). 질의 축적을 다시 발굴로
+        try {
+          const pv = JSON.parse(await cachedText('qb:prov', 3600e3, () => gtext('https://changgi.github.io/korea-archive-mcp/data/provenance.json'), '"provenance"'));
+          const agg = new Map();
+          for (const p of pv.provenance || []) {
+            const q = String((p.args || {}).query || '').trim(); if (!q) continue;
+            const k = `${p.tool}|${q}`; const e = agg.get(k) || { tool: p.tool, q, recs: new Set(), calls: 0, last: '' };
+            (p.records || []).forEach((r) => e.recs.add(r)); e.calls += p.calls || 1; if ((p.last || '') > e.last) e.last = p.last || ''; agg.set(k, e);
+          }
+          const rows = [...agg.values()].sort((a, b) => b.recs.size - a.recs.size || b.calls - a.calls).slice(0, 40);
+          return text(`원장 실측 질의 — 실제로 기록을 발굴한 질의 ${agg.size}개(상위 ${rows.length}, 발굴 기록 수순) · 원장 ${pv.linked_records || '?'}건과 연결\n`
+            + rows.map((e) => `- '${e.q}' (${e.tool}) → 기록 ${e.recs.size}건 · 기관 ${new Set([...e.recs].map((r) => r.split(':')[0])).size}곳 · 호출 ${e.calls} · 마지막 ${e.last.slice(0, 10)}`).join('\n')
+            + `\n※ 근거: https://changgi.github.io/korea-archive-mcp/data/provenance.json(질의 지문↔기록) · 회신 원문은 data/queries/. 같은 질의를 다시 던지면 새로 생긴 기록까지 이어 발굴.`);
+        } catch (e) { return text(`원장 실측 질의 조회 실패(${e.message}) — https://changgi.github.io/korea-archive-mcp/data/provenance.json 직접 열람`); }
+      }
       if (t === 'list') {
         const lines = [...DATA.common, ...DATA.nara_groups].map((g) => `${g.id}: ${g.ko} / ${g.en} (${g.kws.length})`);
         lines.push('RG: NARA 28 Record Group cross-map (63 precision queries)', 'TNA: 14 strategy layers (1,222 generated queries)');
-        lines.push('domestic: 국내 5개 아카이브 검증 키워드셋 — topic="domestic", 기관키(nedb/archives/nlk/warmemo/seoul), 또는 그룹ID(예 NAK-L1)');
+        lines.push('domestic: 국내 5개 아카이브 검증 키워드셋 — topic="domestic", 기관키(nedb/archives/nlk/warmemo/seoul), 또는 그룹ID(예 NAK-L1)'); lines.push('ledger: 원장 실측 질의 — 실제로 기록을 발굴한 질의를 성과순으로(v3.8)');
         return text('Query bank groups:\n' + lines.join('\n'));
       }
       const grp = [...DATA.common, ...DATA.nara_groups].find((g) => g.id.toUpperCase() === t.toUpperCase());
