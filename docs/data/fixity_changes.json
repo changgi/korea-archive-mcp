@@ -1,7 +1,7 @@
 {
-"updated": "2026-11-25T05:26:01Z",
+"updated": "2026-11-25T05:40:00Z",
 "watched": 861,
-"changed_records": 111,
+"changed_records": 128,
 "suspected_source_changes": 0,
 "note": "지문 = 원 기관 응답(우리 판독기 정규형, 판독 시각 등 변동 항목 제외)의 SHA-256-16. pv = 판독기(route.js·lib) 지문. 이력은 지우지 않는다.",
 "changes": [
@@ -2110,6 +2110,329 @@
 "at": "2026-11-25",
 "h": "c427893ecf996745",
 "pv": "5d62ee717cd0",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "koreanwar:1990-US-01-PF-A-00015",
+"title": "인천상륙작전 전 함포 사격 사진 1",
+"url": "https://www.koreanwar.or.kr:8443/searchDetail.do?archRfcd=1990-US-01-PF-A-00015",
+"history": [
+{
+"at": "2026-11-24",
+"h": "d5fc0694972ab2c2",
+"pv": "fa7cffafb977",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "cfd39a3a99082dd3",
+"pv": "4021b086f020",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "koreanwar:1990-US-01-PF-A-00017",
+"title": "인천상륙작전 당시 로체스터호 함상에서 작전 회의 사진 2",
+"url": "https://www.koreanwar.or.kr:8443/searchDetail.do?archRfcd=1990-US-01-PF-A-00017",
+"history": [
+{
+"at": "2026-11-24",
+"h": "28650c807dec7a02",
+"pv": "fa7cffafb977",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "d455fc12d1e57b52",
+"pv": "4021b086f020",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "koreanwar:1990-US-01-PF-A-00018",
+"title": "인천상륙작전 전 도쿄에서 미 제10군단장 에드워드 M. 아몬드 육군 소장과 미 태평양함대 해병단장 르뮤엘 C. 셰퍼드 2세 해병대 중장 사진 1",
+"url": "https://www.koreanwar.or.kr:8443/searchDetail.do?archRfcd=1990-US-01-PF-A-00018",
+"history": [
+{
+"at": "2026-11-24",
+"h": "b3f0d15deefa073a",
+"pv": "fa7cffafb977",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "6c88a12f2cc0b103",
+"pv": "4021b086f020",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "koreanwar:1990-US-01-PF-A-00020",
+"title": "인천상륙작전 당시 유엔군 총사령관 맥아더 장군의 미조리호(USS MISSOURI, BB-63) 방문 사진 1",
+"url": "https://www.koreanwar.or.kr:8443/searchDetail.do?archRfcd=1990-US-01-PF-A-00020",
+"history": [
+{
+"at": "2026-11-24",
+"h": "b5aee62e89aae016",
+"pv": "fa7cffafb977",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "282b6a7a3d86c28f",
+"pv": "4021b086f020",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "koreanwar:1990-US-01-PF-A-00093",
+"title": "인천상륙작전 당시 상륙정에서 하선한 병사들 사진 2",
+"url": "https://www.koreanwar.or.kr:8443/searchDetail.do?archRfcd=1990-US-01-PF-A-00093",
+"history": [
+{
+"at": "2026-11-24",
+"h": "b9bd75c22009f490",
+"pv": "fa7cffafb977",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "535c834eaf04fc2d",
+"pv": "4021b086f020",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "koreanwar:1990-US-01-PF-A-00094",
+"title": "인천상륙작전 당시 인천 해변 주변 좌초된 LST 및 LCM 사진 2",
+"url": "https://www.koreanwar.or.kr:8443/searchDetail.do?archRfcd=1990-US-01-PF-A-00094",
+"history": [
+{
+"at": "2026-11-24",
+"h": "9cc71564976e7c12",
+"pv": "fa7cffafb977",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "7fab9b18463cf231",
+"pv": "4021b086f020",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "koreanwar:1990-US-01-PF-A-00095",
+"title": "인천상륙작전 당시 전차상륙함(LST)들의 병력 및 장비 하역 사진 2",
+"url": "https://www.koreanwar.or.kr:8443/searchDetail.do?archRfcd=1990-US-01-PF-A-00095",
+"history": [
+{
+"at": "2026-11-24",
+"h": "d4cc5f80ccf436f6",
+"pv": "fa7cffafb977",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "72a76659a24c1498",
+"pv": "4021b086f020",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "koreanwar:1990-US-01-PF-A-00096",
+"title": "인천상륙작전 당시 인천 외항에 정박 중인 함정들 사진 2",
+"url": "https://www.koreanwar.or.kr:8443/searchDetail.do?archRfcd=1990-US-01-PF-A-00096",
+"history": [
+{
+"at": "2026-11-24",
+"h": "c7d36c56ed074795",
+"pv": "fa7cffafb977",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "28425ad7047a2485",
+"pv": "4021b086f020",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "koreanwar:2017-NO-01-PF-A-00060",
+"title": "노르웨이 야전병원 '노르매시(NORMASH)' 간호사 헨니 헨릭센과 피란민 사진",
+"url": "https://www.koreanwar.or.kr:8443/searchDetail.do?archRfcd=2017-NO-01-PF-A-00060",
+"history": [
+{
+"at": "2026-11-24",
+"h": "f3f696064e63be24",
+"pv": "fa7cffafb977",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "78f90a180d9b618a",
+"pv": "4021b086f020",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "koreanwar:2022-KR-03-PF-A-00265",
+"title": "1·4후퇴 당시 남하한 피란민 무리 사진(1951)",
+"url": "https://www.koreanwar.or.kr:8443/searchDetail.do?archRfcd=2022-KR-03-PF-A-00265",
+"history": [
+{
+"at": "2026-11-24",
+"h": "fb1e297033f8873a",
+"pv": "fa7cffafb977",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "55aafa75f9a7d87d",
+"pv": "4021b086f020",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "koreanwar:2022-KR-03-PF-A-00267",
+"title": "서울역 피난열차에 오르는 피란민들 사진(1950.12.24.)",
+"url": "https://www.koreanwar.or.kr:8443/searchDetail.do?archRfcd=2022-KR-03-PF-A-00267",
+"history": [
+{
+"at": "2026-11-24",
+"h": "c93f73c305494f1d",
+"pv": "fa7cffafb977",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "f80957e1dcb695e9",
+"pv": "4021b086f020",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "koreanwar:2022-KR-03-PF-A-00268",
+"title": "서울역으로 모여든 피란민들 사진(1950.12.24.)",
+"url": "https://www.koreanwar.or.kr:8443/searchDetail.do?archRfcd=2022-KR-03-PF-A-00268",
+"history": [
+{
+"at": "2026-11-24",
+"h": "69157b07cedf3485",
+"pv": "fa7cffafb977",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "09e47f14c1cc438e",
+"pv": "4021b086f020",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "koreanwar:2022-KR-03-PF-A-00283",
+"title": "피란민아동승차장으로 모인 피란민들 사진(1951.01)",
+"url": "https://www.koreanwar.or.kr:8443/searchDetail.do?archRfcd=2022-KR-03-PF-A-00283",
+"history": [
+{
+"at": "2026-11-24",
+"h": "932092fccbb81589",
+"pv": "fa7cffafb977",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "224693bfbc90ad86",
+"pv": "4021b086f020",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "koreanwar:2022-KR-03-PF-A-00319",
+"title": "대구 동촌 피란민들 사진(1950)",
+"url": "https://www.koreanwar.or.kr:8443/searchDetail.do?archRfcd=2022-KR-03-PF-A-00319",
+"history": [
+{
+"at": "2026-11-24",
+"h": "5c2824c6d3557826",
+"pv": "fa7cffafb977",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "c453b321e73eec61",
+"pv": "4021b086f020",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "koreanwar:2022-KR-03-PF-A-00356",
+"title": "1·4후퇴 당시 피란민과 피란민아동승차장 사진(1951.01.14)",
+"url": "https://www.koreanwar.or.kr:8443/searchDetail.do?archRfcd=2022-KR-03-PF-A-00356",
+"history": [
+{
+"at": "2026-11-24",
+"h": "13f998145a2311c4",
+"pv": "fa7cffafb977",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "e91532c93b5e78ce",
+"pv": "4021b086f020",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "koreanwar:2022-KR-03-PF-A-00497",
+"title": "박천 청천강 인근에서 피난을 떠나는 피란민들 사진(1950.11.15)",
+"url": "https://www.koreanwar.or.kr:8443/searchDetail.do?archRfcd=2022-KR-03-PF-A-00497",
+"history": [
+{
+"at": "2026-11-24",
+"h": "8df2a733f526065b",
+"pv": "fa7cffafb977",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "90bfd8e28839f7d8",
+"pv": "4021b086f020",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "nara:NAID 102044973",
+"title": "Inchon Harbor, South Korea, Years Later",
+"url": "https://catalog.archives.gov/id/102044973",
+"history": [
+{
+"at": "2026-11-24",
+"h": "aeecf872f8717e01",
+"pv": "fa7cffafb977",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "d1b0fe27359f4df7",
+"pv": "4021b086f020",
 "kind": "판독기 변경 동반"
 }
 ]

@@ -7400,6 +7400,58 @@
 "keys": [
 "매체 형태"
 ]
+},
+"영상": {
+"records": [
+"ktv:25942",
+"ktv:28414",
+"ktv:42365",
+"ktv:42535",
+"ktv:8855",
+"ktv:8856",
+"ktv:28799",
+"ktv:4390",
+"ktv:25917",
+"ktv:29584",
+"ktv:44456",
+"ktv:7137",
+"ktv:25325",
+"ktv:25509",
+"ktv:27052",
+"ktv:8195",
+"ktv:8705",
+"ktv:8852",
+"ktv:9033",
+"ktv:9048",
+"ktv:9161",
+"ktv:9206"
+],
+"sources": [
+"ktv"
+],
+"first": "2026-11-23T06:39:47Z",
+"last": "2026-11-24T05:40:01Z",
+"keys": [
+"자료 구분"
+]
+},
+"사진": {
+"records": [
+"ktv:339708",
+"ktv:5241",
+"ktv:5272",
+"ktv:267327",
+"ktv:308995",
+"ktv:5280"
+],
+"sources": [
+"ktv"
+],
+"first": "2026-11-23T06:39:47Z",
+"last": "2026-11-24T05:40:01Z",
+"keys": [
+"자료 구분"
+]
 }
 },
 "재질": {
@@ -8963,7 +9015,11 @@
 "last": "2026-11-24T23:04:33Z",
 "keys": [
 "접근 제한(원문)"
-]
+],
+"superseded": {
+"on": "2026-11-25",
+"why": "판독 규칙 교정으로 기관 값에서 더 이상 나오지 않는 조각(접근 조건 산문의 쉼표 분할 결함, v3.6.3) — 기록·출처는 보존"
+}
 },
 "but others": {
 "records": [
@@ -8976,7 +9032,11 @@
 "last": "2026-11-24T23:04:33Z",
 "keys": [
 "접근 제한(원문)"
-]
+],
+"superseded": {
+"on": "2026-11-25",
+"why": "판독 규칙 교정으로 기관 값에서 더 이상 나오지 않는 조각(접근 조건 산문의 쉼표 분할 결함, v3.6.3) — 기록·출처는 보존"
+}
 },
 "or parts of others": {
 "records": [
@@ -8989,7 +9049,11 @@
 "last": "2026-11-24T23:04:33Z",
 "keys": [
 "접근 제한(원문)"
-]
+],
+"superseded": {
+"on": "2026-11-25",
+"why": "판독 규칙 교정으로 기관 값에서 더 이상 나오지 않는 조각(접근 조건 산문의 쉼표 분할 결함, v3.6.3) — 기록·출처는 보존"
+}
 },
 "Restricted - Fully": {
 "records": [
@@ -9018,7 +9082,11 @@
 "last": "2026-11-25T00:56:51Z",
 "keys": [
 "접근 제한(원문)"
-]
+],
+"superseded": {
+"on": "2026-11-25",
+"why": "판독 규칙 교정으로 기관 값에서 더 이상 나오지 않는 조각(접근 조건 산문의 쉼표 분할 결함, v3.6.3) — 기록·출처는 보존"
+}
 },
 "Not Public Record(s)": {
 "records": [
@@ -9035,6 +9103,208 @@
 "last": "2026-11-25T00:07:52Z",
 "keys": [
 "법적 지위"
+]
+},
+"전체열람/보류": {
+"records": [
+"koreanwar:1990-US-01-PF-A-00046",
+"koreanwar:1990-US-01-PF-A-00053",
+"koreanwar:1990-US-01-PF-A-00054",
+"koreanwar:1990-US-01-PF-A-00022",
+"koreanwar:1990-US-01-PF-A-00042",
+"koreanwar:1990-US-01-PF-A-00043",
+"koreanwar:1990-US-01-PF-A-00044",
+"koreanwar:1990-US-01-PF-A-00015",
+"koreanwar:1990-US-01-PF-A-00017",
+"koreanwar:1990-US-01-PF-A-00018",
+"koreanwar:1990-US-01-PF-A-00020",
+"koreanwar:1990-US-01-PF-A-00093",
+"koreanwar:1990-US-01-PF-A-00094",
+"koreanwar:1990-US-01-PF-A-00095",
+"koreanwar:1990-US-01-PF-A-00096",
+"koreanwar:1990-TR-01-PF-A-00018"
+],
+"sources": [
+"koreanwar"
+],
+"first": "2026-11-23T03:01:45Z",
+"last": "2026-11-24T23:15:56Z",
+"keys": [
+"열람 및 이용조건"
+]
+},
+"전체열람/해당없음": {
+"records": [
+"koreanwar:2022-US-02-AV-D-00119",
+"koreanwar:2022-US-02-AV-D-00127",
+"koreanwar:2022-US-02-AV-D-00207",
+"koreanwar:2022-US-02-AV-D-00215",
+"koreanwar:2022-US-02-AV-D-00329",
+"koreanwar:2022-US-02-AV-D-00165",
+"koreanwar:2022-US-02-AV-D-00167",
+"koreanwar:2022-US-02-AV-D-00049",
+"koreanwar:2022-US-02-AV-D-00245",
+"koreanwar:2022-US-02-AV-D-00366",
+"koreanwar:2024-KR-02-AF-D-00029",
+"koreanwar:2024-KR-02-AF-D-00030"
+],
+"sources": [
+"koreanwar"
+],
+"first": "2026-11-23T13:40:49Z",
+"last": "2026-11-24T23:15:55Z",
+"keys": [
+"열람 및 이용조건"
+]
+},
+"목록열람/해당없음": {
+"records": [
+"koreanwar:2023-RU-02-BP-D-00101",
+"koreanwar:2024-FR-02-DC-D-01234",
+"koreanwar:2011-US-01-PF-A-00002",
+"koreanwar:2017-NO-01-PF-A-00060",
+"koreanwar:1989-KR-01-PF-A-00034",
+"koreanwar:1989-KR-01-PF-A-00058",
+"koreanwar:2012-IN-01-PF-A-00022",
+"koreanwar:2012-IN-01-PF-A-00033",
+"koreanwar:2012-IN-01-PF-A-00034",
+"koreanwar:2012-IN-01-PF-A-00036",
+"koreanwar:1990-AU-01-PF-A-00029",
+"koreanwar:0000-KR-10-BP-A-00035",
+"koreanwar:0000-KR-10-BP-A-00138",
+"koreanwar:1989-KR-01-PF-A-00049",
+"koreanwar:1990-KR-01-PF-A-00009",
+"koreanwar:2023-RU-02-BP-D-00078",
+"koreanwar:1993-KR-05-BP-A-00011",
+"koreanwar:2024-FR-02-DC-D-01131",
+"koreanwar:2024-FR-02-DC-D-01326",
+"koreanwar:2024-FR-02-DC-D-01533",
+"koreanwar:1995-US-01-PF-A-00020",
+"koreanwar:2011-US-01-PF-A-00647",
+"koreanwar:2011-US-01-PF-A-00687",
+"koreanwar:2011-US-01-PF-A-00696",
+"koreanwar:2011-US-01-PF-A-00697"
+],
+"sources": [
+"koreanwar"
+],
+"first": "2026-11-23T15:23:38Z",
+"last": "2026-11-24T23:15:56Z",
+"keys": [
+"열람 및 이용조건"
+]
+},
+"전체열람/제4유형(출처표시+상업적이용금지+변경금지)": {
+"records": [
+"koreanwar:2024-KR-02-PF-D-01234"
+],
+"sources": [
+"koreanwar"
+],
+"first": "2026-11-23T15:23:38Z",
+"last": "2026-11-23T15:34:10Z",
+"keys": [
+"열람 및 이용조건"
+]
+},
+"전체열람/제1유형(출처표시)": {
+"records": [
+"koreanwar:2022-KR-02-PF-D-00119",
+"koreanwar:2022-KR-02-PF-D-00216",
+"koreanwar:2022-KR-02-PF-D-00351",
+"koreanwar:2022-KR-02-PF-D-00256",
+"koreanwar:2022-KR-02-PF-D-00305",
+"koreanwar:2022-KR-02-PF-D-00306",
+"koreanwar:2022-KR-02-PF-D-00307",
+"koreanwar:2022-KR-02-PF-D-00194",
+"koreanwar:2022-KR-02-PF-D-00214",
+"koreanwar:2022-KR-02-PF-D-00221",
+"koreanwar:2022-KR-02-PF-D-00263",
+"koreanwar:2022-KR-02-PF-D-00281"
+],
+"sources": [
+"koreanwar"
+],
+"first": "2026-11-24T22:40:42Z",
+"last": "2026-11-24T23:44:08Z",
+"keys": [
+"열람 및 이용조건"
+]
+},
+"전체열람/제2유형(출처표시+상업적이용금지)": {
+"records": [
+"koreanwar:2022-KR-03-PF-A-00236",
+"koreanwar:2022-KR-03-PF-A-00336",
+"koreanwar:2022-KR-03-PF-A-00487",
+"koreanwar:2022-KR-03-PF-A-00265",
+"koreanwar:2022-KR-03-PF-A-00267",
+"koreanwar:2022-KR-03-PF-A-00268",
+"koreanwar:2022-KR-03-PF-A-00283",
+"koreanwar:2022-KR-03-PF-A-00319",
+"koreanwar:2022-KR-03-PF-A-00356",
+"koreanwar:2022-KR-03-PF-A-00497",
+"koreanwar:2022-KR-03-PF-A-00039"
+],
+"sources": [
+"koreanwar"
+],
+"first": "2026-11-24T22:40:42Z",
+"last": "2026-11-24T23:44:08Z",
+"keys": [
+"열람 및 이용조건"
+]
+},
+"관내열람/해당없음": {
+"records": [
+"koreanwar:2023-KR-01-AV-A-00044"
+],
+"sources": [
+"koreanwar"
+],
+"first": "2026-11-24T22:40:43Z",
+"last": "2026-11-24T22:40:43Z",
+"keys": [
+"열람 및 이용조건"
+]
+},
+"전체열람/제한이용": {
+"records": [
+"koreanwar:2024-US-02-DC-D-00015"
+],
+"sources": [
+"koreanwar"
+],
+"first": "2026-11-24T23:04:29Z",
+"last": "2026-11-24T23:10:19Z",
+"keys": [
+"열람 및 이용조건"
+]
+},
+"전체열람/": {
+"records": [
+"koreanwar:2024-SE-02-DC-D-00034"
+],
+"sources": [
+"koreanwar"
+],
+"first": "2026-11-24T23:10:19Z",
+"last": "2026-11-24T23:10:19Z",
+"keys": [
+"열람 및 이용조건"
+]
+},
+"Donated - Security Classified — 보안 분류 Confidential": {
+"records": [
+"nara:NAID 519786886",
+"nara:NAID 519786908"
+],
+"sources": [
+"nara"
+],
+"first": "2026-11-24T23:15:56Z",
+"last": "2026-11-24T23:15:56Z",
+"keys": [
+"접근 제한(원문)"
 ]
 }
 },
@@ -11327,7 +11597,7 @@
 }
 }
 },
-"updated": "2026-11-25T05:26:01Z",
+"updated": "2026-11-25T05:40:00Z",
 "totals": {
 "매체": 4,
 "주제": 228,
@@ -11337,13 +11607,13 @@
 "인물": 27,
 "기관": 10,
 "기술 수준": 5,
-"형태": 48,
+"형태": 50,
 "재질": 18,
 "죄명": 8,
 "신문": 3,
 "훈격": 1,
 "소장처": 32,
-"공개 상태": 14,
+"공개 상태": 24,
 "생산자": 154,
 "분쟁": 5
 },
