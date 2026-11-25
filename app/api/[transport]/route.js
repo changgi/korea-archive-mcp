@@ -2122,6 +2122,7 @@ const JB_CROSS = `국내외 대조 절차 — 순서를 틀리면 헛수고한�
           const bs = Object.entries(C.by_source || {}).sort((a, b) => b[1].queries - a[1].queries);
           return text(`KOREA ARCHIVE 조회 범위 등록부 — cross_search 회신 ${C.replies}건 · 질의 ${C.total_queries}개 · 기관 ${bs.length}곳 (갱신 ${String(C.updated).slice(0, 16)})\n`
             + bs.map(([s2, b]) => `- ${s2}: 질의 ${b.queries}개 · 결과 ${b.hit} · 확정 0 ${b.zero} · 미확정 0 ${b.zero_legacy} · 조회 실패 ${b.fail}`).join('\n')
+            + `\n\n변화 감시(과거 결과 → 확정 0) ${(C.changes || []).length}건` + (C.changes || []).slice(0, 8).map((c) => `\n- '${c.query}' ${c.source}: 과거 최대 ${c.max_plain}건(${String(c.last_hit_plain).slice(0, 10)}) → 확정 0(${String(c.last_zero).slice(0, 10)}) — 기관 기록 이동·비공개 전환·검색 개편 의심`).join('') // v3.57
             + `\n\n특정 질의: query_bank(topic="coverage:<질의>")` + foot);
         } catch (e) { return text(`조회 범위 등록부 조회 실패(${e.message}) — https://changgi.github.io/korea-archive-mcp/data/coverage.json 직접 열람`); }
       } }
