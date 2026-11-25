@@ -2407,7 +2407,12 @@ def build_coverage():
     out = {"updated": dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"), "strict_since": COVERAGE_STRICT,
            "note": "조회 범위 등록부 — 질의×기관 관측(hit=결과 있음·zero=기관이 0건을 명시한 확정 0·zero_legacy=그 기관의 확정 0 시행(strict_since) 이전 또는 미감사 기관의 0(오류 포함 가능 — 부재 근거로 쓰지 말 것)·fail=조회 실패). "
                    "근거 원문은 queries/<월>.jsonl.gz(cross_search 회신). 부재를 주장하려면 zero ≥ 1이고 그 뒤 hit가 없어야 하며, fail은 '기록이 없다'는 뜻이 아니다.",
-           "replies": nrep, "total_queries": len(Q), "by_source": dict(sorted(by.items())), "queries": dict(sorted(Q.items()))}
+           "replies": nrep, "total_queries": len(Q), "by_source": dict(sorted(by.items())), "queries": dict(sorted(Q.items())),
+           # v3.57 변화 감시 — 같은 질의·표기 변형 없이 얻은 결과가 있었는데 그 뒤 마지막 관측이 확정 0인 질의×기관(기관 기록 이동·비공개 전환·검색 개편 의심, 부재 단정 금지)
+           "changes": sorted(({"query": q, "source": src, "max_plain": e.get("max_plain", 0), "last_hit_plain": e.get("last_hit_plain", ""), "last_zero": e.get("last_zero", "")}
+                              for q, S in Q.items() for src, e in S.items()
+                              if e.get("last_status") == "zero" and e.get("hit_plain") and e.get("zero") and e.get("last_zero", "") > e.get("last_hit_plain", "")),
+                             key=lambda x: x["last_zero"], reverse=True)}
     json.dump(out, open(os.path.join(D, "coverage.json"), "w", encoding="utf-8"), ensure_ascii=False, separators=(",", ":"))
     # v3.44 다매체 — 같은 등록부를 표(CSV)와 사람이 읽는 페이지(HTML)로. 정본은 coverage.json, 두 보기는 매번 그로부터 재생성
     import csv
@@ -2431,6 +2436,7 @@ def build_coverage():
 <h1>조회 범위 등록부</h1><p>질의마다 어느 기관을 언제 조회했고 <b>결과가 있었나 · 0건이 확정됐나 · 조회에 실패했나</b>. 부재를 말하려면 '확정 0'이 있고 그 뒤 결과가 없어야 하며, '조회 실패'는 기록이 없다는 뜻이 아니다.
 '미확정 0'은 그 기관의 확정 0 판별 시행(아래 시행 시각) 이전이거나 아직 감사하지 않은 기관의 0 — 오류가 0으로 보고됐을 수 있다.
 근거 원문: 축적된 cross_search 회신 {nrep}건(<a href="queries/index.json">queries/</a>, 지우지 않음) · 정본 <a href="coverage.json">coverage.json</a> · 표 <a href="coverage.csv">coverage.csv</a> · 갱신 {E_(out['updated'])}</p>
+<h2>변화 감시 ({len(out['changes'])})</h2><p><small>과거에 결과가 있었는데(표기 변형 없이) 마지막 관측이 확정 0인 질의×기관 — 기관의 기록 이동·비공개 전환·검색 개편 의심. 부재로 단정하지 말고 원 기관에서 확인.</small></p>{"<table><tr><th>질의</th><th>기관</th><th>과거 결과(최대)</th><th>마지막 결과</th><th>확정 0</th></tr>" + "".join(f"<tr><td>{E_(c['query'])}</td><td>{E_(c['source'])}</td><td>{c['max_plain']}</td><td>{E_(c['last_hit_plain'][:16])}</td><td>{E_(c['last_zero'][:16])}</td></tr>" for c in out['changes'][:50]) + "</table>" if out['changes'] else "<p>(없음)</p>"}
 <h2>기관별</h2><table><tr><th>기관</th><th>질의</th><th>결과</th><th>확정 0</th><th>미확정 0</th><th>실패</th><th>확정 0 시행(UTC)</th></tr>{bsr}</table>
 <h2>질의별 ({len(out['queries'])})</h2>{qr}
 <p><small>웹·모바일: query_bank(topic="coverage:&lt;질의&gt;")</small></p></main></html>""")
