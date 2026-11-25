@@ -252,6 +252,7 @@ def enrich(o, budget):
                 o["enrich_status"] = "fail"
             o["enriched"] = today; o["thumb_ok"] = False
             return 1
+    if any("[object Object]" in str(x[1]) for x in (o.get("meta") or []) if x and len(x) > 1): o["iiif_v"] = 0  # v3.6.3 '[object Object]'로 판독된 접근 제한 — 브리지 교정 뒤 다시 판독
     rebridge = bool(m) and src0 in IIIF_V and o.get("enrich_status") == "ok" and o.get("iiif_v", 1) < IIIF_V[src0] and budget > 0  # v2.63 브리지 판이 오르면 한 번 다시 판독
     if o.get("enriched") and not rebridge and (o.get("enrich_status") != "fail" or o["enriched"] > (dt.date.today() - dt.timedelta(days=1)).isoformat()):
         th = o.get("thumb") or ""  # 이미 보강된 기록도 썸네일 게재 규칙은 매번 다시 적용(규칙 변경 소급)
@@ -1886,11 +1887,11 @@ def write_quality(recs):
 
 FACETS = [("주제", re.compile(r"^(주제|주제어|색인어.*|subject|키워드|표제어)$", re.I)), ("장소", re.compile(r"^(연관정보|장소|취급지명|place|지명\(장서각 태깅\))$", re.I)),
           ("인물", re.compile(r"^인명\(장서각 태깅\)$")), ("기관", re.compile(r"^관청명\(장서각 태깅\)$")),  # v2.56 기관 개체 태깅
-          ("형태", re.compile(r"^(문서유형|기록물형태|매체유형|사료구분|사료유형|기록유형|자료유형|자료 유형|매체 형태|자료 형태|format)$", re.I)), ("재질", re.compile(r"^재질$")),
+          ("형태", re.compile(r"^(문서유형|기록물형태|매체유형|사료구분|사료유형|기록유형|자료유형|자료 유형|자료 구분|매체 형태|자료 형태|format)$", re.I)), ("재질", re.compile(r"^재질$")),
           ("기술 수준", re.compile(r"^기술 수준$")),  # v2.59 기관의 자료 형태·재질·기술 단계(item·fileUnit·Piece) 분류
           ("죄명", re.compile(r"^죄명$")), ("훈격", re.compile(r"^포상$")), ("신문", re.compile(r"^신문명$")),
           ("생산자", re.compile(r"^(생산처/생산자|생산기관|생산자|제작자|creator|작가)$", re.I)), ("소장처", re.compile(r"^(소장단위\(열람·복제 청구\)|소장처|소장국가|서고정보)$")),
-          ("분쟁", re.compile(r"^분쟁$")), ("공개 상태", re.compile(r"^(공개 상태|공개구분|접근 제한\(원문\)|법적 지위|보존기간)$")),  # v2.99.8 출처(생산자)·소장·분쟁·공개 상태 — 기관 표기 그대로  # v2.99.7 기관의 법적 분류(독립운동 판결문 죄명)·포상 훈격(공훈록)·수록 신문명
+          ("분쟁", re.compile(r"^분쟁$")), ("공개 상태", re.compile(r"^(공개 상태|공개구분|접근 제한\(원문\)|법적 지위|보존기간|열람 및 이용조건)$")),  # v2.99.8 출처(생산자)·소장·분쟁·공개 상태 — 기관 표기 그대로  # v2.99.7 기관의 법적 분류(독립운동 판결문 죄명)·포상 훈격(공훈록)·수록 신문명
           ("분류", re.compile(r"^(분류|사부분류|자료분류|보고서유형분류|주제분류|범주\(Commons\)|분류\(NDC 등\))$")), ("시대", re.compile(r"^(시대|시대분류|국적/시대)$")), ("매체", re.compile(r"^mediatype$", re.I))]
 
 def facet_terms(k, v, fac):
@@ -1907,6 +1908,8 @@ def facet_terms(k, v, fac):
             t = re.sub(r"\s*\((?:Most Recent|[^()]*\d{4}[^()]*)\)\s*$", "", t).strip(" .")
             if 1 < len(t) <= 120: out.append((fac, t))
         return out
+    if fac == "공개 상태":  # v3.6.3 접근 조건 원문은 쉼표가 든 산문('Many documents have been declassified, but others, …') — 세미콜론·가운뎃점(기관 값 구분)으로만, 60자 넘는 산문 조각은 개념으로 쓰지 않는다
+        return [(fac, t.strip()) for t in re.split(r"[;；·]", v) if 1 < len(t.strip()) <= 60]
     if fac == "훈격":  # v2.99.7 '1962 대한민국장' → '대한민국장'(포상 연도는 기록 날짜이지 분류가 아니다)
         t = re.sub(r"^\s*(1[89]|20)\d\d\s*", "", v).strip()
         return [(fac, t)] if 1 < len(t) <= 40 else []
@@ -1961,6 +1964,15 @@ def merge_subjects(recs):
                 uci = ((o.get("authority") or {}).get("persons") or {}).get(t) if fac2 == "인물" else None
                 if uci: e["uci"] = uci  # v2.56 인물 전거
                 e["first"] = min(e["first"], o["first_seen"]); e["last"] = max(e["last"], o["last_seen"])
+    live = {}  # v3.6.3 현재 판독 규칙으로 기관 값에서 나오는 (패싯, 용어) — 공개 상태의 옛 쉼표 분할 조각은 지우지 않고 superseded 표시(SKOS·HTML에서만 제외)
+    for o in recs:
+        if o.get("entry_type", "기록") != "기록": continue
+        for k, v in o.get("meta") or []:
+            fac = next((f for f, rx in FACETS if rx.search(str(k))), None)
+            if fac == "공개 상태": live.update({x: 1 for x in facet_terms(str(k), v, fac)})
+    for t, e in (S["facets"].get("공개 상태") or {}).items():
+        if ("공개 상태", t) not in live and not e.get("superseded"): e["superseded"] = {"on": dt.date.today().isoformat(), "why": "판독 규칙 교정으로 기관 값에서 더 이상 나오지 않는 조각(접근 조건 산문의 쉼표 분할 결함, v3.6.3) — 기록·출처는 보존"}
+        elif ("공개 상태", t) in live and e.get("superseded"): e.pop("superseded")
     S["updated"] = dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
     S["totals"] = {f: len(v) for f, v in S["facets"].items()}
     S["note"] = "원 기관 메타의 주제·지명·분류·시대·매체·인물·기관(장서각 태깅)·형태·재질·기술 수준 표기 그대로(번역·정규화 없음). records = 그 용어가 붙은 원장 기록 key. 지우지 않는다"
@@ -1978,6 +1990,7 @@ def merge_subjects(recs):
         graph.append({"@id": sch, "@type": "skos:ConceptScheme", "skos:prefLabel": {"@value": f"KOREA ARCHIVE 주제 색인 — {f}", "@language": "ko"},
                       "dct:description": "원 기관 메타의 표기를 그대로 모은 개념 체계(번역·정규화 없음)"})
         for t, e in terms.items():
+            if e.get("superseded"): continue  # v3.6.3
             graph.append({"@id": concept_id(f, t), "@type": "skos:Concept", "skos:prefLabel": t, "skos:inScheme": {"@id": sch},
                           "dct:source": e["sources"], "skos:note": f"원장 기록 {len(e['records'])}건 · 메타 키 {', '.join(e['keys'])} · 처음 {e['first'][:10]}",
                           **({"skos:notation": e["uci"], "dct:identifier": f"UCI {e['uci']}"} if e.get("uci") else {}),
@@ -1987,7 +2000,7 @@ def merge_subjects(recs):
     E_ = html.escape; by = {o["key"]: o for o in recs}
     sec = []
     for f, terms in S["facets"].items():
-        items = sorted(terms.items(), key=lambda kv: (-len(kv[1]["records"]), kv[0]))
+        items = sorted(((t, e) for t, e in terms.items() if not e.get("superseded")), key=lambda kv: (-len(kv[1]["records"]), kv[0]))  # v3.6.3 옛 분할 조각 제외(subjects.json에는 보존)
         li = "".join(f"<details id='{E_(subj_anchor(f, t))}'><summary>{E_(t)} <small>{len(e['records'])}건 · {E_(', '.join(e['sources']))}</small></summary><ul>"
                      + "".join(f"<li><a href='{E_((by.get(k) or {}).get('url') or '#')}'>{E_(((by.get(k) or {}).get('title') or k)[:100])}</a> <a href='r/{rec_slug(k)}.html'>기록</a></li>" for k in e["records"][:30]) + "</ul></details>"
                      for t, e in items)
