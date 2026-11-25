@@ -2023,10 +2023,27 @@ const JB_CROSS = `국내외 대조 절차 — 순서를 틀리면 헛수고한�
 미기술 자료를 만나면: 기증이 어려우면 사본수집(공공기록물법 46조 — 국가기록원)·국립중앙도서관 책다모아(02-590-0700). 판단은 기관이 한다, 소장자는 연락만 하면 된다.`;
 
   server.tool('query_bank',
-    'Browse validated discovery keywords (Song 2026). topic: "list" for groups, a group id (G-01..G-22, N-01..N-07), "RG" for NARA Record Group cross-map, "TNA" for the 14 strategy layers, "domestic" for the 5 domestic archives, or a domestic key (nedb/archives/nlk/warmemo/seoul) / domestic group id (e.g. NAK-L1). 전략 지식: "walls"=열한 겹의 벽(실패 원인 11층+대응), "identifiers"=식별자 해독(번호 규칙·옆 훑기), "persons"=인명 열쇠(표기 변형·색인 함정), "crosscheck"=국내외 대조 절차, "world"=6개국+ 서고 지도, "cities"=도시명 계보 대조(Keijo·Fusan·1914 경계), "allies"=한국전 참전·지원 22개국 발굴 지도(보유 소스 매핑·부대 고유명 열쇠), "recipes"=주제 유형별 발굴→판독→권리 완주 레시피 6종(인물·전투·조선·일제강점기·도시·이미지 소싱). 검증 쿼리 뱅크+조사 전략.',
+    'Browse validated discovery keywords (Song 2026). topic: "dict" (기준 사전 — 지명·인물·사건·기관 전거), "list" for groups, a group id (G-01..G-22, N-01..N-07), "RG" for NARA Record Group cross-map, "TNA" for the 14 strategy layers, "domestic" for the 5 domestic archives, or a domestic key (nedb/archives/nlk/warmemo/seoul) / domestic group id (e.g. NAK-L1). 전략 지식: "walls"=열한 겹의 벽(실패 원인 11층+대응), "identifiers"=식별자 해독(번호 규칙·옆 훑기), "persons"=인명 열쇠(표기 변형·색인 함정), "crosscheck"=국내외 대조 절차, "world"=6개국+ 서고 지도, "cities"=도시명 계보 대조(Keijo·Fusan·1914 경계), "allies"=한국전 참전·지원 22개국 발굴 지도(보유 소스 매핑·부대 고유명 열쇠), "recipes"=주제 유형별 발굴→판독→권리 완주 레시피 6종(인물·전투·조선·일제강점기·도시·이미지 소싱). 검증 쿼리 뱅크+조사 전략.',
     { topic: z.string().default('list') },
     async ({ topic }) => {
       const t = topic.trim();
+      if (/^(dict|사전|기준)$/i.test(t)) { // v3.26 기준 사전(지명·인물·사건·기관 전거) — 원장 실측으로 쌓은 연결 기준을 웹·모바일에도(정본 = Pages JSON)
+        try {
+          const B = 'https://changgi.github.io/korea-archive-mcp/data/';
+          const J = async (f, k) => { try { return JSON.parse(await cachedText('qb:' + f, 3600e3, () => gtext(B + f), k)); } catch { return { _fail: f }; } }; // 파일별 실패는 그 구역만 표시
+          const [P, PS, EV, AU] = await Promise.all([J('places.json', '"places"'), J('persons.json', '"persons"'), J('events.json', '"events"'), J('authorities.json', '"authorities"')]);
+          const host = (x) => String(x).replace(/^https?:\/\/(www\.)?/, '').split('/')[0];
+          const pl = Object.entries(P.places || {}).filter(([, e]) => (e.records || []).length).sort((a, b) => b[1].records.length - a[1].records.length)
+            .map(([n, e]) => `- ${n} (${(e.labels || []).slice(1, 5).join('·')}) — 기록 ${e.records.length} · ${e.sources.length}개 기관${e.collection ? ` · IIIF ${e.collection}` : ''}`);
+          const pe = Object.entries(PS.persons || {}).filter(([, e]) => (e.records || []).length)
+            .map(([n, e]) => `- ${n} — 기록 ${e.records.length} · ${e.sources.join(', ')}${e.authority ? ` · 전거 ${e.authority}` : ''}${(e.sameAs || []).length ? ` · 국제 전거 ${e.sameAs.map(host).join(', ')}` : ''}${e.collection ? ` · IIIF ${e.collection}` : ''}`);
+          const ev = Object.entries(EV.events || {}).map(([n, e]) => `- ${n} ${e.period[0] === e.period[1] ? e.period[0] : e.period.join('~')} — ${Object.entries(e.verdicts || {}).map(([k, v]) => `${k} ${v}`).join(' · ') || '해당 기록 없음'}`);
+          const au = Object.entries(AU.authorities || {}).map(([i, a]) => `- ${a.label_lod || a.term} = ${i}${(a.sameAs || []).length ? ` → ${a.sameAs.join(' · ')}` : ''}`);
+          const miss = [P, PS, EV, AU].filter((x) => x._fail).map((x) => x._fail);
+          return text(`KOREA ARCHIVE 기준 사전 — 원장 실측(2건 이상)으로 쌓은 연결 기준. 기관 표기는 그대로 두고 그 위에 잇는 층(같은 장소·인물은 단서, 단정 아님)\n\n【지명 ${pl.length}】 표제·기관 장소 칸 매칭\n${pl.join('\n')}\n\n【인물 ${pe.length}】 표제·기관 인물/주제/색인어 칸 매칭\n${pe.join('\n')}\n\n【사건 ${ev.length}】 표제 사건명 ↔ 기록 날짜(원장 판정 — '사건 이전 연도'만 표기 확인 필요)\n${ev.join('\n')}\n\n【기관 전거 ${au.length}】 국립중앙도서관 LOD(KSH·KAC) → 국제 전거\n${au.join('\n')}`
+            + (miss.length ? `\n\n(조회 실패: ${miss.join(', ')} — 원장 실행 뒤 다시)` : '') + `\n\n※ 보기: ${B}dict.html · 정본 places.json·persons.json·events.json·authorities.json · KV 보기 https://changgi.github.io/korea-archive-mcp/kv.html?manifest=<IIIF 주소>`);
+        } catch (e) { return text(`기준 사전 조회 실패(${e.message}) — https://changgi.github.io/korea-archive-mcp/data/dict.html 직접 열람`); }
+      }
       if (/^(ledger|원장|used|실측)$/i.test(t)) { // v3.8 축적된 실제 질의 — 기록을 발굴한 질의를 성과(발굴 기록 수)순으로(발견 경로 provenance.json). 질의 축적을 다시 발굴로
         try {
           const pv = JSON.parse(await cachedText('qb:prov', 3600e3, () => gtext('https://changgi.github.io/korea-archive-mcp/data/provenance.json'), '"provenance"'));
