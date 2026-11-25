@@ -1406,6 +1406,23 @@
     "tna·Corea 1876:0"
    ],
    "level": "warn"
+  },
+  {
+   "id": "default-era-year-ia",
+   "tool": "cross_search",
+   "args": {
+    "query": "강화도조약",
+    "sources": "ia",
+    "max_per_source": 5
+   },
+   "must": [
+    "ia·Corea 1876:[1-9]",
+    "1876"
+   ],
+   "must_not": [
+    "ia·Corea 1876:0"
+   ],
+   "level": "warn"
   }
  ]
 }
