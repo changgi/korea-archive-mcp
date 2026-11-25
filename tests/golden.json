@@ -1436,6 +1436,18 @@
    ],
    "must_not": [],
    "level": "warn"
+  },
+  {
+   "id": "profile-ia-era-rule",
+   "tool": "source_profile",
+   "args": {
+    "institution": "ia"
+   },
+   "must": [
+    "Corea AND year:"
+   ],
+   "must_not": [],
+   "level": "warn"
   }
  ]
 }
