@@ -350,7 +350,7 @@ def date_derived(o):
     if m and int(m[3] or m[2]) - int(m[2]) <= 10: return m[1], f"상위 계층 포괄 기간({m[4]}) — 이 기록 자체 날짜 아님, 범위 10년 이하만"
     m = re.match(r"^\s*(January|February|March|April|May|June|July|August|September|October|November|December) (\d{1,2}), (1[89]\d\d|20\d\d)\b", md.get("date", ""))  # v2.84 IA 영문 날짜 'October 24, 1950–…'(첫 날짜)
     if m: return f"{m[3]}-{MONTHS.index(m[1]) + 1:02d}-{int(m[2]):02d}", "기관 메타 — date(영문 표기, 범위면 첫 날짜)"
-    for k_ in ("생산일", "발행일", "발신일", "발행년월일", "제작연도", "생산연도", "발행년도", "일자", "Publication Date", "시대"):  # v3.0.2 라벨 붙은 기관 날짜 칸(생산일 Date made·발행일·발신일) — 읽지 않던 공백
+    for k_ in ("생산일", "생산시기", "발행일", "발신일", "발행년월일", "제작연도", "생산연도", "발행년도", "일자", "날짜", "Publication Date", "시대"):  # v3.5.4 생산시기(6·25전쟁 아카이브센터 'YYYY-MM-00 ~ …')·날짜  # v3.0.2 라벨 붙은 기관 날짜 칸(생산일 Date made·발행일·발신일) — 읽지 않던 공백
         dv_, q_ = meta_date(md.get(k_, ""), era=(k_ == "시대"))
         if dv_: return dv_, f"기관 메타 — {k_}" + (f"({q_})" if q_ else "") + (" · 위키미디어 공용 업로더 기재(2차 정보)" if o["key"].startswith("commons:") else "")
     return title_date(o.get("title") or "")
@@ -361,6 +361,12 @@ def meta_date(v, era=False):
     era=True(시대 칸)는 단일 서기 연도만('1911' · '1887년(고종24)' · '조선 태조 7년(1398)')."""
     v = str(v or "").strip(); Y = r"(1[0-9]\d\d|20[0-2]\d)"
     if not v or re.search(r"기원전|BC|不明|불명|미상", v): return "", ""
+    mm = re.match(r"^(\d{4})-(\d{2})-(\d{2})\s*~\s*(\d{4})-(\d{2})-(\d{2})$", v)  # v3.5.4 6·25전쟁 아카이브센터 생산시기 — '-00'은 미상, '0000'은 날짜 없음
+    if mm:
+        a_ = "-".join(x for x in mm.groups()[:3] if x not in ("00", "0000")) if mm[1] != "0000" else ""
+        b_ = "-".join(x for x in mm.groups()[3:] if x not in ("00", "0000")) if mm[4] != "0000" else ""
+        if not a_ or not re.match(r"^" + Y, a_): return "", ""
+        return (a_, "") if (not b_ or b_ == a_) else ((f"{a_[:4]}~{b_[:4]}", "범위") if a_[:4] != b_[:4] else (a_[:7] if a_[:7] == b_[:7] else a_[:4], "범위"))
     if era:
         m = re.match(r"^" + Y + r"년?(?:\s*\([^)]*\))?$", v) or re.search(r"\d+년\s*\(" + Y + r"\)$", v)
         return (m[1], "") if m else ("", "")
