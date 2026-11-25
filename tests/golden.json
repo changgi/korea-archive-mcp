@@ -1909,6 +1909,23 @@
    ],
    "level": "warn",
    "note": "v3.42 NDL은 totalResults 0 명시일 때만 0건 · Archives NZ 라이브 차단 중 주간 인덱스 0건은 확정 0이 아님(조회 실패 '—')"
+  },
+  {
+   "id": "gallica-no-false-zero",
+   "tool": "cross_search",
+   "args": {
+    "query": "Corée",
+    "sources": "gallica",
+    "max_per_source": 2
+   },
+   "must": [
+    "채널별 \\["
+   ],
+   "must_not": [
+    "gallica:0[\\] ·,]"
+   ],
+   "level": "warn",
+   "note": "v3.43 Gallica — SRU numberOfRecords·BnF 카탈로그 numberOfRecords 명시 0만 0건, 카탈로그 전 유형 실패 + 사진·도판 0건은 조회 실패"
   }
  ]
 }

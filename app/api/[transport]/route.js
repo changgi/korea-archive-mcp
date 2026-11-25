@@ -432,6 +432,7 @@ async function bnfCatalog(q, n, doctype) {
     const [a, b] = await Promise.allSettled([bnfCatalog(q, n, 'i'), bnfCatalog(q, n, null)]);
     const A = a.status === 'fulfilled' ? a.value : { total: 0, items: [] }, B = b.status === 'fulfilled' ? b.value : { total: 0, items: [] };
     if (a.status !== 'fulfilled' && b.status !== 'fulfilled') throw b.reason;
+    if (b.status !== 'fulfilled' && !(A.items || []).length) throw new Error(`BnF 카탈로그 전 유형 조회 실패(${errInfo(b.reason)}) — 사진·도판 한정 0건만으로는 확정 0이 아님`); // v3.43
     const seen = new Set(); const all = [...A.items, ...B.items].filter((it) => !seen.has(it.id) && seen.add(it.id));
     if (!all.length) { // v1.96.3: 'all' CQL은 모든 단어 일치 — 0건이면 숫자·짧은 단어를 빼고 핵심어 2개로 완화(실측: 'Corée 1866 expédition' 0건)
       const words = String(q).split(/\s+/).filter((w) => w && !/^\d+$/.test(w) && w.length > 2);
