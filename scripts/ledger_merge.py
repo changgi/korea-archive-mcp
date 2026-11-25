@@ -1014,6 +1014,7 @@ def build_media(recs_all):
     for o in recs:
         d = decade(o) or "연대 미상"; e = tl.setdefault(d, {"decade": d, "records": 0, "by_source": {}, "by_kind": {}, "samples": []})
         e["records"] += 1; h = o["key"].split(":")[0]; k = kind_of(o)
+        if not o.get("date") and o.get("date_derived"): e["derived"] = e.get("derived", 0) + 1  # v3.8.5 이 연대 칸 중 파생 날짜(근거 date_basis)로 정해진 건수 — 증거 강도 구분
         e["by_source"][h] = e["by_source"].get(h, 0) + 1; e["by_kind"][k] = e["by_kind"].get(k, 0) + 1
         if len(e["samples"]) < 5: e["samples"].append({"title": o["title"][:120], "url": o.get("url", ""), "iiif": o.get("iiif") or o.get("iiif_built", "")})
     json.dump({"updated": now, "note": "구간 = 연대(4자리 연도·8자리 날짜·연호 연도 明治·大正·昭和·光武·隆熙·檀紀 환산) → 세기 → 왕조·시대명. 근거 순서 date → 제목 → 메타(생산·시대·출판). 세기·시대 구간은 시간축 근사 정렬", "timeline": sorted(tl.values(), key=lambda e: period_order(e["decade"]))},
@@ -1022,7 +1023,7 @@ def build_media(recs_all):
     E_ = html.escape; KV = "https://changgi.github.io/korea-archive-mcp/kv.html?manifest="; T = sorted(tl.values(), key=lambda e: period_order(e["decade"])); mx = max((e["records"] for e in T), default=1)
     li = lambda x: f"<li><a href='{E_(x['url'] or '#')}'>{E_(x['title'])}</a>" + (f" <a class='kv' href='{KV}{E_(x['iiif'])}'>KV</a>" if x["iiif"] else "") + "</li>"
     KN = {"motion_picture": "영상", "graphic": "사진·그림", "map": "지도", "document": "문서"}
-    rows = "".join(f"""<section><h3>{E_(e['decade'])} <small>{e['records']}건 · {' '.join(f"{KN[k]} {n}" for k, n in sorted(e['by_kind'].items(), key=lambda kv: -kv[1]))}</small></h3>
+    rows = "".join(f"""<section><h3>{E_(e['decade'])} <small>{e['records']}건{f" (파생 날짜 {e['derived']}건)" if e.get('derived') else ''} · {' '.join(f"{KN[k]} {n}" for k, n in sorted(e['by_kind'].items(), key=lambda kv: -kv[1]))}</small></h3>
 <div class="bar" style="width:{max(2, round(e['records'] / mx * 100))}%"></div><p class="src">{' · '.join(f"{E_(SRC_NAME.get(h, h))} {n}" for h, n in sorted(e['by_source'].items(), key=lambda kv: -kv[1]))}</p>
 <ul>{''.join(li(x) for x in e['samples'])}</ul></section>""" for e in T)
     open(os.path.join(D, "timeline.html"), "w", encoding="utf-8").write(f"""<!DOCTYPE html><html lang="ko"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
