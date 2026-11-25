@@ -338,6 +338,34 @@ def date_derived(o):
     if m and int(m[3] or m[2]) - int(m[2]) <= 10: return m[1], f"상위 계층 포괄 기간({m[4]}) — 이 기록 자체 날짜 아님, 범위 10년 이하만"
     m = re.match(r"^\s*(January|February|March|April|May|June|July|August|September|October|November|December) (\d{1,2}), (1[89]\d\d|20\d\d)\b", md.get("date", ""))  # v2.84 IA 영문 날짜 'October 24, 1950–…'(첫 날짜)
     if m: return f"{m[3]}-{MONTHS.index(m[1]) + 1:02d}-{int(m[2]):02d}", "기관 메타 — date(영문 표기, 범위면 첫 날짜)"
+    return title_date(o.get("title") or "")
+
+
+_MON = "|".join(MONTHS)
+def title_date(t):
+    """v3.0.1 기관 표제 속 명시 날짜 — 형식이 분명한 것만(괄호 날짜·'on D Month YYYY'·'Month D, YYYY'·끝의 ', YYYY'·첫머리 'YYYY년').
+    본문 중간의 맨 연도('1950 INVASION …')·번호('Nr. 1939.')는 쓰지 않는다. 표제 날짜는 내용 시점(촬영·사건)일 수 있음을 근거에 적는다."""
+    t = re.sub(r"^\[[^\]]{0,160}\]\s*", "", t)  # 원장 꼬리표·수집처 표시
+    Y = r"(1[5-9]\d\d|20[0-2]\d)"; B = "기관 표제 속 날짜(제목 원문 — 내용·사건 시점일 수 있음)"
+    if re.search(r"\b(?:" + _MON + r"|Jan|Feb|Mar|Apr|Jun|Jul|Aug|Sept?|Oct|Nov|Dec)\b", t) and re.search(r"\d\s?(?:-|–|through|to)\s?(?:" + _MON + r"|Jan|Feb|Mar|Apr|Jun|Jul|Aug|Sept?|Oct|Nov|Dec)\b", t):  # 기간 표제('Feb. 8, 1876 - Aug. 22, 1876', 'March 2, 1919 through March 13, 1919') — 연도 범위로
+        ys = sorted({int(y) for y in re.findall(r"(?<!\d)" + Y + r"(?!\d)", t)})
+        if ys: return (f"{ys[0]}~{ys[-1]}" if len(ys) > 1 else str(ys[0])), B + " — 기간 표제"
+    m = re.search(r"\(" + Y + r"(?:\.\s*(0?[1-9]|1[0-2]))?(?:\.\s*([0-3]?\d))?\.?\)", t)
+    if m: return "-".join([m[1]] + [x.zfill(2) for x in (m[2], m[3]) if x]), B
+    m = re.search(r"(?<![\d-])" + Y + r"-(0[1-9]|1[0-2])-([0-3]\d)(?![\d-])", t)  # AWM 'Kapyong Valley, Korea. 1952-04-16.'
+    if m: return f"{m[1]}-{m[2]}-{m[3]}", B
+    m = re.search(r"(?:^|(?<![Nn]o)(?<!Nr)(?<!Vol)\.\s)(" + _MON + r") " + Y + r"\.(?:\s|$)", t)  # AWM 캡션 날짜 칸 'Kapyong, South Korea. June 1952. …'
+    if m: return f"{m[2]}-{MONTHS.index(m[1]) + 1:02d}", B
+    m = re.search(r"(?:^|(?<![Nn]o)(?<!Nr)(?<!Vol)\.\s)" + Y + r"-(0[1-9]|1[0-2])\.(?:\s|$)", t)  # 'Taegu, Korea. 1951-04. …'
+    if m: return f"{m[1]}-{m[2]}", B
+    m = re.search(r"\b([0-3]?\d) (" + _MON + r") " + Y + r"\b", t)
+    if m: return f"{m[3]}-{MONTHS.index(m[2]) + 1:02d}-{int(m[1]):02d}", B
+    m = re.search(r"\b(" + _MON + r") ([0-3]?\d), " + Y + r"\b", t)
+    if m: return f"{m[3]}-{MONTHS.index(m[1]) + 1:02d}-{int(m[2]):02d}", B
+    m = re.search(r", " + Y + r"(?:\s*[-–~]\s*" + Y + r")?\s*(?:\.\w{3,4})?$", t)
+    if m: return m[1] + (f"~{m[2]}" if m[2] else ""), B
+    m = re.match(r"^" + Y + r"년(?!대)", t)
+    if m: return m[1], B
     return "", ""
 
 ERA_BASE = {"明治": 1867, "메이지": 1867, "大正": 1911, "다이쇼": 1911, "昭和": 1925, "쇼와": 1925, "平成": 1988, "令和": 2018,
@@ -1940,6 +1968,14 @@ def main():
     for i, o in enumerate(sorted(led.values(), key=lambda o: (-o["score"], o["key"])), 1): o["rank"] = i
     ngu = loss_guard(led, prev_snapshot, today)
     if ngu: print(f"불삭제 검사(v2.70): 사라질 뻔한 값 {ngu}건 되살림 — docs/data/loss_guard.json")
+    nmv = 0  # v3.0.1 제자리로 — AWM 검색 파서가 'Conflict'(분쟁명 Korea, 1950-1953)를 날짜 칸에 넣던 결함. 지우지 않고 메타 '분쟁'으로 옮기고 원값은 date_moved에 남긴다
+    for o in led.values():
+        dv = o.get("date") or ""
+        if o["key"].startswith("awm:") and dv and not re.match(r"^\s*(?:c\.?\s*)?\d", dv):
+            if not any(m and m[0] == "분쟁" for m in o.get("meta") or []): o["meta"] = (o.get("meta") or []) + [["분쟁", dv]]
+            o.setdefault("date_moved", []).append({"value": dv, "to": "meta:분쟁", "on": today.isoformat(), "why": "검색 파서가 분쟁명(Conflict)을 날짜로 읽던 결함(v3.0.1) — 날짜는 Date made"})
+            o["date"] = ""; nmv += 1
+    if nmv: print(f"날짜 칸 교정(v3.0.1): AWM 분쟁명 {nmv}건 → 메타 '분쟁'(원값 date_moved 보존)")
     recs = sorted(led.values(), key=lambda o: (o["first_seen"], o["key"]))
     # v2.27 계층·IIIF가 없는 기록은 만들어 구축 — 원 기관 정보와 구분되는 필드에(partOf_derived · iiif_built)
     for o in recs:
@@ -1983,7 +2019,7 @@ def main():
     relations_page([o for o in recs if o.get("entry_type", "기록") == "기록"])  # v2.86 날짜 파생·교차 확인 뒤에
     with open(lp, "w", encoding="utf-8") as f:
         for o in recs: f.write(json.dumps(o, ensure_ascii=False, separators=(",", ":")) + "\n")
-    cols = ["key", "entry_type", "found_by_basis", "summary_composed", "rights_view", "rights_basis", "fixity", "defect_note", "link_note", "sources", "title", "date", "date_derived", "date_basis", "id", "url", "partOf", "partOf_derived", "media", "sameAs", "iiif", "iiif_status", "iiif_built", "iiif_kind", "found_by", "found_by_derived", "first_seen", "last_seen", "seen", "seen_7d", "seen_30d", "days_total", "formats", "tools", "max_cross", "trend", "rank", "score", "summary", "summary_basis", "rights", "attribution", "thumb", "meta", "meta_basis", "authority", "key_aliases", "merge_note", "recovered", "harvested", "meta_restored", "found_via", "drilled_from", "date_cross"]
+    cols = ["key", "entry_type", "found_by_basis", "summary_composed", "rights_view", "rights_basis", "fixity", "defect_note", "link_note", "sources", "title", "date", "date_derived", "date_basis", "id", "url", "partOf", "partOf_derived", "media", "sameAs", "iiif", "iiif_status", "iiif_built", "iiif_kind", "found_by", "found_by_derived", "first_seen", "last_seen", "seen", "seen_7d", "seen_30d", "days_total", "formats", "tools", "max_cross", "trend", "rank", "score", "summary", "summary_basis", "rights", "attribution", "thumb", "meta", "meta_basis", "authority", "key_aliases", "merge_note", "recovered", "harvested", "meta_restored", "found_via", "drilled_from", "date_cross", "date_moved"]
     fmtv = lambda v: json.dumps(v, ensure_ascii=False, separators=(",", ":")) if isinstance(v, list) and v and isinstance(v[0], dict) else " | ".join(f"{a}: {b}" for a, b in v) if isinstance(v, list) and v and isinstance(v[0], list) else (" ".join(f"{k}:{n}" for k, n in sorted(v.items(), key=lambda kv: -kv[1])) if isinstance(v, dict) and all(isinstance(x, (int, float)) for x in v.values()) else json.dumps(v, ensure_ascii=False, separators=(",", ":")) if isinstance(v, dict) else ("+".join(v) if isinstance(v, list) else v))
     with open(os.path.join(D, "discovered.csv"), "w", encoding="utf-8-sig", newline="") as f:
         w = csv.writer(f); w.writerow(cols)

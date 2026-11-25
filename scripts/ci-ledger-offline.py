@@ -41,6 +41,14 @@ try:  # v2.99.9 RiC-O 의미 검사 — 주제가 아닌 패싯(생산자·소�
     _bad = sum(1 for x in _g for c in (x.get("rico:hasOrHadSubject") or []) if any(f"#{sl}/" in str(c.get("@id", "")) for sl in ("creator", "holder", "access", "place")))
     if _bad: bad.append(f"RiC-O 주제 속성에 생산자·소장처·공개 상태·장소 개념 {_bad}건(제 속성으로 — rico_concepts)")
 except Exception as ex: bad.append(f"discovered.jsonld 판독 실패 {ex}")
+try:  # v3.0.1 날짜 칸 의미 검사 — 날짜에 숫자가 없는 값(분쟁명 'Korea, 1950-1953' 등)이 AWM에서 다시 들어오지 않는지 · 파생 날짜엔 근거
+    import re as _re
+    _L = [json.loads(l) for l in open(os.path.join(data, "discovered.jsonl"), encoding="utf-8") if l.strip()]
+    _nd = [o["key"] for o in _L if o["key"].startswith("awm:") and o.get("date") and not _re.match(r"^\s*(?:c\.?\s*)?\d", o["date"])]
+    if _nd: bad.append(f"AWM 날짜 칸에 분쟁명 등 비날짜 {len(_nd)}건(v3.0.1 — Date made만)")
+    _nb = [o["key"] for o in _L if o.get("date_derived") and not o.get("date_basis")]
+    if _nb: bad.append(f"근거 없는 파생 날짜 {len(_nb)}건")
+except Exception as ex: bad.append(f"날짜 검사 실패 {ex}")
 reg = subprocess.run([sys.executable, os.path.join(tmp, "scripts", "records_register.py"), "--verify"], capture_output=True, text=True)
 if reg.returncode not in (0,): bad.append("등록부 검증 실패: " + (reg.stdout + reg.stderr)[-200:])
 if os.environ.get("KEEP"): print("사본:", tmp)
