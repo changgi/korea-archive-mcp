@@ -1,7 +1,7 @@
 {
-"updated": "2026-11-25T03:24:56Z",
-"watched": 848,
-"changed_records": 38,
+"updated": "2026-11-25T03:36:05Z",
+"watched": 850,
+"changed_records": 52,
 "suspected_source_changes": 0,
 "note": "지문 = 원 기관 응답(우리 판독기 정규형, 판독 시각 등 변동 항목 제외)의 SHA-256-16. pv = 판독기(route.js·lib) 지문. 이력은 지우지 않는다.",
 "changes": [
@@ -722,6 +722,272 @@
 {
 "at": "2026-11-25",
 "h": "0d5ccd0e1d1ac86a",
+"pv": "fa6703da94c0",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "awm:ART40313",
+"title": "Kapyong landscape · 권리:PD(저작권 만료)",
+"url": "https://www.awm.gov.au/collection/C176001",
+"history": [
+{
+"at": "2026-11-24",
+"h": "66dc8fd6a24dbca5",
+"pv": "d4726c38e7cc",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "1417c148cf094fc8",
+"pv": "fa6703da94c0",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "awm:HOBJ3145",
+"title": "Kapyong, South Korea. June 1952. A panoramic view from the left of A Company's, 1st Battalion, ... · 권리:PD(저작권 만료)",
+"url": "https://www.awm.gov.au/collection/C372613",
+"history": [
+{
+"at": "2026-11-24",
+"h": "95cf2f6e0bd4c8cd",
+"pv": "d4726c38e7cc",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "0acb1cf6a52b22fa",
+"pv": "fa6703da94c0",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "jsg:K2-2751",
+"title": "흥왕책봉의궤(興王冊封儀軌)",
+"url": "https://jsg.aks.ac.kr/dir/view?dataId=JSG_K2-2751",
+"history": [
+{
+"at": "2026-11-24",
+"h": "a39db5bd91932c3e",
+"pv": "d4726c38e7cc",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "93d7250ce0807213",
+"pv": "fa6703da94c0",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "jsg:K2-2841",
+"title": "존숭도감의궤(尊崇都監儀軌)",
+"url": "https://jsg.aks.ac.kr/dir/view?dataId=JSG_K2-2841",
+"history": [
+{
+"at": "2026-11-24",
+"h": "166e2e8779387180",
+"pv": "d4726c38e7cc",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "fdeaf95e727ad221",
+"pv": "fa6703da94c0",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "jsg:K2-2859",
+"title": "진작의궤(進爵儀軌)",
+"url": "https://jsg.aks.ac.kr/dir/view?dataId=JSG_K2-2859",
+"history": [
+{
+"at": "2026-11-24",
+"h": "2cc4aafa1390ce83",
+"pv": "d4726c38e7cc",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "828319d845bd1a53",
+"pv": "fa6703da94c0",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "jsg:K2-3556",
+"title": "개건도감의궤(改建都監儀軌)",
+"url": "https://jsg.aks.ac.kr/dir/view?dataId=JSG_K2-3556",
+"history": [
+{
+"at": "2026-11-24",
+"h": "b422ff889dcb0e9c",
+"pv": "d4726c38e7cc",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "b64a29ab5c69d7ec",
+"pv": "fa6703da94c0",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "jsg:K2-5210",
+"title": "종묘의궤(宗廟儀軌)",
+"url": "https://jsg.aks.ac.kr/dir/view?dataId=JSG_K2-5210",
+"history": [
+{
+"at": "2026-11-24",
+"h": "8b38a8b4ff49d1e7",
+"pv": "d4726c38e7cc",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "a693bef1c1e2677f",
+"pv": "fa6703da94c0",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "commons:https://commons.wikimedia.org/wiki/File%3AM26_Pershing_Seoul_1950.jpg",
+"title": "M26 Pershing Seoul 1950.jpg",
+"url": "https://commons.wikimedia.org/wiki/File%3AM26_Pershing_Seoul_1950.jpg",
+"history": [
+{
+"at": "2026-11-24",
+"h": "c803a0f2eca314cc",
+"pv": "d4726c38e7cc",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "a34c93abd9d21b6e",
+"pv": "fa6703da94c0",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "commons:https://commons.wikimedia.org/wiki/File%3ANH_96379_Liberation_of_Seoul%2C_Korea%2C_September_1950.jpg",
+"title": "NH 96379 Liberation of Seoul, Korea, September 1950.jpg",
+"url": "https://commons.wikimedia.org/wiki/File%3ANH_96379_Liberation_of_Seoul%2C_Korea%2C_September_1950.jpg",
+"history": [
+{
+"at": "2026-11-24",
+"h": "fa471c9e79f10911",
+"pv": "d4726c38e7cc",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "fa484efc92cc7f4d",
+"pv": "fa6703da94c0",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "commons:https://commons.wikimedia.org/wiki/File%3ASeoul_1950_1.gif",
+"title": "Seoul 1950 1.gif",
+"url": "https://commons.wikimedia.org/wiki/File%3ASeoul_1950_1.gif",
+"history": [
+{
+"at": "2026-11-24",
+"h": "b4f86d76651a2a8a",
+"pv": "d4726c38e7cc",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "e88c2a14ef3319f6",
+"pv": "fa6703da94c0",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "commons:https://commons.wikimedia.org/wiki/File%3AUN_forces_during_the_Second_Battle_of_Seoul%2C_1950.webm",
+"title": "UN forces during the Second Battle of Seoul, 1950.webm",
+"url": "https://commons.wikimedia.org/wiki/File%3AUN_forces_during_the_Second_Battle_of_Seoul%2C_1950.webm",
+"history": [
+{
+"at": "2026-11-24",
+"h": "42f59147269821a1",
+"pv": "d4726c38e7cc",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "d41df2431aaf757b",
+"pv": "fa6703da94c0",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "commons:https://commons.wikimedia.org/wiki/File%3AWomen_parade_and_celebrate_in_front_of_Namdaemun_after_the_North_Korean_capture_of_Seoul%2C_1950.jpg",
+"title": "Women parade and celebrate in front of Namdaemun after the North Korean capture of Seoul, 1950.jpg",
+"url": "https://commons.wikimedia.org/wiki/File%3AWomen_parade_and_celebrate_in_front_of_Namdaemun_after_the_North_Korean_capture_of_Seoul%2C_1950.jpg",
+"history": [
+{
+"at": "2026-11-24",
+"h": "0ca56d766b2c9ebb",
+"pv": "d4726c38e7cc",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "8f0f8871b1faacc1",
+"pv": "fa6703da94c0",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "un:S/2010/358",
+"title": "[S/2010/358] Letter dated 6 July 2010 from the Permanent Representative of the Democratic People's Republic of",
+"url": "https://digitallibrary.un.org/record/685600",
+"history": [
+{
+"at": "2026-11-24",
+"h": "5634a6b71f4d306d",
+"pv": "d4726c38e7cc",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "ad3dbabb1ca31e86",
+"pv": "fa6703da94c0",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "un:S/PRST/2010/13",
+"title": "[S/PRST/2010/13] Statement",
+"url": "https://digitallibrary.un.org/record/685900",
+"history": [
+{
+"at": "2026-11-24",
+"h": "72906330650282b3",
+"pv": "d4726c38e7cc",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "cfcd47492dbb7f25",
 "pv": "fa6703da94c0",
 "kind": "판독기 변경 동반"
 }
