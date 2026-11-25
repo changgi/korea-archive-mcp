@@ -222,6 +222,21 @@
    "level": "error"
   },
   {
+   "id": "carousel-discovery",
+   "tool": "report_template",
+   "args": {
+    "kind": "carousel"
+   },
+   "must": [
+    "사실 검증 워크플로우\\(5단계",
+    "🟢완전공개/🟡카탈로그만/🔴미공개",
+    "필드 조사",
+    "정정 이력"
+   ],
+   "level": "error",
+   "note": "발굴조사 방법론(3단계 공개 판정·필드 조사·검증 5단계)이 carousel 응답에 유지되는지 — 스킬-서버 패리티 회귀 감시"
+  },
+  {
    "id": "csv-format",
    "tool": "cross_search",
    "args": {
