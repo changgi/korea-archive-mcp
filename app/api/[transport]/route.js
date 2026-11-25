@@ -309,7 +309,7 @@ const TOPICS = [
   { p: '이토\\s?히로부미|伊藤博文', en: 'Ito Hirobumi Korea' },
   { p: '김구|金九', en: 'Kim Koo' },
   { p: '안창호|安昌浩', en: 'Ahn Chang-ho' },
-  { p: '3[·.]1\\s?운동|삼일\\s?운동|三一運動|만세\\s?운동', en: 'March First Movement Korea 1919', fr: 'mouvement du 1er mars Corée' },
+  { p: '3[·.]1\\s?운동|삼일\\s?운동|三一運動|만세\\s?운동', en: 'Korean independence movement 1919', fr: 'mouvement du 1er mars Corée' }, // v2.99.6 실측: 'March First Movement Korea 1919'는 TNA 무관 2건, 이 표기는 TNA FO 608/211/19(1919 파리강화회의 자결 각서)·NARA 895.00 정무 문서철
   { p: '위안부|慰安婦|慰安妇', en: 'comfort women', fr: 'femmes de réconfort' },
   { p: '강제\\s?동원|강제\\s?징용|징용|徵用|征用', en: 'Korean forced labor conscription' },
   { p: '광복군|光復軍|光复军', en: 'Korean Liberation Army' },
@@ -918,6 +918,7 @@ const COLLECT = {
   },
   nedb: async (q, n) => { // v1.93: 개방파일 인덱스 미설정이면 한국사DB 통합검색 라이브 조회 — 검색어가 등장하는 DB(편찬 자료군)를 기록 단위 진입점으로 수집(0건 고정 해소)
     const recs = await loadNedbIndex(); if (recs) return nedbFileSearch(recs, q, n);
+    q = String(q).replace(/(\d)[·.](\d{1,2})\s*(운동|만세|사건|혁명|선거|수복|후퇴|사태)/g, '$1·$2 $3'); // v2.99.6 한국사DB는 '3·1운동'·'3.1운동' 0건, '3·1 운동' 3건(실측) — 숫자 사건명 뒤를 띄운다
     const dbs = (await nedbLive(q, 2)).filter((d) => d.total > 0).sort((a, b) => b.total - a.total); const out = [];
     for (let k = 0; k < 2; k++) for (const d of dbs) { const r = d.rows[k]; if (r && out.length < n) out.push({ series: `${d.era} › ${d.name}`, title: r.title.slice(0, 140), date: nedbDate(r.id), id: r.id, url: `${JDB}/id/${r.id}` }); }
     return out;
