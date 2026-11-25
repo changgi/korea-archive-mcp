@@ -862,10 +862,10 @@ const PART_OF = {
   commons: (it) => it.series && `Commons › ${it.series}`,
 };
 const COLLECT = {
-  tna: async (q, n) => {
+  tna: async (q, n, yr) => { // v2.99.1 yr = 생산연도 필터(sps.dateFrom/To) — 당대 국호 질의를 연도 문자열 대신 필터로
     q = koToEn(q) || q;
     const query = /^[A-Z]+ \d+\/\d+$/.test(q.trim()) ? `"${q.trim()}"` : q;
-    const d = await tnaFetch(query, n);
+    const d = await tnaFetch(query, n, 1, yr, yr);
     return (d.records || []).map((r) => { const ref = String(r.reference || ''); return { title: r.title || r.description, date: r.coveringDates || '', id: ref, ...(ref.includes('/') ? { series: ref.split('/')[0] } : {}), url: `https://discovery.nationalarchives.gov.uk/details/r/${r.id}` }; });
   },
   ia: async (q, n) => {
@@ -3303,7 +3303,7 @@ item_cd 5종(자료 성격별): ART 도설·회화 / ETC 두루마리·축 / DRR
       const jobs = want.map((s) => ({ source: s, fn: () => COLLECT[s](query, max_per_source) }));
       if (!variants && want.includes('tna')) { // v2.99 기본 검색에도 — 개항기~대한제국기(1850~1909) 연도가 있는 변환어면 TNA에 당대 국호+연도 1건 추가(실측: 사건명 0건, 'Corea 1876'은 FO 405 강화도조약 문서철)
         const y = ((koToEn(query) || '').match(/\b(18[5-9]\d|190\d)\b/) || [])[1];
-        if (y) jobs.push({ source: `tna·Corea ${y}`, fn: () => COLLECT.tna(`Corea ${y}`, max_per_source) });
+        if (y) jobs.push({ source: `tna·Corea ${y}`, fn: () => COLLECT.tna('Corea', max_per_source, y) }); // v2.99.1 'Corea'+연도 필터 — 'Corea 1876' 문자열은 선원 명부 등 연도만 맞는 기록이 섞임(실측)
       }
       if (variants) { // 당대 표기 자동 팬아웃 — query_bank '열한 겹의 벽' 지식의 도구화
         const eff = koToEn(query) || query;
@@ -3318,7 +3318,7 @@ item_cd 5종(자료 성격별): ART 도설·회화 / ETC 두루마리·축 / DRR
         { const y = (eff.match(/\b(18[5-9]\d|190\d)\b/) || [])[1]; if (y) vs.push([`Corea ${y}`, `Corea ${y}`]); } // v2.98 개항기~대한제국기(1850~1909) 사건은 기관 색인이 사건명이 아니라 당대 국호+연도(TNA FO 405 'Corea … 1894' 실측) — 사건명 질의 0건 보완
         for (const src of ['tna', 'ia', 'nara', 'europeana']) {
           if (!want.includes(src)) continue;
-          for (const [label, vq] of vs) { if (src === 'nara' && /^Corea \d{4}$/.test(vq)) continue; jobs.push({ source: `${src}·${label}`, fn: () => COLLECT[src](vq, max_per_source) }); } // v2.98.1 NARA는 'Corea <연도>'가 성씨 Corea·날짜만 맞는 문서철로 흐려져 제외(실측)
+          for (const [label, vq] of vs) { if (src === 'nara' && /^Corea \d{4}$/.test(vq)) continue; const ey = src === 'tna' && (vq.match(/^Corea (\d{4})$/) || [])[1]; jobs.push({ source: `${src}·${label}`, fn: () => (ey ? COLLECT.tna('Corea', max_per_source, ey) : COLLECT[src](vq, max_per_source)) }); } // v2.98.1 NARA는 'Corea <연도>'가 성씨 Corea·날짜만 맞는 문서철로 흐려져 제외(실측)
         }
       }
       const { items, stats } = await collectMerged(jobs);
