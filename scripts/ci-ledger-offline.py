@@ -56,6 +56,8 @@ assert _dn({"key": "dnz:1", "date": "[1951 or 1952]"})["value"] == "1951~1952" a
 _ft = g["facet_terms"]  # v3.22 기관 전거 줄 — 인명 쉼표 보존·전거 번호는 용어에서 분리
 assert _ft("인물(기관 전거)", "MacArthur, Douglas=KAC201619806 · Ridgway, Matthew B.=KAC1", "인물") == [("인물", "MacArthur, Douglas"), ("인물", "Ridgway, Matthew B.")]
 assert _pl({"title": "서울 前面을 强化?", "meta": [["장소(기관 전거)", "흥남[興南]=KSH2000026697"]]}) == {"서울", "흥남"}
+_pe = g["persons"]  # v3.24 인물 사전
+assert _pe({"title": "GEN MATTHEW B RIDGWAY, YONGPYANG"}) == {"리지웨이"} and _pe({"title": "x", "meta": [["인물(기관 전거)", "MacArthur, Douglas=KAC201619806"]]}) == {"맥아더"} and not _pe({"title": "x", "summary": "MacArthur"})
 _io = g["iiif_origin"]  # v3.9 Gallica 원 기관 IIIF — 디지털 원문 ark만(카탈로그 cb ark 아님), 수집 경로 iiif가 있으면 두지 않음
 assert _io({"url": "http://gallica.bnf.fr/ark:/12148/btv1b2700138b"})["manifest"] == "https://gallica.bnf.fr/iiif/ark:/12148/btv1b2700138b/manifest.json"
 assert _io({"url": "https://gallica.bnf.fr/ark:/12148/cb384972039"}) is None and _io({"url": "https://gallica.bnf.fr/ark:/12148/bpt6k1", "iiif": "x"}) is None
@@ -108,6 +110,9 @@ try:  # v3.0.1 날짜 칸 의미 검사 — 날짜에 숫자가 없는 값(분�
     _A = json.load(open(os.path.join(data, "authorities.json"), encoding="utf-8"))["authorities"]  # v3.23 기관 전거 — 기록의 전거 번호가 모두 authorities.json에
     _am = [i for o in _L for i in ((o.get("authority_ids") or {}).get("terms") or {}).values() if i not in _A or not _A[i]["uri"].startswith("http://lod.nl.go.kr/resource/")]
     if _am: bad.append(f"authorities.json에 없는 전거 {len(_am)}건")
+    _PS = json.load(open(os.path.join(data, "persons.json"), encoding="utf-8"))["persons"]  # v3.24
+    _pp = [o["key"] for o in _L for n in o.get("persons_std") or [] if o["key"] not in (_PS.get(n) or {}).get("records", [])]
+    if _pp: bad.append(f"인물 사전에 없는 기록 인물 {len(_pp)}건")
     _eb = [o["key"] for o in _L if str(o.get("iiif_kind", "")).startswith("기록 봉투") and not (o.get("envelope_basis") or {}).get("why")]  # v3.9.2
     if _eb: bad.append(f"사유 없는 기록 봉투 {len(_eb)}건")
     _ex = [o["key"] for o in _L if o.get("envelope_basis") and not str(o.get("iiif_kind", "")).startswith("기록 봉투")]
