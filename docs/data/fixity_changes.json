@@ -1,7 +1,7 @@
 {
-"updated": "2026-11-25T05:06:17Z",
+"updated": "2026-11-25T05:26:01Z",
 "watched": 861,
-"changed_records": 105,
+"changed_records": 111,
 "suspected_source_changes": 0,
 "note": "지문 = 원 기관 응답(우리 판독기 정규형, 판독 시각 등 변동 항목 제외)의 SHA-256-16. pv = 판독기(route.js·lib) 지문. 이력은 지우지 않는다.",
 "changes": [
@@ -1996,6 +1996,120 @@
 "at": "2026-11-25",
 "h": "39cbbf3e86a3215c",
 "pv": "9da76e192de2",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "koreanwar:2022-KR-02-PF-D-00216",
+"title": "UN군 낙동강 방어선 방어 모습 사진(1950)",
+"url": "https://www.koreanwar.or.kr:8443/searchDetail.do?archRfcd=2022-KR-02-PF-D-00216",
+"history": [
+{
+"at": "2026-11-24",
+"h": "e14c765294003675",
+"pv": "5e1db1fb9360",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "91297933c94216b9",
+"pv": "5d62ee717cd0",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "koreanwar:2022-KR-02-PF-D-00351",
+"title": "낙동강에 진군하고 있는 미 제5해병대의 모습 사진(1950.9.)",
+"url": "https://www.koreanwar.or.kr:8443/searchDetail.do?archRfcd=2022-KR-02-PF-D-00351",
+"history": [
+{
+"at": "2026-11-24",
+"h": "52c58e8b2044223f",
+"pv": "5e1db1fb9360",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "5b31460bcf7e091f",
+"pv": "5d62ee717cd0",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "koreanwar:2022-KR-03-PF-A-00336",
+"title": "낙동강 왜관지구에서 폭파된 북한군 T34-85 전차 사진(1950.09)",
+"url": "https://www.koreanwar.or.kr:8443/searchDetail.do?archRfcd=2022-KR-03-PF-A-00336",
+"history": [
+{
+"at": "2026-11-24",
+"h": "e32bc9480312b6cd",
+"pv": "5e1db1fb9360",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "c88dfe8a13120dd3",
+"pv": "5d62ee717cd0",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "koreanwar:2022-KR-03-PF-A-00487",
+"title": "낙동강 전선에서 조셉 로턴 콜린스 미 육군 대장, 월턴 H.워커 미 육군 중장 사진(1950.07)",
+"url": "https://www.koreanwar.or.kr:8443/searchDetail.do?archRfcd=2022-KR-03-PF-A-00487",
+"history": [
+{
+"at": "2026-11-24",
+"h": "76b80ff5af68ceb5",
+"pv": "5e1db1fb9360",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "804ae60d7af6d58c",
+"pv": "5d62ee717cd0",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "nara:NAID 271813600",
+"title": "1st Cavalry Division",
+"url": "https://catalog.archives.gov/id/271813600",
+"history": [
+{
+"at": "2026-11-24",
+"h": "1029f4ed01238045",
+"pv": "5e1db1fb9360",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "d4e3a6febe812287",
+"pv": "5d62ee717cd0",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "nara:NAID 354633292",
+"title": "Department of State Chronology of Principal Events Relating to the Korean Conflict, August 1950",
+"url": "https://catalog.archives.gov/id/354633292",
+"history": [
+{
+"at": "2026-11-24",
+"h": "c2be1e580289bb46",
+"pv": "5e1db1fb9360",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "c427893ecf996745",
+"pv": "5d62ee717cd0",
 "kind": "판독기 변경 동반"
 }
 ]
