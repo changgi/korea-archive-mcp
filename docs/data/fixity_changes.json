@@ -1,7 +1,7 @@
 {
-"updated": "2026-11-25T03:51:11Z",
+"updated": "2026-11-25T04:13:15Z",
 "watched": 856,
-"changed_records": 53,
+"changed_records": 57,
 "suspected_source_changes": 0,
 "note": "지문 = 원 기관 응답(우리 판독기 정규형, 판독 시각 등 변동 항목 제외)의 SHA-256-16. pv = 판독기(route.js·lib) 지문. 이력은 지우지 않는다.",
 "changes": [
@@ -1008,6 +1008,82 @@
 "at": "2026-11-25",
 "h": "5e6304a2a7647504",
 "pv": "c4b099c69283",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "koreanwar:2022-US-02-AV-D-00127",
+"title": "장진호 전투 이후 수송선에 승선한 미 제1해병사단 제5해병연대 및 제7해병연대 생존 병력 기록영상",
+"url": "https://www.koreanwar.or.kr:8443/searchDetail.do?archRfcd=2022-US-02-AV-D-00127",
+"history": [
+{
+"at": "2026-11-24",
+"h": "28c88551a5671693",
+"pv": "abdeaf098d6a",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "fafb7768168f90ca",
+"pv": "9da76e192de2",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "koreanwar:2022-US-02-AV-D-00207",
+"title": "장진호 지역에서 고토리로 철수하는 미 제1해병사단 기록영상",
+"url": "https://www.koreanwar.or.kr:8443/searchDetail.do?archRfcd=2022-US-02-AV-D-00207",
+"history": [
+{
+"at": "2026-11-24",
+"h": "0215746651585e63",
+"pv": "abdeaf098d6a",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "216e137ae8ec315c",
+"pv": "9da76e192de2",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "koreanwar:2022-US-02-AV-D-00215",
+"title": "한국 함흥에서 미 제1해병사단의 철수 ; 장진호 지역 하갈우리에서 함흥으로 철수하는 미 제1해병사단 기록영상",
+"url": "https://www.koreanwar.or.kr:8443/searchDetail.do?archRfcd=2022-US-02-AV-D-00215",
+"history": [
+{
+"at": "2026-11-24",
+"h": "717e189bc3045805",
+"pv": "abdeaf098d6a",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "747708505b825727",
+"pv": "9da76e192de2",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "koreanwar:2022-US-02-AV-D-00329",
+"title": "장진호 전투에서 퇴각하는 미 제1해병사단 기록영상",
+"url": "https://www.koreanwar.or.kr:8443/searchDetail.do?archRfcd=2022-US-02-AV-D-00329",
+"history": [
+{
+"at": "2026-11-24",
+"h": "222091817aa623ae",
+"pv": "abdeaf098d6a",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "553367a0e709e7ec",
+"pv": "9da76e192de2",
 "kind": "판독기 변경 동반"
 }
 ]
