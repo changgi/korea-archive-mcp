@@ -1423,6 +1423,19 @@
     "ia·Corea 1876:0"
    ],
    "level": "warn"
+  },
+  {
+   "id": "profile-tna-era-rule",
+   "tool": "source_profile",
+   "args": {
+    "institution": "tna"
+   },
+   "must": [
+    "생산연도 필터",
+    "FO 881/2892"
+   ],
+   "must_not": [],
+   "level": "warn"
   }
  ]
 }
