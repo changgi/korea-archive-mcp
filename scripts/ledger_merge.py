@@ -1195,6 +1195,7 @@ def relations_page(R):
                    "summary": {"ko": ["KOREA ARCHIVE 발견 원장 — 기관 표기(sameAs·식별자·입수처 링크)로 확인된 같은 기록의 소장처별 매니페스트. 근거: " + basis(c, "같은 기록(다른 소장처)")[:300]]},
                    "items": items}, open(os.path.join(sd, f"{gid}.json"), "w", encoding="utf-8"), ensure_ascii=False)
     dd_ = os.path.join(D, "day"); os.makedirs(dd_, exist_ok=True); dids = {}; didx = []
+    for o in by.values(): o.pop("same_day", None)  # v3.7.3 매 실행 재계산(원장 값에서 파생)
     for c in day:  # v3.6 같은 날(다른 기관) 묶음마다 IIIF 컬렉션 — 기관별 매니페스트를 한 날짜로(예: 1950-12-24 흥남 — NARA 필름·협약기관 사진·공용 사진). 날짜 근거는 간선 basis 그대로
         dm = re.search(r"\d{4}-\d{2}-\d{2}", basis(c, "같은 날(다른 기관)")); dk_ = dm[0] if dm else ""
         if not dk_: continue
@@ -1204,6 +1205,7 @@ def relations_page(R):
             o = by[k]; mf = (o.get("iiif") if not o.get("iiif_status") else "") or o.get("iiif_built")
             if mf: items.append({"id": mf, "type": "Manifest", "label": {"ko": [f"{SRC_NAME.get(k.split(':')[0], k.split(':')[0])} — {o['title'][:100]}"]}})
         insts = sorted({SRC_NAME.get(k.split(":")[0], k.split(":")[0]) for k in c})
+        for k in c: by[k]["same_day"] = {"date": dk_, "records": len(c), "institutions": len(insts), "collection": f"{PAGES}day/{did}.json"}  # v3.7.3 도구 응답·외부 소비자가 relations.json 없이
         json.dump({"@context": "http://iiif.io/api/presentation/3/context.json", "id": f"{PAGES}day/{did}.json", "type": "Collection",
                    "label": {"ko": [f"같은 날 {dk_} — {len(insts)}개 기관 {len(c)}건"]}, "navDate": f"{dk_}T00:00:00Z",
                    "summary": {"ko": ["KOREA ARCHIVE 발견 원장 — 기관 표기 날짜(원 날짜 칸 또는 기관 메타 날짜 칸)가 같은 다른 기관 기록. 같은 사건의 교차 대조 단서(같은 장면이라는 단정 아님). 근거: " + basis(c, "같은 날(다른 기관)")[:300]]},
@@ -2207,7 +2209,7 @@ def main():
     relations_page([o for o in recs if o.get("entry_type", "기록") == "기록"])  # v2.86 날짜 파생·교차 확인 뒤에
     with open(lp, "w", encoding="utf-8") as f:
         for o in recs: f.write(json.dumps(o, ensure_ascii=False, separators=(",", ":")) + "\n")
-    cols = ["key", "entry_type", "found_by_basis", "summary_composed", "rights_view", "rights_basis", "fixity", "defect_note", "link_note", "sources", "title", "date", "date_derived", "date_basis", "id", "url", "partOf", "partOf_derived", "media", "sameAs", "iiif", "iiif_status", "iiif_built", "iiif_kind", "found_by", "found_by_derived", "first_seen", "last_seen", "seen", "seen_7d", "seen_30d", "days_total", "formats", "tools", "max_cross", "trend", "rank", "score", "summary", "summary_basis", "rights", "attribution", "thumb", "meta", "meta_basis", "authority", "key_aliases", "merge_note", "recovered", "harvested", "meta_restored", "found_via", "drilled_from", "date_cross", "date_moved", "iiif_same", "tool_notes"]
+    cols = ["key", "entry_type", "found_by_basis", "summary_composed", "rights_view", "rights_basis", "fixity", "defect_note", "link_note", "sources", "title", "date", "date_derived", "date_basis", "id", "url", "partOf", "partOf_derived", "media", "sameAs", "iiif", "iiif_status", "iiif_built", "iiif_kind", "found_by", "found_by_derived", "first_seen", "last_seen", "seen", "seen_7d", "seen_30d", "days_total", "formats", "tools", "max_cross", "trend", "rank", "score", "summary", "summary_basis", "rights", "attribution", "thumb", "meta", "meta_basis", "authority", "key_aliases", "merge_note", "recovered", "harvested", "meta_restored", "found_via", "drilled_from", "date_cross", "date_moved", "iiif_same", "tool_notes", "same_day"]
     fmtv = lambda v: json.dumps(v, ensure_ascii=False, separators=(",", ":")) if isinstance(v, list) and v and isinstance(v[0], dict) else " | ".join(f"{a}: {b}" for a, b in v) if isinstance(v, list) and v and isinstance(v[0], list) else (" ".join(f"{k}:{n}" for k, n in sorted(v.items(), key=lambda kv: -kv[1])) if isinstance(v, dict) and all(isinstance(x, (int, float)) for x in v.values()) else json.dumps(v, ensure_ascii=False, separators=(",", ":")) if isinstance(v, dict) else ("+".join(v) if isinstance(v, list) else v))
     with open(os.path.join(D, "discovered.csv"), "w", encoding="utf-8-sig", newline="") as f:
         w = csv.writer(f); w.writerow(cols)

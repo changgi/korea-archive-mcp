@@ -1638,6 +1638,20 @@
    ],
    "level": "warn",
    "note": "v3.7.2 원장 검색 응답에 같은 기록 실물 이미지(iiif_same) — 기록 봉투도 실물 이미지로 잇는 맥락"
+  },
+  {
+   "id": "ledger-same-day-note",
+   "tool": "cross_search",
+   "args": {
+    "query": "흥남",
+    "sources": "ledger",
+    "max_per_source": 10
+   },
+   "must": [
+    "같은 날 1950-12-\\d\\d 다른 기관 기록 \\d곳 \\d+건\\(IIIF 컬렉션 https://changgi\\.github\\.io/korea-archive-mcp/data/day/"
+   ],
+   "level": "warn",
+   "note": "v3.7.3 원장 검색 응답에 같은 날 다른 기관 기록 묶음(day 컬렉션)"
   }
  ]
 }
