@@ -21,6 +21,14 @@ H = {"Content-Type": "application/json", "Accept": "application/json, text/event
 GENERIC = {"korea", "korean", "koreans", "the", "of", "in", "and", "to", "a", "un", "us", "rok", "chosen", "japan", "japanese", "seoul", "pusan"}
 
 
+def anchored(en):
+    """v3.8.2 실제 검색 경로와 같은 질의로 — route.js toIndexLang은 변환 결과에 EN_ANCHOR(Korea 계열 낱말)가 없으면 앞에 'Korea '를 붙인다.
+    이전 실측은 변환어를 그대로 던져 사용자 검색과 다른 질의를 쟀다('Ito Hirobumi' 실측 vs 실제 'Korea Ito Hirobumi')."""
+    s = open(os.path.join(ROOT, "app", "api", "[transport]", "route.js"), encoding="utf-8").read()
+    m = re.search(r"const EN_ANCHOR = /(.+?)/i;", s)
+    return en if (m and re.search(m[1], en, re.I)) else f"Korea {en}"
+
+
 def topics():
     s = open(os.path.join(ROOT, "app", "api", "[transport]", "route.js"), encoding="utf-8").read()
     i = s.index("const TOPICS = ["); j = s.index("];", i)
@@ -61,7 +69,8 @@ def main():
     res = {}
     for n, (pat, en) in enumerate(T, 1):
         r = {"pattern": pat}
-        for tool, args in (("nara_search", {"query": en, "max_results": 5}), ("ia_search", {"query": en, "rows": 5})):
+        q = anchored(en); r["query"] = q  # v3.8.2 실제로 던져지는 질의
+        for tool, args in (("nara_search", {"query": q, "max_results": 5}), ("ia_search", {"query": q, "rows": 5})):
             try: r[tool.split("_")[0]] = measure(call(sid, tool, args), en)
             except Exception as ex: r[tool.split("_")[0]] = {"error": str(ex)[:80]}
             time.sleep(0.5)
