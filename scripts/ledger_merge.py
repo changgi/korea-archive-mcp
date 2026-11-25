@@ -1040,7 +1040,7 @@ ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..")
 DISTS = [("discovered.csv", "text/csv", "발견 기록 표(CSV)"), ("discovered.jsonl", "application/jsonl", "발견 기록(JSONL)"),
          ("discovered.jsonld", "application/ld+json", "RiC-O·PROV 연결 데이터(JSON-LD)"), ("collection.json", "application/ld+json", "IIIF Presentation 3 컬렉션(최근 300건)"),
          ("hierarchy.json", "application/ld+json", "IIIF 계층 컬렉션"), ("subjects.jsonld", "application/ld+json", "주제·인물·장소·형태 SKOS 개념 체계"),
-         ("records.oai_dc.xml", "application/xml", "OAI-PMH Dublin Core"), ("activity/collection.json", "application/ld+json", "IIIF Change Discovery 1.0 활동 스트림(매니페스트 생성·갱신)"), ("day/index.json", "application/ld+json", "IIIF 컬렉션 — 같은 날 다른 기관 기록 묶음(날짜순)"), ("records.csl.json", "application/vnd.citationstyles.csl+json", "인용 CSL-JSON"),
+         ("records.oai_dc.xml", "application/xml", "OAI-PMH Dublin Core"), ("activity/collection.json", "application/ld+json", "IIIF Change Discovery 1.0 활동 스트림(매니페스트 생성·갱신)"), ("day/index.json", "application/ld+json", "IIIF 컬렉션 — 같은 날 다른 기관 기록 묶음(날짜순)"), ("places.json", "application/json", "지명 사전 — 표준명·표기 변이·기록(v3.14)"), ("places.jsonld", "application/ld+json", "지명 사전 SKOS·rico:Place"), ("records.csl.json", "application/vnd.citationstyles.csl+json", "인용 CSL-JSON"),
          ("records.ris", "application/x-research-info-systems", "인용 RIS"), ("records.bib", "application/x-bibtex", "인용 BibTeX"),
          ("feed.xml", "application/atom+xml", "새 발견 Atom 피드"), ("timeline.json", "application/json", "연대 타임라인"), ("tree.json", "application/json", "계층구조"),
          ("classifications.json", "application/json", "분류 사전"), ("provenance.json", "application/json", "발견 경로(질의↔기록)"), ("relations.json", "application/json", "기록↔기록 맥락 연결(근거 포함)"), ("relations.html", "text/html", "맥락 연결 묶음(읽기용)"), ("quality.json", "application/json", "데이터 품질 시계열"),
@@ -1099,6 +1099,37 @@ PLACE_META = re.compile(r"^(장소|취급지명|연관정보|지명.*|place.*|Pl
 def places(o):
     t = " ".join([str(o.get("title") or "")] + [str(v) for k, v in ((m[0], m[1]) for m in (o.get("meta") or []) if m and len(m) > 1) if PLACE_META.match(str(k))])
     return {k for k, rx in _PL.items() if rx.search(t)}
+
+def place_id(n): return f"{PAGES}places.jsonld#" + urllib.parse.quote(n, safe="")
+
+def place_labels(n):
+    """PLACES 정규식 대안에서 표기 변이(altLabel)만 — 정규식 문법(부정 전방탐색·?)은 걷어 낸다."""
+    out = []
+    for x in PLACES[n].split("|"):
+        x = re.sub(r"\(\?[!<=][^)]*\)", "", x).replace("-?", "-").replace("?", "")
+        if x and x not in out: out.append(x)
+    return out
+
+def build_places(recs):
+    """v3.14 지명 사전 산출물 — places.json(표준명·표기 변이·기록·수집처)과 places.jsonld(SKOS ConceptScheme). 기준 정보 축적:
+    기록 목록은 지우지 않는다(원장에서 빠진 기록이 없으니 누적과 같음, 이전 파일의 기록은 합집합으로 보존)."""
+    p = os.path.join(D, "places.json")
+    P0 = json.load(open(p, encoding="utf-8")) if os.path.exists(p) else {}
+    out = {}
+    for n in PLACES:
+        rs = sorted({o["key"] for o in recs if n in (o.get("places_std") or [])} | set(((P0.get("places") or {}).get(n) or {}).get("records") or []))
+        out[n] = {"labels": place_labels(n), "records": rs, "sources": sorted({k.split(":")[0] for k in rs})}
+    J = {"note": "KOREA ARCHIVE 지명 사전 — 다국어 변환표(TOPICS) 지명 대응 + 기관 로마자 변형을 표준명으로. 표제·기관 장소 칸에서만 매칭(요약 본문 제외). 기관 표기 장소는 subjects.json 그대로 — 이 사전은 그 위의 연결 층. 지우지 않음.",
+         "updated": dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"), "places": out}
+    json.dump(J, open(p, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+    sch = f"{PAGES}places.jsonld"
+    g = [{"@id": sch, "@type": "skos:ConceptScheme", "skos:prefLabel": {"@value": "KOREA ARCHIVE 지명 사전", "@language": "ko"}}]
+    for n, e in out.items():
+        g.append({"@id": place_id(n), "@type": ["skos:Concept", "rico:Place"], "skos:inScheme": {"@id": sch}, "skos:prefLabel": {"@value": n, "@language": "ko"},
+                  "skos:altLabel": [x for x in e["labels"] if x != n], "rdfs:seeAlso": [{"@id": f"{PAGES}r/{rec_slug(k)}.html"} for k in e["records"][:200]], "ka:records": len(e["records"])})
+    json.dump({"@context": {"skos": "http://www.w3.org/2004/02/skos/core#", "rico": "https://www.ica.org/standards/RiC/ontology#", "rdfs": "http://www.w3.org/2000/01/rdf-schema#", "ka": f"{PAGES}#"}, "@graph": g},
+              open(os.path.join(D, "places.jsonld"), "w", encoding="utf-8"), ensure_ascii=False, indent=0)
+    return sum(1 for e in out.values() if e["records"])
 
 def envelope_basis(o):
     k = o.get("iiif_kind") or ""
@@ -1375,7 +1406,7 @@ def build_record_pages(recs_all):
 {row('계층', E_(part) + (f" <small>(근거: {E_(o.get('partOf_src', ''))})</small>" if o.get('partOf_src') else '') if part else (E_(pder) + ' <small>[파생]</small>' if pder else ''))}
 {row('날짜', E_(date) if date else (E_(dd) + f" <small>[파생 — {E_(o.get('date_basis', ''))}]</small>" if dd else ''))}{row('연대', E_(decade(o)))}{row('날짜 교차 확인', dch)}
 {row('요약', E_(o.get('summary') or '') or (E_(o.get('summary_composed') or '')))}{row('권리', E_(o.get('rights_view') or '') + (f" <small>({E_(o.get('rights_basis', ''))})</small>" if o.get('rights_basis') else ''))}
-{row('IIIF', f"<a href='{KV}{E_(mf)}'>KV 뷰어로 보기</a> · <a href='{E_(mf)}'>매니페스트</a> <small>({E_(o.get('iiif_kind', ''))})</small>" if mf else '')}{row('같은 날 다른 기관 기록', f"{E_(o['same_day']['date'])} — {o['same_day']['institutions']}개 기관 {o['same_day']['records']}건 · <a href='{KV}{E_(o['same_day']['collection'])}'>KV로 기관별 이어 보기</a> · <a href='{E_(o['same_day']['collection'])}'>IIIF 컬렉션</a> <small>(같은 사건 교차 대조 단서 — 같은 장면이라는 단정 아님)</small>" if o.get('same_day') else '')}{row('원 소장처(사본의 원본)', f"{E_(o['origin_holder']['institution'])}{' · ' + E_(o['origin_holder']['record_group']) if o['origin_holder'].get('record_group') else ''}{' · ' + E_(o['origin_holder']['local_id']) if o['origin_holder'].get('local_id') else ''}{' · 목록 단위 <a href=' + chr(39) + E_(o['origin_holder']['finding_aid']['search']) + chr(39) + '>' + E_(o['origin_holder']['finding_aid']['label']) + '</a>' if o['origin_holder'].get('finding_aid') else ''} <small>({E_(o['origin_holder']['basis'])})</small>" if o.get('origin_holder') else '')}{row('이미지 없는 사유', f"{E_(o['envelope_basis']['type'])} — {E_(o['envelope_basis']['why'])}" if o.get('envelope_basis') else '')}{row('원 기관 IIIF(브라우저 열람)', f"<a href='{KV}{E_(o['iiif_origin']['manifest'])}'>KV 뷰어로 보기</a> · <a href='{E_(o['iiif_origin']['manifest'])}'>매니페스트</a> · <a href='{E_(o['iiif_origin']['viewer'])}'>기관 뷰어</a> <small>({E_(o['iiif_origin']['basis'])})</small>" if o.get('iiif_origin') else '')}{row('같은 기록 실물 이미지', f"<a href='{KV}{E_(o['iiif_same']['manifest'])}'>KV 뷰어로 보기</a> · <a href='{E_(o['iiif_same']['manifest'])}'>매니페스트</a> <small>({E_(o['iiif_same']['basis'])})</small>" if o.get('iiif_same') else '')}
+{row('IIIF', f"<a href='{KV}{E_(mf)}'>KV 뷰어로 보기</a> · <a href='{E_(mf)}'>매니페스트</a> <small>({E_(o.get('iiif_kind', ''))})</small>" if mf else '')}{row('같은 날 다른 기관 기록', f"{E_(o['same_day']['date'])} — {o['same_day']['institutions']}개 기관 {o['same_day']['records']}건 · <a href='{KV}{E_(o['same_day']['collection'])}'>KV로 기관별 이어 보기</a> · <a href='{E_(o['same_day']['collection'])}'>IIIF 컬렉션</a> <small>(같은 사건 교차 대조 단서 — 같은 장면이라는 단정 아님)</small>" if o.get('same_day') else '')}{row('원 소장처(사본의 원본)', f"{E_(o['origin_holder']['institution'])}{' · ' + E_(o['origin_holder']['record_group']) if o['origin_holder'].get('record_group') else ''}{' · ' + E_(o['origin_holder']['local_id']) if o['origin_holder'].get('local_id') else ''}{' · 목록 단위 <a href=' + chr(39) + E_(o['origin_holder']['finding_aid']['search']) + chr(39) + '>' + E_(o['origin_holder']['finding_aid']['label']) + '</a>' if o['origin_holder'].get('finding_aid') else ''} <small>({E_(o['origin_holder']['basis'])})</small>" if o.get('origin_holder') else '')}{row('지명(표준)', ' · '.join(f"<a href='{PAGES}places.json'>{E_(n)}</a>" for n in o['places_std']) + " <small>(지명 사전 — 표제·기관 장소 칸 매칭)</small>" if o.get('places_std') else '')}{row('이미지 없는 사유', f"{E_(o['envelope_basis']['type'])} — {E_(o['envelope_basis']['why'])}" if o.get('envelope_basis') else '')}{row('원 기관 IIIF(브라우저 열람)', f"<a href='{KV}{E_(o['iiif_origin']['manifest'])}'>KV 뷰어로 보기</a> · <a href='{E_(o['iiif_origin']['manifest'])}'>매니페스트</a> · <a href='{E_(o['iiif_origin']['viewer'])}'>기관 뷰어</a> <small>({E_(o['iiif_origin']['basis'])})</small>" if o.get('iiif_origin') else '')}{row('같은 기록 실물 이미지', f"<a href='{KV}{E_(o['iiif_same']['manifest'])}'>KV 뷰어로 보기</a> · <a href='{E_(o['iiif_same']['manifest'])}'>매니페스트</a> <small>({E_(o['iiif_same']['basis'])})</small>" if o.get('iiif_same') else '')}
 {row('발견', f"처음 {E_(o.get('first_seen', '')[:10])} · 최근 {E_(o.get('last_seen', '')[:10])} · {o.get('seen', 1)}회 · 출처 {E_('+'.join(o.get('sources') or []))}")}
 {row('같은 기록(기관 표기)', E_(o.get('sameAs') or '') + ('' if any(t_ == '같은 기록(다른 소장처)' for t_, _, _ in REL.get(o['key'], [])) else ' <small>(원장에 아직 없는 기록 — 기관 sameAs 표기 그대로)</small>') if o.get('sameAs') else '')}{row('옛 key', E_(', '.join(o.get('key_aliases') or [])))}{row('비고', E_(o.get('merge_note') or o.get('recovered') or o.get('harvested') or ''))}{row('발굴 경위', E_(o.get('found_via') or '') + (f" <small>(출발 기록 <a href='{E_(rec_slug(o['drilled_from']))}.html'>{E_(o['drilled_from'])}</a>)</small>" if o.get('drilled_from') else '') if o.get('found_via') else '')}
 </table>{('<h2>주제·분류 (기관 표기)</h2><p>' + ' · '.join(f"<a href='../subjects.html#{E_(subj_anchor(f_, t_))}'>{E_(f_)}: {E_(t_)}</a>" for f_, t_ in record_concepts(o)[:30]) + '</p>') if record_concepts(o) else ''}
@@ -2057,6 +2088,8 @@ def rico_concepts(o):
     for f, t in record_concepts(o):
         if f == "공개 상태": out.setdefault("rico:conditionsOfAccess", []).append(t); continue
         out.setdefault(NOT_SUBJECT.get(f, "rico:hasOrHadSubject"), []).append({"@id": concept_id(f, t)})
+    for n in o.get("places_std") or []:  # v3.14 표준 지명 개념(places.jsonld) — 기관 표기 장소 개념(subjects.jsonld)과 별개, 둘 다 둔다
+        out.setdefault("rico:isAssociatedWithPlace", []).append({"@id": place_id(n)})
     return out
 
 def record_concepts(o):
@@ -2306,6 +2339,9 @@ def main():
                                      "first_seen": o.get("first_seen", ""), "last_seen": o.get("last_seen", ""), "days_total": o.get("days_total", 0), "seen": o.get("seen", 0)}
         else: o.pop("found_by_derived", None)
         o["iiif_kind"] = iiif_kind(o)  # v2.75 원 기관 제공 · 원 기관 이미지로 구축 · 기록 봉투 — 우리 브리지를 '기관'으로 부르던 표기 교정
+        ps_ = sorted(places(o))  # v3.14 표준 지명(지명 사전 — 표제·기관 장소 칸)
+        if ps_: o["places_std"] = ps_
+        else: o.pop("places_std", None)
         oh_ = origin_holder(o)  # v3.11 사본의 원 소장처 계층
         if oh_: o["origin_holder"] = oh_
         else: o.pop("origin_holder", None)
@@ -2419,7 +2455,7 @@ table{{width:100%;border-collapse:collapse;font-size:14px}}td,th{{border-bottom:
 <h2>일별 활용(최근 14일)</h2><table><tr><th>날짜</th><th>검색 묶음</th><th>발견 기록</th><th>신규 기록</th></tr>{urow}</table><p style="font-size:13px">형식별 누계: {E_(fmtv(usage['formats']))} · <a href="usage.json">usage.json</a></p>
 <h2>질의·회신 축적</h2><p style="font-size:13px">모든 도구 호출의 질의와 회신 본문을 원문 그대로(가공·삭제 없이) 영구 보존합니다. 같은 질의·같은 회신은 한 번만 두고 횟수만 셉니다. 회신이 달라지면 새 판으로 남겨 기관 응답 변화의 증거로 씁니다. 고유 질의 {nq['total']}건 · 누적 호출 {nq['calls']}회 · 도구별 {E_(fmtv(nq['by_tool']))} · <a href="queries/index.json">queries/index.json</a> (월별 회신 원문 queries/YYYY-MM.jsonl.gz) · 자동 점검(골든·헬스·원장 보강) 질의·회신은 활용 집계와 분리해 <a href="queries/probe/index.json">queries/probe/</a>에 따로 축적(고유 {npq['total']}건 — 기관 응답 변화·장애의 증거)</p><table><tr><th>최근</th><th>도구</th><th>질의</th><th>횟수</th></tr>{qrow}</table>
 <h2>최근 발견 100건</h2><div class="g">{rows}</div></main></html>""")
-    build_tree(recs); ncls = merge_classes(recs); nprov, _orph = build_provenance(recs); nfx = write_fixity(recs); nql = write_quality(recs); nsub = merge_subjects(recs); nmed = build_media(recs); npg = build_record_pages(recs); ndg = build_digest(recs, today); nact = build_activity(recs); print(f"IIIF Change Discovery 활동 {nact}건 — activity/collection.json"); ncat = build_catalog(recs, nql)
+    build_tree(recs); ncls = merge_classes(recs); nprov, _orph = build_provenance(recs); nfx = write_fixity(recs); nql = write_quality(recs); nsub = merge_subjects(recs); npl = build_places(recs); print(f'지명 사전 {npl}곳 — places.json·places.jsonld'); nmed = build_media(recs); npg = build_record_pages(recs); ndg = build_digest(recs, today); nact = build_activity(recs); print(f"IIIF Change Discovery 활동 {nact}건 — activity/collection.json"); ncat = build_catalog(recs, nql)
     print(f"원장 {len(recs)}건 (신규 {new_recs}, 묶음 {new_batches}) · 맥락 연결 {nrel}")
     print(f"질의 고유 {nq['total']}건(신규 {nq['added']}) · 분류 경로 {ncls}개 · 발견 경로 질의 {nprov}종 · 다매체(피드 {nmed[0]}·인용 {nmed[1]}·연대 {nmed[2]}) · 주제 색인 {nsub} · 품질 권리 {nql['권리 표시']}% 요약 {nql['요약']}% 연대 {nql['연대']}%")
 
