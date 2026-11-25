@@ -126,8 +126,8 @@
 "Europeana": {
 "depth": 1,
 "first": "2026-11-23T03:00:40Z",
-"last": "2026-11-24T22:56:57Z",
-"records": 23,
+"last": "2026-11-25T12:48:44Z",
+"records": 25,
 "sources": [
 "europeana"
 ]
@@ -153,8 +153,8 @@
 "인터넷 아카이브": {
 "depth": 1,
 "first": "2026-11-23T03:00:40Z",
-"last": "2026-11-25T00:14:37Z",
-"records": 105,
+"last": "2026-11-25T12:48:44Z",
+"records": 106,
 "sources": [
 "ia"
 ]
@@ -162,8 +162,8 @@
 "인터넷 아카이브 › IA Collection": {
 "depth": 2,
 "first": "2026-11-23T03:00:40Z",
-"last": "2026-11-25T00:14:37Z",
-"records": 105,
+"last": "2026-11-25T12:48:44Z",
+"records": 106,
 "sources": [
 "ia"
 ]
@@ -198,8 +198,8 @@
 "영국 국립기록관 TNA": {
 "depth": 1,
 "first": "2026-11-23T03:00:46Z",
-"last": "2026-11-25T00:56:51Z",
-"records": 63,
+"last": "2026-11-25T12:48:44Z",
+"records": 65,
 "sources": [
 "tna"
 ]
@@ -722,8 +722,8 @@
 "위키미디어 공용": {
 "depth": 1,
 "first": "2026-11-23T03:01:45Z",
-"last": "2026-11-24T14:47:06Z",
-"records": 31,
+"last": "2026-11-25T12:48:44Z",
+"records": 33,
 "sources": [
 "commons"
 ]
@@ -740,8 +740,8 @@
 "위키미디어 공용 › Commons": {
 "depth": 2,
 "first": "2026-11-23T03:01:45Z",
-"last": "2026-11-24T14:47:06Z",
-"records": 31,
+"last": "2026-11-25T12:48:44Z",
+"records": 33,
 "sources": [
 "commons"
 ]
@@ -812,7 +812,7 @@
 "인터넷 아카이브 › IA Collection › PeriscopeFilm": {
 "depth": 3,
 "first": "2026-11-23T03:01:45Z",
-"last": "2026-11-24T23:15:56Z",
+"last": "2026-11-25T12:48:44Z",
 "records": 4,
 "sources": [
 "ia"
@@ -893,8 +893,8 @@
 "대한민국신문아카이브": {
 "depth": 1,
 "first": "2026-11-23T03:01:45Z",
-"last": "2026-11-25T00:53:19Z",
-"records": 21,
+"last": "2026-11-25T12:48:44Z",
+"records": 23,
 "sources": [
 "oldnews"
 ]
@@ -1244,7 +1244,7 @@
 "DigitalNZ": {
 "depth": 1,
 "first": "2026-11-23T07:26:10Z",
-"last": "2026-11-23T13:40:50Z",
+"last": "2026-11-25T12:48:44Z",
 "records": 8,
 "sources": [
 "dnz"
@@ -1361,8 +1361,8 @@
 "네덜란드 국립기록관": {
 "depth": 1,
 "first": "2026-11-23T07:26:10Z",
-"last": "2026-11-23T13:40:51Z",
-"records": 5,
+"last": "2026-11-25T12:48:44Z",
+"records": 7,
 "sources": [
 "nlna"
 ]
@@ -1370,8 +1370,8 @@
 "네덜란드 국립기록관 › NA(NL)": {
 "depth": 2,
 "first": "2026-11-23T07:26:10Z",
-"last": "2026-11-23T13:40:51Z",
-"records": 5,
+"last": "2026-11-25T12:48:44Z",
+"records": 7,
 "sources": [
 "nlna"
 ]
@@ -1379,8 +1379,8 @@
 "네덜란드 국립기록관 › NA(NL) › 2.05 외무부(Buitenlandse Zaken)": {
 "depth": 3,
 "first": "2026-11-23T07:26:10Z",
-"last": "2026-11-23T13:40:51Z",
-"records": 2,
+"last": "2026-11-25T12:48:44Z",
+"records": 3,
 "sources": [
 "nlna"
 ]
@@ -1937,8 +1937,8 @@
 "대한민국신문아카이브 › 신한민보": {
 "depth": 2,
 "first": "2026-11-23T13:40:48Z",
-"last": "2026-11-25T00:53:18Z",
-"records": 4,
+"last": "2026-11-25T12:48:44Z",
+"records": 6,
 "sources": [
 "oldnews"
 ]
@@ -1982,7 +1982,7 @@
 "DigitalNZ › Alexander Turnbull Library": {
 "depth": 2,
 "first": "2026-11-23T13:40:50Z",
-"last": "2026-11-23T13:40:50Z",
+"last": "2026-11-25T12:48:44Z",
 "records": 4,
 "sources": [
 "dnz"
@@ -1991,7 +1991,7 @@
 "DigitalNZ › Alexander Turnbull Library › TAPUHI": {
 "depth": 3,
 "first": "2026-11-23T13:40:50Z",
-"last": "2026-11-23T13:40:50Z",
+"last": "2026-11-25T12:48:44Z",
 "records": 4,
 "sources": [
 "dnz"
@@ -2000,7 +2000,7 @@
 "DigitalNZ › National Library of New Zealand": {
 "depth": 2,
 "first": "2026-11-23T13:40:50Z",
-"last": "2026-11-23T13:40:50Z",
+"last": "2026-11-25T12:48:44Z",
 "records": 1,
 "sources": [
 "dnz"
@@ -2009,7 +2009,7 @@
 "DigitalNZ › National Library of New Zealand › AnyQuestions": {
 "depth": 3,
 "first": "2026-11-23T13:40:50Z",
-"last": "2026-11-23T13:40:50Z",
+"last": "2026-11-25T12:48:44Z",
 "records": 1,
 "sources": [
 "dnz"
@@ -4319,8 +4319,62 @@
 "sources": [
 "tna"
 ]
+},
+"위키미디어 공용 › Commons › Attacks on rail transport": {
+"depth": 3,
+"first": "2026-11-25T12:48:44Z",
+"last": "2026-11-25T12:48:44Z",
+"records": 1,
+"sources": [
+"commons"
+]
+},
+"위키미디어 공용 › Commons › 1950 black and white photographs of people": {
+"depth": 3,
+"first": "2026-11-25T12:48:44Z",
+"last": "2026-11-25T12:48:44Z",
+"records": 1,
+"sources": [
+"commons"
+]
+},
+"Europeana › TopFoto": {
+"depth": 2,
+"first": "2026-11-25T12:48:44Z",
+"last": "2026-11-25T12:48:44Z",
+"records": 2,
+"sources": [
+"europeana"
+]
+},
+"인터넷 아카이브 › IA Collection › TV-CSPAN2": {
+"depth": 3,
+"first": "2026-11-25T12:48:44Z",
+"last": "2026-11-25T12:48:44Z",
+"records": 1,
+"sources": [
+"ia"
+]
+},
+"네덜란드 국립기록관 › NA(NL) › 토이강 2.03": {
+"depth": 3,
+"first": "2026-11-25T12:48:44Z",
+"last": "2026-11-25T12:48:44Z",
+"records": 1,
+"sources": [
+"nlna"
+]
+},
+"영국 국립기록관 TNA › NCUACS 54.3.95": {
+"depth": 2,
+"first": "2026-11-25T12:48:44Z",
+"last": "2026-11-25T12:48:44Z",
+"records": 2,
+"sources": [
+"tna"
+]
 }
 },
-"updated": "2026-11-25T11:20:56Z",
-"total": 479
+"updated": "2026-11-25T13:36:49Z",
+"total": 485
 }

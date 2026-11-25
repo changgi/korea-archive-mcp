@@ -1,5 +1,5 @@
 {
-"updated": "2026-11-25T11:20:56Z",
+"updated": "2026-11-25T13:36:49Z",
 "note": "구간 = 연대(4자리 연도·8자리 날짜·연호 연도 明治·大正·昭和·光武·隆熙·檀紀 환산) → 세기 → 왕조·시대명. 근거 순서 date → 제목 → 메타(생산·시대·출판). 세기·시대 구간은 시간축 근사 정렬",
 "timeline": [
 {
@@ -1085,14 +1085,15 @@
 },
 {
 "decade": "1920년대",
-"records": 7,
+"records": 8,
 "by_source": {
 "nedb": 2,
 "tna": 1,
-"indy": 4
+"indy": 4,
+"nlna": 1
 },
 "by_kind": {
-"document": 7
+"document": 8
 },
 "samples": [
 {
@@ -1168,7 +1169,7 @@
 },
 {
 "decade": "1940년대",
-"records": 47,
+"records": 49,
 "by_source": {
 "nara": 25,
 "archives": 4,
@@ -1178,12 +1179,12 @@
 "nlna": 1,
 "ia": 2,
 "koreanwar": 2,
-"oldnews": 5,
+"oldnews": 7,
 "indy": 1
 },
 "by_kind": {
 "graphic": 15,
-"document": 21,
+"document": 23,
 "motion_picture": 11
 },
 "samples": [
@@ -1217,23 +1218,23 @@
 },
 {
 "decade": "1950년대",
-"records": 297,
+"records": 302,
 "by_source": {
 "nara": 58,
 "europeana": 13,
 "ia": 29,
-"tna": 20,
+"tna": 22,
 "gallery": 3,
 "awm": 43,
 "archives": 24,
-"commons": 7,
+"commons": 9,
 "gallica": 2,
 "koreanwar": 75,
 "ndl": 1,
 "nlk": 1,
 "oldnews": 4,
 "earchive": 4,
-"nlna": 3,
+"nlna": 4,
 "nzarch": 3,
 "jacar": 1,
 "i815": 1,
@@ -1242,8 +1243,8 @@
 },
 "by_kind": {
 "motion_picture": 40,
-"graphic": 78,
-"document": 179
+"graphic": 80,
+"document": 182
 },
 "samples": [
 {
@@ -1272,7 +1273,7 @@
 "iiif": "https://korea-archive-mcp.vercel.app/iiif/nara/24033/manifest.json"
 }
 ],
-"derived": 91
+"derived": 93
 },
 {
 "decade": "20세기",
@@ -1636,9 +1637,9 @@
 },
 {
 "decade": "2020년대",
-"records": 24,
+"records": 25,
 "by_source": {
-"ia": 6,
+"ia": 7,
 "commons": 4,
 "dnz": 2,
 "un": 3,
@@ -1648,7 +1649,7 @@
 "awm": 1
 },
 "by_kind": {
-"document": 13,
+"document": 14,
 "graphic": 11
 },
 "samples": [
@@ -1682,11 +1683,11 @@
 },
 {
 "decade": "연대 미상",
-"records": 79,
+"records": 81,
 "by_source": {
 "nara": 17,
 "seoul": 12,
-"europeana": 5,
+"europeana": 7,
 "i815": 6,
 "jacar": 3,
 "nrich": 5,
@@ -1702,7 +1703,7 @@
 },
 "by_kind": {
 "document": 47,
-"graphic": 29,
+"graphic": 31,
 "motion_picture": 3
 },
 "samples": [
