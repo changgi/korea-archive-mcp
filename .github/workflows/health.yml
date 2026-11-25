@@ -2,6 +2,7 @@ name: health
 # 주간 소스 헬스체크 — 프로덕션 30채널 골든 질의 실측(source_profile health, 채널별 ms 포함)
 # + 같은 기록 묶기 회귀(v1.86~89: 협약기관·IA 사본 ↔ NARA 원본 병합이 실제로 일어나는지).
 # 🔴(차단·타임아웃)가 3채널 이상이면 실패 → 알림. 기지(旣知) 🔴: gallica(BnF 차단)·foia(opengov 타임아웃).
+# v3.55 foia가 복구되면(숫자 판정) '0건 표지 실측 필요' 이슈를 자동으로 연다(미실측 후보 표지를 확정하기 위해).
 # 기지 채널이 복구되거나 새로 죽으면 이 임계값을 조정할 것.
 on:
   schedule:
@@ -39,6 +40,45 @@ jobs:
           if red >= 3:
               print(f'::error::🔴 {red}채널 — 기지 2채널(gallica·foia) 초과. 신규 장애 점검 필요.')
               sys.exit(1)
+          EOF
+      - name: 기지 차단 채널 복구 감지(foia) — 복구 시 0건 표지 실측 이슈
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          # v3.55 foia(서울정보소통광장)는 국내 리전에서도 연결 실패 중이라 0건 표지(zeroOr)가 미실측 후보다. 복구되면 곧바로 실측해야 하므로 자동으로 알린다.
+          PV="https://korea-archive-mcp.vercel.app/api/mcp"
+          H1='Content-Type: application/json'
+          H2='Accept: application/json, text/event-stream'
+          curl -sS -m 30 -D /tmp/h3.txt -H "$H1" -H "$H2" -H "X-KA-Probe: health" -X POST "$PV" \
+            -d '{"jsonrpc":"2.0","id":1,"method":"initialize","params":{"protocolVersion":"2025-03-26","capabilities":{},"clientInfo":{"name":"ci-recover","version":"1.0"}}}' -o /dev/null
+          SID=$(grep -i '^mcp-session-id:' /tmp/h3.txt | tr -d '\r' | awk '{print $2}')
+          curl -sS -m 30 -H "$H1" -H "$H2" -H "X-KA-Probe: health" -H "Mcp-Session-Id: $SID" -X POST "$PV" \
+            -d '{"jsonrpc":"2.0","method":"notifications/initialized"}' -o /dev/null
+          for q in zqxjvwkpq 청계천; do
+            curl -sS -m 90 -H "$H1" -H "$H2" -H "X-KA-Probe: health" -H "Mcp-Session-Id: $SID" -X POST "$PV" \
+              -d "{\"jsonrpc\":\"2.0\",\"id\":2,\"method\":\"tools/call\",\"params\":{\"name\":\"cross_search\",\"arguments\":{\"query\":\"$q\",\"sources\":\"foia\",\"max_per_source\":2}}}" \
+              | sed 's/^data: //' | grep -m1 '^{' > "/tmp/foia_$q.json" || true
+          done
+          python3 - <<'EOF'
+          import json, os, re, subprocess
+          res = {}
+          for q in ("zqxjvwkpq", "청계천"):
+              try: t = json.load(open(f"/tmp/foia_{q}.json"))["result"]["content"][0]["text"]
+              except Exception as e: t = f"(응답 판독 불가 {e})"
+              m = re.search(r"foia:(\d+|—)", t); res[q] = (m[1] if m else "?", t)
+          line = " · ".join(f"{q}={v[0]}" for q, v in res.items())
+          with open(os.environ["GITHUB_STEP_SUMMARY"], "a") as f: f.write(f"## 기지 차단 채널 복구 감지\n- foia: {line}\n")
+          print("foia:", line)
+          if any(v[0].isdigit() for v in res.values()):
+              title = "기지 차단 채널 복구 감지 — foia(서울정보소통광장): 0건 표지 실측 필요"
+              have = subprocess.run(["gh", "issue", "list", "--repo", os.environ["GITHUB_REPOSITORY"], "--state", "open", "--search", title, "--json", "number", "-q", ".[0].number"], capture_output=True, text=True).stdout.strip()
+              if not have:
+                  body = (f"주간 헬스체크가 foia 응답을 판독했습니다({line}).\n\n"
+                          "할 일: ① 무의미 질의(zqxjvwkpq) 응답 본문에서 0건 표지를 실측(조회 실패 메시지의 '본문:' 동봉 부분 또는 직접 열람) → "
+                          "② route.js foia·server.py _c_foia의 zeroOr 표지를 실측값으로 확정 → ③ ledger_merge.py COVERAGE_STRICT에 foia 추가 → "
+                          "④ 골든 must/must_not 추가. MAINTAINING.md '확정 0' 항목 참고.\n\n"
+                          + "\n".join(f"- {q}: {v[1][:300]}" for q, v in res.items()))
+                  subprocess.run(["gh", "issue", "create", "--repo", os.environ["GITHUB_REPOSITORY"], "--title", title, "--label", "auto-health", "--body", body], check=False)
           EOF
       - name: 같은 기록 묶기 회귀 검사
         run: |
