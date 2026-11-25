@@ -1015,7 +1015,7 @@ ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..")
 DISTS = [("discovered.csv", "text/csv", "발견 기록 표(CSV)"), ("discovered.jsonl", "application/jsonl", "발견 기록(JSONL)"),
          ("discovered.jsonld", "application/ld+json", "RiC-O·PROV 연결 데이터(JSON-LD)"), ("collection.json", "application/ld+json", "IIIF Presentation 3 컬렉션(최근 300건)"),
          ("hierarchy.json", "application/ld+json", "IIIF 계층 컬렉션"), ("subjects.jsonld", "application/ld+json", "주제·인물·장소·형태 SKOS 개념 체계"),
-         ("records.oai_dc.xml", "application/xml", "OAI-PMH Dublin Core"), ("records.csl.json", "application/vnd.citationstyles.csl+json", "인용 CSL-JSON"),
+         ("records.oai_dc.xml", "application/xml", "OAI-PMH Dublin Core"), ("activity/collection.json", "application/ld+json", "IIIF Change Discovery 1.0 활동 스트림(매니페스트 생성·갱신)"), ("records.csl.json", "application/vnd.citationstyles.csl+json", "인용 CSL-JSON"),
          ("records.ris", "application/x-research-info-systems", "인용 RIS"), ("records.bib", "application/x-bibtex", "인용 BibTeX"),
          ("feed.xml", "application/atom+xml", "새 발견 Atom 피드"), ("timeline.json", "application/json", "연대 타임라인"), ("tree.json", "application/json", "계층구조"),
          ("classifications.json", "application/json", "분류 사전"), ("provenance.json", "application/json", "발견 경로(질의↔기록)"), ("relations.json", "application/json", "기록↔기록 맥락 연결(근거 포함)"), ("relations.html", "text/html", "맥락 연결 묶음(읽기용)"), ("quality.json", "application/json", "데이터 품질 시계열"),
@@ -1270,6 +1270,37 @@ def build_digest(recs_all, today):
 <style>body{{font-family:system-ui,'Noto Sans KR',sans-serif;background:#14161b;color:#e6e4dc}}main{{max-width:860px;margin:auto;padding:16px}}a{{color:#e0b04a}}small{{color:#9b9a93}}</style>
 <main><h1>주간 발견 소식</h1><p>주마다 처음 발굴된 기록을 모은 소식(쌓기만 하고 지우지 않음). <a href="../feed.xml">Atom 구독</a> · <a href="../index.html">원장</a></p><ul>{rows}</ul></main></html>""")
     return len(weeks)
+
+def build_activity(recs, size=500):
+    """v3.2 IIIF Change Discovery API 1.0(Activity Streams 2.0) — 하베스터가 변경분만 거두게.
+    Create = 원장 첫 발견(first_seen)의 매니페스트 · Update = 원 기관 응답 지문 변경(fixity 이력, '첫 지문' 제외).
+    원장에서 매번 결정적으로 다시 만든다(원장을 지우지 않으므로 활동도 줄지 않는다). activity/collection.json + page-N.json."""
+    ev = []
+    for o in recs:
+        if o.get("entry_type", "기록") != "기록": continue
+        mf = (o.get("iiif") if not o.get("iiif_status") else "") or o.get("iiif_built")
+        if not mf: continue
+        obj = {"id": mf, "type": "Manifest", "seeAlso": [{"id": f"{PAGES}r/{rec_slug(o['key'])}.json", "type": "Dataset", "format": "application/json", "label": {"ko": ["KOREA ARCHIVE 원장 기록(맥락·증거)"]}}]}
+        if o.get("first_seen"): ev.append({"type": "Create", "object": obj, "endTime": o["first_seen"][:19].rstrip("Z") + "Z", "_k": o["key"]})
+        for fx in (o.get("fixity") or [])[1:]:
+            if fx.get("at") and fx.get("kind") != "첫 지문":
+                ev.append({"type": "Update", "object": obj, "endTime": f"{fx['at'][:10]}T00:00:00Z", "summary": f"원 기관 응답 지문 변경({fx.get('kind', '')})", "_k": o["key"]})
+    ev.sort(key=lambda e: (e["endTime"], e["_k"], e["type"]))
+    for e in ev: e.pop("_k")
+    ad = os.path.join(D, "activity"); os.makedirs(ad, exist_ok=True)
+    base = PAGES + "activity/"; CTX = "http://iiif.io/api/discovery/1/context.json"
+    pages = [ev[i:i + size] for i in range(0, len(ev), size)] or [[]]
+    for n, P in enumerate(pages):
+        pg = {"@context": CTX, "id": f"{base}page-{n}.json", "type": "OrderedCollectionPage", "startIndex": n * size,
+              "partOf": {"id": base + "collection.json", "type": "OrderedCollection"}, "orderedItems": P}
+        if n: pg["prev"] = {"id": f"{base}page-{n - 1}.json", "type": "OrderedCollectionPage"}
+        if n < len(pages) - 1: pg["next"] = {"id": f"{base}page-{n + 1}.json", "type": "OrderedCollectionPage"}
+        json.dump(pg, open(os.path.join(ad, f"page-{n}.json"), "w", encoding="utf-8"), ensure_ascii=False, separators=(",", ":"))
+    json.dump({"@context": CTX, "id": base + "collection.json", "type": "OrderedCollection", "totalItems": len(ev),
+               "summary": "KOREA ARCHIVE 통합검색 발견 원장의 IIIF 매니페스트 생성(원장 첫 발견)·갱신(원 기관 응답 지문 변경) 활동 — IIIF Change Discovery API 1.0",
+               "first": {"id": base + "page-0.json", "type": "OrderedCollectionPage"}, "last": {"id": f"{base}page-{len(pages) - 1}.json", "type": "OrderedCollectionPage"}},
+              open(os.path.join(ad, "collection.json"), "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+    return len(ev)
 
 def build_catalog(recs, nql):
     import hashlib
@@ -2134,13 +2165,13 @@ details{{font-size:12px}}dl{{display:grid;grid-template-columns:auto 1fr;gap:2px
 table{{width:100%;border-collapse:collapse;font-size:14px}}td,th{{border-bottom:1px solid #2a2d35;padding:6px;text-align:left}}</style>
 <main><h1>발견 누적 원장</h1><p>KOREA ARCHIVE 통합검색 사용자가 도구로 발굴한 기록이 매일 이곳에 쌓입니다(검색어·사용자 정보 없음). 기록 <b>{st['records']:,}</b>건 · 마지막 갱신 {st['updated']} · 이번 갱신 신규 {new_recs}건 · 내용·메타정보 보강 {enr}건 · 썸네일 {thn}건</p>
 <p>{srcs}</p>
-<p><a class="b0" href="discovered.csv">CSV 내려받기</a><a class="b0" href="discovered.jsonl">JSONL</a><a class="b0" href="discovered.jsonld">RiC-O JSON-LD</a><a class="b0" href="../kv.html?manifest=https://changgi.github.io/korea-archive-mcp/data/collection.json">KV로 최근 300건 연속 보기</a><a class="b0" href="tree.html">계층구조도</a><a class="b0" href="queries/index.json">질의·회신 축적</a><a class="b0" href="classifications.json">분류 사전</a><a class="b0" href="provenance.json">발견 경로(질의↔기록)</a><a class="b0" href="relations.html">기록↔기록 맥락 연결</a><a class="b0" href="q/index.html">질의별 발굴 기록(IIIF)</a><a class="b0" href="quality.json">데이터 품질 추이</a><a class="b0" href="subjects.html">주제 색인</a><a class="b0" href="subjects.jsonld">주제 SKOS</a><a class="b0" href="fixity_changes.json">원문 변경 감시</a><a class="b0" href="feed.xml">새 발견 구독(Atom)</a><a class="b0" href="records.csl.json">인용 CSL-JSON(Zotero)</a><a class="b0" href="records.ris">인용 RIS(EndNote)</a><a class="b0" href="records.bib">인용 BibTeX(LaTeX)</a><a class="b0" href="catalog.jsonld">데이터 목록(DCAT)</a><a class="b0" href="r/index.json">기록별 영구 페이지</a><a class="b0" href="digest/index.html">주간 발견 소식</a><a class="b0" href="sitemap.xml">사이트맵</a><a class="b0" href="records.oai_dc.xml">OAI-PMH Dublin Core(하베스터)</a><a class="b0" href="timeline.html">연대 타임라인</a><a class="b0" href="nrich/index.html">연구원 연구DB IIIF 계층</a><a class="b0" href="popular.csv">자주 활용 TOP 200</a><a class="b0" href="stats.json">집계</a></p>
+<p><a class="b0" href="discovered.csv">CSV 내려받기</a><a class="b0" href="discovered.jsonl">JSONL</a><a class="b0" href="discovered.jsonld">RiC-O JSON-LD</a><a class="b0" href="../kv.html?manifest=https://changgi.github.io/korea-archive-mcp/data/collection.json">KV로 최근 300건 연속 보기</a><a class="b0" href="tree.html">계층구조도</a><a class="b0" href="queries/index.json">질의·회신 축적</a><a class="b0" href="classifications.json">분류 사전</a><a class="b0" href="provenance.json">발견 경로(질의↔기록)</a><a class="b0" href="relations.html">기록↔기록 맥락 연결</a><a class="b0" href="q/index.html">질의별 발굴 기록(IIIF)</a><a class="b0" href="quality.json">데이터 품질 추이</a><a class="b0" href="subjects.html">주제 색인</a><a class="b0" href="subjects.jsonld">주제 SKOS</a><a class="b0" href="fixity_changes.json">원문 변경 감시</a><a class="b0" href="feed.xml">새 발견 구독(Atom)</a><a class="b0" href="records.csl.json">인용 CSL-JSON(Zotero)</a><a class="b0" href="records.ris">인용 RIS(EndNote)</a><a class="b0" href="records.bib">인용 BibTeX(LaTeX)</a><a class="b0" href="catalog.jsonld">데이터 목록(DCAT)</a><a class="b0" href="r/index.json">기록별 영구 페이지</a><a class="b0" href="digest/index.html">주간 발견 소식</a><a class="b0" href="sitemap.xml">사이트맵</a><a class="b0" href="records.oai_dc.xml">OAI-PMH Dublin Core(하베스터)</a><a class="b0" href="activity/collection.json">IIIF 변경 발견(Change Discovery)</a><a class="b0" href="timeline.html">연대 타임라인</a><a class="b0" href="nrich/index.html">연구원 연구DB IIIF 계층</a><a class="b0" href="popular.csv">자주 활용 TOP 200</a><a class="b0" href="stats.json">집계</a></p>
 <p style="font-size:13px;color:#9b9a93">주요 내용·메타정보·썸네일은 기관 IIIF·우리 브리지 매니페스트를 하루 한 번 판독해 채웁니다(하루 상한·순차 요청). 썸네일은 재이용 가능 표시가 확인된 것만 싣고, 포로·사망자·묘지·수형자 관련 기록과 허가가 필요한 이미지는 링크만 둡니다. 권리는 원 기관 표기를 따릅니다 — 게재 전 judge_rights로 확인. 모든 변경은 저장소 git 이력(docs/data/)에 남습니다.</p>
 <h2>자주 활용되는 기록 TOP 30</h2><p style="font-size:13px">점수 = 최근 30일 발견×2 + 전체 발견 + 발견된 날 수×3 + 교차확인 기관 수 가중. 자동 검사 트래픽 제외.</p><div class="g">{prow}</div>
 <h2>일별 활용(최근 14일)</h2><table><tr><th>날짜</th><th>검색 묶음</th><th>발견 기록</th><th>신규 기록</th></tr>{urow}</table><p style="font-size:13px">형식별 누계: {E_(fmtv(usage['formats']))} · <a href="usage.json">usage.json</a></p>
 <h2>질의·회신 축적</h2><p style="font-size:13px">모든 도구 호출의 질의와 회신 본문을 원문 그대로(가공·삭제 없이) 영구 보존합니다. 같은 질의·같은 회신은 한 번만 두고 횟수만 셉니다. 회신이 달라지면 새 판으로 남겨 기관 응답 변화의 증거로 씁니다. 고유 질의 {nq['total']}건 · 누적 호출 {nq['calls']}회 · 도구별 {E_(fmtv(nq['by_tool']))} · <a href="queries/index.json">queries/index.json</a> (월별 회신 원문 queries/YYYY-MM.jsonl.gz) · 자동 점검(골든·헬스·원장 보강) 질의·회신은 활용 집계와 분리해 <a href="queries/probe/index.json">queries/probe/</a>에 따로 축적(고유 {npq['total']}건 — 기관 응답 변화·장애의 증거)</p><table><tr><th>최근</th><th>도구</th><th>질의</th><th>횟수</th></tr>{qrow}</table>
 <h2>최근 발견 100건</h2><div class="g">{rows}</div></main></html>""")
-    build_tree(recs); ncls = merge_classes(recs); nprov, _orph = build_provenance(recs); nfx = write_fixity(recs); nql = write_quality(recs); nsub = merge_subjects(recs); nmed = build_media(recs); npg = build_record_pages(recs); ndg = build_digest(recs, today); ncat = build_catalog(recs, nql)
+    build_tree(recs); ncls = merge_classes(recs); nprov, _orph = build_provenance(recs); nfx = write_fixity(recs); nql = write_quality(recs); nsub = merge_subjects(recs); nmed = build_media(recs); npg = build_record_pages(recs); ndg = build_digest(recs, today); nact = build_activity(recs); print(f"IIIF Change Discovery 활동 {nact}건 — activity/collection.json"); ncat = build_catalog(recs, nql)
     print(f"원장 {len(recs)}건 (신규 {new_recs}, 묶음 {new_batches}) · 맥락 연결 {nrel}")
     print(f"질의 고유 {nq['total']}건(신규 {nq['added']}) · 분류 경로 {ncls}개 · 발견 경로 질의 {nprov}종 · 다매체(피드 {nmed[0]}·인용 {nmed[1]}·연대 {nmed[2]}) · 주제 색인 {nsub} · 품질 권리 {nql['권리 표시']}% 요약 {nql['요약']}% 연대 {nql['연대']}%")
 
