@@ -877,10 +877,25 @@ const PART_OF = {
   commons: (it) => it.series && `Commons › ${it.series}`,
 };
 // v3.36 확정 0 판별 — 결과가 비었으면 기관 0건 표지(실제 0건 페이지로 실측한 정규식)가 있을 때만 0건, 없으면 조회 실패(throw)
+// v3.56 등록부 질의 키 묶기 — 정확히 같은 질의가 없으면 표기만 다른 질의(공백·가운뎃점·마침표·대소문자)를 묶어 관측을 합친다(원본 키는 그대로)
+const covNorm = (q) => String(q).replace(/[\s·.,\-"'()]+/g, '').toLowerCase();
+function covEntry(C, q) {
+  const Q = C.queries || {}; const k = String(q).trim(); if (Q[k]) return Q[k];
+  const n = covNorm(k); const ks = Object.keys(Q).filter((x) => covNorm(x) === n); if (!ks.length) return null;
+  const out = {};
+  for (const x of ks) for (const [src, e] of Object.entries(Q[x])) {
+    const o = out[src] || (out[src] = { hit: 0, zero: 0, zero_legacy: 0, fail: 0, max: 0, hit_plain: 0, max_plain: 0, last: '', last_hit: '', last_hit_plain: '' });
+    for (const f of ['hit', 'zero', 'zero_legacy', 'fail', 'hit_plain']) o[f] += e[f] || 0;
+    o.max = Math.max(o.max, e.max || 0); o.max_plain = Math.max(o.max_plain, e.max_plain || 0);
+    for (const f of ['last_hit', 'last_hit_plain']) if ((e[f] || '') > o[f]) o[f] = e[f];
+    if ((e.last || '') > o.last) { o.last = e.last; o.last_status = e.last_status; }
+  }
+  return out;
+}
 // v3.52 조회 범위 등록부(coverage.json) — 조회 실패 채널이 같은 질의로 과거에 결과를 낸 적이 있으면 그 관측을 함께(실패 ≠ 부재의 증거). 1시간 캐시
 async function coverageHint(q, chans, zeros = [], variants = false) {
   const C = JSON.parse(await cachedText('qb:cov', 3600e3, () => gtext('https://changgi.github.io/korea-archive-mcp/data/coverage.json'), '"by_source"'));
-  const S = (C.queries || {})[String(q).trim()]; if (!S) return '';
+  const S = covEntry(C, q); if (!S) return '';
   const hit = chans.filter((c) => S[c] && S[c].hit > 0).map((c) => `${c} 결과 최대 ${S[c].max}건(마지막 결과 ${String(S[c].last_hit || '').slice(0, 10)})`);
   const hp = (c) => (variants ? S[c].hit : S[c].hit_plain) > 0; // v3.53 이번 조회가 표기 변형 없이면 변형 없이 얻은 과거 결과와만 비교(같은 조건)
   const chg = zeros.filter((c) => S[c] && hp(c)).map((c) => `${c} 과거 결과 최대 ${variants ? S[c].max : S[c].max_plain}건(마지막 결과 ${String((variants ? S[c].last_hit : S[c].last_hit_plain) || '').slice(0, 10)})`);
