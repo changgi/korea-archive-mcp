@@ -877,7 +877,7 @@ const PART_OF = {
   commons: (it) => it.series && `Commons › ${it.series}`,
 };
 // v3.36 확정 0 판별 — 결과가 비었으면 기관 0건 표지(실제 0건 페이지로 실측한 정규식)가 있을 때만 0건, 없으면 조회 실패(throw)
-const zeroOr = (out, body, rx, name, raw = false) => { if (!out.length && !rx.test(raw ? String(body) : String(body).replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' '))) throw new Error(`${name} 결과 판독 불가(0건 표지 없음 — 차단·개편 가능)`); return out; };
+const zeroOr = (out, body, rx, name, raw = false) => { if (!out.length && !rx.test(raw ? String(body) : String(body).replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' '))) { const head = String(body).replace(/<script[\s\S]*?<\/script>/gi, ' ').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 70); throw new Error(`${name} 결과 판독 불가(0건 표지 없음 — 차단·개편 가능${head ? ` · 본문: ${head}` : ''})`); } return out; }; // v3.45 본문 앞부분 동봉 — 표지 개편·차단 페이지를 응답만으로 진단
 // v3.38 JSON API 확정 0 — 결과가 비면 기관이 돌려준 건수 필드가 명시적 0일 때만 0건(오류 본문·키 누락·개편은 조회 실패). 0건 필드는 2026-11-25 무의미 질의 실측.
 const countZero = (out, ok, name) => { if (!out.length && !ok) throw new Error(`${name} 결과 판독 불가(0건 수치 없음 — 오류 응답·개편 가능)`); return out; };
 const COLLECT = {
@@ -1026,7 +1026,7 @@ const COLLECT = {
         date: '', id: rawId, ...(g('ccmaName') ? { series: g('ccmaName') } : {}), ...(g('imageUrl') ? { media: g('imageUrl') } : {}), url: cpno ? `https://www.heritage.go.kr/heri/cul/culSelectDetail.do?ccbaCpno=${cpno}` : 'https://www.heritage.go.kr' });
       if (out.length >= n) break;
     }
-    return out;
+    return zeroOr(out, b, /<totalCnt>\s*0\s*<\/totalCnt>/, '국가유산포털', true); // v3.45 0건은 OpenAPI totalCnt 0 명시일 때만(국내 리전 전용 — 운영 icn1에서 실측 확인)
   },
   indy: async (q, n) => { // 국가기록원 독립운동판결문 테마관 — GET 실측(2026-11-21). 판결기관·날짜·주문+상세 딥링크(gonghun 수형기록의 원문 창구)
     const b = await gtext('https://theme.archives.go.kr/next/indy/listkeywordSrch.do?keyword=' + encodeURIComponent(q) + '&listSize=' + Math.min(n, 20));
@@ -1359,7 +1359,7 @@ const COLLECT = {
     const seen = new Set(); const out = [];
     const re = /<a[^>]+href="(\/sanction\/\d+)"[^>]*>([\s\S]*?)<\/a>/g; let m;
     while ((m = re.exec(b)) && out.length < n) { const t = norm(m[2]).replace(/^제목\s*:\s*/, ''); if (t && !seen.has(m[1])) { seen.add(m[1]); out.push({ title: t, date: '', id: '', url: 'https://opengov.seoul.go.kr' + m[1] }); } }
-    return out;
+    return zeroOr(out, b, /검색\s*결과가 없습니다|검색된 (결과|문서)가 없습니다|조회된 (결과|자료|문서)가 없습니다|총\s*0\s*건/, '서울정보소통광장'); // v3.45 복구 대비 — 0건 표지 미실측(국내 리전에서도 연결 실패 중), 표지 없으면 본문 동봉 조회 실패
   },
   gallery: async (q, n) => { // v1.97.1: 우리 IIIF 갤러리 — 30곳 탐방·100선 실물 기록 800장(권리 확인·출처 대장 완비)을 연합 검색에 합류. index.json 6h 캐시
     const GB = 'https://changgi.github.io/korea-archive-mcp/';
