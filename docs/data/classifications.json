@@ -72,8 +72,8 @@
 "일본 국립국회도서관": {
 "depth": 1,
 "first": "2026-11-23T03:00:35Z",
-"last": "2026-11-23T13:40:58Z",
-"records": 16,
+"last": "2026-11-25T14:10:24Z",
+"records": 18,
 "sources": [
 "ndl"
 ]
@@ -81,8 +81,8 @@
 "일본 국립국회도서관 › NDL": {
 "depth": 2,
 "first": "2026-11-23T03:00:35Z",
-"last": "2026-11-23T13:40:58Z",
-"records": 16,
+"last": "2026-11-25T14:10:24Z",
+"records": 18,
 "sources": [
 "ndl"
 ]
@@ -758,8 +758,8 @@
 "Gallica(BnF)": {
 "depth": 1,
 "first": "2026-11-23T03:01:45Z",
-"last": "2026-11-23T13:40:47Z",
-"records": 8,
+"last": "2026-11-25T14:23:32Z",
+"records": 10,
 "sources": [
 "gallica"
 ]
@@ -767,8 +767,8 @@
 "Gallica(BnF) › BnF": {
 "depth": 2,
 "first": "2026-11-23T03:01:45Z",
-"last": "2026-11-23T13:40:47Z",
-"records": 8,
+"last": "2026-11-25T14:23:32Z",
+"records": 10,
 "sources": [
 "gallica"
 ]
@@ -1406,7 +1406,7 @@
 "뉴질랜드 기록원": {
 "depth": 1,
 "first": "2026-11-23T07:26:10Z",
-"last": "2026-11-23T13:40:50Z",
+"last": "2026-11-25T14:09:56Z",
 "records": 5,
 "sources": [
 "nzarch"
@@ -1883,8 +1883,8 @@
 "Gallica(BnF) › BnF › data.bnf.fr": {
 "depth": 3,
 "first": "2026-11-23T13:40:47Z",
-"last": "2026-11-23T13:40:47Z",
-"records": 5,
+"last": "2026-11-25T14:23:32Z",
+"records": 7,
 "sources": [
 "gallica"
 ]
@@ -2180,8 +2180,8 @@
 "일본 국립국회도서관 › NDL › 記事": {
 "depth": 3,
 "first": "2026-11-23T13:40:58Z",
-"last": "2026-11-23T13:40:58Z",
-"records": 2,
+"last": "2026-11-25T14:10:24Z",
+"records": 4,
 "sources": [
 "ndl"
 ]
@@ -2351,7 +2351,7 @@
 "뉴질랜드 기록원 › [파생] Number 032, August 1983": {
 "depth": 2,
 "first": "2026-11-23T07:26:10Z",
-"last": "2026-11-23T13:40:50Z",
+"last": "2026-11-25T14:09:56Z",
 "records": 1,
 "sources": [
 "nzarch"
@@ -2360,7 +2360,7 @@
 "뉴질랜드 기록원 › [파생] Number 032, August 1983 › 1980년대": {
 "depth": 3,
 "first": "2026-11-23T07:26:10Z",
-"last": "2026-11-23T13:40:50Z",
+"last": "2026-11-25T14:09:56Z",
 "records": 1,
 "sources": [
 "nzarch"
@@ -2387,7 +2387,7 @@
 "뉴질랜드 기록원 › [파생] International Liaison": {
 "depth": 2,
 "first": "2026-11-23T07:26:10Z",
-"last": "2026-11-23T13:40:50Z",
+"last": "2026-11-25T14:09:56Z",
 "records": 1,
 "sources": [
 "nzarch"
@@ -2396,7 +2396,7 @@
 "뉴질랜드 기록원 › [파생] International Liaison › 1970년대": {
 "depth": 3,
 "first": "2026-11-23T07:26:10Z",
-"last": "2026-11-23T13:40:50Z",
+"last": "2026-11-25T14:09:56Z",
 "records": 1,
 "sources": [
 "nzarch"
@@ -4375,6 +4375,6 @@
 ]
 }
 },
-"updated": "2026-11-25T13:54:25Z",
+"updated": "2026-11-25T14:34:02Z",
 "total": 485
 }

@@ -5420,6 +5420,20 @@
 "keys": [
 "범주(Commons)"
 ]
+},
+"12.商業": {
+"records": [
+"ndl:https://ndlsearch.ndl.go.jp/books/R000000035-I2050014094_0100092364",
+"ndl:https://ndlsearch.ndl.go.jp/books/R000000035-I2050014094_0100207879"
+],
+"sources": [
+"ndl"
+],
+"first": "2026-11-25T14:10:05Z",
+"last": "2026-11-25T14:10:24Z",
+"keys": [
+"분류(NDC 등)"
+]
 }
 },
 "시대": {
@@ -7379,13 +7393,15 @@
 "記事": {
 "records": [
 "ndl:https://ndlsearch.ndl.go.jp/books/R000000004-I032355618",
-"ndl:https://ndlsearch.ndl.go.jp/books/R100000136-I1010013168658411778"
+"ndl:https://ndlsearch.ndl.go.jp/books/R100000136-I1010013168658411778",
+"ndl:https://ndlsearch.ndl.go.jp/books/R000000035-I2050014094_0100092364",
+"ndl:https://ndlsearch.ndl.go.jp/books/R000000035-I2050014094_0100207879"
 ],
 "sources": [
 "ndl"
 ],
 "first": "2026-11-23T13:40:58Z",
-"last": "2026-11-23T13:40:58Z",
+"last": "2026-11-25T14:10:24Z",
 "keys": [
 "자료 형태"
 ]
@@ -7722,6 +7738,34 @@
 "last": "2026-11-25T12:48:44Z",
 "keys": [
 "format"
+]
+},
+"新聞": {
+"records": [
+"ndl:https://ndlsearch.ndl.go.jp/books/R000000035-I2050014094_0100092364",
+"ndl:https://ndlsearch.ndl.go.jp/books/R000000035-I2050014094_0100207879"
+],
+"sources": [
+"ndl"
+],
+"first": "2026-11-25T14:10:05Z",
+"last": "2026-11-25T14:10:24Z",
+"keys": [
+"자료 형태"
+]
+},
+"デジタル": {
+"records": [
+"ndl:https://ndlsearch.ndl.go.jp/books/R000000035-I2050014094_0100092364",
+"ndl:https://ndlsearch.ndl.go.jp/books/R000000035-I2050014094_0100207879"
+],
+"sources": [
+"ndl"
+],
+"first": "2026-11-25T14:10:05Z",
+"last": "2026-11-25T14:10:24Z",
+"keys": [
+"자료 형태"
 ]
 }
 },
@@ -11925,17 +11969,17 @@
 }
 }
 },
-"updated": "2026-11-25T13:54:25Z",
+"updated": "2026-11-25T14:34:02Z",
 "totals": {
 "매체": 4,
 "주제": 228,
 "장소": 56,
-"분류": 104,
+"분류": 105,
 "시대": 38,
 "인물": 29,
 "기관": 11,
 "기술 수준": 5,
-"형태": 54,
+"형태": 56,
 "재질": 18,
 "죄명": 8,
 "신문": 3,

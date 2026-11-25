@@ -1,9 +1,9 @@
 {
 "week": "2026-W48",
-"records": 904,
+"records": 908,
 "by_source": {
 "미국 국립기록관리청 NARA": 156,
-"일본 국립국회도서관": 16,
+"일본 국립국회도서관": 18,
 "일본 아시아역사자료센터": 14,
 "Europeana": 25,
 "인터넷 아카이브": 101,
@@ -17,7 +17,7 @@
 "규장각": 5,
 "국가기록원": 40,
 "위키미디어 공용": 33,
-"Gallica(BnF)": 8,
+"Gallica(BnF)": 10,
 "6·25전쟁 아카이브센터": 83,
 "국립중앙도서관": 11,
 "대한민국신문아카이브": 23,
@@ -6363,6 +6363,34 @@
 "first_seen": "2026-11-25T12:48:44Z",
 "page": "r/f73952cad450.html",
 "url": "https://discovery.nationalarchives.gov.uk/details/r/41c900ef-b8c4-4fe5-beee-22891417eff9"
+},
+{
+"key": "ndl:https://ndlsearch.ndl.go.jp/books/R000000035-I2050014094_0100092364",
+"title": "移入税の代りに出港税?を新設 : 朝鮮総督府の絞った智慧 : 鉄道大悩み商人大当外れ [記事·新聞·デジタル]",
+"first_seen": "2026-11-25T14:10:05Z",
+"page": "r/88c44573a23f.html",
+"url": "https://ndlsearch.ndl.go.jp/books/R000000035-I2050014094_0100092364"
+},
+{
+"key": "ndl:https://ndlsearch.ndl.go.jp/books/R000000035-I2050014094_0100207879",
+"title": "安東材の課税案 : 猛烈な反対を予期しながら : 朝鮮総督府再び提出する [記事·新聞·デジタル]",
+"first_seen": "2026-11-25T14:10:05Z",
+"page": "r/796708b6aa69.html",
+"url": "https://ndlsearch.ndl.go.jp/books/R000000035-I2050014094_0100207879"
+},
+{
+"key": "gallica:ark:/12148/cb31105295z",
+"title": "Vie de monseigneur Berneux, évêque de Capse, in partibus infedelium, vicaire apostolique de Corée [Gallica 원문]",
+"first_seen": "2026-11-25T14:23:32Z",
+"page": "r/e3e25dc57d78.html",
+"url": "https://gallica.bnf.fr/ark:/12148/bpt6k63496887"
+},
+{
+"key": "gallica:ark:/12148/cb31583920v",
+"title": "La Corée et la guerre russo-japonaise [Gallica 원문]",
+"first_seen": "2026-11-25T14:23:32Z",
+"page": "r/bfc19730c2de.html",
+"url": "https://gallica.bnf.fr/ark:/12148/bpt6k1183473t"
 }
 ]
 }

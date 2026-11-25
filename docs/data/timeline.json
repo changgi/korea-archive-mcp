@@ -1,5 +1,5 @@
 {
-"updated": "2026-11-25T13:54:25Z",
+"updated": "2026-11-25T14:34:03Z",
 "note": "구간 = 연대(4자리 연도·8자리 날짜·연호 연도 明治·大正·昭和·光武·隆熙·檀紀 환산) → 세기 → 왕조·시대명. 근거 순서 date → 제목 → 메타(생산·시대·출판). 세기·시대 구간은 시간축 근사 정렬",
 "timeline": [
 {
@@ -807,13 +807,14 @@
 },
 {
 "decade": "1860년대",
-"records": 2,
+"records": 3,
 "by_source": {
 "aks": 1,
-"tna": 1
+"tna": 1,
+"gallica": 1
 },
 "by_kind": {
-"document": 2
+"document": 3
 },
 "samples": [
 {
@@ -825,6 +826,11 @@
 "title": "Yellow Sea (Huang Hai): Korea, W Coast: Inchon to Mok'po; four items on one sheet:...",
 "url": "https://discovery.nationalarchives.gov.uk/details/r/C11440842",
 "iiif": "https://korea-archive-mcp.vercel.app/iiif/tna/C11440842/manifest.json"
+},
+{
+"title": "Vie de monseigneur Berneux, évêque de Capse, in partibus infedelium, vicaire apostolique de Corée [Gallica 원문]",
+"url": "https://gallica.bnf.fr/ark:/12148/bpt6k63496887",
+"iiif": "https://korea-archive-mcp.vercel.app/iiif/rec/TVA9T8MwFPwrlue0qZ0PUo9Fgj-AWKoOTuMUq4nj2k6FQEggMTCygxALQ1EHxIRY808YSX4Er4VITHdPd_fu6V1ii9kUL3hRyDnHMw87zPCpFCgTqKyUFXKhRG3QRBjAcw81m3Xzuqr3hkOurfCQVEhz42RaW-C5yEQh69JDa1gpjUBcV9ZVhexTlWk2Ak2Pf0tR93Dfbj9m2MMZdJMkToBKoNwsmU8oCRN_ngaEjCI6ji5ArEE8c05b5vt_pw9TlQ9z4__LpNrFyzgIx3GSHEBKQ6rv_Lr-RBN1tMeMuz4OLgWu_h0eLmECWAG0b4_f71vU3t12zze7o7unF5D47mF0ROMBIQManZCQ0YAFFF_9AA/manifest.json"
 }
 ],
 "derived": 1
@@ -963,11 +969,11 @@
 },
 {
 "decade": "1900년대",
-"records": 28,
+"records": 29,
 "by_source": {
 "jacar": 5,
 "heritage": 1,
-"gallica": 1,
+"gallica": 2,
 "oldnews": 6,
 "nlna": 1,
 "tna": 8,
@@ -976,7 +982,7 @@
 "i815": 1
 },
 "by_kind": {
-"document": 23,
+"document": 24,
 "graphic": 5
 },
 "samples": [
@@ -1085,15 +1091,16 @@
 },
 {
 "decade": "1920년대",
-"records": 8,
+"records": 10,
 "by_source": {
 "nedb": 2,
 "tna": 1,
 "indy": 4,
-"nlna": 1
+"nlna": 1,
+"ndl": 2
 },
 "by_kind": {
-"document": 8
+"document": 10
 },
 "samples": [
 {
