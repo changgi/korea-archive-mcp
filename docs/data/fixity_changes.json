@@ -1,7 +1,7 @@
 {
-"updated": "2026-11-25T06:38:31Z",
+"updated": "2026-11-25T06:50:37Z",
 "watched": 861,
-"changed_records": 178,
+"changed_records": 191,
 "suspected_source_changes": 0,
 "note": "지문 = 원 기관 응답(우리 판독기 정규형, 판독 시각 등 변동 항목 제외)의 SHA-256-16. pv = 판독기(route.js·lib) 지문. 이력은 지우지 않는다.",
 "changes": [
@@ -3382,6 +3382,253 @@
 {
 "at": "2026-11-25",
 "h": "5ef2114a5c1b4fda",
+"pv": "d935b612f32e",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "nara:NAID 505634321",
+"title": "Mounted Members of the Korean Constabulary in Jeju-Do, Korea",
+"url": "https://catalog.archives.gov/id/505634321",
+"history": [
+{
+"at": "2026-11-24",
+"h": "1417f68138559685",
+"pv": "590917b3c048",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "7cbc7cdd802d469f",
+"pv": "d935b612f32e",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "nara:NAID 505634339",
+"title": "Members of the Korean Constabulary March to Song in Jeju-Do, Korea",
+"url": "https://catalog.archives.gov/id/505634339",
+"history": [
+{
+"at": "2026-11-24",
+"h": "5620a73f740d927a",
+"pv": "590917b3c048",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "7a41e09c54b8fd7d",
+"pv": "d935b612f32e",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "koreanwar:2024-FR-02-DC-D-01131",
+"title": "맥아더 사건에 대한 미 정계의 입장에 대한 전보문(1951.04.15.)",
+"url": "https://www.koreanwar.or.kr:8443/searchDetail.do?archRfcd=2024-FR-02-DC-D-01131",
+"history": [
+{
+"at": "2026-11-24",
+"h": "fdaf0536c24de6a7",
+"pv": "590917b3c048",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "8b27ae881810dba4",
+"pv": "d935b612f32e",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "koreanwar:2024-FR-02-DC-D-01326",
+"title": "거창사건으로 국정위원 일부 해임에 대한 전보문(1951.06.20.)",
+"url": "https://www.koreanwar.or.kr:8443/searchDetail.do?archRfcd=2024-FR-02-DC-D-01326",
+"history": [
+{
+"at": "2026-11-24",
+"h": "413e8ea70c409238",
+"pv": "590917b3c048",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "942af221da81e148",
+"pv": "d935b612f32e",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "koreanwar:2024-FR-02-DC-D-01533",
+"title": "개성 폭격 사건 이후 중공군 프로파간다에 대한 전보문(1951.08.27.)",
+"url": "https://www.koreanwar.or.kr:8443/searchDetail.do?archRfcd=2024-FR-02-DC-D-01533",
+"history": [
+{
+"at": "2026-11-24",
+"h": "54c49f88f5d5c2f6",
+"pv": "590917b3c048",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "c8b1174a4510083d",
+"pv": "d935b612f32e",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "koreanwar:2024-KR-02-AF-D-00029",
+"title": "8월 28일의 사건 개성을 폭격한 미군기 스케치 2(김성환, 1952)",
+"url": "https://www.koreanwar.or.kr:8443/searchDetail.do?archRfcd=2024-KR-02-AF-D-00029",
+"history": [
+{
+"at": "2026-11-24",
+"h": "15783a22ca9a5d0a",
+"pv": "590917b3c048",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "963d3776a99a5cde",
+"pv": "d935b612f32e",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "koreanwar:2024-KR-02-AF-D-00030",
+"title": "8월 28일의 사건 개성을 폭격한 미군기 스케치 1(김성환, 1950.09.14.)",
+"url": "https://www.koreanwar.or.kr:8443/searchDetail.do?archRfcd=2024-KR-02-AF-D-00030",
+"history": [
+{
+"at": "2026-11-24",
+"h": "95e260ad30306d88",
+"pv": "590917b3c048",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "b9d062e29f011656",
+"pv": "d935b612f32e",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "nara:NAID 354633318",
+"title": "Department of State Chronology of Principal Events Relating to the Korean Conflict, September 1950",
+"url": "https://catalog.archives.gov/id/354633318",
+"history": [
+{
+"at": "2026-11-24",
+"h": "ec11ad931572586c",
+"pv": "590917b3c048",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "be6807dc0b319177",
+"pv": "d935b612f32e",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "nara:NAID 354633955",
+"title": "Department of State Chronology of Principal Events Relating to the Korean Conflict, September 1951, Research Project No. 271",
+"url": "https://catalog.archives.gov/id/354633955",
+"history": [
+{
+"at": "2026-11-24",
+"h": "28ed1f6dcd1cbea5",
+"pv": "590917b3c048",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "8ef7178c554d3c55",
+"pv": "d935b612f32e",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "nara:NAID 42219631",
+"title": "No Gun Ri 2000 [Korea] [2]",
+"url": "https://catalog.archives.gov/id/42219631",
+"history": [
+{
+"at": "2026-11-24",
+"h": "7a7bde4fd7bab0b2",
+"pv": "590917b3c048",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "0f46c712d057cf06",
+"pv": "d935b612f32e",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "koreanwar:1990-TR-01-PF-A-00018",
+"title": "부산에 도착하여 하선하는 튀르키예군 모습 사진",
+"url": "https://www.koreanwar.or.kr:8443/searchDetail.do?archRfcd=1990-TR-01-PF-A-00018",
+"history": [
+{
+"at": "2026-11-24",
+"h": "41cddb8334c8eed8",
+"pv": "590917b3c048",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "23a8412c215e1f8d",
+"pv": "d935b612f32e",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "koreanwar:1995-US-01-PF-A-00020",
+"title": "부산항 사진",
+"url": "https://www.koreanwar.or.kr:8443/searchDetail.do?archRfcd=1995-US-01-PF-A-00020",
+"history": [
+{
+"at": "2026-11-24",
+"h": "1893e5da93edbccb",
+"pv": "590917b3c048",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "cf8047ad742c295a",
+"pv": "d935b612f32e",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "koreanwar:2011-US-01-PF-A-00647",
+"title": "부산에 도착한 여섯 번째 수송물 사진",
+"url": "https://www.koreanwar.or.kr:8443/searchDetail.do?archRfcd=2011-US-01-PF-A-00647",
+"history": [
+{
+"at": "2026-11-24",
+"h": "747deadff3e3b7d8",
+"pv": "590917b3c048",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "d18d2c0d02e5a8c5",
 "pv": "d935b612f32e",
 "kind": "판독기 변경 동반"
 }
