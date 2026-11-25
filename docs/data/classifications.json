@@ -4,7 +4,7 @@
 "depth": 1,
 "first": "2026-11-23T03:00:15Z",
 "last": "2026-11-25T00:56:51Z",
-"records": 155,
+"records": 156,
 "sources": [
 "nara",
 "koreanwar",
@@ -4247,8 +4247,26 @@
 "sources": [
 "tna"
 ]
+},
+"미국 국립기록관리청 NARA › RG 80": {
+"depth": 2,
+"first": "2026-11-25T00:00:00Z",
+"last": "2026-11-25T00:00:00Z",
+"records": 1,
+"sources": [
+"nara"
+]
+},
+"미국 국립기록관리청 NARA › RG 80 › General Photographic Files": {
+"depth": 3,
+"first": "2026-11-25T00:00:00Z",
+"last": "2026-11-25T00:00:00Z",
+"records": 1,
+"sources": [
+"nara"
+]
 }
 },
-"updated": "2026-11-25T02:31:02Z",
-"total": 471
+"updated": "2026-11-25T02:46:43Z",
+"total": 473
 }
