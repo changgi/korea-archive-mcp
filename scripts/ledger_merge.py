@@ -1228,7 +1228,7 @@ def build_record_pages(recs_all):
 {row('계층', E_(part) + (f" <small>(근거: {E_(o.get('partOf_src', ''))})</small>" if o.get('partOf_src') else '') if part else (E_(pder) + ' <small>[파생]</small>' if pder else ''))}
 {row('날짜', E_(date) if date else (E_(dd) + f" <small>[파생 — {E_(o.get('date_basis', ''))}]</small>" if dd else ''))}{row('연대', E_(decade(o)))}{row('날짜 교차 확인', dch)}
 {row('요약', E_(o.get('summary') or '') or (E_(o.get('summary_composed') or '')))}{row('권리', E_(o.get('rights_view') or '') + (f" <small>({E_(o.get('rights_basis', ''))})</small>" if o.get('rights_basis') else ''))}
-{row('IIIF', f"<a href='{KV}{E_(mf)}'>KV 뷰어로 보기</a> · <a href='{E_(mf)}'>매니페스트</a> <small>({E_(o.get('iiif_kind', ''))})</small>" if mf else '')}
+{row('IIIF', f"<a href='{KV}{E_(mf)}'>KV 뷰어로 보기</a> · <a href='{E_(mf)}'>매니페스트</a> <small>({E_(o.get('iiif_kind', ''))})</small>" if mf else '')}{row('같은 기록 실물 이미지', f"<a href='{KV}{E_(o['iiif_same']['manifest'])}'>KV 뷰어로 보기</a> · <a href='{E_(o['iiif_same']['manifest'])}'>매니페스트</a> <small>({E_(o['iiif_same']['basis'])})</small>" if o.get('iiif_same') else '')}
 {row('발견', f"처음 {E_(o.get('first_seen', '')[:10])} · 최근 {E_(o.get('last_seen', '')[:10])} · {o.get('seen', 1)}회 · 출처 {E_('+'.join(o.get('sources') or []))}")}
 {row('같은 기록(기관 표기)', E_(o.get('sameAs') or '') + ('' if any(t_ == '같은 기록(다른 소장처)' for t_, _, _ in REL.get(o['key'], [])) else ' <small>(원장에 아직 없는 기록 — 기관 sameAs 표기 그대로)</small>') if o.get('sameAs') else '')}{row('옛 key', E_(', '.join(o.get('key_aliases') or [])))}{row('비고', E_(o.get('merge_note') or o.get('recovered') or o.get('harvested') or ''))}{row('발굴 경위', E_(o.get('found_via') or '') + (f" <small>(출발 기록 <a href='{E_(rec_slug(o['drilled_from']))}.html'>{E_(o['drilled_from'])}</a>)</small>" if o.get('drilled_from') else '') if o.get('found_via') else '')}
 </table>{('<h2>주제·분류 (기관 표기)</h2><p>' + ' · '.join(f"<a href='../subjects.html#{E_(subj_anchor(f_, t_))}'>{E_(f_)}: {E_(t_)}</a>" for f_, t_ in record_concepts(o)[:30]) + '</p>') if record_concepts(o) else ''}
@@ -1747,7 +1747,7 @@ def write_quality(recs):
     R = [o for o in recs if o.get("entry_type", "기록") == "기록"]
     F = {"요약": lambda o: o.get("summary"), "요약(메타 합성 포함)": lambda o: o.get("summary") or o.get("summary_composed"), "연대": lambda o: decade(o), "기관 계층": lambda o: o.get("partOf"), "계층(파생 포함)": lambda o: o.get("partOf") or o.get("partOf_derived"),
          "기관 IIIF": lambda o: o.get("iiif") and not o.get("iiif_status"), "IIIF(원 기관 제공)": lambda o: iiif_kind(o).startswith("원 기관 제공"), "IIIF(원 기관 이미지로 구축)": lambda o: iiif_kind(o).startswith("원 기관 이미지"),
-         "IIIF(실물 이미지 — 제공+구축)": lambda o: not iiif_kind(o).startswith("기록 봉투"), "IIIF(브리지 포함)": lambda o: o.get("iiif") or o.get("iiif_built"), "썸네일": lambda o: o.get("thumb_ok"), "권리 표시": lambda o: o.get("rights_view"),
+         "IIIF(실물 이미지 — 같은 기록 다른 소장처 포함)": lambda o: not iiif_kind(o).startswith("기록 봉투") or bool(o.get("iiif_same")), "IIIF(실물 이미지 — 제공+구축)": lambda o: not iiif_kind(o).startswith("기록 봉투"), "IIIF(브리지 포함)": lambda o: o.get("iiif") or o.get("iiif_built"), "썸네일": lambda o: o.get("thumb_ok"), "권리 표시": lambda o: o.get("rights_view"),
          "메타": lambda o: o.get("meta"), "원문 지문": lambda o: o.get("fixity"), "발견 경로": lambda o: o.get("found_by"), "발견 경로(파생 포함)": lambda o: o.get("found_by") or (o.get("found_by_derived") or {}).get("tools"),
          "관련 기록 연결": lambda o: REL.get(o["key"]), "같은 기록(다른 소장처) 연결": lambda o: any(t == "같은 기록(다른 소장처)" for t, _, _ in REL.get(o["key"], [])),
          "날짜 교차 확인(일치)": lambda o: (o.get("date_cross") or {}).get("verdict") == "일치"}
@@ -2045,12 +2045,20 @@ def main():
         sk_ = [b for t, b, _ in REL.get(o["key"], []) if t == "같은 기록(다른 소장처)"]
         if sk_: o["same_keys"] = sk_
         else: o.pop("same_keys", None)
+    by_ = {o["key"]: o for o in recs}; nis = 0
+    for o in recs:  # v3.1 실물 이미지가 없는 기록 봉투 ← 같은 기록(다른 소장처)의 실물 이미지 매니페스트(근거·소장처 명시 — 이 기록의 IIIF를 바꾸지 않고 따로)
+        sib = [by_[b] for b in o.get("same_keys") or [] if b in by_ and not (by_[b].get("iiif_kind") or "").startswith("기록 봉투")] if (o.get("iiif_kind") or "").startswith("기록 봉투") else []
+        mf_ = next((((x.get("iiif") if not x.get("iiif_status") else "") or x.get("iiif_built"), x) for x in sib if (x.get("iiif") if not x.get("iiif_status") else "") or x.get("iiif_built")), None)
+        if mf_:
+            o["iiif_same"] = {"manifest": mf_[0], "key": mf_[1]["key"], "kind": mf_[1].get("iiif_kind", ""), "basis": f"같은 기록(다른 소장처) — {SRC_NAME.get(mf_[1]['key'].split(':')[0], mf_[1]['key'].split(':')[0])} {mf_[1]['key']}의 실물 이미지(이 기록 소장처의 이미지 아님)"}; nis += 1
+        else: o.pop("iiif_same", None)
+    if nis: print(f"기록 봉투 {nis}건 ← 같은 기록 다른 소장처의 실물 이미지 연결(iiif_same)")
     ndp = date_from_same(recs)  # v2.84 날짜 없는 기록 ← 같은 기록의 다른 소장처 날짜([파생]·근거)
     if ndp: print(f"같은 기록의 다른 소장처 날짜로 연대 파생 {ndp}건")
     relations_page([o for o in recs if o.get("entry_type", "기록") == "기록"])  # v2.86 날짜 파생·교차 확인 뒤에
     with open(lp, "w", encoding="utf-8") as f:
         for o in recs: f.write(json.dumps(o, ensure_ascii=False, separators=(",", ":")) + "\n")
-    cols = ["key", "entry_type", "found_by_basis", "summary_composed", "rights_view", "rights_basis", "fixity", "defect_note", "link_note", "sources", "title", "date", "date_derived", "date_basis", "id", "url", "partOf", "partOf_derived", "media", "sameAs", "iiif", "iiif_status", "iiif_built", "iiif_kind", "found_by", "found_by_derived", "first_seen", "last_seen", "seen", "seen_7d", "seen_30d", "days_total", "formats", "tools", "max_cross", "trend", "rank", "score", "summary", "summary_basis", "rights", "attribution", "thumb", "meta", "meta_basis", "authority", "key_aliases", "merge_note", "recovered", "harvested", "meta_restored", "found_via", "drilled_from", "date_cross", "date_moved"]
+    cols = ["key", "entry_type", "found_by_basis", "summary_composed", "rights_view", "rights_basis", "fixity", "defect_note", "link_note", "sources", "title", "date", "date_derived", "date_basis", "id", "url", "partOf", "partOf_derived", "media", "sameAs", "iiif", "iiif_status", "iiif_built", "iiif_kind", "found_by", "found_by_derived", "first_seen", "last_seen", "seen", "seen_7d", "seen_30d", "days_total", "formats", "tools", "max_cross", "trend", "rank", "score", "summary", "summary_basis", "rights", "attribution", "thumb", "meta", "meta_basis", "authority", "key_aliases", "merge_note", "recovered", "harvested", "meta_restored", "found_via", "drilled_from", "date_cross", "date_moved", "iiif_same"]
     fmtv = lambda v: json.dumps(v, ensure_ascii=False, separators=(",", ":")) if isinstance(v, list) and v and isinstance(v[0], dict) else " | ".join(f"{a}: {b}" for a, b in v) if isinstance(v, list) and v and isinstance(v[0], list) else (" ".join(f"{k}:{n}" for k, n in sorted(v.items(), key=lambda kv: -kv[1])) if isinstance(v, dict) and all(isinstance(x, (int, float)) for x in v.values()) else json.dumps(v, ensure_ascii=False, separators=(",", ":")) if isinstance(v, dict) else ("+".join(v) if isinstance(v, list) else v))
     with open(os.path.join(D, "discovered.csv"), "w", encoding="utf-8-sig", newline="") as f:
         w = csv.writer(f); w.writerow(cols)
