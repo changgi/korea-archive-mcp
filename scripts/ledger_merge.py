@@ -1422,12 +1422,47 @@ def envelope_basis(o):
     else: t, w = ENVELOPE_WHY.get(src, ("미구축", "원 기관 IIIF·공개 이미지 경로 미확인 — 다음 개선 대상(부재 단정 아님)"))
     return {"type": t, "why": w, **({"see": "iiif_same"} if o.get("iiif_same") else {}), **({"see_origin": "iiif_origin"} if o.get("iiif_origin") else {})}
 
+NARA_IX = {"naid": {}, "lid": {}, "prefix": {}}
+
+
+def build_nara_ix(recs):
+    """v3.47 원장 NARA 기록 색인 — NAID·로컬 식별자·식별자 계열(111-ADC 등) → 계층. 사본(IA·6·25센터 등)의 원 소장처 계층을 원장 실측으로 잇는 근거."""
+    ix = {"naid": {}, "lid": {}, "prefix": {}}
+    for r in recs:
+        if not r["key"].startswith("nara:NAID ") or not r.get("partOf"): continue
+        md = {m[0]: m[1] for m in (r.get("meta") or []) if m and len(m) > 1}
+        e = {"key": r["key"], "partOf": r["partOf"], "lineage": md.get("계보(상위 계층)", "")}
+        ix["naid"][r["key"].split(" ", 1)[1]] = e
+        lid = md.get("로컬 식별자", "").strip().upper()
+        if lid:
+            ix["lid"][lid] = e
+            pm = re.match(r"^(\d{2,3}[A-Z]?-[A-Z]{1,6})-", lid)
+            if pm: ix["prefix"].setdefault(pm[1], []).append(e)
+    return ix
+
+
 def origin_holder(o):
     """v3.11 사본 기록의 원 소장처 계층 — 전자사료관(earchive) 등이 해외 원본의 사본을 낼 때 기관 메타 '소장자(처)'·'문서번호'·계층(Record Group)으로
     원본 쪽 계층을 세운다. 원본 기록의 개별 디지털 사본 존재는 단정하지 않는다(NARA 111-SC 사진은 대부분 번호대 shelflist 목록 단위로만 등재)."""
     md = {m[0]: m[1] for m in (o.get("meta") or []) if m and len(m) > 1}
     holder = md.get("소장자(처)", "")
-    if not re.search(r"National Archives and Records Administration|국립문서기록관리청", holder): return None
+    if not re.search(r"National Archives and Records Administration|국립문서기록관리청", holder):
+        # v3.47 기관 sameAs(NAID·NARA 로컬 식별자)가 있는 사본 → 원장 NARA 기록의 계층을 잇는다(원장 실측). 원본 쪽에 없으면 같은 식별자 계열이 모두 한 시리즈일 때만 시리즈 수준
+        if str(o.get("key") or "").startswith("nara:"): return None
+        sa = str(o.get("sameAs") or "")
+        mn = re.search(r"NAID (\d+)", sa); ml = re.search(r"NARA (\d{2,3}[A-Z]?-[A-Z]{1,6}-[\w-]+)", sa, re.I)
+        hit = (NARA_IX["naid"].get(mn[1]) if mn else None) or (NARA_IX["lid"].get(ml[1].upper()) if ml else None)
+        base = {"institution": "NARA(미국 국립문서기록관리청)", "kind": "사본(원본은 원 소장처)"}
+        if hit:
+            return {**base, "partOf": hit["partOf"], **({"lineage": hit["lineage"][:200]} if hit["lineage"] else {}), "original": hit["key"],
+                    "basis": f"기관 sameAs '{sa[:40]}' = 원장 NARA 기록 {hit['key']}의 계층(원장 실측)"}
+        if ml:
+            pm = re.match(r"^(\d{2,3}[A-Z]?-[A-Z]{1,6})-", ml[1].upper()); grp = NARA_IX["prefix"].get(pm[1], []) if pm else []
+            ps = {e["partOf"] for e in grp}
+            if len(grp) >= 2 and len(ps) == 1:
+                return {**base, "partOf": grp[0]["partOf"], **({"lineage": grp[0]["lineage"][:200]} if grp[0]["lineage"] else {}), "level": "series(계열 단위 추정)", "local_id": ml[1].upper(),
+                        "basis": f"기관 sameAs NARA 로컬 식별자 {ml[1].upper()} — 같은 계열({pm[1]})의 원장 NARA 기록 {len(grp)}건이 모두 같은 시리즈(계열 단위 추정, 개별 원본 미확인)"}
+        return None
     rg = re.search(r"Record Group (\d+):?\s*([^›]*)", md.get("계층", "") or str(o.get("partOf") or ""))
     out = {"institution": "NARA(미국 국립문서기록관리청)", "basis": f"사본 기관 메타 '소장자(처)'={holder[:60]}" + (f" · 계층 Record Group {rg[1]}" if rg else ""), "kind": "사본(원본은 원 소장처)"}
     if rg: out["record_group"] = f"RG {rg[1]} {rg[2].strip()}".strip()[:120]
@@ -1691,7 +1726,7 @@ def build_record_pages(recs_all):
 {row('계층', E_(part) + (f" <small>(근거: {E_(o.get('partOf_src', ''))})</small>" if o.get('partOf_src') else '') if part else (E_(pder) + ' <small>[파생]</small>' if pder else ''))}
 {row('날짜', E_(date) if date else (E_(dd) + f" <small>[파생 — {E_(o.get('date_basis', ''))}]</small>" if dd else ''))}{row('연대', E_(decade(o)))}{row('날짜 교차 확인', dch)}
 {row('요약', E_(o.get('summary') or '') or (E_(o.get('summary_composed') or '')))}{row('권리', E_(o.get('rights_view') or '') + (f" <small>({E_(o.get('rights_basis', ''))})</small>" if o.get('rights_basis') else ''))}
-{row('IIIF', f"<a href='{KV}{E_(mf)}'>KV 뷰어로 보기</a> · <a href='{E_(mf)}'>매니페스트</a> <small>({E_(o.get('iiif_kind', ''))})</small>" if mf else '')}{row('같은 날 다른 기관 기록', f"{E_(o['same_day']['date'])} — {o['same_day']['institutions']}개 기관 {o['same_day']['records']}건 · <a href='{KV}{E_(o['same_day']['collection'])}'>KV로 기관별 이어 보기</a> · <a href='{E_(o['same_day']['collection'])}'>IIIF 컬렉션</a> <small>(같은 사건 교차 대조 단서 — 같은 장면이라는 단정 아님)</small>" if o.get('same_day') else '')}{row('원 소장처(사본의 원본)', f"{E_(o['origin_holder']['institution'])}{' · ' + E_(o['origin_holder']['record_group']) if o['origin_holder'].get('record_group') else ''}{' · ' + E_(o['origin_holder']['local_id']) if o['origin_holder'].get('local_id') else ''}{' · 목록 단위 <a href=' + chr(39) + E_(o['origin_holder']['finding_aid']['search']) + chr(39) + '>' + E_(o['origin_holder']['finding_aid']['label']) + '</a>' if o['origin_holder'].get('finding_aid') else ''} <small>({E_(o['origin_holder']['basis'])})</small>" if o.get('origin_holder') else '')}{row('인물(표준)', ' · '.join(f"<a href='{KV}{PAGES}person/{person_slug(n)}.json'>{E_(n)}</a>" for n in o['persons_std'] if n in PERSONS or n in AUTO_PERSONS) + " <small>(인물 사전 — 표제·기관 인물/주제/색인어 칸 매칭, 등장·언급 단서)</small>" if o.get('persons_std') else '')}{row('기관 전거', ' · '.join(f"{E_(t)} <a href='https://lod.nl.go.kr/page/{E_(i)}'>{E_(i)}</a>" + ''.join(f" <a href='{E_(x)}'>{E_(re.sub(r'^https?://(www[.])?', '', x).split('/')[0])}</a>" for x in (AUTH.get(i) or {}).get('sameAs', [])[:4]) for t, i in o['authority_ids']['terms'].items()) + " <small>(국립중앙도서관 LOD — 외부 전거는 LOD 페이지의 owl:sameAs)</small>" if o.get('authority_ids') else '')}{row('날짜 정규화', f"{E_(o['date_norm']['value'])} <small>({E_(o['date_norm']['basis'])} — 원 표기는 날짜 칸 그대로)</small>" if o.get('date_norm') else '')}{row('날짜 주의', E_(o['date_note']['note']) if o.get('date_note') else '')}{row('사건-날짜 대조', f"{E_(o['event_date_check']['event'])}({E_(o['event_date_check']['event_period'])}) ↔ 기록 {E_(o['event_date_check']['recorded'])} [{E_(o['event_date_check']['date_source'])}] — <b>{E_(o['event_date_check']['verdict'])}</b>" if o.get('event_date_check') else '')}{row('지명(표준)', ' · '.join(f"<a href='{KV}{PAGES}place/{place_slug(n)}.json'>{E_(n)}</a>" for n in o['places_std']) + " <small>(지명 사전 — 표제·기관 장소 칸 매칭)</small>" if o.get('places_std') else '')}{row('이미지 없는 사유', f"{E_(o['envelope_basis']['type'])} — {E_(o['envelope_basis']['why'])}" if o.get('envelope_basis') else '')}{row('원 기관 IIIF(브라우저 열람)', f"<a href='{KV}{E_(o['iiif_origin']['manifest'])}'>KV 뷰어로 보기</a> · <a href='{E_(o['iiif_origin']['manifest'])}'>매니페스트</a> · <a href='{E_(o['iiif_origin']['viewer'])}'>기관 뷰어</a> <small>({E_(o['iiif_origin']['basis'])})</small>" if o.get('iiif_origin') else '')}{row('같은 기록 실물 이미지', f"<a href='{KV}{E_(o['iiif_same']['manifest'])}'>KV 뷰어로 보기</a> · <a href='{E_(o['iiif_same']['manifest'])}'>매니페스트</a> <small>({E_(o['iiif_same']['basis'])})</small>" if o.get('iiif_same') else '')}
+{row('IIIF', f"<a href='{KV}{E_(mf)}'>KV 뷰어로 보기</a> · <a href='{E_(mf)}'>매니페스트</a> <small>({E_(o.get('iiif_kind', ''))})</small>" if mf else '')}{row('같은 날 다른 기관 기록', f"{E_(o['same_day']['date'])} — {o['same_day']['institutions']}개 기관 {o['same_day']['records']}건 · <a href='{KV}{E_(o['same_day']['collection'])}'>KV로 기관별 이어 보기</a> · <a href='{E_(o['same_day']['collection'])}'>IIIF 컬렉션</a> <small>(같은 사건 교차 대조 단서 — 같은 장면이라는 단정 아님)</small>" if o.get('same_day') else '')}{row('원 소장처(사본의 원본)', f"{E_(o['origin_holder']['institution'])}{' · ' + E_(o['origin_holder']['partOf']) if o['origin_holder'].get('partOf') else ''}{' · 원본 기록 ' + E_(o['origin_holder']['original']) if o['origin_holder'].get('original') else ''}{' · ' + E_(o['origin_holder']['record_group']) if o['origin_holder'].get('record_group') else ''}{' · ' + E_(o['origin_holder']['local_id']) if o['origin_holder'].get('local_id') else ''}{' · 목록 단위 <a href=' + chr(39) + E_(o['origin_holder']['finding_aid']['search']) + chr(39) + '>' + E_(o['origin_holder']['finding_aid']['label']) + '</a>' if o['origin_holder'].get('finding_aid') else ''} <small>({E_(o['origin_holder']['basis'])})</small>" if o.get('origin_holder') else '')}{row('인물(표준)', ' · '.join(f"<a href='{KV}{PAGES}person/{person_slug(n)}.json'>{E_(n)}</a>" for n in o['persons_std'] if n in PERSONS or n in AUTO_PERSONS) + " <small>(인물 사전 — 표제·기관 인물/주제/색인어 칸 매칭, 등장·언급 단서)</small>" if o.get('persons_std') else '')}{row('기관 전거', ' · '.join(f"{E_(t)} <a href='https://lod.nl.go.kr/page/{E_(i)}'>{E_(i)}</a>" + ''.join(f" <a href='{E_(x)}'>{E_(re.sub(r'^https?://(www[.])?', '', x).split('/')[0])}</a>" for x in (AUTH.get(i) or {}).get('sameAs', [])[:4]) for t, i in o['authority_ids']['terms'].items()) + " <small>(국립중앙도서관 LOD — 외부 전거는 LOD 페이지의 owl:sameAs)</small>" if o.get('authority_ids') else '')}{row('날짜 정규화', f"{E_(o['date_norm']['value'])} <small>({E_(o['date_norm']['basis'])} — 원 표기는 날짜 칸 그대로)</small>" if o.get('date_norm') else '')}{row('날짜 주의', E_(o['date_note']['note']) if o.get('date_note') else '')}{row('사건-날짜 대조', f"{E_(o['event_date_check']['event'])}({E_(o['event_date_check']['event_period'])}) ↔ 기록 {E_(o['event_date_check']['recorded'])} [{E_(o['event_date_check']['date_source'])}] — <b>{E_(o['event_date_check']['verdict'])}</b>" if o.get('event_date_check') else '')}{row('지명(표준)', ' · '.join(f"<a href='{KV}{PAGES}place/{place_slug(n)}.json'>{E_(n)}</a>" for n in o['places_std']) + " <small>(지명 사전 — 표제·기관 장소 칸 매칭)</small>" if o.get('places_std') else '')}{row('이미지 없는 사유', f"{E_(o['envelope_basis']['type'])} — {E_(o['envelope_basis']['why'])}" if o.get('envelope_basis') else '')}{row('원 기관 IIIF(브라우저 열람)', f"<a href='{KV}{E_(o['iiif_origin']['manifest'])}'>KV 뷰어로 보기</a> · <a href='{E_(o['iiif_origin']['manifest'])}'>매니페스트</a> · <a href='{E_(o['iiif_origin']['viewer'])}'>기관 뷰어</a> <small>({E_(o['iiif_origin']['basis'])})</small>" if o.get('iiif_origin') else '')}{row('같은 기록 실물 이미지', f"<a href='{KV}{E_(o['iiif_same']['manifest'])}'>KV 뷰어로 보기</a> · <a href='{E_(o['iiif_same']['manifest'])}'>매니페스트</a> <small>({E_(o['iiif_same']['basis'])})</small>" if o.get('iiif_same') else '')}
 {row('발견', f"처음 {E_(o.get('first_seen', '')[:10])} · 최근 {E_(o.get('last_seen', '')[:10])} · {o.get('seen', 1)}회 · 출처 {E_('+'.join(o.get('sources') or []))}")}
 {row('같은 기록(기관 표기)', E_(o.get('sameAs') or '') + ('' if any(t_ == '같은 기록(다른 소장처)' for t_, _, _ in REL.get(o['key'], [])) else ' <small>(원장에 아직 없는 기록 — 기관 sameAs 표기 그대로)</small>') if o.get('sameAs') else '')}{row('옛 key', E_(', '.join(o.get('key_aliases') or [])))}{row('비고', E_(o.get('merge_note') or o.get('recovered') or o.get('harvested') or ''))}{row('발굴 경위', E_(o.get('found_via') or '') + (f" <small>(출발 기록 <a href='{E_(rec_slug(o['drilled_from']))}.html'>{E_(o['drilled_from'])}</a>)</small>" if o.get('drilled_from') else '') if o.get('found_via') else '')}
 </table>{('<h2>주제·분류 (기관 표기)</h2><p>' + ' · '.join(f"<a href='../subjects.html#{E_(subj_anchor(f_, t_))}'>{E_(f_)}: {E_(t_)}</a>" for f_, t_ in record_concepts(o)[:30]) + '</p>') if record_concepts(o) else ''}
@@ -2689,6 +2724,7 @@ def main():
             if o.get("enrich_status") == "ok" and not o["meta"]: o["enrich_status"] = ""  # 기관 메타 없이 '완료'로 남지 않게 — 다음 보강에 다시 든다
     if ntn: print(f"메타 교정(v3.5.3): 도구 안내 문구 {ntn}건 → tool_notes(원값 보존)")
     recs = sorted(led.values(), key=lambda o: (o["first_seen"], o["key"]))
+    global NARA_IX; NARA_IX = build_nara_ix(recs)  # v3.47 사본 → 원 소장처 계층 잇기 색인
     # v2.27 계층·IIIF가 없는 기록은 만들어 구축 — 원 기관 정보와 구분되는 필드에(partOf_derived · iiif_built)
     for o in recs:
         o["entry_type"] = entry_type(o)
