@@ -81,7 +81,7 @@
    },
    "value": {
     "ko": [
-     "0장 · 링크 전용 1건"
+     "1장 · 링크 전용 1건"
     ]
    }
   }
@@ -141,7 +141,73 @@
    }
   }
  ],
- "items": [],
+ "items": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s28/canvas/1",
+   "type": "Canvas",
+   "label": {
+    "ko": [
+     "원 기록 기술 카드 — 이미지는 원 기관에서 열람(링크 전용)"
+    ]
+   },
+   "width": 1200,
+   "height": 900,
+   "metadata": [
+    {
+     "label": {
+      "ko": [
+       "링크 전용 사유"
+      ]
+     },
+     "value": {
+      "ko": [
+       "정보공개포털 메뉴 점검 안내 — 기관 웹페이지 캡처 — 출처 표기"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "원 기관 열람"
+      ]
+     },
+     "value": {
+      "ko": [
+       "https://www.open.go.kr/othicInfo/infoList/orginlInfoList.do?searchKeyword=%EC%B2%AD%EA%B3%84%EC%B2%9C"
+      ]
+     }
+    }
+   ],
+   "items": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s28/canvas/1/page",
+     "type": "AnnotationPage",
+     "items": [
+      {
+       "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s28/canvas/1/page/a",
+       "type": "Annotation",
+       "motivation": "painting",
+       "target": "https://changgi.github.io/korea-archive-mcp/iiif/m/s28/canvas/1",
+       "body": {
+        "id": "https://korea-archive-mcp.vercel.app/iiif/rec/rVHLSsNAFP2VYSC0QpvUKKIFkVZdiP6BuCg2tsGaqUm0iAgVo_gCKxjxEWsXVRFSCE2r0aWf4jIz8w_eYlCLLt3M4Z4595yZezexgdPzmJ8fsIbN7H3WsOhTFUFB_U7od0PP4ScutwIkIWY57Crghy_Ut9iRE4nY3jHf64adU1a_wwsJbOI0_qOdXdeoG3xeoLfnyOy3BQrbHqu7Pa3loPfqGYqxdiuExLYTwwmcB3s5JY8kBweTsoz4pc1uAuBV4ElZ0cQCEZf1_ri4oeT0xeKsslEhen78y28APtXrKZB10VDIWilq_vkEsF4D66Jplo20JFUqFfE7RiJmUV2c0ZaIpMIxpxqmRPSCqpVmolLMk4n-dGF6UsjKQmZKmM4I2SFhdDhixiYhqwxZQ6nQ9xHfqVHvsTeq990m4hcWPa4ibjthtwVjeUWGPAp6DfT_tbwEXgE3gFWA0GvSW5feuwjUAOx-P04ftvk2EA2LXT0OgDBn9m0Db30A/card.svg",
+        "type": "Image",
+        "format": "image/svg+xml",
+        "width": 1200,
+        "height": 900
+       }
+      }
+     ]
+    }
+   ],
+   "thumbnail": [
+    {
+     "id": "https://korea-archive-mcp.vercel.app/iiif/rec/rVHLSsNAFP2VYSC0QpvUKKIFkVZdiP6BuCg2tsGaqUm0iAgVo_gCKxjxEWsXVRFSCE2r0aWf4jIz8w_eYlCLLt3M4Z4595yZezexgdPzmJ8fsIbN7H3WsOhTFUFB_U7od0PP4ScutwIkIWY57Crghy_Ut9iRE4nY3jHf64adU1a_wwsJbOI0_qOdXdeoG3xeoLfnyOy3BQrbHqu7Pa3loPfqGYqxdiuExLYTwwmcB3s5JY8kBweTsoz4pc1uAuBV4ElZ0cQCEZf1_ri4oeT0xeKsslEhen78y28APtXrKZB10VDIWilq_vkEsF4D66Jplo20JFUqFfE7RiJmUV2c0ZaIpMIxpxqmRPSCqpVmolLMk4n-dGF6UsjKQmZKmM4I2SFhdDhixiYhqwxZQ6nQ9xHfqVHvsTeq990m4hcWPa4ibjthtwVjeUWGPAp6DfT_tbwEXgE3gFWA0GvSW5feuwjUAOx-P04ftvk2EA2LXT0OgDBn9m0Db30A/card.svg",
+     "type": "Image",
+     "format": "image/svg+xml"
+    }
+   ]
+  }
+ ],
  "homepage": [
   {
    "id": "https://www.open.go.kr/othicInfo/infoList/orginlInfoList.do?searchKeyword=%EC%B2%AD%EA%B3%84%EC%B2%9C",

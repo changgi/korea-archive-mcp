@@ -81,7 +81,7 @@
    },
    "value": {
     "ko": [
-     "0장 · 링크 전용 5건"
+     "1장 · 링크 전용 5건"
     ]
    }
   }
@@ -141,7 +141,73 @@
    }
   }
  ],
- "items": [],
+ "items": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s100/canvas/1",
+   "type": "Canvas",
+   "label": {
+    "ko": [
+     "원 기록 기술 카드 — 이미지는 원 기관에서 열람(링크 전용)"
+    ]
+   },
+   "width": 1200,
+   "height": 900,
+   "metadata": [
+    {
+     "label": {
+      "ko": [
+       "링크 전용 사유"
+      ]
+     },
+     "value": {
+      "ko": [
+       "1843년 김용징(金龍徵) 진사 백패(進士白牌) — 문서 1900 이전 · 사이트 재이용 조건 없음(All Rights Reserved) — 게재 전 기관 확인 권장 · 1825년 김광세(金光世) 무과 홍패(武科紅牌) 회방(回榜) — 문서 1900 이전 · 사이트 재이용 조건 없음(All Rights Reserved) — 게재 전 기관 확인 권장 · 1765년 김광세(金光世) 무과 홍패(武科紅牌) — 문서 1900 이전 · 사이트 재이용 조건 없음(All Rights Reserved) — 게재 전 기관 확인 권장 · 1854년 김명악(金命岳) 문과 홍패(文科紅牌) — 문서 1900 이전 · 사이트 재이용 조건 없음(All Rights Reserved) — 게재 전 기관 확인 권장 · 혼서(婚書)－1 — 문서 1900 이전 · 사이트 재이용 조건 없음(All Rights Reserved) — 게재 전 기관 확인 권장"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "원 기관 열람"
+      ]
+     },
+     "value": {
+      "ko": [
+       "https://archive.aks.ac.kr/viewer/viewer.do · https://archive.aks.ac.kr/viewer/viewer.do · https://archive.aks.ac.kr/viewer/viewer.do · https://archive.aks.ac.kr/viewer/viewer.do · https://archive.aks.ac.kr/viewer/viewer.do"
+      ]
+     }
+    }
+   ],
+   "items": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s100/canvas/1/page",
+     "type": "AnnotationPage",
+     "items": [
+      {
+       "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s100/canvas/1/page/a",
+       "type": "Annotation",
+       "motivation": "painting",
+       "target": "https://changgi.github.io/korea-archive-mcp/iiif/m/s100/canvas/1",
+       "body": {
+        "id": "https://korea-archive-mcp.vercel.app/iiif/rec/lVBNSsNgEL3K8K0U-pMEjW1uEPAAgrgIVWgpSm2qGxFSCCJYoWKCjUk1paWtECFiS6t01aN0-X3z3cGJnsDNPN6beY-ZuWI2Mw6Z9CM-f5d-gKMHpPqU8nmCYRf-GvwzFskS3QhfumLY4TOHHeVYixkM4wiHK0A_xtAD_uVIf0YVvWlG8PkNJz7I0MWbLk8d2DgeyOBedqbrhUg_flH2VpTMcuyY8tQ9fXfjPKql8g4pNVL2FVUvqWViF8SqrVbDNopFq1mp1i5PClbdLliVQr1J_UbmVxR0Y1gv4MA0TcBBShT7PeDLVAz6dIUMPNBokW-waZhsZ2T7__05dko-gnMCno7EayLGCeBdRIDj2y0xacs2CbFLX9imQSv7l6Zoel5V85rGrn8A/card.svg",
+        "type": "Image",
+        "format": "image/svg+xml",
+        "width": 1200,
+        "height": 900
+       }
+      }
+     ]
+    }
+   ],
+   "thumbnail": [
+    {
+     "id": "https://korea-archive-mcp.vercel.app/iiif/rec/lVBNSsNgEL3K8K0U-pMEjW1uEPAAgrgIVWgpSm2qGxFSCCJYoWKCjUk1paWtECFiS6t01aN0-X3z3cGJnsDNPN6beY-ZuWI2Mw6Z9CM-f5d-gKMHpPqU8nmCYRf-GvwzFskS3QhfumLY4TOHHeVYixkM4wiHK0A_xtAD_uVIf0YVvWlG8PkNJz7I0MWbLk8d2DgeyOBedqbrhUg_flH2VpTMcuyY8tQ9fXfjPKql8g4pNVL2FVUvqWViF8SqrVbDNopFq1mp1i5PClbdLliVQr1J_UbmVxR0Y1gv4MA0TcBBShT7PeDLVAz6dIUMPNBokW-waZhsZ2T7__05dko-gnMCno7EayLGCeBdRIDj2y0xacs2CbFLX9imQSv7l6Zoel5V85rGrn8A/card.svg",
+     "type": "Image",
+     "format": "image/svg+xml"
+    }
+   ]
+  }
+ ],
  "homepage": [
   {
    "id": "https://archive.aks.ac.kr",
