@@ -1149,6 +1149,26 @@ def date_norm(o):
         return None  # 모호 — 정규화하지 않음
     m = re.match(r"^\[?(\d{4})\s*(?:or|ou|oder|또는|-)\s*(\d{4})\]?$", d)
     if m: return {"value": f"{m[1]}~{m[2]}", "basis": f"원 표기 '{d}' — 둘 중 한 해(범위로)"}
+    # v3.51 기관 표기 변형 — TNA 영문 날짜·범위, 6자리 YYYYMM, 서기+왕력 병기, '왕조, 연도', 시작만 있는 범위
+    MO = {m_: i_ + 1 for i_, m_ in enumerate(("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"))}
+    m = re.match(r"^(1[0-9]\d\d|20[0-2]\d) (Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec) (\d{1,2})$", d)
+    if m: return {"value": f"{m[1]}-{MO[m[2]]:02d}-{int(m[3]):02d}", "basis": f"원 표기 '{d}' — 연 월(영문) 일"}
+    m = re.match(r"^(1[0-9]\d\d|20[0-2]\d) (Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec) (\d{2}) - (1[0-9]\d\d|20[0-2]\d) (Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec) (\d{2})$", d)
+    if m:
+        a_, b_ = f"{m[1]}-{MO[m[2]]:02d}-{m[3]}", f"{m[4]}-{MO[m[5]]:02d}-{m[6]}"
+        if a_ == b_: v_ = a_
+        elif m[1] == m[4] and (m[2], m[3], m[5], m[6]) == ("Jan", "01", "Dec", "31"): v_ = m[1]
+        elif m[1] == m[4] and m[2] == m[5] and m[3] == "01" and int(m[6]) >= 28: v_ = f"{m[1]}-{MO[m[2]]:02d}"
+        else: v_ = f"{a_}~{b_}"
+        return {"value": v_, "basis": f"원 표기 '{d}' — 영문 포괄 기간(TNA Covering dates)" + (" → 한 해 전체" if len(v_) == 4 else " → 한 달 전체" if len(v_) == 7 else "")}
+    m = re.match(r"^(1[0-9]\d\d|20[0-2]\d)(0[1-9]|1[0-2])$", d)
+    if m: return {"value": f"{m[1]}-{m[2]}", "basis": f"원 표기 '{d}' — 6자리 YYYYMM"}
+    m = re.match(r"^(1[0-9]\d\d|20[0-2]\d)\s*[(（][^)）]*[)）]$", d)
+    if m: return {"value": m[1], "basis": f"원 표기 '{d}' — 서기 연도(괄호 안 왕력·연호 병기)"}
+    m = re.match(r"^[가-힣]{1,6},\s*(1[0-9]\d\d|20[0-2]\d)$", d)
+    if m: return {"value": m[1], "basis": f"원 표기 '{d}' — 왕조·시대명 뒤 서기 연도"}
+    m = re.match(r"^(1[0-9]\d\d|20[0-2]\d)\s*~\s*$", d)
+    if m: return {"value": m[1], "basis": f"원 표기 '{d}' — 시작 연도만(끝 미상)"}
     v, q = meta_date(d)
     if v: return {"value": v, "basis": f"원 표기 '{d}'" + (f" — {q}" if q else "")}
     ys = [era_year(x) for x in re.split(r"[～~]", d)]
