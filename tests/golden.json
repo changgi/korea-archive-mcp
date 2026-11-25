@@ -1669,6 +1669,22 @@
    ],
    "level": "warn",
    "note": "v3.8 축적된 실제 질의를 발굴 성과순으로 — 질의 축적을 다시 발굴로"
+  },
+  {
+   "id": "topics-ito-hirobumi",
+   "tool": "ia_search",
+   "args": {
+    "query": "이토 히로부미",
+    "rows": 5
+   },
+   "must": [
+    "(?i)Ito Hirobumi"
+   ],
+   "must_not": [
+    "변환 'Ito Hirobumi Korea'"
+   ],
+   "level": "warn",
+   "note": "v3.8.1 변환어 실측 교정 — 'Ito Hirobumi Korea' → 'Ito Hirobumi'(IA 상위 3/3 관련)"
   }
  ]
 }

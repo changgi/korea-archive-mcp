@@ -306,7 +306,7 @@ const TOPICS = [
   { p: '명성황후|명성왕후|민비|閔妃', en: 'Queen Min Korea', fr: 'reine Min Corée' },
   { p: '고종\\s?황제|고종|高宗', en: 'Kojong' },
   { p: '안중근|安重根', en: 'An Jung-geun Ito Hirobumi' },
-  { p: '이토\\s?히로부미|伊藤博文', en: 'Ito Hirobumi Korea' },
+  { p: '이토\\s?히로부미|伊藤博文', en: 'Ito Hirobumi' }, // v3.8.1 실측(topics-probe 2026-11-25): IA 상위 3/3 관련, NARA 282→341
   { p: '김구|金九', en: 'Kim Koo' },
   { p: '안창호|安昌浩', en: 'Ahn Chang-ho' },
   { p: '3[·.]1\\s?운동|삼일\\s?운동|三一運動|만세\\s?운동', en: 'Korean independence movement 1919', fr: 'mouvement du 1er mars Corée' }, // v2.99.6 실측: 'March First Movement Korea 1919'는 TNA 무관 2건, 이 표기는 TNA FO 608/211/19(1919 파리강화회의 자결 각서)·NARA 895.00 정무 문서철
