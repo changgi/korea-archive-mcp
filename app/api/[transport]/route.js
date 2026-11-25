@@ -3006,7 +3006,7 @@ item_cd 5종(자료 성격별): ART 도설·회화 / ETC 두루마리·축 / DRR
       try {
         const xml = await gtext(api);
         if (!xml.includes('searchError') && !xml.includes('<item>') && /<total>\s*0\s*<\/total>/.test(xml)) return text(`국가기록원 '${query}' — 0건(API 정상 응답). 띄어쓰기·다른 표기(예: '한일협정 조인', '한일회담')로 재검색하거나 포털: ${portal}`); // v1.96.4: 0건을 API 오류로 표기하던 문제
-        if (xml.includes('searchError') || !xml.includes('<item>')) return text(agentBrowse('국가기록원', query, portal, `API 오류: ${xtag(xml, 'message') || '결과 없음'}`));
+        if (xml.includes('searchError') || !xml.includes('<item>')) { const why = xtag(xml, 'message') || xtag(xml, 'returnAuthMsg') || xtag(xml, 'errMsg') || xtag(xml, 'resultMsg'); const code = xtag(xml, 'returnReasonCode') || xtag(xml, 'resultCode'); return text(agentBrowse('국가기록원', query, portal, `API 오류: ${why ? why + (code ? ` (코드 ${code})` : '') : `해석 불가 응답 — 앞부분 '${String(xml).split(key).join('***').split(sk).join('***').replace(/\s+/g, ' ').slice(0, 120)}'`}`)); } // v2.99.5 data.go.kr 게이트웨이 사유(returnAuthMsg·returnReasonCode — 인증키·호출 한도 등)를 그대로 표시, 사유 태그가 없으면 원문 앞부분
         const tot = xtag(xml, 'total') || '?';
         let items = xml.match(/<item>[\s\S]*?<\/item>/g) || [];
         if (filt) items = items.filter((i) => { const y = parseInt((xtag(i, 'prod_year').match(/\d{4}/) || [])[0], 10); return y && y >= yf && y <= yt; });

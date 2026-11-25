@@ -465,12 +465,13 @@
     "max_per_source": 3
    },
    "must": [
-    "공개 누적 원장에 쌓입니다 — https://changgi\\.github\\.io/korea-archive-mcp/data/"
+    "원장에 영구 축적됩니다.{0,80}https://changgi\\.github\\.io/korea-archive-mcp/data/"
    ],
    "must_not": [
     "검색어 포함"
    ],
-   "level": "warn"
+   "level": "warn",
+   "note": "v2.26 안내 문구 변경('공개 누적 원장에 쌓입니다' → '원장에 영구 축적됩니다(가공·삭제 없음 …)') 반영"
   },
   {
    "id": "ledger-source",
@@ -894,12 +895,13 @@
     "format": "csv"
    },
    "must": [
-    "\\[파생\\] 이미지"
+    "Commons › Evacuation of Hungnam"
    ],
    "must_not": [
     "\\(계열 미상\\)"
    ],
-   "level": "warn"
+   "level": "warn",
+   "note": "v2.65부터 Commons 기록은 기관 범주로 계층(partOf_src) — 옛 기대 '[파생] 이미지'보다 나은 원 기관 계층"
   },
   {
    "id": "ledger-media-formats",
@@ -1064,16 +1066,16 @@
    "id": "ledger-subject-search",
    "tool": "cross_search",
    "args": {
-    "query": "중공군개입",
+    "query": "USIS 한국전쟁",
     "sources": "ledger",
     "max_per_source": 5,
     "format": "csv"
    },
    "must": [
-    "rec:ledger:earchive:"
+    "rec:ledger:AUS001_41_00V0000_00[89]"
    ],
    "level": "warn",
-   "note": "v2.42 원장 검색이 기관 주제어(전자사료관 '주제어')까지 본다 — 제목에 없는 주제어로 기록이 나와야"
+   "note": "v2.42 원장 검색이 기관 주제어까지 본다 — '한국전쟁'은 제목에 없고 전자사료관 주제어에만 있다(USIS in Cheju Do). 옛 기대(earchive 중공군개입 기록)는 원장에 존재한 적 없음(git 이력 확인)"
   },
   {
    "id": "nedb-law-no-false-absence",
