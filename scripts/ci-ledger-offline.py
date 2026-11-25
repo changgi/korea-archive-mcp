@@ -115,6 +115,9 @@ try:  # v3.0.1 날짜 칸 의미 검사 — 날짜에 숫자가 없는 값(분�
     if _pp: bad.append(f"인물 사전에 없는 기록 인물 {len(_pp)}건")
     _dh = open(os.path.join(data, "dict.html"), encoding="utf-8").read() if os.path.exists(os.path.join(data, "dict.html")) else ""  # v3.25 기준 사전 페이지
     if not _dh or "흥남" not in _dh or "맥아더" not in _dh or "흥남 철수" not in _dh: bad.append("기준 사전 페이지 결함")
+    _C = json.load(open(os.path.join(data, "dict_candidates.json"), encoding="utf-8"))["places"]  # v3.28 기준 사전 후보 — 사전에 있는 값·국가명은 후보 아님
+    _cb = [v for v, e in _C.items() if not e.get("adopted") and ("(국명)" in v or v in ("흥남", "HUNGNAM", "SEOUL") or len(e["records"]) < 2)]
+    if _cb: bad.append(f"기준 사전 후보 결함 {_cb[:5]}")
     _eb = [o["key"] for o in _L if str(o.get("iiif_kind", "")).startswith("기록 봉투") and not (o.get("envelope_basis") or {}).get("why")]  # v3.9.2
     if _eb: bad.append(f"사유 없는 기록 봉투 {len(_eb)}건")
     _ex = [o["key"] for o in _L if o.get("envelope_basis") and not str(o.get("iiif_kind", "")).startswith("기록 봉투")]
