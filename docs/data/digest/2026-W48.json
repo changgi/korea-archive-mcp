@@ -1,26 +1,26 @@
 {
 "week": "2026-W48",
-"records": 840,
+"records": 892,
 "by_source": {
-"미국 국립기록관리청 NARA": 148,
+"미국 국립기록관리청 NARA": 155,
 "일본 국립국회도서관": 16,
-"일본 아시아역사자료센터": 9,
+"일본 아시아역사자료센터": 14,
 "Europeana": 23,
 "인터넷 아카이브": 100,
-"영국 국립기록관 TNA": 60,
+"영국 국립기록관 TNA": 63,
 "UN 디지털도서관": 8,
 "KOREA ARCHIVE IIIF 갤러리": 3,
 "호주 전쟁기념관": 48,
-"독립운동판결문": 2,
+"독립운동판결문": 12,
 "공훈전자사료관": 3,
-"독립기념관": 10,
+"독립기념관": 13,
 "규장각": 5,
 "국가기록원": 40,
 "위키미디어 공용": 31,
 "Gallica(BnF)": 8,
 "6·25전쟁 아카이브센터": 83,
 "국립중앙도서관": 11,
-"대한민국신문아카이브": 11,
+"대한민국신문아카이브": 21,
 "국편 전자사료관": 8,
 "KTV": 28,
 "서울기록원": 12,
@@ -30,8 +30,8 @@
 "네덜란드 국립기록관": 5,
 "뉴질랜드 기록원": 5,
 "국립문화유산연구원": 43,
-"한국사DB": 34,
-"대한민국역사박물관": 4,
+"한국사DB": 44,
+"대한민국역사박물관": 8,
 "장서각": 7,
 "한국고문서자료관": 27
 },
@@ -5915,6 +5915,370 @@
 "first_seen": "2026-11-25T00:14:37Z",
 "page": "r/b9a82a1deba9.html",
 "url": "https://discovery.nationalarchives.gov.uk/details/r/C3653388"
+},
+{
+"key": "indy:https://theme.archives.go.kr/next/indy/viewIndyDetail.do?IMSI_ARCHIVE_ID=0001351918&FK_ARCHIVE_EVNT_ID=0034974469&evntdowngbn=N&indpnId=0000006665&actionType=det&flag=1&search_region=",
+"title": "[판결문] 조응순(趙應順) — 경성지방법원 · 징역 3년",
+"first_seen": "2026-11-25T00:53:18Z",
+"page": "r/6fe387e49131.html",
+"url": "https://theme.archives.go.kr/next/indy/viewIndyDetail.do?IMSI_ARCHIVE_ID=0001351918&FK_ARCHIVE_EVNT_ID=0034974469&evntdowngbn=N&indpnId=0000006665&actionType=det&flag=1&search_region="
+},
+{
+"key": "indy:https://theme.archives.go.kr/next/indy/viewIndyDetail.do?IMSI_ARCHIVE_ID=0001351918&FK_ARCHIVE_EVNT_ID=0034974470&evntdowngbn=N&indpnId=0000006666&actionType=det&flag=1&search_region=",
+"title": "[판결문] 계준호(桂埈昊) — 경성지방법원 · 징역 2년",
+"first_seen": "2026-11-25T00:53:18Z",
+"page": "r/acf455d4e4b6.html",
+"url": "https://theme.archives.go.kr/next/indy/viewIndyDetail.do?IMSI_ARCHIVE_ID=0001351918&FK_ARCHIVE_EVNT_ID=0034974470&evntdowngbn=N&indpnId=0000006666&actionType=det&flag=1&search_region="
+},
+{
+"key": "indy:https://theme.archives.go.kr/next/indy/viewIndyDetail.do?IMSI_ARCHIVE_ID=0001352020&FK_ARCHIVE_EVNT_ID=0034970573&evntdowngbn=N&indpnId=0000003023&actionType=det&flag=1&search_region=",
+"title": "[판결문] 김승한(金承翰) — 경성지방법원 · 금고 2월 및 벌금 20원, 벌금을 완납하지 못한 때는 20일간 노역장에",
+"first_seen": "2026-11-25T00:53:18Z",
+"page": "r/e6442add62c4.html",
+"url": "https://theme.archives.go.kr/next/indy/viewIndyDetail.do?IMSI_ARCHIVE_ID=0001352020&FK_ARCHIVE_EVNT_ID=0034970573&evntdowngbn=N&indpnId=0000003023&actionType=det&flag=1&search_region="
+},
+{
+"key": "indy:https://theme.archives.go.kr/next/indy/viewIndyDetail.do?IMSI_ARCHIVE_ID=0001352109&FK_ARCHIVE_EVNT_ID=0034986760&evntdowngbn=N&indpnId=0000018129&actionType=det&flag=1&search_region=",
+"title": "[판결문] 이준희(李俊熙) — 대전지방법원 · 면소",
+"first_seen": "2026-11-25T00:53:18Z",
+"page": "r/46afe498fecf.html",
+"url": "https://theme.archives.go.kr/next/indy/viewIndyDetail.do?IMSI_ARCHIVE_ID=0001352109&FK_ARCHIVE_EVNT_ID=0034986760&evntdowngbn=N&indpnId=0000018129&actionType=det&flag=1&search_region="
+},
+{
+"key": "indy:https://theme.archives.go.kr/next/indy/viewIndyDetail.do?IMSI_ARCHIVE_ID=0001352438&FK_ARCHIVE_EVNT_ID=0034992398&evntdowngbn=N&indpnId=0000023390&actionType=det&flag=1&search_region=",
+"title": "[판결문] 이겸승(李謙承) — 광주지방재판소목포지부 · 징역 3월",
+"first_seen": "2026-11-25T00:53:18Z",
+"page": "r/5033db3f7f68.html",
+"url": "https://theme.archives.go.kr/next/indy/viewIndyDetail.do?IMSI_ARCHIVE_ID=0001352438&FK_ARCHIVE_EVNT_ID=0034992398&evntdowngbn=N&indpnId=0000023390&actionType=det&flag=1&search_region="
+},
+{
+"key": "jacar:A05020350600",
+"title": "韓国警察報告資料巻の３",
+"first_seen": "2026-11-25T00:53:18Z",
+"page": "r/8285105ec97e.html",
+"url": "https://www.jacar.archives.go.jp/das/meta/A05020350600"
+},
+{
+"key": "jacar:A10112699000",
+"title": "露国浦潮斯徳地方裁判所検事正アレクサンドル、アリベルトウイチ、シウリツ叙勲ノ件",
+"first_seen": "2026-11-25T00:53:18Z",
+"page": "r/69df28c67ec7.html",
+"url": "https://www.jacar.archives.go.jp/das/meta/A10112699000"
+},
+{
+"key": "jacar:B03030217600",
+"title": "３ 排日教科書ニ関スル件／２ 「高等小学論説文範」審査要領",
+"first_seen": "2026-11-25T00:53:18Z",
+"page": "r/5f679f23da06.html",
+"url": "https://www.jacar.archives.go.jp/das/meta/B03030217600"
+},
+{
+"key": "jacar:B03040648900",
+"title": "３９．醒世小説英雄涙送付ニ関スル件／２ 表紙 繍像英雄涙国事悲全集 ３",
+"first_seen": "2026-11-25T00:53:18Z",
+"page": "r/0d1a6e254506.html",
+"url": "https://www.jacar.archives.go.jp/das/meta/B03040648900"
+},
+{
+"key": "jacar:B03040657000",
+"title": "２ 大正４年８月７日から大正４年１２月１６日",
+"first_seen": "2026-11-25T00:53:18Z",
+"page": "r/ee38d52febbd.html",
+"url": "https://www.jacar.archives.go.jp/das/meta/B03040657000"
+},
+{
+"key": "nedb:dh_001_1945_12_17_0060",
+"title": "禹德淳(이토오 히로부미 암살미수) 입경",
+"first_seen": "2026-11-25T00:53:18Z",
+"page": "r/9c74bce05e0b.html",
+"url": "https://db.history.go.kr/id/dh_001_1945_12_17_0060"
+},
+{
+"key": "nedb:ij_007_0010_00050",
+"title": "四. 甲申革命黨의 亂(檀君紀元四二一七 西洋紀元一八八四)",
+"first_seen": "2026-11-25T00:53:18Z",
+"page": "r/39252cc7ff6d.html",
+"url": "https://db.history.go.kr/id/ij_007_0010_00050"
+},
+{
+"key": "nedb:kd_002_0020_0020_0470",
+"title": "47. 人口稅徵收에 관한 件",
+"first_seen": "2026-11-25T00:53:18Z",
+"page": "r/75e5d8ec0790.html",
+"url": "https://db.history.go.kr/id/kd_002_0020_0020_0470"
+},
+{
+"key": "nedb:ks_002_0070_0610",
+"title": "光武七年十一月 日",
+"first_seen": "2026-11-25T00:53:18Z",
+"page": "r/ed6015abf3c2.html",
+"url": "https://db.history.go.kr/id/ks_002_0070_0610"
+},
+{
+"key": "nedb:npda_1922_05_10_v0003_0360",
+"title": "安重根親弟 安聖根 去處, 일본대관을 암살하기 위하야 폭발탄을 가지고 일본에 잠입",
+"first_seen": "2026-11-25T00:53:18Z",
+"page": "r/8b24fc9bb0a4.html",
+"url": "https://db.history.go.kr/id/npda_1922_05_10_v0003_0360"
+},
+{
+"key": "oldnews:CNTS-00048649213",
+"title": "안중근 의사의 장략 — 신한민보 [3면 1단]",
+"first_seen": "2026-11-25T00:53:18Z",
+"page": "r/f9c463188b94.html",
+"url": "https://nl.go.kr/newspaper/detail.do?content_id=CNTS-00048649213"
+},
+{
+"key": "oldnews:CNTS-00095722593",
+"title": "안중근과연루자 — 대한매일신보 [2면 2단]",
+"first_seen": "2026-11-25T00:53:18Z",
+"page": "r/dfead89396c5.html",
+"url": "https://nl.go.kr/newspaper/detail.do?content_id=CNTS-00095722593"
+},
+{
+"key": "oldnews:CNTS-00095723323",
+"title": "안중근변호 — 대한매일신보 [2면 2단]",
+"first_seen": "2026-11-25T00:53:18Z",
+"page": "r/33cbb1cbf4cf.html",
+"url": "https://nl.go.kr/newspaper/detail.do?content_id=CNTS-00095723323"
+},
+{
+"key": "oldnews:CNTS-00095729484",
+"title": "안중근씨공판 — 대한매일신보 [1면 1단]",
+"first_seen": "2026-11-25T00:53:18Z",
+"page": "r/90f91734f3c5.html",
+"url": "https://nl.go.kr/newspaper/detail.do?content_id=CNTS-00095729484"
+},
+{
+"key": "oldnews:CNTS-00095729928",
+"title": "안중근의공판 — 대한매일신보 [1면 1단]",
+"first_seen": "2026-11-25T00:53:18Z",
+"page": "r/9ea2624eb178.html",
+"url": "https://nl.go.kr/newspaper/detail.do?content_id=CNTS-00095729928"
+},
+{
+"key": "i815:1-012254-000",
+"title": "[독립운동가 자료] 진행된 조선해방운동(1907년~1919년 3·1운동 전후)",
+"first_seen": "2026-11-25T00:53:19Z",
+"page": "r/edf672fa6470.html",
+"url": "https://search.i815.or.kr/contents/independenceFighter/detail.do?independenceFighterId=1-012254-000&sortNo=4"
+},
+{
+"key": "i815:9-HS0007-001",
+"title": "[독립운동가 자료] 현순의 초기- 3·1운동",
+"first_seen": "2026-11-25T00:53:19Z",
+"page": "r/6073817a1bbf.html",
+"url": "https://search.i815.or.kr/contents/independenceFighter/detail.do?independenceFighterId=9-HS0007-001&sortNo=4"
+},
+{
+"key": "i815:9-SH0008-003",
+"title": "[독립운동가 자료] 제3부 3·1운동후 독립운동",
+"first_seen": "2026-11-25T00:53:19Z",
+"page": "r/7b65ef515e08.html",
+"url": "https://search.i815.or.kr/contents/independenceFighter/detail.do?independenceFighterId=9-SH0008-003&sortNo=4"
+},
+{
+"key": "indy:https://theme.archives.go.kr/next/indy/viewIndyDetail.do?IMSI_ARCHIVE_ID=0001351630&FK_ARCHIVE_EVNT_ID=0034982881&evntdowngbn=N&indpnId=0000014498&actionType=det&flag=1&search_region=",
+"title": "[판결문] 박승룡(朴昇龍) — 경성복심법원 · 징역 6년 원심미결구류일수 중 540일 본형에 산입",
+"first_seen": "2026-11-25T00:53:19Z",
+"page": "r/d8fe8d2bbfe6.html",
+"url": "https://theme.archives.go.kr/next/indy/viewIndyDetail.do?IMSI_ARCHIVE_ID=0001351630&FK_ARCHIVE_EVNT_ID=0034982881&evntdowngbn=N&indpnId=0000014498&actionType=det&flag=1&search_region="
+},
+{
+"key": "indy:https://theme.archives.go.kr/next/indy/viewIndyDetail.do?IMSI_ARCHIVE_ID=0001351751&FK_ARCHIVE_EVNT_ID=0034982164&evntdowngbn=N&indpnId=0000013804&actionType=det&flag=1&search_region=",
+"title": "[판결문] 우전창원(宇田昌源) — 고등법원형사부 · 상고 기각",
+"first_seen": "2026-11-25T00:53:19Z",
+"page": "r/da9a73b59e1e.html",
+"url": "https://theme.archives.go.kr/next/indy/viewIndyDetail.do?IMSI_ARCHIVE_ID=0001351751&FK_ARCHIVE_EVNT_ID=0034982164&evntdowngbn=N&indpnId=0000013804&actionType=det&flag=1&search_region="
+},
+{
+"key": "indy:https://theme.archives.go.kr/next/indy/viewIndyDetail.do?IMSI_ARCHIVE_ID=0001351847&FK_ARCHIVE_EVNT_ID=0034980308&evntdowngbn=N&indpnId=0000012089&actionType=det&flag=1&search_region=",
+"title": "[판결문] 박희숙(朴熙淑) — 고등법원형사부 · 상고 기각",
+"first_seen": "2026-11-25T00:53:19Z",
+"page": "r/636c29852b49.html",
+"url": "https://theme.archives.go.kr/next/indy/viewIndyDetail.do?IMSI_ARCHIVE_ID=0001351847&FK_ARCHIVE_EVNT_ID=0034980308&evntdowngbn=N&indpnId=0000012089&actionType=det&flag=1&search_region="
+},
+{
+"key": "indy:https://theme.archives.go.kr/next/indy/viewIndyDetail.do?IMSI_ARCHIVE_ID=0001352025&FK_ARCHIVE_EVNT_ID=0034970706&evntdowngbn=N&indpnId=0000003150&actionType=det&flag=1&search_region=",
+"title": "[판결문] 박경구(朴經九) — 경성복심법원 · 공소 기각",
+"first_seen": "2026-11-25T00:53:19Z",
+"page": "r/fb88abbc1245.html",
+"url": "https://theme.archives.go.kr/next/indy/viewIndyDetail.do?IMSI_ARCHIVE_ID=0001352025&FK_ARCHIVE_EVNT_ID=0034970706&evntdowngbn=N&indpnId=0000003150&actionType=det&flag=1&search_region="
+},
+{
+"key": "indy:https://theme.archives.go.kr/next/indy/viewIndyDetail.do?IMSI_ARCHIVE_ID=0001352421&FK_ARCHIVE_EVNT_ID=0034992188&evntdowngbn=N&indpnId=0000023188&actionType=det&flag=1&search_region=",
+"title": "[판결문] 김종택(金鍾澤) — 광주지방법원형사부 · 징역 2년 집행유예 3년",
+"first_seen": "2026-11-25T00:53:19Z",
+"page": "r/cfb0ab6ca5c6.html",
+"url": "https://theme.archives.go.kr/next/indy/viewIndyDetail.do?IMSI_ARCHIVE_ID=0001352421&FK_ARCHIVE_EVNT_ID=0034992188&evntdowngbn=N&indpnId=0000023188&actionType=det&flag=1&search_region="
+},
+{
+"key": "much:PS01002025001-003656-00000",
+"title": "3.1 운동사",
+"first_seen": "2026-11-25T00:53:19Z",
+"page": "r/2f081fd388ce.html",
+"url": "https://archive.much.go.kr/archive/nrms/view.do?idnbr=PS01002025001-003656-00000"
+},
+{
+"key": "much:PS01002025001-006377-00000",
+"title": "3.1운동사",
+"first_seen": "2026-11-25T00:53:19Z",
+"page": "r/f3e37ad60fc1.html",
+"url": "https://archive.much.go.kr/archive/nrms/view.do?idnbr=PS01002025001-006377-00000"
+},
+{
+"key": "much:PS01002025001-008144-00000",
+"title": "3.1운동비사",
+"first_seen": "2026-11-25T00:53:19Z",
+"page": "r/6907b01cc803.html",
+"url": "https://archive.much.go.kr/archive/nrms/view.do?idnbr=PS01002025001-008144-00000"
+},
+{
+"key": "much:PS01002025008-008048-00000",
+"title": "3.1운동",
+"first_seen": "2026-11-25T00:53:19Z",
+"page": "r/6739108a7964.html",
+"url": "https://archive.much.go.kr/archive/nrms/view.do?idnbr=PS01002025008-008048-00000"
+},
+{
+"key": "nara:NAID 434070922",
+"title": "Abangarez: January 12, 1919 through March 2, 1919",
+"first_seen": "2026-11-25T00:53:19Z",
+"page": "r/7b1470200cb1.html",
+"url": "https://catalog.archives.gov/id/434070922"
+},
+{
+"key": "nara:NAID 434082264",
+"title": "America: March 2, 1919 through March 13, 1919 (2 of 2)",
+"first_seen": "2026-11-25T00:53:19Z",
+"page": "r/ce9806199fcb.html",
+"url": "https://catalog.archives.gov/id/434082264"
+},
+{
+"key": "nara:NAID 591000971",
+"title": "Political Affairs: 895.00/537-624: February 1911 - April 1919",
+"first_seen": "2026-11-25T00:53:19Z",
+"page": "r/d4fdfec9b6aa.html",
+"url": "https://catalog.archives.gov/id/591000971"
+},
+{
+"key": "nara:NAID 591001650",
+"title": "Political Affairs: 895.00/625-711: April 1919 - June 1928 THRU Chief Executive: 895.001 - 895.0011/3",
+"first_seen": "2026-11-25T00:53:19Z",
+"page": "r/3873ca30e30b.html",
+"url": "https://catalog.archives.gov/id/591001650"
+},
+{
+"key": "nara:NAID 608493427",
+"title": "Relations with Japan: 793.94/768-927: January 1919 - June 1919",
+"first_seen": "2026-11-25T00:53:19Z",
+"page": "r/da1d8230fbe8.html",
+"url": "https://catalog.archives.gov/id/608493427"
+},
+{
+"key": "oldnews:CNTS-00115163269",
+"title": "국경일의 꽃 여학교연합 음악 盛觀 본사주최, 찬연하고 성스럽다, 3·1운동 빛내 우리 광복선열의 위업 — 자유신문 [2면 2단]",
+"first_seen": "2026-11-25T00:53:19Z",
+"page": "r/d2d38d193b86.html",
+"url": "https://nl.go.kr/newspaper/detail.do?content_id=CNTS-00115163269"
+},
+{
+"key": "oldnews:CNTS-00115175745",
+"title": "3·1기념사 — 자유신문 [1면 6단]",
+"first_seen": "2026-11-25T00:53:19Z",
+"page": "r/4453e37807de.html",
+"url": "https://nl.go.kr/newspaper/detail.do?content_id=CNTS-00115175745"
+},
+{
+"key": "oldnews:CNTS-00115187825",
+"title": "3·1운동의 역사성 — 자유신문 [2면 4단]",
+"first_seen": "2026-11-25T00:53:19Z",
+"page": "r/59fcecdf35c9.html",
+"url": "https://nl.go.kr/newspaper/detail.do?content_id=CNTS-00115187825"
+},
+{
+"key": "oldnews:CNTS-00115187914",
+"title": "[사설] 3·1운동의 재인식 — 자유신문 [1면 2단]",
+"first_seen": "2026-11-25T00:53:19Z",
+"page": "r/29a98c7c6372.html",
+"url": "https://nl.go.kr/newspaper/detail.do?content_id=CNTS-00115187914"
+},
+{
+"key": "oldnews:CNTS-00115218525",
+"title": "[사설] 3·1운동의 大義를 논함 — 자유신문 [1면 2단]",
+"first_seen": "2026-11-25T00:53:19Z",
+"page": "r/336837452fd3.html",
+"url": "https://nl.go.kr/newspaper/detail.do?content_id=CNTS-00115218525"
+},
+{
+"key": "tna:NCUACS 54.3.95",
+"title": "Catalogue of the papers and correspondence of Joseph Needham CH FRS (1900-1995), biochemist and historian of science",
+"first_seen": "2026-11-25T00:53:19Z",
+"page": "r/d07e1c02d3b9.html",
+"url": "https://discovery.nationalarchives.gov.uk/details/r/3c194287-0fb6-4dc0-8e01-87806ef31f36"
+},
+{
+"key": "tna:RSR",
+"title": "RECORDS OF THE ROYAL SUSSEX REGIMENT",
+"first_seen": "2026-11-25T00:53:19Z",
+"page": "r/e3124ac079a7.html",
+"url": "https://discovery.nationalarchives.gov.uk/details/r/c8e387ee-6864-480e-a39f-5713b2d71cbc"
+},
+{
+"key": "nara:NAID 18511621",
+"title": "Misc. Quotes and Significant Dates/Events",
+"first_seen": "2026-11-25T00:56:51Z",
+"page": "r/a43f89b3ed2c.html",
+"url": "https://catalog.archives.gov/id/18511621"
+},
+{
+"key": "nara:NAID 684007917",
+"title": "American Delegation, U.S.-U.S.S.R. Joint Commission on Korea: American Delegation Numbered Papers, AMD-1 through AMD-9 THRU Whoâs Who in Korea Third Revision, Oct. 15, 1947",
+"first_seen": "2026-11-25T00:56:51Z",
+"page": "r/7b1e0aace65d.html",
+"url": "https://catalog.archives.gov/id/684007917"
+},
+{
+"key": "nedb:dh_001_1945_08_28_0010",
+"title": "在重慶한독당 제5차임시대표대회, 선언 당강 당책 발표",
+"first_seen": "2026-11-25T00:56:51Z",
+"page": "r/033d2e5ccabb.html",
+"url": "https://db.history.go.kr/id/dh_001_1945_08_28_0010"
+},
+{
+"key": "nedb:dh_001_1945_10_06_0030",
+"title": "아놀드, 3·1독립선언서 서명인 중 在京 6인 초청간담",
+"first_seen": "2026-11-25T00:56:51Z",
+"page": "r/ba90c78496fd.html",
+"url": "https://db.history.go.kr/id/dh_001_1945_10_06_0030"
+},
+{
+"key": "nedb:ij_033_0010_00120",
+"title": "12) 上海韓人少年同盟 창립(1930. 8. 1)",
+"first_seen": "2026-11-25T00:56:51Z",
+"page": "r/7c716dcbf730.html",
+"url": "https://db.history.go.kr/id/ij_033_0010_00120"
+},
+{
+"key": "nedb:kd_005",
+"title": "3·1운동편Ⅰ",
+"first_seen": "2026-11-25T00:56:51Z",
+"page": "r/141698782a53.html",
+"url": "https://db.history.go.kr/id/kd_005"
+},
+{
+"key": "nedb:npda_1959_03_01_x0001_0430",
+"title": "3·1의 얼로 送北反對에 總蹶起 日은 亞洲再支配陰謀 韓·日親善엔 補償先決 李大統領 記念式典에서 演說 [寫]",
+"first_seen": "2026-11-25T00:56:51Z",
+"page": "r/00671129d31a.html",
+"url": "https://db.history.go.kr/id/npda_1959_03_01_x0001_0430"
+},
+{
+"key": "tna:FO 608/211/19",
+"title": "Korea: Future: Desire for self-determination, including: Draft memorandum for presentation to the Peace Conference. Letter...",
+"first_seen": "2026-11-25T00:56:51Z",
+"page": "r/c0bbb2b3866d.html",
+"url": "https://discovery.nationalarchives.gov.uk/details/r/C9021956"
 }
 ]
 }
