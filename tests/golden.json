@@ -1336,7 +1336,7 @@
     "max_results": 3
    },
    "must": [
-    "영문 자동 변환 'Cheju-do 1948'"
+    "영문 자동 변환 '(Korea )?Cheju-do 1948'"
    ],
    "must_not": [
     "Quelpart 4"
