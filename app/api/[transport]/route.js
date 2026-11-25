@@ -517,7 +517,7 @@ async function ehistoryList(path, label, q) {
       out.push({ title: `${title}${no ? ` (${no}호)` : ''}`.slice(0, 120), date: yr[1] ? [yr[1], yr[2] && yr[2].padStart(2, '0'), yr[3] && yr[3].padStart(2, '0')].filter(Boolean).join('-') : '',
         id: (m[1].match(/mediadtl=(\d+)/) || [])[1] ? `${label}:${(m[1].match(/mediadtl=(\d+)/) || [])[1]}` : '', series: label, url: EH + m[1].replace(/&amp;/g, '&'), ...(img ? { media: (img.startsWith('http') ? '' : EH) + img } : {}) });
     }
-    return out;
+    return zeroOr(out, b, /검색된 영상이 없습니다|검색결과가 없습니다/, `e영상역사관 ${label}`); // v3.37 목록마다 결과도 0건 표지('검색된 영상이 없습니다'·'검색결과가 없습니다', 2026-11-25 실측)도 없으면 실패
   }
 }
 async function ehistorySearch(q, n) {
@@ -531,6 +531,7 @@ async function ehistorySearch(q, n) {
 async function ehistorySearchIn(L, q, n) {
   const one = async ([path, label]) => ehistoryList(path, label, q);
   const res = await Promise.allSettled(L.map(one));
+  if (res.length && res.every((r) => r.status === 'rejected')) throw res[0].reason; // v3.37 목록 전부 실패 = 확정 0이 아님
   const lists = res.map((r) => (r.status === 'fulfilled' ? r.value : []));
   const seen = new Set(); const out = [];
   for (let k = 0; k < 20 && out.length < n; k++) for (const l of lists) { const it = l[k]; if (!it || seen.has(it.url) || out.length >= n) continue; seen.add(it.url); out.push(it); }
@@ -1138,6 +1139,7 @@ const COLLECT = {
     const en = koToEn(q) || q;
     const b = await gtext('https://www.awm.gov.au/advanced-search?query=' + encodeURIComponent(en));
     const ids = [...new Set([...b.matchAll(/href="\/collection\/(C\d+)"/g)].map((m) => m[1]))].slice(0, Math.min(n, 10)); // v1.96.3: 5→10(상세 병렬 조회 상한)
+    if (!ids.length) return zeroOr([], b, /Sorry no results found/, 'AWM'); // v3.37 0건은 'Sorry no results found' 명시일 때만(2026-11-25 실측)
     const out = await Promise.all(ids.map(async (cid) => {
       try {
         const d = await cachedText('awm:' + cid, 24 * 3600e3, () => gtext('https://www.awm.gov.au/collection/' + cid), '<h1');
@@ -1230,9 +1232,11 @@ const COLLECT = {
     return zeroOr(out, b, /TOTAL\s*0\s*건|조회된 정보가 없습니다/, '공훈전자사료관');
   },
   ktv: async (q, n) => { // v2.37 e영상역사관 자체 목록 검색 우선(ehistory.go.kr — 정직 UA 정상 응답, 2026-11-24 실측). ktv.go.kr 통합검색은 쿠키 확인 리다이렉트(303 → /)로 자동 요청을 받지 않음 → 보조
-    const eh = await ehistorySearch(q, n).catch(() => []);
+    let ehErr = null; const eh = await ehistorySearch(q, n).catch((e) => { ehErr = e; return []; });
     if (eh.length) return eh;
-    return ktvTotalSearch(q, n);
+    const lg = await ktvTotalSearch(q, n).catch((e) => { if (ehErr) throw ehErr; throw e; });
+    if (!lg.length && ehErr) throw ehErr; // v3.37 e영상역사관 실패 + 옛 통합검색(쿠키 리다이렉트로 빈 응답 가능)도 빔 = 조회 실패
+    return lg;
   },
   _ktvLegacy: async (q, n) => { // KTV e영상역사관 — ktv.go.kr 통합검색 iframe GET 실측(2026-11-19)
     // v1.94: 기본 정렬이 '최신순'(sort 파라미터 무효 실측)이라 최근 대통령 영상이 상위를 독점 → 기록 탭(ehistoryStleSe)별 병렬 조회 후 교차 병합, 대통령 기록영상(DT)은 뒤로
