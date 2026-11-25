@@ -95,6 +95,8 @@ try:  # v3.0.1 날짜 칸 의미 검사 — 날짜에 숫자가 없는 값(분�
             if not _c or not _c.get("items") or len(_c["items"]) > len(_e["records"]): bad.append(f"지명 컬렉션 결함 {_n}")
     if not os.path.exists(os.path.join(data, "place", "index.json")): bad.append("지명 컬렉션 색인 없음")
     if "흥남" not in json.dumps(_P["흥남"]["labels"], ensure_ascii=False) or "Hungnam" not in _P["흥남"]["labels"] or any("(?" in x for e in _P.values() for x in e["labels"]): bad.append("지명 표기 변이 결함")
+    _dn = [o["key"] for o in _L if o.get("date_note") and str(o.get("date") or "")[:4] != o["date_note"]["year"]]  # v3.18 철 단위 연도 단서 정합
+    if _dn: bad.append(f"date_note 연도 불일치 {len(_dn)}건")
     _eb = [o["key"] for o in _L if str(o.get("iiif_kind", "")).startswith("기록 봉투") and not (o.get("envelope_basis") or {}).get("why")]  # v3.9.2
     if _eb: bad.append(f"사유 없는 기록 봉투 {len(_eb)}건")
     _ex = [o["key"] for o in _L if o.get("envelope_basis") and not str(o.get("iiif_kind", "")).startswith("기록 봉투")]
