@@ -1871,7 +1871,8 @@
     "漕轉"
    ],
    "must_not": [
-    "not_found: terminated"
+    "not_found: terminated",
+    "levelId와 경로.*terminated"
    ],
    "level": "warn",
    "note": "v3.39 본문 전송 중 끊김(undici terminated)을 비압축 재요청으로 3회 재시도 — 운영 icn1에서 조문 상세 3/3 'terminated'였던 결함(2026-11-25)"

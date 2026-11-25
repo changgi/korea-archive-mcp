@@ -1498,7 +1498,7 @@ async function jLawSearch(query, n) {
 
 async function jItemRead(lid, maxChars) {
   let b;
-  try { b = await gtext(jItemUrl(lid), JDB_HDR); } catch (e) { return { lid, status: 'not_found', note: e.message }; }
+  try { b = await gtext(jItemUrl(lid), JDB_HDR); } catch (e) { return { lid, status: /HTTP 404/.test(String(e.message)) ? 'not_found' : 'fetch_failed', note: e.message }; } // v3.54 연결 끊김·시간 초과는 '없음'이 아니라 조회 실패
   const lines = jLines(b);
   const title = lines.find((l) => /啓$|傳敎$|事目|節目|條例|大典|要覽|謄錄/.test(l) && l.length > 8 && l.length < 140) || '';
   let k = null;
@@ -3008,6 +3008,7 @@ const JB_CROSS = `국내외 대조 절차 — 순서를 틀리면 헛수고한�
           if (r.status === 'ok') return text(`[${q}] ${r.title || ''}\n${(r.meta || []).length ? r.meta.map(([kk, v]) => `${kk}: ${v}`).join(' · ') + '\n' : ''}${r.body}\n(${r.chars}자) ${jCite(q)}\n※ ${r.isLaw ? '한문 원문 제공 — 인용 가능(표점 DB 형태)' : r.era && r.era !== 'joseon' ? `원문 수록(${r.era === 'contemp' ? '현대' : r.era === 'modern' ? '근대' : '고대'} 자료) — 출전을 병기해 인용` : (r.meta || []).length ? '원문 수록(등록류 장계 등) — 출전·발신일 병기 인용' : '국역만 제공 — 역구성 한문은 학술 인용 불가'}. 조문이면 mode=sibling으로 형제 조 확인.`);
           if (r.status === 'image_only') return text(`[${q}] ${r.title}\n${(r.meta || []).map(([kk, v]) => `${kk}: ${v}`).join(' · ')}\n본문 텍스트 없음 — 원문 이미지(지면)로만 제공됩니다(미공개 아님). 원문 열람: ${jCite(q)}`);
           if (r.status === 'not_published') return text(`[${q}] ${r.title}\n본문이 공개되지 않았습니다 — 항목은 존재하고 URL도 유효하나 공개 범위 문제입니다. 재시도로 해결되지 않으며 국사편찬위원회 문의 대상. ${jCite(q)}`);
+          if (r.status === 'fetch_failed') return text(`[${q}] 조회 실패(기관 응답 끊김·지연: ${String(r.note || '').slice(0, 60)}) — 식별자 형식 문제가 아닌 일시 장애입니다(같은 주소가 다른 망에서는 열릴 수 있음). 잠시 후 재시도하거나 브라우저로 원문 열람: ${jItemUrl(q)} · 부재로 단정하지 마십시오.`); // v3.54
           return text(`[${q}] 조회 실패(${r.status}${r.note ? ': ' + r.note : ''}) — levelId와 경로(jlaw*=item/level.do)를 확인하십시오.`);
         }
         if (mode === 'sibling') {
