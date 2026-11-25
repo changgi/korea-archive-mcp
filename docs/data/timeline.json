@@ -1,5 +1,5 @@
 {
-"updated": "2026-11-25T01:38:44Z",
+"updated": "2026-11-25T01:55:39Z",
 "note": "구간 = 연대(4자리 연도·8자리 날짜·연호 연도 明治·大正·昭和·光武·隆熙·檀紀 환산) → 세기 → 왕조·시대명. 근거 순서 date → 제목 → 메타(생산·시대·출판). 세기·시대 구간은 시간축 근사 정렬",
 "timeline": [
 {
@@ -1142,25 +1142,35 @@
 },
 {
 "decade": "1940년대",
-"records": 40,
+"records": 47,
 "by_source": {
+"nara": 25,
 "archives": 4,
 "ndl": 1,
 "nedb": 4,
 "i815": 2,
 "nlna": 1,
 "ia": 2,
-"nara": 18,
 "koreanwar": 2,
 "oldnews": 5,
 "indy": 1
 },
 "by_kind": {
+"graphic": 15,
 "document": 21,
-"motion_picture": 11,
-"graphic": 8
+"motion_picture": 11
 },
 "samples": [
+{
+"title": "FICHE_156",
+"url": "https://catalog.archives.gov/id/373960610",
+"iiif": "https://korea-archive-mcp.vercel.app/iiif/nara/373960610/manifest.json"
+},
+{
+"title": "FICHE_562",
+"url": "https://catalog.archives.gov/id/400397386",
+"iiif": "https://korea-archive-mcp.vercel.app/iiif/nara/400397386/manifest.json"
+},
 {
 "title": "한국전쟁: 대만의 송산공항으로의 백 장군의 도착, 고량, 매촌동의 제8군, 한국전쟁 제29보병연대, 부산에서의 제1해병사단의 상륙 준비",
 "url": "https://www.archives.go.kr/next/newsearch/showDetailPopup.do?rc_code=1310377&rc_rfile_no=202311400025&rc_ritem_no=000000000150",
@@ -1175,29 +1185,19 @@
 "title": "한국전쟁, 미 8군; 한국전쟁, 군사고문단(KMAG)",
 "url": "https://www.archives.go.kr/next/newsearch/showDetailPopup.do?rc_code=1310377&rc_rfile_no=202311400037&rc_ritem_no=000000000044",
 "iiif": "https://korea-archive-mcp.vercel.app/iiif/rec/VVBNS8NAEP0ryx5EIV_bpB9JKSIIPYgg4k2klDbaYNvEJjWCCKmKFCrYi2Bp1PRg6aFiUAvFn-Mxu_0PTlosuoedmfdm5s3MObaxto-LjVLFONVtfMBhB2t4du9Hk1cWXLPnFofo2xRlokmYRf9xgNjlOPoI6HhKO6PVre2N_BrmcBk6EFVJgmuAm5ASMiGKJElymlcUQJuAVhzHsjVRdF1X-JUXjkzhuCHW9TMHPtfWY0K0K6a7qTtFo7pjWk1LKJvrjVKhZJb1HJEJNE2vQNw4NKp6oW7m_srNCcPRazEhLd98CAuGgGWi0IumIR08sn4XfXtfaDdPCIl3Zv4ANpzdTFgnoLceWqQBxCGSSak8UTPJbJwYZ_V8eteLPj0ajBB47KHFrlqIdXw6HLNhG0pUJQ0lqVi6DtLLk3O4BiGYEzA09KP3MaLtaxZAeb_Lnl6AKjqLO6Z4QviEvCfJmkQ0ksQXPw/manifest.json"
-},
-{
-"title": "흥남 철수, 한국",
-"url": "https://www.archives.go.kr/next/newsearch/showDetailPopup.do?rc_code=1310377&rc_rfile_no=202311400025&rc_ritem_no=000000000013",
-"iiif": "https://korea-archive-mcp.vercel.app/iiif/rec/TZDLSsNAFIZfZZiFq1xmktZioLjxAVy4EymlGU2wzcRkagQRGi3ShQs3QsFW46LFRYslKBTBl3GZmb6Dp60WB2bO5YP_nPkvcYydQ1yPGp5_zmJ8pGGBHbwYjuT1K1J5pnp9DS0eBsXHFGvYBUZ3SmVIfUgtYtmUlgghVlmnNnTb0PWECGPHNJMkMf6EjRNunEZmwC4EPEnMlsCMPZ7sMVH3m_s8bIeGy3ejRq3BXValNiV2pbIFdXTsN1kt4NX_41bAF6y1BGRzVkuEsATsW8w6xXwmX4bq8R59dz6RfJtDG8GV4681Kt47cjxR-RSp2zv1NPr9qsq66jlFS5qBDf1U3aQgHIDwxioNt6CEcAZBzgZFPkGy11VZimAgaAGqi7VL2zqlumUfENsh1AH_rn4A/manifest.json"
-},
-{
-"title": "337: TT Conferences, Binder No. 1, 1 Jan 1949 - 31 Dec 1950 [文書・図像類·デジタル] · 디지털 PID 11032793",
-"url": "https://dl.ndl.go.jp/pid/11032793",
-"iiif": "https://dl.ndl.go.jp/api/iiif/11032793/manifest.json"
 }
 ]
 },
 {
 "decade": "1950년대",
-"records": 295,
+"records": 298,
 "by_source": {
-"nara": 53,
+"nara": 57,
 "europeana": 13,
 "ia": 29,
 "tna": 20,
 "gallery": 3,
-"awm": 46,
+"awm": 45,
 "archives": 24,
 "commons": 7,
 "gallica": 2,
@@ -1214,9 +1214,9 @@
 "nedb": 1
 },
 "by_kind": {
-"motion_picture": 38,
-"graphic": 79,
-"document": 178
+"motion_picture": 40,
+"graphic": 78,
+"document": 180
 },
 "samples": [
 {
@@ -1287,7 +1287,7 @@
 },
 {
 "decade": "1960년대",
-"records": 21,
+"records": 22,
 "by_source": {
 "ia": 10,
 "i815": 2,
@@ -1295,12 +1295,13 @@
 "ktv": 2,
 "gonghun": 2,
 "much": 1,
-"awm": 1,
-"nara": 2
+"nara": 3,
+"awm": 1
 },
 "by_kind": {
 "document": 18,
-"graphic": 3
+"graphic": 3,
+"motion_picture": 1
 },
 "samples": [
 {
@@ -1369,16 +1370,16 @@
 },
 {
 "decade": "1970년대",
-"records": 14,
+"records": 16,
 "by_source": {
 "nzarch": 1,
 "earchive": 1,
 "ia": 7,
 "ktv": 1,
-"nara": 4
+"nara": 6
 },
 "by_kind": {
-"document": 10,
+"document": 12,
 "graphic": 4
 },
 "samples": [
@@ -1411,18 +1412,19 @@
 },
 {
 "decade": "1980년대",
-"records": 23,
+"records": 25,
 "by_source": {
 "ktv": 6,
+"nara": 9,
 "nzarch": 1,
 "europeana": 1,
 "gallica": 1,
 "ia": 5,
 "nlk": 1,
-"nara": 8
+"awm": 1
 },
 "by_kind": {
-"document": 17,
+"document": 19,
 "motion_picture": 1,
 "map": 1,
 "graphic": 4
@@ -1432,6 +1434,11 @@
 "title": "[1770호] 교황 방한 구성",
 "url": "https://www.ehistory.go.kr/view/movie?mediasrcgbn=KV&mediaid=30000297&mediadtl=42365&mediagbn=DK",
 "iiif": "https://korea-archive-mcp.vercel.app/iiif/rec/q1YqVrKKVsouKVOK1VEqUbJSijY0Nzd4O2NHrMKrrRPezlyp8HrDyrdT5wB5a960bFTSUUoBKjK0tLDUMzTQMzQECmQCBYBUKZDKKCkpKLbS1y8vL9dLzcgsLskvqtRLz9fLLtIvy0wt18_NB1L2uakpmYnFRcnpSXm23mFqYG5miq2xARAYWZpDBFJKcmxNjIzNTCFckFoXb6A1BUBr3sxofNPcqPCoYZfC6_U7Xm3e-mrDHIXXPQ1Ad77u3PKmawlQXR5QHchbOkq5EPcVAqnXG-a82rRG4XVHy5sFjQpvZk94M28pUCoR5HEjAyMzXUNDXSPjEAMzK2NLKxNzpVoA/manifest.json"
+},
+{
+"title": "Korea",
+"url": "https://catalog.archives.gov/id/492062159",
+"iiif": "https://korea-archive-mcp.vercel.app/iiif/nara/492062159/manifest.json"
 },
 {
 "title": "Number 032, August 1983 - South-North Dialogue in Korea - International Cultural Socie [May be restricted] ·주간인덱스",
@@ -1447,28 +1454,23 @@
 "title": "La Corée et l'Occident : diffusion de la culture française en Corée [Gallica 원문]",
 "url": "https://gallica.bnf.fr/ark:/12148/bpt6k3387193p",
 "iiif": "https://korea-archive-mcp.vercel.app/iiif/rec/TZA9S8RAEIb_yjCNTe72NhsuyZYK2gg2dscVmy9dbt2Lm00lgoKFpb0iNiLCFWIl194_sTT5Ec6pAat3hnee-brABuUMT5QxOlc4D9CjxEMFe0u3eS2h9GB2jvJcF6X1IKHQVdU2emmhKMEoyFvjW1dC5ZTdvCjdEGIHeHbw2xb6-7tu9THHAAvqztMkplBTqNxCMh7yKGF5JqI0FmnIBZktmafe141k7G-5cWarceXYPyar_XQhRBLzVNRE1UQNMz-v1rBr93-0UH7AqcpS1XBwgGeUkZyTdG8PX-8r6G5v-qfr7dL94zNZavuScBJOR5yPQnHMhYwmMorx8hs/manifest.json"
-},
-{
-"title": "KOREA",
-"url": "https://archive.org/details/bwb_S0-BIQ-409",
-"iiif": "https://iiif.archive.org/iiif/3/bwb_S0-BIQ-409/manifest.json"
 }
 ]
 },
 {
 "decade": "1990년대",
-"records": 37,
+"records": 44,
 "by_source": {
 "archives": 6,
 "commons": 1,
 "ndl": 1,
 "nlk": 3,
 "ktv": 13,
-"ia": 3,
-"nara": 10
+"nara": 17,
+"ia": 3
 },
 "by_kind": {
-"document": 20,
+"document": 27,
 "graphic": 13,
 "motion_picture": 4
 },
@@ -1502,7 +1504,7 @@
 },
 {
 "decade": "2000년대",
-"records": 35,
+"records": 37,
 "by_source": {
 "archives": 4,
 "ktv": 5,
@@ -1513,11 +1515,11 @@
 "ndl": 1,
 "nlk": 1,
 "ia": 7,
-"europeana": 2,
-"nara": 1
+"nara": 3,
+"europeana": 2
 },
 "by_kind": {
-"document": 16,
+"document": 18,
 "graphic": 19
 },
 "samples": [
@@ -1644,9 +1646,9 @@
 },
 {
 "decade": "연대 미상",
-"records": 103,
+"records": 79,
 "by_source": {
-"nara": 41,
+"nara": 17,
 "seoul": 12,
 "europeana": 5,
 "i815": 6,
@@ -1663,9 +1665,9 @@
 "koreanwar": 3
 },
 "by_kind": {
-"document": 62,
-"graphic": 35,
-"motion_picture": 6
+"document": 47,
+"graphic": 29,
+"motion_picture": 3
 },
 "samples": [
 {
@@ -1674,24 +1676,24 @@
 "iiif": "https://korea-archive-mcp.vercel.app/iiif/nara/22348/manifest.json"
 },
 {
-"title": "FICHE_156",
-"url": "https://catalog.archives.gov/id/373960610",
-"iiif": "https://korea-archive-mcp.vercel.app/iiif/nara/373960610/manifest.json"
-},
-{
-"title": "FICHE_562",
-"url": "https://catalog.archives.gov/id/400397386",
-"iiif": "https://korea-archive-mcp.vercel.app/iiif/nara/400397386/manifest.json"
-},
-{
-"title": "EVACUATION, HUNGNAM, KOREA",
-"url": "https://catalog.archives.gov/id/22397",
-"iiif": "https://korea-archive-mcp.vercel.app/iiif/nara/22397/manifest.json"
-},
-{
 "title": "[기록건·사진] 여의도공원운영위원회소위원회개최",
 "url": "https://archives.seoul.go.kr/item/1107943",
 "iiif": "https://korea-archive-mcp.vercel.app/iiif/rec/hVDLTsJAFP2VyaxLnwRCv8MdYUG0kUaRR4sbYwJkNCSQwM6mTgkmCJtZVB6xuvRTXHau_-Bta3Tp6pz7Ovfce0M9atep53QGl7ShUJ_atJ4msXyK0pfDxyuMBWxZg8CDgCiQc5buj_C4gPAAwQg4Q_4VzuB-9svTmMORU4WeoRSCi2AYerVWtjAaYNTy_a5na1qzf9pyrx1Pzber5x31oq-5vtPW_vq72A-MQ5gUpnAH-Ry-E5hyuRGwmZDCkLx7g-2QAFune0ZkPM_zY0GKsXzmR2G3-u-a5UKKJCNRANM1urhCF8WLFNouzuohyJinO0HkhMFqRDKh5TOWmtkTTd2slAyjZFonesW2ana5Sm-_AQ/manifest.json"
+},
+{
+"title": "[기록건·사진] 여의도 개발에 따른 전화수요조사",
+"url": "https://archives.seoul.go.kr/item/1186930",
+"iiif": "https://korea-archive-mcp.vercel.app/iiif/rec/VZDNSsNQEIVf5XJXCmnzJ9HmOdyVLooGG7Q_NqkbEareQkDELiKpMZFUaIuQRayCwaWP4jJ38g5OewvF1WGYM2e-mUvqULNOHas7OKMNibrUpPUiz_g0Lt4_f77gJoUFaxAIUogn_IGRIot4FkEwJtzP-CwnkLDyyQdvAqEP0wwnqESPMQfFRlHVA6OmK1gNsGq5bs8xZbnZP2rZF5ZTXa-unnSrp33Zdq22vPX30A8sgjAXRPA8Jr_DbwJ3EZ-nMPcIAmGxQULUYESElZikvI1hMfzf-2BleL_O2CQuk-1p8DoqH9_EgHDuaLuI0UEM8SCJtsVd5ygr1zIl3GOQXBNkg5cZtpqrF2qKZlRUtaLph4ph6jVzb59e_QE/manifest.json"
+},
+{
+"title": "[기록건·사진] 여의도배수분구",
+"url": "https://archives.seoul.go.kr/item/1203593",
+"iiif": "https://korea-archive-mcp.vercel.app/iiif/rec/VVBNS8NAFPwry54U8h2NdH-Ht9JD0WCD1tYm9SJCKytEPFSR2qCJraDtJUIaWw0e_Skes6__wWdTFGFheMy8nZl3Ql3KytS1G-0DWpGoRxkt51kiHqN8Ovt8h7MYJrxCYBBDFIgeF0kCfiDeeD6PqUR3UY_gIOiGZm6WTJzaONU8r-kyVa22dmrOse0qSwtlr6Hst1THs-vqn76JeuAh3GWFM9xfka_OB4HLUIxjGPtk0Q_QFRMBfyKFiDCSv87xrbhZR0wiDLjcXP2Tjv5pkP2V6aqlaRB0xc100YuxzBr0fbi9hjSUxHkmhhfYuyiLJAxe1k1Zx6yHmLW4lkTrRfkjBJGEeRoT4XMYdQkWgIdnpKo_9zQ0w5J1XTbMbc1iZoltbNHTbw/manifest.json"
+},
+{
+"title": "[기록건·사진] 여의도배수분구",
+"url": "https://archives.seoul.go.kr/item/1214560",
+"iiif": "https://korea-archive-mcp.vercel.app/iiif/rec/VVBNS8NAFPwry54U8p0acX-Ht9JD0WCD1tYm9SJCKxEiHqpIbdDEVtD2skIaWw0e_Skes6__wWdTFGFheMy8nZl3Ql3KytS1G-0DWpGoRxkt51kiHuN8Ovt8hzMOE79CYMAhDkXPF0kCQSje_HzOqUR3UY_gIOiGXtqwNJzaONU8r-kyVa22dmrOse0qSwtlr6Hst1THs-vqn76JevAjuMsKZ7i_Il-dDwKXkRhzGAdk0Q_RFROB_0QKEWEkf53jW3GzjpjEGHC5ufonHf3TIPsr01VL0yDsipvposexzBr0A7i9hjSSxHkmhhfYuyiLJAxe1k3ZwKyHmLW4lkTrRfkjBJFEecqJCHwYdQkWgIdnpKo_9zQ0w5J1XTbMbc1i5hYrbdLTbw/manifest.json"
 }
 ]
 }

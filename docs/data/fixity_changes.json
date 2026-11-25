@@ -1,7 +1,7 @@
 {
-"updated": "2026-11-25T01:38:44Z",
-"watched": 842,
-"changed_records": 6,
+"updated": "2026-11-25T01:55:39Z",
+"watched": 844,
+"changed_records": 9,
 "suspected_source_changes": 0,
 "note": "지문 = 원 기관 응답(우리 판독기 정규형, 판독 시각 등 변동 항목 제외)의 SHA-256-16. pv = 판독기(route.js·lib) 지문. 이력은 지우지 않는다.",
 "changes": [
@@ -115,6 +115,63 @@
 "at": "2026-11-25",
 "h": "0bd401cd8972351e",
 "pv": "469ca1a54c52",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "commons:https://commons.wikimedia.org/wiki/File%3AHungnam_evacuation_map.jpg",
+"title": "Hungnam evacuation map.jpg",
+"url": "https://commons.wikimedia.org/wiki/File%3AHungnam_evacuation_map.jpg",
+"history": [
+{
+"at": "2026-11-24",
+"h": "475accca21eba930",
+"pv": "1033444958fe",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "b0df727c0eaa8beb",
+"pv": "628ea0c06128",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "commons:https://commons.wikimedia.org/wiki/File%3AUSS_Begor_(APD-127)_off_Hungnam_on_24_December_1950_(80-G-K-11769).jpg",
+"title": "USS Begor (APD-127) off Hungnam on 24 December 1950 (80-G-K-11769).jpg",
+"url": "https://commons.wikimedia.org/wiki/File%3AUSS_Begor_(APD-127)_off_Hungnam_on_24_December_1950_(80-G-K-11769).jpg",
+"history": [
+{
+"at": "2026-11-24",
+"h": "9d8d7296f726b965",
+"pv": "1033444958fe",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "276f8351d4bde3cc",
+"pv": "628ea0c06128",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "commons:https://commons.wikimedia.org/wiki/File%3AUSS_Begor_(APD-127)_off_Hungnam_on_24_December_1950_(80-G-K-11771).jpg",
+"title": "USS Begor (APD-127) off Hungnam on 24 December 1950 (80-G-K-11771).jpg",
+"url": "https://commons.wikimedia.org/wiki/File%3AUSS_Begor_(APD-127)_off_Hungnam_on_24_December_1950_(80-G-K-11771).jpg",
+"history": [
+{
+"at": "2026-11-24",
+"h": "b75231d0d702bb7c",
+"pv": "1033444958fe",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "04af3719ec8e836b",
+"pv": "628ea0c06128",
 "kind": "판독기 변경 동반"
 }
 ]
