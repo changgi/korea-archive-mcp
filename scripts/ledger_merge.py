@@ -959,6 +959,7 @@ def build_media(recs_all):
         elif o.get("date"): it["issued"] = {"literal": o["date"]}
         if o.get("summary") or o.get("summary_composed"): it["abstract"] = (o.get("summary") or o["summary_composed"])[:1000]
         if o.get("rights_view"): it["license"] = o["rights_view"]; it["note"] += f" · 권리 근거: {o.get('rights_basis', '')}"
+        if not o.get("date") and o.get("date_derived"): it["note"] += f" · 날짜 {o['date_derived']}는 파생(원 기관 날짜 칸 아님) — 근거: {o.get('date_basis', '')}"  # v3.7.1 인용자가 기관 날짜로 오인하지 않게
         csl.append(it)
     json.dump(csl, open(os.path.join(D, "records.csl.json"), "w", encoding="utf-8"), ensure_ascii=False)
     # 3) RIS — EndNote·RefWorks·Zotero
@@ -972,6 +973,7 @@ def build_media(recs_all):
             if ser(o): L.append(f"T2  - {ser(o)}")
             if o.get("url"): L.append(f"UR  - {o['url']}")
             if o.get("summary"): L.append(f"AB  - {o['summary'][:1000]}")
+            if not o.get("date") and o.get("date_derived"): L.append(f"N1  - 날짜 {o['date_derived']}는 파생(원 기관 날짜 칸 아님) — 근거: {o.get('date_basis', '')}")  # v3.7.1
             L += [f"N1  - KOREA ARCHIVE 통합검색 발견 원장 — 처음 발견 {o['first_seen'][:10]} · 출처 {'+'.join(o['sources'])}", "ER  - ", ""]
             f.write("\n".join(L) + "\n")
     # 5) v2.53 OAI-PMH oai_dc — 아카이브·도서관 수집기(하베스터)가 읽는 표준 교환형(Dublin Core 15요소). 정적 ListRecords 1건(파생 계층·날짜는 [파생] 유지)
@@ -1000,6 +1002,7 @@ def build_media(recs_all):
             L = [f"@misc{{ka_{bk},", f"  title = {{{bx(o['title'])}}},", f"  organization = {{{bx(inst(o))}}},"]
             if yr(o): L.append(f"  year = {{{yr(o)}}},")
             if o.get("date"): L.append(f"  date = {{{bx(o['date'])}}},")
+            if not o.get("date") and o.get("date_derived"): L.append(f"  addendum = {{{bx('날짜 ' + o['date_derived'] + '는 파생(원 기관 날짜 칸 아님) — 근거: ' + o.get('date_basis', ''))}}},")  # v3.7.1
             if o.get("url"): L.append(f"  url = {{{o['url']}}},")
             if o.get("id"): L.append(f"  number = {{{bx(o['id'])}}},")
             if ser(o): L.append(f"  series = {{{bx(ser(o))}}},")
