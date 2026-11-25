@@ -1167,12 +1167,15 @@ LOD_NLK = "http://lod.nl.go.kr/resource/"  # v3.23 국립중앙도서관 LOD 전
 # v3.24 인물 사전 — 원장 실측 2건 이상(2026-11-25), 기관 전거(KAC)가 있으면 잇는다. 표제·인물/주제/색인어 칸에서만(요약 본문 제외).
 PERSONS = {"맥아더": (r"MacArthur|Mac Arthur|맥아더|맥아-더|麥克阿瑟|マッカーサー", "KAC201619806"),
            "이승만": (r"이승만|李承晩|李承晚|Syngman Rhee|Rhee,\s?Syngman", "KAC200506341"),
-           "리지웨이": (r"Ridgway|리지웨이", "")}
+           "리지웨이": (r"Ridgway|리지웨이", ""),
+           "영조": (r"英祖|조선\s?영조", "")}  # v3.30 한글 '영조' 단독은 일반어 '營造'와 겹쳐 글자 매칭에서 제외 — 장서각 인물 전거(UCI)로 연결
+PERSON_UCI = {"영조": "G002+AKS-KHF_12C601C870FFFFB1694X0"}  # v3.30 한국역대인물 UCI(장서각 태깅) — 2026-11-25 원장 실측 3건(jsg K2-2841·K2-3556·K2-5210)이 같은 UCI
 _PE = {k: re.compile(r"(?<![A-Za-z가-힣])(?:" + v[0] + r")(?![a-z])", re.I) for k, v in PERSONS.items()}
 PERSON_META = re.compile(r"인물|인명|person|subject|주제|색인어", re.I)
 def persons(o):
     t = " ".join([str(o.get("title") or "")] + [str(m[1]) for m in (o.get("meta") or []) if m and len(m) > 1 and PERSON_META.search(str(m[0]))])
-    return {k for k, rx in _PE.items() if rx.search(t)}
+    uc = set(((o.get("authority") or {}).get("persons") or {}).values())
+    return {k for k, rx in _PE.items() if rx.search(t)} | {k for k, u in PERSON_UCI.items() if u in uc}
 
 def build_persons(recs):
     """v3.24 persons.json·persons.jsonld(SKOS — owl:sameAs = 국립중앙도서관 LOD 전거 + 그 LOD의 외부 전거)·인물별 IIIF 컬렉션 person/<슬러그>.json(연대순). 기록은 누적."""
@@ -1183,7 +1186,7 @@ def build_persons(recs):
         rs = sorted({o["key"] for o in recs if n in (o.get("persons_std") or [])} | set(((P0.get("persons") or {}).get(n) or {}).get("records") or []))
         sa = ([LOD_NLK + kac] + list((AUTH.get(kac) or {}).get("sameAs") or [])) if kac else []
         slug = re.sub(r"[^a-z0-9]+", "-", next((x for x in rx.split("|") if re.match(r"^[A-Za-z]", x)), n).lower()).strip("-")
-        e = {"labels": [x for x in rx.split("|") if "\\" not in x and "(" not in x], "authority": kac, "sameAs": sa, "records": rs, "sources": sorted({k.split(":")[0] for k in rs})}
+        e = {"labels": [x for x in rx.split("|") if "\\" not in x and "(" not in x], "authority": kac, **({"uci": PERSON_UCI[n]} if n in PERSON_UCI else {}), "sameAs": sa, "records": rs, "sources": sorted({k.split(":")[0] for k in rs})}
         L = sorted((by[k] for k in rs if k in by), key=lambda o: (dkey(o), o["key"]))
         items = [{"id": mf, "type": "Manifest", "label": {"ko": [f"{SRC_NAME.get(o['key'].split(':')[0], o['key'].split(':')[0])} — {o['title'][:100]}" + (f" ({dkey(o)})" if dkey(o) != "9999" else "")]}}
                  for o in L for mf in [(o.get("iiif") if not o.get("iiif_status") else "") or o.get("iiif_built")] if mf]
@@ -1198,7 +1201,7 @@ def build_persons(recs):
     sch = f"{PAGES}persons.jsonld"
     g = [{"@id": sch, "@type": "skos:ConceptScheme", "skos:prefLabel": {"@value": "KOREA ARCHIVE 인물 사전", "@language": "ko"}}] + [
         {"@id": f"{sch}#" + urllib.parse.quote(n, safe=""), "@type": ["skos:Concept", "rico:Person"], "skos:inScheme": {"@id": sch}, "skos:prefLabel": {"@value": n, "@language": "ko"},
-         "skos:altLabel": [x for x in e["labels"] if x != n], "owl:sameAs": [{"@id": x} for x in e["sameAs"]], **({"rdfs:seeAlso": {"@id": e["collection"]}} if e.get("collection") else {}), "ka:records": len(e["records"])} for n, e in out.items()]
+         "skos:altLabel": [x for x in e["labels"] if x != n], **({"skos:notation": {"@value": e["uci"], "@type": "ka:UCI"}} if e.get("uci") else {}), "owl:sameAs": [{"@id": x} for x in e["sameAs"]], **({"rdfs:seeAlso": {"@id": e["collection"]}} if e.get("collection") else {}), "ka:records": len(e["records"])} for n, e in out.items()]
     json.dump({"@context": {"skos": "http://www.w3.org/2004/02/skos/core#", "rico": "https://www.ica.org/standards/RiC/ontology#", "owl": "http://www.w3.org/2002/07/owl#", "rdfs": "http://www.w3.org/2000/01/rdf-schema#", "ka": f"{PAGES}#"}, "@graph": g},
               open(os.path.join(D, "persons.jsonld"), "w", encoding="utf-8"), ensure_ascii=False, indent=0)
     return sum(1 for e in out.values() if e["records"])
@@ -1234,14 +1237,14 @@ def dict_candidates(recs):
             if not re.match(r"^(인물\(기관 전거\)|인명\(장서각 태깅\)|인물)$", str(k)): continue
             for t in re.split(r"\s·\s|;", str(v)):
                 t = t.split("=")[0].strip(" .")
-                if 2 <= len(t) <= 40 and not any(rx.search(t) for rx in _PE.values()): pc.setdefault(t, set()).add(o["key"])
+                if 2 <= len(t) <= 40 and t not in PERSONS and not any(rx.search(t) for rx in _PE.values()): pc.setdefault(t, set()).add(o["key"])
     C0.setdefault("persons", {})
     for v, ks in pc.items():
         if len(ks) < 2: continue
         e = C0["persons"].setdefault(v, {"first_seen": today, "records": []})
         e["records"] = sorted(set(e["records"]) | ks); e["sources"] = sorted({k.split(":")[0] for k in e["records"]}); e["last_seen"] = today
     for v, e in C0["persons"].items():
-        if any(rx.search(v) for rx in _PE.values()) and not e.get("adopted"): e["adopted"] = today
+        if (v in PERSONS or any(rx.search(v) for rx in _PE.values())) and not e.get("adopted"): e["adopted"] = today  # v3.30 표준명 일치도 채택
     for v, e in C0["places"].items():  # 이후 사전에 들어간 후보는 지우지 않고 표시
         if any(rx.search(v) for rx in _PL.values()) and not e.get("adopted"): e["adopted"] = today
     C0["updated"] = dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")

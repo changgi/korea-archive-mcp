@@ -58,6 +58,7 @@ assert _ft("인물(기관 전거)", "MacArthur, Douglas=KAC201619806 · Ridgway,
 assert _pl({"title": "서울 前面을 强化?", "meta": [["장소(기관 전거)", "흥남[興南]=KSH2000026697"]]}) == {"서울", "흥남"}
 _pe = g["persons"]  # v3.24 인물 사전
 assert _pe({"title": "GEN MATTHEW B RIDGWAY, YONGPYANG"}) == {"리지웨이"} and _pe({"title": "x", "meta": [["인물(기관 전거)", "MacArthur, Douglas=KAC201619806"]]}) == {"맥아더"} and not _pe({"title": "x", "summary": "MacArthur"})
+assert _pe({"title": "영조물 관리 대장"}) == set() and _pe({"title": "존숭도감의궤", "authority": {"persons": {"영조": "G002+AKS-KHF_12C601C870FFFFB1694X0"}}}) == {"영조"} and _pe({"title": "英祖實錄"}) == {"영조"}  # v3.30 UCI 연결·일반어 제외
 _io = g["iiif_origin"]  # v3.9 Gallica 원 기관 IIIF — 디지털 원문 ark만(카탈로그 cb ark 아님), 수집 경로 iiif가 있으면 두지 않음
 assert _io({"url": "http://gallica.bnf.fr/ark:/12148/btv1b2700138b"})["manifest"] == "https://gallica.bnf.fr/iiif/ark:/12148/btv1b2700138b/manifest.json"
 assert _io({"url": "https://gallica.bnf.fr/ark:/12148/cb384972039"}) is None and _io({"url": "https://gallica.bnf.fr/ark:/12148/bpt6k1", "iiif": "x"}) is None
