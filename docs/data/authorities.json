@@ -1,0 +1,110 @@
+{
+ "note": "국립중앙도서관 LOD 전거 — 원장 기록의 기관 전거 번호(KSH 주제명표목·KAC 인명/단체)와 LOD 페이지의 외부 전거 연결(owl:sameAs). 누적, 지우지 않음.",
+ "authorities": {
+  "KAC200506341": {
+   "id": "KAC200506341",
+   "term": "이승만",
+   "uri": "http://lod.nl.go.kr/resource/KAC200506341",
+   "page": "https://lod.nl.go.kr/page/KAC200506341",
+   "records": [
+    "oldnews:CNTS-00134989837"
+   ],
+   "label_lod": "이승만",
+   "sameAs": [
+    "http://d-nb.info/gnd/118788566",
+    "http://id.loc.gov/authorities/names/n80079491",
+    "http://id.ndl.go.jp/auth/entity/00626760",
+    "http://viaf.org/viaf/46770135",
+    "http://www.wikidata.org/entity/Q171684"
+   ],
+   "status": "ok",
+   "checked": "2026-11-25"
+  },
+  "KAC201619806": {
+   "id": "KAC201619806",
+   "term": "MacArthur, Douglas",
+   "uri": "http://lod.nl.go.kr/resource/KAC201619806",
+   "page": "https://lod.nl.go.kr/page/KAC201619806",
+   "records": [
+    "oldnews:CNTS-00133841567"
+   ],
+   "label_lod": "Mac Arthur, Douglas",
+   "sameAs": [
+    "http://d-nb.info/gnd/11878093X",
+    "http://id.loc.gov/authorities/names/n79054196",
+    "http://id.ndl.go.jp/auth/entity/00524026",
+    "http://viaf.org/viaf/41848578",
+    "http://www.wikidata.org/entity/Q127417"
+   ],
+   "status": "ok",
+   "checked": "2026-11-25"
+  },
+  "KSH1998022700": {
+   "id": "KSH1998022700",
+   "term": "미국(국명)[美國]",
+   "uri": "http://lod.nl.go.kr/resource/KSH1998022700",
+   "page": "https://lod.nl.go.kr/page/KSH1998022700",
+   "records": [
+    "oldnews:CNTS-00134989837"
+   ],
+   "label_lod": "미국(국명)[美國]",
+   "status": "ok",
+   "checked": "2026-11-25"
+  },
+  "KSH2000004373": {
+   "id": "KSH2000004373",
+   "term": "영국(국명)[英國]",
+   "uri": "http://lod.nl.go.kr/resource/KSH2000004373",
+   "page": "https://lod.nl.go.kr/page/KSH2000004373",
+   "records": [
+    "oldnews:CNTS-00095723323",
+    "oldnews:CNTS-00095729928"
+   ],
+   "label_lod": "영국(국명)[英國]",
+   "status": "ok",
+   "checked": "2026-11-25"
+  },
+  "KSH2000010145": {
+   "id": "KSH2000010145",
+   "term": "한국(국명)[韓國]",
+   "uri": "http://lod.nl.go.kr/resource/KSH2000010145",
+   "page": "https://lod.nl.go.kr/page/KSH2000010145",
+   "records": [
+    "oldnews:CNTS-00095722593",
+    "oldnews:CNTS-00095729484"
+   ],
+   "label_lod": "한국(국명)[韓國]",
+   "sameAs": [
+    "http://id.loc.gov/authorities/subjects/sh85073008",
+    "http://www.wikidata.org/entity/Q884"
+   ],
+   "status": "ok",
+   "checked": "2026-11-25"
+  },
+  "KSH2000020573": {
+   "id": "KSH2000020573",
+   "term": "중공군[中共軍]",
+   "uri": "http://lod.nl.go.kr/resource/KSH2000020573",
+   "page": "https://lod.nl.go.kr/page/KSH2000020573",
+   "records": [
+    "oldnews:CNTS-00133841567"
+   ],
+   "label_lod": "중공군[中共軍]",
+   "status": "ok",
+   "checked": "2026-11-25"
+  },
+  "KSH2000026697": {
+   "id": "KSH2000026697",
+   "term": "흥남[興南]",
+   "uri": "http://lod.nl.go.kr/resource/KSH2000026697",
+   "page": "https://lod.nl.go.kr/page/KSH2000026697",
+   "records": [
+    "oldnews:CNTS-00133841567"
+   ],
+   "label_lod": "흥남[興南]",
+   "status": "ok",
+   "checked": "2026-11-25"
+  }
+ },
+ "updated": "2026-11-25T10:32:36Z"
+}
