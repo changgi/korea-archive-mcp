@@ -42,6 +42,8 @@ assert _eb({"key": "nlk:2", "iiif_kind": _K})["type"] == "미구축" and _eb({"k
 _pl = g["places"]  # v3.13 지명 사전 — 다국어 표기 한 표준명, 오탐(어중·일반어) 방지
 assert _pl({"title": "EVACUATION OF HUNGNAM, KOREA"}) == {"흥남"} == _pl({"title": "흥남철수작전 당시 흥남항 전경 사진"}) and _pl({"title": "AMPHIBIOUS FORCE LANDING, D-DAY, INCHON"}) == {"인천"}
 assert not _pl({"title": "Seoulite 세계대전 원산지 개성적 수원지"}) and _pl({"title": "x", "meta": [["취급지명", "Hungnam[흥남]"]]}) == {"흥남"} and not _pl({"title": "x", "summary": "Hungnam"})
+assert _pl({"title": "[국외문화유산] 진주선 — 미국"}) == set() and _pl({"title": "增修崇慶州志 卷一"}) == set() and _pl({"title": "경주지형도(慶州地形圖)"}) == {"경주"}  # v3.15 오탐 규칙
+assert _pl({"title": "REFUGEES RESTING NEAR THE 38TH PARALLEL"}) == {"38선"} and _pl({"title": "한국전쟁 초기 진주시의 60퍼센트"}) == {"진주"} and _pl({"title": "한미 협력 강화 방안"}) == set() and _pl({"title": "강화 청련사 — 인천 강화군"}) == {"강화", "인천"}
 _io = g["iiif_origin"]  # v3.9 Gallica 원 기관 IIIF — 디지털 원문 ark만(카탈로그 cb ark 아님), 수집 경로 iiif가 있으면 두지 않음
 assert _io({"url": "http://gallica.bnf.fr/ark:/12148/btv1b2700138b"})["manifest"] == "https://gallica.bnf.fr/iiif/ark:/12148/btv1b2700138b/manifest.json"
 assert _io({"url": "https://gallica.bnf.fr/ark:/12148/cb384972039"}) is None and _io({"url": "https://gallica.bnf.fr/ark:/12148/bpt6k1", "iiif": "x"}) is None

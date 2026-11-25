@@ -1093,7 +1093,10 @@ PLACES = {"흥남": r"흥남|興南|Hungnam|Hŭngnam", "함흥": r"함흥|咸興
           "인천": r"인천|제물포|仁川|Inchon|Incheon|Chemulpo", "서울": r"서울|경성|京城|漢城|Seoul|Keijo", "부산": r"부산|釜山|Pusan|Busan", "평양": r"평양|平壤|平壌|Pyongyang|P'yŏngyang",
           "원산": r"원산(?!지)|元山|Wonsan", "대구": r"대구|大邱|Taegu|Daegu", "개성": r"개성(?![적이을은있])|開城|Kaesong|Gaeseong", "판문점": r"판문점|板門店|Panmunjom", "낙동강": r"낙동강|洛東江|Naktong|Nakdong",
           "가평": r"가평|加平|Kapyong|Gapyeong", "제주": r"제주|濟州|Cheju|Jeju", "김포": r"김포|金浦|Kimpo|Gimpo", "수원": r"수원(?!지)|水原|Suwon", "대전": r"대전|大田|Taejon|Daejeon",
-          "영등포": r"영등포|Yongdungpo|Yeongdeungpo", "여의도": r"여의도|汝矣島|Yeouido|Yoido", "한강": r"한강|漢江|Han River"}
+          "영등포": r"영등포|Yongdungpo|Yeongdeungpo", "여의도": r"여의도|汝矣島|Yeouido|Yoido", "한강": r"한강|漢江|Han River",
+          # v3.15 원장 실측 2건 이상 추가(2026-11-25) — 오탐 규칙: 진주선(유물명)·增修崇慶州志(중국 숭경주)·원주김씨(본관)는 지명 아님
+          "38선": r"38선|38th Parallel|三十八度線", "진주": r"진주(?![선알목])|晉州|晋州|Chinju|Jinju", "경주": r"경주|(?<!崇)慶州|Kyongju|Gyeongju", "의정부": r"의정부|議政府|Uijongbu|Uijeongbu",
+          "강화": r"강화도|강화군|江華|Kanghwa|Ganghwa", "문산": r"문산|汶山|Munsan", "용평": r"Yongpyang|Yongp'yang", "광주": r"광주(?!김씨)|光州|Kwangju|Gwangju"}
 _PL = {k: re.compile(r"(?<![A-Za-z가-힣])(?:" + v + r")(?![a-z])", re.I) for k, v in PLACES.items()}
 PLACE_META = re.compile(r"^(장소|취급지명|연관정보|지명.*|place.*|Place made|관련사건|생산지|촬영지|위치)$", re.I)
 def places(o):
