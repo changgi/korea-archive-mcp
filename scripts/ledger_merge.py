@@ -907,16 +907,21 @@ def build_query_records(prov, bykey):
             items.append({"id": mf, "type": "Manifest", "label": {"none": [o["title"][:120] + (f" ({o['date']})" if o.get("date") else "")]}})
         args = json.dumps(e["args"], ensure_ascii=False, sort_keys=True) if e.get("args") is not None else ""
         resp = e.get("responses", [])
+        nfound = len(items)
+        if not items:  # v3.49 발견 0건 질의도 질의·회신 증거 — 빈 컬렉션 대신 질의 자체를 기록 카드 매니페스트로(IIIF가 없는 것은 만들어 구축). 발견 기록 수는 0 그대로
+            env = {"s": ["KOREA ARCHIVE 통합검색"], "t": f"질의 기록 — {qlabel(e)}"[:160], "d": (e.get("first") or "")[:10], "i": f"질의 지문 {e['ak']}",
+                   "u": f"{PAGES}q/{e['ak']}.json", "p": f"질의·회신 축적 › {e['tool']}", "n": "질의 기록(발견 0건)", "m": "", "q": qlabel(e)[:80], "at": (e.get("first") or "")[:19]}
+            items = [{"id": f"{ORIGIN}/iiif/rec/{tok(env)}/manifest.json", "type": "Manifest", "label": {"ko": [f"질의 기록 카드 — {qlabel(e)[:100]} (발견 0건)"]}}]
         md = [L1v("도구", e["tool"]), L1v("질의 인자", args), L1v("질의 지문(ak)", e["ak"]), L1v("처음 질의", e["first"]), L1v("마지막 질의", e["last"]),
-              L1v("누적 호출", e["calls"]), L1v("회신 판 수", len(resp)), L1v("발견 기록 수", len(items))] + ([L1v("판독 대상 기록", ", ".join(e["read_records"][:5]))] if e.get("read_records") else [])
+              L1v("누적 호출", e["calls"]), L1v("회신 판 수", len(resp)), L1v("발견 기록 수", nfound)] + ([L1v("항목", "발견 기록 0건 — 질의 자체를 기록 카드로(질의도 현용기록, 회신 원문은 queries/)")] if not nfound else []) + ([L1v("판독 대상 기록", ", ".join(e["read_records"][:5]))] if e.get("read_records") else [])
         md += [L1v(f"회신 판 {i + 1}", f"지문 {r['h']} · {r['first'][:16]}~{r['last'][:16]} · {r['seen']}회 · {r['bytes']}B · 원문 queries/{r['month']}.jsonl.gz") for i, r in enumerate(resp[:20])]
         col = {"@context": "http://iiif.io/api/presentation/3/context.json", "id": f"{PAGES}q/{e['ak']}.json", "type": "Collection",
                "label": {"ko": [f"질의 발굴 기록 — {qlabel(e)}"]},
-               "summary": {"ko": [f"KOREA ARCHIVE 통합검색 질의 한 건이 찾은 기록 {len(items)}건. 회신 원문은 질의·회신 축적(queries/)에서 같은 지문으로 확인 — 질의 → 회신 → 발견 기록의 증거 사슬."]},
+               "summary": {"ko": [f"KOREA ARCHIVE 통합검색 질의 한 건이 찾은 기록 {nfound}건. 회신 원문은 질의·회신 축적(queries/)에서 같은 지문으로 확인 — 질의 → 회신 → 발견 기록의 증거 사슬."]},
                "metadata": md, "requiredStatement": {"label": {"ko": ["출처"]}, "value": {"ko": ["각 기록의 권리는 원 기관 표기를 따름 — 게재 전 judge_rights"]}},
                "seeAlso": [{"id": f"{PAGES}provenance.json", "type": "Dataset", "format": "application/json", "label": {"ko": ["발견 경로 전체"]}}], "items": items}
         json.dump(col, open(os.path.join(qd, f"{e['ak']}.json"), "w", encoding="utf-8"), ensure_ascii=False)
-        rows.append((e, args, len(items), len(resp)))
+        rows.append((e, args, nfound, len(resp)))
     E_ = html.escape; KV = "https://changgi.github.io/korea-archive-mcp/kv.html?manifest="
     kvl = lambda ak: " · <a href='" + KV + E_(PAGES + "q/" + ak + ".json") + "'>KV</a>"
     tr = "".join(f"<tr><td>{E_(e['last'][:16])}</td><td>{E_(e['tool'])}</td><td>{E_(qlabel(e))}</td><td>{n}</td><td>{v}</td><td>{e['calls']}</td>"
