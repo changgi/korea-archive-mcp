@@ -1,6 +1,6 @@
 {
 "week": "2026-W48",
-"records": 908,
+"records": 910,
 "by_source": {
 "미국 국립기록관리청 NARA": 156,
 "일본 국립국회도서관": 18,
@@ -26,7 +26,7 @@
 "서울기록원": 12,
 "국외소재문화유산재단": 35,
 "DigitalNZ": 8,
-"국가유산청": 5,
+"국가유산청": 7,
 "네덜란드 국립기록관": 7,
 "뉴질랜드 기록원": 5,
 "국립문화유산연구원": 43,
@@ -6391,6 +6391,20 @@
 "first_seen": "2026-11-25T14:23:32Z",
 "page": "r/bfc19730c2de.html",
 "url": "https://gallica.bnf.fr/ark:/12148/bpt6k1183473t"
+},
+{
+"key": "heritage:11-0002230000000-11",
+"title": "경복궁 근정전(景福宮 勤政殿) [국보] — 서울 종로구",
+"first_seen": "2026-11-25T14:36:41Z",
+"page": "r/effc082ce675.html",
+"url": "https://www.heritage.go.kr/heri/cul/culSelectDetail.do?ccbaCpno=1111102230000"
+},
+{
+"key": "heritage:11-0002240000000-11",
+"title": "경복궁 경회루(景福宮 慶會樓) [국보] — 서울 종로구",
+"first_seen": "2026-11-25T14:36:41Z",
+"page": "r/86708fe1c27b.html",
+"url": "https://www.heritage.go.kr/heri/cul/culSelectDetail.do?ccbaCpno=1111102240000"
 }
 ]
 }

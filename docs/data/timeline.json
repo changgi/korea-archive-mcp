@@ -1,5 +1,5 @@
 {
-"updated": "2026-11-25T14:34:03Z",
+"updated": "2026-11-25T15:04:32Z",
 "note": "구간 = 연대(4자리 연도·8자리 날짜·연호 연도 明治·大正·昭和·光武·隆熙·檀紀 환산) → 세기 → 왕조·시대명. 근거 순서 date → 제목 → 메타(생산·시대·출판). 세기·시대 구간은 시간축 근사 정렬",
 "timeline": [
 {
@@ -807,14 +807,15 @@
 },
 {
 "decade": "1860년대",
-"records": 3,
+"records": 5,
 "by_source": {
 "aks": 1,
 "tna": 1,
-"gallica": 1
+"gallica": 1,
+"heritage": 2
 },
 "by_kind": {
-"document": 3
+"document": 5
 },
 "samples": [
 {
@@ -831,9 +832,19 @@
 "title": "Vie de monseigneur Berneux, évêque de Capse, in partibus infedelium, vicaire apostolique de Corée [Gallica 원문]",
 "url": "https://gallica.bnf.fr/ark:/12148/bpt6k63496887",
 "iiif": "https://korea-archive-mcp.vercel.app/iiif/rec/TVA9T8MwFPwrlue0qZ0PUo9Fgj-AWKoOTuMUq4nj2k6FQEggMTCygxALQ1EHxIRY808YSX4Er4VITHdPd_fu6V1ii9kUL3hRyDnHMw87zPCpFCgTqKyUFXKhRG3QRBjAcw81m3Xzuqr3hkOurfCQVEhz42RaW-C5yEQh69JDa1gpjUBcV9ZVhexTlWk2Ak2Pf0tR93Dfbj9m2MMZdJMkToBKoNwsmU8oCRN_ngaEjCI6ji5ArEE8c05b5vt_pw9TlQ9z4__LpNrFyzgIx3GSHEBKQ6rv_Lr-RBN1tMeMuz4OLgWu_h0eLmECWAG0b4_f71vU3t12zze7o7unF5D47mF0ROMBIQManZCQ0YAFFF_9AA/manifest.json"
+},
+{
+"title": "경복궁 근정전(景福宮 勤政殿) [국보] — 서울 종로구",
+"url": "https://www.heritage.go.kr/heri/cul/culSelectDetail.do?ccbaCpno=1111102230000",
+"iiif": "https://korea-archive-mcp.vercel.app/iiif/heritage/11-0002230000000-11/manifest.json"
+},
+{
+"title": "경복궁 경회루(景福宮 慶會樓) [국보] — 서울 종로구",
+"url": "https://www.heritage.go.kr/heri/cul/culSelectDetail.do?ccbaCpno=1111102240000",
+"iiif": "https://korea-archive-mcp.vercel.app/iiif/heritage/11-0002240000000-11/manifest.json"
 }
 ],
-"derived": 1
+"derived": 3
 },
 {
 "decade": "1870년대",
@@ -1225,9 +1236,9 @@
 },
 {
 "decade": "1950년대",
-"records": 302,
+"records": 307,
 "by_source": {
-"nara": 58,
+"nara": 63,
 "europeana": 13,
 "ia": 29,
 "tna": 22,
@@ -1249,8 +1260,8 @@
 "nedb": 1
 },
 "by_kind": {
-"motion_picture": 40,
-"graphic": 80,
+"motion_picture": 41,
+"graphic": 84,
 "document": 182
 },
 "samples": [
@@ -1280,7 +1291,7 @@
 "iiif": "https://korea-archive-mcp.vercel.app/iiif/nara/24033/manifest.json"
 }
 ],
-"derived": 93
+"derived": 98
 },
 {
 "decade": "20세기",
@@ -1323,20 +1334,20 @@
 },
 {
 "decade": "1960년대",
-"records": 21,
+"records": 22,
 "by_source": {
 "ia": 10,
 "i815": 2,
 "ktv": 2,
 "gonghun": 2,
 "much": 1,
-"nara": 3,
+"nara": 4,
 "awm": 1
 },
 "by_kind": {
 "document": 18,
 "motion_picture": 1,
-"graphic": 2
+"graphic": 3
 },
 "samples": [
 {
@@ -1365,7 +1376,7 @@
 "iiif": "https://korea-archive-mcp.vercel.app/iiif/ktv/movie~KV~766~4390~DH/manifest.json"
 }
 ],
-"derived": 6
+"derived": 7
 },
 {
 "decade": "광복 이후(1945~)",
@@ -1406,17 +1417,17 @@
 },
 {
 "decade": "1970년대",
-"records": 16,
+"records": 17,
 "by_source": {
 "nzarch": 1,
 "earchive": 1,
 "ia": 7,
 "ktv": 1,
-"nara": 6
+"nara": 7
 },
 "by_kind": {
 "document": 12,
-"graphic": 4
+"graphic": 5
 },
 "samples": [
 {
@@ -1445,7 +1456,7 @@
 "iiif": "https://iiif.archive.org/iiif/3/DTIC_ADB006731/manifest.json"
 }
 ],
-"derived": 7
+"derived": 8
 },
 {
 "decade": "1980년대",
@@ -1690,9 +1701,9 @@
 },
 {
 "decade": "연대 미상",
-"records": 81,
+"records": 74,
 "by_source": {
-"nara": 17,
+"nara": 10,
 "seoul": 12,
 "europeana": 7,
 "i815": 6,
@@ -1710,8 +1721,8 @@
 },
 "by_kind": {
 "document": 47,
-"graphic": 31,
-"motion_picture": 3
+"graphic": 25,
+"motion_picture": 2
 },
 "samples": [
 {
