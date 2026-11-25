@@ -1450,6 +1450,39 @@
    ],
    "must_not": [],
    "level": "warn"
+  },
+  {
+   "id": "nedb-numeric-event",
+   "tool": "cross_search",
+   "args": {
+    "query": "3·1운동",
+    "sources": "nedb",
+    "max_per_source": 3
+   },
+   "must": [
+    "nedb:[1-9]"
+   ],
+   "must_not": [
+    "nedb:0"
+   ],
+   "level": "warn",
+   "note": "v2.99.6 한국사DB는 '3·1운동' 0건·'3·1 운동' 결과 — 숫자 사건명 뒤 띄움"
+  },
+  {
+   "id": "topics-march-first",
+   "tool": "tna_search",
+   "args": {
+    "query": "3·1운동",
+    "max_results": 3
+   },
+   "must": [
+    "Korean independence movement 1919",
+    "FO 608/211/19"
+   ],
+   "must_not": [
+    "March First Movement Korea 1919"
+   ],
+   "level": "warn"
   }
  ]
 }
