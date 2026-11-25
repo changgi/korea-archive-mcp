@@ -1114,6 +1114,7 @@ def build_relations(recs_all):
     for o in R:
         for i in _loc_ids(o): by_id.setdefault(i, set()).add(o["key"])
     rel = {o["key"]: {} for o in R}
+    byk = {o["key"]: o for o in R}
     def add(a, b, t, basis):
         if a == b or a not in rel or b not in rel: return
         rel[a].setdefault((t, b), basis); rel[b].setdefault((t, a), basis)
@@ -1121,7 +1122,11 @@ def build_relations(recs_all):
         for kind, v, basis in same_targets(o):
             for x in target_ids(kind, v):
                 for k in by_id.get(x, ()):
-                    if k.startswith(TARGET_INST[kind]): add(o["key"], k, "같은 기록(다른 소장처)", basis)
+                    if not k.startswith(TARGET_INST[kind]): continue
+                    lv = next((str(m[1]) for m in (byk.get(k, {}).get("meta") or []) if m and m[0] == "기술 수준"), "item")
+                    if k.startswith("nara:") and not o["key"].startswith("nara:") and lv.lower() in ("fileunit", "series", "collection", "recordgroup"):  # v3.7.5 입수처 링크가 낱장이 아닌 NARA 파일·시리즈 — 같은 기록이 아니라 그 단위에 포함
+                        add(o["key"], k, "원본이 속한 NARA 단위(포함)", f"{basis} — 상대 기술 수준 {lv}(낱장 아님, 같은 기록으로 보지 않음)")
+                    else: add(o["key"], k, "같은 기록(다른 소장처)", basis)
         for kind, v in gallery_targets(o):  # v3.7.4 갤러리 재게시(원본 포함) — 같은 기록 아님
             for x in target_ids(kind, v):
                 for k in by_id.get(x, ()):
@@ -1151,7 +1156,7 @@ def build_relations(recs_all):
                 if a["key"].split(":")[0] != b["key"].split(":")[0]:
                     bs = [f"{x['key']} {dsrc[x['key']]}" for x in (a, b) if x["key"] in dsrc]
                     rel[a["key"]].setdefault(("같은 날(다른 기관)", b["key"]), f"기관 표기 날짜 {d}" + (f" (파생 날짜 포함 — {'; '.join(bs)})" if bs else ""))
-    order = {"같은 기록(다른 소장처)": 0, "같은 날(다른 기관)": 1, "갤러리 재게시(원본 포함)": 2, "같은 계열": 3}
+    order = {"같은 기록(다른 소장처)": 0, "같은 날(다른 기관)": 1, "원본이 속한 NARA 단위(포함)": 2, "갤러리 재게시(원본 포함)": 3, "같은 계열": 4}
     REL.clear()
     for k, m in rel.items():
         if m: REL[k] = sorted(((t, b, basis) for (t, b), basis in m.items()), key=lambda x: (order[x[0]], x[1]))
