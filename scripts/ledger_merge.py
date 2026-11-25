@@ -1703,6 +1703,7 @@ FACETS = [("주제", re.compile(r"^(주제|주제어|색인어.*|subject|키워�
           ("인물", re.compile(r"^인명\(장서각 태깅\)$")), ("기관", re.compile(r"^관청명\(장서각 태깅\)$")),  # v2.56 기관 개체 태깅
           ("형태", re.compile(r"^(문서유형|기록물형태|매체유형|사료구분|사료유형|기록유형|자료유형|자료 유형|매체 형태|자료 형태|format)$", re.I)), ("재질", re.compile(r"^재질$")),
           ("기술 수준", re.compile(r"^기술 수준$")),  # v2.59 기관의 자료 형태·재질·기술 단계(item·fileUnit·Piece) 분류
+          ("죄명", re.compile(r"^죄명$")), ("훈격", re.compile(r"^포상$")), ("신문", re.compile(r"^신문명$")),  # v2.99.7 기관의 법적 분류(독립운동 판결문 죄명)·포상 훈격(공훈록)·수록 신문명
           ("분류", re.compile(r"^(분류|사부분류|자료분류|보고서유형분류|주제분류|범주\(Commons\)|분류\(NDC 등\))$")), ("시대", re.compile(r"^(시대|시대분류|국적/시대)$")), ("매체", re.compile(r"^mediatype$", re.I))]
 
 def facet_terms(k, v, fac):
@@ -1712,11 +1713,14 @@ def facet_terms(k, v, fac):
         cm = {"GEOL": "장소", "TOPIC": "주제", "FUNC": "분류"}
         return [(cm[m[1]], re.sub(r"\s*,\s*[\d~\s]*$", "", m[2]).strip()) for m in re.finditer(r"\[(GEOL|TOPIC|FUNC)-\d+\]\s*(?:\([^)]*\)\s*)?([^\[]+)", v)]
     if v.startswith("http"): return []
+    if fac == "훈격":  # v2.99.7 '1962 대한민국장' → '대한민국장'(포상 연도는 기록 날짜이지 분류가 아니다)
+        t = re.sub(r"^\s*(1[89]|20)\d\d\s*", "", v).strip()
+        return [(fac, t)] if 1 < len(t) <= 40 else []
     if fac == "재질" or k == "주제분류":  # v2.59 · v2.61.1 한국사DB 주제분류('정치＞왕실＞국왕＞즉위·책봉')도 계층 그대로 '나무 > 기타' 같은 기관 재질 분류는 계층 그대로 한 용어로(쉼표로만 가른다)
         return [(fac, t.strip()) for t in re.split(r"[,，;]", v) if 1 < len(t.strip()) <= 40]
     return [(fac, t.strip()) for t in re.split(r"[;；,，·]|\s>\s|\s›\s", v) if 1 < len(t.strip()) <= 40]
 
-FACET_SLUG = {"주제": "subject", "장소": "place", "분류": "class", "시대": "period", "매체": "medium", "인물": "person", "기관": "agency", "형태": "form", "재질": "material", "기술 수준": "level"}
+FACET_SLUG = {"주제": "subject", "장소": "place", "분류": "class", "시대": "period", "매체": "medium", "인물": "person", "기관": "agency", "형태": "form", "재질": "material", "기술 수준": "level", "죄명": "charge", "훈격": "honor", "신문": "newspaper"}
 
 def concept_id(fac, term):
     return f"{PAGES}subjects.jsonld#{FACET_SLUG.get(fac, 'x')}/" + urllib.parse.quote(term, safe="")
