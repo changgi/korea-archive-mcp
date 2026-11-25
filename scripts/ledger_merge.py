@@ -1052,6 +1052,17 @@ def iiif_kind(o):
     if re.search(r"korea-archive-mcp\.vercel\.app/iiif/|changgi\.github\.io/korea-archive-mcp/", m): return "원 기관 이미지로 구축(KOREA ARCHIVE 브리지)"
     return "원 기관 제공 매니페스트"
 
+def iiif_origin(o):
+    """v3.9 Node iiifFor의 Gallica 규칙 패리티 — Gallica는 서버 IP 자동 조회가 403(2026-11-23 실측)이라 원장이 매니페스트를 받아 확인할 수 없다.
+    그래서 iiif(원장이 판독·수집하는 경로)에 넣지 않고, 디지털 원문 ark(btv1b·bpt6k 등 — 카탈로그 cb ark 아님)로 만든 기관 공식 IIIF 주소를
+    '확인 불가·브라우저 열람' 근거와 함께 따로 둔다. 기록 봉투(iiif_built)는 그대로 — 지우지 않는다."""
+    u = str(o.get("url") or "")
+    m = re.search(r"gallica\.bnf\.fr/ark:/12148/((?!cb)[a-z0-9]+)", u, re.I)
+    if m and not (o.get("iiif") and not o.get("iiif_status")):
+        return {"manifest": f"https://gallica.bnf.fr/iiif/ark:/12148/{m[1]}/manifest.json", "viewer": f"https://gallica.bnf.fr/ark:/12148/{m[1]}",
+                "basis": "Gallica(BnF) 공식 IIIF 규칙 주소(디지털 원문 ark) — 서버 자동 조회 403이라 원장은 내용을 확인하지 못함, 브라우저 뷰어(KV·Mirador)에서 열림"}
+    return None
+
 def rec_slug(k):
     import hashlib
     return hashlib.sha1(k.encode("utf-8")).hexdigest()[:12]
@@ -1286,7 +1297,7 @@ def build_record_pages(recs_all):
 {row('계층', E_(part) + (f" <small>(근거: {E_(o.get('partOf_src', ''))})</small>" if o.get('partOf_src') else '') if part else (E_(pder) + ' <small>[파생]</small>' if pder else ''))}
 {row('날짜', E_(date) if date else (E_(dd) + f" <small>[파생 — {E_(o.get('date_basis', ''))}]</small>" if dd else ''))}{row('연대', E_(decade(o)))}{row('날짜 교차 확인', dch)}
 {row('요약', E_(o.get('summary') or '') or (E_(o.get('summary_composed') or '')))}{row('권리', E_(o.get('rights_view') or '') + (f" <small>({E_(o.get('rights_basis', ''))})</small>" if o.get('rights_basis') else ''))}
-{row('IIIF', f"<a href='{KV}{E_(mf)}'>KV 뷰어로 보기</a> · <a href='{E_(mf)}'>매니페스트</a> <small>({E_(o.get('iiif_kind', ''))})</small>" if mf else '')}{row('같은 날 다른 기관 기록', f"{E_(o['same_day']['date'])} — {o['same_day']['institutions']}개 기관 {o['same_day']['records']}건 · <a href='{KV}{E_(o['same_day']['collection'])}'>KV로 기관별 이어 보기</a> · <a href='{E_(o['same_day']['collection'])}'>IIIF 컬렉션</a> <small>(같은 사건 교차 대조 단서 — 같은 장면이라는 단정 아님)</small>" if o.get('same_day') else '')}{row('같은 기록 실물 이미지', f"<a href='{KV}{E_(o['iiif_same']['manifest'])}'>KV 뷰어로 보기</a> · <a href='{E_(o['iiif_same']['manifest'])}'>매니페스트</a> <small>({E_(o['iiif_same']['basis'])})</small>" if o.get('iiif_same') else '')}
+{row('IIIF', f"<a href='{KV}{E_(mf)}'>KV 뷰어로 보기</a> · <a href='{E_(mf)}'>매니페스트</a> <small>({E_(o.get('iiif_kind', ''))})</small>" if mf else '')}{row('같은 날 다른 기관 기록', f"{E_(o['same_day']['date'])} — {o['same_day']['institutions']}개 기관 {o['same_day']['records']}건 · <a href='{KV}{E_(o['same_day']['collection'])}'>KV로 기관별 이어 보기</a> · <a href='{E_(o['same_day']['collection'])}'>IIIF 컬렉션</a> <small>(같은 사건 교차 대조 단서 — 같은 장면이라는 단정 아님)</small>" if o.get('same_day') else '')}{row('원 기관 IIIF(브라우저 열람)', f"<a href='{KV}{E_(o['iiif_origin']['manifest'])}'>KV 뷰어로 보기</a> · <a href='{E_(o['iiif_origin']['manifest'])}'>매니페스트</a> · <a href='{E_(o['iiif_origin']['viewer'])}'>기관 뷰어</a> <small>({E_(o['iiif_origin']['basis'])})</small>" if o.get('iiif_origin') else '')}{row('같은 기록 실물 이미지', f"<a href='{KV}{E_(o['iiif_same']['manifest'])}'>KV 뷰어로 보기</a> · <a href='{E_(o['iiif_same']['manifest'])}'>매니페스트</a> <small>({E_(o['iiif_same']['basis'])})</small>" if o.get('iiif_same') else '')}
 {row('발견', f"처음 {E_(o.get('first_seen', '')[:10])} · 최근 {E_(o.get('last_seen', '')[:10])} · {o.get('seen', 1)}회 · 출처 {E_('+'.join(o.get('sources') or []))}")}
 {row('같은 기록(기관 표기)', E_(o.get('sameAs') or '') + ('' if any(t_ == '같은 기록(다른 소장처)' for t_, _, _ in REL.get(o['key'], [])) else ' <small>(원장에 아직 없는 기록 — 기관 sameAs 표기 그대로)</small>') if o.get('sameAs') else '')}{row('옛 key', E_(', '.join(o.get('key_aliases') or [])))}{row('비고', E_(o.get('merge_note') or o.get('recovered') or o.get('harvested') or ''))}{row('발굴 경위', E_(o.get('found_via') or '') + (f" <small>(출발 기록 <a href='{E_(rec_slug(o['drilled_from']))}.html'>{E_(o['drilled_from'])}</a>)</small>" if o.get('drilled_from') else '') if o.get('found_via') else '')}
 </table>{('<h2>주제·분류 (기관 표기)</h2><p>' + ' · '.join(f"<a href='../subjects.html#{E_(subj_anchor(f_, t_))}'>{E_(f_)}: {E_(t_)}</a>" for f_, t_ in record_concepts(o)[:30]) + '</p>') if record_concepts(o) else ''}
@@ -2209,6 +2220,9 @@ def main():
                                      "first_seen": o.get("first_seen", ""), "last_seen": o.get("last_seen", ""), "days_total": o.get("days_total", 0), "seen": o.get("seen", 0)}
         else: o.pop("found_by_derived", None)
         o["iiif_kind"] = iiif_kind(o)  # v2.75 원 기관 제공 · 원 기관 이미지로 구축 · 기록 봉투 — 우리 브리지를 '기관'으로 부르던 표기 교정
+        og_ = iiif_origin(o)  # v3.9 원 기관 IIIF 규칙 주소(서버 확인 불가 기관) — 수집 경로(iiif)는 바꾸지 않고 따로 기록
+        if og_: o["iiif_origin"] = og_
+        else: o.pop("iiif_origin", None)
         o["iiif_built"] = "" if (o.get("iiif") and not o.get("iiif_status")) else leaf_manifest(o)  # v2.52 기관 매니페스트가 비공개 응답이면 브리지로 대체(기관 주소는 보존)
     nrel = build_relations(recs)  # v2.82 기록↔기록 맥락 연결(RiC-O·기록 페이지·품질이 함께 씀)
     for o in recs:  # v2.92 같은 기록(다른 소장처) key — 원장 본체에도(도구 응답·외부 소비자가 relations.json 없이 읽게). 매 실행 재계산
