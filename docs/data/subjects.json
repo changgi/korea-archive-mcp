@@ -11172,6 +11172,45 @@
 "keys": [
 "생산자"
 ]
+},
+"John miller jr,": {
+"records": [
+"ia:bwb_S0-BIQ-409"
+],
+"sources": [
+"ia"
+],
+"first": "2026-11-23T13:50:10Z",
+"last": "2026-11-24T22:44:36Z",
+"keys": [
+"생산자"
+]
+},
+"Chong Lim Kim, Seong-Tong Pai": {
+"records": [
+"ia:bwb_W9-DGF-274"
+],
+"sources": [
+"ia"
+],
+"first": "2026-11-23T13:50:10Z",
+"last": "2026-11-24T22:44:36Z",
+"keys": [
+"생산자"
+]
+},
+"The Emergency Christian Conference On Korean Problems": {
+"records": [
+"ia:documentsonstrug0000emer"
+],
+"sources": [
+"ia"
+],
+"first": "2026-11-23T13:50:10Z",
+"last": "2026-11-24T22:44:36Z",
+"keys": [
+"생산자"
+]
 }
 },
 "분쟁": {
@@ -11288,7 +11327,7 @@
 }
 }
 },
-"updated": "2026-11-25T03:36:05Z",
+"updated": "2026-11-25T03:51:11Z",
 "totals": {
 "매체": 4,
 "주제": 228,
@@ -11305,7 +11344,7 @@
 "훈격": 1,
 "소장처": 32,
 "공개 상태": 14,
-"생산자": 151,
+"생산자": 154,
 "분쟁": 5
 },
 "note": "원 기관 메타의 주제·지명·분류·시대·매체·인물·기관(장서각 태깅)·형태·재질·기술 수준 표기 그대로(번역·정규화 없음). records = 그 용어가 붙은 원장 기록 key. 지우지 않는다",

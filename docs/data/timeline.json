@@ -1,5 +1,5 @@
 {
-"updated": "2026-11-25T03:36:05Z",
+"updated": "2026-11-25T03:51:11Z",
 "note": "구간 = 연대(4자리 연도·8자리 날짜·연호 연도 明治·大正·昭和·光武·隆熙·檀紀 환산) → 세기 → 왕조·시대명. 근거 순서 date → 제목 → 메타(생산·시대·출판). 세기·시대 구간은 시간축 근사 정렬",
 "timeline": [
 {
@@ -1321,12 +1321,12 @@
 {
 "title": "한강 개발",
 "url": "https://www.ehistory.go.kr/view/movie?mediasrcgbn=KV&mediaid=12307&mediadtl=28799&mediagbn=MH",
-"iiif": "https://korea-archive-mcp.vercel.app/iiif/rec/q1YqVrKKVsouKVOK1VEqUbJSejt1zqsNUxVebZjzesMcJR2lFKCYoaWZBZCZCWQCqVIglVFSUlBspa9fXl6ul5qRWVySX1Spl56vl12kX5aZWq6fmw-k7HNTUzITi4uS05PybL3D1MDczBRbQyNjA3MIL6Ukx9bIwtzSEsIFKfT1ANpRALTjzYzGN82NCo8adim8XrPj7cwpQAEgCZTNA8qCnKyjlAtxUiGQAjr31aY1Cq87Wt4saFR4M3vCm3lLgVKJIE8ZGRiZ6Roa6hoZhxiYW5maWBkbK9UCAA/manifest.json"
+"iiif": "https://korea-archive-mcp.vercel.app/iiif/ktv/movie~KV~12307~28799~MH/manifest.json"
 },
 {
 "title": "[678호] 건설의 메아리",
 "url": "https://www.ehistory.go.kr/view/movie?mediasrcgbn=KV&mediaid=766&mediadtl=4390&mediagbn=DH",
-"iiif": "https://korea-archive-mcp.vercel.app/iiif/rec/q1YqVrKKVsouKVOK1VEqUbJSijYzt3g7Y0eswquNW960LHkzd4bC65VT3kxteb1sjZKOUgpQiaGlmYWegZmegQVQIBMoAKRKgVRGSUlBsZW-fnl5uV5qRmZxSX5RpV56vl52kX5ZZmq5fm4-kLLPTU3JTCwuSk5PyrP1DlMDczNTbM3NzCDslJIcWxNjSwMID6TKxQNoQQHQgjczGt80Nyo8atil8Lqn4e3UOa87t7zpWgKUzQPKgjyho5QLcU8hkHq9Yc6rTWsUXne0vFnQqPBm9oQ385YCpRJB3jQyMDLTNTTUNTIOMTC3MjWxMjZWqgUA/manifest.json"
+"iiif": "https://korea-archive-mcp.vercel.app/iiif/ktv/movie~KV~766~4390~DH/manifest.json"
 }
 ]
 },
@@ -1400,7 +1400,7 @@
 {
 "title": "상기하자 6.25",
 "url": "https://www.ehistory.go.kr/view/movie?mediasrcgbn=KV&mediagbn=MH&mediaid=11359&mediadtl=25509",
-"iiif": "https://korea-archive-mcp.vercel.app/iiif/rec/q1YqVrKKVsouKVOK1VEqUbJSetPc-GrHhrdTZ7yZN0HBTM_IVElHKQUobmhpbg5kZgKZQKoUSGWUlBQUW-nrl5eX66VmZBaX5BdV6qXn62UX6Zdlppbr5-YDKfvc1JTMxOKi5PSkPFvvMDUwF8T29YCwM1NsDQ2NTS0hvJSSHFsjU1MDS6AdBSDXzGgEOkjhUcMuhddrdrydOQUoACSBsnlAWZCzdZRyIU4qBFKvN8x5tWmNwuuOljcLGhXezJ7wZt5SoFQiyGNGBkZmuoaGukYmIQamViYGVgaGSrUA/manifest.json"
+"iiif": "https://korea-archive-mcp.vercel.app/iiif/ktv/movie~KV~11359~25509~MH/manifest.json"
 },
 {
 "title": "DTIC ADB006731: Changjin (Chosin) Reservoir, Korea 1950: A Case Study of United States Army Tactics and Doctrine for Enc",
@@ -1432,7 +1432,7 @@
 {
 "title": "[1770호] 교황 방한 구성",
 "url": "https://www.ehistory.go.kr/view/movie?mediasrcgbn=KV&mediaid=30000297&mediadtl=42365&mediagbn=DK",
-"iiif": "https://korea-archive-mcp.vercel.app/iiif/rec/q1YqVrKKVsouKVOK1VEqUbJSijY0Nzd4O2NHrMKrrRPezlyp8HrDyrdT5wB5a960bFTSUUoBKjK0tLDUMzTQMzQECmQCBYBUKZDKKCkpKLbS1y8vL9dLzcgsLskvqtRLz9fLLtIvy0wt18_NB1L2uakpmYnFRcnpSXm23mFqYG5miq2xARAYWZpDBFJKcmxNjIzNTCFckFoXb6A1BUBr3sxofNPcqPCoYZfC6_U7Xm3e-mrDHIXXPQ1Ad77u3PKmawlQXR5QHchbOkq5EPcVAqnXG-a82rRG4XVHy5sFjQpvZk94M28pUCoR5HEjAyMzXUNDXSPjEAMzK2NLKxNzpVoA/manifest.json"
+"iiif": "https://korea-archive-mcp.vercel.app/iiif/ktv/movie~KV~30000297~42365~DK/manifest.json"
 },
 {
 "title": "Korea",
@@ -1547,7 +1547,7 @@
 {
 "title": "대한민국 정부기록 사진집 15 - 서울 여의도 윤중로 벚꽃 축제",
 "url": "https://www.ehistory.go.kr/view/photo?mediasrcgbn=BK&mediaid=23&mediadtl=5241",
-"iiif": "https://korea-archive-mcp.vercel.app/iiif/rec/VY8_S8NQFMW_yuMNTvn7klYMBMHV1U0cqglNqG1i8mwQERKbwUHQDsFS05JCpUvEUrAU0S_jmHf9Dr62IDjde889HM7vGofYOMYt2sUnAqbYwOw-_sly9vZZvb8iKDK2jKvVnE1GCG5LmKUw6yO1hkQEaQ7DFYKnEkYD9pAiyKcw7bNJjthiWH31ECwzKHIsYIvnEkVRJEWXVMIFlwt8XPLhUOqHhixHUSTZjhtSL7iSmp7UCuSua0ey73jU22_bltsIg7Pmacc8ONzZnK5lEm27WvTcrBFd5Zk-z4RBAr0Efccf_wj-ALitw21ragG3t10u1uzzvFqUiN2lUCQInh9h_MJfDbrpT-qiqopEO1LqhrZn6Lv45hc/manifest.json"
+"iiif": "https://korea-archive-mcp.vercel.app/iiif/ktv/photo~BK~23~5241/manifest.json"
 }
 ]
 },

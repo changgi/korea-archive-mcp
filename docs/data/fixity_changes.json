@@ -1,7 +1,7 @@
 {
-"updated": "2026-11-25T03:36:05Z",
-"watched": 850,
-"changed_records": 52,
+"updated": "2026-11-25T03:51:11Z",
+"watched": 856,
+"changed_records": 53,
 "suspected_source_changes": 0,
 "note": "지문 = 원 기관 응답(우리 판독기 정규형, 판독 시각 등 변동 항목 제외)의 SHA-256-16. pv = 판독기(route.js·lib) 지문. 이력은 지우지 않는다.",
 "changes": [
@@ -989,6 +989,25 @@
 "at": "2026-11-25",
 "h": "cfcd47492dbb7f25",
 "pv": "fa6703da94c0",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "nara:NAID 75408",
+"title": "ACTIVITIES IN HUNGNAM HARBOR",
+"url": "https://catalog.archives.gov/id/75408",
+"history": [
+{
+"at": "2026-11-24",
+"h": "4b52fcd97ab88385",
+"pv": "d4726c38e7cc",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "5e6304a2a7647504",
+"pv": "c4b099c69283",
 "kind": "판독기 변경 동반"
 }
 ]
