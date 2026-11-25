@@ -356,6 +356,12 @@ def date_derived(o):
     for k_ in ("생산일", "생산시기", "발행일", "발신일", "발행년월일", "제작연도", "생산연도", "발행년도", "일자", "날짜", "Publication Date", "시대"):  # v3.5.4 생산시기(6·25전쟁 아카이브센터 'YYYY-MM-00 ~ …')·날짜  # v3.0.2 라벨 붙은 기관 날짜 칸(생산일 Date made·발행일·발신일) — 읽지 않던 공백
         dv_, q_ = meta_date(md.get(k_, ""), era=(k_ == "시대"))
         if dv_: return dv_, f"기관 메타 — {k_}" + (f"({q_})" if q_ else "") + (" · 위키미디어 공용 업로더 기재(2차 정보)" if o["key"].startswith("commons:") else "")
+    if o["key"].startswith("nara:"):  # v3.46 NARA 디지털 객체 경로의 연도 폴더(…/Sheets/1951/111-DD-230-51-page-1.jpg) — 기관이 정리한 연도. 로컬 식별자 끝 두 자리(-51)와 일치할 때만(두 기관 단서 교차)
+        mu = re.search(r"catalog\.archives\.gov/medialz/[^\s\"']*?/(?:Sheets|sheets)/(1[89]\d\d|20\d\d)/[^\s\"']*?-(\d\d)-page", f"{o.get('media') or ''} {o.get('thumb') or ''}")
+        lid = md.get("로컬 식별자", "")
+        ml = re.match(r"^\d{2,3}[A-Z]?-[A-Z]{1,6}-\d+[A-Z]?-(\d\d)$", lid, re.I)
+        if mu and ml and mu[1][2:] == ml[1] == mu[2]:
+            return mu[1], f"NARA 디지털 객체 경로 연도 폴더(Sheets/{mu[1]}) = 로컬 식별자 {lid} 끝자리 일치 — 기관 정리 연도(이 기록 날짜 칸 아님)"
     return title_date(o.get("title") or "")
 
 
