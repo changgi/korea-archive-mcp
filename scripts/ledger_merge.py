@@ -1273,6 +1273,16 @@ def build_persons(recs):
 
 CAND_STOP = re.compile(r"^(KOREA|COREA|NORTH|SOUTH|KOREAN WAR|WAR|ASIA|JAPAN|CHINA|UNITED STATES|USA|U\.S\.|STATE|WAR ORPHANS|SQUADRON|PRINCIPAL|Asia: Korea|Korea|한국|대한민국|조선|미국|일본|중국)$", re.I)
 
+# v3.59 사전 후보 검토 판단(사람·검토 기록) — 채택은 PLACES/PERSONS에 넣는 것, 여기는 '보류·제외'와 그 근거. 근거 없는 추정 채택 금지(실확인 원칙)
+CAND_REVIEW = {
+    "places": {
+        "BAIK CHUNG": ("보류", "NARA 111-ADC '소련 점령 지역에서 온 피란민' 표제의 지명 — 38선 부근 백천(白川, 황해도)으로 추정되나 기관이 표준 지명을 밝히지 않음(추정 채택 금지). 기관 기술·당대 지도로 확인되면 PLACES에"),
+        "JAPAN: KURE": ("제외", "구레(吳, 일본 히로시마현) — 영연방군 기지. 지명 사전 범위(한국 지명) 밖 — 기관 장소 칸 값은 주제 색인에 그대로 남음"),
+    },
+    "persons": {},
+}
+
+
 def dict_candidates(recs):
     """v3.28 기준 사전 후보 — 사전(PLACES)에 매칭되지 않는 지명 후보를 원장에서 찾아 쌓는다(자동 추가 아님 — 오탐 검토 후 사람이 PLACES에).
     근거: ① 기관 장소 칸(장소·취급지명·연관정보 GEOL·Place made·장소(기관 전거)) 값 ② NARA식 표제 'X, KOREA'. 기록 2건 이상만. dict_candidates.json 누적(처음 본 날 유지)."""
@@ -1312,6 +1322,12 @@ def dict_candidates(recs):
         if (v in PERSONS or v in AUTO_PERSONS or any(v in a["labels"] for a in AUTO_PERSONS.values()) or any(rx.search(v) for rx in _PE.values())) and not e.get("adopted"): e["adopted"] = today  # v3.30 표준명 일치 · v3.31 전거 자동 인물
     for v, e in C0["places"].items():  # 이후 사전에 들어간 후보는 지우지 않고 표시
         if any(rx.search(v) for rx in _PL.values()) and not e.get("adopted"): e["adopted"] = today
+    for grp, R_ in (("places", CAND_REVIEW.get("places", {})), ("persons", CAND_REVIEW.get("persons", {}))):  # v3.59 검토 판단 누적 — 왜 올리지 않았나(다시 검토하지 않게, 근거와 함께)
+        for v, (verdict, why) in R_.items():
+            e = C0.get(grp, {}).get(v)
+            if e is not None and (e.get("review") or {}).get("verdict") != verdict:
+                e.setdefault("review_history", []).extend([e["review"]] if e.get("review") else [])  # 이전 판단은 지우지 않고 이력으로
+                e["review"] = {"verdict": verdict, "why": why, "at": today}
     C0["updated"] = dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
     json.dump(C0, open(p, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
     return {v: e for v, e in C0["places"].items() if not e.get("adopted")}, {v: e for v, e in C0["persons"].items() if not e.get("adopted")}
@@ -1335,7 +1351,7 @@ def build_dict_page(recs):
     evr = "".join(f"<tr><td><b>{E_(n)}</b></td><td>{E_(a if a == b else a + '~' + b)}</td><td>" + " · ".join(f"{E_(k)} {v}" for k, v in sorted((ev.get(n) or {}).items())) + "</td></tr>" for n, _, a, b in EVENTS)
     au = "".join(f"<tr><td>{E_(a.get('label_lod') or a['term'])}</td><td><a href='{E_(a['page'])}'>{E_(i)}</a></td><td>{len(a['records'])}</td><td>" + " ".join(f"<a href='{E_(x)}'>{E_(host(x))}</a>" for x in a.get("sameAs", [])) + "</td></tr>" for i, a in sorted(AUTH.items()))
     cand, pcand = dict_candidates(recs)  # v3.28 지명 · v3.29 인물
-    cr = "".join(f"<tr><td>{E_(v)}</td><td>{len(e['records'])}</td><td><small>{E_(', '.join(e.get('sources', [])))}</small></td><td><small>처음 {E_(e['first_seen'])}</small></td></tr>" for v, e in sorted(cand.items(), key=lambda x: -len(x[1]["records"]))[:40])
+    cr = "".join(f"<tr><td>{E_(v)}" + (f"<br><small>검토: {E_(e['review']['verdict'])} — {E_(e['review']['why'][:120])}</small>" if e.get("review") else "") + f"</td><td>{len(e['records'])}</td><td><small>{E_(', '.join(e.get('sources', [])))}</small></td><td><small>처음 {E_(e['first_seen'])}</small></td></tr>" for v, e in sorted(cand.items(), key=lambda x: -len(x[1]["records"]))[:40])
     T = lambda h, rows, cap: f"<table><tr>{''.join(f'<th>{x}</th>' for x in h)}</tr>{rows or '<tr><td colspan=4>(없음)</td></tr>'}</table><p><small>{cap}</small></p>"
     open(os.path.join(D, "dict.html"), "w", encoding="utf-8").write(f"""<!DOCTYPE html><html lang="ko"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>기준 사전 — 지명·인물·사건·전거 — KOREA ARCHIVE 발견 원장</title>
 <style>body{{font-family:system-ui,'Noto Sans KR',sans-serif;margin:0;background:#14161b;color:#e6e4dc}}main{{max-width:980px;margin:auto;padding:16px}}a{{color:#e0b04a}}small{{color:#9b9a93}}table{{border-collapse:collapse;width:100%;font-size:14px}}td,th{{border-bottom:1px solid #333;padding:6px;text-align:left;vertical-align:top}}</style>
