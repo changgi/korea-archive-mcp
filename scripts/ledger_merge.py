@@ -1177,10 +1177,38 @@ def persons(o):
     uc = set(((o.get("authority") or {}).get("persons") or {}).values())
     return {k for k, rx in _PE.items() if rx.search(t)} | {k for k, u in PERSON_UCI.items() if u in uc}
 
+AUTO_PERSONS = {}
+
+def auto_persons(recs):
+    """v3.31 전거 자동 인물 — 같은 인물 전거(장서각 한국역대인물 UCI·국립중앙도서관 KAC)가 원장 2건 이상이면 사람 검토 없이 인물 사전에(전거 기반이라 글자 오탐 없음).
+    이미 PERSONS(수동)에 있는 전거는 건너뛴다. 이름 = 가장 많이 쓰인 표기(한글 우선). 기록 persons_std에 더하고 근거를 남긴다."""
+    import collections
+    known = set(PERSON_UCI.values()) | {v[1] for v in PERSONS.values() if v[1]}
+    G = {}
+    for o in recs:
+        if o.get("entry_type", "기록") != "기록": continue
+        for n, i in ((o.get("authority") or {}).get("persons") or {}).items():
+            G.setdefault(i, {"scheme": "한국역대인물 UCI(장서각 태깅)", "names": collections.Counter(), "records": set()}); G[i]["names"][n] += 1; G[i]["records"].add(o["key"])
+        for n, i in ((o.get("authority_ids") or {}).get("terms") or {}).items():
+            if str(i).startswith("KAC") and any(str(m[0]) == "인물(기관 전거)" and n in str(m[1]) for m in (o.get("meta") or []) if m and len(m) > 1):
+                G.setdefault(i, {"scheme": "국립중앙도서관 KAC", "names": collections.Counter(), "records": set()}); G[i]["names"][n] += 1; G[i]["records"].add(o["key"])
+    AUTO_PERSONS.clear()
+    for i, g in G.items():
+        if i in known or len(g["records"]) < 2: continue
+        nm = sorted(g["names"].items(), key=lambda x: (not re.search(r"[가-힣]", x[0]), -x[1], len(x[0])))[0][0]
+        if nm in PERSONS: continue
+        AUTO_PERSONS[nm] = {"id": i, "scheme": g["scheme"], "labels": sorted(g["names"]), "records": sorted(g["records"])}
+    by = {o["key"]: o for o in recs}
+    for nm, a in AUTO_PERSONS.items():
+        for k in a["records"]:
+            o = by.get(k)
+            if o is not None: o["persons_std"] = sorted(set(o.get("persons_std") or []) | {nm})
+    return len(AUTO_PERSONS)
+
 def person_slug(n):
     """v3.30.1 인물 컬렉션 파일명 — 첫 로마자 표기(소문자·하이픈), 로마자가 없으면 지문(영조 → person/.json 빈 이름 결함)."""
     import hashlib
-    la = next((x for x in PERSONS[n][0].split("|") if re.match(r"^[A-Za-z]", x)), "")
+    la = next((x for x in (PERSONS[n][0].split("|") if n in PERSONS else (AUTO_PERSONS.get(n) or {}).get("labels", [])) if re.match(r"^[A-Za-z]", x)), "")
     return re.sub(r"[^a-z0-9]+", "-", la.lower()).strip("-") or "p-" + hashlib.sha1(n.encode()).hexdigest()[:8]
 
 def build_persons(recs):
@@ -1188,11 +1216,11 @@ def build_persons(recs):
     p = os.path.join(D, "persons.json"); P0 = json.load(open(p, encoding="utf-8")) if os.path.exists(p) else {}
     by = {o["key"]: o for o in recs}; out = {}; pd_ = os.path.join(D, "person"); os.makedirs(pd_, exist_ok=True)
     dkey = lambda o: ((o.get("date_norm") or {}).get("value") or o.get("date") or o.get("date_derived") or "9999")[:10]
-    for n, (rx, kac) in PERSONS.items():
+    for n, (rx, kac) in list(PERSONS.items()) + [(k, ("|".join(re.escape(x) for x in v["labels"]), v["id"] if v["id"].startswith("KAC") else "")) for k, v in AUTO_PERSONS.items()]:  # v3.31 전거 자동 인물 포함
         rs = sorted({o["key"] for o in recs if n in (o.get("persons_std") or [])} | set(((P0.get("persons") or {}).get(n) or {}).get("records") or []))
         sa = ([LOD_NLK + kac] + list((AUTH.get(kac) or {}).get("sameAs") or [])) if kac else []
         slug = person_slug(n)
-        e = {"labels": [x for x in rx.split("|") if "\\" not in x and "(" not in x], "authority": kac, **({"uci": PERSON_UCI[n]} if n in PERSON_UCI else {}), "sameAs": sa, "records": rs, "sources": sorted({k.split(":")[0] for k in rs})}
+        e = {"labels": [x for x in rx.split("|") if "\\" not in x and "(" not in x], "authority": kac, **({"uci": PERSON_UCI[n]} if n in PERSON_UCI else ({"uci": AUTO_PERSONS[n]["id"]} if n in AUTO_PERSONS and not AUTO_PERSONS[n]["id"].startswith("KAC") else {})), **({"basis": f"전거 자동 — {AUTO_PERSONS[n]['scheme']} {AUTO_PERSONS[n]['id']} 원장 {len(AUTO_PERSONS[n]['records'])}건(v3.31)"} if n in AUTO_PERSONS else {}), "sameAs": sa, "records": rs, "sources": sorted({k.split(":")[0] for k in rs})}
         L = sorted((by[k] for k in rs if k in by), key=lambda o: (dkey(o), o["key"]))
         items = [{"id": mf, "type": "Manifest", "label": {"ko": [f"{SRC_NAME.get(o['key'].split(':')[0], o['key'].split(':')[0])} — {o['title'][:100]}" + (f" ({dkey(o)})" if dkey(o) != "9999" else "")]}}
                  for o in L for mf in [(o.get("iiif") if not o.get("iiif_status") else "") or o.get("iiif_built")] if mf]
@@ -1250,7 +1278,7 @@ def dict_candidates(recs):
         e = C0["persons"].setdefault(v, {"first_seen": today, "records": []})
         e["records"] = sorted(set(e["records"]) | ks); e["sources"] = sorted({k.split(":")[0] for k in e["records"]}); e["last_seen"] = today
     for v, e in C0["persons"].items():
-        if (v in PERSONS or any(rx.search(v) for rx in _PE.values())) and not e.get("adopted"): e["adopted"] = today  # v3.30 표준명 일치도 채택
+        if (v in PERSONS or v in AUTO_PERSONS or any(v in a["labels"] for a in AUTO_PERSONS.values()) or any(rx.search(v) for rx in _PE.values())) and not e.get("adopted"): e["adopted"] = today  # v3.30 표준명 일치 · v3.31 전거 자동 인물
     for v, e in C0["places"].items():  # 이후 사전에 들어간 후보는 지우지 않고 표시
         if any(rx.search(v) for rx in _PL.values()) and not e.get("adopted"): e["adopted"] = today
     C0["updated"] = dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
@@ -1657,7 +1685,7 @@ def build_record_pages(recs_all):
 {row('계층', E_(part) + (f" <small>(근거: {E_(o.get('partOf_src', ''))})</small>" if o.get('partOf_src') else '') if part else (E_(pder) + ' <small>[파생]</small>' if pder else ''))}
 {row('날짜', E_(date) if date else (E_(dd) + f" <small>[파생 — {E_(o.get('date_basis', ''))}]</small>" if dd else ''))}{row('연대', E_(decade(o)))}{row('날짜 교차 확인', dch)}
 {row('요약', E_(o.get('summary') or '') or (E_(o.get('summary_composed') or '')))}{row('권리', E_(o.get('rights_view') or '') + (f" <small>({E_(o.get('rights_basis', ''))})</small>" if o.get('rights_basis') else ''))}
-{row('IIIF', f"<a href='{KV}{E_(mf)}'>KV 뷰어로 보기</a> · <a href='{E_(mf)}'>매니페스트</a> <small>({E_(o.get('iiif_kind', ''))})</small>" if mf else '')}{row('같은 날 다른 기관 기록', f"{E_(o['same_day']['date'])} — {o['same_day']['institutions']}개 기관 {o['same_day']['records']}건 · <a href='{KV}{E_(o['same_day']['collection'])}'>KV로 기관별 이어 보기</a> · <a href='{E_(o['same_day']['collection'])}'>IIIF 컬렉션</a> <small>(같은 사건 교차 대조 단서 — 같은 장면이라는 단정 아님)</small>" if o.get('same_day') else '')}{row('원 소장처(사본의 원본)', f"{E_(o['origin_holder']['institution'])}{' · ' + E_(o['origin_holder']['record_group']) if o['origin_holder'].get('record_group') else ''}{' · ' + E_(o['origin_holder']['local_id']) if o['origin_holder'].get('local_id') else ''}{' · 목록 단위 <a href=' + chr(39) + E_(o['origin_holder']['finding_aid']['search']) + chr(39) + '>' + E_(o['origin_holder']['finding_aid']['label']) + '</a>' if o['origin_holder'].get('finding_aid') else ''} <small>({E_(o['origin_holder']['basis'])})</small>" if o.get('origin_holder') else '')}{row('인물(표준)', ' · '.join(f"<a href='{KV}{PAGES}person/{person_slug(n)}.json'>{E_(n)}</a>" for n in o['persons_std'] if n in PERSONS) + " <small>(인물 사전 — 표제·기관 인물/주제/색인어 칸 매칭, 등장·언급 단서)</small>" if o.get('persons_std') else '')}{row('기관 전거', ' · '.join(f"{E_(t)} <a href='https://lod.nl.go.kr/page/{E_(i)}'>{E_(i)}</a>" + ''.join(f" <a href='{E_(x)}'>{E_(re.sub(r'^https?://(www[.])?', '', x).split('/')[0])}</a>" for x in (AUTH.get(i) or {}).get('sameAs', [])[:4]) for t, i in o['authority_ids']['terms'].items()) + " <small>(국립중앙도서관 LOD — 외부 전거는 LOD 페이지의 owl:sameAs)</small>" if o.get('authority_ids') else '')}{row('날짜 정규화', f"{E_(o['date_norm']['value'])} <small>({E_(o['date_norm']['basis'])} — 원 표기는 날짜 칸 그대로)</small>" if o.get('date_norm') else '')}{row('날짜 주의', E_(o['date_note']['note']) if o.get('date_note') else '')}{row('사건-날짜 대조', f"{E_(o['event_date_check']['event'])}({E_(o['event_date_check']['event_period'])}) ↔ 기록 {E_(o['event_date_check']['recorded'])} [{E_(o['event_date_check']['date_source'])}] — <b>{E_(o['event_date_check']['verdict'])}</b>" if o.get('event_date_check') else '')}{row('지명(표준)', ' · '.join(f"<a href='{KV}{PAGES}place/{place_slug(n)}.json'>{E_(n)}</a>" for n in o['places_std']) + " <small>(지명 사전 — 표제·기관 장소 칸 매칭)</small>" if o.get('places_std') else '')}{row('이미지 없는 사유', f"{E_(o['envelope_basis']['type'])} — {E_(o['envelope_basis']['why'])}" if o.get('envelope_basis') else '')}{row('원 기관 IIIF(브라우저 열람)', f"<a href='{KV}{E_(o['iiif_origin']['manifest'])}'>KV 뷰어로 보기</a> · <a href='{E_(o['iiif_origin']['manifest'])}'>매니페스트</a> · <a href='{E_(o['iiif_origin']['viewer'])}'>기관 뷰어</a> <small>({E_(o['iiif_origin']['basis'])})</small>" if o.get('iiif_origin') else '')}{row('같은 기록 실물 이미지', f"<a href='{KV}{E_(o['iiif_same']['manifest'])}'>KV 뷰어로 보기</a> · <a href='{E_(o['iiif_same']['manifest'])}'>매니페스트</a> <small>({E_(o['iiif_same']['basis'])})</small>" if o.get('iiif_same') else '')}
+{row('IIIF', f"<a href='{KV}{E_(mf)}'>KV 뷰어로 보기</a> · <a href='{E_(mf)}'>매니페스트</a> <small>({E_(o.get('iiif_kind', ''))})</small>" if mf else '')}{row('같은 날 다른 기관 기록', f"{E_(o['same_day']['date'])} — {o['same_day']['institutions']}개 기관 {o['same_day']['records']}건 · <a href='{KV}{E_(o['same_day']['collection'])}'>KV로 기관별 이어 보기</a> · <a href='{E_(o['same_day']['collection'])}'>IIIF 컬렉션</a> <small>(같은 사건 교차 대조 단서 — 같은 장면이라는 단정 아님)</small>" if o.get('same_day') else '')}{row('원 소장처(사본의 원본)', f"{E_(o['origin_holder']['institution'])}{' · ' + E_(o['origin_holder']['record_group']) if o['origin_holder'].get('record_group') else ''}{' · ' + E_(o['origin_holder']['local_id']) if o['origin_holder'].get('local_id') else ''}{' · 목록 단위 <a href=' + chr(39) + E_(o['origin_holder']['finding_aid']['search']) + chr(39) + '>' + E_(o['origin_holder']['finding_aid']['label']) + '</a>' if o['origin_holder'].get('finding_aid') else ''} <small>({E_(o['origin_holder']['basis'])})</small>" if o.get('origin_holder') else '')}{row('인물(표준)', ' · '.join(f"<a href='{KV}{PAGES}person/{person_slug(n)}.json'>{E_(n)}</a>" for n in o['persons_std'] if n in PERSONS or n in AUTO_PERSONS) + " <small>(인물 사전 — 표제·기관 인물/주제/색인어 칸 매칭, 등장·언급 단서)</small>" if o.get('persons_std') else '')}{row('기관 전거', ' · '.join(f"{E_(t)} <a href='https://lod.nl.go.kr/page/{E_(i)}'>{E_(i)}</a>" + ''.join(f" <a href='{E_(x)}'>{E_(re.sub(r'^https?://(www[.])?', '', x).split('/')[0])}</a>" for x in (AUTH.get(i) or {}).get('sameAs', [])[:4]) for t, i in o['authority_ids']['terms'].items()) + " <small>(국립중앙도서관 LOD — 외부 전거는 LOD 페이지의 owl:sameAs)</small>" if o.get('authority_ids') else '')}{row('날짜 정규화', f"{E_(o['date_norm']['value'])} <small>({E_(o['date_norm']['basis'])} — 원 표기는 날짜 칸 그대로)</small>" if o.get('date_norm') else '')}{row('날짜 주의', E_(o['date_note']['note']) if o.get('date_note') else '')}{row('사건-날짜 대조', f"{E_(o['event_date_check']['event'])}({E_(o['event_date_check']['event_period'])}) ↔ 기록 {E_(o['event_date_check']['recorded'])} [{E_(o['event_date_check']['date_source'])}] — <b>{E_(o['event_date_check']['verdict'])}</b>" if o.get('event_date_check') else '')}{row('지명(표준)', ' · '.join(f"<a href='{KV}{PAGES}place/{place_slug(n)}.json'>{E_(n)}</a>" for n in o['places_std']) + " <small>(지명 사전 — 표제·기관 장소 칸 매칭)</small>" if o.get('places_std') else '')}{row('이미지 없는 사유', f"{E_(o['envelope_basis']['type'])} — {E_(o['envelope_basis']['why'])}" if o.get('envelope_basis') else '')}{row('원 기관 IIIF(브라우저 열람)', f"<a href='{KV}{E_(o['iiif_origin']['manifest'])}'>KV 뷰어로 보기</a> · <a href='{E_(o['iiif_origin']['manifest'])}'>매니페스트</a> · <a href='{E_(o['iiif_origin']['viewer'])}'>기관 뷰어</a> <small>({E_(o['iiif_origin']['basis'])})</small>" if o.get('iiif_origin') else '')}{row('같은 기록 실물 이미지', f"<a href='{KV}{E_(o['iiif_same']['manifest'])}'>KV 뷰어로 보기</a> · <a href='{E_(o['iiif_same']['manifest'])}'>매니페스트</a> <small>({E_(o['iiif_same']['basis'])})</small>" if o.get('iiif_same') else '')}
 {row('발견', f"처음 {E_(o.get('first_seen', '')[:10])} · 최근 {E_(o.get('last_seen', '')[:10])} · {o.get('seen', 1)}회 · 출처 {E_('+'.join(o.get('sources') or []))}")}
 {row('같은 기록(기관 표기)', E_(o.get('sameAs') or '') + ('' if any(t_ == '같은 기록(다른 소장처)' for t_, _, _ in REL.get(o['key'], [])) else ' <small>(원장에 아직 없는 기록 — 기관 sameAs 표기 그대로)</small>') if o.get('sameAs') else '')}{row('옛 key', E_(', '.join(o.get('key_aliases') or [])))}{row('비고', E_(o.get('merge_note') or o.get('recovered') or o.get('harvested') or ''))}{row('발굴 경위', E_(o.get('found_via') or '') + (f" <small>(출발 기록 <a href='{E_(rec_slug(o['drilled_from']))}.html'>{E_(o['drilled_from'])}</a>)</small>" if o.get('drilled_from') else '') if o.get('found_via') else '')}
 </table>{('<h2>주제·분류 (기관 표기)</h2><p>' + ' · '.join(f"<a href='../subjects.html#{E_(subj_anchor(f_, t_))}'>{E_(f_)}: {E_(t_)}</a>" for f_, t_ in record_concepts(o)[:30]) + '</p>') if record_concepts(o) else ''}
@@ -2655,6 +2683,7 @@ def main():
                 ec = o.get("event_date_check")
                 if ec and ec["verdict"].startswith("사건 이전 연도"): ec["basis"] += f" · 같은 철 {len(L_)}건 모두 {y0}년(철 단위 연도 표기 단서)"
             else: o.pop("date_note", None)
+    nap = auto_persons(recs); print(f"전거 자동 인물 {nap}명(같은 인물 전거 원장 2건 이상)")  # v3.31
     eb_ = __import__("collections").Counter()
     for o in recs:  # v3.9.2 봉투 사유(iiif_same·iiif_origin 판정 뒤에)
         e_ = envelope_basis(o)
