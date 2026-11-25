@@ -2059,7 +2059,7 @@ const JB_CROSS = `국내외 대조 절차 — 순서를 틀리면 헛수고한�
 미기술 자료를 만나면: 기증이 어려우면 사본수집(공공기록물법 46조 — 국가기록원)·국립중앙도서관 책다모아(02-590-0700). 판단은 기관이 한다, 소장자는 연락만 하면 된다.`;
 
   server.tool('query_bank',
-    'Browse validated discovery keywords (Song 2026). topic: "dict" (기준 사전 — 지명·인물·사건·기관 전거), "list" for groups, a group id (G-01..G-22, N-01..N-07), "RG" for NARA Record Group cross-map, "TNA" for the 14 strategy layers, "domestic" for the 5 domestic archives, or a domestic key (nedb/archives/nlk/warmemo/seoul) / domestic group id (e.g. NAK-L1). 전략 지식: "walls"=열한 겹의 벽(실패 원인 11층+대응), "identifiers"=식별자 해독(번호 규칙·옆 훑기), "persons"=인명 열쇠(표기 변형·색인 함정), "crosscheck"=국내외 대조 절차, "world"=6개국+ 서고 지도, "cities"=도시명 계보 대조(Keijo·Fusan·1914 경계), "allies"=한국전 참전·지원 22개국 발굴 지도(보유 소스 매핑·부대 고유명 열쇠), "recipes"=주제 유형별 발굴→판독→권리 완주 레시피 6종(인물·전투·조선·일제강점기·도시·이미지 소싱). 검증 쿼리 뱅크+조사 전략.',
+    'Browse validated discovery keywords (Song 2026). topic: "dict" (기준 사전 — 지명·인물·사건·기관 전거), "coverage:질의" (조회 범위 — 확정 0·조회 실패), "list" for groups, a group id (G-01..G-22, N-01..N-07), "RG" for NARA Record Group cross-map, "TNA" for the 14 strategy layers, "domestic" for the 5 domestic archives, or a domestic key (nedb/archives/nlk/warmemo/seoul) / domestic group id (e.g. NAK-L1). 전략 지식: "walls"=열한 겹의 벽(실패 원인 11층+대응), "identifiers"=식별자 해독(번호 규칙·옆 훑기), "persons"=인명 열쇠(표기 변형·색인 함정), "crosscheck"=국내외 대조 절차, "world"=6개국+ 서고 지도, "cities"=도시명 계보 대조(Keijo·Fusan·1914 경계), "allies"=한국전 참전·지원 22개국 발굴 지도(보유 소스 매핑·부대 고유명 열쇠), "recipes"=주제 유형별 발굴→판독→권리 완주 레시피 6종(인물·전투·조선·일제강점기·도시·이미지 소싱). 검증 쿼리 뱅크+조사 전략.',
     { topic: z.string().default('list') },
     async ({ topic }) => {
       const t = topic.trim();
@@ -2080,6 +2080,23 @@ const JB_CROSS = `국내외 대조 절차 — 순서를 틀리면 헛수고한�
             + (miss.length ? `\n\n(조회 실패: ${miss.join(', ')} — 원장 실행 뒤 다시)` : '') + `\n\n※ 보기: ${B}dict.html · 정본 places.json·persons.json·events.json·authorities.json · KV 보기 https://changgi.github.io/korea-archive-mcp/kv.html?manifest=<IIIF 주소>`);
         } catch (e) { return text(`기준 사전 조회 실패(${e.message}) — https://changgi.github.io/korea-archive-mcp/data/dict.html 직접 열람`); }
       }
+      { const cm = t.match(/^(coverage|범위|조회범위)(?:\s*[:：]\s*(.+))?$/i); if (cm) { // v3.41 조회 범위 등록부 — 축적된 cross_search 회신의 채널별 결과를 질의×기관 관측으로(부재 주장의 근거: 확정 0 vs 조회 실패)
+        try {
+          const C = JSON.parse(await cachedText('qb:cov', 3600e3, () => gtext('https://changgi.github.io/korea-archive-mcp/data/coverage.json'), '"by_source"'));
+          const row = (src, e) => `- ${src}: 결과 ${e.hit}회(최대 ${e.max}건) · 확정 0 ${e.zero}회 · 미확정 0 ${e.zero_legacy}회 · 조회 실패 ${e.fail}회 · 마지막 ${String(e.last).slice(0, 16)} ${e.last_status === 'fail' ? '조회 실패' : e.last_status === 'zero' ? '0건' : '결과 ' + String(e.last_status).replace('hit:', '') + '건'}`;
+          const want = (cm[2] || '').trim(); const foot = `\n\n읽는 법: '확정 0'은 기관 응답이 0건을 명시한 관측, '미확정 0'은 확정 0 판별 이전·미감사 기관의 0(오류 포함 가능), '조회 실패'는 기록이 없다는 뜻이 아님. 부재를 말하려면 확정 0이 있고 그 뒤 결과가 없어야 함.\n※ 정본: https://changgi.github.io/korea-archive-mcp/data/coverage.json · 회신 원문 data/queries/ (질의·회신은 지우지 않음)`;
+          if (want) {
+            const keys = Object.keys(C.queries || {}); const lw = want.toLowerCase();
+            const hit = keys.filter((k) => k === want).concat(keys.filter((k) => k !== want && k.toLowerCase().includes(lw))).slice(0, 5);
+            if (!hit.length) return text(`조회 범위 등록부에 '${want}' 질의 관측이 아직 없습니다(축적 질의 ${C.total_queries}개). cross_search로 조회하면 다음 원장 실행 때 관측이 쌓입니다.` + foot);
+            return text(hit.map((k) => `【'${k}' — 기관 ${Object.keys(C.queries[k]).length}곳 관측】\n` + Object.entries(C.queries[k]).sort((a, b) => b[1].hit - a[1].hit || a[0].localeCompare(b[0])).map(([s2, e]) => row(s2, e)).join('\n')).join('\n\n') + foot);
+          }
+          const bs = Object.entries(C.by_source || {}).sort((a, b) => b[1].queries - a[1].queries);
+          return text(`KOREA ARCHIVE 조회 범위 등록부 — cross_search 회신 ${C.replies}건 · 질의 ${C.total_queries}개 · 기관 ${bs.length}곳 (갱신 ${String(C.updated).slice(0, 16)})\n`
+            + bs.map(([s2, b]) => `- ${s2}: 질의 ${b.queries}개 · 결과 ${b.hit} · 확정 0 ${b.zero} · 미확정 0 ${b.zero_legacy} · 조회 실패 ${b.fail}`).join('\n')
+            + `\n\n특정 질의: query_bank(topic="coverage:<질의>")` + foot);
+        } catch (e) { return text(`조회 범위 등록부 조회 실패(${e.message}) — https://changgi.github.io/korea-archive-mcp/data/coverage.json 직접 열람`); }
+      } }
       if (/^(ledger|원장|used|실측)$/i.test(t)) { // v3.8 축적된 실제 질의 — 기록을 발굴한 질의를 성과(발굴 기록 수)순으로(발견 경로 provenance.json). 질의 축적을 다시 발굴로
         try {
           const pv = JSON.parse(await cachedText('qb:prov', 3600e3, () => gtext('https://changgi.github.io/korea-archive-mcp/data/provenance.json'), '"provenance"'));

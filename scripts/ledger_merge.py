@@ -1045,7 +1045,7 @@ DISTS = [("discovered.csv", "text/csv", "발견 기록 표(CSV)"), ("discovered.
          ("feed.xml", "application/atom+xml", "새 발견 Atom 피드"), ("timeline.json", "application/json", "연대 타임라인"), ("tree.json", "application/json", "계층구조"),
          ("classifications.json", "application/json", "분류 사전"), ("provenance.json", "application/json", "발견 경로(질의↔기록)"), ("relations.json", "application/json", "기록↔기록 맥락 연결(근거 포함)"), ("relations.html", "text/html", "맥락 연결 묶음(읽기용)"), ("quality.json", "application/json", "데이터 품질 시계열"),
          ("fixity_changes.json", "application/json", "원문 고정성 변경 이력"), ("loss_guard.json", "application/json", "불삭제 검사 — 되살린 값 기록"), ("queries/index.json", "application/json", "질의·회신 축적 색인"),
-         ("queries/probe/index.json", "application/json", "자동 점검 질의·회신 색인"), ("records/index.json", "application/json", "일일 기록물 등록부 해시 사슬")]
+         ("queries/probe/index.json", "application/json", "자동 점검 질의·회신 색인"), ("records/index.json", "application/json", "일일 기록물 등록부 해시 사슬"), ("coverage.json", "application/json", "조회 범위 등록부(질의×기관 — 결과·확정 0·조회 실패)")]
 
 def iiif_kind(o):
     m = (o.get("iiif") or "") if not o.get("iiif_status") else ""
@@ -2286,6 +2286,62 @@ def rights_view(o):
         return pol[:220], "수집처 정책(source_profile 원문)"
     return "", ""
 
+# v3.41 기관별 '확정 0' 시행 시각(main 머지 + 배포 여유 3분, UTC) — 이 시각 이후의 cross_search '0'만 기관이 0건을 명시한 확정 0.
+# 그 전, 또는 아직 감사하지 않은 기관의 '0'은 오류도 0으로 보고될 수 있었으므로 zero_legacy(부재 근거로 쓰지 않음). 새 기관을 감사하면 여기에 더한다.
+_ZS = {"v3.32": "2026-11-25T11:27:00Z", "v3.33": "2026-11-25T11:39:00Z", "v3.34": "2026-11-25T11:53:00Z", "v3.35": "2026-11-25T12:03:00Z",
+       "v3.36": "2026-11-25T12:22:00Z", "v3.37": "2026-11-25T12:34:00Z", "v3.38": "2026-11-25T12:50:00Z"}
+COVERAGE_STRICT = {**{k: _ZS["v3.32"] for k in ("archives",)}, **{k: _ZS["v3.33"] for k in ("nara", "nlk", "nedb", "kyudb", "earchive")},
+                   **{k: _ZS["v3.34"] for k in ("koreanwar", "okchf", "nrich")}, **{k: _ZS["v3.35"] for k in ("much", "i815")},
+                   **{k: _ZS["v3.36"] for k in ("un", "indy", "jsg", "gonghun", "jacar", "seoul")}, **{k: _ZS["v3.37"] for k in ("ktv", "awm")},
+                   **{k: _ZS["v3.38"] for k in ("tna", "ia", "europeana", "oldnews", "dnz", "commons", "nlna")}}
+
+
+def build_coverage():
+    """v3.41 조회 범위 등록부 — 축적된 cross_search 회신(queries/ + queries/probe/)의 '채널별 [기관:n · 기관:— …]' 줄을 질의×기관 관측으로.
+    '이 질의로 이 기관을 언제 조회했고 결과가 있었나·0건이 확정됐나·조회에 실패했나'의 증거(부재 주장의 근거). 회신 원문에서 매번 다시 계산하므로
+    지울 것이 없다(원문은 queries/에 영구 보존). 기관별 확정 0 시행 이전·미감사 기관의 '0'은 zero_legacy로 따로 센다."""
+    import gzip, base64, zlib
+    Q = {}; seen = set(); nrep = 0
+    for sub in ("queries", os.path.join("queries", "probe")):
+        qd = os.path.join(D, sub)
+        if not os.path.isdir(qd): continue
+        for f in sorted(os.listdir(qd)):
+            if not f.endswith(".jsonl.gz"): continue
+            for ln in gzip.open(os.path.join(qd, f), "rt", encoding="utf-8"):
+                if not ln.strip(): continue
+                o = json.loads(ln)
+                if o.get("tool") != "cross_search" or not o.get("z"): continue
+                q = str((o.get("args") or {}).get("query") or "").strip()
+                if not q: continue
+                try: body = zlib.decompress(base64.b64decode(o["z"]), -15).decode("utf-8", "replace")
+                except Exception: continue
+                m = re.search(r"채널별 \[([^\]]*)\]", body)
+                if not m: continue
+                nrep += 1
+                for src, v in re.findall(r"([a-z][\w-]*):(\d+|—)", m.group(1)):
+                    for at in sorted({o.get("first") or "", o.get("last") or ""} - {""}):
+                        if (q, src, at, v) in seen: continue  # 같은 관측(같은 시각·같은 값) 한 번만 — 중복 제거
+                        seen.add((q, src, at, v))
+                        e = Q.setdefault(q, {}).setdefault(src, {"hit": 0, "zero": 0, "zero_legacy": 0, "fail": 0, "max": 0, "first": at, "last": at})
+                        if v == "—": k = "fail"
+                        elif v == "0": k = "zero" if src in COVERAGE_STRICT and at >= COVERAGE_STRICT[src] else "zero_legacy"
+                        else: k = "hit"; e["max"] = max(e["max"], int(v))
+                        e[k] += 1; e["last_" + ("zero" if k == "zero_legacy" else k)] = max(e.get("last_" + ("zero" if k == "zero_legacy" else k), ""), at)
+                        e["first"] = min(e["first"], at)
+                        if at >= e["last"]: e["last"] = at; e["last_status"] = ("fail" if k == "fail" else "zero" if v == "0" else f"hit:{v}")
+    by = {}
+    for q, S in Q.items():
+        for src, e in S.items():
+            b = by.setdefault(src, {"queries": 0, "hit": 0, "zero": 0, "zero_legacy": 0, "fail": 0}); b["queries"] += 1
+            for k in ("hit", "zero", "zero_legacy", "fail"): b[k] += e[k]
+    out = {"updated": dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"), "strict_since": COVERAGE_STRICT,
+           "note": "조회 범위 등록부 — 질의×기관 관측(hit=결과 있음·zero=기관이 0건을 명시한 확정 0·zero_legacy=그 기관의 확정 0 시행(strict_since) 이전 또는 미감사 기관의 0(오류 포함 가능 — 부재 근거로 쓰지 말 것)·fail=조회 실패). "
+                   "근거 원문은 queries/<월>.jsonl.gz(cross_search 회신). 부재를 주장하려면 zero ≥ 1이고 그 뒤 hit가 없어야 하며, fail은 '기록이 없다'는 뜻이 아니다.",
+           "replies": nrep, "total_queries": len(Q), "by_source": dict(sorted(by.items())), "queries": dict(sorted(Q.items()))}
+    json.dump(out, open(os.path.join(D, "coverage.json"), "w", encoding="utf-8"), ensure_ascii=False, separators=(",", ":"))
+    return len(Q), nrep
+
+
 def write_quality(recs):
     """v2.39 데이터 품질 시계열 — 기록 항목별 채움률을 날마다 쌓는다(지우지 않음, 같은 날은 갱신). 떨어지면 수집기·판독기 이상 신호."""
     R = [o for o in recs if o.get("entry_type", "기록") == "기록"]
@@ -2777,7 +2833,7 @@ table{{width:100%;border-collapse:collapse;font-size:14px}}td,th{{border-bottom:
 <h2>일별 활용(최근 14일)</h2><table><tr><th>날짜</th><th>검색 묶음</th><th>발견 기록</th><th>신규 기록</th></tr>{urow}</table><p style="font-size:13px">형식별 누계: {E_(fmtv(usage['formats']))} · <a href="usage.json">usage.json</a></p>
 <h2>질의·회신 축적</h2><p style="font-size:13px">모든 도구 호출의 질의와 회신 본문을 원문 그대로(가공·삭제 없이) 영구 보존합니다. 같은 질의·같은 회신은 한 번만 두고 횟수만 셉니다. 회신이 달라지면 새 판으로 남겨 기관 응답 변화의 증거로 씁니다. 고유 질의 {nq['total']}건 · 누적 호출 {nq['calls']}회 · 도구별 {E_(fmtv(nq['by_tool']))} · <a href="queries/index.json">queries/index.json</a> (월별 회신 원문 queries/YYYY-MM.jsonl.gz) · 자동 점검(골든·헬스·원장 보강) 질의·회신은 활용 집계와 분리해 <a href="queries/probe/index.json">queries/probe/</a>에 따로 축적(고유 {npq['total']}건 — 기관 응답 변화·장애의 증거)</p><table><tr><th>최근</th><th>도구</th><th>질의</th><th>횟수</th></tr>{qrow}</table>
 <h2>최근 발견 100건</h2><div class="g">{rows}</div></main></html>""")
-    build_tree(recs); ncls = merge_classes(recs); nprov, _orph = build_provenance(recs); nfx = write_fixity(recs); nql = write_quality(recs); nsub = merge_subjects(recs); nau = build_authorities(recs); print(f'기관 전거 외부 연결 {nau}건 — authorities.json'); npe = build_persons(recs); print(f'인물 사전 {npe}명 — persons.json·persons.jsonld·person/'); build_dict_page(recs); npl = build_places(recs); print(f'지명 사전 {npl}곳 — places.json·places.jsonld'); nmed = build_media(recs); npg = build_record_pages(recs); ndg = build_digest(recs, today); nact = build_activity(recs); print(f"IIIF Change Discovery 활동 {nact}건 — activity/collection.json"); ncat = build_catalog(recs, nql)
+    build_tree(recs); ncls = merge_classes(recs); nprov, _orph = build_provenance(recs); nfx = write_fixity(recs); nql = write_quality(recs); ncov = build_coverage(); print(f'조회 범위 등록부 질의 {ncov[0]}개 · 회신 {ncov[1]}건 — coverage.json'); nsub = merge_subjects(recs); nau = build_authorities(recs); print(f'기관 전거 외부 연결 {nau}건 — authorities.json'); npe = build_persons(recs); print(f'인물 사전 {npe}명 — persons.json·persons.jsonld·person/'); build_dict_page(recs); npl = build_places(recs); print(f'지명 사전 {npl}곳 — places.json·places.jsonld'); nmed = build_media(recs); npg = build_record_pages(recs); ndg = build_digest(recs, today); nact = build_activity(recs); print(f"IIIF Change Discovery 활동 {nact}건 — activity/collection.json"); ncat = build_catalog(recs, nql)
     print(f"원장 {len(recs)}건 (신규 {new_recs}, 묶음 {new_batches}) · 맥락 연결 {nrel}")
     print(f"질의 고유 {nq['total']}건(신규 {nq['added']}) · 분류 경로 {ncls}개 · 발견 경로 질의 {nprov}종 · 다매체(피드 {nmed[0]}·인용 {nmed[1]}·연대 {nmed[2]}) · 주제 색인 {nsub} · 품질 권리 {nql['권리 표시']}% 요약 {nql['요약']}% 연대 {nql['연대']}%")
 
