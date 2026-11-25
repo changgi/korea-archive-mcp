@@ -124,6 +124,32 @@
 "@id": "https://changgi.github.io/korea-archive-mcp/data/person/ridgway.json"
 },
 "ka:records": 2
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/persons.jsonld#%EC%98%81%EC%A1%B0",
+"@type": [
+"skos:Concept",
+"rico:Person"
+],
+"skos:inScheme": {
+"@id": "https://changgi.github.io/korea-archive-mcp/data/persons.jsonld"
+},
+"skos:prefLabel": {
+"@value": "영조",
+"@language": "ko"
+},
+"skos:altLabel": [
+"英祖"
+],
+"skos:notation": {
+"@value": "G002+AKS-KHF_12C601C870FFFFB1694X0",
+"@type": "ka:UCI"
+},
+"owl:sameAs": [],
+"rdfs:seeAlso": {
+"@id": "https://changgi.github.io/korea-archive-mcp/data/person/.json"
+},
+"ka:records": 3
 }
 ]
 }
