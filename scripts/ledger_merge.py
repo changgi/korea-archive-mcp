@@ -1424,6 +1424,29 @@ def kw_hier_pass(led, today, budget=10):
         time.sleep(0.6)
     return used, got
 
+def tna_hier_pass(led, today, budget=10):
+    """v3.4 TNA Discovery 기록 중 기관 계층이 없는 것(최상위 컬렉션·시리즈) — records/v1/details의 기관 값으로 계층을 세운다(지어내지 않음).
+    · 다른 기록관 소장(heldBy가 Kew가 아님): 'TNA Discovery › 소장 기관'(이 기록이 그 기관 컬렉션의 최상위) — Discovery가 목록만 실은 외부 소장 컬렉션
+    · Kew 소장: 'TNA › 부서'(참조번호 첫 마디 — 다른 TNA 기록 계층과 같은 형식). 실패·무값은 tna_hier_tried(7일 뒤 재시도)."""
+    used = got = 0
+    for o in sorted(led.values(), key=lambda x: x["key"]):
+        if used >= budget: break
+        if not o["key"].startswith("tna:") or o.get("partOf") or o.get("entry_type", "기록") != "기록": continue
+        if o.get("tna_hier_tried", "") > (today - dt.timedelta(days=7)).isoformat(): continue
+        m = re.search(r"/details/r/([A-Za-z0-9-]+)", o.get("url") or "")
+        if not m: continue
+        used += 1; o["tna_hier_tried"] = today.isoformat()
+        try: j = get(f"https://discovery.nationalarchives.gov.uk/API/records/v1/details/{m[1]}")
+        except Exception as ex: print(f"TNA 계층 조회 실패 {o['key']}: {str(ex)[:60]}"); continue
+        held = [h.get("xReferenceName") for h in j.get("heldBy") or [] if h.get("xReferenceName")]
+        ref = (j.get("citableReference") or o["key"].split(":", 1)[1]).strip()
+        if held and not any("National Archives, Kew" in h for h in held):
+            o["partOf"] = f"TNA Discovery › {held[0]}"; o["partOf_src"] = f"TNA Discovery details(heldBy 소장 기관 · parentId {j.get('parentId', '')} · 기술 수준 {j.get('catalogueLevel', '')})"; got += 1
+        elif re.match(r"^[A-Z]{1,6}[\s/]", ref):
+            o["partOf"] = f"TNA › {re.split(r'[\s/]', ref)[0]}"; o["partOf_src"] = f"TNA Discovery details(참조번호 {ref}의 부서 · parentId {j.get('parentId', '')})"; got += 1
+        time.sleep(0.5)
+    return used, got
+
 def sameas_pass(led, today, budget=10):
     """v2.83 같은 기록 추적 — 기관이 같은 기록이라고 적은 상대가 원장에 없으면 그 기관에서 직접 찾아 원장 기록으로 들인다(발굴).
     정확히 같은 식별자만(NAID·로컬 식별자·참조코드·IA 식별자) — 비슷한 제목은 받지 않는다. 실패는 7일 뒤 재시도, 원래 기록에 sameas_tried."""
@@ -2015,6 +2038,8 @@ def main():
     sa_used, sa_added = sameas_pass(led, today, int(os.environ.get("SAMEAS_MAX", "12")))  # v2.83 같은 기록 추적 발굴
     print(f"같은 기록 추적 {sa_added}건 발굴(요청 {sa_used})")
     kh_used, kh_got = kw_hier_pass(led, today, int(os.environ.get("KW_HIER_MAX", "10")))  # v2.87
+    th_used, th_got = tna_hier_pass(led, today, int(os.environ.get("TNA_HIER_MAX", "10")))  # v3.4
+    if th_used: print(f"TNA 계층 보강: 조회 {th_used} · 세움 {th_got}")
     print(f"6·25전쟁 아카이브센터 기관 계층 {kh_got}건(요청 {kh_used})")
     print(f"첫 화면 링크 해소 {rl_fixed}/{rl_used} · 고문서 소장처 하위 문서 발굴 {ad_added}건({ad_used}회 호출)")
     budget = int(os.environ.get("ENRICH_MAX", "80"))  # 하루 매니페스트 판독 상한(기관 서버 예의 — 순차·간격)
