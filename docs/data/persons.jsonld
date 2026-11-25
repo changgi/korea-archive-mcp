@@ -1,0 +1,129 @@
+{
+"@context": {
+"skos": "http://www.w3.org/2004/02/skos/core#",
+"rico": "https://www.ica.org/standards/RiC/ontology#",
+"owl": "http://www.w3.org/2002/07/owl#",
+"rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+"ka": "https://changgi.github.io/korea-archive-mcp/data/#"
+},
+"@graph": [
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/persons.jsonld",
+"@type": "skos:ConceptScheme",
+"skos:prefLabel": {
+"@value": "KOREA ARCHIVE 인물 사전",
+"@language": "ko"
+}
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/persons.jsonld#%EB%A7%A5%EC%95%84%EB%8D%94",
+"@type": [
+"skos:Concept",
+"rico:Person"
+],
+"skos:inScheme": {
+"@id": "https://changgi.github.io/korea-archive-mcp/data/persons.jsonld"
+},
+"skos:prefLabel": {
+"@value": "맥아더",
+"@language": "ko"
+},
+"skos:altLabel": [
+"MacArthur",
+"Mac Arthur",
+"맥아-더",
+"麥克阿瑟",
+"マッカーサー"
+],
+"owl:sameAs": [
+{
+"@id": "http://lod.nl.go.kr/resource/KAC201619806"
+},
+{
+"@id": "http://d-nb.info/gnd/11878093X"
+},
+{
+"@id": "http://id.loc.gov/authorities/names/n79054196"
+},
+{
+"@id": "http://id.ndl.go.jp/auth/entity/00524026"
+},
+{
+"@id": "http://viaf.org/viaf/41848578"
+},
+{
+"@id": "http://www.wikidata.org/entity/Q127417"
+}
+],
+"rdfs:seeAlso": {
+"@id": "https://changgi.github.io/korea-archive-mcp/data/person/macarthur.json"
+},
+"ka:records": 12
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/persons.jsonld#%EC%9D%B4%EC%8A%B9%EB%A7%8C",
+"@type": [
+"skos:Concept",
+"rico:Person"
+],
+"skos:inScheme": {
+"@id": "https://changgi.github.io/korea-archive-mcp/data/persons.jsonld"
+},
+"skos:prefLabel": {
+"@value": "이승만",
+"@language": "ko"
+},
+"skos:altLabel": [
+"李承晩",
+"李承晚",
+"Syngman Rhee"
+],
+"owl:sameAs": [
+{
+"@id": "http://lod.nl.go.kr/resource/KAC200506341"
+},
+{
+"@id": "http://d-nb.info/gnd/118788566"
+},
+{
+"@id": "http://id.loc.gov/authorities/names/n80079491"
+},
+{
+"@id": "http://id.ndl.go.jp/auth/entity/00626760"
+},
+{
+"@id": "http://viaf.org/viaf/46770135"
+},
+{
+"@id": "http://www.wikidata.org/entity/Q171684"
+}
+],
+"rdfs:seeAlso": {
+"@id": "https://changgi.github.io/korea-archive-mcp/data/person/syngman-rhee.json"
+},
+"ka:records": 2
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/persons.jsonld#%EB%A6%AC%EC%A7%80%EC%9B%A8%EC%9D%B4",
+"@type": [
+"skos:Concept",
+"rico:Person"
+],
+"skos:inScheme": {
+"@id": "https://changgi.github.io/korea-archive-mcp/data/persons.jsonld"
+},
+"skos:prefLabel": {
+"@value": "리지웨이",
+"@language": "ko"
+},
+"skos:altLabel": [
+"Ridgway"
+],
+"owl:sameAs": [],
+"rdfs:seeAlso": {
+"@id": "https://changgi.github.io/korea-archive-mcp/data/person/ridgway.json"
+},
+"ka:records": 2
+}
+]
+}

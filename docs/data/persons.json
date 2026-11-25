@@ -1,0 +1,89 @@
+{
+ "note": "KOREA ARCHIVE 인물 사전 — 원장 실측 2건 이상 인물, 표제·인물/주제/색인어 칸 매칭. sameAs = 국립중앙도서관 LOD 전거와 그 외부 전거(authorities.json). 누적, 지우지 않음.",
+ "updated": "2026-11-25T10:37:39Z",
+ "persons": {
+  "맥아더": {
+   "labels": [
+    "MacArthur",
+    "Mac Arthur",
+    "맥아더",
+    "맥아-더",
+    "麥克阿瑟",
+    "マッカーサー"
+   ],
+   "authority": "KAC201619806",
+   "sameAs": [
+    "http://lod.nl.go.kr/resource/KAC201619806",
+    "http://d-nb.info/gnd/11878093X",
+    "http://id.loc.gov/authorities/names/n79054196",
+    "http://id.ndl.go.jp/auth/entity/00524026",
+    "http://viaf.org/viaf/41848578",
+    "http://www.wikidata.org/entity/Q127417"
+   ],
+   "records": [
+    "ia:hellorhighwater00shel",
+    "ia:hellorhighwaterm0000shel",
+    "ia:hellorhighwaterm0000shel_q5t0",
+    "ia:hellorhighwaterm00shel",
+    "ia:inchonlandingmac0000mich",
+    "ia:inchonlandingmac00lang",
+    "ia:mac-arthurs-war-map-naktong-bulge",
+    "koreanwar:1990-US-01-PF-A-00020",
+    "koreanwar:2024-FR-02-DC-D-01131",
+    "koreanwar:2024-FR-02-DC-D-01234",
+    "nara:NAID 22015",
+    "oldnews:CNTS-00133841567"
+   ],
+   "sources": [
+    "ia",
+    "koreanwar",
+    "nara",
+    "oldnews"
+   ],
+   "collection": "https://changgi.github.io/korea-archive-mcp/data/person/macarthur.json"
+  },
+  "이승만": {
+   "labels": [
+    "이승만",
+    "李承晩",
+    "李承晚",
+    "Syngman Rhee"
+   ],
+   "authority": "KAC200506341",
+   "sameAs": [
+    "http://lod.nl.go.kr/resource/KAC200506341",
+    "http://d-nb.info/gnd/118788566",
+    "http://id.loc.gov/authorities/names/n80079491",
+    "http://id.ndl.go.jp/auth/entity/00626760",
+    "http://viaf.org/viaf/46770135",
+    "http://www.wikidata.org/entity/Q171684"
+   ],
+   "records": [
+    "archives:201808301444-30",
+    "oldnews:CNTS-00134989837"
+   ],
+   "sources": [
+    "archives",
+    "oldnews"
+   ],
+   "collection": "https://changgi.github.io/korea-archive-mcp/data/person/syngman-rhee.json"
+  },
+  "리지웨이": {
+   "labels": [
+    "Ridgway",
+    "리지웨이"
+   ],
+   "authority": "",
+   "sameAs": [],
+   "records": [
+    "ia:111-adc-8630",
+    "nara:NAID 22395"
+   ],
+   "sources": [
+    "ia",
+    "nara"
+   ],
+   "collection": "https://changgi.github.io/korea-archive-mcp/data/person/ridgway.json"
+  }
+ }
+}
