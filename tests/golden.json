@@ -1547,7 +1547,8 @@
    },
    "must": [
     "activity/collection\\.json",
-    "Change Discovery"
+    "Change Discovery",
+    "day/index\\.json"
    ],
    "level": "warn",
    "note": "v3.2 IIIF Change Discovery 1.0 활동 스트림 안내(웹·모바일 동등성)"
