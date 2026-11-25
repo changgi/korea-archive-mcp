@@ -1447,6 +1447,29 @@ def tna_hier_pass(led, today, budget=10):
         time.sleep(0.5)
     return used, got
 
+def nlk_hier_pass(led, today, budget=10):
+    """v3.4.1 국립중앙도서관 기록 중 기관 계층이 없는 것 — nlk_search를 제목으로 불러 **같은 식별자(viewKey·cno) 줄**의 기관 자료유형([지도자료] 등)으로
+    '자료유형 › X'(cross_search nlk 계층과 같은 형식)을 세운다. 날짜가 비었으면 같은 줄의 발행 연도도(기관 값). 다른 줄은 쓰지 않는다. 실패·무일치는 7일 뒤 재시도."""
+    used = got = 0
+    for o in sorted(led.values(), key=lambda x: x["key"]):
+        if used >= budget: break
+        if not o["key"].startswith("nlk:") or o.get("partOf") or o.get("entry_type", "기록") != "기록": continue
+        if o.get("nlk_hier_tried", "") > (today - dt.timedelta(days=7)).isoformat(): continue
+        i = o["key"].split(":", 1)[1]; q = o["title"].strip()[:60]
+        used += 1; o["nlk_hier_tried"] = today.isoformat()
+        try: t = mcp_call("nlk_search", {"query": q})
+        except Exception as ex: print(f"국립중앙도서관 계층 조회 실패 {o['key']}: {str(ex)[:60]}"); continue
+        for ln in t.splitlines():
+            if re.search(r"(?:viewKey|cno)=" + re.escape(i) + r"(?![\w-])", ln):
+                m = re.search(r" \[([^\]]{2,12})\] · ", ln)
+                if m:
+                    o["partOf"] = f"자료유형 › {m[1]}"; o["partOf_src"] = f"nlk_search 같은 식별자({i}) 줄의 기관 자료유형"; got += 1
+                    y = re.search(r"\((\[?\d{4}\]?\d{0,4})\)\s+https?://", ln)
+                    if y and not o.get("date"): o["date"] = y[1]; o["date_src"] = f"nlk_search 같은 식별자({i}) 줄의 기관 발행 연도"
+                break
+        time.sleep(0.6)
+    return used, got
+
 def sameas_pass(led, today, budget=10):
     """v2.83 같은 기록 추적 — 기관이 같은 기록이라고 적은 상대가 원장에 없으면 그 기관에서 직접 찾아 원장 기록으로 들인다(발굴).
     정확히 같은 식별자만(NAID·로컬 식별자·참조코드·IA 식별자) — 비슷한 제목은 받지 않는다. 실패는 7일 뒤 재시도, 원래 기록에 sameas_tried."""
@@ -2040,6 +2063,8 @@ def main():
     kh_used, kh_got = kw_hier_pass(led, today, int(os.environ.get("KW_HIER_MAX", "10")))  # v2.87
     th_used, th_got = tna_hier_pass(led, today, int(os.environ.get("TNA_HIER_MAX", "10")))  # v3.4
     if th_used: print(f"TNA 계층 보강: 조회 {th_used} · 세움 {th_got}")
+    nh_used, nh_got = nlk_hier_pass(led, today, int(os.environ.get("NLK_HIER_MAX", "10")))  # v3.4.1
+    if nh_used: print(f"국립중앙도서관 계층 보강: 조회 {nh_used} · 세움 {nh_got}")
     print(f"6·25전쟁 아카이브센터 기관 계층 {kh_got}건(요청 {kh_used})")
     print(f"첫 화면 링크 해소 {rl_fixed}/{rl_used} · 고문서 소장처 하위 문서 발굴 {ad_added}건({ad_used}회 호출)")
     budget = int(os.environ.get("ENRICH_MAX", "80"))  # 하루 매니페스트 판독 상한(기관 서버 예의 — 순차·간격)
