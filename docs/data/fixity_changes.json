@@ -1,8 +1,123 @@
 {
-"updated": "2026-11-25T01:13:40Z",
+"updated": "2026-11-25T01:17:53Z",
 "watched": 842,
-"changed_records": 0,
+"changed_records": 6,
 "suspected_source_changes": 0,
 "note": "지문 = 원 기관 응답(우리 판독기 정규형, 판독 시각 등 변동 항목 제외)의 SHA-256-16. pv = 판독기(route.js·lib) 지문. 이력은 지우지 않는다.",
-"changes": []
+"changes": [
+{
+"key": "un:A/HRC/28/NGO/9",
+"title": "[A/HRC/28/NGO/9] Human rights situations that require the Council's attention : written statement",
+"url": "https://digitallibrary.un.org/record/1312645",
+"history": [
+{
+"at": "2026-11-24",
+"h": "271e3a351a942f56",
+"pv": "5a97e7d08483",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "089cf3172fc33f92",
+"pv": "469ca1a54c52",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "un:S/2013/162",
+"title": "[S/2013/162] Letter dated 15 March 2013 from the Permanent Representative of the Democratic People's Republic",
+"url": "https://digitallibrary.un.org/record/745866",
+"history": [
+{
+"at": "2026-11-24",
+"h": "6489e960cd08f4e0",
+"pv": "5a97e7d08483",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "66080e43e38bde55",
+"pv": "469ca1a54c52",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "un:S/2015/799",
+"title": "[S/2015/799] Letter dated 19 October 2015 from the Permanent Representative of the Democratic People's Republi",
+"url": "https://digitallibrary.un.org/record/808136",
+"history": [
+{
+"at": "2026-11-24",
+"h": "d0472641630128fb",
+"pv": "5a97e7d08483",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "0818519b693a4064",
+"pv": "469ca1a54c52",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "awm:147844",
+"title": "Kapyong Valley, Korea. 1952-04-16. An elevated view of the Kapyong Valley and surrounding hills ... · 권리:PD(저작권 만료)",
+"url": "https://www.awm.gov.au/collection/C276864",
+"history": [
+{
+"at": "2026-11-24",
+"h": "074fcc0e298eac10",
+"pv": "1033444958fe",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "08268805f312b4b1",
+"pv": "469ca1a54c52",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "awm:HOBJ3143",
+"title": "Kapyong, South Korea. June 1952. A panoramic view from the left of A Company's, 1st Battalion, ... · 권리:PD(저작권 만료)",
+"url": "https://www.awm.gov.au/collection/C332290",
+"history": [
+{
+"at": "2026-11-24",
+"h": "83076e694d3cf5e4",
+"pv": "1033444958fe",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "6c5a036b5bc9b583",
+"pv": "469ca1a54c52",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "awm:HOBJ3144",
+"title": "Kapyong, South Korea. June 1952. A panoramic view from the left of A Company's, 1st Battalion, ... · 권리:PD(저작권 만료)",
+"url": "https://www.awm.gov.au/collection/C332291",
+"history": [
+{
+"at": "2026-11-24",
+"h": "435dcceb589873c7",
+"pv": "1033444958fe",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "0bd401cd8972351e",
+"pv": "469ca1a54c52",
+"kind": "판독기 변경 동반"
+}
+]
+}
+]
 }
