@@ -990,7 +990,7 @@ const COLLECT = {
       out.push({ title: `${title}${cats ? ` [${cats}]` : ''}${author ? ` — ${author}` : ''}${pid ? ` · 디지털 PID ${pid}` : ''}`.slice(0, 140), date: g('dc:date'), id: pid, ...(catArr[0] ? { series: catArr[0] } : {}), url: pid ? `https://dl.ndl.go.jp/pid/${pid}` : link });
       if (out.length >= n) break;
     }
-    return out;
+    return zeroOr(out, b, /<openSearch:totalResults>0</, 'NDL', true); // v3.42 0건은 OpenSearch totalResults 0 명시일 때만(2026-11-25 실측) — 오류·차단 본문은 조회 실패
   },
   un: async (q, n) => { // UN 디지털도서관(digitallibrary.un.org) — Invenio of=xm(MARCXML) 무키 실측(2026-11-21). 안보리 결의·UNCURK 등. ※UN Archives(AtoM)는 별도·보류
     // v1.96.5: 문서기호(A/RES/46/1·S/RES/82(1950)) 입력은 기호 필드(191) 정확 검색 — 일반 검색은 A/RES/46/16 등 근접 기호가 섞임(실측)
@@ -1125,6 +1125,8 @@ const COLLECT = {
       const ix = await cachedText('nzIdx', 6 * 3600e3, () => gtext('https://korea-archive-mcp.vercel.app/nz-index.json'), '"records"');
       const j = JSON.parse(ix); const ql = en.toLowerCase();
       // R번호(id) 질의도 매칭 — 라이브 차단 중 'R17717658' 재조회가 0건이 되지 않게(실측 교훈)
+      const hitIx = (j.records || []).filter((r) => String(r.title || '').toLowerCase().includes(ql) || String(r.id || '').toLowerCase() === ql);
+      if (!hitIx.length) throw new Error('Archives NZ 라이브 차단 — 주간 인덱스(한국 관련 수확분)에도 일치 없음: 기관의 확정 0이 아님(브라우저로 collections.archives.govt.nz 확인)'); // v3.42
       return (j.records || []).filter((r) => String(r.title || '').toLowerCase().includes(ql) || String(r.id || '').toLowerCase() === ql).slice(0, n)
         .map((r) => ({ title: `${String(r.title).slice(0, 86)}${r.access ? ` [${r.access}]` : ''} ·주간인덱스`,
           date: String(r.date || ''), id: String(r.id || ''),

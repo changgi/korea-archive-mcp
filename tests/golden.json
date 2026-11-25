@@ -1892,6 +1892,23 @@
    ],
    "level": "warn",
    "note": "v3.41 조회 범위 등록부 — 질의×기관 관측(결과·확정 0·미확정 0·조회 실패)을 웹·모바일에도. 부재 주장의 근거"
+  },
+  {
+   "id": "ndl-nz-no-false-zero",
+   "tool": "cross_search",
+   "args": {
+    "query": "zqxjvwkpq",
+    "sources": "ndl,nzarch",
+    "max_per_source": 2
+   },
+   "must": [
+    "ndl:0"
+   ],
+   "must_not": [
+    "nzarch:0[\\] ·,]"
+   ],
+   "level": "warn",
+   "note": "v3.42 NDL은 totalResults 0 명시일 때만 0건 · Archives NZ 라이브 차단 중 주간 인덱스 0건은 확정 0이 아님(조회 실패 '—')"
   }
  ]
 }

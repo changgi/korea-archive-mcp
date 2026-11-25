@@ -2289,11 +2289,12 @@ def rights_view(o):
 # v3.41 기관별 '확정 0' 시행 시각(main 머지 + 배포 여유 3분, UTC) — 이 시각 이후의 cross_search '0'만 기관이 0건을 명시한 확정 0.
 # 그 전, 또는 아직 감사하지 않은 기관의 '0'은 오류도 0으로 보고될 수 있었으므로 zero_legacy(부재 근거로 쓰지 않음). 새 기관을 감사하면 여기에 더한다.
 _ZS = {"v3.32": "2026-11-25T11:27:00Z", "v3.33": "2026-11-25T11:39:00Z", "v3.34": "2026-11-25T11:53:00Z", "v3.35": "2026-11-25T12:03:00Z",
-       "v3.36": "2026-11-25T12:22:00Z", "v3.37": "2026-11-25T12:34:00Z", "v3.38": "2026-11-25T12:50:00Z"}
+       "v3.36": "2026-11-25T12:22:00Z", "v3.37": "2026-11-25T12:34:00Z", "v3.38": "2026-11-25T12:50:00Z", "v3.42": "2026-11-25T14:50:00Z"}  # v3.42는 머지 전 기입 — 배포보다 늦게(보수적)
 COVERAGE_STRICT = {**{k: _ZS["v3.32"] for k in ("archives",)}, **{k: _ZS["v3.33"] for k in ("nara", "nlk", "nedb", "kyudb", "earchive")},
                    **{k: _ZS["v3.34"] for k in ("koreanwar", "okchf", "nrich")}, **{k: _ZS["v3.35"] for k in ("much", "i815")},
                    **{k: _ZS["v3.36"] for k in ("un", "indy", "jsg", "gonghun", "jacar", "seoul")}, **{k: _ZS["v3.37"] for k in ("ktv", "awm")},
-                   **{k: _ZS["v3.38"] for k in ("tna", "ia", "europeana", "oldnews", "dnz", "commons", "nlna")}}
+                   **{k: _ZS["v3.38"] for k in ("tna", "ia", "europeana", "oldnews", "dnz", "commons", "nlna")},
+                   **{k: _ZS["v3.42"] for k in ("ndl", "nzarch")}}
 
 
 def build_coverage():
