@@ -1190,7 +1190,7 @@ def relations_page(R):
         return f"<li><a href='r/{rec_slug(k)}.html'>{E_(o['title'][:110])}</a> <small>{E_(inst)} · {E_(d)}{' · 날짜 교차 ' + E_(dc) if dc else ''}</small></li>"
     def basis(c, t):
         return " · ".join(sorted({bs for a in c for tt, b, bs in REL.get(a, []) if tt == t and b in c}))[:400]
-    same = comps("같은 기록(다른 소장처)"); day = comps("같은 날(다른 기관)")
+    same = comps("같은 기록(다른 소장처)"); day = comps("같은 날(다른 기관)"); gal = comps("갤러리 재게시(원본 포함)"); inc = comps("원본이 속한 NARA 단위(포함)")  # v3.7.6
     import hashlib
     sd = os.path.join(D, "same"); os.makedirs(sd, exist_ok=True); gids = {}
     for c in same:  # v2.90 같은 기록 묶음마다 IIIF 컬렉션 — 소장처별 매니페스트(원 기관 제공 또는 우리 브리지)를 나란히, 같은 묶음은 같은 파일명(구성 key 지문)
@@ -1231,6 +1231,8 @@ def relations_page(R):
 <h1>기록↔기록 맥락 연결</h1><p>원장에 있는 기관 표기(sameAs·식별자·입수처 링크·날짜)만으로 이은 묶음입니다. 지어낸 연결은 없고, 묶음마다 근거를 적었습니다. 같은 계열(기관 계층) 연결은 각 기록 페이지의 '관련 기록'에 있습니다.</p>
 {sec("같은 기록 — 여러 소장처", "한 기록이 여러 기관에 있는 경우. 날짜 교차 확인은 기관들이 적은 날짜의 일치 여부", same, "같은 기록(다른 소장처)")}
 {sec("같은 날 — 다른 기관 기록", "기관이 적은 날짜가 같은 다른 기관 기록 — 교차 대조 단서(같은 사건이라는 뜻은 아님)", day, "같은 날(다른 기관)")}
+{sec("원본이 속한 NARA 단위", "기관 입수처 링크가 낱장이 아닌 NARA 파일·시리즈를 가리키는 경우 — 같은 기록이 아니라 그 단위에 포함(v3.7.5)", inc, "원본이 속한 NARA 단위(포함)")}
+{sec("갤러리 재게시 — 원본 포함", "KOREA ARCHIVE 갤러리 이야기 카드가 원 기관 원본을 포함(카드는 여러 기록을 엮음 — 같은 기록 아님, v3.7.4)", gal, "갤러리 재게시(원본 포함)")}
 </main></html>""")
 
 def cite_of(o, inst, pu):
