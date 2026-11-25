@@ -1,7 +1,7 @@
 {
-"updated": "2026-11-25T02:05:17Z",
+"updated": "2026-11-25T02:17:49Z",
 "watched": 844,
-"changed_records": 19,
+"changed_records": 25,
 "suspected_source_changes": 0,
 "note": "지문 = 원 기관 응답(우리 판독기 정규형, 판독 시각 등 변동 항목 제외)의 SHA-256-16. pv = 판독기(route.js·lib) 지문. 이력은 지우지 않는다.",
 "changes": [
@@ -361,6 +361,120 @@
 {
 "at": "2026-11-25",
 "h": "09054191c49e3d55",
+"pv": "628ea0c06128",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "awm:HOBJ4308",
+"title": "Korea. 2 June 1953. A general view of the Coronation Parade of the Commonwealth Division in Korea. · 권리:PD(저작권 만료)",
+"url": "https://www.awm.gov.au/collection/C328864",
+"history": [
+{
+"at": "2026-11-24",
+"h": "f0d937de14a6ff64",
+"pv": "51fd8293ed29",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "abfd35f3fa9ee5e5",
+"pv": "628ea0c06128",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "awm:HOBJ4310",
+"title": "Korea. 2 June 1953. A general view of the Coronation Parade of the Commonwealth Division in Korea. · 권리:PD(저작권 만료)",
+"url": "https://www.awm.gov.au/collection/C328866",
+"history": [
+{
+"at": "2026-11-24",
+"h": "55e507ca5ce7da0d",
+"pv": "51fd8293ed29",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "915f5ac3b52b9e2b",
+"pv": "628ea0c06128",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "awm:HOBJ4316",
+"title": "Korea. 2 June 1953. A general view of the Coronation Parade of the Commonwealth Division in Korea. · 권리:PD(저작권 만료)",
+"url": "https://www.awm.gov.au/collection/C328870",
+"history": [
+{
+"at": "2026-11-24",
+"h": "51984577ab1c3428",
+"pv": "51fd8293ed29",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "c825a2a3d42b3c32",
+"pv": "628ea0c06128",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "commons:https://commons.wikimedia.org/wiki/File%3A%EC%84%9C%EC%9A%B8_%EB%B4%89%EC%9D%80%EC%82%AC_%EA%B0%90%EB%A1%9C%EB%8F%84.jpg",
+"title": "서울 봉은사 감로도.jpg",
+"url": "https://commons.wikimedia.org/wiki/File%3A%EC%84%9C%EC%9A%B8_%EB%B4%89%EC%9D%80%EC%82%AC_%EA%B0%90%EB%A1%9C%EB%8F%84.jpg",
+"history": [
+{
+"at": "2026-11-24",
+"h": "db75f186762b9b1e",
+"pv": "51fd8293ed29",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "28af6c2cc564b2b4",
+"pv": "628ea0c06128",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "commons:https://commons.wikimedia.org/wiki/File%3A%EC%84%9C%EC%9A%B8_%EC%95%88%EC%96%91%EC%95%94_%EA%B0%90%EB%A1%9C%EB%8F%84.jpg",
+"title": "서울 안양암 감로도.jpg",
+"url": "https://commons.wikimedia.org/wiki/File%3A%EC%84%9C%EC%9A%B8_%EC%95%88%EC%96%91%EC%95%94_%EA%B0%90%EB%A1%9C%EB%8F%84.jpg",
+"history": [
+{
+"at": "2026-11-24",
+"h": "e8ed52aeaecc8d2d",
+"pv": "51fd8293ed29",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "cfaca8a1216267ce",
+"pv": "628ea0c06128",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "commons:https://commons.wikimedia.org/wiki/File%3A%EC%9D%98%EB%A0%B9_%EC%88%98%EB%8F%84%EC%82%AC_%EA%B0%90%EB%A1%9C%EB%8F%84.jpg",
+"title": "의령 수도사 감로도.jpg",
+"url": "https://commons.wikimedia.org/wiki/File%3A%EC%9D%98%EB%A0%B9_%EC%88%98%EB%8F%84%EC%82%AC_%EA%B0%90%EB%A1%9C%EB%8F%84.jpg",
+"history": [
+{
+"at": "2026-11-24",
+"h": "caff63eaef97b27f",
+"pv": "51fd8293ed29",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "4a94b5c455244b51",
 "pv": "628ea0c06128",
 "kind": "판독기 변경 동반"
 }
