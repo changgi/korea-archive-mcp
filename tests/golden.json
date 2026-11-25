@@ -1784,6 +1784,23 @@
    ],
    "level": "warn",
    "note": "v3.26 기준 사전을 도구 응답으로(웹·모바일 동등성)"
+  },
+  {
+   "id": "archives-no-false-zero",
+   "tool": "cross_search",
+   "args": {
+    "query": "한국전쟁",
+    "sources": "archives",
+    "max_per_source": 3
+   },
+   "must": [
+    "\\[archives:(?:\\d*[1-9]\\d*|—)"
+   ],
+   "must_not": [
+    "\\[archives:0\\]"
+   ],
+   "level": "warn",
+   "note": "v3.32 부재는 확정 0일 때만 — 옛 결함: 국가기록원 API 오류·장애 응답을 '0건'으로 보고(조회 실패 '—'로 표시해야)"
   }
  ]
 }
