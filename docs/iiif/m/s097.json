@@ -81,7 +81,7 @@
    },
    "value": {
     "ko": [
-     "0장 · 링크 전용 5건"
+     "1장 · 링크 전용 5건"
     ]
    }
   }
@@ -141,7 +141,73 @@
    }
   }
  ],
- "items": [],
+ "items": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s097/canvas/1",
+   "type": "Canvas",
+   "label": {
+    "ko": [
+     "원 기록 기술 카드 — 이미지는 원 기관에서 열람(링크 전용)"
+    ]
+   },
+   "width": 1200,
+   "height": 900,
+   "metadata": [
+    {
+     "label": {
+      "ko": [
+       "링크 전용 사유"
+      ]
+     },
+     "value": {
+      "ko": [
+       "1504년 김석필(金錫弼) 고신(告身)－1 — 문서 1900 이전 · 사이트 재이용 조건 없음(All Rights Reserved) — 게재 전 기관 확인 권장 · 1502년 김석필(金錫弼) 문과 홍패(文科紅牌) — 문서 1900 이전 · 사이트 재이용 조건 없음(All Rights Reserved) — 게재 전 기관 확인 권장 · 1672년 김명열(金命說) 준호구(準戶口) — 문서 1900 이전 · 사이트 재이용 조건 없음(All Rights Reserved) — 게재 전 기관 확인 권장 · 1678년 김번(金璠) 준호구(準戶口) — 문서 1900 이전 · 사이트 재이용 조건 없음(All Rights Reserved) — 게재 전 기관 확인 권장 · 1609년 이정매(李廷梅) 소지(所志) — 문서 1900 이전 · 사이트 재이용 조건 없음(All Rights Reserved) — 게재 전 기관 확인 권장"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "원 기관 열람"
+      ]
+     },
+     "value": {
+      "ko": [
+       "https://archive.aks.ac.kr/viewer/viewer.do · https://archive.aks.ac.kr/viewer/viewer.do · https://archive.aks.ac.kr/viewer/viewer.do · https://archive.aks.ac.kr/viewer/viewer.do · https://archive.aks.ac.kr/viewer/viewer.do"
+      ]
+     }
+    }
+   ],
+   "items": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s097/canvas/1/page",
+     "type": "AnnotationPage",
+     "items": [
+      {
+       "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s097/canvas/1/page/a",
+       "type": "Annotation",
+       "motivation": "painting",
+       "target": "https://changgi.github.io/korea-archive-mcp/iiif/m/s097/canvas/1",
+       "body": {
+        "id": "https://korea-archive-mcp.vercel.app/iiif/rec/lVDBSsNAEP2VZU8KabpZtNX8QcAPEMRDqEJLUWoTvYiQQg4FPURMsKmJplijQoSAxjYe-yk97k7-wSkF717mzXszb2Z3LqlF9QNaBZEoPqoghOktYLzPRZHBg0fWBfGZyGwObgSPnny-EV8OPVSoTXUqvx0IhgTGucxHZM1E6YD_RpaOT0ThyaSUL6PFDNJYliGm5G8aVegRztC2GV86d1qjuYNKB5U9pm01OUN2jqxt2z1Lr9fNfqvduThWza6lmi2128d6b-VnDNyELGZk3zAMApMcKcS4aJ7LSYy7qtAnHB_0Qyy220TbKdr-_2eFnqAP4QxB5FP5lMk0I3AdIUA63JCvg2qAQuLC-H0TG83VjTjjjZqm1TinV78/card.svg",
+        "type": "Image",
+        "format": "image/svg+xml",
+        "width": 1200,
+        "height": 900
+       }
+      }
+     ]
+    }
+   ],
+   "thumbnail": [
+    {
+     "id": "https://korea-archive-mcp.vercel.app/iiif/rec/lVDBSsNAEP2VZU8KabpZtNX8QcAPEMRDqEJLUWoTvYiQQg4FPURMsKmJplijQoSAxjYe-yk97k7-wSkF717mzXszb2Z3LqlF9QNaBZEoPqoghOktYLzPRZHBg0fWBfGZyGwObgSPnny-EV8OPVSoTXUqvx0IhgTGucxHZM1E6YD_RpaOT0ThyaSUL6PFDNJYliGm5G8aVegRztC2GV86d1qjuYNKB5U9pm01OUN2jqxt2z1Lr9fNfqvduThWza6lmi2128d6b-VnDNyELGZk3zAMApMcKcS4aJ7LSYy7qtAnHB_0Qyy220TbKdr-_2eFnqAP4QxB5FP5lMk0I3AdIUA63JCvg2qAQuLC-H0TG83VjTjjjZqm1TinV78/card.svg",
+     "type": "Image",
+     "format": "image/svg+xml"
+    }
+   ]
+  }
+ ],
  "homepage": [
   {
    "id": "https://archive.aks.ac.kr",

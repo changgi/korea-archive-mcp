@@ -81,7 +81,7 @@
    },
    "value": {
     "ko": [
-     "0장 · 링크 전용 6건"
+     "1장 · 링크 전용 6건"
     ]
    }
   }
@@ -141,7 +141,73 @@
    }
   }
  ],
- "items": [],
+ "items": [
+  {
+   "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s098/canvas/1",
+   "type": "Canvas",
+   "label": {
+    "ko": [
+     "원 기록 기술 카드 — 이미지는 원 기관에서 열람(링크 전용)"
+    ]
+   },
+   "width": 1200,
+   "height": 900,
+   "metadata": [
+    {
+     "label": {
+      "ko": [
+       "링크 전용 사유"
+      ]
+     },
+     "value": {
+      "ko": [
+       "1290년 유백(柳伯) 고려방목(高麗榜目) — 문서 1900 이전 · 사이트 재이용 조건 없음(All Rights Reserved) — 게재 전 기관 확인 권장 · 1594년 유성룡(柳成龍) 당장서첩(唐將書帖) — 문서 1900 이전 · 사이트 재이용 조건 없음(All Rights Reserved) — 게재 전 기관 확인 권장 · 1594년 유성룡(柳成龍) 당장서첩(唐將書帖) — 문서 1900 이전 · 사이트 재이용 조건 없음(All Rights Reserved) — 게재 전 기관 확인 권장 · 1592년 유성룡(柳成龍) 고신(告身) — 문서 1900 이전 · 사이트 재이용 조건 없음(All Rights Reserved) — 게재 전 기관 확인 권장 · 1593년 유성룡(柳成龍) 고신(告身) — 문서 1900 이전 · 사이트 재이용 조건 없음(All Rights Reserved) — 게재 전 기관 확인 권장 · 1585년 유성룡(柳成龍) 노비매매명문(奴婢賣買明文) — 문서 1900 이전 · 사이트 재이용 조건 없음(All Rights Reserved) — 게재 전 기관 확인 권장"
+      ]
+     }
+    },
+    {
+     "label": {
+      "ko": [
+       "원 기관 열람"
+      ]
+     },
+     "value": {
+      "ko": [
+       "https://archive.aks.ac.kr/viewer/viewer.do · https://archive.aks.ac.kr/viewer/viewer.do · https://archive.aks.ac.kr/viewer/viewer.do · https://archive.aks.ac.kr/viewer/viewer.do · https://archive.aks.ac.kr/viewer/viewer.do · https://archive.aks.ac.kr/viewer/viewer.do"
+      ]
+     }
+    }
+   ],
+   "items": [
+    {
+     "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s098/canvas/1/page",
+     "type": "AnnotationPage",
+     "items": [
+      {
+       "id": "https://changgi.github.io/korea-archive-mcp/iiif/m/s098/canvas/1/page/a",
+       "type": "Annotation",
+       "motivation": "painting",
+       "target": "https://changgi.github.io/korea-archive-mcp/iiif/m/s098/canvas/1",
+       "body": {
+        "id": "https://korea-archive-mcp.vercel.app/iiif/rec/lZDBSsNAEIZfZdiTQppuglaTNwj4AIJ4CFVoKUptohcRUsmhYMWqCSY11YTWWiFCRIvFo4_SY3byDk4QvHvZn_-f-WZ295RZTN9hhR_l89fCD3FyjXTeZfk8xfsB_Bby91ikC3QjfBiIcT__cNiuxGymM_R74iqktqAY9qG4ucTzTDwF6M1g6XiAUYzumxgnQIyIZ_A3iUlsj3hF1fjSuVXWtTVKmpRscaW2wTfJHZNr2Hbb0qtVs1NvNE_2ZbNlyWZdbnWo3i55ztGN4fsTtg3DAEwysjgKIF9kIhnRriL0QKXLfIHFtXLsIWH_f6_EDogjOSLJs4l4TMU0BbyISHDaWxHP3aJLQezi8GWVGs3yf1Su1iqKUlFVdvYD/card.svg",
+        "type": "Image",
+        "format": "image/svg+xml",
+        "width": 1200,
+        "height": 900
+       }
+      }
+     ]
+    }
+   ],
+   "thumbnail": [
+    {
+     "id": "https://korea-archive-mcp.vercel.app/iiif/rec/lZDBSsNAEIZfZdiTQppuglaTNwj4AIJ4CFVoKUptohcRUsmhYMWqCSY11YTWWiFCRIvFo4_SY3byDk4QvHvZn_-f-WZ295RZTN9hhR_l89fCD3FyjXTeZfk8xfsB_Bby91ikC3QjfBiIcT__cNiuxGymM_R74iqktqAY9qG4ucTzTDwF6M1g6XiAUYzumxgnQIyIZ_A3iUlsj3hF1fjSuVXWtTVKmpRscaW2wTfJHZNr2Hbb0qtVs1NvNE_2ZbNlyWZdbnWo3i55ztGN4fsTtg3DAEwysjgKIF9kIhnRriL0QKXLfIHFtXLsIWH_f6_EDogjOSLJs4l4TMU0BbyISHDaWxHP3aJLQezi8GWVGs3yf1Su1iqKUlFVdvYD/card.svg",
+     "type": "Image",
+     "format": "image/svg+xml"
+    }
+   ]
+  }
+ ],
  "homepage": [
   {
    "id": "https://archive.aks.ac.kr",

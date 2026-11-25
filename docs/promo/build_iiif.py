@@ -8,7 +8,7 @@
   · 기관 웹페이지 캡처·All Rights Reserved → 게재하지 않고 원 기관 링크만(목록 'links')
 사용: python3 docs/promo/build_iiif.py   (재실행 시 바뀐 이미지만 다시 만든다)
 """
-import json, glob, os, re, shutil, pathlib, html, hashlib, csv, io, time, urllib.request, urllib.parse, datetime
+import json, glob, os, re, shutil, pathlib, html, hashlib, csv, io, time, urllib.request, urllib.parse, datetime, zlib, base64
 from PIL import Image
 
 PROMO = pathlib.Path(__file__).resolve().parent
@@ -128,7 +128,7 @@ def main():
     (OUT / 'm').mkdir(parents=True, exist_ok=True)
     manifests, index, stats = [], [], {'ok': 0, 'kogl4': 0, 'link': 0, 'missing': 0}
     exports, parts = [], {}
-    keep = set()
+    keep = set(); cardkeys = set()
     for S in series_list():
         rec = S['led'].get('record', {})
         canvases, links, seen = [], [], set()
@@ -215,6 +215,20 @@ def main():
             canvases.append(cv)
         if not canvases and not links:
             continue
+        if not canvases:  # v3.50 링크 전용(권리·점검) 시리즈 — 빈 매니페스트 대신 원 기록 기술 카드(브리지 card.svg — 실제 기술 메타만, 생성 이미지 아님) 한 장
+            env = {'s': [rec.get('inst') or S['inst']], 't': str(rec.get('title') or S['head'])[:160], 'd': str(rec.get('date') or ''), 'i': str(rec.get('id') or ''),
+                   'u': str(rec.get('url') or ''), 'p': f'{S["part"]} › {S["key"]}', 'n': str(rec.get('inst') or S['inst']), 'm': '',
+                   'q': '갤러리 시리즈(링크 전용)', 'at': str(S.get('checked') or '')}
+            zc = zlib.compressobj(9, zlib.DEFLATED, -15)
+            tk = base64.urlsafe_b64encode(zc.compress(json.dumps(env, ensure_ascii=False, separators=(',', ':')).encode()) + zc.flush()).decode().rstrip('=')
+            cid = f'{BASE}m/{S["key"]}/canvas/1'
+            card = f'https://korea-archive-mcp.vercel.app/iiif/rec/{tk}/card.svg'
+            canvases.append({'id': cid, 'type': 'Canvas', 'label': L('원 기록 기술 카드 — 이미지는 원 기관에서 열람(링크 전용)'), 'width': 1200, 'height': 900,
+                             'metadata': [{'label': L('링크 전용 사유'), 'value': L(' · '.join(f"{x['title'][:60]} — {x['rights'][:80]}" for x in links)[:600])},
+                                          {'label': L('원 기관 열람'), 'value': L(' · '.join(x['url'] for x in links if x['url'])[:600])}],
+                             'items': [{'id': cid + '/page', 'type': 'AnnotationPage', 'items': [{'id': cid + '/page/a', 'type': 'Annotation', 'motivation': 'painting', 'target': cid,
+                                        'body': {'id': card, 'type': 'Image', 'format': 'image/svg+xml', 'width': 1200, 'height': 900}}]}],
+                             'thumbnail': [{'id': card, 'type': 'Image', 'format': 'image/svg+xml'}], '_sha': '', '_naid': '', '_card': True})
         mid = f'{BASE}m/{S["key"]}.json'
         label = f'{S["n"]:03d} · {S["inst"]} — {S["head"]}' if len(S['key']) == 4 else f'{S["n"]:02d} · {S["inst"]} — {S["head"]}'
         man = {'@context': 'http://iiif.io/api/presentation/3/context.json', 'id': mid, 'type': 'Manifest', 'label': L(label),
@@ -233,27 +247,30 @@ def main():
                'items': canvases}
         if rec.get('url'):
             man['homepage'] = [{'id': rec['url'], 'type': 'Text', 'label': L('원 기관 기록'), 'format': 'text/html'}]
-        if canvases:
-            man['thumbnail'] = canvases[0]['thumbnail']
+        real = [c for c in canvases if not c.get('_card')]  # v3.50 기록 카드는 실물 이미지 목록(색인·내보내기·이어보기)에서 제외
+        if real:
+            man['thumbnail'] = real[0]['thumbnail']
+        else:
+            cardkeys.add(S['key'])
         nd0 = nav_date(rec.get('date'))
         if nd0:
             man['navDate'] = nd0
-        for c in canvases:
+        for c in real:
             exports.append({'series': S['key'], 'n': S['n'], 'part': S['part'], 'series_label': label, 'canvas': c['id'], 'title': c['label']['ko'][0],
                             **{m['label']['ko'][0]: m['value']['ko'][0] for m in c['metadata']}, 'image': c['items'][0]['items'][0]['body']['id'],
                             'manifest': mid, 'kv': PAGES + 'kv.html?collection=' + urllib.request.quote(BASE + 'hierarchy.json', safe='') + '&manifest=' + urllib.request.quote(mid, safe='') + '&canvas=' + c['id'].rsplit('/', 1)[1],
                             'source': (c.get('homepage') or [{}])[0].get('id', ''), 'navDate': c.get('navDate', ''), 'sha256': c['_sha'], 'naid': c['_naid'], 'rights_uri': c.get('rights', '')})
         for c in canvases:
-            c.pop('_sha', None); c.pop('_naid', None)
-        parts.setdefault(S['part'], []).append({'id': mid, 'type': 'Manifest', 'label': L(label), **({'thumbnail': man['thumbnail']} if canvases else {}), **({'navDate': nd0} if nd0 else {})})
+            c.pop('_sha', None); c.pop('_naid', None); c.pop('_card', None)
+        parts.setdefault(S['part'], []).append({'id': mid, 'type': 'Manifest', 'label': L(label), **({'thumbnail': man['thumbnail']} if real else {}), **({'navDate': nd0} if nd0 else {})})
         (OUT / 'm' / f'{S["key"]}.json').write_text(json.dumps(man, ensure_ascii=False, indent=1), encoding='utf-8')
-        manifests.append({'id': mid, 'type': 'Manifest', 'label': L(label), **({'thumbnail': man['thumbnail']} if canvases else {})})
+        manifests.append({'id': mid, 'type': 'Manifest', 'label': L(label), **({'thumbnail': man['thumbnail']} if real else {})})
         index.append({'key': S['key'], 'n': S['n'], 'label': label, 'part': S['part'], 'flag': S['flag'], 'page': S['page'],
                       'rec': {k: rec.get(k, '') for k in ('id', 'title', 'date', 'inst', 'url')},
                       'c': [{'t': c['label']['ko'][0], 'img': c['items'][0]['items'][0]['body']['id'].replace(BASE, ''),
                              'th': c['thumbnail'][0]['id'].replace(BASE, ''), 'w': c['width'], 'h': c['height'],
                              'md': {m['label']['ko'][0]: m['value']['ko'][0] for m in c['metadata']},
-                             'u': (c.get('homepage') or [{}])[0].get('id', '')} for c in canvases],
+                             'u': (c.get('homepage') or [{}])[0].get('id', '')} for c in real],
                       'links': links})
     coll = {'@context': 'http://iiif.io/api/presentation/3/context.json', 'id': BASE + 'collection.json', 'type': 'Collection',
             'label': L('KOREA ARCHIVE 통합검색 — 30곳 탐방·100선 전체 기록 이미지'),
@@ -262,6 +279,7 @@ def main():
     # 전체 이어보기 매니페스트 — 800장을 한 매니페스트에(각 장 라벨에 시리즈 번호), Mirador·UV에서 처음부터 끝까지 연속으로 넘김
     allc = []
     for S0 in index:
+        if S0['key'] in cardkeys: continue  # v3.50 기록 카드 시리즈는 이어보기(실물 이미지)에서 제외
         man0 = json.loads((OUT / 'm' / f'{S0["key"]}.json').read_text(encoding='utf-8'))
         for c in man0['items']:
             c = json.loads(json.dumps(c)); c['label'] = L(S0['label'].split(' — ')[0] + ' · ' + c['label']['ko'][0]); allc.append(c)
