@@ -1,0 +1,29 @@
+{
+ "note": "기준 사전 후보(지명) — 사전에 없는 값, 원장 2건 이상. 자동 추가 아님: 오탐(일반어·국가명·부대명) 검토 뒤 PLACES에 넣고 오프라인 시험 사례 추가. 누적.",
+ "places": {
+  "BAIK CHUNG": {
+   "first_seen": "2026-11-25",
+   "records": [
+    "ia:111-adc-6600",
+    "nara:NAID 20374"
+   ],
+   "sources": [
+    "ia",
+    "nara"
+   ],
+   "last_seen": "2026-11-25"
+  },
+  "JAPAN: KURE": {
+   "first_seen": "2026-11-25",
+   "records": [
+    "awm:F07533",
+    "awm:P03175.001"
+   ],
+   "sources": [
+    "awm"
+   ],
+   "last_seen": "2026-11-25"
+  }
+ },
+ "updated": "2026-11-25T10:56:40Z"
+}
