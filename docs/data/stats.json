@@ -1,8 +1,8 @@
 {
- "updated": "2026-11-25T17:00:34Z",
+ "updated": "2026-11-25T18:10:09Z",
  "records": 933,
  "new_records": 0,
- "new_batches": 1,
+ "new_batches": 0,
  "by_source": {
   "nara": 156,
   "ia": 106,
@@ -44,12 +44,12 @@
   "iiif": 3
  },
  "queries": {
-  "added": 2,
+  "added": 0,
   "total": 140,
-  "calls": 184,
+  "calls": 190,
   "by_tool": {
    "cross_search": 84,
-   "nedb_search": 73,
+   "nedb_search": 79,
    "source_profile": 11,
    "seoul_archives_search": 3,
    "nara_search": 3,
