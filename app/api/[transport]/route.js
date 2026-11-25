@@ -1038,6 +1038,7 @@ const COLLECT = {
       out.push({ title: `역사박물관 ${norm(c[1])} ${c[2]}건 — 사이트 검색(POST)으로 열람`, date: '', id: '', url: 'https://archive.much.go.kr/index.do' });
       if (out.length >= n) break;
     }
+    if (!out.length && !/통합검색\s*\(0\)|총\s*\[0\]\s*건/.test(b.replace(/<[^>]+>/g, ' '))) throw new Error('역사박물관 결과 판독 불가(0건 표지 없음)'); // v3.35 0건은 '통합검색(0)'·'총 [0] 건' 명시일 때만(2026-11-25 실측)
     return out;
   },
   oldnews: async (q, n) => { // 대한민국신문아카이브(국립중앙도서관) — POST JSON 역공학(2026-11-21). 1883~1960 신문 기사 전문(공립신보·신한민보·황성신문 등)
@@ -1203,6 +1204,7 @@ const COLLECT = {
       if (out.length >= n) break;
       out.push({ title: `독립기념관 ${c.name} ${c.disp}건`, date: '', id: '', series: c.name, url: base + c.u }); // v2.3: 집계 신호도 계열(카테고리) 부여
     }
+    if (!out.length && !/콘텐츠\s*\(0\)/.test(b.replace(/<[^>]+>/g, ' '))) throw new Error('독립기념관 결과 판독 불가(0건 표지 없음)'); // v3.35 0건은 '콘텐츠(0)' 명시일 때만(2026-11-25 실측 — 0건 페이지: 소장자료(0) 콘텐츠(0) …)
     return out;
   },
   gonghun: async (q, n) => { // 공훈전자사료관(국가보훈부) — 독립유공자 공훈록. 2026-11-20 복구 실측(GET 검색·상세 딥링크)
