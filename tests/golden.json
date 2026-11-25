@@ -1926,6 +1926,23 @@
    ],
    "level": "warn",
    "note": "v3.43 Gallica — SRU numberOfRecords·BnF 카탈로그 numberOfRecords 명시 0만 0건, 카탈로그 전 유형 실패 + 사진·도판 0건은 조회 실패"
+  },
+  {
+   "id": "heritage-true-zero",
+   "tool": "cross_search",
+   "args": {
+    "query": "zqxjvwkpq",
+    "sources": "heritage",
+    "max_per_source": 2
+   },
+   "must": [
+    "heritage:0"
+   ],
+   "must_not": [
+    "판독 불가"
+   ],
+   "level": "warn",
+   "note": "v3.45 국가유산포털 0건은 OpenAPI totalCnt 0 명시일 때만 — 운영 icn1에서 v3.45 배포(READY 14:40Z) 후 무의미 질의 3/3 heritage:0으로 표지 실측 확정(이 작업망은 차단)"
   }
  ]
 }
