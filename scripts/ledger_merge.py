@@ -2447,8 +2447,13 @@ def retry_failed_coverage(budget=6, min_age_h=6):
     cut = (dt.datetime.now(dt.timezone.utc) - dt.timedelta(hours=min_age_h)).strftime("%Y-%m-%dT%H:%M:%SZ")
     cand = sorted(((e["fail"], q, src) for q, S in (C.get("queries") or {}).items() for src, e in S.items()
                    if e.get("last_status") == "fail" and e.get("last_fail", e.get("last", "")) <= cut), key=lambda x: (x[0], x[1], x[2]))
+    # v3.56.1 '미확정 0'만 있는 관측(확정 0 판별 이전의 0 — 오류였을 수 있음)도 재조회해 확정 0·결과로 가린다. 그 기관이 지금 확정 0 판별을 적용받을 때만,
+    # 어느 기관에서도 결과가 없던 시험성 질의(zqxjvwkpq 등)는 빼고 예산 4건 — 실제 질의의 부재 근거를 먼저 세운다
+    leg = sorted((q, src) for q, S in (C.get("queries") or {}).items() if any(e.get("hit") for e in S.values())
+                 for src, e in S.items() if e.get("zero_legacy") and not (e.get("zero") or e.get("hit") or e.get("fail")) and src in COVERAGE_STRICT and e.get("last", "") <= cut)
+    cand = cand[:budget] + [(0, q, src) for q, src in leg[:4]]
     tried = ok = 0
-    for _, q, src in cand[:budget]:
+    for _, q, src in cand:
         tried += 1
         try:
             t = mcp_call("cross_search", {"query": q, "sources": src, "max_per_source": 2})
@@ -2456,7 +2461,7 @@ def retry_failed_coverage(budget=6, min_age_h=6):
             if m and re.search(rf"\b{re.escape(src)}:(\d+)", m[1]): ok += 1
         except Exception as e:
             print(f"조회 실패 재조회 {q}·{src}: {str(e)[:60]}")
-    if tried: print(f"조회 범위 등록부 — 조회 실패 재조회 {tried}건 중 응답 판독 {ok}건(다음 실행 때 등록부 반영)")
+    if tried: print(f"조회 범위 등록부 — 재조회(조회 실패·미확정 0) {tried}건 중 응답 판독 {ok}건(다음 실행 때 등록부 반영)")
     return tried, ok
 
 
