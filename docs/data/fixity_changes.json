@@ -1,7 +1,7 @@
 {
-"updated": "2026-11-25T03:10:48Z",
+"updated": "2026-11-25T03:24:56Z",
 "watched": 848,
-"changed_records": 35,
+"changed_records": 38,
 "suspected_source_changes": 0,
 "note": "지문 = 원 기관 응답(우리 판독기 정규형, 판독 시각 등 변동 항목 제외)의 SHA-256-16. pv = 판독기(route.js·lib) 지문. 이력은 지우지 않는다.",
 "changes": [
@@ -665,6 +665,63 @@
 {
 "at": "2026-11-25",
 "h": "8bf3fc48b5290d1b",
+"pv": "fa6703da94c0",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "nara:NAID 42219676",
+"title": "Korea",
+"url": "https://catalog.archives.gov/id/42219676",
+"history": [
+{
+"at": "2026-11-24",
+"h": "b5c11a49ad30de44",
+"pv": "d4726c38e7cc",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "00622d62d7256690",
+"pv": "fa6703da94c0",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "nara:NAID 492062268",
+"title": "Korea",
+"url": "https://catalog.archives.gov/id/492062268",
+"history": [
+{
+"at": "2026-11-24",
+"h": "0027720beea8744c",
+"pv": "d4726c38e7cc",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "f6e1a33ef8ccb200",
+"pv": "fa6703da94c0",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "much:PS01002025008-005391-00000",
+"title": "판문점 1969년 7월 15일호",
+"url": "https://archive.much.go.kr/archive/nrms/view.do?idnbr=PS01002025008-005391-00000",
+"history": [
+{
+"at": "2026-11-24",
+"h": "ae2dc3131c448e5d",
+"pv": "d4726c38e7cc",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "0d5ccd0e1d1ac86a",
 "pv": "fa6703da94c0",
 "kind": "판독기 변경 동반"
 }
