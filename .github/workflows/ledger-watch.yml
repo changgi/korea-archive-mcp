@@ -30,3 +30,20 @@ jobs:
             num=$(gh issue list --label auto-health --state open --search "원장 갱신 중단" --json number -q '.[0].number')
             if [ -n "$num" ]; then gh issue comment "$num" --body "$body"; else gh issue create --title "원장 갱신 중단 — ledger 정기 실행 누락" --label auto-health --body "$body"; fi
           fi
+      - name: 운영 Pages 산출물 건강 검사(v3.27)
+        # 원장이 게시한 기준·연결 산출물(지명·인물·사건·전거·관계·품질·컬렉션·기준 사전·데이터 목록)이 실제로 열리고 핵심 수치가 0이 아닌지.
+        # 실패하면 auto-health 이슈(같은 제목이 열려 있으면 댓글). 통과하면 열린 이슈를 닫는다.
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set +e
+          out=$(python3 scripts/pages_health.py); code=$?
+          echo "$out"
+          num=$(gh issue list --label auto-health --state open --search "Pages 산출물 결함" --json number -q '.[0].number')
+          if [ $code -ne 0 ]; then
+            body=$(printf '운영 Pages 산출물 검사 실패:\n\n%s\n\n원장(ledger) 실행 로그와 docs/data 커밋을 확인하십시오. 축적 정보는 지우지 않는다 — 이전 커밋에서 복원 가능.' "$out")
+            if [ -n "$num" ]; then gh issue comment "$num" --body "$body"; else gh issue create --title "Pages 산출물 결함 — 기준·연결 산출물 점검" --label auto-health --body "$body"; fi
+            exit 1
+          elif [ -n "$num" ]; then
+            gh issue close "$num" --comment "운영 Pages 산출물 검사 정상 — 자동 종료"
+          fi
