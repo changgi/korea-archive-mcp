@@ -898,12 +898,12 @@ const COLLECT = {
   },
   nara: async (q, n) => {
     q = koToEn(q) || q;
-    const key = process.env.NARA_API_KEY; if (!key) return [];
+    const key = process.env.NARA_API_KEY; if (!key) throw new Error('NARA_API_KEY 미설정 — 0건이 아니라 조회 불가'); // v3.33 키 없음을 확정 0으로 보고하던 결함
     const d = await jget(`https://catalog.archives.gov/api/v2/records/search?q=${encodeURIComponent(q)}&limit=${n}&page=1`, { 'x-api-key': key });
     return ((((d.body || {}).hits || {}).hits) || []).map((h) => { const rec = (h._source || {}).record || {}; const po = naraChain(rec); const d0u = String((((rec.digitalObjects || [])[0]) || {}).objectUrl || ''); return { title: rec.title || '', date: naraDate(rec), id: rec.naId ? `NAID ${rec.naId}` : '', ...(rec.localIdentifier ? { lid: `NARA ${String(rec.localIdentifier).toUpperCase()}` } : {}), ...(po ? { series: po } : {}), ...(d0u ? { media: d0u } : {}), url: `https://catalog.archives.gov/id/${rec.naId}` }; });
   },
   archives: async (q, n) => {
-    const key = process.env.ARCHIVES_API_KEY; if (!key) return [];
+    const key = process.env.ARCHIVES_API_KEY; if (!key) throw new Error('ARCHIVES_API_KEY 미설정 — 0건이 아니라 조회 불가'); // v3.33
     const sk = /%[0-9A-Fa-f]{2}/.test(key) ? key : encodeURIComponent(key);
     const xml = await gtext(`https://apis.data.go.kr/1741050/openapi/searcharc?serviceKey=${sk}&query=${encodeURIComponent(q)}&start=1&limit=${n}`);
     if (!xml.includes('<item>')) { // v3.32 부재는 '확정 0'일 때만(v2.47 archives_search와 같은 판별) — 오류·장애 응답을 0건으로 보고하던 결함(cross_search 'archives:0')
@@ -920,15 +920,18 @@ const COLLECT = {
     });
   },
   nlk: async (q, n) => {
-    const key = process.env.NLK_API_KEY; if (!key) return [];
+    const key = process.env.NLK_API_KEY; if (!key) throw new Error('NLK_API_KEY 미설정 — 0건이 아니라 조회 불가'); // v3.33
     // 실측 7.7s(최저속 축) — 6h TTL 캐시(마커 <item> — 정상 결과만)
     const xml = await cachedText(`nlk:${q}:${n}`, 6 * 3600e3, () => gtext(`https://www.nl.go.kr/NL/search/openApi/search.do?key=${encodeURIComponent(key)}&apiType=xml&srchTarget=total&kwd=${encodeURIComponent(q)}&pageSize=${n}&pageNum=1`), '<item>');
+    if (!xml.includes('<item>') && !/<total>\s*0\s*<\/total>/.test(xml)) throw new Error('국립중앙도서관 API 응답에 항목·0건 표기 없음 — ' + (xtag(xml, 'error') || xtag(xml, 'message') || xml.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 60))); // v3.33 확정 0만 0건
     return (xml.match(/<item>[\s\S]*?<\/item>/g) || []).map((it) => { let lk = xtag(it, 'detail_link') || xtag(it, 'org_link'); if (lk.startsWith('/')) lk = 'https://www.nl.go.kr' + lk; return { title: xtag(it, 'title_info') || xtag(it, 'title'), date: xtag(it, 'pub_year_info'), id: ((lk.match(/viewKey=([^&#\s]+)/) || [])[1] || xtag(it, 'control_no') || ''), ...(xtag(it, 'type_name') ? { series: xtag(it, 'type_name') } : {}), url: lk }; }); // v2.67 id=기록 고유번호(viewKey) — 종전 자료유형이라 원장에서 같은 유형의 다른 기록이 한 key로 합쳐지던 결함
   },
   nedb: async (q, n) => { // v1.93: 개방파일 인덱스 미설정이면 한국사DB 통합검색 라이브 조회 — 검색어가 등장하는 DB(편찬 자료군)를 기록 단위 진입점으로 수집(0건 고정 해소)
     const recs = await loadNedbIndex(); if (recs) return nedbFileSearch(recs, q, n);
     q = String(q).replace(/(\d)[·.](\d{1,2})\s*(운동|만세|사건|혁명|선거|수복|후퇴|사태)/g, '$1·$2 $3'); // v2.99.6 한국사DB는 '3·1운동'·'3.1운동' 0건, '3·1 운동' 3건(실측) — 숫자 사건명 뒤를 띄운다
-    const dbs = (await nedbLive(q, 2)).filter((d) => d.total > 0).sort((a, b) => b.total - a.total); const out = [];
+    const all = await nedbLive(q, 2); // v3.33 모든 DB가 '총 N건' 표기 없이(-1) 실패하면 확정 0이 아니라 조회 실패
+    if (all.length && all.every((d) => d.total < 0)) throw new Error('한국사DB 주요 DB 전부 응답 이상(총 건수 표기 없음)');
+    const dbs = all.filter((d) => d.total > 0).sort((a, b) => b.total - a.total); const out = [];
     for (let k = 0; k < 2; k++) for (const d of dbs) { const r = d.rows[k]; if (r && out.length < n) out.push({ series: `${d.era} › ${d.name}`, title: r.title.slice(0, 140), date: nedbDate(r.id), id: r.id, url: `${JDB}/id/${r.id}` }); }
     return out;
   },
@@ -1158,6 +1161,7 @@ const COLLECT = {
   },
   kyudb: async (q, n) => { // 서울대 규장각 — 기존 jKyu(목록+해제 POST) 코어 재사용
     const r = await jKyu(q);
+    if (!Array.isArray(r['목록']) && !Array.isArray(r['해제'])) throw new Error('규장각 목록·해제 조회 모두 실패 — ' + [r['목록'], r['해제']].map((x) => (x && x.error) || '').filter(Boolean).join(' / ').slice(0, 120)); // v3.33 둘 다 실패를 0건으로 보고하던 결함
     const list = Array.isArray(r['목록']) ? r['목록'] : [];
     const rows = r['목록항목'] || [];
     if (rows.length) return rows.slice(0, n).map((x) => { const km = x.call.match(/^(奎|古|想白|一簑)/); const kn = km && { '奎': '규장각도서(奎)', '古': '고도서(古)', '想白': '상백문고', '一簑': '일사문고' }[km[1]];
@@ -1251,6 +1255,7 @@ const COLLECT = {
       method: 'POST', headers: { 'User-Agent': UA, 'Content-Type': 'application/x-www-form-urlencoded' },
       body: new URLSearchParams({ allSearchQuery: q, searchQuery: q, searchPageIndex: '1', searchPageUnit: String(Math.min(n, 20)), searchPageSize: '10' }),
       signal: AbortSignal.timeout(FETCH_TIMEOUT) });
+    if (!r.ok) throw new Error('전자사료관 HTTP ' + r.status); // v3.33 오류 페이지를 0건으로 판독하던 결함
     const b = await r.text();
     const out = [];
     // v1.81: 행 하단 스팬 전면 수확 — code(사료ID)·국내외·국가·소장기관·생산기간 (2026-11-21 실측: AUS033… → 미국 › 국립문서기록관리청)

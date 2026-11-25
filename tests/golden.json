@@ -1801,6 +1801,24 @@
    ],
    "level": "warn",
    "note": "v3.32 부재는 확정 0일 때만 — 옛 결함: 국가기록원 API 오류·장애 응답을 '0건'으로 보고(조회 실패 '—'로 표시해야)"
+  },
+  {
+   "id": "no-false-zero-nlk-nedb",
+   "tool": "cross_search",
+   "args": {
+    "query": "한국전쟁",
+    "sources": "nlk,nedb",
+    "max_per_source": 2
+   },
+   "must": [
+    "채널별 \\["
+   ],
+   "must_not": [
+    "nlk:0[\\],]",
+    "nedb:0[\\],]"
+   ],
+   "level": "warn",
+   "note": "v3.33 부재는 확정 0일 때만 — 키 미설정·API 오류·전 DB 응답 이상을 '0건'으로 보고하던 결함(조회 실패 '—'로)"
   }
  ]
 }
