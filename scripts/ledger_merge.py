@@ -111,7 +111,7 @@ DEEP = {"i815": ("nedb_search", lambda o: o.get("url") and {"mode": "i815", "que
 DEEP["nedb"] = ("nedb_search", lambda o: re.match(r"^[a-z]{2,5}_[0-9a-z_]+$", o["key"].split(":", 1)[1]) and {"mode": "item", "query": o["key"].split(":", 1)[1]})  # v2.61 한국사DB 기록(levelId) — 시대별 경로 판독
 DEEP["nlk"] = ("nlk_search", lambda o: o.get("id") and o.get("title") and {"query": re.sub(r"\s*[:;\[].*$", "", o["title"])[:60] or o["title"][:60], "max_results": 20})  # v2.72 국립중앙도서관 — 같은 기록 번호 줄만(nlk_own)
 DEEP["kyudb"] = ("nedb_search", lambda o: re.match(r"^[^\x00-\x7f]{1,4}[0-9][0-9.\-]*$", str(o.get("id") or "")) and {"mode": "kyujanggak", "query": o["id"]})  # v2.55 규장각 해제(기관 해설문) — 같은 청구기호 행만 쓴다
-IIIF_V = {"awm": 2, "commons": 3, "europeana": 2, "heritage": 2, "much": 2, "nrich": 2, "nara": 2, "tna": 2, "ia": 2, "ndl": 2, "gallery": 2}  # v2.76 권리/출처 표기 분리로 IIIF 기록 전부 재판독  # commons 2 = 범주(Commons, 숨김 제외)  # v2.63 우리 IIIF 브리지 판 — awm 2 = 기관 상세 표 전부(자료 유형·매체 형태·제작자·제작지·분쟁)와 본문 설명
+IIIF_V = {"awm": 2, "commons": 3, "europeana": 2, "heritage": 2, "much": 2, "nrich": 2, "nara": 3, "tna": 2, "ia": 2, "ndl": 2, "gallery": 2}  # v2.76 권리/출처 표기 분리로 IIIF 기록 전부 재판독  # commons 2 = 범주(Commons, 숨김 제외)  # v2.63 우리 IIIF 브리지 판 — awm 2 = 기관 상세 표 전부(자료 유형·매체 형태·제작자·제작지·분쟁)와 본문 설명
 DEEP_V = {"seoul": 2, "aks": 2, "jsg": 2, "nedb": 5, "un": 2}  # nedb 5 = 실패 응답으로 비워진 메타 복구(v2.69.3)  # nedb 4 = 기술 항목 줄 판별 엄격화(v2.69.2)  # nedb 3 = 법전 조문 판독 교정(v2.69.1 — 검색창 문구 오인)  # un 2 = 기관 MARC XML(제목·문서기호·유형·날짜·의제)  # v2.61.1 nedb 2 = 표 없는 기록(삼국사기)·원문 이미지만(신문) 판독  # v2.56 jsg 2 = 장서각 개체 태깅·인물 전거(UCI)  # v2.32 판독기 판 — 판이 오르면 이미 보강된 기록도 한 번 다시 판독(서울기록원: 기관 계층·생산자·보존이력 추가)
 _sid = [None]
 
@@ -258,7 +258,7 @@ def enrich(o, budget):
             md = []
             for e in (j.get("metadata") or [])[:12]:
                 k, v = strip(L1(e.get("label"))), strip(L1(e.get("value")))
-                if k and v and k not in ("판독 시각", "변환", "발견 시각", "발견 경로") and len(md) < 8: md.append([k[:30], v[:140]])
+                if k and v and k not in ("판독 시각", "변환", "발견 시각", "발견 경로") and len(md) < 10: md.append([k[:30], v[:140]])
             if md or not o.get("meta"):  # v2.69.3 빈 매니페스트 메타로 축적된 메타를 지우지 않는다
                 nk = {m[0] for m in md}
                 o["meta"] = md + [m for m in (o.get("meta") or []) if m and m[0] not in nk]  # v2.79 새 메타 + 기존에만 있던 항목 보존(8개 상한으로 잘려 나가던 결함)
@@ -309,7 +309,7 @@ def tree_path(o):
     return [top] + (segs or ["(계열 미상)"])
 
 ERAS = ["광복이후", "광복 이후", "선사", "고조선", "삼국", "고구려", "백제", "신라", "가야", "통일신라", "발해", "남북국", "고려", "조선", "대한제국", "일제강점기", "대한민국"]
-DATE_KEYS = ("생산일", "생산연도", "생산", "연대", "날짜", "시대", "시대분류", "출판정보", "발행", "발행일", "제작연도", "제작시기", "국적/시대", "작성연대 / 간행시기", "생산기간", "발간연도", "date", "발행년도", "기간", "생산 기간", "생산시기", "Publication Date", "일자", "연월일", "발신일", "발행년월일")  # v2.56 연구원 발행년도·TNA 기간·6·25 생산시기·NDL 발행일·서울 일자  # v2.50 생산기간(전자사료관)·발간연도(국외문화유산)·date(IA·Europeana) — 인수·등록·업로드일(보존이력·addeddate)은 넣지 않는다
+DATE_KEYS = ("생산일", "생산연도", "생산", "연대", "날짜", "시대", "시대분류", "출판정보", "발행", "발행일", "제작연도", "제작시기", "국적/시대", "작성연대 / 간행시기", "생산기간", "발간연도", "date", "발행년도", "기간", "생산 기간", "생산시기", "Publication Date", "일자", "연월일", "발신일", "발행년월일", "포괄 기간(이 기록)")  # v2.56 연구원 발행년도·TNA 기간·6·25 생산시기·NDL 발행일·서울 일자  # v2.50 생산기간(전자사료관)·발간연도(국외문화유산)·date(IA·Europeana) — 인수·등록·업로드일(보존이력·addeddate)은 넣지 않는다
 ERA_KEYS = ("시대", "시대분류", "제작시기", "국적/시대")
 
 MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
@@ -332,6 +332,10 @@ def date_derived(o):
     if m: return "-".join(x for x in m.groups() if x), "기관 메타 — 생산기간(시작)"
     m = re.match(r"^\s*(1[0-9]\d\d|20\d\d)\s*년?\s*$", md.get("발간연도", ""))
     if m: return m[1], "기관 메타 — 발간연도"
+    m = re.match(r"^((?:ca\. )?(1[0-9]\d\d|20\d\d)(?:~(?:ca\. )?(1[0-9]\d\d|20\d\d))?)$", md.get("포괄 기간(이 기록)", ""))  # v3.0 NARA coverage/inclusive(파일단위·영상 아이템 — productionDates 없음)
+    if m: return m[1], "기관 메타 — 포괄 기간(이 기록, NARA coverage·inclusive)"
+    m = re.match(r"^((?:ca\. )?(1[0-9]\d\d|20\d\d)(?:~(?:ca\. )?(1[0-9]\d\d|20\d\d))?) — (\w+ NAID \d+)", md.get("포괄 기간(상위 계층)", ""))
+    if m and int(m[3] or m[2]) - int(m[2]) <= 10: return m[1], f"상위 계층 포괄 기간({m[4]}) — 이 기록 자체 날짜 아님, 범위 10년 이하만"
     m = re.match(r"^\s*(January|February|March|April|May|June|July|August|September|October|November|December) (\d{1,2}), (1[89]\d\d|20\d\d)\b", md.get("date", ""))  # v2.84 IA 영문 날짜 'October 24, 1950–…'(첫 날짜)
     if m: return f"{m[3]}-{MONTHS.index(m[1]) + 1:02d}-{int(m[2]):02d}", "기관 메타 — date(영문 표기, 범위면 첫 날짜)"
     return "", ""
