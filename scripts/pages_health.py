@@ -7,7 +7,7 @@ UA = {"User-Agent": "KoreaArchiveMCP/1.0 (+https://github.com/changgi/korea-arch
 CHECKS = [  # (파일, 검사 — 내용 → 문제 문자열 또는 None)
     ("discovered.jsonl", lambda t: None if t.count("\n") >= 500 else f"원장 줄 수 {t.count(chr(10))} < 500"),
     ("places.json", lambda t: None if sum(1 for e in json.loads(t)["places"].values() if e.get("records")) >= 10 else "기록 있는 지명 < 10"),
-    ("persons.json", lambda t: None if any(e.get("records") for e in json.loads(t)["persons"].values()) else "기록 있는 인물 0"),
+    ("persons.json", lambda t: "인물 컬렉션 빈 파일명" if any(str(e.get("collection", "")).endswith("/.json") for e in json.loads(t)["persons"].values()) else (None if any(e.get("records") for e in json.loads(t)["persons"].values()) else "기록 있는 인물 0")),
     ("events.json", lambda t: None if json.loads(t)["events"] else "사건 0"),
     ("authorities.json", lambda t: None if json.loads(t)["authorities"] else "전거 0"),
     ("relations.json", lambda t: None if len(json.loads(t)["edges"]) >= 100 else "관계 간선 < 100"),

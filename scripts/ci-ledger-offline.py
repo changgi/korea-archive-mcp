@@ -113,6 +113,8 @@ try:  # v3.0.1 날짜 칸 의미 검사 — 날짜에 숫자가 없는 값(분�
     if _am: bad.append(f"authorities.json에 없는 전거 {len(_am)}건")
     _PS = json.load(open(os.path.join(data, "persons.json"), encoding="utf-8"))["persons"]  # v3.24
     _pp = [o["key"] for o in _L for n in o.get("persons_std") or [] if o["key"] not in (_PS.get(n) or {}).get("records", [])]
+    _ps = [n for n, e in _PS.items() if e.get("collection") and (e["collection"].endswith("/.json") or not os.path.exists(os.path.join(data, "person", e["collection"].rsplit("/", 1)[1])))]  # v3.30.1 빈 슬러그·파일 없음
+    if _ps: bad.append(f"인물 컬렉션 파일명 결함 {_ps}")
     if _pp: bad.append(f"인물 사전에 없는 기록 인물 {len(_pp)}건")
     _dh = open(os.path.join(data, "dict.html"), encoding="utf-8").read() if os.path.exists(os.path.join(data, "dict.html")) else ""  # v3.25 기준 사전 페이지
     if not _dh or "흥남" not in _dh or "맥아더" not in _dh or "흥남 철수" not in _dh: bad.append("기준 사전 페이지 결함")
