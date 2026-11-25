@@ -220,7 +220,7 @@ def enrich(o, budget):
         if args:
             try:
                 txt = mcp_call(tool, args); summ, md = parse_deep(txt)
-                if re.search(r"조회 실패|파싱 실패|상세 파싱 실패|오류\(|시간 초과|브라우저로 열람|상세 미발견", txt[:400]): raise ValueError("판독 실패 응답 — 보강하지 않음(기존 값 보존, 다음 날 재시도)")  # v2.69.3 실패를 성공으로 받아 메타를 비우던 결함
+                if re.search(r"조회 실패|파싱 실패|상세 파싱 실패|오류\(|시간 초과|브라우저로 열람|상세 미발견|메타 미검출|자동조회 실패|다음 단계\(안내\)", txt[:600]): raise ValueError("판독 실패 응답 — 보강하지 않음(기존 값 보존, 다음 날 재시도)")  # v2.69.3 실패를 성공으로 받아 메타를 비우던 결함
                 if src0 == "nedb" and re.search(r"문자입력기|AND OR", txt[:600]): raise ValueError("판독 결함 출력(검색창 문구) — 보강하지 않음")  # v2.69.1 방어
                 if src0 == "nedb":  # v2.61 한국사DB 원문 — 기술 항목 줄(제목·연월일·출전…)은 메타로, 본문 앞부분은 요약으로(미공개·실패는 요약 비움)
                     L2 = txt.splitlines()
@@ -2110,6 +2110,13 @@ def main():
             o.setdefault("date_moved", []).append({"value": dv, "to": "meta:분쟁", "on": today.isoformat(), "why": "검색 파서가 분쟁명(Conflict)을 날짜로 읽던 결함(v3.0.1) — 날짜는 Date made"})
             o["date"] = ""; nmv += 1
     if nmv: print(f"날짜 칸 교정(v3.0.1): AWM 분쟁명 {nmv}건 → 메타 '분쟁'(원값 date_moved 보존)")
+    ntn = 0  # v3.5.3 제자리로 — 도구 안내 문구('➤ 다음 단계(안내)'·'공식 검색')가 기관 메타로 쌓인 것: 지우지 않고 tool_notes로 옮긴다(기관 데이터와 구분)
+    for o in led.values():
+        mv = [m for m in (o.get("meta") or []) if m and (str(m[0]).startswith("➤") or m[0] == "공식 검색")]
+        if mv:
+            o["meta"] = [m for m in o["meta"] if m not in mv]; o.setdefault("tool_notes", []).extend({"label": m[0], "value": m[1], "moved": today.isoformat(), "why": "도구 안내 응답이 메타로 판독되던 결함(v3.5.3)"} for m in mv); ntn += 1
+            if o.get("enrich_status") == "ok" and not o["meta"]: o["enrich_status"] = ""  # 기관 메타 없이 '완료'로 남지 않게 — 다음 보강에 다시 든다
+    if ntn: print(f"메타 교정(v3.5.3): 도구 안내 문구 {ntn}건 → tool_notes(원값 보존)")
     recs = sorted(led.values(), key=lambda o: (o["first_seen"], o["key"]))
     # v2.27 계층·IIIF가 없는 기록은 만들어 구축 — 원 기관 정보와 구분되는 필드에(partOf_derived · iiif_built)
     for o in recs:
@@ -2161,7 +2168,7 @@ def main():
     relations_page([o for o in recs if o.get("entry_type", "기록") == "기록"])  # v2.86 날짜 파생·교차 확인 뒤에
     with open(lp, "w", encoding="utf-8") as f:
         for o in recs: f.write(json.dumps(o, ensure_ascii=False, separators=(",", ":")) + "\n")
-    cols = ["key", "entry_type", "found_by_basis", "summary_composed", "rights_view", "rights_basis", "fixity", "defect_note", "link_note", "sources", "title", "date", "date_derived", "date_basis", "id", "url", "partOf", "partOf_derived", "media", "sameAs", "iiif", "iiif_status", "iiif_built", "iiif_kind", "found_by", "found_by_derived", "first_seen", "last_seen", "seen", "seen_7d", "seen_30d", "days_total", "formats", "tools", "max_cross", "trend", "rank", "score", "summary", "summary_basis", "rights", "attribution", "thumb", "meta", "meta_basis", "authority", "key_aliases", "merge_note", "recovered", "harvested", "meta_restored", "found_via", "drilled_from", "date_cross", "date_moved", "iiif_same"]
+    cols = ["key", "entry_type", "found_by_basis", "summary_composed", "rights_view", "rights_basis", "fixity", "defect_note", "link_note", "sources", "title", "date", "date_derived", "date_basis", "id", "url", "partOf", "partOf_derived", "media", "sameAs", "iiif", "iiif_status", "iiif_built", "iiif_kind", "found_by", "found_by_derived", "first_seen", "last_seen", "seen", "seen_7d", "seen_30d", "days_total", "formats", "tools", "max_cross", "trend", "rank", "score", "summary", "summary_basis", "rights", "attribution", "thumb", "meta", "meta_basis", "authority", "key_aliases", "merge_note", "recovered", "harvested", "meta_restored", "found_via", "drilled_from", "date_cross", "date_moved", "iiif_same", "tool_notes"]
     fmtv = lambda v: json.dumps(v, ensure_ascii=False, separators=(",", ":")) if isinstance(v, list) and v and isinstance(v[0], dict) else " | ".join(f"{a}: {b}" for a, b in v) if isinstance(v, list) and v and isinstance(v[0], list) else (" ".join(f"{k}:{n}" for k, n in sorted(v.items(), key=lambda kv: -kv[1])) if isinstance(v, dict) and all(isinstance(x, (int, float)) for x in v.values()) else json.dumps(v, ensure_ascii=False, separators=(",", ":")) if isinstance(v, dict) else ("+".join(v) if isinstance(v, list) else v))
     with open(os.path.join(D, "discovered.csv"), "w", encoding="utf-8-sig", newline="") as f:
         w = csv.writer(f); w.writerow(cols)
