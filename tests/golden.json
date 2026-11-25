@@ -1685,6 +1685,36 @@
    ],
    "level": "warn",
    "note": "v3.8.1 변환어 실측 교정 — 'Ito Hirobumi Korea' → 'Ito Hirobumi'(IA 상위 3/3 관련)"
+  },
+  {
+   "id": "nara-prewar-hint",
+   "tool": "nara_search",
+   "args": {
+    "query": "강화도조약",
+    "max_results": 3
+   },
+   "must": [
+    "1945년 이전 한국 사건",
+    "tna_search"
+   ],
+   "level": "warn",
+   "note": "v3.8.7 1945년 이전 연도 질의 — NARA·IA 색인 드묾 안내(alt_trials 결론의 도구 노출)"
+  },
+  {
+   "id": "nara-no-prewar-hint-1950",
+   "tool": "nara_search",
+   "args": {
+    "query": "흥남 철수",
+    "max_results": 3
+   },
+   "must": [
+    "NARA"
+   ],
+   "must_not": [
+    "1945년 이전 한국 사건"
+   ],
+   "level": "warn",
+   "note": "v3.8.7 1950년대 질의엔 안내 없음"
   }
  ]
 }
