@@ -39,6 +39,9 @@ assert g["origin_holder"]({"meta": [["소장자(처)", "국사편찬위원회"]]
 _eb = g["envelope_basis"]; _K = "기록 봉투(이미지 없음 — 기록 정보만 담은 브리지)"  # v3.11.1 기록 단위 봉투 사유
 assert _eb({"key": "nlk:CNTS-1", "iiif_kind": _K})["type"] == "기술" and _eb({"key": "nlk:1", "iiif_kind": _K, "meta": [["원문 열람", "소장 정보(원문 열람은 기관 확인)"]]})["type"] == "매체"
 assert _eb({"key": "nlk:2", "iiif_kind": _K})["type"] == "미구축" and _eb({"key": "nrich:rep:1", "iiif_kind": _K})["type"] == "매체" and _eb({"key": "nara:1", "iiif_kind": "원 기관 제공 매니페스트"}) is None
+_pl = g["places"]  # v3.13 지명 사전 — 다국어 표기 한 표준명, 오탐(어중·일반어) 방지
+assert _pl({"title": "EVACUATION OF HUNGNAM, KOREA"}) == {"흥남"} == _pl({"title": "흥남철수작전 당시 흥남항 전경 사진"}) and _pl({"title": "AMPHIBIOUS FORCE LANDING, D-DAY, INCHON"}) == {"인천"}
+assert not _pl({"title": "Seoulite 세계대전 원산지 개성적 수원지"}) and _pl({"title": "x", "meta": [["취급지명", "Hungnam[흥남]"]]}) == {"흥남"} and not _pl({"title": "x", "summary": "Hungnam"})
 _io = g["iiif_origin"]  # v3.9 Gallica 원 기관 IIIF — 디지털 원문 ark만(카탈로그 cb ark 아님), 수집 경로 iiif가 있으면 두지 않음
 assert _io({"url": "http://gallica.bnf.fr/ark:/12148/btv1b2700138b"})["manifest"] == "https://gallica.bnf.fr/iiif/ark:/12148/btv1b2700138b/manifest.json"
 assert _io({"url": "https://gallica.bnf.fr/ark:/12148/cb384972039"}) is None and _io({"url": "https://gallica.bnf.fr/ark:/12148/bpt6k1", "iiif": "x"}) is None
