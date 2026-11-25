@@ -906,6 +906,10 @@ const COLLECT = {
     const key = process.env.ARCHIVES_API_KEY; if (!key) return [];
     const sk = /%[0-9A-Fa-f]{2}/.test(key) ? key : encodeURIComponent(key);
     const xml = await gtext(`https://apis.data.go.kr/1741050/openapi/searcharc?serviceKey=${sk}&query=${encodeURIComponent(q)}&start=1&limit=${n}`);
+    if (!xml.includes('<item>')) { // v3.32 부재는 '확정 0'일 때만(v2.47 archives_search와 같은 판별) — 오류·장애 응답을 0건으로 보고하던 결함(cross_search 'archives:0')
+      if (!xml.includes('searchError') && /<total>\s*0\s*<\/total>/.test(xml)) return [];
+      throw new Error('국가기록원 API 응답에 항목·0건 표기 없음' + ((xtag(xml, 'returnAuthMsg') || xtag(xml, 'errMsg') || xtag(xml, 'resultMsg') || xtag(xml, 'message')) ? ` — ${xtag(xml, 'returnAuthMsg') || xtag(xml, 'errMsg') || xtag(xml, 'resultMsg') || xtag(xml, 'message')}` : ` — ${xml.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 60)}`));
+    }
     return (xml.match(/<item>[\s\S]*?<\/item>/g) || []).map((i) => {
       const link = archLink(xtag(i, 'link')); // v2.7.1: API가 &amp;로 내려줌 → 클릭 시 빈 페이지(실측). 해제 + https
       const rid = ((link.match(/rc_rfile_no=(\d+)/) || [])[1] || '') + ((link.match(/rc_ritem_no=(\d+)/) || [])[1] ? '-' + (link.match(/rc_ritem_no=0*(\d+)/) || [])[1] : '');
