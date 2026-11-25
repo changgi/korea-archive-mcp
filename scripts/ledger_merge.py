@@ -1079,11 +1079,20 @@ ENVELOPE_WHY = {
     "nrich": ("미구축", "브리지 대상 유형(국외문화유산·금석문·초상화·괘불·연구DB 이미지) 밖의 기록(발간자료 등)"),
 }
 
+_md = lambda o: {m[0]: m[1] for m in (o.get("meta") or []) if m and len(m) > 1}
+ENVELOPE_RULES = {  # v3.11.1 2026-11-25 실측 근거
+    "nrich": [lambda o: ("매체", "발간 보고서 — 원문은 기관 파일 다운로드(PDF, 스크립트 양식) · 공공누리 표기는 상세 페이지 원문") if o["key"].startswith("nrich:rep:") else None,
+              lambda o: ("매체", "한국고고학사전 항목 텍스트 — 상세 페이지 대표이미지(data-original-url) 없음(2026-11-25 실측 4건) · 공공누리 제4유형 표기") if o["key"].startswith("nrich:dict:") else None],
+    "nlk": [lambda o: ("기술", "디지털화 원문은 국립중앙도서관 원문 뷰어(viewer.nl.go.kr — 스크립트 전용, robots 전체 Disallow 표시) — IIIF 미제공") if (o["key"].startswith("nlk:CNTS-") or _md(o).get("원문 뷰어")) else None,
+            lambda o: ("매체", "소장 서지 — 디지털화 원문 미연결(기관 표기 '소장 정보(원문 열람은 기관 확인)')") if "소장 정보" in _md(o).get("원문 열람", "") else None],
+}
+
 def envelope_basis(o):
     k = o.get("iiif_kind") or ""
     if not k.startswith("기록 봉투"): return None
     src = o["key"].split(":")[0]
     if "원 기관 페이지에 이 기록의 공개 이미지 없음" in k: t, w = "원 기관 이미지 없음", "브리지가 원 기관 페이지를 판독했으나 이 기록의 공개 이미지 없음"
+    elif (r_ := next((f(o) for f in ENVELOPE_RULES.get(src, []) if f(o)), None)): t, w = r_  # v3.11.1 기록 단위 규칙(같은 기관 안에서도 자료 유형별 사유가 다름)
     else: t, w = ENVELOPE_WHY.get(src, ("미구축", "원 기관 IIIF·공개 이미지 경로 미확인 — 다음 개선 대상(부재 단정 아님)"))
     return {"type": t, "why": w, **({"see": "iiif_same"} if o.get("iiif_same") else {}), **({"see_origin": "iiif_origin"} if o.get("iiif_origin") else {})}
 

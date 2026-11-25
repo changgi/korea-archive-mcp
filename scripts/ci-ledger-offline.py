@@ -36,6 +36,9 @@ assert not _bad_dt, f"날짜 해석기 회귀 {_bad_dt}"
 _oh = g["origin_holder"]({"meta": [["소장자(처)", "국립문서기록관리청 (National Archives and Records Administration)"], ["문서번호", "SC354878"], ["계층", "국사편찬위원회 전자사료관 › 사료군 AUS005 Record Group 111: Records of the Office of the Chief Signal Officer, 1860 - 1985 › 사료계열"]]})
 assert _oh["local_id"] == "111-SC-354878" and "111-SC-354000 to 111-SC-354999" in _oh["finding_aid"]["label"] and _oh["record_group"].startswith("RG 111"), _oh  # v3.11
 assert g["origin_holder"]({"meta": [["소장자(처)", "국사편찬위원회"]]}) is None
+_eb = g["envelope_basis"]; _K = "기록 봉투(이미지 없음 — 기록 정보만 담은 브리지)"  # v3.11.1 기록 단위 봉투 사유
+assert _eb({"key": "nlk:CNTS-1", "iiif_kind": _K})["type"] == "기술" and _eb({"key": "nlk:1", "iiif_kind": _K, "meta": [["원문 열람", "소장 정보(원문 열람은 기관 확인)"]]})["type"] == "매체"
+assert _eb({"key": "nlk:2", "iiif_kind": _K})["type"] == "미구축" and _eb({"key": "nrich:rep:1", "iiif_kind": _K})["type"] == "매체" and _eb({"key": "nara:1", "iiif_kind": "원 기관 제공 매니페스트"}) is None
 _io = g["iiif_origin"]  # v3.9 Gallica 원 기관 IIIF — 디지털 원문 ark만(카탈로그 cb ark 아님), 수집 경로 iiif가 있으면 두지 않음
 assert _io({"url": "http://gallica.bnf.fr/ark:/12148/btv1b2700138b"})["manifest"] == "https://gallica.bnf.fr/iiif/ark:/12148/btv1b2700138b/manifest.json"
 assert _io({"url": "https://gallica.bnf.fr/ark:/12148/cb384972039"}) is None and _io({"url": "https://gallica.bnf.fr/ark:/12148/bpt6k1", "iiif": "x"}) is None
