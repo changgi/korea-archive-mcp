@@ -36,6 +36,11 @@ if _h - _j: bad.append(f"기록 JSON 없음 {len(_h - _j)}건")  # v2.85 기록�
 else:
     _s = json.load(open(os.path.join(_rd, sorted(_j)[0] + ".json"), encoding="utf-8"))
     if not (_s.get("cite", {}).get("ko") and _s.get("page") and "related" in _s): bad.append("기록 JSON에 인용·페이지·관계 없음")
+try:  # v2.99.9 RiC-O 의미 검사 — 주제가 아닌 패싯(생산자·소장처·공개 상태)이 hasOrHadSubject로 나가지 않는지(v2.99.8 결함 546건 재발 방지)
+    _g = json.load(open(os.path.join(data, "discovered.jsonld"), encoding="utf-8"))["@graph"]
+    _bad = sum(1 for x in _g for c in (x.get("rico:hasOrHadSubject") or []) if any(f"#{sl}/" in str(c.get("@id", "")) for sl in ("creator", "holder", "access", "place")))
+    if _bad: bad.append(f"RiC-O 주제 속성에 생산자·소장처·공개 상태·장소 개념 {_bad}건(제 속성으로 — rico_concepts)")
+except Exception as ex: bad.append(f"discovered.jsonld 판독 실패 {ex}")
 reg = subprocess.run([sys.executable, os.path.join(tmp, "scripts", "records_register.py"), "--verify"], capture_output=True, text=True)
 if reg.returncode not in (0,): bad.append("등록부 검증 실패: " + (reg.stdout + reg.stderr)[-200:])
 if os.environ.get("KEEP"): print("사본:", tmp)
