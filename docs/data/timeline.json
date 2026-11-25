@@ -1,5 +1,5 @@
 {
-"updated": "2026-11-25T01:17:53Z",
+"updated": "2026-11-25T01:38:44Z",
 "note": "구간 = 연대(4자리 연도·8자리 날짜·연호 연도 明治·大正·昭和·光武·隆熙·檀紀 환산) → 세기 → 왕조·시대명. 근거 순서 date → 제목 → 메타(생산·시대·출판). 세기·시대 구간은 시간축 근사 정렬",
 "timeline": [
 {
@@ -71,23 +71,6 @@
 "title": "[초상화(국가지정)] 이제현 초상 (Portrait of Yi Je-hyeon)",
 "url": "https://portal.nrich.go.kr/kor/portraitNdUsrView.do?menuIdx=1258&portrait_idx=1",
 "iiif": "https://korea-archive-mcp.vercel.app/iiif/nrich/portrait-1/manifest.json"
-}
-]
-},
-{
-"decade": "1150년대",
-"records": 1,
-"by_source": {
-"nara": 1
-},
-"by_kind": {
-"graphic": 1
-},
-"samples": [
-{
-"title": "Numerical File: 1155-1166/300",
-"url": "https://catalog.archives.gov/id/19219213",
-"iiif": "https://korea-archive-mcp.vercel.app/iiif/nara/19219213/manifest.json"
 }
 ]
 },
@@ -190,23 +173,6 @@
 "title": "1456년 오공신회맹축(五功臣會盟軸)－1",
 "url": "https://archive.aks.ac.kr/link.do?dataUCI=G002+AKS+KSM-XD.1456.1100-20250415.F13301-02-W000001",
 "iiif": "https://korea-archive-mcp.vercel.app/iiif/rec/nVFdSwJBFP0rwzwVuuvM-vGwUBFFEdKTRUH0sGigWGa69RKB4faBGhgohK66oFEPBuJqqPlrog_ZuUt_oVmFfkDDhTP33LnnzNw5x2ks72Elnsb7bqxiGVOfP8CuNAQPLcvsQ96wKwX2NITX8tzHqPSZa0xuml969rvamLwN5n_GdxS7cYQ3cohxWCdEci0HQ65gaFPYXRUdPZFSQgSJSH7io35xjXq9hApEEnaIsxyFU94aVdVkWvZ4lFQ4Gjs7EPmtRCUsxlOew1giLkaOlyKKqmyvbCz80yTJTeyybvVfLNNg7QFoOtSLrFmwehn0nhmhP3qaOdvW_aJzqjKwc0NmapCflWYcAkOD5hhqPSg9I6g_QpeLdxAnmNmDbA3ZVQ2ui1Ynw90T3N0ZtBsfzcZ1woF1dKvbRuxWA-MSQbXIVXhJcb6CvyUgUCpIvi1C5Gngi18/manifest.json"
-}
-]
-},
-{
-"decade": "1540년대",
-"records": 1,
-"by_source": {
-"nara": 1
-},
-"by_kind": {
-"graphic": 1
-},
-"samples": [
-{
-"title": "740.0011PW/1-145 - 3-1545: January-March 1945",
-"url": "https://catalog.archives.gov/id/605163366",
-"iiif": "https://korea-archive-mcp.vercel.app/iiif/nara/605163366/manifest.json"
 }
 ]
 },
@@ -845,16 +811,16 @@
 },
 {
 "decade": "1870년대",
-"records": 22,
+"records": 21,
 "by_source": {
 "kyudb": 2,
 "ia": 10,
-"nara": 5,
+"nara": 4,
 "tna": 5
 },
 "by_kind": {
 "document": 17,
-"graphic": 5
+"graphic": 4
 },
 "samples": [
 {
@@ -928,7 +894,7 @@
 },
 {
 "decade": "1890년대",
-"records": 36,
+"records": 35,
 "by_source": {
 "kyudb": 2,
 "oldnews": 3,
@@ -937,11 +903,11 @@
 "gallica": 1,
 "commons": 1,
 "ia": 7,
-"nara": 6
+"nara": 5
 },
 "by_kind": {
 "document": 29,
-"graphic": 6,
+"graphic": 5,
 "motion_picture": 1
 },
 "samples": [
@@ -974,7 +940,7 @@
 },
 {
 "decade": "1900년대",
-"records": 24,
+"records": 28,
 "by_source": {
 "jacar": 5,
 "heritage": 1,
@@ -982,12 +948,13 @@
 "oldnews": 6,
 "nlna": 1,
 "tna": 8,
+"nara": 4,
 "nedb": 1,
 "i815": 1
 },
 "by_kind": {
 "document": 23,
-"graphic": 1
+"graphic": 5
 },
 "samples": [
 {
@@ -1046,7 +1013,7 @@
 },
 {
 "decade": "1910년대",
-"records": 35,
+"records": 34,
 "by_source": {
 "ndl": 8,
 "indy": 4,
@@ -1057,11 +1024,11 @@
 "i815": 1,
 "jsg": 2,
 "tna": 3,
-"nara": 5
+"nara": 4
 },
 "by_kind": {
 "document": 24,
-"graphic": 11
+"graphic": 10
 },
 "samples": [
 {
@@ -1132,18 +1099,17 @@
 },
 {
 "decade": "1930년대",
-"records": 12,
+"records": 9,
 "by_source": {
 "okchf": 2,
 "earchive": 1,
 "ndl": 1,
 "europeana": 1,
-"nara": 3,
 "indy": 3,
 "nedb": 1
 },
 "by_kind": {
-"graphic": 5,
+"graphic": 2,
 "document": 7
 },
 "samples": [
@@ -1176,7 +1142,7 @@
 },
 {
 "decade": "1940년대",
-"records": 33,
+"records": 40,
 "by_source": {
 "archives": 4,
 "ndl": 1,
@@ -1184,14 +1150,14 @@
 "i815": 2,
 "nlna": 1,
 "ia": 2,
-"nara": 11,
+"nara": 18,
 "koreanwar": 2,
 "oldnews": 5,
 "indy": 1
 },
 "by_kind": {
 "document": 21,
-"motion_picture": 4,
+"motion_picture": 11,
 "graphic": 8
 },
 "samples": [
@@ -1224,9 +1190,9 @@
 },
 {
 "decade": "1950년대",
-"records": 297,
+"records": 295,
 "by_source": {
-"nara": 55,
+"nara": 53,
 "europeana": 13,
 "ia": 29,
 "tna": 20,
@@ -1249,7 +1215,7 @@
 },
 "by_kind": {
 "motion_picture": 38,
-"graphic": 81,
+"graphic": 79,
 "document": 178
 },
 "samples": [
@@ -1321,7 +1287,7 @@
 },
 {
 "decade": "1960년대",
-"records": 19,
+"records": 21,
 "by_source": {
 "ia": 10,
 "i815": 2,
@@ -1329,11 +1295,12 @@
 "ktv": 2,
 "gonghun": 2,
 "much": 1,
-"awm": 1
+"awm": 1,
+"nara": 2
 },
 "by_kind": {
 "document": 18,
-"graphic": 1
+"graphic": 3
 },
 "samples": [
 {
@@ -1402,15 +1369,17 @@
 },
 {
 "decade": "1970년대",
-"records": 10,
+"records": 14,
 "by_source": {
 "nzarch": 1,
 "earchive": 1,
 "ia": 7,
-"ktv": 1
+"ktv": 1,
+"nara": 4
 },
 "by_kind": {
-"document": 10
+"document": 10,
+"graphic": 4
 },
 "samples": [
 {
@@ -1442,19 +1411,21 @@
 },
 {
 "decade": "1980년대",
-"records": 15,
+"records": 23,
 "by_source": {
 "ktv": 6,
 "nzarch": 1,
 "europeana": 1,
 "gallica": 1,
 "ia": 5,
-"nlk": 1
+"nlk": 1,
+"nara": 8
 },
 "by_kind": {
-"document": 13,
+"document": 17,
 "motion_picture": 1,
-"map": 1
+"map": 1,
+"graphic": 4
 },
 "samples": [
 {
@@ -1486,7 +1457,7 @@
 },
 {
 "decade": "1990년대",
-"records": 28,
+"records": 37,
 "by_source": {
 "archives": 6,
 "commons": 1,
@@ -1494,11 +1465,11 @@
 "nlk": 3,
 "ktv": 13,
 "ia": 3,
-"nara": 1
+"nara": 10
 },
 "by_kind": {
 "document": 20,
-"graphic": 4,
+"graphic": 13,
 "motion_picture": 4
 },
 "samples": [
@@ -1673,9 +1644,9 @@
 },
 {
 "decade": "연대 미상",
-"records": 127,
+"records": 103,
 "by_source": {
-"nara": 65,
+"nara": 41,
 "seoul": 12,
 "europeana": 5,
 "i815": 6,
@@ -1692,9 +1663,9 @@
 "koreanwar": 3
 },
 "by_kind": {
-"document": 66,
-"graphic": 48,
-"motion_picture": 13
+"document": 62,
+"graphic": 35,
+"motion_picture": 6
 },
 "samples": [
 {
