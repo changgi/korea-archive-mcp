@@ -1448,7 +1448,7 @@ def origin_holder(o):
     holder = md.get("소장자(처)", "")
     if not re.search(r"National Archives and Records Administration|국립문서기록관리청", holder):
         # v3.47 기관 sameAs(NAID·NARA 로컬 식별자)가 있는 사본 → 원장 NARA 기록의 계층을 잇는다(원장 실측). 원본 쪽에 없으면 같은 식별자 계열이 모두 한 시리즈일 때만 시리즈 수준
-        if o["key"].startswith("nara:"): return None
+        if str(o.get("key") or "").startswith("nara:"): return None
         sa = str(o.get("sameAs") or "")
         mn = re.search(r"NAID (\d+)", sa); ml = re.search(r"NARA (\d{2,3}[A-Z]?-[A-Z]{1,6}-[\w-]+)", sa, re.I)
         hit = (NARA_IX["naid"].get(mn[1]) if mn else None) or (NARA_IX["lid"].get(ml[1].upper()) if ml else None)
