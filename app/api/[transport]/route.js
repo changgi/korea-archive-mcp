@@ -1126,7 +1126,7 @@ const COLLECT = {
         const h1 = d.match(/<h1[^>]*>\s*(?:<[^>]+>\s*)*([^<]{3,120})/);
         const acc = d.match(/(?:Accession Number|ID number)[^A-Z0-9]{0,40}([A-Z0-9/.\-]{3,20})/);
         const pd = /Copyright expired - public domain|publicdomain\/mark/.test(d);
-        const conf = d.match(/Conflict[^<]*<\/[a-z0-9]+>\s*<[^>]*>\s*(?:<[^>]+>\s*)*([^<]{4,40})/);
+        const conf = d.match(/Date made<\/th>\s*<td[^>]*>\s*([^<]{2,40})/); // v3.0.1 날짜 = 'Date made'(c 1919 등). 'Conflict'(Korea, 1950-1953)는 분쟁명 — 날짜 칸에 넣던 결함
         const ot = d.match(/Object type<\/th>\s*<td>\s*([^<]{2,40})/); // v1.81: 소장품 유형(Photograph·Film·Firearm 등 — C285584 실측)
         return { title: (h1 ? norm(h1[1]) : cid) + (pd ? ' · 권리:PD(저작권 만료)' : ''), date: conf ? norm(conf[1]) : '', id: acc ? acc[1] : cid, ...(ot ? { series: norm(ot[1]) } : {}), url: 'https://www.awm.gov.au/collection/' + cid };
       } catch { return null; }

@@ -1521,6 +1521,23 @@
    ],
    "level": "warn",
    "note": "v3.0 가장 가까운 상위 계층(series) 범위 — RG 범위(1860~1985)를 쓰지 않는다"
+  },
+  {
+   "id": "awm-date-made",
+   "tool": "cross_search",
+   "args": {
+    "query": "Kapyong",
+    "sources": "awm",
+    "max_per_source": 5
+   },
+   "must": [
+    "Kapyong"
+   ],
+   "must_not": [
+    "Korea, 1950-1953"
+   ],
+   "level": "warn",
+   "note": "v3.0.1 AWM 날짜 = Date made — 옛 결함: 분쟁명(Conflict)이 날짜 칸에"
   }
  ]
 }
