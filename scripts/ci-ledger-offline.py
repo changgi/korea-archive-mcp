@@ -64,6 +64,12 @@ try:  # v3.2 IIIF Change Discovery — 컬렉션·페이지 구조, 시간 순, 
     if any(_ev[i]["endTime"] > _ev[i + 1]["endTime"] for i in range(len(_ev) - 1)): bad.append("Change Discovery 시간 순 아님")
     if sum(e["type"] == "Create" for e in _ev) < 0.9 * sum(1 for o in _L if o.get("entry_type", "기록") == "기록"): bad.append("Change Discovery Create 누락")
 except Exception as ex: bad.append(f"Change Discovery 판독 실패 {ex}")
+try:  # v3.6 같은 날 IIIF 컬렉션 — 색인과 파일 일치, 묶음마다 매니페스트 2개 이상
+    _di = json.load(open(os.path.join(data, "day", "index.json"), encoding="utf-8"))
+    for _x in _di["items"]:
+        _c = json.load(open(os.path.join(data, "day", _x["id"].rsplit("/", 1)[1]), encoding="utf-8"))
+        if _c.get("type") != "Collection" or len(_c.get("items") or []) < 2: bad.append(f"같은 날 컬렉션 결함 {_x['id']}"); break
+except Exception as ex: bad.append(f"같은 날 컬렉션 판독 실패 {ex}")
 reg = subprocess.run([sys.executable, os.path.join(tmp, "scripts", "records_register.py"), "--verify"], capture_output=True, text=True)
 if reg.returncode not in (0,): bad.append("등록부 검증 실패: " + (reg.stdout + reg.stderr)[-200:])
 if os.environ.get("KEEP"): print("사본:", tmp)
