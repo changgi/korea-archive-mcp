@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-25T18:30:59Z",
+ "updated": "2026-11-25T18:39:23Z",
  "records": 933,
  "new_records": 0,
  "new_batches": 0,
@@ -44,11 +44,11 @@
   "iiif": 3
  },
  "queries": {
-  "added": 1,
+  "added": 0,
   "total": 141,
-  "calls": 191,
+  "calls": 192,
   "by_tool": {
-   "cross_search": 84,
+   "cross_search": 85,
    "nedb_search": 79,
    "source_profile": 11,
    "seoul_archives_search": 3,
