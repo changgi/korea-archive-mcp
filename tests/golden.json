@@ -1577,14 +1577,34 @@
     "ref_code": "1990-US-01-PF-A-00046"
    },
    "must": [
-    "공개 이미지\\(상세 페이지\\)"
+    "공개 이미지\\(상세 페이지\\): [1-9]",
+    "/upload/kams/"
    ],
    "must_not": [
     "/resources/",
-    "no_img"
+    "no_img",
+    "/images/content/"
    ],
    "level": "warn",
    "note": "v3.5.1 상세 페이지 기록 이미지 표시(사이트 공통 이미지 제외) — IIIF 브리지 이전 단계"
+  },
+  {
+   "id": "koreanwar-iiif-bridge",
+   "tool": "cross_search",
+   "args": {
+    "query": "흥남철수",
+    "sources": "koreanwar",
+    "max_per_source": 3,
+    "format": "manifest"
+   },
+   "must": [
+    "/iiif/kw/\\d{4}-[A-Z]{2}-"
+   ],
+   "must_not": [
+    "\"iiif\":\"https://korea-archive-mcp\\.vercel\\.app/iiif/rec/"
+   ],
+   "level": "warn",
+   "note": "v3.5.2 6·25전쟁 아카이브센터 IIIF 브리지 — 옛 결함: 기록 이미지가 있어도 봉투(rec)로만"
   }
  ]
 }
