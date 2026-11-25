@@ -345,6 +345,8 @@ function toIndexLang(q, lang) {
   return f || (lang === 'fr' ? 'Corée' : 'Korea');
 }
 const koToEn = (q) => toIndexLang(q, 'en');
+// v3.8.7 1945년 이전 연도가 든 질의 — NARA·IA 색인에 드문 시대라 대체 경로 안내(topics_probe alt_trials 결론을 도구 응답으로)
+const preWarHint = (q) => ([...String(q || '').matchAll(/(?<!\d)(1[5-9]\d\d)(?!\d)/g)].some((m) => +m[1] < 1945) ? '\n※ 1945년 이전 한국 사건·인물은 NARA·archive.org 제목 색인에 드뭅니다(변환어 실측 2026-11-25 — 대안 표기 12종도 개선 없음). tna_search(연대 필터)·nedb_search(한국사DB 원문)·cross_search(sources=oldnews,jacar,ndl) 병행을 권장합니다.' : '');
 const gallicaKoToFr = (q) => toIndexLang(q, 'fr');
 
 async function tnaFetch(query, rows = 20, page = 1, yearFrom, yearTo) {
@@ -1855,7 +1857,7 @@ const handler = createMcpHandler((server) => {
       });
       const total = typeof hits.total === 'object' ? hits.total.value : hits.total;
       const rline = record_group ? (() => { const r = judgeRights(`RG ${record_group}`, '', 'NARA'); return `\n권리 초판정(RG ${record_group}): ${r[0]} — ${r[1]}\n※ 건별 실확인: judge_rights(naid=<NAID>) — 카탈로그 Use Restriction 실조회로 A/C 확정`; })() : '';
-      return text(`NARA '${query}'${en ? ` → 영문 자동 변환 '${eff}'` : ''}${record_group ? ` (RG ${record_group})` : ''} — total ${total}:\n` + (rows.join('\n') || '(0 results)') + rline);
+      return text(`NARA '${query}'${en ? ` → 영문 자동 변환 '${eff}'` : ''}${record_group ? ` (RG ${record_group})` : ''} — total ${total}:\n` + (rows.join('\n') || '(0 results)') + rline + preWarHint(eff || query));
     });
 
   server.tool('ia_search',
@@ -1907,7 +1909,7 @@ const handler = createMcpHandler((server) => {
       const docs = ((d.response || {}).docs) || [];
       const lshort = (lu) => { const m = String(lu || '').match(/(publicdomain\/(?:mark|zero)|licenses\/[a-z-]+)/); return m ? m[1].replace('licenses/', 'CC ') : ''; };
       const tags = [year_from || year_to ? `연대 ${year_from || ''}~${year_to || ''}` : '', page > 1 ? `p.${page}` : ''].filter(Boolean);
-      return text(`archive.org '${query}'${en ? ` → 영문 자동 변환 '${en}'` : ''}${tags.length ? ` [${tags.join(' · ')}]` : ''} — total ${(d.response || {}).numFound}:\n` + (docs.map((x) => { const rt = lshort(x.licenseurl); return `- ${x.identifier} | ${String(x.title).slice(0, 90)} (${String(x.date || '').slice(0, 10)})${rt ? ` | 권리:${rt}` : ''} | https://archive.org/details/${x.identifier}`; }).join('\n') || '(0)') + '\n※ 권리 미표기 건은 judge_rights 초판정 — 발굴 우선, 권리는 표시.');
+      return text(`archive.org '${query}'${en ? ` → 영문 자동 변환 '${en}'` : ''}${tags.length ? ` [${tags.join(' · ')}]` : ''} — total ${(d.response || {}).numFound}:\n` + (docs.map((x) => { const rt = lshort(x.licenseurl); return `- ${x.identifier} | ${String(x.title).slice(0, 90)} (${String(x.date || '').slice(0, 10)})${rt ? ` | 권리:${rt}` : ''} | https://archive.org/details/${x.identifier}`; }).join('\n') || '(0)') + '\n※ 권리 미표기 건은 judge_rights 초판정 — 발굴 우선, 권리는 표시.' + preWarHint(en || query));
     });
 
   server.tool('gallica_search',
