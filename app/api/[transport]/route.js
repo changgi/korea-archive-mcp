@@ -5,7 +5,7 @@ import { DATA } from '../../../lib/data.js';
 import { judgeRights } from '../../../lib/rights.js';
 import { PROFILES } from '../../../lib/profiles.js';
 import { DOMESTIC } from '../../../lib/domestic_keywords.js';
-import { buildNaraManifest, naraUrls } from '../../../lib/nara_iiif.js';
+import { buildNaraManifest, naraUrls, restrItem } from '../../../lib/nara_iiif.js';
 import { bridgeUrl, kvUrl, ktvId } from '../../../lib/ka_iiif.js';
 import { envelopeOf, encodeEnv, recUrls } from '../../../lib/rec_iiif.js';
 import { deflateRawSync } from 'node:zlib';
@@ -2066,7 +2066,7 @@ const JB_CROSS = `국내외 대조 절차 — 순서를 틀리면 헛수고한�
           const rec = (((((d.body || {}).hits || {}).hits) || [])[0] || { _source: {} })._source.record || null;
           if (!rec || Number(rec.naId) !== naid) return text(`[NAID ${naid}] 카탈로그에 없음 — NAID를 확인하거나 rg_series 초판정을 사용하십시오.`);
           const ur = rec.useRestriction || {};
-          const urs = typeof ur === 'string' ? ur : [ur.status, ur.note, (ur.specificUseRestrictions || []).join('/')].filter(Boolean).join(' · ');
+          const urs = typeof ur === 'string' ? ur : [ur.status, ur.note, (ur.specificUseRestrictions || []).map(restrItem).join('/')].filter(Boolean).join(' · ');
           const rgnum = rec.recordGroupNumber || ((rec.ancestors || []).map((a) => a.recordGroupNumber).find(Boolean)) || '';
           const base = judgeRights(rgnum ? `RG ${rgnum}` : rg_series, rec.title || title, 'NARA');
           let cls = base[0], basis = base[1];
@@ -2553,7 +2553,7 @@ const JB_CROSS = `국내외 대조 절차 — 순서를 틀리면 헛수고한�
                   const rec = (((((JSON.parse(raw).body || {}).hits || {}).hits) || [])[0] || { _source: {} })._source.record;
                   if (!rec || String(rec.naId) !== naid) { nline = `【NARA 원본 대조】 NAID ${naid} — 카탈로그에 없음(파일명 번호 오기 가능) → 업로더 라이선스만으로 게재 판단 금지\n`; return; }
                   const ur = rec.useRestriction || {};
-                  const urs = typeof ur === 'string' ? ur : [ur.status, ur.note, (ur.specificUseRestrictions || []).join('/')].filter(Boolean).join(' · ');
+                  const urs = typeof ur === 'string' ? ur : [ur.status, ur.note, (ur.specificUseRestrictions || []).map(restrItem).join('/')].filter(Boolean).join(' · ');
                   const cls = /unrestricted/i.test(urs) && !/restricted\s*[-–]|possibly|fully restricted/i.test(urs) ? 'A(제한 없음 실확인)' : /restricted/i.test(urs) ? 'C(제한 표기 — 기관 확인 필요)' : '판정 보류(Use Restriction 미기재)';
                   nline = `【NARA 원본 대조】 NAID ${naid} 원본 실재 확인 — ${norm(rec.title || '').slice(0, 110)}\n`
                     + `  계보: ${naraChain(rec) || '—'} · 생산: ${naraDate(rec) || '—'} · 소장 번호: ${rec.localIdentifier || '—'}\n`

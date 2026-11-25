@@ -1606,6 +1606,24 @@
    ],
    "level": "warn",
    "note": "v3.5.2 6·25전쟁 아카이브센터 IIIF 브리지 — 옛 결함: 기록 이미지가 있어도 봉투(rec)로만"
+  },
+  {
+   "id": "nara-restriction-object",
+   "tool": "nara_search",
+   "args": {
+    "query": "",
+    "naid": 519786886,
+    "output": "iiif"
+   },
+   "must": [
+    "Donated - Security Classified",
+    "보안 분류 Confidential"
+   ],
+   "must_not": [
+    "\\[object Object\\]"
+   ],
+   "level": "warn",
+   "note": "v3.6.3 NARA specificAccessRestrictions 객체 — 옛 결함: '[object Object]'로 보안 분류 사유 소실"
   }
  ]
 }
