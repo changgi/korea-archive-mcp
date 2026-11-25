@@ -198,8 +198,8 @@
 "영국 국립기록관 TNA": {
 "depth": 1,
 "first": "2026-11-23T03:00:46Z",
-"last": "2026-11-24T23:50:32Z",
-"records": 36,
+"last": "2026-11-25T00:07:52Z",
+"records": 56,
 "sources": [
 "tna"
 ]
@@ -3954,8 +3954,8 @@
 "영국 국립기록관 TNA › FO 405": {
 "depth": 2,
 "first": "2026-11-24T23:50:32Z",
-"last": "2026-11-24T23:50:32Z",
-"records": 2,
+"last": "2026-11-25T00:07:52Z",
+"records": 4,
 "sources": [
 "tna"
 ]
@@ -3963,8 +3963,8 @@
 "영국 국립기록관 TNA › FO 483": {
 "depth": 2,
 "first": "2026-11-24T23:50:32Z",
-"last": "2026-11-24T23:50:32Z",
-"records": 1,
+"last": "2026-11-25T00:07:52Z",
+"records": 3,
 "sources": [
 "tna"
 ]
@@ -3972,8 +3972,8 @@
 "영국 국립기록관 TNA › FO 881": {
 "depth": 2,
 "first": "2026-11-24T23:50:32Z",
-"last": "2026-11-24T23:50:32Z",
-"records": 1,
+"last": "2026-11-25T00:07:52Z",
+"records": 10,
 "sources": [
 "tna"
 ]
@@ -4004,8 +4004,71 @@
 "sources": [
 "tna"
 ]
+},
+"영국 국립기록관 TNA › FO 198": {
+"depth": 2,
+"first": "2026-11-25T00:07:52Z",
+"last": "2026-11-25T00:07:52Z",
+"records": 1,
+"sources": [
+"tna"
+]
+},
+"영국 국립기록관 TNA › FO 228": {
+"depth": 2,
+"first": "2026-11-25T00:07:52Z",
+"last": "2026-11-25T00:07:52Z",
+"records": 1,
+"sources": [
+"tna"
+]
+},
+"영국 국립기록관 TNA › FO 410": {
+"depth": 2,
+"first": "2026-11-25T00:07:52Z",
+"last": "2026-11-25T00:07:52Z",
+"records": 1,
+"sources": [
+"tna"
+]
+},
+"영국 국립기록관 TNA › FO 738": {
+"depth": 2,
+"first": "2026-11-25T00:07:52Z",
+"last": "2026-11-25T00:07:52Z",
+"records": 1,
+"sources": [
+"tna"
+]
+},
+"영국 국립기록관 TNA › [파생] 1790년대": {
+"depth": 2,
+"first": "2026-11-25T00:07:52Z",
+"last": "2026-11-25T00:07:52Z",
+"records": 1,
+"sources": [
+"tna"
+]
+},
+"영국 국립기록관 TNA › Philatelic 69": {
+"depth": 2,
+"first": "2026-11-25T00:07:52Z",
+"last": "2026-11-25T00:07:52Z",
+"records": 1,
+"sources": [
+"tna"
+]
+},
+"영국 국립기록관 TNA › Philatelic 71": {
+"depth": 2,
+"first": "2026-11-25T00:07:52Z",
+"last": "2026-11-25T00:07:52Z",
+"records": 1,
+"sources": [
+"tna"
+]
 }
 },
-"updated": "2026-11-25T00:07:30Z",
-"total": 444
+"updated": "2026-11-25T00:10:54Z",
+"total": 451
 }

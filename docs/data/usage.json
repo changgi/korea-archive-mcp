@@ -9,10 +9,15 @@
    "batches": 26,
    "records": 421,
    "new": 352
+  },
+  "2026-11-25": {
+   "batches": 3,
+   "records": 22,
+   "new": 20
   }
  },
  "formats": {
-  "text": 68,
+  "text": 71,
   "csv": 49,
   "iiif": 3
  }

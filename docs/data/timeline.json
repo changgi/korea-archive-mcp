@@ -1,5 +1,5 @@
 {
-"updated": "2026-11-25T00:07:30Z",
+"updated": "2026-11-25T00:10:54Z",
 "note": "구간 = 연대(4자리 연도·8자리 날짜·연호 연도 明治·大正·昭和·光武·隆熙·檀紀 환산) → 세기 → 왕조·시대명. 근거 순서 date → 제목 → 메타(생산·시대·출판). 세기·시대 구간은 시간축 근사 정렬",
 "timeline": [
 {
@@ -662,14 +662,14 @@
 },
 {
 "decade": "1790년대",
-"records": 3,
+"records": 4,
 "by_source": {
-"tna": 1,
+"tna": 2,
 "jsg": 1,
 "aks": 1
 },
 "by_kind": {
-"document": 3
+"document": 4
 },
 "samples": [
 {
@@ -686,6 +686,11 @@
 "title": "1798년 이제(李濟) 영정(影幀)",
 "url": "https://archive.aks.ac.kr/link.do?dataUCI=G002+AKS+KSM-XZ.1798.1144-20250415.F11301-01-W000009",
 "iiif": "https://korea-archive-mcp.vercel.app/iiif/rec/q1YqVrKKVkrMLlaK1VEqUbJSMjS3tHjd2qLwZu6WNwvmaDyb2_ds_3xNhTczGt8smKrxdO_GpzsbNJV0lFKAaoFUJpByNzAw0nb0Dtb2DvbVjYjSAxmhZ2hoYqJrZGBkamBiaKrnZmhobGCoC0ThBiBgCdRaCtSaUVJSUGylr59YlJyRWZaqB3SIXmKyXnaRfk5mXrZeSr59SmJJYqizpy2ZlhQALXk7dc6rrWtfbV7wes2ONy1z3syb8Hpxz6stDQqPGnYpwIXBPBBzyUQ7kKpZO9527Xy9ueVNN0QKIqbwennH2_41QN7GN4v3gAJpygqF1z0Nbxa1vp3VA7QwD2ghKDh1lHIhIVQIpF5vmPNq0xqF1x0tbxY0KryZPeHNvKVAqURQgAOdb6ZraKhrZBJiYGAFRkq1AA/manifest.json"
+},
+{
+"title": "Judicial Committee of the Privy Council: Printed Cases in Indian and Colonial Appeals and Printed Papers in Appeals",
+"url": "https://discovery.nationalarchives.gov.uk/details/r/C16545",
+"iiif": "https://korea-archive-mcp.vercel.app/iiif/tna/C16545/manifest.json"
 }
 ]
 },
@@ -787,18 +792,25 @@
 },
 {
 "decade": "1850년대",
-"records": 1,
+"records": 2,
 "by_source": {
-"okchf": 1
+"okchf": 1,
+"tna": 1
 },
 "by_kind": {
-"graphic": 1
+"graphic": 1,
+"document": 1
 },
 "samples": [
 {
 "title": "[국외문화유산] 나전퇴침 — 일본 일본민예관",
 "url": "https://www.overseaschf.or.kr/archive/search/category.do?mode=view&srSearchTy=relic&id=47054&iDivCd=1",
 "iiif": "https://korea-archive-mcp.vercel.app/iiif/rec/hZExT8JAGIb_SnMDE_RaWhCaNA76D2QjDGd70hNKsT1KiDFBQpREBwcGiEhYTBwwEsUEDb_GkR7_wY9CoomDt3zfvV_ufe-5O0cBMorIq1jOCSolEUcGKq7en8VwEU0X62FfjCaiMytJUWcgJt319Vx8PElf7b4kHpbR22JXopelGPRW8zZKIhssoDAoPq0yy9D3lIwOSgMUh_N6YGDcbDZlL6R-QEkA0bLnyxUfE99yWEgxqNBhi3Ba9vyWbHv7rmdTM2S0mQj8o3hcaJmxf4LZZhyRYIcsPLBNFbLqkLXFEFe3Yjz9DbPZ3mwgPqW_pLG8Y_tpf_PVwHr7Xknk_ovkeC7FNuEEE84JQOkKLBxfGHOn4R7XCKvitJLWlKyqq5qW15S8psmn9TIEnEFANButXqdS1OuKyaUk7u_E-BFGZPNXcC6bUtVUWisoOUNXjEwOXXwD/manifest.json"
+},
+{
+"title": "Tapling Collection of Postage and Telegraph Stamps, Box 14",
+"url": "https://discovery.nationalarchives.gov.uk/details/r/6ea20163-55e4-41f0-857f-3e5d5be3a919",
+"iiif": "https://korea-archive-mcp.vercel.app/iiif/tna/6ea20163/manifest.json"
 }
 ]
 },
@@ -827,15 +839,15 @@
 },
 {
 "decade": "1870년대",
-"records": 11,
+"records": 14,
 "by_source": {
 "kyudb": 2,
 "ia": 3,
 "nara": 5,
-"tna": 1
+"tna": 4
 },
 "by_kind": {
-"document": 6,
+"document": 9,
 "graphic": 5
 },
 "samples": [
@@ -868,17 +880,17 @@
 },
 {
 "decade": "1880년대",
-"records": 6,
+"records": 9,
 "by_source": {
 "europeana": 1,
 "gallica": 1,
 "heritage": 1,
 "commons": 1,
-"tna": 2
+"tna": 5
 },
 "by_kind": {
 "graphic": 1,
-"document": 5
+"document": 8
 },
 "samples": [
 {
@@ -910,19 +922,19 @@
 },
 {
 "decade": "1890년대",
-"records": 21,
+"records": 26,
 "by_source": {
 "kyudb": 2,
 "oldnews": 3,
 "heritage": 1,
-"tna": 6,
+"tna": 11,
 "gallica": 1,
 "commons": 1,
 "ia": 1,
 "nara": 6
 },
 "by_kind": {
-"document": 14,
+"document": 19,
 "graphic": 6,
 "motion_picture": 1
 },
@@ -956,17 +968,17 @@
 },
 {
 "decade": "1900년대",
-"records": 13,
+"records": 20,
 "by_source": {
 "jacar": 5,
 "heritage": 1,
 "gallica": 1,
 "oldnews": 4,
 "nlna": 1,
-"tna": 1
+"tna": 8
 },
 "by_kind": {
-"document": 12,
+"document": 19,
 "graphic": 1
 },
 "samples": [
