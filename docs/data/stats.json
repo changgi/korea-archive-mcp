@@ -1,8 +1,8 @@
 {
- "updated": "2026-11-25T01:55:39Z",
+ "updated": "2026-11-25T02:05:17Z",
  "records": 915,
  "new_records": 0,
- "new_batches": 1,
+ "new_batches": 0,
  "by_source": {
   "nara": 155,
   "ia": 105,
@@ -44,7 +44,7 @@
   "iiif": 3
  },
  "queries": {
-  "added": 1,
+  "added": 0,
   "total": 114,
   "calls": 132,
   "by_tool": {

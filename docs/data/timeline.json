@@ -1,5 +1,5 @@
 {
-"updated": "2026-11-25T01:55:39Z",
+"updated": "2026-11-25T02:05:17Z",
 "note": "구간 = 연대(4자리 연도·8자리 날짜·연호 연도 明治·大正·昭和·光武·隆熙·檀紀 환산) → 세기 → 왕조·시대명. 근거 순서 date → 제목 → 메타(생산·시대·출판). 세기·시대 구간은 시간축 근사 정렬",
 "timeline": [
 {
@@ -1190,14 +1190,14 @@
 },
 {
 "decade": "1950년대",
-"records": 298,
+"records": 296,
 "by_source": {
 "nara": 57,
 "europeana": 13,
 "ia": 29,
 "tna": 20,
 "gallery": 3,
-"awm": 45,
+"awm": 43,
 "archives": 24,
 "commons": 7,
 "gallica": 2,
@@ -1216,7 +1216,7 @@
 "by_kind": {
 "motion_picture": 40,
 "graphic": 78,
-"document": 180
+"document": 178
 },
 "samples": [
 {
@@ -1287,11 +1287,10 @@
 },
 {
 "decade": "1960년대",
-"records": 22,
+"records": 21,
 "by_source": {
 "ia": 10,
 "i815": 2,
-"commons": 1,
 "ktv": 2,
 "gonghun": 2,
 "much": 1,
@@ -1300,8 +1299,8 @@
 },
 "by_kind": {
 "document": 18,
-"graphic": 3,
-"motion_picture": 1
+"motion_picture": 1,
+"graphic": 2
 },
 "samples": [
 {
@@ -1320,14 +1319,14 @@
 "iiif": "https://korea-archive-mcp.vercel.app/iiif/rec/q1YqVrKKVsq0MDRVitVRKlGyUop-073g9Zodb-ZNeL24J1bh7dQFr1fseN3dofCmZcGb5rkKb_s7X22d8Gb2BIWns2c_7W183dqipKOUAtQJpDKBlLuvoaWZsaGhkbmBka6hAVC0FCiaUVJSUGylr1-cmliUnKEHslEvv0gvu0g_OT-vJDWvpFg_L7W8OCCxILVIPyW1JDEzRy8l3x4u5plii2awWnF-UYlfvq0F0IYCoA0QFys8atilgOwFoGweUBbsRR2lXIg7C4HU6w1zXm1ao_C6o-XNgkYFoIfezFsKlEoEBYKRgZGZrqGhrpFxiIGxlYGhlaGRUi0A/manifest.json"
 },
 {
-"title": "서울, 한강, 여의도-1969년.jpg",
-"url": "https://commons.wikimedia.org/wiki/File%3A%EC%84%9C%EC%9A%B8%2C_%ED%95%9C%EA%B0%95%2C_%EC%97%AC%EC%9D%98%EB%8F%84-1969%EB%85%84.jpg",
-"iiif": "https://korea-archive-mcp.vercel.app/iiif/commons/File%3A%EC%84%9C%EC%9A%B8%2C%20%ED%95%9C%EA%B0%95%2C%20%EC%97%AC%EC%9D%98%EB%8F%84-1969%EB%85%84.jpg/manifest.json"
-},
-{
 "title": "한강 개발",
 "url": "https://www.ehistory.go.kr/view/movie?mediasrcgbn=KV&mediaid=12307&mediadtl=28799&mediagbn=MH",
 "iiif": "https://korea-archive-mcp.vercel.app/iiif/rec/q1YqVrKKVsouKVOK1VEqUbJSejt1zqsNUxVebZjzesMcJR2lFKCYoaWZBZCZCWQCqVIglVFSUlBspa9fXl6ul5qRWVySX1Spl56vl12kX5aZWq6fmw-k7HNTUzITi4uS05PybL3D1MDczBRbQyNjA3MIL6Ukx9bIwtzSEsIFKfT1ANpRALTjzYzGN82NCo8adim8XrPj7cwpQAEgCZTNA8qCnKyjlAtxUiGQAjr31aY1Cq87Wt4saFR4M3vCm3lLgVKJIE8ZGRiZ6Roa6hoZhxiYW5maWBkbK9UCAA/manifest.json"
+},
+{
+"title": "[678호] 건설의 메아리",
+"url": "https://www.ehistory.go.kr/view/movie?mediasrcgbn=KV&mediaid=766&mediadtl=4390&mediagbn=DH",
+"iiif": "https://korea-archive-mcp.vercel.app/iiif/rec/q1YqVrKKVsouKVOK1VEqUbJSijYzt3g7Y0eswquNW960LHkzd4bC65VT3kxteb1sjZKOUgpQiaGlmYWegZmegQVQIBMoAKRKgVRGSUlBsZW-fnl5uV5qRmZxSX5RpV56vl52kX5ZZmq5fm4-kLLPTU3JTCwuSk5PyrP1DlMDczNTbM3NzCDslJIcWxNjSwMID6TKxQNoQQHQgjczGt80Nyo8atil8Lqn4e3UOa87t7zpWgKUzQPKgjyho5QLcU8hkHq9Yc6rTWsUXne0vFnQqPBm9oQ385YCpRJB3jQyMDLTNTTUNTIOMTC3MjWxMjZWqgUA/manifest.json"
 }
 ]
 },
@@ -1459,7 +1458,7 @@
 },
 {
 "decade": "1990년대",
-"records": 44,
+"records": 45,
 "by_source": {
 "archives": 6,
 "commons": 1,
@@ -1467,10 +1466,11 @@
 "nlk": 3,
 "ktv": 13,
 "nara": 17,
-"ia": 3
+"ia": 3,
+"awm": 1
 },
 "by_kind": {
-"document": 27,
+"document": 28,
 "graphic": 13,
 "motion_picture": 4
 },
@@ -1504,7 +1504,7 @@
 },
 {
 "decade": "2000년대",
-"records": 37,
+"records": 38,
 "by_source": {
 "archives": 4,
 "ktv": 5,
@@ -1516,10 +1516,11 @@
 "nlk": 1,
 "ia": 7,
 "nara": 3,
-"europeana": 2
+"europeana": 2,
+"awm": 1
 },
 "by_kind": {
-"document": 18,
+"document": 19,
 "graphic": 19
 },
 "samples": [
@@ -1552,14 +1553,14 @@
 },
 {
 "decade": "2010년대",
-"records": 35,
+"records": 36,
 "by_source": {
 "ia": 8,
 "un": 5,
 "gonghun": 1,
 "archives": 2,
 "nlk": 2,
-"commons": 5,
+"commons": 6,
 "ktv": 1,
 "okchf": 1,
 "dnz": 2,
@@ -1569,7 +1570,7 @@
 },
 "by_kind": {
 "document": 24,
-"graphic": 11
+"graphic": 12
 },
 "samples": [
 {
