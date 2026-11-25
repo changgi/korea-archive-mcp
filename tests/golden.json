@@ -1715,6 +1715,22 @@
    ],
    "level": "warn",
    "note": "v3.8.7 1950년대 질의엔 안내 없음"
+  },
+  {
+   "id": "ledger-gallica-iiif-origin",
+   "tool": "cross_search",
+   "args": {
+    "query": "naufrage",
+    "sources": "ledger"
+   },
+   "must": [
+    "원 기관 IIIF\\(브라우저 열람 — 서버 확인 불가\\) https://gallica\\.bnf\\.fr/iiif/ark:/12148/bpt6k"
+   ],
+   "must_not": [
+    "gallica\\.bnf\\.fr/iiif/ark:/12148/cb"
+   ],
+   "level": "warn",
+   "note": "v3.9 Gallica 원 기관 IIIF(디지털 원문 ark만, 카탈로그 cb ark 아님)"
   }
  ]
 }
