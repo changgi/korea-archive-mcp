@@ -1958,6 +1958,21 @@
    ],
    "level": "warn",
    "note": "v3.46 NARA 디지털 객체 경로 연도 폴더(Sheets/1951) = 로컬 식별자 111-DD-230-51 끝자리 일치 → 파생 날짜(원장 병합 후)"
+  },
+  {
+   "id": "ledger-origin-holder-sameas",
+   "tool": "cross_search",
+   "args": {
+    "query": "111-ADC-8582",
+    "sources": "ledger",
+    "max_per_source": 5
+   },
+   "must": [
+    "원 소장처\\(사본의 원본\\) NARA.*RG 111",
+    "원본 nara:NAID 22347"
+   ],
+   "level": "warn",
+   "note": "v3.47 사본(IA 111-adc-8582)의 기관 sameAs(NARA 로컬 식별자) = 원장 NARA 기록의 계층을 원 소장처로 — 원장 병합 후"
   }
  ]
 }
