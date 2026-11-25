@@ -33,6 +33,9 @@ _cases = [(_md("1910-03-15"), "1910-03-15"), (_md("c 23 March 1956")[0], "1956-0
           (_td("Sept. 4, 1876 - Mar. 6, 1877")[0], "1876~1877"), (_td("서울역 피난열차에 오르는 피란민들 사진(1950.12.24.)")[0], "1950-12-24")]
 _bad_dt = [(i, got, want) for i, (got, want) in enumerate(_cases) if (got[0] if isinstance(got, tuple) else got) != want]
 assert not _bad_dt, f"날짜 해석기 회귀 {_bad_dt}"
+_oh = g["origin_holder"]({"meta": [["소장자(처)", "국립문서기록관리청 (National Archives and Records Administration)"], ["문서번호", "SC354878"], ["계층", "국사편찬위원회 전자사료관 › 사료군 AUS005 Record Group 111: Records of the Office of the Chief Signal Officer, 1860 - 1985 › 사료계열"]]})
+assert _oh["local_id"] == "111-SC-354878" and "111-SC-354000 to 111-SC-354999" in _oh["finding_aid"]["label"] and _oh["record_group"].startswith("RG 111"), _oh  # v3.11
+assert g["origin_holder"]({"meta": [["소장자(처)", "국사편찬위원회"]]}) is None
 _io = g["iiif_origin"]  # v3.9 Gallica 원 기관 IIIF — 디지털 원문 ark만(카탈로그 cb ark 아님), 수집 경로 iiif가 있으면 두지 않음
 assert _io({"url": "http://gallica.bnf.fr/ark:/12148/btv1b2700138b"})["manifest"] == "https://gallica.bnf.fr/iiif/ark:/12148/btv1b2700138b/manifest.json"
 assert _io({"url": "https://gallica.bnf.fr/ark:/12148/cb384972039"}) is None and _io({"url": "https://gallica.bnf.fr/ark:/12148/bpt6k1", "iiif": "x"}) is None
