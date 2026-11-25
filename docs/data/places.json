@@ -1,6 +1,6 @@
 {
  "note": "KOREA ARCHIVE 지명 사전 — 다국어 변환표(TOPICS) 지명 대응 + 기관 로마자 변형을 표준명으로. 표제·기관 장소 칸에서만 매칭(요약 본문 제외). 기관 표기 장소는 subjects.json 그대로 — 이 사전은 그 위의 연결 층. 지우지 않음.",
- "updated": "2026-11-25T09:39:16Z",
+ "updated": "2026-11-25T09:45:37Z",
  "places": {
   "흥남": {
    "labels": [
@@ -98,7 +98,8 @@
     "ndl",
     "nlk",
     "oldnews"
-   ]
+   ],
+   "collection": "https://changgi.github.io/korea-archive-mcp/data/place/hungnam.json"
   },
   "함흥": {
    "labels": [
@@ -114,7 +115,8 @@
    "sources": [
     "koreanwar",
     "nara"
-   ]
+   ],
+   "collection": "https://changgi.github.io/korea-archive-mcp/data/place/hamhung.json"
   },
   "장진호": {
    "labels": [
@@ -149,7 +151,8 @@
     "ia",
     "koreanwar",
     "nara"
-   ]
+   ],
+   "collection": "https://changgi.github.io/korea-archive-mcp/data/place/chosin.json"
   },
   "하갈우리": {
    "labels": [
@@ -163,7 +166,8 @@
    "sources": [
     "koreanwar",
     "nara"
-   ]
+   ],
+   "collection": "https://changgi.github.io/korea-archive-mcp/data/place/hagaru.json"
   },
   "고토리": {
    "labels": [
@@ -177,7 +181,8 @@
    "sources": [
     "koreanwar",
     "nara"
-   ]
+   ],
+   "collection": "https://changgi.github.io/korea-archive-mcp/data/place/koto-ri.json"
   },
   "인천": {
    "labels": [
@@ -242,7 +247,8 @@
     "nara",
     "nlk",
     "tna"
-   ]
+   ],
+   "collection": "https://changgi.github.io/korea-archive-mcp/data/place/inchon.json"
   },
   "서울": {
    "labels": [
@@ -329,7 +335,8 @@
     "nlk",
     "okchf",
     "oldnews"
-   ]
+   ],
+   "collection": "https://changgi.github.io/korea-archive-mcp/data/place/seoul.json"
   },
   "부산": {
    "labels": [
@@ -370,7 +377,8 @@
     "koreanwar",
     "ktv",
     "nara"
-   ]
+   ],
+   "collection": "https://changgi.github.io/korea-archive-mcp/data/place/pusan.json"
   },
   "평양": {
    "labels": [
@@ -387,7 +395,8 @@
    "sources": [
     "awm",
     "ia"
-   ]
+   ],
+   "collection": "https://changgi.github.io/korea-archive-mcp/data/place/pyongyang.json"
   },
   "원산": {
    "labels": [
@@ -420,7 +429,8 @@
     "awm",
     "ia",
     "koreanwar"
-   ]
+   ],
+   "collection": "https://changgi.github.io/korea-archive-mcp/data/place/taegu.json"
   },
   "개성": {
    "labels": [
@@ -441,7 +451,8 @@
     "ia",
     "koreanwar",
     "nara"
-   ]
+   ],
+   "collection": "https://changgi.github.io/korea-archive-mcp/data/place/kaesong.json"
   },
   "판문점": {
    "labels": [
@@ -472,7 +483,8 @@
     "much",
     "nara",
     "tna"
-   ]
+   ],
+   "collection": "https://changgi.github.io/korea-archive-mcp/data/place/panmunjom.json"
   },
   "낙동강": {
    "labels": [
@@ -518,7 +530,8 @@
     "koreanwar",
     "nara",
     "tna"
-   ]
+   ],
+   "collection": "https://changgi.github.io/korea-archive-mcp/data/place/naktong.json"
   },
   "가평": {
    "labels": [
@@ -536,7 +549,8 @@
    ],
    "sources": [
     "awm"
-   ]
+   ],
+   "collection": "https://changgi.github.io/korea-archive-mcp/data/place/kapyong.json"
   },
   "제주": {
    "labels": [
@@ -566,7 +580,8 @@
     "ia",
     "koreanwar",
     "nara"
-   ]
+   ],
+   "collection": "https://changgi.github.io/korea-archive-mcp/data/place/cheju.json"
   },
   "김포": {
    "labels": [
@@ -586,7 +601,8 @@
    "sources": [
     "awm",
     "europeana"
-   ]
+   ],
+   "collection": "https://changgi.github.io/korea-archive-mcp/data/place/kimpo.json"
   },
   "수원": {
    "labels": [
@@ -600,7 +616,8 @@
    ],
    "sources": [
     "nedb"
-   ]
+   ],
+   "collection": "https://changgi.github.io/korea-archive-mcp/data/place/suwon.json"
   },
   "대전": {
    "labels": [
@@ -616,7 +633,8 @@
    "sources": [
     "ia",
     "indy"
-   ]
+   ],
+   "collection": "https://changgi.github.io/korea-archive-mcp/data/place/taejon.json"
   },
   "영등포": {
    "labels": [
@@ -660,7 +678,8 @@
     "commons",
     "ktv",
     "seoul"
-   ]
+   ],
+   "collection": "https://changgi.github.io/korea-archive-mcp/data/place/yeouido.json"
   },
   "한강": {
    "labels": [
@@ -696,7 +715,8 @@
     "ktv",
     "nedb",
     "seoul"
-   ]
+   ],
+   "collection": "https://changgi.github.io/korea-archive-mcp/data/place/han-river.json"
   },
   "38선": {
    "labels": [
@@ -725,7 +745,8 @@
     "europeana",
     "koreanwar",
     "nara"
-   ]
+   ],
+   "collection": "https://changgi.github.io/korea-archive-mcp/data/place/38th-parallel.json"
   },
   "진주": {
    "labels": [
@@ -749,7 +770,8 @@
    ],
    "sources": [
     "archives"
-   ]
+   ],
+   "collection": "https://changgi.github.io/korea-archive-mcp/data/place/chinju.json"
   },
   "경주": {
    "labels": [
@@ -771,7 +793,8 @@
    "sources": [
     "jsg",
     "nlk"
-   ]
+   ],
+   "collection": "https://changgi.github.io/korea-archive-mcp/data/place/kyongju.json"
   },
   "의정부": {
    "labels": [
@@ -787,7 +810,8 @@
    "sources": [
     "ia",
     "nara"
-   ]
+   ],
+   "collection": "https://changgi.github.io/korea-archive-mcp/data/place/uijongbu.json"
   },
   "강화": {
    "labels": [
@@ -804,7 +828,8 @@
    "sources": [
     "heritage",
     "jsg"
-   ]
+   ],
+   "collection": "https://changgi.github.io/korea-archive-mcp/data/place/kanghwa.json"
   },
   "문산": {
    "labels": [
@@ -819,7 +844,8 @@
    "sources": [
     "ia",
     "nara"
-   ]
+   ],
+   "collection": "https://changgi.github.io/korea-archive-mcp/data/place/munsan.json"
   },
   "용평": {
    "labels": [
@@ -833,7 +859,8 @@
    "sources": [
     "ia",
     "nara"
-   ]
+   ],
+   "collection": "https://changgi.github.io/korea-archive-mcp/data/place/yongpyang.json"
   },
   "광주": {
    "labels": [
@@ -848,7 +875,8 @@
    ],
    "sources": [
     "indy"
-   ]
+   ],
+   "collection": "https://changgi.github.io/korea-archive-mcp/data/place/kwangju.json"
   }
  }
 }
