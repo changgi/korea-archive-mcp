@@ -1739,6 +1739,17 @@ def subj_anchor(fac, term):
     import hashlib
     return f"{FACET_SLUG.get(fac, 'x')}-{hashlib.sha1(term.encode('utf-8')).hexdigest()[:10]}"
 
+NOT_SUBJECT = {"장소": "rico:isAssociatedWithPlace", "생산자": "rico:hasCreator", "소장처": "rico:hasOrHadHolder"}  # v2.99.9 패싯 → RiC-O 속성(주제가 아닌 것)
+
+def rico_concepts(o):
+    """v2.99.9 기록의 기관 분류 개념을 RiC-O 속성으로 — 주제·분류는 hasOrHadSubject, 장소·생산자·소장처는 제 속성, 공개 상태는 conditionsOfAccess(문자열).
+    v2.99.8까지 소장처·공개 상태가 hasOrHadSubject로 나가 'NARA College Park 영상실이 이 기록의 주제'가 되던 의미 오류(546건)."""
+    out = {}
+    for f, t in record_concepts(o):
+        if f == "공개 상태": out.setdefault("rico:conditionsOfAccess", []).append(t); continue
+        out.setdefault(NOT_SUBJECT.get(f, "rico:hasOrHadSubject"), []).append({"@id": concept_id(f, t)})
+    return out
+
 def record_concepts(o):
     """기록 → (패싯, 용어) 목록 — merge_subjects와 같은 규칙(기관 표기 그대로)."""
     out = []
@@ -1988,8 +1999,7 @@ def main():
         mf = (o.get("iiif") if not o.get("iiif_status") else "") or o.get("iiif_built")
         graph.append({"@id": o.get("url") or f"rec:{o['key']}", "@type": "rico:Record", "rico:title": o["title"], **({"rico:identifier": o["id"]} if o.get("id") else {}),
                       **({"rico:isAssociatedWithDate": o["date"]} if o.get("date") else {}), "rico:isOrWasIncludedIn": {"@id": sid},
-                      **({"rico:hasOrHadSubject": [{"@id": concept_id(f, t)} for f, t in record_concepts(o) if f != "장소"]} if any(f != "장소" for f, t in record_concepts(o)) else {}),
-                      **({"rico:isAssociatedWithPlace": [{"@id": concept_id(f, t)} for f, t in record_concepts(o) if f == "장소"]} if any(f == "장소" for f, t in record_concepts(o)) else {}),
+                      **rico_concepts(o),
                       "rdfs:seeAlso": {"@id": f"{PAGES}r/{rec_slug(o['key'])}.html"}, **({"owl:sameAs": [o["sameAs"]] * bool(o.get("sameAs")) + [{"@id": U_[b_]} for t_, b_, _ in REL.get(o["key"], []) if t_ == "같은 기록(다른 소장처)" and U_.get(b_)]} if (o.get("sameAs") or any(t_ == "같은 기록(다른 소장처)" for t_, _, _ in REL.get(o["key"], []))) else {}), **({"rico:isRelatedTo": [{"@id": f"{PAGES}r/{rec_slug(b_)}.html", "rdfs:comment": f"{t_} — {bs_}"} for t_, b_, bs_ in REL.get(o["key"], [])[:20]]} if REL.get(o["key"]) else {}), **({"rico:hasOrHadInstantiation": {"@id": mf, "@type": "rico:Instantiation", "rico:title": o["iiif_kind"]}} if mf else {}), **({"rico:scopeAndContent": o["summary"]} if o.get("summary") else {}),
                       "prov:wasGeneratedBy": {"@type": "prov:Activity", "prov:label": "KOREA ARCHIVE 통합검색 발견", "prov:startedAtTime": o["first_seen"], "prov:used": o["sources"], **({"prov:endedAtTime": o["last_seen"]} if o.get("last_seen") else {}), **({"prov:wasAssociatedWith": [f"KOREA ARCHIVE 통합검색/{t}" for t in o["tools"]]} if o.get("tools") else {}),
                                              **({"prov:wasInformedBy": [{"@id": f"https://changgi.github.io/korea-archive-mcp/data/provenance.json#{ak}"} for ak in o["found_by"]]} if o.get("found_by") else {})}})
