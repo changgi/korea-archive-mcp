@@ -877,6 +877,13 @@ const PART_OF = {
   commons: (it) => it.series && `Commons › ${it.series}`,
 };
 // v3.36 확정 0 판별 — 결과가 비었으면 기관 0건 표지(실제 0건 페이지로 실측한 정규식)가 있을 때만 0건, 없으면 조회 실패(throw)
+// v3.52 조회 범위 등록부(coverage.json) — 조회 실패 채널이 같은 질의로 과거에 결과를 낸 적이 있으면 그 관측을 함께(실패 ≠ 부재의 증거). 1시간 캐시
+async function coverageHint(q, chans) {
+  const C = JSON.parse(await cachedText('qb:cov', 3600e3, () => gtext('https://changgi.github.io/korea-archive-mcp/data/coverage.json'), '"by_source"'));
+  const S = (C.queries || {})[String(q).trim()]; if (!S) return '';
+  const hit = chans.filter((c) => S[c] && S[c].hit > 0).map((c) => `${c} 결과 최대 ${S[c].max}건(마지막 결과 ${String(S[c].last_hit || '').slice(0, 10)})`);
+  return hit.length ? `\n※ 같은 질의의 과거 관측(조회 범위 등록부): ${hit.join(' · ')} — 이번 실패는 기록 부재가 아닌 일시 조회 실패일 가능성이 큽니다.` : '';
+}
 const zeroOr = (out, body, rx, name, raw = false) => { if (!out.length && !rx.test(raw ? String(body) : String(body).replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' '))) { const head = String(body).replace(/<script[\s\S]*?<\/script>/gi, ' ').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 70); throw new Error(`${name} 결과 판독 불가(0건 표지 없음 — 차단·개편 가능${head ? ` · 본문: ${head}` : ''})`); } return out; }; // v3.45 본문 앞부분 동봉 — 표지 개편·차단 페이지를 응답만으로 진단
 // v3.38 JSON API 확정 0 — 결과가 비면 기관이 돌려준 건수 필드가 명시적 0일 때만 0건(오류 본문·키 누락·개편은 조회 실패). 0건 필드는 2026-11-25 무의미 질의 실측.
 const countZero = (out, ok, name) => { if (!out.length && !ok) throw new Error(`${name} 결과 판독 불가(0건 수치 없음 — 오류 응답·개편 가능)`); return out; };
@@ -3433,7 +3440,8 @@ item_cd 5종(자료 성격별): ART 도설·회화 / ETC 두루마리·축 / DRR
       // v2.48 부재 단정 금지 — 조회 실패(—) 채널은 '그 기관에 없음'이 아니다. 0건(확정)과 구분해 명시
       const failedCh = [...new Set(stats.filter((x) => /^[a-z0-9_]+(?:·[^:]+)?:—/.test(x)).map((x) => x.split(':')[0].split('·')[0]))];
       const failNote = failedCh.length ? `\n※ 조회 실패 채널 ${failedCh.length}곳(${failedCh.join(', ')}) — 이번 응답에 없을 뿐 그 기관에 기록이 없다는 뜻이 아닙니다(시간 초과·차단·응답 끊김). 해당 수집처만 다시: sources='${failedCh.join(',')}'` : '';
-      const keptNote = failNote + uaNote + ((kept || ledgerConf()) ? `\n※ 질의·회신·발견 기록은 원문 그대로 공개 누적 원장에 영구 축적됩니다(가공·삭제 없음 — 공개를 원치 않는 본인 정보는 질의에 넣지 마십시오) — ${LEDGER_PAGE}` : '');
+      const covNote = failedCh.length ? await Promise.race([coverageHint(query, failedCh), sleep(2500).then(() => '')]).catch(() => '') : ''; // v3.52 실패 채널의 과거 관측(조회 범위 등록부) — 부재가 아님을 증거로
+      const keptNote = failNote + covNote + uaNote + ((kept || ledgerConf()) ? `\n※ 질의·회신·발견 기록은 원문 그대로 공개 누적 원장에 영구 축적됩니다(가공·삭제 없음 — 공개를 원치 않는 본인 정보는 질의에 넣지 마십시오) — ${LEDGER_PAGE}` : '');
       if (format === 'iiif') { // v1.97: 연속 이미지 뷰 — 결과 중 기관 IIIF가 있는 기록의 원 매니페스트를 컬렉션으로, 위키미디어는 정지 이미지 매니페스트로
         const L3 = (t) => ({ ko: [String(t || '').slice(0, 200)] });
         const ext = []; const cm = []; const none = [];
