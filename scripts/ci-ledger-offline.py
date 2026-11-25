@@ -50,6 +50,9 @@ assert _ec({"title": "인천상륙작전 전 함포 사격 사진 1", "date": "1
 assert _ec({"title": "Hell or high water; MacArthur's landing at Inchon", "date": "1968"})["verdict"].startswith("사건 이후") and _ec({"title": "CHOSIN RESERVOIR AREA", "date": "1950-11-01"}) is None
 assert _ec({"title": "한국전쟁, 미 8군", "date": "1945"})["verdict"].startswith("사건 이전 연도") and _ec({"title": "흥남 철수 — Korean War", "date": "1950-12-20"})["event"] == "흥남 철수"  # v3.19 구체 사건 우선
 assert _ec({"title": "List: Negotiations re Policy After the Armistice Talks", "date": "1947~1952"})["verdict"] == "일치" and _ec({"title": "韓国併合ニ関スル閣議決定書", "date": "1909"}) is None and _ec({"title": "판문점 휴전회담장", "date": "0000"}) is None
+_dn = g["date_norm"]  # v3.20 비ISO 날짜 정규화 — 일/월 모호는 기관 관행 확인된 곳만
+assert _dn({"key": "dnz:1", "date": "18/04/2018"})["value"] == "2018-04-18" and _dn({"key": "x:1", "date": "05/04/2018"}) is None and _dn({"key": "x:1", "date": "18/04/2018"})["value"] == "2018-04-18"
+assert _dn({"key": "dnz:1", "date": "[1951 or 1952]"})["value"] == "1951~1952" and _dn({"key": "jacar:1", "date": "明治４２年～明治４３年"})["value"] == "1909~1910" and _dn({"key": "x:1", "date": "1950-12"}) is None and _dn({"key": "ia:1", "date": "1950-01-01T00:00:00Z"})["value"] == "1950" and _dn({"key": "indy:1", "date": "19220405"})["value"] == "1922-04-05"
 _io = g["iiif_origin"]  # v3.9 Gallica 원 기관 IIIF — 디지털 원문 ark만(카탈로그 cb ark 아님), 수집 경로 iiif가 있으면 두지 않음
 assert _io({"url": "http://gallica.bnf.fr/ark:/12148/btv1b2700138b"})["manifest"] == "https://gallica.bnf.fr/iiif/ark:/12148/btv1b2700138b/manifest.json"
 assert _io({"url": "https://gallica.bnf.fr/ark:/12148/cb384972039"}) is None and _io({"url": "https://gallica.bnf.fr/ark:/12148/bpt6k1", "iiif": "x"}) is None
