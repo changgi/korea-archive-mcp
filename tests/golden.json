@@ -1736,7 +1736,7 @@
    "id": "seoul-iiif-bridge",
    "tool": "cross_search",
    "args": {
-    "query": "한강개발",
+    "query": "한강개발도로",
     "sources": "seoul",
     "max_per_source": 3,
     "format": "manifest"
@@ -1745,7 +1745,10 @@
     "/iiif/seoul/\\d+/manifest\\.json"
    ],
    "level": "warn",
-   "note": "v3.10 서울기록원 IIIF 브리지 — 옛 결함: 사진 기록건도 기록 봉투(rec)로만"
+   "note": "v3.10 서울기록원 IIIF 브리지 — 옛 결함: 사진 기록건(/item/)도 기록 봉투(rec)로만. 집합 기술(/aggregation/)은 봉투가 맞음",
+   "must_not": [
+    "\"accessUrl\\\\?\":\\\\?\"https://archives\\.seoul\\.go\\.kr/item/\\d+\\\\?\"[^}]*\"iiif\\\\?\":\\\\?\"https://korea-archive-mcp\\.vercel\\.app/iiif/rec/"
+   ]
   }
  ]
 }
