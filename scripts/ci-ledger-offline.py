@@ -52,6 +52,16 @@ try:  # v3.0.1 날짜 칸 의미 검사 — 날짜에 숫자가 없는 값(분�
     _nb = [o["key"] for o in _L if o.get("date_derived") and not o.get("date_basis")]
     if _nb: bad.append(f"근거 없는 파생 날짜 {len(_nb)}건")
 except Exception as ex: bad.append(f"날짜 검사 실패 {ex}")
+try:  # v3.2 IIIF Change Discovery — 컬렉션·페이지 구조, 시간 순, 기록마다 Create
+    _ac = json.load(open(os.path.join(data, "activity", "collection.json"), encoding="utf-8"))
+    _ev = []
+    _pg = _ac["first"]["id"].rsplit("/", 1)[1]
+    while _pg:
+        _p = json.load(open(os.path.join(data, "activity", _pg), encoding="utf-8")); _ev += _p["orderedItems"]; _pg = (_p.get("next") or {}).get("id", "").rsplit("/", 1)[-1] or None
+    if _ac.get("type") != "OrderedCollection" or len(_ev) != _ac.get("totalItems"): bad.append("Change Discovery 총계·페이지 불일치")
+    if any(_ev[i]["endTime"] > _ev[i + 1]["endTime"] for i in range(len(_ev) - 1)): bad.append("Change Discovery 시간 순 아님")
+    if sum(e["type"] == "Create" for e in _ev) < 0.9 * sum(1 for o in _L if o.get("entry_type", "기록") == "기록"): bad.append("Change Discovery Create 누락")
+except Exception as ex: bad.append(f"Change Discovery 판독 실패 {ex}")
 reg = subprocess.run([sys.executable, os.path.join(tmp, "scripts", "records_register.py"), "--verify"], capture_output=True, text=True)
 if reg.returncode not in (0,): bad.append("등록부 검증 실패: " + (reg.stdout + reg.stderr)[-200:])
 if os.environ.get("KEEP"): print("사본:", tmp)
