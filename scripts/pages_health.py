@@ -14,6 +14,9 @@ CHECKS = [  # (파일, 검사 — 내용 → 문제 문자열 또는 None)
     ("quality.json", lambda t: None if json.loads(t)["runs"] else "품질 runs 0"),
     ("place/index.json", lambda t: None if json.loads(t)["items"] else "지명 컬렉션 0"),
     ("day/index.json", lambda t: None if json.loads(t)["items"] else "같은 날 컬렉션 0"),
+    ("dict_candidates.json", lambda t: None if "places" in json.loads(t) else "후보 파일 구조 결함"),  # v3.29
+    ("places.jsonld", lambda t: None if len(json.loads(t)["@graph"]) >= 10 else "지명 SKOS 개념 < 10"),
+    ("persons.jsonld", lambda t: None if any(x.get("owl:sameAs") for x in json.loads(t)["@graph"]) else "인물 SKOS 국제 전거 0"),
     ("dict.html", lambda t: None if "기준 사전" in t and "흥남" in t else "기준 사전 페이지 내용 결함"),
     ("catalog.jsonld", lambda t: None if "places.json" in t and "authorities.json" in t else "데이터 목록에 기준 사전 미등재"),
 ]
