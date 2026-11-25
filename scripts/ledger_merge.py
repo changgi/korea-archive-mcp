@@ -1087,6 +1087,19 @@ ENVELOPE_RULES = {  # v3.11.1 2026-11-25 실측 근거
             lambda o: ("매체", "소장 서지 — 디지털화 원문 미연결(기관 표기 '소장 정보(원문 열람은 기관 확인)')") if "소장 정보" in _md(o).get("원문 열람", "") else None],
 }
 
+# v3.13 지명 사전 — route.js 다국어 변환표(TOPICS)의 지명 대응(흥남·興南→Hungnam 등)과 기관 로마자 변형(Incheon·Busan·Jeju…)을 한 표준명으로.
+#   '같은 날(다른 기관)' 간선의 근거에 같은 지명을 붙인다(표제·기관 장소 칸에서만 — 요약 본문 속 언급은 쓰지 않음: 다른 곳 언급 오탐 방지).
+PLACES = {"흥남": r"흥남|興南|Hungnam|Hŭngnam", "함흥": r"함흥|咸興|Hamhung|Hamhŭng", "장진호": r"장진호|長津|Chosin|Changjin", "하갈우리": r"하갈우리|Hagaru", "고토리": r"고토리|Koto-?ri",
+          "인천": r"인천|제물포|仁川|Inchon|Incheon|Chemulpo", "서울": r"서울|경성|京城|漢城|Seoul|Keijo", "부산": r"부산|釜山|Pusan|Busan", "평양": r"평양|平壤|平壌|Pyongyang|P'yŏngyang",
+          "원산": r"원산(?!지)|元山|Wonsan", "대구": r"대구|大邱|Taegu|Daegu", "개성": r"개성(?![적이을은있])|開城|Kaesong|Gaeseong", "판문점": r"판문점|板門店|Panmunjom", "낙동강": r"낙동강|洛東江|Naktong|Nakdong",
+          "가평": r"가평|加平|Kapyong|Gapyeong", "제주": r"제주|濟州|Cheju|Jeju", "김포": r"김포|金浦|Kimpo|Gimpo", "수원": r"수원(?!지)|水原|Suwon", "대전": r"대전|大田|Taejon|Daejeon",
+          "영등포": r"영등포|Yongdungpo|Yeongdeungpo", "여의도": r"여의도|汝矣島|Yeouido|Yoido", "한강": r"한강|漢江|Han River"}
+_PL = {k: re.compile(r"(?<![A-Za-z가-힣])(?:" + v + r")(?![a-z])", re.I) for k, v in PLACES.items()}
+PLACE_META = re.compile(r"^(장소|취급지명|연관정보|지명.*|place.*|Place made|관련사건|생산지|촬영지|위치)$", re.I)
+def places(o):
+    t = " ".join([str(o.get("title") or "")] + [str(v) for k, v in ((m[0], m[1]) for m in (o.get("meta") or []) if m and len(m) > 1) if PLACE_META.match(str(k))])
+    return {k for k, rx in _PL.items() if rx.search(t)}
+
 def envelope_basis(o):
     k = o.get("iiif_kind") or ""
     if not k.startswith("기록 봉투"): return None
@@ -1231,7 +1244,8 @@ def build_relations(recs_all):
             for b in L:
                 if a["key"].split(":")[0] != b["key"].split(":")[0]:
                     bs = [f"{x['key']} {dsrc[x['key']]}" for x in (a, b) if x["key"] in dsrc]
-                    rel[a["key"]].setdefault(("같은 날(다른 기관)", b["key"]), f"기관 표기 날짜 {d}" + (f" (파생 날짜 포함 — {'; '.join(bs)})" if bs else ""))
+                    sp = sorted(places(a) & places(b))  # v3.13 같은 지명(지명 사전 — 다국어 변환표 TOPICS 대응) — 같은 날·같은 곳은 같은 사건의 더 강한 단서
+                    rel[a["key"]].setdefault(("같은 날(다른 기관)", b["key"]), f"기관 표기 날짜 {d}" + (f" · 같은 지명 {', '.join(sp)}(표제·기관 장소 칸)" if sp else "") + (f" (파생 날짜 포함 — {'; '.join(bs)})" if bs else ""))
     order = {"같은 기록(다른 소장처)": 0, "같은 날(다른 기관)": 1, "원본이 속한 NARA 단위(포함)": 2, "갤러리 재게시(원본 포함)": 3, "같은 계열": 4}
     REL.clear()
     for k, m in rel.items():
@@ -1972,6 +1986,7 @@ def write_quality(recs):
          "관련 기록 연결": lambda o: REL.get(o["key"]), "같은 기록(다른 소장처) 연결": lambda o: any(t == "같은 기록(다른 소장처)" for t, _, _ in REL.get(o["key"], [])),
          "날짜 교차 확인(일치)": lambda o: (o.get("date_cross") or {}).get("verdict") == "일치",
          "기록 봉투 사유 확정": lambda o: (o.get("envelope_basis") or {}).get("type") not in (None, "미구축") if iiif_kind(o).startswith("기록 봉투") else True,  # v3.12 이미지 없는 이유까지 아는 기록(봉투가 아니면 해당 없음=충족)
+         "같은 날·같은 지명 연결": lambda o: any(t == "같은 날(다른 기관)" and "같은 지명" in bs for t, _, bs in REL.get(o["key"], [])),  # v3.13
          "원 소장처 계층(사본)": lambda o: o.get("origin_holder"), "원 기관 IIIF(브라우저 열람)": lambda o: o.get("iiif_origin")}
     day = dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%d")
     snap = {"records": len(R), **{k: round(100 * sum(1 for o in R if f(o)) / max(1, len(R)), 1) for k, f in F.items()}}
@@ -1984,7 +1999,7 @@ def write_quality(recs):
     Qj["definitions"] = {"기관 IIIF": "iiif 필드가 있는 기록 — 원 기관 제공과 우리 브리지(원 기관 이미지로 구축)를 함께 센다(v2.75 이전부터의 시계열이라 이름 유지)",
                          "IIIF(원 기관 제공)": "원 기관이 직접 공개한 IIIF 매니페스트", "IIIF(원 기관 이미지로 구축)": "KOREA ARCHIVE 브리지가 원 기관 이미지·메타로 만든 매니페스트",
                          "IIIF(실물 이미지 — 제공+구축)": "위 둘의 합 — 나머지는 이미지 없는 기록 봉투", "IIIF(브리지 포함)": "기록 봉투까지 포함 — 모든 기록이 IIIF로 열림",
-                         "관련 기록 연결": "relations.json에서 다른 기록과 하나 이상 이어진 기록(같은 기록·같은 날·같은 계열, v2.82)", "같은 기록(다른 소장처) 연결": "기관 sameAs·식별자 일치로 다른 소장처의 같은 기록과 이어진 기록", "날짜 교차 확인(일치)": "같은 기록의 다른 소장처가 적은 날짜와 이 기록의 날짜가 일치(v2.84 date_cross — 두 기관 이상이 증언)", "기록 봉투 사유 확정": "이미지 없는 기록 봉투 중 사유(권리·기술·매체·원 기관 이미지 없음)가 실측 근거로 확정된 비율 — 봉투가 아닌 기록은 충족으로 센다(v3.12)", "기록 봉투 사유(건)": "envelope_basis 유형별 건수(v3.9.2~)", "원 소장처 계층(사본)": "사본 기록의 원 소장처·Record Group·식별자(origin_holder, v3.11)", "원 기관 IIIF(브라우저 열람)": "서버 확인 불가 기관의 공식 IIIF 규칙 주소(iiif_origin, v3.9)"}  # v2.75
+                         "관련 기록 연결": "relations.json에서 다른 기록과 하나 이상 이어진 기록(같은 기록·같은 날·같은 계열, v2.82)", "같은 기록(다른 소장처) 연결": "기관 sameAs·식별자 일치로 다른 소장처의 같은 기록과 이어진 기록", "날짜 교차 확인(일치)": "같은 기록의 다른 소장처가 적은 날짜와 이 기록의 날짜가 일치(v2.84 date_cross — 두 기관 이상이 증언)", "기록 봉투 사유 확정": "이미지 없는 기록 봉투 중 사유(권리·기술·매체·원 기관 이미지 없음)가 실측 근거로 확정된 비율 — 봉투가 아닌 기록은 충족으로 센다(v3.12)", "기록 봉투 사유(건)": "envelope_basis 유형별 건수(v3.9.2~)", "같은 날·같은 지명 연결": "같은 날 다른 기관 기록 중 표제·기관 장소 칸의 지명(지명 사전 PLACES — 다국어 표기 한 표준명)까지 같은 기록이 있는 비율(v3.13) — 같은 사건의 더 강한 단서", "원 소장처 계층(사본)": "사본 기록의 원 소장처·Record Group·식별자(origin_holder, v3.11)", "원 기관 IIIF(브라우저 열람)": "서버 확인 불가 기관의 공식 IIIF 규칙 주소(iiif_origin, v3.9)"}  # v2.75
     Qj["daily"][day] = snap; Qj["daily"] = dict(sorted(Qj["daily"].items())); Qj["latest"] = {"day": day, **snap}
     runs = Qj.setdefault("runs", [])  # v3.8.4 실행마다 측정 축적 — daily[날짜]는 그날 마지막 값이라 같은 날 여러 실행의 중간 측정이 덮어써지던 결함. 바로 앞과 같으면 중복이라 쌓지 않는다
     if not runs or {k: v for k, v in runs[-1].items() if k != "at"} != snap: runs.append({"at": dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"), **snap})
