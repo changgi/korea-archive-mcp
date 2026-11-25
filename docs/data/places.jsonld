@@ -1,0 +1,1552 @@
+{
+"@context": {
+"skos": "http://www.w3.org/2004/02/skos/core#",
+"rico": "https://www.ica.org/standards/RiC/ontology#",
+"rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+"ka": "https://changgi.github.io/korea-archive-mcp/data/#"
+},
+"@graph": [
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/places.jsonld",
+"@type": "skos:ConceptScheme",
+"skos:prefLabel": {
+"@value": "KOREA ARCHIVE 지명 사전",
+"@language": "ko"
+}
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/places.jsonld#%ED%9D%A5%EB%82%A8",
+"@type": [
+"skos:Concept",
+"rico:Place"
+],
+"skos:inScheme": {
+"@id": "https://changgi.github.io/korea-archive-mcp/data/places.jsonld"
+},
+"skos:prefLabel": {
+"@value": "흥남",
+"@language": "ko"
+},
+"skos:altLabel": [
+"興南",
+"Hungnam",
+"Hŭngnam"
+],
+"rdfs:seeAlso": [
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/397a826abef5.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/c17e2a3e1e37.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/fdf0d8922fd8.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/5d29cfceb5c4.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/8dbf888e7add.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/f9950501c31e.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/a6eb90add001.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/5077eb9e3273.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/dd2f00d57687.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/cf0308259031.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/2f8d4f491c25.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/c591ec3bd849.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/246a4b9c4149.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/2753b6ed38d7.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/ee3f64a5ab38.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/702d43e92edf.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/0aa190771532.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/feda8b2b1b58.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/4d0ece5ce957.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/0ac0dd71374b.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/96b39c349222.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/879c1bf226ad.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/e33dfb8a85d4.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/f9cd5c5fe181.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/5ff7029725a2.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/cf8f7bbd6485.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/97030009f601.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/593854222d9f.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/5cac81bf5df9.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/1344673a0866.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/422575e98b5c.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/32301c80c4c2.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/5f10aa448fb4.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/ed4ebb7869f3.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/ddfe7d47e8f8.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/893b3eb56184.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/aa20a918a076.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/3a0e763a5667.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/0bbd7a4ffa5c.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/1f6d4173b346.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/aba9367326e0.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/520d14ad9dc4.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/833ed396c08d.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/f2b05d50a918.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/b0f2b0aa3cf8.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/bac246690849.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/1365029cfe88.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/5ec30eeddd8e.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/a446e113822a.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/4388d5cfeff7.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/d808ff125428.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/40e15bfaa0f6.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/ee28f42a08ae.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/68057951818f.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/a2a3baf842a6.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/13a4417fe69e.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/27f091c2a971.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/c37463a10a1a.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/416e290818a4.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/462e03ab0ebd.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/8d4fa3d58689.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/6dc271dcb40a.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/12ad90fa630c.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/9ee45efb6cf8.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/3e86e968de49.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/b83f0b6d6b52.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/3dba4d7ccb7f.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/0b40059b1aa8.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/506083f0c416.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/f82b4763971e.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/35eb64ce33c8.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/fc8d63620e64.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/f73e93b7bcad.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/ccac169eb6db.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/bc889c7609c9.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/dac4e643ecf5.html"
+}
+],
+"ka:records": 76
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/places.jsonld#%ED%95%A8%ED%9D%A5",
+"@type": [
+"skos:Concept",
+"rico:Place"
+],
+"skos:inScheme": {
+"@id": "https://changgi.github.io/korea-archive-mcp/data/places.jsonld"
+},
+"skos:prefLabel": {
+"@value": "함흥",
+"@language": "ko"
+},
+"skos:altLabel": [
+"咸興",
+"Hamhung",
+"Hamhŭng"
+],
+"rdfs:seeAlso": [
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/6d90b09853b8.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/08cbb7d6bb95.html"
+}
+],
+"ka:records": 2
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/places.jsonld#%EC%9E%A5%EC%A7%84%ED%98%B8",
+"@type": [
+"skos:Concept",
+"rico:Place"
+],
+"skos:inScheme": {
+"@id": "https://changgi.github.io/korea-archive-mcp/data/places.jsonld"
+},
+"skos:prefLabel": {
+"@value": "장진호",
+"@language": "ko"
+},
+"skos:altLabel": [
+"長津",
+"Chosin",
+"Changjin"
+],
+"rdfs:seeAlso": [
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/005e85d00cca.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/a1f22ccccfea.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/27c71286e7ed.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/902e4825831f.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/11f2c98b2802.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/b6d60b08ac9b.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/07473769fd7d.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/2e0f0b160a6a.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/8398e69746d5.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/c43ed45f4f61.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/2c0eada6e3fd.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/189155ae0909.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/6d90b09853b8.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/a07744707337.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/8fc0712ebb20.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/08cbb7d6bb95.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/b3c031400c55.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/f8a3ea66b079.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/83427867d4fa.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/0118c090ad1b.html"
+}
+],
+"ka:records": 20
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/places.jsonld#%ED%95%98%EA%B0%88%EC%9A%B0%EB%A6%AC",
+"@type": [
+"skos:Concept",
+"rico:Place"
+],
+"skos:inScheme": {
+"@id": "https://changgi.github.io/korea-archive-mcp/data/places.jsonld"
+},
+"skos:prefLabel": {
+"@value": "하갈우리",
+"@language": "ko"
+},
+"skos:altLabel": [
+"Hagaru"
+],
+"rdfs:seeAlso": [
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/6d90b09853b8.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/08cbb7d6bb95.html"
+}
+],
+"ka:records": 2
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/places.jsonld#%EA%B3%A0%ED%86%A0%EB%A6%AC",
+"@type": [
+"skos:Concept",
+"rico:Place"
+],
+"skos:inScheme": {
+"@id": "https://changgi.github.io/korea-archive-mcp/data/places.jsonld"
+},
+"skos:prefLabel": {
+"@value": "고토리",
+"@language": "ko"
+},
+"skos:altLabel": [
+"Koto-ri"
+],
+"rdfs:seeAlso": [
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/189155ae0909.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/b3c031400c55.html"
+}
+],
+"ka:records": 2
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/places.jsonld#%EC%9D%B8%EC%B2%9C",
+"@type": [
+"skos:Concept",
+"rico:Place"
+],
+"skos:inScheme": {
+"@id": "https://changgi.github.io/korea-archive-mcp/data/places.jsonld"
+},
+"skos:prefLabel": {
+"@value": "인천",
+"@language": "ko"
+},
+"skos:altLabel": [
+"제물포",
+"仁川",
+"Inchon",
+"Incheon",
+"Chemulpo"
+],
+"rdfs:seeAlso": [
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/397a826abef5.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/da879f8a0e5c.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/0b7f43f2fe7e.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/a8464e9c891c.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/e83b7a831cab.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/7bb8a65ae7b1.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/f505d3ccbfae.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/561a61fcf9fa.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/5d090481b13f.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/c7047bf0b81b.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/a1f22ccccfea.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/434f8ea5837a.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/e0c16cd90492.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/be53efb4f9bc.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/2812b7200915.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/62192ea52c8a.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/5d93e464db45.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/3612a42fa11b.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/162ea2de7c98.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/b6d60b08ac9b.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/6fbc35297daa.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/9492cf85f783.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/b2164b592594.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/3c6377be89ff.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/4d152e8cc0f8.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/a73cf7e1be72.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/ef0270e57df4.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/043a3a8bd7a8.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/225630572518.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/82afb4009479.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/2a386432b9e3.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/bbd52e69e05d.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/7f300af67b04.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/923d9dc91955.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/5d4be09ab088.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/2d6869235e34.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/76699bffa15d.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/ac9a04db273d.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/31d48dd9cbc5.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/a380f25e7d64.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/ff3377e1d2e1.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/8c79357b1ee6.html"
+}
+],
+"ka:records": 42
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/places.jsonld#%EC%84%9C%EC%9A%B8",
+"@type": [
+"skos:Concept",
+"rico:Place"
+],
+"skos:inScheme": {
+"@id": "https://changgi.github.io/korea-archive-mcp/data/places.jsonld"
+},
+"skos:prefLabel": {
+"@value": "서울",
+"@language": "ko"
+},
+"skos:altLabel": [
+"경성",
+"京城",
+"漢城",
+"Seoul",
+"Keijo"
+],
+"rdfs:seeAlso": [
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/86578eb0f98e.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/280f5e34c70e.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/a5b468762aaf.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/3e3ef3a44483.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/6d87ed7d0988.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/5fe03c47ec8a.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/1dedf16ec321.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/5c7f0d6c615e.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/435b521b9589.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/afaf25d33ab1.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/1caa933367d7.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/007a9a2f9c6c.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/1cf920e5b1eb.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/60cdaa1abbc2.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/1ce452d19d29.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/2df32bd85aa9.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/385aea113a6f.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/332d61717a01.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/cb12b76b7402.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/133cfc686cd7.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/bc407a3c31c4.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/eca413e5cf87.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/21e76ed8c024.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/f505d3ccbfae.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/567347277d1e.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/fa53f10e7dc9.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/eb721f3991a3.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/f074c18dfe74.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/e4adab9a74f6.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/af0ee89ffed1.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/32301c80c4c2.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/c1e71d6ff1aa.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/d8fe8d2bbfe6.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/6fe387e49131.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/acf455d4e4b6.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/e6442add62c4.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/fb88abbc1245.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/b774b59bd959.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/2116eb34bfb6.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/7ebe9368533d.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/ed97fd12c647.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/62a506ac34cf.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/3777799974ab.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/84b0e4307bb1.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/155745d2ce1e.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/5b665e02d93e.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/0fb87ae31ab0.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/94cc37782b48.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/2f44ace939cf.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/fb5fff4e13d1.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/d0f6f5db15f9.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/8e743c72936e.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/8bd4126bd5fa.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/76699bffa15d.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/84cf42b5e84e.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/79d03959a863.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/ea0a60b70ac8.html"
+}
+],
+"ka:records": 57
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/places.jsonld#%EB%B6%80%EC%82%B0",
+"@type": [
+"skos:Concept",
+"rico:Place"
+],
+"skos:inScheme": {
+"@id": "https://changgi.github.io/korea-archive-mcp/data/places.jsonld"
+},
+"skos:prefLabel": {
+"@value": "부산",
+"@language": "ko"
+},
+"skos:altLabel": [
+"釜山",
+"Pusan",
+"Busan"
+],
+"rdfs:seeAlso": [
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/397a826abef5.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/5ccfd2a9e903.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/a169ff7e7a37.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/3944df3aa7d5.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/d874d8750409.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/b14be6cc7db5.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/e70c581cf387.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/5f10aa448fb4.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/21f6823a94fd.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/24ae9953a7c6.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/33c1ebf68846.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/8a9606f7789a.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/f395a77dc86b.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/f73ad49f1638.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/c6ae0b2c3bf1.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/bc45a5923026.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/afcd0f57bcdd.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/334d01ebd1bb.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/8d4fa3d58689.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/b2521f943f1b.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/8d3800256757.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/7cfecc4ee93b.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/220ee006ae92.html"
+}
+],
+"ka:records": 23
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/places.jsonld#%ED%8F%89%EC%96%91",
+"@type": [
+"skos:Concept",
+"rico:Place"
+],
+"skos:inScheme": {
+"@id": "https://changgi.github.io/korea-archive-mcp/data/places.jsonld"
+},
+"skos:prefLabel": {
+"@value": "평양",
+"@language": "ko"
+},
+"skos:altLabel": [
+"平壤",
+"平壌",
+"Pyongyang",
+"P'yŏngyang"
+],
+"rdfs:seeAlso": [
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/da879f8a0e5c.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/67badf561c70.html"
+}
+],
+"ka:records": 2
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/places.jsonld#%EC%9B%90%EC%82%B0",
+"@type": [
+"skos:Concept",
+"rico:Place"
+],
+"skos:inScheme": {
+"@id": "https://changgi.github.io/korea-archive-mcp/data/places.jsonld"
+},
+"skos:prefLabel": {
+"@value": "원산",
+"@language": "ko"
+},
+"skos:altLabel": [
+"元山",
+"Wonsan"
+],
+"rdfs:seeAlso": [],
+"ka:records": 0
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/places.jsonld#%EB%8C%80%EA%B5%AC",
+"@type": [
+"skos:Concept",
+"rico:Place"
+],
+"skos:inScheme": {
+"@id": "https://changgi.github.io/korea-archive-mcp/data/places.jsonld"
+},
+"skos:prefLabel": {
+"@value": "대구",
+"@language": "ko"
+},
+"skos:altLabel": [
+"大邱",
+"Taegu",
+"Daegu"
+],
+"rdfs:seeAlso": [
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/063b198b36ce.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/a86a2ac49ca3.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/c742609661a1.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/cdc0027be318.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/da879f8a0e5c.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/d26d4ae32bc2.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/32301c80c4c2.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/f395a77dc86b.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/a17051ad72c7.html"
+}
+],
+"ka:records": 9
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/places.jsonld#%EA%B0%9C%EC%84%B1",
+"@type": [
+"skos:Concept",
+"rico:Place"
+],
+"skos:inScheme": {
+"@id": "https://changgi.github.io/korea-archive-mcp/data/places.jsonld"
+},
+"skos:prefLabel": {
+"@value": "개성",
+"@language": "ko"
+},
+"skos:altLabel": [
+"開城",
+"Kaesong",
+"Gaeseong"
+],
+"rdfs:seeAlso": [
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/1dedf16ec321.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/e1b43ae6e2f0.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/b42bdcb2ed19.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/80659e0e6f29.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/f5aff3514461.html"
+}
+],
+"ka:records": 5
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/places.jsonld#%ED%8C%90%EB%AC%B8%EC%A0%90",
+"@type": [
+"skos:Concept",
+"rico:Place"
+],
+"skos:inScheme": {
+"@id": "https://changgi.github.io/korea-archive-mcp/data/places.jsonld"
+},
+"skos:prefLabel": {
+"@value": "판문점",
+"@language": "ko"
+},
+"skos:altLabel": [
+"板門店",
+"Panmunjom"
+],
+"rdfs:seeAlso": [
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/6b9da0f06e06.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/2deb139bb95c.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/a1f7cce03468.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/683d8e4af998.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/ed587f111931.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/085b5a1ed0b1.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/badd4edcd41f.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/8ccfaa7adf49.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/0e2e7e26b570.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/cc0f82b5424f.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/c13368a90bd4.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/c78180b5aca1.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/910bd860c95f.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/81c10867d272.html"
+}
+],
+"ka:records": 14
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/places.jsonld#%EB%82%99%EB%8F%99%EA%B0%95",
+"@type": [
+"skos:Concept",
+"rico:Place"
+],
+"skos:inScheme": {
+"@id": "https://changgi.github.io/korea-archive-mcp/data/places.jsonld"
+},
+"skos:prefLabel": {
+"@value": "낙동강",
+"@language": "ko"
+},
+"skos:altLabel": [
+"洛東江",
+"Naktong",
+"Nakdong"
+],
+"rdfs:seeAlso": [
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/1dedf16ec321.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/a86a2ac49ca3.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/c742609661a1.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/cdc0027be318.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/3243ed4a3680.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/a7420c63650e.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/1e3be22a98e6.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/2baef5e2042e.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/e70c581cf387.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/4cdd874b2e45.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/a6dcffe5fd8f.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/8692d17a4fa3.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/cb65dac3e668.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/fcafb9b7385c.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/0b99aa6f4b58.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/729f852fc9c4.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/56350e91c144.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/fa056023339e.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/4ded12508608.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/511f5f63fd74.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/7f8e8313b042.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/75d00407c783.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/381ba9124ce2.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/90f55c2fdb18.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/5cb7a2ac1982.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/7336c8e9cee4.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/9b05ebda9464.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/d384119f9802.html"
+}
+],
+"ka:records": 28
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/places.jsonld#%EA%B0%80%ED%8F%89",
+"@type": [
+"skos:Concept",
+"rico:Place"
+],
+"skos:inScheme": {
+"@id": "https://changgi.github.io/korea-archive-mcp/data/places.jsonld"
+},
+"skos:prefLabel": {
+"@value": "가평",
+"@language": "ko"
+},
+"skos:altLabel": [
+"加平",
+"Kapyong",
+"Gapyeong"
+],
+"rdfs:seeAlso": [
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/42286c48fe16.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/c1620d3b9bdd.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/27a75c1f6b0d.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/29346c0f37a9.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/72594d2f947e.html"
+}
+],
+"ka:records": 5
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/places.jsonld#%EC%A0%9C%EC%A3%BC",
+"@type": [
+"skos:Concept",
+"rico:Place"
+],
+"skos:inScheme": {
+"@id": "https://changgi.github.io/korea-archive-mcp/data/places.jsonld"
+},
+"skos:prefLabel": {
+"@value": "제주",
+"@language": "ko"
+},
+"skos:altLabel": [
+"濟州",
+"Cheju",
+"Jeju"
+],
+"rdfs:seeAlso": [
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/140334a40615.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/56fc69003f99.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/aba589d960ee.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/f9affe8d1476.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/5b56df740881.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/1570403f9e34.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/36604611a2ec.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/99aad0d7b7f3.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/e9b107e20927.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/842b9c648287.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/e26fb21c94be.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/b9e6b7130f9f.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/8796567b7eb2.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/0d9a2d2f4dbd.html"
+}
+],
+"ka:records": 14
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/places.jsonld#%EA%B9%80%ED%8F%AC",
+"@type": [
+"skos:Concept",
+"rico:Place"
+],
+"skos:inScheme": {
+"@id": "https://changgi.github.io/korea-archive-mcp/data/places.jsonld"
+},
+"skos:prefLabel": {
+"@value": "김포",
+"@language": "ko"
+},
+"skos:altLabel": [
+"金浦",
+"Kimpo",
+"Gimpo"
+],
+"rdfs:seeAlso": [
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/4cdf2cf20d50.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/9d935ba70b5e.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/cdce09d8771a.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/da879f8a0e5c.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/440b8fab5b4b.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/f505d3ccbfae.html"
+}
+],
+"ka:records": 6
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/places.jsonld#%EC%88%98%EC%9B%90",
+"@type": [
+"skos:Concept",
+"rico:Place"
+],
+"skos:inScheme": {
+"@id": "https://changgi.github.io/korea-archive-mcp/data/places.jsonld"
+},
+"skos:prefLabel": {
+"@value": "수원",
+"@language": "ko"
+},
+"skos:altLabel": [
+"水原",
+"Suwon"
+],
+"rdfs:seeAlso": [
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/afc10574ffb5.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/013e2303d325.html"
+}
+],
+"ka:records": 2
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/places.jsonld#%EB%8C%80%EC%A0%84",
+"@type": [
+"skos:Concept",
+"rico:Place"
+],
+"skos:inScheme": {
+"@id": "https://changgi.github.io/korea-archive-mcp/data/places.jsonld"
+},
+"skos:prefLabel": {
+"@value": "대전",
+"@language": "ko"
+},
+"skos:altLabel": [
+"大田",
+"Taejon",
+"Daejeon"
+],
+"rdfs:seeAlso": [
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/d26d4ae32bc2.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/46afe498fecf.html"
+}
+],
+"ka:records": 2
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/places.jsonld#%EC%98%81%EB%93%B1%ED%8F%AC",
+"@type": [
+"skos:Concept",
+"rico:Place"
+],
+"skos:inScheme": {
+"@id": "https://changgi.github.io/korea-archive-mcp/data/places.jsonld"
+},
+"skos:prefLabel": {
+"@value": "영등포",
+"@language": "ko"
+},
+"skos:altLabel": [
+"Yongdungpo",
+"Yeongdeungpo"
+],
+"rdfs:seeAlso": [],
+"ka:records": 0
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/places.jsonld#%EC%97%AC%EC%9D%98%EB%8F%84",
+"@type": [
+"skos:Concept",
+"rico:Place"
+],
+"skos:inScheme": {
+"@id": "https://changgi.github.io/korea-archive-mcp/data/places.jsonld"
+},
+"skos:prefLabel": {
+"@value": "여의도",
+"@language": "ko"
+},
+"skos:altLabel": [
+"汝矣島",
+"Yeouido",
+"Yoido"
+],
+"rdfs:seeAlso": [
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/13ee85a20a2d.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/634fdeb1cbc6.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/1cf920e5b1eb.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/5d7709968f2e.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/660474520d61.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/bc407a3c31c4.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/381938a1df4e.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/1075ed4cb12b.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/0fd1b9b713ce.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/472d9240c706.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/2f44ace939cf.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/fb5fff4e13d1.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/75430d684964.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/829cef32fa67.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/dadda53f872c.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/16ef6a431899.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/c615ade43551.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/ffb034093eea.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/afd9f1306e67.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/d85348e40f27.html"
+}
+],
+"ka:records": 20
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/places.jsonld#%ED%95%9C%EA%B0%95",
+"@type": [
+"skos:Concept",
+"rico:Place"
+],
+"skos:inScheme": {
+"@id": "https://changgi.github.io/korea-archive-mcp/data/places.jsonld"
+},
+"skos:prefLabel": {
+"@value": "한강",
+"@language": "ko"
+},
+"skos:altLabel": [
+"漢江",
+"Han River"
+],
+"rdfs:seeAlso": [
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/1cf920e5b1eb.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/381938a1df4e.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/91ed3ab67c30.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/afc10574ffb5.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/013e2303d325.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/07a45e29e89b.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/db7917e1fcc7.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/d797375b29c0.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/1d6cc310cfd9.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/a0bfa442816c.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/458be9581b25.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/a71fa5bff88d.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/99b81e53b4b0.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/b24c0bd9c96e.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/ecec0270cce8.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/77be64655714.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/e7a5443e3a20.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/e05a3f9c78cd.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/c615ade43551.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/ffb034093eea.html"
+},
+{
+"@id": "https://changgi.github.io/korea-archive-mcp/data/r/afd9f1306e67.html"
+}
+],
+"ka:records": 21
+}
+]
+}

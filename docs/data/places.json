@@ -1,0 +1,702 @@
+{
+ "note": "KOREA ARCHIVE 지명 사전 — 다국어 변환표(TOPICS) 지명 대응 + 기관 로마자 변형을 표준명으로. 표제·기관 장소 칸에서만 매칭(요약 본문 제외). 기관 표기 장소는 subjects.json 그대로 — 이 사전은 그 위의 연결 층. 지우지 않음.",
+ "updated": "2026-11-25T09:33:58Z",
+ "places": {
+  "흥남": {
+   "labels": [
+    "흥남",
+    "興南",
+    "Hungnam",
+    "Hŭngnam"
+   ],
+   "records": [
+    "archives:200200097136-2",
+    "archives:200200097143-1",
+    "archives:202010401379-63",
+    "archives:202010401379-64",
+    "archives:202010401379-65",
+    "archives:202010401379-66",
+    "archives:202010401379-67",
+    "archives:202010401384-69",
+    "archives:202211156135-1",
+    "archives:202211156136-1",
+    "archives:202311400025-13",
+    "archives:202411621912-29",
+    "archives:202411621912-31",
+    "archives:202411621913-2",
+    "archives:202411621927-145",
+    "archives:202411621927-146",
+    "archives:202411621927-163",
+    "archives:202411621927-164",
+    "archives:202411622163-146",
+    "archives:202411622163-164",
+    "commons:https://commons.wikimedia.org/wiki/File%3AHungnam_evacuation_map.jpg",
+    "commons:https://commons.wikimedia.org/wiki/File%3AUSS_Begor_(APD-127)_off_Hungnam_on_24_December_1950_(80-G-K-11769).jpg",
+    "commons:https://commons.wikimedia.org/wiki/File%3AUSS_Begor_(APD-127)_off_Hungnam_on_24_December_1950_(80-G-K-11771).jpg",
+    "earchive:AUS005_06_02V0000_710",
+    "earchive:AUS005_06_02V0000_712",
+    "gallery:s01/1",
+    "gallery:s12/2",
+    "gallery:s29/1",
+    "ia:111-adc-10380",
+    "ia:111-adc-8608",
+    "ia:111-adc-8610",
+    "ia:111-adc-8630",
+    "ia:111-adc-8634",
+    "ia:428-npc-168",
+    "ia:428-npc-170",
+    "ia:428-npc-171",
+    "ia:DTIC_ADA242405",
+    "ia:QF4OCzIor4S5rHJoO2i4eNOiB5MkE2",
+    "ia:cia-readingroom-document-cia-rdp79t00909a000500010020-9",
+    "ia:cia-readingroom-document-cia-rdp80t00246a050600910001-9",
+    "ia:cia-readingroom-document-cia-rdp82-00457r007500490005-8",
+    "ia:t3wXp7NIGMTGQvUfLLEtBtKYxxIEfc",
+    "koreanwar:1990-US-01-PF-A-00022",
+    "koreanwar:1990-US-01-PF-A-00042",
+    "koreanwar:1990-US-01-PF-A-00043",
+    "koreanwar:1990-US-01-PF-A-00044",
+    "koreanwar:1990-US-01-PF-A-00046",
+    "koreanwar:1990-US-01-PF-A-00053",
+    "koreanwar:1990-US-01-PF-A-00054",
+    "koreanwar:2022-KR-02-PF-D-00119",
+    "koreanwar:2022-KR-03-PF-A-00236",
+    "koreanwar:2022-US-02-AV-D-00165",
+    "koreanwar:2022-US-02-AV-D-00167",
+    "nara:NAID 22373",
+    "nara:NAID 22374",
+    "nara:NAID 22375",
+    "nara:NAID 22376",
+    "nara:NAID 22383",
+    "nara:NAID 22395",
+    "nara:NAID 22397",
+    "nara:NAID 22399",
+    "nara:NAID 24142",
+    "nara:NAID 520782",
+    "nara:NAID 75389",
+    "nara:NAID 75390",
+    "nara:NAID 75392",
+    "nara:NAID 75393",
+    "nara:NAID 75395",
+    "nara:NAID 75408",
+    "ndl:3540893",
+    "ndl:https://ndlsearch.ndl.go.jp/books/R100000002-I000003215319",
+    "nlk:871492717",
+    "nlk:CNTS-00042868571",
+    "nlk:CNTS-00084149712",
+    "oldnews:CNTS-00132257465",
+    "oldnews:CNTS-00134989837"
+   ],
+   "sources": [
+    "archives",
+    "commons",
+    "earchive",
+    "gallery",
+    "ia",
+    "koreanwar",
+    "nara",
+    "ndl",
+    "nlk",
+    "oldnews"
+   ]
+  },
+  "함흥": {
+   "labels": [
+    "함흥",
+    "咸興",
+    "Hamhung",
+    "Hamhŭng"
+   ],
+   "records": [
+    "koreanwar:2022-US-02-AV-D-00215",
+    "nara:NAID 22344"
+   ],
+   "sources": [
+    "koreanwar",
+    "nara"
+   ]
+  },
+  "장진호": {
+   "labels": [
+    "장진호",
+    "長津",
+    "Chosin",
+    "Changjin"
+   ],
+   "records": [
+    "ia:ADC-10271",
+    "ia:DTIC_ADA429076",
+    "ia:DTIC_ADB006731",
+    "ia:breakoutchosinre0000russ",
+    "ia:colderthanhellma0000owen",
+    "ia:litvin-korea-physician-inchon-chosin",
+    "ia:lkfil-Ben_Wagner_-_The_Battle_of_the_Chosin_Reservoir",
+    "ia:the-frozen-chosen-the-1st-u.-s.-marine-division-and-the-battle-of-the-chosin-reservoir",
+    "koreanwar:2022-US-02-AV-D-00049",
+    "koreanwar:2022-US-02-AV-D-00119",
+    "koreanwar:2022-US-02-AV-D-00127",
+    "koreanwar:2022-US-02-AV-D-00207",
+    "koreanwar:2022-US-02-AV-D-00215",
+    "koreanwar:2022-US-02-AV-D-00329",
+    "koreanwar:2023-KR-01-AV-A-00044",
+    "nara:NAID 22344",
+    "nara:NAID 22345",
+    "nara:NAID 23203",
+    "nara:NAID 276537577",
+    "nara:NAID 276537580"
+   ],
+   "sources": [
+    "ia",
+    "koreanwar",
+    "nara"
+   ]
+  },
+  "하갈우리": {
+   "labels": [
+    "하갈우리",
+    "Hagaru"
+   ],
+   "records": [
+    "koreanwar:2022-US-02-AV-D-00215",
+    "nara:NAID 22344"
+   ],
+   "sources": [
+    "koreanwar",
+    "nara"
+   ]
+  },
+  "고토리": {
+   "labels": [
+    "고토리",
+    "Koto-ri"
+   ],
+   "records": [
+    "koreanwar:2022-US-02-AV-D-00207",
+    "nara:NAID 22345"
+   ],
+   "sources": [
+    "koreanwar",
+    "nara"
+   ]
+  },
+  "인천": {
+   "labels": [
+    "인천",
+    "제물포",
+    "仁川",
+    "Inchon",
+    "Incheon",
+    "Chemulpo"
+   ],
+   "records": [
+    "archives:200200097136-2",
+    "awm:F03507",
+    "awm:F07533",
+    "awm:P00675.051",
+    "awm:SWEJ0286",
+    "europeana:/08602/IL5000018837",
+    "europeana:/08611/censorship3433",
+    "europeana:/08611/censorship3471",
+    "europeana:/2051908/data_euscreenXL_ina_AFE85003744",
+    "heritage:21-0000550000000-23",
+    "ia:DTIC_ADA429076",
+    "ia:bwb_C0-CEI-593",
+    "ia:hellorhighwater00shel",
+    "ia:hellorhighwaterm0000shel",
+    "ia:hellorhighwaterm0000shel_q5t0",
+    "ia:hellorhighwaterm00shel",
+    "ia:inchonlandingkor0000edwa",
+    "ia:inchonlandingmac0000mich",
+    "ia:inchonlandingmac00lang",
+    "ia:litvin-korea-physician-inchon-chosin",
+    "koreanwar:1990-US-01-PF-A-00015",
+    "koreanwar:1990-US-01-PF-A-00017",
+    "koreanwar:1990-US-01-PF-A-00018",
+    "koreanwar:1990-US-01-PF-A-00020",
+    "koreanwar:1990-US-01-PF-A-00093",
+    "koreanwar:1990-US-01-PF-A-00094",
+    "koreanwar:1990-US-01-PF-A-00095",
+    "koreanwar:1990-US-01-PF-A-00096",
+    "nara:NAID 102044973",
+    "nara:NAID 102046649",
+    "nara:NAID 19066",
+    "nara:NAID 21994",
+    "nara:NAID 22015",
+    "nara:NAID 22142",
+    "nara:NAID 79592",
+    "nara:NAID 79609",
+    "nlk:12434495",
+    "tna:ADM 116/6226",
+    "tna:ADM 116/6405",
+    "tna:ADM 344/1552",
+    "tna:WA/23",
+    "tna:WO 291/2428"
+   ],
+   "sources": [
+    "archives",
+    "awm",
+    "europeana",
+    "heritage",
+    "ia",
+    "koreanwar",
+    "nara",
+    "nlk",
+    "tna"
+   ]
+  },
+  "서울": {
+   "labels": [
+    "서울",
+    "경성",
+    "京城",
+    "漢城",
+    "Seoul",
+    "Keijo"
+   ],
+   "records": [
+    "aks:L011143",
+    "aks:L011144",
+    "aks:L011145",
+    "aks:L011146",
+    "aks:L011148",
+    "archives:201205069333-5",
+    "archives:202311400025-9",
+    "awm:ART40393",
+    "awm:HOBJ2135",
+    "awm:HOBJ2144",
+    "awm:HOBJ2794",
+    "awm:JK0465",
+    "commons:https://commons.wikimedia.org/wiki/File%3A%EC%84%9C%EC%9A%B8%2C_%ED%95%9C%EA%B0%95%2C_%EC%97%AC%EC%9D%98%EB%8F%84-1969%EB%85%84.jpg",
+    "commons:https://commons.wikimedia.org/wiki/File%3A%EC%84%9C%EC%9A%B8_%EB%B4%89%EC%9D%80%EC%82%AC_%EA%B0%90%EB%A1%9C%EB%8F%84.jpg",
+    "commons:https://commons.wikimedia.org/wiki/File%3A%EC%84%9C%EC%9A%B8_%EC%95%88%EC%96%91%EC%95%94_%EA%B0%90%EB%A1%9C%EB%8F%84.jpg",
+    "commons:https://commons.wikimedia.org/wiki/File%3AM26_Pershing_Seoul_1950.jpg",
+    "commons:https://commons.wikimedia.org/wiki/File%3ANH_96379_Liberation_of_Seoul%2C_Korea%2C_September_1950.jpg",
+    "commons:https://commons.wikimedia.org/wiki/File%3ASeoul_1950_1.gif",
+    "commons:https://commons.wikimedia.org/wiki/File%3AUN_forces_during_the_Second_Battle_of_Seoul%2C_1950.webm",
+    "commons:https://commons.wikimedia.org/wiki/File%3AWomen_parade_and_celebrate_in_front_of_Namdaemun_after_the_North_Korean_capture_of_Seoul%2C_1950.jpg",
+    "commons:https://commons.wikimedia.org/wiki/File%3AYeouido%2C_Seoul.jpg",
+    "europeana:/08602/IL5000015457",
+    "europeana:/08602/IL5000015794",
+    "europeana:/08611/censorship3433",
+    "europeana:/2022039/11088_de_bo133_29675",
+    "heritage:11-0000010000000-11",
+    "heritage:21-0001160000000-11",
+    "heritage:21-0001860000000-11",
+    "ia:111-adc-8372",
+    "ia:111-adc-8463",
+    "ia:111-adc-8630",
+    "ia:BattleOfTheBarricades",
+    "indy:https://theme.archives.go.kr/next/indy/viewIndyDetail.do?IMSI_ARCHIVE_ID=0001351630&FK_ARCHIVE_EVNT_ID=0034982881&evntdowngbn=N&indpnId=0000014498&actionType=det&flag=1&search_region=",
+    "indy:https://theme.archives.go.kr/next/indy/viewIndyDetail.do?IMSI_ARCHIVE_ID=0001351918&FK_ARCHIVE_EVNT_ID=0034974469&evntdowngbn=N&indpnId=0000006665&actionType=det&flag=1&search_region=",
+    "indy:https://theme.archives.go.kr/next/indy/viewIndyDetail.do?IMSI_ARCHIVE_ID=0001351918&FK_ARCHIVE_EVNT_ID=0034974470&evntdowngbn=N&indpnId=0000006666&actionType=det&flag=1&search_region=",
+    "indy:https://theme.archives.go.kr/next/indy/viewIndyDetail.do?IMSI_ARCHIVE_ID=0001352020&FK_ARCHIVE_EVNT_ID=0034970573&evntdowngbn=N&indpnId=0000003023&actionType=det&flag=1&search_region=",
+    "indy:https://theme.archives.go.kr/next/indy/viewIndyDetail.do?IMSI_ARCHIVE_ID=0001352025&FK_ARCHIVE_EVNT_ID=0034970706&evntdowngbn=N&indpnId=0000003150&actionType=det&flag=1&search_region=",
+    "indy:https://theme.archives.go.kr/next/indy/viewIndyDetail.do?IMSI_ARCHIVE_ID=0001352062&FK_ARCHIVE_EVNT_ID=0034971420&evntdowngbn=N&indpnId=0000003833&actionType=det&flag=1&search_region=",
+    "jacar:A10112616400",
+    "jsg:K2-3556",
+    "koreanwar:2022-KR-02-PF-D-00194",
+    "koreanwar:2022-KR-02-PF-D-00214",
+    "koreanwar:2022-KR-02-PF-D-00221",
+    "koreanwar:2022-KR-02-PF-D-00263",
+    "koreanwar:2022-KR-02-PF-D-00281",
+    "koreanwar:2022-KR-03-PF-A-00039",
+    "koreanwar:2022-KR-03-PF-A-00267",
+    "koreanwar:2022-KR-03-PF-A-00268",
+    "ktv:5241",
+    "ktv:5272",
+    "nara:NAID 22137",
+    "nara:NAID 22228",
+    "nara:NAID 87540",
+    "nlk:12434495",
+    "okchf:relic_gls:94034",
+    "okchf:relic_gls:94035",
+    "oldnews:CNTS-00133841567"
+   ],
+   "sources": [
+    "aks",
+    "archives",
+    "awm",
+    "commons",
+    "europeana",
+    "heritage",
+    "ia",
+    "indy",
+    "jacar",
+    "jsg",
+    "koreanwar",
+    "ktv",
+    "nara",
+    "nlk",
+    "okchf",
+    "oldnews"
+   ]
+  },
+  "부산": {
+   "labels": [
+    "부산",
+    "釜山",
+    "Pusan",
+    "Busan"
+   ],
+   "records": [
+    "archives:200200097136-2",
+    "archives:202311400025-150",
+    "awm:JK0113",
+    "awm:LEEJ0285",
+    "awm:P01813.443",
+    "awm:P01813.445",
+    "ia:111-adc-8305",
+    "ia:111-adc-8634",
+    "ia:24114-kobe-japan-world-war-2-mos-vwr",
+    "koreanwar:1990-TR-01-PF-A-00018",
+    "koreanwar:1995-US-01-PF-A-00020",
+    "koreanwar:2011-US-01-PF-A-00647",
+    "koreanwar:2011-US-01-PF-A-00687",
+    "koreanwar:2011-US-01-PF-A-00696",
+    "koreanwar:2011-US-01-PF-A-00697",
+    "ktv:267327",
+    "nara:NAID 102044822",
+    "nara:NAID 102047495",
+    "nara:NAID 22399",
+    "nara:NAID 22656",
+    "nara:NAID 22684",
+    "nara:NAID 519786886",
+    "nara:NAID 519786908"
+   ],
+   "sources": [
+    "archives",
+    "awm",
+    "ia",
+    "koreanwar",
+    "ktv",
+    "nara"
+   ]
+  },
+  "평양": {
+   "labels": [
+    "평양",
+    "平壤",
+    "平壌",
+    "Pyongyang",
+    "P'yŏngyang"
+   ],
+   "records": [
+    "awm:F03507",
+    "ia:111-adc-8582"
+   ],
+   "sources": [
+    "awm",
+    "ia"
+   ]
+  },
+  "원산": {
+   "labels": [
+    "원산",
+    "元山",
+    "Wonsan"
+   ],
+   "records": [],
+   "sources": []
+  },
+  "대구": {
+   "labels": [
+    "대구",
+    "大邱",
+    "Taegu",
+    "Daegu"
+   ],
+   "records": [
+    "awm:146902",
+    "awm:146922",
+    "awm:146925",
+    "awm:147450",
+    "awm:F03507",
+    "ia:111-adc-8389",
+    "ia:111-adc-8630",
+    "koreanwar:2011-US-01-PF-A-00687",
+    "koreanwar:2022-KR-03-PF-A-00319"
+   ],
+   "sources": [
+    "awm",
+    "ia",
+    "koreanwar"
+   ]
+  },
+  "개성": {
+   "labels": [
+    "개성",
+    "開城",
+    "Kaesong",
+    "Gaeseong"
+   ],
+   "records": [
+    "archives:202311400025-9",
+    "ia:111-adc-6600",
+    "koreanwar:2024-FR-02-DC-D-01533",
+    "nara:NAID 20315",
+    "nara:NAID 20374"
+   ],
+   "sources": [
+    "archives",
+    "ia",
+    "koreanwar",
+    "nara"
+   ]
+  },
+  "판문점": {
+   "labels": [
+    "판문점",
+    "板門店",
+    "Panmunjom"
+   ],
+   "records": [
+    "awm:F03606",
+    "awm:P02956.002",
+    "awm:P07797.002",
+    "awm:P07797.003",
+    "koreanwar:2012-IN-01-PF-A-00022",
+    "koreanwar:2012-IN-01-PF-A-00036",
+    "ktv:5280",
+    "much:PS01002025001-003418-00000",
+    "much:PS01002025001-021084-00000",
+    "much:PS01002025003-024961-00000",
+    "much:PS01002025008-005391-00000",
+    "nara:NAID 76430",
+    "tna:FO 371/110540/1071/20",
+    "tna:FO 371/115328/1073/124"
+   ],
+   "sources": [
+    "awm",
+    "koreanwar",
+    "ktv",
+    "much",
+    "nara",
+    "tna"
+   ]
+  },
+  "낙동강": {
+   "labels": [
+    "낙동강",
+    "洛東江",
+    "Naktong",
+    "Nakdong"
+   ],
+   "records": [
+    "archives:202311400025-9",
+    "awm:146922",
+    "awm:146925",
+    "awm:147450",
+    "awm:P01813.438",
+    "ia:111-adc-8255",
+    "ia:111-adc-8257",
+    "ia:111-adc-8297",
+    "ia:111-adc-8305",
+    "ia:DTIC_ADA290790",
+    "ia:PLAN-PIA03762",
+    "ia:mac-arthurs-war-map-naktong-bulge",
+    "ia:southtonaktongno0000appl_x1i4",
+    "koreanwar:1996-US-01-PF-A-00016",
+    "koreanwar:1996-US-01-PF-A-00037",
+    "koreanwar:1996-US-01-PF-A-00042",
+    "koreanwar:2011-US-01-PF-A-00002",
+    "koreanwar:2022-KR-02-PF-D-00216",
+    "koreanwar:2022-KR-02-PF-D-00351",
+    "koreanwar:2022-KR-03-PF-A-00336",
+    "koreanwar:2022-KR-03-PF-A-00487",
+    "nara:NAID 22021",
+    "nara:NAID 22023",
+    "nara:NAID 22062",
+    "nara:NAID 22101",
+    "nara:NAID 280956792",
+    "nara:NAID 348336389",
+    "tna:Photo 1225/5(30)"
+   ],
+   "sources": [
+    "archives",
+    "awm",
+    "ia",
+    "koreanwar",
+    "nara",
+    "tna"
+   ]
+  },
+  "가평": {
+   "labels": [
+    "가평",
+    "加平",
+    "Kapyong",
+    "Gapyeong"
+   ],
+   "records": [
+    "awm:147844",
+    "awm:ART40313",
+    "awm:HOBJ3143",
+    "awm:HOBJ3144",
+    "awm:HOBJ3145"
+   ],
+   "sources": [
+    "awm"
+   ]
+  },
+  "제주": {
+   "labels": [
+    "제주",
+    "濟州",
+    "Cheju",
+    "Jeju"
+   ],
+   "records": [
+    "earchive:AUS001_41_00V0000_008",
+    "earchive:AUS001_41_00V0000_009",
+    "earchive:AUS005_06_02V0000_032",
+    "earchive:DCB050_12_00C1156",
+    "earchive:DJE003_09_00C0001_002",
+    "ia:111-adc-7115",
+    "koreanwar:1989-KR-01-PF-A-00049",
+    "koreanwar:1990-KR-01-PF-A-00009",
+    "nara:NAID 20886",
+    "nara:NAID 20887",
+    "nara:NAID 404791030",
+    "nara:NAID 404791033",
+    "nara:NAID 505634321",
+    "nara:NAID 505634339"
+   ],
+   "sources": [
+    "earchive",
+    "ia",
+    "koreanwar",
+    "nara"
+   ]
+  },
+  "김포": {
+   "labels": [
+    "김포",
+    "金浦",
+    "Kimpo",
+    "Gimpo"
+   ],
+   "records": [
+    "awm:ART40331",
+    "awm:ART40333",
+    "awm:ART90301",
+    "awm:F03507",
+    "awm:JK0780",
+    "europeana:/08611/censorship3433"
+   ],
+   "sources": [
+    "awm",
+    "europeana"
+   ]
+  },
+  "수원": {
+   "labels": [
+    "수원",
+    "水原",
+    "Suwon"
+   ],
+   "records": [
+    "nedb:bb_001r_007_21_0100",
+    "nedb:bb_001r_007_21_0110"
+   ],
+   "sources": [
+    "nedb"
+   ]
+  },
+  "대전": {
+   "labels": [
+    "대전",
+    "大田",
+    "Taejon",
+    "Daejeon"
+   ],
+   "records": [
+    "ia:111-adc-8389",
+    "indy:https://theme.archives.go.kr/next/indy/viewIndyDetail.do?IMSI_ARCHIVE_ID=0001352109&FK_ARCHIVE_EVNT_ID=0034986760&evntdowngbn=N&indpnId=0000018129&actionType=det&flag=1&search_region="
+   ],
+   "sources": [
+    "ia",
+    "indy"
+   ]
+  },
+  "영등포": {
+   "labels": [
+    "영등포",
+    "Yongdungpo",
+    "Yeongdeungpo"
+   ],
+   "records": [],
+   "sources": []
+  },
+  "여의도": {
+   "labels": [
+    "여의도",
+    "汝矣島",
+    "Yeouido",
+    "Yoido"
+   ],
+   "records": [
+    "commons:https://commons.wikimedia.org/wiki/File%3A%EB%8B%B9%EC%82%B0%EC%B2%A0%EA%B5%90%EC%97%90%EC%84%9C_%EC%B4%AC%EC%98%81%ED%95%9C_%EC%97%AC%EC%9D%98%EB%8F%84.jpg",
+    "commons:https://commons.wikimedia.org/wiki/File%3A%EB%8F%99%EC%9E%91%EB%8C%80%EA%B5%90%EC%97%90%EC%84%9C_%EB%B3%B8_%EC%97%AC%EC%9D%98%EB%8F%84%EC%9D%98_%EB%A7%88%EC%B2%9C%EB%A3%A8%EB%93%A4.jpg",
+    "commons:https://commons.wikimedia.org/wiki/File%3A%EC%84%9C%EC%9A%B8%2C_%ED%95%9C%EA%B0%95%2C_%EC%97%AC%EC%9D%98%EB%8F%84-1969%EB%85%84.jpg",
+    "commons:https://commons.wikimedia.org/wiki/File%3ACherry_Blossom_in_Yeouido_Festival.jpg",
+    "commons:https://commons.wikimedia.org/wiki/File%3AJ-Hope_at_a_fansign_in_Yeouido%2C_in_December_2015_05.jpg",
+    "commons:https://commons.wikimedia.org/wiki/File%3AYeouido%2C_Seoul.jpg",
+    "commons:https://commons.wikimedia.org/wiki/File%3AYeouido_Han_River.jpg",
+    "commons:https://commons.wikimedia.org/wiki/File%3AYeouido_SeMA_Bunker.jpg",
+    "commons:https://commons.wikimedia.org/wiki/File%3AYeouido_Spring_Flower_Festival.jpg",
+    "commons:https://commons.wikimedia.org/wiki/File%3AYeouido_Spring_Flower_Festival_2013.jpg",
+    "ktv:5241",
+    "ktv:5272",
+    "seoul:1107943",
+    "seoul:1186930",
+    "seoul:1203593",
+    "seoul:1214560",
+    "seoul:86310",
+    "seoul:86311",
+    "seoul:86312",
+    "seoul:https://archives.seoul.go.kr/catalog/result?regclass=ALL&query=%EC%97%AC%EC%9D%98%EB%8F%84"
+   ],
+   "sources": [
+    "commons",
+    "ktv",
+    "seoul"
+   ]
+  },
+  "한강": {
+   "labels": [
+    "한강",
+    "漢江",
+    "Han River"
+   ],
+   "records": [
+    "commons:https://commons.wikimedia.org/wiki/File%3A%EC%84%9C%EC%9A%B8%2C_%ED%95%9C%EA%B0%95%2C_%EC%97%AC%EC%9D%98%EB%8F%84-1969%EB%85%84.jpg",
+    "commons:https://commons.wikimedia.org/wiki/File%3AYeouido_Han_River.jpg",
+    "ktv:28799",
+    "nedb:bb_001r_007_21_0100",
+    "nedb:bb_001r_007_21_0110",
+    "nedb:bb_008r_001_01_0390",
+    "nedb:bb_008r_001_01_0400",
+    "nedb:bb_008r_001_02_0260",
+    "nedb:bb_008r_001_02_0320",
+    "nedb:bb_009r_001_10_0170",
+    "nedb:bb_011r_001_02_0280",
+    "nedb:bb_019r_001_06_0210",
+    "nedb:npda_1920_04_30_v0002_1100",
+    "seoul:2399",
+    "seoul:509522",
+    "seoul:6581",
+    "seoul:7598",
+    "seoul:7603",
+    "seoul:86310",
+    "seoul:86311",
+    "seoul:86312"
+   ],
+   "sources": [
+    "commons",
+    "ktv",
+    "nedb",
+    "seoul"
+   ]
+  }
+ }
+}
