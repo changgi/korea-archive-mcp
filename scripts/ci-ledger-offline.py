@@ -36,6 +36,10 @@ assert not _bad_dt, f"날짜 해석기 회귀 {_bad_dt}"
 _oh = g["origin_holder"]({"meta": [["소장자(처)", "국립문서기록관리청 (National Archives and Records Administration)"], ["문서번호", "SC354878"], ["계층", "국사편찬위원회 전자사료관 › 사료군 AUS005 Record Group 111: Records of the Office of the Chief Signal Officer, 1860 - 1985 › 사료계열"]]})
 assert _oh["local_id"] == "111-SC-354878" and "111-SC-354000 to 111-SC-354999" in _oh["finding_aid"]["label"] and _oh["record_group"].startswith("RG 111"), _oh  # v3.11
 assert g["origin_holder"]({"meta": [["소장자(처)", "국사편찬위원회"]]}) is None
+_dn = lambda d: (g["date_norm"]({"key": "x:1", "date": d}) or {}).get("value")  # v3.51 기관 날짜 표기 변형 정규화 — 모호한 표기는 정규화하지 않는다(must_not)
+assert (_dn("1894 Aug 7"), _dn("1952 Jan 01 - 1952 Dec 31"), _dn("1950 Sep 01 - 1950 Sep 30"), _dn("1894 Jun 01 - 1894 Dec 31"), _dn("197605"), _dn("1763(영조 39)"), _dn("조선, 1789"), _dn("1934 ~")) == \
+       ("1894-08-07", "1952", "1950-09", "1894-06-01~1894-12-31", "1976-05", "1763", "1789", "1934"), "date_norm 회귀(v3.51)"
+assert not any(_dn(x) for x in ("2019/1962", "11.3.63-3.12.63", "고려시대", "조선, 19세기")), "모호한 날짜 표기가 정규화됨(v3.51 must_not)"
 _eb = g["envelope_basis"]; _K = "기록 봉투(이미지 없음 — 기록 정보만 담은 브리지)"  # v3.11.1 기록 단위 봉투 사유
 assert _eb({"key": "nlk:CNTS-1", "iiif_kind": _K})["type"] == "기술" and _eb({"key": "nlk:1", "iiif_kind": _K, "meta": [["원문 열람", "소장 정보(원문 열람은 기관 확인)"]]})["type"] == "매체"
 assert _eb({"key": "nlk:2", "iiif_kind": _K})["type"] == "미구축" and _eb({"key": "nrich:rep:1", "iiif_kind": _K})["type"] == "매체" and _eb({"key": "nara:1", "iiif_kind": "원 기관 제공 매니페스트"}) is None
