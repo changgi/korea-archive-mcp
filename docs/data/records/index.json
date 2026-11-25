@@ -415,10 +415,14 @@
   {
    "register": "2026-11-25-29.json",
    "sha256": "76fd7ad5c409231527721432701510988cebc1e0a0f6af06b7ac5fb87bc700cb"
+  },
+  {
+   "register": "2026-11-25-30.json",
+   "sha256": "1074b031e6d40a1f4742b003fb77082f057625a8e86bd29c7b803083b6875bd2"
   }
  ],
  "head": {
-  "register": "2026-11-25-29.json",
-  "sha256": "76fd7ad5c409231527721432701510988cebc1e0a0f6af06b7ac5fb87bc700cb"
+  "register": "2026-11-25-30.json",
+  "sha256": "1074b031e6d40a1f4742b003fb77082f057625a8e86bd29c7b803083b6875bd2"
  }
 }
