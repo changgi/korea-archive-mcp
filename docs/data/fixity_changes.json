@@ -1,7 +1,7 @@
 {
-"updated": "2026-11-25T02:46:43Z",
-"watched": 847,
-"changed_records": 32,
+"updated": "2026-11-25T03:10:48Z",
+"watched": 848,
+"changed_records": 35,
 "suspected_source_changes": 0,
 "note": "지문 = 원 기관 응답(우리 판독기 정규형, 판독 시각 등 변동 항목 제외)의 SHA-256-16. pv = 판독기(route.js·lib) 지문. 이력은 지우지 않는다.",
 "changes": [
@@ -608,6 +608,63 @@
 {
 "at": "2026-11-25",
 "h": "0660dc0c17bfeef4",
+"pv": "fa6703da94c0",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "nedb:ks_001_0020_0090",
+"title": "癸卯十月二十七日",
+"url": "https://db.history.go.kr/id/ks_001_0020_0090",
+"history": [
+{
+"at": "2026-11-24",
+"h": "6399f11ca219b82d",
+"pv": "f0b888915bda",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "63ede5dfd329780f",
+"pv": "fa6703da94c0",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "nedb:npda_1920_04_30_v0002_1100",
+"title": "本月漢江水質試驗",
+"url": "https://db.history.go.kr/id/npda_1920_04_30_v0002_1100",
+"history": [
+{
+"at": "2026-11-24",
+"h": "7c492b6ca20916a3",
+"pv": "f0b888915bda",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "2380c21ba56e249e",
+"pv": "fa6703da94c0",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "nedb:sg_001r_0020_0010",
+"title": "시조 혁거세가 즉위하다",
+"url": "https://db.history.go.kr/id/sg_001r_0020_0010",
+"history": [
+{
+"at": "2026-11-24",
+"h": "97f5a8df46939a7a",
+"pv": "f0b888915bda",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "8bf3fc48b5290d1b",
 "pv": "fa6703da94c0",
 "kind": "판독기 변경 동반"
 }
