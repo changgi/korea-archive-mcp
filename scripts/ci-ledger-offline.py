@@ -53,6 +53,9 @@ assert _ec({"title": "List: Negotiations re Policy After the Armistice Talks", "
 _dn = g["date_norm"]  # v3.20 비ISO 날짜 정규화 — 일/월 모호는 기관 관행 확인된 곳만
 assert _dn({"key": "dnz:1", "date": "18/04/2018"})["value"] == "2018-04-18" and _dn({"key": "x:1", "date": "05/04/2018"}) is None and _dn({"key": "x:1", "date": "18/04/2018"})["value"] == "2018-04-18"
 assert _dn({"key": "dnz:1", "date": "[1951 or 1952]"})["value"] == "1951~1952" and _dn({"key": "jacar:1", "date": "明治４２年～明治４３年"})["value"] == "1909~1910" and _dn({"key": "x:1", "date": "1950-12"}) is None and _dn({"key": "ia:1", "date": "1950-01-01T00:00:00Z"})["value"] == "1950" and _dn({"key": "indy:1", "date": "19220405"})["value"] == "1922-04-05"
+_ft = g["facet_terms"]  # v3.22 기관 전거 줄 — 인명 쉼표 보존·전거 번호는 용어에서 분리
+assert _ft("인물(기관 전거)", "MacArthur, Douglas=KAC201619806 · Ridgway, Matthew B.=KAC1", "인물") == [("인물", "MacArthur, Douglas"), ("인물", "Ridgway, Matthew B.")]
+assert _pl({"title": "서울 前面을 强化?", "meta": [["장소(기관 전거)", "흥남[興南]=KSH2000026697"]]}) == {"서울", "흥남"}
 _io = g["iiif_origin"]  # v3.9 Gallica 원 기관 IIIF — 디지털 원문 ark만(카탈로그 cb ark 아님), 수집 경로 iiif가 있으면 두지 않음
 assert _io({"url": "http://gallica.bnf.fr/ark:/12148/btv1b2700138b"})["manifest"] == "https://gallica.bnf.fr/iiif/ark:/12148/btv1b2700138b/manifest.json"
 assert _io({"url": "https://gallica.bnf.fr/ark:/12148/cb384972039"}) is None and _io({"url": "https://gallica.bnf.fr/ark:/12148/bpt6k1", "iiif": "x"}) is None

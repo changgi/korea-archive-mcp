@@ -126,7 +126,7 @@ DEEP["nedb"] = ("nedb_search", lambda o: re.match(r"^[a-z]{2,5}_[0-9a-z_]+$", o[
 DEEP["nlk"] = ("nlk_search", lambda o: o.get("id") and o.get("title") and {"query": re.sub(r"\s*[:;\[].*$", "", o["title"])[:60] or o["title"][:60], "max_results": 20})  # v2.72 국립중앙도서관 — 같은 기록 번호 줄만(nlk_own)
 DEEP["kyudb"] = ("nedb_search", lambda o: re.match(r"^[^\x00-\x7f]{1,4}[0-9][0-9.\-]*$", str(o.get("id") or "")) and {"mode": "kyujanggak", "query": o["id"]})  # v2.55 규장각 해제(기관 해설문) — 같은 청구기호 행만 쓴다
 IIIF_V = {"koreanwar": 2, "ktv": 2, "seoul": 2, "awm": 2, "commons": 3, "europeana": 2, "heritage": 2, "much": 2, "nrich": 2, "nara": 3, "tna": 2, "ia": 2, "ndl": 2, "gallery": 2}  # v2.76 권리/출처 표기 분리로 IIIF 기록 전부 재판독  # commons 2 = 범주(Commons, 숨김 제외)  # v2.63 우리 IIIF 브리지 판 — awm 2 = 기관 상세 표 전부(자료 유형·매체 형태·제작자·제작지·분쟁)와 본문 설명
-DEEP_V = {"seoul": 2, "aks": 2, "jsg": 2, "nedb": 5, "un": 2}  # nedb 5 = 실패 응답으로 비워진 메타 복구(v2.69.3)  # nedb 4 = 기술 항목 줄 판별 엄격화(v2.69.2)  # nedb 3 = 법전 조문 판독 교정(v2.69.1 — 검색창 문구 오인)  # un 2 = 기관 MARC XML(제목·문서기호·유형·날짜·의제)  # v2.61.1 nedb 2 = 표 없는 기록(삼국사기)·원문 이미지만(신문) 판독  # v2.56 jsg 2 = 장서각 개체 태깅·인물 전거(UCI)  # v2.32 판독기 판 — 판이 오르면 이미 보강된 기록도 한 번 다시 판독(서울기록원: 기관 계층·생산자·보존이력 추가)
+DEEP_V = {"oldnews": 2, "seoul": 2, "aks": 2, "jsg": 2, "nedb": 5, "un": 2}  # nedb 5 = 실패 응답으로 비워진 메타 복구(v2.69.3)  # nedb 4 = 기술 항목 줄 판별 엄격화(v2.69.2)  # nedb 3 = 법전 조문 판독 교정(v2.69.1 — 검색창 문구 오인)  # un 2 = 기관 MARC XML(제목·문서기호·유형·날짜·의제)  # v2.61.1 nedb 2 = 표 없는 기록(삼국사기)·원문 이미지만(신문) 판독  # v2.56 jsg 2 = 장서각 개체 태깅·인물 전거(UCI)  # v2.32 판독기 판 — 판이 오르면 이미 보강된 기록도 한 번 다시 판독(서울기록원: 기관 계층·생산자·보존이력 추가)
 _sid = [None]
 
 def mcp_call(tool, args):
@@ -1098,7 +1098,7 @@ PLACES = {"흥남": r"흥남|興南|Hungnam|Hŭngnam", "함흥": r"함흥|咸興
           "38선": r"38선|38th Parallel|三十八度線", "진주": r"진주(?![선알목])|晉州|晋州|Chinju|Jinju", "경주": r"경주|(?<!崇)慶州|Kyongju|Gyeongju", "의정부": r"의정부|議政府|Uijongbu|Uijeongbu",
           "강화": r"강화도|강화군|江華|Kanghwa|Ganghwa", "문산": r"문산|汶山|Munsan", "용평": r"Yongpyang|Yongp'yang", "광주": r"광주(?!김씨)|光州|Kwangju|Gwangju"}
 _PL = {k: re.compile(r"(?<![A-Za-z가-힣])(?:" + v + r")(?![a-z])", re.I) for k, v in PLACES.items()}
-PLACE_META = re.compile(r"^(장소|취급지명|연관정보|지명.*|place.*|Place made|관련사건|생산지|촬영지|위치)$", re.I)
+PLACE_META = re.compile(r"^(장소|장소\(기관 전거\)|취급지명|연관정보|지명.*|place.*|Place made|관련사건|생산지|촬영지|위치)$", re.I)
 def places(o):
     t = " ".join([str(o.get("title") or "")] + [str(v) for k, v in ((m[0], m[1]) for m in (o.get("meta") or []) if m and len(m) > 1) if PLACE_META.match(str(k))])
     return {k for k, rx in _PL.items() if rx.search(t)}
@@ -2133,8 +2133,8 @@ def write_quality(recs):
     json.dump(Qj, open(p, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
     return snap
 
-FACETS = [("주제", re.compile(r"^(주제|주제어|색인어.*|subject|키워드|표제어)$", re.I)), ("장소", re.compile(r"^(연관정보|장소|취급지명|place|지명\(장서각 태깅\))$", re.I)),
-          ("인물", re.compile(r"^인명\(장서각 태깅\)$")), ("기관", re.compile(r"^관청명\(장서각 태깅\)$")),  # v2.56 기관 개체 태깅
+FACETS = [("주제", re.compile(r"^(주제|주제어|색인어.*|subject|키워드|표제어)$", re.I)), ("장소", re.compile(r"^(연관정보|장소|장소\(기관 전거\)|취급지명|place|지명\(장서각 태깅\))$", re.I)),
+          ("인물", re.compile(r"^(인명\(장서각 태깅\)|인물\(기관 전거\))$")), ("기관", re.compile(r"^(관청명\(장서각 태깅\)|단체\(기관 전거\))$")),  # v2.56 기관 개체 태깅
           ("형태", re.compile(r"^(문서유형|기록물형태|매체유형|사료구분|사료유형|기록유형|자료유형|자료 유형|자료 구분|매체 형태|자료 형태|format)$", re.I)), ("재질", re.compile(r"^재질$")),
           ("기술 수준", re.compile(r"^기술 수준$")),  # v2.59 기관의 자료 형태·재질·기술 단계(item·fileUnit·Piece) 분류
           ("죄명", re.compile(r"^죄명$")), ("훈격", re.compile(r"^포상$")), ("신문", re.compile(r"^신문명$")),
@@ -2149,6 +2149,8 @@ def facet_terms(k, v, fac):
         cm = {"GEOL": "장소", "TOPIC": "주제", "FUNC": "분류"}
         return [(cm[m[1]], re.sub(r"\s*,\s*[\d~\s]*$", "", m[2]).strip()) for m in re.finditer(r"\[(GEOL|TOPIC|FUNC)-\d+\]\s*(?:\([^)]*\)\s*)?([^\[]+)", v)]
     if v.startswith("http"): return []
+    if k.endswith("(기관 전거)"):  # v3.22 국립중앙도서관 전거 줄 '이름=KSH…' — 가운뎃점으로만 가르고(인명 쉼표 보존) 용어는 이름만, 전거 번호는 authority로
+        return [(fac, t.split("=")[0].strip()) for t in re.split(r"\s·\s", v) if 1 < len(t.split("=")[0].strip()) <= 120]
     if fac in ("생산자", "소장처", "분쟁"):  # v2.99.8 인명·기관명엔 쉼표가 들어간다('Holzheimer, Claude Rudolph') — 세미콜론으로만 가르고, 끝의 존속기간·(Most Recent) 괄호를 뗀다
         out = []
         for t in re.split(r"[;；]", v):
@@ -2441,6 +2443,10 @@ def main():
         ec_ = event_date_check(o)  # v3.17 사건-날짜 정합(기관 값은 그대로)
         if ec_: o["event_date_check"] = ec_
         else: o.pop("event_date_check", None)
+        au_ = {t.split("=")[0].strip(): t.split("=")[1].strip() for k, v in ((m[0], m[1]) for m in (o.get("meta") or []) if m and len(m) > 1 and str(m[0]).endswith("(기관 전거)"))
+               for t in re.split(r"\s·\s", str(v)) if "=" in t}  # v3.22 기관 전거(KSH·KAC) — 이름=전거번호
+        if au_: o["authority_ids"] = {"scheme": "국립중앙도서관 전거(KSH 주제명표목·KAC 인명/단체)", "terms": au_}
+        else: o.pop("authority_ids", None)
         ps_ = sorted(places(o))  # v3.14 표준 지명(지명 사전 — 표제·기관 장소 칸)
         if ps_: o["places_std"] = ps_
         else: o.pop("places_std", None)
