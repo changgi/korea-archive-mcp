@@ -1624,6 +1624,20 @@
    ],
    "level": "warn",
    "note": "v3.6.3 NARA specificAccessRestrictions 객체 — 옛 결함: '[object Object]'로 보안 분류 사유 소실"
+  },
+  {
+   "id": "ledger-iiif-same-note",
+   "tool": "cross_search",
+   "args": {
+    "query": "흥남 철수 기록영상 6",
+    "sources": "ledger",
+    "max_per_source": 5
+   },
+   "must": [
+    "실물 이미지: 같은 기록 nara:NAID \\d+의 매니페스트"
+   ],
+   "level": "warn",
+   "note": "v3.7.2 원장 검색 응답에 같은 기록 실물 이미지(iiif_same) — 기록 봉투도 실물 이미지로 잇는 맥락"
   }
  ]
 }
