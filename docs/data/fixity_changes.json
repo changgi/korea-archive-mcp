@@ -1,7 +1,7 @@
 {
-"updated": "2026-11-25T06:24:53Z",
+"updated": "2026-11-25T06:38:31Z",
 "watched": 861,
-"changed_records": 156,
+"changed_records": 178,
 "suspected_source_changes": 0,
 "note": "지문 = 원 기관 응답(우리 판독기 정규형, 판독 시각 등 변동 항목 제외)의 SHA-256-16. pv = 판독기(route.js·lib) 지문. 이력은 지우지 않는다.",
 "changes": [
@@ -2964,6 +2964,424 @@
 {
 "at": "2026-11-25",
 "h": "03e00c23082fe795",
+"pv": "d935b612f32e",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "nara:NAID 42219636",
+"title": "Korean War Memorial",
+"url": "https://catalog.archives.gov/id/42219636",
+"history": [
+{
+"at": "2026-11-24",
+"h": "f8a6c8bfbd0f9709",
+"pv": "43a1e8e3db94",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "6b5bd0f8669bc2bd",
+"pv": "d935b612f32e",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "nara:NAID 74247857",
+"title": "Korea – Natives and Native Dwellings",
+"url": "https://catalog.archives.gov/id/74247857",
+"history": [
+{
+"at": "2026-11-24",
+"h": "805d550e2de88bd6",
+"pv": "43a1e8e3db94",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "840694635780c16b",
+"pv": "d935b612f32e",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "koreanwar:0000-KR-10-BP-A-00035",
+"title": "해방후 한국전쟁기간 : 경향신문 . 4 , 1953.4.1~1953.4.31",
+"url": "https://www.koreanwar.or.kr:8443/searchDetail.do?archRfcd=0000-KR-10-BP-A-00035",
+"history": [
+{
+"at": "2026-11-24",
+"h": "39de970d85063d19",
+"pv": "43a1e8e3db94",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "319cbf7f0e5c6697",
+"pv": "d935b612f32e",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "koreanwar:0000-KR-10-BP-A-00138",
+"title": "씩씩한 우리 겨레 : 국민 학교 3.4 학년",
+"url": "https://www.koreanwar.or.kr:8443/searchDetail.do?archRfcd=0000-KR-10-BP-A-00138",
+"history": [
+{
+"at": "2026-11-24",
+"h": "cb23cee81f516114",
+"pv": "43a1e8e3db94",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "862439b610faf7e9",
+"pv": "d935b612f32e",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "koreanwar:1989-KR-01-PF-A-00049",
+"title": "제주도 4.3사건 당시 육군 참모진 사진(1948)",
+"url": "https://www.koreanwar.or.kr:8443/searchDetail.do?archRfcd=1989-KR-01-PF-A-00049",
+"history": [
+{
+"at": "2026-11-24",
+"h": "b1d555dc93c06fe1",
+"pv": "43a1e8e3db94",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "89588da92dd8156b",
+"pv": "d935b612f32e",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "koreanwar:1990-KR-01-PF-A-00009",
+"title": "제주4·3사건 폭도들이 귀순하는 사진",
+"url": "https://www.koreanwar.or.kr:8443/searchDetail.do?archRfcd=1990-KR-01-PF-A-00009",
+"history": [
+{
+"at": "2026-11-24",
+"h": "cbf440687ae27c73",
+"pv": "43a1e8e3db94",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "37aea04866b92797",
+"pv": "d935b612f32e",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "koreanwar:2023-RU-02-BP-D-00078",
+"title": "크로코딜 잡지(1953. 02, 4호)",
+"url": "https://www.koreanwar.or.kr:8443/searchDetail.do?archRfcd=2023-RU-02-BP-D-00078",
+"history": [
+{
+"at": "2026-11-24",
+"h": "1c4570a858c5eb58",
+"pv": "43a1e8e3db94",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "45ea75546785de2f",
+"pv": "d935b612f32e",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "koreanwar:2024-US-02-DC-D-00015",
+"title": "항공기 요약 보고서(1951.04.30.)",
+"url": "https://www.koreanwar.or.kr:8443/searchDetail.do?archRfcd=2024-US-02-DC-D-00015",
+"history": [
+{
+"at": "2026-11-24",
+"h": "eb7b38cebaf3cf73",
+"pv": "43a1e8e3db94",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "107a3917156e1b8d",
+"pv": "d935b612f32e",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "nara:NAID 323152357",
+"title": "National Assembly of Korea 2/27/89 [OA 6343] [2]",
+"url": "https://catalog.archives.gov/id/323152357",
+"history": [
+{
+"at": "2026-11-24",
+"h": "caa37cae813a9a61",
+"pv": "43a1e8e3db94",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "2a2d340e8e462bc6",
+"pv": "d935b612f32e",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "nara:NAID 323153774",
+"title": "Korea n.d. [OA 7565] [1]",
+"url": "https://catalog.archives.gov/id/323153774",
+"history": [
+{
+"at": "2026-11-24",
+"h": "acbffd756b411b84",
+"pv": "43a1e8e3db94",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "2287e874858d9d32",
+"pv": "d935b612f32e",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "nara:NAID 402692471",
+"title": "World War II Operations Reports - Pacific Theater: 36-008 (1 of 2)",
+"url": "https://catalog.archives.gov/id/402692471",
+"history": [
+{
+"at": "2026-11-24",
+"h": "e5e1c3491d373950",
+"pv": "43a1e8e3db94",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "86a68d1fc690d5fe",
+"pv": "d935b612f32e",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "nara:NAID 402694655",
+"title": "World War II Operations Reports - Pacific Theater: 36-009 (2 of 2)",
+"url": "https://catalog.archives.gov/id/402694655",
+"history": [
+{
+"at": "2026-11-24",
+"h": "2721e348ef07d17c",
+"pv": "43a1e8e3db94",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "5fb128f3a9e77aef",
+"pv": "d935b612f32e",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "nara:NAID 402699988",
+"title": "World War II Operations Reports - Pacific Theater: 36-014 (1 of 2)",
+"url": "https://catalog.archives.gov/id/402699988",
+"history": [
+{
+"at": "2026-11-24",
+"h": "317de366ab575519",
+"pv": "43a1e8e3db94",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "e3c2f5d3e8a588d3",
+"pv": "d935b612f32e",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "nara:NAID 684014604",
+"title": "United Nations Temporary Commission on Korea (UNTCOK): Administration and Security THRU Elections",
+"url": "https://catalog.archives.gov/id/684014604",
+"history": [
+{
+"at": "2026-11-24",
+"h": "97d8c83d04871f39",
+"pv": "43a1e8e3db94",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "ca5f528a01cd4eb5",
+"pv": "d935b612f32e",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "nara:NAID 20887080",
+"title": "V part 2 of 2",
+"url": "https://catalog.archives.gov/id/20887080",
+"history": [
+{
+"at": "2026-11-24",
+"h": "b8c3701eaee5f609",
+"pv": "43a1e8e3db94",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "eaccfcf5595bf5f7",
+"pv": "d935b612f32e",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "nara:NAID 402467227",
+"title": "World War II Operations Reports - Pacific Theater: 18-002 (1 of 2)",
+"url": "https://catalog.archives.gov/id/402467227",
+"history": [
+{
+"at": "2026-11-24",
+"h": "8276936312f4cd54",
+"pv": "43a1e8e3db94",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "9e8ba0e6c59e6ded",
+"pv": "d935b612f32e",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "nara:NAID 640035642",
+"title": "Supreme Commander for the Allied Powers (SCAP), Summation of Non-Military Allies in Japan: Number 15, December 1946 THRU Number 18, March 1947",
+"url": "https://catalog.archives.gov/id/640035642",
+"history": [
+{
+"at": "2026-11-24",
+"h": "b3f677973f6fca93",
+"pv": "43a1e8e3db94",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "cda2a30b17b4832d",
+"pv": "d935b612f32e",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "nara:NAID 643349627",
+"title": "Miscellaneous Documents Pertaining to Witnesses for the Defense and Witnesses for the Prosecution: Iiuma, Mamoru THRU Yamoauchi, Juji",
+"url": "https://catalog.archives.gov/id/643349627",
+"history": [
+{
+"at": "2026-11-24",
+"h": "c223f3a7dd6f15ce",
+"pv": "43a1e8e3db94",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "c4f974862589f753",
+"pv": "d935b612f32e",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "nara:NAID 644035378",
+"title": "United Nations War Crimes Commission, Staffs of the German Concentration Camps THRU Kokuhonsha and Japanese Fascist Organizations",
+"url": "https://catalog.archives.gov/id/644035378",
+"history": [
+{
+"at": "2026-11-24",
+"h": "ada8b3f597a9c09b",
+"pv": "43a1e8e3db94",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "8c679824dafa9f18",
+"pv": "d935b612f32e",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "nara:NAID 644119250",
+"title": "Investigation Division",
+"url": "https://catalog.archives.gov/id/644119250",
+"history": [
+{
+"at": "2026-11-24",
+"h": "e82329b67d89573b",
+"pv": "43a1e8e3db94",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "f9e8f0289c4b57a1",
+"pv": "d935b612f32e",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "koreanwar:1993-KR-05-BP-A-00011",
+"title": "국군 38선 돌파 보도기사(1950.10.4)",
+"url": "https://www.koreanwar.or.kr:8443/searchDetail.do?archRfcd=1993-KR-05-BP-A-00011",
+"history": [
+{
+"at": "2026-11-24",
+"h": "093c8168e039d014",
+"pv": "43a1e8e3db94",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "90fbacca6eda3d60",
+"pv": "d935b612f32e",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "koreanwar:2024-SE-02-DC-D-00034",
+"title": "스웨덴 적십자병원 보고서 34호 부록 (4)",
+"url": "https://www.koreanwar.or.kr:8443/searchDetail.do?archRfcd=2024-SE-02-DC-D-00034",
+"history": [
+{
+"at": "2026-11-24",
+"h": "1f206afa71e415b0",
+"pv": "590917b3c048",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "5ef2114a5c1b4fda",
 "pv": "d935b612f32e",
 "kind": "판독기 변경 동반"
 }
