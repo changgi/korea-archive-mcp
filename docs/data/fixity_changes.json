@@ -1,7 +1,7 @@
 {
-"updated": "2026-11-25T04:56:06Z",
+"updated": "2026-11-25T05:06:17Z",
 "watched": 861,
-"changed_records": 99,
+"changed_records": 105,
 "suspected_source_changes": 0,
 "note": "지문 = 원 기관 응답(우리 판독기 정규형, 판독 시각 등 변동 항목 제외)의 SHA-256-16. pv = 판독기(route.js·lib) 지문. 이력은 지우지 않는다.",
 "changes": [
@@ -1881,6 +1881,120 @@
 {
 "at": "2026-11-25",
 "h": "78fba41ec8cd9257",
+"pv": "9da76e192de2",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "koreanwar:2022-US-02-AV-D-00049",
+"title": "장진호 전투 당시 미 해병대원을 싣고 이동하는 트럭 행렬 기록영상",
+"url": "https://www.koreanwar.or.kr:8443/searchDetail.do?archRfcd=2022-US-02-AV-D-00049",
+"history": [
+{
+"at": "2026-11-24",
+"h": "af303df56ad8113f",
+"pv": "37a207116194",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "474e1f6ac0eea105",
+"pv": "9da76e192de2",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "koreanwar:2022-US-02-AV-D-00245",
+"title": "한국에서의 해병대 퇴각 기록영상 1",
+"url": "https://www.koreanwar.or.kr:8443/searchDetail.do?archRfcd=2022-US-02-AV-D-00245",
+"history": [
+{
+"at": "2026-11-24",
+"h": "3f2eddc4af462d38",
+"pv": "37a207116194",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "ae657b8d4a5e0321",
+"pv": "9da76e192de2",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "koreanwar:2023-KR-01-AV-A-00044",
+"title": "6.25 KOREAN WAR 한국전쟁 2편: 중국군의 개입과 장진호 전투 DVD",
+"url": "https://www.koreanwar.or.kr:8443/searchDetail.do?archRfcd=2023-KR-01-AV-A-00044",
+"history": [
+{
+"at": "2026-11-24",
+"h": "3471b5f686bab070",
+"pv": "37a207116194",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "9bc38cc91c4e8428",
+"pv": "9da76e192de2",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "nara:NAID 373983536",
+"title": "FICHE_272",
+"url": "https://catalog.archives.gov/id/373983536",
+"history": [
+{
+"at": "2026-11-24",
+"h": "0cb2f61b9a836380",
+"pv": "37a207116194",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "fc767fda486b4fce",
+"pv": "9da76e192de2",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "nara:NAID 400402185",
+"title": "FICHE_586",
+"url": "https://catalog.archives.gov/id/400402185",
+"history": [
+{
+"at": "2026-11-24",
+"h": "ace93f3b0d6c7fb3",
+"pv": "37a207116194",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "0d4a86502d83e456",
+"pv": "9da76e192de2",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "koreanwar:2011-US-01-PF-A-00002",
+"title": "낙동강 주변 풍경 사진",
+"url": "https://www.koreanwar.or.kr:8443/searchDetail.do?archRfcd=2011-US-01-PF-A-00002",
+"history": [
+{
+"at": "2026-11-24",
+"h": "441b10f7f5623929",
+"pv": "5e1db1fb9360",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "39cbbf3e86a3215c",
 "pv": "9da76e192de2",
 "kind": "판독기 변경 동반"
 }
