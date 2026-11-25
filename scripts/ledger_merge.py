@@ -1970,14 +1970,21 @@ def write_quality(recs):
          "IIIF(실물 이미지 — 같은 기록 다른 소장처 포함)": lambda o: not iiif_kind(o).startswith("기록 봉투") or bool(o.get("iiif_same")), "IIIF(실물 이미지 — 제공+구축)": lambda o: not iiif_kind(o).startswith("기록 봉투"), "IIIF(브리지 포함)": lambda o: o.get("iiif") or o.get("iiif_built"), "썸네일": lambda o: o.get("thumb_ok"), "권리 표시": lambda o: o.get("rights_view"),
          "메타": lambda o: o.get("meta"), "원문 지문": lambda o: o.get("fixity"), "발견 경로": lambda o: o.get("found_by"), "발견 경로(파생 포함)": lambda o: o.get("found_by") or (o.get("found_by_derived") or {}).get("tools"),
          "관련 기록 연결": lambda o: REL.get(o["key"]), "같은 기록(다른 소장처) 연결": lambda o: any(t == "같은 기록(다른 소장처)" for t, _, _ in REL.get(o["key"], [])),
-         "날짜 교차 확인(일치)": lambda o: (o.get("date_cross") or {}).get("verdict") == "일치"}
+         "날짜 교차 확인(일치)": lambda o: (o.get("date_cross") or {}).get("verdict") == "일치",
+         "기록 봉투 사유 확정": lambda o: (o.get("envelope_basis") or {}).get("type") not in (None, "미구축") if iiif_kind(o).startswith("기록 봉투") else True,  # v3.12 이미지 없는 이유까지 아는 기록(봉투가 아니면 해당 없음=충족)
+         "원 소장처 계층(사본)": lambda o: o.get("origin_holder"), "원 기관 IIIF(브라우저 열람)": lambda o: o.get("iiif_origin")}
     day = dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%d")
     snap = {"records": len(R), **{k: round(100 * sum(1 for o in R if f(o)) / max(1, len(R)), 1) for k, f in F.items()}}
+    eb = {}
+    for o in R:
+        t_ = (o.get("envelope_basis") or {}).get("type")
+        if t_: eb[t_] = eb.get(t_, 0) + 1
+    snap["기록 봉투 사유(건)"] = dict(sorted(eb.items()))  # v3.12 사유 분류 축적(권리·기술·매체·원 기관 이미지 없음·미구축) — 기준 정보의 시계열
     p = os.path.join(D, "quality.json"); Qj = json.load(open(p, encoding="utf-8")) if os.path.exists(p) else {"note": "기록 항목별 채움률(%) 일별 시계열 — 지우지 않는다", "daily": {}}
     Qj["definitions"] = {"기관 IIIF": "iiif 필드가 있는 기록 — 원 기관 제공과 우리 브리지(원 기관 이미지로 구축)를 함께 센다(v2.75 이전부터의 시계열이라 이름 유지)",
                          "IIIF(원 기관 제공)": "원 기관이 직접 공개한 IIIF 매니페스트", "IIIF(원 기관 이미지로 구축)": "KOREA ARCHIVE 브리지가 원 기관 이미지·메타로 만든 매니페스트",
                          "IIIF(실물 이미지 — 제공+구축)": "위 둘의 합 — 나머지는 이미지 없는 기록 봉투", "IIIF(브리지 포함)": "기록 봉투까지 포함 — 모든 기록이 IIIF로 열림",
-                         "관련 기록 연결": "relations.json에서 다른 기록과 하나 이상 이어진 기록(같은 기록·같은 날·같은 계열, v2.82)", "같은 기록(다른 소장처) 연결": "기관 sameAs·식별자 일치로 다른 소장처의 같은 기록과 이어진 기록", "날짜 교차 확인(일치)": "같은 기록의 다른 소장처가 적은 날짜와 이 기록의 날짜가 일치(v2.84 date_cross — 두 기관 이상이 증언)"}  # v2.75
+                         "관련 기록 연결": "relations.json에서 다른 기록과 하나 이상 이어진 기록(같은 기록·같은 날·같은 계열, v2.82)", "같은 기록(다른 소장처) 연결": "기관 sameAs·식별자 일치로 다른 소장처의 같은 기록과 이어진 기록", "날짜 교차 확인(일치)": "같은 기록의 다른 소장처가 적은 날짜와 이 기록의 날짜가 일치(v2.84 date_cross — 두 기관 이상이 증언)", "기록 봉투 사유 확정": "이미지 없는 기록 봉투 중 사유(권리·기술·매체·원 기관 이미지 없음)가 실측 근거로 확정된 비율 — 봉투가 아닌 기록은 충족으로 센다(v3.12)", "기록 봉투 사유(건)": "envelope_basis 유형별 건수(v3.9.2~)", "원 소장처 계층(사본)": "사본 기록의 원 소장처·Record Group·식별자(origin_holder, v3.11)", "원 기관 IIIF(브라우저 열람)": "서버 확인 불가 기관의 공식 IIIF 규칙 주소(iiif_origin, v3.9)"}  # v2.75
     Qj["daily"][day] = snap; Qj["daily"] = dict(sorted(Qj["daily"].items())); Qj["latest"] = {"day": day, **snap}
     runs = Qj.setdefault("runs", [])  # v3.8.4 실행마다 측정 축적 — daily[날짜]는 그날 마지막 값이라 같은 날 여러 실행의 중간 측정이 덮어써지던 결함. 바로 앞과 같으면 중복이라 쌓지 않는다
     if not runs or {k: v for k, v in runs[-1].items() if k != "at"} != snap: runs.append({"at": dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"), **snap})
