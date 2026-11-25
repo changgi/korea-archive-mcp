@@ -13,7 +13,7 @@ jobs:
       - name: 보류 소스 탐침
         run: |
           set +e
-          UA="Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
+          UA="KoreaArchiveMCP/2.36 (+https://github.com/changgi/korea-archive-mcp; archival discovery; non-commercial research)"  # v3.40 정직 UA — 위장 UA로 '복구'를 판정하면 실제 수집기(정직 UA)와 결과가 어긋난다
           recovered=0
           # 1차 실행(2026-11-21) 교훈: curl은 403에도 exit 0 → HTTP 코드 실측 필수.
           # 마커는 차단 페이지(JS 챌린지·Incapsula·보안확인)에 절대 없을 문자열로 — URL 에코 문자열 금지.
