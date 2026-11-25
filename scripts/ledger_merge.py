@@ -2392,7 +2392,10 @@ def build_coverage():
                         e = Q.setdefault(q, {}).setdefault(src, {"hit": 0, "zero": 0, "zero_legacy": 0, "fail": 0, "max": 0, "first": at, "last": at})
                         if v == "—": k = "fail"
                         elif v == "0": k = "zero" if src in COVERAGE_STRICT and at >= COVERAGE_STRICT[src] else "zero_legacy"
-                        else: k = "hit"; e["max"] = max(e["max"], int(v))
+                        else:
+                            k = "hit"; e["max"] = max(e["max"], int(v))
+                            if not (o.get("args") or {}).get("variants"):  # v3.53 표기 변형 없이 얻은 결과 — 변화 신호 비교 기준(variants 결과와 섞지 않음)
+                                e["hit_plain"] = e.get("hit_plain", 0) + 1; e["max_plain"] = max(e.get("max_plain", 0), int(v)); e["last_hit_plain"] = max(e.get("last_hit_plain", ""), at)
                         e[k] += 1; e["last_" + ("zero" if k == "zero_legacy" else k)] = max(e.get("last_" + ("zero" if k == "zero_legacy" else k), ""), at)
                         e["first"] = min(e["first"], at)
                         if at >= e["last"]: e["last"] = at; e["last_status"] = ("fail" if k == "fail" else "zero" if v == "0" else f"hit:{v}")

@@ -1990,6 +1990,23 @@
    ],
    "level": "warn",
    "note": "v3.52 실패 채널의 과거 관측은 등록부에 결과(hit)가 있을 때만 — 결과가 한 번도 없던 질의·기관에 근거를 지어 붙이지 않는다"
+  },
+  {
+   "id": "zero-no-false-change-signal",
+   "tool": "cross_search",
+   "args": {
+    "query": "zqxjvwkpq",
+    "sources": "tna,europeana",
+    "max_per_source": 2
+   },
+   "must": [
+    "tna:0"
+   ],
+   "must_not": [
+    "변화 신호"
+   ],
+   "level": "warn",
+   "note": "v3.53 확정 0인데 같은 질의·같은 조건(표기 변형 여부)의 과거 결과가 있을 때만 변화 신호 — 결과가 한 번도 없던 질의에는 붙이지 않는다"
   }
  ]
 }
