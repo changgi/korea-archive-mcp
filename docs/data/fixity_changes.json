@@ -1,7 +1,7 @@
 {
-"updated": "2026-11-25T04:13:15Z",
+"updated": "2026-11-25T04:22:01Z",
 "watched": 856,
-"changed_records": 57,
+"changed_records": 76,
 "suspected_source_changes": 0,
 "note": "지문 = 원 기관 응답(우리 판독기 정규형, 판독 시각 등 변동 항목 제외)의 SHA-256-16. pv = 판독기(route.js·lib) 지문. 이력은 지우지 않는다.",
 "changes": [
@@ -1083,6 +1083,367 @@
 {
 "at": "2026-11-25",
 "h": "553367a0e709e7ec",
+"pv": "9da76e192de2",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "nara:NAID 16845104",
+"title": "Aircraft Summaries, 1951",
+"url": "https://catalog.archives.gov/id/16845104",
+"history": [
+{
+"at": "2026-11-24",
+"h": "f5be0bac024902fe",
+"pv": "6acdd5764c47",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "90f7f8e246e20daa",
+"pv": "9da76e192de2",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "nara:NAID 22023",
+"title": "KOREAN WAR, SLATE: MARINES TAKE FIRST OBJECTIVE, NAKTONG RIVER",
+"url": "https://catalog.archives.gov/id/22023",
+"history": [
+{
+"at": "2026-11-24",
+"h": "cc9872c14b3a302e",
+"pv": "5e1db1fb9360",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "6e95846241ec3772",
+"pv": "9da76e192de2",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "nara:NAID 22062",
+"title": "KOREAN WAR, 1ST BN., 5TH MARINE REGT., 1ST PROVISIONAL MARINE BRIGADE IN DRIVE TO NAKTONG (2ND BATTL",
+"url": "https://catalog.archives.gov/id/22062",
+"history": [
+{
+"at": "2026-11-24",
+"h": "ec40d90960dced82",
+"pv": "5e1db1fb9360",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "f16eaacf555a9d43",
+"pv": "9da76e192de2",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "nara:NAID 22154",
+"title": "KOREAN WAR: NK PRISONERS TAKEN BY 8TH ROK DIV NEAR PUNGGI ; 3RD ROK VID, NORTH OF HANGNUNG ; SIGNAL",
+"url": "https://catalog.archives.gov/id/22154",
+"history": [
+{
+"at": "2026-11-24",
+"h": "c6ba6f9b93291d12",
+"pv": "fa7cffafb977",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "5dc8b0c90f1b20ce",
+"pv": "9da76e192de2",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "nara:NAID 22228",
+"title": "UN DAY, SEOUL, KOREA ; KOREAN WAR, SUKCHON",
+"url": "https://catalog.archives.gov/id/22228",
+"history": [
+{
+"at": "2026-11-24",
+"h": "fbebb4e2e89ab39d",
+"pv": "abdeaf098d6a",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "dc5d44d0edc4b589",
+"pv": "9da76e192de2",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "nara:NAID 22395",
+"title": "GEN MATTHEW B RIDGWAY, YONGPYANG, KOREA ; EVACUATION, HUNGNAM ; KMAG, MUNSAN, KOREA ; LT GEN MATTHEW",
+"url": "https://catalog.archives.gov/id/22395",
+"history": [
+{
+"at": "2026-11-24",
+"h": "179fd45499efed1a",
+"pv": "5e1db1fb9360",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "8e02ca3450ef7758",
+"pv": "9da76e192de2",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "nara:NAID 24032",
+"title": "MARINE RETREAT IN KOREA",
+"url": "https://catalog.archives.gov/id/24032",
+"history": [
+{
+"at": "2026-11-24",
+"h": "74c0fade82bd9b1b",
+"pv": "5e1db1fb9360",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "bb989206f9a59b03",
+"pv": "9da76e192de2",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "ktv:25325",
+"title": "클린턴 대통령 방한 (1966호)",
+"url": "https://www.ehistory.go.kr/view/movie?mediasrcgbn=KV&mediagbn=DH&mediaid=11280&mediadtl=25325",
+"history": [
+{
+"at": "2026-11-24",
+"h": "2e93230b1aa968dc",
+"pv": "497c2a6f518a",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "6570bb53e7d39de2",
+"pv": "9da76e192de2",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "ktv:25509",
+"title": "상기하자 6.25",
+"url": "https://www.ehistory.go.kr/view/movie?mediasrcgbn=KV&mediagbn=MH&mediaid=11359&mediadtl=25509",
+"history": [
+{
+"at": "2026-11-24",
+"h": "890e39b874505956",
+"pv": "7615c02802df",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "af0388a74b9aabd7",
+"pv": "9da76e192de2",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "ktv:27052",
+"title": "아! 잊으랴 어찌 우리 그 날을",
+"url": "https://www.ehistory.go.kr/view/movie?mediasrcgbn=KV&mediagbn=MH&mediaid=11899&mediadtl=27052",
+"history": [
+{
+"at": "2026-11-24",
+"h": "832e5736f0702cae",
+"pv": "7615c02802df",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "76e713215db922a5",
+"pv": "9da76e192de2",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "ktv:308995",
+"title": "6자회담 제3차 경제, 에너지 협력 실무그룹 회의 종료후 기념촬영",
+"url": "https://www.ehistory.go.kr/view/photo?mediasrcgbn=PT&mediagbn=GE&mediaid=1002184&mediadtl=308995",
+"history": [
+{
+"at": "2026-11-24",
+"h": "a453c920724af4d2",
+"pv": "497c2a6f518a",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "933c95d68d807cef",
+"pv": "9da76e192de2",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "ktv:5280",
+"title": "비전향 장기수 판문점 통해 북한 송환",
+"url": "https://www.ehistory.go.kr/view/photo?mediasrcgbn=BK&mediagbn=&mediaid=23&mediadtl=5280",
+"history": [
+{
+"at": "2026-11-24",
+"h": "c9a2b032da1ccb18",
+"pv": "497c2a6f518a",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "cd74b4014be698c6",
+"pv": "9da76e192de2",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "ktv:8195",
+"title": "다시는 전쟁이 일어나지 않기를",
+"url": "https://www.ehistory.go.kr/view/movie?mediasrcgbn=KV&mediagbn=MH&mediaid=1559&mediadtl=8195",
+"history": [
+{
+"at": "2026-11-24",
+"h": "b49318f585d4ea2c",
+"pv": "7615c02802df",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "d4cc7e90f74b42a2",
+"pv": "9da76e192de2",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "ktv:8705",
+"title": "대한뉴스의 발자취 (제1집)",
+"url": "https://www.ehistory.go.kr/view/movie?mediasrcgbn=KV&mediagbn=MH&mediaid=1886&mediadtl=8705",
+"history": [
+{
+"at": "2026-11-24",
+"h": "39bd4bd2e6d2e269",
+"pv": "7615c02802df",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "7319b0de57f3b922",
+"pv": "9da76e192de2",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "ktv:8852",
+"title": "1950년대 우리나라(1)",
+"url": "https://www.ehistory.go.kr/view/movie?mediasrcgbn=KV&mediagbn=MH&mediaid=2003&mediadtl=8852",
+"history": [
+{
+"at": "2026-11-24",
+"h": "ba879b9f092f0223",
+"pv": "497c2a6f518a",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "b5568e74ec5845ac",
+"pv": "9da76e192de2",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "ktv:9033",
+"title": "한국 전쟁(2)",
+"url": "https://www.ehistory.go.kr/view/movie?mediasrcgbn=KV&mediagbn=MH&mediaid=2212&mediadtl=9033",
+"history": [
+{
+"at": "2026-11-24",
+"h": "3a4d1da532718676",
+"pv": "7615c02802df",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "26f4a78168bd84d2",
+"pv": "9da76e192de2",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "ktv:9048",
+"title": "한국 전쟁",
+"url": "https://www.ehistory.go.kr/view/movie?mediasrcgbn=KV&mediagbn=MH&mediaid=2171&mediadtl=9048",
+"history": [
+{
+"at": "2026-11-24",
+"h": "8e1181b6c4bab224",
+"pv": "7615c02802df",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "77128f2b164536e9",
+"pv": "9da76e192de2",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "ktv:9161",
+"title": "대한뉴스 1500호 특집",
+"url": "https://www.ehistory.go.kr/view/movie?mediasrcgbn=KV&mediagbn=MH&mediaid=2265&mediadtl=9161",
+"history": [
+{
+"at": "2026-11-24",
+"h": "e5f1fa162cb5a4a6",
+"pv": "7615c02802df",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "5e3ddaac0b35b07a",
+"pv": "9da76e192de2",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "ktv:9206",
+"title": "6.25 전쟁 발발",
+"url": "https://www.ehistory.go.kr/view/movie?mediasrcgbn=KV&mediagbn=MH&mediaid=2373&mediadtl=9206",
+"history": [
+{
+"at": "2026-11-24",
+"h": "318db0c9b9626b3c",
+"pv": "7615c02802df",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-25",
+"h": "f264fecf7937b96e",
 "pv": "9da76e192de2",
 "kind": "판독기 변경 동반"
 }
