@@ -2409,6 +2409,29 @@ def build_coverage():
     return len(Q), nrep
 
 
+def retry_failed_coverage(budget=6, min_age_h=6):
+    """v3.48 조회 범위 등록부의 '조회 실패'를 다시 조회 — 실패는 증거의 빈칸(기록이 없다는 뜻이 아님)이므로 원장 실행마다 소량(budget) 재조회해
+    확정 0·결과로 바꿀 기회를 만든다. 회신은 서버가 점검 질의(queries/probe/, X-KA-Probe=ledger)로 축적하고 다음 원장 실행의 등록부에 반영된다.
+    대상: 마지막 상태가 실패이고 마지막 실패가 min_age_h시간 이상 지난 질의×기관, 실패 횟수 적은 것부터(오래 막힌 곳이 예산을 독점하지 않게)."""
+    p = os.path.join(D, "coverage.json")
+    if not os.path.exists(p): return 0, 0
+    C = json.load(open(p, encoding="utf-8"))
+    cut = (dt.datetime.now(dt.timezone.utc) - dt.timedelta(hours=min_age_h)).strftime("%Y-%m-%dT%H:%M:%SZ")
+    cand = sorted(((e["fail"], q, src) for q, S in (C.get("queries") or {}).items() for src, e in S.items()
+                   if e.get("last_status") == "fail" and e.get("last_fail", e.get("last", "")) <= cut), key=lambda x: (x[0], x[1], x[2]))
+    tried = ok = 0
+    for _, q, src in cand[:budget]:
+        tried += 1
+        try:
+            t = mcp_call("cross_search", {"query": q, "sources": src, "max_per_source": 2})
+            m = re.search(r"채널별 \[([^\]]*)\]", t)
+            if m and re.search(rf"\b{re.escape(src)}:(\d+)", m[1]): ok += 1
+        except Exception as e:
+            print(f"조회 실패 재조회 {q}·{src}: {str(e)[:60]}")
+    if tried: print(f"조회 범위 등록부 — 조회 실패 재조회 {tried}건 중 응답 판독 {ok}건(다음 실행 때 등록부 반영)")
+    return tried, ok
+
+
 def write_quality(recs):
     """v2.39 데이터 품질 시계열 — 기록 항목별 채움률을 날마다 쌓는다(지우지 않음, 같은 날은 갱신). 떨어지면 수집기·판독기 이상 신호."""
     R = [o for o in recs if o.get("entry_type", "기록") == "기록"]
@@ -2901,7 +2924,10 @@ table{{width:100%;border-collapse:collapse;font-size:14px}}td,th{{border-bottom:
 <h2>일별 활용(최근 14일)</h2><table><tr><th>날짜</th><th>검색 묶음</th><th>발견 기록</th><th>신규 기록</th></tr>{urow}</table><p style="font-size:13px">형식별 누계: {E_(fmtv(usage['formats']))} · <a href="usage.json">usage.json</a></p>
 <h2>질의·회신 축적</h2><p style="font-size:13px">모든 도구 호출의 질의와 회신 본문을 원문 그대로(가공·삭제 없이) 영구 보존합니다. 같은 질의·같은 회신은 한 번만 두고 횟수만 셉니다. 회신이 달라지면 새 판으로 남겨 기관 응답 변화의 증거로 씁니다. 고유 질의 {nq['total']}건 · 누적 호출 {nq['calls']}회 · 도구별 {E_(fmtv(nq['by_tool']))} · <a href="queries/index.json">queries/index.json</a> (월별 회신 원문 queries/YYYY-MM.jsonl.gz) · 자동 점검(골든·헬스·원장 보강) 질의·회신은 활용 집계와 분리해 <a href="queries/probe/index.json">queries/probe/</a>에 따로 축적(고유 {npq['total']}건 — 기관 응답 변화·장애의 증거)</p><table><tr><th>최근</th><th>도구</th><th>질의</th><th>횟수</th></tr>{qrow}</table>
 <h2>최근 발견 100건</h2><div class="g">{rows}</div></main></html>""")
-    build_tree(recs); ncls = merge_classes(recs); nprov, _orph = build_provenance(recs); nfx = write_fixity(recs); nql = write_quality(recs); ncov = build_coverage(); print(f'조회 범위 등록부 질의 {ncov[0]}개 · 회신 {ncov[1]}건 — coverage.json'); nsub = merge_subjects(recs); nau = build_authorities(recs); print(f'기관 전거 외부 연결 {nau}건 — authorities.json'); npe = build_persons(recs); print(f'인물 사전 {npe}명 — persons.json·persons.jsonld·person/'); build_dict_page(recs); npl = build_places(recs); print(f'지명 사전 {npl}곳 — places.json·places.jsonld'); nmed = build_media(recs); npg = build_record_pages(recs); ndg = build_digest(recs, today); nact = build_activity(recs); print(f"IIIF Change Discovery 활동 {nact}건 — activity/collection.json"); ncat = build_catalog(recs, nql)
+    build_tree(recs); ncls = merge_classes(recs); nprov, _orph = build_provenance(recs); nfx = write_fixity(recs); nql = write_quality(recs); ncov = build_coverage();
+    try: retry_failed_coverage()  # v3.48 실패 관측 재조회(예산 6)
+    except Exception as e: print(f'조회 실패 재조회 생략: {e}')
+    print(f'조회 범위 등록부 질의 {ncov[0]}개 · 회신 {ncov[1]}건 — coverage.json'); nsub = merge_subjects(recs); nau = build_authorities(recs); print(f'기관 전거 외부 연결 {nau}건 — authorities.json'); npe = build_persons(recs); print(f'인물 사전 {npe}명 — persons.json·persons.jsonld·person/'); build_dict_page(recs); npl = build_places(recs); print(f'지명 사전 {npl}곳 — places.json·places.jsonld'); nmed = build_media(recs); npg = build_record_pages(recs); ndg = build_digest(recs, today); nact = build_activity(recs); print(f"IIIF Change Discovery 활동 {nact}건 — activity/collection.json"); ncat = build_catalog(recs, nql)
     print(f"원장 {len(recs)}건 (신규 {new_recs}, 묶음 {new_batches}) · 맥락 연결 {nrel}")
     print(f"질의 고유 {nq['total']}건(신규 {nq['added']}) · 분류 경로 {ncls}개 · 발견 경로 질의 {nprov}종 · 다매체(피드 {nmed[0]}·인용 {nmed[1]}·연대 {nmed[2]}) · 주제 색인 {nsub} · 품질 권리 {nql['권리 표시']}% 요약 {nql['요약']}% 연대 {nql['연대']}%")
 
