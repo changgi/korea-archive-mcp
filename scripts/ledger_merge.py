@@ -1388,6 +1388,11 @@ def same_targets(o):
             if mm: out.append(("naid", mm[1], f"기관 메타 '{k}'의 NARA 카탈로그 링크"))
         mm = NARA_LINK.search(o.get("summary") or "") if o["key"].startswith("ia:") else None
         if mm: out.append(("naid", mm[1], "IA 기술(description)의 NARA 카탈로그 링크"))
+    if o["key"].startswith("gallery:"):  # v3.2.1 우리 갤러리 카드의 '원 기록' 표기 — 재게시본 ↔ 원 기관 원본(NAID·archive.org 식별자)
+        for k, v in (o.get("meta") or []):
+            if k != "원 기록": continue
+            for n in re.findall(r"NAID (\d+)", str(v)): out.append(("naid", n, "갤러리 카드 '원 기록' 표기 — KOREA ARCHIVE 갤러리 재게시본의 원본"))
+            for i in re.findall(r"archive\.org (\S+?)(?=\s|\(|$)", str(v)): out.append(("ia", i, "갤러리 카드 '원 기록' 표기 — KOREA ARCHIVE 갤러리 재게시본의 원본"))
     seen = set(); return [t for t in out if not (t[:2] in seen or seen.add(t[:2]))]
 
 TARGET_INST = {"kw": "koreanwar:", "nara_local": "nara:", "naid": "nara:", "ia": "ia:"}  # 상대 기록의 소장처 — IA 식별자가 NARA 로컬 식별자와 같아 자기 자신에 걸리지 않게
