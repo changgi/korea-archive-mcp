@@ -1110,14 +1110,20 @@ EVENTS = [("흥남 철수", r"흥남\s?철수|Hungnam evacuation|EVACUATION[^;]{
           ("서울 수복", r"서울\s?수복|9[·.]28\s?수복|recapture of Seoul|RECAPTURE OF SEOUL|Liberation of Seoul", "1950-09-20", "1950-09-29"),
           ("장진호 전투", r"장진호\s?전투|Battle of (?:the )?Chosin", "1950-11-27", "1950-12-13"),  # 'Chosin Reservoir'는 지역명 — 사건 아님
           ("가평 전투", r"가평\s?전투|Battle of Kapyong", "1951-04-22", "1951-04-25"),
-          ("정전협정 조인", r"정전\s?협정\s?조인|휴전\s?협정\s?조인|signing of the (?:Korean )?armistice", "1953-07-27", "1953-07-27")]
+          ("정전협정 조인", r"정전\s?협정\s?조인|휴전\s?협정\s?조인|signing of the (?:Korean )?armistice", "1953-07-27", "1953-07-27"),
+          # v3.19 원장 제목 실측 2건 이상(2026-11-25) — 구체 사건을 먼저, '한국전쟁(전 기간)'은 마지막(다른 사건이 먼저 맞으면 그것으로)
+          ("판문점(휴전) 회담", r"판문점\s?(?:휴전\s?)?회담|휴전\s?회담|정전\s?회담|armistice talks|truce talks|talks at Panmunjom|PEACE TALKS", "1951-07-10", "1953-07-27"),
+          ("중공군 개입", r"중공군\s?(?:개입|참전)|Chinese (?:Communist )?intervention", "1950-10-19", "1950-11-30"),
+          ("1·4 후퇴", r"1[·.]4\s?후퇴", "1951-01-03", "1951-01-07"),
+          ("3·1운동", r"3[·.]1\s?운동|삼일운동|三一運動|March 1st Movement", "1919-03-01", "1919-05-31"),
+          ("한국전쟁(전 기간)", r"한국전쟁|6[·.]25\s?전쟁|Korean War|朝鮮戦争", "1950-06-25", "1953-07-27")]
 _EV = [(n, re.compile(rx, re.I), a, b) for n, rx, a, b in EVENTS]
 
 def event_date_check(o):
     d = str(o.get("date") or o.get("date_derived") or "")
     d = re.sub(r"-01-01T00:00:00Z$", "", d)  # IA 등 '연도만'을 1월 1일 0시로 적은 표기
     m = re.match(r"^(\d{4})(?:-(\d{2}))?(?:-(\d{2}))?", d)
-    if not m: return None
+    if not m or int(m[1]) < 1000: return None  # '0000' = 기관의 날짜 미상 표기(6·25전쟁 아카이브센터) — 대조하지 않음
     lo = f"{m[1]}-{m[2] or '01'}-{m[3] or '01'}"; hi = f"{m[1]}-{m[2] or '12'}-{m[3] or '31'}"  # 기록 날짜의 가능한 범위(연·월 단위 표기면 넓게)
     rng = re.search(r"~(\d{4})", d)
     if rng: hi = f"{rng[1]}-12-31"
