@@ -1,10 +1,105 @@
 {
-"updated": "2026-11-25T23:37:27Z",
+"updated": "2026-11-26T13:18:21Z",
 "watched": 874,
-"changed_records": 191,
+"changed_records": 196,
 "suspected_source_changes": 0,
 "note": "지문 = 원 기관 응답(우리 판독기 정규형, 판독 시각 등 변동 항목 제외)의 SHA-256-16. pv = 판독기(route.js·lib) 지문. 이력은 지우지 않는다.",
 "changes": [
+{
+"key": "nara:NAID 22344",
+"title": "Withdrawal of 1st Marine, Hamhung, Korea ; Withdrawal of 1st Marines, Hagaru-re to Hamhung, North Korea, withdrawal from Chosin Reservoir Area",
+"url": "https://catalog.archives.gov/id/22344",
+"history": [
+{
+"at": "2026-11-24",
+"h": "6d147c7d75a6f189",
+"pv": "5a97e7d08483",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-26",
+"h": "39c60974a1e09349",
+"pv": "ea6e76c6334f",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "nara:NAID 22348",
+"title": "B-26 BOMB MISSION, KOREA",
+"url": "https://catalog.archives.gov/id/22348",
+"history": [
+{
+"at": "2026-11-24",
+"h": "299c155fa40efa78",
+"pv": "5a97e7d08483",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-26",
+"h": "8a7c657f66adad7b",
+"pv": "ea6e76c6334f",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "nara:NAID 373960610",
+"title": "FICHE_156",
+"url": "https://catalog.archives.gov/id/373960610",
+"history": [
+{
+"at": "2026-11-24",
+"h": "9d743ec66ff3bb91",
+"pv": "5a97e7d08483",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-26",
+"h": "84c21d883a6976cf",
+"pv": "ea6e76c6334f",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "nara:NAID 400397386",
+"title": "FICHE_562",
+"url": "https://catalog.archives.gov/id/400397386",
+"history": [
+{
+"at": "2026-11-24",
+"h": "d00b82a7e8b985e9",
+"pv": "5a97e7d08483",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-26",
+"h": "39a1d005dba1e89d",
+"pv": "ea6e76c6334f",
+"kind": "판독기 변경 동반"
+}
+]
+},
+{
+"key": "nara:NAID 22397",
+"title": "EVACUATION, HUNGNAM, KOREA",
+"url": "https://catalog.archives.gov/id/22397",
+"history": [
+{
+"at": "2026-11-24",
+"h": "b67b850941e3ad79",
+"pv": "5a97e7d08483",
+"kind": "첫 지문"
+},
+{
+"at": "2026-11-26",
+"h": "edf992abb212e2a4",
+"pv": "ea6e76c6334f",
+"kind": "판독기 변경 동반"
+}
+]
+},
 {
 "key": "un:A/HRC/28/NGO/9",
 "title": "[A/HRC/28/NGO/9] Human rights situations that require the Council's attention : written statement",

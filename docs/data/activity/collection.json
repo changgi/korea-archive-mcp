@@ -2,7 +2,7 @@
  "@context": "http://iiif.io/api/discovery/1/context.json",
  "id": "https://changgi.github.io/korea-archive-mcp/data/activity/collection.json",
  "type": "OrderedCollection",
- "totalItems": 1101,
+ "totalItems": 1106,
  "summary": "KOREA ARCHIVE 통합검색 발견 원장의 IIIF 매니페스트 생성(원장 첫 발견)·갱신(원 기관 응답 지문 변경) 활동 — IIIF Change Discovery API 1.0",
  "first": {
   "id": "https://changgi.github.io/korea-archive-mcp/data/activity/page-0.json",
