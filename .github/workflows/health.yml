@@ -1,12 +1,14 @@
 name: health
-# 주간 소스 헬스체크 — 프로덕션 30채널 골든 질의 실측(source_profile health, 채널별 ms 포함)
+# 일일 소스 헬스체크 — 프로덕션 채널 골든 질의 실측(source_profile health, 채널별 ms 포함)
 # + 같은 기록 묶기 회귀(v1.86~89: 협약기관·IA 사본 ↔ NARA 원본 병합이 실제로 일어나는지).
-# 🔴(차단·타임아웃)가 3채널 이상이면 실패 → 알림. 기지(旣知) 🔴: gallica(BnF 차단)·foia(opengov 타임아웃).
+# 알림 기준(v3.58): 기지(旣知) 🔴는 foia(서울정보소통광장 시간 초과) 하나뿐이고, **기지 외 🔴가 1채널이라도 있으면 즉시 실패**한다.
+#   옛 기준은 '🔴 3채널 이상' + 기지 목록 gallica·foia였는데, gallica는 복구(🟢)되고 국가기록원(archives)이 코드 04로 죽은 2026-11-27 장애를
+#   3채널 미만이라 그대로 놓쳤다(심사 기간에 대표 국내 기관이 사는 일을 자동 감시가 못 잡는 공백). 기지 채널이 복구되거나
+#   새로 죽으면 KNOWN 집합과 이 기준을 조정할 것. 주기는 주 1회 → 매일로 당긴다(주 1회면 최대 7일 늦게 발견).
 # v3.55 foia가 복구되면(숫자 판정) '0건 표지 실측 필요' 이슈를 자동으로 연다(미실측 후보 표지를 확정하기 위해).
-# 기지 채널이 복구되거나 새로 죽으면 이 임계값을 조정할 것.
 on:
   schedule:
-    - cron: '23 21 * * 1'   # 매주 월 06:23 KST
+    - cron: '23 21 * * *'   # 매일 06:23 KST
   workflow_dispatch: {}
 permissions:
   contents: read
@@ -30,16 +32,22 @@ jobs:
             -o /tmp/health.raw
           sed 's/^data: //' /tmp/health.raw | grep -m1 '^{' > /tmp/health.json
           python3 - <<'EOF'
-          import json, os, sys
+          import json, os, re, sys
+          KNOWN = {'foia'}  # 기지(旣知) 장애 — 서울정보소통광장 연결 실패(6s 타임아웃). 복구되면 이 집합에서 뺄 것
           d = json.load(open('/tmp/health.json'))
           text = d['result']['content'][0]['text']
           print(text)
           with open(os.environ['GITHUB_STEP_SUMMARY'], 'a') as f:
-              f.write('## 주간 소스 헬스체크\n```\n' + text + '\n```\n')
-          red = sum(1 for ln in text.splitlines() if ln.startswith('🔴'))  # 범례의 🔴 제외
-          if red >= 3:
-              print(f'::error::🔴 {red}채널 — 기지 2채널(gallica·foia) 초과. 신규 장애 점검 필요.')
+              f.write('## 소스 헬스체크\n```\n' + text + '\n```\n')
+          # 채널 줄만 센다('🔴 archives: …' — 소문자 채널 키). 파이프라인 신선도 줄('🔴 연구원 연구DB 색인(…)')과 범례는 제외
+          red = re.findall(r'^🔴\s*([a-z0-9_]+)\s*:', text, re.M)
+          unknown = sorted({c for c in red if c not in KNOWN})
+          with open(os.environ['GITHUB_STEP_SUMMARY'], 'a') as f:
+              f.write(f'\n- 🔴 {len(red)}채널 {sorted(set(red))} · 기지 {sorted(set(red) & KNOWN)} · 기지 외 {unknown}\n')
+          if unknown:
+              print(f'::error::🔴 기지 외 채널 장애 {len(unknown)}곳({", ".join(unknown)}) — 기지 {sorted(KNOWN)} 외 🔴는 즉시 점검(대표 기관이 죽은 채 심사에 들어가면 실행 완성도 점수 전체가 위험).')
               sys.exit(1)
+          print(f'기지 외 🔴 없음(기지 {sorted(set(red) & KNOWN) or "해당 없음"})')
           EOF
       - name: 기지 차단 채널 복구 감지(foia) — 복구 시 0건 표지 실측 이슈
         env:
@@ -73,7 +81,7 @@ jobs:
               title = "기지 차단 채널 복구 감지 — foia(서울정보소통광장): 0건 표지 실측 필요"
               have = subprocess.run(["gh", "issue", "list", "--repo", os.environ["GITHUB_REPOSITORY"], "--state", "open", "--search", title, "--json", "number", "-q", ".[0].number"], capture_output=True, text=True).stdout.strip()
               if not have:
-                  body = (f"주간 헬스체크가 foia 응답을 판독했습니다({line}).\n\n"
+                  body = (f"헬스체크가 foia 응답을 판독했습니다({line}).\n\n"
                           "할 일: ① 무의미 질의(zqxjvwkpq) 응답 본문에서 0건 표지를 실측(조회 실패 메시지의 '본문:' 동봉 부분 또는 직접 열람) → "
                           "② route.js foia·server.py _c_foia의 zeroOr 표지를 실측값으로 확정 → ③ ledger_merge.py COVERAGE_STRICT에 foia 추가 → "
                           "④ 골든 must/must_not 추가. MAINTAINING.md '확정 0' 항목 참고.\n\n"
@@ -129,5 +137,5 @@ jobs:
           gh label create auto-health --color B60205 --description "자동 감시가 발견한 장애" 2>/dev/null || true
           url="${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
           num=$(gh issue list --repo "${{ github.repository }}" --label auto-health --state open --search "헬스체크" --json number -q '.[0].number')
-          msg="주간 헬스체크 실패 — 채널 장애 또는 같은 기록 묶기 회귀. 실행 요약: $url · 조치: MAINTAINING.md '사이트가 바뀌었을 때'."
-          if [ -n "$num" ]; then gh issue comment "$num" --repo "${{ github.repository }}" --body "$msg"; else gh issue create --repo "${{ github.repository }}" --title "주간 헬스체크 실패" --label auto-health --body "$msg"; fi
+          msg="헬스체크 실패 — 채널 장애 또는 같은 기록 묶기 회귀. 실행 요약: $url · 조치: MAINTAINING.md '사이트가 바뀌었을 때'."
+          if [ -n "$num" ]; then gh issue comment "$num" --repo "${{ github.repository }}" --body "$msg"; else gh issue create --repo "${{ github.repository }}" --title "헬스체크 실패" --label auto-health --body "$msg"; fi
