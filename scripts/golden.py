@@ -47,6 +47,15 @@ for c in G['cases']:
     for rx in c.get('must_not', []):
         if txt and re.search(rx, txt):
             probs.append(f'금지 패턴 출현: /{rx}/')
+    if c.get('json_fence') and txt:  # v3.58 코드펜스 안 JSON이 실제로 파싱되는지 — 24KB 가드가 문자열을 자르면 json.loads가 실패한다(정규식만큼는 못 잡는 결함)
+        m = re.search(r'```json\n([\s\S]*?)\n```', txt)
+        if not m:
+            probs.append('JSON 코드펜스 없음(절단 의심)')
+        else:
+            try:
+                json.loads(m.group(1))
+            except Exception as e:  # noqa: BLE001
+                probs.append(f'JSON 파싱 실패: {str(e)[:80]}')
     if not txt and not probs:
         probs.append('빈 응답')
     lv = c.get('level', 'error')
