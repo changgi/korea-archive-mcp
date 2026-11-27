@@ -19,8 +19,8 @@
    "@id": "https://changgi.github.io/korea-archive-mcp/data/catalog.jsonld#dataset",
    "@type": "dcat:Dataset",
    "dct:title": "KOREA ARCHIVE 통합검색 — 발견 누적 원장",
-   "dct:description": "사용자들이 KOREA ARCHIVE 통합검색 도구로 국내외 아카이브에서 발굴한 한국 관련 기록 933건의 재기술·계층·IIIF·권리 표시·발견 경로·질의 축적. 원 기관 표기 그대로, 파생 정보는 [파생] 표시, 축적 정보는 지우지 않는다.",
-   "dct:modified": "2026-11-27T13:19:51Z",
+   "dct:description": "사용자들이 KOREA ARCHIVE 통합검색 도구로 국내외 아카이브에서 발굴한 한국 관련 기록 1033건의 재기술·계층·IIIF·권리 표시·발견 경로·질의 축적. 원 기관 표기 그대로, 파생 정보는 [파생] 표시, 축적 정보는 지우지 않는다.",
+   "dct:modified": "2026-11-27T23:33:45Z",
    "dct:publisher": {
     "@type": "foaf:Agent",
     "foaf:name": "KOREA ARCHIVE 통합검색"
@@ -88,11 +88,11 @@
       "@id": "https://changgi.github.io/korea-archive-mcp/data/discovered.csv"
      },
      "dcat:mediaType": "text/csv",
-     "dcat:byteSize": 1939823,
+     "dcat:byteSize": 2116353,
      "spdx:checksum": {
       "@type": "spdx:Checksum",
       "spdx:algorithm": "spdx:checksumAlgorithm_sha256",
-      "spdx:checksumValue": "1381cf76d4973c4fb994ce961f1c21d80e514ff36d011ddbbe99467782637964"
+      "spdx:checksumValue": "7139fcba196f7418b1494d8ba87b800205ff454f2b8c10ecbe4e36118abdf3f4"
      }
     },
     {
@@ -102,11 +102,11 @@
       "@id": "https://changgi.github.io/korea-archive-mcp/data/discovered.jsonl"
      },
      "dcat:mediaType": "application/jsonl",
-     "dcat:byteSize": 2601470,
+     "dcat:byteSize": 2841564,
      "spdx:checksum": {
       "@type": "spdx:Checksum",
       "spdx:algorithm": "spdx:checksumAlgorithm_sha256",
-      "spdx:checksumValue": "b93d9bab8cab08ceea37753d12fa080980d11813837193bf4e7c693d6c9ae0f1"
+      "spdx:checksumValue": "025a367d9c1e33687b1c90af79b24c2754b6a99d99e131d46ae6d5ae3ffc9063"
      }
     },
     {
@@ -116,11 +116,11 @@
       "@id": "https://changgi.github.io/korea-archive-mcp/data/discovered.jsonld"
      },
      "dcat:mediaType": "application/ld+json",
-     "dcat:byteSize": 2577854,
+     "dcat:byteSize": 2858106,
      "spdx:checksum": {
       "@type": "spdx:Checksum",
       "spdx:algorithm": "spdx:checksumAlgorithm_sha256",
-      "spdx:checksumValue": "c4b2746cbee3ed6edded1872a8c0c777b81f2e7a5bdbb112afde64c62f71f789"
+      "spdx:checksumValue": "fcd50a6e5ef8521a3b0fb68a07c65fe260aa275649f475e7843f376c07f71350"
      }
     },
     {
@@ -130,11 +130,11 @@
       "@id": "https://changgi.github.io/korea-archive-mcp/data/collection.json"
      },
      "dcat:mediaType": "application/ld+json",
-     "dcat:byteSize": 84698,
+     "dcat:byteSize": 105665,
      "spdx:checksum": {
       "@type": "spdx:Checksum",
       "spdx:algorithm": "spdx:checksumAlgorithm_sha256",
-      "spdx:checksumValue": "b3648275f4867e434abe2a2dc2220af19b0fd0623b53dcf55f237ff76ed73fea"
+      "spdx:checksumValue": "ebb48bf082a17c40ecf0ee984eae582abde8b7614fb99233703d390c5b435e9d"
      }
     },
     {
@@ -144,11 +144,11 @@
       "@id": "https://changgi.github.io/korea-archive-mcp/data/hierarchy.json"
      },
      "dcat:mediaType": "application/ld+json",
-     "dcat:byteSize": 5013,
+     "dcat:byteSize": 5017,
      "spdx:checksum": {
       "@type": "spdx:Checksum",
       "spdx:algorithm": "spdx:checksumAlgorithm_sha256",
-      "spdx:checksumValue": "d6dd0e8570bb65bd9fd227ed8d6244d6325adab43d4bffc836a99355ea0da9c2"
+      "spdx:checksumValue": "3dbf3567fe8ba90dc3e5622fd93c8d17fc4c1f7cdb68b6f06ec252ecaae62aaf"
      }
     },
     {
@@ -158,11 +158,11 @@
       "@id": "https://changgi.github.io/korea-archive-mcp/data/subjects.jsonld"
      },
      "dcat:mediaType": "application/ld+json",
-     "dcat:byteSize": 316672,
+     "dcat:byteSize": 352260,
      "spdx:checksum": {
       "@type": "spdx:Checksum",
       "spdx:algorithm": "spdx:checksumAlgorithm_sha256",
-      "spdx:checksumValue": "5440f48ca00b15036ecf56a9d7dac90b555b84223bafe754e3be93f270737162"
+      "spdx:checksumValue": "430bfb5d2b4dbe9ba7eafe60a3a126895e5802f7b033b6dabd832b310f105e36"
      }
     },
     {
@@ -172,11 +172,11 @@
       "@id": "https://changgi.github.io/korea-archive-mcp/data/records.oai_dc.xml"
      },
      "dcat:mediaType": "application/xml",
-     "dcat:byteSize": 1590947,
+     "dcat:byteSize": 1753412,
      "spdx:checksum": {
       "@type": "spdx:Checksum",
       "spdx:algorithm": "spdx:checksumAlgorithm_sha256",
-      "spdx:checksumValue": "523c4f39d38e9b1f02dbc97040a92c884c30cea4078ffd8f71494a7055ec1eed"
+      "spdx:checksumValue": "16e56b927af007daea8fbcb3cd47a8b528121549b81bd69c5eed11507ff3d8d7"
      }
     },
     {
@@ -190,7 +190,7 @@
      "spdx:checksum": {
       "@type": "spdx:Checksum",
       "spdx:algorithm": "spdx:checksumAlgorithm_sha256",
-      "spdx:checksumValue": "ea9abd0b160405564b1c1bbf4a8f6a5419acabb81988f2cb612397d46051b9cd"
+      "spdx:checksumValue": "33b0e05ec30921fb3031217705e6da662c4d004288286d49fafee0641d0cc1e2"
      }
     },
     {
@@ -200,11 +200,11 @@
       "@id": "https://changgi.github.io/korea-archive-mcp/data/day/index.json"
      },
      "dcat:mediaType": "application/ld+json",
-     "dcat:byteSize": 3887,
+     "dcat:byteSize": 4163,
      "spdx:checksum": {
       "@type": "spdx:Checksum",
       "spdx:algorithm": "spdx:checksumAlgorithm_sha256",
-      "spdx:checksumValue": "189ef159d2b9b578372a6dbe26a39f64646c40e7cf1d7aba150588622f33d415"
+      "spdx:checksumValue": "c9e2ee32dec2ac6f7428b030dd4a15969d0fb0771eaee73bddd51f48f8a87c69"
      }
     },
     {
@@ -214,11 +214,11 @@
       "@id": "https://changgi.github.io/korea-archive-mcp/data/places.json"
      },
      "dcat:mediaType": "application/json",
-     "dcat:byteSize": 23520,
+     "dcat:byteSize": 25642,
      "spdx:checksum": {
       "@type": "spdx:Checksum",
       "spdx:algorithm": "spdx:checksumAlgorithm_sha256",
-      "spdx:checksumValue": "97b10bb1e732254582a1daee27328caf6c096088d1be8c9fd2ec5138616d95e3"
+      "spdx:checksumValue": "612dcb218bb39fbec99f8f7c368c99ea0b10c89980b9810a5bf238df620865f9"
      }
     },
     {
@@ -228,11 +228,11 @@
       "@id": "https://changgi.github.io/korea-archive-mcp/data/places.jsonld"
      },
      "dcat:mediaType": "application/ld+json",
-     "dcat:byteSize": 47298,
+     "dcat:byteSize": 50868,
      "spdx:checksum": {
       "@type": "spdx:Checksum",
       "spdx:algorithm": "spdx:checksumAlgorithm_sha256",
-      "spdx:checksumValue": "c2722ba8323ae4dd5c1cce5a2d478f9965000abd04fc5c5fc0fadccd97f70d63"
+      "spdx:checksumValue": "a23117f0dc0dad2b0b0b98a04d24311394073835cb9ba73c81c2b911a1c367ed"
      }
     },
     {
@@ -246,7 +246,7 @@
      "spdx:checksum": {
       "@type": "spdx:Checksum",
       "spdx:algorithm": "spdx:checksumAlgorithm_sha256",
-      "spdx:checksumValue": "02882ba85077b4c5ba8d4f5c553e21f9aaba8acdf2b4d205132126c706da6a49"
+      "spdx:checksumValue": "1d7e22a4030d4bac640a89cf20f43f27b569300dcf8c51d5bc50ec9c1a714762"
      }
     },
     {
@@ -260,7 +260,7 @@
      "spdx:checksum": {
       "@type": "spdx:Checksum",
       "spdx:algorithm": "spdx:checksumAlgorithm_sha256",
-      "spdx:checksumValue": "f14640d9daa5559a6b2fc3a6e633aab0076dd01414434a20fe61b684ca400dd9"
+      "spdx:checksumValue": "6771a42710a95daffb5faa82196798ab9cab8c466ad5a4e6887284e8223740b7"
      }
     },
     {
@@ -270,11 +270,11 @@
       "@id": "https://changgi.github.io/korea-archive-mcp/data/dict.html"
      },
      "dcat:mediaType": "text/html",
-     "dcat:byteSize": 16096,
+     "dcat:byteSize": 16701,
      "spdx:checksum": {
       "@type": "spdx:Checksum",
       "spdx:algorithm": "spdx:checksumAlgorithm_sha256",
-      "spdx:checksumValue": "02d6922acc92c7451a0bbce57f8dc17e9e7e46928a288d16bd075b320703ac27"
+      "spdx:checksumValue": "365c7dc099974ec348ec0b8c67c87b751b15fbe5a4cb08b6d65a471ad15451f6"
      }
     },
     {
@@ -288,7 +288,7 @@
      "spdx:checksum": {
       "@type": "spdx:Checksum",
       "spdx:algorithm": "spdx:checksumAlgorithm_sha256",
-      "spdx:checksumValue": "ef4027930dfbbaa29e376520abcb81d5583cfcb0175719798a2b1665ba161fef"
+      "spdx:checksumValue": "dd2e86a2157c0dafac9a45135279d2d5993d6a119756cc38cc6346037444fa48"
      }
     },
     {
@@ -312,11 +312,11 @@
       "@id": "https://changgi.github.io/korea-archive-mcp/data/authorities.json"
      },
      "dcat:mediaType": "application/json",
-     "dcat:byteSize": 3253,
+     "dcat:byteSize": 4778,
      "spdx:checksum": {
       "@type": "spdx:Checksum",
       "spdx:algorithm": "spdx:checksumAlgorithm_sha256",
-      "spdx:checksumValue": "1288d0e33ed5efeedb556cba4b027dac763d4457995e3071a9539fb8fabaa28e"
+      "spdx:checksumValue": "19907a61ed1c29753bb4c635fbf7070fec702fd526b0fe47a91e5e4db7613470"
      }
     },
     {
@@ -326,11 +326,11 @@
       "@id": "https://changgi.github.io/korea-archive-mcp/data/place/index.json"
      },
      "dcat:mediaType": "application/ld+json",
-     "dcat:byteSize": 4531,
+     "dcat:byteSize": 4534,
      "spdx:checksum": {
       "@type": "spdx:Checksum",
       "spdx:algorithm": "spdx:checksumAlgorithm_sha256",
-      "spdx:checksumValue": "1f4f2d0e60081ce1e0af41666f39d494b50f09c6dd25f72d712fbdc271b06c9e"
+      "spdx:checksumValue": "fdadf601d2d5473908ae7d0c3ead86d57bf71efd07a4e59d11b04a3c81a33edb"
      }
     },
     {
@@ -340,11 +340,11 @@
       "@id": "https://changgi.github.io/korea-archive-mcp/data/records.csl.json"
      },
      "dcat:mediaType": "application/vnd.citationstyles.csl+json",
-     "dcat:byteSize": 1026301,
+     "dcat:byteSize": 1124432,
      "spdx:checksum": {
       "@type": "spdx:Checksum",
       "spdx:algorithm": "spdx:checksumAlgorithm_sha256",
-      "spdx:checksumValue": "6d49ac58a9acc05d96638413e1148f03dc9c95c530a27fe21ff322b51b3038af"
+      "spdx:checksumValue": "05a594bff23f3845488d5bf3629da090205fc6b5b02981097ffe5a1d6acbacf7"
      }
     },
     {
@@ -354,11 +354,11 @@
       "@id": "https://changgi.github.io/korea-archive-mcp/data/records.ris"
      },
      "dcat:mediaType": "application/x-research-info-systems",
-     "dcat:byteSize": 643918,
+     "dcat:byteSize": 697500,
      "spdx:checksum": {
       "@type": "spdx:Checksum",
       "spdx:algorithm": "spdx:checksumAlgorithm_sha256",
-      "spdx:checksumValue": "12b3c329d138f4676b5a8bcbd8a849da83719730670a3b00a9ea7b4dcdb65b88"
+      "spdx:checksumValue": "82fb6ba24bd8bcd45319e0f67044e22bf93fc8d9221e0d1051c5b32fc8b3420f"
      }
     },
     {
@@ -368,11 +368,11 @@
       "@id": "https://changgi.github.io/korea-archive-mcp/data/records.bib"
      },
      "dcat:mediaType": "application/x-bibtex",
-     "dcat:byteSize": 613193,
+     "dcat:byteSize": 680781,
      "spdx:checksum": {
       "@type": "spdx:Checksum",
       "spdx:algorithm": "spdx:checksumAlgorithm_sha256",
-      "spdx:checksumValue": "c92ce6c3a303d261b180186c332d8ab7bf8b4ff06187a335028c8e42ef5b9918"
+      "spdx:checksumValue": "d47e19031513fd1017d7b0912fa04b303cb187c96e6fba54c537a69e0d6591ba"
      }
     },
     {
@@ -382,11 +382,11 @@
       "@id": "https://changgi.github.io/korea-archive-mcp/data/feed.xml"
      },
      "dcat:mediaType": "application/atom+xml",
-     "dcat:byteSize": 82554,
+     "dcat:byteSize": 70337,
      "spdx:checksum": {
       "@type": "spdx:Checksum",
       "spdx:algorithm": "spdx:checksumAlgorithm_sha256",
-      "spdx:checksumValue": "aad221baea5160e2b2ab244637bcea4983a09f57a45d45286e52eb1daaff13b9"
+      "spdx:checksumValue": "c1bdd7a10e3fd5c4273e1c24b29e23a198c0c9169dae7ef5bc15cb7069b9cc78"
      }
     },
     {
@@ -396,11 +396,11 @@
       "@id": "https://changgi.github.io/korea-archive-mcp/data/timeline.json"
      },
      "dcat:mediaType": "application/json",
-     "dcat:byteSize": 94024,
+     "dcat:byteSize": 96218,
      "spdx:checksum": {
       "@type": "spdx:Checksum",
       "spdx:algorithm": "spdx:checksumAlgorithm_sha256",
-      "spdx:checksumValue": "103ec9ff2156f2f29e23ef838bee0117fcf6b8f462e501cd1a859dd6c4b74c06"
+      "spdx:checksumValue": "7cc874279b9a295ed83e0652be97324ff11b72b3741e481488447d2a5c4279a1"
      }
     },
     {
@@ -410,11 +410,11 @@
       "@id": "https://changgi.github.io/korea-archive-mcp/data/tree.json"
      },
      "dcat:mediaType": "application/json",
-     "dcat:byteSize": 255209,
+     "dcat:byteSize": 281900,
      "spdx:checksum": {
       "@type": "spdx:Checksum",
       "spdx:algorithm": "spdx:checksumAlgorithm_sha256",
-      "spdx:checksumValue": "c390a6a9b6cf868178d56722ab8ad22ffa6ddc5cf3bca027d47a31b6b30970dd"
+      "spdx:checksumValue": "54071b230351ab75c01886c52028bdc26d732eec434b4cbf825e458aa59efbd7"
      }
     },
     {
@@ -424,11 +424,11 @@
       "@id": "https://changgi.github.io/korea-archive-mcp/data/classifications.json"
      },
      "dcat:mediaType": "application/json",
-     "dcat:byteSize": 90301,
+     "dcat:byteSize": 96877,
      "spdx:checksum": {
       "@type": "spdx:Checksum",
       "spdx:algorithm": "spdx:checksumAlgorithm_sha256",
-      "spdx:checksumValue": "492508e6bc98595634976dc90d085767e2e0e02579d7296e8faf63d52560669b"
+      "spdx:checksumValue": "808fca4e83a39ad758eee296ba474a035c8fd854f231ca271daf25f3f38971e2"
      }
     },
     {
@@ -438,11 +438,11 @@
       "@id": "https://changgi.github.io/korea-archive-mcp/data/provenance.json"
      },
      "dcat:mediaType": "application/json",
-     "dcat:byteSize": 74953,
+     "dcat:byteSize": 108197,
      "spdx:checksum": {
       "@type": "spdx:Checksum",
       "spdx:algorithm": "spdx:checksumAlgorithm_sha256",
-      "spdx:checksumValue": "fe8bf659290436c1d5d3ffff8b2fb276f4997012a59b0dabb3085914d67ef244"
+      "spdx:checksumValue": "2307ef35db1a8ed246b6c00ceadfe50d89b2413061d53b48e7ef888e8fd637b6"
      }
     },
     {
@@ -452,11 +452,11 @@
       "@id": "https://changgi.github.io/korea-archive-mcp/data/relations.json"
      },
      "dcat:mediaType": "application/json",
-     "dcat:byteSize": 476327,
+     "dcat:byteSize": 521643,
      "spdx:checksum": {
       "@type": "spdx:Checksum",
       "spdx:algorithm": "spdx:checksumAlgorithm_sha256",
-      "spdx:checksumValue": "c3b9830b548f9c4796e7cd4d071c4ea2b2bdc8d3069255241ed734a998071bec"
+      "spdx:checksumValue": "bccf9d2f78ffbe2e63109cd703e224e8357f02897798885920b2630ff5c4cdaf"
      }
     },
     {
@@ -466,11 +466,11 @@
       "@id": "https://changgi.github.io/korea-archive-mcp/data/relations.html"
      },
      "dcat:mediaType": "text/html",
-     "dcat:byteSize": 39538,
+     "dcat:byteSize": 41645,
      "spdx:checksum": {
       "@type": "spdx:Checksum",
       "spdx:algorithm": "spdx:checksumAlgorithm_sha256",
-      "spdx:checksumValue": "1e864aecd18a8dd67cae6027f9d1d1742f5862c6e3e5ec5e594ab1990eedfacc"
+      "spdx:checksumValue": "d01e7bb5894aec48f36aaf44cb02f31277d2ecdecd4ccab443b5903f1c48cac7"
      }
     },
     {
@@ -480,11 +480,11 @@
       "@id": "https://changgi.github.io/korea-archive-mcp/data/quality.json"
      },
      "dcat:mediaType": "application/json",
-     "dcat:byteSize": 68016,
+     "dcat:byteSize": 69333,
      "spdx:checksum": {
       "@type": "spdx:Checksum",
       "spdx:algorithm": "spdx:checksumAlgorithm_sha256",
-      "spdx:checksumValue": "75ba70f28ea0c527aac669c3f0804cccb42ce7b139796cb959fe47ca79ddc096"
+      "spdx:checksumValue": "8512625ee80ca1c6ae713039d358706f0299f5ea41c7da9611670be4daedad30"
      }
     },
     {
@@ -498,7 +498,7 @@
      "spdx:checksum": {
       "@type": "spdx:Checksum",
       "spdx:algorithm": "spdx:checksumAlgorithm_sha256",
-      "spdx:checksumValue": "c928bf4f0de68757dc8e6de5f2da58b2da9953315b20d3924cc794f4ab659b8d"
+      "spdx:checksumValue": "43c2e07a435b3cb45cf398eb2258052afab59ac46fdf5a4091051a5ba418788b"
      }
     },
     {
@@ -512,7 +512,7 @@
      "spdx:checksum": {
       "@type": "spdx:Checksum",
       "spdx:algorithm": "spdx:checksumAlgorithm_sha256",
-      "spdx:checksumValue": "28650c4bcf1169cc60a2585d107afe6693f492be648bbd12081c5b38285d612f"
+      "spdx:checksumValue": "4fe9ff4100ce2ad3776b1a655ad7b02b638ad6d5eafb66a2a63d3fd2ba835798"
      }
     },
     {
@@ -522,11 +522,11 @@
       "@id": "https://changgi.github.io/korea-archive-mcp/data/queries/index.json"
      },
      "dcat:mediaType": "application/json",
-     "dcat:byteSize": 45688,
+     "dcat:byteSize": 61103,
      "spdx:checksum": {
       "@type": "spdx:Checksum",
       "spdx:algorithm": "spdx:checksumAlgorithm_sha256",
-      "spdx:checksumValue": "a91cd1b678216ece88eca64a0b1cf1b978662b8a6955f4a3247068f72430f690"
+      "spdx:checksumValue": "7cf3d33363d351737e6a80e2d00f83cecd89a86725c4eafc6304ae09e368bcdf"
      }
     },
     {
@@ -536,11 +536,11 @@
       "@id": "https://changgi.github.io/korea-archive-mcp/data/queries/probe/index.json"
      },
      "dcat:mediaType": "application/json",
-     "dcat:byteSize": 1538545,
+     "dcat:byteSize": 1564739,
      "spdx:checksum": {
       "@type": "spdx:Checksum",
       "spdx:algorithm": "spdx:checksumAlgorithm_sha256",
-      "spdx:checksumValue": "0f4a5ddefba11370eca697f58182ee22217bdcb1c7dc84f28a0e04196c14dfb7"
+      "spdx:checksumValue": "a1ec860b809fd8287f7f6724eda041ffb46976fc6b77db1dd5a3fc34866340e2"
      }
     },
     {
@@ -550,11 +550,11 @@
       "@id": "https://changgi.github.io/korea-archive-mcp/data/records/index.json"
      },
      "dcat:mediaType": "application/json",
-     "dcat:byteSize": 19269,
+     "dcat:byteSize": 19390,
      "spdx:checksum": {
       "@type": "spdx:Checksum",
       "spdx:algorithm": "spdx:checksumAlgorithm_sha256",
-      "spdx:checksumValue": "7c91bf8a7d4ef11f1bb50925dbff4b85da779e4967384e387f29731ce3a52175"
+      "spdx:checksumValue": "1669cdd7591d1b3a4205e08b4cb46e384a527bde19e8df1cc4c6a9716842d6ee"
      }
     },
     {
@@ -564,11 +564,11 @@
       "@id": "https://changgi.github.io/korea-archive-mcp/data/coverage.json"
      },
      "dcat:mediaType": "application/json",
-     "dcat:byteSize": 53952,
+     "dcat:byteSize": 73022,
      "spdx:checksum": {
       "@type": "spdx:Checksum",
       "spdx:algorithm": "spdx:checksumAlgorithm_sha256",
-      "spdx:checksumValue": "d49f25227f10a9fc4a4b45b86a1a0971570965565c9bf7154d1f94b68d734fb5"
+      "spdx:checksumValue": "c57ea138c896a3a35a82aade2b6287eda50c20038cf696b6a08b04d496dd23bd"
      }
     },
     {
@@ -578,54 +578,54 @@
       "@id": "https://changgi.github.io/korea-archive-mcp/data/coverage.csv"
      },
      "dcat:mediaType": "text/csv",
-     "dcat:byteSize": 20326,
+     "dcat:byteSize": 30079,
      "spdx:checksum": {
       "@type": "spdx:Checksum",
       "spdx:algorithm": "spdx:checksumAlgorithm_sha256",
-      "spdx:checksumValue": "4a6a96205b5c0df0ce95f9aef547470e643cc1e73dc4e818e34d45379769941d"
+      "spdx:checksumValue": "1debc08de5a23bfb0f12b637901542df06c47a5307bc314211239c42167097b6"
      }
     }
    ],
    "ka:quality": {
-    "records": 910,
-    "요약": 75.9,
-    "요약(메타 합성 포함)": 97.7,
-    "연대": 91.9,
-    "기관 계층": 99.2,
+    "records": 1007,
+    "요약": 73.4,
+    "요약(메타 합성 포함)": 94.5,
+    "연대": 91.1,
+    "기관 계층": 98.9,
     "계층(파생 포함)": 100.0,
-    "기관 IIIF": 65.4,
-    "IIIF(원 기관 제공)": 14.3,
-    "IIIF(원 기관 이미지로 구축)": 45.9,
-    "IIIF(실물 이미지 — 같은 기록 다른 소장처 포함)": 60.5,
-    "IIIF(실물 이미지 — 제공+구축)": 60.2,
+    "기관 IIIF": 63.3,
+    "IIIF(원 기관 제공)": 14.1,
+    "IIIF(원 기관 이미지로 구축)": 44.4,
+    "IIIF(실물 이미지 — 같은 기록 다른 소장처 포함)": 58.8,
+    "IIIF(실물 이미지 — 제공+구축)": 58.5,
     "IIIF(브리지 포함)": 100.0,
-    "썸네일": 13.4,
+    "썸네일": 13.7,
     "권리 표시": 100.0,
-    "메타": 95.2,
-    "원문 지문": 96.0,
-    "발견 경로": 63.5,
+    "메타": 92.3,
+    "원문 지문": 89.1,
+    "발견 경로": 68.3,
     "발견 경로(파생 포함)": 100.0,
-    "관련 기록 연결": 82.3,
-    "같은 기록(다른 소장처) 연결": 6.0,
-    "날짜 교차 확인(일치)": 3.8,
+    "관련 기록 연결": 82.1,
+    "같은 기록(다른 소장처) 연결": 5.5,
+    "날짜 교차 확인(일치)": 3.5,
     "기록 봉투 사유 확정": 99.9,
-    "날짜 정규 형식(정규화 포함)": 94.5,
-    "사건-날짜 대조(일치)": 9.3,
-    "같은 날·같은 지명 연결": 3.8,
-    "원 소장처 계층(사본)": 2.4,
-    "원 기관 IIIF(브라우저 열람)": 1.1,
+    "날짜 정규 형식(정규화 포함)": 94.2,
+    "사건-날짜 대조(일치)": 8.6,
+    "같은 날·같은 지명 연결": 3.6,
+    "원 소장처 계층(사본)": 2.2,
+    "원 기관 IIIF(브라우저 열람)": 1.0,
     "기록 봉투 사유(건)": {
-     "권리": 60,
-     "기술": 153,
-     "매체": 101,
+     "권리": 63,
+     "기술": 187,
+     "매체": 119,
      "미구축": 1,
-     "원 기관 이미지 없음": 47
+     "원 기관 이미지 없음": 48
     },
     "사건-날짜 대조(건)": {
      "사건 이전 연도": 5,
-     "사건 이후": 56,
+     "사건 이후": 58,
      "사건 직전": 5,
-     "일치": 85
+     "일치": 87
     }
    }
   }

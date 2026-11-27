@@ -37,13 +37,17 @@
 "ia:cinesaurio-2025-08-14-carteleara",
 "ia:111-adc-10380",
 "ia:111-adc-8257",
-"ia:LC-30456"
+"ia:LC-30456",
+"ia:81594-us-navy-with-the-marines-chosin-to-hungnam-vwr",
+"ia:NPC-177",
+"ia:e_history_StreamRoot_DH_0203_19590303_01",
+"ia:frozen-hell-battle-of-chosin-reservoir-the-armchair-historian-1080p-h-264"
 ],
 "sources": [
 "ia"
 ],
 "first": "2026-11-23T03:00:40Z",
-"last": "2026-11-25T12:48:44Z",
+"last": "2026-11-27T21:28:47Z",
 "keys": [
 "mediatype"
 ]
@@ -89,13 +93,18 @@
 "ia:NPDP18760405",
 "ia:NPDP18760413",
 "ia:coreaorchosenla01landgoog",
-"ia:landsrisingsuna00barbgoog"
+"ia:landsrisingsuna00barbgoog",
+"ia:cia-readingroom-document-cia-rdp80-00809a000700260090-2",
+"ia:DTIC_ADA471198",
+"ia:malmo-korea-corpsman-chosin",
+"ia:owen-korea-usmc-officer-chosin",
+"ia:DTIC_ADA149352"
 ],
 "sources": [
 "ia"
 ],
 "first": "2026-11-23T03:00:40Z",
-"last": "2026-11-25T00:14:37Z",
+"last": "2026-11-27T21:28:47Z",
 "keys": [
 "mediatype"
 ]
@@ -103,13 +112,15 @@
 "audio": {
 "records": [
 "ia:VOA_Africa_20180731_190000",
-"ia:korea_and_her_neighbors_2106_librivox"
+"ia:korea_and_her_neighbors_2106_librivox",
+"ia:VOA_Africa_20190206_170000",
+"ia:VOA_Africa_20190210_060000"
 ],
 "sources": [
 "ia"
 ],
 "first": "2026-11-23T03:14:21Z",
-"last": "2026-11-25T00:14:37Z",
+"last": "2026-11-27T21:24:34Z",
 "keys": [
 "mediatype"
 ]
@@ -178,13 +189,14 @@
 "ia:cia-readingroom-document-03194444",
 "ia:cia-readingroom-document-cia-rdp80t00246a018200250001-2",
 "ia:cia-readingroom-document-cia-rdp79t00909a000500010020-9",
-"ia:cia-readingroom-document-cia-rdp80t00246a050600910001-9"
+"ia:cia-readingroom-document-cia-rdp80t00246a050600910001-9",
+"ia:cia-readingroom-document-cia-rdp80-00809a000700260090-2"
 ],
 "sources": [
 "ia"
 ],
 "first": "2026-11-23T03:00:40Z",
-"last": "2026-11-24T23:10:19Z",
+"last": "2026-11-27T21:18:29Z",
 "keys": [
 "subject"
 ]
@@ -192,14 +204,15 @@
 "South Korea": {
 "records": [
 "ia:e_history_StreamRoot_DH_0463_19640411_01",
-"dnz:42631548"
+"dnz:42631548",
+"ia:e_history_StreamRoot_DH_0203_19590303_01"
 ],
 "sources": [
 "ia",
 "dnz"
 ],
 "first": "2026-11-23T03:00:40Z",
-"last": "2026-11-25T12:48:44Z",
+"last": "2026-11-27T21:18:29Z",
 "keys": [
 "subject",
 "주제"
@@ -207,39 +220,42 @@
 },
 "News": {
 "records": [
-"ia:e_history_StreamRoot_DH_0463_19640411_01"
+"ia:e_history_StreamRoot_DH_0463_19640411_01",
+"ia:e_history_StreamRoot_DH_0203_19590303_01"
 ],
 "sources": [
 "ia"
 ],
 "first": "2026-11-23T03:00:40Z",
-"last": "2026-11-23T03:00:40Z",
+"last": "2026-11-27T21:18:29Z",
 "keys": [
 "subject"
 ]
 },
 "StreamRoot_DH": {
 "records": [
-"ia:e_history_StreamRoot_DH_0463_19640411_01"
+"ia:e_history_StreamRoot_DH_0463_19640411_01",
+"ia:e_history_StreamRoot_DH_0203_19590303_01"
 ],
 "sources": [
 "ia"
 ],
 "first": "2026-11-23T03:00:40Z",
-"last": "2026-11-23T03:00:40Z",
+"last": "2026-11-27T21:18:29Z",
 "keys": [
 "subject"
 ]
 },
 "DH": {
 "records": [
-"ia:e_history_StreamRoot_DH_0463_19640411_01"
+"ia:e_history_StreamRoot_DH_0463_19640411_01",
+"ia:e_history_StreamRoot_DH_0203_19590303_01"
 ],
 "sources": [
 "ia"
 ],
 "first": "2026-11-23T03:00:40Z",
-"last": "2026-11-23T03:00:40Z",
+"last": "2026-11-27T21:18:29Z",
 "keys": [
 "subject"
 ]
@@ -364,13 +380,15 @@
 },
 "中共軍": {
 "records": [
-"oldnews:CNTS-00133841567"
+"oldnews:CNTS-00133841567",
+"oldnews:CNTS-00133841718",
+"oldnews:CNTS-00133893156"
 ],
 "sources": [
 "oldnews"
 ],
 "first": "2026-11-23T03:01:45Z",
-"last": "2026-11-23T03:01:45Z",
+"last": "2026-11-27T21:22:47Z",
 "keys": [
 "색인어(기사 내용 재구성)"
 ]
@@ -724,14 +742,15 @@
 "dnz:23044160",
 "dnz:23044233",
 "dnz:42631548",
-"ia:ADC-10271"
+"ia:ADC-10271",
+"ia:frozen-hell-battle-of-chosin-reservoir-the-armchair-historian-1080p-h-264"
 ],
 "sources": [
 "dnz",
 "ia"
 ],
 "first": "2026-11-23T13:40:50Z",
-"last": "2026-11-25T12:48:44Z",
+"last": "2026-11-27T21:20:08Z",
 "keys": [
 "주제",
 "subject"
@@ -1386,13 +1405,15 @@
 "ia:DTIC_ADA429076",
 "ia:DTIC_ADB006731",
 "ia:DTIC_ADA290790",
-"ia:DTIC_ADA242405"
+"ia:DTIC_ADA242405",
+"ia:DTIC_ADA471198",
+"ia:DTIC_ADA149352"
 ],
 "sources": [
 "ia"
 ],
 "first": "2026-11-24T22:40:42Z",
-"last": "2026-11-24T22:44:35Z",
+"last": "2026-11-27T21:28:47Z",
 "keys": [
 "subject"
 ]
@@ -1405,7 +1426,7 @@
 "ia"
 ],
 "first": "2026-11-24T22:40:43Z",
-"last": "2026-11-24T22:40:43Z",
+"last": "2026-11-27T21:28:47Z",
 "keys": [
 "subject"
 ]
@@ -1418,7 +1439,7 @@
 "ia"
 ],
 "first": "2026-11-24T22:40:43Z",
-"last": "2026-11-24T22:40:43Z",
+"last": "2026-11-27T21:28:47Z",
 "keys": [
 "subject"
 ]
@@ -1431,7 +1452,7 @@
 "ia"
 ],
 "first": "2026-11-24T22:40:43Z",
-"last": "2026-11-24T22:40:43Z",
+"last": "2026-11-27T21:28:47Z",
 "keys": [
 "subject"
 ]
@@ -1444,7 +1465,7 @@
 "ia"
 ],
 "first": "2026-11-24T22:40:43Z",
-"last": "2026-11-24T22:40:43Z",
+"last": "2026-11-27T21:28:47Z",
 "keys": [
 "subject"
 ]
@@ -1457,7 +1478,7 @@
 "ia"
 ],
 "first": "2026-11-24T22:40:43Z",
-"last": "2026-11-24T22:40:43Z",
+"last": "2026-11-27T21:28:47Z",
 "keys": [
 "subject"
 ]
@@ -1470,7 +1491,7 @@
 "ia"
 ],
 "first": "2026-11-24T22:40:43Z",
-"last": "2026-11-24T22:40:43Z",
+"last": "2026-11-27T21:28:47Z",
 "keys": [
 "subject"
 ]
@@ -1483,7 +1504,7 @@
 "ia"
 ],
 "first": "2026-11-24T22:40:43Z",
-"last": "2026-11-24T22:40:43Z",
+"last": "2026-11-27T21:28:47Z",
 "keys": [
 "subject"
 ]
@@ -1496,7 +1517,7 @@
 "ia"
 ],
 "first": "2026-11-24T22:40:43Z",
-"last": "2026-11-24T22:40:43Z",
+"last": "2026-11-27T21:28:47Z",
 "keys": [
 "subject"
 ]
@@ -1509,7 +1530,7 @@
 "ia"
 ],
 "first": "2026-11-24T22:40:43Z",
-"last": "2026-11-24T22:40:43Z",
+"last": "2026-11-27T21:28:47Z",
 "keys": [
 "subject"
 ]
@@ -1522,20 +1543,22 @@
 "ia"
 ],
 "first": "2026-11-24T22:40:43Z",
-"last": "2026-11-24T22:40:43Z",
+"last": "2026-11-27T21:28:47Z",
 "keys": [
 "subject"
 ]
 },
 "oral history": {
 "records": [
-"ia:litvin-korea-physician-inchon-chosin"
+"ia:litvin-korea-physician-inchon-chosin",
+"ia:malmo-korea-corpsman-chosin",
+"ia:owen-korea-usmc-officer-chosin"
 ],
 "sources": [
 "ia"
 ],
 "first": "2026-11-24T22:40:43Z",
-"last": "2026-11-24T22:40:43Z",
+"last": "2026-11-27T21:28:47Z",
 "keys": [
 "subject"
 ]
@@ -2257,13 +2280,15 @@
 "oldnews:CNTS-00095722593",
 "oldnews:CNTS-00095723323",
 "oldnews:CNTS-00095729484",
-"oldnews:CNTS-00095729928"
+"oldnews:CNTS-00095729928",
+"oldnews:CNTS-00095720904",
+"oldnews:CNTS-00095723299"
 ],
 "sources": [
 "oldnews"
 ],
 "first": "2026-11-25T00:53:18Z",
-"last": "2026-11-25T00:53:18Z",
+"last": "2026-11-27T21:24:13Z",
 "keys": [
 "색인어(기사 내용 재구성)"
 ]
@@ -2405,13 +2430,14 @@
 "이등박문": {
 "records": [
 "oldnews:CNTS-00095723323",
-"oldnews:CNTS-00095729484"
+"oldnews:CNTS-00095729484",
+"oldnews:CNTS-00095720904"
 ],
 "sources": [
 "oldnews"
 ],
 "first": "2026-11-25T00:53:18Z",
-"last": "2026-11-25T00:53:18Z",
+"last": "2026-11-27T21:24:13Z",
 "keys": [
 "색인어(기사 내용 재구성)"
 ]
@@ -2424,7 +2450,7 @@
 "oldnews"
 ],
 "first": "2026-11-25T00:53:18Z",
-"last": "2026-11-25T00:53:18Z",
+"last": "2026-11-27T21:24:13Z",
 "keys": [
 "색인어(기사 내용 재구성)"
 ]
@@ -2438,7 +2464,7 @@
 "oldnews"
 ],
 "first": "2026-11-25T00:53:18Z",
-"last": "2026-11-25T00:53:18Z",
+"last": "2026-11-27T21:24:13Z",
 "keys": [
 "색인어(기사 내용 재구성)"
 ]
@@ -2451,7 +2477,7 @@
 "oldnews"
 ],
 "first": "2026-11-25T00:53:18Z",
-"last": "2026-11-25T00:53:18Z",
+"last": "2026-11-27T21:24:13Z",
 "keys": [
 "색인어(기사 내용 재구성)"
 ]
@@ -2464,7 +2490,7 @@
 "oldnews"
 ],
 "first": "2026-11-25T00:53:18Z",
-"last": "2026-11-25T00:53:18Z",
+"last": "2026-11-27T21:24:13Z",
 "keys": [
 "색인어(기사 내용 재구성)"
 ]
@@ -2478,7 +2504,7 @@
 "oldnews"
 ],
 "first": "2026-11-25T00:53:18Z",
-"last": "2026-11-25T00:53:18Z",
+"last": "2026-11-27T21:24:13Z",
 "keys": [
 "색인어(기사 내용 재구성)"
 ]
@@ -2491,7 +2517,7 @@
 "oldnews"
 ],
 "first": "2026-11-25T00:53:18Z",
-"last": "2026-11-25T00:53:18Z",
+"last": "2026-11-27T21:24:13Z",
 "keys": [
 "색인어(기사 내용 재구성)"
 ]
@@ -2505,7 +2531,7 @@
 "oldnews"
 ],
 "first": "2026-11-25T00:53:18Z",
-"last": "2026-11-25T00:53:18Z",
+"last": "2026-11-27T21:24:13Z",
 "keys": [
 "색인어(기사 내용 재구성)"
 ]
@@ -2518,7 +2544,7 @@
 "oldnews"
 ],
 "first": "2026-11-25T00:53:18Z",
-"last": "2026-11-25T00:53:18Z",
+"last": "2026-11-27T21:24:13Z",
 "keys": [
 "주제"
 ]
@@ -2526,13 +2552,14 @@
 "공판": {
 "records": [
 "oldnews:CNTS-00095729484",
-"oldnews:CNTS-00095729928"
+"oldnews:CNTS-00095729928",
+"oldnews:CNTS-00095723299"
 ],
 "sources": [
 "oldnews"
 ],
 "first": "2026-11-25T00:53:18Z",
-"last": "2026-11-25T00:53:18Z",
+"last": "2026-11-27T21:24:13Z",
 "keys": [
 "색인어(기사 내용 재구성)"
 ]
@@ -2792,13 +2819,14 @@
 },
 "여순": {
 "records": [
-"oldnews:CNTS-00095729928"
+"oldnews:CNTS-00095729928",
+"oldnews:CNTS-00095720904"
 ],
 "sources": [
 "oldnews"
 ],
 "first": "2026-11-25T00:53:18Z",
-"last": "2026-11-25T00:53:18Z",
+"last": "2026-11-27T21:24:13Z",
 "keys": [
 "색인어(기사 내용 재구성)"
 ]
@@ -2961,13 +2989,14 @@
 },
 "국가": {
 "records": [
-"oldnews:CNTS-00095729928"
+"oldnews:CNTS-00095729928",
+"oldnews:CNTS-00095720904"
 ],
 "sources": [
 "oldnews"
 ],
 "first": "2026-11-25T00:53:18Z",
-"last": "2026-11-25T00:53:18Z",
+"last": "2026-11-27T21:24:13Z",
 "keys": [
 "색인어(기사 내용 재구성)"
 ]
@@ -3233,6 +3262,478 @@
 "last": "2026-11-25T00:56:51Z",
 "keys": [
 "표제어"
+]
+},
+"Chosin To Hungnam": {
+"records": [
+"ia:81594-us-navy-with-the-marines-chosin-to-hungnam-vwr"
+],
+"sources": [
+"ia"
+],
+"first": "2026-11-27T21:17:31Z",
+"last": "2026-11-27T21:28:47Z",
+"keys": [
+"subject"
+]
+},
+"U.S. Marines": {
+"records": [
+"ia:NPC-177"
+],
+"sources": [
+"ia"
+],
+"first": "2026-11-27T21:17:31Z",
+"last": "2026-11-27T21:22:08Z",
+"keys": [
+"subject"
+]
+},
+"咸興": {
+"records": [
+"oldnews:CNTS-00133841718"
+],
+"sources": [
+"oldnews"
+],
+"first": "2026-11-27T21:17:31Z",
+"last": "2026-11-27T21:22:47Z",
+"keys": [
+"색인어(기사 내용 재구성)"
+]
+},
+"長津湖": {
+"records": [
+"oldnews:CNTS-00133841718",
+"oldnews:CNTS-00133892946",
+"oldnews:CNTS-00133893156",
+"oldnews:CNTS-00133893433",
+"oldnews:CNTS-00133934398"
+],
+"sources": [
+"oldnews"
+],
+"first": "2026-11-27T21:17:31Z",
+"last": "2026-11-27T21:22:47Z",
+"keys": [
+"색인어(기사 내용 재구성)"
+]
+},
+"N軍": {
+"records": [
+"oldnews:CNTS-00133841718"
+],
+"sources": [
+"oldnews"
+],
+"first": "2026-11-27T21:17:31Z",
+"last": "2026-11-27T21:22:47Z",
+"keys": [
+"색인어(기사 내용 재구성)"
+]
+},
+"함흥[咸興]": {
+"records": [
+"oldnews:CNTS-00133841718"
+],
+"sources": [
+"oldnews"
+],
+"first": "2026-11-27T21:17:31Z",
+"last": "2026-11-27T21:22:47Z",
+"keys": [
+"주제"
+]
+},
+"淸津": {
+"records": [
+"oldnews:CNTS-00133892946"
+],
+"sources": [
+"oldnews"
+],
+"first": "2026-11-27T21:17:31Z",
+"last": "2026-11-27T21:22:47Z",
+"keys": [
+"색인어(기사 내용 재구성)"
+]
+},
+"청진(함경북도)[淸津]": {
+"records": [
+"oldnews:CNTS-00133892946"
+],
+"sources": [
+"oldnews"
+],
+"first": "2026-11-27T21:17:31Z",
+"last": "2026-11-27T21:22:47Z",
+"keys": [
+"주제"
+]
+},
+"北韓": {
+"records": [
+"oldnews:CNTS-00133893156"
+],
+"sources": [
+"oldnews"
+],
+"first": "2026-11-27T21:17:31Z",
+"last": "2026-11-27T21:22:47Z",
+"keys": [
+"색인어(기사 내용 재구성)"
+]
+},
+"平壤": {
+"records": [
+"oldnews:CNTS-00133893156"
+],
+"sources": [
+"oldnews"
+],
+"first": "2026-11-27T21:17:31Z",
+"last": "2026-11-27T21:22:47Z",
+"keys": [
+"색인어(기사 내용 재구성)"
+]
+},
+"엔軍": {
+"records": [
+"oldnews:CNTS-00133893156"
+],
+"sources": [
+"oldnews"
+],
+"first": "2026-11-27T21:17:31Z",
+"last": "2026-11-27T21:22:47Z",
+"keys": [
+"색인어(기사 내용 재구성)"
+]
+},
+"북한(국명)[北韓]": {
+"records": [
+"oldnews:CNTS-00133893156"
+],
+"sources": [
+"oldnews"
+],
+"first": "2026-11-27T21:17:31Z",
+"last": "2026-11-27T21:22:47Z",
+"keys": [
+"주제"
+]
+},
+"Berquist": {
+"records": [
+"ia:DTIC_ADA471198"
+],
+"sources": [
+"ia"
+],
+"first": "2026-11-27T21:19:13Z",
+"last": "2026-11-27T21:28:47Z",
+"keys": [
+"subject"
+]
+},
+"Paul T": {
+"records": [
+"ia:DTIC_ADA471198"
+],
+"sources": [
+"ia"
+],
+"first": "2026-11-27T21:19:13Z",
+"last": "2026-11-27T21:28:47Z",
+"keys": [
+"subject"
+]
+},
+"*MILITARY FORCES(UNITED STATES)": {
+"records": [
+"ia:DTIC_ADA471198"
+],
+"sources": [
+"ia"
+],
+"first": "2026-11-27T21:19:13Z",
+"last": "2026-11-27T21:28:47Z",
+"keys": [
+"subject"
+]
+},
+"*MILITARY HISTORY": {
+"records": [
+"ia:DTIC_ADA471198"
+],
+"sources": [
+"ia"
+],
+"first": "2026-11-27T21:19:13Z",
+"last": "2026-11-27T21:28:47Z",
+"keys": [
+"subject"
+]
+},
+"張晋호": {
+"records": [
+"oldnews:CNTS-00109355902"
+],
+"sources": [
+"oldnews"
+],
+"first": "2026-11-27T21:19:13Z",
+"last": "2026-11-27T21:20:08Z",
+"keys": [
+"색인어(기사 내용 재구성)"
+]
+},
+"韓國": {
+"records": [
+"oldnews:CNTS-00133893433"
+],
+"sources": [
+"oldnews"
+],
+"first": "2026-11-27T21:19:13Z",
+"last": "2026-11-27T21:20:08Z",
+"keys": [
+"색인어(기사 내용 재구성)"
+]
+},
+"한국(국명)[韓國]": {
+"records": [
+"oldnews:CNTS-00133893433"
+],
+"sources": [
+"oldnews"
+],
+"first": "2026-11-27T21:19:13Z",
+"last": "2026-11-27T21:20:08Z",
+"keys": [
+"주제"
+]
+},
+"Berger": {
+"records": [
+"ia:DTIC_ADA149352"
+],
+"sources": [
+"ia"
+],
+"first": "2026-11-27T21:19:44Z",
+"last": "2026-11-27T21:20:08Z",
+"keys": [
+"subject"
+]
+},
+"F. M.": {
+"records": [
+"ia:DTIC_ADA149352"
+],
+"sources": [
+"ia"
+],
+"first": "2026-11-27T21:19:44Z",
+"last": "2026-11-27T21:20:08Z",
+"keys": [
+"subject"
+]
+},
+"*NORTH KOREA": {
+"records": [
+"ia:DTIC_ADA149352"
+],
+"sources": [
+"ia"
+],
+"first": "2026-11-27T21:19:44Z",
+"last": "2026-11-27T21:20:08Z",
+"keys": [
+"subject"
+]
+},
+"*MILITARY OPERATIONS": {
+"records": [
+"ia:DTIC_ADA149352"
+],
+"sources": [
+"ia"
+],
+"first": "2026-11-27T21:19:44Z",
+"last": "2026-11-27T21:20:08Z",
+"keys": [
+"subject"
+]
+},
+"張鎭浩": {
+"records": [
+"oldnews:CNTS-00094871302"
+],
+"sources": [
+"oldnews"
+],
+"first": "2026-11-27T21:19:44Z",
+"last": "2026-11-27T21:20:08Z",
+"keys": [
+"색인어(기사 내용 재구성)"
+]
+},
+"李鳳植": {
+"records": [
+"oldnews:CNTS-00094871302"
+],
+"sources": [
+"oldnews"
+],
+"first": "2026-11-27T21:19:44Z",
+"last": "2026-11-27T21:20:08Z",
+"keys": [
+"색인어(기사 내용 재구성)"
+]
+},
+"장춘": {
+"records": [
+"oldnews:CNTS-00095720904"
+],
+"sources": [
+"oldnews"
+],
+"first": "2026-11-27T21:21:15Z",
+"last": "2026-11-27T21:24:13Z",
+"keys": [
+"색인어(기사 내용 재구성)"
+]
+},
+"일본헌병": {
+"records": [
+"oldnews:CNTS-00095720904"
+],
+"sources": [
+"oldnews"
+],
+"first": "2026-11-27T21:21:15Z",
+"last": "2026-11-27T21:24:13Z",
+"keys": [
+"색인어(기사 내용 재구성)"
+]
+},
+"경부": {
+"records": [
+"oldnews:CNTS-00095720904"
+],
+"sources": [
+"oldnews"
+],
+"first": "2026-11-27T21:21:15Z",
+"last": "2026-11-27T21:24:13Z",
+"keys": [
+"색인어(기사 내용 재구성)"
+]
+},
+"순사": {
+"records": [
+"oldnews:CNTS-00095720904"
+],
+"sources": [
+"oldnews"
+],
+"first": "2026-11-27T21:21:15Z",
+"last": "2026-11-27T21:24:13Z",
+"keys": [
+"색인어(기사 내용 재구성)"
+]
+},
+"대련": {
+"records": [
+"oldnews:CNTS-00095720904"
+],
+"sources": [
+"oldnews"
+],
+"first": "2026-11-27T21:21:15Z",
+"last": "2026-11-27T21:24:13Z",
+"keys": [
+"색인어(기사 내용 재구성)"
+]
+},
+"생명": {
+"records": [
+"oldnews:CNTS-00095720904"
+],
+"sources": [
+"oldnews"
+],
+"first": "2026-11-27T21:21:15Z",
+"last": "2026-11-27T21:24:13Z",
+"keys": [
+"색인어(기사 내용 재구성)"
+]
+},
+"대신": {
+"records": [
+"oldnews:CNTS-00095720904"
+],
+"sources": [
+"oldnews"
+],
+"first": "2026-11-27T21:21:15Z",
+"last": "2026-11-27T21:24:13Z",
+"keys": [
+"색인어(기사 내용 재구성)"
+]
+},
+"감옥": {
+"records": [
+"oldnews:CNTS-00095720904"
+],
+"sources": [
+"oldnews"
+],
+"first": "2026-11-27T21:21:15Z",
+"last": "2026-11-27T21:24:13Z",
+"keys": [
+"색인어(기사 내용 재구성)"
+]
+},
+"국가(나라)[國家]": {
+"records": [
+"oldnews:CNTS-00095720904"
+],
+"sources": [
+"oldnews"
+],
+"first": "2026-11-27T21:21:15Z",
+"last": "2026-11-27T21:24:13Z",
+"keys": [
+"주제"
+]
+},
+"지방법원": {
+"records": [
+"oldnews:CNTS-00095723299"
+],
+"sources": [
+"oldnews"
+],
+"first": "2026-11-27T21:21:15Z",
+"last": "2026-11-27T21:24:13Z",
+"keys": [
+"색인어(기사 내용 재구성)"
+]
+},
+"공동 판매[共同販賣]": {
+"records": [
+"oldnews:CNTS-00095723299"
+],
+"sources": [
+"oldnews"
+],
+"first": "2026-11-27T21:21:15Z",
+"last": "2026-11-27T21:24:13Z",
+"keys": [
+"주제"
 ]
 }
 },
@@ -3994,13 +4495,14 @@
 "한국(국명)[韓國]": {
 "records": [
 "oldnews:CNTS-00095722593",
-"oldnews:CNTS-00095729484"
+"oldnews:CNTS-00095729484",
+"oldnews:CNTS-00133893433"
 ],
 "sources": [
 "oldnews"
 ],
 "first": "2026-11-25T00:53:18Z",
-"last": "2026-11-25T00:53:18Z",
+"last": "2026-11-27T21:20:08Z",
 "keys": [
 "장소(기관 전거)"
 ]
@@ -4014,7 +4516,46 @@
 "oldnews"
 ],
 "first": "2026-11-25T00:53:18Z",
-"last": "2026-11-25T00:53:18Z",
+"last": "2026-11-27T21:24:13Z",
+"keys": [
+"장소(기관 전거)"
+]
+},
+"함흥[咸興]": {
+"records": [
+"oldnews:CNTS-00133841718"
+],
+"sources": [
+"oldnews"
+],
+"first": "2026-11-27T21:17:31Z",
+"last": "2026-11-27T21:22:47Z",
+"keys": [
+"장소(기관 전거)"
+]
+},
+"청진(함경북도)[淸津]": {
+"records": [
+"oldnews:CNTS-00133892946"
+],
+"sources": [
+"oldnews"
+],
+"first": "2026-11-27T21:17:31Z",
+"last": "2026-11-27T21:22:47Z",
+"keys": [
+"장소(기관 전거)"
+]
+},
+"북한(국명)[北韓]": {
+"records": [
+"oldnews:CNTS-00133893156"
+],
+"sources": [
+"oldnews"
+],
+"first": "2026-11-27T21:17:31Z",
+"last": "2026-11-27T21:22:47Z",
 "keys": [
 "장소(기관 전거)"
 ]
@@ -4194,13 +4735,14 @@
 },
 "문화예술-영상예술-영화/드라마-포스터": {
 "records": [
-"much:PS01002025001-003418-00000"
+"much:PS01002025001-003418-00000",
+"much:PS01002025001-003921-00000"
 ],
 "sources": [
 "much"
 ],
 "first": "2026-11-23T13:40:48Z",
-"last": "2026-11-23T13:40:48Z",
+"last": "2026-11-27T21:18:29Z",
 "keys": [
 "분류"
 ]
@@ -5148,13 +5690,14 @@
 },
 "GE134": {
 "records": [
-"ndl:https://ndlsearch.ndl.go.jp/books/R100000002-I000003215319"
+"ndl:https://ndlsearch.ndl.go.jp/books/R100000002-I000003215319",
+"ndl:https://ndlsearch.ndl.go.jp/books/R100000002-I026803623"
 ],
 "sources": [
 "ndl"
 ],
 "first": "2026-11-23T03:01:45Z",
-"last": "2026-11-23T03:15:42Z",
+"last": "2026-11-27T21:28:47Z",
 "keys": [
 "분류(NDC 등)"
 ]
@@ -5433,6 +5976,301 @@
 "last": "2026-11-25T14:10:24Z",
 "keys": [
 "분류(NDC 등)"
+]
+},
+"Battle of Chosin Reservoir": {
+"records": [
+"commons:https://commons.wikimedia.org/wiki/File%3A1st_Marine_Division_at_Chosin_Reservoir_in_Korea%2C_December_1950.jpg",
+"commons:https://commons.wikimedia.org/wiki/File%3ANaplam_strike_at_Chosin.jpg",
+"commons:https://commons.wikimedia.org/wiki/File%3AChosin.jpg",
+"commons:https://commons.wikimedia.org/wiki/File%3AMarine_Stinson_OY-1_and_Douglas_R4D_aircraft_at_Chosin_Reservoir_in_1950.jpg"
+],
+"sources": [
+"commons"
+],
+"first": "2026-11-27T21:17:31Z",
+"last": "2026-11-27T21:29:03Z",
+"keys": [
+"범주(Commons)"
+]
+},
+"December 1950 North Korea photographs": {
+"records": [
+"commons:https://commons.wikimedia.org/wiki/File%3A1st_Marine_Division_at_Chosin_Reservoir_in_Korea%2C_December_1950.jpg",
+"commons:https://commons.wikimedia.org/wiki/File%3ANaplam_strike_at_Chosin.jpg",
+"commons:https://commons.wikimedia.org/wiki/File%3AChosin.jpg",
+"commons:https://commons.wikimedia.org/wiki/File%3AMarine_Stinson_OY-1_and_Douglas_R4D_aircraft_at_Chosin_Reservoir_in_1950.jpg"
+],
+"sources": [
+"commons"
+],
+"first": "2026-11-27T21:17:31Z",
+"last": "2026-11-27T21:29:03Z",
+"keys": [
+"범주(Commons)"
+]
+},
+"Maps of the battle of Chosin Reservoir": {
+"records": [
+"commons:https://commons.wikimedia.org/wiki/File%3AMap_of_Battle_of_the_Changjin_reservoir.jpg"
+],
+"sources": [
+"commons"
+],
+"first": "2026-11-27T21:17:31Z",
+"last": "2026-11-27T21:29:03Z",
+"keys": [
+"범주(Commons)"
+]
+},
+"문화예술-문헌-기타": {
+"records": [
+"much:PS01002025008-004424-00000"
+],
+"sources": [
+"much"
+],
+"first": "2026-11-27T21:17:31Z",
+"last": "2026-11-27T21:22:08Z",
+"keys": [
+"분류"
+]
+},
+"전통과학-지리-지도": {
+"records": [
+"much:PS01002025008-013605-00000"
+],
+"sources": [
+"much"
+],
+"first": "2026-11-27T21:17:31Z",
+"last": "2026-11-27T21:22:08Z",
+"keys": [
+"분류"
+]
+},
+"ZA28": {
+"records": [
+"ndl:https://ndlsearch.ndl.go.jp/books/R000000004-I4261312"
+],
+"sources": [
+"ndl"
+],
+"first": "2026-11-27T21:17:31Z",
+"last": "2026-11-27T21:28:47Z",
+"keys": [
+"분류(NDC 등)"
+]
+},
+"XP": {
+"records": [
+"ndl:https://ndlsearch.ndl.go.jp/books/R100000002-Ias199706060"
+],
+"sources": [
+"ndl"
+],
+"first": "2026-11-27T21:17:31Z",
+"last": "2026-11-27T21:28:47Z",
+"keys": [
+"분류(NDC 등)"
+]
+},
+"1920 photographs of Korea": {
+"records": [
+"commons:https://commons.wikimedia.org/wiki/File%3A%EC%9C%A0%EA%B4%80%EC%88%9C_%EC%9D%BC%EC%A0%9C%EA%B0%90%EC%8B%9C%EB%8C%80%EC%83%81%EC%9D%B8%EB%AC%BC%EC%B9%B4%EB%93%9C.jpg",
+"commons:https://commons.wikimedia.org/wiki/File%3ARyu_Gwan-sun.jpg"
+],
+"sources": [
+"commons"
+],
+"first": "2026-11-27T21:18:16Z",
+"last": "2026-11-27T21:18:29Z",
+"keys": [
+"범주(Commons)"
+]
+},
+"Ryu Gwan-sun": {
+"records": [
+"commons:https://commons.wikimedia.org/wiki/File%3A%EC%9C%A0%EA%B4%80%EC%88%9C_%EC%9D%BC%EC%A0%9C%EA%B0%90%EC%8B%9C%EB%8C%80%EC%83%81%EC%9D%B8%EB%AC%BC%EC%B9%B4%EB%93%9C.jpg",
+"commons:https://commons.wikimedia.org/wiki/File%3ARyu_Gwan-sun.jpg",
+"commons:https://commons.wikimedia.org/wiki/File%3AYu_gwansun.JPG"
+],
+"sources": [
+"commons"
+],
+"first": "2026-11-27T21:18:16Z",
+"last": "2026-11-27T21:18:29Z",
+"keys": [
+"범주(Commons)"
+]
+},
+"April 2007 in South Korea": {
+"records": [
+"commons:https://commons.wikimedia.org/wiki/File%3AYu_gwansun.JPG"
+],
+"sources": [
+"commons"
+],
+"first": "2026-11-27T21:18:16Z",
+"last": "2026-11-27T21:18:29Z",
+"keys": [
+"범주(Commons)"
+]
+},
+"Bronze statues": {
+"records": [
+"commons:https://commons.wikimedia.org/wiki/File%3AYu_gwansun.JPG"
+],
+"sources": [
+"commons"
+],
+"first": "2026-11-27T21:18:16Z",
+"last": "2026-11-27T21:18:29Z",
+"keys": [
+"범주(Commons)"
+]
+},
+"Cheonan": {
+"records": [
+"commons:https://commons.wikimedia.org/wiki/File%3AYu_gwansun.JPG"
+],
+"sources": [
+"commons"
+],
+"first": "2026-11-27T21:18:16Z",
+"last": "2026-11-27T21:18:29Z",
+"keys": [
+"범주(Commons)"
+]
+},
+"Statues of standing women in South Korea": {
+"records": [
+"commons:https://commons.wikimedia.org/wiki/File%3AYu_gwansun.JPG"
+],
+"sources": [
+"commons"
+],
+"first": "2026-11-27T21:18:16Z",
+"last": "2026-11-27T21:18:29Z",
+"keys": [
+"범주(Commons)"
+]
+},
+"문화예술-영상예술-영화/드라마-전단지": {
+"records": [
+"much:PS01002025008-010203-00000"
+],
+"sources": [
+"much"
+],
+"first": "2026-11-27T21:18:16Z",
+"last": "2026-11-27T21:18:29Z",
+"keys": [
+"분류"
+]
+},
+"M26 Pershing durin": {
+"records": [
+"commons:https://commons.wikimedia.org/wiki/File%3AChosin.jpg"
+],
+"sources": [
+"commons"
+],
+"first": "2026-11-27T21:19:44Z",
+"last": "2026-11-27T21:20:08Z",
+"keys": [
+"범주(Commons)"
+]
+},
+"Douglas R4D Skytrain": {
+"records": [
+"commons:https://commons.wikimedia.org/wiki/File%3AMarine_Stinson_OY-1_and_Douglas_R4D_aircraft_at_Chosin_Reservoir_in_1950.jpg"
+],
+"sources": [
+"commons"
+],
+"first": "2026-11-27T21:19:44Z",
+"last": "2026-11-27T21:20:08Z",
+"keys": [
+"범주(Commons)"
+]
+},
+"Marine Observation Squadron 6": {
+"records": [
+"commons:https://commons.wikimedia.org/wiki/File%3AMarine_Stinson_OY-1_and_Douglas_R4D_aircraft_at_Chosin_Reservoir_in_1950.jpg"
+],
+"sources": [
+"commons"
+],
+"first": "2026-11-27T21:19:44Z",
+"last": "2026-11-27T21:20:08Z",
+"keys": [
+"범주(Commons)"
+]
+},
+"Stinson L-5 Sentinel": {
+"records": [
+"commons:https://commons.wikimedia.org/wiki/File%3AMarine_Stinson_OY-1_and_Douglas_R4D_aircraft_at_Chosin_Reservoir_in_1950.jpg"
+],
+"sources": [
+"commons"
+],
+"first": "2026-11-27T21:19:44Z",
+"last": "2026-11-27T21:20:08Z",
+"keys": [
+"범주(Commons)"
+]
+},
+"ZA5": {
+"records": [
+"ndl:https://ndlsearch.ndl.go.jp/books/R000000004-I031739599"
+],
+"sources": [
+"ndl"
+],
+"first": "2026-11-27T21:19:51Z",
+"last": "2026-11-27T21:28:47Z",
+"keys": [
+"분류(NDC 등)"
+]
+},
+"SVG ballot icons": {
+"records": [
+"commons:https://commons.wikimedia.org/wiki/File%3AA_coloured_voting_box.svg"
+],
+"sources": [
+"commons"
+],
+"first": "2026-11-27T21:24:34Z",
+"last": "2026-11-27T21:24:34Z",
+"keys": [
+"범주(Commons)"
+]
+},
+"SVG logos of WikiProjects": {
+"records": [
+"commons:https://commons.wikimedia.org/wiki/File%3AA_coloured_voting_box.svg"
+],
+"sources": [
+"commons"
+],
+"first": "2026-11-27T21:24:34Z",
+"last": "2026-11-27T21:24:34Z",
+"keys": [
+"범주(Commons)"
+]
+},
+"Photos of South Korea from ISS": {
+"records": [
+"commons:https://commons.wikimedia.org/wiki/File%3AISS026-E-12345_-_View_of_South_Korea.jpg"
+],
+"sources": [
+"commons"
+],
+"first": "2026-11-27T21:24:34Z",
+"last": "2026-11-27T21:24:34Z",
+"keys": [
+"범주(Commons)"
 ]
 }
 },
@@ -5928,26 +6766,29 @@
 "much:PS01002025001-003656-00000",
 "much:PS01002025001-006377-00000",
 "much:PS01002025001-008144-00000",
-"much:PS01002025008-008048-00000"
+"much:PS01002025008-008048-00000",
+"much:PS01002025001-003921-00000",
+"much:PS01002025008-010203-00000"
 ],
 "sources": [
 "much"
 ],
 "first": "2026-11-23T13:40:48Z",
-"last": "2026-11-25T00:53:19Z",
+"last": "2026-11-27T21:18:29Z",
 "keys": [
 "국적/시대"
 ]
 },
 "한국-2000년 이후": {
 "records": [
-"much:PS01002025003-024961-00000"
+"much:PS01002025003-024961-00000",
+"much:PS01002025008-004424-00000"
 ],
 "sources": [
 "much"
 ],
 "first": "2026-11-23T13:40:48Z",
-"last": "2026-11-23T13:40:48Z",
+"last": "2026-11-27T21:22:08Z",
 "keys": [
 "국적/시대"
 ]
@@ -6001,6 +6842,32 @@
 ],
 "first": "2026-11-25T14:36:41Z",
 "last": "2026-11-25T14:43:12Z",
+"keys": [
+"시대"
+]
+},
+"한국-일제강점": {
+"records": [
+"much:PS01002025008-013605-00000"
+],
+"sources": [
+"much"
+],
+"first": "2026-11-27T21:17:31Z",
+"last": "2026-11-27T21:22:08Z",
+"keys": [
+"국적/시대"
+]
+},
+"근현대": {
+"records": [
+"heritage:13-0002300000000-34"
+],
+"sources": [
+"heritage"
+],
+"first": "2026-11-27T21:18:16Z",
+"last": "2026-11-27T21:18:29Z",
 "keys": [
 "시대"
 ]
@@ -6545,13 +7412,28 @@
 },
 "중공군[中共軍]": {
 "records": [
-"oldnews:CNTS-00133841567"
+"oldnews:CNTS-00133841567",
+"oldnews:CNTS-00133841718",
+"oldnews:CNTS-00133893156"
 ],
 "sources": [
 "oldnews"
 ],
 "first": "2026-11-23T03:01:45Z",
-"last": "2026-11-23T03:01:45Z",
+"last": "2026-11-27T21:22:47Z",
+"keys": [
+"단체(기관 전거)"
+]
+},
+"지방 법원[地方法院]": {
+"records": [
+"oldnews:CNTS-00095723299"
+],
+"sources": [
+"oldnews"
+],
+"first": "2026-11-27T21:21:15Z",
+"last": "2026-11-27T21:24:13Z",
 "keys": [
 "단체(기관 전거)"
 ]
@@ -6654,7 +7536,7 @@
 "nara"
 ],
 "first": "2026-11-23T03:00:15Z",
-"last": "2026-11-25T00:00:00Z",
+"last": "2026-11-27T21:29:03Z",
 "keys": [
 "기술 수준"
 ]
@@ -6727,13 +7609,18 @@
 "nara:NAID 591001650",
 "nara:NAID 608493427",
 "nara:NAID 18511621",
-"nara:NAID 684007917"
+"nara:NAID 684007917",
+"nara:NAID 240824180",
+"nara:NAID 41028058",
+"nara:NAID 42219763",
+"nara:NAID 42219724",
+"nara:NAID 557758179"
 ],
 "sources": [
 "nara"
 ],
 "first": "2026-11-23T03:00:15Z",
-"last": "2026-11-25T00:56:51Z",
+"last": "2026-11-27T21:29:03Z",
 "keys": [
 "기술 수준"
 ]
@@ -7151,13 +8038,14 @@
 "근현대문서": {
 "records": [
 "earchive:DCB050_12_00C1156",
-"earchive:DJE003_09_00C0001_002"
+"earchive:DJE003_09_00C0001_002",
+"earchive:AJP044_01_02C5039"
 ],
 "sources": [
 "earchive"
 ],
 "first": "2026-11-23T13:40:46Z",
-"last": "2026-11-23T13:40:46Z",
+"last": "2026-11-27T21:22:08Z",
 "keys": [
 "사료구분"
 ]
@@ -7380,13 +8268,15 @@
 "ndl:https://ndlsearch.ndl.go.jp/books/R100000002-I000003215319",
 "ndl:https://ndlsearch.ndl.go.jp/books/R100000002-I000008258487",
 "ndl:https://ndlsearch.ndl.go.jp/books/R100000002-I024390870",
-"ndl:https://ndlsearch.ndl.go.jp/books/R100000136-I1970586434809985193"
+"ndl:https://ndlsearch.ndl.go.jp/books/R100000136-I1970586434809985193",
+"ndl:https://ndlsearch.ndl.go.jp/books/R100000002-Ias199706060",
+"ndl:https://ndlsearch.ndl.go.jp/books/R100000002-I026803623"
 ],
 "sources": [
 "ndl"
 ],
 "first": "2026-11-23T03:00:35Z",
-"last": "2026-11-25T16:49:26Z",
+"last": "2026-11-27T21:28:47Z",
 "keys": [
 "자료 형태"
 ]
@@ -7409,13 +8299,15 @@
 "ndl:https://ndlsearch.ndl.go.jp/books/R000000004-I032355618",
 "ndl:https://ndlsearch.ndl.go.jp/books/R100000136-I1010013168658411778",
 "ndl:https://ndlsearch.ndl.go.jp/books/R000000035-I2050014094_0100092364",
-"ndl:https://ndlsearch.ndl.go.jp/books/R000000035-I2050014094_0100207879"
+"ndl:https://ndlsearch.ndl.go.jp/books/R000000035-I2050014094_0100207879",
+"ndl:https://ndlsearch.ndl.go.jp/books/R000000004-I4261312",
+"ndl:https://ndlsearch.ndl.go.jp/books/R000000004-I031739599"
 ],
 "sources": [
 "ndl"
 ],
 "first": "2026-11-23T13:40:58Z",
-"last": "2026-11-25T14:10:24Z",
+"last": "2026-11-27T21:28:47Z",
 "keys": [
 "자료 형태"
 ]
@@ -7667,13 +8559,14 @@
 "ktv:9033",
 "ktv:9048",
 "ktv:9161",
-"ktv:9206"
+"ktv:9206",
+"ktv:28379"
 ],
 "sources": [
 "ktv"
 ],
 "first": "2026-11-23T06:39:47Z",
-"last": "2026-11-24T05:40:01Z",
+"last": "2026-11-27T21:18:29Z",
 "keys": [
 "자료 구분"
 ]
@@ -7771,15 +8664,59 @@
 "デジタル": {
 "records": [
 "ndl:https://ndlsearch.ndl.go.jp/books/R000000035-I2050014094_0100092364",
-"ndl:https://ndlsearch.ndl.go.jp/books/R000000035-I2050014094_0100207879"
+"ndl:https://ndlsearch.ndl.go.jp/books/R000000035-I2050014094_0100207879",
+"ndl:https://ndlsearch.ndl.go.jp/books/R000000004-I4261312"
 ],
 "sources": [
 "ndl"
 ],
 "first": "2026-11-25T14:10:05Z",
-"last": "2026-11-25T14:10:24Z",
+"last": "2026-11-27T21:28:47Z",
 "keys": [
 "자료 형태"
+]
+},
+"도서": {
+"records": [
+"nlk:718392893",
+"nlk:5224308",
+"nlk:68339760"
+],
+"sources": [
+"nlk"
+],
+"first": "2026-11-27T21:16:26Z",
+"last": "2026-11-27T21:28:47Z",
+"keys": [
+"자료유형"
+]
+},
+"고문서": {
+"records": [
+"earchive:DDG048_03_00K0012_001",
+"earchive:DDG048_03_00K0012_002"
+],
+"sources": [
+"earchive"
+],
+"first": "2026-11-27T21:17:31Z",
+"last": "2026-11-27T21:22:08Z",
+"keys": [
+"사료구분"
+]
+},
+"학위논문": {
+"records": [
+"nlk:CNTS-00132152081",
+"nlk:CNTS-00132171467"
+],
+"sources": [
+"nlk"
+],
+"first": "2026-11-27T21:19:13Z",
+"last": "2026-11-27T21:28:47Z",
+"keys": [
+"자료유형"
 ]
 }
 },
@@ -8055,13 +8992,15 @@
 "much:PS01002025001-003656-00000",
 "much:PS01002025001-006377-00000",
 "much:PS01002025001-008144-00000",
-"much:PS01002025008-008048-00000"
+"much:PS01002025008-008048-00000",
+"much:PS01002025008-004424-00000",
+"much:PS01002025008-013605-00000"
 ],
 "sources": [
 "much"
 ],
 "first": "2026-11-23T13:40:48Z",
-"last": "2026-11-25T00:53:19Z",
+"last": "2026-11-27T21:22:08Z",
 "keys": [
 "재질"
 ]
@@ -8076,7 +9015,7 @@
 "indy"
 ],
 "first": "2026-11-23T03:01:04Z",
-"last": "2026-11-23T13:40:48Z",
+"last": "2026-11-27T21:18:29Z",
 "keys": [
 "죄명"
 ]
@@ -8091,7 +9030,7 @@
 "indy"
 ],
 "first": "2026-11-23T03:01:04Z",
-"last": "2026-11-25T00:53:19Z",
+"last": "2026-11-27T21:18:29Z",
 "keys": [
 "죄명"
 ]
@@ -8185,13 +9124,14 @@
 "i815:GM1960061503-03",
 "i815:GM1963112702-10",
 "i815:GM1948061604-01",
-"i815:GM1952041604-01"
+"i815:GM1952041604-01",
+"i815:GM1951101002-03"
 ],
 "sources": [
 "i815"
 ],
 "first": "2026-11-23T03:01:12Z",
-"last": "2026-11-25T00:53:18Z",
+"last": "2026-11-27T21:22:08Z",
 "keys": [
 "신문명"
 ]
@@ -8220,6 +9160,32 @@
 ],
 "first": "2026-11-23T13:40:49Z",
 "last": "2026-11-25T00:53:18Z",
+"keys": [
+"신문명"
+]
+},
+"선봉": {
+"records": [
+"i815:3-005955-002-1930"
+],
+"sources": [
+"i815"
+],
+"first": "2026-11-27T21:17:31Z",
+"last": "2026-11-27T21:22:08Z",
+"keys": [
+"신문명"
+]
+},
+"황성신문": {
+"records": [
+"i815:HS1909071102"
+],
+"sources": [
+"i815"
+],
+"first": "2026-11-27T21:19:44Z",
+"last": "2026-11-27T21:20:08Z",
 "keys": [
 "신문명"
 ]
@@ -8305,7 +9271,7 @@
 "nara"
 ],
 "first": "2026-11-23T03:00:15Z",
-"last": "2026-11-24T23:44:08Z",
+"last": "2026-11-27T21:29:03Z",
 "keys": [
 "소장단위(열람·복제 청구)"
 ]
@@ -8322,13 +9288,14 @@
 "nara:NAID 404791033",
 "nara:NAID 505634321",
 "nara:NAID 505634339",
-"nara:NAID 520782"
+"nara:NAID 520782",
+"nara:NAID 557758179"
 ],
 "sources": [
 "nara"
 ],
 "first": "2026-11-23T03:00:15Z",
-"last": "2026-11-25T00:00:00Z",
+"last": "2026-11-27T21:29:03Z",
 "keys": [
 "소장단위(열람·복제 청구)"
 ]
@@ -8344,7 +9311,7 @@
 "nara"
 ],
 "first": "2026-11-23T03:00:15Z",
-"last": "2026-11-24T22:40:43Z",
+"last": "2026-11-27T21:29:03Z",
 "keys": [
 "소장단위(열람·복제 청구)"
 ]
@@ -8552,13 +9519,16 @@
 "nara:NAID 42219745",
 "nara:NAID 42219636",
 "nara:NAID 42219631",
-"nara:NAID 18511621"
+"nara:NAID 18511621",
+"nara:NAID 41028058",
+"nara:NAID 42219763",
+"nara:NAID 42219724"
 ],
 "sources": [
 "nara"
 ],
 "first": "2026-11-23T07:26:10Z",
-"last": "2026-11-25T00:56:51Z",
+"last": "2026-11-27T21:24:34Z",
 "keys": [
 "소장단위(열람·복제 청구)"
 ]
@@ -8920,6 +9890,19 @@
 "keys": [
 "소장처"
 ]
+},
+"National Archives at Washington, DC - Textual Reference": {
+"records": [
+"nara:NAID 240824180"
+],
+"sources": [
+"nara"
+],
+"first": "2026-11-27T21:18:16Z",
+"last": "2026-11-27T21:18:29Z",
+"keys": [
+"소장단위(열람·복제 청구)"
+]
 }
 },
 "공개 상태": {
@@ -9059,13 +10042,15 @@
 "nara:NAID 591001650",
 "nara:NAID 608493427",
 "nara:NAID 684007917",
-"nara:NAID 520782"
+"nara:NAID 520782",
+"nara:NAID 240824180",
+"nara:NAID 557758179"
 ],
 "sources": [
 "nara"
 ],
 "first": "2026-11-23T03:00:15Z",
-"last": "2026-11-25T00:56:51Z",
+"last": "2026-11-27T21:29:03Z",
 "keys": [
 "접근 제한(원문)"
 ]
@@ -9318,13 +10303,16 @@
 "nara:NAID 42219744",
 "nara:NAID 42219745",
 "nara:NAID 42219636",
-"nara:NAID 42219631"
+"nara:NAID 42219631",
+"nara:NAID 41028058",
+"nara:NAID 42219763",
+"nara:NAID 42219724"
 ],
 "sources": [
 "nara"
 ],
 "first": "2026-11-23T07:26:10Z",
-"last": "2026-11-24T23:15:55Z",
+"last": "2026-11-27T21:24:34Z",
 "keys": [
 "접근 제한(원문)"
 ]
@@ -9499,7 +10487,7 @@
 "koreanwar"
 ],
 "first": "2026-11-23T13:40:49Z",
-"last": "2026-11-24T23:15:55Z",
+"last": "2026-11-27T21:28:47Z",
 "keys": [
 "열람 및 이용조건"
 ]
@@ -9530,13 +10518,14 @@
 "koreanwar:2011-US-01-PF-A-00647",
 "koreanwar:2011-US-01-PF-A-00687",
 "koreanwar:2011-US-01-PF-A-00696",
-"koreanwar:2011-US-01-PF-A-00697"
+"koreanwar:2011-US-01-PF-A-00697",
+"koreanwar:1991-KR-04-AF-A-00005"
 ],
 "sources": [
 "koreanwar"
 ],
 "first": "2026-11-23T15:23:38Z",
-"last": "2026-11-24T23:15:56Z",
+"last": "2026-11-27T21:18:29Z",
 "keys": [
 "열람 및 이용조건"
 ]
@@ -9609,7 +10598,7 @@
 "koreanwar"
 ],
 "first": "2026-11-24T22:40:43Z",
-"last": "2026-11-24T22:40:43Z",
+"last": "2026-11-27T21:28:47Z",
 "keys": [
 "열람 및 이용조건"
 ]
@@ -9756,26 +10745,28 @@
 "ia:cia-readingroom-document-cia-rdp88g01117r000802600002-3",
 "ia:cia-readingroom-document-cia-rdp79r01012a018200010001-0",
 "ia:cia-readingroom-document-03194444",
-"ia:cia-readingroom-document-cia-rdp80t00246a018200250001-2"
+"ia:cia-readingroom-document-cia-rdp80t00246a018200250001-2",
+"ia:cia-readingroom-document-cia-rdp80-00809a000700260090-2"
 ],
 "sources": [
 "ia"
 ],
 "first": "2026-11-23T03:00:40Z",
-"last": "2026-11-24T23:10:19Z",
+"last": "2026-11-27T21:18:29Z",
 "keys": [
 "creator"
 ]
 },
 "ehistory.korea.kr": {
 "records": [
-"ia:e_history_StreamRoot_DH_0463_19640411_01"
+"ia:e_history_StreamRoot_DH_0463_19640411_01",
+"ia:e_history_StreamRoot_DH_0203_19590303_01"
 ],
 "sources": [
 "ia"
 ],
 "first": "2026-11-23T03:00:40Z",
-"last": "2026-11-23T03:00:40Z",
+"last": "2026-11-27T21:18:29Z",
 "keys": [
 "creator"
 ]
@@ -9983,13 +10974,14 @@
 "Unknown author Unknown author": {
 "records": [
 "commons:https://commons.wikimedia.org/wiki/File%3AUSS_Begor_(APD-127)_off_Hungnam_on_24_December_1950_(80-G-K-11769).jpg",
-"commons:https://commons.wikimedia.org/wiki/File%3AUSS_Begor_(APD-127)_off_Hungnam_on_24_December_1950_(80-G-K-11771).jpg"
+"commons:https://commons.wikimedia.org/wiki/File%3AUSS_Begor_(APD-127)_off_Hungnam_on_24_December_1950_(80-G-K-11771).jpg",
+"commons:https://commons.wikimedia.org/wiki/File%3ARyu_Gwan-sun.jpg"
 ],
 "sources": [
 "commons"
 ],
 "first": "2026-11-23T03:01:45Z",
-"last": "2026-11-23T03:15:42Z",
+"last": "2026-11-27T21:18:29Z",
 "keys": [
 "작가"
 ]
@@ -10370,7 +11362,7 @@
 "koreanwar"
 ],
 "first": "2026-11-23T13:40:49Z",
-"last": "2026-11-24T22:40:43Z",
+"last": "2026-11-27T21:28:47Z",
 "keys": [
 "생산처/생산자"
 ]
@@ -10806,13 +11798,15 @@
 "ia:DTIC_ADA242405",
 "ia:DTIC_ADA429076",
 "ia:DTIC_ADB006731",
-"ia:DTIC_ADA290790"
+"ia:DTIC_ADA290790",
+"ia:DTIC_ADA471198",
+"ia:DTIC_ADA149352"
 ],
 "sources": [
 "ia"
 ],
 "first": "2026-11-24T22:40:42Z",
-"last": "2026-11-24T22:44:35Z",
+"last": "2026-11-27T21:28:47Z",
 "keys": [
 "creator",
 "생산자"
@@ -10915,20 +11909,22 @@
 "ia"
 ],
 "first": "2026-11-24T22:40:43Z",
-"last": "2026-11-24T22:40:43Z",
+"last": "2026-11-27T21:20:08Z",
 "keys": [
 "생산자"
 ]
 },
 "U.S. Navy. Bureau of Medicine and Surgery": {
 "records": [
-"ia:litvin-korea-physician-inchon-chosin"
+"ia:litvin-korea-physician-inchon-chosin",
+"ia:malmo-korea-corpsman-chosin",
+"ia:owen-korea-usmc-officer-chosin"
 ],
 "sources": [
 "ia"
 ],
 "first": "2026-11-24T22:40:43Z",
-"last": "2026-11-24T22:40:43Z",
+"last": "2026-11-27T21:28:47Z",
 "keys": [
 "creator"
 ]
@@ -10941,7 +11937,7 @@
 "ia"
 ],
 "first": "2026-11-24T22:40:43Z",
-"last": "2026-11-24T22:40:43Z",
+"last": "2026-11-27T21:22:08Z",
 "keys": [
 "creator"
 ]
@@ -10954,7 +11950,7 @@
 "koreanwar"
 ],
 "first": "2026-11-24T22:40:43Z",
-"last": "2026-11-24T22:40:43Z",
+"last": "2026-11-27T21:28:47Z",
 "keys": [
 "생산처/생산자"
 ]
@@ -11867,6 +12863,241 @@
 "keys": [
 "생산자"
 ]
+},
+"U.S. Marines (Official Marine Corps Photo # A5656) ( http://www.tecom.usmc.mil/HD/Home_Page.htm )": {
+"records": [
+"commons:https://commons.wikimedia.org/wiki/File%3A1st_Marine_Division_at_Chosin_Reservoir_in_Korea%2C_December_1950.jpg"
+],
+"sources": [
+"commons"
+],
+"first": "2026-11-27T21:17:31Z",
+"last": "2026-11-27T21:29:03Z",
+"keys": [
+"작가"
+]
+},
+"Billy C. Mossman, United States Army Center of Military History": {
+"records": [
+"commons:https://commons.wikimedia.org/wiki/File%3AMap_of_Battle_of_the_Changjin_reservoir.jpg"
+],
+"sources": [
+"commons"
+],
+"first": "2026-11-27T21:17:31Z",
+"last": "2026-11-27T21:29:03Z",
+"keys": [
+"작가"
+]
+},
+"Photo DOD (USMC) A5461": {
+"records": [
+"commons:https://commons.wikimedia.org/wiki/File%3ANaplam_strike_at_Chosin.jpg"
+],
+"sources": [
+"commons"
+],
+"first": "2026-11-27T21:17:31Z",
+"last": "2026-11-27T21:29:03Z",
+"keys": [
+"작가"
+]
+},
+"함양군(咸陽郡)": {
+"records": [
+"earchive:DDG048_03_00K0012_001",
+"earchive:DDG048_03_00K0012_002"
+],
+"sources": [
+"earchive"
+],
+"first": "2026-11-27T21:17:31Z",
+"last": "2026-11-27T21:22:08Z",
+"keys": [
+"생산자"
+]
+},
+"PeriscopeFilm": {
+"records": [
+"ia:81594-us-navy-with-the-marines-chosin-to-hungnam-vwr"
+],
+"sources": [
+"ia"
+],
+"first": "2026-11-27T21:17:31Z",
+"last": "2026-11-27T21:28:47Z",
+"keys": [
+"creator"
+]
+},
+"United States. Navy": {
+"records": [
+"ia:NPC-177"
+],
+"sources": [
+"ia"
+],
+"first": "2026-11-27T21:17:31Z",
+"last": "2026-11-27T21:22:08Z",
+"keys": [
+"creator"
+]
+},
+"Martin Russ": {
+"records": [
+"much:PS01002025008-004424-00000"
+],
+"sources": [
+"much"
+],
+"first": "2026-11-27T21:17:31Z",
+"last": "2026-11-27T21:22:08Z",
+"keys": [
+"작가"
+]
+},
+"심미서원(審美書院)": {
+"records": [
+"much:PS01002025008-013605-00000"
+],
+"sources": [
+"much"
+],
+"first": "2026-11-27T21:17:31Z",
+"last": "2026-11-27T21:22:08Z",
+"keys": [
+"작가"
+]
+},
+"藤井 久": {
+"records": [
+"ndl:https://ndlsearch.ndl.go.jp/books/R000000004-I4261312"
+],
+"sources": [
+"ndl"
+],
+"first": "2026-11-27T21:17:31Z",
+"last": "2026-11-27T21:28:47Z",
+"keys": [
+"생산자"
+]
+},
+"조선총독부 경기도경찰부 고등과": {
+"records": [
+"commons:https://commons.wikimedia.org/wiki/File%3A%EC%9C%A0%EA%B4%80%EC%88%9C_%EC%9D%BC%EC%A0%9C%EA%B0%90%EC%8B%9C%EB%8C%80%EC%83%81%EC%9D%B8%EB%AC%BC%EC%B9%B4%EB%93%9C.jpg"
+],
+"sources": [
+"commons"
+],
+"first": "2026-11-27T21:18:16Z",
+"last": "2026-11-27T21:18:29Z",
+"keys": [
+"작가"
+]
+},
+"Laurent Pawlowski": {
+"records": [
+"commons:https://commons.wikimedia.org/wiki/File%3AYu_gwansun.JPG"
+],
+"sources": [
+"commons"
+],
+"first": "2026-11-27T21:18:16Z",
+"last": "2026-11-27T21:18:29Z",
+"keys": [
+"작가"
+]
+},
+"Photo by Corporal Peter McDonald, USMC": {
+"records": [
+"commons:https://commons.wikimedia.org/wiki/File%3AChosin.jpg"
+],
+"sources": [
+"commons"
+],
+"first": "2026-11-27T21:19:44Z",
+"last": "2026-11-27T21:20:08Z",
+"keys": [
+"작가"
+]
+},
+"Sgt. W.R. Keating, USMC": {
+"records": [
+"commons:https://commons.wikimedia.org/wiki/File%3AMarine_Stinson_OY-1_and_Douglas_R4D_aircraft_at_Chosin_Reservoir_in_1950.jpg"
+],
+"sources": [
+"commons"
+],
+"first": "2026-11-27T21:19:44Z",
+"last": "2026-11-27T21:20:08Z",
+"keys": [
+"작가"
+]
+},
+"The Armchair Historian": {
+"records": [
+"ia:frozen-hell-battle-of-chosin-reservoir-the-armchair-historian-1080p-h-264"
+],
+"sources": [
+"ia"
+],
+"first": "2026-11-27T21:19:44Z",
+"last": "2026-11-27T21:20:08Z",
+"keys": [
+"creator"
+]
+},
+"トウガラシ": {
+"records": [
+"ndl:https://ndlsearch.ndl.go.jp/books/R000000004-I031739599"
+],
+"sources": [
+"ndl"
+],
+"first": "2026-11-27T21:19:51Z",
+"last": "2026-11-27T21:28:47Z",
+"keys": [
+"생산자"
+]
+},
+"국방부 전사 편찬 위원회 (國防部戰史編纂委員會)": {
+"records": [
+"ndl:https://ndlsearch.ndl.go.jp/books/R100000002-I026803623"
+],
+"sources": [
+"ndl"
+],
+"first": "2026-11-27T21:19:51Z",
+"last": "2026-11-27T21:28:47Z",
+"keys": [
+"생산자"
+]
+},
+"Resizia": {
+"records": [
+"commons:https://commons.wikimedia.org/wiki/File%3AA_coloured_voting_box.svg"
+],
+"sources": [
+"commons"
+],
+"first": "2026-11-27T21:24:34Z",
+"last": "2026-11-27T21:24:34Z",
+"keys": [
+"작가"
+]
+},
+"Earth Science and Remote Sensing Unit , Lyndon B. Johnson Space Center": {
+"records": [
+"commons:https://commons.wikimedia.org/wiki/File%3AISS026-E-12345_-_View_of_South_Korea.jpg"
+],
+"sources": [
+"commons"
+],
+"first": "2026-11-27T21:24:34Z",
+"last": "2026-11-27T21:24:34Z",
+"keys": [
+"작가"
+]
 }
 },
 "분쟁": {
@@ -11983,24 +13214,24 @@
 }
 }
 },
-"updated": "2026-11-27T13:19:50Z",
+"updated": "2026-11-27T23:33:40Z",
 "totals": {
 "매체": 4,
-"주제": 228,
-"장소": 56,
-"분류": 105,
-"시대": 39,
+"주제": 264,
+"장소": 59,
+"분류": 127,
+"시대": 41,
 "인물": 29,
-"기관": 11,
+"기관": 12,
 "기술 수준": 5,
-"형태": 56,
+"형태": 59,
 "재질": 18,
 "죄명": 8,
-"신문": 3,
+"신문": 5,
 "훈격": 1,
-"소장처": 33,
+"소장처": 34,
 "공개 상태": 24,
-"생산자": 157,
+"생산자": 175,
 "분쟁": 5
 },
 "note": "원 기관 메타의 주제·지명·분류·시대·매체·인물·기관(장서각 태깅)·형태·재질·기술 수준 표기 그대로(번역·정규화 없음). records = 그 용어가 붙은 원장 기록 key. 지우지 않는다",

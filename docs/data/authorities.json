@@ -71,7 +71,8 @@
    "page": "https://lod.nl.go.kr/page/KSH2000010145",
    "records": [
     "oldnews:CNTS-00095722593",
-    "oldnews:CNTS-00095729484"
+    "oldnews:CNTS-00095729484",
+    "oldnews:CNTS-00133893433"
    ],
    "label_lod": "한국(국명)[韓國]",
    "sameAs": [
@@ -87,7 +88,9 @@
    "uri": "http://lod.nl.go.kr/resource/KSH2000020573",
    "page": "https://lod.nl.go.kr/page/KSH2000020573",
    "records": [
-    "oldnews:CNTS-00133841567"
+    "oldnews:CNTS-00133841567",
+    "oldnews:CNTS-00133841718",
+    "oldnews:CNTS-00133893156"
    ],
    "label_lod": "중공군[中共軍]",
    "status": "ok",
@@ -104,7 +107,58 @@
    "label_lod": "흥남[興南]",
    "status": "ok",
    "checked": "2026-11-25"
+  },
+  "KSH1998013656": {
+   "id": "KSH1998013656",
+   "term": "지방 법원[地方法院]",
+   "uri": "http://lod.nl.go.kr/resource/KSH1998013656",
+   "page": "https://lod.nl.go.kr/page/KSH1998013656",
+   "records": [
+    "oldnews:CNTS-00095723299"
+   ],
+   "label_lod": "지방 법원[地方法院]",
+   "status": "ok",
+   "checked": "2026-11-27"
+  },
+  "KSH2000006329": {
+   "id": "KSH2000006329",
+   "term": "북한(국명)[北韓]",
+   "uri": "http://lod.nl.go.kr/resource/KSH2000006329",
+   "page": "https://lod.nl.go.kr/page/KSH2000006329",
+   "records": [
+    "oldnews:CNTS-00133893156"
+   ],
+   "label_lod": "북한(국명)[北韓]",
+   "sameAs": [
+    "http://www.wikidata.org/entity/Q423"
+   ],
+   "status": "ok",
+   "checked": "2026-11-27"
+  },
+  "KSH2003006184": {
+   "id": "KSH2003006184",
+   "term": "청진(함경북도)[淸津]",
+   "uri": "http://lod.nl.go.kr/resource/KSH2003006184",
+   "page": "https://lod.nl.go.kr/page/KSH2003006184",
+   "records": [
+    "oldnews:CNTS-00133892946"
+   ],
+   "label_lod": "청진(함경북도)[淸津]",
+   "status": "ok",
+   "checked": "2026-11-27"
+  },
+  "KSH2003008298": {
+   "id": "KSH2003008298",
+   "term": "함흥[咸興]",
+   "uri": "http://lod.nl.go.kr/resource/KSH2003008298",
+   "page": "https://lod.nl.go.kr/page/KSH2003008298",
+   "records": [
+    "oldnews:CNTS-00133841718"
+   ],
+   "label_lod": "함흥[咸興]",
+   "status": "ok",
+   "checked": "2026-11-27"
   }
  },
- "updated": "2026-11-27T13:19:50Z"
+ "updated": "2026-11-27T23:33:45Z"
 }

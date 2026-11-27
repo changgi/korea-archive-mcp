@@ -1,143 +1,148 @@
 {
- "updated": "2026-11-27T13:19:39Z",
- "records": 933,
- "new_records": 0,
- "new_batches": 0,
+ "updated": "2026-11-27T23:33:39Z",
+ "records": 1033,
+ "new_records": 100,
+ "new_batches": 48,
  "by_source": {
-  "nara": 156,
-  "ia": 106,
-  "koreanwar": 83,
+  "nara": 161,
+  "ia": 118,
+  "koreanwar": 84,
   "tna": 65,
+  "nedb": 57,
   "awm": 48,
-  "nedb": 46,
+  "commons": 43,
   "nrich": 43,
   "archives": 40,
+  "oldnews": 35,
   "okchf": 35,
-  "commons": 33,
   "aks": 32,
-  "ktv": 28,
+  "ktv": 31,
+  "i815": 29,
   "europeana": 25,
-  "i815": 23,
-  "oldnews": 23,
-  "ndl": 18,
-  "jacar": 14,
-  "seoul": 13,
+  "ndl": 22,
+  "nlk": 22,
+  "seoul": 16,
+  "jacar": 15,
+  "gallica": 14,
+  "earchive": 14,
   "indy": 12,
-  "nlk": 11,
-  "gallica": 10,
+  "much": 12,
+  "dnz": 10,
   "un": 8,
-  "earchive": 8,
-  "dnz": 8,
-  "much": 8,
-  "heritage": 7,
+  "heritage": 8,
   "nlna": 7,
   "jsg": 7,
+  "gallery": 6,
+  "nzarch": 6,
   "kyudb": 5,
-  "nzarch": 5,
-  "gallery": 3,
   "gonghun": 3
  },
  "first": "2026-11-23T03:00:15Z",
  "formats": {
-  "text": 87,
-  "csv": 49,
-  "iiif": 3
+  "text": 121,
+  "csv": 53,
+  "iiif": 4,
+  "manifest": 7,
+  "karda": 2
  },
  "queries": {
-  "added": 2,
-  "total": 144,
-  "calls": 196,
+  "added": 50,
+  "total": 194,
+  "calls": 291,
   "by_tool": {
-   "cross_search": 86,
-   "nedb_search": 79,
-   "source_profile": 12,
-   "seoul_archives_search": 4,
-   "nara_search": 4,
+   "cross_search": 135,
+   "nedb_search": 89,
+   "source_profile": 16,
+   "judge_rights": 10,
+   "tna_search": 8,
+   "seoul_archives_search": 7,
+   "nara_search": 7,
+   "koreanwar_item": 6,
+   "archives_search": 4,
+   "koreanwar_search": 3,
    "query_bank": 3,
-   "judge_rights": 3,
-   "koreanwar_item": 2,
-   "koreanwar_search": 2,
+   "report_template": 2,
    "nlk_search": 1
   }
  },
- "repeat_records": 171,
+ "repeat_records": 274,
  "entry_types": {
-  "기록": 910,
+  "기록": 1007,
   "소장처(컬렉션)": 5,
-  "검색 안내": 11,
+  "검색 안내": 14,
   "결함 출력": 7
  },
  "site_root_links": 5,
  "top10": [
   {
    "rank": 1,
-   "seen": 13,
-   "days": 1,
-   "title": "[판결문] 유관순(柳寬順) — 경성복심법원 · 원판결 중 피고관련 부분 취소, 징역 3년",
-   "url": "https://theme.archives.go.kr/next/indy/viewIndyDetail.do?IMSI_ARCHIVE_ID=0001352062&FK_ARCHIVE_EVNT_ID=0034971420&evntdowngbn=N&indpnId=0000003833&actionType=det&flag=1&search_region="
+   "seen": 45,
+   "days": 3,
+   "title": "Withdrawal of 1st Marine, Hamhung, Korea ; Withdrawal of 1st Marines, Hagaru-re to Hamhung, North Ko",
+   "url": "https://catalog.archives.gov/id/22344"
   },
   {
    "rank": 2,
-   "seen": 13,
-   "days": 1,
-   "title": "[판결문] 유관순(柳寬順) — 불상 · 상고 기각",
-   "url": "https://theme.archives.go.kr/next/indy/viewIndyDetail.do?IMSI_ARCHIVE_ID=0001352062&FK_ARCHIVE_EVNT_ID=0034971431&evntdowngbn=N&indpnId=0000003844&actionType=det&flag=1&search_region="
+   "seen": 45,
+   "days": 3,
+   "title": "WITHDRAWAL FIRST MARINES, 1ST MARINE DIV. FROM CHOSIN RESERVOIR AREA, KOTO-RI, KOREA",
+   "url": "https://catalog.archives.gov/id/22345"
   },
   {
    "rank": 3,
-   "seen": 10,
-   "days": 2,
-   "title": "EVACUATION OF HUNGNAM, KOREA",
-   "url": "https://catalog.archives.gov/id/75392"
+   "seen": 45,
+   "days": 3,
+   "title": "MARINE RETREAT IN KOREA",
+   "url": "https://catalog.archives.gov/id/24033"
   },
   {
    "rank": 4,
-   "seen": 10,
-   "days": 2,
-   "title": "EVACUATION OF HUNGNAM KOREA",
-   "url": "https://catalog.archives.gov/id/75393"
+   "seen": 44,
+   "days": 3,
+   "title": "Fifth Marine Regiment Gets Into Hills and Cold Weather Around Chosin Reservoir",
+   "url": "https://catalog.archives.gov/id/276537577"
   },
   {
    "rank": 5,
-   "seen": 9,
-   "days": 2,
-   "title": "EVACUATION, HUNGNAM, KOREA",
-   "url": "https://catalog.archives.gov/id/22397"
+   "seen": 44,
+   "days": 3,
+   "title": "FICHE_156",
+   "url": "https://catalog.archives.gov/id/373960610"
   },
   {
    "rank": 6,
-   "seen": 8,
-   "days": 2,
-   "title": "[奎18933] 加士島屯土賭稅 節目 가사도둔토도세 절목 · 內藏院(朝鮮) 編/내장원(조선) 편",
-   "url": "https://kyudb.snu.ac.kr/book/view.do?book_cd=GK18933_00"
+   "seen": 39,
+   "days": 3,
+   "title": "B-26 BOMB MISSION, KOREA",
+   "url": "https://catalog.archives.gov/id/22348"
   },
   {
    "rank": 7,
-   "seen": 8,
-   "days": 1,
-   "title": "01 · 미국 국립기록관리청 NARA — 1950.12.24 흥남 — 필름 원본까지 — North Korean refugees use anything that will float ",
-   "url": "https://changgi.github.io/korea-archive-mcp/iiif.html#s01/1"
+   "seen": 27,
+   "days": 3,
+   "title": "REMNANTS OF THE 5TH AND 7TH REGIMENTS OF THE FIRST MARINE DIVISION ABOARD TRANSPORTS, AFTER FIGHTING",
+   "url": "https://catalog.archives.gov/id/23203"
   },
   {
    "rank": 8,
-   "seen": 8,
-   "days": 1,
-   "title": "12 · 위키미디어 공용 Commons — 업로더 말 대신 원 소장처에 묻는다 — Korean natives prepare to board a tank landing ship du",
-   "url": "https://changgi.github.io/korea-archive-mcp/iiif.html#s12/2"
+   "seen": 26,
+   "days": 3,
+   "title": "EVACUATION",
+   "url": "https://catalog.archives.gov/id/23204"
   },
   {
    "rank": 9,
-   "seen": 8,
-   "days": 1,
-   "title": "29 · 인터넷 아카이브 archive.org — 인터넷 사본과 NARA 원본, 한 줄로 — EVACUATION OF HUNGNAM, KOREA (+4장)",
-   "url": "https://changgi.github.io/korea-archive-mcp/iiif.html#s29/1"
+   "seen": 26,
+   "days": 3,
+   "title": "FICHE_562",
+   "url": "https://catalog.archives.gov/id/400397386"
   },
   {
    "rank": 10,
-   "seen": 7,
-   "days": 2,
-   "title": "Korea: armistice negotiations",
-   "url": "https://discovery.nationalarchives.gov.uk/details/r/C3640680"
+   "seen": 23,
+   "days": 1,
+   "title": "장진호 : 불과 얼음 17일 전쟁",
+   "url": "https://www.nl.go.kr/NL/contents/search.do#viewKey=718392893&viewType=AH1"
   }
  ]
 }
