@@ -1,0 +1,101 @@
+name: deploy-prebuilt
+
+# Vercel Build CPU 과금을 0으로 만드는 배포 경로.
+# 빌드는 GitHub Actions(공개 레포 = 무료)에서 `vercel build`로 수행하고,
+# 결과물(.vercel/output)만 Vercel에 업로드(`vercel deploy --prebuilt`)한다.
+# 즉 Vercel의 빌드 머신(Build CPU Minutes 과금원)은 전혀 쓰지 않는다.
+#
+# 필요한 Repository secrets:
+#   VERCEL_TOKEN      (프로젝트 범위 액세스 토큰, 이름: github-actions-prebuilt)
+#   VERCEL_ORG_ID     (team_...)
+#   VERCEL_PROJECT_ID (prj_...)
+#
+# 주의: 이 워크플로가 정상 동작하는 것을 확인한 뒤, Vercel 프로젝트의
+#   Settings → Build and Deployment → Ignored Build Step 을 "Don't build anything"
+#   (exit 0)으로 두어야 Git push 때 Vercel이 중복 빌드하지 않는다.
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  # 프로덕션 배포는 한 번에 하나만. 연속 push 시 이전 실행은 취소.
+  group: deploy-prebuilt-production
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+env:
+  VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+  VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+  VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+
+jobs:
+  deploy:
+    name: GitHub 빌드 → Vercel prebuilt 배포
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: 체크아웃
+        uses: actions/checkout@v4
+
+      - name: Node 24 설정 (package.json engines와 동일)
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+
+      - name: 의존성 설치
+        run: npm ci --no-audit --no-fund
+
+      - name: Vercel CLI 설치
+        run: npm i -g vercel@68
+
+      - name: Vercel 프로젝트 설정·환경변수 내려받기
+        run: vercel pull --yes --environment=production --token="$VERCEL_TOKEN"
+
+      - name: 빌드 (로컬에서 .vercel/output 생성 — Vercel 빌드 머신 미사용)
+        run: vercel build --prod --token="$VERCEL_TOKEN"
+
+      - name: prebuilt 산출물 배포 (빌드 없이 업로드만)
+        id: deploy
+        run: |
+          set -euo pipefail
+          out=$(vercel deploy --prebuilt --prod --token="$VERCEL_TOKEN")
+          printf '%s\n' "$out"
+          url=$(printf '%s\n' "$out" | grep -Eo 'https://[^[:space:]]+' | tail -1)
+          echo "url=$url" >> "$GITHUB_OUTPUT"
+          {
+            echo "### 배포 완료"
+            echo "- 배포 URL: ${url:-unknown}"
+            echo "- 커밋: \`${GITHUB_SHA::7}\`"
+            echo "- Vercel 빌드 사용: 없음 (prebuilt)"
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: 배포 후 확인 — MCP initialize HTTP 200 (운영 도메인 2곳)
+        run: |
+          set -uo pipefail
+          fail=0
+          for host in https://korea.archives.ai.kr https://korea-archive-mcp.vercel.app; do
+            code=""
+            for i in $(seq 1 12); do
+              code=$(curl -sS -o /tmp/body.$$ -w '%{http_code}' -m 30 \
+                -H 'Content-Type: application/json' \
+                -H 'Accept: application/json, text/event-stream' \
+                -X POST "$host/api/mcp" \
+                -d '{"jsonrpc":"2.0","id":1,"method":"initialize","params":{"protocolVersion":"2025-03-26","capabilities":{},"clientInfo":{"name":"ci-deploy","version":"1.0"}}}' \
+                2>/dev/null || echo "000")
+              echo "$host → HTTP $code (시도 $i/12)"
+              [ "$code" = "200" ] && break
+              sleep 10
+            done
+            if [ "$code" != "200" ]; then
+              echo "::error::$host/api/mcp 가 HTTP $code 로 응답했습니다."
+              head -c 500 /tmp/body.$$ || true
+              fail=1
+            fi
+          done
+          rm -f /tmp/body.$$
+          exit $fail
