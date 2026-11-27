@@ -142,6 +142,32 @@ const CHELIPED_INSTALL = 'cheliped-skills 설치(https://github.com/tykimos/chel
 const chelipedCmd = (url) => `node cheliped-cli.mjs '${JSON.stringify([{ cmd: 'goto', args: [url] }, { cmd: 'observe' }])}'`;
 const chelipedSearch = (url, query) => `${CHELIPED_INSTALL}\n1) 관찰: ${chelipedCmd(url)}\n2) 검색: node cheliped-cli.mjs '${JSON.stringify([{ cmd: 'fill', args: ['<검색창번호>', query] }, { cmd: 'click', args: ['<버튼번호>'] }, { cmd: 'scrape' }])}'\n   (1)의 observe 결과 번호로 <검색창번호>·<버튼번호> 치환)`;
 const xtag = (block, t) => { const m = block.match(new RegExp(`<${t}>(?:<!\\[CDATA\\[)?([\\s\\S]*?)(?:\\]\\]>)?</${t}>`)); return m ? m[1].replace(/<[^>]+>/g, '').trim() : ''; };
+// v3.58 data.go.kr 게이트웨이 코드 → 원인·조치 안내. 코드 04(HTTP_ERROR)는 **기관 백엔드 응답 실패**로, 게이트웨이(GET 정상·무키 호출은 코드 30)와 우리 서버 키는 정상이다 — 서비스키 재발급으로 풀리지 않는 기관 측 장애임을 응답에 명시한다(2026-11-28 실측: archives 채널 🔴 코드 04)
+const DATA_GO_KR = {
+  '01': 'APPLICATION_ERROR — 요청 파라미터 오류(기관 측)', '02': 'DB_ERROR — 기관 DB 오류',
+  '03': 'NODATA_ERROR — 기관에 해당 데이터 없음', '04': 'HTTP_ERROR — 기관 백엔드 응답 실패(게이트웨이·서버 키 정상, 기관 OpenAPI 측 장애)',
+  '05': 'SERVICETIMEOUT_ERROR — 기관 응답 시간 초과',
+  '10': 'INVALID_REQUEST_PARAMETER_ERROR — 요청 파라미터 형식 오류', '11': 'NO_MANDATORY_REQUEST_PARAMETERS_ERROR — 필수 파라미터 누락',
+  '12': 'NO_OPENAPI_SERVICE_ERROR — 폐기된 OpenAPI',
+  '20': 'SERVICE_ACCESS_DENIED_ERROR — 공공데이터포털 접근 거부', '21': 'TEMPORARILY_DISABLE_THE_SERVICEKEY_ERROR — 일시 중지된 서비스키',
+  '22': 'LIMITED_NUMBER_OF_SERVICE_REQUESTS_EXCEEDS_ERROR — 일일 호출 한도 초과',
+  '30': 'SERVICE_KEY_IS_NOT_REGISTERED_ERROR — 등록되지 않은 서비스키(활용신청 승인 상태 확인)',
+  '31': 'DEADLINE_HAS_EXPIRED_ERROR — 활용기간 만료', '32': 'UNREGISTERED_IP_ERROR — 등록되지 않은 IP',
+  '33': 'UNSIGNED_CALL_ERROR — 서명되지 않은 호출',
+};
+const dataGoKrWhy = (xml) => { // 게이트웨이 XML → '코드 04 — HTTP_ERROR … · 기관 장애라 키로는 풀리지 않음' 한 줄
+  const s = String(xml || '');
+  const code = String(xtag(s, 'returnReasonCode') || xtag(s, 'resultCode') || '').trim();
+  const msg = xtag(s, 'errMsg') || xtag(s, 'returnAuthMsg') || xtag(s, 'resultMsg') || xtag(s, 'message');
+  if (!code && !msg) return `해석 불가 응답 — 앞부분 '${s.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 100)}'`;
+  const known = DATA_GO_KR[code];
+  const base = [code ? `코드 ${code}` : '', known || msg || '사유 표기 없음'].filter(Boolean).join(' — ')
+    + (known && msg && !known.includes(msg) ? ` · 게이트웨이 원문 '${msg}'` : '');
+  const act = /^0[1-5]$/.test(code)
+    ? ' · 기관 OpenAPI 측 장애입니다 — 서비스키·호출방식을 바꿔도 풀리지 않고 기관 복구에 달려 있습니다. 포털에서 같은 검색어로 직접 확인하십시오'
+    : (code ? ' · data.go.kr 마이페이지에서 활용신청 승인 상태·일일 트래픽·서비스키를 확인하십시오' : '');
+  return base + act;
+};
 
 function koreaScore(t) {
   const s = (t || '').toLowerCase();
@@ -551,7 +577,7 @@ const ktvTotalSearch = (q, n) => COLLECT._ktvLegacy(q, n);
 async function collectMerged(collectors) {
   const boxed = (fn) => Promise.race([fn(), new Promise((_, rej) => setTimeout(() => rej(new Error('timebox 12s')), SOURCE_TIMEBOX_MS))]);
   const settled = await Promise.allSettled(collectors.map((c) => boxed(c.fn)));
-  const map = new Map(); const stats = [];
+  const map = new Map(); const stats = []; const failReasons = [];
   settled.forEach((r, i) => {
     const name = collectors[i].source;
     if (r.status === 'fulfilled' && Array.isArray(r.value)) {
@@ -562,7 +588,7 @@ async function collectMerged(collectors) {
         if (map.has(k)) { const e = map.get(k); if (!e.sources.includes(name)) { e.sources.push(name); if (!e.url && raw.url) e.url = raw.url; } }
         else map.set(k, { title: norm(raw.title), date: raw.date || '', id: raw.id || '', url: raw.url || '', ...(raw.series ? { series: String(raw.series).slice(0, 80) } : {}), ...(raw.media ? { media: String(raw.media).slice(0, 600) } : {}), ...(raw.sameAs ? { sameAs: String(raw.sameAs) } : {}), ...(raw.lid ? { lid: String(raw.lid) } : {}), ...(raw.note ? { note: String(raw.note).slice(0, 300) } : {}), sources: [name] });
       }
-    } else stats.push(`${name}:—${UA_REFUSED[name] ? '⛔정직UA거부' : ''}`);
+    } else { stats.push(`${name}:—${UA_REFUSED[name] ? '⛔정직UA거부' : ''}`); failReasons.push({ name, why: String((r.reason && r.reason.message) || r.reason || '실패') }); } // v3.58: 실패 사유를 함께 보관 — cross_search가 응답 끝에 원인을 적는다(기관 장애를 '기록 없음'으로 오인하지 않게)
   });
   // v1.86: 동일 기록 병합 — sameAs(원본 식별자)가 다른 레코드의 id와 같으면 한 건으로 합치고 출처를 모두 남긴다(제목 언어가 달라도 교차확인)
   const items = [...map.values()];
@@ -581,7 +607,7 @@ async function collectMerged(collectors) {
     if (!tgt.media && it.media) tgt.media = it.media; // 원본에 매체가 없으면 재게시본 원본 파일 승계
     drop.add(it);
   }
-  return { items: items.filter((it) => !drop.has(it)), stats };
+  return { items: items.filter((it) => !drop.has(it)), stats, failReasons };
 }
 // nedb: 국사편찬위 한국사DB의 data.go.kr 공식 개방파일(KOGL)을 미리 인덱싱해 웹 배치한 것을 검색 — robots 무관(라이브 스크래핑 없음).
 // NEDB_INDEX_URL 에 ingest-opendata.mjs로 만든 nedb_index.json(호스팅 URL)을 지정하면 활성화.
@@ -944,10 +970,10 @@ const COLLECT = {
   archives: async (q, n) => {
     const key = process.env.ARCHIVES_API_KEY; if (!key) throw new Error('ARCHIVES_API_KEY 미설정 — 0건이 아니라 조회 불가'); // v3.33
     const sk = /%[0-9A-Fa-f]{2}/.test(key) ? key : encodeURIComponent(key);
-    const xml = await gtext(`https://apis.data.go.kr/1741050/openapi/searcharc?serviceKey=${sk}&query=${encodeURIComponent(q)}&start=1&limit=${n}`);
+    const xml = await gtext(`https://apis.data.go.kr/1741050/openapi/searcharc?serviceKey=${sk}&query=${encodeURIComponent(q)}&start=1&limit=${n}&pageNo=1&display=${n}`); // v3.58: 공식 오퍼레이션 인자(pageNo·display)를 함께 보낸다 — 기관이 start/limit를 무시하는 개편에 대비(중복 인자는 무해)
     if (!xml.includes('<item>')) { // v3.32 부재는 '확정 0'일 때만(v2.47 archives_search와 같은 판별) — 오류·장애 응답을 0건으로 보고하던 결함(cross_search 'archives:0')
       if (!xml.includes('searchError') && /<total>\s*0\s*<\/total>/.test(xml)) return [];
-      throw new Error('국가기록원 API 응답에 항목·0건 표기 없음' + ((xtag(xml, 'returnAuthMsg') || xtag(xml, 'errMsg') || xtag(xml, 'resultMsg') || xtag(xml, 'message')) ? ` — ${xtag(xml, 'returnAuthMsg') || xtag(xml, 'errMsg') || xtag(xml, 'resultMsg') || xtag(xml, 'message')}` : ` — ${xml.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 60)}`));
+      throw new Error('국가기록원 조회 실패 — ' + dataGoKrWhy(xml)); // v3.58: 원인을 코드까지 풀어 health·cross_search에 그대로 보인다(04=기관 장애 — 0건도 키 문제도 아님)
     }
     return (xml.match(/<item>[\s\S]*?<\/item>/g) || []).map((i) => {
       const link = archLink(xtag(i, 'link')); // v2.7.1: API가 &amp;로 내려줌 → 클릭 시 빈 페이지(실측). 해제 + https
@@ -1810,8 +1836,13 @@ const handler = createMcpHandler((server) => {
       for (const c of (res && res.content) || []) {
         if (c.type === 'text' && typeof c.text === 'string') {
           const b = _enc.encode(c.text);
-          if (b.length > LIMIT_B) c.text = _dec.decode(b.slice(0, LIMIT_B)).replace(/\uFFFD+$/, '')
-            + `\n…[응답 24KB 한도 — ${b.length}B 중 절단. page·max_results로 분할 조회]`;
+          if (b.length <= LIMIT_B) continue;
+          const cut = `\n…[응답 24KB 한도 — ${b.length}B 중 절단. page·max_results로 분할 조회]`;
+          const f = c.text.indexOf('```json');
+          const headB = f > 0 ? _enc.encode(c.text.slice(0, f)).length : Infinity;
+          // v3.58 코드펜스 안에서 자르면 JSON이 파싱 불가가 된다(매니페스트·karda는 구조가 곧 값) — 잘림 지점이 JSON 블록이면 블록을 빼고 사유를 남긴다
+          if (f > 0 && headB < LIMIT_B - 400) c.text = c.text.slice(0, f) + `[JSON 본문 생략 — 전체 ${b.length}B가 24KB 한도를 넘습니다. max_per_source를 줄이거나 sources를 나눠 재요청하면 닫힌 JSON을 받습니다]` + cut;
+          else c.text = _dec.decode(b.slice(0, LIMIT_B)).replace(/\uFFFD+$/, '') + cut;
         }
       }
     } catch { /* 가드 실패 시 원응답 유지 */ }
@@ -1876,7 +1907,7 @@ const handler = createMcpHandler((server) => {
 
   server.tool('nara_search',
     'Search the US NARA catalog (API v2). Multilingual queries (한국어·日本語·中文·Русский 등) auto-translate to English index terms (장진호/長津湖→Chosin Reservoir …). Requires NARA_API_KEY env on the server; record_group enables precision cross-search (e.g. 242). 미국 NARA 검색 — 다국어 질의 자동 영문 변환.',
-    { query: z.string().describe('한국어 또는 영어 (naid 지정 시 무시 가능 — 빈 문자열 허용)'), record_group: z.number().int().optional(), moving_images_only: z.boolean().default(false), max_results: z.number().int().min(1).max(50).default(15), page: z.number().int().min(1).default(1), naid: z.coerce.number().int().optional().describe('NAID 인접 채굴 중심값 e.g. 22015'), radius: z.number().int().min(0).max(8).default(3).describe('naid ±N 인접 범위'), output: z.enum(['text', 'iiif']).default('text').describe("iiif=naid 기록을 IIIF Presentation 3 매니페스트로(계보 partOf·생산일 navDate·권리·판독 지문·디지털 객체 — 공개 URL로 KV·Mirador에서 열림)") },
+    { query: z.string().default('').describe('한국어 또는 영어 — naid만 지정하면 생략 가능(기본 빈 문자열)'), record_group: z.number().int().optional(), moving_images_only: z.boolean().default(false), max_results: z.number().int().min(1).max(50).default(15), page: z.number().int().min(1).default(1), naid: z.coerce.number().int().optional().describe('NAID 인접 채굴 중심값 e.g. 22015'), radius: z.number().int().min(0).max(8).default(3).describe('naid ±N 인접 범위'), output: z.enum(['text', 'iiif']).default('text').describe("iiif=naid 기록을 IIIF Presentation 3 매니페스트로(계보 partOf·생산일 navDate·권리·판독 지문·디지털 객체 — 공개 URL로 KV·Mirador에서 열림)") },
     async ({ query, record_group, moving_images_only, max_results, page, naid, radius, output }) => {
       const key = process.env.NARA_API_KEY;
       if (!key) return text('NARA_API_KEY not configured on this server. Free key: email Catalog_API@nara.gov (name + email). Meanwhile use catalog.archives.gov directly.');
@@ -3129,11 +3160,11 @@ item_cd 5종(자료 성격별): ART 도설·회화 / ETC 두루마리·축 / DRR
       if (!key) return text(agentBrowse('국가기록원', query, portal, "OpenAPI 키(ARCHIVES_API_KEY, data.go.kr 15000153) 미설정"));
       const sk = /%[0-9A-Fa-f]{2}/.test(key) ? key : encodeURIComponent(key);
       const yf = year_from || 0, yt = year_to || 9999, filt = !!(year_from || year_to);
-      const api = `https://apis.data.go.kr/1741050/openapi/searcharc?serviceKey=${sk}&query=${encodeURIComponent(query)}&start=1&limit=${filt ? 50 : Math.min(max_results, 50)}`;
+      const api = `https://apis.data.go.kr/1741050/openapi/searcharc?serviceKey=${sk}&query=${encodeURIComponent(query)}&start=1&limit=${filt ? 50 : Math.min(max_results, 50)}&pageNo=1&display=${filt ? 50 : Math.min(max_results, 50)}`; // v3.58 pageNo·display 병기(공식 오퍼레이션 인자 — 기관이 start/limit를 무시해도 동작)
       try {
         const xml = await gtext(api);
         if (!xml.includes('searchError') && !xml.includes('<item>') && /<total>\s*0\s*<\/total>/.test(xml)) return text(`국가기록원 '${query}' — 0건(API 정상 응답). 띄어쓰기·다른 표기(예: '한일협정 조인', '한일회담')로 재검색하거나 포털: ${portal}`); // v1.96.4: 0건을 API 오류로 표기하던 문제
-        if (xml.includes('searchError') || !xml.includes('<item>')) { const why = xtag(xml, 'message') || xtag(xml, 'returnAuthMsg') || xtag(xml, 'errMsg') || xtag(xml, 'resultMsg'); const code = xtag(xml, 'returnReasonCode') || xtag(xml, 'resultCode'); return text(agentBrowse('국가기록원', query, portal, `API 오류: ${why ? why + (code ? ` (코드 ${code})` : '') : `해석 불가 응답 — 앞부분 '${String(xml).split(key).join('***').split(sk).join('***').replace(/\s+/g, ' ').slice(0, 120)}'`}`)); } // v2.99.5 data.go.kr 게이트웨이 사유(returnAuthMsg·returnReasonCode — 인증키·호출 한도 등)를 그대로 표시, 사유 태그가 없으면 원문 앞부분
+        if (xml.includes('searchError') || !xml.includes('<item>')) return text(agentBrowse('국가기록원', query, portal, `API 오류: ${dataGoKrWhy(String(xml).split(key).join('***').split(sk).join('***'))}`)); // v3.58 data.go.kr 코드를 원인·조치까지(04=기관 백엔드 장애 — 키·한도 문제 아님, 22=한도, 30=키 미등록) · v2.99.5 인증키는 ***로 가림
         const tot = xtag(xml, 'total') || '?';
         let items = xml.match(/<item>[\s\S]*?<\/item>/g) || [];
         if (filt) items = items.filter((i) => { const y = parseInt((xtag(i, 'prod_year').match(/\d{4}/) || [])[0], 10); return y && y >= yf && y <= yt; });
@@ -3450,16 +3481,20 @@ item_cd 5종(자료 성격별): ART 도설·회화 / ETC 두루마리·축 / DRR
           for (const [label, vq] of vs) { if (src === 'nara' && /^Corea \d{4}$/.test(vq)) continue; const ey = (vq.match(/^Corea (\d{4})$/) || [])[1]; jobs.push({ source: `${src}·${label}`, fn: () => (ey && src === 'tna' ? COLLECT.tna('Corea', max_per_source, ey) : ey && src === 'ia' ? COLLECT.ia(`Corea AND year:${ey}`, max_per_source) : COLLECT[src](vq, max_per_source)) }); } // v2.98.1 NARA는 'Corea <연도>'가 성씨 Corea·날짜만 맞는 문서철로 흐려져 제외(실측)
         }
       }
-      const { items, stats } = await collectMerged(jobs);
+      const { items, stats, failReasons = [] } = await collectMerged(jobs);
       await resolveOrigins(items, stats);
       { const linked = linkOverseas(items); if (linked.length !== items.length) { items.length = 0; items.push(...linked); stats.push('국외 교차확인 ' + linked.filter((x) => x.crossOv).length + '건'); } }
-      items.sort((a, b) => b.sources.length - a.sources.length);
+      // v3.58 재실행 일관성 — 정렬에 결정론적 tie-breaker(출처명 asc · 식별자 asc). 복수 출처 수만 보면 원본확인(resolveOrigins)이 이번 호출에 성공/실패했는지에 따라 순서와 건수(30건 상한 절단)가 함께 흔들렸다(실측 15↔14건)
+      items.sort((a, b) => b.sources.length - a.sources.length
+        || String(a.sources[0] || '').split('·')[0].localeCompare(String(b.sources[0] || '').split('·')[0])
+        || String(a.id || a.url || a.title || '').localeCompare(String(b.id || b.url || b.title || '')));
       // v2.5 발견 누적 원장 — 발견 기록을 날짜 함에 적재(v2.26부터 질의·회신은 래퍼가 ka:q로 원문 그대로 별도 축적), 매일 GitHub 원장으로 병합. 미설정·한도 초과면 조용히 생략
       const kept = await stash(items, { fmt: format || 'text', probe: !!(REQ.getStore() || {}).probe, ak: (REQ.getStore() || {}).ak || '', partOf: (it) => { const h = it.sources[0].split('·')[0]; return (PART_OF[h] && PART_OF[h](it)) || ''; } });
       const uaNote = Object.keys(UA_REFUSED).filter((k) => stats.some((x) => x.startsWith(k + ':') && x.includes('⛔'))).map((k) => `\n※ ${uaRefusedNote(k, query)}`).join(''); // v2.36 정직 UA 거부 기관 — 0건 대신 브라우저 경로
       // v2.48 부재 단정 금지 — 조회 실패(—) 채널은 '그 기관에 없음'이 아니다. 0건(확정)과 구분해 명시
       const failedCh = [...new Set(stats.filter((x) => /^[a-z0-9_]+(?:·[^:]+)?:—/.test(x)).map((x) => x.split(':')[0].split('·')[0]))];
-      const failNote = failedCh.length ? `\n※ 조회 실패 채널 ${failedCh.length}곳(${failedCh.join(', ')}) — 이번 응답에 없을 뿐 그 기관에 기록이 없다는 뜻이 아닙니다(시간 초과·차단·응답 끊김). 해당 수집처만 다시: sources='${failedCh.join(',')}'` : '';
+      const failNote = failedCh.length ? `\n※ 조회 실패 채널 ${failedCh.length}곳(${failedCh.join(', ')}) — 이번 응답에 없을 뿐 그 기관에 기록이 없다는 뜻이 아닙니다(시간 초과·차단·응답 끊김). 해당 수집처만 다시: sources='${failedCh.join(',')}'`
+        + [...new Map(failReasons.filter((r) => failedCh.includes(r.name.split('·')[0])).map((r) => [r.name, r.why])).entries()].slice(0, 6).map(([nm, why]) => `\n  · ${nm}: ${why.length > 110 ? why.slice(0, 110) + '…' : why}`).join('') : ''; // v3.58 실패 사유(예: 국가기록원 코드 04=기관 장애)를 그대로 보인다
       const zeroCh = [...new Set(stats.filter((x) => /^[a-z0-9_]+(?:·[^:]+)?:0(?!\d)/.test(x)).map((x) => x.split(':')[0].split('·')[0]))]; // v3.53 확정 0 채널
       const covNote = (failedCh.length || zeroCh.length) ? await Promise.race([coverageHint(query, failedCh, zeroCh, !!variants), sleep(2500).then(() => '')]).catch(() => '') : ''; // v3.52 실패 채널의 과거 관측 · v3.53 0건인데 과거 결과가 있던 채널(변화 신호)
       const keptNote = failNote + covNote + uaNote + ((kept || ledgerConf()) ? `\n※ 질의·회신·발견 기록은 원문 그대로 공개 누적 원장에 영구 축적됩니다(가공·삭제 없음 — 공개를 원치 않는 본인 정보는 질의에 넣지 마십시오) — ${LEDGER_PAGE}` : '');
@@ -3508,19 +3543,39 @@ item_cd 5종(자료 성격별): ART 도설·회화 / ETC 두루마리·축 / DRR
         // 검색 결과 전체를 KV 한 링크로 — 컬렉션을 압축해 주소 #c= 에 실음(서버 저장 없음, 링크=컬렉션)
         const kvAll = 'https://changgi.github.io/korea-archive-mcp/kv.html#c=' + deflateRawSync(Buffer.from(JSON.stringify(coll)), { level: 9 }).toString('base64').replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
         const cj = JSON.stringify(coll);
-        const out = `IIIF '${query}' — 매니페스트 ${ext.length}건(그중 기록 봉투 ${none.length}건 — IIIF가 없던 기록을 구축) · 정지 이미지 ${still ? still.items.length : 0}장\n`
+        let out = `IIIF '${query}' — 매니페스트 ${ext.length}건(그중 기록 봉투 ${none.length}건 — IIIF가 없던 기록을 구축) · 정지 이미지 ${still ? still.items.length : 0}장\n`
           + `■ 전체를 한 번에 연속으로 보기(KV): ${kvAll}\n`
           + (cj.length < 13000 ? `① IIIF Collection(기관 원 매니페스트·브리지·기록 봉투):\n${cj}\n` : `① IIIF Collection ${ext.length}건(계열 ${groups.length}개) — 크기 상한으로 본문 생략(위 KV 링크에 전체 포함). 앞 8건:\n${ext.slice(0, 8).map((x) => `- ${x.label.ko[0].slice(0, 70)}\n  ${x.id}`).join('\n')}\n`)
           + (still ? `\n② 정지 이미지 Manifest(위키미디어 1600px — 권리는 캔버스별):\n${JSON.stringify(still)}\n` : '')
           + (none.length ? `\n③ 기록 봉투로 구축한 ${none.length}건(원본 이미지가 있으면 그 이미지, 없으면 기록 카드 · 계층 '기관 › 계열 › 기록' 구축 · 발견 질의·시각·봉투 지문 증거):\n${none.slice(0, 12).join('\n')}\n` : '')
           + `\n※ 보기: report_template(kind='iiif')의 뷰어 골격 SRC에 위 JSON 객체를 넣어 아티팩트로 게시하면 전체를 한 줄로 이어 넘기는 연속 이미지 뷰가 된다. 자체 뷰어 KV (Korea Archive Viewer)로 바로: https://changgi.github.io/korea-archive-mcp/kv.html?manifest=<URL>(컬렉션 전체 연속·비교·자동 넘김) · Mirador https://projectmirador.org/embed/?iiif-content=<URL> 로도 열린다. Gallica는 서버 자동 조회가 403이라 브라우저 뷰어에서만 열린다.`
           + `\n※ 예제: 30곳 탐방·100선 800장 공개 갤러리 https://changgi.github.io/korea-archive-mcp/iiif.html · 전체 이어보기 매니페스트 https://changgi.github.io/korea-archive-mcp/iiif/all.json`;
-        return text(out.length > 23000 ? out.slice(0, 23000) + '\n…(24KB 상한 — max_per_source를 줄여 재요청)' : out);
+        // v3.58 24KB — 문자 수(out.length) 절단은 한글에서 바이트로 넘치고 JSON 블록을 중간에서 끊는다: UTF-8 바이트로 재고 ② 정지 이미지 매니페스트 JSON → ③ 목록 순으로 덜어낸다(① 컬렉션·KV 링크·꼬리 안내는 남긴다 — 닫힌 JSON 유지)
+        if (Buffer.byteLength(out, 'utf8') > 23000) {
+          const cut2 = out.replace(/\n② 정지 이미지 Manifest[\s\S]*?(?=\n③ )/, '\n② 정지 이미지 Manifest — 크기 상한으로 본문 생략(KV 컬렉션에 포함)');
+          out = Buffer.byteLength(cut2, 'utf8') > 23000 ? cut2.replace(/\n③ [\s\S]*?(?=\n※ 보기)/, '\n③ 목록 — 크기 상한으로 생략(KV 컬렉션에 전체 포함)\n') : cut2;
+        }
+        if (Buffer.byteLength(out, 'utf8') > 23000) out = out.split('\n① ')[0] + '\n※ 24KB 상한 — 위 KV 링크에 검색 결과 전체(컬렉션 JSON)가 담겨 있습니다(max_per_source를 줄이면 본문으로도 받습니다).';
+        return text(out);
       }
       if (format === 'manifest') { // 발굴 수집기록 매니페스트 — 발굴 행위 자체를 맥락·증거성 갖춘 현용기록으로(ISAD(G)·RiC 지향)
         const recs = items.slice(0, 30);
         const now = new Date().toISOString();
         const rid2 = (it, i) => 'rec:' + (it.id ? `${it.sources[0].split('·')[0]}:${it.id}` : `m${i}`); // karda 그래프와 동일 키 — 상호 참조
+        const mkRec = (it, i) => { // v3.58: 기록 한 건 → rico:Record(바이트 예산 패킹에서 한 건씩 부른다 — 문자열 절단 대신 건수를 덜어낸다)
+          const hb = [...new Set(it.sources.map((s) => s.split('·')[0]))];
+          const dr = DEEP_READ[hb[0]] && DEEP_READ[hb[0]](it);
+          return {
+            '@type': 'rico:Record', node: rid2(it, i), // karda 그래프 노드와 같은 키
+            identifier: it.id || null, title: it.title, date: it.date || null,
+            heldBy: hb.map((k) => ({ id: k, name: (ARCHIVE_META[k] || {}).n || k, country: (ARCHIVE_META[k] || {}).c || '' })), // 맥락 — 기관 정식명·국가
+            accessUrl: it.url || null, evidence: `API 실조회 ${now.slice(0, 10)}` + (it.sources.includes('nara·원본확인') ? ` · NARA 카탈로그 원본 실재 확인(${it.id}) — 사본 ${it.sameAs || ''}` : (it.sameAs && it.sources.length > 1 ? ` · 기관 간 동일 기록 대조(${it.sameAs})` : '')),
+            ...(it.media ? { media: it.media } : {}), // 다매체 — 원본 매체 직링크(게재 소싱)
+            iiif: iiifFor(it.url, it.id) || recUrls(encodeEnv(envelopeOf({ ...it, title: norm(it.title).slice(0, 160) }, { query, inst: (ARCHIVE_META[hb[0]] || {}).n || hb[0], part: (PART_OF[hb[0]] && PART_OF[hb[0]](it)) || it.series || '' }))).manifest, // v2.0: 모든 기록에 IIIF — 기관 IIIF·브리지, 없으면 기록 봉투
+            ...(it.sameAs ? { sameAs: it.sameAs } : {}), ...(it.altTitle ? { altTitle: it.altTitle } : {}), // 맥락·증거성 — 기관 간 동일 기록(재수집본↔원본)
+            ...((PART_OF[hb[0]] && PART_OF[hb[0]](it)) ? { partOf: PART_OF[hb[0]](it) } : {}), // 맥락 — 상위 계층
+            ...(dr ? { deepRead: dr } : {}) }; // 증거성 — 판독 재현 호출문
+        };
         const man = {
           '@context': { dcterms: 'http://purl.org/dc/terms/', rico: 'https://www.ica.org/standards/RiC/ontology#',
             title: 'dcterms:title', date: 'dcterms:date', identifier: 'dcterms:identifier', provenance: 'dcterms:provenance',
@@ -3533,56 +3588,61 @@ item_cd 5종(자료 성격별): ART 도설·회화 / ETC 두루마리·축 / DRR
             tool: 'KOREA ARCHIVE 통합검색 cross_search (Vercel icn1)',
             reproduce: `cross_search(query=${JSON.stringify(query)}, sources=${JSON.stringify(sources)}, format='manifest')`,
             channelStats: stats },
-          records: recs.map((it, i) => {
-            const hb = [...new Set(it.sources.map((s) => s.split('·')[0]))];
-            const dr = DEEP_READ[hb[0]] && DEEP_READ[hb[0]](it);
-            return {
-              '@type': 'rico:Record', node: rid2(it, i), // karda 그래프 노드와 같은 키
-              identifier: it.id || null, title: it.title, date: it.date || null,
-              heldBy: hb.map((k) => ({ id: k, name: (ARCHIVE_META[k] || {}).n || k, country: (ARCHIVE_META[k] || {}).c || '' })), // 맥락 — 기관 정식명·국가
-              accessUrl: it.url || null, evidence: `API 실조회 ${now.slice(0, 10)}` + (it.sources.includes('nara·원본확인') ? ` · NARA 카탈로그 원본 실재 확인(${it.id}) — 사본 ${it.sameAs || ''}` : (it.sameAs && it.sources.length > 1 ? ` · 기관 간 동일 기록 대조(${it.sameAs})` : '')),
-              ...(it.media ? { media: it.media } : {}), // 다매체 — 원본 매체 직링크(게재 소싱)
-              iiif: iiifFor(it.url, it.id) || recUrls(encodeEnv(envelopeOf({ ...it, title: norm(it.title).slice(0, 160) }, { query, inst: (ARCHIVE_META[hb[0]] || {}).n || hb[0], part: (PART_OF[hb[0]] && PART_OF[hb[0]](it)) || it.series || '' }))).manifest, // v2.0: 모든 기록에 IIIF — 기관 IIIF·브리지, 없으면 기록 봉투
-              ...(it.sameAs ? { sameAs: it.sameAs } : {}), ...(it.altTitle ? { altTitle: it.altTitle } : {}), // 맥락·증거성 — 기관 간 동일 기록(재수집본↔원본)
-              ...((PART_OF[hb[0]] && PART_OF[hb[0]](it)) ? { partOf: PART_OF[hb[0]](it) } : {}), // 맥락 — 상위 계층
-              ...(dr ? { deepRead: dr } : {}) }; // 증거성 — 판독 재현 호출문
-          }),
+          recordsTotal: recs.length, // v3.58: 전체 후보 건수 — records 길이와 다르면 24KB 한도로 뒤쪽을 덜어낸 것(recordsRightOmitted)
+          records: [],
         };
-        man.recordsFixity = 'sha256:' + createHash('sha256').update(JSON.stringify(man.records)).digest('hex'); // 내장 무결성
+        // v3.58 24KB 한도 — 매니페스트는 구조가 깨지면 아예 쓸 수 없다(문자열을 자르면 JSON·코드펜스가 함께 깨져 json.loads가 'Unterminated string'이 된다). 기록을 한 건씩 넣으며 UTF-8 바이트를 재고 예산(18,000B)에서 멈춘 뒤 JSON을 닫아 반환한다 — 꼬리 안내문까지 24KB 안에 들어온다
+        const BUDGET_B = 18000;
+        for (let i = 0; i < recs.length; i++) {
+          man.records.push(mkRec(recs[i], i));
+          if (Buffer.byteLength(JSON.stringify(man), 'utf8') > BUDGET_B) { man.records.pop(); break; }
+        }
+        const omitted = recs.length - man.records.length;
+        man.recordsIncluded = man.records.length;
+        if (omitted) man.recordsRightOmitted = omitted; // 이 매니페스트가 전량이 아님을 스스로 밝힌다(recordsTotal·재현 호출로 보완)
+        man.recordsFixity = 'sha256:' + createHash('sha256').update(JSON.stringify(man.records)).digest('hex'); // 내장 무결성 — 실린 records 그대로의 지문
         const mj = JSON.stringify(man);
         const fx = createHash('sha256').update(mj).digest('hex'); // 고정성(fixity) — 전파 중 변조 검증
-        return text(`발굴 수집기록 매니페스트 '${query}' — ${recs.length}건 (재현 가능·기관 등재용):\n`
+        return text(`발굴 수집기록 매니페스트 '${query}' — ${man.records.length}건 (재현 가능·기관 등재용):\n`
           + '```json\n' + mj + '\n```'
+          + (omitted ? `\n※ 24KB 한도 — 전체 ${recs.length}건 중 앞 ${man.records.length}건만 실었습니다(recordsTotal=${recs.length} · recordsRightOmitted=${omitted}). 나머지는 max_per_source를 줄이거나 sources를 나눠 재요청하십시오. 이 JSON은 잘리지 않아 그대로 등재·전파할 수 있습니다.` : '')
           + `\nfixity(sha256): ${fx} — 위 JSON 바이트의 지문. 전파·보관본 대조 시 불일치=변조/손상.`
           + '\n공개 지문 원장(골든 기록 주간 감시·개정 이력): https://korea-archive-mcp.vercel.app/fixity-ledger.json'
           + '\n※ 현용기록물로서의 발굴기록: provenance(질의·소스·시각·재현 호출)=증거성 · heldBy·식별자=맥락 · fixity=고정성. 이 JSON을 그대로 기록관리시스템·KARDA에 등재.'
           + "\n※ 다매체 변환 사슬: 이 매니페스트 → report_template(kind=report/carousel/full_package)=보고서·카드뉴스 · format='karda'=지식그래프 · format='csv'=데이터셋 · media 필드=원본 매체 직링크(게재 소싱)."
-          + '\n※ 지속가능성: 영속 식별자(archRfcd·NAID·levelId·R번호) 우선 인용 — URL이 썩어도 재발굴 가능. 채널 생존은 source_profile(health)·주간 CI가 감시. 권리는 judge_rights로 기록 단위 표시.');
+          + '\n※ 지속가능성: 영속 식별자(archRfcd·NAID·levelId·R번호) 우선 인용 — URL이 썩어도 재발굴 가능. 채널 생존은 source_profile(health)·일일 CI가 감시. 권리는 judge_rights로 기록 단위 표시.');
       }
       if (format === 'karda') { // 온톨로지 직출력 — 로컬 스킬 전용이던 KARDA 노드·엣지 지식의 서버화(웹·모바일 동등성)
-        const recs = items.slice(0, 30);
-        const srcs = [...new Set(recs.flatMap((it) => it.sources.map((s) => s.split('·')[0])))];
+        const all = items.slice(0, 30);
         const rid = (it, i) => 'rec:' + (it.id ? `${it.sources[0].split('·')[0]}:${it.id}` : `m${i}`);
-        const nodes = [{ id: 'topic:' + query, type: 'topic', label: query }]
-          .concat(srcs.map((s) => ({ id: 'archive:' + s, type: 'archive', label: (ARCHIVE_META[s] || {}).n || s, ...(((ARCHIVE_META[s] || {}).c) ? { country: ARCHIVE_META[s].c } : {}) })))
-          .concat(recs.map((it, i) => ({ id: rid(it, i), type: 'record', label: it.title.slice(0, 90),
-            ...(it.id ? { identifier: it.id } : {}), // manifest와 동일 식별자 — 상호 참조
-            ...(it.date ? { date: it.date } : {}), ...(it.url ? { url: it.url } : {}), ...(it.media ? { media: it.media } : {}), ...(it.altTitle ? { altTitle: it.altTitle } : {}) })));
-        const edges = []; const serSeen = new Set();
-        recs.forEach((it, i) => {
-          edges.push({ from: 'topic:' + query, to: rid(it, i), rel: 'FOUND' });
-          const hb0 = it.sources[0].split('·')[0];
-          const po = PART_OF[hb0] && PART_OF[hb0](it);
-          if (po) { // 계층 맥락 — series 노드·PART_OF 엣지(v1.72)
-            const sid = 'series:' + po;
-            if (!serSeen.has(sid)) { serSeen.add(sid); nodes.push({ id: sid, type: 'series', label: po }); }
-            edges.push({ from: rid(it, i), to: sid, rel: 'PART_OF' });
-          }
-          [...new Set(it.sources.map((s) => s.split('·')[0]))].forEach((s) => edges.push({ from: rid(it, i), to: 'archive:' + s, rel: 'HELD_BY' }));
-          if (it.sameAs) { const sa = 'ext:' + it.sameAs; if (!serSeen.has(sa)) { serSeen.add(sa); nodes.push({ id: sa, type: 'identifier', label: it.sameAs }); } edges.push({ from: rid(it, i), to: sa, rel: 'SAME_AS' }); } // v1.86 기관 간 동일 기록
-        });
-        return text(`교차수집 '${query}' KARDA 온톨로지 — 채널별 [${stats.join(' · ')}] → 노드 ${nodes.length}·엣지 ${edges.length} (레코드 ${recs.length}건, 상한 30):\n`
-          + '```json\n' + JSON.stringify({ nodes, edges }) + '\n```'
+        const build = (recs) => { // v3.58: 기록 묶음 → 노드·엣지(바이트 예산에 맞춰 기록을 덜어낼 때 다시 부른다)
+          const srcs = [...new Set(recs.flatMap((it) => it.sources.map((s) => s.split('·')[0])))];
+          const nodes = [{ id: 'topic:' + query, type: 'topic', label: query }]
+            .concat(srcs.map((s) => ({ id: 'archive:' + s, type: 'archive', label: (ARCHIVE_META[s] || {}).n || s, ...(((ARCHIVE_META[s] || {}).c) ? { country: ARCHIVE_META[s].c } : {}) })))
+            .concat(recs.map((it, i) => ({ id: rid(it, i), type: 'record', label: it.title.slice(0, 90),
+              ...(it.id ? { identifier: it.id } : {}), // manifest와 동일 식별자 — 상호 참조
+              ...(it.date ? { date: it.date } : {}), ...(it.url ? { url: it.url } : {}), ...(it.media ? { media: it.media } : {}), ...(it.altTitle ? { altTitle: it.altTitle } : {}) })));
+          const edges = []; const serSeen = new Set();
+          recs.forEach((it, i) => {
+            edges.push({ from: 'topic:' + query, to: rid(it, i), rel: 'FOUND' });
+            const hb0 = it.sources[0].split('·')[0];
+            const po = PART_OF[hb0] && PART_OF[hb0](it);
+            if (po) { // 계층 맥락 — series 노드·PART_OF 엣지(v1.72)
+              const sid = 'series:' + po;
+              if (!serSeen.has(sid)) { serSeen.add(sid); nodes.push({ id: sid, type: 'series', label: po }); }
+              edges.push({ from: rid(it, i), to: sid, rel: 'PART_OF' });
+            }
+            [...new Set(it.sources.map((s) => s.split('·')[0]))].forEach((s) => edges.push({ from: rid(it, i), to: 'archive:' + s, rel: 'HELD_BY' }));
+            if (it.sameAs) { const sa = 'ext:' + it.sameAs; if (!serSeen.has(sa)) { serSeen.add(sa); nodes.push({ id: sa, type: 'identifier', label: it.sameAs }); } edges.push({ from: rid(it, i), to: sa, rel: 'SAME_AS' }); } // v1.86 기관 간 동일 기록
+          });
+          return { nodes, edges };
+        };
+        // v3.58 24KB 한도 — JSON이 중간에서 잘리면 지식그래프에 넣을 수 없다: 노드·엣지가 18,000B를 넘으면 기록을 뒤에서부터 덜어 다시 만든다(닫힌 JSON 보장)
+        let keep = all.length; let g = build(all.slice(0, keep)); let gj = JSON.stringify(g);
+        while (keep > 1 && Buffer.byteLength(gj, 'utf8') > 18000) { keep--; g = build(all.slice(0, keep)); gj = JSON.stringify(g); }
+        const recs = all.slice(0, keep);
+        return text(`교차수집 '${query}' KARDA 온톨로지 — 채널별 [${stats.join(' · ')}] → 노드 ${g.nodes.length}·엣지 ${g.edges.length} (레코드 ${recs.length}건${keep < all.length ? ` — 병합 ${all.length}건 중 앞 ${recs.length}건(24KB 한도)` : ''}, 상한 30):\n`
+          + '```json\n' + gj + '\n```'
           + '\n※ 그대로 KARDA·지식그래프 도구(Gephi·Neo4j·vis.js)에 투입. 한 레코드의 복수 HELD_BY=기관 교차확인. 권리 초판정: judge_rights. 인물 중심 그래프는 nedb_search(mode=gonghun, \'종합:이름\')과 결합.');
       }
       if (format === 'csv') { // 분석 투입용 구조화 출력 — "자료로써 분석할 수 있게". node=karda·manifest와 동일 조인 키(v1.71)
