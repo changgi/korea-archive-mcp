@@ -19,13 +19,18 @@
    "batches": 48,
    "records": 921,
    "new": 100
+  },
+  "2026-11-28": {
+   "batches": 5,
+   "records": 81,
+   "new": 20
   }
  },
  "formats": {
-  "text": 121,
-  "csv": 53,
+  "text": 124,
+  "csv": 54,
   "iiif": 4,
-  "manifest": 7,
+  "manifest": 8,
   "karda": 2
  }
 }

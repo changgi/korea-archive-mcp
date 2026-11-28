@@ -1,6 +1,6 @@
 {
  "note": "KOREA ARCHIVE 지명 사전 — 다국어 변환표(TOPICS) 지명 대응 + 기관 로마자 변형을 표준명으로. 표제·기관 장소 칸에서만 매칭(요약 본문 제외). 기관 표기 장소는 subjects.json 그대로 — 이 사전은 그 위의 연결 층. 지우지 않음.",
- "updated": "2026-11-27T23:33:45Z",
+ "updated": "2026-11-28T12:32:42Z",
  "places": {
   "흥남": {
    "labels": [
@@ -33,6 +33,7 @@
     "commons:https://commons.wikimedia.org/wiki/File%3AHungnam_evacuation_map.jpg",
     "commons:https://commons.wikimedia.org/wiki/File%3AUSS_Begor_(APD-127)_off_Hungnam_on_24_December_1950_(80-G-K-11769).jpg",
     "commons:https://commons.wikimedia.org/wiki/File%3AUSS_Begor_(APD-127)_off_Hungnam_on_24_December_1950_(80-G-K-11771).jpg",
+    "earchive:AUS001_36_01V0000_767",
     "earchive:AUS005_06_02V0000_710",
     "earchive:AUS005_06_02V0000_712",
     "gallery:s01/1",
@@ -112,6 +113,7 @@
     "Hamhŭng"
    ],
    "records": [
+    "earchive:AUS001_36_01V0000_767",
     "koreanwar:2022-US-02-AV-D-00215",
     "nara:NAID 22344",
     "nedb:npda_1936_04_03_w0005_0910",
@@ -119,6 +121,7 @@
     "oldnews:CNTS-00133841718"
    ],
    "sources": [
+    "earchive",
     "koreanwar",
     "nara",
     "nedb",
@@ -135,14 +138,23 @@
    ],
    "records": [
     "commons:https://commons.wikimedia.org/wiki/File%3A1st_Marine_Division_at_Chosin_Reservoir_in_Korea%2C_December_1950.jpg",
+    "commons:https://commons.wikimedia.org/wiki/File%3AChosin-Retreat.png",
     "commons:https://commons.wikimedia.org/wiki/File%3AChosin.jpg",
+    "commons:https://commons.wikimedia.org/wiki/File%3AF4U_Corsair_fires_rocket_at_Chosin_Reservoir_1950.JPEG",
     "commons:https://commons.wikimedia.org/wiki/File%3AMap_of_Battle_of_the_Changjin_reservoir.jpg",
     "commons:https://commons.wikimedia.org/wiki/File%3AMarine_Stinson_OY-1_and_Douglas_R4D_aircraft_at_Chosin_Reservoir_in_1950.jpg",
     "commons:https://commons.wikimedia.org/wiki/File%3ANaplam_strike_at_Chosin.jpg",
+    "commons:https://commons.wikimedia.org/wiki/File%3AWithdrawal_from_Chosin_Reservoir_Dec._6-11%2C_1950.jpg",
+    "earchive:AUS264_00_00C0045",
+    "earchive:AUS305_03_00C0008",
+    "earchive:DDG048_03_00K0012",
     "earchive:DDG048_03_00K0012_001",
     "earchive:DDG048_03_00K0012_002",
+    "foia:https://opengov.seoul.go.kr/sanction/26187871",
+    "foia:https://opengov.seoul.go.kr/sanction/34542200",
     "ia:81594-us-navy-with-the-marines-chosin-to-hungnam-vwr",
     "ia:ADC-10271",
+    "ia:ADC-9438",
     "ia:CSPAN3_20260812_165300_1950_Korean_War_Battle_of_Chosin_Reservoir",
     "ia:DTIC_ADA149352",
     "ia:DTIC_ADA429076",
@@ -152,6 +164,7 @@
     "ia:breakoutchosinre0000russ",
     "ia:colderthanhellma0000owen",
     "ia:frozen-hell-battle-of-chosin-reservoir-the-armchair-historian-1080p-h-264",
+    "ia:gigg-korea-usmc-enlisted-chosin",
     "ia:litvin-korea-physician-inchon-chosin",
     "ia:lkfil-Ben_Wagner_-_The_Battle_of_the_Chosin_Reservoir",
     "ia:malmo-korea-corpsman-chosin",
@@ -188,6 +201,7 @@
    "sources": [
     "commons",
     "earchive",
+    "foia",
     "ia",
     "koreanwar",
     "much",
@@ -330,6 +344,7 @@
     "commons:https://commons.wikimedia.org/wiki/File%3AUN_forces_during_the_Second_Battle_of_Seoul%2C_1950.webm",
     "commons:https://commons.wikimedia.org/wiki/File%3AWomen_parade_and_celebrate_in_front_of_Namdaemun_after_the_North_Korean_capture_of_Seoul%2C_1950.jpg",
     "commons:https://commons.wikimedia.org/wiki/File%3AYeouido%2C_Seoul.jpg",
+    "earchive:COH008_15_00A0008",
     "europeana:/08602/IL5000015457",
     "europeana:/08602/IL5000015794",
     "europeana:/08611/censorship3433",
@@ -379,6 +394,7 @@
     "archives",
     "awm",
     "commons",
+    "earchive",
     "europeana",
     "gallery",
     "heritage",
@@ -841,6 +857,7 @@
     "Gyeongju"
    ],
    "records": [
+    "earchive:COH008_15_00A0008",
     "jsg:K2-4542",
     "nlk:179178908",
     "nlk:825280808",
@@ -851,6 +868,7 @@
     "nlk:CNTS-00132076027"
    ],
    "sources": [
+    "earchive",
     "jsg",
     "nlk"
    ],

@@ -1,27 +1,27 @@
 {
 "week": "2026-W48",
-"records": 1007,
+"records": 1027,
 "by_source": {
 "미국 국립기록관리청 NARA": 161,
 "일본 국립국회도서관": 22,
 "일본 아시아역사자료센터": 15,
 "Europeana": 25,
-"인터넷 아카이브": 113,
+"인터넷 아카이브": 115,
 "영국 국립기록관 TNA": 65,
 "UN 디지털도서관": 8,
 "KOREA ARCHIVE IIIF 갤러리": 6,
 "호주 전쟁기념관": 48,
 "독립운동판결문": 12,
 "공훈전자사료관": 3,
-"독립기념관": 16,
+"독립기념관": 19,
 "규장각": 5,
 "국가기록원": 40,
-"위키미디어 공용": 43,
+"위키미디어 공용": 46,
 "Gallica(BnF)": 14,
 "6·25전쟁 아카이브센터": 84,
 "국립중앙도서관": 22,
 "대한민국신문아카이브": 35,
-"국편 전자사료관": 14,
+"국편 전자사료관": 19,
 "KTV": 31,
 "서울기록원": 15,
 "국외소재문화유산재단": 35,
@@ -33,7 +33,8 @@
 "한국사DB": 55,
 "대한민국역사박물관": 12,
 "장서각": 7,
-"한국고문서자료관": 27
+"한국고문서자료관": 27,
+"foia": 7
 },
 "items": [
 {
@@ -7084,6 +7085,146 @@
 "first_seen": "2026-11-27T21:24:35Z",
 "page": "r/a57742fd59c4.html",
 "url": "https://collections.archives.govt.nz/web/arena/search#/entity/aims-archive/R22438362"
+},
+{
+"key": "commons:https://commons.wikimedia.org/wiki/File%3AChosin-Retreat.png",
+"title": "Chosin-Retreat.png",
+"first_seen": "2026-11-28T00:29:11Z",
+"page": "r/82eb79316892.html",
+"url": "https://commons.wikimedia.org/wiki/File%3AChosin-Retreat.png"
+},
+{
+"key": "commons:https://commons.wikimedia.org/wiki/File%3AF4U_Corsair_fires_rocket_at_Chosin_Reservoir_1950.JPEG",
+"title": "F4U Corsair fires rocket at Chosin Reservoir 1950.JPEG",
+"first_seen": "2026-11-28T00:29:11Z",
+"page": "r/b72d91d603ae.html",
+"url": "https://commons.wikimedia.org/wiki/File%3AF4U_Corsair_fires_rocket_at_Chosin_Reservoir_1950.JPEG"
+},
+{
+"key": "commons:https://commons.wikimedia.org/wiki/File%3AWithdrawal_from_Chosin_Reservoir_Dec._6-11%2C_1950.jpg",
+"title": "Withdrawal from Chosin Reservoir Dec. 6-11, 1950.jpg",
+"first_seen": "2026-11-28T00:29:11Z",
+"page": "r/927ab53ecae3.html",
+"url": "https://commons.wikimedia.org/wiki/File%3AWithdrawal_from_Chosin_Reservoir_Dec._6-11%2C_1950.jpg"
+},
+{
+"key": "earchive:AUS001_36_01V0000_767",
+"title": "Chinese Red prisoners of war shiver in the sub-zero cold of the Hamhung-Hungnam area [함경남도 흥남구역의 영하날씨에 중공군이 떨고",
+"first_seen": "2026-11-28T00:29:11Z",
+"page": "r/c205886be833.html",
+"url": "https://archive.history.go.kr/record/catalog/catalogView.do?systemId=000000898980"
+},
+{
+"key": "earchive:AUS251_09_00C1374",
+"title": "1st Marine Division(1951.2.5-15)",
+"first_seen": "2026-11-28T00:29:11Z",
+"page": "r/bbed81c729ea.html",
+"url": "https://archive.history.go.kr/record/catalog/catalogView.do?systemId=000000995601"
+},
+{
+"key": "earchive:AUS264_00_00C0045",
+"title": "Chosin Reservoir",
+"first_seen": "2026-11-28T00:29:11Z",
+"page": "r/fa3749f04deb.html",
+"url": "https://archive.history.go.kr/record/catalog/catalogView.do?systemId=000000959847"
+},
+{
+"key": "earchive:AUS305_03_00C0008",
+"title": "Chosin Reservoir, 1st Battalion, 32nd Infantry Regiment, 1950.11.24-30.",
+"first_seen": "2026-11-28T00:29:11Z",
+"page": "r/35e3b2deec00.html",
+"url": "https://archive.history.go.kr/record/catalog/catalogView.do?systemId=000001215078"
+},
+{
+"key": "earchive:DDG048_03_00K0012",
+"title": "1882년~1885년 함양군(咸陽郡) 장진호(張進昊) 준호구",
+"first_seen": "2026-11-28T00:29:11Z",
+"page": "r/a538feac11c4.html",
+"url": "https://archive.history.go.kr/record/catalog/catalogView.do?systemId=000001165043"
+},
+{
+"key": "foia:https://opengov.seoul.go.kr/sanction/24111660",
+"title": "사가독서 학습휴가 독후감 제출",
+"first_seen": "2026-11-28T00:29:11Z",
+"page": "r/77c113e06e52.html",
+"url": "https://opengov.seoul.go.kr/sanction/24111660"
+},
+{
+"key": "foia:https://opengov.seoul.go.kr/sanction/25041099",
+"title": "보건소 소식지(제52호) 제작",
+"first_seen": "2026-11-28T00:29:11Z",
+"page": "r/468c608a96c7.html",
+"url": "https://opengov.seoul.go.kr/sanction/25041099"
+},
+{
+"key": "foia:https://opengov.seoul.go.kr/sanction/26187871",
+"title": "-2022년 호국보훈의 달-미국 장진호 전투 참전자협회(Chosin Few) 감사장 수여계획",
+"first_seen": "2026-11-28T00:29:11Z",
+"page": "r/460bc7d0fa8a.html",
+"url": "https://opengov.seoul.go.kr/sanction/26187871"
+},
+{
+"key": "foia:https://opengov.seoul.go.kr/sanction/27606840",
+"title": "최종보고서 발간보고_지속가능한 돌봄SOS센터 사업발전방안연구",
+"first_seen": "2026-11-28T00:29:11Z",
+"page": "r/119cd0b98fb9.html",
+"url": "https://opengov.seoul.go.kr/sanction/27606840"
+},
+{
+"key": "foia:https://opengov.seoul.go.kr/sanction/29182738",
+"title": "2023년 8월 시설관리과 급량비 지급(8/31 어반게이트)",
+"first_seen": "2026-11-28T00:29:11Z",
+"page": "r/406f31316c18.html",
+"url": "https://opengov.seoul.go.kr/sanction/29182738"
+},
+{
+"key": "foia:https://opengov.seoul.go.kr/sanction/29590377",
+"title": "2023년 10월 시설관리과 급량비 지급(10/31 다복한식부페)",
+"first_seen": "2026-11-28T00:29:11Z",
+"page": "r/c309846a9aa3.html",
+"url": "https://opengov.seoul.go.kr/sanction/29590377"
+},
+{
+"key": "foia:https://opengov.seoul.go.kr/sanction/34542200",
+"title": "보훈단체 보조금 교부(2025호국영령추모사업, 장진호전투기념)",
+"first_seen": "2026-11-28T00:29:11Z",
+"page": "r/e6f2a1304b3d.html",
+"url": "https://opengov.seoul.go.kr/sanction/34542200"
+},
+{
+"key": "i815:HS1907091203",
+"title": "[신문자료] 1907년09월12일",
+"first_seen": "2026-11-28T00:29:11Z",
+"page": "r/97c889d67768.html",
+"url": "https://search.i815.or.kr/contents/newsPaper/detail.do?newsPaperId=HS1907091203&sortNo=8"
+},
+{
+"key": "i815:HS1909020401",
+"title": "[신문자료] 1909년02월04일",
+"first_seen": "2026-11-28T00:29:11Z",
+"page": "r/a049bbb86164.html",
+"url": "https://search.i815.or.kr/contents/newsPaper/detail.do?newsPaperId=HS1909020401&sortNo=8"
+},
+{
+"key": "i815:HS1909031402",
+"title": "[신문자료] 1909년03월14일",
+"first_seen": "2026-11-28T00:29:11Z",
+"page": "r/ab2c9b00d71a.html",
+"url": "https://search.i815.or.kr/contents/newsPaper/detail.do?newsPaperId=HS1909031402&sortNo=8"
+},
+{
+"key": "ia:ADC-9438",
+"title": "Remnants Of The 5th And 7th Regiments Of The First Marine Division Aboard Transports After Fighting Their Way From Way From Chosin Reservoir, 12/11/1950",
+"first_seen": "2026-11-28T00:29:11Z",
+"page": "r/67333a9b4182.html",
+"url": "https://archive.org/details/ADC-9438"
+},
+{
+"key": "ia:gigg-korea-usmc-enlisted-chosin",
+"title": "Telephone interview with Marine Gunnery Sergeant Garrison O. Gigg, 2nd Platoon “C” Company attached to the 1st Engineer Battalion, First Marines, present at Chosin Reservoir Campaign.",
+"first_seen": "2026-11-28T00:29:11Z",
+"page": "r/56c07312af3b.html",
+"url": "https://archive.org/details/gigg-korea-usmc-enlisted-chosin"
 }
 ]
 }

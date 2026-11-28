@@ -1,5 +1,5 @@
 {
-"updated": "2026-11-27T23:33:45Z",
+"updated": "2026-11-28T12:32:42Z",
 "note": "구간 = 연대(4자리 연도·8자리 날짜·연호 연도 明治·大正·昭和·光武·隆熙·檀紀 환산) → 세기 → 왕조·시대명. 근거 순서 date → 제목 → 메타(생산·시대·출판). 세기·시대 구간은 시간축 근사 정렬",
 "timeline": [
 {
@@ -203,13 +203,13 @@
 },
 {
 "decade": "조선시대",
-"records": 23,
+"records": 20,
 "by_source": {
 "nrich": 5,
-"nedb": 18
+"nedb": 15
 },
 "by_kind": {
-"document": 22,
+"document": 19,
 "graphic": 1
 },
 "samples": [
@@ -481,12 +481,13 @@
 },
 {
 "decade": "1710년대",
-"records": 7,
+"records": 9,
 "by_source": {
-"aks": 7
+"aks": 7,
+"nedb": 2
 },
 "by_kind": {
-"document": 7
+"document": 9
 },
 "samples": [
 {
@@ -515,7 +516,7 @@
 "iiif": "https://korea-archive-mcp.vercel.app/iiif/rec/q1YqVrKKVkrMLlaK1VEqUbJSMjQ3NHnd2qLwZu6WN7MnvNq6RuPZ3L6nrc1PW7drKryZ0fhmwVSNp3s3Pt3ZoKmko5QC1AGkMoGUu4GBkbajd7C2d7CvbkSUHsggPUNDExNdIwMjUwMTQ1M9N0NDYwNDXSAKNwABM6DWUqDWjJKSgmIrff3EouSMzLJUPaBz9BKT9bKL9HMy87L1UvLtUxJLEkOdPW3JtKQAaMnbqXNebV37avOC12t2vGmZ82behNeLe15taVB41LBLAS4M5oGYSybagVTN2vG2a-frzS1vuiFSEDGF18s73vavAfI2vlm8BxRUU1YovO5peLOo9e2sHqCFeUALQYGqo5QLCaFCIPV6w5xXm9YovO5oebOgUQEYum_mLQVKJYKCHeh8M11DQ10jkxADAyswUqoFAA/manifest.json"
 }
 ],
-"derived": 7
+"derived": 9
 },
 {
 "decade": "1730년대",
@@ -913,19 +914,20 @@
 },
 {
 "decade": "1880년대",
-"records": 12,
+"records": 14,
 "by_source": {
 "europeana": 1,
 "gallica": 1,
 "heritage": 1,
 "commons": 1,
 "tna": 5,
-"earchive": 2,
-"nara": 1
+"earchive": 3,
+"nara": 1,
+"nedb": 1
 },
 "by_kind": {
 "graphic": 2,
-"document": 10
+"document": 12
 },
 "samples": [
 {
@@ -954,7 +956,7 @@
 "iiif": "https://korea-archive-mcp.vercel.app/iiif/tna/82085148/manifest.json"
 }
 ],
-"derived": 5
+"derived": 7
 },
 {
 "decade": "1890년대",
@@ -1005,7 +1007,7 @@
 },
 {
 "decade": "1900년대",
-"records": 32,
+"records": 35,
 "by_source": {
 "jacar": 5,
 "heritage": 1,
@@ -1015,10 +1017,10 @@
 "tna": 8,
 "nara": 4,
 "nedb": 1,
-"i815": 2
+"i815": 5
 },
 "by_kind": {
-"document": 27,
+"document": 30,
 "graphic": 5
 },
 "samples": [
@@ -1048,7 +1050,7 @@
 "iiif": "https://korea-archive-mcp.vercel.app/iiif/rec/TVCxTsMwFPyVJy8saeM4adp4pBJICDa2qoPTuK3b1A62y4KQQGJgZAchFoZKHSomxNo_YaT9CF6ASEx379073eldEUf4gExEWaqRIMOAeMLJ6YGxSmoPpVHaC6WBQ3-qtAygb-x2hXhm9MSUCtmJqIwOQC0qK51TRjuQHpxZXkqtrINCgtuuZmZp6z1OHqlyCwmD499Y2D8-7NbvQxKQAtOjjMZIFVJh5zyMWJT0wlEe04x2Ke2NUFyiOPW-cjwM_8q3cz1uj234z5NXPp13EpayrDNDV4WuJvPz5gMO9dEPFsI3drzSeNU8JCALnBAuEHabp6-3Nezu7_Yvt3Xp_fMrSqJ-GaMsbUVRi8XnUcwTypMuuf4G/manifest.json"
 }
 ],
-"derived": 7
+"derived": 10
 },
 {
 "decade": "근대",
@@ -1276,22 +1278,22 @@
 },
 {
 "decade": "1950년대",
-"records": 322,
+"records": 327,
 "by_source": {
 "nara": 63,
 "europeana": 13,
-"ia": 32,
+"ia": 33,
 "tna": 22,
 "gallery": 5,
 "awm": 43,
 "archives": 24,
-"commons": 12,
+"commons": 13,
 "gallica": 2,
 "koreanwar": 75,
 "ndl": 2,
 "nlk": 1,
 "oldnews": 9,
-"earchive": 4,
+"earchive": 7,
 "nlna": 4,
 "nzarch": 3,
 "jacar": 1,
@@ -1301,8 +1303,8 @@
 },
 "by_kind": {
 "motion_picture": 42,
-"graphic": 88,
-"document": 192
+"graphic": 89,
+"document": 196
 },
 "samples": [
 {
@@ -1331,7 +1333,7 @@
 "iiif": "https://korea-archive-mcp.vercel.app/iiif/nara/24033/manifest.json"
 }
 ],
-"derived": 102
+"derived": 106
 },
 {
 "decade": "20세기",
@@ -1374,7 +1376,7 @@
 },
 {
 "decade": "1960년대",
-"records": 22,
+"records": 23,
 "by_source": {
 "ia": 10,
 "i815": 2,
@@ -1382,10 +1384,11 @@
 "gonghun": 2,
 "much": 1,
 "nara": 4,
-"awm": 1
+"awm": 1,
+"earchive": 1
 },
 "by_kind": {
-"document": 18,
+"document": 19,
 "motion_picture": 1,
 "graphic": 3
 },
@@ -1416,7 +1419,7 @@
 "iiif": "https://korea-archive-mcp.vercel.app/iiif/ktv/movie~KV~766~4390~DH/manifest.json"
 }
 ],
-"derived": 7
+"derived": 8
 },
 {
 "decade": "광복 이후(1945~)",
@@ -1457,17 +1460,18 @@
 },
 {
 "decade": "1970년대",
-"records": 18,
+"records": 20,
 "by_source": {
 "nzarch": 1,
-"earchive": 2,
+"earchive": 3,
 "ia": 7,
 "ktv": 1,
-"nara": 7
+"nara": 7,
+"seoul": 1
 },
 "by_kind": {
-"document": 13,
-"graphic": 5
+"document": 14,
+"graphic": 6
 },
 "samples": [
 {
@@ -1496,7 +1500,7 @@
 "iiif": "https://iiif.archive.org/iiif/3/DTIC_ADB006731/manifest.json"
 }
 ],
-"derived": 8
+"derived": 9
 },
 {
 "decade": "1980년대",
@@ -1549,10 +1553,10 @@
 },
 {
 "decade": "1990년대",
-"records": 55,
+"records": 56,
 "by_source": {
 "archives": 6,
-"commons": 2,
+"commons": 3,
 "ndl": 1,
 "nlk": 6,
 "ktv": 15,
@@ -1563,7 +1567,7 @@
 },
 "by_kind": {
 "document": 34,
-"graphic": 16,
+"graphic": 17,
 "motion_picture": 5
 },
 "samples": [
@@ -1593,11 +1597,11 @@
 "iiif": "https://korea-archive-mcp.vercel.app/iiif/rec/TVDBTsJAEP2VzR48QbvbIg1NiBc_wIM3YwiBKo1Aa7tYE2MChBhuciHBSLUeiJBg0lQJxHjiUzzubv_BASNxDjsz783Om5kb7GPzBJe9Ss2-snx8msEMmzgNJ6I7lUkk-yMkkkhMPvh7lI5WMhyhdDhN7-dIduc8meEMrsIHWihQCG0INaIRSnKE6kYhmzcAbQFaY8z1TVUNgkD5U1POHeXCU5vWNYMn8K0Nofo1Jzi0WNmuHzluy1WqzoFXKVWcqlWkOiW6YexB7p3ZdavUdIr_5baEzazGhiA72w7hwhB88cbjNl_F4iWUjwP03f5E8mHFF4P1Mr1byPBrvYQaEc9gOfna2xakwzFgMurJ5w7SoFMTOu0OlsENSMFdghPxmCdzJPo9GXUQKMinCVBl9nuWfJbSrKYfE90k1Mzt49sf/manifest.json"
 }
 ],
-"derived": 21
+"derived": 22
 },
 {
 "decade": "2000년대",
-"records": 49,
+"records": 52,
 "by_source": {
 "archives": 4,
 "ktv": 5,
@@ -1607,15 +1611,16 @@
 "much": 2,
 "ndl": 1,
 "nlk": 5,
-"ia": 9,
+"ia": 10,
 "nara": 4,
 "europeana": 2,
 "awm": 1,
-"gallica": 1
+"gallica": 1,
+"seoul": 2
 },
 "by_kind": {
-"document": 29,
-"graphic": 20
+"document": 30,
+"graphic": 22
 },
 "samples": [
 {
@@ -1648,7 +1653,7 @@
 },
 {
 "decade": "2010년대",
-"records": 40,
+"records": 41,
 "by_source": {
 "ia": 10,
 "un": 5,
@@ -1662,10 +1667,11 @@
 "nrich": 4,
 "ndl": 1,
 "koreanwar": 3,
+"earchive": 1,
 "gallica": 1
 },
 "by_kind": {
-"document": 27,
+"document": 28,
 "graphic": 13
 },
 "samples": [
@@ -1695,11 +1701,11 @@
 "iiif": "https://korea-archive-mcp.vercel.app/iiif/rec/q1YqVrKKVkrPz0vPKM1TitVRKlGyUnozZ8GrLQ1vOuZovF_e-XT9mpcL2jQVDC0NjBTqgJSRgcKh7QrGeoZvZm153T8TxDEyMLTUN7Q0M1J43dPwduqc1-v3vNq69s28pfqv-1tfL9sLZCnpKKUAjYarBPIzgXxjU2MzILMUyMwoKSkottLXT9WFOkcvt6AsUS89Xy-7SL-0OLVI3zk_r6QoM6k0KLUgv6jEJbUkMTNHLyXfPj0_JD85PyXV1sjAwMBQLTcv3S_fFmSyWkFiempIZklOqi1ED9CqApAHwS5_tbnlzfQtCo8adiF8A1SQB1QACxAdpVwgD0gVAqnXG-a82rRG4XVHy5sFjQpvZk-AeCuxBOwvIzNdQ0NdI-MQA2MrA0MrQyOlWgA/manifest.json"
 }
 ],
-"derived": 8
+"derived": 9
 },
 {
 "decade": "2020년대",
-"records": 30,
+"records": 34,
 "by_source": {
 "ia": 8,
 "commons": 4,
@@ -1709,10 +1715,11 @@
 "nrich": 4,
 "ndl": 1,
 "awm": 1,
-"nlk": 4
+"nlk": 4,
+"foia": 4
 },
 "by_kind": {
-"document": 19,
+"document": 23,
 "graphic": 11
 },
 "samples": [
@@ -1742,34 +1749,35 @@
 "iiif": "https://korea-archive-mcp.vercel.app/iiif/commons/File%3AYeouido%2C%20Seoul.jpg/manifest.json"
 }
 ],
-"derived": 9
+"derived": 11
 },
 {
 "decade": "연대 미상",
-"records": 90,
+"records": 89,
 "by_source": {
 "nara": 11,
-"seoul": 15,
+"seoul": 12,
 "europeana": 7,
 "i815": 6,
 "jacar": 4,
 "nrich": 5,
-"earchive": 4,
+"earchive": 2,
 "jsg": 1,
 "kyudb": 1,
 "ndl": 3,
 "ia": 8,
 "aks": 8,
-"commons": 7,
+"commons": 8,
 "nlk": 3,
 "koreanwar": 4,
 "much": 1,
 "heritage": 1,
-"nzarch": 1
+"nzarch": 1,
+"foia": 3
 },
 "by_kind": {
-"document": 57,
-"graphic": 31,
+"document": 58,
+"graphic": 29,
 "motion_picture": 2
 },
 "samples": [

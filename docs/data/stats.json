@@ -1,30 +1,30 @@
 {
- "updated": "2026-11-27T23:33:39Z",
- "records": 1033,
- "new_records": 100,
- "new_batches": 48,
+ "updated": "2026-11-28T12:32:16Z",
+ "records": 1053,
+ "new_records": 20,
+ "new_batches": 5,
  "by_source": {
   "nara": 161,
-  "ia": 118,
+  "ia": 120,
   "koreanwar": 84,
   "tna": 65,
   "nedb": 57,
   "awm": 48,
-  "commons": 43,
+  "commons": 46,
   "nrich": 43,
   "archives": 40,
   "oldnews": 35,
   "okchf": 35,
+  "i815": 32,
   "aks": 32,
   "ktv": 31,
-  "i815": 29,
   "europeana": 25,
   "ndl": 22,
   "nlk": 22,
+  "earchive": 19,
   "seoul": 16,
   "jacar": 15,
   "gallica": 14,
-  "earchive": 14,
   "indy": 12,
   "much": 12,
   "dnz": 10,
@@ -32,6 +32,7 @@
   "heritage": 8,
   "nlna": 7,
   "jsg": 7,
+  "foia": 7,
   "gallery": 6,
   "nzarch": 6,
   "kyudb": 5,
@@ -39,35 +40,35 @@
  },
  "first": "2026-11-23T03:00:15Z",
  "formats": {
-  "text": 121,
-  "csv": 53,
+  "text": 124,
+  "csv": 54,
   "iiif": 4,
-  "manifest": 7,
+  "manifest": 8,
   "karda": 2
  },
  "queries": {
-  "added": 50,
-  "total": 194,
-  "calls": 291,
+  "added": 6,
+  "total": 200,
+  "calls": 302,
   "by_tool": {
-   "cross_search": 135,
-   "nedb_search": 89,
-   "source_profile": 16,
-   "judge_rights": 10,
+   "cross_search": 140,
+   "nedb_search": 90,
+   "source_profile": 17,
+   "judge_rights": 11,
+   "nara_search": 8,
    "tna_search": 8,
    "seoul_archives_search": 7,
-   "nara_search": 7,
    "koreanwar_item": 6,
-   "archives_search": 4,
+   "archives_search": 6,
    "koreanwar_search": 3,
    "query_bank": 3,
    "report_template": 2,
    "nlk_search": 1
   }
  },
- "repeat_records": 274,
+ "repeat_records": 276,
  "entry_types": {
-  "기록": 1007,
+  "기록": 1027,
   "소장처(컬렉션)": 5,
   "검색 안내": 14,
   "결함 출력": 7
@@ -76,73 +77,73 @@
  "top10": [
   {
    "rank": 1,
-   "seen": 45,
-   "days": 3,
+   "seen": 50,
+   "days": 4,
    "title": "Withdrawal of 1st Marine, Hamhung, Korea ; Withdrawal of 1st Marines, Hagaru-re to Hamhung, North Ko",
    "url": "https://catalog.archives.gov/id/22344"
   },
   {
    "rank": 2,
-   "seen": 45,
-   "days": 3,
+   "seen": 50,
+   "days": 4,
    "title": "WITHDRAWAL FIRST MARINES, 1ST MARINE DIV. FROM CHOSIN RESERVOIR AREA, KOTO-RI, KOREA",
    "url": "https://catalog.archives.gov/id/22345"
   },
   {
    "rank": 3,
-   "seen": 45,
-   "days": 3,
+   "seen": 50,
+   "days": 4,
    "title": "MARINE RETREAT IN KOREA",
    "url": "https://catalog.archives.gov/id/24033"
   },
   {
    "rank": 4,
-   "seen": 44,
-   "days": 3,
+   "seen": 48,
+   "days": 4,
    "title": "Fifth Marine Regiment Gets Into Hills and Cold Weather Around Chosin Reservoir",
    "url": "https://catalog.archives.gov/id/276537577"
   },
   {
    "rank": 5,
-   "seen": 44,
-   "days": 3,
+   "seen": 48,
+   "days": 4,
    "title": "FICHE_156",
    "url": "https://catalog.archives.gov/id/373960610"
   },
   {
    "rank": 6,
-   "seen": 39,
-   "days": 3,
+   "seen": 43,
+   "days": 4,
    "title": "B-26 BOMB MISSION, KOREA",
    "url": "https://catalog.archives.gov/id/22348"
   },
   {
    "rank": 7,
-   "seen": 27,
-   "days": 3,
+   "seen": 31,
+   "days": 4,
    "title": "REMNANTS OF THE 5TH AND 7TH REGIMENTS OF THE FIRST MARINE DIVISION ABOARD TRANSPORTS, AFTER FIGHTING",
    "url": "https://catalog.archives.gov/id/23203"
   },
   {
    "rank": 8,
-   "seen": 26,
-   "days": 3,
+   "seen": 30,
+   "days": 4,
    "title": "EVACUATION",
    "url": "https://catalog.archives.gov/id/23204"
   },
   {
    "rank": 9,
-   "seen": 26,
-   "days": 3,
+   "seen": 29,
+   "days": 4,
    "title": "FICHE_562",
    "url": "https://catalog.archives.gov/id/400397386"
   },
   {
    "rank": 10,
-   "seen": 23,
-   "days": 1,
-   "title": "장진호 : 불과 얼음 17일 전쟁",
-   "url": "https://www.nl.go.kr/NL/contents/search.do#viewKey=718392893&viewType=AH1"
+   "seen": 22,
+   "days": 2,
+   "title": "1st Marine Division at Chosin Reservoir in Korea, December 1950.jpg",
+   "url": "https://commons.wikimedia.org/wiki/File%3A1st_Marine_Division_at_Chosin_Reservoir_in_Korea%2C_December_1950.jpg"
   }
  ]
 }
